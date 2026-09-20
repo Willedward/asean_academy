@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l1-01",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.1",
+  "title": "Prime factorisation of 360",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {"type": "text", "text": "Express "},
+        {"type": "inline_math", "latex": "360"},
+        {"type": "text", "text": " as a product of its prime factors. Give your answer using index notation."}
+      ],
+      "marks": 2,
+      "primary_outcome": "1.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "prime_factorisation",
+        "canonical_expression": "360",
+        "canonical_latex": "2^3 \\times 3^2 \\times 5",
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "require_prime_bases": true,
+          "allow_factor_reordering": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [{"type": "text", "text": "Begin with the smallest prime that divides 360 and continue dividing by prime numbers."}]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {"type": "text", "text": "The first divisions are "},
+            {"type": "inline_math", "latex": "360 \\div 2=180"},
+            {"type": "text", "text": " and "},
+            {"type": "inline_math", "latex": "180 \\div 2=90"},
+            {"type": "text", "text": ". Continue until every remaining factor is prime, then collect repeated factors as powers."}
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [{"type": "display_math", "latex": "360=2\\times2\\times2\\times3\\times3\\times5"}],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [{"type": "display_math", "latex": "360=2^3\\times3^2\\times5"}],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": ["TMS 2023 1E Math P2 (QP).pdf", "TMS 2023 1E Math P2 (ANS).pdf"],
+    "created_at": "2026-09-20T16:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

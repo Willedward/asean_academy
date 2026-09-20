@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l3-01",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.5",
+  "title": "Interpreting a number line",
+  "difficulty": 3,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {"type": "text", "text": "The number line is divided into equal intervals."},
+    {"type": "asset_ref", "asset_key": "number-line"}
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": "a",
+      "prompt": [
+        {"type": "text", "text": "Write the values represented by P, Q, R and S in ascending order."}
+      ],
+      "marks": 2,
+      "primary_outcome": "1.5",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "ordered_numeric_list",
+        "canonical_expression": "[-2.5,-0.5,1,2.5]",
+        "canonical_latex": "-2.5,\\;-0.5,\\;1,\\;2.5",
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "order": "ascending",
+          "allow_equivalent_fractions": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [{"type": "text", "text": "Find the size of each small interval between two consecutive labelled integers."}]
+        },
+        {
+          "stage": 2,
+          "content": [{"type": "text", "text": "Each small interval represents 0.5. Read the four points from left to right."}]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [{"type": "text", "text": "Each unlabelled tick lies halfway between two consecutive integers, so P, Q, R and S represent −2.5, −0.5, 1 and 2.5 respectively."}],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [{"type": "display_math", "latex": "-2.5,\\;-0.5,\\;1,\\;2.5"}],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "label": "b",
+      "prompt": [
+        {"type": "text", "text": "Using their numerical values, write a true inequality comparing Q and S."}
+      ],
+      "marks": 1,
+      "primary_outcome": "1.6",
+      "secondary_outcomes": ["1.5"],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_relation",
+        "canonical_expression": "-0.5 < 2.5",
+        "canonical_latex": "-0.5<2.5",
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "allowed_operators": ["<", ">"],
+          "allow_reversed_equivalent": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [{"type": "text", "text": "A value farther to the right on a number line is greater."}]
+        },
+        {
+          "stage": 2,
+          "content": [{"type": "text", "text": "Q represents −0.5 and S represents 2.5. Choose the inequality symbol that points towards the smaller value."}]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [{"type": "display_math", "latex": "-0.5<2.5"}],
+          "mark_type": "B",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "number-line",
+      "kind": "number_line",
+      "format": "svg",
+      "path": "assets/n1-l3-01-number-line.svg",
+      "alt_text": "Number line from negative three to three in intervals of one half, with P at negative 2.5, Q at negative 0.5, R at 1 and S at 2.5.",
+      "generation_spec": {
+        "minimum": -3,
+        "maximum": 3,
+        "interval": 0.5,
+        "points": {"P": -2.5, "Q": -0.5, "R": 1, "S": 2.5}
+      },
+      "sha256": "3e4e7ad2d0dfcd67cb02dbba7e79854c08f17bd8fde81012c81c746d3d255831",
+      "width": 760,
+      "height": 180
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": ["TMS 2023 1E Math P2 (QP).pdf", "2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf"],
+    "created_at": "2026-09-20T16:50:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l2-02",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.7",
+  "title": "Significant figures and estimation",
+  "difficulty": 2,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": "a",
+      "prompt": [
+        {"type": "text", "text": "Round "},
+        {"type": "inline_math", "latex": "0.007856"},
+        {"type": "text", "text": " to 3 significant figures."}
+      ],
+      "marks": 1,
+      "primary_outcome": "1.7",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_sf",
+        "canonical_answer": "0.00786",
+        "canonical_latex": "0.00786",
+        "accepted_answers": [],
+        "rounding_precision": 3
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [{"type": "text", "text": "Leading zeros are not significant. Start counting from the digit 7."}]
+        },
+        {
+          "stage": 2,
+          "content": [{"type": "text", "text": "The first three significant digits are 7, 8 and 5. Use the next digit to decide whether 5 rounds up."}]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [{"type": "display_math", "latex": "0.007856=0.00786\\text{ (3 s.f.)}"}],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "label": "b",
+      "prompt": [
+        {"type": "text", "text": "By rounding each number to 1 significant figure, estimate the value of "},
+        {"type": "display_math", "latex": "\\frac{19.8\\times0.0497}{0.201}."}
+      ],
+      "marks": 2,
+      "primary_outcome": "1.7",
+      "secondary_outcomes": ["1.4"],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [{"type": "text", "text": "Round all three values separately before carrying out the calculation."}]
+        },
+        {
+          "stage": 2,
+          "content": [{"type": "display_math", "latex": "19.8\\approx20,\\qquad0.0497\\approx0.05,\\qquad0.201\\approx0.2"}]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [{"type": "display_math", "latex": "\\frac{19.8\\times0.0497}{0.201}\\approx\\frac{20\\times0.05}{0.2}"}],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [{"type": "display_math", "latex": "\\frac{20\\times0.05}{0.2}=5"}],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": ["2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf"],
+    "created_at": "2026-09-20T16:45:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}
