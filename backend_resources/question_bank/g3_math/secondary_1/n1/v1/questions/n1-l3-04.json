@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l3-04",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.2",
+  "title": "Three repeating bus schedules",
+  "difficulty": 3,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": "a",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Three buses leave a terminal together. They return every 28 minutes, 42 minutes and 63 minutes respectively. Find the number of minutes until all three next leave together."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "1.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "252",
+        "canonical_latex": "252",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the LCM of all three intervals."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "28=2^2\\times7,\\quad42=2\\times3\\times7,\\quad63=3^2\\times7"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "28=2^2\\times7,\\quad42=2\\times3\\times7,\\quad63=3^2\\times7"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\operatorname{LCM}=2^2\\times3^2\\times7"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "252\\text{ minutes}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "label": "b",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "During this interval, how many times does the bus with the 28-minute interval leave after the initial departure and up to and including the common departure?"
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "1.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide the common interval by 28."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "252\\div28"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "252\\div28=9"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-09-20T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

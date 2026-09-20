@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l1-11",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.5",
+  "title": "Ordering negative numbers",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Arrange "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-1.8,\\;-\\frac74,\\;-1.72"
+        },
+        {
+          "type": "text",
+          "text": " in ascending order."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.5",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "ordered_numeric_list",
+        "canonical_expression": "[\"-1.8\",\"-7/4\",\"-1.72\"]",
+        "canonical_latex": "-1.8,\\;-\\frac74,\\;-1.72",
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "order": "ascending",
+          "allow_equivalent_fractions": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the fraction to a decimal before comparing."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "-\\frac74=-1.75"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "-\\frac74=-1.75"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "-1.8<-\\frac74<-1.72"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "TMS 2023 1E Math P2 (QP).pdf",
+      "TMS 2023 1E Math P2 (ANS).pdf"
+    ],
+    "created_at": "2026-09-20T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

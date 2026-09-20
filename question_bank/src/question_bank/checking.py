@@ -36,8 +36,11 @@ def _decimal_places(value: str) -> int:
 
 def _significant_figures(value: str) -> int:
     cleaned = value.strip().lower().lstrip("+-")
-    coefficient = cleaned.split("e", 1)[0].replace(".", "")
+    coefficient_text = cleaned.split("e", 1)[0]
+    coefficient = coefficient_text.replace(".", "")
     coefficient = coefficient.lstrip("0")
+    if "." not in coefficient_text and "e" not in cleaned:
+        coefficient = coefficient.rstrip("0")
     return len(coefficient) if coefficient else 1
 
 
@@ -76,7 +79,15 @@ def _prime_factor_value(expression: str) -> int:
 
 
 def _ordered_values(value: str) -> list[Fraction]:
-    cleaned = value.strip().strip("[]()")
+    raw = value.strip()
+    if raw.startswith("["):
+        try:
+            values = json.loads(raw)
+        except json.JSONDecodeError:
+            values = None
+        if isinstance(values, list):
+            return [_fraction(str(item)) for item in values]
+    cleaned = raw.strip("[]()")
     separator = "," if "," in cleaned else "<" if "<" in cleaned else ">"
     if separator not in cleaned:
         raise AnswerFormatError("Separate the ordered values with commas or inequality signs.")

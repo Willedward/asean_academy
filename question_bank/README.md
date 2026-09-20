@@ -9,7 +9,7 @@ cd /home/william/asean_academy/question_bank
 uv sync
 ```
 
-Validate the current five-question draft:
+Validate the complete 40-question draft:
 
 ```bash
 uv run question-bank validate
@@ -23,7 +23,7 @@ uv run question-bank preview --port 8765
 
 Then visit <http://127.0.0.1:8765>. The preview includes KaTeX rendering, multipart inputs, deterministic answer checks, both hints, and worked solutions. It is a local author/reviewer tool and intentionally exposes answers.
 
-Publication validation remains unsuccessful until all 40 questions are present and reviewed:
+Publication validation remains unsuccessful until all 40 draft questions receive human mathematical and editorial review:
 
 ```bash
 uv run question-bank validate --publish

@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l2-03",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.1",
+  "title": "Prime factorisation of 756",
+  "difficulty": 2,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express "
+        },
+        {
+          "type": "inline_math",
+          "latex": "756"
+        },
+        {
+          "type": "text",
+          "text": " as a product of prime factors in index notation."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "prime_factorisation",
+        "canonical_expression": "756",
+        "canonical_latex": "2^2\\times3^3\\times7",
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "require_prime_bases": true,
+          "allow_factor_reordering": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Repeatedly divide by 2, then by 3."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "756=4\\times189=2^2\\times189"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "756=2\\times2\\times3\\times3\\times3\\times7"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "756=2^2\\times3^3\\times7"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "TMS 2023 1E Math P2 (QP).pdf",
+      "TMS 2023 1E Math P2 (ANS).pdf"
+    ],
+    "created_at": "2026-09-20T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

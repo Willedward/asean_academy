@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l2-05",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.2",
+  "title": "Largest square tiles",
+  "difficulty": 2,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": "a",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A rectangular floor measures 168 cm by 252 cm. Find the greatest possible side length, in centimetres, of identical square tiles that cover it without cutting."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "84",
+        "canonical_latex": "84",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The tile side must divide both dimensions."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "168=2^3\\times3\\times7,\\qquad252=2^2\\times3^2\\times7"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\operatorname{HCF}(168,252)=2^2\\times3\\times7"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "84\\text{ cm}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "label": "b",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the number of these square tiles needed."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find how many tiles fit along each side."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "168\\div84=2,\\qquad252\\div84=3"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "2\\times3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "6\\text{ tiles}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "TMS 2023 1E Math P2 (QP).pdf",
+      "TMS 2023 1E Math P2 (ANS).pdf"
+    ],
+    "created_at": "2026-09-20T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

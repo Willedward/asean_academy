@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l3-05",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.3",
+  "title": "Changing fraction of a tank",
+  "difficulty": 3,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A tank is initially "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac35"
+        },
+        {
+          "type": "text",
+          "text": " full. Water equal to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac14"
+        },
+        {
+          "type": "text",
+          "text": " of the tank’s capacity is drained. Then water equal to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac23"
+        },
+        {
+          "type": "text",
+          "text": " of the remaining empty space is added. What fraction of the tank is now full?"
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "1.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "47/60",
+        "canonical_latex": "\\frac{47}{60}",
+        "accepted_answers": []
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "First find the fraction full after draining, then the empty fraction."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac35-\\frac14=\\frac7{20}"
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac35-\\frac14=\\frac7{20}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "1-\\frac7{20}=\\frac{13}{20}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac23\\times\\frac{13}{20}=\\frac{13}{30}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac7{20}+\\frac{13}{30}=\\frac{47}{60}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-09-20T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team"
+  }
+}

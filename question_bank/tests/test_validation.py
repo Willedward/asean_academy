@@ -6,28 +6,23 @@ from question_bank.models import Question
 from question_bank.validation import validate_bank
 
 
-def test_five_question_pilot_is_a_valid_draft(bank_root):
+def test_complete_question_bank_is_a_valid_draft(bank_root):
     report = validate_bank(bank_root)
 
     assert report.valid
-    assert len(report.questions) == 5
+    assert len(report.questions) == 40
     assert {question.difficulty for question in report.questions} == {1, 2, 3}
-    assert all(issue.severity == "warning" for issue in report.issues)
-    assert {issue.code for issue in report.issues} == {
-        "difficulty_distribution",
-        "outcome_distribution",
-    }
+    assert not report.issues
 
 
-def test_incomplete_draft_cannot_be_published(bank_root):
+def test_unreviewed_draft_cannot_be_published(bank_root):
     report = validate_bank(bank_root, publish=True)
 
     assert not report.valid
-    assert any(issue.code == "difficulty_distribution" for issue in report.errors)
-    assert any(issue.code == "review_required" for issue in report.errors)
+    assert len([issue for issue in report.errors if issue.code == "review_required"]) == 40
 
 
-def test_every_pilot_question_matches_the_source_contract(bank_root):
+def test_every_question_matches_the_source_contract(bank_root):
     schema_path = bank_root.parents[3] / "schema" / "question-v1.schema.json"
     schema = json.loads(schema_path.read_text())
     Draft202012Validator.check_schema(schema)
