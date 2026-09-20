@@ -2,8 +2,9 @@
 
 An ASEAN scholarship preparation platform in early development.
 
-- [Product plan](docs/plan/plan.md), [architecture](docs/plan/ARCHI.md), and
-  [build stages](docs/plan/STAGES.md) describe the planned application.
+- [PLAN V2](docs/plan/PLAN_V2.md) consolidates the course-based product, service
+  boundaries, integration sequence, and delivery plan. The earlier [product plan](docs/plan/plan.md),
+  [architecture](docs/plan/ARCHI.md), and [build stages](docs/plan/STAGES.md) remain useful background.
 - [OCR extractor](ocr_extractor/README.md) is a Python worker that converts exam
   PDFs into question JSON, source crops and SQLite/PostgreSQL staging records.
 - [Question categorizer](question_categorizer/README.md) maps reviewed question
