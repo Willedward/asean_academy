@@ -5,6 +5,8 @@ import json
 import os
 from pathlib import Path
 
+from .practice import PracticeEngine
+from .practice_web import serve_practice
 from .preview import serve
 from .repository import QuestionImporter
 from .validation import validate_bank
@@ -26,6 +28,22 @@ def parser():
     preview.add_argument("bank", type=Path, nargs="?", default=DEFAULT_BANK)
     preview.add_argument("--host", default="127.0.0.1")
     preview.add_argument("--port", type=int, default=8765)
+    practice = commands.add_parser(
+        "practice", help="Serve the local practice API and placeholder student interface"
+    )
+    practice.add_argument("bank", type=Path, nargs="?", default=DEFAULT_BANK)
+    practice.add_argument("--host", default="127.0.0.1")
+    practice.add_argument("--port", type=int, default=8766)
+    practice.add_argument(
+        "--database",
+        type=Path,
+        default=REPOSITORY_ROOT / "question_bank/practice-local.sqlite3",
+    )
+    practice.add_argument(
+        "--development-drafts",
+        action="store_true",
+        help="Allow draft questions in this localhost-only development application",
+    )
     importer = commands.add_parser("import-db", help="Import validated questions into PostgreSQL")
     importer.add_argument("bank", type=Path, nargs="?", default=DEFAULT_BANK)
     importer.add_argument("--publish", action="store_true", help="Require publication validation")
@@ -44,6 +62,18 @@ def main(argv=None):
             print(json.dumps(report.as_dict(), indent=2))
             return 1
         serve(args.bank, args.host, args.port)
+        return 0
+    if args.command == "practice":
+        report = validate_bank(args.bank)
+        if not report.valid:
+            print(json.dumps(report.as_dict(), indent=2))
+            return 1
+        engine = PracticeEngine(
+            args.database,
+            report.questions,
+            allow_drafts=args.development_drafts,
+        )
+        serve_practice(engine, args.bank, args.host, args.port)
         return 0
     report = validate_bank(args.bank, publish=args.publish)
     if not report.valid:

@@ -8,6 +8,8 @@ An ASEAN scholarship preparation platform in early development.
   PDFs into question JSON, source crops and SQLite/PostgreSQL staging records.
 - [Question categorizer](question_categorizer/README.md) maps reviewed question
   parts into the fixed Mathematics syllabus using local, explainable rules.
+- [N1 practice application](docs/plan/PRACTICE_APPLICATION.md) provides a persistent
+  local session API and replaceable student placeholder while the final frontend is designed.
 - `backend_resources/sample_papers` is the input location for source PDFs.
 - `frontend_resources` contains branding assets; `main.py` is an initial placeholder.
 
