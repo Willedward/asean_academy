@@ -1,0 +1,318 @@
+{
+  "$defs": {
+    "CourseLessonReference": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^n1-lesson-[0-9]{2}$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "outcomes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Outcomes",
+          "type": "array"
+        },
+        "required_practice_count": {
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Required Practice Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "title",
+        "outcomes",
+        "required_practice_count"
+      ],
+      "title": "CourseLessonReference",
+      "type": "object"
+    },
+    "CourseProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authoring_method": {
+          "const": "original_authored",
+          "title": "Authoring Method",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "authored_by": {
+          "minLength": 1,
+          "title": "Authored By",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Notes"
+        }
+      },
+      "required": [
+        "authoring_method",
+        "created_at",
+        "authored_by"
+      ],
+      "title": "CourseProvenance",
+      "type": "object"
+    },
+    "CourseUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "topic_code": {
+          "const": "N1",
+          "title": "Topic Code",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "checkpoint_question_count": {
+          "maximum": 40,
+          "minimum": 1,
+          "title": "Checkpoint Question Count",
+          "type": "integer"
+        },
+        "lessons": {
+          "items": {
+            "$ref": "#/$defs/CourseLessonReference"
+          },
+          "minItems": 1,
+          "title": "Lessons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "topic_code",
+        "title",
+        "checkpoint_question_count",
+        "lessons"
+      ],
+      "title": "CourseUnit",
+      "type": "object"
+    },
+    "MasteryPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[a-z0-9-]+-v[0-9]+$",
+          "title": "Key",
+          "type": "string"
+        },
+        "minimum_eventual_correct_percentage": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Minimum Eventual Correct Percentage",
+          "type": "integer"
+        },
+        "mastery_requires_checkpoint": {
+          "title": "Mastery Requires Checkpoint",
+          "type": "boolean"
+        },
+        "checkpoint_passing_percentage": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Checkpoint Passing Percentage",
+          "type": "integer"
+        },
+        "give_up_after_incorrect_attempts": {
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Give Up After Incorrect Attempts",
+          "type": "integer"
+        },
+        "hints_penalize_marks": {
+          "title": "Hints Penalize Marks",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "key",
+        "minimum_eventual_correct_percentage",
+        "mastery_requires_checkpoint",
+        "checkpoint_passing_percentage",
+        "give_up_after_incorrect_attempts",
+        "hints_penalize_marks"
+      ],
+      "title": "MasteryPolicy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "stable_key": {
+      "const": "g3-sec1-math",
+      "title": "Stable Key",
+      "type": "string"
+    },
+    "programme_key": {
+      "const": "asean-scholarship-preparation",
+      "title": "Programme Key",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "const": "g3_math_v1_draft",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "school_level": {
+      "const": "secondary_1",
+      "title": "School Level",
+      "type": "string"
+    },
+    "subject": {
+      "const": "Mathematics",
+      "title": "Subject",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "description": {
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "mastery_policies": {
+      "items": {
+        "$ref": "#/$defs/MasteryPolicy"
+      },
+      "minItems": 1,
+      "title": "Mastery Policies",
+      "type": "array"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/CourseUnit"
+      },
+      "minItems": 1,
+      "title": "Units",
+      "type": "array"
+    },
+    "question_allocation_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "propertyNames": {
+        "enum": [
+          "lesson_practice",
+          "unit_checkpoint",
+          "adaptive_reserve"
+        ]
+      },
+      "title": "Question Allocation Counts",
+      "type": "object"
+    },
+    "provenance": {
+      "$ref": "#/$defs/CourseProvenance"
+    }
+  },
+  "required": [
+    "revision",
+    "stable_key",
+    "programme_key",
+    "curriculum_version",
+    "school_level",
+    "subject",
+    "status",
+    "title",
+    "description",
+    "mastery_policies",
+    "units",
+    "question_allocation_counts",
+    "provenance"
+  ],
+  "title": "Course",
+  "type": "object"
+}

@@ -1,0 +1,938 @@
+{
+  "$defs": {
+    "ActiveRecallSection": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "type": {
+          "const": "active_recall",
+          "title": "Type",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "prompt": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Prompt",
+          "type": "array"
+        },
+        "response": {
+          "discriminator": {
+            "mapping": {
+              "algebraic_expression": "#/$defs/AlgebraicResponse",
+              "numeric": "#/$defs/NumericResponse"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NumericResponse"
+            },
+            {
+              "$ref": "#/$defs/AlgebraicResponse"
+            }
+          ],
+          "title": "Response"
+        },
+        "feedback": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Feedback",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "type",
+        "title",
+        "prompt",
+        "response",
+        "feedback"
+      ],
+      "title": "ActiveRecallSection",
+      "type": "object"
+    },
+    "AlgebraicResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "algebraic_expression",
+          "title": "Type",
+          "type": "string"
+        },
+        "comparison_mode": {
+          "enum": [
+            "symbolic_equivalence",
+            "prime_factorisation",
+            "ordered_numeric_list",
+            "exact_relation"
+          ],
+          "title": "Comparison Mode",
+          "type": "string"
+        },
+        "canonical_expression": {
+          "minLength": 1,
+          "title": "Canonical Expression",
+          "type": "string"
+        },
+        "canonical_latex": {
+          "minLength": 1,
+          "title": "Canonical Latex",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Variables",
+          "type": "array"
+        },
+        "domain_constraints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Domain Constraints",
+          "type": "array"
+        },
+        "accepted_equivalents": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Equivalents",
+          "type": "array"
+        },
+        "checker_config": {
+          "additionalProperties": true,
+          "title": "Checker Config",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "comparison_mode",
+        "canonical_expression",
+        "canonical_latex",
+        "variables",
+        "domain_constraints",
+        "accepted_equivalents",
+        "checker_config"
+      ],
+      "title": "AlgebraicResponse",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_key": {
+          "minLength": 1,
+          "title": "Asset Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "number_line",
+            "geometry",
+            "chart",
+            "table",
+            "image"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "svg",
+            "png",
+            "webp"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "alt_text": {
+          "minLength": 1,
+          "title": "Alt Text",
+          "type": "string"
+        },
+        "generation_spec": {
+          "additionalProperties": true,
+          "title": "Generation Spec",
+          "type": "object"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height"
+        }
+      },
+      "required": [
+        "asset_key",
+        "kind",
+        "format",
+        "path",
+        "alt_text",
+        "generation_spec",
+        "sha256"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "AssetReferenceBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "asset_ref",
+          "title": "Type",
+          "type": "string"
+        },
+        "asset_key": {
+          "minLength": 1,
+          "title": "Asset Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "asset_key"
+      ],
+      "title": "AssetReferenceBlock",
+      "type": "object"
+    },
+    "CourseProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authoring_method": {
+          "const": "original_authored",
+          "title": "Authoring Method",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "authored_by": {
+          "minLength": 1,
+          "title": "Authored By",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Notes"
+        }
+      },
+      "required": [
+        "authoring_method",
+        "created_at",
+        "authored_by"
+      ],
+      "title": "CourseProvenance",
+      "type": "object"
+    },
+    "DisplayMathBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "display_math",
+          "title": "Type",
+          "type": "string"
+        },
+        "latex": {
+          "minLength": 1,
+          "title": "Latex",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "latex"
+      ],
+      "title": "DisplayMathBlock",
+      "type": "object"
+    },
+    "ExplanationSection": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "type": {
+          "const": "explanation",
+          "title": "Type",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "blocks": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Blocks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "type",
+        "title",
+        "blocks"
+      ],
+      "title": "ExplanationSection",
+      "type": "object"
+    },
+    "InlineMathBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "inline_math",
+          "title": "Type",
+          "type": "string"
+        },
+        "latex": {
+          "minLength": 1,
+          "title": "Latex",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "latex"
+      ],
+      "title": "InlineMathBlock",
+      "type": "object"
+    },
+    "NumericResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "numeric",
+          "title": "Type",
+          "type": "string"
+        },
+        "comparison_mode": {
+          "enum": [
+            "exact_numeric",
+            "absolute_tolerance",
+            "rounded_dp",
+            "rounded_sf"
+          ],
+          "title": "Comparison Mode",
+          "type": "string"
+        },
+        "canonical_answer": {
+          "minLength": 1,
+          "title": "Canonical Answer",
+          "type": "string"
+        },
+        "canonical_latex": {
+          "minLength": 1,
+          "title": "Canonical Latex",
+          "type": "string"
+        },
+        "accepted_answers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Answers",
+          "type": "array"
+        },
+        "absolute_tolerance": {
+          "anyOf": [
+            {
+              "pattern": "^(0|[0-9]+(?:\\.[0-9]+)?)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Absolute Tolerance"
+        },
+        "rounding_precision": {
+          "anyOf": [
+            {
+              "maximum": 15,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding Precision"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UnitSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "type",
+        "comparison_mode",
+        "canonical_answer",
+        "canonical_latex"
+      ],
+      "title": "NumericResponse",
+      "type": "object"
+    },
+    "SummarySection": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "type": {
+          "const": "summary",
+          "title": "Type",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "blocks": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Blocks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "type",
+        "title",
+        "blocks"
+      ],
+      "title": "SummarySection",
+      "type": "object"
+    },
+    "TextBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "title": "TextBlock",
+      "type": "object"
+    },
+    "UnitSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical": {
+          "minLength": 1,
+          "title": "Canonical",
+          "type": "string"
+        },
+        "accepted": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Accepted",
+          "type": "array"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "canonical",
+        "accepted",
+        "required"
+      ],
+      "title": "UnitSpec",
+      "type": "object"
+    },
+    "WorkedExampleSection": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "type": {
+          "const": "worked_example",
+          "title": "Type",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "prompt": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Prompt",
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/WorkedExampleStep"
+          },
+          "minItems": 1,
+          "title": "Steps",
+          "type": "array"
+        },
+        "verification_note": {
+          "minLength": 1,
+          "title": "Verification Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "type",
+        "title",
+        "prompt",
+        "steps",
+        "verification_note"
+      ],
+      "title": "WorkedExampleSection",
+      "type": "object"
+    },
+    "WorkedExampleStep": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "content": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "asset_ref": "#/$defs/AssetReferenceBlock",
+                "display_math": "#/$defs/DisplayMathBlock",
+                "inline_math": "#/$defs/InlineMathBlock",
+                "text": "#/$defs/TextBlock"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/TextBlock"
+              },
+              {
+                "$ref": "#/$defs/InlineMathBlock"
+              },
+              {
+                "$ref": "#/$defs/DisplayMathBlock"
+              },
+              {
+                "$ref": "#/$defs/AssetReferenceBlock"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Content",
+          "type": "array"
+        }
+      },
+      "required": [
+        "position",
+        "content"
+      ],
+      "title": "WorkedExampleStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "stable_key": {
+      "pattern": "^n1-lesson-[0-9]{2}$",
+      "title": "Stable Key",
+      "type": "string"
+    },
+    "course_key": {
+      "const": "g3-sec1-math",
+      "title": "Course Key",
+      "type": "string"
+    },
+    "unit_key": {
+      "const": "g3-sec1-n1",
+      "title": "Unit Key",
+      "type": "string"
+    },
+    "position": {
+      "minimum": 1,
+      "title": "Position",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "outcomes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Outcomes",
+      "type": "array"
+    },
+    "prerequisite_lessons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prerequisite Lessons",
+      "type": "array"
+    },
+    "estimated_minutes": {
+      "maximum": 180,
+      "minimum": 1,
+      "title": "Estimated Minutes",
+      "type": "integer"
+    },
+    "objectives": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Objectives",
+      "type": "array"
+    },
+    "mastery_policy_key": {
+      "pattern": "^[a-z0-9-]+-v[0-9]+$",
+      "title": "Mastery Policy Key",
+      "type": "string"
+    },
+    "sections": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "active_recall": "#/$defs/ActiveRecallSection",
+            "explanation": "#/$defs/ExplanationSection",
+            "summary": "#/$defs/SummarySection",
+            "worked_example": "#/$defs/WorkedExampleSection"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ExplanationSection"
+          },
+          {
+            "$ref": "#/$defs/WorkedExampleSection"
+          },
+          {
+            "$ref": "#/$defs/ActiveRecallSection"
+          },
+          {
+            "$ref": "#/$defs/SummarySection"
+          }
+        ]
+      },
+      "title": "Sections",
+      "type": "array"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/CourseProvenance"
+    }
+  },
+  "required": [
+    "revision",
+    "stable_key",
+    "course_key",
+    "unit_key",
+    "position",
+    "status",
+    "title",
+    "summary",
+    "outcomes",
+    "prerequisite_lessons",
+    "estimated_minutes",
+    "objectives",
+    "mastery_policy_key",
+    "sections",
+    "assets",
+    "provenance"
+  ],
+  "title": "Lesson",
+  "type": "object"
+}

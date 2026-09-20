@@ -11,6 +11,8 @@ An ASEAN scholarship preparation platform in early development.
   parts into the fixed Mathematics syllabus using local, explainable rules.
 - [N1 practice application](docs/plan/PRACTICE_APPLICATION.md) provides a persistent
   local session API and replaceable student placeholder while the final frontend is designed.
+- [N1 course foundation](docs/plan/N1_COURSE_FOUNDATION.md) documents the versioned course map,
+  seven draft lesson shells, question-pool allocation, local preview, and PostgreSQL import.
 - `backend_resources/sample_papers` is the input location for source PDFs.
 - `frontend_resources` contains branding assets; `main.py` is an initial placeholder.
 

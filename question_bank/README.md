@@ -37,11 +37,41 @@ Publication validation remains unsuccessful until all 40 draft questions receive
 uv run question-bank validate --publish
 ```
 
+Validate the N1 course structure, seven lesson shells, and all 40 pool mappings:
+
+```bash
+uv run question-bank course-validate
+```
+
+Preview the draft course map at <http://127.0.0.1:8767>:
+
+```bash
+uv run question-bank course-preview
+```
+
+The seven `lesson_content_required` warnings are expected until each lesson's teaching
+sections are authored and reviewed. Publication validation deliberately fails while course,
+lesson, or question content remains in `draft` state:
+
+```bash
+uv run question-bank course-validate --publish
+```
+
+Regenerate the committed course-authoring JSON Schemas after changing a Pydantic contract:
+
+```bash
+uv run question-bank course-schema
+```
+
 To import a valid draft or reviewed bank into a database after applying the Supabase migration:
 
 ```bash
 uv sync --extra postgres
 DATABASE_URL=postgresql://... uv run question-bank import-db
+DATABASE_URL=postgresql://... uv run question-bank course-import-db
 ```
 
-Import is transactional. Existing question revisions are immutable: changing assessed content requires incrementing the question's `revision`.
+Apply migrations `202609200001` through `202609200003` before importing. Import the question
+bank first because course pools reference stable question identities. Imports are transactional.
+Existing question, course, and lesson revisions are immutable: changed content requires an
+incremented `revision`; review-state promotion may retain the same revision.
