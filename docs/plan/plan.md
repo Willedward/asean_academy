@@ -256,7 +256,8 @@ The PDFs have selectable OCR text but are effectively scanned-image pages. Ordin
 
 - The source image is the visual truth shown to students.
 - OCR is used primarily for anchors, search, rough segmentation and metadata.
-- A vision-capable model performs structured mathematical extraction.
+- Local layout, formula and table models produce structured candidates; uncertain
+  transcriptions go to human review without automatic paid vision calls.
 - Official answer and solution pages are paired with questions where available.
 - Failed or uncertain content is hidden.
 
@@ -573,4 +574,3 @@ The beta is ready when:
 - Permission, answer-checking and critical browser tests pass.
 - Errors and AI usage are observable.
 - The product works on desktop and mobile for a 10–30-student invited cohort.
-

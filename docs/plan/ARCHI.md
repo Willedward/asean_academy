@@ -462,7 +462,8 @@ Therefore:
 
 - OCR is an anchor and indexing tool.
 - The rendered source image is the visual source of truth.
-- Vision extraction is required for structured mathematics.
+- Local formula/layout/table models provide candidate structured mathematics;
+  uncertain content requires human transcription review.
 - Official solution crops are retained as evidence.
 
 ### 8.2 Pipeline stages
@@ -477,7 +478,7 @@ Therefore:
 
 #### Stage B — render
 
-1. Render every page at 200–250 DPI.
+1. Measure embedded text and image coverage; render image-backed pages at 300 DPI.
 2. Convert to loss-controlled WebP or PNG.
 3. Record page width, height and checksum.
 4. Detect blank or nearly blank pages.
@@ -519,7 +520,13 @@ Use deterministic header rules first, then a low-cost model only when necessary.
 
 #### Stage F — structured extraction
 
-Call a pinned GPT-5.4 Mini snapshot through the Responses API with image input and Structured Outputs. Require fields such as:
+The implemented default in [`ocr_extractor`](../../ocr_extractor/README.md) uses
+local PP-StructureV3 layout, ordinary OCR, PP-FormulaNet and table recognition.
+Preserve ordered text, math, table and image blocks with original source crops,
+recognition confidence and review reasons. Missing or uncertain regions go to the
+local human-review workbench. There is no automatic vision API fallback.
+The previously implemented vision backend remains available only through explicit
+selection. Legacy summary fields remain available, for example:
 
 ```json
 {
@@ -557,11 +564,16 @@ taxonomy version
 Recommended method:
 
 1. Deterministic keyword/rule candidates.
-2. GPT-5.4 Mini chooses only among allowed topic IDs.
-3. Validate the returned ID against the database.
-4. Hide content below the classification threshold.
+2. Optionally rerank the small candidate list with a local text-embedding model.
+3. Validate every returned ID against the database and taxonomy version.
+4. Send weak or conflicting results to human review as `unclassified`.
+5. Test a schema-constrained text-model call only if labelled evaluation shows
+   that local classification cannot meet the quality target. The model may choose
+   only among allowed topic IDs.
 
-A separately trained machine-learning classifier is not required for the beta. The likely dataset is initially too small, and a schema-constrained language model is more maintainable.
+A separately trained machine-learning classifier and a vector database are not
+required for the beta. The taxonomy is small and relational. The detailed design
+is in [`QUESTION_CATEGORIZATION.md`](QUESTION_CATEGORIZATION.md).
 
 #### Stage H — verification
 
@@ -1032,4 +1044,3 @@ The architecture is implemented sufficiently for the beta when:
 - Prompt, model, token and cost information is observable.
 - CI covers application, database, worker and critical browser paths.
 - The system supports the invited 10–30-student December cohort without manual database operations during ordinary use.
-

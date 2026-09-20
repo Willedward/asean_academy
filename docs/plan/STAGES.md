@@ -331,11 +331,23 @@ Prove the complete learning loop with real content before investing heavily in a
 
 Turn one representative scanned paper and its solution pages into draft question records. Accuracy matters more than processing every page.
 
+**Implementation note (14 September 2026):** The Python worker is in
+[`ocr_extractor`](../../ocr_extractor/README.md). Its default hybrid pipeline analyzes
+text/image coverage, renders image-backed pages at 300 DPI, prepares images, and
+uses local Paddle layout, text, formula and table recognition. Failed or uncertain
+content goes to human review; it never automatically invokes the vision API.
+Ordered content blocks and confidence/source evidence persist in JSON and
+SQLite/PostgreSQL. A local browser workbench supports source comparison, LaTeX
+preview and separate review revisions. Beasiswa provides an eight-question
+evaluation fixture; founder confirmation of the agent's visual transcription is
+pending. Deployed administrator authentication, private object storage and Stage 5
+academic verification/publication gates remain outstanding.
+
 ### Pipeline tasks
 
 1. Implement document checksum and duplicate detection.
 2. Save source metadata: school, year, paper, source level, target track and page count.
-3. Render pages at a fixed 200–250 DPI using PyMuPDF.
+3. Render image-backed pages at 300 DPI using PyMuPDF; retain source coordinates.
 4. Extract the existing OCR text layer for navigation anchors.
 5. Store page-level text and image metadata.
 6. Classify pages as cover, instructions, question, continuation, answer key, worked solution or blank.

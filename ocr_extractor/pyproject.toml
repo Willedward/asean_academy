@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "asean-academy-ocr-extractor"
+version = "0.2.0"
+description = "PDF question ingestion with source crops, validated JSON and database persistence"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "pymupdf>=1.26,<2", "pydantic>=2.11,<3",
+  "numpy>=1.26,<3", "pillow>=11,<13", "opencv-contrib-python>=4.10,<5",
+]
+
+[project.optional-dependencies]
+vision = ["openai>=2.0,<3"]
+postgres = ["psycopg[binary]>=3.2,<4"]
+paddle = ["paddleocr[doc-parser]>=3.3,<3.5", "paddlepaddle>=3.2,<3.4"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "ruff>=0.12,<1"]
+
+[project.scripts]
+ocr-extract = "ocr_extractor.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ocr_extractor"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "ocr: requires installed Tesseract language data", "postgres: requires TEST_DATABASE_URL",
+  "paddle: runs downloaded local Paddle models (RUN_PADDLE_TESTS=1)",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

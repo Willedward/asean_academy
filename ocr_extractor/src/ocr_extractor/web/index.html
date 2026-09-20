@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="review-token" content="__REVIEW_TOKEN__">
+  <title>ASEAN Academy · Question review</title>
+  <link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <script defer src="/static/vendor/katex/katex.min.js"></script>
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <header><div class="brand">ASEAN ACADEMY <span>Content workbench</span></div>
+    <span class="badge">Human review</span></header>
+  <main>
+    <aside>
+      <h1>Question review</h1>
+      <p class="muted">Compare every expression with the source before marking it checked.</p>
+      <label for="document">Source paper</label><select id="document"></select>
+      <div id="document-warnings" class="notice"></div>
+      <div id="queue" aria-label="Question queue"></div>
+      <details><summary>All source pages &amp; extraction warnings</summary><div id="pages"></div></details>
+    </aside>
+    <section id="workspace">
+      <div class="toolbar"><div><h2 id="title">Select a paper</h2><p id="subtitle" class="muted"></p></div>
+        <button id="next" type="button">Next question →</button></div>
+      <p id="message" role="status" aria-live="polite"></p>
+      <div class="columns">
+        <section class="panel"><h3>Original source</h3><div id="source"></div></section>
+        <section class="panel"><h3>Rendered question</h3><div id="preview"></div>
+          <p class="muted">Math renders locally with KaTeX. Diagrams retain their original image.</p></section>
+      </div>
+      <details id="diagnostics"><summary>Recognition details</summary><pre id="warnings"></pre><pre id="raw"></pre></details>
+      <section class="panel"><h3>Edit content</h3><p class="muted">Use text for sentences, math for LaTeX, and tables for cell values. Each block keeps its source crop.</p><div id="editor"></div></section>
+      <form id="review-form" class="panel">
+        <label for="reviewer">Reviewer name</label><input id="reviewer" autocomplete="name" required maxlength="120">
+        <label for="notes">Review notes</label><textarea id="notes" rows="2" placeholder="Corrections, unresolved symbols, or missing content"></textarea>
+        <p class="muted">“Checked” records your transcription review. Academic verification and publication remain separate backend steps.</p>
+        <div class="actions"><button type="submit" data-decision="draft">Save draft</button>
+          <button type="submit" data-decision="checked" class="primary">Mark transcription checked</button>
+          <button type="submit" data-decision="rejected">Reject candidate</button></div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
