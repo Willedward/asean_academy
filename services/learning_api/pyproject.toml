@@ -9,10 +9,14 @@ description = "Versioned HTTP API for ASEAN Academy course and practice services
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+  "asean-academy-question-bank",
   "fastapi>=0.115,<1",
   "pydantic>=2.11,<3",
   "uvicorn[standard]>=0.34,<1",
 ]
+
+[tool.uv.sources]
+asean-academy-question-bank = { path = "../../question_bank", editable = true }
 
 [dependency-groups]
 dev = ["httpx>=0.28,<1", "pytest>=8.3,<10", "ruff>=0.12,<1"]

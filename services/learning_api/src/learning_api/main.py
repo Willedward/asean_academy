@@ -13,6 +13,8 @@ from . import __version__
 from .config import Settings
 from .contracts import ErrorDetail, ErrorEnvelope, HealthResponse
 from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
+from .course_catalogue import CourseCatalogue
+from .routers.courses import router as courses_router
 
 LOGGER = logging.getLogger("learning_api")
 
@@ -61,6 +63,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         },
     )
     application.state.settings = settings
+    application.state.course_catalogue = CourseCatalogue(
+        settings.repository_root,
+        allow_drafts=settings.allow_draft_content,
+    )
     application.add_middleware(
         CORSMiddleware,
         allow_origins=list(settings.cors_origins),
@@ -143,6 +149,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @application.get("/api/v1/_unexpected-error-contract", include_in_schema=False)
     async def unexpected_error_contract() -> None:
         raise RuntimeError("private failure detail")
+
+    application.include_router(courses_router)
 
     return application
 

@@ -14,7 +14,8 @@
     "test:web": "corepack pnpm --filter @asean-academy/web test",
     "test:python": "uv run --project services/learning_api --locked pytest services/learning_api/tests && uv run --project question_bank --locked pytest question_bank/tests",
     "openapi:export": "uv run --project services/learning_api --locked python services/learning_api/scripts/export_openapi.py",
-    "openapi:generate": "corepack pnpm openapi:export && corepack pnpm --filter @asean-academy/web openapi:generate",
+    "fixtures:export": "uv run --project services/learning_api --locked python services/learning_api/scripts/export_frontend_fixtures.py",
+    "openapi:generate": "corepack pnpm openapi:export && corepack pnpm fixtures:export && corepack pnpm --filter @asean-academy/web openapi:generate",
     "ci:web": "corepack pnpm openapi:generate && corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test:web && corepack pnpm build"
   }
 }

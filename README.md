@@ -17,6 +17,10 @@ An ASEAN scholarship preparation platform in early development.
   replaceable Next.js shell, local setup, CI gates, and deliberate blank-lesson workflow.
 - [Tutor interaction design](docs/plan/TUTOR_INTERACTION_DESIGN.md) specifies the later grounded,
   multi-turn student-teacher experience and answer-lock rules.
+- [Milestone 2 pilot shell](docs/plan/MILESTONE_2_PILOT_SHELL.md) tracks the course-map and blank
+  lesson slice, remaining practice/progress work, and content dependencies.
+- [Lesson video handoff](docs/plan/LESSON_VIDEO_HANDOFF.md) lets lesson production continue without
+  committing large media files or choosing a playback provider prematurely.
 - `backend_resources/sample_papers` is the input location for source PDFs.
 - `frontend_resources` contains branding assets; `main.py` is an initial placeholder.
 

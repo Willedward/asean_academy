@@ -35,6 +35,8 @@ jobs:
       - run: pnpm ci:web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
+      - name: Verify committed generated contracts and fixtures
+        run: git diff --exit-code -- services/learning_api/openapi.json apps/web/src/lib/api/schema.d.ts apps/web/src/fixtures
 
   python:
     name: Learning API and question domain

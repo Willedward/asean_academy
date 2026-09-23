@@ -1,6 +1,211 @@
 {
   "components": {
     "schemas": {
+      "CourseLessonMap": {
+        "additionalProperties": false,
+        "properties": {
+          "availability": {
+            "enum": [
+              "content_pending",
+              "available"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "content_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "estimated_minutes": {
+            "title": "Estimated Minutes",
+            "type": "integer"
+          },
+          "href": {
+            "title": "Href",
+            "type": "string"
+          },
+          "learning_material_state": {
+            "enum": [
+              "pending",
+              "ready"
+            ],
+            "title": "Learning Material State",
+            "type": "string"
+          },
+          "objectives": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Objectives",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "progress_state": {
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "proficient",
+              "mastered"
+            ],
+            "title": "Progress State",
+            "type": "string"
+          },
+          "required_practice_count": {
+            "title": "Required Practice Count",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "title",
+          "summary",
+          "outcomes",
+          "estimated_minutes",
+          "objectives",
+          "required_practice_count",
+          "content_status",
+          "learning_material_state",
+          "availability",
+          "href"
+        ],
+        "title": "CourseLessonMap",
+        "type": "object"
+      },
+      "CourseMapResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "development_preview": {
+            "title": "Development Preview",
+            "type": "boolean"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "school_level": {
+            "title": "School Level",
+            "type": "string"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "units": {
+            "items": {
+              "$ref": "#/components/schemas/CourseUnitMap"
+            },
+            "title": "Units",
+            "type": "array"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "title",
+          "description",
+          "subject",
+          "school_level",
+          "content_status",
+          "development_preview",
+          "units"
+        ],
+        "title": "CourseMapResponse",
+        "type": "object"
+      },
+      "CourseUnitMap": {
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint_available": {
+            "title": "Checkpoint Available",
+            "type": "boolean"
+          },
+          "checkpoint_question_count": {
+            "title": "Checkpoint Question Count",
+            "type": "integer"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/CourseLessonMap"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "title",
+          "checkpoint_question_count",
+          "checkpoint_available",
+          "lessons"
+        ],
+        "title": "CourseUnitMap",
+        "type": "object"
+      },
       "ErrorDetail": {
         "additionalProperties": false,
         "properties": {
@@ -114,6 +319,165 @@
         ],
         "title": "HealthResponse",
         "type": "object"
+      },
+      "LessonResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "assets": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Assets",
+            "type": "array"
+          },
+          "content_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "development_preview": {
+            "title": "Development Preview",
+            "type": "boolean"
+          },
+          "estimated_minutes": {
+            "title": "Estimated Minutes",
+            "type": "integer"
+          },
+          "learning_material_state": {
+            "enum": [
+              "pending",
+              "ready"
+            ],
+            "title": "Learning Material State",
+            "type": "string"
+          },
+          "objectives": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Objectives",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/PracticeEntry"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "sections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "unit_key": {
+            "title": "Unit Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "course_key",
+          "unit_key",
+          "position",
+          "title",
+          "summary",
+          "outcomes",
+          "estimated_minutes",
+          "objectives",
+          "content_status",
+          "development_preview",
+          "learning_material_state",
+          "sections",
+          "assets",
+          "practice"
+        ],
+        "title": "LessonResponse",
+        "type": "object"
+      },
+      "PracticeEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "mode": {
+            "const": "guided_practice",
+            "default": "guided_practice",
+            "title": "Mode",
+            "type": "string"
+          },
+          "question_count": {
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "unavailable_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "content_not_reviewed",
+                  "questions_not_published"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unavailable Reason"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "question_count",
+          "available"
+        ],
+        "title": "PracticeEntry",
+        "type": "object"
       }
     }
   },
@@ -124,6 +488,109 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/courses/{course_key}/map": {
+      "get": {
+        "operationId": "getCourseMap",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Course Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseMapResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Get the learner-safe course map",
+        "tags": [
+          "courses"
+        ]
+      }
+    },
     "/api/v1/health": {
       "get": {
         "operationId": "getHealth",
@@ -212,6 +679,109 @@
         "summary": "Check learning API availability",
         "tags": [
           "system"
+        ]
+      }
+    },
+    "/api/v1/lessons/{lesson_key}": {
+      "get": {
+        "operationId": "getLesson",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Lesson Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Get a learner-safe lesson revision",
+        "tags": [
+          "courses"
         ]
       }
     }

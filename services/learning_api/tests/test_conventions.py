@@ -25,3 +25,9 @@ def test_invalid_environment_fails_with_a_readable_error(monkeypatch):
     monkeypatch.setenv("ASEAN_ACADEMY_ENV", "somewhere")
     with pytest.raises(RuntimeError, match="ASEAN_ACADEMY_ENV"):
         Settings.from_environment()
+
+
+def test_invalid_draft_content_flag_fails_with_a_readable_error(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT", "sometimes")
+    with pytest.raises(RuntimeError, match="ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT"):
+        Settings.from_environment()

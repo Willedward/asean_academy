@@ -1,5 +1,6 @@
 import type { components } from "./schema";
 import { createApiClient } from "./client";
+import { apiErrorMessage } from "./errors";
 
 export type HealthResponse = components["schemas"]["HealthResponse"];
 
@@ -23,11 +24,7 @@ export async function getHealth(): Promise<HealthResponse> {
 
   const { data, error, response } = await createApiClient().GET("/api/v1/health");
   if (error || !data) {
-    const message =
-      typeof error === "object" && error && "error" in error
-        ? error.error.message
-        : `Learning API returned ${response.status}.`;
-    throw new Error(message);
+    throw new Error(apiErrorMessage(error, response.status));
   }
   return data;
 }

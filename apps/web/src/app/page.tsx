@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { HealthPanel } from "@/components/health-panel";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -25,6 +27,7 @@ export default function Home() {
             Course and question contracts are versioned. The seven N1 lessons remain safe draft
             placeholders while videos and reviewed learning materials are being prepared.
           </p>
+          <Button asChild><Link href="/learn">View the N1 course shell</Link></Button>
         </div>
 
         <aside className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 sm:p-7">
