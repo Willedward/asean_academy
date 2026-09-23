@@ -1,0 +1,20 @@
+{
+  "name": "asean-academy",
+  "private": true,
+  "packageManager": "pnpm@12.5.1",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "corepack pnpm --filter @asean-academy/web build",
+    "dev:web": "corepack pnpm --filter @asean-academy/web dev",
+    "dev:api": "uv run --project services/learning_api uvicorn learning_api.main:app --reload --host 127.0.0.1 --port 8000",
+    "lint": "corepack pnpm --filter @asean-academy/web lint",
+    "typecheck": "corepack pnpm --filter @asean-academy/web typecheck",
+    "test:web": "corepack pnpm --filter @asean-academy/web test",
+    "test:python": "uv run --project services/learning_api --locked pytest services/learning_api/tests && uv run --project question_bank --locked pytest question_bank/tests",
+    "openapi:export": "uv run --project services/learning_api --locked python services/learning_api/scripts/export_openapi.py",
+    "openapi:generate": "corepack pnpm openapi:export && corepack pnpm --filter @asean-academy/web openapi:generate",
+    "ci:web": "corepack pnpm openapi:generate && corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test:web && corepack pnpm build"
+  }
+}

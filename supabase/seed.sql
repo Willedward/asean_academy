@@ -1,0 +1,2 @@
+-- Milestone 1 intentionally has no production-like learner seed data.
+-- Course/question imports remain explicit authoring-tool operations.

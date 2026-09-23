@@ -13,6 +13,10 @@ An ASEAN scholarship preparation platform in early development.
   local session API and replaceable student placeholder while the final frontend is designed.
 - [N1 course foundation](docs/plan/N1_COURSE_FOUNDATION.md) documents the versioned course map,
   seven draft lesson shells, question-pool allocation, local preview, and PostgreSQL import.
+- [Milestone 1 foundation](docs/plan/MILESTONE_1_FOUNDATION.md) documents the production API and
+  replaceable Next.js shell, local setup, CI gates, and deliberate blank-lesson workflow.
+- [Tutor interaction design](docs/plan/TUTOR_INTERACTION_DESIGN.md) specifies the later grounded,
+  multi-turn student-teacher experience and answer-lock rules.
 - `backend_resources/sample_papers` is the input location for source PDFs.
 - `frontend_resources` contains branding assets; `main.py` is an initial placeholder.
 
@@ -28,3 +32,18 @@ Open http://localhost:8765 to compare source crops with editable text, LaTeX,
 tables and diagrams. The default pipeline runs local models; failed or uncertain
 regions go to human review without automatic vision API calls. Extracted content
 remains `needs_review` until academic verification and publication are implemented.
+
+Run the Milestone 1 applications in two terminals:
+
+```bash
+corepack pnpm install
+uv sync --project services/learning_api --locked
+corepack pnpm dev:api
+```
+
+```bash
+corepack pnpm dev:web
+```
+
+Open <http://localhost:3000>. The temporary foundation screen calls the API at
+`http://127.0.0.1:8000/api/v1/health` through a same-origin Next.js rewrite.
