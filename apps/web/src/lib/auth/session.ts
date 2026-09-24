@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
 
+import { safeNextPath } from "@/lib/auth/navigation";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -32,9 +33,14 @@ export const getVerifiedSession = cache(async (): Promise<VerifiedSession | null
   };
 });
 
-export async function requireVerifiedSession(): Promise<VerifiedSession | null> {
+export async function requireVerifiedSession(
+  nextPath = "/onboarding",
+): Promise<VerifiedSession | null> {
   if (!isSupabaseConfigured()) return null;
   const session = await getVerifiedSession();
-  if (!session) redirect("/login");
+  if (!session) {
+    const next = encodeURIComponent(safeNextPath(nextPath));
+    redirect(`/login?next=${next}`);
+  }
   return session;
 }

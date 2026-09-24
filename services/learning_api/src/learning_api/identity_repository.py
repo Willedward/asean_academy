@@ -7,6 +7,7 @@ from typing import Protocol
 
 import psycopg
 from psycopg.rows import dict_row
+from psycopg.types.json import Jsonb
 
 from .identity import AuthenticatedLearner
 
@@ -24,6 +25,7 @@ class IdentityRepository(Protocol):
         learner: AuthenticatedLearner,
         invitation_code: str,
         display_name: str,
+        request_id: str,
     ) -> dict: ...
 
     def current_learner(self, learner: AuthenticatedLearner) -> dict: ...
@@ -97,6 +99,7 @@ class PostgresIdentityRepository:
         learner: AuthenticatedLearner,
         invitation_code: str,
         display_name: str,
+        request_id: str,
     ) -> dict:
         if not learner.email:
             raise IdentityError(
@@ -194,6 +197,21 @@ class PostgresIdentityRepository:
             connection.execute(
                 "update beta_invitations set use_count = use_count + 1 where id = %s",
                 (invitation["id"],),
+            )
+            connection.execute(
+                """
+                insert into beta_audit_events (
+                    event_type, actor_user_id, invitation_id,
+                    target_user_id, request_id, metadata
+                ) values ('invitation_accepted', %s, %s, %s, %s, %s::jsonb)
+                """,
+                (
+                    learner.learner_id,
+                    invitation["id"],
+                    learner.learner_id,
+                    request_id,
+                    Jsonb({"course_key": invitation["course_key"]}),
+                ),
             )
             response = self._response(connection, learner.learner_id)
             return {"accepted": True, **response}

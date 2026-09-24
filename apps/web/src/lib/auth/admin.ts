@@ -3,12 +3,13 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { getServerLearner, ServerLearningApiError } from "@/lib/server/learning-api";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 
-import { hasActiveEnrolment } from "./learner-state";
 import { requireVerifiedSession } from "./session";
 
-export async function requireEnrolledLearner() {
-  const session = await requireVerifiedSession("/learn");
+export async function requireAdministrator() {
+  if (!isSupabaseConfigured()) return null;
+  const session = await requireVerifiedSession("/admin/invitations");
   if (!session) return null;
 
   let learner;
@@ -18,13 +19,15 @@ export async function requireEnrolledLearner() {
     if (
       error instanceof ServerLearningApiError &&
       error.status === 403 &&
-      ["onboarding_required", "active_enrolment_required"].includes(error.code)
+      error.code === "onboarding_required"
     ) {
       redirect("/onboarding");
     }
     throw error;
   }
 
-  if (!hasActiveEnrolment(learner)) redirect("/onboarding");
+  if (!["content_admin", "academic_admin"].includes(learner.profile.role)) {
+    redirect("/learn");
+  }
   return learner;
 }

@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+import logging
 
+from fastapi import APIRouter, HTTPException, Request
+
+from ..conventions import current_request_id
 from ..dependencies import IdentityRepositoryDependency, LearnerDependency
 from ..identity_contracts import (
     AcceptInvitationRequest,
@@ -12,6 +15,7 @@ from ..identity_contracts import (
 )
 from ..identity_repository import IdentityError
 
+LOGGER = logging.getLogger("learning_api.identity")
 router = APIRouter(prefix="/api/v1", tags=["identity"])
 
 
@@ -33,16 +37,29 @@ def _safe(call):
 )
 async def accept_invitation(
     body: AcceptInvitationRequest,
+    request: Request,
     learner: LearnerDependency,
     repository: IdentityRepositoryDependency,
 ) -> InvitationAcceptanceResponse:
-    return _safe(
-        lambda: repository.accept_invitation(
+    try:
+        result = repository.accept_invitation(
             learner,
             body.invitation_code,
             body.display_name,
+            current_request_id(request),
         )
-    )
+    except IdentityError as exc:
+        LOGGER.warning(
+            "onboarding_rejected request_id=%s code=%s",
+            current_request_id(request),
+            exc.code,
+        )
+        raise HTTPException(
+            status_code=exc.status,
+            detail={"code": exc.code, "message": str(exc)},
+        ) from exc
+    LOGGER.info("onboarding_accepted request_id=%s", current_request_id(request))
+    return result
 
 
 @router.get(

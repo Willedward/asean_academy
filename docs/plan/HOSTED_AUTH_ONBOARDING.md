@@ -2,7 +2,7 @@
 
 ## Status
 
-The code integration is complete on `feature/hosted-auth-onboarding`.
+The hosted-auth foundation was introduced on `feature/hosted-auth-onboarding`.
 It adds Google sign-in through Supabase, cookie-based server sessions, protected
 learner routes, invitation acceptance, sign-out and an authenticated same-origin
 gateway to the Python learning API. It builds in both hosted-auth and local-preview
@@ -167,6 +167,9 @@ uv run --project services/learning_api --locked \
 ```
 
 ## 6. Issue a student invitation
+
+For normal beta operations, bootstrap an administrator and use the protected `/admin/invitations` dashboard as described in `docs/plan/BETA_OPERATIONS.md`. The command below remains an emergency operator fallback.
+
 
 The course must be imported before invitations can be issued. Run this from a
 trusted administrator terminal with the database URL set:

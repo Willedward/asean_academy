@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from time import perf_counter
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -15,6 +16,7 @@ from .contracts import ErrorDetail, ErrorEnvelope, HealthResponse
 from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
 from .course_catalogue import CourseCatalogue
 from .identity import SupabaseTokenVerifier, TokenVerifier
+from .routers.admin import router as admin_router
 from .routers.courses import router as courses_router
 from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
@@ -101,8 +103,17 @@ def create_app(
     @application.middleware("http")
     async def request_context(request: Request, call_next):
         request.state.request_id = request_id_from(request.headers.get(REQUEST_ID_HEADER))
+        started_at = perf_counter()
         response = await call_next(request)
         response.headers[REQUEST_ID_HEADER] = request.state.request_id
+        LOGGER.info(
+            "request_complete request_id=%s method=%s path=%s status=%s duration_ms=%.2f",
+            request.state.request_id,
+            request.method,
+            request.url.path,
+            response.status_code,
+            (perf_counter() - started_at) * 1000,
+        )
         return response
 
     @application.exception_handler(HTTPException)
@@ -128,10 +139,15 @@ def create_app(
     async def validation_exception(request: Request, exc: RequestValidationError):
         return _error_response(
             request,
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             code="validation_error",
             message="The request did not match the API contract.",
-            details={"fields": exc.errors(include_url=False, include_context=False)},
+            details={
+                "fields": [
+                    {key: value for key, value in error.items() if key not in {"ctx", "url"}}
+                    for error in exc.errors()
+                ]
+            },
         )
 
     @application.exception_handler(Exception)
@@ -174,6 +190,7 @@ def create_app(
         raise RuntimeError("private failure detail")
 
     application.include_router(identity_router)
+    application.include_router(admin_router)
     application.include_router(courses_router)
     application.include_router(practice_router)
     application.include_router(progress_router)

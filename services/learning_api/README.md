@@ -37,15 +37,15 @@ ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT=false
 
 Asymmetric Supabase access tokens are verified from the project JWKS. A legacy HS256 project must also provide `SUPABASE_ANON_KEY`; those tokens are validated through Supabase Auth. In the hosted web app, the browser keeps a Supabase cookie session and calls the same-origin Next.js gateway. That server forwards the access token as `Authorization: Bearer ...`; this API verifies it independently. Database and service-role credentials stay server-only.
 
-Create an invitation after the course has been imported:
+After an intended administrator has signed in with Google once, bootstrap their database-backed role:
 
 ```bash
 ASEAN_ACADEMY_DATABASE_URL=postgresql://... \
   uv run --project services/learning_api --locked \
-  python services/learning_api/scripts/create_invitation.py student@example.com
+  python services/learning_api/scripts/set_admin_role.py admin@example.com
 ```
 
-The command prints the raw invitation code once. The database stores only its SHA-256 digest. After the Supabase user signs in, the frontend submits that code to `POST /api/v1/onboarding/accept-invitation`; this creates the student profile and pins the enrolment to the current N1 course revision.
+The administrator can then open `/admin/invitations` to create and revoke student invitations. Raw invitation codes are returned once and the database stores only their SHA-256 digests. The `create_invitation.py` script remains an emergency operator fallback. After a Supabase user accepts a matching invitation, the API creates the student profile and pins the enrolment to the current N1 course revision.
 
 ## Verification
 
@@ -65,4 +65,4 @@ TEST_DATABASE_URL=postgresql://... \
 
 It checks invitation onboarding, per-learner idempotency, cross-learner session isolation, immutable attempts, and concurrent duplicate session creation.
 
-The complete Google OAuth, hosted environment, invitation and acceptance-test runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`.
+The Google OAuth and hosted environment runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`. Administrator invitation operations and observability are documented in `docs/plan/BETA_OPERATIONS.md`.

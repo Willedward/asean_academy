@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
+from .admin_repository import PostgresBetaOperationsRepository
 from .identity import AuthenticatedLearner, AuthenticationError
 from .identity_repository import IdentityError, PostgresIdentityRepository
 from .practice_service import PracticeService
@@ -77,6 +79,47 @@ def identity_repository(request: Request) -> PostgresIdentityRepository:
 IdentityRepositoryDependency = Annotated[
     PostgresIdentityRepository, Depends(identity_repository)
 ]
+
+
+def beta_operations_repository(request: Request) -> PostgresBetaOperationsRepository:
+    settings = request.app.state.settings
+    if not settings.database_url:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "beta_operations_not_configured",
+                "message": "Beta operations require the PostgreSQL database.",
+            },
+        )
+    repository = getattr(request.app.state, "beta_operations_repository", None)
+    if repository is None:
+        repository = PostgresBetaOperationsRepository(settings.database_url)
+        request.app.state.beta_operations_repository = repository
+    return repository
+
+
+BetaOperationsRepositoryDependency = Annotated[
+    PostgresBetaOperationsRepository, Depends(beta_operations_repository)
+]
+
+
+def admin_learner(
+    learner: LearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+) -> AuthenticatedLearner:
+    role = repository.role_for(learner.learner_id)
+    if role not in {"content_admin", "academic_admin"}:
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "code": "administrator_required",
+                "message": "An authorized academy administrator is required.",
+            },
+        )
+    return replace(learner, role=role)
+
+
+AdminLearnerDependency = Annotated[AuthenticatedLearner, Depends(admin_learner)]
 
 
 def enrolled_learner(

@@ -16,6 +16,8 @@ import pytest
 from question_bank.practice import solution_for
 from question_bank.validation import validate_bank
 
+from learning_api.admin_contracts import CreateInvitationRequest
+from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.identity_repository import invitation_digest
@@ -257,3 +259,81 @@ def test_concurrent_session_creation_replays_one_postgres_session():
             (learner_id,),
         ).fetchone()[0]
     assert count == 1
+
+
+@pytest.mark.postgres
+def test_beta_operations_are_admin_authorized_audited_and_immutable():
+    database_url = _database_url()
+    administrator_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (administrator_id, f"{administrator_id}@example.test"),
+        )
+        connection.execute(
+            "insert into profiles (id, role, display_name) values (%s, 'content_admin', 'Admin')",
+            (administrator_id,),
+        )
+
+    repository = PostgresBetaOperationsRepository(database_url)
+    administrator = AuthenticatedLearner(
+        administrator_id,
+        "content_admin",
+        f"{administrator_id}@example.test",
+    )
+    assert repository.role_for(administrator_id) == "content_admin"
+
+    created = repository.create_invitation(
+        administrator,
+        CreateInvitationRequest(email=f"{uuid4()}@example.test"),
+        "postgres-admin-create",
+    )
+    assert created["status"] == "active"
+    assert len(created["invitation_code"]) >= 16
+
+    listed = repository.list_invitations(status="active", limit=200, offset=0)
+    assert any(
+        item["invitation_id"] == created["invitation_id"]
+        for item in listed["invitations"]
+    )
+    events = repository.audit_events(limit=200)["events"]
+    assert any(
+        event["request_id"] == "postgres-admin-create"
+        and event["event_type"] == "invitation_created"
+        for event in events
+    )
+
+    revoked = repository.revoke_invitation(
+        administrator,
+        created["invitation_id"],
+        "postgres-admin-revoke",
+    )
+    assert revoked["status"] == "revoked"
+    revoked_again = repository.revoke_invitation(
+        administrator,
+        created["invitation_id"],
+        "postgres-admin-revoke-again",
+    )
+    assert revoked_again["revoked_at"] == revoked["revoked_at"]
+    assert repository.summary()["invitations_revoked"] >= 1
+
+    with psycopg.connect(database_url) as connection:
+        repeated_revoke_events = connection.execute(
+            "select count(*) from beta_audit_events where request_id = %s",
+            ("postgres-admin-revoke-again",),
+        ).fetchone()[0]
+        assert repeated_revoke_events == 0
+        stored = connection.execute(
+            "select token_sha256 from beta_invitations where id = %s",
+            (created["invitation_id"],),
+        ).fetchone()[0]
+        assert stored == invitation_digest(created["invitation_code"])
+        assert created["invitation_code"] != stored
+        event_id = connection.execute(
+            "select id from beta_audit_events where request_id = 'postgres-admin-create'"
+        ).fetchone()[0]
+        with pytest.raises(psycopg.errors.RaiseException, match="audit events are immutable"):
+            connection.execute(
+                "update beta_audit_events set metadata = '{}'::jsonb where id = %s",
+                (event_id,),
+            )
