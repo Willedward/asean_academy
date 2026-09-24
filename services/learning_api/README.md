@@ -35,7 +35,7 @@ SUPABASE_JWT_AUDIENCE=authenticated
 ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT=false
 ```
 
-Asymmetric Supabase access tokens are verified from the project JWKS. A legacy HS256 project must also provide `SUPABASE_ANON_KEY`; those tokens are validated through Supabase Auth. Browser requests send the access token as `Authorization: Bearer ...`. Database and service-role credentials stay server-only.
+Asymmetric Supabase access tokens are verified from the project JWKS. A legacy HS256 project must also provide `SUPABASE_ANON_KEY`; those tokens are validated through Supabase Auth. In the hosted web app, the browser keeps a Supabase cookie session and calls the same-origin Next.js gateway. That server forwards the access token as `Authorization: Bearer ...`; this API verifies it independently. Database and service-role credentials stay server-only.
 
 Create an invitation after the course has been imported:
 
@@ -64,3 +64,5 @@ TEST_DATABASE_URL=postgresql://... \
 ```
 
 It checks invitation onboarding, per-learner idempotency, cross-learner session isolation, immutable attempts, and concurrent duplicate session creation.
+
+The complete Google OAuth, hosted environment, invitation and acceptance-test runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`.

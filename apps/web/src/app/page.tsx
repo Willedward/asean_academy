@@ -3,15 +3,18 @@ import Link from "next/link";
 
 import { HealthPanel } from "@/components/health-panel";
 import { Button } from "@/components/ui/button";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export default function Home() {
+  const hostedAuth = isSupabaseConfigured();
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-8 sm:px-8 sm:py-12">
       <header className="flex items-center gap-3">
         <Image src="/brand-symbol.svg" width={42} height={42} alt="" priority />
         <div>
           <p className="m-0 text-lg font-extrabold tracking-tight">ASEAN Academy</p>
-          <p className="m-0 text-sm text-slate-500">Milestone 1 foundation</p>
+          <p className="m-0 text-sm text-slate-500">Secondary mathematics beta</p>
         </div>
       </header>
 
@@ -21,20 +24,22 @@ export default function Home() {
             Secondary 1 G3 Mathematics
           </p>
           <h1 className="m-0 max-w-2xl text-4xl font-black leading-tight tracking-[-0.04em] sm:text-6xl">
-            The learning foundation is ready for your lesson design.
+            Learn each idea, practise it, and keep moving forward.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
-            Course and question contracts are versioned. The seven N1 lessons remain safe draft
-            placeholders while videos and reviewed learning materials are being prepared.
+            Follow the N1 course in order, submit typed final answers, and revisit questions that need another attempt. Lesson materials remain draft placeholders while the videos are prepared.
           </p>
-          <Button asChild><Link href="/learn">View the N1 course shell</Link></Button>
+          <Button asChild>
+            <Link href={hostedAuth ? "/login" : "/learn"}>
+              {hostedAuth ? "Student sign in" : "Open the local course shell"}
+            </Link>
+          </Button>
         </div>
 
         <aside className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 sm:p-7">
           <h2 className="mt-0 text-xl font-extrabold">System readiness</h2>
           <p className="text-sm leading-6 text-slate-600">
-            This temporary screen proves that the replaceable Next.js client can use the generated
-            OpenAPI contract and reach the Python learning API.
+            The web application talks to the learning API through a same-origin gateway. Hosted student requests carry a verified Supabase session automatically.
           </p>
           <HealthPanel />
         </aside>

@@ -1,0 +1,265 @@
+# Hosted authentication and student onboarding
+
+## Status
+
+The code integration is complete on `feature/hosted-auth-onboarding`.
+It adds Google sign-in through Supabase, cookie-based server sessions, protected
+learner routes, invitation acceptance, sign-out and an authenticated same-origin
+gateway to the Python learning API. It builds in both hosted-auth and local-preview
+modes.
+
+A real end-to-end Google redirect cannot be completed until the Supabase project,
+Google OAuth client and public deployment URLs are configured. No provider secret,
+database password or service-role key belongs in this repository.
+
+## Delivered flow
+
+1. A visitor opens `/login` and selects **Continue with Google**.
+2. Supabase starts a PKCE OAuth flow and returns to `/auth/callback`.
+3. The callback exchanges the one-time code and stores the session in cookies.
+4. A signed-in student without a profile is sent to `/onboarding`.
+5. The student supplies a display name and the beta invitation code.
+6. The learning API verifies the Supabase JWT, exact invitation email, expiry,
+   use limit and pinned course revision.
+7. Successful acceptance creates the learner profile and active enrolment and
+   opens `/learn`.
+8. `/learn`, `/courses`, `/lessons`, `/practice` and `/progress` require both a
+   verified hosted session and an active API enrolment.
+9. Sign-out clears the Supabase session and returns to `/login`.
+
+When Supabase public variables are absent, the existing credential-free local
+SQLite learner remains available. This lets lesson and frontend work continue
+without hosted infrastructure.
+
+## Security boundaries
+
+- Supabase Auth owns Google OAuth and refresh-token rotation.
+- Next.js Proxy refreshes session cookies and verifies identity with
+  `getClaims()`; server code does not authorize from unverified cookie contents.
+- The browser calls only the same-origin `/api/v1/*` route. Next.js adds the
+  Supabase access token on the server before forwarding to FastAPI.
+- FastAPI independently verifies the JWT signature, issuer, audience and expiry.
+- Invitation acceptance requires the authenticated email to exactly match the
+  invited email.
+- The browser never receives a database URL, service-role key or Google client
+  secret.
+- OAuth `next` parameters accept only application-relative paths, preventing an
+  external redirect after login.
+- Authenticated gateway responses use private, no-store caching.
+
+Google sign-in reduces casual account sharing because students do not receive a
+second academy password. It cannot prevent someone from sharing an entire Google
+account. Strict one-session-per-user enforcement is a separate Supabase project
+setting and currently requires a compatible paid plan; decide that before the
+public beta.
+
+## 1. Create or select the Supabase project
+
+Use one Supabase project for the beta environment. From its **Connect** or API
+settings, record:
+
+- Project URL, for example `https://PROJECT_REF.supabase.co`.
+- Publishable key. This is intentionally used by the browser.
+- Pooled PostgreSQL connection string. This is server-only.
+- JWT signing algorithm. New projects normally use asymmetric signing keys.
+
+Apply every file in `supabase/migrations` in filename order. Then import the
+question bank and course records:
+
+```bash
+DATABASE_URL='postgresql://...' \
+  uv run --project question_bank --extra postgres question-bank import-db
+
+DATABASE_URL='postgresql://...' \
+  uv run --project question_bank --extra postgres question-bank course-import-db
+```
+
+Draft records support development and a controlled preview. Keep
+`ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT=false` for a real student beta until the
+questions and lessons pass review.
+
+## 2. Configure Google OAuth
+
+In Google Auth Platform:
+
+1. Configure the consent-screen branding and audience.
+2. Add the `openid`, email and profile scopes required by Supabase.
+3. Create an OAuth client of type **Web application**.
+4. Add authorized JavaScript origins:
+   - `http://localhost:3000` for local verification.
+   - The final HTTPS web origin, for example `https://academy.example.com`.
+5. Add the Supabase provider callback shown on the Supabase Google provider page,
+   normally `https://PROJECT_REF.supabase.co/auth/v1/callback`, as an authorized
+   redirect URI.
+6. Copy the Google client ID and client secret directly into Supabase
+   **Authentication > Providers > Google** and enable the provider.
+
+Do not send or commit the Google client secret. Configure it directly in the
+provider dashboard.
+
+## 3. Configure Supabase redirect URLs
+
+In Supabase **Authentication > URL Configuration**:
+
+- Site URL: the final frontend origin.
+- Additional redirect URL for local development:
+  `http://localhost:3000/auth/callback`.
+- Additional redirect URL for production:
+  `https://YOUR_WEB_DOMAIN/auth/callback`.
+- Add a preview callback only if that preview deployment is intentionally allowed
+  to use the beta identity project.
+
+The callback generated by the application must exactly match this allow-list.
+Broad wildcard redirects should not be used for production.
+
+## 4. Configure the Next.js web deployment
+
+Set these variables on the web service before its build starts:
+
+```dotenv
+LEARNING_API_URL=https://YOUR_API_DOMAIN
+NEXT_PUBLIC_SITE_URL=https://YOUR_WEB_DOMAIN
+NEXT_PUBLIC_SUPABASE_URL=https://PROJECT_REF.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+NEXT_PUBLIC_USE_API_FIXTURES=false
+```
+
+`NEXT_PUBLIC_*` values are frozen into the browser bundle during `next build`.
+Changing them requires a rebuild/redeploy. `LEARNING_API_URL` must be reachable
+from the Next.js server; it does not have to be exposed to browser JavaScript.
+
+For Railway, use the repository root as the build context. The current workspace
+commands are:
+
+```bash
+corepack pnpm --filter @asean-academy/web build
+corepack pnpm --filter @asean-academy/web start
+```
+
+Railway may provide `RAILWAY_PUBLIC_DOMAIN`, but set `NEXT_PUBLIC_SITE_URL`
+explicitly so OAuth callbacks do not depend on platform inference.
+
+## 5. Configure the Python API deployment
+
+Set server-only variables on the API service:
+
+```dotenv
+ASEAN_ACADEMY_ENV=preview
+ASEAN_ACADEMY_DATABASE_URL=postgresql://...
+ASEAN_ACADEMY_REPOSITORY_ROOT=/app
+ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT=true
+ASEAN_ACADEMY_CORS_ORIGINS=https://YOUR_WEB_DOMAIN
+SUPABASE_URL=https://PROJECT_REF.supabase.co
+SUPABASE_JWT_AUDIENCE=authenticated
+```
+
+For a legacy `HS256` project, also set `SUPABASE_ANON_KEY`. New asymmetric JWTs
+are verified from Supabase JWKS and do not need that fallback key.
+
+Do not set `ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID` in hosted PostgreSQL mode.
+Do not place the PostgreSQL URL or service-role key in the web service.
+
+Start the API with the deployment platform's assigned port, for example:
+
+```bash
+uv run --project services/learning_api --locked \
+  uvicorn learning_api.main:app --host 0.0.0.0 --port "$PORT"
+```
+
+## 6. Issue a student invitation
+
+The course must be imported before invitations can be issued. Run this from a
+trusted administrator terminal with the database URL set:
+
+```bash
+ASEAN_ACADEMY_DATABASE_URL='postgresql://...' \
+  uv run --project services/learning_api --locked \
+  python services/learning_api/scripts/create_invitation.py \
+  student@example.com --expires-days 14 --max-uses 1
+```
+
+The command prints the raw invitation code exactly once. Send it to the matching
+student through an appropriate private channel. The database stores only its
+SHA-256 digest.
+
+A convenient onboarding link is:
+
+```text
+https://YOUR_WEB_DOMAIN/onboarding?code=RAW_INVITATION_CODE
+```
+
+The code pre-fills the form, but the signed-in Google email still has to match.
+
+## 7. Local hosted-auth verification
+
+Use the same Supabase project and a PostgreSQL development database. In
+`apps/web/.env.local` set:
+
+```dotenv
+LEARNING_API_URL=http://127.0.0.1:8000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://PROJECT_REF.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+NEXT_PUBLIC_USE_API_FIXTURES=false
+```
+
+Start the API from the repository root with its PostgreSQL and Supabase server
+variables loaded:
+
+```bash
+uv run --project services/learning_api --locked \
+  uvicorn learning_api.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Start the web application in another terminal:
+
+```bash
+corepack pnpm --filter @asean-academy/web dev
+```
+
+Open `http://localhost:3000/login`. Use a real invitation for the same Google
+email. Verify sign-in, onboarding, course loading, one practice answer, progress,
+sign-out and sign-in again.
+
+## 8. Hosted acceptance test
+
+Use a normal window for the invited student and a private window for negative
+checks:
+
+1. An anonymous visit to `/learn` redirects to `/login`.
+2. Google sign-in returns to the configured web domain without a callback error.
+3. A wrong or expired invitation stays on onboarding with a safe error.
+4. An invitation for a different email is rejected.
+5. A valid invitation reaches `/learn` and remains accepted if submitted again.
+6. Course, lesson, practice and progress API calls succeed without a bearer token
+   being manually stored by application code.
+7. Refreshing a protected page preserves the session.
+8. Sign-out returns to `/login`; revisiting `/learn` again requires sign-in.
+9. A second student cannot access the first student's session URL.
+10. API logs and frontend errors share the `X-Request-ID` needed for diagnosis.
+
+## Implemented files
+
+- `apps/web/src/lib/supabase/*`: browser/server clients, config and session refresh.
+- `apps/web/src/proxy.ts`: Next.js 16 session-refresh proxy.
+- `apps/web/src/app/login`: Google entry screen and OAuth start action.
+- `apps/web/src/app/auth/callback`: PKCE code exchange.
+- `apps/web/src/app/auth/signout`: server-side sign-out.
+- `apps/web/src/app/onboarding`: invitation activation screen.
+- `apps/web/src/app/(learner)/layout.tsx`: verified-session and enrolment gate.
+- `apps/web/src/app/api/v1/[...path]/route.ts`: authenticated learning API gateway.
+
+## Remaining external inputs and decisions
+
+The code does not need lesson videos or reviewed lesson bodies. Hosted activation
+still needs:
+
+- Supabase project URL and publishable key.
+- Google OAuth client configured directly in Supabase.
+- Final web and API HTTPS domains.
+- Server-only pooled PostgreSQL URL.
+- At least one beta test email for invitation issuance.
+- Decision on Supabase Free versus a plan that supports strict single-session
+  enforcement.
+- Decision on whether to add magic-link account recovery after Google sign-in is
+  verified. Google-only is the current beta UI.
