@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CircleAlert, Clock3, FileClock, RefreshCw } from "lucide-react";
+import { BookOpen, CheckCircle2, CircleAlert, Clock3, FileClock, RefreshCw, RotateCcw, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,24 @@ type Props = {
   courseKey: string;
   loadCourseMap?: (courseKey: string) => Promise<CourseMapResponse>;
 };
+
+type ProgressState = CourseMapResponse["units"][number]["lessons"][number]["progress_state"];
+
+function ProgressBadge({ state }: { state: ProgressState }) {
+  if (state === "mastered") {
+    return <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2.5 py-1 text-xs font-bold text-violet-800"><Trophy aria-hidden="true" className="size-3.5" />Mastered</span>;
+  }
+  if (state === "proficient") {
+    return <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-800"><CheckCircle2 aria-hidden="true" className="size-3.5" />Proficient</span>;
+  }
+  if (state === "practice_completed") {
+    return <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900"><RotateCcw aria-hidden="true" className="size-3.5" />Retry recommended</span>;
+  }
+  if (state === "in_progress") {
+    return <span className="inline-flex items-center gap-1 rounded-full bg-sky-100 px-2.5 py-1 text-xs font-bold text-sky-800"><Clock3 aria-hidden="true" className="size-3.5" />In progress</span>;
+  }
+  return <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900"><FileClock aria-hidden="true" className="size-3.5" />Material pending</span>;
+}
 
 export function CourseMapPanel({ courseKey, loadCourseMap = getCourseMap }: Props) {
   const [course, setCourse] = useState<CourseMapResponse | null>(null);
@@ -76,7 +94,7 @@ export function CourseMapPanel({ courseKey, loadCourseMap = getCourseMap }: Prop
                   <span className="grow">
                     <span className="flex flex-wrap items-start justify-between gap-2">
                       <span className="font-extrabold text-slate-950 group-hover:text-teal-800">{lesson.title}</span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-900"><FileClock aria-hidden="true" className="size-3.5" />Material pending</span>
+                      <ProgressBadge state={lesson.progress_state} />
                     </span>
                     <span className="mt-2 flex flex-wrap gap-4 text-sm text-slate-500">
                       <span className="inline-flex items-center gap-1"><BookOpen aria-hidden="true" className="size-4" />Outcome {lesson.outcomes.join(", ")}</span>

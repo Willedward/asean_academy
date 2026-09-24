@@ -8,23 +8,27 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getLesson, type LessonResponse } from "@/lib/api/course";
 import { createPracticeSession, type PracticeSessionResponse } from "@/lib/api/practice";
+import { startLesson, type LessonProgressResponse } from "@/lib/api/progress";
 
 type Props = {
   lessonKey: string;
   loadLesson?: (lessonKey: string) => Promise<LessonResponse>;
   startSession?: (lessonKey: string, questionCount?: number) => Promise<PracticeSessionResponse>;
+  recordStart?: (lessonKey: string) => Promise<LessonProgressResponse>;
 };
 
 export function LessonPanel({
   lessonKey,
   loadLesson = getLesson,
   startSession = createPracticeSession,
+  recordStart = startLesson,
 }: Props) {
   const router = useRouter();
   const [lesson, setLesson] = useState<LessonResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reload, setReload] = useState(0);
   const [startingPractice, setStartingPractice] = useState(false);
+  const [progressWarning, setProgressWarning] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -33,6 +37,15 @@ export function LessonPanel({
         if (active) {
           setLesson(result);
           setError(null);
+          void recordStart(result.stable_key).catch((caught: unknown) => {
+            if (active) {
+              setProgressWarning(
+                caught instanceof Error
+                  ? caught.message
+                  : "Lesson progress could not be recorded.",
+              );
+            }
+          });
         }
       })
       .catch((caught: unknown) => {
@@ -41,7 +54,7 @@ export function LessonPanel({
     return () => {
       active = false;
     };
-  }, [lessonKey, loadLesson, reload]);
+  }, [lessonKey, loadLesson, recordStart, reload]);
 
   async function beginPractice() {
     if (!lesson) return;
@@ -71,6 +84,7 @@ export function LessonPanel({
     <article className="space-y-7">
       <Link className="inline-flex items-center gap-2 text-sm font-semibold text-teal-800 hover:underline" href="/learn"><ArrowLeft aria-hidden="true" className="size-4" />Back to course map</Link>
       {lesson.development_preview && <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"><strong>Draft lesson shell.</strong> This route is visible only because local draft preview is enabled.</div>}
+      {progressWarning ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950" role="status">{progressWarning}</div> : null}
       <header>
         <div className="mb-3 flex flex-wrap gap-2 text-sm font-semibold text-teal-700"><span>Lesson {lesson.position}</span><span>·</span><span>Outcome {lesson.outcomes.join(", ")}</span><span>·</span><span className="inline-flex items-center gap-1"><Clock3 aria-hidden="true" className="size-4" />{lesson.estimated_minutes} minutes planned</span></div>
         <h1 className="m-0 text-4xl font-black tracking-[-0.035em] sm:text-5xl">{lesson.title}</h1>

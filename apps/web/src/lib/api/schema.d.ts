@@ -55,6 +55,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/learning-home": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get learner progress and the recommended next action */
+        get: operations["getLearningHome"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/lessons/{lesson_key}": {
         parameters: {
             query?: never;
@@ -66,6 +83,23 @@ export interface paths {
         get: operations["getLesson"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/lessons/{lesson_key}/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Idempotently start a lesson for the local development learner */
+        post: operations["startLesson"];
         delete?: never;
         options?: never;
         head?: never;
@@ -157,6 +191,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get learner progress across the N1 course */
+        get: operations["getProgress"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -223,7 +274,7 @@ export interface components {
              * @default not_started
              * @enum {string}
              */
-            progress_state: "not_started" | "in_progress" | "proficient" | "mastered";
+            progress_state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
             /** Required Practice Count */
             required_practice_count: number;
             /** Stable Key */
@@ -373,6 +424,66 @@ export interface components {
              */
             stage: 1 | 2;
         };
+        /** LearningHomeResponse */
+        LearningHomeResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Learner Id */
+            learner_id: string;
+            /** Lessons */
+            lessons: components["schemas"]["LessonProgressResponse"][];
+            next_action: components["schemas"]["NextActionResponse"];
+            /** Unresolved Retry Count */
+            unresolved_retry_count: number;
+        };
+        /** LessonProgressResponse */
+        LessonProgressResponse: {
+            /**
+             * Checkpoint Passed
+             * @default false
+             */
+            checkpoint_passed: boolean;
+            /**
+             * Correct Count
+             * @default 0
+             */
+            correct_count: number;
+            /**
+             * Eventual Correct Percentage
+             * @default 0
+             */
+            eventual_correct_percentage: number;
+            /**
+             * Gave Up Count
+             * @default 0
+             */
+            gave_up_count: number;
+            /** Last Session Id */
+            last_session_id?: string | null;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Title */
+            lesson_title: string;
+            /** Position */
+            position: number;
+            /**
+             * Question Count
+             * @default 0
+             */
+            question_count: number;
+            /**
+             * Resolved Count
+             * @default 0
+             */
+            resolved_count: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
+            /** Updated At */
+            updated_at?: string | null;
+        };
         /** LessonResponse */
         LessonResponse: {
             /** Assets */
@@ -416,6 +527,24 @@ export interface components {
             title: string;
             /** Unit Key */
             unit_key: string;
+        };
+        /** NextActionResponse */
+        NextActionResponse: {
+            /** Description */
+            description: string;
+            /** Href */
+            href: string;
+            /** Lesson Key */
+            lesson_key?: string | null;
+            /** Session Id */
+            session_id?: string | null;
+            /** Title */
+            title: string;
+            /**
+             * Type
+             * @enum {string}
+             */
+            type: "start_lesson" | "resume_practice" | "retry_practice" | "continue_lesson" | "content_pending" | "checkpoint_pending";
         };
         /** NextQuestionResponse */
         NextQuestionResponse: {
@@ -486,8 +615,12 @@ export interface components {
         PracticeSessionSummary: {
             /** Assigned Count */
             assigned_count: number;
+            /** Correct Count */
+            correct_count: number;
             /** Development Drafts */
             development_drafts: boolean;
+            /** Gave Up Count */
+            gave_up_count: number;
             /** Lesson Key */
             lesson_key: string;
             /**
@@ -506,6 +639,19 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "completed";
+        };
+        /** ProgressResponse */
+        ProgressResponse: {
+            /** Checkpoint Required For Mastery */
+            checkpoint_required_for_mastery: boolean;
+            /** Course Key */
+            course_key: string;
+            /** Learner Id */
+            learner_id: string;
+            /** Lessons */
+            lessons: components["schemas"]["LessonProgressResponse"][];
+            /** Proficiency Threshold */
+            proficiency_threshold: number;
         };
         /** PublicQuestionResponse */
         PublicQuestionResponse: {
@@ -877,6 +1023,89 @@ export interface operations {
             };
         };
     };
+    getLearningHome: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LearningHomeResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     getLesson: {
         parameters: {
             query?: never;
@@ -895,6 +1124,91 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    startLesson: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonProgressResponse"];
                 };
             };
             /** @description Bad Request */
@@ -1327,6 +1641,89 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HintResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getProgress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressResponse"];
                 };
             };
             /** @description Bad Request */

@@ -25,6 +25,7 @@ def application(tmp_path: Path, *, allow_drafts: bool = True):
             repository_root=REPOSITORY_ROOT,
             allow_draft_content=allow_drafts,
             practice_database=tmp_path / "practice.sqlite3",
+            development_learner_id="development-learner",
         )
     )
 

@@ -33,6 +33,7 @@ class Settings:
     repository_root: Path = DEFAULT_REPOSITORY_ROOT
     allow_draft_content: bool = False
     practice_database: Path | None = None
+    development_learner_id: str | None = None
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -58,6 +59,11 @@ class Settings:
             practice_database=(
                 Path(value).expanduser().resolve()
                 if (value := os.getenv("ASEAN_ACADEMY_PRACTICE_DATABASE"))
+                else None
+            ),
+            development_learner_id=(
+                os.getenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", "development-learner")
+                if environment in {"development", "test"}
                 else None
             ),
         )

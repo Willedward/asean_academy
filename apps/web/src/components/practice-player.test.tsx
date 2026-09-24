@@ -18,6 +18,8 @@ const current: NextQuestionResponse = {
     question_count: 3,
     assigned_count: 1,
     resolved_count: 0,
+    correct_count: 0,
+    gave_up_count: 0,
     lesson_key: "n1-lesson-01",
     mode: "guided_practice",
     development_drafts: true,

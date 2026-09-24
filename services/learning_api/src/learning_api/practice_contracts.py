@@ -33,6 +33,8 @@ class PracticeSessionSummary(ApiModel):
     question_count: int
     assigned_count: int
     resolved_count: int
+    correct_count: int
+    gave_up_count: int
     lesson_key: str
     mode: PracticeMode
     development_drafts: bool

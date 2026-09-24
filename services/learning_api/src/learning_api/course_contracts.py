@@ -11,7 +11,9 @@ from .contracts import ApiModel
 ContentStatus = Literal["draft", "reviewed", "published", "retired"]
 LearningMaterialState = Literal["pending", "ready"]
 LessonAvailability = Literal["content_pending", "available"]
-LessonProgressState = Literal["not_started", "in_progress", "proficient", "mastered"]
+LessonProgressState = Literal[
+    "not_started", "in_progress", "practice_completed", "proficient", "mastered"
+]
 
 
 class PracticeEntry(ApiModel):

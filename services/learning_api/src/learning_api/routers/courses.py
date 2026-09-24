@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, Path, Request
 
 from ..course_catalogue import CatalogueError, CourseCatalogue
 from ..course_contracts import CourseMapResponse, LessonResponse
+from ..dependencies import local_progress_service
 
 router = APIRouter(prefix="/api/v1", tags=["courses"])
 
@@ -36,7 +37,10 @@ async def course_map(
     request: Request,
     course_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
 ) -> CourseMapResponse:
-    return _safe(lambda: _catalogue(request).course_map(course_key))
+    course = _safe(lambda: _catalogue(request).course_map(course_key))
+    if request.app.state.settings.development_learner_id is not None:
+        return local_progress_service(request).apply_to_course_map(course)
+    return course
 
 
 @router.get(

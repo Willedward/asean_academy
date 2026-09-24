@@ -382,12 +382,16 @@ class PracticeEngine:
             "select status from session_questions where session_id = ?", (session["id"],)
         ).fetchall()
         resolved = sum(row["status"] != "pending" for row in rows)
+        correct = sum(row["status"] == "correct" for row in rows)
+        gave_up = sum(row["status"] == "gave_up" for row in rows)
         return {
             "session_id": session["id"],
             "status": session["status"],
             "question_count": session["requested_count"],
             "assigned_count": len(rows),
             "resolved_count": resolved,
+            "correct_count": correct,
+            "gave_up_count": gave_up,
             "lesson_key": scope.get("lesson_key"),
             "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,

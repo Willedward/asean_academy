@@ -179,9 +179,14 @@ export function PracticePlayer({
         <p className="text-slate-700">
           You resolved {current.session.resolved_count} of {current.session.question_count} questions.
         </p>
-        <Button asChild>
-          <Link href={`/lessons/${current.session.lesson_key}`}>Return to lesson</Link>
-        </Button>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button asChild>
+            <Link href="/progress">View progress</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href={`/lessons/${current.session.lesson_key}`}>Return to lesson</Link>
+          </Button>
+        </div>
       </section>
     );
   }

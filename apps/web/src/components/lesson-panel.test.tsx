@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { lessonFixture } from "@/lib/api/course";
 import type { PracticeSessionResponse } from "@/lib/api/practice";
+import type { LessonProgressResponse } from "@/lib/api/progress";
 
 import { LessonPanel } from "./lesson-panel";
 
@@ -24,11 +25,27 @@ describe("LessonPanel", () => {
       development_drafts: true,
     };
     const startSession = vi.fn().mockResolvedValue(session);
+    const progress: LessonProgressResponse = {
+      lesson_key: "n1-lesson-01",
+      lesson_title: "Primes and prime factorisation",
+      position: 1,
+      state: "in_progress",
+      question_count: 0,
+      resolved_count: 0,
+      correct_count: 0,
+      gave_up_count: 0,
+      eventual_correct_percentage: 0,
+      checkpoint_passed: false,
+      last_session_id: null,
+      updated_at: "2026-09-24T00:00:00Z",
+    };
+    const recordStart = vi.fn().mockResolvedValue(progress);
     render(
       <LessonPanel
         lessonKey="n1-lesson-01"
         loadLesson={loadLesson}
         startSession={startSession}
+        recordStart={recordStart}
       />,
     );
 
@@ -38,6 +55,7 @@ describe("LessonPanel", () => {
     ).toBeInTheDocument();
     const button = screen.getByRole("button", { name: "Start draft practice" });
     expect(button).toBeEnabled();
+    await waitFor(() => expect(recordStart).toHaveBeenCalledWith("n1-lesson-01"));
 
     fireEvent.click(button);
 
