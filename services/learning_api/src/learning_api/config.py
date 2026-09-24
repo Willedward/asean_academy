@@ -32,6 +32,7 @@ class Settings:
     log_level: str
     repository_root: Path = DEFAULT_REPOSITORY_ROOT
     allow_draft_content: bool = False
+    practice_database: Path | None = None
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -53,5 +54,10 @@ class Settings:
             allow_draft_content=_boolean(
                 "ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT",
                 environment in {"development", "test"},
+            ),
+            practice_database=(
+                Path(value).expanduser().resolve()
+                if (value := os.getenv("ASEAN_ACADEMY_PRACTICE_DATABASE"))
+                else None
             ),
         )

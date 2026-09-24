@@ -166,6 +166,7 @@ class CourseCatalogue:
                 lesson_key=lesson.stable_key,
                 question_count=pool.expected_question_count,
                 available=material_ready,
+                development_available=self.allow_drafts and not material_ready,
                 unavailable_reason=None if material_ready else "content_not_reviewed",
             ),
         )

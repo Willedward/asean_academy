@@ -1,6 +1,94 @@
 {
   "components": {
     "schemas": {
+      "AttemptPartResult": {
+        "additionalProperties": false,
+        "properties": {
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "marks_available": {
+            "title": "Marks Available",
+            "type": "integer"
+          },
+          "marks_awarded": {
+            "title": "Marks Awarded",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "correct",
+          "error",
+          "marks_awarded",
+          "marks_available"
+        ],
+        "title": "AttemptPartResult",
+        "type": "object"
+      },
+      "AttemptResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_number": {
+            "title": "Attempt Number",
+            "type": "integer"
+          },
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "marks_available": {
+            "title": "Marks Available",
+            "type": "integer"
+          },
+          "marks_awarded": {
+            "title": "Marks Awarded",
+            "type": "integer"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/AttemptPartResult"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "question_finished": {
+            "title": "Question Finished",
+            "type": "boolean"
+          },
+          "solution_available": {
+            "title": "Solution Available",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attempt_number",
+          "correct",
+          "parts",
+          "marks_awarded",
+          "marks_available",
+          "question_finished",
+          "solution_available"
+        ],
+        "title": "AttemptResponse",
+        "type": "object"
+      },
       "CourseLessonMap": {
         "additionalProperties": false,
         "properties": {
@@ -206,6 +294,40 @@
         "title": "CourseUnitMap",
         "type": "object"
       },
+      "CreatePracticeSessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "lesson_key": {
+            "pattern": "^n1-lesson-[0-9]{2}$",
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "mode": {
+            "const": "guided_practice",
+            "default": "guided_practice",
+            "title": "Mode",
+            "type": "string"
+          },
+          "question_count": {
+            "anyOf": [
+              {
+                "maximum": 20.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question Count"
+          }
+        },
+        "required": [
+          "lesson_key"
+        ],
+        "title": "CreatePracticeSessionRequest",
+        "type": "object"
+      },
       "ErrorDetail": {
         "additionalProperties": false,
         "properties": {
@@ -254,6 +376,25 @@
           "error"
         ],
         "title": "ErrorEnvelope",
+        "type": "object"
+      },
+      "GiveUpResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "solution": {
+            "$ref": "#/components/schemas/SolutionResponse"
+          },
+          "status": {
+            "const": "gave_up",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "solution"
+        ],
+        "title": "GiveUpResponse",
         "type": "object"
       },
       "HealthDependencies": {
@@ -318,6 +459,55 @@
           "request_id"
         ],
         "title": "HealthResponse",
+        "type": "object"
+      },
+      "HintPartResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Content",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "content"
+        ],
+        "title": "HintPartResponse",
+        "type": "object"
+      },
+      "HintResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/HintPartResponse"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "stage": {
+            "enum": [
+              1,
+              2
+            ],
+            "title": "Stage",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "stage",
+          "parts"
+        ],
+        "title": "HintResponse",
         "type": "object"
       },
       "LessonResponse": {
@@ -432,11 +622,119 @@
         "title": "LessonResponse",
         "type": "object"
       },
+      "NextQuestionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Count"
+          },
+          "highest_hint_stage": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Highest Hint Stage"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PublicQuestionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "selection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selection Reason"
+          },
+          "session": {
+            "$ref": "#/components/schemas/PracticeSessionSummary"
+          },
+          "solution_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Solution Available"
+          },
+          "stage": {
+            "anyOf": [
+              {
+                "enum": [
+                  "guided",
+                  "independent",
+                  "challenge"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stage"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "session"
+        ],
+        "title": "NextQuestionResponse",
+        "type": "object"
+      },
       "PracticeEntry": {
         "additionalProperties": false,
         "properties": {
           "available": {
             "title": "Available",
+            "type": "boolean"
+          },
+          "development_available": {
+            "default": false,
+            "title": "Development Available",
             "type": "boolean"
           },
           "lesson_key": {
@@ -478,6 +776,405 @@
         ],
         "title": "PracticeEntry",
         "type": "object"
+      },
+      "PracticeSessionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "development_drafts": {
+            "title": "Development Drafts",
+            "type": "boolean"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "mode": {
+            "const": "guided_practice",
+            "title": "Mode",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "status",
+          "question_count",
+          "lesson_key",
+          "mode",
+          "development_drafts"
+        ],
+        "title": "PracticeSessionResponse",
+        "type": "object"
+      },
+      "PracticeSessionSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "assigned_count": {
+            "title": "Assigned Count",
+            "type": "integer"
+          },
+          "development_drafts": {
+            "title": "Development Drafts",
+            "type": "boolean"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "mode": {
+            "const": "guided_practice",
+            "title": "Mode",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "status",
+          "question_count",
+          "assigned_count",
+          "resolved_count",
+          "lesson_key",
+          "mode",
+          "development_drafts"
+        ],
+        "title": "PracticeSessionSummary",
+        "type": "object"
+      },
+      "PublicQuestionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/QuestionAssetResponse"
+            },
+            "title": "Assets",
+            "type": "array"
+          },
+          "calculator_allowed": {
+            "title": "Calculator Allowed",
+            "type": "boolean"
+          },
+          "difficulty": {
+            "title": "Difficulty",
+            "type": "integer"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/QuestionPartResponse"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "primary_outcome": {
+            "title": "Primary Outcome",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "stem": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Stem",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "total_marks": {
+            "title": "Total Marks",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "title",
+          "difficulty",
+          "primary_outcome",
+          "calculator_allowed",
+          "total_marks",
+          "source_status",
+          "stem",
+          "parts",
+          "assets"
+        ],
+        "title": "PublicQuestionResponse",
+        "type": "object"
+      },
+      "QuestionAssetResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "alt_text": {
+            "title": "Alt Text",
+            "type": "string"
+          },
+          "asset_key": {
+            "title": "Asset Key",
+            "type": "string"
+          },
+          "format": {
+            "title": "Format",
+            "type": "string"
+          },
+          "height": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "width": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width"
+          }
+        },
+        "required": [
+          "asset_key",
+          "kind",
+          "format",
+          "path",
+          "alt_text",
+          "width",
+          "height"
+        ],
+        "title": "QuestionAssetResponse",
+        "type": "object"
+      },
+      "QuestionPartResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "input_placeholder": {
+            "title": "Input Placeholder",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "marks": {
+            "title": "Marks",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "prompt": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Prompt",
+            "type": "array"
+          },
+          "response_type": {
+            "enum": [
+              "numeric",
+              "algebraic_expression"
+            ],
+            "title": "Response Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "label",
+          "prompt",
+          "marks",
+          "response_type",
+          "input_placeholder"
+        ],
+        "title": "QuestionPartResponse",
+        "type": "object"
+      },
+      "SolutionPartResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_answer": {
+            "title": "Canonical Answer",
+            "type": "string"
+          },
+          "canonical_latex": {
+            "title": "Canonical Latex",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "steps": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Steps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "position",
+          "label",
+          "canonical_answer",
+          "canonical_latex",
+          "steps"
+        ],
+        "title": "SolutionPartResponse",
+        "type": "object"
+      },
+      "SolutionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/SolutionPartResponse"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "parts"
+        ],
+        "title": "SolutionResponse",
+        "type": "object"
+      },
+      "SubmitAttemptRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "additionalProperties": {
+              "maxLength": 500,
+              "type": "string"
+            },
+            "maxProperties": 20,
+            "minProperties": 1,
+            "title": "Answers",
+            "type": "object"
+          },
+          "question_key": {
+            "pattern": "^n1-l[1-3]-[0-9]{2}$",
+            "title": "Question Key",
+            "type": "string"
+          },
+          "question_revision": {
+            "minimum": 1.0,
+            "title": "Question Revision",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "question_key",
+          "question_revision",
+          "answers"
+        ],
+        "title": "SubmitAttemptRequest",
+        "type": "object"
       }
     }
   },
@@ -488,6 +1185,120 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/attempts": {
+      "post": {
+        "operationId": "submitPracticeAttempt",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitAttemptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Submit typed final answers for deterministic marking",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/api/v1/courses/{course_key}/map": {
       "get": {
         "operationId": "getCourseMap",
@@ -782,6 +1593,563 @@
         "summary": "Get a learner-safe lesson revision",
         "tags": [
           "courses"
+        ]
+      }
+    },
+    "/api/v1/practice-sessions": {
+      "post": {
+        "operationId": "createPracticeSession",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePracticeSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Start or replay an idempotent lesson-practice session",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/api/v1/practice-sessions/{session_id}": {
+      "get": {
+        "operationId": "getPracticeSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeSessionSummary"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Resume practice-session progress",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/api/v1/practice-sessions/{session_id}/next": {
+      "get": {
+        "operationId": "getNextPracticeQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextQuestionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Get the current unresolved question or assign the next one",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/api/v1/practice-sessions/{session_id}/questions/{question_key}/give-up": {
+      "post": {
+        "operationId": "giveUpPracticeQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "question_key",
+            "required": true,
+            "schema": {
+              "pattern": "^n1-l[1-3]-[0-9]{2}$",
+              "title": "Question Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiveUpResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Unlock the authored solution after two incorrect attempts",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/api/v1/practice-sessions/{session_id}/questions/{question_key}/hints/{stage}": {
+      "post": {
+        "operationId": "revealPracticeHint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "question_key",
+            "required": true,
+            "schema": {
+              "pattern": "^n1-l[1-3]-[0-9]{2}$",
+              "title": "Question Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stage",
+            "required": true,
+            "schema": {
+              "maximum": 2,
+              "minimum": 1,
+              "title": "Stage",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HintResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Reveal the next authored hint",
+        "tags": [
+          "practice"
         ]
       }
     }

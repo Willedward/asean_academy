@@ -19,6 +19,7 @@ class PracticeEntry(ApiModel):
     mode: Literal["guided_practice"] = "guided_practice"
     question_count: int = Field(ge=1, le=20)
     available: bool
+    development_available: bool = False
     unavailable_reason: Literal["content_not_reviewed", "questions_not_published"] | None = None
 
 

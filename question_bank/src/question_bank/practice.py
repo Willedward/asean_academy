@@ -81,6 +81,14 @@ def public_question(question: Question) -> dict:
     }
 
 
+def _canonical_submission(response) -> str:
+    if isinstance(response, NumericResponse):
+        return response.canonical_answer
+    if response.comparison_mode == "prime_factorisation":
+        return response.canonical_latex
+    return response.canonical_expression
+
+
 def solution_for(question: Question) -> dict:
     return {
         "stable_key": question.stable_key,
@@ -89,11 +97,7 @@ def solution_for(question: Question) -> dict:
             {
                 "position": part.position,
                 "label": part.label,
-                "canonical_answer": (
-                    part.response.canonical_answer
-                    if isinstance(part.response, NumericResponse)
-                    else part.response.canonical_expression
-                ),
+                "canonical_answer": _canonical_submission(part.response),
                 "canonical_latex": part.response.canonical_latex,
                 "steps": [step.model_dump(mode="json") for step in part.solution],
             }
@@ -151,6 +155,12 @@ class PracticeEngine:
                     completed_at text
                 );
 
+                create table if not exists session_idempotency_keys (
+                    idempotency_key text primary key,
+                    session_id text not null references practice_sessions(id) on delete cascade,
+                    created_at text not null
+                );
+
                 create table if not exists session_questions (
                     session_id text not null references practice_sessions(id) on delete cascade,
                     question_key text not null,
@@ -203,6 +213,9 @@ class PracticeEngine:
         question_count: int = 5,
         difficulties: list[int] | None = None,
         outcomes: list[str] | None = None,
+        ordered_question_keys: list[str] | None = None,
+        context: dict[str, str | dict[str, str]] | None = None,
+        idempotency_key: str | None = None,
     ) -> dict:
         if not self.questions:
             raise PracticeError(
@@ -210,29 +223,52 @@ class PracticeEngine:
                 "No published questions are available. Use the local development-drafts flag only for review.",
                 409,
             )
-        if not 1 <= question_count <= min(40, len(self.questions)):
-            raise PracticeError(
-                "invalid_question_count",
-                f"question_count must be between 1 and {min(40, len(self.questions))}.",
-            )
+        if idempotency_key is not None and not 1 <= len(idempotency_key) <= 200:
+            raise PracticeError("invalid_idempotency_key", "Supply a non-empty idempotency key.")
         difficulties = sorted(set(difficulties or [1, 2, 3]))
         outcomes = sorted(set(outcomes or []))
         if not difficulties or any(level not in {1, 2, 3} for level in difficulties):
             raise PracticeError("invalid_difficulties", "difficulties must contain levels 1, 2, or 3.")
+        ordered_question_keys = list(ordered_question_keys or [])
+        if len(ordered_question_keys) != len(set(ordered_question_keys)):
+            raise PracticeError("invalid_question_pool", "Question-pool keys must be unique.")
+        pool_keys = set(ordered_question_keys)
         eligible = [
-            q
-            for q in self.questions.values()
-            if q.difficulty in difficulties and (not outcomes or q.primary_outcome in outcomes)
+            question
+            for question in self.questions.values()
+            if question.difficulty in difficulties
+            and (not outcomes or question.primary_outcome in outcomes)
+            and (not pool_keys or question.stable_key in pool_keys)
         ]
-        if question_count > len(eligible):
+        if pool_keys - set(self.questions):
             raise PracticeError(
-                "insufficient_questions",
-                f"Only {len(eligible)} questions match the selected scope.",
+                "question_pool_unavailable",
+                "One or more configured question revisions are unavailable.",
                 409,
             )
+        maximum = min(40, len(eligible))
+        if not 1 <= question_count <= maximum:
+            raise PracticeError(
+                "invalid_question_count",
+                f"question_count must be between 1 and {maximum}.",
+            )
         session_id = str(uuid.uuid4())
-        scope = {"difficulties": difficulties, "outcomes": outcomes}
+        scope = {
+            "difficulties": difficulties,
+            "outcomes": outcomes,
+            "question_keys": ordered_question_keys,
+            **(context or {}),
+        }
         with self._connect() as connection:
+            if idempotency_key is not None:
+                existing = connection.execute(
+                    "select session_id from session_idempotency_keys where idempotency_key = ?",
+                    (idempotency_key,),
+                ).fetchone()
+                if existing is not None:
+                    return self._creation_response(
+                        self._session(connection, existing["session_id"])
+                    )
             connection.execute(
                 """
                 insert into practice_sessions (
@@ -241,11 +277,21 @@ class PracticeEngine:
                 """,
                 (session_id, self.bank_key, question_count, _json(scope), _now()),
             )
+            if idempotency_key is not None:
+                connection.execute(
+                    "insert into session_idempotency_keys values (?, ?, ?)",
+                    (idempotency_key, session_id, _now()),
+                )
+            return self._creation_response(self._session(connection, session_id))
+
+    def _creation_response(self, session) -> dict:
+        scope = json.loads(session["scope_json"])
         return {
-            "session_id": session_id,
-            "status": "active",
-            "question_count": question_count,
-            "scope": scope,
+            "session_id": session["id"],
+            "status": session["status"],
+            "question_count": session["requested_count"],
+            "lesson_key": scope.get("lesson_key"),
+            "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
 
@@ -297,9 +343,15 @@ class PracticeEngine:
             if question.stable_key not in assigned
             and question.difficulty in scope["difficulties"]
             and (not scope["outcomes"] or question.primary_outcome in scope["outcomes"])
+            and (not scope.get("question_keys") or question.stable_key in scope["question_keys"])
         ]
         if not candidates:
             return None
+
+        if scope.get("question_keys"):
+            by_key = {question.stable_key: question for question in candidates}
+            question = next(by_key[key] for key in scope["question_keys"] if key in by_key)
+            return Candidate(question, "configured_lesson_pool")
 
         ranked = []
         for question in candidates:
@@ -325,6 +377,7 @@ class PracticeEngine:
         return Candidate(question, reason)
 
     def _summary(self, connection, session) -> dict:
+        scope = json.loads(session["scope_json"])
         rows = connection.execute(
             "select status from session_questions where session_id = ?", (session["id"],)
         ).fetchall()
@@ -335,8 +388,14 @@ class PracticeEngine:
             "question_count": session["requested_count"],
             "assigned_count": len(rows),
             "resolved_count": resolved,
+            "lesson_key": scope.get("lesson_key"),
+            "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
+
+    def session_summary(self, session_id: str) -> dict:
+        with self._connect() as connection:
+            return self._summary(connection, self._session(connection, session_id))
 
     def next_question(self, session_id: str) -> dict:
         with self._connect() as connection:
@@ -402,6 +461,7 @@ class PracticeEngine:
             if pending is None:
                 return {"status": "completed", "session": summary, "question": None}
             question = self._question(pending["question_key"], pending["question_revision"])
+            scope = json.loads(session["scope_json"])
             attempt_count = connection.execute(
                 """
                 select count(*) from attempts
@@ -414,6 +474,7 @@ class PracticeEngine:
                 "session": summary,
                 "position": pending["position"],
                 "selection_reason": pending["selection_reason"],
+                "stage": scope.get("stages", {}).get(question.stable_key),
                 "attempt_count": attempt_count,
                 "highest_hint_stage": pending["highest_hint_stage"],
                 "solution_available": pending["incorrect_attempts"] >= 2,

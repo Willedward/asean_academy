@@ -2,20 +2,29 @@
 
 import { ArrowLeft, CircleAlert, Clock3, Construction, PlayCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { getLesson, type LessonResponse } from "@/lib/api/course";
+import { createPracticeSession, type PracticeSessionResponse } from "@/lib/api/practice";
 
 type Props = {
   lessonKey: string;
   loadLesson?: (lessonKey: string) => Promise<LessonResponse>;
+  startSession?: (lessonKey: string, questionCount?: number) => Promise<PracticeSessionResponse>;
 };
 
-export function LessonPanel({ lessonKey, loadLesson = getLesson }: Props) {
+export function LessonPanel({
+  lessonKey,
+  loadLesson = getLesson,
+  startSession = createPracticeSession,
+}: Props) {
+  const router = useRouter();
   const [lesson, setLesson] = useState<LessonResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reload, setReload] = useState(0);
+  const [startingPractice, setStartingPractice] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -33,6 +42,25 @@ export function LessonPanel({ lessonKey, loadLesson = getLesson }: Props) {
       active = false;
     };
   }, [lessonKey, loadLesson, reload]);
+
+  async function beginPractice() {
+    if (!lesson) return;
+    setStartingPractice(true);
+    try {
+      const session = await startSession(
+        lesson.stable_key,
+        lesson.practice.question_count,
+      );
+      router.push(`/practice/${session.session_id}`);
+    } catch (caught: unknown) {
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "The practice session could not be started.",
+      );
+      setStartingPractice(false);
+    }
+  }
 
   if (error) {
     return <div className="status-card border-rose-200 bg-rose-50" role="alert"><CircleAlert aria-hidden="true" className="size-5 text-rose-700" /><div className="grow"><p className="status-title">Lesson unavailable</p><p className="status-copy">{error}</p></div><Button variant="outline" onClick={() => { setError(null); setLesson(null); setReload((value) => value + 1); }}><RefreshCw aria-hidden="true" className="mr-2 size-4" />Retry</Button></div>;
@@ -61,8 +89,27 @@ export function LessonPanel({ lessonKey, loadLesson = getLesson }: Props) {
       ) : null}
       <section className="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="practice-title">
         <h2 id="practice-title" className="mt-0 text-xl font-extrabold">Guided practice</h2>
-        <p className="text-slate-600">{lesson.practice.question_count} questions are allocated to this lesson. Practice will unlock after the lesson and question revisions are reviewed and published.</p>
-        <Button disabled><PlayCircle aria-hidden="true" className="mr-2 size-4" />Practice unavailable in draft</Button>
+        <p className="text-slate-600">
+          {lesson.practice.question_count} typed-answer questions are allocated to this lesson.
+          {lesson.practice.development_available
+            ? " You can exercise the complete flow locally while the questions remain drafts."
+            : " Practice unlocks for learners after the lesson and question revisions are reviewed."}
+        </p>
+        {lesson.practice.available || lesson.practice.development_available ? (
+          <Button disabled={startingPractice} onClick={() => void beginPractice()}>
+            <PlayCircle aria-hidden="true" className="mr-2 size-4" />
+            {startingPractice
+              ? "Starting practice…"
+              : lesson.practice.development_available
+                ? "Start draft practice"
+                : "Start practice"}
+          </Button>
+        ) : (
+          <Button disabled>
+            <PlayCircle aria-hidden="true" className="mr-2 size-4" />
+            Practice unavailable
+          </Button>
+        )}
       </section>
     </article>
   );

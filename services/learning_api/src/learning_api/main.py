@@ -15,6 +15,7 @@ from .contracts import ErrorDetail, ErrorEnvelope, HealthResponse
 from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
 from .course_catalogue import CourseCatalogue
 from .routers.courses import router as courses_router
+from .routers.practice import router as practice_router
 
 LOGGER = logging.getLogger("learning_api")
 
@@ -151,6 +152,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         raise RuntimeError("private failure detail")
 
     application.include_router(courses_router)
+    application.include_router(practice_router)
 
     return application
 

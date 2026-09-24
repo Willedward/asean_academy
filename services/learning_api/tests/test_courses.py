@@ -65,6 +65,7 @@ def test_blank_lesson_has_objectives_but_no_invented_material():
         "mode": "guided_practice",
         "question_count": 3,
         "available": False,
+        "development_available": True,
         "unavailable_reason": "content_not_reviewed",
     }
     encoded = json.dumps(lesson)

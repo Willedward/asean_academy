@@ -122,3 +122,28 @@ def test_queued_retry_is_selected_in_a_new_session(engine):
 
     assert retry["question"]["stable_key"] == question["stable_key"]
     assert retry["selection_reason"] == "required_retry"
+
+
+def test_configured_pool_is_ordered_and_creation_is_idempotent(engine):
+    first = engine.create_session(
+        question_count=2,
+        ordered_question_keys=["n1-l1-01", "n1-l2-03"],
+        context={
+            "lesson_key": "n1-lesson-01",
+            "mode": "guided_practice",
+            "stages": {"n1-l1-01": "guided", "n1-l2-03": "independent"},
+        },
+        idempotency_key="lesson-start",
+    )
+    replay = engine.create_session(
+        question_count=2,
+        ordered_question_keys=["n1-l1-01", "n1-l2-03"],
+        context={"lesson_key": "changed-but-replayed"},
+        idempotency_key="lesson-start",
+    )
+
+    assert replay == first
+    current = engine.next_question(first["session_id"])
+    assert current["question"]["stable_key"] == "n1-l1-01"
+    assert current["stage"] == "guided"
+    assert current["session"]["lesson_key"] == "n1-lesson-01"

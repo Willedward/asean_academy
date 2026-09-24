@@ -51,7 +51,12 @@ def _is_prime(value: int) -> bool:
 
 
 def _prime_factor_value(expression: str) -> int:
-    normalized = expression.replace("×", "*").replace("·", "*").replace("^", "**")
+    normalized = (
+        expression.replace(r"\times", "*")
+        .replace("×", "*")
+        .replace("·", "*")
+        .replace("^", "**")
+    )
     try:
         tree = ast.parse(normalized, mode="eval")
     except SyntaxError as exc:
