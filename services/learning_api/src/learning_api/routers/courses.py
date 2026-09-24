@@ -1,4 +1,4 @@
-"""Course map and lesson read endpoints."""
+"""Authenticated course map and lesson read endpoints."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException, Path, Request
 
 from ..course_catalogue import CatalogueError, CourseCatalogue
 from ..course_contracts import CourseMapResponse, LessonResponse
-from ..dependencies import local_progress_service
+from ..dependencies import EnrolledLearnerDependency, ProgressServiceDependency
 
 router = APIRouter(prefix="/api/v1", tags=["courses"])
 
@@ -31,26 +31,26 @@ def _safe(call):
     "/courses/{course_key}/map",
     operation_id="getCourseMap",
     response_model=CourseMapResponse,
-    summary="Get the learner-safe course map",
+    summary="Get the authenticated learner's safe course map",
 )
 async def course_map(
     request: Request,
     course_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
+    progress: ProgressServiceDependency,
 ) -> CourseMapResponse:
     course = _safe(lambda: _catalogue(request).course_map(course_key))
-    if request.app.state.settings.development_learner_id is not None:
-        return local_progress_service(request).apply_to_course_map(course)
-    return course
+    return progress.apply_to_course_map(course)
 
 
 @router.get(
     "/lessons/{lesson_key}",
     operation_id="getLesson",
     response_model=LessonResponse,
-    summary="Get a learner-safe lesson revision",
+    summary="Get an authenticated learner-safe lesson revision",
 )
 async def lesson(
     request: Request,
     lesson_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
+    _learner: EnrolledLearnerDependency,
 ) -> LessonResponse:
     return _safe(lambda: _catalogue(request).lesson(lesson_key))

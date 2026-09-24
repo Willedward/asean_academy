@@ -28,7 +28,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get the learner-safe course map */
+        /** Get the authenticated learner's safe course map */
         get: operations["getCourseMap"];
         put?: never;
         post?: never;
@@ -62,7 +62,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get learner progress and the recommended next action */
+        /** Get authenticated learner progress and the recommended next action */
         get: operations["getLearningHome"];
         put?: never;
         post?: never;
@@ -79,7 +79,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get a learner-safe lesson revision */
+        /** Get an authenticated learner-safe lesson revision */
         get: operations["getLesson"];
         put?: never;
         post?: never;
@@ -98,8 +98,42 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Idempotently start a lesson for the local development learner */
+        /** Idempotently start a lesson for the authenticated learner */
         post: operations["startLesson"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the authenticated learner profile and pinned enrolments */
+        get: operations["getCurrentLearner"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/onboarding/accept-invitation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept a beta invitation and pin the learner to its course revision */
+        post: operations["acceptBetaInvitation"];
         delete?: never;
         options?: never;
         head?: never;
@@ -115,7 +149,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Start or replay an idempotent lesson-practice session */
+        /** Start or replay an idempotent learner-owned practice session */
         post: operations["createPracticeSession"];
         delete?: never;
         options?: never;
@@ -130,7 +164,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Resume practice-session progress */
+        /** Resume an owned practice session */
         get: operations["getPracticeSession"];
         put?: never;
         post?: never;
@@ -147,7 +181,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get the current unresolved question or assign the next one */
+        /** Get or assign the next question in an owned session */
         get: operations["getNextPracticeQuestion"];
         put?: never;
         post?: never;
@@ -183,7 +217,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Reveal the next authored hint */
+        /** Reveal the next authored hint in an owned session */
         post: operations["revealPracticeHint"];
         delete?: never;
         options?: never;
@@ -198,7 +232,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get learner progress across the N1 course */
+        /** Get authenticated learner progress across the N1 course */
         get: operations["getProgress"];
         put?: never;
         post?: never;
@@ -212,6 +246,13 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AcceptInvitationRequest */
+        AcceptInvitationRequest: {
+            /** Display Name */
+            display_name: string;
+            /** Invitation Code */
+            invitation_code: string;
+        };
         /** AttemptPartResult */
         AttemptPartResult: {
             /** Correct */
@@ -336,6 +377,29 @@ export interface components {
             /** Question Count */
             question_count?: number | null;
         };
+        /** CurrentLearnerResponse */
+        CurrentLearnerResponse: {
+            /** Enrolments */
+            enrolments: components["schemas"]["EnrolmentResponse"][];
+            profile: components["schemas"]["ProfileResponse"];
+        };
+        /** EnrolmentResponse */
+        EnrolmentResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
+            /**
+             * Enrolled At
+             * Format: date-time
+             */
+            enrolled_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "completed" | "withdrawn";
+        };
         /** ErrorDetail */
         ErrorDetail: {
             /** Code */
@@ -366,10 +430,10 @@ export interface components {
         HealthDependencies: {
             /**
              * Authentication
-             * @default planned_stage_4
+             * @default supabase_bearer
              * @constant
              */
-            authentication: "planned_stage_4";
+            authentication: "supabase_bearer";
             /**
              * Course Content
              * @default draft_placeholders
@@ -423,6 +487,18 @@ export interface components {
              * @enum {integer}
              */
             stage: 1 | 2;
+        };
+        /** InvitationAcceptanceResponse */
+        InvitationAcceptanceResponse: {
+            /**
+             * Accepted
+             * @default true
+             * @constant
+             */
+            accepted: true;
+            /** Enrolments */
+            enrolments: components["schemas"]["EnrolmentResponse"][];
+            profile: components["schemas"]["ProfileResponse"];
         };
         /** LearningHomeResponse */
         LearningHomeResponse: {
@@ -639,6 +715,22 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "completed";
+        };
+        /** ProfileResponse */
+        ProfileResponse: {
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string;
+            /** Learner Id */
+            learner_id: string;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "student" | "content_admin" | "academic_admin";
+            /** Target Track */
+            target_track: string | null;
         };
         /** ProgressResponse */
         ProgressResponse: {
@@ -1209,6 +1301,176 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LessonProgressResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getCurrentLearner: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurrentLearnerResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    acceptBetaInvitation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcceptInvitationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationAcceptanceResponse"];
                 };
             };
             /** @description Bad Request */

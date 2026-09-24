@@ -1,13 +1,13 @@
-"""Local learner progress and learning-home endpoints."""
+"""Authenticated learner progress and learning-home endpoints."""
 
 from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Path, Request
+from fastapi import APIRouter, HTTPException, Path
 
 from ..course_catalogue import CatalogueError
-from ..dependencies import local_progress_service
+from ..dependencies import ProgressServiceDependency
 from ..progress_contracts import (
     LearningHomeResponse,
     LessonProgressResponse,
@@ -33,30 +33,30 @@ def _safe(call):
     "/lessons/{lesson_key}/start",
     operation_id="startLesson",
     response_model=LessonProgressResponse,
-    summary="Idempotently start a lesson for the local development learner",
+    summary="Idempotently start a lesson for the authenticated learner",
 )
 async def start_lesson(
-    request: Request,
     lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    service: ProgressServiceDependency,
 ) -> LessonProgressResponse:
-    return _safe(lambda: local_progress_service(request).start_lesson(lesson_key))
+    return _safe(lambda: service.start_lesson(lesson_key))
 
 
 @router.get(
     "/progress",
     operation_id="getProgress",
     response_model=ProgressResponse,
-    summary="Get learner progress across the N1 course",
+    summary="Get authenticated learner progress across the N1 course",
 )
-async def progress(request: Request) -> ProgressResponse:
-    return _safe(lambda: local_progress_service(request).progress())
+async def progress(service: ProgressServiceDependency) -> ProgressResponse:
+    return _safe(service.progress)
 
 
 @router.get(
     "/learning-home",
     operation_id="getLearningHome",
     response_model=LearningHomeResponse,
-    summary="Get learner progress and the recommended next action",
+    summary="Get authenticated learner progress and the recommended next action",
 )
-async def learning_home(request: Request) -> LearningHomeResponse:
-    return _safe(lambda: local_progress_service(request).learning_home())
+async def learning_home(service: ProgressServiceDependency) -> LearningHomeResponse:
+    return _safe(service.learning_home)

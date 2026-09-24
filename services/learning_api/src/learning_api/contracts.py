@@ -24,7 +24,7 @@ class ErrorEnvelope(ApiModel):
 
 class HealthDependencies(ApiModel):
     course_content: Literal["draft_placeholders"] = "draft_placeholders"
-    authentication: Literal["planned_stage_4"] = "planned_stage_4"
+    authentication: Literal["supabase_bearer"] = "supabase_bearer"
     tutor: Literal["disabled"] = "disabled"
 
 

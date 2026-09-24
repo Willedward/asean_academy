@@ -34,7 +34,7 @@ def test_health_uses_versioned_contract_and_request_id():
         "request_id": "browser-test-1",
         "dependencies": {
             "course_content": "draft_placeholders",
-            "authentication": "planned_stage_4",
+            "authentication": "supabase_bearer",
             "tutor": "disabled",
         },
     }

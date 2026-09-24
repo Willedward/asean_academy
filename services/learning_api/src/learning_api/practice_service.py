@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 
 from question_bank.practice import PracticeEngine, PracticeError
 from question_bank.validation import validate_bank
 
 from .course_catalogue import BANK_ROOT, CourseCatalogue
+from .postgres_practice import PostgresPracticeEngine
 from .progress_service import ProgressService
 
 
@@ -20,6 +22,7 @@ class PracticeService:
         progress: ProgressService,
         *,
         allow_drafts: bool,
+        database_url: str | None = None,
     ):
         report = validate_bank(repository_root / BANK_ROOT)
         if not report.valid:
@@ -30,11 +33,33 @@ class PracticeService:
             )
         self.catalogue = catalogue
         self.progress = progress
-        self.engine = PracticeEngine(
-            database,
-            report.questions,
-            allow_drafts=allow_drafts,
-        )
+        self.postgres = database_url is not None
+        if database_url is not None:
+            self.engine = PostgresPracticeEngine(
+                database_url,
+                report.questions,
+                progress.learner_id,
+                allow_drafts=allow_drafts,
+            )
+        else:
+            self.engine = PracticeEngine(
+                database,
+                report.questions,
+                allow_drafts=allow_drafts,
+            )
+
+    def _owned_session(self, session_id: str) -> None:
+        if self.progress.session(session_id) is None:
+            raise PracticeError(
+                "session_not_found", "Practice session was not found.", 404
+            )
+
+    def _session_idempotency_key(self, key: str) -> str:
+        if self.postgres:
+            return key
+        return hashlib.sha256(
+            f"{self.progress.learner_id}:{key}".encode()
+        ).hexdigest()
 
     def _sync(self, summary: dict) -> None:
         self.progress.sync_session(summary)
@@ -61,6 +86,12 @@ class PracticeService:
         lesson = self.catalogue.lesson(lesson_key)
         active = self.progress.active_session(lesson_key)
         if active is not None:
+            self.progress.attach_session(
+                lesson.stable_key,
+                lesson.revision,
+                active.session_id,
+                active.question_count,
+            )
             summary = self.engine.session_summary(active.session_id)
             self._sync(summary)
             if summary["status"] == "active":
@@ -95,7 +126,7 @@ class PracticeService:
                 "mode": mode,
                 "stages": {item.question_key: item.stage for item in pool.items},
             },
-            idempotency_key=idempotency_key,
+            idempotency_key=self._session_idempotency_key(idempotency_key),
         )
         self.progress.attach_session(
             lesson.stable_key,
@@ -106,11 +137,13 @@ class PracticeService:
         return created
 
     def session(self, session_id: str) -> dict:
+        self._owned_session(session_id)
         summary = self.engine.session_summary(session_id)
         self._sync(summary)
         return summary
 
     def next_question(self, session_id: str) -> dict:
+        self._owned_session(session_id)
         response = self.engine.next_question(session_id)
         self._sync(response["session"])
         return response
@@ -124,6 +157,7 @@ class PracticeService:
         answers: dict[str, str],
         idempotency_key: str,
     ) -> dict:
+        self._owned_session(session_id)
         response = self.engine.submit_attempt(
             session_id=session_id,
             stable_key=question_key,
@@ -141,9 +175,11 @@ class PracticeService:
         question_key: str,
         stage: int,
     ) -> dict:
+        self._owned_session(session_id)
         return self.engine.reveal_hint(session_id, question_key, stage)
 
     def give_up(self, *, session_id: str, question_key: str) -> dict:
+        self._owned_session(session_id)
         response = self.engine.give_up(session_id, question_key)
         self._sync(self.engine.session_summary(session_id))
         return response

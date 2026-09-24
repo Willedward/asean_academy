@@ -210,5 +210,5 @@ def test_progress_fails_closed_without_a_learner_identity(tmp_path):
 
     response = request(app, "GET", "/api/v1/progress")
 
-    assert response.status_code == 503
+    assert response.status_code == 401
     assert response.json()["error"]["code"] == "authentication_required"

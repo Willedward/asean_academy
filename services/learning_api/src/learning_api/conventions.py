@@ -44,14 +44,3 @@ async def require_idempotency_key(
                 "message": f"{IDEMPOTENCY_HEADER} must be a UUID.",
             },
         ) from exc
-
-
-async def require_verified_user() -> None:
-    """Fail closed until Stage 4 installs the Supabase JWT verifier."""
-    raise HTTPException(
-        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-        detail={
-            "code": "authentication_not_configured",
-            "message": "Authenticated learning endpoints are not enabled yet.",
-        },
-    )

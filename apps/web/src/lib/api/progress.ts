@@ -24,16 +24,18 @@ export async function startLesson(
   return data;
 }
 
-export async function getProgress(): Promise<ProgressResponse> {
+export async function getProgress(accessToken?: string): Promise<ProgressResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().GET("/api/v1/progress");
+  const { data, error, response } = await createApiClient(accessToken).GET("/api/v1/progress");
   if (error || !data) throw new Error(apiErrorMessage(error, response.status));
   return data;
 }
 
-export async function getLearningHome(): Promise<LearningHomeResponse> {
+export async function getLearningHome(
+  accessToken?: string,
+): Promise<LearningHomeResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().GET(
+  const { data, error, response } = await createApiClient(accessToken).GET(
     "/api/v1/learning-home",
   );
   if (error || !data) throw new Error(apiErrorMessage(error, response.status));

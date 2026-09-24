@@ -14,7 +14,9 @@ from .config import Settings
 from .contracts import ErrorDetail, ErrorEnvelope, HealthResponse
 from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
 from .course_catalogue import CourseCatalogue
+from .identity import SupabaseTokenVerifier, TokenVerifier
 from .routers.courses import router as courses_router
+from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
 from .routers.progress import router as progress_router
 
@@ -28,6 +30,7 @@ def _error_response(
     code: str,
     message: str,
     details: dict | None = None,
+    headers: dict[str, str] | None = None,
 ) -> JSONResponse:
     body = ErrorEnvelope(
         error=ErrorDetail(
@@ -37,10 +40,18 @@ def _error_response(
             details=details,
         )
     )
-    return JSONResponse(status_code=status_code, content=body.model_dump(mode="json"))
+    return JSONResponse(
+        status_code=status_code,
+        content=body.model_dump(mode="json"),
+        headers=headers,
+    )
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None,
+    *,
+    token_verifier: TokenVerifier | None = None,
+) -> FastAPI:
     settings = settings or Settings.from_environment()
     logging.basicConfig(level=settings.log_level)
 
@@ -65,6 +76,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         },
     )
     application.state.settings = settings
+    application.state.token_verifier = token_verifier or (
+        SupabaseTokenVerifier(
+            settings.supabase_url,
+            audience=settings.supabase_jwt_audience,
+            anon_key=settings.supabase_anon_key,
+        )
+        if settings.supabase_url
+        else None
+    )
     application.state.course_catalogue = CourseCatalogue(
         settings.repository_root,
         allow_drafts=settings.allow_draft_content,
@@ -101,6 +121,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             code=code,
             message=message,
             details=details,
+            headers=exc.headers,
         )
 
     @application.exception_handler(RequestValidationError)
@@ -152,6 +173,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def unexpected_error_contract() -> None:
         raise RuntimeError("private failure detail")
 
+    application.include_router(identity_router)
     application.include_router(courses_router)
     application.include_router(practice_router)
     application.include_router(progress_router)

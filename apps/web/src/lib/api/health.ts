@@ -12,7 +12,7 @@ const healthFixture: HealthResponse = {
   request_id: "fixture-request",
   dependencies: {
     course_content: "draft_placeholders",
-    authentication: "planned_stage_4",
+    authentication: "supabase_bearer",
     tutor: "disabled",
   },
 };

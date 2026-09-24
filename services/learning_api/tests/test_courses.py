@@ -20,6 +20,7 @@ def get(path: str, *, allow_drafts: bool = True):
             log_level="INFO",
             repository_root=REPOSITORY_ROOT,
             allow_draft_content=allow_drafts,
+            development_learner_id="development-learner",
         )
     )
 

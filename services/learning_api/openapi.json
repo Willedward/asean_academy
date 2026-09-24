@@ -1,6 +1,29 @@
 {
   "components": {
     "schemas": {
+      "AcceptInvitationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Display Name",
+            "type": "string"
+          },
+          "invitation_code": {
+            "maxLength": 300,
+            "minLength": 16,
+            "title": "Invitation Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "invitation_code",
+          "display_name"
+        ],
+        "title": "AcceptInvitationRequest",
+        "type": "object"
+      },
       "AttemptPartResult": {
         "additionalProperties": false,
         "properties": {
@@ -329,6 +352,62 @@
         "title": "CreatePracticeSessionRequest",
         "type": "object"
       },
+      "CurrentLearnerResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "enrolments": {
+            "items": {
+              "$ref": "#/components/schemas/EnrolmentResponse"
+            },
+            "title": "Enrolments",
+            "type": "array"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileResponse"
+          }
+        },
+        "required": [
+          "profile",
+          "enrolments"
+        ],
+        "title": "CurrentLearnerResponse",
+        "type": "object"
+      },
+      "EnrolmentResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "course_revision": {
+            "title": "Course Revision",
+            "type": "integer"
+          },
+          "enrolled_at": {
+            "format": "date-time",
+            "title": "Enrolled At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed",
+              "withdrawn"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course_key",
+          "course_revision",
+          "status",
+          "enrolled_at"
+        ],
+        "title": "EnrolmentResponse",
+        "type": "object"
+      },
       "ErrorDetail": {
         "additionalProperties": false,
         "properties": {
@@ -402,8 +481,8 @@
         "additionalProperties": false,
         "properties": {
           "authentication": {
-            "const": "planned_stage_4",
-            "default": "planned_stage_4",
+            "const": "supabase_bearer",
+            "default": "supabase_bearer",
             "title": "Authentication",
             "type": "string"
           },
@@ -509,6 +588,33 @@
           "parts"
         ],
         "title": "HintResponse",
+        "type": "object"
+      },
+      "InvitationAcceptanceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted": {
+            "const": true,
+            "default": true,
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "enrolments": {
+            "items": {
+              "$ref": "#/components/schemas/EnrolmentResponse"
+            },
+            "title": "Enrolments",
+            "type": "array"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileResponse"
+          }
+        },
+        "required": [
+          "profile",
+          "enrolments"
+        ],
+        "title": "InvitationAcceptanceResponse",
         "type": "object"
       },
       "LearningHomeResponse": {
@@ -1069,6 +1175,59 @@
         "title": "PracticeSessionSummary",
         "type": "object"
       },
+      "ProfileResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "learner_id": {
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "student",
+              "content_admin",
+              "academic_admin"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "target_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Track"
+          }
+        },
+        "required": [
+          "learner_id",
+          "email",
+          "display_name",
+          "role",
+          "target_track"
+        ],
+        "title": "ProfileResponse",
+        "type": "object"
+      },
       "ProgressResponse": {
         "additionalProperties": false,
         "properties": {
@@ -1407,6 +1566,12 @@
         "title": "SubmitAttemptRequest",
         "type": "object"
       }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "scheme": "bearer",
+        "type": "http"
+      }
     }
   },
   "info": {
@@ -1524,6 +1689,11 @@
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "summary": "Submit typed final answers for deterministic marking",
         "tags": [
           "practice"
@@ -1627,7 +1797,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Get the learner-safe course map",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the authenticated learner's safe course map",
         "tags": [
           "courses"
         ]
@@ -1809,7 +1984,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Get learner progress and the recommended next action",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get authenticated learner progress and the recommended next action",
         "tags": [
           "progress"
         ]
@@ -1912,7 +2092,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Get a learner-safe lesson revision",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get an authenticated learner-safe lesson revision",
         "tags": [
           "courses"
         ]
@@ -2015,9 +2200,216 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Idempotently start a lesson for the local development learner",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Idempotently start a lesson for the authenticated learner",
         "tags": [
           "progress"
+        ]
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "getCurrentLearner",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentLearnerResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the authenticated learner profile and pinned enrolments",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/api/v1/onboarding/accept-invitation": {
+      "post": {
+        "operationId": "acceptBetaInvitation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptInvitationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationAcceptanceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Accept a beta invitation and pin the learner to its course revision",
+        "tags": [
+          "identity"
         ]
       }
     },
@@ -2129,7 +2521,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Start or replay an idempotent lesson-practice session",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Start or replay an idempotent learner-owned practice session",
         "tags": [
           "practice"
         ]
@@ -2232,7 +2629,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Resume practice-session progress",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Resume an owned practice session",
         "tags": [
           "practice"
         ]
@@ -2335,7 +2737,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Get the current unresolved question or assign the next one",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get or assign the next question in an owned session",
         "tags": [
           "practice"
         ]
@@ -2448,6 +2855,11 @@
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "summary": "Unlock the authored solution after two incorrect attempts",
         "tags": [
           "practice"
@@ -2572,7 +2984,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Reveal the next authored hint",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Reveal the next authored hint in an owned session",
         "tags": [
           "practice"
         ]
@@ -2663,7 +3080,12 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Get learner progress across the N1 course",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get authenticated learner progress across the N1 course",
         "tags": [
           "progress"
         ]

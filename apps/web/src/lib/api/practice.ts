@@ -21,9 +21,10 @@ function idempotencyKey(): string {
 export async function createPracticeSession(
   lessonKey: string,
   questionCount?: number,
+  accessToken?: string,
 ): Promise<PracticeSessionResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().POST("/api/v1/practice-sessions", {
+  const { data, error, response } = await createApiClient(accessToken).POST("/api/v1/practice-sessions", {
     params: { header: { "Idempotency-Key": idempotencyKey() } },
     body: {
       lesson_key: lessonKey,
@@ -35,9 +36,12 @@ export async function createPracticeSession(
   return data;
 }
 
-export async function getNextQuestion(sessionId: string): Promise<NextQuestionResponse> {
+export async function getNextQuestion(
+  sessionId: string,
+  accessToken?: string,
+): Promise<NextQuestionResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().GET(
+  const { data, error, response } = await createApiClient(accessToken).GET(
     "/api/v1/practice-sessions/{session_id}/next",
     { params: { path: { session_id: sessionId } } },
   );
@@ -50,9 +54,10 @@ export async function submitAttempt(
   questionKey: string,
   questionRevision: number,
   answers: Record<string, string>,
+  accessToken?: string,
 ): Promise<AttemptResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().POST("/api/v1/attempts", {
+  const { data, error, response } = await createApiClient(accessToken).POST("/api/v1/attempts", {
     params: { header: { "Idempotency-Key": idempotencyKey() } },
     body: {
       session_id: sessionId,
@@ -69,9 +74,10 @@ export async function revealHint(
   sessionId: string,
   questionKey: string,
   stage: 1 | 2,
+  accessToken?: string,
 ): Promise<HintResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().POST(
+  const { data, error, response } = await createApiClient(accessToken).POST(
     "/api/v1/practice-sessions/{session_id}/questions/{question_key}/hints/{stage}",
     {
       params: {
@@ -90,9 +96,10 @@ export async function revealHint(
 export async function giveUp(
   sessionId: string,
   questionKey: string,
+  accessToken?: string,
 ): Promise<GiveUpResponse> {
   fixtureGuard();
-  const { data, error, response } = await createApiClient().POST(
+  const { data, error, response } = await createApiClient(accessToken).POST(
     "/api/v1/practice-sessions/{session_id}/questions/{question_key}/give-up",
     { params: { path: { session_id: sessionId, question_key: questionKey } } },
   );

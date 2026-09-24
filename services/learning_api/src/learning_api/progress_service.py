@@ -47,6 +47,9 @@ class ProgressService:
             question_count,
         )
 
+    def session(self, session_id: str):
+        return self.repository.session(self.learner_id, session_id)
+
     def active_session(self, lesson_key: str | None = None):
         return self.repository.active_session(self.learner_id, lesson_key)
 

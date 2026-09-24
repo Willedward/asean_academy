@@ -10,9 +10,12 @@ export type LessonResponse = components["schemas"]["LessonResponse"];
 export const courseMapFixture = courseMapJson as CourseMapResponse;
 export const lessonFixture = lessonJson as LessonResponse;
 
-export async function getCourseMap(courseKey: string): Promise<CourseMapResponse> {
+export async function getCourseMap(
+  courseKey: string,
+  accessToken?: string,
+): Promise<CourseMapResponse> {
   if (process.env.NEXT_PUBLIC_USE_API_FIXTURES === "true") return courseMapFixture;
-  const { data, error, response } = await createApiClient().GET(
+  const { data, error, response } = await createApiClient(accessToken).GET(
     "/api/v1/courses/{course_key}/map",
     { params: { path: { course_key: courseKey } } },
   );
@@ -20,7 +23,10 @@ export async function getCourseMap(courseKey: string): Promise<CourseMapResponse
   return data;
 }
 
-export async function getLesson(lessonKey: string): Promise<LessonResponse> {
+export async function getLesson(
+  lessonKey: string,
+  accessToken?: string,
+): Promise<LessonResponse> {
   if (process.env.NEXT_PUBLIC_USE_API_FIXTURES === "true") {
     const lesson = courseMapFixture.units[0]?.lessons.find(
       (candidate) => candidate.stable_key === lessonKey,
@@ -42,7 +48,7 @@ export async function getLesson(lessonKey: string): Promise<LessonResponse> {
       },
     };
   }
-  const { data, error, response } = await createApiClient().GET("/api/v1/lessons/{lesson_key}", {
+  const { data, error, response } = await createApiClient(accessToken).GET("/api/v1/lessons/{lesson_key}", {
     params: { path: { lesson_key: lessonKey } },
   });
   if (error || !data) throw new Error(apiErrorMessage(error, response.status));
