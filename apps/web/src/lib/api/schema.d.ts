@@ -404,6 +404,26 @@ export interface components {
             /** Total Students */
             total_students: number;
         };
+        /** CheckpointProgressResponse */
+        CheckpointProgressResponse: {
+            /** Available */
+            available: boolean;
+            /** Last Percentage */
+            last_percentage?: number | null;
+            /** Last Session Id */
+            last_session_id?: string | null;
+            /** Passing Percentage */
+            passing_percentage: number;
+            /** Question Count */
+            question_count: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "locked" | "available" | "in_progress" | "passed";
+            /** Unit Key */
+            unit_key: string;
+        };
         /** CourseLessonMap */
         CourseLessonMap: {
             /**
@@ -445,6 +465,13 @@ export interface components {
             summary: string;
             /** Title */
             title: string;
+            /** Unlock Reason */
+            unlock_reason?: "prerequisite_not_proficient" | null;
+            /**
+             * Unlocked
+             * @default false
+             */
+            unlocked: boolean;
         };
         /** CourseMapResponse */
         CourseMapResponse: {
@@ -508,15 +535,17 @@ export interface components {
         /** CreatePracticeSessionRequest */
         CreatePracticeSessionRequest: {
             /** Lesson Key */
-            lesson_key: string;
+            lesson_key?: string | null;
             /**
              * Mode
              * @default guided_practice
-             * @constant
+             * @enum {string}
              */
-            mode: "guided_practice";
+            mode: "guided_practice" | "retry_review" | "checkpoint";
             /** Question Count */
             question_count?: number | null;
+            /** Unit Key */
+            unit_key?: string | null;
         };
         /** CreatedInvitationResponse */
         CreatedInvitationResponse: {
@@ -726,6 +755,8 @@ export interface components {
         };
         /** LearningHomeResponse */
         LearningHomeResponse: {
+            /** Checkpoints */
+            checkpoints: components["schemas"]["CheckpointProgressResponse"][];
             /** Course Key */
             course_key: string;
             /** Learner Id */
@@ -777,10 +808,22 @@ export interface components {
              */
             resolved_count: number;
             /**
+             * Retry Question Count
+             * @default 0
+             */
+            retry_question_count: number;
+            /**
              * State
              * @enum {string}
              */
             state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
+            /** Unlock Reason */
+            unlock_reason?: "prerequisite_not_proficient" | null;
+            /**
+             * Unlocked
+             * @default false
+             */
+            unlocked: boolean;
             /** Updated At */
             updated_at?: string | null;
         };
@@ -844,7 +887,9 @@ export interface components {
              * Type
              * @enum {string}
              */
-            type: "start_lesson" | "resume_practice" | "retry_practice" | "continue_lesson" | "content_pending" | "checkpoint_pending";
+            type: "start_lesson" | "resume_practice" | "retry_practice" | "continue_lesson" | "content_pending" | "start_checkpoint" | "resume_checkpoint" | "course_complete";
+            /** Unit Key */
+            unit_key?: string | null;
         };
         /** NextQuestionResponse */
         NextQuestionResponse: {
@@ -861,7 +906,7 @@ export interface components {
             /** Solution Available */
             solution_available?: boolean | null;
             /** Stage */
-            stage?: ("guided" | "independent" | "challenge") | null;
+            stage?: ("guided" | "independent" | "challenge" | "checkpoint" | "adaptive") | null;
             /**
              * Status
              * @enum {string}
@@ -895,12 +940,12 @@ export interface components {
             /** Development Drafts */
             development_drafts: boolean;
             /** Lesson Key */
-            lesson_key: string;
+            lesson_key?: string | null;
             /**
              * Mode
-             * @constant
+             * @enum {string}
              */
-            mode: "guided_practice";
+            mode: "guided_practice" | "retry_review" | "checkpoint";
             /** Question Count */
             question_count: number;
             /** Session Id */
@@ -910,6 +955,8 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "completed";
+            /** Unit Key */
+            unit_key?: string | null;
         };
         /** PracticeSessionSummary */
         PracticeSessionSummary: {
@@ -921,13 +968,18 @@ export interface components {
             development_drafts: boolean;
             /** Gave Up Count */
             gave_up_count: number;
+            /**
+             * Incorrect Count
+             * @default 0
+             */
+            incorrect_count: number;
             /** Lesson Key */
-            lesson_key: string;
+            lesson_key?: string | null;
             /**
              * Mode
-             * @constant
+             * @enum {string}
              */
-            mode: "guided_practice";
+            mode: "guided_practice" | "retry_review" | "checkpoint";
             /** Question Count */
             question_count: number;
             /** Resolved Count */
@@ -939,6 +991,8 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "completed";
+            /** Unit Key */
+            unit_key?: string | null;
         };
         /** ProfileResponse */
         ProfileResponse: {
@@ -960,6 +1014,8 @@ export interface components {
         ProgressResponse: {
             /** Checkpoint Required For Mastery */
             checkpoint_required_for_mastery: boolean;
+            /** Checkpoints */
+            checkpoints: components["schemas"]["CheckpointProgressResponse"][];
             /** Course Key */
             course_key: string;
             /** Learner Id */

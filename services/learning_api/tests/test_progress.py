@@ -98,6 +98,7 @@ def test_learning_home_resumes_active_practice(tmp_path):
         "description": "Continue question 1 of 3.",
         "href": f"/practice/{session['session_id']}",
         "lesson_key": "n1-lesson-01",
+        "unit_key": None,
         "session_id": session["session_id"],
     }
     assert course["units"][0]["lessons"][0]["progress_state"] == "in_progress"

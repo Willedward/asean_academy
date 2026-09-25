@@ -254,6 +254,68 @@
         "title": "BetaOperationsSummaryResponse",
         "type": "object"
       },
+      "CheckpointProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "last_percentage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Percentage"
+          },
+          "last_session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Session Id"
+          },
+          "passing_percentage": {
+            "title": "Passing Percentage",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "locked",
+              "available",
+              "in_progress",
+              "passed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "unit_key": {
+            "title": "Unit Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit_key",
+          "state",
+          "available",
+          "question_count",
+          "passing_percentage"
+        ],
+        "title": "CheckpointProgressResponse",
+        "type": "object"
+      },
       "CourseLessonMap": {
         "additionalProperties": false,
         "properties": {
@@ -336,6 +398,23 @@
           "title": {
             "title": "Title",
             "type": "string"
+          },
+          "unlock_reason": {
+            "anyOf": [
+              {
+                "const": "prerequisite_not_proficient",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unlock Reason"
+          },
+          "unlocked": {
+            "default": false,
+            "title": "Unlocked",
+            "type": "boolean"
           }
         },
         "required": [
@@ -501,13 +580,24 @@
         "additionalProperties": false,
         "properties": {
           "lesson_key": {
-            "pattern": "^n1-lesson-[0-9]{2}$",
-            "title": "Lesson Key",
-            "type": "string"
+            "anyOf": [
+              {
+                "pattern": "^n1-lesson-[0-9]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lesson Key"
           },
           "mode": {
-            "const": "guided_practice",
             "default": "guided_practice",
+            "enum": [
+              "guided_practice",
+              "retry_review",
+              "checkpoint"
+            ],
             "title": "Mode",
             "type": "string"
           },
@@ -523,11 +613,20 @@
               }
             ],
             "title": "Question Count"
+          },
+          "unit_key": {
+            "anyOf": [
+              {
+                "pattern": "^[a-z0-9-]+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Key"
           }
         },
-        "required": [
-          "lesson_key"
-        ],
         "title": "CreatePracticeSessionRequest",
         "type": "object"
       },
@@ -1005,6 +1104,13 @@
       "LearningHomeResponse": {
         "additionalProperties": false,
         "properties": {
+          "checkpoints": {
+            "items": {
+              "$ref": "#/components/schemas/CheckpointProgressResponse"
+            },
+            "title": "Checkpoints",
+            "type": "array"
+          },
           "course_key": {
             "title": "Course Key",
             "type": "string"
@@ -1033,7 +1139,8 @@
           "course_key",
           "next_action",
           "unresolved_retry_count",
-          "lessons"
+          "lessons",
+          "checkpoints"
         ],
         "title": "LearningHomeResponse",
         "type": "object"
@@ -1094,6 +1201,11 @@
             "title": "Resolved Count",
             "type": "integer"
           },
+          "retry_question_count": {
+            "default": 0,
+            "title": "Retry Question Count",
+            "type": "integer"
+          },
           "state": {
             "enum": [
               "not_started",
@@ -1104,6 +1216,23 @@
             ],
             "title": "State",
             "type": "string"
+          },
+          "unlock_reason": {
+            "anyOf": [
+              {
+                "const": "prerequisite_not_proficient",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unlock Reason"
+          },
+          "unlocked": {
+            "default": false,
+            "title": "Unlocked",
+            "type": "boolean"
           },
           "updated_at": {
             "anyOf": [
@@ -1282,10 +1411,23 @@
               "retry_practice",
               "continue_lesson",
               "content_pending",
-              "checkpoint_pending"
+              "start_checkpoint",
+              "resume_checkpoint",
+              "course_complete"
             ],
             "title": "Type",
             "type": "string"
+          },
+          "unit_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Key"
           }
         },
         "required": [
@@ -1374,7 +1516,9 @@
                 "enum": [
                   "guided",
                   "independent",
-                  "challenge"
+                  "challenge",
+                  "checkpoint",
+                  "adaptive"
                 ],
                 "type": "string"
               },
@@ -1460,11 +1604,22 @@
             "type": "boolean"
           },
           "lesson_key": {
-            "title": "Lesson Key",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lesson Key"
           },
           "mode": {
-            "const": "guided_practice",
+            "enum": [
+              "guided_practice",
+              "retry_review",
+              "checkpoint"
+            ],
             "title": "Mode",
             "type": "string"
           },
@@ -1483,13 +1638,23 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "unit_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Key"
           }
         },
         "required": [
           "session_id",
           "status",
           "question_count",
-          "lesson_key",
           "mode",
           "development_drafts"
         ],
@@ -1515,12 +1680,28 @@
             "title": "Gave Up Count",
             "type": "integer"
           },
+          "incorrect_count": {
+            "default": 0,
+            "title": "Incorrect Count",
+            "type": "integer"
+          },
           "lesson_key": {
-            "title": "Lesson Key",
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lesson Key"
           },
           "mode": {
-            "const": "guided_practice",
+            "enum": [
+              "guided_practice",
+              "retry_review",
+              "checkpoint"
+            ],
             "title": "Mode",
             "type": "string"
           },
@@ -1543,6 +1724,17 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "unit_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Key"
           }
         },
         "required": [
@@ -1553,7 +1745,6 @@
           "resolved_count",
           "correct_count",
           "gave_up_count",
-          "lesson_key",
           "mode",
           "development_drafts"
         ],
@@ -1620,6 +1811,13 @@
             "title": "Checkpoint Required For Mastery",
             "type": "boolean"
           },
+          "checkpoints": {
+            "items": {
+              "$ref": "#/components/schemas/CheckpointProgressResponse"
+            },
+            "title": "Checkpoints",
+            "type": "array"
+          },
           "course_key": {
             "title": "Course Key",
             "type": "string"
@@ -1645,7 +1843,8 @@
           "course_key",
           "proficiency_threshold",
           "checkpoint_required_for_mastery",
-          "lessons"
+          "lessons",
+          "checkpoints"
         ],
         "title": "ProgressResponse",
         "type": "object"

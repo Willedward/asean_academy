@@ -23,6 +23,7 @@ from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.identity_repository import invitation_digest
 from learning_api.main import create_app
 from learning_api.postgres_practice import PostgresPracticeEngine
+from learning_api.progress_repository import PostgresProgressRepository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 BANK_ROOT = REPOSITORY_ROOT / "backend_resources/question_bank/g3_math/secondary_1/n1/v1"
@@ -336,4 +337,138 @@ def test_beta_operations_are_admin_authorized_audited_and_immutable():
             connection.execute(
                 "update beta_audit_events set metadata = '{}'::jsonb where id = %s",
                 (event_id,),
+            )
+
+
+@pytest.mark.postgres
+def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (learner_id, f"{learner_id}@example.test"),
+        )
+        lesson_rows = connection.execute(
+            """
+            select lessons.id as lesson_id, versions.id as lesson_version_id,
+                   lessons.lesson_key
+            from course_lessons lessons
+            join lesson_versions versions on versions.lesson_id = lessons.id
+            where versions.revision = 1
+            order by lessons.position
+            """
+        ).fetchall()
+        assert len(lesson_rows) == 7, "Import the complete N1 course before this test"
+        for lesson_id, lesson_version_id, _lesson_key in lesson_rows:
+            connection.execute(
+                """
+                insert into learner_lesson_progress (
+                    student_id, lesson_id, lesson_version_id, state,
+                    question_count, resolved_count, correct_count,
+                    eventual_correct_percentage, completed_at
+                ) values (%s, %s, %s, 'proficient', 1, 1, 1, 100, now())
+                """,
+                (learner_id, lesson_id, lesson_version_id),
+            )
+
+    questions = validate_bank(BANK_ROOT).questions
+    by_key = {question.stable_key: question for question in questions}
+    checkpoint_keys = [
+        "n1-l1-03",
+        "n1-l2-04",
+        "n1-l2-01",
+        "n1-l3-04",
+        "n1-l2-07",
+        "n1-l3-06",
+        "n1-l3-07",
+        "n1-l3-01",
+    ]
+    context = {
+        "unit_key": "g3-sec1-n1",
+        "mode": "checkpoint",
+        "stages": {key: "checkpoint" for key in checkpoint_keys},
+        "selection_reason": "configured_checkpoint_pool",
+    }
+    engine = PostgresPracticeEngine(
+        database_url, questions, learner_id, allow_drafts=True
+    )
+    created = engine.create_session(
+        question_count=8,
+        ordered_question_keys=checkpoint_keys,
+        context=context,
+        idempotency_key="postgres-checkpoint-a",
+    )
+    replay = engine.create_session(
+        question_count=8,
+        ordered_question_keys=checkpoint_keys,
+        context=context,
+        idempotency_key="postgres-checkpoint-b",
+    )
+    assert replay["session_id"] == created["session_id"]
+
+    repository = PostgresProgressRepository(database_url)
+    repository.attach_checkpoint_session(
+        learner_id,
+        "g3-sec1-n1",
+        created["session_id"],
+        8,
+    )
+    assert repository.active_session(learner_id) is None
+    assert repository.checkpoint_session(learner_id, created["session_id"]) is not None
+    for number in range(1, 9):
+        current = engine.next_question(created["session_id"])
+        question_key = current["question"]["stable_key"]
+        answers = (
+            {"1": "not an answer"}
+            if number == 1
+            else {
+                str(part["position"]): part["canonical_answer"]
+                for part in solution_for(by_key[question_key])["parts"]
+            }
+        )
+        result = engine.submit_attempt(
+            session_id=created["session_id"],
+            stable_key=question_key,
+            revision=current["question"]["revision"],
+            answers=answers,
+            idempotency_key=f"postgres-checkpoint-answer-{number}",
+        )
+        assert result["question_finished"] is True
+        assert result["solution_available"] is False
+
+    completed = engine.next_question(created["session_id"])["session"]
+    assert completed["status"] == "completed"
+    assert completed["correct_count"] == 7
+    assert completed["incorrect_count"] == 1
+    recorded = repository.sync_checkpoint(
+        learner_id,
+        completed,
+        lesson_keys=[row[2] for row in lesson_rows],
+        passing_percentage=70,
+        policy_key="n1-default-v1",
+    )
+    assert recorded.percentage == 87.5
+    assert all(
+        progress.state == "mastered" and progress.checkpoint_passed
+        for progress in repository.lesson_progress(learner_id)
+    )
+
+    with psycopg.connect(database_url) as connection:
+        events = connection.execute(
+            """
+            select event_type::text from mastery_events
+            where student_id = %s and source_practice_session_id = %s
+            order by event_type::text
+            """,
+            (learner_id, created["session_id"]),
+        ).fetchall()
+        assert events == [("checkpoint_passed",), ("lesson_mastered",)]
+        with pytest.raises(psycopg.errors.RaiseException, match="mastery events are immutable"):
+            connection.execute(
+                """
+                update mastery_events set evidence = '{}'::jsonb
+                where student_id = %s and source_practice_session_id = %s
+                """,
+                (learner_id, created["session_id"]),
             )

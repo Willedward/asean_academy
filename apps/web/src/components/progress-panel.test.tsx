@@ -18,16 +18,19 @@ describe("ProgressPanel", () => {
           lesson_title: "Primes and prime factorisation",
           position: 1,
           state: "proficient",
+          unlocked: true,
           question_count: 3,
           resolved_count: 3,
           correct_count: 3,
           gave_up_count: 0,
+          retry_question_count: 0,
           eventual_correct_percentage: 100,
           checkpoint_passed: false,
           last_session_id: "session-1",
           updated_at: "2026-09-24T00:00:00Z",
         },
       ],
+      checkpoints: [],
     };
     render(<ProgressPanel loadProgress={vi.fn().mockResolvedValue(fixture)} />);
 

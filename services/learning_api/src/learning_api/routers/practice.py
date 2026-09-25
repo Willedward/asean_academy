@@ -20,6 +20,7 @@ from ..practice_contracts import (
     PracticeSessionSummary,
     SubmitAttemptRequest,
 )
+from ..progress_repository import ProgressError
 
 router = APIRouter(prefix="/api/v1", tags=["practice"])
 
@@ -32,7 +33,7 @@ IdempotencyHeader = Annotated[
 def _safe(call):
     try:
         return call()
-    except (PracticeError, CatalogueError) as exc:
+    except (PracticeError, CatalogueError, ProgressError) as exc:
         status_code = getattr(exc, "status", getattr(exc, "status_code", 400))
         raise HTTPException(
             status_code=status_code,
@@ -53,8 +54,9 @@ async def create_session(
     service: PracticeServiceDependency,
 ) -> PracticeSessionResponse:
     return _safe(
-        lambda: service.create_lesson_session(
+        lambda: service.create_session(
             lesson_key=body.lesson_key,
+            unit_key=body.unit_key,
             mode=body.mode,
             question_count=body.question_count,
             idempotency_key=idempotency_key,

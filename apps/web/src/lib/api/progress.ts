@@ -4,6 +4,7 @@ import { apiErrorMessage } from "./errors";
 
 export type LessonProgressResponse = components["schemas"]["LessonProgressResponse"];
 export type ProgressResponse = components["schemas"]["ProgressResponse"];
+export type CheckpointProgressResponse = components["schemas"]["CheckpointProgressResponse"];
 export type LearningHomeResponse = components["schemas"]["LearningHomeResponse"];
 
 function fixtureGuard(): void {

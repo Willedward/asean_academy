@@ -20,6 +20,7 @@ const current: NextQuestionResponse = {
     resolved_count: 0,
     correct_count: 0,
     gave_up_count: 0,
+    incorrect_count: 0,
     lesson_key: "n1-lesson-01",
     mode: "guided_practice",
     development_drafts: true,

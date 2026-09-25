@@ -38,6 +38,8 @@ class CourseLessonMap(ApiModel):
     learning_material_state: LearningMaterialState
     availability: LessonAvailability
     progress_state: LessonProgressState = "not_started"
+    unlocked: bool = False
+    unlock_reason: Literal["prerequisite_not_proficient"] | None = None
     href: str
 
 

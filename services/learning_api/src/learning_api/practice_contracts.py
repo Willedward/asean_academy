@@ -4,25 +4,36 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-from pydantic import Field, StringConstraints
+from pydantic import Field, StringConstraints, model_validator
 
 from .contracts import ApiModel
 
-PracticeMode = Literal["guided_practice"]
-PracticeStage = Literal["guided", "independent", "challenge"]
+PracticeMode = Literal["guided_practice", "retry_review", "checkpoint"]
+PracticeStage = Literal["guided", "independent", "challenge", "checkpoint", "adaptive"]
 
 
 class CreatePracticeSessionRequest(ApiModel):
-    lesson_key: str = Field(pattern=r"^n1-lesson-[0-9]{2}$")
+    lesson_key: str | None = Field(default=None, pattern=r"^n1-lesson-[0-9]{2}$")
+    unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     mode: PracticeMode = "guided_practice"
     question_count: int | None = Field(default=None, ge=1, le=20)
+
+    @model_validator(mode="after")
+    def target_matches_mode(self):
+        if self.mode == "checkpoint":
+            if self.unit_key is None or self.lesson_key is not None:
+                raise ValueError("checkpoint sessions require unit_key and no lesson_key")
+        elif self.lesson_key is None or self.unit_key is not None:
+            raise ValueError("lesson practice sessions require lesson_key and no unit_key")
+        return self
 
 
 class PracticeSessionResponse(ApiModel):
     session_id: str
     status: Literal["active", "completed"]
     question_count: int
-    lesson_key: str
+    lesson_key: str | None = None
+    unit_key: str | None = None
     mode: PracticeMode
     development_drafts: bool
 
@@ -34,8 +45,10 @@ class PracticeSessionSummary(ApiModel):
     assigned_count: int
     resolved_count: int
     correct_count: int
+    incorrect_count: int = 0
     gave_up_count: int
-    lesson_key: str
+    lesson_key: str | None = None
+    unit_key: str | None = None
     mode: PracticeMode
     development_drafts: bool
 

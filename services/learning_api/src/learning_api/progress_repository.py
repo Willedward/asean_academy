@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -54,6 +55,20 @@ class SessionProgressRecord:
     updated_at: str
 
 
+@dataclass(frozen=True, slots=True)
+class CheckpointSessionRecord:
+    session_id: str
+    learner_id: str
+    unit_key: str
+    status: str
+    question_count: int
+    resolved_count: int
+    correct_count: int
+    incorrect_count: int
+    percentage: float
+    updated_at: str
+
+
 class ProgressRepository(Protocol):
     def start_lesson(
         self,
@@ -89,7 +104,35 @@ class ProgressRepository(Protocol):
         minimum_percentage: int,
     ) -> LessonProgressRecord: ...
 
+    def attach_checkpoint_session(
+        self,
+        learner_id: str,
+        unit_key: str,
+        session_id: str,
+        question_count: int,
+    ) -> None: ...
+
+    def checkpoint_session(
+        self, learner_id: str, session_id: str
+    ) -> CheckpointSessionRecord | None: ...
+
+    def latest_checkpoint_session(
+        self, learner_id: str, unit_key: str
+    ) -> CheckpointSessionRecord | None: ...
+
+    def sync_checkpoint(
+        self,
+        learner_id: str,
+        summary: dict,
+        *,
+        lesson_keys: list[str],
+        passing_percentage: int,
+        policy_key: str,
+    ) -> CheckpointSessionRecord: ...
+
     def lesson_progress(self, learner_id: str) -> list[LessonProgressRecord]: ...
+
+    def unresolved_question_keys(self, learner_id: str) -> list[str]: ...
 
 
 class SQLiteProgressRepository:
@@ -148,6 +191,51 @@ class SQLiteProgressRepository:
 
                 create index if not exists learner_active_session_idx
                 on learner_practice_sessions (learner_id, status, updated_at desc);
+
+                create table if not exists learner_checkpoint_sessions (
+                    session_id text primary key,
+                    learner_id text not null,
+                    unit_key text not null,
+                    status text not null check (status in ('active', 'completed')),
+                    question_count integer not null,
+                    resolved_count integer not null default 0,
+                    correct_count integer not null default 0,
+                    incorrect_count integer not null default 0,
+                    created_at text not null,
+                    updated_at text not null
+                );
+
+                create index if not exists learner_checkpoint_session_idx
+                on learner_checkpoint_sessions (
+                    learner_id, unit_key, status, updated_at desc
+                );
+
+                create table if not exists learner_mastery_events (
+                    id text primary key,
+                    learner_id text not null,
+                    lesson_key text,
+                    event_type text not null check (
+                        event_type in (
+                            'lesson_proficient', 'checkpoint_passed', 'lesson_mastered'
+                        )
+                    ),
+                    source_session_id text not null,
+                    evidence_json text not null,
+                    created_at text not null,
+                    unique (learner_id, event_type, source_session_id)
+                );
+
+                create trigger if not exists learner_mastery_events_no_update
+                before update on learner_mastery_events
+                begin
+                    select raise(abort, 'mastery events are immutable');
+                end;
+
+                create trigger if not exists learner_mastery_events_no_delete
+                before delete on learner_mastery_events
+                begin
+                    select raise(abort, 'mastery events are immutable');
+                end;
                 """
             )
 
@@ -380,6 +468,28 @@ class SQLiteProgressRepository:
                     lesson_key,
                 ),
             )
+            if state == "proficient" and current["state"] != "proficient":
+                evidence = json.dumps(
+                    {
+                        "eventual_correct_percentage": percentage,
+                        "gave_up_count": gave_up_count,
+                        "minimum_percentage": minimum_percentage,
+                    },
+                    separators=(",", ":"),
+                    sort_keys=True,
+                )
+                connection.execute(
+                    """
+                    insert or ignore into learner_mastery_events (
+                        id, learner_id, lesson_key, event_type,
+                        source_session_id, evidence_json, created_at
+                    ) values (?, ?, ?, 'lesson_proficient', ?, ?, ?)
+                    """,
+                    (
+                        f"{session_id}:lesson_proficient", learner_id, lesson_key,
+                        session_id, evidence, timestamp,
+                    ),
+                )
             updated = connection.execute(
                 """
                 select * from learner_lesson_progress
@@ -388,6 +498,173 @@ class SQLiteProgressRepository:
                 (learner_id, lesson_key),
             ).fetchone()
             return self._lesson(updated)
+
+    @staticmethod
+    def _checkpoint(row) -> CheckpointSessionRecord:
+        question_count = row["question_count"]
+        correct_count = row["correct_count"]
+        return CheckpointSessionRecord(
+            session_id=row["session_id"],
+            learner_id=row["learner_id"],
+            unit_key=row["unit_key"],
+            status=row["status"],
+            question_count=question_count,
+            resolved_count=row["resolved_count"],
+            correct_count=correct_count,
+            incorrect_count=row["incorrect_count"],
+            percentage=round(
+                (100 * correct_count / question_count) if question_count else 0, 2
+            ),
+            updated_at=row["updated_at"],
+        )
+
+    def attach_checkpoint_session(
+        self,
+        learner_id: str,
+        unit_key: str,
+        session_id: str,
+        question_count: int,
+    ) -> None:
+        timestamp = _now()
+        with self._connect() as connection:
+            connection.execute(
+                """
+                insert into learner_checkpoint_sessions (
+                    session_id, learner_id, unit_key, status, question_count,
+                    created_at, updated_at
+                ) values (?, ?, ?, 'active', ?, ?, ?)
+                on conflict(session_id) do nothing
+                """,
+                (
+                    session_id, learner_id, unit_key, question_count,
+                    timestamp, timestamp,
+                ),
+            )
+
+    def checkpoint_session(
+        self, learner_id: str, session_id: str
+    ) -> CheckpointSessionRecord | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                select * from learner_checkpoint_sessions
+                where learner_id = ? and session_id = ?
+                """,
+                (learner_id, session_id),
+            ).fetchone()
+        return self._checkpoint(row) if row is not None else None
+
+    def latest_checkpoint_session(
+        self, learner_id: str, unit_key: str
+    ) -> CheckpointSessionRecord | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                select * from learner_checkpoint_sessions
+                where learner_id = ? and unit_key = ?
+                order by updated_at desc limit 1
+                """,
+                (learner_id, unit_key),
+            ).fetchone()
+        return self._checkpoint(row) if row is not None else None
+
+    def sync_checkpoint(
+        self,
+        learner_id: str,
+        summary: dict,
+        *,
+        lesson_keys: list[str],
+        passing_percentage: int,
+        policy_key: str,
+    ) -> CheckpointSessionRecord:
+        timestamp = _now()
+        session_id = summary["session_id"]
+        count = summary["question_count"]
+        correct = summary["correct_count"]
+        percentage = round((100 * correct / count) if count else 0, 2)
+        completed = summary["status"] == "completed"
+        passed = completed and percentage >= passing_percentage
+        with self._connect() as connection:
+            owner = connection.execute(
+                """
+                select * from learner_checkpoint_sessions
+                where learner_id = ? and session_id = ?
+                """,
+                (learner_id, session_id),
+            ).fetchone()
+            if owner is None:
+                raise ProgressError(
+                    "practice_session_not_owned",
+                    "The checkpoint session is not linked to the local learner.",
+                    404,
+                )
+            connection.execute(
+                """
+                update learner_checkpoint_sessions
+                set status = ?, question_count = ?, resolved_count = ?,
+                    correct_count = ?, incorrect_count = ?, updated_at = ?
+                where session_id = ?
+                """,
+                (
+                    summary["status"], count, summary["resolved_count"],
+                    correct, summary.get("incorrect_count", 0), timestamp, session_id,
+                ),
+            )
+            if passed:
+                placeholders = ",".join("?" for _ in lesson_keys)
+                rows = connection.execute(
+                    f"""
+                    select lesson_key, state from learner_lesson_progress
+                    where learner_id = ? and lesson_key in ({placeholders})
+                    """,
+                    [learner_id, *lesson_keys],
+                ).fetchall()
+                states = {row["lesson_key"]: row["state"] for row in rows}
+                if set(states) != set(lesson_keys) or any(
+                    state not in {"proficient", "mastered"} for state in states.values()
+                ):
+                    raise ProgressError(
+                        "checkpoint_prerequisites_changed",
+                        "Every lesson must remain proficient before checkpoint mastery is recorded.",
+                        409,
+                    )
+                connection.execute(
+                    f"""
+                    update learner_lesson_progress
+                    set state = 'mastered', checkpoint_passed = 1, updated_at = ?
+                    where learner_id = ? and lesson_key in ({placeholders})
+                    """,
+                    [timestamp, learner_id, *lesson_keys],
+                )
+                evidence = json.dumps(
+                    {
+                        "policy_key": policy_key,
+                        "passing_percentage": passing_percentage,
+                        "achieved_percentage": percentage,
+                        "question_count": count,
+                        "lesson_keys": lesson_keys,
+                    },
+                    separators=(",", ":"),
+                    sort_keys=True,
+                )
+                for event_type in ("checkpoint_passed", "lesson_mastered"):
+                    connection.execute(
+                        """
+                        insert or ignore into learner_mastery_events (
+                            id, learner_id, event_type, source_session_id,
+                            evidence_json, created_at
+                        ) values (?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            f"{session_id}:{event_type}", learner_id, event_type,
+                            session_id, evidence, timestamp,
+                        ),
+                    )
+            row = connection.execute(
+                "select * from learner_checkpoint_sessions where session_id = ?",
+                (session_id,),
+            ).fetchone()
+        return self._checkpoint(row)
 
     def lesson_progress(self, learner_id: str) -> list[LessonProgressRecord]:
         with self._connect() as connection:
@@ -400,6 +677,23 @@ class SQLiteProgressRepository:
                 (learner_id,),
             ).fetchall()
             return [self._lesson(row) for row in rows]
+
+    def unresolved_question_keys(self, learner_id: str) -> list[str]:
+        del learner_id  # The local adapter has exactly one development learner.
+        with self._connect() as connection:
+            try:
+                rows = connection.execute(
+                    """
+                    select question_key from question_progress
+                    where state in ('queued_for_retry', 'gave_up')
+                    order by question_key
+                    """
+                ).fetchall()
+            except sqlite3.OperationalError as exc:
+                if "no such table: question_progress" not in str(exc):
+                    raise
+                return []
+        return [row["question_key"] for row in rows]
 
 
 def _iso(value) -> str | None:
@@ -464,6 +758,25 @@ class PostgresProgressRepository:
         )
 
     @staticmethod
+    def _checkpoint(row) -> CheckpointSessionRecord:
+        question_count = row["question_count"]
+        correct_count = row["correct_count"]
+        return CheckpointSessionRecord(
+            session_id=str(row["session_id"]),
+            learner_id=str(row["learner_id"]),
+            unit_key=row["unit_key"],
+            status=row["status"],
+            question_count=question_count,
+            resolved_count=row["resolved_count"],
+            correct_count=correct_count,
+            incorrect_count=row["incorrect_count"],
+            percentage=round(
+                (100 * correct_count / question_count) if question_count else 0, 2
+            ),
+            updated_at=_iso(row["updated_at"]),
+        )
+
+    @staticmethod
     def _lesson_identity(connection, lesson_key: str, revision: int):
         row = connection.execute(
             """
@@ -520,6 +833,27 @@ class PostgresProgressRepository:
                     as correct_count,
                 count(questions.id) filter (where questions.status = 'gave_up')::integer
                     as gave_up_count,
+                coalesce(sessions.completed_at, sessions.created_at) as updated_at
+            from practice_sessions sessions
+            left join session_questions questions
+                on questions.practice_session_id = sessions.id
+        """
+
+    @staticmethod
+    def _checkpoint_query() -> str:
+        return """
+            select
+                sessions.id as session_id,
+                sessions.student_id as learner_id,
+                sessions.scope->>'unit_key' as unit_key,
+                sessions.status::text as status,
+                sessions.requested_question_count as question_count,
+                count(questions.id) filter (where questions.status <> 'pending')::integer
+                    as resolved_count,
+                count(questions.id) filter (where questions.status = 'correct')::integer
+                    as correct_count,
+                count(questions.id) filter (where questions.status = 'incorrect')::integer
+                    as incorrect_count,
                 coalesce(sessions.completed_at, sessions.created_at) as updated_at
             from practice_sessions sessions
             left join session_questions questions
@@ -600,6 +934,7 @@ class PostgresProgressRepository:
                 self._session_query()
                 + """
                   where sessions.student_id = %s and sessions.id = %s
+                    and sessions.scope ? 'lesson_key'
                   group by sessions.id
                 """,
                 (learner_id, session_id),
@@ -611,7 +946,11 @@ class PostgresProgressRepository:
         learner_id: str,
         lesson_key: str | None = None,
     ) -> SessionProgressRecord | None:
-        conditions = ["sessions.student_id = %s", "sessions.status = 'active'"]
+        conditions = [
+            "sessions.student_id = %s",
+            "sessions.status = 'active'",
+            "sessions.scope ? 'lesson_key'",
+        ]
         parameters: list[str] = [learner_id]
         if lesson_key is not None:
             conditions.append("sessions.scope->>'lesson_key' = %s")
@@ -742,6 +1081,155 @@ class PostgresProgressRepository:
             ).fetchone()
             return self._lesson(updated)
 
+    def attach_checkpoint_session(
+        self,
+        learner_id: str,
+        unit_key: str,
+        session_id: str,
+        question_count: int,
+    ) -> None:
+        del question_count
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            owned = connection.execute(
+                """
+                select id from practice_sessions
+                where id = %s and student_id = %s
+                  and scope->>'unit_key' = %s
+                  and scope->>'mode' = 'checkpoint'
+                """,
+                (session_id, learner_id, unit_key),
+            ).fetchone()
+            if owned is None:
+                raise ProgressError(
+                    "practice_session_not_owned",
+                    "The checkpoint session does not belong to this learner.",
+                    404,
+                )
+
+    def checkpoint_session(
+        self, learner_id: str, session_id: str
+    ) -> CheckpointSessionRecord | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            row = connection.execute(
+                self._checkpoint_query()
+                + """
+                  where sessions.student_id = %s and sessions.id = %s
+                    and sessions.scope->>'mode' = 'checkpoint'
+                  group by sessions.id
+                """,
+                (learner_id, session_id),
+            ).fetchone()
+        return self._checkpoint(row) if row else None
+
+    def latest_checkpoint_session(
+        self, learner_id: str, unit_key: str
+    ) -> CheckpointSessionRecord | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            row = connection.execute(
+                self._checkpoint_query()
+                + """
+                  where sessions.student_id = %s
+                    and sessions.scope->>'unit_key' = %s
+                    and sessions.scope->>'mode' = 'checkpoint'
+                  group by sessions.id
+                  order by sessions.created_at desc limit 1
+                """,
+                (learner_id, unit_key),
+            ).fetchone()
+        return self._checkpoint(row) if row else None
+
+    def sync_checkpoint(
+        self,
+        learner_id: str,
+        summary: dict,
+        *,
+        lesson_keys: list[str],
+        passing_percentage: int,
+        policy_key: str,
+    ) -> CheckpointSessionRecord:
+        session_id = summary["session_id"]
+        count = summary["question_count"]
+        correct = summary["correct_count"]
+        percentage = round((100 * correct / count) if count else 0, 2)
+        completed = summary["status"] == "completed"
+        passed = completed and percentage >= passing_percentage
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            session = connection.execute(
+                """
+                select id, scope->>'unit_key' as unit_key
+                from practice_sessions
+                where id = %s and student_id = %s
+                  and scope->>'mode' = 'checkpoint'
+                for update
+                """,
+                (session_id, learner_id),
+            ).fetchone()
+            if session is None:
+                raise ProgressError(
+                    "practice_session_not_owned",
+                    "The checkpoint session does not belong to this learner.",
+                    404,
+                )
+            if passed:
+                progress_rows = connection.execute(
+                    """
+                    select progress.lesson_id, lessons.lesson_key, progress.state::text as state
+                    from learner_lesson_progress progress
+                    join course_lessons lessons on lessons.id = progress.lesson_id
+                    where progress.student_id = %s and lessons.lesson_key = any(%s)
+                    for update of progress
+                    """,
+                    (learner_id, lesson_keys),
+                ).fetchall()
+                states = {row["lesson_key"]: row["state"] for row in progress_rows}
+                if set(states) != set(lesson_keys) or any(
+                    state not in {"proficient", "mastered"} for state in states.values()
+                ):
+                    raise ProgressError(
+                        "checkpoint_prerequisites_changed",
+                        "Every lesson must remain proficient before checkpoint mastery is recorded.",
+                        409,
+                    )
+                connection.execute(
+                    """
+                    update learner_lesson_progress progress
+                    set state = 'mastered', checkpoint_passed = true, updated_at = now()
+                    from course_lessons lessons
+                    where progress.lesson_id = lessons.id
+                      and progress.student_id = %s
+                      and lessons.lesson_key = any(%s)
+                    """,
+                    (learner_id, lesson_keys),
+                )
+                evidence = psycopg.types.json.Jsonb(
+                    {
+                        "unit_key": session["unit_key"],
+                        "policy_key": policy_key,
+                        "passing_percentage": passing_percentage,
+                        "achieved_percentage": percentage,
+                        "question_count": count,
+                        "lesson_keys": lesson_keys,
+                    }
+                )
+                for event_type in ("checkpoint_passed", "lesson_mastered"):
+                    connection.execute(
+                        """
+                        insert into mastery_events (
+                            student_id, event_type, source_practice_session_id, evidence
+                        ) values (%s, %s, %s, %s::jsonb)
+                        on conflict (student_id, event_type, source_practice_session_id)
+                        do nothing
+                        """,
+                        (learner_id, event_type, session_id, evidence),
+                    )
+        record = self.checkpoint_session(learner_id, session_id)
+        assert record is not None
+        return record
+
     def lesson_progress(self, learner_id: str) -> list[LessonProgressRecord]:
         with self._connect() as connection:
             self._set_identity(connection, learner_id)
@@ -751,3 +1239,19 @@ class PostgresProgressRepository:
                 (learner_id,),
             ).fetchall()
             return [self._lesson(row) for row in rows]
+
+    def unresolved_question_keys(self, learner_id: str) -> list[str]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            rows = connection.execute(
+                """
+                select questions.stable_key
+                from question_progress progress
+                join math_questions questions on questions.id = progress.question_id
+                where progress.student_id = %s
+                  and progress.state in ('queued_for_retry', 'gave_up')
+                order by questions.stable_key
+                """,
+                (learner_id,),
+            ).fetchall()
+        return [row["stable_key"] for row in rows]

@@ -20,6 +20,7 @@ describe("LearningHomePanel", () => {
         session_id: "session-1",
       },
       lessons: [],
+      checkpoints: [],
     };
     render(
       <LearningHomePanel loadLearningHome={vi.fn().mockResolvedValue(fixture)} />,

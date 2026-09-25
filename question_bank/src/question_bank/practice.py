@@ -166,7 +166,7 @@ class PracticeEngine:
                     question_key text not null,
                     question_revision integer not null,
                     position integer not null,
-                    status text not null check (status in ('pending', 'correct', 'gave_up')),
+                    status text not null check (status in ('pending', 'correct', 'incorrect', 'gave_up')),
                     selection_reason text not null,
                     incorrect_attempts integer not null default 0,
                     highest_hint_stage integer not null default 0 check (highest_hint_stage between 0 and 2),
@@ -206,6 +206,35 @@ class PracticeEngine:
                 );
                 """
             )
+            session_question_sql = connection.execute(
+                "select sql from sqlite_master where type = 'table' and name = 'session_questions'"
+            ).fetchone()[0]
+            if "'incorrect'" not in session_question_sql:
+                connection.executescript(
+                    """
+                    alter table session_questions rename to session_questions_legacy;
+                    create table session_questions (
+                        session_id text not null references practice_sessions(id) on delete cascade,
+                        question_key text not null,
+                        question_revision integer not null,
+                        position integer not null,
+                        status text not null check (
+                            status in ('pending', 'correct', 'incorrect', 'gave_up')
+                        ),
+                        selection_reason text not null,
+                        incorrect_attempts integer not null default 0,
+                        highest_hint_stage integer not null default 0 check (
+                            highest_hint_stage between 0 and 2
+                        ),
+                        assigned_at text not null,
+                        resolved_at text,
+                        primary key (session_id, position),
+                        unique (session_id, question_key)
+                    );
+                    insert into session_questions select * from session_questions_legacy;
+                    drop table session_questions_legacy;
+                    """
+                )
 
     def create_session(
         self,
@@ -291,6 +320,7 @@ class PracticeEngine:
             "status": session["status"],
             "question_count": session["requested_count"],
             "lesson_key": scope.get("lesson_key"),
+            "unit_key": scope.get("unit_key"),
             "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
@@ -351,7 +381,9 @@ class PracticeEngine:
         if scope.get("question_keys"):
             by_key = {question.stable_key: question for question in candidates}
             question = next(by_key[key] for key in scope["question_keys"] if key in by_key)
-            return Candidate(question, "configured_lesson_pool")
+            return Candidate(
+                question, scope.get("selection_reason", "configured_lesson_pool")
+            )
 
         ranked = []
         for question in candidates:
@@ -376,6 +408,22 @@ class PracticeEngine:
         _, _, _, _, question, reason = min(ranked, key=lambda item: item[:4])
         return Candidate(question, reason)
 
+    def retry_question_keys(self, eligible_keys: list[str]) -> list[str]:
+        if not eligible_keys:
+            return []
+        placeholders = ",".join("?" for _ in eligible_keys)
+        with self._connect() as connection:
+            rows = connection.execute(
+                f"""
+                select question_key from question_progress
+                where state in ('queued_for_retry', 'gave_up')
+                  and question_key in ({placeholders})
+                order by coalesce(last_attempted_at, ''), question_key
+                """,
+                eligible_keys,
+            ).fetchall()
+        return [row["question_key"] for row in rows]
+
     def _summary(self, connection, session) -> dict:
         scope = json.loads(session["scope_json"])
         rows = connection.execute(
@@ -383,6 +431,7 @@ class PracticeEngine:
         ).fetchall()
         resolved = sum(row["status"] != "pending" for row in rows)
         correct = sum(row["status"] == "correct" for row in rows)
+        incorrect = sum(row["status"] == "incorrect" for row in rows)
         gave_up = sum(row["status"] == "gave_up" for row in rows)
         return {
             "session_id": session["id"],
@@ -391,8 +440,10 @@ class PracticeEngine:
             "assigned_count": len(rows),
             "resolved_count": resolved,
             "correct_count": correct,
+            "incorrect_count": incorrect,
             "gave_up_count": gave_up,
             "lesson_key": scope.get("lesson_key"),
+            "unit_key": scope.get("unit_key"),
             "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
@@ -499,7 +550,9 @@ class PracticeEngine:
         if not isinstance(idempotency_key, str) or not 1 <= len(idempotency_key) <= 200:
             raise PracticeError("invalid_idempotency_key", "Supply a non-empty idempotency key.")
         with self._connect() as connection:
-            self._session(connection, session_id)
+            session = self._session(connection, session_id)
+            scope = json.loads(session["scope_json"])
+            checkpoint = scope.get("mode") == "checkpoint"
             existing = connection.execute(
                 """
                 select result_json from attempts
@@ -553,8 +606,10 @@ class PracticeEngine:
                 "parts": part_results,
                 "marks_awarded": marks_awarded,
                 "marks_available": question.total_marks,
-                "question_finished": correct,
-                "solution_available": not correct and incorrect_attempts >= 2,
+                "question_finished": correct or checkpoint,
+                "solution_available": (
+                    False if checkpoint else not correct and incorrect_attempts >= 2
+                ),
             }
             timestamp = _now()
             connection.execute(
@@ -586,9 +641,9 @@ class PracticeEngine:
                 where session_id = ? and question_key = ?
                 """,
                 (
-                    "correct" if correct else "pending",
+                    "correct" if correct else ("incorrect" if checkpoint else "pending"),
                     incorrect_attempts,
-                    timestamp if correct else None,
+                    timestamp if correct or checkpoint else None,
                     session_id,
                     stable_key,
                 ),
@@ -625,7 +680,13 @@ class PracticeEngine:
         if stage not in {1, 2}:
             raise PracticeError("invalid_hint_stage", "Hint stage must be 1 or 2.")
         with self._connect() as connection:
-            self._session(connection, session_id)
+            session = self._session(connection, session_id)
+            if json.loads(session["scope_json"]).get("mode") == "checkpoint":
+                raise PracticeError(
+                    "checkpoint_support_locked",
+                    "Hints are unavailable during a checkpoint.",
+                    403,
+                )
             assignment = connection.execute(
                 """
                 select * from session_questions
@@ -662,7 +723,13 @@ class PracticeEngine:
 
     def give_up(self, session_id: str, stable_key: str) -> dict:
         with self._connect() as connection:
-            self._session(connection, session_id)
+            session = self._session(connection, session_id)
+            if json.loads(session["scope_json"]).get("mode") == "checkpoint":
+                raise PracticeError(
+                    "checkpoint_support_locked",
+                    "Give up and solutions are unavailable during a checkpoint.",
+                    403,
+                )
             assignment = connection.execute(
                 """
                 select * from session_questions

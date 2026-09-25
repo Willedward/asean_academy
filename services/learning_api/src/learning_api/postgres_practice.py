@@ -124,6 +124,7 @@ class PostgresPracticeEngine:
             "status": session["status"],
             "question_count": session["requested_question_count"],
             "lesson_key": scope.get("lesson_key"),
+            "unit_key": scope.get("unit_key"),
             "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
@@ -135,6 +136,7 @@ class PostgresPracticeEngine:
                 count(*)::integer as assigned_count,
                 count(*) filter (where status <> 'pending')::integer as resolved_count,
                 count(*) filter (where status = 'correct')::integer as correct_count,
+                count(*) filter (where status = 'incorrect')::integer as incorrect_count,
                 count(*) filter (where status = 'gave_up')::integer as gave_up_count
             from session_questions where practice_session_id = %s
             """,
@@ -148,8 +150,10 @@ class PostgresPracticeEngine:
             "assigned_count": counts["assigned_count"],
             "resolved_count": counts["resolved_count"],
             "correct_count": counts["correct_count"],
+            "incorrect_count": counts["incorrect_count"],
             "gave_up_count": counts["gave_up_count"],
             "lesson_key": scope.get("lesson_key"),
+            "unit_key": scope.get("unit_key"),
             "mode": scope.get("mode"),
             "development_drafts": self.development_drafts,
         }
@@ -227,22 +231,23 @@ class PostgresPracticeEngine:
                             409,
                         )
                     return self._creation_response(existing)
-            lesson_key = scope.get("lesson_key")
-            if lesson_key:
+            context_name = "lesson_key" if scope.get("lesson_key") else "unit_key"
+            context_key = scope.get(context_name)
+            if context_key:
                 connection.execute(
                     "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
-                    (f"{self.learner_id}:lesson:{lesson_key}",),
+                    (f"{self.learner_id}:{context_name}:{context_key}",),
                 )
                 active = connection.execute(
                     """
                     select * from practice_sessions
                     where student_id = %s
                       and status = 'active'
-                      and scope->>'lesson_key' = %s
+                      and scope->>%s = %s
                     order by created_at desc
                     limit 1
                     """,
-                    (self.learner_id, lesson_key),
+                    (self.learner_id, context_name, context_key),
                 ).fetchone()
                 if active is not None:
                     if idempotency_key is not None:
@@ -326,7 +331,7 @@ class PostgresPracticeEngine:
         if scope.get("question_keys"):
             by_key = {question.stable_key: question for question in candidates}
             selected = next(by_key[key] for key in scope["question_keys"] if key in by_key)
-            return selected, "configured_lesson_pool"
+            return selected, scope.get("selection_reason", "configured_lesson_pool")
         ranked = []
         for question in candidates:
             state = progress.get(question.stable_key)
@@ -349,6 +354,25 @@ class PostgresPracticeEngine:
             )
         _, _, _, _, question, reason = min(ranked, key=lambda item: item[:4])
         return question, reason
+
+    def retry_question_keys(self, eligible_keys: list[str]) -> list[str]:
+        if not eligible_keys:
+            return []
+        with self._connect() as connection:
+            self._set_identity(connection)
+            rows = connection.execute(
+                """
+                select questions.stable_key
+                from question_progress progress
+                join math_questions questions on questions.id = progress.question_id
+                where progress.student_id = %s
+                  and progress.state in ('queued_for_retry', 'gave_up')
+                  and questions.stable_key = any(%s)
+                order by progress.last_attempted_at nulls first, questions.stable_key
+                """,
+                (self.learner_id, eligible_keys),
+            ).fetchall()
+        return [row["stable_key"] for row in rows]
 
     def next_question(self, session_id: str) -> dict:
         with self._connect() as connection:
@@ -444,7 +468,8 @@ class PostgresPracticeEngine:
             raise PracticeError("invalid_idempotency_key", "Supply a non-empty idempotency key.")
         with self._connect() as connection:
             self._set_identity(connection)
-            self._session(connection, session_id, lock=True)
+            session = self._session(connection, session_id, lock=True)
+            checkpoint = session["scope"].get("mode") == "checkpoint"
             existing = connection.execute(
                 """
                 select attempts.answers, attempts.result, assigned.practice_session_id,
@@ -519,8 +544,10 @@ class PostgresPracticeEngine:
                 "parts": part_results,
                 "marks_awarded": marks_awarded,
                 "marks_available": question.total_marks,
-                "question_finished": correct,
-                "solution_available": not correct and incorrect_attempts >= 2,
+                "question_finished": correct or checkpoint,
+                "solution_available": (
+                    False if checkpoint else not correct and incorrect_attempts >= 2
+                ),
             }
             connection.execute(
                 """
@@ -548,7 +575,12 @@ class PostgresPracticeEngine:
                     resolved_at = case when %s then now() else null end
                 where id = %s
                 """,
-                ("correct" if correct else "pending", incorrect_attempts, correct, assignment["id"]),
+                (
+                    "correct" if correct else ("incorrect" if checkpoint else "pending"),
+                    incorrect_attempts,
+                    correct or checkpoint,
+                    assignment["id"],
+                ),
             )
             state = "correct" if correct else "queued_for_retry"
             connection.execute(
@@ -582,7 +614,13 @@ class PostgresPracticeEngine:
             raise PracticeError("invalid_hint_stage", "Hint stage must be 1 or 2.")
         with self._connect() as connection:
             self._set_identity(connection)
-            self._session(connection, session_id)
+            session = self._session(connection, session_id)
+            if session["scope"].get("mode") == "checkpoint":
+                raise PracticeError(
+                    "checkpoint_support_locked",
+                    "Hints are unavailable during a checkpoint.",
+                    403,
+                )
             assignment = connection.execute(
                 """
                 select assigned.*, versions.revision
@@ -626,7 +664,13 @@ class PostgresPracticeEngine:
     def give_up(self, session_id: str, stable_key: str) -> dict:
         with self._connect() as connection:
             self._set_identity(connection)
-            self._session(connection, session_id, lock=True)
+            session = self._session(connection, session_id, lock=True)
+            if session["scope"].get("mode") == "checkpoint":
+                raise PracticeError(
+                    "checkpoint_support_locked",
+                    "Give up and solutions are unavailable during a checkpoint.",
+                    403,
+                )
             assignment = connection.execute(
                 """
                 select assigned.*, versions.revision,

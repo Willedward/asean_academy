@@ -7,6 +7,7 @@ from pathlib import Path
 
 from question_bank.course_models import ActiveRecallSection
 from question_bank.course_validation import validate_course
+from question_bank.validation import validate_bank
 
 from .course_contracts import (
     CourseLessonMap,
@@ -60,6 +61,17 @@ class CourseCatalogue:
             )
         return report
 
+    @cached_property
+    def questions(self):
+        report = validate_bank(self.repository_root / BANK_ROOT)
+        if not report.valid:
+            raise CatalogueError(
+                "question_bank_invalid",
+                "The question bank failed validation and is temporarily unavailable.",
+                503,
+            )
+        return report.questions
+
     def _assert_visible(self, status: str):
         if status != "published" and not self.allow_drafts:
             raise CatalogueError(
@@ -82,6 +94,7 @@ class CourseCatalogue:
             for reference in unit.lessons:
                 lesson = lesson_by_key[reference.stable_key]
                 material_ready = bool(lesson.sections) and lesson.status == "published"
+                unlocked = not lesson.prerequisite_lessons
                 lesson_maps.append(
                     CourseLessonMap(
                         stable_key=lesson.stable_key,
@@ -95,6 +108,10 @@ class CourseCatalogue:
                         content_status=lesson.status,
                         learning_material_state="ready" if material_ready else "pending",
                         availability="available" if material_ready else "content_pending",
+                        unlocked=unlocked,
+                        unlock_reason=(
+                            None if unlocked else "prerequisite_not_proficient"
+                        ),
                         href=f"/lessons/{lesson.stable_key}",
                     )
                 )
