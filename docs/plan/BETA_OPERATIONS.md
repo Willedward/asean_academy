@@ -68,9 +68,9 @@ is designed for a disposable database.
 
 ## 2. Bootstrap the first administrator
 
-The user must sign in with Google once so a row exists in `auth.users`. They do
-not need a student invitation. From a trusted terminal with the server database
-URL, run:
+The user must sign in with Google and accept a beta invitation once so a verified
+learner profile exists. This keeps the server runtime role out of Supabase's
+internal `auth` schema. From a trusted terminal with the server database URL, run:
 
 ```bash
 ASEAN_ACADEMY_DATABASE_URL='postgresql://...' \
@@ -87,9 +87,10 @@ ASEAN_ACADEMY_DATABASE_URL='postgresql://...' \
   admin@example.com --role academic_admin
 ```
 
-The command locates the exact normalized email in Supabase Auth and upserts the
-profile role. It never accepts or prints passwords, OAuth tokens or database
-secrets. After the command succeeds, the administrator can open
+The command locates the exact normalized email in `profiles` and changes its
+role. It never accesses Supabase Auth internals and never accepts or prints
+passwords, OAuth tokens or database secrets. After the command succeeds, the
+administrator can open
 `https://YOUR_WEB_DOMAIN/admin/invitations`. A generic login flow also redirects
 an administrator away from student onboarding to this dashboard.
 
@@ -207,3 +208,10 @@ still needs:
 - deployed web and API domains with the variables in
   `HOSTED_AUTH_ONBOARDING.md`; and
 - a disposable PostgreSQL URL if the opt-in integration tests are to run in CI.
+
+
+## Extended analytics and role management
+
+The API-first student analytics, question metrics and academic-administrator
+role workflow are documented in `ADMIN_ANALYTICS_ROLE_MANAGEMENT.md`. Safe
+database-first rolling releases are documented in `RELEASE_OPERATIONS.md`.

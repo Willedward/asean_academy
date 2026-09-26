@@ -5,18 +5,27 @@ from __future__ import annotations
 import logging
 from time import perf_counter
 
+import psycopg
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from psycopg.rows import dict_row
 
 from . import __version__
 from .config import Settings
-from .contracts import ErrorDetail, ErrorEnvelope, HealthResponse
+from .contracts import (
+    ErrorDetail,
+    ErrorEnvelope,
+    HealthResponse,
+    ReadinessDependencies,
+    ReadinessResponse,
+)
 from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
 from .course_catalogue import CourseCatalogue
 from .identity import SupabaseTokenVerifier, TokenVerifier
 from .routers.admin import router as admin_router
+from .routers.admin_analytics import router as admin_analytics_router
 from .routers.courses import router as courses_router
 from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
@@ -178,6 +187,63 @@ def create_app(
             request_id=current_request_id(request),
         )
 
+    @application.get(
+        "/api/v1/ready",
+        operation_id="getReadiness",
+        tags=["system"],
+        response_model=ReadinessResponse,
+        summary="Check database and schema readiness before receiving traffic",
+    )
+    def readiness(request: Request) -> ReadinessResponse:
+        if not settings.database_url:
+            dependencies = ReadinessDependencies(database="local", schema_status="local")
+        else:
+            try:
+                with psycopg.connect(
+                    settings.database_url,
+                    connect_timeout=5,
+                    prepare_threshold=None,
+                    row_factory=dict_row,
+                ) as connection:
+                    row = connection.execute(
+                        """
+                        select exists (
+                            select 1 from information_schema.columns
+                            where table_schema = 'public'
+                              and table_name = 'profiles'
+                              and column_name = 'email'
+                        ) as schema_ready
+                        """
+                    ).fetchone()
+            except psycopg.Error as exc:
+                LOGGER.warning(
+                    "readiness_database_failed request_id=%s error_type=%s",
+                    current_request_id(request),
+                    type(exc).__name__,
+                )
+                raise HTTPException(
+                    status_code=503,
+                    detail={
+                        "code": "database_unavailable",
+                        "message": "The learning database is unavailable.",
+                    },
+                ) from exc
+            if row is None or not row["schema_ready"]:
+                raise HTTPException(
+                    status_code=503,
+                    detail={
+                        "code": "database_schema_outdated",
+                        "message": "The learning database schema is not ready.",
+                    },
+                )
+            dependencies = ReadinessDependencies(database="ready", schema_status="current")
+        return ReadinessResponse(
+            version=__version__,
+            environment=settings.environment,
+            request_id=current_request_id(request),
+            dependencies=dependencies,
+        )
+
     @application.get("/api/v1/_error-contract", include_in_schema=False)
     async def error_contract() -> None:
         raise HTTPException(
@@ -191,6 +257,7 @@ def create_app(
 
     application.include_router(identity_router)
     application.include_router(admin_router)
+    application.include_router(admin_analytics_router)
     application.include_router(courses_router)
     application.include_router(practice_router)
     application.include_router(progress_router)

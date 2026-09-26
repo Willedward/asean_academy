@@ -65,4 +65,4 @@ TEST_DATABASE_URL=postgresql://... \
 
 It checks invitation onboarding, per-learner idempotency, cross-learner session isolation, immutable attempts, and concurrent duplicate session creation.
 
-The Google OAuth and hosted environment runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`. Administrator invitation operations and observability are documented in `docs/plan/BETA_OPERATIONS.md`. Checkpoint, mastery, retry behavior and the frontend contract are documented in `docs/plan/CHECKPOINT_MASTERY_RETRY.md`.
+The Google OAuth and hosted environment runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`. Administrator invitation operations and observability are documented in `docs/plan/BETA_OPERATIONS.md`. Student analytics and role management are documented in `docs/plan/ADMIN_ANALYTICS_ROLE_MANAGEMENT.md`, and rolling release procedures are in `docs/plan/RELEASE_OPERATIONS.md`. Checkpoint, mastery, retry behavior and the frontend contract are documented in `docs/plan/CHECKPOINT_MASTERY_RETRY.md`.

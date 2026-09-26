@@ -8,6 +8,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
+from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
 from .identity import AuthenticatedLearner, AuthenticationError
 from .identity_repository import IdentityError, PostgresIdentityRepository
@@ -103,6 +104,28 @@ BetaOperationsRepositoryDependency = Annotated[
 ]
 
 
+def admin_analytics_repository(request: Request) -> PostgresAdminAnalyticsRepository:
+    settings = request.app.state.settings
+    if not settings.database_url:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "admin_analytics_not_configured",
+                "message": "Administrator analytics require the PostgreSQL database.",
+            },
+        )
+    repository = getattr(request.app.state, "admin_analytics_repository", None)
+    if repository is None:
+        repository = PostgresAdminAnalyticsRepository(settings.database_url)
+        request.app.state.admin_analytics_repository = repository
+    return repository
+
+
+AdminAnalyticsRepositoryDependency = Annotated[
+    PostgresAdminAnalyticsRepository, Depends(admin_analytics_repository)
+]
+
+
 def admin_learner(
     learner: LearnerDependency,
     repository: BetaOperationsRepositoryDependency,
@@ -120,6 +143,25 @@ def admin_learner(
 
 
 AdminLearnerDependency = Annotated[AuthenticatedLearner, Depends(admin_learner)]
+
+
+def academic_admin_learner(
+    administrator: AdminLearnerDependency,
+) -> AuthenticatedLearner:
+    if administrator.role != "academic_admin":
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "code": "academic_administrator_required",
+                "message": "An academic administrator is required.",
+            },
+        )
+    return administrator
+
+
+AcademicAdminLearnerDependency = Annotated[
+    AuthenticatedLearner, Depends(academic_admin_learner)
+]
 
 
 def enrolled_learner(

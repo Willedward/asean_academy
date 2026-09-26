@@ -59,7 +59,7 @@ class PostgresIdentityRepository:
         learner_id = learner.learner_id
         profile = connection.execute(
             """
-            select profiles.id, profiles.display_name,
+            select profiles.id, profiles.email, profiles.display_name,
                    profiles.role::text as role, profiles.target_track
             from profiles
             where profiles.id = %s
@@ -87,7 +87,7 @@ class PostgresIdentityRepository:
         return {
             "profile": {
                 "learner_id": str(profile["id"]),
-                "email": learner.email,
+                "email": profile["email"],
                 "display_name": profile["display_name"],
                 "role": profile["role"],
                 "target_track": profile["target_track"],
@@ -150,18 +150,18 @@ class PostgresIdentityRepository:
                     )
                 connection.execute(
                     """
-                    update profiles set display_name = %s, updated_at = now()
+                    update profiles
+                    set email = %s, display_name = %s, updated_at = now()
                     where id = %s
                     """,
-                    (display_name.strip(), learner.learner_id),
+                    (learner.email.strip().casefold(), display_name.strip(), learner.learner_id),
                 )
                 response = self._response(connection, learner)
                 return {"accepted": True, **response}
             if (
                 invitation["revoked_at"] is not None
-                or invitation["expires_at"] <= connection.execute(
-                    "select now() as current_time"
-                ).fetchone()["current_time"]
+                or invitation["expires_at"]
+                <= connection.execute("select now() as current_time").fetchone()["current_time"]
                 or invitation["use_count"] >= invitation["max_uses"]
             ):
                 raise IdentityError(
@@ -169,15 +169,17 @@ class PostgresIdentityRepository:
                 )
             connection.execute(
                 """
-                insert into profiles (id, role, display_name, target_track)
-                values (%s, 'student', %s, %s)
+                insert into profiles (id, email, role, display_name, target_track)
+                values (%s, %s, 'student', %s, %s)
                 on conflict (id) do update set
+                    email = excluded.email,
                     display_name = excluded.display_name,
                     target_track = coalesce(profiles.target_track, excluded.target_track),
                     updated_at = now()
                 """,
                 (
                     learner.learner_id,
+                    learner.email.strip().casefold(),
                     display_name.strip(),
                     invitation["course_key"],
                 ),
@@ -220,4 +222,16 @@ class PostgresIdentityRepository:
     def current_learner(self, learner: AuthenticatedLearner) -> dict:
         with self._connect() as connection:
             self._set_identity(connection, learner.learner_id)
+            if learner.email:
+                connection.execute(
+                    """
+                    update profiles set email = %s, updated_at = now()
+                    where id = %s and email is distinct from %s
+                    """,
+                    (
+                        learner.email.strip().casefold(),
+                        learner.learner_id,
+                        learner.email.strip().casefold(),
+                    ),
+                )
             return self._response(connection, learner)

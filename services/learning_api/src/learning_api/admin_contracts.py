@@ -70,7 +70,8 @@ class BetaOperationsSummaryResponse(ApiModel):
 class AuditEventResponse(ApiModel):
     event_id: UUID
     event_type: Literal[
-        "invitation_created", "invitation_revoked", "invitation_accepted"
+        "invitation_created", "invitation_revoked", "invitation_accepted",
+        "role_changed",
     ]
     actor_user_id: UUID | None
     invitation_id: UUID | None

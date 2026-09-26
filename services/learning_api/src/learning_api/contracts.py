@@ -35,3 +35,17 @@ class HealthResponse(ApiModel):
     environment: str
     request_id: str
     dependencies: HealthDependencies = Field(default_factory=HealthDependencies)
+
+
+class ReadinessDependencies(ApiModel):
+    database: Literal["ready", "local"]
+    schema_status: Literal["current", "local"]
+
+
+class ReadinessResponse(ApiModel):
+    status: Literal["ready"] = "ready"
+    service: Literal["learning-api"] = "learning-api"
+    version: str
+    environment: str
+    request_id: str
+    dependencies: ReadinessDependencies

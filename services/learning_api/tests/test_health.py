@@ -78,3 +78,18 @@ def test_unexpected_errors_hide_private_details():
         }
     }
     assert "private failure detail" not in response.text
+
+
+
+def test_readiness_uses_local_dependencies_without_postgres():
+    response = get("/api/v1/ready", headers={"X-Request-ID": "ready-test"})
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "status": "ready",
+        "service": "learning-api",
+        "version": "0.1.0",
+        "environment": "test",
+        "request_id": "ready-test",
+        "dependencies": {"database": "local", "schema_status": "local"},
+    }

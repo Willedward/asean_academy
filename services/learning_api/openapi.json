@@ -24,6 +24,547 @@
         "title": "AcceptInvitationRequest",
         "type": "object"
       },
+      "AdminAnalyticsOverviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "active_enrolments": {
+            "title": "Active Enrolments",
+            "type": "integer"
+          },
+          "active_students_last_30_days": {
+            "title": "Active Students Last 30 Days",
+            "type": "integer"
+          },
+          "active_students_last_7_days": {
+            "title": "Active Students Last 7 Days",
+            "type": "integer"
+          },
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "checkpoint_attempts": {
+            "title": "Checkpoint Attempts",
+            "type": "integer"
+          },
+          "checkpoint_passes": {
+            "title": "Checkpoint Passes",
+            "type": "integer"
+          },
+          "completed_practice_sessions": {
+            "title": "Completed Practice Sessions",
+            "type": "integer"
+          },
+          "correct_attempts": {
+            "title": "Correct Attempts",
+            "type": "integer"
+          },
+          "give_ups": {
+            "title": "Give Ups",
+            "type": "integer"
+          },
+          "hint_reveals": {
+            "title": "Hint Reveals",
+            "type": "integer"
+          },
+          "lessons_mastered": {
+            "title": "Lessons Mastered",
+            "type": "integer"
+          },
+          "lessons_started": {
+            "title": "Lessons Started",
+            "type": "integer"
+          },
+          "overall_accuracy_percentage": {
+            "title": "Overall Accuracy Percentage",
+            "type": "number"
+          },
+          "practice_sessions": {
+            "title": "Practice Sessions",
+            "type": "integer"
+          },
+          "students_with_retries": {
+            "title": "Students With Retries",
+            "type": "integer"
+          },
+          "total_students": {
+            "title": "Total Students",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total_students",
+          "active_enrolments",
+          "active_students_last_7_days",
+          "active_students_last_30_days",
+          "lessons_started",
+          "lessons_mastered",
+          "practice_sessions",
+          "completed_practice_sessions",
+          "attempts",
+          "correct_attempts",
+          "overall_accuracy_percentage",
+          "hint_reveals",
+          "give_ups",
+          "students_with_retries",
+          "checkpoint_attempts",
+          "checkpoint_passes"
+        ],
+        "title": "AdminAnalyticsOverviewResponse",
+        "type": "object"
+      },
+      "AdminDifficultyPerformanceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "accuracy_percentage": {
+            "title": "Accuracy Percentage",
+            "type": "number"
+          },
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "correct_attempts": {
+            "title": "Correct Attempts",
+            "type": "integer"
+          },
+          "difficulty": {
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Difficulty",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "difficulty",
+          "attempts",
+          "correct_attempts",
+          "accuracy_percentage"
+        ],
+        "title": "AdminDifficultyPerformanceResponse",
+        "type": "object"
+      },
+      "AdminLessonProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint_passed": {
+            "title": "Checkpoint Passed",
+            "type": "boolean"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "correct_count": {
+            "title": "Correct Count",
+            "type": "integer"
+          },
+          "eventual_correct_percentage": {
+            "title": "Eventual Correct Percentage",
+            "type": "number"
+          },
+          "gave_up_count": {
+            "title": "Gave Up Count",
+            "type": "integer"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "lesson_title": {
+            "title": "Lesson Title",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "in_progress",
+              "practice_completed",
+              "proficient",
+              "mastered"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "lesson_title",
+          "state",
+          "question_count",
+          "resolved_count",
+          "correct_count",
+          "gave_up_count",
+          "eventual_correct_percentage",
+          "checkpoint_passed",
+          "started_at",
+          "updated_at",
+          "completed_at"
+        ],
+        "title": "AdminLessonProgressResponse",
+        "type": "object"
+      },
+      "AdminQuestionAnalyticsListResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/AdminQuestionAnalyticsResponse"
+            },
+            "title": "Questions",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "questions",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "AdminQuestionAnalyticsListResponse",
+        "type": "object"
+      },
+      "AdminQuestionAnalyticsResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "accuracy_percentage": {
+            "title": "Accuracy Percentage",
+            "type": "number"
+          },
+          "attempt_count": {
+            "title": "Attempt Count",
+            "type": "integer"
+          },
+          "correct_attempts": {
+            "title": "Correct Attempts",
+            "type": "integer"
+          },
+          "difficulty": {
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Difficulty",
+            "type": "integer"
+          },
+          "give_up_count": {
+            "title": "Give Up Count",
+            "type": "integer"
+          },
+          "hint_reveals": {
+            "title": "Hint Reveals",
+            "type": "integer"
+          },
+          "outcome_code": {
+            "title": "Outcome Code",
+            "type": "string"
+          },
+          "question_key": {
+            "title": "Question Key",
+            "type": "string"
+          },
+          "queued_for_retry_students": {
+            "title": "Queued For Retry Students",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "unique_students": {
+            "title": "Unique Students",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question_key",
+          "title",
+          "difficulty",
+          "outcome_code",
+          "attempt_count",
+          "unique_students",
+          "correct_attempts",
+          "accuracy_percentage",
+          "hint_reveals",
+          "give_up_count",
+          "queued_for_retry_students"
+        ],
+        "title": "AdminQuestionAnalyticsResponse",
+        "type": "object"
+      },
+      "AdminStudentDetailResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "difficulty_performance": {
+            "items": {
+              "$ref": "#/components/schemas/AdminDifficultyPerformanceResponse"
+            },
+            "title": "Difficulty Performance",
+            "type": "array"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/AdminLessonProgressResponse"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "student": {
+            "$ref": "#/components/schemas/AdminStudentSummaryResponse"
+          }
+        },
+        "required": [
+          "student",
+          "lessons",
+          "difficulty_performance"
+        ],
+        "title": "AdminStudentDetailResponse",
+        "type": "object"
+      },
+      "AdminStudentListResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "students": {
+            "items": {
+              "$ref": "#/components/schemas/AdminStudentSummaryResponse"
+            },
+            "title": "Students",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "students",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "AdminStudentListResponse",
+        "type": "object"
+      },
+      "AdminStudentSummaryResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "accuracy_percentage": {
+            "title": "Accuracy Percentage",
+            "type": "number"
+          },
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "correct_attempts": {
+            "title": "Correct Attempts",
+            "type": "integer"
+          },
+          "course_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Course Keys",
+            "type": "array"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "enrolled_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enrolled At"
+          },
+          "enrolment_status": {
+            "enum": [
+              "active",
+              "completed",
+              "withdrawn",
+              "not_enrolled"
+            ],
+            "title": "Enrolment Status",
+            "type": "string"
+          },
+          "last_activity_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Activity At"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "lessons_mastered": {
+            "title": "Lessons Mastered",
+            "type": "integer"
+          },
+          "lessons_proficient": {
+            "title": "Lessons Proficient",
+            "type": "integer"
+          },
+          "lessons_started": {
+            "title": "Lessons Started",
+            "type": "integer"
+          },
+          "practice_sessions": {
+            "title": "Practice Sessions",
+            "type": "integer"
+          },
+          "retry_question_count": {
+            "title": "Retry Question Count",
+            "type": "integer"
+          },
+          "target_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Track"
+          }
+        },
+        "required": [
+          "learner_id",
+          "email",
+          "display_name",
+          "target_track",
+          "enrolment_status",
+          "course_keys",
+          "enrolled_at",
+          "last_activity_at",
+          "lessons_started",
+          "lessons_proficient",
+          "lessons_mastered",
+          "practice_sessions",
+          "attempts",
+          "correct_attempts",
+          "accuracy_percentage",
+          "retry_question_count"
+        ],
+        "title": "AdminStudentSummaryResponse",
+        "type": "object"
+      },
+      "AdminUserRoleResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "student",
+              "content_admin",
+              "academic_admin"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "learner_id",
+          "email",
+          "display_name",
+          "role",
+          "updated_at"
+        ],
+        "title": "AdminUserRoleResponse",
+        "type": "object"
+      },
       "AttemptPartResult": {
         "additionalProperties": false,
         "properties": {
@@ -158,7 +699,8 @@
             "enum": [
               "invitation_created",
               "invitation_revoked",
-              "invitation_accepted"
+              "invitation_accepted",
+              "role_changed"
             ],
             "title": "Event Type",
             "type": "string"
@@ -2041,6 +2583,73 @@
         "title": "QuestionPartResponse",
         "type": "object"
       },
+      "ReadinessDependencies": {
+        "additionalProperties": false,
+        "properties": {
+          "database": {
+            "enum": [
+              "ready",
+              "local"
+            ],
+            "title": "Database",
+            "type": "string"
+          },
+          "schema_status": {
+            "enum": [
+              "current",
+              "local"
+            ],
+            "title": "Schema Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "database",
+          "schema_status"
+        ],
+        "title": "ReadinessDependencies",
+        "type": "object"
+      },
+      "ReadinessResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "dependencies": {
+            "$ref": "#/components/schemas/ReadinessDependencies"
+          },
+          "environment": {
+            "title": "Environment",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "service": {
+            "const": "learning-api",
+            "default": "learning-api",
+            "title": "Service",
+            "type": "string"
+          },
+          "status": {
+            "const": "ready",
+            "default": "ready",
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "environment",
+          "request_id",
+          "dependencies"
+        ],
+        "title": "ReadinessResponse",
+        "type": "object"
+      },
       "SolutionPartResponse": {
         "additionalProperties": false,
         "properties": {
@@ -2149,6 +2758,25 @@
         ],
         "title": "SubmitAttemptRequest",
         "type": "object"
+      },
+      "UpdateUserRoleRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "enum": [
+              "student",
+              "content_admin",
+              "academic_admin"
+            ],
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role"
+        ],
+        "title": "UpdateUserRoleRequest",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -2165,6 +2793,259 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/admin/analytics/overview": {
+      "get": {
+        "operationId": "getAdminAnalyticsOverview",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAnalyticsOverviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get aggregate beta learning metrics",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/analytics/questions": {
+      "get": {
+        "operationId": "listAdminQuestionAnalytics",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "difficulty",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Difficulty"
+            }
+          },
+          {
+            "in": "query",
+            "name": "outcome",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Outcome"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminQuestionAnalyticsListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List aggregate question performance metrics",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/api/v1/admin/audit-events": {
       "get": {
         "operationId": "listBetaAuditEvents",
@@ -2721,6 +3602,371 @@
           }
         ],
         "summary": "Get a privacy-minimal beta operations summary",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/students": {
+      "get": {
+        "operationId": "listAdminStudents",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStudentListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List privacy-limited learner progress summaries",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/students/{learner_id}": {
+      "get": {
+        "operationId": "getAdminStudentDetail",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStudentDetailResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get one learner's progress without exposing submitted answers",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/users/{learner_id}/role": {
+      "patch": {
+        "operationId": "updateAdminUserRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRoleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserRoleResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Change a user role as an academic administrator",
         "tags": [
           "admin"
         ]
@@ -4233,6 +5479,97 @@
         "summary": "Get authenticated learner progress across the N1 course",
         "tags": [
           "progress"
+        ]
+      }
+    },
+    "/api/v1/ready": {
+      "get": {
+        "operationId": "getReadiness",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Check database and schema readiness before receiving traffic",
+        "tags": [
+          "system"
         ]
       }
     }
