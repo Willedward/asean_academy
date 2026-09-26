@@ -43,6 +43,7 @@ class PostgresIdentityRepository:
         return psycopg.connect(
             self.database_url,
             connect_timeout=10,
+            prepare_threshold=None,
             row_factory=dict_row,
         )
 
@@ -54,13 +55,13 @@ class PostgresIdentityRepository:
         )
 
     @staticmethod
-    def _response(connection, learner_id: str) -> dict:
+    def _response(connection, learner: AuthenticatedLearner) -> dict:
+        learner_id = learner.learner_id
         profile = connection.execute(
             """
-            select profiles.id, users.email, profiles.display_name,
+            select profiles.id, profiles.display_name,
                    profiles.role::text as role, profiles.target_track
             from profiles
-            join auth.users users on users.id = profiles.id
             where profiles.id = %s
             """,
             (learner_id,),
@@ -86,7 +87,7 @@ class PostgresIdentityRepository:
         return {
             "profile": {
                 "learner_id": str(profile["id"]),
-                "email": profile["email"],
+                "email": learner.email,
                 "display_name": profile["display_name"],
                 "role": profile["role"],
                 "target_track": profile["target_track"],
@@ -154,7 +155,7 @@ class PostgresIdentityRepository:
                     """,
                     (display_name.strip(), learner.learner_id),
                 )
-                response = self._response(connection, learner.learner_id)
+                response = self._response(connection, learner)
                 return {"accepted": True, **response}
             if (
                 invitation["revoked_at"] is not None
@@ -213,10 +214,10 @@ class PostgresIdentityRepository:
                     Jsonb({"course_key": invitation["course_key"]}),
                 ),
             )
-            response = self._response(connection, learner.learner_id)
+            response = self._response(connection, learner)
             return {"accepted": True, **response}
 
     def current_learner(self, learner: AuthenticatedLearner) -> dict:
         with self._connect() as connection:
             self._set_identity(connection, learner.learner_id)
-            return self._response(connection, learner.learner_id)
+            return self._response(connection, learner)

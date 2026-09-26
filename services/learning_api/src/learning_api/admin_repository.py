@@ -30,6 +30,7 @@ class PostgresBetaOperationsRepository:
         return psycopg.connect(
             self.database_url,
             connect_timeout=10,
+            prepare_threshold=None,
             row_factory=dict_row,
         )
 

@@ -26,7 +26,7 @@ def main() -> None:
         raise SystemExit("--expires-days and --max-uses must be positive.")
     code = secrets.token_urlsafe(32)
     expires_at = datetime.now(UTC) + timedelta(days=args.expires_days)
-    with psycopg.connect(database_url) as connection:
+    with psycopg.connect(database_url, prepare_threshold=None) as connection:
         row = connection.execute(
             """
             select versions.id

@@ -31,7 +31,9 @@ def main() -> None:
     if not database_url:
         raise SystemExit("Set ASEAN_ACADEMY_DATABASE_URL or DATABASE_URL.")
 
-    with psycopg.connect(database_url, row_factory=dict_row) as connection:
+    with psycopg.connect(
+        database_url, prepare_threshold=None, row_factory=dict_row
+    ) as connection:
         user = connection.execute(
             """
             select id, email, raw_user_meta_data

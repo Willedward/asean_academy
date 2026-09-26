@@ -141,7 +141,7 @@ def main(argv=None):
             import psycopg
         except ImportError as exc:
             raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
-        with psycopg.connect(database_url) as connection:
+        with psycopg.connect(database_url, prepare_threshold=None) as connection:
             result = CourseImporter(connection).import_all(
                 report.course, report.lessons, report.pools
             )
@@ -158,7 +158,7 @@ def main(argv=None):
         import psycopg
     except ImportError as exc:
         raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
-    with psycopg.connect(database_url) as connection:
+    with psycopg.connect(database_url, prepare_threshold=None) as connection:
         results = QuestionImporter(connection).import_all(report.questions)
     print(json.dumps({"status": "complete", "results": results}, indent=2))
     return 0
