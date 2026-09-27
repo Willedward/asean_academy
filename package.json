@@ -8,7 +8,8 @@
   "scripts": {
     "build": "corepack pnpm --filter @asean-academy/web build",
     "dev:web": "corepack pnpm --filter @asean-academy/web dev",
-    "dev:api": "uv run --project services/learning_api uvicorn learning_api.main:app --reload --host 127.0.0.1 --port 8000",
+    "dev:api": "uv run --project services/learning_api python services/learning_api/scripts/run_dev.py",
+    "setup:api": "uv run --project services/learning_api python services/learning_api/scripts/configure_local_env.py",
     "lint": "corepack pnpm --filter @asean-academy/web lint",
     "typecheck": "corepack pnpm --filter @asean-academy/web typecheck",
     "test:web": "corepack pnpm --filter @asean-academy/web test",

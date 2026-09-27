@@ -8,10 +8,21 @@ From the repository root:
 
 ```bash
 uv sync --project services/learning_api --locked
-uv run --project services/learning_api uvicorn learning_api.main:app --reload
+corepack pnpm dev:api
 ```
 
 The default development environment uses `development-learner` and `.local/practice.sqlite3`, so the placeholder frontend works without an identity provider. Open <http://127.0.0.1:8000/docs> or call `http://127.0.0.1:8000/api/v1/health`.
+
+To use Google sign-in, hosted learner records, and administrator features locally,
+link the Supabase CLI project and run the one-time secure setup. The command reads
+the public browser settings from `apps/web/.env.local`, prompts for the database
+password without echoing it, verifies the connection, and writes the credentials
+to the git-ignored `services/learning_api/.env.local` file:
+
+```bash
+corepack pnpm setup:api
+corepack pnpm dev:api
+```
 
 ## Supabase/PostgreSQL mode
 

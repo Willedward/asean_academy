@@ -48,3 +48,22 @@ def test_postgres_development_learner_must_be_a_uuid(monkeypatch):
     monkeypatch.setenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", "development-learner")
     with pytest.raises(RuntimeError, match="must be a UUID"):
         Settings.from_environment()
+
+
+def test_postgres_disables_the_implicit_development_learner(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "development")
+    monkeypatch.setenv("ASEAN_ACADEMY_DATABASE_URL", "postgresql://example.test/db")
+    monkeypatch.delenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", raising=False)
+
+    settings = Settings.from_environment()
+
+    assert settings.development_learner_id is None
+
+
+def test_empty_development_learner_is_treated_as_disabled(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "development")
+    monkeypatch.setenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", "")
+
+    settings = Settings.from_environment()
+
+    assert settings.development_learner_id is None

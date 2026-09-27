@@ -65,10 +65,14 @@ class Settings:
         log_level = os.getenv("ASEAN_ACADEMY_LOG_LEVEL", "INFO").strip().upper()
         if log_level not in {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}:
             raise RuntimeError("ASEAN_ACADEMY_LOG_LEVEL is invalid")
-        log_format = os.getenv(
-            "ASEAN_ACADEMY_LOG_FORMAT",
-            "json" if environment in {"preview", "production"} else "text",
-        ).strip().lower()
+        log_format = (
+            os.getenv(
+                "ASEAN_ACADEMY_LOG_FORMAT",
+                "json" if environment in {"preview", "production"} else "text",
+            )
+            .strip()
+            .lower()
+        )
         if log_format not in {"text", "json"}:
             raise RuntimeError("ASEAN_ACADEMY_LOG_FORMAT must be text or json")
         release_sha = (
@@ -79,6 +83,23 @@ class Settings:
         ).strip()
         if not release_sha or len(release_sha) > 128:
             raise RuntimeError("ASEAN_ACADEMY_RELEASE_SHA must contain 1 to 128 characters")
+        database_url = (
+            value
+            if (
+                value := os.getenv(
+                    "ASEAN_ACADEMY_DATABASE_URL", os.getenv("DATABASE_URL", "")
+                ).strip()
+            )
+            else None
+        )
+        development_learner_value = os.getenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID")
+        if environment in {"development", "test"}:
+            if development_learner_value is None:
+                development_learner_id = None if database_url else "development-learner"
+            else:
+                development_learner_id = development_learner_value.strip() or None
+        else:
+            development_learner_id = None
         settings = cls(
             environment=environment,
             cors_origins=_csv("ASEAN_ACADEMY_CORS_ORIGINS", "http://localhost:3000"),
@@ -87,13 +108,13 @@ class Settings:
             slow_request_ms=_positive_integer("ASEAN_ACADEMY_SLOW_REQUEST_MS", 1000),
             release_sha=release_sha,
             deployment_id=(
-                value
-                if (value := os.getenv("RAILWAY_DEPLOYMENT_ID", "").strip())
-                else None
+                value if (value := os.getenv("RAILWAY_DEPLOYMENT_ID", "").strip()) else None
             ),
             repository_root=Path(
                 os.getenv("ASEAN_ACADEMY_REPOSITORY_ROOT", DEFAULT_REPOSITORY_ROOT)
-            ).expanduser().resolve(),
+            )
+            .expanduser()
+            .resolve(),
             allow_draft_content=_boolean(
                 "ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT",
                 environment in {"development", "test"},
@@ -103,29 +124,15 @@ class Settings:
                 if (value := os.getenv("ASEAN_ACADEMY_PRACTICE_DATABASE"))
                 else None
             ),
-            development_learner_id=(
-                os.getenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", "development-learner")
-                if environment in {"development", "test"}
-                else None
-            ),
-            database_url=(
-                value
-                if (value := os.getenv(
-                    "ASEAN_ACADEMY_DATABASE_URL", os.getenv("DATABASE_URL", "")
-                ).strip())
-                else None
-            ),
+            development_learner_id=development_learner_id,
+            database_url=database_url,
             supabase_url=(
-                value.rstrip("/")
-                if (value := os.getenv("SUPABASE_URL", "").strip())
-                else None
+                value.rstrip("/") if (value := os.getenv("SUPABASE_URL", "").strip()) else None
             ),
             supabase_anon_key=(
                 value if (value := os.getenv("SUPABASE_ANON_KEY", "").strip()) else None
             ),
-            supabase_jwt_audience=os.getenv(
-                "SUPABASE_JWT_AUDIENCE", "authenticated"
-            ).strip(),
+            supabase_jwt_audience=os.getenv("SUPABASE_JWT_AUDIENCE", "authenticated").strip(),
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:
