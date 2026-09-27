@@ -55,6 +55,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List deployed content and its latest review decisions */
+        get: operations["listContentReviewQueue"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/content/{kind}/{stable_key}/lifecycle-requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Request a Git-authored publication or retirement release */
+        post: operations["requestContentLifecycleChange"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/content/{kind}/{stable_key}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Preview public content without private answers or locked feedback */
+        get: operations["previewContentAsStudent"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/content/{kind}/{stable_key}/reviews": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Append a Mathematics or editorial review decision */
+        post: operations["recordContentReview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/invitations": {
         parameters: {
             query?: never;
@@ -913,7 +981,7 @@ export interface components {
              * Event Type
              * @enum {string}
              */
-            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed";
+            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed" | "content_review_recorded" | "content_publication_requested" | "content_retirement_requested";
             /** Invitation Id */
             invitation_id: string | null;
             /** Metadata */
@@ -962,6 +1030,205 @@ export interface components {
             /** Unit Key */
             unit_key: string;
         };
+        /** ContentLifecycleRequestResponse */
+        ContentLifecycleRequestResponse: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "publish" | "retire";
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question";
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Lifecycle Request Id
+             * Format: uuid
+             */
+            lifecycle_request_id: string;
+            /** Reason */
+            reason: string;
+            /** Release Instruction */
+            release_instruction: string;
+            /**
+             * Requested By
+             * Format: uuid
+             */
+            requested_by: string;
+            /** Requester Email */
+            requester_email: string;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /** Source Revision */
+            source_revision: number;
+            /** Stable Key */
+            stable_key: string;
+        };
+        /** ContentLifecycleSummary */
+        ContentLifecycleSummary: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "publish" | "retire";
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Lifecycle Request Id
+             * Format: uuid
+             */
+            lifecycle_request_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Requested By
+             * Format: uuid
+             */
+            requested_by: string;
+            /** Requester Email */
+            requester_email: string;
+        };
+        /** ContentReviewItemResponse */
+        ContentReviewItemResponse: {
+            /** Blockers */
+            blockers: string[];
+            /** Can Request Publication */
+            can_request_publication: boolean;
+            /** Can Request Retirement */
+            can_request_retirement: boolean;
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question";
+            /** Difficulty */
+            difficulty?: number | null;
+            editorial_review: components["schemas"]["ContentReviewSummary"] | null;
+            lifecycle_request: components["schemas"]["ContentLifecycleSummary"] | null;
+            mathematics_review: components["schemas"]["ContentReviewSummary"] | null;
+            /** Outcome Code */
+            outcome_code?: string | null;
+            /** Position */
+            position?: number | null;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /**
+             * Review State
+             * @enum {string}
+             */
+            review_state: "unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired";
+            /** Revision */
+            revision: number;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /**
+             * Source Status
+             * @enum {string}
+             */
+            source_status: "draft" | "reviewed" | "published" | "retired";
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+        };
+        /** ContentReviewQueueResponse */
+        ContentReviewQueueResponse: {
+            /** Items */
+            items: components["schemas"]["ContentReviewItemResponse"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Total */
+            total: number;
+        };
+        /** ContentReviewRecordResponse */
+        ContentReviewRecordResponse: {
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question";
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approved" | "changes_requested";
+            /**
+             * Dimension
+             * @enum {string}
+             */
+            dimension: "mathematics" | "editorial";
+            /** Notes */
+            notes: string;
+            /**
+             * Record Id
+             * Format: uuid
+             */
+            record_id: string;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Reviewer Email */
+            reviewer_email: string;
+            /**
+             * Reviewer Id
+             * Format: uuid
+             */
+            reviewer_id: string;
+            /** Reviewer Role */
+            reviewer_role: string;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /** Source Revision */
+            source_revision: number;
+            /** Stable Key */
+            stable_key: string;
+        };
+        /** ContentReviewSummary */
+        ContentReviewSummary: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approved" | "changes_requested";
+            /**
+             * Dimension
+             * @enum {string}
+             */
+            dimension: "mathematics" | "editorial";
+            /** Notes */
+            notes: string;
+            /** Reviewer Email */
+            reviewer_email: string;
+            /**
+             * Reviewer Id
+             * Format: uuid
+             */
+            reviewer_id: string;
+            /** Reviewer Role */
+            reviewer_role: string;
+        };
         /** ContentStatusResponse */
         ContentStatusResponse: {
             /** Course Key */
@@ -974,6 +1241,24 @@ export interface components {
             questions: number;
             /** Status */
             status: string;
+        };
+        /** ContentStudentPreviewResponse */
+        ContentStudentPreviewResponse: {
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question";
+            /** Public Content */
+            public_content: {
+                [key: string]: unknown;
+            };
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Revision */
+            revision: number;
+            /** Stable Key */
+            stable_key: string;
         };
         /** CourseLessonMap */
         CourseLessonMap: {
@@ -1082,6 +1367,22 @@ export interface components {
              * @default 1
              */
             max_uses: number;
+        };
+        /** CreateLifecycleRequest */
+        CreateLifecycleRequest: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "publish" | "retire";
+            /** Reason */
+            reason: string;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /** Source Revision */
+            source_revision: number;
         };
         /** CreatePracticeSessionRequest */
         CreatePracticeSessionRequest: {
@@ -1853,6 +2154,27 @@ export interface components {
             /** Version */
             version: string;
         };
+        /** RecordContentReviewRequest */
+        RecordContentReviewRequest: {
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approved" | "changes_requested";
+            /**
+             * Dimension
+             * @enum {string}
+             */
+            dimension: "mathematics" | "editorial";
+            /** Notes */
+            notes: string;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /** Source Revision */
+            source_revision: number;
+        };
         /** ReleaseMetadata */
         ReleaseMetadata: {
             /** Deployment Id */
@@ -2163,6 +2485,362 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AuditEventListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listContentReviewQueue: {
+        parameters: {
+            query?: {
+                kind?: ("course" | "lesson" | "question") | null;
+                source_status?: string | null;
+                review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
+                search?: string | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentReviewQueueResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    requestContentLifecycleChange: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                kind: "course" | "lesson" | "question";
+                stable_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateLifecycleRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentLifecycleRequestResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    previewContentAsStudent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                kind: "course" | "lesson" | "question";
+                stable_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentStudentPreviewResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    recordContentReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                kind: "course" | "lesson" | "question";
+                stable_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordContentReviewRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentReviewRecordResponse"];
                 };
             };
             /** @description Bad Request */

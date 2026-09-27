@@ -36,6 +36,7 @@ from .identity import SupabaseTokenVerifier, TokenVerifier
 from .observability import configure_logging
 from .routers.admin import router as admin_router
 from .routers.admin_analytics import router as admin_analytics_router
+from .routers.content_review import router as content_review_router
 from .routers.courses import router as courses_router
 from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
@@ -261,9 +262,13 @@ def create_app(
                                 where table_schema = 'public'
                                   and table_name = 'learner_lesson_section_progress'
                             ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'content_review_records'
+                            ) and exists (
                                 select 1 from pg_enum e join pg_type t on t.oid=e.enumtypid
                                 where t.typname='beta_audit_event_type'
-                                and e.enumlabel='course_revision_changed'
+                                and e.enumlabel='content_retirement_requested'
                             ) as schema_ready
                         """
                     ).fetchone()
@@ -331,6 +336,7 @@ def create_app(
     application.include_router(identity_router)
     application.include_router(admin_router)
     application.include_router(admin_analytics_router)
+    application.include_router(content_review_router)
     application.include_router(courses_router)
     application.include_router(practice_router)
     application.include_router(progress_router)

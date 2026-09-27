@@ -18,17 +18,18 @@ new application versions at the same time.
 2. Take or confirm a recent managed database backup before a schema change.
 3. Apply an **expand** migration. Add nullable columns, tables, indexes or enum
    values without deleting or renaming fields used by the running application.
-4. Verify `/api/v1/ready` against the upgraded database.
-5. Deploy the backend. Keep API changes backward compatible with the currently
+4. Run `corepack pnpm release:content`; any non-draft item must have current Mathematics and editorial approval, and published/retired items need a matching lifecycle request.
+5. Verify `/api/v1/ready` against the upgraded database.
+6. Deploy the backend. Keep API changes backward compatible with the currently
    deployed web client.
-6. Wait for the new backend instance to pass the readiness check before routing
+7. Wait for the new backend instance to pass the readiness check before routing
    user traffic to it.
-7. Deploy the web application after the compatible backend is healthy.
-8. Run an authenticated smoke journey: sign in, load the course map, resume or
+8. Deploy the web application after the compatible backend is healthy.
+9. Run an authenticated smoke journey: sign in, load the course map, resume or
    create practice, submit an idempotent attempt, and load progress.
-9. Observe error rate, latency, database connections and failed onboarding for a
+10. Observe error rate, latency, database connections and failed onboarding for a
    defined release window.
-10. Perform any destructive **contract** migration in a later release after no
+11. Perform any destructive **contract** migration in a later release after no
     deployed code reads the old field.
 
 ## Compatibility rules

@@ -233,7 +233,7 @@ def test_only_academic_admin_can_view_deployment_status():
     assert response.status_code == 200
     assert response.json()["request_id"] == "operations-test"
     assert response.json()["database"]["resources"]["current_questions"] == 40
-    assert response.json()["release"]["required_schema_revision"] == "202609270009"
+    assert response.json()["release"]["required_schema_revision"] == "202609280010"
 
 
 def test_admin_invitation_contract_rejects_invalid_email():
@@ -257,3 +257,49 @@ def test_new_academic_operations_reject_content_admin_and_students():
                              ("POST", f"/users/{STUDENT_ID}/curriculum-migration")]:
             response = request(app, method, "/api/v1/admin" + path, token)
             assert response.status_code == (401 if token is None else 403), response.text
+
+
+def test_content_admin_can_preview_student_content_without_private_answers():
+    app, _ = application()
+
+    forbidden = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/question/n1-l1-01/preview",
+        "student-token",
+    )
+    preview = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/question/n1-l1-01/preview",
+        "admin-token",
+    )
+
+    assert forbidden.status_code == 403
+    assert preview.status_code == 200, preview.text
+    assert preview.json()["content_kind"] == "question"
+    assert "parts" in preview.text
+    assert "canonical_answer" not in preview.text
+    assert "hints" not in preview.text
+    assert "worked_solution" not in preview.text
+
+
+def test_content_admin_cannot_request_publication():
+    app, _ = application()
+
+    response = request(
+        app,
+        "POST",
+        "/api/v1/admin/content/question/n1-l1-01/lifecycle-requests",
+        "admin-token",
+        json={
+            "source_revision": 1,
+            "source_content_sha256": "a" * 64,
+            "review_fingerprint": "b" * 64,
+            "action": "publish",
+            "reason": "Publication must remain restricted to academic administrators.",
+        },
+    )
+
+    assert response.status_code == 403
+    assert response.json()["error"]["code"] == "academic_administrator_required"

@@ -1,7 +1,7 @@
 # ASEAN Academy beta architecture
 
-**Implementation snapshot:** 27 September 2026, `feature/content-sync-admin-dashboard`.
-**Companion:** [Content synchronization and admin runbook](CONTENT_SYNC_ADMIN_DASHBOARD.md).
+**Implementation snapshot:** 28 September 2026, `feature/content-review-publication`.
+**Companions:** [Content synchronization and admin runbook](CONTENT_SYNC_ADMIN_DASHBOARD.md) and [Content review and controlled publication](CONTENT_REVIEW_PUBLICATION.md).
 **Format:** Markdown with editable Mermaid diagrams. GitHub renders these diagrams; a
 Mermaid-enabled Markdown preview can render them locally. The overview is also supplied
 as [BETA_ARCHITECTURE.mmd](BETA_ARCHITECTURE.mmd) for Mermaid editors and SVG/PDF export.
@@ -46,7 +46,7 @@ flowchart TB
 
   subgraph web["Next.js web service — localhost:3000 in development"]
     PAGES["Course map · Lesson notes · Practice · Progress"]
-    DASH["Admin overview · Students · Questions<br/>Invitations · Roles · Audit · Operations"]
+    DASH["Admin overview · Students · Questions<br/>Content review · Invitations · Roles · Audit · Operations"]
     SESSION["Server session verification<br/>OAuth callback and cookie refresh"]
     PROXY["Same-origin /api/v1/* proxy<br/>No-store responses · Request IDs"]
     PAGES --> PROXY
@@ -60,11 +60,13 @@ flowchart TB
     PRACTICE["Practice orchestration and deterministic marking"]
     PROGRESS["Section progress · Proficiency · Checkpoint mastery"]
     OPS["Admin analytics · Invitations · Role management"]
+    REVIEW["Content review · Safe preview · Release requests"]
     SYNC["Content hashes · Readiness · Revision migration"]
     AUTHZ --> COURSE
     AUTHZ --> PRACTICE
     AUTHZ --> PROGRESS
     AUTHZ --> OPS
+    AUTHZ --> REVIEW
     OPS --> SYNC
     PRACTICE --> PROGRESS
   end
@@ -77,7 +79,7 @@ flowchart TB
   GOOGLE["Google OAuth"]
   BANK["question_bank Python library<br/>Validation · Checking · Importers"]
   GIT[("Git-authored JSON and assets")]
-  CI["GitHub Actions<br/>Validate → Migrate → Import → Deploy → Smoke"]
+  CI["GitHub Actions<br/>Validate → Migrate → Approval gate → Import → Deploy → Smoke"]
   OCR["Offline OCR and categorizer<br/>Staging and human review"]
   AI["Future grounded AI tutor"]
   VIDEO["Future video host and captions"]
@@ -96,6 +98,8 @@ flowchart TB
   PROGRESS --> DB
   PRACTICE --> DB
   OPS --> DB
+  REVIEW --> DB
+  REVIEW --> GIT
   SYNC --> DB
   SYNC --> GIT
   BANK --> GIT
@@ -151,6 +155,7 @@ flowchart LR
   GR["progress_repository.py<br/>PostgreSQL or local SQLite"]
   ADMIN["admin_repository.py<br/>Invitations · Audit · Service status"]
   ANALYTICS["admin_analytics_repository.py<br/>Students · Questions · Roles"]
+  REVIEW["content_review.py<br/>Fingerprint · Decisions · Release requests"]
   TRANSITION["curriculum_admin.py<br/>Preview · Lock · Check · Update · Audit"]
   HEALTH["content_sync.py<br/>Revision and content-hash checks"]
   PG[("PostgreSQL")]
@@ -165,6 +170,7 @@ flowchart LR
   GS --> GR
   ROUTES --> ADMIN
   ROUTES --> ANALYTICS
+  ROUTES --> REVIEW
   ROUTES --> TRANSITION
   TRANSITION --> HEALTH
   IDREPO --> PG
@@ -172,6 +178,7 @@ flowchart LR
   GR --> PG
   ADMIN --> PG
   ANALYTICS --> PG
+  REVIEW --> PG
   TRANSITION --> PG
   HEALTH --> PG
 ```
@@ -301,6 +308,8 @@ erDiagram
   lesson_sections ||--o{ learner_lesson_section_progress : completes
   auth_users ||--o{ mastery_events : earns
   auth_users ||--o{ beta_audit_events : acts_or_is_target
+  profiles ||--o{ content_review_records : reviews
+  profiles ||--o{ content_lifecycle_requests : requests
   beta_invitations ||--o{ beta_audit_events : relates
 ```
 
@@ -320,6 +329,7 @@ revisions; attempts and session items refer to exact persisted versions.
 | Attempts and progress | PostgreSQL in hosted mode | Student-scoped API and repositories |
 | Local unauthenticated preview | SQLite | Development-only fallback; not automatically merged into hosted accounts |
 | Aggregated admin metrics | PostgreSQL query results | Protected API; no separate analytics copy |
+| Review decisions and lifecycle requests | Append-only PostgreSQL records bound to a Git-content fingerprint | Protected content-review API; release gate reads them |
 | Release identity and request logs | Process environment and logs | Health/status endpoints and hosting log system |
 
 **Important limitation:** the current API serves one bundled N1 catalogue. Importing
@@ -335,25 +345,40 @@ not unrestricted historical course delivery.
 flowchart TB
   SOURCE["Edit draft question / course JSON"]
   VALIDATE["Schema · Syllabus · Answer · Pool validation"]
-  REVIEW["Human mathematical and editorial review"]
+  PREVIEW["Student-safe preview"]
+  MATH["Mathematics review"]
+  EDIT["Editorial review"]
+  APPROVED["Both latest decisions approve the semantic fingerprint"]
+  REQUEST["Academic publication request"]
+  GITREV["Reviewed / published Git revision"]
+  GATE["Automated approval and content release gate"]
   IMPORT["Question importer then course importer"]
   HASH["Immutable revision hashes match deployed catalogue"]
-  DB[("PostgreSQL content")]
+  DB[("PostgreSQL content and append-only decisions")]
   START["API startup content check"]
   READY["/api/v1/ready<br/>Schema and content checks"]
   TRAFFIC["Accept new deployment traffic"]
 
   SOURCE --> VALIDATE
   VALIDATE -->|"Development preview allowed"| IMPORT
-  VALIDATE --> REVIEW
-  REVIEW -->|"Explicit publication process"| IMPORT
+  VALIDATE --> PREVIEW
+  PREVIEW --> MATH
+  PREVIEW --> EDIT
+  MATH --> APPROVED
+  EDIT --> APPROVED
+  APPROVED --> REQUEST
+  REQUEST --> GITREV
+  GITREV --> GATE
+  GATE -->|"Approved"| IMPORT
+  GATE -->|"Missing or stale decision"| STOP["Stop release and return to review"]
   IMPORT --> DB
   DB --> HASH
   HASH --> START
   START --> READY
   READY -->|"Ready"| TRAFFIC
-  READY -->|"Mismatch"| STOP["Stop promotion; import or repair first"]
+  READY -->|"Mismatch"| STOP2["Stop promotion; import or repair first"]
 ```
+
 
 Importing a draft is allowed for development and does **not** publish it. Production
 configuration refuses draft visibility. Current N1 content still needs review.
@@ -399,6 +424,7 @@ reviewed migration design. There is no force-reset button.
 | `/admin/students` | Yes | Yes | Search/paginate student summaries |
 | `/admin/students/<id>` | Yes | Yes | Individual lesson and attempt aggregates |
 | `/admin/questions` | Yes | Yes | Filter question performance by outcome/difficulty |
+| `/admin/content` | Yes | Yes | Safe preview and review; lifecycle requests require academic role |
 | `/admin/invitations` | Yes | Yes | Create/list/revoke beta invitations |
 | `/admin/audit` | Yes | Yes | Latest 100 operational audit events |
 | `/admin/users` | No | Yes | All profiles including admins, role changes, course migration |
@@ -411,7 +437,7 @@ to protect the last-admin check. Analytics excludes raw submitted answers, auth
 tokens and invitation secrets. Invitation plaintext is returned once on creation.
 
 This dashboard is usable as the placeholder admin interface. It does not include
-a content editor, video uploader, billing console, full log browser, metrics history
+an in-browser content editor, video uploader, billing console, full log browser, metrics history
 or unrestricted audit export.
 
 ## 10. Deployment and observability
@@ -422,7 +448,8 @@ flowchart LR
   CI --> MAIN["Reviewed main branch"]
   MAIN --> RELEASE["Manual production workflow<br/>Protected environment"]
   RELEASE --> MIGRATE["Migration safety + Supabase migrations"]
-  MIGRATE --> IMPORT["Immutable question and course imports"]
+  MIGRATE --> APPROVAL["Human approval release gate"]
+  APPROVAL --> IMPORT["Immutable question and course imports"]
   IMPORT --> API["Deploy API with release SHA"]
   API --> READY["Readiness + expected release smoke check"]
   READY --> WEB["Deploy web"]
@@ -477,7 +504,8 @@ client code.
 - [Question importer](../../question_bank/src/question_bank/repository.py),
   [course importer](../../question_bank/src/question_bank/course_repository.py)
 - [Database migrations](../../supabase/migrations)
-- [Content check](../../services/learning_api/src/learning_api/content_sync.py),
+- [Content check](../../services/learning_api/src/learning_api/content_sync.py), [content review](../../services/learning_api/src/learning_api/content_review.py),
+  [release gate](../../services/learning_api/scripts/verify_content_release.py),
   [bootstrap](../../services/learning_api/scripts/bootstrap_local.py)
 - [Curriculum update](../../services/learning_api/src/learning_api/curriculum_admin.py)
 - [CI](../../.github/workflows/ci.yml), [release](../../.github/workflows/deploy-production.yml)

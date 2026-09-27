@@ -60,6 +60,9 @@ const eventLabels: Record<
   invitation_accepted: "Student onboarded",
   role_changed: "User role changed",
   course_revision_changed: "Course revision changed",
+  content_review_recorded: "Content review recorded",
+  content_publication_requested: "Content publication requested",
+  content_retirement_requested: "Content retirement requested",
 };
 
 function formatDate(value: string): string {

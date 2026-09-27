@@ -14,6 +14,11 @@ export type Role = components["schemas"]["AdminUserRoleResponse"]["role"];
 export type Operations = components["schemas"]["DeploymentStatusResponse"];
 export type ContentStatus = components["schemas"]["ContentStatusResponse"];
 export type Audit = components["schemas"]["AuditEventListResponse"];
+export type ContentQueue = components["schemas"]["ContentReviewQueueResponse"];
+export type ContentItem = components["schemas"]["ContentReviewItemResponse"];
+export type ContentPreview = components["schemas"]["ContentStudentPreviewResponse"];
+export type ReviewInput = components["schemas"]["RecordContentReviewRequest"];
+export type LifecycleInput = components["schemas"]["CreateLifecycleRequest"];
 
 export async function adminRequest<T>(
   path: string,

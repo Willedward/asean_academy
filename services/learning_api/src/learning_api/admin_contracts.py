@@ -97,6 +97,8 @@ class AuditEventResponse(ApiModel):
     event_type: Literal[
         "invitation_created", "invitation_revoked", "invitation_accepted",
         "role_changed", "course_revision_changed",
+        "content_review_recorded", "content_publication_requested",
+        "content_retirement_requested",
     ]
     actor_user_id: UUID | None
     invitation_id: UUID | None

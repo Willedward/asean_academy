@@ -7,7 +7,7 @@ flowchart TB
 
   subgraph web["Next.js web service — localhost:3000 in development"]
     PAGES["Course map · Lesson notes · Practice · Progress"]
-    DASH["Admin overview · Students · Questions<br/>Invitations · Roles · Audit · Operations"]
+    DASH["Admin overview · Students · Questions<br/>Content review · Invitations · Roles · Audit · Operations"]
     SESSION["Server session verification<br/>OAuth callback and cookie refresh"]
     PROXY["Same-origin /api/v1/* proxy<br/>No-store responses · Request IDs"]
     PAGES --> PROXY
@@ -21,11 +21,13 @@ flowchart TB
     PRACTICE["Practice orchestration and deterministic marking"]
     PROGRESS["Section progress · Proficiency · Checkpoint mastery"]
     OPS["Admin analytics · Invitations · Role management"]
+    REVIEW["Content review · Safe preview · Release requests"]
     SYNC["Content hashes · Readiness · Revision migration"]
     AUTHZ --> COURSE
     AUTHZ --> PRACTICE
     AUTHZ --> PROGRESS
     AUTHZ --> OPS
+    AUTHZ --> REVIEW
     OPS --> SYNC
     PRACTICE --> PROGRESS
   end
@@ -38,7 +40,7 @@ flowchart TB
   GOOGLE["Google OAuth"]
   BANK["question_bank Python library<br/>Validation · Checking · Importers"]
   GIT[("Git-authored JSON and assets")]
-  CI["GitHub Actions<br/>Validate → Migrate → Import → Deploy → Smoke"]
+  CI["GitHub Actions<br/>Validate → Migrate → Approval gate → Import → Deploy → Smoke"]
   OCR["Offline OCR and categorizer<br/>Staging and human review"]
   AI["Future grounded AI tutor"]
   VIDEO["Future video host and captions"]
@@ -57,6 +59,8 @@ flowchart TB
   PROGRESS --> DB
   PRACTICE --> DB
   OPS --> DB
+  REVIEW --> DB
+  REVIEW --> GIT
   SYNC --> DB
   SYNC --> GIT
   BANK --> GIT

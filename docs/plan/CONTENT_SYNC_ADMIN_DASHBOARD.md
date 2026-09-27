@@ -1,7 +1,7 @@
 # Content synchronization and administrator dashboard
 
-**Branch:** `feature/content-sync-admin-dashboard`
-**Required migration:** `202609270009_course_revision_audit.sql`
+**Branch:** `feature/content-review-publication`
+**Required migrations:** through `202609280010_content_review_workflow.sql`
 **Current authored catalogue:** `g3-sec1-math` revision 2; 40 N1 draft questions.
 
 ## Delivered
@@ -18,7 +18,8 @@
    audit and operational APIs.
 5. CI and release verification now import content into disposable PostgreSQL and run
    database tests instead of silently skipping them for lack of TEST_DATABASE_URL.
-6. [Architecture diagrams](BETA_ARCHITECTURE.md) explain current services, workflows,
+6. A protected review queue adds safe student preview, separate Mathematics and editorial decisions, append-only release requests and an automated release gate.
+7. [Architecture diagrams](BETA_ARCHITECTURE.md) explain current services, workflows,
    data relationships, release sequencing and future integrations.
 
 ## Run locally
@@ -66,6 +67,7 @@ Reuse an already running web server on port 3000 rather than launching a second 
 - Student course: <http://localhost:3000/learn>
 - Admin dashboard: <http://localhost:3000/admin>
 - Users and course updates: <http://localhost:3000/admin/users>
+- Content review: <http://localhost:3000/admin/content>
 - Database/content status: <http://localhost:3000/admin/operations>
 - Readiness: <http://localhost:8000/api/v1/ready>
 
@@ -123,6 +125,9 @@ All endpoints are under `/api/v1/admin`.
 | `/users/{id}/role` | PATCH | academic_admin |
 | `/users/{id}/curriculum-preview` | GET | academic_admin |
 | `/users/{id}/curriculum-migration` | POST | academic_admin |
+| `/content`, `/content/{kind}/{key}/preview` | GET | content_admin or academic_admin |
+| `/content/{kind}/{key}/reviews` | POST | editorial: either admin; Mathematics: academic_admin |
+| `/content/{kind}/{key}/lifecycle-requests` | POST | academic_admin |
 | `/operations/status`, `/operations/content` | GET | academic_admin |
 
 Student accounts cannot access these APIs. Backend authorization remains authoritative

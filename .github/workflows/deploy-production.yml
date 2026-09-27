@@ -106,6 +106,10 @@ jobs:
         run: |
           supabase link --project-ref "$SUPABASE_PROJECT_ID" --password "$SUPABASE_DB_PASSWORD"
           supabase db push --linked --yes
+      - name: Verify human content approvals
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+        run: uv run --project services/learning_api --locked python services/learning_api/scripts/verify_content_release.py
       - name: Import the immutable question and course revisions
         env:
           DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}

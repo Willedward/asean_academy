@@ -973,7 +973,10 @@
               "invitation_revoked",
               "invitation_accepted",
               "role_changed",
-              "course_revision_changed"
+              "course_revision_changed",
+              "content_review_recorded",
+              "content_publication_requested",
+              "content_retirement_requested"
             ],
             "title": "Event Type",
             "type": "string"
@@ -1131,6 +1134,466 @@
         "title": "CheckpointProgressResponse",
         "type": "object"
       },
+      "ContentLifecycleRequestResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "publish",
+              "retire"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "lifecycle_request_id": {
+            "format": "uuid",
+            "title": "Lifecycle Request Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "release_instruction": {
+            "title": "Release Instruction",
+            "type": "string"
+          },
+          "requested_by": {
+            "format": "uuid",
+            "title": "Requested By",
+            "type": "string"
+          },
+          "requester_email": {
+            "title": "Requester Email",
+            "type": "string"
+          },
+          "review_fingerprint": {
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "source_content_sha256": {
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_revision": {
+            "title": "Source Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lifecycle_request_id",
+          "action",
+          "requested_by",
+          "requester_email",
+          "reason",
+          "created_at",
+          "content_kind",
+          "stable_key",
+          "source_revision",
+          "source_content_sha256",
+          "review_fingerprint",
+          "release_instruction"
+        ],
+        "title": "ContentLifecycleRequestResponse",
+        "type": "object"
+      },
+      "ContentLifecycleSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "publish",
+              "retire"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "lifecycle_request_id": {
+            "format": "uuid",
+            "title": "Lifecycle Request Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "requested_by": {
+            "format": "uuid",
+            "title": "Requested By",
+            "type": "string"
+          },
+          "requester_email": {
+            "title": "Requester Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lifecycle_request_id",
+          "action",
+          "requested_by",
+          "requester_email",
+          "reason",
+          "created_at"
+        ],
+        "title": "ContentLifecycleSummary",
+        "type": "object"
+      },
+      "ContentReviewItemResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "blockers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Blockers",
+            "type": "array"
+          },
+          "can_request_publication": {
+            "title": "Can Request Publication",
+            "type": "boolean"
+          },
+          "can_request_retirement": {
+            "title": "Can Request Retirement",
+            "type": "boolean"
+          },
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "difficulty": {
+            "anyOf": [
+              {
+                "maximum": 3.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficulty"
+          },
+          "editorial_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContentReviewSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lifecycle_request": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContentLifecycleSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mathematics_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContentReviewSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "outcome_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outcome Code"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "review_fingerprint": {
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "review_state": {
+            "enum": [
+              "unreviewed",
+              "partially_approved",
+              "approved",
+              "changes_requested",
+              "publication_requested",
+              "retirement_requested",
+              "published",
+              "retired"
+            ],
+            "title": "Review State",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_content_sha256": {
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_kind",
+          "stable_key",
+          "revision",
+          "source_content_sha256",
+          "review_fingerprint",
+          "title",
+          "source_status",
+          "review_state",
+          "mathematics_review",
+          "editorial_review",
+          "lifecycle_request",
+          "blockers",
+          "can_request_publication",
+          "can_request_retirement"
+        ],
+        "title": "ContentReviewItemResponse",
+        "type": "object"
+      },
+      "ContentReviewQueueResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ContentReviewItemResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "ContentReviewQueueResponse",
+        "type": "object"
+      },
+      "ContentReviewRecordResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "approved",
+              "changes_requested"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "mathematics",
+              "editorial"
+            ],
+            "title": "Dimension",
+            "type": "string"
+          },
+          "notes": {
+            "title": "Notes",
+            "type": "string"
+          },
+          "record_id": {
+            "format": "uuid",
+            "title": "Record Id",
+            "type": "string"
+          },
+          "review_fingerprint": {
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "reviewer_email": {
+            "title": "Reviewer Email",
+            "type": "string"
+          },
+          "reviewer_id": {
+            "format": "uuid",
+            "title": "Reviewer Id",
+            "type": "string"
+          },
+          "reviewer_role": {
+            "title": "Reviewer Role",
+            "type": "string"
+          },
+          "source_content_sha256": {
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_revision": {
+            "title": "Source Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dimension",
+          "decision",
+          "reviewer_id",
+          "reviewer_email",
+          "reviewer_role",
+          "notes",
+          "created_at",
+          "record_id",
+          "content_kind",
+          "stable_key",
+          "source_revision",
+          "source_content_sha256",
+          "review_fingerprint"
+        ],
+        "title": "ContentReviewRecordResponse",
+        "type": "object"
+      },
+      "ContentReviewSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "approved",
+              "changes_requested"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "mathematics",
+              "editorial"
+            ],
+            "title": "Dimension",
+            "type": "string"
+          },
+          "notes": {
+            "title": "Notes",
+            "type": "string"
+          },
+          "reviewer_email": {
+            "title": "Reviewer Email",
+            "type": "string"
+          },
+          "reviewer_id": {
+            "format": "uuid",
+            "title": "Reviewer Id",
+            "type": "string"
+          },
+          "reviewer_role": {
+            "title": "Reviewer Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dimension",
+          "decision",
+          "reviewer_id",
+          "reviewer_email",
+          "reviewer_role",
+          "notes",
+          "created_at"
+        ],
+        "title": "ContentReviewSummary",
+        "type": "object"
+      },
       "ContentStatusResponse": {
         "additionalProperties": false,
         "properties": {
@@ -1163,6 +1626,46 @@
           "questions"
         ],
         "title": "ContentStatusResponse",
+        "type": "object"
+      },
+      "ContentStudentPreviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "public_content": {
+            "additionalProperties": true,
+            "title": "Public Content",
+            "type": "object"
+          },
+          "review_fingerprint": {
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_kind",
+          "stable_key",
+          "revision",
+          "review_fingerprint",
+          "public_content"
+        ],
+        "title": "ContentStudentPreviewResponse",
         "type": "object"
       },
       "CourseLessonMap": {
@@ -1423,6 +1926,49 @@
           "email"
         ],
         "title": "CreateInvitationRequest",
+        "type": "object"
+      },
+      "CreateLifecycleRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "publish",
+              "retire"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "review_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "source_content_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_revision": {
+            "minimum": 1.0,
+            "title": "Source Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "source_revision",
+          "source_content_sha256",
+          "review_fingerprint",
+          "action",
+          "reason"
+        ],
+        "title": "CreateLifecycleRequest",
         "type": "object"
       },
       "CreatePracticeSessionRequest": {
@@ -3451,6 +3997,58 @@
         "title": "ReadinessResponse",
         "type": "object"
       },
+      "RecordContentReviewRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "enum": [
+              "approved",
+              "changes_requested"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "mathematics",
+              "editorial"
+            ],
+            "title": "Dimension",
+            "type": "string"
+          },
+          "notes": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Notes",
+            "type": "string"
+          },
+          "review_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "source_content_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_revision": {
+            "minimum": 1.0,
+            "title": "Source Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "source_revision",
+          "source_content_sha256",
+          "review_fingerprint",
+          "dimension",
+          "decision",
+          "notes"
+        ],
+        "title": "RecordContentReviewRequest",
+        "type": "object"
+      },
       "ReleaseMetadata": {
         "additionalProperties": false,
         "properties": {
@@ -4210,6 +4808,596 @@
         "summary": "List recent immutable beta audit events",
         "tags": [
           "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/content": {
+      "get": {
+        "operationId": "listContentReviewQueue",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kind",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "course",
+                    "lesson",
+                    "question"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Kind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "source_status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^(draft|reviewed|published|retired)$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "review_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "unreviewed",
+                    "partially_approved",
+                    "approved",
+                    "changes_requested",
+                    "publication_requested",
+                    "retirement_requested",
+                    "published",
+                    "retired"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Review State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentReviewQueueResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List deployed content and its latest review decisions",
+        "tags": [
+          "admin",
+          "content-review"
+        ]
+      }
+    },
+    "/api/v1/admin/content/{kind}/{stable_key}/lifecycle-requests": {
+      "post": {
+        "operationId": "requestContentLifecycleChange",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "course",
+                "lesson",
+                "question"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stable_key",
+            "required": true,
+            "schema": {
+              "title": "Stable Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLifecycleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentLifecycleRequestResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Request a Git-authored publication or retirement release",
+        "tags": [
+          "admin",
+          "content-review"
+        ]
+      }
+    },
+    "/api/v1/admin/content/{kind}/{stable_key}/preview": {
+      "get": {
+        "operationId": "previewContentAsStudent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "course",
+                "lesson",
+                "question"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stable_key",
+            "required": true,
+            "schema": {
+              "title": "Stable Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentStudentPreviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Preview public content without private answers or locked feedback",
+        "tags": [
+          "admin",
+          "content-review"
+        ]
+      }
+    },
+    "/api/v1/admin/content/{kind}/{stable_key}/reviews": {
+      "post": {
+        "operationId": "recordContentReview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "course",
+                "lesson",
+                "question"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stable_key",
+            "required": true,
+            "schema": {
+              "title": "Stable Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordContentReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentReviewRecordResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Append a Mathematics or editorial review decision",
+        "tags": [
+          "admin",
+          "content-review"
         ]
       }
     },

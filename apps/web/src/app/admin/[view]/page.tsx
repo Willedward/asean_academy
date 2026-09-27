@@ -7,6 +7,7 @@ import {
   AuditPanel,
 } from "@/components/admin-dashboard";
 import { requireAdministrator } from "@/lib/auth/admin";
+import { ContentReviewPanel } from "@/components/content-review-panel";
 
 export default async function AdminView({
   params,
@@ -24,6 +25,7 @@ export default async function AdminView({
   const pages: Record<string, { title: string; content: React.ReactNode }> = {
     students: { title: "Student progress", content: <StudentsPanel /> },
     questions: { title: "Question performance", content: <QuestionsPanel /> },
+    content: { title: "Content review and publication", content: <ContentReviewPanel academic={administrator.profile.role === "academic_admin"} /> },
     users: {
       title: "Users, roles and course revisions",
       content: <UsersPanel selfId={administrator.profile.learner_id} />,
