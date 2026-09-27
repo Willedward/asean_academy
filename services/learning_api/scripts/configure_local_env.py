@@ -67,6 +67,13 @@ def _check_database(database_url: str) -> bool:
             ).fetchone()
             return bool(row and row[0])
     except psycopg.Error as exc:
+        if exc.sqlstate == "28P01":
+            raise SystemExit(
+                "Supabase rejected the project database password (SQLSTATE 28P01). "
+                "The linked shared-pooler username is correct. Reset the database "
+                "password under Supabase Dashboard > Database > Settings, wait briefly "
+                "for the pooler to update, and run this command once more."
+            ) from exc
         message = str(exc).splitlines()[0] if str(exc) else exc.__class__.__name__
         raise SystemExit(f"Could not connect to Supabase PostgreSQL: {message}") from exc
 
