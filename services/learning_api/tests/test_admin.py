@@ -76,6 +76,20 @@ class FakeBetaOperationsRepository:
             "enrolments_last_7_days": 4,
         }
 
+    def service_status(self):
+        return {
+            "state": "ready",
+            "latency_ms": 4.25,
+            "server_time": datetime.now(UTC),
+            "resources": {
+                "registered_users": 13,
+                "students": 12,
+                "active_enrolments": 9,
+                "current_course_versions": 1,
+                "current_questions": 40,
+            },
+        }
+
     def audit_events(self, *, limit):
         assert limit <= 200
         return {
@@ -191,6 +205,35 @@ def test_admin_summary_and_audit_are_privacy_minimal():
     assert events.status_code == 200
     assert events.json()["events"][0]["request_id"] == "request-123"
     assert "raw-code" not in events.text
+
+
+def test_only_academic_admin_can_view_deployment_status():
+    app, repository = application()
+
+    denied = request(
+        app,
+        "GET",
+        "/api/v1/admin/operations/status",
+        "admin-token",
+    )
+    assert denied.status_code == 403
+    assert denied.json()["error"]["code"] == "academic_administrator_required"
+
+    repository.role_for = lambda learner_id: (
+        "academic_admin" if learner_id == ADMIN_ID else "student"
+    )
+    response = request(
+        app,
+        "GET",
+        "/api/v1/admin/operations/status",
+        "admin-token",
+        headers={"X-Request-ID": "operations-test"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["request_id"] == "operations-test"
+    assert response.json()["database"]["resources"]["current_questions"] == 40
+    assert response.json()["release"]["required_schema_revision"] == "202609260007"
 
 
 def test_admin_invitation_contract_rejects_invalid_email():

@@ -26,12 +26,18 @@ def test_health_uses_versioned_contract_and_request_id():
 
     assert response.status_code == 200
     assert response.headers["X-Request-ID"] == "browser-test-1"
+    assert response.headers["X-Release-SHA"] == "local"
     assert response.json() == {
         "status": "ok",
         "service": "learning-api",
         "version": "0.1.0",
         "environment": "test",
         "request_id": "browser-test-1",
+        "release": {
+            "sha": "local",
+            "deployment_id": None,
+            "required_schema_revision": "202609260007",
+        },
         "dependencies": {
             "course_content": "draft_placeholders",
             "authentication": "supabase_bearer",
@@ -91,5 +97,10 @@ def test_readiness_uses_local_dependencies_without_postgres():
         "version": "0.1.0",
         "environment": "test",
         "request_id": "ready-test",
+        "release": {
+            "sha": "local",
+            "deployment_id": None,
+            "required_schema_revision": "202609260007",
+        },
         "dependencies": {"database": "local", "schema_status": "local"},
     }

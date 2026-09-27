@@ -1,0 +1,21 @@
+{
+  "202609240004_identity_progress_rls.sql": [
+    {
+      "category": "alter_column_type",
+      "match": "alter column idempotency_key type text",
+      "reason": "The pre-beta table was empty and the UUID-to-text cast preserved compatible values."
+    },
+    {
+      "category": "drop_object",
+      "match": "drop constraint session_questions_selection_reason_check",
+      "reason": "The constraint is recreated in the same transaction with the expanded allowed values."
+    }
+  ],
+  "202609260006_checkpoint_mastery_retry.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint session_questions_selection_reason_check",
+      "reason": "The constraint is recreated in the same transaction with retry as an additional value."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from uuid import UUID, uuid4
 from fastapi import Header, HTTPException, Request, status
 
 REQUEST_ID_HEADER = "X-Request-ID"
+RELEASE_SHA_HEADER = "X-Release-SHA"
 IDEMPOTENCY_HEADER = "Idempotency-Key"
 _SAFE_REQUEST_ID = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 

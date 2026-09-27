@@ -10,6 +10,11 @@ const healthFixture: HealthResponse = {
   version: "fixture",
   environment: "development",
   request_id: "fixture-request",
+  release: {
+    sha: "fixture",
+    deployment_id: null,
+    required_schema_revision: "202609260007",
+  },
   dependencies: {
     course_content: "draft_placeholders",
     authentication: "supabase_bearer",

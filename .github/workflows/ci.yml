@@ -75,4 +75,6 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
     steps:
       - uses: actions/checkout@v4
+      - name: Reject unreviewed destructive migrations
+        run: python3 scripts/check_migration_safety.py
       - run: bash scripts/validate_migrations.sh

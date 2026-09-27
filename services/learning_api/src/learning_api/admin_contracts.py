@@ -9,7 +9,7 @@ from uuid import UUID
 
 from pydantic import Field, field_validator
 
-from .contracts import ApiModel
+from .contracts import ApiModel, ReleaseMetadata
 
 InvitationStatus = Literal["active", "expired", "exhausted", "revoked"]
 
@@ -65,6 +65,31 @@ class BetaOperationsSummaryResponse(ApiModel):
     invitations_exhausted: int
     invitations_revoked: int
     enrolments_last_7_days: int
+
+
+class OperationalResourceCounts(ApiModel):
+    registered_users: int
+    students: int
+    active_enrolments: int
+    current_course_versions: int
+    current_questions: int
+
+
+class OperationalDatabaseStatus(ApiModel):
+    state: Literal["ready"] = "ready"
+    latency_ms: float = Field(ge=0)
+    server_time: datetime
+    resources: OperationalResourceCounts
+
+
+class DeploymentStatusResponse(ApiModel):
+    status: Literal["operational"] = "operational"
+    checked_at: datetime
+    request_id: str
+    environment: str
+    uptime_seconds: float = Field(ge=0)
+    release: ReleaseMetadata
+    database: OperationalDatabaseStatus
 
 
 class AuditEventResponse(ApiModel):

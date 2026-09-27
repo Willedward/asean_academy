@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import UTC, datetime
 from time import perf_counter
 
 import psycopg
@@ -13,17 +14,24 @@ from fastapi.responses import JSONResponse
 from psycopg.rows import dict_row
 
 from . import __version__
-from .config import Settings
+from .config import REQUIRED_SCHEMA_REVISION, Settings
 from .contracts import (
     ErrorDetail,
     ErrorEnvelope,
     HealthResponse,
     ReadinessDependencies,
     ReadinessResponse,
+    ReleaseMetadata,
 )
-from .conventions import REQUEST_ID_HEADER, current_request_id, request_id_from
+from .conventions import (
+    RELEASE_SHA_HEADER,
+    REQUEST_ID_HEADER,
+    current_request_id,
+    request_id_from,
+)
 from .course_catalogue import CourseCatalogue
 from .identity import SupabaseTokenVerifier, TokenVerifier
+from .observability import configure_logging
 from .routers.admin import router as admin_router
 from .routers.admin_analytics import router as admin_analytics_router
 from .routers.courses import router as courses_router
@@ -64,7 +72,7 @@ def create_app(
     token_verifier: TokenVerifier | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_environment()
-    logging.basicConfig(level=settings.log_level)
+    configure_logging(level=settings.log_level, log_format=settings.log_format)
 
     application = FastAPI(
         title="ASEAN Academy Learning API",
@@ -87,6 +95,7 @@ def create_app(
         },
     )
     application.state.settings = settings
+    application.state.started_at = datetime.now(UTC)
     application.state.token_verifier = token_verifier or (
         SupabaseTokenVerifier(
             settings.supabase_url,
@@ -106,7 +115,7 @@ def create_app(
         allow_credentials=True,
         allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-Request-ID"],
-        expose_headers=[REQUEST_ID_HEADER],
+        expose_headers=[REQUEST_ID_HEADER, RELEASE_SHA_HEADER],
     )
 
     @application.middleware("http")
@@ -115,13 +124,20 @@ def create_app(
         started_at = perf_counter()
         response = await call_next(request)
         response.headers[REQUEST_ID_HEADER] = request.state.request_id
-        LOGGER.info(
-            "request_complete request_id=%s method=%s path=%s status=%s duration_ms=%.2f",
-            request.state.request_id,
-            request.method,
-            request.url.path,
-            response.status_code,
-            (perf_counter() - started_at) * 1000,
+        response.headers[RELEASE_SHA_HEADER] = settings.release_sha
+        duration_ms = round((perf_counter() - started_at) * 1000, 2)
+        log = LOGGER.warning if duration_ms >= settings.slow_request_ms else LOGGER.info
+        log(
+            "slow_request" if duration_ms >= settings.slow_request_ms else "request_complete",
+            extra={
+                "request_id": request.state.request_id,
+                "http_method": request.method,
+                "http_path": request.url.path,
+                "http_status": response.status_code,
+                "duration_ms": duration_ms,
+                "release_sha": settings.release_sha,
+                "deployment_id": settings.deployment_id,
+            },
         )
         return response
 
@@ -162,8 +178,15 @@ def create_app(
     @application.exception_handler(Exception)
     async def unexpected_exception(request: Request, exc: Exception):
         LOGGER.exception(
-            "unhandled_exception request_id=%s",
-            current_request_id(request),
+            "unhandled_exception",
+            extra={
+                "request_id": current_request_id(request),
+                "http_method": request.method,
+                "http_path": request.url.path,
+                "release_sha": settings.release_sha,
+                "deployment_id": settings.deployment_id,
+                "error_type": type(exc).__name__,
+            },
             exc_info=exc,
         )
         return _error_response(
@@ -185,6 +208,11 @@ def create_app(
             version=__version__,
             environment=settings.environment,
             request_id=current_request_id(request),
+            release=ReleaseMetadata(
+                sha=settings.release_sha,
+                deployment_id=settings.deployment_id,
+                required_schema_revision=REQUIRED_SCHEMA_REVISION,
+            ),
         )
 
     @application.get(
@@ -217,9 +245,13 @@ def create_app(
                     ).fetchone()
             except psycopg.Error as exc:
                 LOGGER.warning(
-                    "readiness_database_failed request_id=%s error_type=%s",
-                    current_request_id(request),
-                    type(exc).__name__,
+                    "readiness_database_failed",
+                    extra={
+                        "request_id": current_request_id(request),
+                        "release_sha": settings.release_sha,
+                        "deployment_id": settings.deployment_id,
+                        "error_type": type(exc).__name__,
+                    },
                 )
                 raise HTTPException(
                     status_code=503,
@@ -241,6 +273,11 @@ def create_app(
             version=__version__,
             environment=settings.environment,
             request_id=current_request_id(request),
+            release=ReleaseMetadata(
+                sha=settings.release_sha,
+                deployment_id=settings.deployment_id,
+                required_schema_revision=REQUIRED_SCHEMA_REVISION,
+            ),
             dependencies=dependencies,
         )
 

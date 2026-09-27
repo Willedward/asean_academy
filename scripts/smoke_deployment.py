@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""Retrying, secrets-free smoke checks for a deployed ASEAN Academy release."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from dataclasses import asdict, dataclass
+from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.request import Request, urlopen
+
+
+class SmokeCheckError(RuntimeError):
+    pass
+
+
+@dataclass(frozen=True)
+class CheckResult:
+    name: str
+    url: str
+    status: int
+    release_sha: str | None = None
+
+
+def normalize_base_url(value: str) -> str:
+    parsed = urlsplit(value.strip())
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+        raise ValueError("Deployment URLs must use http or https and include a host.")
+    if parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise ValueError("Deployment URLs must not contain credentials, queries, or fragments.")
+    netloc = parsed.hostname
+    if parsed.port:
+        netloc = f"{netloc}:{parsed.port}"
+    path = parsed.path.rstrip("/") + "/"
+    return urlunsplit((parsed.scheme, netloc, path, "", ""))
+
+
+def request(url: str, *, timeout: float, require_json: bool) -> tuple[int, Any, dict[str, str]]:
+    req = Request(url, headers={"User-Agent": "asean-academy-release-smoke/1.0"})
+    try:
+        with urlopen(req, timeout=timeout) as response:
+            status = response.status
+            body = response.read()
+            headers = {key.lower(): value for key, value in response.headers.items()}
+    except HTTPError as exc:
+        raise SmokeCheckError(f"{url} returned HTTP {exc.code}") from exc
+    except URLError as exc:
+        raise SmokeCheckError(f"{url} could not be reached: {exc.reason}") from exc
+    if not 200 <= status < 400:
+        raise SmokeCheckError(f"{url} returned HTTP {status}")
+    if not require_json:
+        return status, None, headers
+    try:
+        return status, json.loads(body), headers
+    except json.JSONDecodeError as exc:
+        raise SmokeCheckError(f"{url} did not return valid JSON") from exc
+
+
+def check_api(api_url: str, *, expected_release: str | None, timeout: float) -> list[CheckResult]:
+    results: list[CheckResult] = []
+    health_url = urljoin(api_url, "api/v1/health")
+    status, health, headers = request(health_url, timeout=timeout, require_json=True)
+    if health.get("status") != "ok":
+        raise SmokeCheckError("The API health contract did not report status=ok.")
+    release_sha = health.get("release", {}).get("sha")
+    header_release = headers.get("x-release-sha")
+    if not release_sha or header_release != release_sha:
+        raise SmokeCheckError("The API release identity body and header did not match.")
+    if expected_release and not release_sha.startswith(expected_release):
+        raise SmokeCheckError(
+            f"The active API release {release_sha[:12]} does not match {expected_release[:12]}."
+        )
+    results.append(CheckResult("api_health", health_url, status, release_sha))
+
+    ready_url = urljoin(api_url, "api/v1/ready")
+    status, ready, _ = request(ready_url, timeout=timeout, require_json=True)
+    if ready.get("status") != "ready":
+        raise SmokeCheckError("The API readiness contract did not report status=ready.")
+    if ready.get("release", {}).get("sha") != release_sha:
+        raise SmokeCheckError("Health and readiness reported different releases.")
+    results.append(CheckResult("api_readiness", ready_url, status, release_sha))
+    return results
+
+
+def check_web(web_url: str, *, timeout: float) -> CheckResult:
+    status, _, _ = request(web_url, timeout=timeout, require_json=False)
+    return CheckResult("web_root", web_url, status)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--api-url", required=True)
+    parser.add_argument("--web-url")
+    parser.add_argument("--expected-release")
+    parser.add_argument("--attempts", type=int, default=24)
+    parser.add_argument("--interval-seconds", type=float, default=5)
+    parser.add_argument("--timeout-seconds", type=float, default=10)
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    if args.attempts < 1 or args.interval_seconds < 0 or args.timeout_seconds <= 0:
+        raise SystemExit("Attempts and timeout must be positive; interval cannot be negative.")
+    api_url = normalize_base_url(args.api_url)
+    web_url = normalize_base_url(args.web_url) if args.web_url else None
+
+    last_error: SmokeCheckError | None = None
+    for attempt in range(1, args.attempts + 1):
+        try:
+            results = check_api(
+                api_url,
+                expected_release=args.expected_release,
+                timeout=args.timeout_seconds,
+            )
+            if web_url:
+                results.append(check_web(web_url, timeout=args.timeout_seconds))
+            print(
+                json.dumps(
+                    {
+                        "status": "passed",
+                        "attempt": attempt,
+                        "checks": [asdict(item) for item in results],
+                    },
+                    separators=(",", ":"),
+                )
+            )
+            return 0
+        except SmokeCheckError as exc:
+            last_error = exc
+            if attempt < args.attempts:
+                print(
+                    f"Smoke attempt {attempt}/{args.attempts} pending: {exc}",
+                    file=sys.stderr,
+                )
+                time.sleep(args.interval_seconds)
+
+    print(
+        json.dumps(
+            {
+                "status": "failed",
+                "attempts": args.attempts,
+                "error": str(last_error),
+            },
+            separators=(",", ":"),
+        ),
+        file=sys.stderr,
+    )
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

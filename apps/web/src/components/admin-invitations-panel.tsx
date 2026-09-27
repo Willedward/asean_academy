@@ -51,11 +51,15 @@ const statusClasses: Record<Invitation["status"], string> = {
   revoked: "bg-rose-100 text-rose-800",
 };
 
-const eventLabels = {
+const eventLabels: Record<
+  AuditEventList["events"][number]["event_type"],
+  string
+> = {
   invitation_created: "Invitation created",
   invitation_revoked: "Invitation revoked",
   invitation_accepted: "Student onboarded",
-} as const;
+  role_changed: "User role changed",
+};
 
 function formatDate(value: string): string {
   return new Intl.DateTimeFormat("en-SG", {

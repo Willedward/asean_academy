@@ -49,6 +49,7 @@ except role changes, which require `academic_admin`.
 | `GET` | `/api/v1/admin/students/{learnerId}` | Lesson and difficulty progress for one student |
 | `GET` | `/api/v1/admin/analytics/overview` | Aggregate engagement, mastery and attempt metrics |
 | `GET` | `/api/v1/admin/analytics/questions` | Question accuracy, hints, give-ups and retry demand |
+| `GET` | `/api/v1/admin/operations/status` | Academic-admin-only release and database status |
 | `PATCH` | `/api/v1/admin/users/{learnerId}/role` | Academic-admin-only role change |
 
 Student analytics deliberately exclude submitted answer bodies, access tokens,

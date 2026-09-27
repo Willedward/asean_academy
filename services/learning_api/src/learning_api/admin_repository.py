@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import secrets
 from datetime import UTC, datetime, timedelta
+from time import perf_counter
 from uuid import UUID
 
 import psycopg
@@ -256,6 +257,37 @@ class PostgresBetaOperationsRepository:
             ).fetchone()
         assert row is not None
         return dict(row)
+
+    def service_status(self) -> dict:
+        started_at = perf_counter()
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                select
+                    clock_timestamp() as server_time,
+                    (select count(*) from profiles) as registered_users,
+                    (select count(*) from profiles where role = 'student') as students,
+                    (select count(*) from course_enrolments
+                     where status = 'active') as active_enrolments,
+                    (select count(*) from course_versions
+                     where is_current) as current_course_versions,
+                    (select count(*) from math_question_versions
+                     where is_current) as current_questions
+                """
+            ).fetchone()
+        assert row is not None
+        return {
+            "state": "ready",
+            "latency_ms": round((perf_counter() - started_at) * 1000, 2),
+            "server_time": row["server_time"],
+            "resources": {
+                "registered_users": row["registered_users"],
+                "students": row["students"],
+                "active_enrolments": row["active_enrolments"],
+                "current_course_versions": row["current_course_versions"],
+                "current_questions": row["current_questions"],
+            },
+        }
 
     def audit_events(self, *, limit: int) -> dict:
         with self._connect() as connection:

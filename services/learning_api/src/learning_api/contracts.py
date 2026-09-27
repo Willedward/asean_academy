@@ -28,12 +28,19 @@ class HealthDependencies(ApiModel):
     tutor: Literal["disabled"] = "disabled"
 
 
+class ReleaseMetadata(ApiModel):
+    sha: str
+    deployment_id: str | None = None
+    required_schema_revision: str
+
+
 class HealthResponse(ApiModel):
     status: Literal["ok"] = "ok"
     service: Literal["learning-api"] = "learning-api"
     version: str
     environment: str
     request_id: str
+    release: ReleaseMetadata
     dependencies: HealthDependencies = Field(default_factory=HealthDependencies)
 
 
@@ -48,4 +55,5 @@ class ReadinessResponse(ApiModel):
     version: str
     environment: str
     request_id: str
+    release: ReleaseMetadata
     dependencies: ReadinessDependencies

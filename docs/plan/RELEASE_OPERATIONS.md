@@ -1,5 +1,8 @@
 # Release operations without avoidable user disruption
 
+The executable workflows and one-time production setup are documented in
+[DEPLOYMENT_AUTOMATION_OBSERVABILITY.md](DEPLOYMENT_AUTOMATION_OBSERVABILITY.md).
+
 ## Objective
 
 Normal releases should preserve signed-in sessions, in-progress practice and

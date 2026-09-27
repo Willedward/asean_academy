@@ -1288,6 +1288,51 @@
         "title": "CurrentLearnerResponse",
         "type": "object"
       },
+      "DeploymentStatusResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "checked_at": {
+            "format": "date-time",
+            "title": "Checked At",
+            "type": "string"
+          },
+          "database": {
+            "$ref": "#/components/schemas/OperationalDatabaseStatus"
+          },
+          "environment": {
+            "title": "Environment",
+            "type": "string"
+          },
+          "release": {
+            "$ref": "#/components/schemas/ReleaseMetadata"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "status": {
+            "const": "operational",
+            "default": "operational",
+            "title": "Status",
+            "type": "string"
+          },
+          "uptime_seconds": {
+            "minimum": 0.0,
+            "title": "Uptime Seconds",
+            "type": "number"
+          }
+        },
+        "required": [
+          "checked_at",
+          "request_id",
+          "environment",
+          "uptime_seconds",
+          "release",
+          "database"
+        ],
+        "title": "DeploymentStatusResponse",
+        "type": "object"
+      },
       "EnrolmentResponse": {
         "additionalProperties": false,
         "properties": {
@@ -1427,6 +1472,9 @@
             "title": "Environment",
             "type": "string"
           },
+          "release": {
+            "$ref": "#/components/schemas/ReleaseMetadata"
+          },
           "request_id": {
             "title": "Request Id",
             "type": "string"
@@ -1451,7 +1499,8 @@
         "required": [
           "version",
           "environment",
-          "request_id"
+          "request_id",
+          "release"
         ],
         "title": "HealthResponse",
         "type": "object"
@@ -2086,6 +2135,71 @@
         "title": "NextQuestionResponse",
         "type": "object"
       },
+      "OperationalDatabaseStatus": {
+        "additionalProperties": false,
+        "properties": {
+          "latency_ms": {
+            "minimum": 0.0,
+            "title": "Latency Ms",
+            "type": "number"
+          },
+          "resources": {
+            "$ref": "#/components/schemas/OperationalResourceCounts"
+          },
+          "server_time": {
+            "format": "date-time",
+            "title": "Server Time",
+            "type": "string"
+          },
+          "state": {
+            "const": "ready",
+            "default": "ready",
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "latency_ms",
+          "server_time",
+          "resources"
+        ],
+        "title": "OperationalDatabaseStatus",
+        "type": "object"
+      },
+      "OperationalResourceCounts": {
+        "additionalProperties": false,
+        "properties": {
+          "active_enrolments": {
+            "title": "Active Enrolments",
+            "type": "integer"
+          },
+          "current_course_versions": {
+            "title": "Current Course Versions",
+            "type": "integer"
+          },
+          "current_questions": {
+            "title": "Current Questions",
+            "type": "integer"
+          },
+          "registered_users": {
+            "title": "Registered Users",
+            "type": "integer"
+          },
+          "students": {
+            "title": "Students",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "registered_users",
+          "students",
+          "active_enrolments",
+          "current_course_versions",
+          "current_questions"
+        ],
+        "title": "OperationalResourceCounts",
+        "type": "object"
+      },
       "PracticeEntry": {
         "additionalProperties": false,
         "properties": {
@@ -2620,6 +2734,9 @@
             "title": "Environment",
             "type": "string"
           },
+          "release": {
+            "$ref": "#/components/schemas/ReleaseMetadata"
+          },
           "request_id": {
             "title": "Request Id",
             "type": "string"
@@ -2645,9 +2762,40 @@
           "version",
           "environment",
           "request_id",
+          "release",
           "dependencies"
         ],
         "title": "ReadinessResponse",
+        "type": "object"
+      },
+      "ReleaseMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "deployment_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deployment Id"
+          },
+          "required_schema_revision": {
+            "title": "Required Schema Revision",
+            "type": "string"
+          },
+          "sha": {
+            "title": "Sha",
+            "type": "string"
+          }
+        },
+        "required": [
+          "sha",
+          "required_schema_revision"
+        ],
+        "title": "ReleaseMetadata",
         "type": "object"
       },
       "SolutionPartResponse": {
@@ -3506,6 +3654,102 @@
           }
         ],
         "summary": "Idempotently revoke a beta invitation",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/operations/status": {
+      "get": {
+        "operationId": "getDeploymentStatus",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentStatusResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Inspect the active release and database as an academic administrator",
         "tags": [
           "admin"
         ]

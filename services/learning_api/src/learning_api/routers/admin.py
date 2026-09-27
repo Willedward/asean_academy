@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import UTC, datetime
 from typing import Literal
 from uuid import UUID
 
@@ -13,12 +14,19 @@ from ..admin_contracts import (
     BetaOperationsSummaryResponse,
     CreatedInvitationResponse,
     CreateInvitationRequest,
+    DeploymentStatusResponse,
     InvitationListResponse,
     InvitationResponse,
 )
 from ..admin_repository import BetaOperationsError
+from ..config import REQUIRED_SCHEMA_REVISION
+from ..contracts import ReleaseMetadata
 from ..conventions import current_request_id
-from ..dependencies import AdminLearnerDependency, BetaOperationsRepositoryDependency
+from ..dependencies import (
+    AcademicAdminLearnerDependency,
+    AdminLearnerDependency,
+    BetaOperationsRepositoryDependency,
+)
 
 LOGGER = logging.getLogger("learning_api.admin")
 router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
@@ -80,9 +88,11 @@ async def create_invitation(
         )
     )
     LOGGER.info(
-        "beta_invitation_created request_id=%s invitation_id=%s",
-        current_request_id(request),
-        result["invitation_id"],
+        "beta_invitation_created",
+        extra={
+            "request_id": current_request_id(request),
+            "invitation_id": str(result["invitation_id"]),
+        },
     )
     return result
 
@@ -107,9 +117,11 @@ async def revoke_invitation(
         )
     )
     LOGGER.info(
-        "beta_invitation_revoked request_id=%s invitation_id=%s",
-        current_request_id(request),
-        invitation_id,
+        "beta_invitation_revoked",
+        extra={
+            "request_id": current_request_id(request),
+            "invitation_id": str(invitation_id),
+        },
     )
     return result
 
@@ -126,6 +138,36 @@ async def operations_summary(
 ) -> BetaOperationsSummaryResponse:
     del administrator
     return _safe(repository.summary)
+
+
+@router.get(
+    "/operations/status",
+    operation_id="getDeploymentStatus",
+    response_model=DeploymentStatusResponse,
+    summary="Inspect the active release and database as an academic administrator",
+)
+async def deployment_status(
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+) -> DeploymentStatusResponse:
+    del administrator
+    settings = request.app.state.settings
+    return DeploymentStatusResponse(
+        checked_at=datetime.now(UTC),
+        request_id=current_request_id(request),
+        environment=settings.environment,
+        uptime_seconds=max(
+            0,
+            (datetime.now(UTC) - request.app.state.started_at).total_seconds(),
+        ),
+        release=ReleaseMetadata(
+            sha=settings.release_sha,
+            deployment_id=settings.deployment_id,
+            required_schema_revision=REQUIRED_SCHEMA_REVISION,
+        ),
+        database=_safe(repository.service_status),
+    )
 
 
 @router.get(

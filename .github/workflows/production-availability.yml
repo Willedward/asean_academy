@@ -1,0 +1,28 @@
+name: Production availability
+
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-availability
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: ${{ vars.PRODUCTION_API_URL != '' && vars.PRODUCTION_WEB_URL != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public health, readiness and web availability
+        run: |
+          python3 scripts/smoke_deployment.py \
+            --api-url "${{ vars.PRODUCTION_API_URL }}" \
+            --web-url "${{ vars.PRODUCTION_WEB_URL }}" \
+            --attempts 3 \
+            --interval-seconds 10

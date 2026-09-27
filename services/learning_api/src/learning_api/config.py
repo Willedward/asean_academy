@@ -8,6 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
+REQUIRED_SCHEMA_REVISION = "202609260007"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -26,11 +27,25 @@ def _boolean(name: str, default: bool) -> bool:
     raise RuntimeError(f"{name} must be true or false")
 
 
+def _positive_integer(name: str, default: int) -> int:
+    try:
+        value = int(os.getenv(name, str(default)))
+    except ValueError as exc:
+        raise RuntimeError(f"{name} must be a positive integer") from exc
+    if value <= 0:
+        raise RuntimeError(f"{name} must be a positive integer")
+    return value
+
+
 @dataclass(frozen=True, slots=True)
 class Settings:
     environment: str
     cors_origins: tuple[str, ...]
     log_level: str
+    log_format: str = "text"
+    slow_request_ms: int = 1000
+    release_sha: str = "local"
+    deployment_id: str | None = None
     repository_root: Path = DEFAULT_REPOSITORY_ROOT
     allow_draft_content: bool = False
     practice_database: Path | None = None
@@ -50,10 +65,32 @@ class Settings:
         log_level = os.getenv("ASEAN_ACADEMY_LOG_LEVEL", "INFO").strip().upper()
         if log_level not in {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}:
             raise RuntimeError("ASEAN_ACADEMY_LOG_LEVEL is invalid")
+        log_format = os.getenv(
+            "ASEAN_ACADEMY_LOG_FORMAT",
+            "json" if environment in {"preview", "production"} else "text",
+        ).strip().lower()
+        if log_format not in {"text", "json"}:
+            raise RuntimeError("ASEAN_ACADEMY_LOG_FORMAT must be text or json")
+        release_sha = (
+            os.getenv("ASEAN_ACADEMY_RELEASE_SHA")
+            or os.getenv("RAILWAY_GIT_COMMIT_SHA")
+            or os.getenv("OTEL_SERVICE_VERSION")
+            or "local"
+        ).strip()
+        if not release_sha or len(release_sha) > 128:
+            raise RuntimeError("ASEAN_ACADEMY_RELEASE_SHA must contain 1 to 128 characters")
         settings = cls(
             environment=environment,
             cors_origins=_csv("ASEAN_ACADEMY_CORS_ORIGINS", "http://localhost:3000"),
             log_level=log_level,
+            log_format=log_format,
+            slow_request_ms=_positive_integer("ASEAN_ACADEMY_SLOW_REQUEST_MS", 1000),
+            release_sha=release_sha,
+            deployment_id=(
+                value
+                if (value := os.getenv("RAILWAY_DEPLOYMENT_ID", "").strip())
+                else None
+            ),
             repository_root=Path(
                 os.getenv("ASEAN_ACADEMY_REPOSITORY_ROOT", DEFAULT_REPOSITORY_ROOT)
             ).expanduser().resolve(),

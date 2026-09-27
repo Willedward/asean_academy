@@ -4,6 +4,40 @@
  */
 
 export interface paths {
+    "/api/v1/admin/analytics/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get aggregate beta learning metrics */
+        get: operations["getAdminAnalyticsOverview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/analytics/questions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List aggregate question performance metrics */
+        get: operations["listAdminQuestionAnalytics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/audit-events": {
         parameters: {
             query?: never;
@@ -56,6 +90,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/operations/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Inspect the active release and database as an academic administrator */
+        get: operations["getDeploymentStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/operations/summary": {
         parameters: {
             query?: never;
@@ -71,6 +122,57 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List privacy-limited learner progress summaries */
+        get: operations["listAdminStudents"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students/{learner_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one learner's progress without exposing submitted answers */
+        get: operations["getAdminStudentDetail"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{learner_id}/role": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change a user role as an academic administrator */
+        patch: operations["updateAdminUserRole"];
         trace?: never;
     };
     "/api/v1/attempts": {
@@ -311,6 +413,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/ready": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Check database and schema readiness before receiving traffic */
+        get: operations["getReadiness"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -321,6 +440,206 @@ export interface components {
             display_name: string;
             /** Invitation Code */
             invitation_code: string;
+        };
+        /** AdminAnalyticsOverviewResponse */
+        AdminAnalyticsOverviewResponse: {
+            /** Active Enrolments */
+            active_enrolments: number;
+            /** Active Students Last 30 Days */
+            active_students_last_30_days: number;
+            /** Active Students Last 7 Days */
+            active_students_last_7_days: number;
+            /** Attempts */
+            attempts: number;
+            /** Checkpoint Attempts */
+            checkpoint_attempts: number;
+            /** Checkpoint Passes */
+            checkpoint_passes: number;
+            /** Completed Practice Sessions */
+            completed_practice_sessions: number;
+            /** Correct Attempts */
+            correct_attempts: number;
+            /** Give Ups */
+            give_ups: number;
+            /** Hint Reveals */
+            hint_reveals: number;
+            /** Lessons Mastered */
+            lessons_mastered: number;
+            /** Lessons Started */
+            lessons_started: number;
+            /** Overall Accuracy Percentage */
+            overall_accuracy_percentage: number;
+            /** Practice Sessions */
+            practice_sessions: number;
+            /** Students With Retries */
+            students_with_retries: number;
+            /** Total Students */
+            total_students: number;
+        };
+        /** AdminDifficultyPerformanceResponse */
+        AdminDifficultyPerformanceResponse: {
+            /** Accuracy Percentage */
+            accuracy_percentage: number;
+            /** Attempts */
+            attempts: number;
+            /** Correct Attempts */
+            correct_attempts: number;
+            /** Difficulty */
+            difficulty: number;
+        };
+        /** AdminLessonProgressResponse */
+        AdminLessonProgressResponse: {
+            /** Checkpoint Passed */
+            checkpoint_passed: boolean;
+            /** Completed At */
+            completed_at: string | null;
+            /** Correct Count */
+            correct_count: number;
+            /** Eventual Correct Percentage */
+            eventual_correct_percentage: number;
+            /** Gave Up Count */
+            gave_up_count: number;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Title */
+            lesson_title: string;
+            /** Question Count */
+            question_count: number;
+            /** Resolved Count */
+            resolved_count: number;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "in_progress" | "practice_completed" | "proficient" | "mastered";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** AdminQuestionAnalyticsListResponse */
+        AdminQuestionAnalyticsListResponse: {
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Questions */
+            questions: components["schemas"]["AdminQuestionAnalyticsResponse"][];
+            /** Total */
+            total: number;
+        };
+        /** AdminQuestionAnalyticsResponse */
+        AdminQuestionAnalyticsResponse: {
+            /** Accuracy Percentage */
+            accuracy_percentage: number;
+            /** Attempt Count */
+            attempt_count: number;
+            /** Correct Attempts */
+            correct_attempts: number;
+            /** Difficulty */
+            difficulty: number;
+            /** Give Up Count */
+            give_up_count: number;
+            /** Hint Reveals */
+            hint_reveals: number;
+            /** Outcome Code */
+            outcome_code: string;
+            /** Question Key */
+            question_key: string;
+            /** Queued For Retry Students */
+            queued_for_retry_students: number;
+            /** Title */
+            title: string;
+            /** Unique Students */
+            unique_students: number;
+        };
+        /** AdminStudentDetailResponse */
+        AdminStudentDetailResponse: {
+            /** Difficulty Performance */
+            difficulty_performance: components["schemas"]["AdminDifficultyPerformanceResponse"][];
+            /** Lessons */
+            lessons: components["schemas"]["AdminLessonProgressResponse"][];
+            student: components["schemas"]["AdminStudentSummaryResponse"];
+        };
+        /** AdminStudentListResponse */
+        AdminStudentListResponse: {
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Students */
+            students: components["schemas"]["AdminStudentSummaryResponse"][];
+            /** Total */
+            total: number;
+        };
+        /** AdminStudentSummaryResponse */
+        AdminStudentSummaryResponse: {
+            /** Accuracy Percentage */
+            accuracy_percentage: number;
+            /** Attempts */
+            attempts: number;
+            /** Correct Attempts */
+            correct_attempts: number;
+            /** Course Keys */
+            course_keys: string[];
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string;
+            /** Enrolled At */
+            enrolled_at: string | null;
+            /**
+             * Enrolment Status
+             * @enum {string}
+             */
+            enrolment_status: "active" | "completed" | "withdrawn" | "not_enrolled";
+            /** Last Activity At */
+            last_activity_at: string | null;
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /** Lessons Mastered */
+            lessons_mastered: number;
+            /** Lessons Proficient */
+            lessons_proficient: number;
+            /** Lessons Started */
+            lessons_started: number;
+            /** Practice Sessions */
+            practice_sessions: number;
+            /** Retry Question Count */
+            retry_question_count: number;
+            /** Target Track */
+            target_track: string | null;
+        };
+        /** AdminUserRoleResponse */
+        AdminUserRoleResponse: {
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string;
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "student" | "content_admin" | "academic_admin";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
         };
         /** AttemptPartResult */
         AttemptPartResult: {
@@ -375,7 +694,7 @@ export interface components {
              * Event Type
              * @enum {string}
              */
-            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted";
+            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed";
             /** Invitation Id */
             invitation_id: string | null;
             /** Metadata */
@@ -592,6 +911,28 @@ export interface components {
             enrolments: components["schemas"]["EnrolmentResponse"][];
             profile: components["schemas"]["ProfileResponse"];
         };
+        /** DeploymentStatusResponse */
+        DeploymentStatusResponse: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            database: components["schemas"]["OperationalDatabaseStatus"];
+            /** Environment */
+            environment: string;
+            release: components["schemas"]["ReleaseMetadata"];
+            /** Request Id */
+            request_id: string;
+            /**
+             * Status
+             * @default operational
+             * @constant
+             */
+            status: "operational";
+            /** Uptime Seconds */
+            uptime_seconds: number;
+        };
         /** EnrolmentResponse */
         EnrolmentResponse: {
             /** Course Key */
@@ -661,6 +1002,7 @@ export interface components {
             dependencies?: components["schemas"]["HealthDependencies"];
             /** Environment */
             environment: string;
+            release: components["schemas"]["ReleaseMetadata"];
             /** Request Id */
             request_id: string;
             /**
@@ -913,6 +1255,36 @@ export interface components {
              */
             status: "active" | "completed";
         };
+        /** OperationalDatabaseStatus */
+        OperationalDatabaseStatus: {
+            /** Latency Ms */
+            latency_ms: number;
+            resources: components["schemas"]["OperationalResourceCounts"];
+            /**
+             * Server Time
+             * Format: date-time
+             */
+            server_time: string;
+            /**
+             * State
+             * @default ready
+             * @constant
+             */
+            state: "ready";
+        };
+        /** OperationalResourceCounts */
+        OperationalResourceCounts: {
+            /** Active Enrolments */
+            active_enrolments: number;
+            /** Current Course Versions */
+            current_course_versions: number;
+            /** Current Questions */
+            current_questions: number;
+            /** Registered Users */
+            registered_users: number;
+            /** Students */
+            students: number;
+        };
         /** PracticeEntry */
         PracticeEntry: {
             /** Available */
@@ -1092,6 +1464,51 @@ export interface components {
              */
             response_type: "numeric" | "algebraic_expression";
         };
+        /** ReadinessDependencies */
+        ReadinessDependencies: {
+            /**
+             * Database
+             * @enum {string}
+             */
+            database: "ready" | "local";
+            /**
+             * Schema Status
+             * @enum {string}
+             */
+            schema_status: "current" | "local";
+        };
+        /** ReadinessResponse */
+        ReadinessResponse: {
+            dependencies: components["schemas"]["ReadinessDependencies"];
+            /** Environment */
+            environment: string;
+            release: components["schemas"]["ReleaseMetadata"];
+            /** Request Id */
+            request_id: string;
+            /**
+             * Service
+             * @default learning-api
+             * @constant
+             */
+            service: "learning-api";
+            /**
+             * Status
+             * @default ready
+             * @constant
+             */
+            status: "ready";
+            /** Version */
+            version: string;
+        };
+        /** ReleaseMetadata */
+        ReleaseMetadata: {
+            /** Deployment Id */
+            deployment_id?: string | null;
+            /** Required Schema Revision */
+            required_schema_revision: string;
+            /** Sha */
+            sha: string;
+        };
         /** SolutionPartResponse */
         SolutionPartResponse: {
             /** Canonical Answer */
@@ -1129,6 +1546,14 @@ export interface components {
             /** Session Id */
             session_id: string;
         };
+        /** UpdateUserRoleRequest */
+        UpdateUserRoleRequest: {
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "student" | "content_admin" | "academic_admin";
+        };
     };
     responses: never;
     parameters: never;
@@ -1138,6 +1563,177 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    getAdminAnalyticsOverview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminAnalyticsOverviewResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listAdminQuestionAnalytics: {
+        parameters: {
+            query?: {
+                difficulty?: number | null;
+                outcome?: string | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminQuestionAnalyticsListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     listBetaAuditEvents: {
         parameters: {
             query?: {
@@ -1482,6 +2078,89 @@ export interface operations {
             };
         };
     };
+    getDeploymentStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeploymentStatusResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     getBetaOperationsSummary: {
         parameters: {
             query?: never;
@@ -1498,6 +2177,267 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BetaOperationsSummaryResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listAdminStudents: {
+        parameters: {
+            query?: {
+                search?: string | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminStudentListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getAdminStudentDetail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminStudentDetailResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    updateAdminUserRole: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateUserRoleRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminUserRoleResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2693,6 +3633,89 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProgressResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getReadiness: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadinessResponse"];
                 };
             };
             /** @description Bad Request */

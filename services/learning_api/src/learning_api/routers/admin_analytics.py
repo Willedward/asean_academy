@@ -122,9 +122,11 @@ async def update_user_role(
         )
     )
     LOGGER.info(
-        "admin_role_changed request_id=%s target_user_id=%s role=%s",
-        current_request_id(request),
-        learner_id,
-        body.role,
+        "admin_role_changed",
+        extra={
+            "request_id": current_request_id(request),
+            "target_user_id": str(learner_id),
+            "role": body.role,
+        },
     )
     return result
