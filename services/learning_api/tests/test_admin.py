@@ -233,7 +233,7 @@ def test_only_academic_admin_can_view_deployment_status():
     assert response.status_code == 200
     assert response.json()["request_id"] == "operations-test"
     assert response.json()["database"]["resources"]["current_questions"] == 40
-    assert response.json()["release"]["required_schema_revision"] == "202609270008"
+    assert response.json()["release"]["required_schema_revision"] == "202609270009"
 
 
 def test_admin_invitation_contract_rejects_invalid_email():
@@ -247,3 +247,13 @@ def test_admin_invitation_contract_rejects_invalid_email():
     )
     assert response.status_code == 422
     assert response.json()["error"]["code"] == "validation_error"
+
+
+def test_new_academic_operations_reject_content_admin_and_students():
+    app, _ = application()
+    for token in [None, "student-token", "admin-token"]:
+        for method, path in [("GET", "/users"), ("GET", "/operations/content"),
+                             ("GET", f"/users/{STUDENT_ID}/curriculum-preview?course_key=g3-sec1-math"),
+                             ("POST", f"/users/{STUDENT_ID}/curriculum-migration")]:
+            response = request(app, method, "/api/v1/admin" + path, token)
+            assert response.status_code == (401 if token is None else 403), response.text

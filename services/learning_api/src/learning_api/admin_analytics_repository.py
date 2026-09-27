@@ -381,6 +381,27 @@ class PostgresAdminAnalyticsRepository:
             "offset": offset,
         }
 
+    def list_users(self, *, search, limit, offset):
+        pattern = f"%{search or ''}%"
+        with self._connect() as connection:
+            users = connection.execute("""
+                select id as learner_id, email, display_name, role::text, updated_at
+                from profiles where email ilike %s or coalesce(display_name, '') ilike %s
+                order by email, id limit %s offset %s
+            """, (pattern, pattern, limit, offset)).fetchall()
+            total = connection.execute("""
+                select count(*) as total from profiles
+                where email ilike %s or coalesce(display_name, '') ilike %s
+            """, (pattern, pattern)).fetchone()["total"]
+            for user in users:
+                user["enrolments"] = connection.execute("""
+                    select c.course_key, v.revision as course_revision, e.status::text
+                    from course_enrolments e join courses c on c.id=e.course_id
+                    join course_versions v on v.id=e.course_version_id
+                    where e.student_id=%s order by c.course_key
+                """, (user["learner_id"],)).fetchall()
+        return {"users": users, "total": total, "limit": limit, "offset": offset}
+
     def change_role(
         self,
         administrator: AuthenticatedLearner,
@@ -395,6 +416,7 @@ class PostgresAdminAnalyticsRepository:
                 409,
             )
         with self._connect() as connection:
+            connection.execute("select pg_advisory_xact_lock(20260927, 10)")
             target = connection.execute(
                 """
                 select id, email, display_name, role::text as role, updated_at

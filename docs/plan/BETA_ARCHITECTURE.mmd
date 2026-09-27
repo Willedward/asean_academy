@@ -1,0 +1,78 @@
+flowchart TB
+  subgraph people["Users and authoring"]
+    STUDENT["Student browser"]
+    ADMIN["Administrator browser"]
+    AUTHOR["Content author and reviewer"]
+  end
+
+  subgraph web["Next.js web service — localhost:3000 in development"]
+    PAGES["Course map · Lesson notes · Practice · Progress"]
+    DASH["Admin overview · Students · Questions<br/>Invitations · Roles · Audit · Operations"]
+    SESSION["Server session verification<br/>OAuth callback and cookie refresh"]
+    PROXY["Same-origin /api/v1/* proxy<br/>No-store responses · Request IDs"]
+    PAGES --> PROXY
+    DASH --> PROXY
+    SESSION --> PROXY
+  end
+
+  subgraph api["FastAPI Learning API — localhost:8000 in development"]
+    AUTHZ["Token verification and database role checks"]
+    COURSE["Course catalogue and prerequisites"]
+    PRACTICE["Practice orchestration and deterministic marking"]
+    PROGRESS["Section progress · Proficiency · Checkpoint mastery"]
+    OPS["Admin analytics · Invitations · Role management"]
+    SYNC["Content hashes · Readiness · Revision migration"]
+    AUTHZ --> COURSE
+    AUTHZ --> PRACTICE
+    AUTHZ --> PROGRESS
+    AUTHZ --> OPS
+    OPS --> SYNC
+    PRACTICE --> PROGRESS
+  end
+
+  subgraph supabase["Supabase managed services"]
+    AUTH["Supabase Auth"]
+    DB[("PostgreSQL<br/>Content revisions and learner state")]
+  end
+
+  GOOGLE["Google OAuth"]
+  BANK["question_bank Python library<br/>Validation · Checking · Importers"]
+  GIT[("Git-authored JSON and assets")]
+  CI["GitHub Actions<br/>Validate → Migrate → Import → Deploy → Smoke"]
+  OCR["Offline OCR and categorizer<br/>Staging and human review"]
+  AI["Future grounded AI tutor"]
+  VIDEO["Future video host and captions"]
+
+  STUDENT --> PAGES
+  ADMIN --> DASH
+  STUDENT --> SESSION
+  ADMIN --> SESSION
+  SESSION --> AUTH
+  AUTH <-->|OAuth| GOOGLE
+  PROXY -->|"Bearer token / HTTP"| AUTHZ
+  AUTHZ -->|"JWKS or Auth user verification"| AUTH
+  AUTHZ -->|"profiles.role"| DB
+  COURSE --> GIT
+  PRACTICE --> BANK
+  PROGRESS --> DB
+  PRACTICE --> DB
+  OPS --> DB
+  SYNC --> DB
+  SYNC --> GIT
+  BANK --> GIT
+  AUTHOR --> GIT
+  AUTHOR --> OCR
+  OCR -.->|"Reviewed future ingestion"| GIT
+  GIT --> CI
+  CI -->|"Migrations and content imports"| DB
+  CI -->|"Deploy API then web"| api
+  CI --> web
+  PRACTICE -.-> AI
+  PAGES -.-> VIDEO
+
+  classDef managed fill:#ede9fe,stroke:#7c3aed,color:#111827
+  classDef future fill:#f8fafc,stroke:#94a3b8,stroke-dasharray:5 5,color:#475569
+  classDef data fill:#fef3c7,stroke:#d97706,color:#111827
+  class AUTH,DB,GOOGLE managed
+  class AI,VIDEO future
+  class GIT data

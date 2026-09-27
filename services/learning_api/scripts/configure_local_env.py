@@ -9,11 +9,12 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 import psycopg
 
+from learning_api.config import REQUIRED_SCHEMA_REVISION
+
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 WEB_ENV = REPOSITORY_ROOT / "apps/web/.env.local"
 API_ENV = REPOSITORY_ROOT / "services/learning_api/.env.local"
 POOLER_URL = REPOSITORY_ROOT / "supabase/.temp/pooler-url"
-REQUIRED_SCHEMA_REVISION = "202609270008"
 
 
 def _read_env(path: Path) -> dict[str, str]:

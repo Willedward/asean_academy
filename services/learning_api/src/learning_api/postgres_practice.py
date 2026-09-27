@@ -57,6 +57,8 @@ class PostgresPracticeEngine:
         )
 
     def _set_identity(self, connection) -> None:
+        connection.execute("select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                           (f"curriculum:{self.learner_id}",))
         connection.execute(
             "select set_config('request.jwt.claim.sub', %s, true)",
             (self.learner_id,),
@@ -267,6 +269,16 @@ class PostgresPracticeEngine:
                             ),
                         )
                     return self._creation_response(active)
+            if scope.get("course_key"):
+                pin = connection.execute("""
+                    select v.revision from course_enrolments e
+                    join courses c on c.id=e.course_id
+                    join course_versions v on v.id=e.course_version_id
+                    where e.student_id=%s and c.course_key=%s and e.status='active'
+                """, (self.learner_id, scope["course_key"])).fetchone()
+                if pin is None or pin["revision"] != scope.get("course_revision"):
+                    raise PracticeError("course_revision_update_required",
+                                        "An administrator must update your course enrolment before starting new practice.", 409)
             session = connection.execute(
                 """
                 insert into practice_sessions (

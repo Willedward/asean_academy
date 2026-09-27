@@ -43,7 +43,7 @@ export default async function OnboardingPage({
     currentLearner &&
     ["content_admin", "academic_admin"].includes(currentLearner.profile.role)
   ) {
-    redirect("/admin/invitations");
+    redirect("/admin");
   }
   if (currentLearner && hasActiveEnrolment(currentLearner)) redirect("/learn");
 

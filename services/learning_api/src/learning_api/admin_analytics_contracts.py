@@ -118,3 +118,54 @@ class AdminUserRoleResponse(ApiModel):
     display_name: str | None
     role: AdminUserRole
     updated_at: datetime
+
+
+class AdminEnrolmentResponse(ApiModel):
+    course_key: str
+    course_revision: int
+    status: str
+
+
+class AdminManagedUserResponse(AdminUserRoleResponse):
+    enrolments: list[AdminEnrolmentResponse]
+
+
+class AdminUserListResponse(ApiModel):
+    users: list[AdminManagedUserResponse]
+    total: int
+    limit: int
+    offset: int
+
+
+class ContentStatusResponse(ApiModel):
+    status: str
+    course_key: str
+    course_revision: int
+    lessons: int
+    questions: int
+
+
+class CurriculumPreviewResponse(ApiModel):
+    learner_id: UUID
+    course_key: str
+    from_revision: int
+    target_revision: int
+    target_hash: str
+    active_sessions: int
+    incompatible_lessons: list[str]
+    blockers: list[str]
+    allowed: bool
+
+
+class CurriculumMigrationRequest(ApiModel):
+    course_key: str = Field(min_length=1, max_length=80)
+    from_revision: int = Field(ge=1)
+    target_revision: int = Field(ge=1)
+    target_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
+    reason: str = Field(min_length=10, max_length=500)
+
+
+class CurriculumMigrationResponse(ApiModel):
+    migrated: bool
+    learner_id: UUID
+    course_revision: int

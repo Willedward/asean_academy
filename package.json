@@ -19,6 +19,7 @@
     "release:check": "python3 scripts/check_migration_safety.py",
     "smoke:deployment": "python3 scripts/smoke_deployment.py",
     "openapi:generate": "corepack pnpm openapi:export && corepack pnpm fixtures:export && corepack pnpm --filter @asean-academy/web openapi:generate",
-    "ci:web": "corepack pnpm openapi:generate && corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test:web && corepack pnpm build"
+    "ci:web": "corepack pnpm openapi:generate && corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test:web && corepack pnpm build",
+    "bootstrap:api": "uv run --project services/learning_api --locked python services/learning_api/scripts/bootstrap_local.py"
   }
 }

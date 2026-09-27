@@ -798,6 +798,8 @@ class PostgresProgressRepository:
 
     @staticmethod
     def _set_identity(connection, learner_id: str) -> None:
+        connection.execute("select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                           (f"curriculum:{learner_id}",))
         connection.execute(
             "select set_config('request.jwt.claim.sub', %s, true)",
             (learner_id,),
@@ -977,6 +979,15 @@ class PostgresProgressRepository:
         with self._connect() as connection:
             self._set_identity(connection, learner_id)
             identity = self._lesson_identity(connection, lesson_key, lesson_revision)
+            permitted = connection.execute("""
+                select 1 from course_enrolments e
+                join unit_versions u on u.course_version_id=e.course_version_id
+                join unit_version_lessons m on m.unit_version_id=u.id
+                where e.student_id=%s and e.status='active' and m.lesson_version_id=%s
+            """, (learner_id, identity["lesson_version_id"])).fetchone()
+            if permitted is None:
+                raise ProgressError("course_revision_update_required",
+                                    "An administrator must update your course enrolment before starting this lesson.", 409)
             connection.execute(
                 """
                 insert into learner_lesson_progress (

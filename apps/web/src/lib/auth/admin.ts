@@ -9,7 +9,7 @@ import { requireVerifiedSession } from "./session";
 
 export async function requireAdministrator() {
   if (!isSupabaseConfigured()) return null;
-  const session = await requireVerifiedSession("/admin/invitations");
+  const session = await requireVerifiedSession("/admin");
   if (!session) return null;
 
   let learner;

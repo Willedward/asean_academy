@@ -2,6 +2,9 @@
 
 An ASEAN scholarship preparation platform in early development.
 
+- [Beta architecture diagrams](docs/plan/BETA_ARCHITECTURE.md) map services, data, authentication, learning and releases.
+- [Admin dashboard and content-sync runbook](docs/plan/CONTENT_SYNC_ADMIN_DASHBOARD.md) covers local bootstrap, admin pages and controlled course updates.
+
 - [PLAN V2](docs/plan/PLAN_V2.md) consolidates the course-based product, service
   boundaries, integration sequence, and delivery plan. The earlier [product plan](docs/plan/plan.md),
   [architecture](docs/plan/ARCHI.md), and [build stages](docs/plan/STAGES.md) remain useful background.
@@ -50,4 +53,4 @@ corepack pnpm dev:web
 ```
 
 Open <http://localhost:3000>. The temporary foundation screen calls the API at
-`http://127.0.0.1:8000/api/v1/health` through a same-origin Next.js rewrite.
+`http://127.0.0.1:8000/api/v1/health` through a same-origin Next.js route handler.

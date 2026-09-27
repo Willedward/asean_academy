@@ -147,12 +147,6 @@ class PracticeService:
         self.progress.assert_lesson_unlocked(lesson_key)
         active = self.progress.active_session(lesson_key)
         if active is not None:
-            self.progress.attach_session(
-                lesson.stable_key,
-                lesson.revision,
-                active.session_id,
-                active.question_count,
-            )
             summary = self.engine.session_summary(active.session_id)
             self._sync(summary)
             if summary["status"] == "active":
@@ -190,6 +184,8 @@ class PracticeService:
             question_count=selected_count,
             ordered_question_keys=ordered_keys,
             context={
+                "course_key": self.catalogue.report.course.stable_key,
+                "course_revision": self.catalogue.report.course.revision,
                 "lesson_key": lesson.stable_key,
                 "mode": mode,
                 "stages": stages,
@@ -261,6 +257,8 @@ class PracticeService:
             question_count=selected_count,
             ordered_question_keys=[item.question_key for item in pool.items],
             context={
+                "course_key": self.catalogue.report.course.stable_key,
+                "course_revision": self.catalogue.report.course.revision,
                 "unit_key": unit.stable_key,
                 "mode": "checkpoint",
                 "stages": {item.question_key: item.stage for item in pool.items},

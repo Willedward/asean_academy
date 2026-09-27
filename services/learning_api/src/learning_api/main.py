@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from time import perf_counter
 
@@ -15,6 +16,7 @@ from psycopg.rows import dict_row
 
 from . import __version__
 from .config import REQUIRED_SCHEMA_REVISION, Settings
+from .content_sync import ContentSyncError, verify_database_content
 from .contracts import (
     ErrorDetail,
     ErrorEnvelope,
@@ -74,7 +76,14 @@ def create_app(
     settings = settings or Settings.from_environment()
     configure_logging(level=settings.log_level, log_format=settings.log_format)
 
+    @asynccontextmanager
+    async def lifespan(app):
+        if settings.database_url and settings.environment != "test":
+            verify_database_content(settings.database_url, app.state.course_catalogue)
+        yield
+
     application = FastAPI(
+        lifespan=lifespan,
         title="ASEAN Academy Learning API",
         version=__version__,
         description=(
@@ -140,6 +149,11 @@ def create_app(
             },
         )
         return response
+
+    @application.exception_handler(ContentSyncError)
+    async def content_error(request: Request, exc: ContentSyncError):
+        return _error_response(request, status_code=503, code="content_out_of_sync",
+                               message="Learning content is awaiting a database import.")
 
     @application.exception_handler(HTTPException)
     async def http_exception(request: Request, exc: HTTPException):
@@ -246,6 +260,10 @@ def create_app(
                                 select 1 from information_schema.tables
                                 where table_schema = 'public'
                                   and table_name = 'learner_lesson_section_progress'
+                            ) and exists (
+                                select 1 from pg_enum e join pg_type t on t.oid=e.enumtypid
+                                where t.typname='beta_audit_event_type'
+                                and e.enumlabel='course_revision_changed'
                             ) as schema_ready
                         """
                     ).fetchone()
@@ -274,7 +292,19 @@ def create_app(
                         "message": "The learning database schema is not ready.",
                     },
                 )
-            dependencies = ReadinessDependencies(database="ready", schema_status="current")
+            try:
+                verify_database_content(settings.database_url, application.state.course_catalogue)
+            except ContentSyncError as exc:
+                raise HTTPException(status_code=503, detail={
+                    "code": "content_out_of_sync",
+                    "message": "Learning content is awaiting a database import.",
+                }) from exc
+            except psycopg.Error as exc:
+                raise HTTPException(status_code=503, detail={
+                    "code": "database_unavailable",
+                    "message": "The learning database is unavailable.",
+                }) from exc
+            dependencies = ReadinessDependencies(database="ready", schema_status="current", content_status="current")
         return ReadinessResponse(
             version=__version__,
             environment=settings.environment,

@@ -198,6 +198,30 @@
         "title": "AdminDifficultyPerformanceResponse",
         "type": "object"
       },
+      "AdminEnrolmentResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "course_revision": {
+            "title": "Course Revision",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course_key",
+          "course_revision",
+          "status"
+        ],
+        "title": "AdminEnrolmentResponse",
+        "type": "object"
+      },
       "AdminLessonProgressResponse": {
         "additionalProperties": false,
         "properties": {
@@ -281,6 +305,62 @@
           "completed_at"
         ],
         "title": "AdminLessonProgressResponse",
+        "type": "object"
+      },
+      "AdminManagedUserResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "enrolments": {
+            "items": {
+              "$ref": "#/components/schemas/AdminEnrolmentResponse"
+            },
+            "title": "Enrolments",
+            "type": "array"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "student",
+              "content_admin",
+              "academic_admin"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "learner_id",
+          "email",
+          "display_name",
+          "role",
+          "updated_at",
+          "enrolments"
+        ],
+        "title": "AdminManagedUserResponse",
         "type": "object"
       },
       "AdminQuestionAnalyticsListResponse": {
@@ -569,6 +649,38 @@
           "retry_question_count"
         ],
         "title": "AdminStudentSummaryResponse",
+        "type": "object"
+      },
+      "AdminUserListResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/AdminManagedUserResponse"
+            },
+            "title": "Users",
+            "type": "array"
+          }
+        },
+        "required": [
+          "users",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "AdminUserListResponse",
         "type": "object"
       },
       "AdminUserRoleResponse": {
@@ -860,7 +972,8 @@
               "invitation_created",
               "invitation_revoked",
               "invitation_accepted",
-              "role_changed"
+              "role_changed",
+              "course_revision_changed"
             ],
             "title": "Event Type",
             "type": "string"
@@ -1016,6 +1129,40 @@
           "passing_percentage"
         ],
         "title": "CheckpointProgressResponse",
+        "type": "object"
+      },
+      "ContentStatusResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "course_revision": {
+            "title": "Course Revision",
+            "type": "integer"
+          },
+          "lessons": {
+            "title": "Lessons",
+            "type": "integer"
+          },
+          "questions": {
+            "title": "Questions",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "course_key",
+          "course_revision",
+          "lessons",
+          "questions"
+        ],
+        "title": "ContentStatusResponse",
         "type": "object"
       },
       "CourseLessonMap": {
@@ -1446,6 +1593,133 @@
           "enrolments"
         ],
         "title": "CurrentLearnerResponse",
+        "type": "object"
+      },
+      "CurriculumMigrationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Course Key",
+            "type": "string"
+          },
+          "from_revision": {
+            "minimum": 1.0,
+            "title": "From Revision",
+            "type": "integer"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "target_hash": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Target Hash",
+            "type": "string"
+          },
+          "target_revision": {
+            "minimum": 1.0,
+            "title": "Target Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "course_key",
+          "from_revision",
+          "target_revision",
+          "target_hash",
+          "reason"
+        ],
+        "title": "CurriculumMigrationRequest",
+        "type": "object"
+      },
+      "CurriculumMigrationResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "course_revision": {
+            "title": "Course Revision",
+            "type": "integer"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "migrated": {
+            "title": "Migrated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "migrated",
+          "learner_id",
+          "course_revision"
+        ],
+        "title": "CurriculumMigrationResponse",
+        "type": "object"
+      },
+      "CurriculumPreviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "active_sessions": {
+            "title": "Active Sessions",
+            "type": "integer"
+          },
+          "allowed": {
+            "title": "Allowed",
+            "type": "boolean"
+          },
+          "blockers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Blockers",
+            "type": "array"
+          },
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "from_revision": {
+            "title": "From Revision",
+            "type": "integer"
+          },
+          "incompatible_lessons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Incompatible Lessons",
+            "type": "array"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "target_hash": {
+            "title": "Target Hash",
+            "type": "string"
+          },
+          "target_revision": {
+            "title": "Target Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "learner_id",
+          "course_key",
+          "from_revision",
+          "target_revision",
+          "target_hash",
+          "active_sessions",
+          "incompatible_lessons",
+          "blockers",
+          "allowed"
+        ],
+        "title": "CurriculumPreviewResponse",
         "type": "object"
       },
       "DeploymentStatusResponse": {
@@ -3100,6 +3374,15 @@
       "ReadinessDependencies": {
         "additionalProperties": false,
         "properties": {
+          "content_status": {
+            "default": "local",
+            "enum": [
+              "current",
+              "local"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
           "database": {
             "enum": [
               "ready",
@@ -4285,6 +4568,102 @@
         ]
       }
     },
+    "/api/v1/admin/operations/content": {
+      "get": {
+        "operationId": "getContentStatus",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentStatusResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Content Status",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/api/v1/admin/operations/status": {
       "get": {
         "operationId": "getDeploymentStatus",
@@ -4719,6 +5098,382 @@
           }
         ],
         "summary": "Get one learner's progress without exposing submitted answers",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/users": {
+      "get": {
+        "operationId": "listAdminUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Users",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/users/{learner_id}/curriculum-migration": {
+      "post": {
+        "operationId": "migrateCurriculum",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CurriculumMigrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurriculumMigrationResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Migrate Curriculum",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/users/{learner_id}/curriculum-preview": {
+      "get": {
+        "operationId": "previewCurriculumMigration",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "course_key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 1,
+              "title": "Course Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurriculumPreviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Preview Curriculum",
         "tags": [
           "admin"
         ]

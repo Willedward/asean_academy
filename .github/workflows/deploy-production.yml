@@ -31,6 +31,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
       NEXT_TELEMETRY_DISABLED: "1"
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -52,6 +53,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: python3 scripts/check_migration_safety.py
       - run: bash scripts/validate_migrations.sh
+      - run: uv run --project services/learning_api --locked question-bank import-db
+      - run: uv run --project services/learning_api --locked question-bank course-import-db
       - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts
       - run: uv run --project services/learning_api pytest services/learning_api/tests
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests

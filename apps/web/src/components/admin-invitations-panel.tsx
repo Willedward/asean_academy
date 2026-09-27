@@ -59,6 +59,7 @@ const eventLabels: Record<
   invitation_revoked: "Invitation revoked",
   invitation_accepted: "Student onboarded",
   role_changed: "User role changed",
+  course_revision_changed: "Course revision changed",
 };
 
 function formatDate(value: string): string {

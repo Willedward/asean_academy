@@ -90,6 +90,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/operations/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Content Status */
+        get: operations["getContentStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/operations/status": {
         parameters: {
             query?: never;
@@ -150,6 +167,57 @@ export interface paths {
         };
         /** Get one learner's progress without exposing submitted answers */
         get: operations["getAdminStudentDetail"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Users */
+        get: operations["listAdminUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{learner_id}/curriculum-migration": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Migrate Curriculum */
+        post: operations["migrateCurriculum"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{learner_id}/curriculum-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Preview Curriculum */
+        get: operations["previewCurriculumMigration"];
         put?: never;
         post?: never;
         delete?: never;
@@ -555,6 +623,15 @@ export interface components {
             /** Difficulty */
             difficulty: number;
         };
+        /** AdminEnrolmentResponse */
+        AdminEnrolmentResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
+            /** Status */
+            status: string;
+        };
         /** AdminLessonProgressResponse */
         AdminLessonProgressResponse: {
             /** Checkpoint Passed */
@@ -585,6 +662,30 @@ export interface components {
              * @enum {string}
              */
             state: "in_progress" | "practice_completed" | "proficient" | "mastered";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** AdminManagedUserResponse */
+        AdminManagedUserResponse: {
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string;
+            /** Enrolments */
+            enrolments: components["schemas"]["AdminEnrolmentResponse"][];
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "student" | "content_admin" | "academic_admin";
             /**
              * Updated At
              * Format: date-time
@@ -686,6 +787,17 @@ export interface components {
             retry_question_count: number;
             /** Target Track */
             target_track: string | null;
+        };
+        /** AdminUserListResponse */
+        AdminUserListResponse: {
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Total */
+            total: number;
+            /** Users */
+            users: components["schemas"]["AdminManagedUserResponse"][];
         };
         /** AdminUserRoleResponse */
         AdminUserRoleResponse: {
@@ -801,7 +913,7 @@ export interface components {
              * Event Type
              * @enum {string}
              */
-            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed";
+            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed";
             /** Invitation Id */
             invitation_id: string | null;
             /** Metadata */
@@ -849,6 +961,19 @@ export interface components {
             state: "locked" | "available" | "in_progress" | "passed";
             /** Unit Key */
             unit_key: string;
+        };
+        /** ContentStatusResponse */
+        ContentStatusResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
+            /** Lessons */
+            lessons: number;
+            /** Questions */
+            questions: number;
+            /** Status */
+            status: string;
         };
         /** CourseLessonMap */
         CourseLessonMap: {
@@ -1017,6 +1142,55 @@ export interface components {
             /** Enrolments */
             enrolments: components["schemas"]["EnrolmentResponse"][];
             profile: components["schemas"]["ProfileResponse"];
+        };
+        /** CurriculumMigrationRequest */
+        CurriculumMigrationRequest: {
+            /** Course Key */
+            course_key: string;
+            /** From Revision */
+            from_revision: number;
+            /** Reason */
+            reason: string;
+            /** Target Hash */
+            target_hash: string;
+            /** Target Revision */
+            target_revision: number;
+        };
+        /** CurriculumMigrationResponse */
+        CurriculumMigrationResponse: {
+            /** Course Revision */
+            course_revision: number;
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /** Migrated */
+            migrated: boolean;
+        };
+        /** CurriculumPreviewResponse */
+        CurriculumPreviewResponse: {
+            /** Active Sessions */
+            active_sessions: number;
+            /** Allowed */
+            allowed: boolean;
+            /** Blockers */
+            blockers: string[];
+            /** Course Key */
+            course_key: string;
+            /** From Revision */
+            from_revision: number;
+            /** Incompatible Lessons */
+            incompatible_lessons: string[];
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /** Target Hash */
+            target_hash: string;
+            /** Target Revision */
+            target_revision: number;
         };
         /** DeploymentStatusResponse */
         DeploymentStatusResponse: {
@@ -1639,6 +1813,12 @@ export interface components {
         };
         /** ReadinessDependencies */
         ReadinessDependencies: {
+            /**
+             * Content Status
+             * @default local
+             * @enum {string}
+             */
+            content_status: "current" | "local";
             /**
              * Database
              * @enum {string}
@@ -2309,6 +2489,89 @@ export interface operations {
             };
         };
     };
+    getContentStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentStatusResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     getDeploymentStatus: {
         parameters: {
             query?: never;
@@ -2580,6 +2843,269 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdminStudentDetailResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listAdminUsers: {
+        parameters: {
+            query?: {
+                search?: string | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminUserListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    migrateCurriculum: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumMigrationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumMigrationResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    previewCurriculumMigration: {
+        parameters: {
+            query: {
+                course_key: string;
+            };
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumPreviewResponse"];
                 };
             };
             /** @description Bad Request */

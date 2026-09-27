@@ -272,8 +272,8 @@ def test_beta_operations_are_admin_authorized_audited_and_immutable():
             (administrator_id, f"{administrator_id}@example.test"),
         )
         connection.execute(
-            "insert into profiles (id, role, display_name) values (%s, 'content_admin', 'Admin')",
-            (administrator_id,),
+            "insert into profiles (id, email, role, display_name) values (%s, %s, 'content_admin', 'Admin')",
+            (administrator_id, f"{administrator_id}@example.test"),
         )
 
     repository = PostgresBetaOperationsRepository(database_url)
@@ -355,8 +355,8 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
                    lessons.lesson_key
             from course_lessons lessons
             join lesson_versions versions on versions.lesson_id = lessons.id
-            where versions.revision = 1
-            order by lessons.position
+            where versions.is_current
+            order by lessons.lesson_key
             """
         ).fetchall()
         assert len(lesson_rows) == 7, "Import the complete N1 course before this test"
@@ -490,6 +490,11 @@ def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolate
             ),
         )
 
+    with psycopg.connect(database_url) as connection:
+        connection.execute("""
+            insert into course_enrolments(student_id, course_id, course_version_id)
+            select %s, course_id, id from course_versions where is_current
+        """, (learner_id,))
     repository = PostgresProgressRepository(database_url)
     repository.start_lesson(learner_id, "n1-lesson-01", 2)
     repository.set_section_completion(

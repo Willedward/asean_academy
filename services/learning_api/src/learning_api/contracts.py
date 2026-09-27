@@ -47,6 +47,7 @@ class HealthResponse(ApiModel):
 class ReadinessDependencies(ApiModel):
     database: Literal["ready", "local"]
     schema_status: Literal["current", "local"]
+    content_status: Literal["current", "local"] = "local"
 
 
 class ReadinessResponse(ApiModel):
