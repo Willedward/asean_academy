@@ -472,3 +472,57 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
                 """,
                 (learner_id, created["session_id"]),
             )
+
+
+@pytest.mark.postgres
+def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolated():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    other_learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s), (%s, %s)",
+            (
+                learner_id,
+                f"{learner_id}@example.test",
+                other_learner_id,
+                f"{other_learner_id}@example.test",
+            ),
+        )
+
+    repository = PostgresProgressRepository(database_url)
+    repository.start_lesson(learner_id, "n1-lesson-01", 2)
+    repository.set_section_completion(
+        learner_id,
+        "n1-lesson-01",
+        2,
+        "prime-numbers",
+        True,
+    )
+
+    assert repository.completed_section_keys(learner_id, "n1-lesson-01", 2) == [
+        "prime-numbers"
+    ]
+    assert repository.completed_section_keys(learner_id, "n1-lesson-01", 1) == []
+    assert repository.completed_section_keys(other_learner_id, "n1-lesson-01", 2) == []
+
+    with psycopg.connect(database_url) as connection:
+        connection.execute("set local role authenticated")
+        connection.execute(
+            "select set_config('request.jwt.claim.sub', %s, true)",
+            (other_learner_id,),
+        )
+        visible = connection.execute(
+            "select count(*) from learner_lesson_section_progress where student_id = %s",
+            (learner_id,),
+        ).fetchone()[0]
+        assert visible == 0
+
+    repository.set_section_completion(
+        learner_id,
+        "n1-lesson-01",
+        2,
+        "prime-numbers",
+        False,
+    )
+    assert repository.completed_section_keys(learner_id, "n1-lesson-01", 2) == []

@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Annotated, Literal
 
 from pydantic import Field
+from question_bank.course_models import (
+    ExplanationSection,
+    SummarySection,
+    WorkedExampleSection,
+)
+from question_bank.models import Asset, ContentBlock
 
 from .contracts import ApiModel
 
@@ -13,6 +19,24 @@ LearningMaterialState = Literal["pending", "ready"]
 LessonAvailability = Literal["content_pending", "available"]
 LessonProgressState = Literal[
     "not_started", "in_progress", "practice_completed", "proficient", "mastered"
+]
+
+
+class PublicActiveRecallSection(ApiModel):
+    stable_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    position: int = Field(ge=1)
+    type: Literal["active_recall"]
+    title: str = Field(min_length=1, max_length=160)
+    prompt: list[ContentBlock]
+    response_type: Literal["numeric", "algebraic_expression"]
+
+
+PublicLessonSection = Annotated[
+    ExplanationSection
+    | WorkedExampleSection
+    | PublicActiveRecallSection
+    | SummarySection,
+    Field(discriminator="type"),
 ]
 
 
@@ -78,6 +102,6 @@ class LessonResponse(ApiModel):
     content_status: ContentStatus
     development_preview: bool
     learning_material_state: LearningMaterialState
-    sections: list[dict[str, Any]]
-    assets: list[dict[str, Any]]
+    sections: list[PublicLessonSection]
+    assets: list[Asset]
     practice: PracticeEntry

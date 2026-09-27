@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Annotated, Any, Literal
+
+from pydantic import Field, StringConstraints
 
 from .contracts import ApiModel
 
@@ -42,6 +44,32 @@ class LessonProgressResponse(ApiModel):
     checkpoint_passed: bool = False
     last_session_id: str | None = None
     updated_at: str | None = None
+
+
+class LessonSectionProgressResponse(ApiModel):
+    lesson_key: str
+    lesson_revision: int = Field(ge=1)
+    total_sections: int = Field(ge=0)
+    completed_count: int = Field(ge=0)
+    completed_section_keys: list[str]
+
+
+class SetLessonSectionCompletionRequest(ApiModel):
+    completed: bool
+
+
+RecallAnswer = Annotated[str, StringConstraints(max_length=500)]
+
+
+class ActiveRecallAttemptRequest(ApiModel):
+    answer: RecallAnswer
+
+
+class ActiveRecallAttemptResponse(ApiModel):
+    correct: bool
+    error: str | None
+    feedback: list[dict[str, Any]]
+    progress: LessonSectionProgressResponse
 
 
 class CheckpointProgressResponse(ApiModel):

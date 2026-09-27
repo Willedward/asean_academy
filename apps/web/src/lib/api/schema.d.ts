@@ -260,6 +260,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/lessons/{lesson_key}/section-progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get explicit section completion for the current lesson revision */
+        get: operations["getLessonSectionProgress"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/lessons/{lesson_key}/sections/{section_key}/active-recall": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Check an authored lesson recall answer without exposing its answer key */
+        post: operations["checkLessonActiveRecall"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/lessons/{lesson_key}/sections/{section_key}/completion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Explicitly mark a lesson note section complete or incomplete */
+        put: operations["setLessonSectionCompletion"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/lessons/{lesson_key}/start": {
         parameters: {
             query?: never;
@@ -440,6 +491,23 @@ export interface components {
             display_name: string;
             /** Invitation Code */
             invitation_code: string;
+        };
+        /** ActiveRecallAttemptRequest */
+        ActiveRecallAttemptRequest: {
+            /** Answer */
+            answer: string;
+        };
+        /** ActiveRecallAttemptResponse */
+        ActiveRecallAttemptResponse: {
+            /** Correct */
+            correct: boolean;
+            /** Error */
+            error: string | null;
+            /** Feedback */
+            feedback: {
+                [key: string]: unknown;
+            }[];
+            progress: components["schemas"]["LessonSectionProgressResponse"];
         };
         /** AdminAnalyticsOverviewResponse */
         AdminAnalyticsOverviewResponse: {
@@ -640,6 +708,45 @@ export interface components {
              * Format: date-time
              */
             updated_at: string;
+        };
+        /** Asset */
+        Asset: {
+            /** Alt Text */
+            alt_text: string;
+            /** Asset Key */
+            asset_key: string;
+            /**
+             * Format
+             * @enum {string}
+             */
+            format: "svg" | "png" | "webp";
+            /** Generation Spec */
+            generation_spec: {
+                [key: string]: unknown;
+            };
+            /** Height */
+            height?: number | null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "number_line" | "geometry" | "chart" | "table" | "image";
+            /** Path */
+            path: string;
+            /** Sha256 */
+            sha256: string;
+            /** Width */
+            width?: number | null;
+        };
+        /** AssetReferenceBlock */
+        AssetReferenceBlock: {
+            /** Asset Key */
+            asset_key: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "asset_ref";
         };
         /** AttemptPartResult */
         AttemptPartResult: {
@@ -933,6 +1040,16 @@ export interface components {
             /** Uptime Seconds */
             uptime_seconds: number;
         };
+        /** DisplayMathBlock */
+        DisplayMathBlock: {
+            /** Latex */
+            latex: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "display_math";
+        };
         /** EnrolmentResponse */
         EnrolmentResponse: {
             /** Course Key */
@@ -967,6 +1084,22 @@ export interface components {
         ErrorEnvelope: {
             error: components["schemas"]["ErrorDetail"];
         };
+        /** ExplanationSection */
+        ExplanationSection: {
+            /** Blocks */
+            blocks: (components["schemas"]["TextBlock"] | components["schemas"]["InlineMathBlock"] | components["schemas"]["DisplayMathBlock"] | components["schemas"]["AssetReferenceBlock"])[];
+            /** Position */
+            position: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "explanation";
+        };
         /** GiveUpResponse */
         GiveUpResponse: {
             solution: components["schemas"]["SolutionResponse"];
@@ -986,10 +1119,10 @@ export interface components {
             authentication: "supabase_bearer";
             /**
              * Course Content
-             * @default draft_placeholders
+             * @default versioned_catalogue
              * @constant
              */
-            course_content: "draft_placeholders";
+            course_content: "versioned_catalogue";
             /**
              * Tutor
              * @default disabled
@@ -1038,6 +1171,16 @@ export interface components {
              * @enum {integer}
              */
             stage: 1 | 2;
+        };
+        /** InlineMathBlock */
+        InlineMathBlock: {
+            /** Latex */
+            latex: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "inline_math";
         };
         /** InvitationAcceptanceResponse */
         InvitationAcceptanceResponse: {
@@ -1172,9 +1315,7 @@ export interface components {
         /** LessonResponse */
         LessonResponse: {
             /** Assets */
-            assets: {
-                [key: string]: unknown;
-            }[];
+            assets: components["schemas"]["Asset"][];
             /**
              * Content Status
              * @enum {string}
@@ -1201,9 +1342,7 @@ export interface components {
             /** Revision */
             revision: number;
             /** Sections */
-            sections: {
-                [key: string]: unknown;
-            }[];
+            sections: (components["schemas"]["ExplanationSection"] | components["schemas"]["WorkedExampleSection"] | components["schemas"]["PublicActiveRecallSection"] | components["schemas"]["SummarySection"])[];
             /** Stable Key */
             stable_key: string;
             /** Summary */
@@ -1212,6 +1351,19 @@ export interface components {
             title: string;
             /** Unit Key */
             unit_key: string;
+        };
+        /** LessonSectionProgressResponse */
+        LessonSectionProgressResponse: {
+            /** Completed Count */
+            completed_count: number;
+            /** Completed Section Keys */
+            completed_section_keys: string[];
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Revision */
+            lesson_revision: number;
+            /** Total Sections */
+            total_sections: number;
         };
         /** NextActionResponse */
         NextActionResponse: {
@@ -1397,6 +1549,27 @@ export interface components {
             /** Proficiency Threshold */
             proficiency_threshold: number;
         };
+        /** PublicActiveRecallSection */
+        PublicActiveRecallSection: {
+            /** Position */
+            position: number;
+            /** Prompt */
+            prompt: (components["schemas"]["TextBlock"] | components["schemas"]["InlineMathBlock"] | components["schemas"]["DisplayMathBlock"] | components["schemas"]["AssetReferenceBlock"])[];
+            /**
+             * Response Type
+             * @enum {string}
+             */
+            response_type: "numeric" | "algebraic_expression";
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "active_recall";
+        };
         /** PublicQuestionResponse */
         PublicQuestionResponse: {
             /** Assets */
@@ -1509,6 +1682,11 @@ export interface components {
             /** Sha */
             sha: string;
         };
+        /** SetLessonSectionCompletionRequest */
+        SetLessonSectionCompletionRequest: {
+            /** Completed */
+            completed: boolean;
+        };
         /** SolutionPartResponse */
         SolutionPartResponse: {
             /** Canonical Answer */
@@ -1546,6 +1724,32 @@ export interface components {
             /** Session Id */
             session_id: string;
         };
+        /** SummarySection */
+        SummarySection: {
+            /** Blocks */
+            blocks: (components["schemas"]["TextBlock"] | components["schemas"]["InlineMathBlock"] | components["schemas"]["DisplayMathBlock"] | components["schemas"]["AssetReferenceBlock"])[];
+            /** Position */
+            position: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "summary";
+        };
+        /** TextBlock */
+        TextBlock: {
+            /** Text */
+            text: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "text";
+        };
         /** UpdateUserRoleRequest */
         UpdateUserRoleRequest: {
             /**
@@ -1553,6 +1757,33 @@ export interface components {
              * @enum {string}
              */
             role: "student" | "content_admin" | "academic_admin";
+        };
+        /** WorkedExampleSection */
+        WorkedExampleSection: {
+            /** Position */
+            position: number;
+            /** Prompt */
+            prompt: (components["schemas"]["TextBlock"] | components["schemas"]["InlineMathBlock"] | components["schemas"]["DisplayMathBlock"] | components["schemas"]["AssetReferenceBlock"])[];
+            /** Stable Key */
+            stable_key: string;
+            /** Steps */
+            steps: components["schemas"]["WorkedExampleStep"][];
+            /** Title */
+            title: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "worked_example";
+            /** Verification Note */
+            verification_note: string;
+        };
+        /** WorkedExampleStep */
+        WorkedExampleStep: {
+            /** Content */
+            content: (components["schemas"]["TextBlock"] | components["schemas"]["InlineMathBlock"] | components["schemas"]["DisplayMathBlock"] | components["schemas"]["AssetReferenceBlock"])[];
+            /** Position */
+            position: number;
         };
     };
     responses: never;
@@ -2863,6 +3094,271 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getLessonSectionProgress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonSectionProgressResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    checkLessonActiveRecall: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_key: string;
+                section_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ActiveRecallAttemptRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ActiveRecallAttemptResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    setLessonSectionCompletion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_key: string;
+                section_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetLessonSectionCompletionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonSectionProgressResponse"];
                 };
             };
             /** @description Bad Request */

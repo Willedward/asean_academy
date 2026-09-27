@@ -52,15 +52,26 @@ def test_course_map_returns_seven_explicit_content_placeholders():
     }
 
 
-def test_blank_lesson_has_objectives_but_no_invented_material():
+def test_draft_lesson_returns_authored_sections_without_private_recall_answer():
     response = get("/api/v1/lessons/n1-lesson-01")
 
     assert response.status_code == 200
     lesson = response.json()
+    assert lesson["revision"] == 2
     assert lesson["title"] == "Primes and prime factorisation"
     assert lesson["objectives"]
-    assert lesson["sections"] == []
+    assert [section["type"] for section in lesson["sections"]] == [
+        "explanation",
+        "worked_example",
+        "explanation",
+        "worked_example",
+        "active_recall",
+        "explanation",
+        "summary",
+    ]
+    assert lesson["sections"][4]["response_type"] == "algebraic_expression"
     assert lesson["assets"] == []
+    assert lesson["learning_material_state"] == "pending"
     assert lesson["practice"] == {
         "lesson_key": "n1-lesson-01",
         "mode": "guided_practice",
@@ -72,6 +83,7 @@ def test_blank_lesson_has_objectives_but_no_invented_material():
     encoded = json.dumps(lesson)
     assert "canonical_answer" not in encoded
     assert "canonical_expression" not in encoded
+    assert "Correct. Repeated division" not in encoded
 
 
 def test_draft_course_is_hidden_when_preview_is_disabled():

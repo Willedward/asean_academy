@@ -235,12 +235,18 @@ def create_app(
                 ) as connection:
                     row = connection.execute(
                         """
-                        select exists (
-                            select 1 from information_schema.columns
-                            where table_schema = 'public'
-                              and table_name = 'profiles'
-                              and column_name = 'email'
-                        ) as schema_ready
+                        select
+                            exists (
+                                select 1 from information_schema.columns
+                                where table_schema = 'public'
+                                  and table_name = 'profiles'
+                                  and column_name = 'email'
+                            )
+                            and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'learner_lesson_section_progress'
+                            ) as schema_ready
                         """
                     ).fetchone()
             except psycopg.Error as exc:

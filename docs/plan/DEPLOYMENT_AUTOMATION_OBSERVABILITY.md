@@ -47,7 +47,8 @@ add these environment secrets:
 | --- | --- | --- |
 | `RAILWAY_TOKEN` | Railway project settings | Project token for the production environment |
 | `SUPABASE_ACCESS_TOKEN` | Supabase account access tokens | Token permitted to link the production project |
-| `SUPABASE_DB_PASSWORD` | Supabase database settings | Production database password |
+| `SUPABASE_DB_PASSWORD` | Supabase database settings | Production database password used by the Supabase CLI |
+| `PRODUCTION_DATABASE_URL` | Supabase Connect panel | Encoded transaction-pooler URI used for transactional content imports |
 
 Add these repository or production-environment variables:
 
@@ -61,6 +62,19 @@ Add these repository or production-environment variables:
 
 Never paste any of those secrets into source files, issues, chat, or variables
 whose names start with `NEXT_PUBLIC_`.
+
+## Release ordering for authored content
+
+The production workflow applies additive migrations first, then imports the validated
+question bank followed by the versioned course snapshot. Only after both imports
+succeed does it deploy the API. This ordering is required because learner progress
+pins section completion to an immutable lesson revision. A failed import stops the
+release before live traffic can reach code that expects the new revision.
+
+`PRODUCTION_DATABASE_URL` must use the working Supabase connection string with a
+URL-encoded password. Store it only as a protected GitHub environment secret.
+The importers are replay-safe: they accept an identical existing revision and reject
+attempts to overwrite a revision with different content.
 
 ## Railway service settings required once
 

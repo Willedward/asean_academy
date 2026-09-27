@@ -9,9 +9,13 @@ from fastapi import APIRouter, HTTPException, Path
 from ..course_catalogue import CatalogueError
 from ..dependencies import ProgressServiceDependency
 from ..progress_contracts import (
+    ActiveRecallAttemptRequest,
+    ActiveRecallAttemptResponse,
     LearningHomeResponse,
     LessonProgressResponse,
+    LessonSectionProgressResponse,
     ProgressResponse,
+    SetLessonSectionCompletionRequest,
 )
 from ..progress_repository import ProgressError
 
@@ -40,6 +44,61 @@ async def start_lesson(
     service: ProgressServiceDependency,
 ) -> LessonProgressResponse:
     return _safe(lambda: service.start_lesson(lesson_key))
+
+
+@router.get(
+    "/lessons/{lesson_key}/section-progress",
+    operation_id="getLessonSectionProgress",
+    response_model=LessonSectionProgressResponse,
+    summary="Get explicit section completion for the current lesson revision",
+)
+async def lesson_section_progress(
+    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    service: ProgressServiceDependency,
+) -> LessonSectionProgressResponse:
+    return _safe(lambda: service.section_progress(lesson_key))
+
+
+@router.put(
+    "/lessons/{lesson_key}/sections/{section_key}/completion",
+    operation_id="setLessonSectionCompletion",
+    response_model=LessonSectionProgressResponse,
+    summary="Explicitly mark a lesson note section complete or incomplete",
+)
+async def set_lesson_section_completion(
+    body: SetLessonSectionCompletionRequest,
+    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
+    service: ProgressServiceDependency,
+) -> LessonSectionProgressResponse:
+    return _safe(
+        lambda: service.set_section_completion(
+            lesson_key,
+            section_key,
+            completed=body.completed,
+        )
+    )
+
+
+@router.post(
+    "/lessons/{lesson_key}/sections/{section_key}/active-recall",
+    operation_id="checkLessonActiveRecall",
+    response_model=ActiveRecallAttemptResponse,
+    summary="Check an authored lesson recall answer without exposing its answer key",
+)
+async def check_lesson_active_recall(
+    body: ActiveRecallAttemptRequest,
+    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
+    service: ProgressServiceDependency,
+) -> ActiveRecallAttemptResponse:
+    return _safe(
+        lambda: service.check_active_recall(
+            lesson_key,
+            section_key,
+            answer=body.answer,
+        )
+    )
 
 
 @router.get(

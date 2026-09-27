@@ -24,6 +24,60 @@
         "title": "AcceptInvitationRequest",
         "type": "object"
       },
+      "ActiveRecallAttemptRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answer": {
+            "maxLength": 500,
+            "title": "Answer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "answer"
+        ],
+        "title": "ActiveRecallAttemptRequest",
+        "type": "object"
+      },
+      "ActiveRecallAttemptResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "feedback": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Feedback",
+            "type": "array"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/LessonSectionProgressResponse"
+          }
+        },
+        "required": [
+          "correct",
+          "error",
+          "feedback",
+          "progress"
+        ],
+        "title": "ActiveRecallAttemptResponse",
+        "type": "object"
+      },
       "AdminAnalyticsOverviewResponse": {
         "additionalProperties": false,
         "properties": {
@@ -563,6 +617,112 @@
           "updated_at"
         ],
         "title": "AdminUserRoleResponse",
+        "type": "object"
+      },
+      "Asset": {
+        "additionalProperties": false,
+        "properties": {
+          "alt_text": {
+            "minLength": 1,
+            "title": "Alt Text",
+            "type": "string"
+          },
+          "asset_key": {
+            "minLength": 1,
+            "title": "Asset Key",
+            "type": "string"
+          },
+          "format": {
+            "enum": [
+              "svg",
+              "png",
+              "webp"
+            ],
+            "title": "Format",
+            "type": "string"
+          },
+          "generation_spec": {
+            "additionalProperties": true,
+            "title": "Generation Spec",
+            "type": "object"
+          },
+          "height": {
+            "anyOf": [
+              {
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height"
+          },
+          "kind": {
+            "enum": [
+              "number_line",
+              "geometry",
+              "chart",
+              "table",
+              "image"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "path": {
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Sha256",
+            "type": "string"
+          },
+          "width": {
+            "anyOf": [
+              {
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width"
+          }
+        },
+        "required": [
+          "asset_key",
+          "kind",
+          "format",
+          "path",
+          "alt_text",
+          "generation_spec",
+          "sha256"
+        ],
+        "title": "Asset",
+        "type": "object"
+      },
+      "AssetReferenceBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "asset_key": {
+            "minLength": 1,
+            "title": "Asset Key",
+            "type": "string"
+          },
+          "type": {
+            "const": "asset_ref",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "asset_key"
+        ],
+        "title": "AssetReferenceBlock",
         "type": "object"
       },
       "AttemptPartResult": {
@@ -1333,6 +1493,27 @@
         "title": "DeploymentStatusResponse",
         "type": "object"
       },
+      "DisplayMathBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "latex": {
+            "minLength": 1,
+            "title": "Latex",
+            "type": "string"
+          },
+          "type": {
+            "const": "display_math",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "latex"
+        ],
+        "title": "DisplayMathBlock",
+        "type": "object"
+      },
       "EnrolmentResponse": {
         "additionalProperties": false,
         "properties": {
@@ -1418,6 +1599,71 @@
         "title": "ErrorEnvelope",
         "type": "object"
       },
+      "ExplanationSection": {
+        "additionalProperties": false,
+        "properties": {
+          "blocks": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "asset_ref": "#/components/schemas/AssetReferenceBlock",
+                  "display_math": "#/components/schemas/DisplayMathBlock",
+                  "inline_math": "#/components/schemas/InlineMathBlock",
+                  "text": "#/components/schemas/TextBlock"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/InlineMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/DisplayMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AssetReferenceBlock"
+                }
+              ]
+            },
+            "minItems": 1,
+            "title": "Blocks",
+            "type": "array"
+          },
+          "position": {
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          },
+          "stable_key": {
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "const": "explanation",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "type",
+          "title",
+          "blocks"
+        ],
+        "title": "ExplanationSection",
+        "type": "object"
+      },
       "GiveUpResponse": {
         "additionalProperties": false,
         "properties": {
@@ -1447,8 +1693,8 @@
             "type": "string"
           },
           "course_content": {
-            "const": "draft_placeholders",
-            "default": "draft_placeholders",
+            "const": "versioned_catalogue",
+            "default": "versioned_catalogue",
             "title": "Course Content",
             "type": "string"
           },
@@ -1552,6 +1798,27 @@
           "parts"
         ],
         "title": "HintResponse",
+        "type": "object"
+      },
+      "InlineMathBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "latex": {
+            "minLength": 1,
+            "title": "Latex",
+            "type": "string"
+          },
+          "type": {
+            "const": "inline_math",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "latex"
+        ],
+        "title": "InlineMathBlock",
         "type": "object"
       },
       "InvitationAcceptanceResponse": {
@@ -1851,8 +2118,7 @@
         "properties": {
           "assets": {
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "$ref": "#/components/schemas/Asset"
             },
             "title": "Assets",
             "type": "array"
@@ -1914,8 +2180,29 @@
           },
           "sections": {
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "discriminator": {
+                "mapping": {
+                  "active_recall": "#/components/schemas/PublicActiveRecallSection",
+                  "explanation": "#/components/schemas/ExplanationSection",
+                  "summary": "#/components/schemas/SummarySection",
+                  "worked_example": "#/components/schemas/WorkedExampleSection"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ExplanationSection"
+                },
+                {
+                  "$ref": "#/components/schemas/WorkedExampleSection"
+                },
+                {
+                  "$ref": "#/components/schemas/PublicActiveRecallSection"
+                },
+                {
+                  "$ref": "#/components/schemas/SummarySection"
+                }
+              ]
             },
             "title": "Sections",
             "type": "array"
@@ -1956,6 +2243,46 @@
           "practice"
         ],
         "title": "LessonResponse",
+        "type": "object"
+      },
+      "LessonSectionProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "completed_count": {
+            "minimum": 0.0,
+            "title": "Completed Count",
+            "type": "integer"
+          },
+          "completed_section_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Completed Section Keys",
+            "type": "array"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "lesson_revision": {
+            "minimum": 1.0,
+            "title": "Lesson Revision",
+            "type": "integer"
+          },
+          "total_sections": {
+            "minimum": 0.0,
+            "title": "Total Sections",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "lesson_revision",
+          "total_sections",
+          "completed_count",
+          "completed_section_keys"
+        ],
+        "title": "LessonSectionProgressResponse",
         "type": "object"
       },
       "NextActionResponse": {
@@ -2505,6 +2832,79 @@
         "title": "ProgressResponse",
         "type": "object"
       },
+      "PublicActiveRecallSection": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          },
+          "prompt": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "asset_ref": "#/components/schemas/AssetReferenceBlock",
+                  "display_math": "#/components/schemas/DisplayMathBlock",
+                  "inline_math": "#/components/schemas/InlineMathBlock",
+                  "text": "#/components/schemas/TextBlock"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/InlineMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/DisplayMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AssetReferenceBlock"
+                }
+              ]
+            },
+            "title": "Prompt",
+            "type": "array"
+          },
+          "response_type": {
+            "enum": [
+              "numeric",
+              "algebraic_expression"
+            ],
+            "title": "Response Type",
+            "type": "string"
+          },
+          "stable_key": {
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "const": "active_recall",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "type",
+          "title",
+          "prompt",
+          "response_type"
+        ],
+        "title": "PublicActiveRecallSection",
+        "type": "object"
+      },
       "PublicQuestionResponse": {
         "additionalProperties": false,
         "properties": {
@@ -2798,6 +3198,20 @@
         "title": "ReleaseMetadata",
         "type": "object"
       },
+      "SetLessonSectionCompletionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "completed": {
+            "title": "Completed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "completed"
+        ],
+        "title": "SetLessonSectionCompletionRequest",
+        "type": "object"
+      },
       "SolutionPartResponse": {
         "additionalProperties": false,
         "properties": {
@@ -2907,6 +3321,92 @@
         "title": "SubmitAttemptRequest",
         "type": "object"
       },
+      "SummarySection": {
+        "additionalProperties": false,
+        "properties": {
+          "blocks": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "asset_ref": "#/components/schemas/AssetReferenceBlock",
+                  "display_math": "#/components/schemas/DisplayMathBlock",
+                  "inline_math": "#/components/schemas/InlineMathBlock",
+                  "text": "#/components/schemas/TextBlock"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/InlineMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/DisplayMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AssetReferenceBlock"
+                }
+              ]
+            },
+            "minItems": 1,
+            "title": "Blocks",
+            "type": "array"
+          },
+          "position": {
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          },
+          "stable_key": {
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "const": "summary",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "type",
+          "title",
+          "blocks"
+        ],
+        "title": "SummarySection",
+        "type": "object"
+      },
+      "TextBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "type": {
+            "const": "text",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "text"
+        ],
+        "title": "TextBlock",
+        "type": "object"
+      },
       "UpdateUserRoleRequest": {
         "additionalProperties": false,
         "properties": {
@@ -2924,6 +3424,132 @@
           "role"
         ],
         "title": "UpdateUserRoleRequest",
+        "type": "object"
+      },
+      "WorkedExampleSection": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          },
+          "prompt": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "asset_ref": "#/components/schemas/AssetReferenceBlock",
+                  "display_math": "#/components/schemas/DisplayMathBlock",
+                  "inline_math": "#/components/schemas/InlineMathBlock",
+                  "text": "#/components/schemas/TextBlock"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/InlineMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/DisplayMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AssetReferenceBlock"
+                }
+              ]
+            },
+            "minItems": 1,
+            "title": "Prompt",
+            "type": "array"
+          },
+          "stable_key": {
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/WorkedExampleStep"
+            },
+            "minItems": 1,
+            "title": "Steps",
+            "type": "array"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "type": {
+            "const": "worked_example",
+            "title": "Type",
+            "type": "string"
+          },
+          "verification_note": {
+            "minLength": 1,
+            "title": "Verification Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "type",
+          "title",
+          "prompt",
+          "steps",
+          "verification_note"
+        ],
+        "title": "WorkedExampleSection",
+        "type": "object"
+      },
+      "WorkedExampleStep": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "items": {
+              "discriminator": {
+                "mapping": {
+                  "asset_ref": "#/components/schemas/AssetReferenceBlock",
+                  "display_math": "#/components/schemas/DisplayMathBlock",
+                  "inline_math": "#/components/schemas/InlineMathBlock",
+                  "text": "#/components/schemas/TextBlock"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/InlineMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/DisplayMathBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AssetReferenceBlock"
+                }
+              ]
+            },
+            "minItems": 1,
+            "title": "Content",
+            "type": "array"
+          },
+          "position": {
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "content"
+        ],
+        "title": "WorkedExampleStep",
         "type": "object"
       }
     },
@@ -4735,6 +5361,370 @@
         "summary": "Get an authenticated learner-safe lesson revision",
         "tags": [
           "courses"
+        ]
+      }
+    },
+    "/api/v1/lessons/{lesson_key}/section-progress": {
+      "get": {
+        "operationId": "getLessonSectionProgress",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_key",
+            "required": true,
+            "schema": {
+              "pattern": "^n1-lesson-[0-9]{2}$",
+              "title": "Lesson Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonSectionProgressResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get explicit section completion for the current lesson revision",
+        "tags": [
+          "progress"
+        ]
+      }
+    },
+    "/api/v1/lessons/{lesson_key}/sections/{section_key}/active-recall": {
+      "post": {
+        "operationId": "checkLessonActiveRecall",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_key",
+            "required": true,
+            "schema": {
+              "pattern": "^n1-lesson-[0-9]{2}$",
+              "title": "Lesson Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "section_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Section Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveRecallAttemptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveRecallAttemptResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Check an authored lesson recall answer without exposing its answer key",
+        "tags": [
+          "progress"
+        ]
+      }
+    },
+    "/api/v1/lessons/{lesson_key}/sections/{section_key}/completion": {
+      "put": {
+        "operationId": "setLessonSectionCompletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_key",
+            "required": true,
+            "schema": {
+              "pattern": "^n1-lesson-[0-9]{2}$",
+              "title": "Lesson Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "section_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Section Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetLessonSectionCompletionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonSectionProgressResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Explicitly mark a lesson note section complete or incomplete",
+        "tags": [
+          "progress"
         ]
       }
     },

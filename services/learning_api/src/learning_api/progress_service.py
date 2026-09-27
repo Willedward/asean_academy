@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from question_bank.checking import check_answer
+from question_bank.course_models import ActiveRecallSection
+
 from .course_catalogue import CourseCatalogue
 from .course_contracts import CourseMapResponse
 from .progress_repository import ProgressError, ProgressRepository
@@ -96,6 +99,127 @@ class ProgressService:
             unlocked=True,
             retry_question_count=self._retry_counts()[lesson.stable_key],
         )
+
+    def _authored_lesson(self, lesson_key: str):
+        self.catalogue.lesson(lesson_key)
+        lesson = next(
+            (
+                candidate
+                for candidate in self.catalogue.report.lessons
+                if candidate.stable_key == lesson_key
+            ),
+            None,
+        )
+        if lesson is None:
+            raise ProgressError("lesson_not_found", "The requested lesson was not found.", 404)
+        self.assert_lesson_unlocked(lesson_key)
+        return lesson
+
+    @staticmethod
+    def _section(lesson, section_key: str):
+        section = next(
+            (item for item in lesson.sections if item.stable_key == section_key),
+            None,
+        )
+        if section is None:
+            raise ProgressError(
+                "lesson_section_not_found",
+                "The requested lesson section was not found.",
+                404,
+            )
+        return section
+
+    def _section_progress_response(self, lesson) -> dict:
+        valid_keys = {section.stable_key for section in lesson.sections}
+        completed = [
+            key
+            for key in self.repository.completed_section_keys(
+                self.learner_id,
+                lesson.stable_key,
+                lesson.revision,
+            )
+            if key in valid_keys
+        ]
+        return {
+            "lesson_key": lesson.stable_key,
+            "lesson_revision": lesson.revision,
+            "total_sections": len(lesson.sections),
+            "completed_count": len(completed),
+            "completed_section_keys": completed,
+        }
+
+    def section_progress(self, lesson_key: str) -> dict:
+        lesson = self._authored_lesson(lesson_key)
+        return self._section_progress_response(lesson)
+
+    def set_section_completion(
+        self,
+        lesson_key: str,
+        section_key: str,
+        *,
+        completed: bool,
+    ) -> dict:
+        lesson = self._authored_lesson(lesson_key)
+        section = self._section(lesson, section_key)
+        if completed and isinstance(section, ActiveRecallSection):
+            raise ProgressError(
+                "active_recall_answer_required",
+                "Answer this recall check correctly to complete the section.",
+                409,
+            )
+        self.repository.start_lesson(
+            self.learner_id,
+            lesson.stable_key,
+            lesson.revision,
+        )
+        self.repository.set_section_completion(
+            self.learner_id,
+            lesson.stable_key,
+            lesson.revision,
+            section.stable_key,
+            completed,
+        )
+        return self._section_progress_response(lesson)
+
+    def check_active_recall(
+        self,
+        lesson_key: str,
+        section_key: str,
+        *,
+        answer: str,
+    ) -> dict:
+        lesson = self._authored_lesson(lesson_key)
+        section = self._section(lesson, section_key)
+        if not isinstance(section, ActiveRecallSection):
+            raise ProgressError(
+                "active_recall_required",
+                "The requested section is not an active-recall check.",
+                409,
+            )
+        checked = check_answer(section.response, answer)
+        if checked["correct"]:
+            self.repository.start_lesson(
+                self.learner_id,
+                lesson.stable_key,
+                lesson.revision,
+            )
+            self.repository.set_section_completion(
+                self.learner_id,
+                lesson.stable_key,
+                lesson.revision,
+                section.stable_key,
+                True,
+            )
+        return {
+            "correct": checked["correct"],
+            "error": checked["error"],
+            "feedback": (
+                [block.model_dump(mode="json") for block in section.feedback]
+                if checked["correct"]
+                else []
+            ),
+            "progress": self._section_progress_response(lesson),
+        }
 
     def attach_session(
         self,

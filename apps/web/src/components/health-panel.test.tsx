@@ -12,7 +12,7 @@ describe("HealthPanel", () => {
       environment: "test",
       request_id: "test-request",
       dependencies: {
-        course_content: "draft_placeholders",
+        course_content: "versioned_catalogue",
         authentication: "supabase_bearer",
         tutor: "disabled",
       },

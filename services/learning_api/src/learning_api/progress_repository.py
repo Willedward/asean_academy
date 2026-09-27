@@ -132,6 +132,22 @@ class ProgressRepository(Protocol):
 
     def lesson_progress(self, learner_id: str) -> list[LessonProgressRecord]: ...
 
+    def set_section_completion(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+        section_key: str,
+        completed: bool,
+    ) -> None: ...
+
+    def completed_section_keys(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+    ) -> list[str]: ...
+
     def unresolved_question_keys(self, learner_id: str) -> list[str]: ...
 
 
@@ -174,6 +190,22 @@ class SQLiteProgressRepository:
                     updated_at text not null,
                     completed_at text,
                     primary key (learner_id, lesson_key)
+                );
+
+                create table if not exists learner_lesson_section_progress (
+                    learner_id text not null,
+                    lesson_key text not null,
+                    lesson_revision integer not null,
+                    section_key text not null,
+                    completed_at text not null,
+                    primary key (
+                        learner_id, lesson_key, lesson_revision, section_key
+                    )
+                );
+
+                create index if not exists learner_section_progress_lesson_idx
+                on learner_lesson_section_progress (
+                    learner_id, lesson_key, lesson_revision, completed_at
                 );
 
                 create table if not exists learner_practice_sessions (
@@ -678,6 +710,54 @@ class SQLiteProgressRepository:
             ).fetchall()
             return [self._lesson(row) for row in rows]
 
+    def set_section_completion(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+        section_key: str,
+        completed: bool,
+    ) -> None:
+        with self._connect() as connection:
+            if completed:
+                connection.execute(
+                    """
+                    insert into learner_lesson_section_progress (
+                        learner_id, lesson_key, lesson_revision, section_key, completed_at
+                    ) values (?, ?, ?, ?, ?)
+                    on conflict (
+                        learner_id, lesson_key, lesson_revision, section_key
+                    ) do update set completed_at = excluded.completed_at
+                    """,
+                    (learner_id, lesson_key, lesson_revision, section_key, _now()),
+                )
+            else:
+                connection.execute(
+                    """
+                    delete from learner_lesson_section_progress
+                    where learner_id = ? and lesson_key = ?
+                      and lesson_revision = ? and section_key = ?
+                    """,
+                    (learner_id, lesson_key, lesson_revision, section_key),
+                )
+
+    def completed_section_keys(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+    ) -> list[str]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                select section_key from learner_lesson_section_progress
+                where learner_id = ? and lesson_key = ? and lesson_revision = ?
+                order by completed_at, section_key
+                """,
+                (learner_id, lesson_key, lesson_revision),
+            ).fetchall()
+        return [row["section_key"] for row in rows]
+
     def unresolved_question_keys(self, learner_id: str) -> list[str]:
         del learner_id  # The local adapter has exactly one development learner.
         with self._connect() as connection:
@@ -792,6 +872,33 @@ class PostgresProgressRepository:
             raise ProgressError(
                 "lesson_not_imported",
                 "The requested lesson revision has not been imported into PostgreSQL.",
+                503,
+            )
+        return row
+
+    @staticmethod
+    def _section_identity(
+        connection,
+        lesson_key: str,
+        revision: int,
+        section_key: str,
+    ):
+        row = connection.execute(
+            """
+            select sections.id as section_id
+            from lesson_sections sections
+            join lesson_versions versions on versions.id = sections.lesson_version_id
+            join course_lessons lessons on lessons.id = versions.lesson_id
+            where lessons.lesson_key = %s
+              and versions.revision = %s
+              and sections.section_key = %s
+            """,
+            (lesson_key, revision, section_key),
+        ).fetchone()
+        if row is None:
+            raise ProgressError(
+                "lesson_section_not_imported",
+                "The requested lesson section has not been imported into PostgreSQL.",
                 503,
             )
         return row
@@ -1240,6 +1347,68 @@ class PostgresProgressRepository:
                 (learner_id,),
             ).fetchall()
             return [self._lesson(row) for row in rows]
+
+    def set_section_completion(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+        section_key: str,
+        completed: bool,
+    ) -> None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            section = self._section_identity(
+                connection,
+                lesson_key,
+                lesson_revision,
+                section_key,
+            )
+            if completed:
+                connection.execute(
+                    """
+                    insert into learner_lesson_section_progress (
+                        student_id, lesson_section_id, completed_at
+                    ) values (%s, %s, now())
+                    on conflict (student_id, lesson_section_id)
+                    do update set completed_at = excluded.completed_at
+                    """,
+                    (learner_id, section["section_id"]),
+                )
+            else:
+                connection.execute(
+                    """
+                    delete from learner_lesson_section_progress
+                    where student_id = %s and lesson_section_id = %s
+                    """,
+                    (learner_id, section["section_id"]),
+                )
+
+    def completed_section_keys(
+        self,
+        learner_id: str,
+        lesson_key: str,
+        lesson_revision: int,
+    ) -> list[str]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            rows = connection.execute(
+                """
+                select sections.section_key
+                from learner_lesson_section_progress progress
+                join lesson_sections sections
+                  on sections.id = progress.lesson_section_id
+                join lesson_versions versions
+                  on versions.id = sections.lesson_version_id
+                join course_lessons lessons on lessons.id = versions.lesson_id
+                where progress.student_id = %s
+                  and lessons.lesson_key = %s
+                  and versions.revision = %s
+                order by progress.completed_at, sections.section_key
+                """,
+                (learner_id, lesson_key, lesson_revision),
+            ).fetchall()
+        return [row["section_key"] for row in rows]
 
     def unresolved_question_keys(self, learner_id: str) -> list[str]:
         with self._connect() as connection:

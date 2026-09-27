@@ -206,6 +206,92 @@ def test_give_up_requires_retry_and_retry_can_reach_proficiency(tmp_path):
     assert improved["gave_up_count"] == 0
 
 
+
+def test_lesson_sections_require_explicit_completion_and_correct_recall(tmp_path):
+    app = application(tmp_path)
+
+    initial = request(
+        app,
+        "GET",
+        "/api/v1/lessons/n1-lesson-01/section-progress",
+    )
+    assert initial.status_code == 200
+    assert initial.json() == {
+        "lesson_key": "n1-lesson-01",
+        "lesson_revision": 2,
+        "total_sections": 7,
+        "completed_count": 0,
+        "completed_section_keys": [],
+    }
+
+    completed = request(
+        app,
+        "PUT",
+        "/api/v1/lessons/n1-lesson-01/sections/prime-numbers/completion",
+        json={"completed": True},
+    )
+    assert completed.status_code == 200
+    assert completed.json()["completed_section_keys"] == ["prime-numbers"]
+
+    blocked = request(
+        app,
+        "PUT",
+        "/api/v1/lessons/n1-lesson-01/sections/factorise-84-check/completion",
+        json={"completed": True},
+    )
+    assert blocked.status_code == 409
+    assert blocked.json()["error"]["code"] == "active_recall_answer_required"
+
+    incorrect = request(
+        app,
+        "POST",
+        "/api/v1/lessons/n1-lesson-01/sections/factorise-84-check/active-recall",
+        json={"answer": "2^2*3*5"},
+    )
+    assert incorrect.status_code == 200
+    assert incorrect.json()["correct"] is False
+    assert incorrect.json()["feedback"] == []
+    assert incorrect.json()["progress"]["completed_count"] == 1
+
+    correct = request(
+        app,
+        "POST",
+        "/api/v1/lessons/n1-lesson-01/sections/factorise-84-check/active-recall",
+        json={"answer": "2^2*3*7"},
+    )
+    assert correct.status_code == 200
+    assert correct.json()["correct"] is True
+    assert correct.json()["error"] is None
+    assert correct.json()["feedback"]
+    assert correct.json()["progress"]["completed_count"] == 2
+    assert set(correct.json()["progress"]["completed_section_keys"]) == {
+        "prime-numbers",
+        "factorise-84-check",
+    }
+
+    reopened = request(
+        app,
+        "PUT",
+        "/api/v1/lessons/n1-lesson-01/sections/prime-numbers/completion",
+        json={"completed": False},
+    )
+    assert reopened.status_code == 200
+    assert reopened.json()["completed_section_keys"] == ["factorise-84-check"]
+
+
+def test_unknown_lesson_section_is_not_recorded(tmp_path):
+    app = application(tmp_path)
+
+    response = request(
+        app,
+        "PUT",
+        "/api/v1/lessons/n1-lesson-01/sections/not-a-section/completion",
+        json={"completed": True},
+    )
+
+    assert response.status_code == 404
+    assert response.json()["error"]["code"] == "lesson_section_not_found"
+
 def test_progress_fails_closed_without_a_learner_identity(tmp_path):
     app = application(tmp_path, learner_id=None)
 

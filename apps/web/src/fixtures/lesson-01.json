@@ -1,6 +1,6 @@
 {
   "stable_key": "n1-lesson-01",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n1",
   "position": 1,
@@ -9,7 +9,7 @@
   "outcomes": [
     "1.1"
   ],
-  "estimated_minutes": 25,
+  "estimated_minutes": 30,
   "objectives": [
     "Identify whether a positive integer is prime or composite.",
     "Write a positive integer as a product of prime factors in index notation."
@@ -17,7 +17,297 @@
   "content_status": "draft",
   "development_preview": true,
   "learning_material_state": "pending",
-  "sections": [],
+  "sections": [
+    {
+      "stable_key": "prime-numbers",
+      "position": 1,
+      "type": "explanation",
+      "title": "Prime and composite numbers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A factor of a positive integer divides it exactly, with no remainder. For example, the positive factors of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "12"
+        },
+        {
+          "type": "text",
+          "text": " are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1,2,3,4,6,12"
+        },
+        {
+          "type": "text",
+          "text": ".\n\nA prime number is a whole number greater than 1 with exactly two positive factors: 1 and itself. A composite number is a whole number greater than 1 with more than two positive factors. The number 1 is neither prime nor composite because it has only one positive factor.\n\nThe first few prime numbers are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2,3,5,7,11,13,17,19"
+        },
+        {
+          "type": "text",
+          "text": ". The number 2 is the only even prime number."
+        }
+      ]
+    },
+    {
+      "stable_key": "testing-primality",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example: test whether numbers are prime",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Decide whether "
+        },
+        {
+          "type": "inline_math",
+          "latex": "91"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "97"
+        },
+        {
+          "type": "text",
+          "text": " are prime or composite."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "To test a number, check prime divisors up to its square root. Both square roots are less than "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10"
+            },
+            {
+              "type": "text",
+              "text": ", so check "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2,3,5"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7"
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "91=7\\times13"
+            },
+            {
+              "type": "text",
+              "text": "Therefore, 91 is composite."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The number 97 is not divisible by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2,3,5"
+            },
+            {
+              "type": "text",
+              "text": " or "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7"
+            },
+            {
+              "type": "text",
+              "text": ". Therefore, 97 is prime."
+            }
+          ]
+        }
+      ],
+      "verification_note": "For 91 we found a factor pair other than 1 and 91. For 97, no prime not exceeding its square root divides it."
+    },
+    {
+      "stable_key": "prime-factorisation",
+      "position": 3,
+      "type": "explanation",
+      "title": "Prime factorisation and index notation",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A prime factorisation writes a composite number as a product containing only prime factors. You may use repeated division or a factor tree. Keep splitting composite factors until every branch ends in a prime number.\n\nRepeated prime factors should be collected using index notation. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2\\times2\\times2"
+        },
+        {
+          "type": "text",
+          "text": " is written as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2^3"
+        },
+        {
+          "type": "text",
+          "text": ". The final factorisation is usually written with prime bases in ascending order."
+        }
+      ]
+    },
+    {
+      "stable_key": "factorise-360",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: express 360 as prime factors",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express "
+        },
+        {
+          "type": "inline_math",
+          "latex": "360"
+        },
+        {
+          "type": "text",
+          "text": " as a product of prime factors in index notation."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide repeatedly by the smallest available prime:"
+            },
+            {
+              "type": "display_math",
+              "latex": "360=2\\times180=2\\times2\\times90=2\\times2\\times2\\times45"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Continue factorising "
+            },
+            {
+              "type": "inline_math",
+              "latex": "45"
+            },
+            {
+              "type": "text",
+              "text": ":"
+            },
+            {
+              "type": "display_math",
+              "latex": "45=3\\times15=3\\times3\\times5"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Collect equal factors using powers:"
+            },
+            {
+              "type": "display_math",
+              "latex": "360=2^3\\times3^2\\times5"
+            }
+          ]
+        }
+      ],
+      "verification_note": "All bases are prime, and 2 cubed times 3 squared times 5 equals 360."
+    },
+    {
+      "stable_key": "factorise-84-check",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express "
+        },
+        {
+          "type": "inline_math",
+          "latex": "84"
+        },
+        {
+          "type": "text",
+          "text": " as a product of prime factors in index notation."
+        }
+      ],
+      "response_type": "algebraic_expression"
+    },
+    {
+      "stable_key": "common-mistakes",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common mistakes to avoid",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not include 1 as a prime factor. Do not stop while a factor is still composite. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "84=4\\times21"
+        },
+        {
+          "type": "text",
+          "text": " is true but is not a prime factorisation because 4 and 21 are composite. Finally, check that multiplying your prime factors reconstructs the original number."
+        }
+      ]
+    },
+    {
+      "stable_key": "lesson-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson summary",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A prime number has exactly two positive factors. A composite number has more than two, while 1 is neither prime nor composite.\n\nTo obtain a prime factorisation, repeatedly split or divide the number until every factor is prime, collect repeated factors with index notation, and multiply the result to check it."
+        }
+      ]
+    }
+  ],
   "assets": [],
   "practice": {
     "lesson_key": "n1-lesson-01",

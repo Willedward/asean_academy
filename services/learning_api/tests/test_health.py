@@ -36,10 +36,10 @@ def test_health_uses_versioned_contract_and_request_id():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202609260007",
+            "required_schema_revision": "202609270008",
         },
         "dependencies": {
-            "course_content": "draft_placeholders",
+            "course_content": "versioned_catalogue",
             "authentication": "supabase_bearer",
             "tutor": "disabled",
         },
@@ -100,7 +100,7 @@ def test_readiness_uses_local_dependencies_without_postgres():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202609260007",
+            "required_schema_revision": "202609270008",
         },
         "dependencies": {"database": "local", "schema_status": "local"},
     }

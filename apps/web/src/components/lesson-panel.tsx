@@ -5,6 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import {
+  LessonContent,
+  type LessonContentApi,
+} from "@/components/lesson-content";
+import { LessonMediaPanel } from "@/components/lesson-media-panel";
 import { Button } from "@/components/ui/button";
 import { getLesson, type LessonResponse } from "@/lib/api/course";
 import { createPracticeSession, type PracticeSessionResponse } from "@/lib/api/practice";
@@ -15,6 +20,7 @@ type Props = {
   loadLesson?: (lessonKey: string) => Promise<LessonResponse>;
   startSession?: (lessonKey: string, questionCount?: number) => Promise<PracticeSessionResponse>;
   recordStart?: (lessonKey: string) => Promise<LessonProgressResponse>;
+  sectionApi?: LessonContentApi;
 };
 
 export function LessonPanel({
@@ -22,6 +28,7 @@ export function LessonPanel({
   loadLesson = getLesson,
   startSession = createPracticeSession,
   recordStart = startLesson,
+  sectionApi,
 }: Props) {
   const router = useRouter();
   const [lesson, setLesson] = useState<LessonResponse | null>(null);
@@ -94,7 +101,16 @@ export function LessonPanel({
         <h2 id="objectives-title" className="mt-0 text-xl font-extrabold">Learning objectives</h2>
         <ul className="mb-0 space-y-2 pl-5 text-slate-700">{lesson.objectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
       </section>
-      {lesson.learning_material_state === "pending" ? (
+      {lesson.sections.length ? (
+        <>
+          <LessonMediaPanel />
+          <LessonContent
+            api={sectionApi}
+            lessonKey={lesson.stable_key}
+            sections={lesson.sections}
+          />
+        </>
+      ) : lesson.learning_material_state === "pending" ? (
         <section className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center" aria-labelledby="material-title">
           <Construction aria-hidden="true" className="mx-auto size-9 text-amber-700" />
           <h2 id="material-title" className="mb-2 text-2xl font-extrabold">Lesson material is being prepared</h2>

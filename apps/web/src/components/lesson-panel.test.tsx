@@ -3,7 +3,10 @@ import { describe, expect, it, vi } from "vitest";
 
 import { lessonFixture } from "@/lib/api/course";
 import type { PracticeSessionResponse } from "@/lib/api/practice";
-import type { LessonProgressResponse } from "@/lib/api/progress";
+import type {
+  LessonProgressResponse,
+  LessonSectionProgressResponse,
+} from "@/lib/api/progress";
 
 import { LessonPanel } from "./lesson-panel";
 
@@ -14,7 +17,7 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("LessonPanel", () => {
-  it("keeps lesson material blank but opens development practice", async () => {
+  it("renders the draft lesson note and opens development practice", async () => {
     const loadLesson = vi.fn().mockResolvedValue(lessonFixture);
     const session: PracticeSessionResponse = {
       session_id: "69284c2d-018f-4ddb-8935-51918af14954",
@@ -42,22 +45,41 @@ describe("LessonPanel", () => {
       updated_at: "2026-09-24T00:00:00Z",
     };
     const recordStart = vi.fn().mockResolvedValue(progress);
+    const sectionProgress: LessonSectionProgressResponse = {
+      lesson_key: "n1-lesson-01",
+      lesson_revision: 2,
+      total_sections: 7,
+      completed_count: 0,
+      completed_section_keys: [],
+    };
+    const sectionApi = {
+      getProgress: vi.fn().mockResolvedValue(sectionProgress),
+      setCompletion: vi.fn().mockResolvedValue(sectionProgress),
+      checkRecall: vi.fn(),
+    };
     render(
       <LessonPanel
         lessonKey="n1-lesson-01"
         loadLesson={loadLesson}
         startSession={startSession}
         recordStart={recordStart}
+        sectionApi={sectionApi}
       />,
     );
 
     expect(await screen.findByRole("heading", { name: lessonFixture.title })).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Lesson material is being prepared" }),
+      screen.getByRole("heading", { name: "Prime and composite numbers" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Video lesson will be added here" }),
     ).toBeInTheDocument();
     const button = screen.getByRole("button", { name: "Start draft practice" });
     expect(button).toBeEnabled();
     await waitFor(() => expect(recordStart).toHaveBeenCalledWith("n1-lesson-01"));
+    await waitFor(() =>
+      expect(sectionApi.getProgress).toHaveBeenCalledWith("n1-lesson-01"),
+    );
 
     fireEvent.click(button);
 
