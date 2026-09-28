@@ -446,7 +446,9 @@ or unrestricted audit export.
 flowchart LR
   BRANCH["Feature branch / PR"] --> CI["Lint · Types · Unit tests<br/>Fresh PostgreSQL · Integration tests<br/>Authenticated Chromium journeys<br/>Contract generation · Web build"]
   CI --> MAIN["Reviewed main branch"]
-  MAIN --> RELEASE["Manual production workflow<br/>Protected environment"]
+  MAIN --> STAGING["Automatic staging workflow<br/>Isolated Supabase + Railway"]
+  STAGING --> STAGINGSMOKE["Preview environment · Google provider<br/>Auth gate · readiness · scheduled checks"]
+  STAGINGSMOKE --> RELEASE["Manual production workflow<br/>Protected environment"]
   RELEASE --> MIGRATE["Migration safety + Supabase migrations"]
   MIGRATE --> APPROVAL["Human approval release gate"]
   APPROVAL --> IMPORT["Immutable question and course imports"]
@@ -471,7 +473,7 @@ zero disruption without testing those operational settings.
 content. Admin operations show current status, not historical uptime. Request IDs
 connect user-visible failures to logs. See
 [Deployment automation and observability](DEPLOYMENT_AUTOMATION_OBSERVABILITY.md)
-for external environment setup and rollback procedures. The browser-test boundary and local/CI runbook are in [Authenticated beta end-to-end verification](AUTHENTICATED_BETA_E2E.md).
+for production environment setup and rollback procedures. The hosted pre-production path is in [Hosted staging deployment](HOSTED_STAGING.md). The browser-test boundary and local/CI runbook are in [Authenticated beta end-to-end verification](AUTHENTICATED_BETA_E2E.md).
 
 ## 11. Future extensions without blocking this beta milestone
 

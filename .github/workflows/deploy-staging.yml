@@ -1,0 +1,189 @@
+name: Staging release
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      release_reason:
+        description: Reason for this staging deployment
+        required: true
+        default: Staging verification
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staging-release
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify staging candidate
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: asean_academy_staging_verify
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d asean_academy_staging_verify"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_staging_verify
+      NEXT_TELEMETRY_DISABLED: "1"
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_staging_verify
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.5.1
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: uv sync --project services/learning_api --locked
+      - run: uv sync --project question_bank --locked
+      - run: pnpm install --frozen-lockfile
+      - run: python3 scripts/check_migration_safety.py
+      - run: bash scripts/validate_migrations.sh
+      - run: uv run --project services/learning_api --locked question-bank import-db
+      - run: uv run --project services/learning_api --locked question-bank course-import-db
+      - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts scripts/smoke_deployment.py scripts/verify_supabase_auth_config.py scripts/test_smoke_deployment.py
+      - run: uv run --project services/learning_api pytest services/learning_api/tests scripts/test_smoke_deployment.py
+      - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
+      - run: uv run --project question_bank pytest question_bank/tests
+      - run: pnpm ci:web
+      - name: Verify generated contracts and fixtures
+        run: git diff --exit-code -- services/learning_api/openapi.json apps/web/src/lib/api/schema.d.ts apps/web/src/fixtures
+
+  release:
+    name: Migrate, deploy and smoke staging
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: staging
+    env:
+      RELEASE_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      RAILWAY_TOKEN: ${{ secrets.STAGING_RAILWAY_TOKEN }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.STAGING_SUPABASE_DB_PASSWORD }}
+      STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      STAGING_SUPABASE_PROJECT_ID: ${{ vars.STAGING_SUPABASE_PROJECT_ID }}
+      STAGING_SUPABASE_URL: ${{ vars.STAGING_SUPABASE_URL }}
+      STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ vars.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      STAGING_RAILWAY_API_SERVICE: ${{ vars.STAGING_RAILWAY_API_SERVICE }}
+      STAGING_RAILWAY_WEB_SERVICE: ${{ vars.STAGING_RAILWAY_WEB_SERVICE }}
+      STAGING_API_URL: ${{ vars.STAGING_API_URL }}
+      STAGING_DEPLOYMENT_GUARD: ${{ vars.STAGING_DEPLOYMENT_GUARD }}
+      STAGING_WEB_URL: ${{ vars.STAGING_WEB_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.118.0
+      - name: Validate isolated staging configuration
+        run: |
+          : "${RAILWAY_TOKEN:?Configure STAGING_RAILWAY_TOKEN in the staging environment.}"
+          : "${SUPABASE_ACCESS_TOKEN:?Configure SUPABASE_ACCESS_TOKEN in the staging environment.}"
+          : "${SUPABASE_DB_PASSWORD:?Configure STAGING_SUPABASE_DB_PASSWORD in staging.}"
+          : "${STAGING_DATABASE_URL:?Configure STAGING_DATABASE_URL in staging.}"
+          : "${STAGING_SUPABASE_PROJECT_ID:?Configure STAGING_SUPABASE_PROJECT_ID.}"
+          : "${STAGING_SUPABASE_URL:?Configure STAGING_SUPABASE_URL.}"
+          : "${STAGING_SUPABASE_PUBLISHABLE_KEY:?Configure STAGING_SUPABASE_PUBLISHABLE_KEY.}"
+          : "${STAGING_RAILWAY_API_SERVICE:?Configure STAGING_RAILWAY_API_SERVICE.}"
+          : "${STAGING_RAILWAY_WEB_SERVICE:?Configure STAGING_RAILWAY_WEB_SERVICE.}"
+          : "${STAGING_API_URL:?Configure STAGING_API_URL.}"
+          : "${STAGING_WEB_URL:?Configure STAGING_WEB_URL.}"
+          : "${STAGING_DEPLOYMENT_GUARD:?Configure STAGING_DEPLOYMENT_GUARD.}"
+          test "$STAGING_DEPLOYMENT_GUARD" = "ASEAN_ACADEMY_STAGING"
+          test "$STAGING_API_URL" != "$STAGING_WEB_URL"
+          test "$STAGING_API_URL" != "${{ vars.PRODUCTION_API_URL }}"
+          test "$STAGING_WEB_URL" != "${{ vars.PRODUCTION_WEB_URL }}"
+      - name: Verify Google OAuth and callback configuration
+        run: |
+          python3 scripts/verify_supabase_auth_config.py \
+            --project-ref "$STAGING_SUPABASE_PROJECT_ID" \
+            --web-url "$STAGING_WEB_URL"
+      - name: Apply pending staging migrations
+        run: |
+          supabase link \
+            --project-ref "$STAGING_SUPABASE_PROJECT_ID" \
+            --password "$SUPABASE_DB_PASSWORD"
+          supabase db push --linked --yes
+      - name: Import draft question and course revisions
+        env:
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+        run: |
+          uv sync --project services/learning_api --locked --no-dev
+          uv run --project services/learning_api --locked question-bank import-db
+          uv run --project services/learning_api --locked question-bank course-import-db
+      - name: Configure and deploy the staging API
+        run: |
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ENV=preview" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT=true" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_LOG_FORMAT=json" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_RELEASE_SHA=$RELEASE_SHA" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_CORS_ORIGINS=$STAGING_WEB_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_DATABASE_URL=$STAGING_DATABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "SUPABASE_URL=$STAGING_SUPABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "SUPABASE_ANON_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 up --ci --service "$STAGING_RAILWAY_API_SERVICE"
+      - name: Verify API release and staging database readiness
+        run: |
+          python3 scripts/smoke_deployment.py \
+            --api-url "$STAGING_API_URL" \
+            --expected-release "$RELEASE_SHA" \
+            --expected-environment preview \
+            --attempts 36 \
+            --interval-seconds 5
+      - name: Configure and deploy the staging web app
+        run: |
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ENV=preview" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_RELEASE_SHA=$RELEASE_SHA" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "LEARNING_API_URL=$STAGING_API_URL" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "NEXT_PUBLIC_SITE_URL=$STAGING_WEB_URL" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "NEXT_PUBLIC_SUPABASE_URL=$STAGING_SUPABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "NEXT_PUBLIC_USE_API_FIXTURES=false" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 up --ci --service "$STAGING_RAILWAY_WEB_SERVICE"
+      - name: Verify hosted authentication and the complete staging application
+        run: |
+          python3 scripts/smoke_deployment.py \
+            --api-url "$STAGING_API_URL" \
+            --web-url "$STAGING_WEB_URL" \
+            --expected-release "$RELEASE_SHA" \
+            --expected-environment preview \
+            --require-auth-gate \
+            --supabase-url "$STAGING_SUPABASE_URL" \
+            --supabase-publishable-key "$STAGING_SUPABASE_PUBLISHABLE_KEY" \
+            --attempts 36 \
+            --interval-seconds 5

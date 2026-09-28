@@ -125,6 +125,7 @@ jobs:
         run: |
           python3 scripts/smoke_deployment.py \
             --api-url "$PRODUCTION_API_URL" \
+            --expected-environment production \
             --expected-release "$GITHUB_SHA" \
             --attempts 36 \
             --interval-seconds 5
@@ -137,6 +138,7 @@ jobs:
           python3 scripts/smoke_deployment.py \
             --api-url "$PRODUCTION_API_URL" \
             --web-url "$PRODUCTION_WEB_URL" \
+            --expected-environment production \
             --expected-release "$GITHUB_SHA" \
             --attempts 36 \
             --interval-seconds 5

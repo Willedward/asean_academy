@@ -1,0 +1,36 @@
+name: Staging availability
+
+on:
+  schedule:
+    - cron: "5,35 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staging-availability
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: >-
+      vars.STAGING_API_URL != '' &&
+      vars.STAGING_WEB_URL != '' &&
+      vars.STAGING_SUPABASE_URL != '' &&
+      vars.STAGING_SUPABASE_PUBLISHABLE_KEY != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check staging health, authentication and access gate
+        run: |
+          python3 scripts/smoke_deployment.py \
+            --api-url "${{ vars.STAGING_API_URL }}" \
+            --web-url "${{ vars.STAGING_WEB_URL }}" \
+            --expected-environment preview \
+            --require-auth-gate \
+            --supabase-url "${{ vars.STAGING_SUPABASE_URL }}" \
+            --supabase-publishable-key "${{ vars.STAGING_SUPABASE_PUBLISHABLE_KEY }}" \
+            --attempts 3 \
+            --interval-seconds 10

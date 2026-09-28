@@ -23,6 +23,7 @@ jobs:
         run: |
           python3 scripts/smoke_deployment.py \
             --api-url "${{ vars.PRODUCTION_API_URL }}" \
+            --expected-environment production \
             --web-url "${{ vars.PRODUCTION_WEB_URL }}" \
             --attempts 3 \
             --interval-seconds 10

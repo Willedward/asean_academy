@@ -5,6 +5,7 @@ An ASEAN scholarship preparation platform in early development.
 - [Beta architecture diagrams](docs/plan/BETA_ARCHITECTURE.md) map services, data, authentication, learning and releases.
 - [Admin dashboard and content-sync runbook](docs/plan/CONTENT_SYNC_ADMIN_DASHBOARD.md) covers local bootstrap, admin pages and controlled course updates.
 - [Authenticated beta E2E verification](docs/plan/AUTHENTICATED_BETA_E2E.md) covers the real browser/API/PostgreSQL journeys and test-only identity boundary.
+- [Hosted staging deployment](docs/plan/HOSTED_STAGING.md) covers isolated Railway/Supabase setup, Google OAuth verification, automated releases, and rollback.
 
 - [PLAN V2](docs/plan/PLAN_V2.md) consolidates the course-based product, service
   boundaries, integration sequence, and delivery plan. The earlier [product plan](docs/plan/plan.md),
