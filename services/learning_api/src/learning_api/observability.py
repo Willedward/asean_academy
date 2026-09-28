@@ -18,6 +18,8 @@ _STRUCTURED_FIELDS = (
     "target_user_id",
     "role",
     "invitation_id",
+    "rate_limit_policy",
+    "rate_limit_subject",
 )
 
 

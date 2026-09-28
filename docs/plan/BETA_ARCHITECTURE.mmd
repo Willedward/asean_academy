@@ -17,17 +17,19 @@ flowchart TB
 
   subgraph api["FastAPI Learning API — localhost:8000 in development"]
     AUTHZ["Token verification and database role checks"]
+    GUARD["Request-size guard · Shared mutation rate limits"]
     COURSE["Course catalogue and prerequisites"]
     PRACTICE["Practice orchestration and deterministic marking"]
     PROGRESS["Section progress · Proficiency · Checkpoint mastery"]
     OPS["Admin analytics · Invitations · Role management"]
     REVIEW["Content review · Safe preview · Release requests"]
     SYNC["Content hashes · Readiness · Revision migration"]
-    AUTHZ --> COURSE
-    AUTHZ --> PRACTICE
-    AUTHZ --> PROGRESS
-    AUTHZ --> OPS
-    AUTHZ --> REVIEW
+    AUTHZ --> GUARD
+    GUARD --> COURSE
+    GUARD --> PRACTICE
+    GUARD --> PROGRESS
+    GUARD --> OPS
+    GUARD --> REVIEW
     OPS --> SYNC
     PRACTICE --> PROGRESS
   end
@@ -40,7 +42,7 @@ flowchart TB
   GOOGLE["Google OAuth"]
   BANK["question_bank Python library<br/>Validation · Checking · Importers"]
   GIT[("Git-authored JSON and assets")]
-  CI["GitHub Actions<br/>CI → Staging migrate/import/deploy/smoke<br/>Production approval → deploy/smoke"]
+  CI["GitHub Actions<br/>CI → Migrate/restore proof → Staging deploy/smoke<br/>Production approval → deploy/smoke"]
   OCR["Offline OCR and categorizer<br/>Staging and human review"]
   AI["Future grounded AI tutor"]
   VIDEO["Future video host and captions"]
@@ -72,6 +74,7 @@ flowchart TB
   CI -->|"Deploy API then web"| api
   CI --> web
   PRACTICE -.-> AI
+  GUARD -->|"Opaque counters and security events"| DB
   PAGES -.-> VIDEO
 
   classDef managed fill:#ede9fe,stroke:#7c3aed,color:#111827

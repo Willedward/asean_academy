@@ -84,6 +84,7 @@ Add these **environment secrets**:
 | SUPABASE_ACCESS_TOKEN        | Fine-grained Supabase token with auth config read and project migration access |
 | STAGING_SUPABASE_DB_PASSWORD | Password for the staging Supabase database                                     |
 | STAGING_DATABASE_URL         | Encoded staging transaction-pooler connection string                           |
+| STAGING_ABUSE_HASH_SECRET    | Random server-only HMAC secret of at least 32 characters                         |
 
 Add these **environment variables**:
 
@@ -99,7 +100,9 @@ Add these **environment variables**:
 | STAGING_WEB_URL                  | Public HTTPS web origin            |
 
 The repository-level production URL variables should remain configured so the staging
-workflow can reject accidental production targets.
+workflow can reject accidental production targets. Generate the abuse HMAC secret locally
+with `python3 -c 'import secrets; print(secrets.token_urlsafe(48))'`; do not reuse the
+production value.
 
 ## Railway service settings
 

@@ -2,14 +2,27 @@
 
 from __future__ import annotations
 
+import logging
+from collections.abc import Callable
 from dataclasses import replace
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, Request
+import psycopg
+from fastapi import Depends, HTTPException, Request, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
+from .abuse import (
+    POLICIES,
+    InMemoryRateLimiter,
+    PostgresRateLimiter,
+    RateLimiter,
+    client_ip,
+    decision_headers,
+    opaque_subject,
+)
 from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
+from .conventions import current_request_id
 from .identity import AuthenticatedLearner, AuthenticationError
 from .identity_repository import IdentityError, PostgresIdentityRepository
 from .practice_service import PracticeService
@@ -17,6 +30,7 @@ from .progress_repository import PostgresProgressRepository, SQLiteProgressRepos
 from .progress_service import ProgressService
 
 bearer = HTTPBearer(auto_error=False)
+LOGGER = logging.getLogger("learning_api.abuse")
 
 
 def current_learner(
@@ -239,3 +253,114 @@ def practice_service(
 
 
 PracticeServiceDependency = Annotated[PracticeService, Depends(practice_service)]
+
+
+def rate_limiter(request: Request) -> RateLimiter:
+    limiter = getattr(request.app.state, "rate_limiter", None)
+    if limiter is None:
+        settings = request.app.state.settings
+        limiter = (
+            PostgresRateLimiter(settings.database_url)
+            if settings.database_url
+            else InMemoryRateLimiter()
+        )
+        request.app.state.rate_limiter = limiter
+    return limiter
+
+
+def _rate_limit_dependency(*policy_keys: str) -> Callable:
+    def enforce(
+        request: Request,
+        response: Response,
+        learner: LearnerDependency,
+    ) -> None:
+        settings = request.app.state.settings
+        if not settings.rate_limits_enabled:
+            return
+        limiter = rate_limiter(request)
+        visible_headers: dict[str, str] | None = None
+        for policy_key in policy_keys:
+            policy = POLICIES[policy_key]
+            raw_subject = (
+                client_ip(request, trust_proxy_headers=settings.trust_proxy_headers)
+                if policy.subject_kind == "ip"
+                else learner.learner_id
+            )
+            digest = opaque_subject(
+                settings.abuse_hash_secret,
+                policy.subject_kind,
+                raw_subject,
+            )
+            try:
+                decision = limiter.consume(
+                    policy,
+                    digest,
+                    request_id=current_request_id(request),
+                    path=request.url.path,
+                )
+            except psycopg.Error as exc:
+                raise HTTPException(
+                    status_code=503,
+                    detail={
+                        "code": "abuse_protection_unavailable",
+                        "message": "Request protection is temporarily unavailable.",
+                    },
+                ) from exc
+            headers = decision_headers(decision)
+            if policy.subject_kind == "learner":
+                visible_headers = headers
+            if not decision.allowed:
+                headers["Retry-After"] = str(decision.retry_after_seconds)
+                LOGGER.warning(
+                    "rate_limit_exceeded",
+                    extra={
+                        "request_id": current_request_id(request),
+                        "http_method": request.method,
+                        "http_path": request.url.path,
+                        "rate_limit_policy": policy.key,
+                        "rate_limit_subject": policy.subject_kind,
+                    },
+                )
+                raise HTTPException(
+                    status_code=429,
+                    detail={
+                        "code": "rate_limit_exceeded",
+                        "message": "Too many requests. Wait before trying again.",
+                        "details": {
+                            "limit": decision.limit,
+                            "window_seconds": policy.window_seconds,
+                            "retry_after_seconds": decision.retry_after_seconds,
+                        },
+                    },
+                    headers=headers,
+                )
+        if visible_headers:
+            response.headers.update(visible_headers)
+
+    return enforce
+
+
+OnboardingRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("onboarding_learner", "onboarding_ip")),
+]
+PracticeSessionRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("practice_session_write")),
+]
+PracticeAttemptRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("practice_attempt")),
+]
+PracticeSupportRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("practice_support")),
+]
+LearnerProgressWriteRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("learner_progress_write")),
+]
+AdminWriteRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("admin_write")),
+]

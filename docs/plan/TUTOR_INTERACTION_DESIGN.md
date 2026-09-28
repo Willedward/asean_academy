@@ -95,6 +95,40 @@ The message response should contain a response type, safe rendered blocks,
 suggested learner replies, recommended next action, and request ID. It should not
 expose raw provider output.
 
+## Per-learner quota and cost boundary
+
+Tutor quotas are enforced by the Learning API, not by the browser and not solely by the
+model provider. Ordinary HTTP rate limits protect request bursts. A separate durable
+usage ledger protects model cost and fair access.
+
+For each learner and UTC day, the server tracks reserved and actual request count, input
+tokens, output tokens, and total tokens. Before calling a provider, it atomically reserves
+the maximum permitted cost for the turn. After the response it reconciles the reservation
+with provider-reported usage. A failed provider call releases the unused reservation while
+retaining a small failed-call counter for abuse detection.
+
+The pilot configuration includes:
+
+- daily messages per learner;
+- daily total model tokens per learner;
+- maximum context and output tokens per turn;
+- one concurrent generation per learner;
+- academy-wide daily/monthly circuit breakers;
+- per-learner administrative override with an audit record; and
+- a reset timestamp in the standard `tutor_quota_exceeded` response.
+
+Suggested starting values are configuration, not schema constants. Begin with 10 tutor
+turns per learner per day and a 20,000 total-token daily ceiling during the Lesson 1 beta,
+then reduce or increase them using real prompt size, answer quality, and cost measurements.
+Students never receive the provider API key. Quota exhaustion affects only live tutor
+messages; lessons, deterministic marking, authored hints, and worked solutions remain
+available.
+
+Planned accounting tables are `tutor_usage_daily` for one atomic learner/day balance and
+`tutor_usage_events` for append-only reservation/reconciliation records. Stored tutor
+messages reference sanitized model usage metadata. Operational logs exclude raw prompts,
+student answers, tokens, and provider credentials.
+
 ## Provider strategy
 
 Use a provider interface so the implementation can run against a local model, a
@@ -110,5 +144,5 @@ evaluation rather than price alone.
 - Server-enforced answer/solution lock state.
 - Fixed evaluation conversations, including repeated “I don't understand” turns.
 - Leakage, curriculum-correctness, latency, and inappropriate-output checks.
-- Per-student rate limits, timeouts, logs, and a feature flag.
+- Per-student request and model-token quotas, timeouts, logs, and a feature flag.
 - A useful fallback when the model is unavailable.

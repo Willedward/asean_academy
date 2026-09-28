@@ -86,3 +86,20 @@ def test_e2e_authentication_secret_requires_32_characters(monkeypatch):
 
     with pytest.raises(RuntimeError, match="at least 32"):
         Settings.from_environment()
+
+
+def test_hosted_environment_requires_a_non_default_abuse_secret(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "preview")
+    monkeypatch.setenv("SUPABASE_URL", "https://example.supabase.co")
+    monkeypatch.setenv("ASEAN_ACADEMY_DATABASE_URL", "postgresql://example.test/db")
+    monkeypatch.delenv("ASEAN_ACADEMY_ABUSE_HASH_SECRET", raising=False)
+
+    with pytest.raises(RuntimeError, match="must be set"):
+        Settings.from_environment()
+
+
+def test_enabled_rate_limits_require_a_long_abuse_secret(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ABUSE_HASH_SECRET", "too-short")
+
+    with pytest.raises(RuntimeError, match="at least 32"):
+        Settings.from_environment()

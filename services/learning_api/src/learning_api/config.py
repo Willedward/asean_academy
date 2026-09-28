@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202609280010"
+REQUIRED_SCHEMA_REVISION = "202609280011"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -55,6 +55,10 @@ class Settings:
     supabase_anon_key: str | None = None
     supabase_jwt_audience: str = "authenticated"
     e2e_auth_secret: str | None = None
+    rate_limits_enabled: bool = True
+    abuse_hash_secret: str = "development-only-abuse-hash-secret"
+    trust_proxy_headers: bool = False
+    max_request_body_bytes: int = 65536
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -140,6 +144,15 @@ class Settings:
             ),
             supabase_jwt_audience=os.getenv("SUPABASE_JWT_AUDIENCE", "authenticated").strip(),
             e2e_auth_secret=e2e_auth_secret,
+            rate_limits_enabled=_boolean("ASEAN_ACADEMY_RATE_LIMITS_ENABLED", True),
+            abuse_hash_secret=os.getenv(
+                "ASEAN_ACADEMY_ABUSE_HASH_SECRET",
+                "development-only-abuse-hash-secret",
+            ).strip(),
+            trust_proxy_headers=_boolean("ASEAN_ACADEMY_TRUST_PROXY_HEADERS", False),
+            max_request_body_bytes=_positive_integer(
+                "ASEAN_ACADEMY_MAX_REQUEST_BODY_BYTES", 65536
+            ),
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:
@@ -150,6 +163,16 @@ class Settings:
                 )
         if environment == "production" and settings.allow_draft_content:
             raise RuntimeError("Draft course content cannot be enabled in production")
+        if settings.rate_limits_enabled and len(settings.abuse_hash_secret) < 32:
+            raise RuntimeError(
+                "ASEAN_ACADEMY_ABUSE_HASH_SECRET must contain at least 32 characters"
+            )
+        if environment in {"preview", "production"} and (
+            settings.abuse_hash_secret == "development-only-abuse-hash-secret"
+        ):
+            raise RuntimeError(
+                "ASEAN_ACADEMY_ABUSE_HASH_SECRET must be set in preview and production"
+            )
         if settings.database_url and settings.development_learner_id:
             try:
                 UUID(settings.development_learner_id)

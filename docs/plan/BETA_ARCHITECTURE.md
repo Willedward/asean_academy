@@ -1,6 +1,6 @@
 # ASEAN Academy beta architecture
 
-**Implementation snapshot:** 28 September 2026, `feature/authenticated-beta-e2e`.
+**Implementation snapshot:** 28 September 2026, `feature/api-abuse-recovery`.
 **Companions:** [Content synchronization and admin runbook](CONTENT_SYNC_ADMIN_DASHBOARD.md) and [Content review and controlled publication](CONTENT_REVIEW_PUBLICATION.md).
 **Format:** Markdown with editable Mermaid diagrams. GitHub renders these diagrams; a
 Mermaid-enabled Markdown preview can render them locally. The overview is also supplied
@@ -23,10 +23,10 @@ module into a separate service only when scaling, isolation or ownership require
 | Web | Student and administrator pages, Google sign-in, session cookies, same-origin API proxy, KaTeX | Implemented, `apps/web`; design remains replaceable |
 | Learning API | Verified identity, access rules, lesson/practice workflows, progress, administration | Implemented, `services/learning_api` |
 | Supabase Auth | Google OAuth exchange, user identity, access/refresh tokens | Integrated; Google/Supabase dashboard configuration is external |
-| PostgreSQL | Imported content revisions, profiles, invitations, enrolments, attempts, progress, audit | Implemented, `supabase/migrations` |
+| PostgreSQL | Imported content revisions, profiles, invitations, enrolments, attempts, progress, audit, shared rate limits | Implemented, `supabase/migrations` |
 | Question-bank domain | Validation, numeric/expression checking, hints, solutions, content import | Implemented shared package, `question_bank` |
 | Git-authored content | Editable, reviewable source for lessons and questions | 40 N1 question drafts; seven lesson records; Lesson 1 has draft notes |
-| CI and release tooling | Unit/contract tests, authenticated browser journeys, migration checks, imports, deployment sequencing, health checks | Workflows implemented; actual Railway/GitHub configuration must be verified separately |
+| CI and release tooling | Unit/contract tests, authenticated browser journeys, migration checks, imports, backup/restore proof, deployment sequencing, health and bounded load checks | Workflows implemented; actual Railway/GitHub configuration must be verified separately |
 | OCR and categorization | PDF extraction, staging/review and syllabus mapping | Existing offline tools; outside the student request path |
 | Conversational AI tutor | Grounded follow-up explanations and multi-turn conversation | Planned; current hints/solutions are authored content, not live LLM responses |
 | Video delivery | Hosted media, captions/transcript, playback | Pending media and hosting decision; lesson page has placeholder support |
@@ -56,17 +56,19 @@ flowchart TB
 
   subgraph api["FastAPI Learning API — localhost:8000 in development"]
     AUTHZ["Token verification and database role checks"]
+    GUARD["Request-size guard · Shared mutation rate limits"]
     COURSE["Course catalogue and prerequisites"]
     PRACTICE["Practice orchestration and deterministic marking"]
     PROGRESS["Section progress · Proficiency · Checkpoint mastery"]
     OPS["Admin analytics · Invitations · Role management"]
     REVIEW["Content review · Safe preview · Release requests"]
     SYNC["Content hashes · Readiness · Revision migration"]
-    AUTHZ --> COURSE
-    AUTHZ --> PRACTICE
-    AUTHZ --> PROGRESS
-    AUTHZ --> OPS
-    AUTHZ --> REVIEW
+    AUTHZ --> GUARD
+    GUARD --> COURSE
+    GUARD --> PRACTICE
+    GUARD --> PROGRESS
+    GUARD --> OPS
+    GUARD --> REVIEW
     OPS --> SYNC
     PRACTICE --> PROGRESS
   end
@@ -79,7 +81,7 @@ flowchart TB
   GOOGLE["Google OAuth"]
   BANK["question_bank Python library<br/>Validation · Checking · Importers"]
   GIT[("Git-authored JSON and assets")]
-  CI["GitHub Actions<br/>Validate → Migrate → Approval gate → Import → Deploy → Smoke"]
+  CI["GitHub Actions<br/>Validate → Migrate → Restore proof → Approval gate → Import → Deploy → Smoke"]
   OCR["Offline OCR and categorizer<br/>Staging and human review"]
   AI["Future grounded AI tutor"]
   VIDEO["Future video host and captions"]
@@ -111,6 +113,7 @@ flowchart TB
   CI -->|"Deploy API then web"| api
   CI --> web
   PRACTICE -.-> AI
+  GUARD -->|"Opaque counters and security events"| DB
   PAGES -.-> VIDEO
 
   classDef managed fill:#ede9fe,stroke:#7c3aed,color:#111827
@@ -331,6 +334,8 @@ revisions; attempts and session items refer to exact persisted versions.
 | Aggregated admin metrics | PostgreSQL query results | Protected API; no separate analytics copy |
 | Review decisions and lifecycle requests | Append-only PostgreSQL records bound to a Git-content fingerprint | Protected content-review API; release gate reads them |
 | Release identity and request logs | Process environment and logs | Health/status endpoints and hosting log system |
+| Abuse counters and security events | PostgreSQL opaque HMAC identities | API middleware only; no browser table grants |
+| Recovery proof | Managed backup plus disposable restored database | `pg_dump`/`pg_restore` and deterministic critical-table signatures |
 
 **Important limitation:** the current API serves one bundled N1 catalogue. Importing
 multiple revisions does not create a full arbitrary historical-catalogue server.

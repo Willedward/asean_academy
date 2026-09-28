@@ -27,6 +27,7 @@ from ..dependencies import (
     AcademicAdminLearnerDependency,
     AdminAnalyticsRepositoryDependency,
     AdminLearnerDependency,
+    AdminWriteRateLimitDependency,
 )
 from .admin import _safe
 
@@ -119,6 +120,7 @@ async def update_user_role(
     request: Request,
     administrator: AcademicAdminLearnerDependency,
     repository: AdminAnalyticsRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
 ) -> AdminUserRoleResponse:
     result = _safe(
         lambda: repository.change_role(
@@ -170,6 +172,7 @@ async def preview_curriculum(learner_id: UUID, request: Request,
              response_model=CurriculumMigrationResponse)
 async def migrate_curriculum(learner_id: UUID, body: CurriculumMigrationRequest, request: Request,
                              administrator: AcademicAdminLearnerDependency,
-                             repository: AdminAnalyticsRepositoryDependency):
+                             repository: AdminAnalyticsRepositoryDependency,
+                             _rate_limit: AdminWriteRateLimitDependency):
     return _safe(lambda: migrate(repository, administrator, learner_id, body,
                                 current_request_id(request), request.app.state.course_catalogue))

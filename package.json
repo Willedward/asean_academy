@@ -20,6 +20,7 @@
     "release:check": "python3 scripts/check_migration_safety.py",
     "release:content": "uv run --project services/learning_api --locked python services/learning_api/scripts/verify_content_release.py",
     "smoke:deployment": "python3 scripts/smoke_deployment.py",
+    "smoke:load": "python3 scripts/load_test_api.py",
     "openapi:generate": "corepack pnpm openapi:export && corepack pnpm fixtures:export && corepack pnpm --filter @asean-academy/web openapi:generate",
     "ci:web": "corepack pnpm openapi:generate && corepack pnpm lint && corepack pnpm typecheck && corepack pnpm test:web && corepack pnpm build",
     "bootstrap:api": "uv run --project services/learning_api --locked python services/learning_api/scripts/bootstrap_local.py"

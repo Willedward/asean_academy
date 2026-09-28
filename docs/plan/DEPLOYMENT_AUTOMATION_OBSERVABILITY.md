@@ -49,6 +49,7 @@ add these environment secrets:
 | `SUPABASE_ACCESS_TOKEN` | Supabase account access tokens | Token permitted to link the production project |
 | `SUPABASE_DB_PASSWORD` | Supabase database settings | Production database password used by the Supabase CLI |
 | `PRODUCTION_DATABASE_URL` | Supabase Connect panel | Encoded transaction-pooler URI used for transactional content imports |
+| `PRODUCTION_ABUSE_HASH_SECRET` | Generate locally with `secrets.token_urlsafe(48)` | Server-only HMAC secret for opaque shared rate-limit identities |
 
 Add these repository or production-environment variables:
 
@@ -102,6 +103,9 @@ Configure the API service with:
 - `ASEAN_ACADEMY_ENV=production`
 - `ASEAN_ACADEMY_LOG_FORMAT=json`
 - `ASEAN_ACADEMY_SLOW_REQUEST_MS=1000`
+- `ASEAN_ACADEMY_RATE_LIMITS_ENABLED=true`
+- `ASEAN_ACADEMY_ABUSE_HASH_SECRET` from the protected production secret
+- `ASEAN_ACADEMY_TRUST_PROXY_HEADERS=true` only behind Railway's normalized ingress
 - deployment overlap: 30 seconds
 - deployment draining: 20 seconds
 - restart policy: always
@@ -227,3 +231,10 @@ A database rollback is appropriate only when it has been designed and tested
 before release. Rolling application code back over an additive migration is
 usually safer.
 
+
+## Abuse controls and recovery drills
+
+Sensitive mutations use PostgreSQL-backed limits shared by every API replica. The
+recovery CI job restores a real PostgreSQL dump and compares critical table signatures.
+See [API_ABUSE_RECOVERY.md](API_ABUSE_RECOVERY.md) for limits, staging load smoke,
+secret handling, restore commands, and the AI tutor quota boundary.

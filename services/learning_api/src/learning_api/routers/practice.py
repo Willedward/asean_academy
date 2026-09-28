@@ -9,7 +9,12 @@ from fastapi import APIRouter, Header, HTTPException, Path
 from question_bank.practice import PracticeError
 
 from ..course_catalogue import CatalogueError
-from ..dependencies import PracticeServiceDependency
+from ..dependencies import (
+    PracticeAttemptRateLimitDependency,
+    PracticeServiceDependency,
+    PracticeSessionRateLimitDependency,
+    PracticeSupportRateLimitDependency,
+)
 from ..practice_contracts import (
     AttemptResponse,
     CreatePracticeSessionRequest,
@@ -52,6 +57,7 @@ async def create_session(
     body: CreatePracticeSessionRequest,
     idempotency_key: IdempotencyHeader,
     service: PracticeServiceDependency,
+    _rate_limit: PracticeSessionRateLimitDependency,
 ) -> PracticeSessionResponse:
     return _safe(
         lambda: service.create_session(
@@ -100,6 +106,7 @@ async def submit_attempt(
     body: SubmitAttemptRequest,
     idempotency_key: IdempotencyHeader,
     service: PracticeServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
 ) -> AttemptResponse:
     return _safe(
         lambda: service.submit_attempt(
@@ -123,6 +130,7 @@ async def reveal_hint(
     question_key: Annotated[str, Path(pattern=r"^n1-l[1-3]-[0-9]{2}$")],
     stage: Annotated[int, Path(ge=1, le=2)],
     service: PracticeServiceDependency,
+    _rate_limit: PracticeSupportRateLimitDependency,
 ) -> HintResponse:
     return _safe(
         lambda: service.reveal_hint(
@@ -143,6 +151,7 @@ async def give_up(
     session_id: UUID,
     question_key: Annotated[str, Path(pattern=r"^n1-l[1-3]-[0-9]{2}$")],
     service: PracticeServiceDependency,
+    _rate_limit: PracticeSupportRateLimitDependency,
 ) -> GiveUpResponse:
     return _safe(
         lambda: service.give_up(

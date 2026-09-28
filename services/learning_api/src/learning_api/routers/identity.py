@@ -7,7 +7,11 @@ import logging
 from fastapi import APIRouter, HTTPException, Request
 
 from ..conventions import current_request_id
-from ..dependencies import IdentityRepositoryDependency, LearnerDependency
+from ..dependencies import (
+    IdentityRepositoryDependency,
+    LearnerDependency,
+    OnboardingRateLimitDependency,
+)
 from ..identity_contracts import (
     AcceptInvitationRequest,
     CurrentLearnerResponse,
@@ -40,6 +44,7 @@ async def accept_invitation(
     request: Request,
     learner: LearnerDependency,
     repository: IdentityRepositoryDependency,
+    _rate_limit: OnboardingRateLimitDependency,
 ) -> InvitationAcceptanceResponse:
     try:
         result = repository.accept_invitation(

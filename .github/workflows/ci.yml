@@ -48,7 +48,7 @@ jobs:
           version: "0.12.5"
           enable-cache: true
       - run: uv sync --project services/learning_api --locked
-      - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts
+      - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts scripts/backup_restore_drill.py scripts/load_test_api.py
       - run: uv run --project services/learning_api pytest services/learning_api/tests
       - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py
       - run: uv sync --project question_bank --locked
@@ -90,6 +90,13 @@ jobs:
         run: uv run --project services/learning_api --locked pytest services/learning_api/tests -m postgres
         env:
           TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
+      - name: Create empty recovery target
+        run: psql -X "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "create database asean_academy_restore"
+      - name: Prove PostgreSQL backup and restore integrity
+        run: uv run --project services/learning_api --locked python scripts/backup_restore_drill.py
+        env:
+          SOURCE_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
+          RESTORE_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_restore
 
   authenticated-e2e:
     name: Authenticated beta browser journeys

@@ -100,7 +100,9 @@ def create_app(
             403: {"model": ErrorEnvelope},
             404: {"model": ErrorEnvelope},
             409: {"model": ErrorEnvelope},
+            413: {"model": ErrorEnvelope},
             422: {"model": ErrorEnvelope},
+            429: {"model": ErrorEnvelope},
             500: {"model": ErrorEnvelope},
         },
     )
@@ -127,14 +129,37 @@ def create_app(
         allow_credentials=True,
         allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-Request-ID"],
-        expose_headers=[REQUEST_ID_HEADER, RELEASE_SHA_HEADER],
+        expose_headers=[
+            REQUEST_ID_HEADER,
+            RELEASE_SHA_HEADER,
+            "RateLimit-Limit",
+            "RateLimit-Remaining",
+            "RateLimit-Reset",
+            "Retry-After",
+        ],
     )
 
     @application.middleware("http")
     async def request_context(request: Request, call_next):
         request.state.request_id = request_id_from(request.headers.get(REQUEST_ID_HEADER))
         started_at = perf_counter()
-        response = await call_next(request)
+        content_length = request.headers.get("content-length")
+        if (
+            request.method in {"POST", "PUT", "PATCH"}
+            and request.url.path.startswith("/api/v1/")
+            and content_length
+            and content_length.isdecimal()
+            and int(content_length) > settings.max_request_body_bytes
+        ):
+            response = _error_response(
+                request,
+                status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                code="request_too_large",
+                message="The request body is too large.",
+                details={"max_bytes": settings.max_request_body_bytes},
+            )
+        else:
+            response = await call_next(request)
         response.headers[REQUEST_ID_HEADER] = request.state.request_id
         response.headers[RELEASE_SHA_HEADER] = settings.release_sha
         duration_ms = round((perf_counter() - started_at) * 1000, 2)
@@ -271,6 +296,14 @@ def create_app(
                                 select 1 from pg_enum e join pg_type t on t.oid=e.enumtypid
                                 where t.typname='beta_audit_event_type'
                                 and e.enumlabel='content_retirement_requested'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'api_rate_limit_counters'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'api_security_events'
                             ) as schema_ready
                         """
                     ).fetchone()

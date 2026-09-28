@@ -25,6 +25,7 @@ from ..conventions import current_request_id
 from ..dependencies import (
     AcademicAdminLearnerDependency,
     AdminLearnerDependency,
+    AdminWriteRateLimitDependency,
     BetaOperationsRepositoryDependency,
 )
 
@@ -79,6 +80,7 @@ async def create_invitation(
     request: Request,
     administrator: AdminLearnerDependency,
     repository: BetaOperationsRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
 ) -> CreatedInvitationResponse:
     result = _safe(
         lambda: repository.create_invitation(
@@ -108,6 +110,7 @@ async def revoke_invitation(
     request: Request,
     administrator: AdminLearnerDependency,
     repository: BetaOperationsRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
 ) -> InvitationResponse:
     result = _safe(
         lambda: repository.revoke_invitation(

@@ -27,6 +27,7 @@ from ..dependencies import (
     AcademicAdminLearnerDependency,
     AdminAnalyticsRepositoryDependency,
     AdminLearnerDependency,
+    AdminWriteRateLimitDependency,
 )
 from .admin import _safe
 
@@ -98,6 +99,7 @@ async def review_content(
     request: Request,
     administrator: AdminLearnerDependency,
     repository: AdminAnalyticsRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
 ) -> ContentReviewRecordResponse:
     result = _safe(
         lambda: record_review(
@@ -137,6 +139,7 @@ async def lifecycle_request(
     request: Request,
     administrator: AcademicAdminLearnerDependency,
     repository: AdminAnalyticsRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
 ) -> ContentLifecycleRequestResponse:
     result = _safe(
         lambda: request_lifecycle(

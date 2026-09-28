@@ -7,7 +7,10 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Path
 
 from ..course_catalogue import CatalogueError
-from ..dependencies import ProgressServiceDependency
+from ..dependencies import (
+    LearnerProgressWriteRateLimitDependency,
+    ProgressServiceDependency,
+)
 from ..progress_contracts import (
     ActiveRecallAttemptRequest,
     ActiveRecallAttemptResponse,
@@ -42,6 +45,7 @@ def _safe(call):
 async def start_lesson(
     lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
     service: ProgressServiceDependency,
+    _rate_limit: LearnerProgressWriteRateLimitDependency,
 ) -> LessonProgressResponse:
     return _safe(lambda: service.start_lesson(lesson_key))
 
@@ -70,6 +74,7 @@ async def set_lesson_section_completion(
     lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
     section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
     service: ProgressServiceDependency,
+    _rate_limit: LearnerProgressWriteRateLimitDependency,
 ) -> LessonSectionProgressResponse:
     return _safe(
         lambda: service.set_section_completion(
@@ -91,6 +96,7 @@ async def check_lesson_active_recall(
     lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
     section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
     service: ProgressServiceDependency,
+    _rate_limit: LearnerProgressWriteRateLimitDependency,
 ) -> ActiveRecallAttemptResponse:
     return _safe(
         lambda: service.check_active_recall(
