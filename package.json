@@ -13,6 +13,7 @@
     "lint": "corepack pnpm --filter @asean-academy/web lint",
     "typecheck": "corepack pnpm --filter @asean-academy/web typecheck",
     "test:web": "corepack pnpm --filter @asean-academy/web test",
+    "test:e2e": "corepack pnpm --filter @asean-academy/web test:e2e",
     "test:python": "uv run --project services/learning_api --locked pytest services/learning_api/tests && uv run --project question_bank --locked pytest question_bank/tests",
     "openapi:export": "uv run --project services/learning_api --locked python services/learning_api/scripts/export_openapi.py",
     "fixtures:export": "uv run --project services/learning_api --locked python services/learning_api/scripts/export_frontend_fixtures.py",

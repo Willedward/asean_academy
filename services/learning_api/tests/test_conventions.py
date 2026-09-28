@@ -67,3 +67,22 @@ def test_empty_development_learner_is_treated_as_disabled(monkeypatch):
     settings = Settings.from_environment()
 
     assert settings.development_learner_id is None
+
+
+def test_e2e_authentication_secret_is_rejected_outside_test(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "development")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_E2E_AUTH_SECRET",
+        "asean-academy-local-e2e-secret-2026-only",
+    )
+
+    with pytest.raises(RuntimeError, match="allowed only in test"):
+        Settings.from_environment()
+
+
+def test_e2e_authentication_secret_requires_32_characters(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "test")
+    monkeypatch.setenv("ASEAN_ACADEMY_E2E_AUTH_SECRET", "too-short")
+
+    with pytest.raises(RuntimeError, match="at least 32"):
+        Settings.from_environment()

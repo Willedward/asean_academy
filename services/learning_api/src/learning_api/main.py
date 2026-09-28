@@ -32,7 +32,7 @@ from .conventions import (
     request_id_from,
 )
 from .course_catalogue import CourseCatalogue
-from .identity import SupabaseTokenVerifier, TokenVerifier
+from .identity import E2ETokenVerifier, SupabaseTokenVerifier, TokenVerifier
 from .observability import configure_logging
 from .routers.admin import router as admin_router
 from .routers.admin_analytics import router as admin_analytics_router
@@ -107,7 +107,9 @@ def create_app(
     application.state.settings = settings
     application.state.started_at = datetime.now(UTC)
     application.state.token_verifier = token_verifier or (
-        SupabaseTokenVerifier(
+        E2ETokenVerifier(settings.e2e_auth_secret)
+        if settings.environment == "test" and settings.e2e_auth_secret
+        else SupabaseTokenVerifier(
             settings.supabase_url,
             audience=settings.supabase_jwt_audience,
             anon_key=settings.supabase_anon_key,

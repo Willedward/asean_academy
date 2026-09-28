@@ -3,12 +3,9 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { getServerLearner, ServerLearningApiError } from "@/lib/server/learning-api";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
-
 import { requireVerifiedSession } from "./session";
 
 export async function requireAdministrator() {
-  if (!isSupabaseConfigured()) return null;
   const session = await requireVerifiedSession("/admin");
   if (!session) return null;
 

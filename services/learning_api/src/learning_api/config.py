@@ -54,6 +54,7 @@ class Settings:
     supabase_url: str | None = None
     supabase_anon_key: str | None = None
     supabase_jwt_audience: str = "authenticated"
+    e2e_auth_secret: str | None = None
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -100,6 +101,11 @@ class Settings:
                 development_learner_id = development_learner_value.strip() or None
         else:
             development_learner_id = None
+        e2e_auth_secret = os.getenv("ASEAN_ACADEMY_E2E_AUTH_SECRET", "").strip() or None
+        if e2e_auth_secret and environment != "test":
+            raise RuntimeError("ASEAN_ACADEMY_E2E_AUTH_SECRET is allowed only in test")
+        if e2e_auth_secret and len(e2e_auth_secret) < 32:
+            raise RuntimeError("ASEAN_ACADEMY_E2E_AUTH_SECRET must contain at least 32 characters")
         settings = cls(
             environment=environment,
             cors_origins=_csv("ASEAN_ACADEMY_CORS_ORIGINS", "http://localhost:3000"),
@@ -133,6 +139,7 @@ class Settings:
                 value if (value := os.getenv("SUPABASE_ANON_KEY", "").strip()) else None
             ),
             supabase_jwt_audience=os.getenv("SUPABASE_JWT_AUDIENCE", "authenticated").strip(),
+            e2e_auth_secret=e2e_auth_secret,
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:

@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { getVerifiedSession } from "@/lib/auth/session";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { getVerifiedSession, isAuthenticationConfigured } from "@/lib/auth/session";
 
 const FORWARDED_REQUEST_HEADERS = [
   "accept",
@@ -56,7 +55,7 @@ async function forward(request: NextRequest, context: Context): Promise<Response
     if (value) headers.set(name, value);
   });
 
-  if (isSupabaseConfigured() && !PUBLIC_PATHS.has(relativePath)) {
+  if (isAuthenticationConfigured() && !PUBLIC_PATHS.has(relativePath)) {
     const session = await getVerifiedSession();
     if (!session) return authenticationError();
     headers.set("Authorization", `Bearer ${session.accessToken}`);

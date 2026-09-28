@@ -4,9 +4,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { getVerifiedSession } from "@/lib/auth/session";
+import { getVerifiedSession, isAuthenticationConfigured } from "@/lib/auth/session";
 import { safeNextPath } from "@/lib/auth/navigation";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { signInWithGoogle } from "./actions";
 
@@ -22,7 +21,7 @@ export default async function LoginPage({
   const params = await searchParams;
   const next = safeNextPath(typeof params.next === "string" ? params.next : undefined);
   const errorCode = typeof params.error === "string" ? params.error : "";
-  const configured = isSupabaseConfigured();
+  const configured = isAuthenticationConfigured();
 
   if (configured && await getVerifiedSession()) redirect(next);
 

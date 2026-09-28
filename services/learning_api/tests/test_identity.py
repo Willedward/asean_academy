@@ -137,3 +137,40 @@ def test_supabase_asymmetric_token_verification_checks_signature_issuer_and_audi
     )
     with pytest.raises(AuthenticationError, match="expired or invalid"):
         verifier.verify(wrong_audience)
+
+
+def test_e2e_token_verifier_accepts_only_signed_short_lived_test_tokens():
+    from datetime import UTC, datetime, timedelta
+
+    import jwt
+    import pytest
+
+    from learning_api.identity import AuthenticationError, E2ETokenVerifier
+
+    secret = "asean-academy-local-e2e-secret-2026-only"
+    verifier = E2ETokenVerifier(secret)
+    now = datetime.now(UTC)
+    claims = {
+        "sub": LEARNER_A,
+        "email": "a@example.test",
+        "role": "authenticated",
+        "aud": "authenticated",
+        "iss": "asean-academy-e2e",
+        "iat": now,
+        "exp": now + timedelta(minutes=5),
+    }
+
+    learner = verifier.verify(jwt.encode(claims, secret, algorithm="HS256"))
+    assert learner.learner_id == LEARNER_A
+    assert learner.email == "a@example.test"
+    assert learner.source == "e2e_signed"
+
+    expired = jwt.encode(
+        {**claims, "exp": now - timedelta(seconds=1)}, secret, algorithm="HS256"
+    )
+    with pytest.raises(AuthenticationError, match="expired or invalid"):
+        verifier.verify(expired)
+
+    tampered = jwt.encode(claims, f"{secret}-different", algorithm="HS256")
+    with pytest.raises(AuthenticationError, match="expired or invalid"):
+        verifier.verify(tampered)

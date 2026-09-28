@@ -1,6 +1,6 @@
 # ASEAN Academy beta architecture
 
-**Implementation snapshot:** 28 September 2026, `feature/content-review-publication`.
+**Implementation snapshot:** 28 September 2026, `feature/authenticated-beta-e2e`.
 **Companions:** [Content synchronization and admin runbook](CONTENT_SYNC_ADMIN_DASHBOARD.md) and [Content review and controlled publication](CONTENT_REVIEW_PUBLICATION.md).
 **Format:** Markdown with editable Mermaid diagrams. GitHub renders these diagrams; a
 Mermaid-enabled Markdown preview can render them locally. The overview is also supplied
@@ -26,7 +26,7 @@ module into a separate service only when scaling, isolation or ownership require
 | PostgreSQL | Imported content revisions, profiles, invitations, enrolments, attempts, progress, audit | Implemented, `supabase/migrations` |
 | Question-bank domain | Validation, numeric/expression checking, hints, solutions, content import | Implemented shared package, `question_bank` |
 | Git-authored content | Editable, reviewable source for lessons and questions | 40 N1 question drafts; seven lesson records; Lesson 1 has draft notes |
-| CI and release tooling | Tests, migration checks, imports, deployment sequencing, health checks | Workflows implemented; actual Railway/GitHub configuration must be verified separately |
+| CI and release tooling | Unit/contract tests, authenticated browser journeys, migration checks, imports, deployment sequencing, health checks | Workflows implemented; actual Railway/GitHub configuration must be verified separately |
 | OCR and categorization | PDF extraction, staging/review and syllabus mapping | Existing offline tools; outside the student request path |
 | Conversational AI tutor | Grounded follow-up explanations and multi-turn conversation | Planned; current hints/solutions are authored content, not live LLM responses |
 | Video delivery | Hosted media, captions/transcript, playback | Pending media and hosting decision; lesson page has placeholder support |
@@ -444,7 +444,7 @@ or unrestricted audit export.
 
 ```mermaid
 flowchart LR
-  BRANCH["Feature branch / PR"] --> CI["Lint · Types · Unit tests<br/>Fresh PostgreSQL · Integration tests<br/>Contract generation · Web build"]
+  BRANCH["Feature branch / PR"] --> CI["Lint · Types · Unit tests<br/>Fresh PostgreSQL · Integration tests<br/>Authenticated Chromium journeys<br/>Contract generation · Web build"]
   CI --> MAIN["Reviewed main branch"]
   MAIN --> RELEASE["Manual production workflow<br/>Protected environment"]
   RELEASE --> MIGRATE["Migration safety + Supabase migrations"]
@@ -471,7 +471,7 @@ zero disruption without testing those operational settings.
 content. Admin operations show current status, not historical uptime. Request IDs
 connect user-visible failures to logs. See
 [Deployment automation and observability](DEPLOYMENT_AUTOMATION_OBSERVABILITY.md)
-for external environment setup and rollback procedures.
+for external environment setup and rollback procedures. The browser-test boundary and local/CI runbook are in [Authenticated beta end-to-end verification](AUTHENTICATED_BETA_E2E.md).
 
 ## 11. Future extensions without blocking this beta milestone
 

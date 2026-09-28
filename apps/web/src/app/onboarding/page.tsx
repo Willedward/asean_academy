@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { hasActiveEnrolment } from "@/lib/auth/learner-state";
 import { requireVerifiedSession } from "@/lib/auth/session";
 import { getServerLearner, ServerLearningApiError } from "@/lib/server/learning-api";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { isAuthenticationConfigured } from "@/lib/auth/session";
 
 export default async function OnboardingPage({
   searchParams,
@@ -16,7 +16,7 @@ export default async function OnboardingPage({
   const params = await searchParams;
   const initialCode = typeof params.code === "string" ? params.code.slice(0, 300) : "";
 
-  if (!isSupabaseConfigured()) {
+  if (!isAuthenticationConfigured()) {
     return (
       <main className="mx-auto flex min-h-screen max-w-xl flex-col justify-center px-5 py-12">
         <h1 className="text-3xl font-black">Hosted onboarding is not configured.</h1>

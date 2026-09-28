@@ -89,3 +89,56 @@ jobs:
         run: uv run --project services/learning_api --locked pytest services/learning_api/tests -m postgres
         env:
           TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_test
+
+  authenticated-e2e:
+    name: Authenticated beta browser journeys
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: asean_academy_e2e
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d asean_academy_e2e"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      E2E_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/asean_academy_e2e
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.5.1
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
+      - run: uv sync --project services/learning_api --locked
+      - run: pnpm install --frozen-lockfile
+      - name: Prepare disposable E2E database
+        run: |
+          DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
+          DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank import-db
+          DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
+          uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
+      - run: pnpm --filter @asean-academy/web exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+      - name: Upload browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          if-no-files-found: ignore
+          retention-days: 7

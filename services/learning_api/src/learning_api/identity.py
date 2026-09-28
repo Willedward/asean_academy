@@ -158,6 +158,33 @@ class SupabaseTokenVerifier:
         return _learner(payload, source="supabase_auth")
 
 
+class E2ETokenVerifier:
+    """Verify short-lived HS256 tokens only for isolated end-to-end tests."""
+
+    ISSUER = "asean-academy-e2e"
+
+    def __init__(self, secret: str):
+        if len(secret) < 32:
+            raise ValueError("The E2E authentication secret must contain at least 32 characters.")
+        self.secret = secret
+
+    def verify(self, token: str) -> AuthenticatedLearner:
+        try:
+            payload = jwt.decode(
+                token,
+                self.secret,
+                algorithms=["HS256"],
+                audience="authenticated",
+                issuer=self.ISSUER,
+                options={"require": ["exp", "iat", "sub", "role", "email"]},
+            )
+        except InvalidTokenError as exc:
+            raise AuthenticationError(
+                "invalid_access_token", "The access token is expired or invalid."
+            ) from exc
+        return _learner(payload, source="e2e_signed")
+
+
 class StaticTokenVerifier:
     """Deterministic verifier used by contract tests and local preview harnesses."""
 
