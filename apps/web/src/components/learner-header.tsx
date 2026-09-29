@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { isE2EAuthenticationEnabled } from "@/lib/auth/e2e-config";
 import { getVerifiedSession } from "@/lib/auth/session";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export async function LearnerHeader() {
-  const hostedAuth = isSupabaseConfigured();
+  const hostedAuth = isSupabaseConfigured() || isE2EAuthenticationEnabled();
   const session = hostedAuth ? await getVerifiedSession() : null;
 
   return (

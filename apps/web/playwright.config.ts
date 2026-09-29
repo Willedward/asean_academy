@@ -10,7 +10,9 @@ export default defineConfig({
   fullyParallel: false,
   timeout: 60_000,
   workers: 1,
-  retries: process.env.CI ? 1 : 0,
+  // The serial journeys intentionally share a one-shot database, so a retry would
+  // start from mutated state and hide the original failure location.
+  retries: 0,
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: "http://127.0.0.1:3100",
