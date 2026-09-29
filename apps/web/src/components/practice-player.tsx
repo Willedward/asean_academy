@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { MathContent, type ContentBlock } from "@/components/math-content";
+import { QuestionReportForm } from "@/components/question-report-form";
 import { Button } from "@/components/ui/button";
 import {
   getNextQuestion,
@@ -172,20 +173,22 @@ export function PracticePlayer({
   }
 
   if (current.status === "completed" || !question) {
+    const checkpoint = current.session.mode === "checkpoint";
+    const percentage = current.session.question_count
+      ? Math.round(1000 * current.session.correct_count / current.session.question_count) / 10
+      : 0;
     return (
       <section className="rounded-3xl border border-emerald-200 bg-emerald-50 p-8 text-center">
         <CheckCircle2 aria-hidden="true" className="mx-auto size-12 text-emerald-700" />
-        <h1 className="text-3xl font-black">Practice complete</h1>
+        <h1 className="text-3xl font-black">{checkpoint ? "Checkpoint complete" : "Practice complete"}</h1>
         <p className="text-slate-700">
-          You resolved {current.session.resolved_count} of {current.session.question_count} questions.
+          {checkpoint
+            ? `You answered ${current.session.correct_count} of ${current.session.question_count} correctly (${percentage}%).`
+            : `You resolved ${current.session.resolved_count} of ${current.session.question_count} questions.`}
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Button asChild>
-            <Link href="/progress">View progress</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href={`/lessons/${current.session.lesson_key}`}>Return to lesson</Link>
-          </Button>
+          <Button asChild><Link href="/progress">View progress</Link></Button>
+          {!checkpoint ? <Button asChild variant="outline"><Link href={`/lessons/${current.session.lesson_key}`}>Return to lesson</Link></Button> : null}
         </div>
       </section>
     );
@@ -195,10 +198,10 @@ export function PracticePlayer({
     <article className="space-y-6">
       <Link
         className="inline-flex items-center gap-2 text-sm font-semibold text-teal-800 hover:underline"
-        href={`/lessons/${current.session.lesson_key}`}
+        href={current.session.mode === "checkpoint" ? "/progress" : `/lessons/${current.session.lesson_key}`}
       >
         <ArrowLeft aria-hidden="true" className="size-4" />
-        Exit practice
+        {current.session.mode === "checkpoint" ? "Exit checkpoint" : "Exit practice"}
       </Link>
 
       {current.session.development_drafts ? (
@@ -210,7 +213,7 @@ export function PracticePlayer({
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">
-            {current.stage?.replace("_", " ") ?? "Practice"} · Question {current.position} of {current.session.question_count}
+            {current.session.mode === "checkpoint" ? "Checkpoint" : current.stage?.replace("_", " ") ?? "Practice"} · Question {current.position} of {current.session.question_count}
           </p>
           <h1 className="m-0 text-3xl font-black tracking-tight">{question.title}</h1>
         </div>
@@ -328,28 +331,31 @@ export function PracticePlayer({
               <Send aria-hidden="true" className="mr-2 size-4" />
               Check final answer
             </Button>
-            <Button
-              disabled={busy || hints.some((hint) => hint.stage === 1)}
-              onClick={() => void openHint(1)}
-              variant="outline"
-            >
-              <Lightbulb aria-hidden="true" className="mr-2 size-4" />
-              Hint 1
-            </Button>
-            <Button
-              disabled={busy || !hints.some((hint) => hint.stage === 1) || hints.some((hint) => hint.stage === 2)}
-              onClick={() => void openHint(2)}
-              variant="outline"
-            >
-              Hint 2
-            </Button>
-            {attempt?.solution_available ? (
+            {current.session.mode !== "checkpoint" ? <>
+              <Button
+                disabled={busy || hints.some((hint) => hint.stage === 1)}
+                onClick={() => void openHint(1)}
+                variant="outline"
+              >
+                <Lightbulb aria-hidden="true" className="mr-2 size-4" />
+                Hint 1
+              </Button>
+              <Button
+                disabled={busy || !hints.some((hint) => hint.stage === 1) || hints.some((hint) => hint.stage === 2)}
+                onClick={() => void openHint(2)}
+                variant="outline"
+              >
+                Hint 2
+              </Button>
+            </> : null}
+            {attempt?.solution_available && current.session.mode !== "checkpoint" ? (
               <Button disabled={busy} onClick={() => void revealSolution()} variant="outline">
                 Give up and show solution
               </Button>
             ) : null}
           </>
         )}
+        <QuestionReportForm sessionId={sessionId} questionKey={question.stable_key} questionRevision={question.revision} />
       </div>
     </article>
   );

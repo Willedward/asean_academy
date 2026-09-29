@@ -14,6 +14,8 @@ from question_bank.checking import check_answer
 from question_bank.models import NumericResponse, Question
 from question_bank.practice import PracticeError, public_question, solution_for
 
+from .retry_policy import transition_retry
+
 
 def _fingerprint(value: dict) -> str:
     payload = json.dumps(value, separators=(",", ":"), sort_keys=True).encode()
@@ -63,6 +65,20 @@ class PostgresPracticeEngine:
             "select set_config('request.jwt.claim.sub', %s, true)",
             (self.learner_id,),
         )
+
+    def _daily_retry_capacity(self, connection) -> int:
+        reserved = connection.execute(
+            """
+            select coalesce(sum(requested_question_count), 0)::integer as count
+            from practice_sessions
+            where student_id = %s
+              and scope->>'mode' = 'retry_review'
+              and timezone('Asia/Singapore', created_at)::date
+                  = timezone('Asia/Singapore', now())::date
+            """,
+            (self.learner_id,),
+        ).fetchone()["count"]
+        return max(0, 5 - reserved)
 
     def _question(self, key: str, revision: int | None = None) -> Question:
         question = self.questions.get(key)
@@ -269,6 +285,14 @@ class PostgresPracticeEngine:
                             ),
                         )
                     return self._creation_response(active)
+            if scope.get("mode") == "retry_review":
+                remaining = self._daily_retry_capacity(connection)
+                if question_count > remaining:
+                    raise PracticeError(
+                        "retry_daily_cap_reached",
+                        "You have completed today's five spaced-review questions.",
+                        409,
+                    )
             if scope.get("course_key"):
                 pin = connection.execute("""
                     select v.revision from course_enrolments e
@@ -369,23 +393,63 @@ class PostgresPracticeEngine:
         return question, reason
 
     def retry_question_keys(self, eligible_keys: list[str]) -> list[str]:
+        return [
+            assignment["served_key"]
+            for assignment in self.retry_assignments(eligible_keys, [])
+        ]
+
+    def retry_assignments(
+        self,
+        eligible_keys: list[str],
+        reserve_keys: list[str],
+    ) -> list[dict[str, str]]:
+        """Select at most five due reviews and safe same-skill reserve variants."""
         if not eligible_keys:
             return []
         with self._connect() as connection:
             self._set_identity(connection)
+            remaining = self._daily_retry_capacity(connection)
+            if remaining == 0:
+                return []
             rows = connection.execute(
                 """
-                select questions.stable_key
+                select questions.stable_key, progress.review_stage
                 from question_progress progress
                 join math_questions questions on questions.id = progress.question_id
                 where progress.student_id = %s
                   and progress.state in ('queued_for_retry', 'gave_up')
+                  and progress.due_at <= now()
                   and questions.stable_key = any(%s)
-                order by progress.last_attempted_at nulls first, questions.stable_key
+                order by progress.due_at, progress.last_attempted_at nulls first,
+                         questions.stable_key
+                limit %s
                 """,
-                (self.learner_id, eligible_keys),
+                (self.learner_id, eligible_keys, remaining),
             ).fetchall()
-        return [row["stable_key"] for row in rows]
+        reserved: set[str] = set()
+        assignments: list[dict[str, str]] = []
+        for row in rows:
+            origin_key = row["stable_key"]
+            origin = self.questions.get(origin_key)
+            served_key = origin_key
+            if row["review_stage"] >= 1 and origin is not None:
+                variant = next(
+                    (
+                        self.questions[key]
+                        for key in reserve_keys
+                        if key in self.questions
+                        and key not in reserved
+                        and key != origin_key
+                        and self.questions[key].primary_outcome == origin.primary_outcome
+                        and self.questions[key].difficulty == origin.difficulty
+                    ),
+                    None,
+                )
+                if variant is not None:
+                    served_key = variant.stable_key
+                    reserved.add(served_key)
+            assignments.append({"served_key": served_key, "origin_key": origin_key})
+        return assignments
 
     def next_question(self, session_id: str) -> dict:
         with self._connect() as connection:
@@ -428,12 +492,23 @@ class PostgresPracticeEngine:
                     else:
                         question, reason = candidate
                         ids = self._question_ids(connection, question.stable_key, question.revision)
+                        origin_key = session["scope"].get("retry_origins", {}).get(
+                            question.stable_key
+                        )
+                        origin_id = None
+                        if origin_key and origin_key != question.stable_key:
+                            origin_question = self._question(origin_key)
+                            origin_id = self._question_ids(
+                                connection,
+                                origin_question.stable_key,
+                                origin_question.revision,
+                            )["question_id"]
                         pending = connection.execute(
                             """
                             insert into session_questions (
                                 practice_session_id, question_version_id, position,
-                                status, selection_reason
-                            ) values (%s, %s, %s, 'pending', %s)
+                                status, selection_reason, retry_origin_question_id
+                            ) values (%s, %s, %s, 'pending', %s, %s)
                             returning *, %s::text as stable_key, %s::integer as revision
                             """,
                             (
@@ -441,6 +516,7 @@ class PostgresPracticeEngine:
                                 ids["question_version_id"],
                                 assigned_count + 1,
                                 reason,
+                                origin_id,
                                 question.stable_key,
                                 question.revision,
                             ),
@@ -511,7 +587,9 @@ class PostgresPracticeEngine:
             assignment = connection.execute(
                 """
                 select assigned.*, versions.revision, versions.id as question_version_id,
-                       questions.id as question_id, questions.stable_key
+                       questions.id as question_id, questions.stable_key,
+                       coalesce(assigned.retry_origin_question_id, questions.id)
+                           as progress_question_id
                 from session_questions assigned
                 join math_question_versions versions on versions.id = assigned.question_version_id
                 join math_questions questions on questions.id = versions.question_id
@@ -595,13 +673,30 @@ class PostgresPracticeEngine:
                     assignment["id"],
                 ),
             )
-            state = "correct" if correct else "queued_for_retry"
+            previous = connection.execute(
+                """
+                select interval_days, review_stage, review_streak
+                from question_progress
+                where student_id = %s and question_id = %s
+                """,
+                (self.learner_id, assignment["progress_question_id"]),
+            ).fetchone()
+            transition = transition_retry(
+                mode=session["scope"].get("mode", "guided_practice"),
+                correct=correct,
+                incorrect_attempts=incorrect_attempts,
+                highest_hint_stage=assignment["highest_hint_stage"],
+                previous_interval_days=previous["interval_days"] if previous else None,
+                previous_review_stage=previous["review_stage"] if previous else 0,
+                previous_review_streak=previous["review_streak"] if previous else 0,
+            )
             connection.execute(
                 """
                 insert into question_progress (
                     student_id, question_id, latest_question_version_id, state,
-                    attempts_total, incorrect_total, correct_total, last_attempted_at
-                ) values (%s, %s, %s, %s, 1, %s, %s, now())
+                    attempts_total, incorrect_total, correct_total, last_attempted_at,
+                    due_at, interval_days, review_stage, review_streak, last_resolution
+                ) values (%s, %s, %s, %s, 1, %s, %s, now(), %s, %s, %s, %s, %s)
                 on conflict (student_id, question_id) do update set
                     latest_question_version_id = excluded.latest_question_version_id,
                     state = excluded.state,
@@ -609,15 +704,25 @@ class PostgresPracticeEngine:
                     incorrect_total = question_progress.incorrect_total + excluded.incorrect_total,
                     correct_total = question_progress.correct_total + excluded.correct_total,
                     last_attempted_at = excluded.last_attempted_at,
+                    due_at = excluded.due_at,
+                    interval_days = excluded.interval_days,
+                    review_stage = excluded.review_stage,
+                    review_streak = excluded.review_streak,
+                    last_resolution = excluded.last_resolution,
                     updated_at = now()
                 """,
                 (
                     self.learner_id,
-                    assignment["question_id"],
+                    assignment["progress_question_id"],
                     assignment["question_version_id"],
-                    state,
+                    transition.state,
                     0 if correct else 1,
                     1 if correct else 0,
+                    transition.due_at,
+                    transition.interval_days,
+                    transition.review_stage,
+                    transition.review_streak,
+                    transition.resolution,
                 ),
             )
             return result
@@ -687,7 +792,9 @@ class PostgresPracticeEngine:
             assignment = connection.execute(
                 """
                 select assigned.*, versions.revision,
-                       versions.id as question_version_id, questions.id as question_id
+                       versions.id as question_version_id, questions.id as question_id,
+                       coalesce(assigned.retry_origin_question_id, questions.id)
+                           as progress_question_id
                 from session_questions assigned
                 join math_question_versions versions on versions.id = assigned.question_version_id
                 join math_questions questions on questions.id = versions.question_id
@@ -712,20 +819,37 @@ class PostgresPracticeEngine:
                 """,
                 (assignment["id"],),
             )
+            transition = transition_retry(
+                mode=session["scope"].get("mode", "guided_practice"),
+                correct=False,
+                gave_up=True,
+            )
             connection.execute(
                 """
                 insert into question_progress (
-                    student_id, question_id, latest_question_version_id, state
-                ) values (%s, %s, %s, 'gave_up')
+                    student_id, question_id, latest_question_version_id, state,
+                    due_at, interval_days, review_stage, review_streak, last_resolution
+                ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 on conflict (student_id, question_id) do update set
                     latest_question_version_id = excluded.latest_question_version_id,
                     state = excluded.state,
+                    due_at = excluded.due_at,
+                    interval_days = excluded.interval_days,
+                    review_stage = excluded.review_stage,
+                    review_streak = excluded.review_streak,
+                    last_resolution = excluded.last_resolution,
                     updated_at = now()
                 """,
                 (
                     self.learner_id,
-                    assignment["question_id"],
+                    assignment["progress_question_id"],
                     assignment["question_version_id"],
+                    transition.state,
+                    transition.due_at,
+                    transition.interval_days,
+                    transition.review_stage,
+                    transition.review_streak,
+                    transition.resolution,
                 ),
             )
             return {"status": "gave_up", "solution": solution_for(question)}

@@ -73,7 +73,7 @@ export function DiagnosticLanding({
     <section className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-6">
         <div className="max-w-2xl">
-          <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-teal-700"><ClipboardCheck aria-hidden="true" className="size-4" />N1 readiness evidence</p>
+          <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-teal-700"><ClipboardCheck aria-hidden="true" className="size-4" />Mathematics readiness evidence</p>
           <h1 className="m-0 text-3xl font-black">{next.title}</h1>
           <p className="mt-3 leading-7 text-slate-600">{next.message}</p>
           {next.estimated_minutes && next.question_count ? <p className="text-sm font-semibold text-slate-500">About {next.estimated_minutes} minutes · {next.question_count} questions · calculator allowed</p> : null}

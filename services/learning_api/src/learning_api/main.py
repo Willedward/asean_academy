@@ -42,6 +42,7 @@ from .routers.diagnostics import router as diagnostics_router
 from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
 from .routers.progress import router as progress_router
+from .routers.question_reports import router as question_reports_router
 
 LOGGER = logging.getLogger("learning_api")
 
@@ -309,6 +310,10 @@ def create_app(
                                 select 1 from information_schema.tables
                                 where table_schema = 'public'
                                   and table_name = 'diagnostic_results'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'question_reports'
                             ) as schema_ready
                         """
                     ).fetchone()
@@ -381,6 +386,7 @@ def create_app(
     application.include_router(diagnostics_router)
     application.include_router(practice_router)
     application.include_router(progress_router)
+    application.include_router(question_reports_router)
 
     return application
 

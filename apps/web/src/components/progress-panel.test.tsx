@@ -5,6 +5,8 @@ import type { ProgressResponse } from "@/lib/api/progress";
 
 import { ProgressPanel } from "./progress-panel";
 
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
+
 describe("ProgressPanel", () => {
   it("shows proficiency without claiming checkpoint mastery", async () => {
     const fixture: ProgressResponse = {
@@ -12,6 +14,8 @@ describe("ProgressPanel", () => {
       course_key: "g3-sec1-math",
       proficiency_threshold: 70,
       checkpoint_required_for_mastery: true,
+      scheduled_retry_count: 2,
+      next_retry_due_at: "2026-09-30T02:00:00Z",
       lessons: [
         {
           lesson_key: "n1-lesson-01",
@@ -41,7 +45,8 @@ describe("ProgressPanel", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Proficient")).toBeInTheDocument();
     expect(
-      screen.getByText(/Mastery remains locked until the reviewed unit checkpoint/),
+      screen.getByText(/Mastery requires passing the unit checkpoint/),
     ).toBeInTheDocument();
+    expect(screen.getByText(/2 spaced reviews scheduled/)).toBeInTheDocument();
   });
 });

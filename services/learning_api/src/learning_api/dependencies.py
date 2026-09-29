@@ -29,6 +29,7 @@ from .identity_repository import IdentityError, PostgresIdentityRepository
 from .practice_service import PracticeService
 from .progress_repository import PostgresProgressRepository, SQLiteProgressRepository
 from .progress_service import ProgressService
+from .question_report_repository import PostgresQuestionReportRepository
 
 bearer = HTTPBearer(auto_error=False)
 LOGGER = logging.getLogger("learning_api.abuse")
@@ -160,6 +161,28 @@ def diagnostic_repository(request: Request) -> PostgresDiagnosticRepository:
 
 DiagnosticRepositoryDependency = Annotated[
     PostgresDiagnosticRepository, Depends(diagnostic_repository)
+]
+
+
+def question_report_repository(request: Request) -> PostgresQuestionReportRepository:
+    settings = request.app.state.settings
+    if not settings.database_url:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "question_reports_not_configured",
+                "message": "Question reports require the PostgreSQL database.",
+            },
+        )
+    repository = getattr(request.app.state, "question_report_repository", None)
+    if repository is None:
+        repository = PostgresQuestionReportRepository(settings.database_url)
+        request.app.state.question_report_repository = repository
+    return repository
+
+
+QuestionReportRepositoryDependency = Annotated[
+    PostgresQuestionReportRepository, Depends(question_report_repository)
 ]
 
 

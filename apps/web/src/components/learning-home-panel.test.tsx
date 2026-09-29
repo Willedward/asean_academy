@@ -11,6 +11,8 @@ describe("LearningHomePanel", () => {
       learner_id: "development-learner",
       course_key: "g3-sec1-math",
       unresolved_retry_count: 0,
+      scheduled_retry_count: 0,
+      next_retry_due_at: null,
       next_action: {
         type: "resume_practice",
         title: "Resume Primes and prime factorisation",

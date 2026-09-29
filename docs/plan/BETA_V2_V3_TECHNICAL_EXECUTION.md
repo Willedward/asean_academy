@@ -16,7 +16,7 @@ continues to define domain boundaries and long-term architecture.
 
 ## 1. Feasibility decision
 
-A **Sec 1 N1 Mathematics-only invitation beta for 10–30 students is feasible in
+A **full Secondary 1–2 Mathematics invitation beta for 10–30 students is technically feasible in
 December 2026** if the team freezes the scope described below and validates a real
 hosted staging deployment early.
 
@@ -29,7 +29,7 @@ many independent dependencies on one critical path.
 
 The recommended release split is:
 
-- **December Beta core:** invitation access, a Maths N1 readiness diagnostic, reviewed
+- **December Beta core:** invitation access, a full Sec 1–2 Mathematics readiness diagnostic, reviewed
   notes, guided practice, spaced retry, unit checkpoint, progress, question reporting,
   essential admin operations, responsive NextScholar frontend and production safety.
 - **December Beta stretch:** all seven videos and an expiring parent-share link. Neither
@@ -101,7 +101,7 @@ The current blockers are product completion rather than basic infrastructure:
 - a real hosted staging environment has not passed the manual Google sign-in journey;
 - the course-map UI still labels the checkpoint as pending despite backend support;
 - retry evidence exists, but due-date spacing and variant selection do not;
-- diagnostic persistence/API/UI are implemented, but the 28 production diagnostic items remain unauthored and unpublished;
+- diagnostic persistence/API/UI are implemented as an N1 pilot slice, but the 19-topic catalogue and 76 production diagnostic items remain unauthored and unpublished;
 - question-problem reports still have no schema or API; and
 - account deletion has no operational workflow.
 
@@ -119,7 +119,7 @@ content or final design has been approved.
 | B-01 | Implemented; hosted journey still needs verification | Deploy staging, test expiry/revocation/email matching with real Google accounts |
 | B-02 | Implemented; external OAuth configuration remains | Verify callback, refresh, sign-out and private-window login in staging |
 | B-03 | Partial | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3 |
-| B-04 | Technical implementation complete; production forms content-pending | Author/review/import the 28 isolated matched items, then verify baseline/endline in staging |
+| B-04 | Technical implementation complete; production forms content-pending | Generalise the syllabus/bank contract and author/review/import 76 isolated matched items, then verify baseline/endline in staging |
 | B-05 | Authenticated learner result and admin comparison implemented | Validate final design; private share link/PDF remains stretch |
 | B-06 | Implemented technical shell | Integrate final responsive design and reviewed content states |
 | B-07 | Versioned lesson infrastructure implemented; content incomplete | Author and review all seven lesson notes and active-recall sections |
@@ -154,11 +154,8 @@ path.
 ### 4.1 Recommended product defaults
 
 - **Track:** every Beta invitation pins the Sec 1 course. No learner track picker.
-- **Diagnostic:** Maths N1 only, described to users as an “N1 readiness check,” not a
-  complete scholarship readiness score.
-- **Measurement:** use two matched forms. Fourteen questions per form gives two items
-  per N1 outcome; therefore 28 separate reviewed diagnostic items are required. Do not
-  reuse practice/checkpoint questions or the identical form at the end.
+- **Diagnostic:** Mathematics across all 19 supplied Sec 1–2 topic groups, described as a readiness check rather than a predicted scholarship result.
+- **Measurement:** use two matched 38-question forms with two items for each of the 19 topic groups per form. Therefore 76 separate reviewed diagnostic items are required. Do not reuse practice/checkpoint questions or the identical form at the end.
 - **Report:** authenticated learner results and administrator comparison are required.
   An expiring parent link or PDF is stretch work.
 - **English:** defer B-14 and B-15 to V2.
@@ -225,9 +222,9 @@ early.
 **Exit:** an invited test account can reach the current N1 shell in hosted staging and an
 academic administrator can reach all protected admin pages.
 
-### B1 — N1 diagnostic and evidence baseline
+### B1 — Mathematics diagnostic and evidence baseline
 
-**Engineering status (29 September 2026): complete.** Production activation remains a B5 content gate. See [N1_DIAGNOSTIC_EVIDENCE.md](N1_DIAGNOSTIC_EVIDENCE.md).
+**Engineering status (29 September 2026): reusable engine and N1 pilot slice complete.** Full-syllabus catalogue/form activation remains a content-platform and B5 gate. See [N1_DIAGNOSTIC_EVIDENCE.md](N1_DIAGNOSTIC_EVIDENCE.md).
 
 **Data model**
 
@@ -264,6 +261,8 @@ POST /api/v1/admin/students/{id}/diagnostics/{purpose}/reset
 an administrator can compare them.
 
 ### B2 — Spaced retry, checkpoint completion and problem reports
+
+**Engineering status (29 September 2026): complete locally.** See [B2_RETRY_CHECKPOINT_REPORT_EVIDENCE.md](B2_RETRY_CHECKPOINT_REPORT_EVIDENCE.md). Hosted and final-content gates remain.
 
 **Spaced retry**
 
@@ -326,7 +325,9 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 ### B5 — Content release and controlled pilot
 
-- Review 40 existing questions and create/review the 28-question matched diagnostic bank.
+The bulk authoring sequence and approximately 1,900–2,850-question target are defined in [QUESTION_BANK_SCALE_PLAN.md](QUESTION_BANK_SCALE_PLAN.md).
+
+- Review the existing N1 pilot, build the 19-topic bank, and create/review 76 matched diagnostic items.
 - Author/review all seven notes, examples, active-recall items, hints and solutions.
 - Confirm checkpoint/reserve capacity after diagnostic isolation.
 - Import approved immutable revisions and verify catalogue/database hashes.
@@ -344,7 +345,7 @@ content revision and cohort list.
 | --- | --- | --- |
 | Backend | B0 integration, diagnostics, spaced retry, reports, deletion runbook | Yes |
 | Frontend | NextScholar tokens/components and screens against fixtures/OpenAPI | Yes |
-| Mathematics content | Seven notes, 40-question review, 28 diagnostic items, pool audit | Yes |
+| Mathematics content | Generalized 19-topic bank, approximately 1,976 first-target items, 76 diagnostic items, notes and pool audit | Yes |
 | Video | Host experiment, captions, transcripts, posters | Only if the team makes all videos mandatory |
 | English | Taxonomy, question/essay format and rubric research | No; V2 |
 | AI tutor | Provider interface, quotas and synthetic evaluation behind a flag | No; V2 |
@@ -507,7 +508,7 @@ screen exists.
 1. Review and merge this scope decision with the product roadmap.
 2. Consolidate the stacked feature branches into a beta integration PR.
 3. Configure and deploy the real isolated staging environment.
-4. Commission, review and import 28 matched N1 diagnostic items using the frozen B1 specification.
+4. Generalise the bank schema, then commission, review and import 76 matched full-syllabus diagnostic items.
 5. Implement B2 spaced retry, checkpoint UI and reports.
 6. Complete B3 privacy/operations and the final frontend integration.
 7. Activate the B1 forms and run the hosted baseline/endline acceptance journey.

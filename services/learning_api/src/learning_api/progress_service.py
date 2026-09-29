@@ -363,11 +363,16 @@ class ProgressService:
                     retry_question_count=retry_counts[lesson.stable_key],
                 )
             )
+        scheduled_retry_count, next_retry_due_at = self.repository.retry_schedule(
+            self.learner_id
+        )
         return {
             "learner_id": self.learner_id,
             "course_key": report.course.stable_key,
             "proficiency_threshold": self.policy.minimum_eventual_correct_percentage,
             "checkpoint_required_for_mastery": self.policy.mastery_requires_checkpoint,
+            "scheduled_retry_count": scheduled_retry_count,
+            "next_retry_due_at": next_retry_due_at,
             "lessons": lesson_responses,
             "checkpoints": [
                 self.checkpoint_status(unit.stable_key)
@@ -408,7 +413,7 @@ class ProgressService:
                 "type": "resume_checkpoint",
                 "title": "Resume the N1 checkpoint",
                 "description": "Continue the unit checkpoint from your last question.",
-                "href": f"/practice/{active_checkpoint['last_session_id']}",
+                "href": f"/checkpoints/{active_checkpoint['last_session_id']}",
                 "lesson_key": None,
                 "unit_key": active_checkpoint["unit_key"],
                 "session_id": active_checkpoint["last_session_id"],
@@ -464,7 +469,7 @@ class ProgressService:
                     "type": "start_checkpoint",
                     "title": "Start the N1 checkpoint",
                     "description": "Complete the checkpoint to turn proficiency into mastery.",
-                    "href": "/progress",
+                    "href": "/progress#checkpoint-title",
                     "lesson_key": None,
                     "unit_key": checkpoint["unit_key"],
                     "session_id": None,
@@ -519,6 +524,8 @@ class ProgressService:
             "unresolved_retry_count": sum(
                 lesson["retry_question_count"] for lesson in progress["lessons"]
             ),
+            "scheduled_retry_count": progress["scheduled_retry_count"],
+            "next_retry_due_at": progress["next_retry_due_at"],
             "lessons": progress["lessons"],
             "checkpoints": progress["checkpoints"],
         }

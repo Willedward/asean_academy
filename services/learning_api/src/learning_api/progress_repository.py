@@ -150,6 +150,8 @@ class ProgressRepository(Protocol):
 
     def unresolved_question_keys(self, learner_id: str) -> list[str]: ...
 
+    def retry_schedule(self, learner_id: str) -> tuple[int, str | None]: ...
+
 
 class SQLiteProgressRepository:
     """Local adapter; production PostgreSQL must implement the same behaviour."""
@@ -774,6 +776,10 @@ class SQLiteProgressRepository:
                     raise
                 return []
         return [row["question_key"] for row in rows]
+
+    def retry_schedule(self, learner_id: str) -> tuple[int, str | None]:
+        keys = self.unresolved_question_keys(learner_id)
+        return len(keys), None
 
 
 def _iso(value) -> str | None:
@@ -1431,8 +1437,24 @@ class PostgresProgressRepository:
                 join math_questions questions on questions.id = progress.question_id
                 where progress.student_id = %s
                   and progress.state in ('queued_for_retry', 'gave_up')
-                order by questions.stable_key
+                  and progress.due_at <= now()
+                order by progress.due_at, questions.stable_key
                 """,
                 (learner_id,),
             ).fetchall()
         return [row["stable_key"] for row in rows]
+
+    def retry_schedule(self, learner_id: str) -> tuple[int, str | None]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            row = connection.execute(
+                """
+                select count(*)::integer as scheduled_count, min(due_at) as next_due_at
+                from question_progress
+                where student_id = %s
+                  and state in ('queued_for_retry', 'gave_up')
+                  and due_at is not null
+                """,
+                (learner_id,),
+            ).fetchone()
+        return row["scheduled_count"], _iso(row["next_due_at"])

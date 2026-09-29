@@ -97,6 +97,8 @@ class ProgressResponse(ApiModel):
     course_key: str
     proficiency_threshold: int
     checkpoint_required_for_mastery: bool
+    scheduled_retry_count: int = 0
+    next_retry_due_at: str | None = None
     lessons: list[LessonProgressResponse]
     checkpoints: list[CheckpointProgressResponse]
 
@@ -106,5 +108,7 @@ class LearningHomeResponse(ApiModel):
     course_key: str
     next_action: NextActionResponse
     unresolved_retry_count: int
+    scheduled_retry_count: int = 0
+    next_retry_due_at: str | None = None
     lessons: list[LessonProgressResponse]
     checkpoints: list[CheckpointProgressResponse]

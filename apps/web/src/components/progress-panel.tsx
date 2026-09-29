@@ -10,9 +10,11 @@ import {
   Trophy,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
+import { createCheckpointSession } from "@/lib/api/practice";
 import { getProgress, type ProgressResponse } from "@/lib/api/progress";
 
 const statePresentation: Record<
@@ -51,7 +53,9 @@ export function ProgressPanel({
 }: {
   loadProgress?: () => Promise<ProgressResponse>;
 }) {
+  const router = useRouter();
   const [progress, setProgress] = useState<ProgressResponse | null>(null);
+  const [startingCheckpoint, setStartingCheckpoint] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reload, setReload] = useState(0);
 
@@ -73,6 +77,21 @@ export function ProgressPanel({
       active = false;
     };
   }, [loadProgress, reload]);
+
+  async function openCheckpoint(unitKey: string, sessionId?: string | null) {
+    if (sessionId) {
+      router.push(`/checkpoints/${sessionId}`);
+      return;
+    }
+    setStartingCheckpoint(unitKey);
+    try {
+      const session = await createCheckpointSession(unitKey);
+      router.push(`/checkpoints/${session.session_id}`);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "The checkpoint could not be started.");
+      setStartingCheckpoint(null);
+    }
+  }
 
   if (error) {
     return (
@@ -99,7 +118,15 @@ export function ProgressPanel({
           {proficient} of {progress.lessons.length} lessons are proficient. Proficiency requires at least {progress.proficiency_threshold}% eventual correctness with no Give up result.
         </p>
         {progress.checkpoint_required_for_mastery ? (
-          <p className="text-sm text-slate-500">Mastery remains locked until the reviewed unit checkpoint is available.</p>
+          <p className="text-sm text-slate-500">Mastery requires passing the unit checkpoint.</p>
+        ) : null}
+        {progress.scheduled_retry_count ? (
+          <p className="mt-2 text-sm font-semibold text-teal-800">
+            {progress.scheduled_retry_count} spaced {progress.scheduled_retry_count === 1 ? "review" : "reviews"} scheduled
+            {progress.next_retry_due_at
+              ? ` · next due ${new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(progress.next_retry_due_at))}`
+              : ""}.
+          </p>
         ) : null}
       </header>
 
@@ -132,6 +159,33 @@ export function ProgressPanel({
           );
         })}
       </ol>
+
+      <section className="space-y-4" aria-labelledby="checkpoint-title">
+        <h2 className="text-2xl font-black" id="checkpoint-title">Unit checkpoints</h2>
+        {progress.checkpoints.map((checkpoint) => (
+          <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" key={checkpoint.unit_key}>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">{checkpoint.unit_key.replaceAll("-", " ")}</p>
+                <h3 className="m-0 text-xl font-extrabold">{checkpoint.question_count}-question checkpoint</h3>
+                <p className="mb-0 mt-2 text-sm text-slate-600">
+                  Pass at {checkpoint.passing_percentage}% or above. Hints and solutions stay locked during the attempt.
+                  {checkpoint.last_percentage !== null ? ` Latest score: ${checkpoint.last_percentage}%.` : ""}
+                </p>
+              </div>
+              {checkpoint.state === "in_progress" ? (
+                <Button onClick={() => void openCheckpoint(checkpoint.unit_key, checkpoint.last_session_id)}>Resume checkpoint</Button>
+              ) : checkpoint.state === "available" ? (
+                <Button disabled={startingCheckpoint === checkpoint.unit_key} onClick={() => void openCheckpoint(checkpoint.unit_key)}>{startingCheckpoint === checkpoint.unit_key ? "Starting…" : checkpoint.last_session_id ? "Retake checkpoint" : "Start checkpoint"}</Button>
+              ) : checkpoint.state === "passed" ? (
+                <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-bold text-violet-800">Passed · mastered</span>
+              ) : (
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-600">Complete every lesson to unlock</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </section>
     </div>
   );
 }

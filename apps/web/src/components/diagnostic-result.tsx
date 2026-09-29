@@ -27,7 +27,7 @@ export function DiagnosticResultPanel({ sessionId, load = getDiagnosticResult }:
   return (
     <div className="space-y-7">
       <header className="rounded-3xl bg-teal-900 p-8 text-white">
-        <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-teal-200"><Sparkles className="size-4" />{result.purpose} N1 readiness</p>
+        <p className="mb-2 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-teal-200"><Sparkles className="size-4" />{result.purpose} Mathematics readiness</p>
         <h1 className="m-0 text-4xl font-black">{labels[result.band]}</h1>
         <p className="mb-0 mt-3 text-lg text-teal-50">You earned {result.score} of {result.max_score} weighted marks ({result.percentage}%). This is learning evidence, not a label or predicted scholarship result.</p>
       </header>

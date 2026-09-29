@@ -22,6 +22,7 @@ export default async function AdminLayout({
     ["/admin", "Overview"],
     ["/admin/students", "Students"],
     ["/admin/questions", "Question analytics"],
+    ["/admin/reports", "Reports inbox"],
     ["/admin/content", "Content review"],
     ["/admin/invitations", "Invitations"],
     ["/admin/audit", "Audit history"],

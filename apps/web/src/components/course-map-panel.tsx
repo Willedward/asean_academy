@@ -84,7 +84,7 @@ export function CourseMapPanel({ courseKey, loadCourseMap = getCourseMap }: Prop
         <section key={unit.stable_key} aria-labelledby={`${unit.stable_key}-title`}>
           <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div><p className="mb-1 text-sm font-semibold text-teal-700">Unit {unit.position}</p><h2 id={`${unit.stable_key}-title`} className="m-0 text-2xl font-extrabold">{unit.title}</h2></div>
-            <p className="m-0 text-sm text-slate-500">{unit.checkpoint_question_count}-question checkpoint · pending</p>
+            <p className="m-0 text-sm text-slate-500">{unit.checkpoint_question_count}-question checkpoint · {unit.checkpoint_available ? "ready" : "unlocks after lesson proficiency"}</p>
           </div>
           <ol className="grid list-none gap-3 p-0">
             {unit.lessons.map((lesson) => (

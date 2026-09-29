@@ -18,6 +18,8 @@ import {
   type Operations,
   type ContentStatus,
   type Audit,
+  type Reports,
+  type Report,
 } from "@/lib/api/admin-dashboard";
 
 function useResource<T>(path: string) {
@@ -280,7 +282,7 @@ export function StudentPanel({ learnerId }: { learnerId: string }) {
           retries: data.student.retry_question_count,
         }}
       />
-      <h3 className="text-xl font-bold">N1 readiness evidence</h3>
+      <h3 className="text-xl font-bold">Mathematics readiness evidence</h3>
       {!diagnostics.data ? (
         <State error={diagnostics.error} reload={diagnostics.reload} />
       ) : !diagnostics.data.baseline && !diagnostics.data.endline ? (
@@ -766,6 +768,54 @@ export function AuditPanel() {
       <Button variant="outline" onClick={reload}>
         Refresh audit trail
       </Button>
+    </div>
+  );
+}
+
+export function ReportsPanel() {
+  const [status, setStatus] = useState("open");
+  const [offset, setOffset] = useState(0);
+  const [revision, setRevision] = useState(0);
+  const query = new URLSearchParams({ status, limit: "25", offset: String(offset), revision: String(revision) });
+  const { data, error, reload } = useResource<Reports>(`question-reports?${query}`);
+
+  async function update(reportId: string, nextStatus: "in_review" | "resolved" | "dismissed") {
+    const resolution = nextStatus === "in_review" ? null : window.prompt("Resolution shown to the learner:");
+    if (nextStatus !== "in_review" && !resolution?.trim()) return;
+    await adminRequest<Report>(
+      `question-reports/${encodeURIComponent(reportId)}`,
+      { status: nextStatus, resolution },
+      "PATCH",
+    );
+    setRevision((value) => value + 1);
+    reload();
+  }
+
+  return (
+    <div className="space-y-5">
+      <label className="block max-w-xs text-sm font-bold">Status
+        <select className="mt-1 block w-full rounded-lg border bg-white p-3" onChange={(event) => { setStatus(event.target.value); setOffset(0); }} value={status}>
+          <option value="open">Open</option><option value="in_review">In review</option><option value="resolved">Resolved</option><option value="dismissed">Dismissed</option>
+        </select>
+      </label>
+      {!data ? <State error={error} reload={reload} /> : !data.reports.length ? <p>No reports in this state.</p> : (
+        <div className="space-y-4">
+          {data.reports.map((report) => (
+            <article className="rounded-2xl border border-slate-200 bg-white p-5" key={report.report_id}>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div><p className="m-0 text-xs font-bold uppercase text-teal-700">{pretty(report.category)} · {report.question_key} r{report.question_revision}</p><h2 className="mt-1 text-xl font-bold">{report.question_title}</h2></div>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold capitalize">{pretty(report.status)}</span>
+              </div>
+              <p className="text-sm text-slate-500">{report.learner_email} · {date(report.created_at)}</p>
+              <p className="whitespace-pre-wrap">{report.comment}</p>
+              {report.resolution ? <p className="rounded-xl bg-emerald-50 p-3"><strong>Resolution:</strong> {report.resolution}</p> : null}
+              {report.status === "open" ? <Button onClick={() => void update(report.report_id, "in_review")}>Start review</Button> : null}
+              {report.status === "in_review" ? <div className="flex gap-2"><Button onClick={() => void update(report.report_id, "resolved")}>Resolve</Button><Button onClick={() => void update(report.report_id, "dismissed")} variant="outline">Dismiss</Button></div> : null}
+            </article>
+          ))}
+          <Pager offset={offset} total={data.total} onChange={setOffset} />
+        </div>
+      )}
     </div>
   );
 }

@@ -160,7 +160,30 @@ class PracticeService:
                 for question in self.questions
                 if question.primary_outcome in lesson.outcomes
             ]
-            ordered_keys = self.engine.retry_question_keys(lesson_keys)
+            reserve_pool = next(
+                (
+                    candidate
+                    for candidate in self.catalogue.report.pools.pools
+                    if candidate.type == "adaptive_reserve"
+                ),
+                None,
+            )
+            reserve_keys = (
+                [item.question_key for item in reserve_pool.items]
+                if reserve_pool is not None
+                else []
+            )
+            if isinstance(self.engine, PostgresPracticeEngine):
+                assignments = self.engine.retry_assignments(lesson_keys, reserve_keys)
+                ordered_keys = [item["served_key"] for item in assignments]
+                retry_origins = {
+                    item["served_key"]: item["origin_key"]
+                    for item in assignments
+                    if item["served_key"] != item["origin_key"]
+                }
+            else:
+                ordered_keys = self.engine.retry_question_keys(lesson_keys)
+                retry_origins = {}
             if not ordered_keys:
                 raise PracticeError(
                     "retry_queue_empty",
@@ -190,6 +213,7 @@ class PracticeService:
                 "mode": mode,
                 "stages": stages,
                 "selection_reason": selection_reason,
+                "retry_origins": retry_origins if mode == "retry_review" else {},
             },
             idempotency_key=self._session_idempotency_key(idempotency_key),
         )

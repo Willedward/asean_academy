@@ -1,4 +1,4 @@
-"""PostgreSQL repository and deterministic scoring for N1 diagnostics."""
+"""PostgreSQL repository and deterministic scoring for Mathematics diagnostics."""
 
 from __future__ import annotations
 
@@ -166,7 +166,7 @@ class PostgresDiagnosticRepository:
                     "status": "resume",
                     "purpose": "baseline",
                     "session_id": baseline["id"],
-                    "title": "Resume your N1 readiness check",
+                    "title": "Resume your Mathematics readiness check",
                     "message": "Your saved answers are ready when you return.",
                 }
 
@@ -180,7 +180,7 @@ class PostgresDiagnosticRepository:
                         "purpose": "endline",
                         "session_id": endline["id"],
                         "result_session_id": baseline["id"],
-                        "title": "Resume your final N1 readiness check",
+                        "title": "Resume your final Mathematics readiness check",
                         "message": "Finish the endline check to compare your progress.",
                     }
                 return {
@@ -188,7 +188,7 @@ class PostgresDiagnosticRepository:
                     "purpose": "endline",
                     "session_id": endline["id"],
                     "result_session_id": endline["id"],
-                    "title": "Your N1 readiness checks are complete",
+                    "title": "Your Mathematics readiness checks are complete",
                     "message": "View your baseline and endline evidence side by side.",
                 }
 

@@ -1,4 +1,4 @@
-"""API contracts for revision-pinned N1 baseline and endline diagnostics."""
+"""API contracts for revision-pinned Mathematics baseline and endline diagnostics."""
 
 from __future__ import annotations
 
