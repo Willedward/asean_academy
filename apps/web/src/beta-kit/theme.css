@@ -1,0 +1,114 @@
+/*
+ * NextScholar beta kit: brand tokens.
+ *
+ * This file only adds new, "ns-" prefixed tokens. It does not change any
+ * existing class or colour. To use the kit inside the real app, add ONE line
+ * to src/app/globals.css, right after `@import "tailwindcss";`:
+ *
+ *   @import "../beta-kit/theme.css";
+ *
+ * Utilities then exist as bg-ns-ink, text-ns-muted, border-ns-line,
+ * shadow-ns-md, animate-ns-pop and so on.
+ */
+
+@theme {
+  --font-ns: var(--font-figtree, Figtree), "Helvetica Neue", system-ui, sans-serif;
+  --font-ns-math: "Cambria Math", "Times New Roman", serif;
+
+  --color-ns-surface: #fbfaf7;
+  --color-ns-raised: #ffffff;
+  --color-ns-sunken: #f2f0e9;
+  --color-ns-line: #e4e1d8;
+  --color-ns-line-strong: #7f9292;
+  --color-ns-ink: #0f3d40;
+  --color-ns-muted: #4e6667;
+  --color-ns-on-brand: #fbfaf7;
+  --color-ns-brand-soft: #e3ecea;
+  --color-ns-dark: #0a2a2c;
+  --color-ns-teal-2: #1b5357;
+  --color-ns-on-dark-muted: #a7bdbc;
+
+  --color-ns-amber: #c87a1e;
+  --color-ns-amber-text: #94560f;
+  --color-ns-amber-soft: #f8ecd8;
+  --color-ns-amber-line: #e9c99a;
+  --color-ns-gold: #e3a44b;
+  --color-ns-gold-light: #f6c063;
+  --color-ns-silver: #9fb3b4;
+  --color-ns-bronze: #c87a1e;
+  --color-ns-blush: #e98f6b;
+  --color-ns-mint: #8fd3c8;
+
+  --color-ns-success: #1f6f8b;
+  --color-ns-success-soft: #e4f1f5;
+  --color-ns-danger: #b42318;
+  --color-ns-danger-soft: #fbeae7;
+
+  --shadow-ns-sm: 0 1px 2px rgb(15 61 64 / 0.08);
+  --shadow-ns-md: 0 8px 24px rgb(15 61 64 / 0.12);
+  --shadow-ns-lg: 0 16px 48px rgb(15 61 64 / 0.16);
+
+  --animate-ns-pop: ns-pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+  --animate-ns-float: ns-float 3s ease-in-out infinite;
+  --animate-ns-flame: ns-flame 1.6s ease-in-out infinite;
+  --animate-ns-glow: ns-glow 2s ease-in-out infinite;
+  --animate-ns-shine: ns-shine 2.4s linear infinite;
+  --animate-ns-rise: ns-rise 2.2s ease-out infinite;
+
+  @keyframes ns-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes ns-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes ns-flame {
+    0%, 100% { transform: scale(1) rotate(-3deg); }
+    50% { transform: scale(1.08) rotate(3deg); }
+  }
+  @keyframes ns-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(227 164 75 / 0.55); }
+    50% { box-shadow: 0 0 0 12px rgb(227 164 75 / 0); }
+  }
+  @keyframes ns-shine {
+    0% { background-position: -160% 0; }
+    100% { background-position: 260% 0; }
+  }
+  @keyframes ns-rise {
+    0% { transform: translateY(10px); opacity: 0; }
+    15% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-34px); opacity: 0; }
+  }
+}
+
+/* Used by inline styles (confetti), so it lives outside @theme. */
+@keyframes ns-fall {
+  0% { transform: translateY(-60px) rotate(0deg); }
+  100% { transform: translateY(1000px) rotate(600deg); }
+}
+
+/* Celebrations respect the device setting, and the in-app "Celebrations" toggle
+   (set data-ns-celebrations="off" on <html> or any wrapper). */
+@media (prefers-reduced-motion: reduce) {
+  .ns-root *,
+  .ns-root *::before,
+  .ns-root *::after {
+    animation: none !important;
+  }
+  .ns-root .ns-confetti {
+    display: none;
+  }
+}
+[data-ns-celebrations="off"] .ns-confetti {
+  display: none;
+}
+
+/* The app's globals.css sets `a { color: inherit }` outside any layer, which
+   beats Tailwind's text-* utilities on links. Inside kit screens, hand link
+   colour back to the utility classes. */
+.ns-root a[class] {
+  color: revert-layer;
+}
