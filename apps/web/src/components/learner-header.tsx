@@ -23,6 +23,9 @@ export async function LearnerHeader() {
             <Link className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline" href="/learn">
               Course map
             </Link>
+            <Link className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline" href="/diagnostics">
+              Readiness
+            </Link>
             <Link className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline" href="/progress">
               Progress
             </Link>

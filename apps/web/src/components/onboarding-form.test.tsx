@@ -58,7 +58,7 @@ describe("OnboardingForm", () => {
     await waitFor(() => {
       expect(acceptInvitation).toHaveBeenCalledWith("invitation-code-123", "Student");
     });
-    expect(replace).toHaveBeenCalledWith("/learn");
+    expect(replace).toHaveBeenCalledWith("/diagnostics");
     expect(refresh).toHaveBeenCalledOnce();
   });
 

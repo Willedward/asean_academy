@@ -20,11 +20,12 @@ A **Sec 1 N1 Mathematics-only invitation beta for 10–30 students is feasible i
 December 2026** if the team freezes the scope described below and validates a real
 hosted staging deployment early.
 
-The entire Beta list in the product roadmap is **not a credible single December
-release** at the stated team capacity of 10–25 combined hours per week. English essay
-AI, browser lesson/course editors, two complete scholarship tracks, seven polished
-videos, parent-shareable diagnostic reports and the final frontend would put content,
-AI safety, privacy and operations on the same critical path.
+Codex makes a larger December Beta technically plausible because backend, tests, API
+contracts, migrations and integration work can move in parallel. It does not remove the
+human gates for mathematical review, videos, final design acceptance, privacy decisions,
+external-provider setup or testing with real students. At the stated 10–25 combined team
+hours per week, treating every roadmap row as a mandatory launch gate would still put too
+many independent dependencies on one critical path.
 
 The recommended release split is:
 
@@ -47,6 +48,29 @@ date.
 
 V3 is appropriately placed after demand, parent engagement and managed mentor sessions
 have been measured.
+
+
+### 1.1 Codex-adjusted delivery assessment
+
+The updated Beta features are not being rejected. They are split by confidence and can
+all remain visible in the roadmap:
+
+- **Commit to the controlled Beta:** B-01–B-07, B-09–B-13, B-16–B-18, B-21–B-25 and
+  B-27–B-29, subject to their review, hosted and accessibility gates.
+- **Include when the parallel owner finishes:** B-08 videos and B-26 final brand assets.
+  Reviewed notes keep the learning flow usable if video production finishes later.
+- **Run behind a disabled flag or separate pilot:** a narrow grounded tutor can be built
+  early, but it should not receive real student data or become a Beta promise until its
+  evaluation and quota controls pass.
+- **Keep out of the December launch gate:** B-14/B-15 English, browser-based lesson/course
+  editors, payments, public signup, Sec 3 content and gamification. These require new
+  reviewed content, policy or provider operations beyond writing code.
+
+Codex changes implementation throughput, so this plan should be re-estimated after each
+milestone instead of using the original calendar estimate mechanically. Scope only moves
+into the committed cohort when it has an owner, acceptance test and safe fallback. This
+allows the team to ship more when work finishes early without delaying the core learning
+experiment.
 
 ## 2. Current technical baseline
 
@@ -77,7 +101,8 @@ The current blockers are product completion rather than basic infrastructure:
 - a real hosted staging environment has not passed the manual Google sign-in journey;
 - the course-map UI still labels the checkpoint as pending despite backend support;
 - retry evidence exists, but due-date spacing and variant selection do not;
-- diagnostics and question-problem reports have no schema or API; and
+- diagnostic persistence/API/UI are implemented, but the 28 production diagnostic items remain unauthored and unpublished;
+- question-problem reports still have no schema or API; and
 - account deletion has no operational workflow.
 
 The `main` branch is also behind the stacked feature chain. No beta deployment should
@@ -94,8 +119,8 @@ content or final design has been approved.
 | B-01 | Implemented; hosted journey still needs verification | Deploy staging, test expiry/revocation/email matching with real Google accounts |
 | B-02 | Implemented; external OAuth configuration remains | Verify callback, refresh, sign-out and private-window login in staging |
 | B-03 | Partial | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3 |
-| B-04 | Not implemented | Build Maths N1 diagnostic forms, resumable sessions, scoring and pre/post attempts |
-| B-05 | Not implemented | Beta core is an authenticated results page plus admin view/export; private share link/PDF is stretch |
+| B-04 | Technical implementation complete; production forms content-pending | Author/review/import the 28 isolated matched items, then verify baseline/endline in staging |
+| B-05 | Authenticated learner result and admin comparison implemented | Validate final design; private share link/PDF remains stretch |
 | B-06 | Implemented technical shell | Integrate final responsive design and reviewed content states |
 | B-07 | Versioned lesson infrastructure implemented; content incomplete | Author and review all seven lesson notes and active-recall sections |
 | B-08 | Metadata/handoff designed; no delivery | Choose host and add captions/transcripts; allow notes/transcript fallback for Beta |
@@ -202,6 +227,8 @@ academic administrator can reach all protected admin pages.
 
 ### B1 — N1 diagnostic and evidence baseline
 
+**Engineering status (29 September 2026): complete.** Production activation remains a B5 content gate. See [N1_DIAGNOSTIC_EVIDENCE.md](N1_DIAGNOSTIC_EVIDENCE.md).
+
 **Data model**
 
 - `diagnostic_forms`: stable key, revision, track/course pin, purpose (`baseline` or
@@ -217,10 +244,12 @@ academic administrator can reach all protected admin pages.
 ```text
 GET  /api/v1/diagnostics/next
 POST /api/v1/diagnostics/sessions
+GET  /api/v1/diagnostics/sessions/{id}
 PUT  /api/v1/diagnostics/sessions/{id}/responses/{position}
 POST /api/v1/diagnostics/sessions/{id}/submit
 GET  /api/v1/diagnostics/sessions/{id}/result
 GET  /api/v1/admin/students/{id}/diagnostics
+POST /api/v1/admin/students/{id}/diagnostics/{purpose}/reset
 ```
 
 - Reuse deterministic question checking without returning correctness until submission.
@@ -478,11 +507,10 @@ screen exists.
 1. Review and merge this scope decision with the product roadmap.
 2. Consolidate the stacked feature branches into a beta integration PR.
 3. Configure and deploy the real isolated staging environment.
-4. Freeze the diagnostic specification and commission 28 matched, reviewed N1 items.
-5. Implement B1 diagnostic persistence/API while the frontend integrates against
-   generated fixtures.
-6. Implement B2 spaced retry, checkpoint UI and reports.
-7. Complete B3 privacy/operations and the final frontend integration.
+4. Commission, review and import 28 matched N1 diagnostic items using the frozen B1 specification.
+5. Implement B2 spaced retry, checkpoint UI and reports.
+6. Complete B3 privacy/operations and the final frontend integration.
+7. Activate the B1 forms and run the hosted baseline/endline acceptance journey.
 8. Run the controlled pilot before opening the 10–30 student cohort.
 
 The grounded tutor scaffold is the first non-blocking V2 backend milestone after the

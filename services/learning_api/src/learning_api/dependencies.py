@@ -23,6 +23,7 @@ from .abuse import (
 from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
 from .conventions import current_request_id
+from .diagnostic_repository import PostgresDiagnosticRepository
 from .identity import AuthenticatedLearner, AuthenticationError
 from .identity_repository import IdentityError, PostgresIdentityRepository
 from .practice_service import PracticeService
@@ -137,6 +138,28 @@ def admin_analytics_repository(request: Request) -> PostgresAdminAnalyticsReposi
 
 AdminAnalyticsRepositoryDependency = Annotated[
     PostgresAdminAnalyticsRepository, Depends(admin_analytics_repository)
+]
+
+
+def diagnostic_repository(request: Request) -> PostgresDiagnosticRepository:
+    settings = request.app.state.settings
+    if not settings.database_url:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "diagnostics_not_configured",
+                "message": "Diagnostics require the PostgreSQL database.",
+            },
+        )
+    repository = getattr(request.app.state, "diagnostic_repository", None)
+    if repository is None:
+        repository = PostgresDiagnosticRepository(settings.database_url)
+        request.app.state.diagnostic_repository = repository
+    return repository
+
+
+DiagnosticRepositoryDependency = Annotated[
+    PostgresDiagnosticRepository, Depends(diagnostic_repository)
 ]
 
 

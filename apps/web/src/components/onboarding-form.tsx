@@ -34,7 +34,7 @@ export function OnboardingForm({
     setError(null);
     try {
       await acceptInvitation(invitationCode.trim(), displayName.trim());
-      router.replace("/learn");
+      router.replace("/diagnostics");
       router.refresh();
     } catch (caught) {
       const suffix = caught instanceof ApiRequestError && caught.requestId

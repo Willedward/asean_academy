@@ -9,6 +9,7 @@ import {
   type Overview,
   type Students,
   type StudentDetail,
+  type Diagnostics,
   type Questions,
   type Users,
   type Role,
@@ -256,6 +257,9 @@ export function StudentPanel({ learnerId }: { learnerId: string }) {
   const { data, error, reload } = useResource<StudentDetail>(
     `students/${encodeURIComponent(learnerId)}`,
   );
+  const diagnostics = useResource<Diagnostics>(
+    `students/${encodeURIComponent(learnerId)}/diagnostics`,
+  );
   if (!data) return <State error={error} reload={reload} />;
   return (
     <div className="space-y-5">
@@ -276,6 +280,30 @@ export function StudentPanel({ learnerId }: { learnerId: string }) {
           retries: data.student.retry_question_count,
         }}
       />
+      <h3 className="text-xl font-bold">N1 readiness evidence</h3>
+      {!diagnostics.data ? (
+        <State error={diagnostics.error} reload={diagnostics.reload} />
+      ) : !diagnostics.data.baseline && !diagnostics.data.endline ? (
+        <p>No submitted diagnostic evidence yet.</p>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2">
+          {(["baseline", "endline"] as const).map((purpose) => {
+            const result = diagnostics.data?.[purpose];
+            return (
+              <div className="rounded-2xl border border-slate-200 bg-white p-5" key={purpose}>
+                <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">{purpose}</p>
+                {result ? (
+                  <>
+                    <p className="my-1 text-3xl font-black">{result.percentage}%</p>
+                    <p className="m-0 capitalize text-slate-600">{pretty(result.band)}</p>
+                    <p className="mb-0 mt-3 text-sm text-slate-500">Priorities: {result.priorities.length ? result.priorities.join(", ") : "none"}</p>
+                  </>
+                ) : <p className="mb-0 text-slate-500">Not completed</p>}
+              </div>
+            );
+          })}
+        </div>
+      )}
       <h3 className="text-xl font-bold">Lesson progress</h3>
       {!data.lessons.length ? (
         <p>No lesson progress yet.</p>
