@@ -8,7 +8,7 @@
 
 **Initial vertical slice:** Singapore Secondary 1 G3 Mathematics, N1 Numbers and their operations
 
-**Companion documents:** `plan.md`, `ARCHI.md`, `STAGES.md`, `N1_QUESTION_BANK_SCHEMA.md`, and `PRACTICE_APPLICATION.md`
+**Companion documents:** `ROADMAP_BETA_V2_V3.md` defines release scope, and `BETA_V2_V3_TECHNICAL_EXECUTION.md` defines the current audited execution order. `plan.md`, `ARCHI.md`, `STAGES.md`, `N1_QUESTION_BANK_SCHEMA.md`, and `PRACTICE_APPLICATION.md` remain background and domain references.
 
 ## 1. Purpose
 

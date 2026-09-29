@@ -2,6 +2,8 @@
 
 An ASEAN scholarship preparation platform in early development.
 
+- [Beta, V2 and V3 product roadmap](docs/plan/ROADMAP_BETA_V2_V3.md) defines the proposed release features.
+- [Beta, V2 and V3 technical execution](docs/plan/BETA_V2_V3_TECHNICAL_EXECUTION.md) audits feasibility, current readiness, sequencing and release gates.
 - [Beta architecture diagrams](docs/plan/BETA_ARCHITECTURE.md) map services, data, authentication, learning and releases.
 - [Admin dashboard and content-sync runbook](docs/plan/CONTENT_SYNC_ADMIN_DASHBOARD.md) covers local bootstrap, admin pages and controlled course updates.
 - [Authenticated beta E2E verification](docs/plan/AUTHENTICATED_BETA_E2E.md) covers the real browser/API/PostgreSQL journeys and test-only identity boundary.

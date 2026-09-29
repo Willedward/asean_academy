@@ -2,6 +2,8 @@
 
 **Document status:** Proposed. Builds on the existing plans; does not replace them.
 
+**Technical companion:** [BETA_V2_V3_TECHNICAL_EXECUTION.md](BETA_V2_V3_TECHNICAL_EXECUTION.md) audits current implementation, feasibility, release gates and execution order. Where the roadmap status column is stale, the audited technical companion governs delivery planning.
+
 **Created:** 29 September 2026
 
 **Builds on:** `plan.md` (December beta product plan), `PLAN_V2.md` (course platform plan), `STAGES.md`, `TUTOR_INTERACTION_DESIGN.md`, `LESSON_VIDEO_HANDOFF.md` and `BETA_OPERATIONS.md`. The design canvas ("NextScholar screens") holds the matching screens.
