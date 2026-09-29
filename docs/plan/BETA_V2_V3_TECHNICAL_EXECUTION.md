@@ -310,6 +310,8 @@ accepting the first student.
 
 ### B4 — Final frontend integration
 
+**Engineering status (29 September 2026): component/design kit received and validated on the B3 integration branch; live route/API wiring remains.** See [B4_FRONTEND_KIT_INTEGRATION_AUDIT.md](B4_FRONTEND_KIT_INTEGRATION_AUDIT.md).
+
 The final frontend consumes the generated OpenAPI client and existing same-origin proxy.
 It must not duplicate business rules or call PostgreSQL/Supabase learning tables directly.
 

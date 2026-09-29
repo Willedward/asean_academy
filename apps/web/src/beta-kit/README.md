@@ -1,8 +1,7 @@
 # NextScholar beta kit
 
 The beta frontend design, as React components, ready to wire to the learning API.
-Nothing outside `src/beta-kit/`, `src/app/beta-kit/` and `public/beta-kit/` was changed.
-Your existing pages keep working exactly as before.
+The source frontend-kit commit was additive and left existing pages unchanged. The B3 integration branch also adds a tested request-level production guard in `src/proxy.ts`; existing application routes continue to use their current implementations.
 
 ## See it
 

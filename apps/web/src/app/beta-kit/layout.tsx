@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Design preview for the beta screens. Off in production unless
- * NEXT_PUBLIC_BETA_KIT=true, so it never ships to students by accident.
+ * Design preview for the beta screens. In production, the request proxy
+ * returns 404 unless the deployment is built with NEXT_PUBLIC_BETA_KIT=true.
  */
 export default function BetaKitLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   if (process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_BETA_KIT !== "true") notFound();
