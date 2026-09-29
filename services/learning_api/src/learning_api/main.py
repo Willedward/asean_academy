@@ -314,6 +314,10 @@ def create_app(
                                 select 1 from information_schema.tables
                                 where table_schema = 'public'
                                   and table_name = 'question_reports'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'account_deletion_records'
                             ) as schema_ready
                         """
                     ).fetchone()

@@ -63,6 +63,9 @@ const eventLabels: Record<
   content_review_recorded: "Content review recorded",
   content_publication_requested: "Content publication requested",
   content_retirement_requested: "Content retirement requested",
+  question_report_created: "Question report created",
+  question_report_status_changed: "Question report status changed",
+  account_deletion_completed: "Student account deleted",
 };
 
 function formatDate(value: string): string {

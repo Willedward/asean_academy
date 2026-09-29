@@ -24,6 +24,105 @@
         "title": "AcceptInvitationRequest",
         "type": "object"
       },
+      "AccountDeletionPreviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "confirmation_value": {
+            "title": "Confirmation Value",
+            "type": "string"
+          },
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Counts",
+            "type": "object"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "learner_id": {
+            "format": "uuid",
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "preview_token": {
+            "title": "Preview Token",
+            "type": "string"
+          },
+          "retained_records": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Retained Records",
+            "type": "array"
+          }
+        },
+        "required": [
+          "learner_id",
+          "email",
+          "display_name",
+          "counts",
+          "retained_records",
+          "preview_token",
+          "expires_at",
+          "confirmation_value"
+        ],
+        "title": "AccountDeletionPreviewResponse",
+        "type": "object"
+      },
+      "AccountDeletionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "completed_at": {
+            "format": "date-time",
+            "title": "Completed At",
+            "type": "string"
+          },
+          "deleted": {
+            "const": true,
+            "default": true,
+            "title": "Deleted",
+            "type": "boolean"
+          },
+          "retained_records": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Retained Records",
+            "type": "array"
+          },
+          "target_reference": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Target Reference",
+            "type": "string"
+          }
+        },
+        "required": [
+          "target_reference",
+          "completed_at",
+          "retained_records"
+        ],
+        "title": "AccountDeletionResponse",
+        "type": "object"
+      },
       "ActiveRecallAttemptRequest": {
         "additionalProperties": false,
         "properties": {
@@ -113,6 +212,22 @@
             "title": "Correct Attempts",
             "type": "integer"
           },
+          "diagnostic_resets": {
+            "title": "Diagnostic Resets",
+            "type": "integer"
+          },
+          "diagnostic_sessions_in_progress": {
+            "title": "Diagnostic Sessions In Progress",
+            "type": "integer"
+          },
+          "diagnostic_sessions_started": {
+            "title": "Diagnostic Sessions Started",
+            "type": "integer"
+          },
+          "diagnostic_sessions_submitted": {
+            "title": "Diagnostic Sessions Submitted",
+            "type": "integer"
+          },
           "give_ups": {
             "title": "Give Ups",
             "type": "integer"
@@ -135,6 +250,30 @@
           },
           "practice_sessions": {
             "title": "Practice Sessions",
+            "type": "integer"
+          },
+          "question_reports_dismissed": {
+            "title": "Question Reports Dismissed",
+            "type": "integer"
+          },
+          "question_reports_in_review": {
+            "title": "Question Reports In Review",
+            "type": "integer"
+          },
+          "question_reports_open": {
+            "title": "Question Reports Open",
+            "type": "integer"
+          },
+          "question_reports_resolved": {
+            "title": "Question Reports Resolved",
+            "type": "integer"
+          },
+          "question_reports_total": {
+            "title": "Question Reports Total",
+            "type": "integer"
+          },
+          "rate_limit_rejections_last_24_hours": {
+            "title": "Rate Limit Rejections Last 24 Hours",
             "type": "integer"
           },
           "students_with_retries": {
@@ -162,7 +301,17 @@
           "give_ups",
           "students_with_retries",
           "checkpoint_attempts",
-          "checkpoint_passes"
+          "checkpoint_passes",
+          "diagnostic_sessions_started",
+          "diagnostic_sessions_submitted",
+          "diagnostic_sessions_in_progress",
+          "diagnostic_resets",
+          "question_reports_total",
+          "question_reports_open",
+          "question_reports_in_review",
+          "question_reports_resolved",
+          "question_reports_dismissed",
+          "rate_limit_rejections_last_24_hours"
         ],
         "title": "AdminAnalyticsOverviewResponse",
         "type": "object"
@@ -1282,7 +1431,10 @@
               "course_revision_changed",
               "content_review_recorded",
               "content_publication_requested",
-              "content_retirement_requested"
+              "content_retirement_requested",
+              "question_report_created",
+              "question_report_status_changed",
+              "account_deletion_completed"
             ],
             "title": "Event Type",
             "type": "string"
@@ -3256,6 +3408,36 @@
           "error"
         ],
         "title": "ErrorEnvelope",
+        "type": "object"
+      },
+      "ExecuteAccountDeletionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "confirmation_email": {
+            "maxLength": 320,
+            "minLength": 5,
+            "title": "Confirmation Email",
+            "type": "string"
+          },
+          "preview_token": {
+            "maxLength": 4000,
+            "minLength": 40,
+            "title": "Preview Token",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "preview_token",
+          "confirmation_email",
+          "reason"
+        ],
+        "title": "ExecuteAccountDeletionRequest",
         "type": "object"
       },
       "ExplanationSection": {
@@ -8130,6 +8312,272 @@
           }
         ],
         "summary": "Get one learner's progress without exposing submitted answers",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/students/{learner_id}/deletion/execute": {
+      "post": {
+        "operationId": "executeStudentAccountDeletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecuteAccountDeletionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountDeletionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Delete a learner after signed preview and exact email confirmation",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/students/{learner_id}/deletion/preview": {
+      "post": {
+        "operationId": "previewStudentAccountDeletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountDeletionPreviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Preview the exact learner records affected by account deletion",
         "tags": [
           "admin"
         ]

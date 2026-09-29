@@ -85,6 +85,16 @@ class AdminAnalyticsOverviewResponse(ApiModel):
     students_with_retries: int
     checkpoint_attempts: int
     checkpoint_passes: int
+    diagnostic_sessions_started: int
+    diagnostic_sessions_submitted: int
+    diagnostic_sessions_in_progress: int
+    diagnostic_resets: int
+    question_reports_total: int
+    question_reports_open: int
+    question_reports_in_review: int
+    question_reports_resolved: int
+    question_reports_dismissed: int
+    rate_limit_rejections_last_24_hours: int
 
 
 class AdminQuestionAnalyticsResponse(ApiModel):

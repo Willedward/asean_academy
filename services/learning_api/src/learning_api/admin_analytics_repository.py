@@ -274,7 +274,27 @@ class PostgresAdminAnalyticsRepository:
                     (select count(distinct progress.student_id) from question_progress progress join profiles on profiles.id = progress.student_id where profiles.role = 'student' and progress.state in ('queued_for_retry', 'gave_up'))::integer
                         as students_with_retries,
                     (select count(*) from practice_sessions sessions join profiles on profiles.id = sessions.student_id where profiles.role = 'student' and sessions.scope->>'mode' = 'checkpoint')::integer as checkpoint_attempts,
-                    (select count(*) from mastery_events events join profiles on profiles.id = events.student_id where profiles.role = 'student' and events.event_type = 'checkpoint_passed')::integer as checkpoint_passes
+                    (select count(*) from mastery_events events join profiles on profiles.id = events.student_id where profiles.role = 'student' and events.event_type = 'checkpoint_passed')::integer as checkpoint_passes,
+                    (select count(*) from diagnostic_sessions)::integer
+                        as diagnostic_sessions_started,
+                    (select count(*) from diagnostic_sessions
+                     where state = 'submitted')::integer as diagnostic_sessions_submitted,
+                    (select count(*) from diagnostic_sessions
+                     where state = 'in_progress')::integer as diagnostic_sessions_in_progress,
+                    (select count(*) from diagnostic_resets)::integer as diagnostic_resets,
+                    (select count(*) from question_reports)::integer
+                        as question_reports_total,
+                    (select count(*) from question_reports
+                     where status = 'open')::integer as question_reports_open,
+                    (select count(*) from question_reports
+                     where status = 'in_review')::integer as question_reports_in_review,
+                    (select count(*) from question_reports
+                     where status = 'resolved')::integer as question_reports_resolved,
+                    (select count(*) from question_reports
+                     where status = 'dismissed')::integer as question_reports_dismissed,
+                    (select count(*) from api_security_events
+                     where occurred_at >= now() - interval '24 hours')::integer
+                        as rate_limit_rejections_last_24_hours
                 """
             ).fetchone()
         assert row is not None

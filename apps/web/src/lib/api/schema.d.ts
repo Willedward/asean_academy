@@ -278,6 +278,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/students/{learner_id}/deletion/execute": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Delete a learner after signed preview and exact email confirmation */
+        post: operations["executeStudentAccountDeletion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students/{learner_id}/deletion/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Preview the exact learner records affected by account deletion */
+        post: operations["previewStudentAccountDeletion"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/students/{learner_id}/diagnostics": {
         parameters: {
             query?: never;
@@ -834,6 +868,51 @@ export interface components {
             /** Invitation Code */
             invitation_code: string;
         };
+        /** AccountDeletionPreviewResponse */
+        AccountDeletionPreviewResponse: {
+            /** Confirmation Value */
+            confirmation_value: string;
+            /** Counts */
+            counts: {
+                [key: string]: number;
+            };
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /**
+             * Learner Id
+             * Format: uuid
+             */
+            learner_id: string;
+            /** Preview Token */
+            preview_token: string;
+            /** Retained Records */
+            retained_records: string[];
+        };
+        /** AccountDeletionResponse */
+        AccountDeletionResponse: {
+            /**
+             * Completed At
+             * Format: date-time
+             */
+            completed_at: string;
+            /**
+             * Deleted
+             * @default true
+             * @constant
+             */
+            deleted: true;
+            /** Retained Records */
+            retained_records: string[];
+            /** Target Reference */
+            target_reference: string;
+        };
         /** ActiveRecallAttemptRequest */
         ActiveRecallAttemptRequest: {
             /** Answer */
@@ -869,6 +948,14 @@ export interface components {
             completed_practice_sessions: number;
             /** Correct Attempts */
             correct_attempts: number;
+            /** Diagnostic Resets */
+            diagnostic_resets: number;
+            /** Diagnostic Sessions In Progress */
+            diagnostic_sessions_in_progress: number;
+            /** Diagnostic Sessions Started */
+            diagnostic_sessions_started: number;
+            /** Diagnostic Sessions Submitted */
+            diagnostic_sessions_submitted: number;
             /** Give Ups */
             give_ups: number;
             /** Hint Reveals */
@@ -881,6 +968,18 @@ export interface components {
             overall_accuracy_percentage: number;
             /** Practice Sessions */
             practice_sessions: number;
+            /** Question Reports Dismissed */
+            question_reports_dismissed: number;
+            /** Question Reports In Review */
+            question_reports_in_review: number;
+            /** Question Reports Open */
+            question_reports_open: number;
+            /** Question Reports Resolved */
+            question_reports_resolved: number;
+            /** Question Reports Total */
+            question_reports_total: number;
+            /** Rate Limit Rejections Last 24 Hours */
+            rate_limit_rejections_last_24_hours: number;
             /** Students With Retries */
             students_with_retries: number;
             /** Total Students */
@@ -1305,7 +1404,7 @@ export interface components {
              * Event Type
              * @enum {string}
              */
-            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed" | "content_review_recorded" | "content_publication_requested" | "content_retirement_requested";
+            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed" | "content_review_recorded" | "content_publication_requested" | "content_retirement_requested" | "question_report_created" | "question_report_status_changed" | "account_deletion_completed";
             /** Invitation Id */
             invitation_id: string | null;
             /** Metadata */
@@ -2074,6 +2173,15 @@ export interface components {
         /** ErrorEnvelope */
         ErrorEnvelope: {
             error: components["schemas"]["ErrorDetail"];
+        };
+        /** ExecuteAccountDeletionRequest */
+        ExecuteAccountDeletionRequest: {
+            /** Confirmation Email */
+            confirmation_email: string;
+            /** Preview Token */
+            preview_token: string;
+            /** Reason */
+            reason: string;
         };
         /** ExplanationSection */
         ExplanationSection: {
@@ -4732,6 +4840,216 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdminStudentDetailResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    executeStudentAccountDeletion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExecuteAccountDeletionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountDeletionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    previewStudentAccountDeletion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountDeletionPreviewResponse"];
                 };
             };
             /** @description Bad Request */

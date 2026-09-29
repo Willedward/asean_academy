@@ -25,6 +25,15 @@ CRITICAL_TABLES = (
     ("public", "learner_lesson_progress"),
     ("public", "learner_lesson_section_progress"),
     ("public", "mastery_events"),
+    ("public", "diagnostic_forms"),
+    ("public", "diagnostic_form_items"),
+    ("public", "diagnostic_sessions"),
+    ("public", "diagnostic_responses"),
+    ("public", "diagnostic_response_idempotency_keys"),
+    ("public", "diagnostic_results"),
+    ("public", "diagnostic_resets"),
+    ("public", "question_reports"),
+    ("public", "account_deletion_records"),
     ("public", "math_question_versions"),
     ("public", "course_versions"),
     ("public", "lesson_versions"),
@@ -130,7 +139,11 @@ def _run(command: list[str], *, environment: dict[str, str]) -> None:
     )
     if result.returncode:
         executable = command[0]
-        raise RuntimeError(f"{executable} failed with exit code {result.returncode}.")
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        suffix = f" Detail: {detail}" if detail else ""
+        raise RuntimeError(
+            f"{executable} failed with exit code {result.returncode}.{suffix}"
+        )
 
 
 def run_drill(source_url: str, restore_url: str) -> dict:

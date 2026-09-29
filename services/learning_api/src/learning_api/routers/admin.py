@@ -10,11 +10,14 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, Query, Request, status
 
 from ..admin_contracts import (
+    AccountDeletionPreviewResponse,
+    AccountDeletionResponse,
     AuditEventListResponse,
     BetaOperationsSummaryResponse,
     CreatedInvitationResponse,
     CreateInvitationRequest,
     DeploymentStatusResponse,
+    ExecuteAccountDeletionRequest,
     InvitationListResponse,
     InvitationResponse,
 )
@@ -24,6 +27,7 @@ from ..contracts import ReleaseMetadata
 from ..conventions import current_request_id
 from ..dependencies import (
     AcademicAdminLearnerDependency,
+    AccountDeletionRepositoryDependency,
     AdminLearnerDependency,
     AdminWriteRateLimitDependency,
     BetaOperationsRepositoryDependency,
@@ -186,3 +190,53 @@ async def audit_events(
 ) -> AuditEventListResponse:
     del administrator
     return _safe(lambda: repository.audit_events(limit=limit))
+
+
+@router.post(
+    "/students/{learner_id}/deletion/preview",
+    operation_id="previewStudentAccountDeletion",
+    response_model=AccountDeletionPreviewResponse,
+    summary="Preview the exact learner records affected by account deletion",
+)
+async def preview_account_deletion(
+    learner_id: UUID,
+    administrator: AcademicAdminLearnerDependency,
+    repository: AccountDeletionRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> AccountDeletionPreviewResponse:
+    del administrator
+    return _safe(lambda: repository.preview(learner_id))
+
+
+@router.post(
+    "/students/{learner_id}/deletion/execute",
+    operation_id="executeStudentAccountDeletion",
+    response_model=AccountDeletionResponse,
+    summary="Delete a learner after signed preview and exact email confirmation",
+)
+async def execute_account_deletion(
+    learner_id: UUID,
+    body: ExecuteAccountDeletionRequest,
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: AccountDeletionRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> AccountDeletionResponse:
+    result = _safe(
+        lambda: repository.execute(
+            administrator,
+            learner_id,
+            preview_token=body.preview_token,
+            confirmation_email=body.confirmation_email,
+            reason=body.reason,
+            request_id=current_request_id(request),
+        )
+    )
+    LOGGER.warning(
+        "student_account_deleted",
+        extra={
+            "request_id": current_request_id(request),
+            "target_reference": result["target_reference"],
+        },
+    )
+    return result

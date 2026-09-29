@@ -112,6 +112,16 @@ class FakeAdminAnalyticsRepository:
             "students_with_retries": 5,
             "checkpoint_attempts": 3,
             "checkpoint_passes": 2,
+            "diagnostic_sessions_started": 7,
+            "diagnostic_sessions_submitted": 5,
+            "diagnostic_sessions_in_progress": 2,
+            "diagnostic_resets": 1,
+            "question_reports_total": 4,
+            "question_reports_open": 1,
+            "question_reports_in_review": 1,
+            "question_reports_resolved": 2,
+            "question_reports_dismissed": 0,
+            "rate_limit_rejections_last_24_hours": 3,
         }
 
     def question_analytics(self, *, difficulty, outcome, limit, offset):

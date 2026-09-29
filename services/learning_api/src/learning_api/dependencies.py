@@ -20,6 +20,7 @@ from .abuse import (
     decision_headers,
     opaque_subject,
 )
+from .account_deletion_repository import PostgresAccountDeletionRepository
 from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
 from .conventions import current_request_id
@@ -117,6 +118,31 @@ def beta_operations_repository(request: Request) -> PostgresBetaOperationsReposi
 
 BetaOperationsRepositoryDependency = Annotated[
     PostgresBetaOperationsRepository, Depends(beta_operations_repository)
+]
+
+
+def account_deletion_repository(request: Request) -> PostgresAccountDeletionRepository:
+    settings = request.app.state.settings
+    if not settings.database_url:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "account_deletion_not_configured",
+                "message": "Account deletion requires the PostgreSQL database.",
+            },
+        )
+    repository = getattr(request.app.state, "account_deletion_repository", None)
+    if repository is None:
+        repository = PostgresAccountDeletionRepository(
+            settings.database_url,
+            settings.abuse_hash_secret,
+        )
+        request.app.state.account_deletion_repository = repository
+    return repository
+
+
+AccountDeletionRepositoryDependency = Annotated[
+    PostgresAccountDeletionRepository, Depends(account_deletion_repository)
 ]
 
 

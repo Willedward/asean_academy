@@ -112,9 +112,10 @@ would intentionally activate rate limits.
 6. fails if any critical table differs.
 
 The verified data includes Auth users, profiles, enrolments, practice sessions, selected
-questions, attempts, question and lesson progress, mastery, immutable content revisions,
-review/audit records, abuse counters/events, and migration history. Connection strings
-come only from environment variables and are not printed.
+questions, attempts, question and lesson progress, mastery, diagnostics, question reports,
+pseudonymous account-deletion evidence, immutable content revisions, review/audit records,
+abuse counters/events, and migration history. Connection strings come only from
+environment variables and are not printed.
 
 ```bash
 read -r -s -p "Source database URL: " SOURCE_DATABASE_URL

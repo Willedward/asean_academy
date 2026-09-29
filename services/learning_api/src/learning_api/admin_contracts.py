@@ -99,6 +99,8 @@ class AuditEventResponse(ApiModel):
         "role_changed", "course_revision_changed",
         "content_review_recorded", "content_publication_requested",
         "content_retirement_requested",
+        "question_report_created", "question_report_status_changed",
+        "account_deletion_completed",
     ]
     actor_user_id: UUID | None
     invitation_id: UUID | None
@@ -110,3 +112,40 @@ class AuditEventResponse(ApiModel):
 
 class AuditEventListResponse(ApiModel):
     events: list[AuditEventResponse]
+
+
+class AccountDeletionPreviewResponse(ApiModel):
+    learner_id: UUID
+    email: str
+    display_name: str | None
+    counts: dict[str, int]
+    retained_records: list[str]
+    preview_token: str
+    expires_at: datetime
+    confirmation_value: str
+
+
+class ExecuteAccountDeletionRequest(ApiModel):
+    preview_token: str = Field(min_length=40, max_length=4000)
+    confirmation_email: str = Field(min_length=5, max_length=320)
+    reason: str = Field(min_length=10, max_length=500)
+
+    @field_validator("confirmation_email")
+    @classmethod
+    def normalize_confirmation_email(cls, value: str) -> str:
+        return value.strip().casefold()
+
+    @field_validator("reason")
+    @classmethod
+    def normalize_reason(cls, value: str) -> str:
+        normalized = value.strip()
+        if len(normalized) < 10:
+            raise ValueError("reason must contain at least 10 non-whitespace characters")
+        return normalized
+
+
+class AccountDeletionResponse(ApiModel):
+    deleted: Literal[True] = True
+    target_reference: str = Field(pattern=r"^[0-9a-f]{64}$")
+    completed_at: datetime
+    retained_records: list[str]

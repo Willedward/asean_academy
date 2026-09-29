@@ -102,8 +102,8 @@ The current blockers are product completion rather than basic infrastructure:
 - the course-map UI still labels the checkpoint as pending despite backend support;
 - retry evidence exists, but due-date spacing and variant selection do not;
 - diagnostic persistence/API/UI are implemented as an N1 pilot slice, but the 19-topic catalogue and 76 production diagnostic items remain unauthored and unpublished;
-- question-problem reports still have no schema or API; and
-- account deletion has no operational workflow.
+- question reports and account deletion are implemented locally, but still need hosted
+  rehearsal and final B4 frontend integration.
 
 The `main` branch is also behind the stacked feature chain. No beta deployment should
 be cut directly from `main` until the feature branches are consolidated through a
@@ -128,7 +128,7 @@ content or final design has been approved.
 | B-10 | Immediate retry exists | Add durable due dates, spacing state, daily cap and reserve-question selection |
 | B-11 | Backend checkpoint/mastery implemented; learner UI says pending | Review pool, expose start/resume/results UI and run failure/retake/pass journey |
 | B-12 | Implemented technical page | Add due dates, diagnostic comparison and final responsive design |
-| B-13 | Not implemented | Add learner report endpoint, report state and admin reports inbox |
+| B-13 | Implemented locally; final UI/hosted workflow remain | Validate learner submission and admin resolution in staging/B4 |
 | B-14 | No production domain/API | Move to V2 unless a separate owner and reviewed English bank are ready |
 | B-15 | No production domain/API or AI evaluation | Move to V2; do not make open-ended AI feedback a Beta dependency |
 | B-16 | Admin navigation and pages implemented | Apply final design and verify role-specific navigation |
@@ -136,10 +136,10 @@ content or final design has been approved.
 | B-18 | Review API, safe preview, UI and lifecycle audit implemented | Use it on real content; reconcile the roadmap's “3 reviews” with the implemented Maths/editorial plus academic publication rule |
 | B-19 | Review/version infrastructure exists; browser editor does not | Keep lesson authoring in reviewed Git for Beta; defer editor to V2 |
 | B-20 | Versioned Git course/pools and importers exist; browser editor does not | Keep Git as source for Beta; defer editor to V2 |
-| B-21 | Not implemented | Build with B-13 using one report workflow |
+| B-21 | Implemented with B-13 | Validate administrator reports inbox in staging/B4 |
 | B-22 | Broad audit exists for invitations, roles, course changes and content lifecycle | Add question-report and account-lifecycle events; verify export/retention needs |
 | B-23 | Implemented administrator student progress and aggregate analytics | Validate against real staging accounts and final UI |
-| B-24 | Monitoring, release health, backups and rate limits implemented; deletion missing | Add an audited founder-operated deletion procedure for Beta and rehearse incident/restore runbooks |
+| B-24 | Deletion, retention, restore, monitoring and rate limits complete locally | Rehearse hosted alerts, limits, load and rollback before inviting students |
 | B-25 | Not implemented | Perform one repository-wide brand migration; retain internal package/database identifiers where renaming adds risk |
 | B-26 | Designed externally | Integrate accessible assets, metadata and icons after the design handoff |
 | B-27 | Partial component primitives exist | Map Figma components to existing API states and add missing error/empty/loading/focus states |
@@ -292,6 +292,8 @@ an administrator can compare them.
 usable in the web app, and an admin can resolve a learner report.
 
 ### B3 — Operational privacy and release controls
+
+**Engineering status (29 September 2026): backend and local operational rehearsal complete.** See [B3_OPERATIONAL_PRIVACY_RELEASE_CONTROLS.md](B3_OPERATIONAL_PRIVACY_RELEASE_CONTROLS.md). Hosted load/rate-limit, backup-retention, alert-delivery and rollback evidence remain release gates.
 
 - Add an account-deletion runbook and protected script/endpoint with preview, explicit
   target confirmation, audit and a defined treatment of legally/operationally retained
