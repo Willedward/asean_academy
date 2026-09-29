@@ -1,10 +1,18 @@
 import "server-only";
 
+import type { CourseMapResponse } from "@/lib/api/course";
 import type { CurrentLearnerResponse } from "@/lib/api/identity";
+import type {
+  LearningHomeResponse,
+  ProgressResponse,
+} from "@/lib/api/progress";
 import type { VerifiedSession } from "@/lib/auth/session";
 
 function baseUrl(): string {
-  return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+  return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(
+    /\/$/,
+    "",
+  );
 }
 
 type ErrorBody = {
@@ -26,7 +34,7 @@ export class ServerLearningApiError extends Error {
 async function parseError(response: Response): Promise<ServerLearningApiError> {
   let body: ErrorBody = {};
   try {
-    body = await response.json() as ErrorBody;
+    body = (await response.json()) as ErrorBody;
   } catch {
     // The fallback below deliberately hides upstream response details.
   }
@@ -38,10 +46,11 @@ async function parseError(response: Response): Promise<ServerLearningApiError> {
   );
 }
 
-export async function getServerLearner(
+async function getServerJson<T>(
   session: VerifiedSession,
-): Promise<CurrentLearnerResponse> {
-  const response = await fetch(`${baseUrl()}/api/v1/me`, {
+  path: string,
+): Promise<T> {
+  const response = await fetch(`${baseUrl()}${path}`, {
     cache: "no-store",
     headers: {
       Accept: "application/json",
@@ -50,5 +59,33 @@ export async function getServerLearner(
     },
   });
   if (!response.ok) throw await parseError(response);
-  return await response.json() as CurrentLearnerResponse;
+  return (await response.json()) as T;
+}
+
+export async function getServerLearner(
+  session: VerifiedSession,
+): Promise<CurrentLearnerResponse> {
+  return getServerJson(session, "/api/v1/me");
+}
+
+export async function getServerLearningHome(
+  session: VerifiedSession,
+): Promise<LearningHomeResponse> {
+  return getServerJson(session, "/api/v1/learning-home");
+}
+
+export async function getServerCourseMap(
+  session: VerifiedSession,
+  courseKey: string,
+): Promise<CourseMapResponse> {
+  return getServerJson(
+    session,
+    `/api/v1/courses/${encodeURIComponent(courseKey)}/map`,
+  );
+}
+
+export async function getServerProgress(
+  session: VerifiedSession,
+): Promise<ProgressResponse> {
+  return getServerJson(session, "/api/v1/progress");
 }

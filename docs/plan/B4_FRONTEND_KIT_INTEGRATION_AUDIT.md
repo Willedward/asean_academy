@@ -8,7 +8,7 @@
 
 The frontend kit is valid React/Next.js code and can be used as the visual implementation for B4. It was additive: no existing page, API client, authentication flow or backend file was overwritten. The actual frontend commit was cherry-picked onto B3 because the source branch was based on older history containing a duplicate roadmap commit.
 
-The kit is not yet the live learner application. It supplies 69 responsive, props-driven screen states under `/beta-kit`, backed by sample data and small adapters. Existing production routes such as `/learn`, `/lessons/*`, `/practice/*`, `/checkpoints/*`, `/diagnostics/*` and `/progress` still render the earlier technical UI. B4 is the work of connecting those routes and state machines to these components.
+The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4.1 has now connected `/learn` and `/courses/[courseKey]` to live authenticated learning-home, course-map and progress responses. These two routes deliberately omit sample-only XP, league, quests, streaks and rewards. Other production routes such as `/lessons/*`, `/practice/*`, `/checkpoints/*`, `/diagnostics/*` and `/progress` still render the earlier technical UI until their B4 integration steps are completed.
 
 ## Verified behavior
 
@@ -18,6 +18,17 @@ The kit is not yet the live learner application. It supplies 69 responsive, prop
 - Development HTTP smoke checks returned `200` for the kit index, dashboard, lesson, practice, checkpoint and loading screens.
 - In an unflagged production build, `/beta-kit` returns a true non-cacheable `404` and `/` remains available.
 - The current API-contract drift in the adapter test was repaired by adding B2's required `unlocked` and `retry_question_count` fields to its fixture.
+
+
+## B4.1 live integration (30 September 2026)
+
+- `/learn` uses the authenticated learner's active enrolment instead of a hard-coded course.
+- `/courses/[courseKey]` displays API-owned lesson locks, progress and checkpoint state.
+- Both pages fetch through the server-side Learning API using the verified Supabase access token; they do not query learning tables directly.
+- Known API failures render a safe retry state with the request ID retained for support.
+- `ASEAN_ACADEMY_BETA_LEARNING_UI=true` enables these screens in production. Development defaults on; `false` immediately restores the established technical pages.
+- Route loading states, mobile navigation and desktop navigation are included. Unsupported gamification remains absent.
+- The next B4 slice is lesson and guided-practice visual integration while preserving their existing server-owned state machines.
 
 ## What can be wired now
 

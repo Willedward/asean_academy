@@ -310,7 +310,7 @@ accepting the first student.
 
 ### B4 — Final frontend integration
 
-**Engineering status (29 September 2026): component/design kit received and validated on the B3 integration branch; live route/API wiring remains.** See [B4_FRONTEND_KIT_INTEGRATION_AUDIT.md](B4_FRONTEND_KIT_INTEGRATION_AUDIT.md).
+**Engineering status (30 September 2026): the component/design kit is validated and B4.1 now wires the authenticated `/learn` dashboard and `/courses/[courseKey]` map to live learning-home, course-map and progress APIs. The previous technical screens remain behind the server-only `ASEAN_ACADEMY_BETA_LEARNING_UI` rollback flag. Lesson, practice, checkpoint, diagnostic, progress, public/auth and administrator visual integration remains.** See [B4_FRONTEND_KIT_INTEGRATION_AUDIT.md](B4_FRONTEND_KIT_INTEGRATION_AUDIT.md).
 
 The final frontend consumes the generated OpenAPI client and existing same-origin proxy.
 It must not duplicate business rules or call PostgreSQL/Supabase learning tables directly.
