@@ -1,0 +1,195 @@
+.mascot {
+  isolation: isolate;
+}
+
+.mascot :is(.tail, .body, .wing, .feet, .head, .eyes, .lowerBeak, .accessory) {
+  transform-box: fill-box;
+}
+
+.animated {
+  animation: hornbill-enter 520ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+
+.animated .body {
+  transform-origin: 50% 90%;
+  animation: hornbill-breathe 3.8s ease-in-out infinite;
+}
+
+.animated .head {
+  transform-origin: 34% 78%;
+  animation: hornbill-head-idle 4.6s ease-in-out infinite;
+}
+
+.animated .eyes {
+  transform-origin: center;
+  animation: hornbill-blink 5.8s ease-in-out infinite;
+}
+
+.animated .wing {
+  transform-origin: 72% 24%;
+  animation: hornbill-wing-idle 3.8s ease-in-out infinite;
+}
+
+.animated .tail {
+  transform-origin: 72% 10%;
+  animation: hornbill-tail-idle 3.8s ease-in-out infinite;
+}
+
+.animated .lowerBeak {
+  transform-origin: 4% 8%;
+  animation: hornbill-beak-idle 7.2s ease-in-out infinite;
+}
+
+.animated.cheer .body {
+  animation-duration: 1.8s;
+}
+
+.animated.cheer .head {
+  animation: hornbill-head-cheer 1.8s ease-in-out infinite;
+}
+
+.animated.cheer .wing {
+  animation: hornbill-wing-cheer 900ms ease-in-out infinite;
+}
+
+.animated.cheer .tail {
+  animation-duration: 1.8s;
+}
+
+.animated.point .wing {
+  animation: hornbill-wing-point 2.8s ease-in-out infinite;
+}
+
+.animated.sleepy .body,
+.animated.sleepy .head,
+.animated.sleepy .tail,
+.animated.sleepy .wing {
+  animation-duration: 5.4s;
+}
+
+.animated.sleepy .eyes {
+  animation: none;
+}
+
+@keyframes hornbill-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hornbill-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.012, 0.988);
+  }
+}
+
+@keyframes hornbill-head-idle {
+  0%,
+  38%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  48% {
+    transform: rotate(-2deg) translateY(-1px);
+  }
+  58% {
+    transform: rotate(1deg) translateY(0);
+  }
+}
+
+@keyframes hornbill-head-cheer {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-2px);
+  }
+}
+
+@keyframes hornbill-blink {
+  0%,
+  43%,
+  46%,
+  100% {
+    transform: scaleY(1);
+  }
+  44%,
+  45% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes hornbill-wing-idle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes hornbill-wing-cheer {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes hornbill-wing-point {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes hornbill-tail-idle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@keyframes hornbill-beak-idle {
+  0%,
+  74%,
+  80%,
+  100% {
+    transform: rotate(0deg);
+  }
+  76%,
+  78% {
+    transform: rotate(1.6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated,
+  .animated :is(.tail, .body, .wing, .feet, .head, .eyes, .lowerBeak, .accessory) {
+    animation: none !important;
+    transform: none !important;
+  }
+}

@@ -21,7 +21,7 @@ The preview is switched off in production builds unless `NEXT_PUBLIC_BETA_KIT=tr
 | `screens/` | One component per screen, e.g. `DashboardScreen`, `PracticeQuestionScreen`. Each takes plain data as props and never fetches. |
 | `types.ts` | Shared view models (`Player`, `Quest`, `League`, `LessonSummary`, `UnitSummary`...). Each screen file adds its own `XxxProps`. |
 | `adapters.ts` | Maps today's API responses (course map, progress, next action) to the view models. Tested in `adapters.test.ts`. |
-| `components/` | Building blocks: buttons, cards, the hornbill mascot (SVG, 6 moods, 5 outfits), XP chips, level ring, quests, streak, medals, confetti, answer feedback. |
+| `components/` | Building blocks: buttons, cards, the animated hornbill mascot (SVG, 6 moods, 5 outfits, reduced-motion support), XP chips, level ring, quests, streak, medals, confetti, answer feedback. |
 | `shell/` | `AppShell` (tab screens: bottom nav on phones, sidebar on desktop), `FocusShell` (lesson, practice, checkpoint, essay), `BareShell` (landing, sign in, errors). |
 | `sample-data.ts`, `preview/` | Sample student "Dimas" and the preview registry. Not needed in production. |
 | `theme.css` | Brand tokens as Tailwind v4 theme values (`bg-ns-ink`, `text-ns-muted`, `animate-ns-pop`...). |
