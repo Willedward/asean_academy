@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, it } from "vitest";
 
-import { getSiteOrigin, normalizeSiteOrigin, safeNextPath } from "./navigation";
+import {
+  getSiteOrigin,
+  loginErrorPath,
+  normalizeSiteOrigin,
+  onboardingPath,
+  safeNextPath,
+} from "./navigation";
 
 const originalSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const originalRailwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN;
@@ -20,6 +26,17 @@ describe("hosted auth navigation", () => {
     expect(safeNextPath("https://attacker.example/steal")).toBe("/onboarding");
     expect(safeNextPath("//attacker.example/steal")).toBe("/onboarding");
     expect(safeNextPath("/\\attacker.example/steal")).toBe("/onboarding");
+  });
+
+  it("preserves invitation links across sign-in and safe error retries", () => {
+    const invitation = onboardingPath("invite / + token");
+    expect(invitation).toBe("/onboarding?code=invite%20%2F%20%2B%20token");
+    expect(loginErrorPath("oauth_start_failed", invitation)).toBe(
+      "/login?error=oauth_start_failed&next=%2Fonboarding%3Fcode%3Dinvite%2520%252F%2520%252B%2520token",
+    );
+    expect(
+      loginErrorPath("auth_callback_failed", "https://attacker.example"),
+    ).toBe("/login?error=auth_callback_failed&next=%2Fonboarding");
   });
 
   it("normalizes deployed hostnames to HTTPS origins", () => {

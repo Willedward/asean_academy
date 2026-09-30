@@ -6,7 +6,11 @@ import { cn } from "@/lib/utils";
 
 import type { Href, Tone } from "../types";
 
-type IconType = ComponentType<{ size?: number; className?: string; "aria-hidden"?: boolean }>;
+type IconType = ComponentType<{
+  size?: number;
+  className?: string;
+  "aria-hidden"?: boolean;
+}>;
 
 export const focusRing =
   "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ns-success";
@@ -15,13 +19,16 @@ export const focusRing =
 /* Button                                                              */
 /* ------------------------------------------------------------------ */
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "gold";
+export type ButtonVariant =
+  "primary" | "secondary" | "ghost" | "danger" | "gold";
 
 const VARIANT: Record<ButtonVariant, string> = {
   primary: "bg-ns-ink text-ns-on-brand border-ns-ink hover:bg-ns-dark",
-  secondary: "bg-ns-raised text-ns-ink border-ns-line-strong hover:bg-ns-sunken",
+  secondary:
+    "bg-ns-raised text-ns-ink border-ns-line-strong hover:bg-ns-sunken",
   ghost: "bg-transparent text-ns-ink border-transparent hover:bg-ns-sunken",
-  danger: "bg-ns-raised text-ns-danger border-ns-danger hover:bg-ns-danger-soft",
+  danger:
+    "bg-ns-raised text-ns-danger border-ns-danger hover:bg-ns-danger-soft",
   gold: "bg-ns-gold text-ns-ink border-ns-gold font-black animate-ns-glow",
 };
 
@@ -81,7 +88,14 @@ export function Button({
     );
   }
   return (
-    <button type={type} form={form} className={classes} disabled={disabled} onClick={onClick} aria-label={ariaLabel}>
+    <button
+      type={type}
+      form={form}
+      className={classes}
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
       {inner}
     </button>
   );
@@ -113,7 +127,12 @@ export function IconButton({
     );
   }
   return (
-    <button type="button" aria-label={label} onClick={onClick} className={classes}>
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className={classes}
+    >
       <Icon size={22} aria-hidden />
     </button>
   );
@@ -156,14 +175,23 @@ export function Card({
 }
 
 const TAG_TONE: Record<Tone, string> = {
-  neutral: "bg-ns-sunken text-ns-muted shadow-[inset_0_0_0_1px_var(--color-ns-line)]",
+  neutral:
+    "bg-ns-sunken text-ns-muted shadow-[inset_0_0_0_1px_var(--color-ns-line)]",
   brand: "bg-ns-brand-soft text-ns-ink",
   amber: "bg-ns-amber-soft text-ns-amber-text",
   success: "bg-ns-success-soft text-ns-success",
   danger: "bg-ns-danger-soft text-ns-danger",
 };
 
-export function Tag({ children, tone = "neutral", icon: Icon }: { children: ReactNode; tone?: Tone; icon?: IconType }) {
+export function Tag({
+  children,
+  tone = "neutral",
+  icon: Icon,
+}: {
+  children: ReactNode;
+  tone?: Tone;
+  icon?: IconType;
+}) {
   return (
     <span
       className={cn(
@@ -177,45 +205,117 @@ export function Tag({ children, tone = "neutral", icon: Icon }: { children: Reac
   );
 }
 
-export function Eyebrow({ children, muted }: { children: ReactNode; muted?: boolean }) {
+export function Eyebrow({
+  children,
+  muted,
+}: {
+  children: ReactNode;
+  muted?: boolean;
+}) {
   return (
-    <div className={cn("text-xs font-semibold tracking-[0.02em]", muted ? "text-ns-muted" : "text-ns-amber-text")}>
+    <div
+      className={cn(
+        "text-xs font-semibold tracking-[0.02em]",
+        muted ? "text-ns-muted" : "text-ns-amber-text",
+      )}
+    >
       {children}
     </div>
   );
 }
 
-export function H1({ children, className }: { children: ReactNode; className?: string }) {
-  return <h1 className={cn("m-0 text-[26px] leading-8 font-bold tracking-[-0.01em] lg:text-[32px] lg:leading-10", className)}>{children}</h1>;
+export function H1({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <h1
+      className={cn(
+        "m-0 text-[26px] leading-8 font-bold tracking-[-0.01em] lg:text-[32px] lg:leading-10",
+        className,
+      )}
+    >
+      {children}
+    </h1>
+  );
 }
 
-export function H2({ children, className }: { children: ReactNode; className?: string }) {
-  return <h2 className={cn("m-0 text-xl leading-7 font-semibold", className)}>{children}</h2>;
+export function H2({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <h2 className={cn("m-0 text-xl leading-7 font-semibold", className)}>
+      {children}
+    </h2>
+  );
 }
 
-export function H3({ children, className }: { children: ReactNode; className?: string }) {
-  return <h3 className={cn("m-0 text-[17px] leading-6 font-semibold", className)}>{children}</h3>;
+export function H3({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <h3 className={cn("m-0 text-[17px] leading-6 font-semibold", className)}>
+      {children}
+    </h3>
+  );
 }
 
-export function Muted({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("m-0 text-sm leading-5 text-ns-muted", className)}>{children}</p>;
+export function Muted({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <p className={cn("m-0 text-sm leading-5 text-ns-muted", className)}>
+      {children}
+    </p>
+  );
 }
 
 export function Divider() {
   return <div className="h-px bg-ns-line" />;
 }
 
-export function Stat({ value, label, sub }: { value: ReactNode; label: string; sub?: string }) {
+export function Stat({
+  value,
+  label,
+  sub,
+}: {
+  value: ReactNode;
+  label: string;
+  sub?: string;
+}) {
   return (
     <div className="flex min-w-0 flex-col gap-0.5">
-      <div className="text-[26px] leading-8 font-bold tabular-nums">{value}</div>
+      <div className="text-[26px] leading-8 font-bold tabular-nums">
+        {value}
+      </div>
       <div className="text-[13px] leading-[18px] text-ns-muted">{label}</div>
       {sub ? <div className="text-xs text-ns-muted">{sub}</div> : null}
     </div>
   );
 }
 
-export function Avatar({ initials, size = 36 }: { initials: string; size?: number }) {
+export function Avatar({
+  initials,
+  size = 36,
+}: {
+  initials: string;
+  size?: number;
+}) {
   return (
     <span
       aria-hidden="true"
@@ -238,7 +338,10 @@ export function IconCircle({
 }) {
   return (
     <span
-      className={cn("inline-flex shrink-0 items-center justify-center rounded-full", TAG_TONE[tone])}
+      className={cn(
+        "inline-flex shrink-0 items-center justify-center rounded-full",
+        TAG_TONE[tone],
+      )}
       style={{ width: size, height: size }}
     >
       <Icon size={Math.round(size / 2)} aria-hidden />
@@ -250,11 +353,25 @@ export function IconCircle({
 /* Progress                                                            */
 /* ------------------------------------------------------------------ */
 
-export function Bar({ pct, height = 8, fill = "amber" }: { pct: number; height?: number; fill?: "amber" | "success" }) {
+export function Bar({
+  pct,
+  height = 8,
+  fill = "amber",
+}: {
+  pct: number;
+  height?: number;
+  fill?: "amber" | "success";
+}) {
   return (
-    <div className="overflow-hidden rounded-full bg-ns-brand-soft" style={{ height }}>
+    <div
+      className="overflow-hidden rounded-full bg-ns-brand-soft"
+      style={{ height }}
+    >
       <div
-        className={cn("h-full rounded-full", fill === "success" ? "bg-ns-success" : "bg-ns-amber")}
+        className={cn(
+          "h-full rounded-full",
+          fill === "success" ? "bg-ns-success" : "bg-ns-amber",
+        )}
         style={{ width: `${Math.max(0, Math.min(100, pct))}%` }}
       />
     </div>
@@ -278,7 +395,13 @@ export function ProgressBar({
         <span className="font-semibold">{label}</span>
         <span className="text-ns-muted tabular-nums">{value}</span>
       </div>
-      <div role="progressbar" aria-label={label} aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
+      <div
+        role="progressbar"
+        aria-label={label}
+        aria-valuenow={pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
         <Bar pct={pct} height={10} fill={fill} />
       </div>
     </div>
@@ -286,7 +409,15 @@ export function ProgressBar({
 }
 
 /** Segmented progress for question steps. */
-export function Steps({ done, current, total }: { done: number; current: number; total: number }) {
+export function Steps({
+  done,
+  current,
+  total,
+}: {
+  done: number;
+  current: number;
+  total: number;
+}) {
   return (
     <div aria-hidden="true" className="flex gap-1.5">
       {Array.from({ length: total }, (_, i) => (
@@ -294,7 +425,11 @@ export function Steps({ done, current, total }: { done: number; current: number;
           key={i}
           className={cn(
             "h-1.5 flex-1 rounded-full",
-            i < done ? "bg-ns-success" : i === current ? "bg-ns-amber" : "bg-ns-line",
+            i < done
+              ? "bg-ns-success"
+              : i === current
+                ? "bg-ns-amber"
+                : "bg-ns-line",
           )}
         />
       ))}
@@ -323,11 +458,16 @@ export function Callout({
     neutral: "bg-ns-sunken text-ns-muted",
   }[tone];
   return (
-    <div role="status" className={cn("flex items-start gap-3 rounded-xl p-4", bg)}>
+    <div
+      role="status"
+      className={cn("flex items-start gap-3 rounded-xl p-4", bg)}
+    >
       <span className="flex pt-0.5">
         <Icon size={20} aria-hidden />
       </span>
-      <div className="flex min-w-0 grow flex-col gap-1 text-sm leading-5 text-ns-ink">{children}</div>
+      <div className="flex min-w-0 grow flex-col gap-1 text-sm leading-5 text-ns-ink">
+        {children}
+      </div>
     </div>
   );
 }
@@ -344,6 +484,12 @@ export function Field({
   math,
   mono,
   onChange,
+  autoCapitalize,
+  autoComplete,
+  maxLength,
+  minLength,
+  required,
+  spellCheck,
 }: {
   id: string;
   /** Form field name, so the input posts with a <form> or server action. */
@@ -357,6 +503,12 @@ export function Field({
   math?: boolean;
   mono?: boolean;
   onChange?: (value: string) => void;
+  autoCapitalize?: string;
+  autoComplete?: string;
+  maxLength?: number;
+  minLength?: number;
+  required?: boolean;
+  spellCheck?: boolean;
 }) {
   const described = error || hint ? `${id}-msg` : undefined;
   return (
@@ -370,9 +522,17 @@ export function Field({
         type="text"
         defaultValue={onChange ? undefined : value}
         value={onChange ? (value ?? "") : undefined}
-        onChange={onChange ? (event) => onChange(event.target.value) : undefined}
+        onChange={
+          onChange ? (event) => onChange(event.target.value) : undefined
+        }
         placeholder={placeholder}
         readOnly={readOnly}
+        autoCapitalize={autoCapitalize}
+        autoComplete={autoComplete}
+        maxLength={maxLength}
+        minLength={minLength}
+        required={required}
+        spellCheck={spellCheck}
         aria-invalid={error ? true : undefined}
         aria-describedby={described}
         className={cn(
@@ -385,7 +545,10 @@ export function Field({
         )}
       />
       {error ? (
-        <div id={described} className="flex items-start gap-1.5 text-sm leading-5 font-semibold text-ns-danger">
+        <div
+          id={described}
+          className="flex items-start gap-1.5 text-sm leading-5 font-semibold text-ns-danger"
+        >
           <AlertCircle size={18} className="shrink-0" aria-hidden />
           <span>{error}</span>
         </div>
@@ -401,7 +564,9 @@ export function Field({
 /** Inline maths, e.g. <M>360<i>k</i></M>. Real content should go through the
  *  app's existing MathContent (KaTeX) component. */
 export function M({ children }: { children: ReactNode }) {
-  return <span className="font-ns-math text-[1.12em] text-ns-ink">{children}</span>;
+  return (
+    <span className="font-ns-math text-[1.12em] text-ns-ink">{children}</span>
+  );
 }
 
 export function Sup({ base, exp }: { base: ReactNode; exp: ReactNode }) {

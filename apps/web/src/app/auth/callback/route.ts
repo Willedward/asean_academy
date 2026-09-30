@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { getSiteOrigin, safeNextPath } from "@/lib/auth/navigation";
+import {
+  getSiteOrigin,
+  loginErrorPath,
+  safeNextPath,
+} from "@/lib/auth/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: Request) {
@@ -22,7 +26,7 @@ export async function GET(request: Request) {
     }
   }
 
-  const failed = new URL("/login", requestUrl.origin);
-  failed.searchParams.set("error", "auth_callback_failed");
-  return NextResponse.redirect(failed);
+  return NextResponse.redirect(
+    new URL(loginErrorPath("auth_callback_failed", next), requestUrl.origin),
+  );
 }

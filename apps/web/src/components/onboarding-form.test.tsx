@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { InvitationAcceptanceResponse } from "@/lib/api/identity";
@@ -53,13 +59,53 @@ describe("OnboardingForm", () => {
     fireEvent.change(screen.getByLabelText("Name shown in the academy"), {
       target: { value: "  Student  " },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Join the beta course" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Join the beta course" }),
+    );
 
     await waitFor(() => {
-      expect(acceptInvitation).toHaveBeenCalledWith("invitation-code-123", "Student");
+      expect(acceptInvitation).toHaveBeenCalledWith(
+        "invitation-code-123",
+        "Student",
+      );
     });
     expect(replace).toHaveBeenCalledWith("/diagnostics");
     expect(refresh).toHaveBeenCalledOnce();
+  });
+
+  it("uses the live NextScholar form without unsupported account rewards", async () => {
+    const acceptInvitation = vi.fn(async () => accepted);
+    render(
+      <OnboardingForm
+        acceptInvitation={acceptInvitation}
+        appearance="nextscholar"
+        email="student@example.test"
+        initialCode="invitation-code-123"
+      />,
+    );
+
+    expect(screen.getByDisplayValue("invitation-code-123")).toBeInTheDocument();
+    expect(
+      screen.getByText("Filled in securely from your invitation link."),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/\bXP\b/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/streak/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole("radio")).not.toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Name shown in the academy"), {
+      target: { value: "  Student  " },
+    });
+    fireEvent.click(
+      screen.getByRole("button", { name: "Join the beta course" }),
+    );
+
+    await waitFor(() => {
+      expect(acceptInvitation).toHaveBeenCalledWith(
+        "invitation-code-123",
+        "Student",
+      );
+    });
+    expect(replace).toHaveBeenCalledWith("/diagnostics");
   });
 
   it("shows a safe backend error with its request ID", async () => {
@@ -82,7 +128,9 @@ describe("OnboardingForm", () => {
     fireEvent.change(screen.getByLabelText("Name shown in the academy"), {
       target: { value: "Student" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Join the beta course" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Join the beta course" }),
+    );
 
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Sign in with the email address that received this invitation. Request ID: request-123",

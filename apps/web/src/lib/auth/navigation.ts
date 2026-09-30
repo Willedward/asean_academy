@@ -1,7 +1,12 @@
 const DEFAULT_AFTER_SIGN_IN = "/onboarding";
 
 export function safeNextPath(value: string | null | undefined): string {
-  if (!value || !value.startsWith("/") || value.startsWith("//") || value.includes("\\")) {
+  if (
+    !value ||
+    !value.startsWith("/") ||
+    value.startsWith("//") ||
+    value.includes("\\")
+  ) {
     return DEFAULT_AFTER_SIGN_IN;
   }
 
@@ -15,11 +20,16 @@ export function safeNextPath(value: string | null | undefined): string {
 }
 
 export function normalizeSiteOrigin(value: string): string {
-  const withProtocol = value.startsWith("http://") || value.startsWith("https://")
-    ? value
-    : `https://${value}`;
+  const withProtocol =
+    value.startsWith("http://") || value.startsWith("https://")
+      ? value
+      : `https://${value}`;
   const parsed = new URL(withProtocol);
-  if (!["http:", "https:"].includes(parsed.protocol) || parsed.username || parsed.password) {
+  if (
+    !["http:", "https:"].includes(parsed.protocol) ||
+    parsed.username ||
+    parsed.password
+  ) {
     throw new Error("The application site URL is invalid.");
   }
   return parsed.origin;
@@ -37,4 +47,16 @@ export function getSiteOrigin(): string {
 
   if (process.env.NODE_ENV !== "production") return "http://localhost:3000";
   throw new Error("Set NEXT_PUBLIC_SITE_URL for hosted authentication.");
+}
+
+export function loginErrorPath(error: string, next?: string | null): string {
+  const params = new URLSearchParams({ error });
+  params.set("next", safeNextPath(next));
+  return `/login?${params.toString()}`;
+}
+
+export function onboardingPath(invitationCode?: string | null): string {
+  return invitationCode
+    ? `/onboarding?code=${encodeURIComponent(invitationCode)}`
+    : "/onboarding";
 }

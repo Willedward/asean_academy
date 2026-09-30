@@ -2,7 +2,11 @@
 
 import { redirect } from "next/navigation";
 
-import { getSiteOrigin, safeNextPath } from "@/lib/auth/navigation";
+import {
+  getSiteOrigin,
+  loginErrorPath,
+  safeNextPath,
+} from "@/lib/auth/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export async function signInWithGoogle(formData: FormData) {
@@ -12,7 +16,7 @@ export async function signInWithGoogle(formData: FormData) {
   try {
     siteOrigin = getSiteOrigin();
   } catch {
-    redirect("/login?error=site_url_missing");
+    redirect(loginErrorPath("site_url_missing", next));
   }
 
   const supabase = await createClient();
@@ -23,6 +27,6 @@ export async function signInWithGoogle(formData: FormData) {
     options: { redirectTo: callback.toString() },
   });
 
-  if (error || !data.url) redirect("/login?error=oauth_start_failed");
+  if (error || !data.url) redirect(loginErrorPath("oauth_start_failed", next));
   redirect(data.url);
 }

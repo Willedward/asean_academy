@@ -51,15 +51,28 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - Retry selection, the five-question daily cap, checkpoint availability, scoring and mastery remain enforced by the Learning API.
 - Browser extensions such as Grammarly can inject attributes into the document body before React starts; the root body now suppresses that expected attribute-only hydration warning.
 - The rollout flag continues to restore the established progress and checkpoint screens without changing API state.
-- Validation passes 49 web tests and TypeScript. Full lint and production-build results are recorded with the implementation commit.
+- Validation passes 49 web tests, ESLint, TypeScript and the production Next.js build.
 - The next B4 slice is authentication/onboarding visual integration, then diagnostic and administrator surfaces.
+
+## B4.4 Google sign-in and invitation onboarding integration (30 September 2026)
+
+- `/login` now uses the final responsive NextScholar presentation while continuing to invoke the existing server-only Google OAuth action.
+- Login errors remain mapped to safe messages, and the validated destination is preserved through OAuth-start and callback failures so invitation links can be retried without losing their code.
+- `/onboarding?code=...` now preserves the invitation code when an unauthenticated visitor is sent through Google sign-in.
+- The onboarding form still calls the same invitation-acceptance API, displays backend errors with request IDs, creates no client-owned enrolment state and proceeds to the readiness check only after acceptance.
+- Existing redirects remain authoritative: academic/content administrators enter `/admin`, already-enrolled students enter `/learn`, and unverified sessions return to `/login`.
+- Account switching uses the existing POST sign-out route. The live screens expose no unsupported track picker, XP, streak, league, badge or starter-pack claims.
+- Missing Supabase configuration has a dedicated unavailable state instead of an active sign-in control.
+- The rollout flag restores the established login and onboarding views without changing cookies, identities or enrolments.
+- Validation passes 54 web tests, ESLint, TypeScript and the production Next.js build. Authenticated Playwright remains environment-gated by `E2E_DATABASE_URL`.
+- The next B4 slice is diagnostic visual integration, followed by administrator surfaces and final responsive/accessibility acceptance.
 
 ## What can be wired now
 
 | Area                 | Existing source of truth                                            | B4 work                                                                                                   |
 | -------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Landing and sign-in  | Supabase server actions and `/login` errors                         | Replace visuals while preserving callback/session behavior                                                |
-| Onboarding           | Invitation-bound profile/enrolment API                              | Bind the kit form to the existing action; do not add a client-owned track decision                        |
+| Landing and sign-in  | Supabase server actions and `/login` errors                         | Integrated in B4.4 with safe error and destination handling                                               |
+| Onboarding           | Invitation-bound profile/enrolment API                              | Integrated in B4.4 without a client-owned track decision                                                   |
 | Dashboard/course map | Learning-home, course-map and progress APIs                         | Use the supplied adapters and replace sample player/game data with absent states                          |
 | Lesson               | Versioned lesson response and section progress                      | Render real `MathContent`, material states and progress through kit slots/wrappers                        |
 | Guided practice      | Existing practice player, deterministic checking, hints and Give up | Keep the state machine and render kit screens for each server state                                       |

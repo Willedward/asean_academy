@@ -4,8 +4,12 @@ import { CircleAlert, LoaderCircle, TicketCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
+import { LiveOnboardingFormView } from "@/beta-kit/live/live-entry";
 import { Button } from "@/components/ui/button";
-import { acceptBetaInvitation, type InvitationAcceptanceResponse } from "@/lib/api/identity";
+import {
+  acceptBetaInvitation,
+  type InvitationAcceptanceResponse,
+} from "@/lib/api/identity";
 import { ApiRequestError } from "@/lib/api/errors";
 
 type Props = {
@@ -15,12 +19,14 @@ type Props = {
     invitationCode: string,
     displayName: string,
   ) => Promise<InvitationAcceptanceResponse>;
+  appearance?: "established" | "nextscholar";
 };
 
 export function OnboardingForm({
   email,
   initialCode = "",
   acceptInvitation = acceptBetaInvitation,
+  appearance = "established",
 }: Props) {
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
@@ -37,9 +43,10 @@ export function OnboardingForm({
       router.replace("/diagnostics");
       router.refresh();
     } catch (caught) {
-      const suffix = caught instanceof ApiRequestError && caught.requestId
-        ? ` Request ID: ${caught.requestId}`
-        : "";
+      const suffix =
+        caught instanceof ApiRequestError && caught.requestId
+          ? ` Request ID: ${caught.requestId}`
+          : "";
       setError(
         `${caught instanceof Error ? caught.message : "The invitation could not be accepted."}${suffix}`,
       );
@@ -47,10 +54,29 @@ export function OnboardingForm({
     }
   }
 
+  if (appearance === "nextscholar") {
+    return (
+      <LiveOnboardingFormView
+        email={email}
+        displayName={displayName}
+        invitationCode={invitationCode}
+        codeFromLink={Boolean(initialCode)}
+        submitting={submitting}
+        error={error}
+        onDisplayNameChange={setDisplayName}
+        onInvitationCodeChange={setInvitationCode}
+        onSubmit={(event) => void submit(event)}
+      />
+    );
+  }
+
   return (
     <form className="space-y-5" onSubmit={(event) => void submit(event)}>
       <div>
-        <label className="mb-2 block text-sm font-bold text-slate-800" htmlFor="student-email">
+        <label
+          className="mb-2 block text-sm font-bold text-slate-800"
+          htmlFor="student-email"
+        >
           Signed-in email
         </label>
         <input
@@ -65,7 +91,10 @@ export function OnboardingForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-bold text-slate-800" htmlFor="display-name">
+        <label
+          className="mb-2 block text-sm font-bold text-slate-800"
+          htmlFor="display-name"
+        >
           Name shown in the academy
         </label>
         <input
@@ -82,7 +111,10 @@ export function OnboardingForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-bold text-slate-800" htmlFor="invitation-code">
+        <label
+          className="mb-2 block text-sm font-bold text-slate-800"
+          htmlFor="invitation-code"
+        >
           Beta invitation code
         </label>
         <input
@@ -101,7 +133,10 @@ export function OnboardingForm({
       </div>
 
       {error ? (
-        <div className="flex gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-900" role="alert">
+        <div
+          className="flex gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-900"
+          role="alert"
+        >
           <CircleAlert aria-hidden="true" className="size-5 shrink-0" />
           <span>{error}</span>
         </div>
@@ -109,9 +144,18 @@ export function OnboardingForm({
 
       <Button className="w-full py-3" disabled={submitting} type="submit">
         {submitting ? (
-          <><LoaderCircle aria-hidden="true" className="mr-2 size-4 animate-spin" />Checking invitation…</>
+          <>
+            <LoaderCircle
+              aria-hidden="true"
+              className="mr-2 size-4 animate-spin"
+            />
+            Checking invitation…
+          </>
         ) : (
-          <><TicketCheck aria-hidden="true" className="mr-2 size-4" />Join the beta course</>
+          <>
+            <TicketCheck aria-hidden="true" className="mr-2 size-4" />
+            Join the beta course
+          </>
         )}
       </Button>
     </form>
