@@ -2,7 +2,7 @@ import {
   CoreCourseMapScreen,
   CoreLearningError,
 } from "@/beta-kit/live/core-learning-screens";
-import type { CoreLearner } from "@/beta-kit/live/core-learning-shell";
+import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CourseMapPanel } from "@/components/course-map-panel";
 import { LearnerHeader } from "@/components/learner-header";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
@@ -25,19 +25,6 @@ function EstablishedCoursePage({ courseKey }: { courseKey: string }) {
   );
 }
 
-function coreLearner(
-  profile: NonNullable<
-    Awaited<ReturnType<typeof requireEnrolledLearner>>
-  >["profile"],
-): CoreLearner {
-  return {
-    displayName:
-      profile.display_name?.trim() || profile.email.split("@")[0] || "Student",
-    email: profile.email,
-    targetTrack: profile.target_track?.trim() || "G3 Mathematics",
-  };
-}
-
 export default async function CoursePage({
   params,
 }: PageProps<"/courses/[courseKey]">) {
@@ -50,7 +37,7 @@ export default async function CoursePage({
   if (!learner || !session)
     return <EstablishedCoursePage courseKey={courseKey} />;
 
-  const presentationLearner = coreLearner(learner.profile);
+  const presentationLearner = coreLearnerFromProfile(learner.profile);
   const courseHref = `/courses/${courseKey}`;
   const result = await Promise.all([
     getServerCourseMap(session, courseKey),

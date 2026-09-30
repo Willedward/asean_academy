@@ -30,6 +30,18 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - Route loading states, mobile navigation and desktop navigation are included. Unsupported gamification remains absent.
 - The next B4 slice is lesson and guided-practice visual integration while preserving their existing server-owned state machines.
 
+## B4.2 lesson and guided-practice integration (30 September 2026)
+
+- `/lessons/[lessonKey]` now uses the final responsive shell and component tokens while preserving lesson-start recording, section completion and deterministic active-recall checks.
+- Real lesson notes, KaTeX content, objectives, development status and empty video/material placeholders are shown without invented teaching content.
+- Starting guided practice still creates the server-owned session with the reviewed question count and follows the returned session ID.
+- `/practice/[sessionId]` retains the existing API state machine for selection, multipart typed answers, marking, Hint 1/Hint 2 sequencing, retry, Give up, worked solution, completion and question reporting.
+- Checkpoint mode suppresses hints and solutions in the shared live view; the dedicated checkpoint route remains on the technical shell until the next route-integration slice.
+- The live views do not display sample XP, stars, streak, quest or league values.
+- The same server-only B4 rollout flag restores the established lesson and practice screens immediately.
+- Validation now passes 45 web tests, ESLint, TypeScript and the production Next.js build.
+- The next B4 slice is checkpoint/retry/progress visual integration, followed by public authentication/onboarding and administrator surfaces.
+
 ## What can be wired now
 
 | Area | Existing source of truth | B4 work |

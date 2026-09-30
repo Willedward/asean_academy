@@ -162,12 +162,14 @@ export function CoreLearningShell({
   courseHref,
   children,
   maxWidth = 1080,
+  focus = false,
 }: {
   active: CoreNavKey;
   learner: CoreLearner;
   courseHref: string;
   children: ReactNode;
   maxWidth?: number;
+  focus?: boolean;
 }) {
   return (
     <div className="ns-root relative min-h-dvh bg-ns-surface font-ns text-ns-ink lg:flex">
@@ -192,7 +194,12 @@ export function CoreLearningShell({
             <Avatar initials={initials(learner.displayName)} size={36} />
           </div>
         </header>
-        <main className="flex grow justify-center px-4 pt-5 pb-28 lg:px-14 lg:pt-10 lg:pb-16">
+        <main
+          className={cn(
+            "flex grow justify-center px-4 pt-5 lg:px-14 lg:pt-10 lg:pb-16",
+            focus ? "pb-10" : "pb-28",
+          )}
+        >
           <div
             className="flex w-full flex-col gap-4 lg:gap-6"
             style={{ maxWidth }}
@@ -201,7 +208,9 @@ export function CoreLearningShell({
           </div>
         </main>
       </div>
-      <Navigation active={active} courseHref={courseHref} mobile />
+      {focus ? null : (
+        <Navigation active={active} courseHref={courseHref} mobile />
+      )}
     </div>
   );
 }

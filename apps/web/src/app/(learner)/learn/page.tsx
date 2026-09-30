@@ -5,7 +5,7 @@ import {
   CoreLearningDashboard,
   CoreLearningError,
 } from "@/beta-kit/live/core-learning-screens";
-import type { CoreLearner } from "@/beta-kit/live/core-learning-shell";
+import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { getVerifiedSession } from "@/lib/auth/session";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
@@ -27,19 +27,6 @@ function EstablishedLearningPage() {
   );
 }
 
-function coreLearner(
-  profile: NonNullable<
-    Awaited<ReturnType<typeof requireEnrolledLearner>>
-  >["profile"],
-): CoreLearner {
-  return {
-    displayName:
-      profile.display_name?.trim() || profile.email.split("@")[0] || "Student",
-    email: profile.email,
-    targetTrack: profile.target_track?.trim() || "G3 Mathematics",
-  };
-}
-
 export default async function LearnPage() {
   if (!betaLearningUiEnabled()) return <EstablishedLearningPage />;
 
@@ -52,7 +39,7 @@ export default async function LearnPage() {
   );
   if (!activeEnrolment) return <EstablishedLearningPage />;
 
-  const presentationLearner = coreLearner(learner.profile);
+  const presentationLearner = coreLearnerFromProfile(learner.profile);
   const courseHref = `/courses/${activeEnrolment.course_key}`;
   const result = await Promise.all([
     getServerLearningHome(session),
