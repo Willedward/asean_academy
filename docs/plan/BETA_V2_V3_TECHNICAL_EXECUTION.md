@@ -328,6 +328,8 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 ### B5 — Content release and controlled pilot
 
+**Engineering status (30 September 2026): the fail-closed release-evidence gate, protected GitHub rehearsal, exact-SHA/content binding, diagnostic-isolation checks and controlled cohort phases are implemented. The current N1 source remains below the 19-topic/1,900-question/76-diagnostic threshold, six lesson notes remain empty, content is draft, and hosted/manual evidence has not passed. See [B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md).**
+
 The bulk authoring sequence and approximately 1,900–2,850-question target are defined in [QUESTION_BANK_SCALE_PLAN.md](QUESTION_BANK_SCALE_PLAN.md).
 
 - Review the existing N1 pilot, build the 19-topic bank, and create/review 76 matched diagnostic items.

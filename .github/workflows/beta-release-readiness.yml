@@ -1,0 +1,206 @@
+name: Beta release readiness
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact 40-character staging release SHA
+        required: true
+        type: string
+      phase:
+        description: Controlled rollout phase
+        required: true
+        type: choice
+        options:
+          - founder_alpha
+          - friendly_users
+          - beta_cohort
+      cohort_label:
+        description: Non-PII cohort label, for example founder-alpha-01
+        required: true
+        type: string
+      cohort_size:
+        description: Planned invited users for this phase
+        required: true
+        type: number
+      hosted_google_oauth:
+        description: Real private-window Google sign-in and callback passed
+        required: true
+        default: false
+        type: boolean
+      authenticated_e2e:
+        description: Authenticated diagnostic-to-endline staging journey passed
+        required: true
+        default: false
+        type: boolean
+      accessibility:
+        description: Keyboard, focus, contrast, screen-reader and mobile checks passed
+        required: true
+        default: false
+        type: boolean
+      incident_and_data_owners:
+        description: Primary and backup incident/data owners accepted the runbook
+        required: true
+        default: false
+        type: boolean
+      schema_content_freeze:
+        description: Schema and content freeze is active for this cohort
+        required: true
+        default: false
+        type: boolean
+      founder_release_signoff:
+        description: Founders approved this SHA, content revision and cohort label
+        required: true
+        default: false
+        type: boolean
+      rate_limit_rehearsed:
+        description: Authenticated staging rate-limit journey passed
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+
+concurrency:
+  group: beta-release-readiness
+  cancel-in-progress: false
+
+jobs:
+  evidence:
+    name: Prove controlled-pilot readiness
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: staging
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: asean_academy_restore
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d asean_academy_restore"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      SOURCE_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      RESTORE_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asean_academy_restore
+      STAGING_API_URL: ${{ vars.STAGING_API_URL }}
+      STAGING_WEB_URL: ${{ vars.STAGING_WEB_URL }}
+      STAGING_SUPABASE_URL: ${{ vars.STAGING_SUPABASE_URL }}
+      STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ vars.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
+      - name: Install PostgreSQL recovery tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+      - name: Validate protected staging inputs
+        run: |
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          test "${#RELEASE_SHA}" = 40
+          : "${DATABASE_URL:?Configure STAGING_DATABASE_URL in the staging environment.}"
+          : "${STAGING_API_URL:?Configure STAGING_API_URL.}"
+          : "${STAGING_WEB_URL:?Configure STAGING_WEB_URL.}"
+          : "${STAGING_SUPABASE_URL:?Configure STAGING_SUPABASE_URL.}"
+          : "${STAGING_SUPABASE_PUBLISHABLE_KEY:?Configure STAGING_SUPABASE_PUBLISHABLE_KEY.}"
+      - run: uv sync --project services/learning_api --locked
+      - name: Verify deployed SHA, auth gate and Google provider
+        id: deployment_smoke
+        continue-on-error: true
+        run: |
+          python3 scripts/smoke_deployment.py \
+            --api-url "$STAGING_API_URL" \
+            --web-url "$STAGING_WEB_URL" \
+            --expected-release "$RELEASE_SHA" \
+            --expected-environment preview \
+            --require-auth-gate \
+            --supabase-url "$STAGING_SUPABASE_URL" \
+            --supabase-publishable-key "$STAGING_SUPABASE_PUBLISHABLE_KEY" \
+            --attempts 6 \
+            --interval-seconds 10
+      - name: Run bounded staging load smoke
+        id: load_smoke
+        continue-on-error: true
+        run: |
+          python3 scripts/load_test_api.py \
+            --api-url "$STAGING_API_URL" \
+            --requests 200 \
+            --concurrency 20 \
+            --max-p95-ms 1500 \
+            --minimum-success-ratio 0.99 \
+            > beta-load-evidence.json
+      - name: Prove backup restoration into an empty isolated database
+        id: restore_drill
+        continue-on-error: true
+        run: |
+          uv run --project services/learning_api --locked \
+            python scripts/backup_restore_drill.py > beta-restore-evidence.json
+      - name: Generate fail-closed release evidence
+        id: release_gate
+        continue-on-error: true
+        env:
+          CONFIRM_HOSTED_GOOGLE_OAUTH: ${{ inputs.hosted_google_oauth }}
+          CONFIRM_AUTHENTICATED_E2E: ${{ inputs.authenticated_e2e }}
+          CONFIRM_ACCESSIBILITY: ${{ inputs.accessibility }}
+          CONFIRM_INCIDENT_AND_DATA_OWNERS: ${{ inputs.incident_and_data_owners }}
+          CONFIRM_SCHEMA_CONTENT_FREEZE: ${{ inputs.schema_content_freeze }}
+          CONFIRM_FOUNDER_RELEASE_SIGNOFF: ${{ inputs.founder_release_signoff }}
+          CONFIRM_RATE_LIMIT_REHEARSED: ${{ inputs.rate_limit_rehearsed }}
+        run: |
+          confirmations=()
+          if [[ "${{ steps.deployment_smoke.outcome }}" = success ]]; then confirmations+=(--confirm deployed_release_smoke); fi
+          if [[ "${{ steps.restore_drill.outcome }}" = success ]]; then confirmations+=(--confirm restore_drill); fi
+          if [[ "$CONFIRM_HOSTED_GOOGLE_OAUTH" = true ]]; then confirmations+=(--confirm hosted_google_oauth); fi
+          if [[ "$CONFIRM_AUTHENTICATED_E2E" = true ]]; then confirmations+=(--confirm authenticated_e2e); fi
+          if [[ "$CONFIRM_ACCESSIBILITY" = true ]]; then confirmations+=(--confirm accessibility); fi
+          if [[ "$CONFIRM_INCIDENT_AND_DATA_OWNERS" = true ]]; then confirmations+=(--confirm incident_and_data_owners); fi
+          if [[ "$CONFIRM_SCHEMA_CONTENT_FREEZE" = true ]]; then confirmations+=(--confirm schema_content_freeze); fi
+          if [[ "$CONFIRM_FOUNDER_RELEASE_SIGNOFF" = true ]]; then confirmations+=(--confirm founder_release_signoff); fi
+          if [[ "$CONFIRM_RATE_LIMIT_REHEARSED" = true && "${{ steps.load_smoke.outcome }}" = success ]]; then confirmations+=(--confirm rate_limit_and_load); fi
+          uv run --project services/learning_api --locked \
+            python services/learning_api/scripts/beta_release_gate.py \
+            --release-sha "$RELEASE_SHA" \
+            --phase "${{ inputs.phase }}" \
+            --cohort-label "${{ inputs.cohort_label }}" \
+            --cohort-size "${{ inputs.cohort_size }}" \
+            --attested-by "$GITHUB_ACTOR" \
+            --output-json beta-release-evidence.json \
+            --output-markdown beta-release-evidence.md \
+            "${confirmations[@]}"
+      - name: Upload immutable release evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: beta-release-${{ inputs.release_sha }}
+          if-no-files-found: error
+          retention-days: 90
+          path: |
+            beta-release-evidence.json
+            beta-release-evidence.md
+            beta-load-evidence.json
+            beta-restore-evidence.json
+      - name: Enforce release decision
+        if: >-
+          steps.deployment_smoke.outcome != 'success' ||
+          steps.load_smoke.outcome != 'success' ||
+          steps.restore_drill.outcome != 'success' ||
+          steps.release_gate.outcome != 'success'
+        run: |
+          cat beta-release-evidence.md
+          exit 1
