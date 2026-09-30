@@ -1,16 +1,26 @@
 # Mathematics question bank sources
 
-This directory contains version-controlled source JSON for reviewed mathematics questions. PostgreSQL is the production source of truth after validation and import.
+This directory contains version-controlled source JSON for original mathematics questions.
+PostgreSQL becomes the production source of truth only after validation, review, and import.
 
 ## Layout
 
 ```text
+authoring/house-rules-v1.json
 schema/question-v1.schema.json
-g3_math/secondary_1/n1/v1/blueprint.json
-g3_math/secondary_1/n1/v1/questions/*.json
-g3_math/secondary_1/n1/v1/assets/*.{svg,png,webp}
+schema/question-batch-manifest-v1.schema.json
+schema/question-house-rules-v1.schema.json
+g3_math/<school_level>/<topic>/v1/
+  blueprint.json
+  batches/<batch-id>.json
+  questions/<stable-key>.json
+  assets/*.{svg,png,webp}
 ```
 
-Each question file follows `question-v1.schema.json`. The blueprint fixes the bank size, difficulty mix, syllabus coverage, and publication checks. Binary or SVG assets are uploaded to object storage during import; their metadata and checksums are stored in PostgreSQL.
+Every question follows `question-v1.schema.json`. A blueprint fixes bank size, five-level
+difficulty distribution, syllabus coverage, and publication checks. A batch manifest allocates
+20–30 questions and records generator, prompt, sources, checksums, and review state.
 
-Question files must contain original questions. Sample examination papers are style and mark-allocation references and must not be copied verbatim.
+Binary or SVG assets are uploaded to object storage during import; their metadata and checksums
+are stored in PostgreSQL. Questions must be original. Sample examination papers are style,
+difficulty, and mark-allocation references and must not be copied verbatim.

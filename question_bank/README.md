@@ -75,3 +75,25 @@ Apply migrations `202609200001` through `202609200003` before importing. Import 
 bank first because course pools reference stable question identities. Imports are transactional.
 Existing question, course, and lesson revisions are immutable: changed content requires an
 incremented `revision`; review-state promotion may retain the same revision.
+
+## Controlled bulk authoring
+
+The bulk authoring workflow is model-independent. It creates all missing topic blueprints,
+allocates unfinished banks into reviewable batches, validates provenance and generated content,
+scans every bank for prompt duplicates, and exports reviewer packets:
+
+```bash
+uv run --project question_bank question-bank authoring-schema
+uv run --project question_bank question-bank authoring-blueprints
+uv run --project question_bank question-bank authoring-plan
+uv run --project question_bank question-bank authoring-validate
+```
+
+A planned manifest contains an exact outcome/difficulty allocation of 20–30 questions and reserves every stable question key. Before
+questions are added, claim the manifest by replacing its `unassigned` generator fields with the
+actual provider/model, generator version, and prompt version. Add all stable question keys and
+change its status to `draft`; validation then executes every canonical and accepted answer and
+checks the batch distribution and assets.
+
+See [`docs/plan/BULK_QUESTION_AUTHORING_PIPELINE.md`](../docs/plan/BULK_QUESTION_AUTHORING_PIPELINE.md)
+for the lifecycle, repository layout, reviewer export command, and parallel Codex workflow.

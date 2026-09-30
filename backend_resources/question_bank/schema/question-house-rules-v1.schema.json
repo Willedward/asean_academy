@@ -1,0 +1,81 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "version_key": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Version Key",
+      "type": "string"
+    },
+    "locale": {
+      "minLength": 1,
+      "title": "Locale",
+      "type": "string"
+    },
+    "language_variant": {
+      "minLength": 1,
+      "title": "Language Variant",
+      "type": "string"
+    },
+    "measurement_system": {
+      "const": "metric",
+      "default": "metric",
+      "title": "Measurement System",
+      "type": "string"
+    },
+    "currency": {
+      "minLength": 1,
+      "title": "Currency",
+      "type": "string"
+    },
+    "exact_answers_by_default": {
+      "default": true,
+      "title": "Exact Answers By Default",
+      "type": "boolean"
+    },
+    "rounding_must_be_explicit": {
+      "default": true,
+      "title": "Rounding Must Be Explicit",
+      "type": "boolean"
+    },
+    "calculator_permission_per_question": {
+      "default": true,
+      "title": "Calculator Permission Per Question",
+      "type": "boolean"
+    },
+    "error_carried_forward": {
+      "default": false,
+      "title": "Error Carried Forward",
+      "type": "boolean"
+    },
+    "prohibited_contexts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prohibited Contexts",
+      "type": "array"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "version_key",
+    "locale",
+    "language_variant",
+    "currency",
+    "prohibited_contexts",
+    "notes"
+  ],
+  "title": "HouseRules",
+  "type": "object"
+}

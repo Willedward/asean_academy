@@ -6,13 +6,17 @@ from question_bank.models import Question
 from question_bank.validation import validate_bank
 
 
-def test_complete_question_bank_is_a_valid_draft(bank_root):
+def test_authored_n1_pilot_is_a_valid_partial_draft(bank_root):
     report = validate_bank(bank_root)
 
     assert report.valid
     assert len(report.questions) == 40
     assert {question.difficulty for question in report.questions} == {1, 2, 3}
-    assert not report.issues
+    assert not report.errors
+    assert {issue.code for issue in report.warnings} == {
+        "difficulty_distribution",
+        "outcome_distribution",
+    }
 
 
 def test_unreviewed_draft_cannot_be_published(bank_root):
@@ -46,10 +50,10 @@ def test_blueprint_totals_remain_consistent(bank_root):
     }
 
     assert totals == blueprint["difficulty_distribution"] == {
-        "1": 15,
-        "2": 15,
-        "3": 10,
-        "4": 0,
-        "5": 0,
+        "1": 21,
+        "2": 31,
+        "3": 31,
+        "4": 16,
+        "5": 5,
     }
-    assert sum(row["total"] for row in blueprint["outcome_distribution"]) == 40
+    assert sum(row["total"] for row in blueprint["outcome_distribution"]) == 104

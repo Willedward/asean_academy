@@ -5,6 +5,13 @@ import json
 import os
 from pathlib import Path
 
+from .authoring import (
+    export_reviewer_batch,
+    plan_all_batches,
+    validate_authoring_pipeline,
+    write_authoring_schemas,
+    write_missing_blueprints,
+)
 from .catalogue import write_schemas as write_catalogue_schemas
 from .catalogue_repository import CatalogueImporter
 from .course_preview import serve_course
@@ -30,6 +37,10 @@ DEFAULT_SYLLABUS = REPOSITORY_ROOT / "backend_resources/syllabi/g3_math/v1/catal
 DEFAULT_COURSE_REGISTRY = (
     REPOSITORY_ROOT / "backend_resources/courses/g3_math/v1/registry.json"
 )
+DEFAULT_HOUSE_RULES = (
+    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v1.json"
+)
+DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/schema"
 
 
 def parser():
@@ -133,11 +144,87 @@ def parser():
     catalogue_importer.add_argument(
         "--publish", action="store_true", help="Require publication validation"
     )
+    authoring_blueprints = commands.add_parser(
+        "authoring-blueprints",
+        help="Create missing 104-question blueprints for all syllabus topic groups",
+    )
+    authoring_blueprints.add_argument(
+        "banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE
+    )
+    authoring_blueprints.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_blueprints.add_argument("--question-count", type=int, default=104)
+    authoring_plan = commands.add_parser(
+        "authoring-plan",
+        help="Create controlled 20–30-question batch manifests for incomplete banks",
+    )
+    authoring_plan.add_argument("banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE)
+    authoring_plan.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_plan.add_argument("--house-rules", type=Path, default=DEFAULT_HOUSE_RULES)
+    authoring_plan.add_argument("--batch-size", type=int, default=26)
+    authoring_validate = commands.add_parser(
+        "authoring-validate",
+        help="Validate blueprints, manifests, answers, assets, and cross-bank duplicates",
+    )
+    authoring_validate.add_argument(
+        "banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE
+    )
+    authoring_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_validate.add_argument("--near-duplicate-threshold", type=float, default=0.82)
+    authoring_export = commands.add_parser(
+        "authoring-export", help="Export one authored batch for mathematics and editorial review"
+    )
+    authoring_export.add_argument("manifest", type=Path)
+    authoring_export.add_argument("output", type=Path)
+    authoring_export.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_schema = commands.add_parser(
+        "authoring-schema", help="Generate batch-manifest and house-rule JSON Schemas"
+    )
+    authoring_schema.add_argument(
+        "output", type=Path, nargs="?", default=DEFAULT_AUTHORING_SCHEMA
+    )
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "authoring-blueprints":
+        result = write_missing_blueprints(
+            args.syllabus, args.banks, question_count=args.question_count
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-plan":
+        result = plan_all_batches(
+            args.banks,
+            REPOSITORY_ROOT,
+            args.syllabus,
+            args.house_rules,
+            preferred_batch_size=args.batch_size,
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-validate":
+        report = validate_authoring_pipeline(
+            args.banks,
+            args.syllabus,
+            repository_root=REPOSITORY_ROOT,
+            near_duplicate_threshold=args.near_duplicate_threshold,
+        )
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0 if report.valid else 1
+    if args.command == "authoring-export":
+        result = export_reviewer_batch(
+            args.manifest,
+            args.output,
+            repository_root=REPOSITORY_ROOT,
+            syllabus_path=args.syllabus,
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-schema":
+        write_authoring_schemas(args.output)
+        print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
+        return 0
     if args.command == "course-registry-validate":
         report = validate_course_registry(args.registry, args.syllabus)
         print(json.dumps(report.as_dict(), indent=2))

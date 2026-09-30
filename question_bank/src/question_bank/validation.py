@@ -84,10 +84,15 @@ class CatalogueValidationReport:
         expected_topic_groups = (
             self.syllabus.expected_topic_group_count if self.syllabus else 0
         )
-        authored = {
+        blueprinted = {
             (bank.blueprint.school_level, bank.blueprint.topic.code)
             for bank in self.banks
             if bank.blueprint is not None
+        }
+        authored = {
+            (bank.blueprint.school_level, bank.blueprint.topic.code)
+            for bank in self.banks
+            if bank.blueprint is not None and bank.questions
         }
         return {
             "valid": self.valid,
@@ -101,6 +106,7 @@ class CatalogueValidationReport:
                 0, expected_topic_groups - known_topic_groups
             ),
             "bank_count": len(self.banks),
+            "blueprinted_topic_level_count": len(blueprinted),
             "authored_topic_level_count": len(authored),
             "question_count": len(self.questions),
             "error_count": len(self.errors),
@@ -306,23 +312,24 @@ def validate_bank(
         if question.primary_outcome in outcome:
             outcome[question.primary_outcome] += 1
 
-    _compare_distribution(
-        report,
-        difficulty,
-        blueprint.difficulty_distribution,
-        blueprint_path,
-        "difficulty_distribution",
-        publish,
-    )
-    expected_outcomes = {row.code: row.total for row in blueprint.outcome_distribution}
-    _compare_distribution(
-        report,
-        outcome,
-        expected_outcomes,
-        blueprint_path,
-        "outcome_distribution",
-        publish,
-    )
+    if report.questions or publish:
+        _compare_distribution(
+            report,
+            difficulty,
+            blueprint.difficulty_distribution,
+            blueprint_path,
+            "difficulty_distribution",
+            publish,
+        )
+        expected_outcomes = {row.code: row.total for row in blueprint.outcome_distribution}
+        _compare_distribution(
+            report,
+            outcome,
+            expected_outcomes,
+            blueprint_path,
+            "outcome_distribution",
+            publish,
+        )
     if publish:
         if blueprint.status not in {"reviewed", "published"}:
             _issue(

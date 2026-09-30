@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "BatchAllocation": {
+      "additionalProperties": false,
+      "properties": {
+        "outcome_code": {
+          "pattern": "^[0-9]+\\.[0-9]+$",
+          "title": "Outcome Code",
+          "type": "string"
+        },
+        "difficulty": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Difficulty",
+          "type": "integer"
+        },
+        "count": {
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "outcome_code",
+        "difficulty",
+        "count"
+      ],
+      "title": "BatchAllocation",
+      "type": "object"
+    },
+    "GeneratorMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "generator_version": {
+          "minLength": 1,
+          "title": "Generator Version",
+          "type": "string"
+        },
+        "prompt_version": {
+          "minLength": 1,
+          "title": "Prompt Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "generator_version",
+        "prompt_version"
+      ],
+      "title": "GeneratorMetadata",
+      "type": "object"
+    },
+    "ReviewState": {
+      "additionalProperties": false,
+      "properties": {
+        "mathematics": {
+          "default": "pending",
+          "enum": [
+            "pending",
+            "approved",
+            "changes_requested"
+          ],
+          "title": "Mathematics",
+          "type": "string"
+        },
+        "editorial": {
+          "default": "pending",
+          "enum": [
+            "pending",
+            "approved",
+            "changes_requested"
+          ],
+          "title": "Editorial",
+          "type": "string"
+        }
+      },
+      "title": "ReviewState",
+      "type": "object"
+    },
+    "SourceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "syllabus",
+            "style",
+            "house_rules",
+            "other"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "role"
+      ],
+      "title": "SourceReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "batch_id": {
+      "pattern": "^g3-sec[12]-[ngs][0-9]+-b[0-9]{3}$",
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "bank_key": {
+      "pattern": "^g3-sec[12]-[ngs][0-9]+-v[0-9]+$",
+      "title": "Bank Key",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "school_level": {
+      "enum": [
+        "secondary_1",
+        "secondary_2"
+      ],
+      "title": "School Level",
+      "type": "string"
+    },
+    "topic_code": {
+      "pattern": "^[NGS][0-9]+$",
+      "title": "Topic Code",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "draft",
+        "ready_for_review",
+        "changes_requested",
+        "approved"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "generator": {
+      "$ref": "#/$defs/GeneratorMetadata"
+    },
+    "source_references": {
+      "items": {
+        "$ref": "#/$defs/SourceReference"
+      },
+      "minItems": 1,
+      "title": "Source References",
+      "type": "array"
+    },
+    "allocation": {
+      "items": {
+        "$ref": "#/$defs/BatchAllocation"
+      },
+      "minItems": 1,
+      "title": "Allocation",
+      "type": "array"
+    },
+    "expected_question_count": {
+      "maximum": 30,
+      "minimum": 20,
+      "title": "Expected Question Count",
+      "type": "integer"
+    },
+    "question_keys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Question Keys",
+      "type": "array"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewState"
+    }
+  },
+  "required": [
+    "batch_id",
+    "bank_key",
+    "curriculum_version",
+    "school_level",
+    "topic_code",
+    "status",
+    "created_at",
+    "generator",
+    "source_references",
+    "allocation",
+    "expected_question_count"
+  ],
+  "title": "QuestionBatchManifest",
+  "type": "object"
+}

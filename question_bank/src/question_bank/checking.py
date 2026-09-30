@@ -127,6 +127,8 @@ def _check_numeric(spec: NumericResponse, answer: str) -> bool:
 
 
 def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
+    if spec.comparison_mode == "symbolic_equivalence" and answer.strip() == spec.canonical_expression.strip():
+        return True
     if answer.strip() in spec.accepted_equivalents:
         return True
     if spec.comparison_mode == "prime_factorisation":
