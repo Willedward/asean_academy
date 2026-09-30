@@ -2,6 +2,8 @@ import { useId } from "react";
 
 import type { Mood, Outfit, Pose } from "../types";
 
+import styles from "./hornbill.module.css";
+
 const T = "#0F3D40";
 const T2 = "#1B5357";
 const A = "#C87A1E";
@@ -143,6 +145,8 @@ export interface HornbillProps {
   crop?: "body" | "head";
   /** Accessible name. Leave empty when the bird is decoration. */
   label?: string;
+  /** Disable motion for static exports. User reduced-motion preferences always win. */
+  animated?: boolean;
   className?: string;
 }
 
@@ -155,36 +159,70 @@ export function Hornbill({
   branch,
   crop = "body",
   label,
+  animated = true,
   className,
 }: HornbillProps) {
   const titleId = useId();
   const showBranch = branch ?? crop === "body";
   const view = crop === "head" ? "72 10 120 120" : "0 0 200 200";
+  const classes = [
+    styles.mascot,
+    animated ? styles.animated : null,
+    styles[mood],
+    styles[pose],
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
   return (
     <svg
       viewBox={view}
       width={size}
       height={size}
-      className={className}
+      className={classes}
       style={{ display: "block", flexShrink: 0, overflow: crop === "head" ? "hidden" : "visible" }}
       role={label ? "img" : undefined}
       aria-labelledby={label ? titleId : undefined}
       aria-hidden={label ? undefined : true}
+      data-animation={animated ? "idle" : "off"}
+      data-mood={mood}
+      data-pose={pose}
     >
       {label ? <title id={titleId}>{label}</title> : null}
-      <path d="M72 150 L56 196 L78 196 L88 152 Z" fill={T2} />
-      <path d="M58 188 L80 188" stroke={C} strokeWidth={5} />
-      <ellipse cx={90} cy={118} rx={36} ry={44} fill={T} />
-      <ellipse cx={102} cy={128} rx={20} ry={28} fill={C} />
-      <Wing pose={pose} />
+      <g className={styles.tail} data-mascot-part="tail">
+        <path d="M72 150 L56 196 L78 196 L88 152 Z" fill={T2} />
+        <path d="M58 188 L80 188" stroke={C} strokeWidth={5} />
+      </g>
+      <g className={styles.body} data-mascot-part="body">
+        <ellipse cx={90} cy={118} rx={36} ry={44} fill={T} />
+        <ellipse cx={102} cy={128} rx={20} ry={28} fill={C} />
+      </g>
+      <g className={styles.wing} data-mascot-part="wing">
+        <Wing pose={pose} />
+      </g>
       {showBranch ? <path d="M28 166 L176 166" stroke={A} strokeWidth={7} strokeLinecap="round" /> : null}
-      <path d="M94 158 L90 168 M106 158 L108 168" stroke={D} strokeWidth={5} strokeLinecap="round" />
-      <circle cx={106} cy={64} r={27} fill={T} />
-      <path d="M126 58 Q166 60 186 100 Q166 86 128 84 Z" fill={A} />
-      <path d="M122 46 Q156 34 176 68 Q156 54 124 60 Z" fill={AL} />
-      <path d="M130 84 Q146 88 160 94" stroke={D} strokeWidth={2} fill="none" opacity={0.3} />
-      <Eyes mood={mood} />
-      {outfit ? <Accessory outfit={outfit} /> : null}
+      <g className={styles.feet} data-mascot-part="feet">
+        <path d="M94 158 L90 168 M106 158 L108 168" stroke={D} strokeWidth={5} strokeLinecap="round" />
+      </g>
+      <g className={styles.head} data-mascot-part="head">
+        <circle cx={106} cy={64} r={27} fill={T} />
+        <path
+          className={styles.lowerBeak}
+          d="M126 58 Q166 60 186 100 Q166 86 128 84 Z"
+          fill={A}
+          data-mascot-part="beak"
+        />
+        <path d="M122 46 Q156 34 176 68 Q156 54 124 60 Z" fill={AL} />
+        <path d="M130 84 Q146 88 160 94" stroke={D} strokeWidth={2} fill="none" opacity={0.3} />
+        <g className={styles.eyes} data-mascot-part="eyes">
+          <Eyes mood={mood} />
+        </g>
+        {outfit ? (
+          <g className={styles.accessory} data-mascot-part="accessory">
+            <Accessory outfit={outfit} />
+          </g>
+        ) : null}
+      </g>
     </svg>
   );
 }
