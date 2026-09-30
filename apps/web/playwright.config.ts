@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const databaseUrl = process.env.E2E_DATABASE_URL;
-if (!databaseUrl) throw new Error("Set E2E_DATABASE_URL to a prepared disposable database.");
+if (!databaseUrl)
+  throw new Error("Set E2E_DATABASE_URL to a prepared disposable database.");
 
 export const e2eSecret = "asean-academy-local-e2e-secret-2026-only";
 
@@ -23,7 +24,8 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: [
     {
-      command: "uv run --project ../../services/learning_api --locked uvicorn learning_api.main:app --host 127.0.0.1 --port 8100",
+      command:
+        "uv run --project ../../services/learning_api --locked uvicorn learning_api.main:app --host 127.0.0.1 --port 8100",
       port: 8100,
       reuseExistingServer: false,
       timeout: 60_000,
@@ -43,9 +45,11 @@ export default defineConfig({
       reuseExistingServer: false,
       timeout: 60_000,
       env: {
+        ASEAN_ACADEMY_BETA_LEARNING_UI: "true",
         ASEAN_ACADEMY_E2E_AUTH_SECRET: e2eSecret,
         ASEAN_ACADEMY_ENV: "test",
         LEARNING_API_URL: "http://127.0.0.1:8100",
+        NEXT_DIST_DIR: ".next-e2e",
         NEXT_PUBLIC_USE_API_FIXTURES: "false",
       },
     },

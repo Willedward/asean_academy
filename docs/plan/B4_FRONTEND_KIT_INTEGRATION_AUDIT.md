@@ -8,7 +8,7 @@
 
 The frontend kit is valid React/Next.js code and can be used as the visual implementation for B4. It was additive: no existing page, API client, authentication flow or backend file was overwritten. The actual frontend commit was cherry-picked onto B3 because the source branch was based on older history containing a duplicate roadmap commit.
 
-The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4.1 through B4.5 now connect the public entry, authentication, onboarding, learning home, course map, lesson, practice, retry, checkpoint, progress and diagnostic journeys to live authenticated APIs. These routes deliberately omit sample-only XP, league, quests, streaks and rewards. The administrator routes still use the earlier technical UI until their B4 integration step is completed.
+The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4.1 through B4.7 connect the public entry, authentication, onboarding, readiness, learning home, course map, lesson, practice, retry, checkpoint, progress and administrator journeys to live authenticated APIs. These routes deliberately omit sample-only XP, league, quests, streaks and rewards. The established visual shells remain available through the server-only rollout flag.
 
 ## Verified behavior
 
@@ -92,6 +92,19 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - Validation passes 61 web tests, ESLint, strict TypeScript and the production Next.js build across all 152 generated pages.
 - Authenticated Playwright and screenshots at 390, 768 and 1440 pixels remain environment-gated acceptance work. This is the next B4 slice.
 
+## B4.7 authenticated responsive acceptance (30 September 2026)
+
+- The serial Chromium suite now follows the current onboarding contract through the readiness `content_pending` state before entering the learning path.
+- The learner journey verifies invitation rejection/acceptance, lesson progress, guided-practice feedback, Hint 1/Hint 2, Give up, worked solutions, question reporting, persistence after re-authentication and isolation between two learners.
+- The question report is carried through the real API and PostgreSQL repositories. A content administrator starts review and records the learner-visible resolution through the B4.6 inline form.
+- Content administrators can inspect learner evidence but do not receive the academic-only deletion control or users/system navigation. Direct access to users/roles redirects to the administrator overview.
+- Academic administrators can access users/roles, content preview and the signed learner-deletion preview. The acceptance suite does not execute permanent deletion.
+- The administrator overview is checked at 390, 768 and 1440 pixels with no page-level horizontal overflow. The successful Playwright report contains a screenshot attachment for each width plus the content-administrator phone menu.
+- Mobile administrator navigation moves focus into the opened menu, closes with Escape and restores focus to its trigger. This behavior also has a component regression test.
+- The E2E Next.js server uses the ignored `.next-e2e` directory, so the suite can run while the developer's localhost server owns `.next`.
+- Validation passes 62 web tests, ESLint, strict TypeScript and four authenticated Chromium journeys against a fresh PostgreSQL 16 database. CI now uploads the HTML acceptance report on success and failure.
+- B4 automated acceptance is complete. Hosted Google OAuth, a real Supabase staging account, screen-reader/contrast spot checks and founder visual sign-off remain B5 release gates because they depend on the deployed environment and human review.
+
 ## What can be wired now
 
 | Area                 | Existing source of truth                                            | B4 work                                                                                                   |
@@ -123,7 +136,7 @@ These fields must never be calculated authoritatively in the browser. If selecte
 5. Integrate retry, checkpoint and question-report states already supported by B2.
 6. Integrate the diagnostic journey with the shared component system while keeping B1 session and scoring rules server-owned. Completed in B4.5.
 7. Integrate progress and administrator views with role-aware navigation and guarded operations. Completed through B4.3 and B4.6.
-8. Run authenticated E2E, keyboard/screen-reader checks and screenshots at 390, 768 and 1440 pixels before replacing the technical shell.
+8. Run authenticated E2E, keyboard checks and screenshots at 390, 768 and 1440 pixels before replacing the technical shell. Automated coverage completed in B4.7; hosted screen-reader/contrast spot checks remain a B5 release gate.
 
 ## Merge boundary
 

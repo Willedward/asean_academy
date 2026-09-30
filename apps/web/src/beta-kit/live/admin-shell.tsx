@@ -19,7 +19,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ComponentType, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType,
+  type ReactNode,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -178,6 +184,26 @@ export function AdminShell({
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    mobilePanelRef.current
+      ?.querySelector<HTMLElement>("a[href], button:not([disabled])")
+      ?.focus();
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      menuButtonRef.current?.focus();
+    }
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
     <div className="ns-root ns-admin-root min-h-dvh bg-ns-surface font-ns text-ns-ink lg:flex">
       <aside className="sticky top-0 hidden h-dvh w-[280px] shrink-0 flex-col border-r border-ns-line bg-ns-surface px-5 py-6 lg:flex">
@@ -207,6 +233,7 @@ export function AdminShell({
             </span>
             <Avatar initials={initials(identity.displayName)} size={34} />
             <button
+              aria-controls="admin-mobile-navigation"
               aria-expanded={open}
               aria-label={
                 open
@@ -218,6 +245,7 @@ export function AdminShell({
                 focusRing,
               )}
               onClick={() => setOpen((value) => !value)}
+              ref={menuButtonRef}
               type="button"
             >
               {open ? (
@@ -230,8 +258,19 @@ export function AdminShell({
         </header>
 
         {open ? (
-          <div className="fixed inset-0 top-16 z-20 bg-ns-dark/30 lg:hidden">
-            <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-ns-line bg-ns-raised p-4 shadow-ns-lg">
+          <div
+            className="fixed inset-0 top-16 z-20 bg-ns-dark/30 lg:hidden"
+            onClick={(event) => {
+              if (event.target !== event.currentTarget) return;
+              setOpen(false);
+              menuButtonRef.current?.focus();
+            }}
+          >
+            <div
+              className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-ns-line bg-ns-raised p-4 shadow-ns-lg"
+              id="admin-mobile-navigation"
+              ref={mobilePanelRef}
+            >
               <Navigation
                 identity={identity}
                 onNavigate={() => setOpen(false)}

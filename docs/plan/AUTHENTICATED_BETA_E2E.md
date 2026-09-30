@@ -21,7 +21,14 @@ The serial Chromium suite covers these beta-critical journeys:
 8. a second learner cannot see the first learner's progress;
 9. a content administrator cannot perform mathematics review or open academic-only user management;
 10. an academic administrator can open user management and safe student preview;
-11. safe preview disables answer entry and does not expose the worked solution.
+11. safe preview disables answer entry and does not expose the worked solution;
+12. a learner report reaches the administrator inbox and a content administrator records a learner-visible resolution;
+13. content and academic administrator navigation and protected controls follow database roles;
+14. the administrator shell has no page-level horizontal overflow at 390, 768 and 1440 pixels;
+15. mobile navigation is keyboard-operable, moves focus into the menu, closes with Escape and restores focus; and
+16. academic deletion is previewed through the signed backend workflow without executing permanent deletion.
+
+The Playwright report attaches administrator screenshots at all three widths and a content-administrator phone-menu screenshot.
 
 These are browser/API/database integration checks. Google account selection, the
 Supabase-hosted OAuth callback and provider consent screen remain a small hosted smoke
@@ -36,10 +43,10 @@ expiry. FastAPI checks its signature and every required claim.
 
 The route and verifier are available only when:
 
-~~~text
+```text
 ASEAN_ACADEMY_ENV=test
 ASEAN_ACADEMY_E2E_AUTH_SECRET=<at least 32 characters>
-~~~
+```
 
 The API refuses to start with that secret in development, preview or production. The
 web route returns 404 outside test mode. No production or preview deployment should
@@ -64,19 +71,18 @@ The **authenticated-e2e** job in **.github/workflows/ci.yml** starts PostgreSQL 
 installs locked Python and Node dependencies, applies every migration, imports questions
 and the course catalogue, seeds identities, installs Chromium, then runs:
 
-~~~bash
+```bash
 pnpm test:e2e
-~~~
+```
 
-Playwright starts the API on port 8100 and the web app on port 3100. It retains traces,
-screenshots and video on failure; CI uploads the HTML report for seven days.
+Playwright starts the API on port 8100 and the web app on port 3100. The web test server uses `.next-e2e`, so it can run alongside a developer server using `.next`. It retains traces, screenshots and video on failure, attaches responsive acceptance screenshots on success, and CI uploads the HTML report for seven days after every run.
 
 ## Local execution
 
 Use a disposable local PostgreSQL database whose name contains e2e. Never point these
 commands at the hosted beta project.
 
-~~~bash
+```bash
 export E2E_DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/asean_academy_e2e'
 
 DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
@@ -86,14 +92,14 @@ uv run --project services/learning_api --locked python services/learning_api/scr
 
 corepack pnpm --filter @asean-academy/web exec playwright install chromium
 corepack pnpm test:e2e
-~~~
+```
 
 The seed is intentionally one-shot. Recreate the disposable database before another
 complete run. Linux machines may also require Playwright system packages:
 
-~~~bash
+```bash
 corepack pnpm --filter @asean-academy/web exec playwright install-deps chromium
-~~~
+```
 
 ## Files
 

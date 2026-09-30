@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { AdminShell } from "./admin-shell";
@@ -58,5 +58,37 @@ describe("AdminShell", () => {
       screen.queryByRole("link", { name: "System status" }),
     ).not.toBeInTheDocument();
     expect(screen.getByText("Content administrator")).toBeInTheDocument();
+  });
+
+  it("opens the mobile navigation with focus and closes it with Escape", () => {
+    render(
+      <AdminShell
+        identity={{
+          displayName: "William",
+          email: "william@example.com",
+          role: "academic_admin",
+        }}
+      >
+        <h1>Learning overview</h1>
+      </AdminShell>,
+    );
+
+    const open = screen.getByRole("button", {
+      name: "Open administrator navigation",
+    });
+    fireEvent.click(open);
+
+    expect(
+      screen.getByRole("button", { name: "Close administrator navigation" }),
+    ).toHaveAttribute("aria-expanded", "true");
+    expect(
+      screen.getAllByRole("link", { name: "Overview" }).at(-1),
+    ).toHaveFocus();
+
+    fireEvent.keyDown(document, { key: "Escape" });
+
+    expect(
+      screen.getByRole("button", { name: "Open administrator navigation" }),
+    ).toHaveFocus();
   });
 });
