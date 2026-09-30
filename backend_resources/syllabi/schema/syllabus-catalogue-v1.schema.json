@@ -131,6 +131,11 @@
       "title": "Expected Topic Count",
       "type": "integer"
     },
+    "expected_topic_group_count": {
+      "minimum": 1,
+      "title": "Expected Topic Group Count",
+      "type": "integer"
+    },
     "topics": {
       "items": {
         "$ref": "#/$defs/SyllabusTopic"
@@ -148,6 +153,7 @@
     "status",
     "source_reference",
     "expected_topic_count",
+    "expected_topic_group_count",
     "topics"
   ],
   "title": "SyllabusCatalogue",

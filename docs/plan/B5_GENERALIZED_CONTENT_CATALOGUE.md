@@ -6,7 +6,7 @@ This milestone removes the N1-only constraints from the Git-authored question an
 
 ## Implemented contracts
 
-The canonical syllabus source is `backend_resources/syllabi/g3_math/v1/catalogue.json`. It currently contains the 13 topic groups and 87 outcomes that were supplied and confirmed in the repository. The catalogue records an expected total of 19 topics and remains `draft`; publication validation fails until the six missing topic definitions are supplied. No missing syllabus content was inferred.
+The canonical machine-readable syllabus source is `backend_resources/syllabi/g3_math/v1/catalogue.json`, with a permanent human-readable transcription in `docs/reference/G3_MATHEMATICS_SYLLABUS.md`. The supplied official pages confirm 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. The catalogue is complete and active. A topic taught at both Secondary One and Secondary Two counts as two groups for authoring and diagnostic coverage.
 
 Question identities now support any confirmed `N`, `G`, or `S` topic, both Secondary 1 and Secondary 2, and bank revisions such as `g3-sec2-g4-v1`. Stable question keys carry the topic and difficulty, while the validator checks those fields against the bank blueprint and syllabus catalogue. Calculator use may be either enabled or disabled.
 
@@ -24,14 +24,15 @@ uv run --project question_bank question-bank catalogue-validate --publish
 uv run --project question_bank question-bank catalogue-schema
 ```
 
-Draft validation currently succeeds with a warning and reports:
+Catalogue validation succeeds without warnings and reports:
 
-- 13 confirmed topic definitions out of 19 expected;
-- six unconfirmed topic definitions;
+- 13 of 13 unique topic definitions;
+- 19 of 19 level-specific topic groups;
+- 87 syllabus outcomes;
 - one authored topic-level bank;
 - 40 authored questions.
 
-Publication validation is deliberately blocked by the incomplete syllabus, draft bank/questions, and incomplete course content.
+Publication validation remains deliberately blocked by the draft bank/questions and incomplete course content.
 
 Once `DATABASE_URL` points to a migrated database, the catalogue-wide import is:
 
@@ -51,8 +52,8 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 6. For a learning unit, add its lesson files and one pool manifest. Course validation checks unit/topic/bank alignment, pool capacity, lesson outcomes and complete non-overlapping allocation.
 7. Import only after validation and human review pass. Published validation remains the release gate.
 
-## Remaining founder input and content work
+## Remaining content work
 
-Engineering can accept all 19 topics now, but the source of truth contains only 13. The team must supply the canonical codes, titles, strand ordering and Secondary 1/2 outcomes for the remaining six topics before the catalogue can become active. The team must then author and review the learning banks, the 76 isolated diagnostic items, lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The team must now author and review learning banks for all 19 level-specific topic groups, the 76 isolated diagnostic items, lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.

@@ -66,9 +66,9 @@ The pilot integration coverage proves refresh/resume, idempotent create/save, de
 
 Production activation needs:
 
-1. a versioned catalogue of all 19 topic groups and outcome codes;
+1. a versioned catalogue of all 19 level-specific topic groups and outcome codes;
 2. a generalized diagnostic bank/import contract rather than the N1-specific pilot naming;
-3. 38 baseline and 38 matched endline items, with two items per topic on each form;
+3. 38 baseline and 38 matched endline items, with two items per level-specific topic group on each form;
 4. comparable difficulty across forms without duplicated wording, values or solution paths;
 5. marks, two authored hint stages and fully worked solutions, even though help stays hidden in diagnostics;
 6. mathematics and editorial approval for every item and form;

@@ -11,8 +11,10 @@ def test_versioned_syllabus_records_confirmed_subset(repository_root):
     path = repository_root / "backend_resources/syllabi/g3_math/v1/catalogue.json"
     catalogue = load_catalogue(path)
 
-    assert len(catalogue.topics) == 13
-    assert catalogue.expected_topic_count == 19
+    assert catalogue.status == "active"
+    assert len(catalogue.topics) == catalogue.expected_topic_count == 13
+    assert catalogue.topic_group_count == catalogue.expected_topic_group_count == 19
+    assert sum(len(topic.outcomes) for topic in catalogue.topics) == 87
     assert catalogue.topic("N1").outcome_codes("secondary_1") == {
         "1.1",
         "1.2",
@@ -79,11 +81,11 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
 
     assert report.valid
     assert report.as_dict()["known_topic_count"] == 13
-    assert report.as_dict()["unconfirmed_topic_count"] == 6
+    assert report.as_dict()["unconfirmed_topic_count"] == 0
+    assert report.as_dict()["known_topic_group_count"] == 19
+    assert report.as_dict()["unconfirmed_topic_group_count"] == 0
     assert report.as_dict()["authored_topic_level_count"] == 1
-    assert {issue.code for issue in report.warnings} == {
-        "incomplete_syllabus_catalogue"
-    }
+    assert not report.warnings
 
     publish_report = validate_catalogue(
         repository_root / "backend_resources/question_bank/g3_math",
@@ -91,7 +93,10 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
         publish=True,
     )
     assert not publish_report.valid
-    assert "incomplete_syllabus_catalogue" in {
+    assert "incomplete_syllabus_catalogue" not in {
+        issue.code for issue in publish_report.errors
+    }
+    assert "bank_review_required" in {
         issue.code for issue in publish_report.errors
     }
 

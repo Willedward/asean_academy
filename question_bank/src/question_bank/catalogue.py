@@ -64,6 +64,7 @@ class SyllabusCatalogue(Model):
     status: ContentStatus
     source_reference: str = Field(min_length=1)
     expected_topic_count: int = Field(ge=1)
+    expected_topic_group_count: int = Field(ge=1)
     topics: list[SyllabusTopic] = Field(min_length=1)
 
     @model_validator(mode="after")
@@ -76,9 +77,33 @@ class SyllabusCatalogue(Model):
         positions = [topic.position for topic in self.topics]
         if positions != list(range(1, len(positions) + 1)):
             raise ValueError("Topic positions must be consecutive from 1")
-        if self.status == "active" and len(self.topics) != self.expected_topic_count:
-            raise ValueError("An active catalogue must contain every expected topic")
+        topic_groups = {
+            (topic.code, outcome.school_level)
+            for topic in self.topics
+            for outcome in topic.outcomes
+        }
+        if len(topic_groups) > self.expected_topic_group_count:
+            raise ValueError(
+                "Catalogue cannot contain more level-specific topic groups than expected"
+            )
+        if self.status == "active":
+            if len(self.topics) != self.expected_topic_count:
+                raise ValueError("An active catalogue must contain every expected topic")
+            if len(topic_groups) != self.expected_topic_group_count:
+                raise ValueError(
+                    "An active catalogue must contain every expected level-specific topic group"
+                )
         return self
+
+    @property
+    def topic_group_count(self) -> int:
+        return len(
+            {
+                (topic.code, outcome.school_level)
+                for topic in self.topics
+                for outcome in topic.outcomes
+            }
+        )
 
     def topic(self, code: str) -> SyllabusTopic | None:
         return next((topic for topic in self.topics if topic.code == code), None)

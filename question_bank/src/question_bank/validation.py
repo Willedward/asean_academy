@@ -79,6 +79,10 @@ class CatalogueValidationReport:
     def as_dict(self):
         known_topics = len(self.syllabus.topics) if self.syllabus else 0
         expected_topics = self.syllabus.expected_topic_count if self.syllabus else 0
+        known_topic_groups = self.syllabus.topic_group_count if self.syllabus else 0
+        expected_topic_groups = (
+            self.syllabus.expected_topic_group_count if self.syllabus else 0
+        )
         authored = {
             (bank.blueprint.school_level, bank.blueprint.topic.code)
             for bank in self.banks
@@ -90,6 +94,11 @@ class CatalogueValidationReport:
             "known_topic_count": known_topics,
             "expected_topic_count": expected_topics,
             "unconfirmed_topic_count": max(0, expected_topics - known_topics),
+            "known_topic_group_count": known_topic_groups,
+            "expected_topic_group_count": expected_topic_groups,
+            "unconfirmed_topic_group_count": max(
+                0, expected_topic_groups - known_topic_groups
+            ),
             "bank_count": len(self.banks),
             "authored_topic_level_count": len(authored),
             "question_count": len(self.questions),
@@ -421,13 +430,22 @@ def validate_catalogue(
             fingerprints[fingerprint] = question.stable_key
 
     syllabus = report.syllabus
-    missing_count = syllabus.expected_topic_count - len(syllabus.topics)
-    if missing_count:
+    missing_topics = syllabus.expected_topic_count - len(syllabus.topics)
+    missing_groups = syllabus.expected_topic_group_count - syllabus.topic_group_count
+    if missing_topics or missing_groups:
         _issue(
             report,
             "error" if publish else "warning",
             "incomplete_syllabus_catalogue",
             syllabus_path,
-            f"{missing_count} of {syllabus.expected_topic_count} topic definitions remain unconfirmed",
+            f"Missing {missing_topics} unique topics and {missing_groups} level-specific topic groups",
+        )
+    if publish and syllabus.status != "active":
+        _issue(
+            report,
+            "error",
+            "syllabus_catalogue_not_active",
+            syllabus_path,
+            f"Catalogue status is {syllabus.status}",
         )
     return report

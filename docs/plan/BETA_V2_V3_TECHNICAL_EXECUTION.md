@@ -328,9 +328,9 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 ### B5 — Content release and controlled pilot
 
-**Engineering status (30 September 2026): the fail-closed release-evidence gate, protected GitHub rehearsal, exact-SHA/content binding, diagnostic-isolation checks and controlled cohort phases are implemented. The current N1 source remains below the 19-topic/1,900-question/76-diagnostic threshold, six lesson notes remain empty, content is draft, and hosted/manual evidence has not passed. See [B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md).**
+**Engineering status (30 September 2026): the fail-closed release-evidence gate, protected GitHub rehearsal, exact-SHA/content binding, diagnostic-isolation checks and controlled cohort phases are implemented. The current N1 source remains below the 19-topic-group/1,900-question/76-diagnostic threshold, six lesson notes remain empty, content is draft, and hosted/manual evidence has not passed. See [B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md).**
 
-**Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The source catalogue contains the 13 supplied topic groups and explicitly blocks publication until the remaining six are confirmed. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md).
+**Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
 
 The bulk authoring sequence and approximately 1,900–2,850-question target are defined in [QUESTION_BANK_SCALE_PLAN.md](QUESTION_BANK_SCALE_PLAN.md).
 

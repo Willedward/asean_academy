@@ -4,13 +4,13 @@
 
 ## Target inventory
 
-The syllabus supplied covers 19 topic groups across Secondary 1 and Secondary 2. At 100–150 questions per group, the target inventory is 1,900–2,850 reviewed questions.
+The syllabus supplied covers 19 level-specific topic groups across Secondary 1 and Secondary 2. At 100–150 questions per group, the target inventory is 1,900–2,850 reviewed questions.
 
 This inventory is separate from the diagnostic forms. Practice, checkpoint, adaptive-reserve and diagnostic questions have different exposure and measurement roles and must use separate pool assignments. Diagnostic questions must never appear in learning pools.
 
 Recommended first complete target:
 
-| Purpose | Per topic | Total across 19 topics |
+| Purpose | Per topic group | Total across 19 level-specific topic groups |
 | --- | ---: | ---: |
 | Guided/independent practice | 55 | 1,045 |
 | Challenge practice | 15 | 285 |
@@ -25,7 +25,7 @@ Expand strong or high-weight topics toward 150 after the first review and learne
 
 The diagnostic measures the complete Sec 1–2 scope, not only N1. The recommended beta design is:
 
-- 38 baseline questions: two questions for each of the 19 topic groups;
+- 38 baseline questions: two questions for each of the 19 level-specific topic groups;
 - 38 matched endline questions with equivalent outcomes and difficulty, but different values, wording and solution paths;
 - resumable sections so a learner does not need to finish all 38 in one sitting;
 - an overall readiness band plus topic and syllabus-domain evidence;
@@ -38,10 +38,10 @@ One question per topic would be shorter but too noisy for topic-level claims. If
 
 Question generation should run as a controlled content pipeline:
 
-1. Freeze a machine-readable syllabus catalogue for all 19 topic groups and their outcomes.
+1. Freeze a machine-readable syllabus catalogue for all 19 level-specific topic groups and their outcomes.
 2. Define a blueprint for each topic: difficulty, response type, marks, multipart rate, calculator use, context type, diagram requirement and pool allocation.
 3. Ingest sample papers only as style and mark-allocation references. Questions remain original and do not reproduce paper wording.
-4. Generate small batches of 20–30 questions per topic.
+4. Generate small batches of 20–30 questions per topic group.
 5. Validate schema, LaTeX, marks, hints, solutions, deterministic answer specs and referenced assets automatically.
 6. Run exact and near-duplicate detection within the batch and against the entire bank.
 7. Execute every supported canonical/accepted answer through the deterministic checker.
@@ -62,7 +62,7 @@ The current authoring package deliberately hard-codes the N1 pilot bank, N1 outc
 - cross-bank duplicate fingerprints;
 - diagram generation specifications and asset checksum validation;
 - batch manifests recording generator/prompt version and provenance;
-- review queues and coverage dashboards that work across all 19 topics; and
+- review queues and coverage dashboards that work across all 19 level-specific topic groups; and
 - import commands that reject incomplete or unreviewed publication batches.
 
 Do this generalisation once before generating thousands of files. Hand-editing thousands of N1-shaped files and migrating them later would create unnecessary rework.
@@ -73,7 +73,7 @@ Ten to fifteen additional Sec 1/Sec 2 papers with answer schemes are useful for 
 
 Before full production, record:
 
-- the canonical list and ordering of the 19 topic groups and all outcome codes;
+- the canonical list and ordering of the 19 level-specific topic groups and all outcome codes;
 - whether the target is exactly 100, a weighted 100–150 range, or 150 for every topic;
 - preferred difficulty distribution for practice and checkpoint pools;
 - any schools/paper sections that should carry more style weight;
