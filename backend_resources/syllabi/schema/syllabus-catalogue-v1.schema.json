@@ -1,0 +1,155 @@
+{
+  "$defs": {
+    "SyllabusOutcome": {
+      "additionalProperties": false,
+      "properties": {
+        "school_level": {
+          "enum": [
+            "secondary_1",
+            "secondary_2"
+          ],
+          "title": "School Level",
+          "type": "string"
+        },
+        "code": {
+          "pattern": "^[0-9]+\\.[0-9]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "school_level",
+        "code",
+        "description",
+        "position"
+      ],
+      "title": "SyllabusOutcome",
+      "type": "object"
+    },
+    "SyllabusTopic": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[NGS][0-9]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "strand": {
+          "enum": [
+            "number_and_algebra",
+            "geometry_and_measurement",
+            "statistics_and_probability"
+          ],
+          "title": "Strand",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "outcomes": {
+          "items": {
+            "$ref": "#/$defs/SyllabusOutcome"
+          },
+          "minItems": 1,
+          "title": "Outcomes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "title",
+        "strand",
+        "position",
+        "outcomes"
+      ],
+      "title": "SyllabusTopic",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "version_key": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Version Key",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "jurisdiction": {
+      "minLength": 1,
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "subject": {
+      "const": "Mathematics",
+      "title": "Subject",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "source_reference": {
+      "minLength": 1,
+      "title": "Source Reference",
+      "type": "string"
+    },
+    "expected_topic_count": {
+      "minimum": 1,
+      "title": "Expected Topic Count",
+      "type": "integer"
+    },
+    "topics": {
+      "items": {
+        "$ref": "#/$defs/SyllabusTopic"
+      },
+      "minItems": 1,
+      "title": "Topics",
+      "type": "array"
+    }
+  },
+  "required": [
+    "version_key",
+    "title",
+    "jurisdiction",
+    "subject",
+    "status",
+    "source_reference",
+    "expected_topic_count",
+    "topics"
+  ],
+  "title": "SyllabusCatalogue",
+  "type": "object"
+}

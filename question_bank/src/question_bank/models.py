@@ -8,7 +8,10 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "1.0.0"
-OUTCOMES = frozenset({"1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7"})
+OUTCOME_PATTERN = r"^[0-9]+\.[0-9]+$"
+TOPIC_PATTERN = r"^[NGS][0-9]+$"
+QUESTION_KEY_PATTERN = r"^[ngs][0-9]+-l[1-3]-[0-9]{2,4}$"
+BANK_KEY_PATTERN = r"^g3-sec[12]-[ngs][0-9]+-v[0-9]+$"
 
 
 class Model(BaseModel):
@@ -143,7 +146,7 @@ class QuestionPart(Model):
     label: str | None = Field(default=None, pattern=r"^[a-z](?:\([ivx]+\))?$")
     prompt: list[ContentBlock] = Field(min_length=1)
     marks: int = Field(ge=1, le=15)
-    primary_outcome: str
+    primary_outcome: str = Field(pattern=OUTCOME_PATTERN)
     secondary_outcomes: list[str]
     response: Response
     hints: tuple[Hint, Hint]
@@ -151,10 +154,11 @@ class QuestionPart(Model):
 
     @model_validator(mode="after")
     def part_is_consistent(self):
-        if self.primary_outcome not in OUTCOMES:
-            raise ValueError(f"Unsupported N1 outcome: {self.primary_outcome}")
-        if not set(self.secondary_outcomes).issubset(OUTCOMES):
-            raise ValueError("A secondary outcome is outside N1")
+        if any(
+            re.fullmatch(OUTCOME_PATTERN, code) is None
+            for code in self.secondary_outcomes
+        ):
+            raise ValueError("Secondary outcome codes must use the numeric syllabus format")
         if self.primary_outcome in self.secondary_outcomes:
             raise ValueError("The primary outcome cannot also be secondary")
         if len(set(self.secondary_outcomes)) != len(self.secondary_outcomes):
@@ -209,15 +213,15 @@ class Provenance(Model):
 class Question(Model):
     schema_version: Literal["1.0.0"] = SCHEMA_VERSION
     revision: int = Field(ge=1)
-    stable_key: str = Field(pattern=r"^n1-l[1-3]-[0-9]{2}$")
-    bank_key: Literal["g3-sec1-n1-v1"]
-    curriculum_version: Literal["g3_math_v1_draft"]
-    school_level: Literal["secondary_1"]
-    topic_code: Literal["N1"]
-    primary_outcome: str
+    stable_key: str = Field(pattern=QUESTION_KEY_PATTERN)
+    bank_key: str = Field(pattern=BANK_KEY_PATTERN)
+    curriculum_version: str = Field(pattern=r"^[a-z0-9_]+$")
+    school_level: Literal["secondary_1", "secondary_2"]
+    topic_code: str = Field(pattern=TOPIC_PATTERN)
+    primary_outcome: str = Field(pattern=OUTCOME_PATTERN)
     title: str = Field(min_length=1, max_length=160)
     difficulty: int = Field(ge=1, le=3)
-    calculator_allowed: Literal[True]
+    calculator_allowed: bool
     question_type: Literal["structured"]
     status: Literal["draft", "reviewed", "published", "retired"]
     stem: list[ContentBlock]
@@ -228,11 +232,17 @@ class Question(Model):
 
     @model_validator(mode="after")
     def question_is_consistent(self):
-        if self.primary_outcome not in OUTCOMES:
-            raise ValueError(f"Unsupported N1 outcome: {self.primary_outcome}")
-        key_difficulty = int(re.fullmatch(r"n1-l([1-3])-[0-9]{2}", self.stable_key).group(1))
-        if key_difficulty != self.difficulty:
+        key_match = re.fullmatch(QUESTION_KEY_PATTERN, self.stable_key)
+        key_topic, key_level, _ = key_match.group(0).split("-")
+        if key_topic.upper() != self.topic_code:
+            raise ValueError("Stable-key topic must match topic_code")
+        if int(key_level[1:]) != self.difficulty:
             raise ValueError("Stable-key level must match difficulty")
+        expected_bank_prefix = (
+            f"g3-sec{self.school_level[-1]}-{self.topic_code.lower()}-v"
+        )
+        if not self.bank_key.startswith(expected_bank_prefix):
+            raise ValueError("Bank key must match school_level and topic_code")
         positions = [part.position for part in self.parts]
         if positions != list(range(1, len(positions) + 1)):
             raise ValueError("Part positions must be consecutive from 1")

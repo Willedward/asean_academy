@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 import psycopg
+from question_bank.catalogue_repository import CatalogueImporter
 from question_bank.course_repository import CourseImporter
-from question_bank.repository import QuestionImporter
 from run_dev import REPOSITORY_ROOT, _configure_environment
 
 from learning_api.config import Settings
@@ -18,6 +18,21 @@ from learning_api.course_catalogue import CourseCatalogue
 
 sys.path.insert(0, str(REPOSITORY_ROOT / "scripts"))
 from check_migration_safety import inspect_migrations  # noqa: E402
+
+
+def import_question_catalogue(connection, report):
+    bank_reports = list(report.bank_reports.values())
+    if not bank_reports or bank_reports[0].catalogue is None:
+        raise ValueError("Validated course has no syllabus catalogue")
+    banks = [
+        (bank.blueprint, bank.questions)
+        for bank in bank_reports
+        if bank.blueprint is not None
+    ]
+    return CatalogueImporter(connection).import_all(
+        bank_reports[0].catalogue,
+        banks,
+    )
 
 
 def migration_body(path: Path) -> str:
@@ -62,7 +77,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             if not pending:
                 with connection.transaction(force_rollback=True):
                     lock(connection)
-                    QuestionImporter(connection).import_all(questions)
+                    import_question_catalogue(connection, report)
                     CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
                     check_content(connection, catalogue)
                 print("Content import preview passed; transaction rolled back.")
@@ -88,7 +103,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             print(f"Applied {migration.name}")
         with connection.transaction():
             lock(connection)
-            QuestionImporter(connection).import_all(questions)
+            import_question_catalogue(connection, report)
             CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
             result = check_content(connection, catalogue)
         print("Imported and verified content. Enrolments and credentials were not changed.")

@@ -5,14 +5,15 @@ import json
 import os
 from pathlib import Path
 
+from .catalogue import write_schemas as write_catalogue_schemas
+from .catalogue_repository import CatalogueImporter
 from .course_preview import serve_course
 from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .practice import PracticeEngine
 from .practice_web import serve_practice
 from .preview import serve
-from .repository import QuestionImporter
-from .validation import validate_bank
+from .validation import validate_bank, validate_catalogue
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_BANK = (
@@ -23,6 +24,8 @@ DEFAULT_COURSE = (
     REPOSITORY_ROOT
     / "backend_resources/courses/g3_math/secondary_1/n1/v1"
 )
+DEFAULT_BANK_CATALOGUE = REPOSITORY_ROOT / "backend_resources/question_bank/g3_math"
+DEFAULT_SYLLABUS = REPOSITORY_ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
 
 
 def parser():
@@ -86,11 +89,70 @@ def parser():
     course_importer.add_argument(
         "--publish", action="store_true", help="Require publication validation"
     )
+    catalogue_validate = commands.add_parser(
+        "catalogue-validate", help="Validate the syllabus and every discovered question bank"
+    )
+    catalogue_validate.add_argument(
+        "banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE
+    )
+    catalogue_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    catalogue_validate.add_argument(
+        "--publish", action="store_true", help="Require a complete reviewed catalogue"
+    )
+    catalogue_schema = commands.add_parser(
+        "catalogue-schema", help="Generate syllabus and bank blueprint JSON Schemas"
+    )
+    catalogue_schema.add_argument(
+        "output",
+        type=Path,
+        nargs="?",
+        default=REPOSITORY_ROOT / "backend_resources/syllabi/schema",
+    )
+    catalogue_importer = commands.add_parser(
+        "catalogue-import-db",
+        help="Seed syllabus metadata and import every validated question bank",
+    )
+    catalogue_importer.add_argument(
+        "banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE
+    )
+    catalogue_importer.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    catalogue_importer.add_argument(
+        "--publish", action="store_true", help="Require publication validation"
+    )
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "catalogue-validate":
+        report = validate_catalogue(args.banks, args.syllabus, publish=args.publish)
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0 if report.valid else 1
+    if args.command == "catalogue-schema":
+        write_catalogue_schemas(args.output)
+        print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
+        return 0
+    if args.command == "catalogue-import-db":
+        report = validate_catalogue(args.banks, args.syllabus, publish=args.publish)
+        if not report.valid:
+            print(json.dumps(report.as_dict(), indent=2))
+            return 1
+        database_url = os.environ.get("DATABASE_URL")
+        if not database_url:
+            raise SystemExit("Set DATABASE_URL before running catalogue-import-db")
+        try:
+            import psycopg
+        except ImportError as exc:
+            raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
+        banks = [
+            (bank.blueprint, bank.questions)
+            for bank in report.banks
+            if bank.blueprint is not None
+        ]
+        with psycopg.connect(database_url, prepare_threshold=None) as connection:
+            result = CatalogueImporter(connection).import_all(report.syllabus, banks)
+        print(json.dumps({"status": "complete", "result": result}, indent=2))
+        return 0
     if args.command == "validate":
         report = validate_bank(args.bank, publish=args.publish)
         print(json.dumps(report.as_dict(), indent=2))
@@ -159,6 +221,9 @@ def main(argv=None):
     except ImportError as exc:
         raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
     with psycopg.connect(database_url, prepare_threshold=None) as connection:
-        results = QuestionImporter(connection).import_all(report.questions)
-    print(json.dumps({"status": "complete", "results": results}, indent=2))
+        result = CatalogueImporter(connection).import_all(
+            report.catalogue,
+            [(report.blueprint, report.questions)],
+        )
+    print(json.dumps({"status": "complete", "result": result}, indent=2))
     return 0

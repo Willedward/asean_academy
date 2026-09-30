@@ -7,7 +7,6 @@ from pathlib import Path
 
 from question_bank.course_models import ActiveRecallSection
 from question_bank.course_validation import validate_course
-from question_bank.validation import validate_bank
 
 from .course_contracts import (
     CourseLessonMap,
@@ -18,7 +17,7 @@ from .course_contracts import (
 )
 
 COURSE_ROOT = Path("backend_resources/courses/g3_math/secondary_1/n1/v1")
-BANK_ROOT = Path("backend_resources/question_bank/g3_math/secondary_1/n1/v1")
+BANK_ROOT = Path("backend_resources/question_bank/g3_math")
 
 
 class CatalogueError(RuntimeError):
@@ -63,14 +62,7 @@ class CourseCatalogue:
 
     @cached_property
     def questions(self):
-        report = validate_bank(self.repository_root / BANK_ROOT)
-        if not report.valid:
-            raise CatalogueError(
-                "question_bank_invalid",
-                "The question bank failed validation and is temporarily unavailable.",
-                503,
-            )
-        return report.questions
+        return self.report.questions
 
     def _assert_visible(self, status: str):
         if status != "published" and not self.allow_drafts:

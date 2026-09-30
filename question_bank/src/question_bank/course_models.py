@@ -2,12 +2,21 @@
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from typing import Annotated, Literal
 
 from pydantic import Field, model_validator
 
-from .models import OUTCOMES, Asset, ContentBlock, Model, Response
+from .models import (
+    OUTCOME_PATTERN,
+    QUESTION_KEY_PATTERN,
+    TOPIC_PATTERN,
+    Asset,
+    ContentBlock,
+    Model,
+    Response,
+)
 
 COURSE_SCHEMA_VERSION = "1.0.0"
 ContentStatus = Literal["draft", "reviewed", "published", "retired"]
@@ -41,7 +50,7 @@ class MasteryPolicy(Model):
 
 
 class CourseLessonReference(Model):
-    stable_key: str = Field(pattern=r"^n1-lesson-[0-9]{2}$")
+    stable_key: str = Field(pattern=r"^[ngs][0-9]+-lesson-[0-9]{2,3}$")
     position: int = Field(ge=1)
     title: str = Field(min_length=1, max_length=160)
     outcomes: list[str] = Field(min_length=1)
@@ -49,8 +58,8 @@ class CourseLessonReference(Model):
 
     @model_validator(mode="after")
     def outcomes_are_supported(self):
-        if not set(self.outcomes).issubset(OUTCOMES):
-            raise ValueError("Lesson reference contains an unsupported N1 outcome")
+        if any(re.fullmatch(OUTCOME_PATTERN, code) is None for code in self.outcomes):
+            raise ValueError("Lesson reference outcomes must use the numeric syllabus format")
         if len(set(self.outcomes)) != len(self.outcomes):
             raise ValueError("Lesson reference outcomes must be unique")
         return self
@@ -59,7 +68,7 @@ class CourseLessonReference(Model):
 class CourseUnit(Model):
     stable_key: str = Field(pattern=r"^[a-z0-9-]+$")
     position: int = Field(ge=1)
-    topic_code: Literal["N1"]
+    topic_code: str = Field(pattern=TOPIC_PATTERN)
     title: str = Field(min_length=1, max_length=160)
     checkpoint_question_count: int = Field(ge=1, le=40)
     lessons: list[CourseLessonReference] = Field(min_length=1)
@@ -78,10 +87,10 @@ class CourseUnit(Model):
 class Course(Model):
     schema_version: Literal["1.0.0"] = COURSE_SCHEMA_VERSION
     revision: int = Field(ge=1)
-    stable_key: Literal["g3-sec1-math"]
-    programme_key: Literal["asean-scholarship-preparation"]
-    curriculum_version: Literal["g3_math_v1_draft"]
-    school_level: Literal["secondary_1"]
+    stable_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    programme_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    curriculum_version: str = Field(pattern=r"^[a-z0-9_]+$")
+    school_level: Literal["secondary_1", "secondary_2"]
     subject: Literal["Mathematics"]
     status: ContentStatus
     title: str = Field(min_length=1, max_length=160)
@@ -93,11 +102,15 @@ class Course(Model):
 
     @model_validator(mode="after")
     def course_is_consistent(self):
-        if len(self.units) != 1:
-            raise ValueError("The N1 v1 course contract requires exactly one unit")
         positions = [unit.position for unit in self.units]
         if positions != list(range(1, len(positions) + 1)):
             raise ValueError("Course unit positions must be consecutive from 1")
+        unit_keys = [unit.stable_key for unit in self.units]
+        if len(unit_keys) != len(set(unit_keys)):
+            raise ValueError("Course unit keys must be unique")
+        lesson_keys = [lesson.stable_key for unit in self.units for lesson in unit.lessons]
+        if len(lesson_keys) != len(set(lesson_keys)):
+            raise ValueError("Lesson keys must be unique across the course")
         policy_keys = [policy.key for policy in self.mastery_policies]
         if len(policy_keys) != len(set(policy_keys)):
             raise ValueError("Mastery policy keys must be unique")
@@ -179,9 +192,9 @@ def _section_blocks(section):
 class Lesson(Model):
     schema_version: Literal["1.0.0"] = COURSE_SCHEMA_VERSION
     revision: int = Field(ge=1)
-    stable_key: str = Field(pattern=r"^n1-lesson-[0-9]{2}$")
-    course_key: Literal["g3-sec1-math"]
-    unit_key: Literal["g3-sec1-n1"]
+    stable_key: str = Field(pattern=r"^[ngs][0-9]+-lesson-[0-9]{2,3}$")
+    course_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    unit_key: str = Field(pattern=r"^[a-z0-9-]+$")
     position: int = Field(ge=1)
     status: ContentStatus
     title: str = Field(min_length=1, max_length=160)
@@ -197,8 +210,8 @@ class Lesson(Model):
 
     @model_validator(mode="after")
     def lesson_is_consistent(self):
-        if not set(self.outcomes).issubset(OUTCOMES):
-            raise ValueError("Lesson contains an unsupported N1 outcome")
+        if any(re.fullmatch(OUTCOME_PATTERN, code) is None for code in self.outcomes):
+            raise ValueError("Lesson outcomes must use the numeric syllabus format")
         if len(set(self.outcomes)) != len(self.outcomes):
             raise ValueError("Lesson outcomes must be unique")
         if self.stable_key in self.prerequisite_lessons:
@@ -231,7 +244,7 @@ class Lesson(Model):
 
 class QuestionPoolItem(Model):
     position: int = Field(ge=1)
-    question_key: str = Field(pattern=r"^n1-l[1-3]-[0-9]{2}$")
+    question_key: str = Field(pattern=QUESTION_KEY_PATTERN)
     stage: PoolStage
     weight: int = Field(default=1, ge=1, le=100)
 
@@ -239,7 +252,7 @@ class QuestionPoolItem(Model):
 class QuestionPool(Model):
     stable_key: str = Field(pattern=r"^[a-z0-9-]+$")
     type: PoolType
-    lesson_key: str | None = Field(default=None, pattern=r"^n1-lesson-[0-9]{2}$")
+    lesson_key: str | None = Field(default=None, pattern=r"^[ngs][0-9]+-lesson-[0-9]{2,3}$")
     expected_question_count: int = Field(ge=1, le=40)
     items: list[QuestionPoolItem] = Field(min_length=1)
 
@@ -267,9 +280,9 @@ class QuestionPool(Model):
 
 class QuestionPools(Model):
     schema_version: Literal["1.0.0"] = COURSE_SCHEMA_VERSION
-    course_key: Literal["g3-sec1-math"]
-    unit_key: Literal["g3-sec1-n1"]
-    bank_key: Literal["g3-sec1-n1-v1"]
+    course_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    unit_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    bank_key: str = Field(pattern=r"^g3-sec[12]-[ngs][0-9]+-v[0-9]+$")
     pools: list[QuestionPool] = Field(min_length=1)
 
     @model_validator(mode="after")
@@ -281,3 +294,44 @@ class QuestionPools(Model):
         if len(question_keys) != len(set(question_keys)):
             raise ValueError("Every question must be allocated to exactly one source pool")
         return self
+
+
+class QuestionPoolCollection(Model):
+    """All per-unit pool manifests in one course snapshot.
+
+    The one-manifest dump intentionally remains byte-for-byte compatible with the
+    legacy N1 snapshot so its immutable course revision hash does not change.
+    """
+
+    manifests: list[QuestionPools] = Field(min_length=1)
+
+    @property
+    def pools(self) -> list[QuestionPool]:
+        return [pool for manifest in self.manifests for pool in manifest.pools]
+
+    @model_validator(mode="after")
+    def manifests_are_unique(self):
+        pairs = [(item.unit_key, item.bank_key) for item in self.manifests]
+        if len(pairs) != len(set(pairs)):
+            raise ValueError("Pool manifests must be unique by unit and bank")
+        course_keys = {item.course_key for item in self.manifests}
+        if len(course_keys) != 1:
+            raise ValueError("Every pool manifest must belong to the same course")
+        pool_keys = [pool.stable_key for pool in self.pools]
+        if len(pool_keys) != len(set(pool_keys)):
+            raise ValueError("Question-pool keys must be unique across the course")
+        question_keys = [item.question_key for pool in self.pools for item in pool.items]
+        if len(question_keys) != len(set(question_keys)):
+            raise ValueError("Every question must be allocated once across the course")
+        return self
+
+    def model_dump(self, *args, **kwargs):
+        if len(self.manifests) == 1:
+            return self.manifests[0].model_dump(*args, **kwargs)
+        return {
+            "schema_version": COURSE_SCHEMA_VERSION,
+            "manifests": [
+                manifest.model_dump(*args, **kwargs)
+                for manifest in sorted(self.manifests, key=lambda item: item.unit_key)
+            ],
+        }

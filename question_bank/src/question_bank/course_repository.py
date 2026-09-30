@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 
-from .course_models import Course, Lesson, QuestionPools
+from .course_models import Course, Lesson, QuestionPoolCollection
 
 
 def _digest(payload) -> str:
@@ -22,7 +22,7 @@ def lesson_content_hash(lesson: Lesson) -> str:
 def course_content_hash(
     course: Course,
     lessons: list[Lesson],
-    pools: QuestionPools,
+    pools: QuestionPoolCollection,
 ) -> str:
     """Hash the complete course snapshot pinned by one course revision."""
     course_payload = course.model_dump(mode="json", exclude={"status", "provenance"})
@@ -300,7 +300,9 @@ class CourseImporter:
         )
         return cursor.fetchone()[0], True
 
-    def import_all(self, course: Course, lessons: list[Lesson], pools: QuestionPools):
+    def import_all(
+        self, course: Course, lessons: list[Lesson], pools: QuestionPoolCollection
+    ):
         """Import a fully validated snapshot as one database transaction."""
         digest = course_content_hash(course, lessons, pools)
         lesson_by_key = {lesson.stable_key: lesson for lesson in lessons}
@@ -422,12 +424,13 @@ class CourseImporter:
                             (lesson_version_id, lesson_ids[prerequisite]),
                         )
 
-                self._insert_pools(
-                    cursor,
-                    pools,
-                    unit_version_ids[pools.unit_key],
-                    lesson_version_ids,
-                )
+                for manifest in pools.manifests:
+                    self._insert_pools(
+                        cursor,
+                        manifest,
+                        unit_version_ids[manifest.unit_key],
+                        lesson_version_ids,
+                    )
         return {
             "stable_key": course.stable_key,
             "revision": course.revision,

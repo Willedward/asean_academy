@@ -9,8 +9,14 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from .course_models import Course, Lesson, QuestionPools
-from .validation import validate_bank
+from .catalogue import load_blueprint
+from .course_models import (
+    Course,
+    Lesson,
+    QuestionPoolCollection,
+    QuestionPools,
+)
+from .validation import ValidationReport, validate_bank
 
 
 @dataclass(frozen=True)
@@ -25,8 +31,17 @@ class CourseIssue:
 class CourseValidationReport:
     course: Course | None = None
     lessons: list[Lesson] = field(default_factory=list)
-    pools: QuestionPools | None = None
+    pools: QuestionPoolCollection | None = None
+    bank_reports: dict[str, ValidationReport] = field(default_factory=dict)
     issues: list[CourseIssue] = field(default_factory=list)
+
+    @property
+    def questions(self):
+        return [
+            question
+            for bank in self.bank_reports.values()
+            for question in bank.questions
+        ]
 
     @property
     def errors(self):
@@ -44,7 +59,9 @@ class CourseValidationReport:
         return {
             "valid": self.valid,
             "course_key": self.course.stable_key if self.course else None,
+            "unit_count": len(self.course.units) if self.course else 0,
             "lesson_count": len(self.lessons),
+            "pool_manifest_count": len(self.pools.manifests) if self.pools else 0,
             "pool_count": len(self.pools.pools) if self.pools else 0,
             "allocated_question_count": (
                 sum(len(pool.items) for pool in self.pools.pools) if self.pools else 0
@@ -84,6 +101,25 @@ def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidation
             )
 
 
+def _pool_paths(course_root: Path) -> list[Path]:
+    legacy = course_root / "question_pools.json"
+    paths = [legacy] if legacy.is_file() else []
+    paths.extend(sorted((course_root / "question_pools").glob("*.json")))
+    return paths
+
+
+def _bank_root_for(question_bank_root: Path, bank_key: str) -> Path | None:
+    direct = question_bank_root / "blueprint.json"
+    candidates = [direct] if direct.is_file() else sorted(question_bank_root.glob("**/blueprint.json"))
+    for path in candidates:
+        try:
+            if load_blueprint(path).bank_key == bank_key:
+                return path.parent
+        except (OSError, ValueError, ValidationError):
+            continue
+    return None
+
+
 def validate_course(
     course_root: Path,
     question_bank_root: Path,
@@ -91,11 +127,30 @@ def validate_course(
     publish: bool = False,
 ) -> CourseValidationReport:
     course_root = course_root.resolve()
+    question_bank_root = question_bank_root.resolve()
     report = CourseValidationReport()
     course_path = course_root / "course.json"
-    pools_path = course_root / "question_pools.json"
     report.course = _load(course_path, Course, report, "invalid_course")
-    report.pools = _load(pools_path, QuestionPools, report, "invalid_question_pools")
+
+    manifests = []
+    pool_paths = _pool_paths(course_root)
+    if not pool_paths:
+        _issue(
+            report,
+            "error",
+            "invalid_question_pools",
+            course_root,
+            "No question-pool manifests were found",
+        )
+    for path in pool_paths:
+        manifest = _load(path, QuestionPools, report, "invalid_question_pools")
+        if manifest is not None:
+            manifests.append(manifest)
+    if manifests:
+        try:
+            report.pools = QuestionPoolCollection(manifests=manifests)
+        except ValidationError as exc:
+            _issue(report, "error", "invalid_question_pools", course_root, str(exc))
 
     lessons_dir = course_root / "lessons"
     seen = set()
@@ -122,25 +177,24 @@ def validate_course(
         return report
 
     course = report.course
-    unit = course.units[0]
-    if report.pools.course_key != course.stable_key:
+    unit_by_key = {unit.stable_key: unit for unit in course.units}
+    manifest_by_unit = {manifest.unit_key: manifest for manifest in report.pools.manifests}
+    if set(manifest_by_unit) != set(unit_by_key):
         _issue(
             report,
             "error",
-            "pool_course_mismatch",
-            pools_path,
-            f"Pool course is {report.pools.course_key}, expected {course.stable_key}",
+            "pool_unit_inventory",
+            course_root,
+            f"Missing manifests: {sorted(set(unit_by_key) - set(manifest_by_unit))}; "
+            f"extra manifests: {sorted(set(manifest_by_unit) - set(unit_by_key))}",
         )
-    if report.pools.unit_key != unit.stable_key:
-        _issue(
-            report,
-            "error",
-            "pool_unit_mismatch",
-            pools_path,
-            f"Pool unit is {report.pools.unit_key}, expected {unit.stable_key}",
-        )
+
+    references = {
+        lesson.stable_key: (unit, lesson)
+        for unit in course.units
+        for lesson in unit.lessons
+    }
     lesson_by_key = {lesson.stable_key: lesson for lesson in report.lessons}
-    references = {lesson.stable_key: lesson for lesson in unit.lessons}
     if set(lesson_by_key) != set(references):
         missing = sorted(set(references) - set(lesson_by_key))
         extra = sorted(set(lesson_by_key) - set(references))
@@ -155,8 +209,11 @@ def validate_course(
     policy_keys = {policy.key for policy in course.mastery_policies}
     position_by_key = {key: lesson.position for key, lesson in lesson_by_key.items()}
     for key, lesson in lesson_by_key.items():
-        reference = references.get(key)
-        if reference and (
+        parent = references.get(key)
+        if parent is None:
+            continue
+        unit, reference = parent
+        if (
             lesson.position != reference.position
             or lesson.title != reference.title
             or lesson.outcomes != reference.outcomes
@@ -171,16 +228,19 @@ def validate_course(
         if lesson.course_key != course.stable_key or lesson.unit_key != unit.stable_key:
             _issue(report, "error", "lesson_parent", key, "Lesson has the wrong course or unit")
         if lesson.mastery_policy_key not in policy_keys:
-            _issue(
-                report,
-                "error",
-                "unknown_mastery_policy",
-                key,
-                lesson.mastery_policy_key,
-            )
+            _issue(report, "error", "unknown_mastery_policy", key, lesson.mastery_policy_key)
         for prerequisite in lesson.prerequisite_lessons:
-            if prerequisite not in lesson_by_key:
+            prerequisite_parent = references.get(prerequisite)
+            if prerequisite not in lesson_by_key or prerequisite_parent is None:
                 _issue(report, "error", "unknown_prerequisite", key, prerequisite)
+            elif prerequisite_parent[0].stable_key != unit.stable_key:
+                _issue(
+                    report,
+                    "error",
+                    "cross_unit_prerequisite",
+                    key,
+                    f"Prerequisite {prerequisite} belongs to another unit",
+                )
             elif position_by_key[prerequisite] >= lesson.position:
                 _issue(
                     report,
@@ -190,10 +250,9 @@ def validate_course(
                     f"Prerequisite {prerequisite} must appear earlier",
                 )
         if not lesson.sections:
-            severity = "error" if publish else "warning"
             _issue(
                 report,
-                severity,
+                "error" if publish else "warning",
                 "lesson_content_required",
                 key,
                 "Lesson needs reviewed sections before publication",
@@ -204,111 +263,179 @@ def validate_course(
     if publish and course.status not in {"reviewed", "published"}:
         _issue(report, "error", "course_review_required", course_path, course.status)
 
-    bank_report = validate_bank(question_bank_root, publish=publish)
-    for issue in bank_report.errors:
-        _issue(report, "error", f"question_bank_{issue.code}", issue.path, issue.message)
-    question_by_key = {question.stable_key: question for question in bank_report.questions}
-    bank_keys = {question.bank_key for question in bank_report.questions}
-    if bank_keys and bank_keys != {report.pools.bank_key}:
-        _issue(
-            report,
-            "error",
-            "pool_bank_mismatch",
-            pools_path,
-            f"Pool bank is {report.pools.bank_key}, question bank contains {sorted(bank_keys)}",
-        )
-
-    pools = report.pools.pools
-    practice_pool_by_lesson = {
-        pool.lesson_key: pool for pool in pools if pool.type == "lesson_practice"
-    }
-    for reference in unit.lessons:
-        pool = practice_pool_by_lesson.get(reference.stable_key)
-        if pool is None:
-            _issue(
-                report,
-                "error",
-                "missing_lesson_pool",
-                reference.stable_key,
-                "Lesson has no practice pool",
-            )
-        elif pool.expected_question_count != reference.required_practice_count:
-            _issue(
-                report,
-                "error",
-                "required_practice_count",
-                reference.stable_key,
-                f"Course requires {reference.required_practice_count}, pool contains "
-                f"{pool.expected_question_count}",
-            )
     pool_type_counts = {pool_type: 0 for pool_type in course.question_allocation_counts}
-    allocated_keys = set()
-    for pool in pools:
-        pool_type_counts[pool.type] += len(pool.items)
-        lesson = lesson_by_key.get(pool.lesson_key) if pool.lesson_key else None
-        if pool.type == "lesson_practice" and lesson is None:
-            _issue(report, "error", "unknown_pool_lesson", pool.stable_key, str(pool.lesson_key))
-        for item in pool.items:
-            question = question_by_key.get(item.question_key)
-            if question is None:
-                _issue(
-                    report,
-                    "error",
-                    "unknown_pool_question",
-                    pool.stable_key,
-                    item.question_key,
-                )
-                continue
-            allocated_keys.add(item.question_key)
-            if lesson and question.primary_outcome not in lesson.outcomes:
-                _issue(
-                    report,
-                    "error",
-                    "pool_outcome_mismatch",
-                    pool.stable_key,
-                    f"{item.question_key} outcome {question.primary_outcome} is outside {lesson.outcomes}",
-                )
-            expected_difficulty = {"guided": 1, "independent": 2, "challenge": 3}.get(
-                item.stage
+    for unit in course.units:
+        manifest = manifest_by_unit.get(unit.stable_key)
+        if manifest is None:
+            continue
+        path = next(
+            (item for item in pool_paths if _load_pool_identity(item) == (manifest.unit_key, manifest.bank_key)),
+            course_root,
+        )
+        if manifest.course_key != course.stable_key:
+            _issue(
+                report,
+                "error",
+                "pool_course_mismatch",
+                path,
+                f"Pool course is {manifest.course_key}, expected {course.stable_key}",
             )
-            if expected_difficulty and question.difficulty != expected_difficulty:
+        bank_root = _bank_root_for(question_bank_root, manifest.bank_key)
+        if bank_root is None:
+            _issue(report, "error", "missing_pool_bank", path, manifest.bank_key)
+            continue
+        bank_report = validate_bank(bank_root, publish=publish)
+        report.bank_reports[manifest.bank_key] = bank_report
+        for issue in bank_report.errors:
+            _issue(report, "error", f"question_bank_{issue.code}", issue.path, issue.message)
+        blueprint = bank_report.blueprint
+        if blueprint is not None:
+            if blueprint.topic.code != unit.topic_code:
                 _issue(
                     report,
                     "error",
-                    "pool_difficulty_mismatch",
-                    pool.stable_key,
-                    f"{item.question_key} is difficulty {question.difficulty}, expected {expected_difficulty}",
+                    "unit_bank_topic_mismatch",
+                    path,
+                    f"Unit uses {unit.topic_code}; bank uses {blueprint.topic.code}",
                 )
+            if (
+                blueprint.curriculum_version != course.curriculum_version
+                or blueprint.school_level != course.school_level
+            ):
+                _issue(
+                    report,
+                    "error",
+                    "unit_bank_curriculum_mismatch",
+                    path,
+                    "Bank curriculum or school level differs from the course",
+                )
+            syllabus_topic = (
+                bank_report.catalogue.topic(unit.topic_code)
+                if bank_report.catalogue is not None
+                else None
+            )
+            allowed_outcomes = (
+                syllabus_topic.outcome_codes(course.school_level)
+                if syllabus_topic is not None
+                else set()
+            )
+            for reference in unit.lessons:
+                if not reference.stable_key.startswith(f"{unit.topic_code.lower()}-lesson-"):
+                    _issue(
+                        report,
+                        "error",
+                        "lesson_topic_key_mismatch",
+                        reference.stable_key,
+                        f"Lesson key must match unit topic {unit.topic_code}",
+                    )
+                unknown_outcomes = set(reference.outcomes) - allowed_outcomes
+                if unknown_outcomes:
+                    _issue(
+                        report,
+                        "error",
+                        "lesson_outcome_catalogue_mismatch",
+                        reference.stable_key,
+                        f"Outcomes are outside {unit.topic_code} {course.school_level}: "
+                        f"{sorted(unknown_outcomes)}",
+                    )
+        question_by_key = {question.stable_key: question for question in bank_report.questions}
+        lesson_refs = {reference.stable_key: reference for reference in unit.lessons}
+        practice_pool_by_lesson = {
+            pool.lesson_key: pool
+            for pool in manifest.pools
+            if pool.type == "lesson_practice"
+        }
+        for reference in unit.lessons:
+            pool = practice_pool_by_lesson.get(reference.stable_key)
+            if pool is None:
+                _issue(
+                    report,
+                    "error",
+                    "missing_lesson_pool",
+                    reference.stable_key,
+                    "Lesson has no practice pool",
+                )
+            elif pool.expected_question_count != reference.required_practice_count:
+                _issue(
+                    report,
+                    "error",
+                    "required_practice_count",
+                    reference.stable_key,
+                    f"Course requires {reference.required_practice_count}, pool contains "
+                    f"{pool.expected_question_count}",
+                )
+        allocated_keys = set()
+        for pool in manifest.pools:
+            pool_type_counts[pool.type] += len(pool.items)
+            lesson = lesson_by_key.get(pool.lesson_key) if pool.lesson_key else None
+            if pool.type == "lesson_practice" and pool.lesson_key not in lesson_refs:
+                _issue(report, "error", "unknown_pool_lesson", pool.stable_key, str(pool.lesson_key))
+            for item in pool.items:
+                question = question_by_key.get(item.question_key)
+                if question is None:
+                    _issue(report, "error", "unknown_pool_question", pool.stable_key, item.question_key)
+                    continue
+                allocated_keys.add(item.question_key)
+                if lesson and question.primary_outcome not in lesson.outcomes:
+                    _issue(
+                        report,
+                        "error",
+                        "pool_outcome_mismatch",
+                        pool.stable_key,
+                        f"{item.question_key} outcome {question.primary_outcome} is outside {lesson.outcomes}",
+                    )
+                expected_difficulty = {
+                    "guided": 1,
+                    "independent": 2,
+                    "challenge": 3,
+                }.get(item.stage)
+                if expected_difficulty and question.difficulty != expected_difficulty:
+                    _issue(
+                        report,
+                        "error",
+                        "pool_difficulty_mismatch",
+                        pool.stable_key,
+                        f"{item.question_key} is difficulty {question.difficulty}, expected {expected_difficulty}",
+                    )
+        question_keys = set(question_by_key)
+        if allocated_keys != question_keys:
+            _issue(
+                report,
+                "error",
+                "question_allocation_inventory",
+                path,
+                f"Unallocated: {sorted(question_keys - allocated_keys)}; "
+                f"unknown: {sorted(allocated_keys - question_keys)}",
+            )
+        checkpoint_total = sum(
+            len(pool.items) for pool in manifest.pools if pool.type == "unit_checkpoint"
+        )
+        if checkpoint_total < unit.checkpoint_question_count:
+            _issue(
+                report,
+                "error",
+                "checkpoint_capacity",
+                path,
+                f"Checkpoint needs {unit.checkpoint_question_count}, pool has {checkpoint_total}",
+            )
 
     if pool_type_counts != course.question_allocation_counts:
         _issue(
             report,
             "error",
             "allocation_counts",
-            pools_path,
+            course_root,
             f"Found {pool_type_counts}, expected {course.question_allocation_counts}",
         )
-    question_keys = set(question_by_key)
-    if allocated_keys != question_keys:
-        _issue(
-            report,
-            "error",
-            "question_allocation_inventory",
-            pools_path,
-            f"Unallocated: {sorted(question_keys - allocated_keys)}; unknown: {sorted(allocated_keys - question_keys)}",
-        )
-
-    checkpoint_pools = [pool for pool in pools if pool.type == "unit_checkpoint"]
-    checkpoint_total = sum(len(pool.items) for pool in checkpoint_pools)
-    if checkpoint_total < unit.checkpoint_question_count:
-        _issue(
-            report,
-            "error",
-            "checkpoint_capacity",
-            pools_path,
-            f"Checkpoint needs {unit.checkpoint_question_count}, pool has {checkpoint_total}",
-        )
     return report
+
+
+def _load_pool_identity(path: Path) -> tuple[str, str] | None:
+    try:
+        item = QuestionPools.model_validate_json(path.read_text())
+        return item.unit_key, item.bank_key
+    except (OSError, ValueError, ValidationError):
+        return None
 
 
 def schema_documents():

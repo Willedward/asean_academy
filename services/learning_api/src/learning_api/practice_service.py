@@ -6,9 +6,8 @@ import hashlib
 from pathlib import Path
 
 from question_bank.practice import PracticeEngine, PracticeError
-from question_bank.validation import validate_bank
 
-from .course_catalogue import BANK_ROOT, CourseCatalogue
+from .course_catalogue import CourseCatalogue
 from .postgres_practice import PostgresPracticeEngine
 from .progress_service import ProgressService
 
@@ -24,28 +23,21 @@ class PracticeService:
         allow_drafts: bool,
         database_url: str | None = None,
     ):
-        report = validate_bank(repository_root / BANK_ROOT)
-        if not report.valid:
-            raise PracticeError(
-                "question_bank_invalid",
-                "The question bank failed validation and is temporarily unavailable.",
-                503,
-            )
-        self.questions = report.questions
+        self.questions = catalogue.questions
         self.catalogue = catalogue
         self.progress = progress
         self.postgres = database_url is not None
         if database_url is not None:
             self.engine = PostgresPracticeEngine(
                 database_url,
-                report.questions,
+                self.questions,
                 progress.learner_id,
                 allow_drafts=allow_drafts,
             )
         else:
             self.engine = PracticeEngine(
                 database,
-                report.questions,
+                self.questions,
                 allow_drafts=allow_drafts,
             )
 
@@ -80,11 +72,32 @@ class PracticeService:
             "development_drafts": summary["development_drafts"],
         }
 
+    def _lesson_manifest(self, lesson_key: str):
+        manifest = next(
+            (
+                manifest
+                for manifest in self.catalogue.report.pools.manifests
+                if any(
+                    pool.type == "lesson_practice" and pool.lesson_key == lesson_key
+                    for pool in manifest.pools
+                )
+            ),
+            None,
+        )
+        if manifest is None:
+            raise PracticeError(
+                "lesson_pool_missing",
+                "Practice has not been configured for this lesson.",
+                503,
+            )
+        return manifest
+
     def _lesson_pool(self, lesson_key: str):
+        manifest = self._lesson_manifest(lesson_key)
         pool = next(
             (
                 candidate
-                for candidate in self.catalogue.report.pools.pools
+                for candidate in manifest.pools
                 if candidate.type == "lesson_practice"
                 and candidate.lesson_key == lesson_key
             ),
@@ -160,10 +173,11 @@ class PracticeService:
                 for question in self.questions
                 if question.primary_outcome in lesson.outcomes
             ]
+            manifest = self._lesson_manifest(lesson_key)
             reserve_pool = next(
                 (
                     candidate
-                    for candidate in self.catalogue.report.pools.pools
+                    for candidate in manifest.pools
                     if candidate.type == "adaptive_reserve"
                 ),
                 None,
@@ -251,14 +265,22 @@ class PracticeService:
                 "Every lesson in this unit must be proficient before the checkpoint.",
                 409,
             )
-        pool = next(
+        manifest = next(
             (
                 candidate
-                for candidate in self.catalogue.report.pools.pools
-                if candidate.type == "unit_checkpoint"
+                for candidate in self.catalogue.report.pools.manifests
+                if candidate.unit_key == unit_key
             ),
             None,
         )
+        pool = next(
+            (
+                candidate
+                for candidate in manifest.pools
+                if candidate.type == "unit_checkpoint"
+            ),
+            None,
+        ) if manifest is not None else None
         if pool is None:
             raise PracticeError(
                 "checkpoint_pool_missing",

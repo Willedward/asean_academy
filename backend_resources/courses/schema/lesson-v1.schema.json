@@ -801,17 +801,17 @@
       "type": "integer"
     },
     "stable_key": {
-      "pattern": "^n1-lesson-[0-9]{2}$",
+      "pattern": "^[ngs][0-9]+-lesson-[0-9]{2,3}$",
       "title": "Stable Key",
       "type": "string"
     },
     "course_key": {
-      "const": "g3-sec1-math",
+      "pattern": "^[a-z0-9-]+$",
       "title": "Course Key",
       "type": "string"
     },
     "unit_key": {
-      "const": "g3-sec1-n1",
+      "pattern": "^[a-z0-9-]+$",
       "title": "Unit Key",
       "type": "string"
     },

@@ -1,0 +1,184 @@
+{
+  "$defs": {
+    "BankTopic": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[NGS][0-9]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "title"
+      ],
+      "title": "BankTopic",
+      "type": "object"
+    },
+    "OutcomeDistribution": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[0-9]+\\.[0-9]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "difficulty_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Difficulty Counts",
+          "type": "object"
+        },
+        "total": {
+          "minimum": 0,
+          "title": "Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "code",
+        "title",
+        "difficulty_counts",
+        "total"
+      ],
+      "title": "OutcomeDistribution",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "bank_id": {
+      "format": "uuid",
+      "title": "Bank Id",
+      "type": "string"
+    },
+    "bank_key": {
+      "pattern": "^g3-sec[12]-[ngs][0-9]+-v[0-9]+$",
+      "title": "Bank Key",
+      "type": "string"
+    },
+    "bank_role": {
+      "default": "learning",
+      "enum": [
+        "learning",
+        "diagnostic"
+      ],
+      "title": "Bank Role",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "school_level": {
+      "enum": [
+        "secondary_1",
+        "secondary_2"
+      ],
+      "title": "School Level",
+      "type": "string"
+    },
+    "course": {
+      "minLength": 1,
+      "title": "Course",
+      "type": "string"
+    },
+    "topic": {
+      "$ref": "#/$defs/BankTopic"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "question_count": {
+      "minimum": 1,
+      "title": "Question Count",
+      "type": "integer"
+    },
+    "difficulty_distribution": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Difficulty Distribution",
+      "type": "object"
+    },
+    "outcome_distribution": {
+      "items": {
+        "$ref": "#/$defs/OutcomeDistribution"
+      },
+      "minItems": 1,
+      "title": "Outcome Distribution",
+      "type": "array"
+    },
+    "defaults": {
+      "additionalProperties": true,
+      "title": "Defaults",
+      "type": "object"
+    },
+    "difficulty_definitions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Difficulty Definitions",
+      "type": "object"
+    },
+    "style_references": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Style References",
+      "type": "array"
+    },
+    "publication_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Publication Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "bank_id",
+    "bank_key",
+    "curriculum_version",
+    "school_level",
+    "course",
+    "topic",
+    "status",
+    "question_count",
+    "difficulty_distribution",
+    "outcome_distribution",
+    "defaults",
+    "difficulty_definitions",
+    "style_references",
+    "publication_checks"
+  ],
+  "title": "BankBlueprint",
+  "type": "object"
+}
