@@ -49,7 +49,6 @@ date.
 V3 is appropriately placed after demand, parent engagement and managed mentor sessions
 have been measured.
 
-
 ### 1.1 Codex-adjusted delivery assessment
 
 The updated Beta features are not being rejected. They are split by confidence and can
@@ -114,37 +113,37 @@ reviewed integration pull request.
 `Implemented` means code and tests exist. It does not mean hosted configuration, final
 content or final design has been approved.
 
-| ID | Audited readiness | Required action |
-| --- | --- | --- |
-| B-01 | Implemented; hosted journey still needs verification | Deploy staging, test expiry/revocation/email matching with real Google accounts |
-| B-02 | Implemented; external OAuth configuration remains | Verify callback, refresh, sign-out and private-window login in staging |
-| B-03 | Partial | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3 |
-| B-04 | Technical implementation complete; production forms content-pending | Generalise the syllabus/bank contract and author/review/import 76 isolated matched items, then verify baseline/endline in staging |
-| B-05 | Authenticated learner result and admin comparison implemented | Validate final design; private share link/PDF remains stretch |
-| B-06 | Implemented technical shell | Integrate final responsive design and reviewed content states |
-| B-07 | Versioned lesson infrastructure implemented; content incomplete | Author and review all seven lesson notes and active-recall sections |
-| B-08 | Metadata/handoff designed; no delivery | Choose host and add captions/transcripts; allow notes/transcript fallback for Beta |
-| B-09 | Implemented technical vertical slice | Review questions and integrate final interaction/error/loading states |
-| B-10 | Immediate retry exists | Add durable due dates, spacing state, daily cap and reserve-question selection |
-| B-11 | Backend checkpoint/mastery implemented; learner UI says pending | Review pool, expose start/resume/results UI and run failure/retake/pass journey |
-| B-12 | Implemented technical page | Add due dates, diagnostic comparison and final responsive design |
-| B-13 | Implemented locally; final UI/hosted workflow remain | Validate learner submission and admin resolution in staging/B4 |
-| B-14 | No production domain/API | Move to V2 unless a separate owner and reviewed English bank are ready |
-| B-15 | No production domain/API or AI evaluation | Move to V2; do not make open-ended AI feedback a Beta dependency |
-| B-16 | Admin navigation and pages implemented | Apply final design and verify role-specific navigation |
-| B-17 | Implemented | Verify hosted creation/revocation/audit and invitation secret handling |
-| B-18 | Review API, safe preview, UI and lifecycle audit implemented | Use it on real content; reconcile the roadmap's “3 reviews” with the implemented Maths/editorial plus academic publication rule |
-| B-19 | Review/version infrastructure exists; browser editor does not | Keep lesson authoring in reviewed Git for Beta; defer editor to V2 |
-| B-20 | Versioned Git course/pools and importers exist; browser editor does not | Keep Git as source for Beta; defer editor to V2 |
-| B-21 | Implemented with B-13 | Validate administrator reports inbox in staging/B4 |
-| B-22 | Broad audit exists for invitations, roles, course changes and content lifecycle | Add question-report and account-lifecycle events; verify export/retention needs |
-| B-23 | Implemented administrator student progress and aggregate analytics | Validate against real staging accounts and final UI |
-| B-24 | Deletion, retention, restore, monitoring and rate limits complete locally | Rehearse hosted alerts, limits, load and rollback before inviting students |
-| B-25 | Not implemented | Perform one repository-wide brand migration; retain internal package/database identifiers where renaming adds risk |
-| B-26 | Designed externally | Integrate accessible assets, metadata and icons after the design handoff |
-| B-27 | Partial component primitives exist | Map Figma components to existing API states and add missing error/empty/loading/focus states |
-| B-28 | Technical shell is responsive in places, not acceptance-tested | Test 390/768/1440 widths and keyboard/screen-reader paths |
-| B-29 | Not implemented in product form | Replace the developer home screen with the invite-only NextScholar landing page |
+| ID   | Audited readiness                                                               | Required action                                                                                                                   |
+| ---- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| B-01 | Implemented; hosted journey still needs verification                            | Deploy staging, test expiry/revocation/email matching with real Google accounts                                                   |
+| B-02 | Implemented; external OAuth configuration remains                               | Verify callback, refresh, sign-out and private-window login in staging                                                            |
+| B-03 | Partial                                                                         | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3               |
+| B-04 | Technical implementation complete; production forms content-pending             | Generalise the syllabus/bank contract and author/review/import 76 isolated matched items, then verify baseline/endline in staging |
+| B-05 | Authenticated learner result and admin comparison implemented                   | Validate final design; private share link/PDF remains stretch                                                                     |
+| B-06 | Implemented technical shell                                                     | Integrate final responsive design and reviewed content states                                                                     |
+| B-07 | Versioned lesson infrastructure implemented; content incomplete                 | Author and review all seven lesson notes and active-recall sections                                                               |
+| B-08 | Metadata/handoff designed; no delivery                                          | Choose host and add captions/transcripts; allow notes/transcript fallback for Beta                                                |
+| B-09 | Implemented technical vertical slice                                            | Review questions and integrate final interaction/error/loading states                                                             |
+| B-10 | Immediate retry exists                                                          | Add durable due dates, spacing state, daily cap and reserve-question selection                                                    |
+| B-11 | Backend checkpoint/mastery implemented; learner UI says pending                 | Review pool, expose start/resume/results UI and run failure/retake/pass journey                                                   |
+| B-12 | Implemented technical page                                                      | Add due dates, diagnostic comparison and final responsive design                                                                  |
+| B-13 | Implemented locally; final UI/hosted workflow remain                            | Validate learner submission and admin resolution in staging/B4                                                                    |
+| B-14 | No production domain/API                                                        | Move to V2 unless a separate owner and reviewed English bank are ready                                                            |
+| B-15 | No production domain/API or AI evaluation                                       | Move to V2; do not make open-ended AI feedback a Beta dependency                                                                  |
+| B-16 | Admin navigation and pages implemented                                          | Apply final design and verify role-specific navigation                                                                            |
+| B-17 | Implemented                                                                     | Verify hosted creation/revocation/audit and invitation secret handling                                                            |
+| B-18 | Review API, safe preview, UI and lifecycle audit implemented                    | Use it on real content; reconcile the roadmap's “3 reviews” with the implemented Maths/editorial plus academic publication rule   |
+| B-19 | Review/version infrastructure exists; browser editor does not                   | Keep lesson authoring in reviewed Git for Beta; defer editor to V2                                                                |
+| B-20 | Versioned Git course/pools and importers exist; browser editor does not         | Keep Git as source for Beta; defer editor to V2                                                                                   |
+| B-21 | Implemented with B-13                                                           | Validate administrator reports inbox in staging/B4                                                                                |
+| B-22 | Broad audit exists for invitations, roles, course changes and content lifecycle | Add question-report and account-lifecycle events; verify export/retention needs                                                   |
+| B-23 | Implemented administrator student progress and aggregate analytics              | Validate against real staging accounts and final UI                                                                               |
+| B-24 | Deletion, retention, restore, monitoring and rate limits complete locally       | Rehearse hosted alerts, limits, load and rollback before inviting students                                                        |
+| B-25 | Not implemented                                                                 | Perform one repository-wide brand migration; retain internal package/database identifiers where renaming adds risk                |
+| B-26 | Designed externally                                                             | Integrate accessible assets, metadata and icons after the design handoff                                                          |
+| B-27 | Partial component primitives exist                                              | Map Figma components to existing API states and add missing error/empty/loading/focus states                                      |
+| B-28 | Technical shell is responsive in places, not acceptance-tested                  | Test 390/768/1440 widths and keyboard/screen-reader paths                                                                         |
+| B-29 | Not implemented in product form                                                 | Replace the developer home screen with the invite-only NextScholar landing page                                                   |
 
 ## 4. Beta scope contract
 
@@ -190,14 +189,14 @@ parallel with backend work, but release gates remain shared.
 
 Indicative engineering effort, assuming the current code remains the baseline:
 
-| Milestone | Focused engineering effort | Calendar implication |
-| --- | ---: | --- |
-| B0 | 2–4 working days | Do first; external credentials can extend elapsed time |
-| B1 | 7–10 working days | Backend and diagnostic frontend can overlap |
-| B2 | 7–10 working days | Retry/report backend and checkpoint UI can overlap |
-| B3 | 3–5 working days | Runbooks and operational rehearsal |
-| B4 | 10–15 frontend working days | Runs in parallel after API/fixture contracts freeze |
-| B5 | 5–10 engineering days | Integration, bug fixing and pilot support; excludes authoring/review time |
+| Milestone |  Focused engineering effort | Calendar implication                                                      |
+| --------- | --------------------------: | ------------------------------------------------------------------------- |
+| B0        |            2–4 working days | Do first; external credentials can extend elapsed time                    |
+| B1        |           7–10 working days | Backend and diagnostic frontend can overlap                               |
+| B2        |           7–10 working days | Retry/report backend and checkpoint UI can overlap                        |
+| B3        |            3–5 working days | Runbooks and operational rehearsal                                        |
+| B4        | 10–15 frontend working days | Runs in parallel after API/fixture contracts freeze                       |
+| B5        |       5–10 engineering days | Integration, bug fixing and pilot support; excludes authoring/review time |
 
 At 10–25 combined team hours per week, the reduced Beta requires roughly 7–10 calendar
 weeks when frontend and content proceed in parallel. External setup delays or late content
@@ -310,7 +309,7 @@ accepting the first student.
 
 ### B4 — Final frontend integration
 
-**Engineering status (30 September 2026): B4.1 wires the authenticated `/learn` dashboard and `/courses/[courseKey]` map to live APIs. B4.2 now integrates `/lessons/[lessonKey]` and guided `/practice/[sessionId]` with the final component system while retaining API-owned lesson progress, active recall, session selection, marking, hints, give-up solutions and question reports. The previous technical screens remain behind the server-only `ASEAN_ACADEMY_BETA_LEARNING_UI` rollback flag. Checkpoint/retry entry routes, diagnostic, progress, authentication/onboarding and administrator visual integration remain. The public `/` landing page now uses the rollout-controlled NextScholar presentation.** See [B4_FRONTEND_KIT_INTEGRATION_AUDIT.md](B4_FRONTEND_KIT_INTEGRATION_AUDIT.md).
+**Engineering status (30 September 2026): B4.1 wires the authenticated `/learn` dashboard and `/courses/[courseKey]` map to live APIs. B4.2 integrates `/lessons/[lessonKey]` and guided `/practice/[sessionId]` while retaining the API-owned learning state machines. B4.3 now integrates live `/progress`, retry-review entry, checkpoint start/resume/retake and `/checkpoints/[sessionId]`; the server remains authoritative for selection, daily retry limits, scoring and mastery. The previous technical screens remain behind the server-only `ASEAN_ACADEMY_BETA_LEARNING_UI` rollback flag. Diagnostic, authentication/onboarding and administrator visual integration remain. The public `/` landing page uses the rollout-controlled NextScholar presentation.** See [B4_FRONTEND_KIT_INTEGRATION_AUDIT.md](B4_FRONTEND_KIT_INTEGRATION_AUDIT.md).
 
 The final frontend consumes the generated OpenAPI client and existing same-origin proxy.
 It must not duplicate business rules or call PostgreSQL/Supabase learning tables directly.
@@ -345,15 +344,15 @@ content revision and cohort list.
 
 ## 6. Parallel work lanes
 
-| Lane | Can proceed now | Blocks Beta |
-| --- | --- | --- |
-| Backend | B0 integration, diagnostics, spaced retry, reports, deletion runbook | Yes |
-| Frontend | NextScholar tokens/components and screens against fixtures/OpenAPI | Yes |
-| Mathematics content | Generalized 19-topic bank, approximately 1,976 first-target items, 76 diagnostic items, notes and pool audit | Yes |
-| Video | Host experiment, captions, transcripts, posters | Only if the team makes all videos mandatory |
-| English | Taxonomy, question/essay format and rubric research | No; V2 |
-| AI tutor | Provider interface, quotas and synthetic evaluation behind a flag | No; V2 |
-| Operations | Staging credentials, tester invitations, privacy/consent text, support owner | Yes |
+| Lane                | Can proceed now                                                                                              | Blocks Beta                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| Backend             | B0 integration, diagnostics, spaced retry, reports, deletion runbook                                         | Yes                                         |
+| Frontend            | NextScholar tokens/components and screens against fixtures/OpenAPI                                           | Yes                                         |
+| Mathematics content | Generalized 19-topic bank, approximately 1,976 first-target items, 76 diagnostic items, notes and pool audit | Yes                                         |
+| Video               | Host experiment, captions, transcripts, posters                                                              | Only if the team makes all videos mandatory |
+| English             | Taxonomy, question/essay format and rubric research                                                          | No; V2                                      |
+| AI tutor            | Provider interface, quotas and synthetic evaluation behind a flag                                            | No; V2                                      |
+| Operations          | Staging credentials, tester invitations, privacy/consent text, support owner                                 | Yes                                         |
 
 API fixtures should be versioned and generated. The frontend owner should not wait for a
 hosted backend for every screen, and backend work should not depend on final styling.
@@ -475,17 +474,17 @@ state; reviewed Git content remains the authoring source of truth.
 
 ## 10. Verification matrix
 
-| Capability | Unit/domain | PostgreSQL integration | API contract | Browser E2E | Hosted manual |
-| --- | --- | --- | --- | --- | --- |
-| Invitation/auth | Token and invite rules | Profile/enrolment transaction | Identity errors/roles | Google test boundary | Real Google callback |
-| Diagnostic | Scoring/bands/eligibility | Autosave, ownership, immutable result | No early feedback | Resume and submit | Real invited learner |
-| Practice | Deterministic answer policies | Idempotency and progress | Hint/solution locks | Wrong/retry/give-up | Multi-device persistence |
-| Spaced retry | 2/4/7/14 transition | Due concurrency and ordering | Server time/due state | Daily review flow | Timezone check |
-| Checkpoint | Pass/retake policy | Mastery transaction | Support locked | Failure and pass | Refresh/multi-tab |
-| Reports | Category/state transitions | Ownership/audit | Safe metadata | Submit/admin resolve | Support workflow |
-| Operations | Limit/retention policies | Restore signatures | Health/readiness | Admin status | Rollback/restore drill |
-| Tutor (V2) | Prompt/lock/quota policy | Reservation/reconciliation | Structured output | Multi-turn fallback | Provider/cost alert |
-| Payments (V2) | Entitlement/price policy | Idempotent webhook | Signed event errors | Checkout states | Reconciliation/refund |
+| Capability      | Unit/domain                   | PostgreSQL integration                | API contract          | Browser E2E          | Hosted manual            |
+| --------------- | ----------------------------- | ------------------------------------- | --------------------- | -------------------- | ------------------------ |
+| Invitation/auth | Token and invite rules        | Profile/enrolment transaction         | Identity errors/roles | Google test boundary | Real Google callback     |
+| Diagnostic      | Scoring/bands/eligibility     | Autosave, ownership, immutable result | No early feedback     | Resume and submit    | Real invited learner     |
+| Practice        | Deterministic answer policies | Idempotency and progress              | Hint/solution locks   | Wrong/retry/give-up  | Multi-device persistence |
+| Spaced retry    | 2/4/7/14 transition           | Due concurrency and ordering          | Server time/due state | Daily review flow    | Timezone check           |
+| Checkpoint      | Pass/retake policy            | Mastery transaction                   | Support locked        | Failure and pass     | Refresh/multi-tab        |
+| Reports         | Category/state transitions    | Ownership/audit                       | Safe metadata         | Submit/admin resolve | Support workflow         |
+| Operations      | Limit/retention policies      | Restore signatures                    | Health/readiness      | Admin status         | Rollback/restore drill   |
+| Tutor (V2)      | Prompt/lock/quota policy      | Reservation/reconciliation            | Structured output     | Multi-turn fallback  | Provider/cost alert      |
+| Payments (V2)   | Entitlement/price policy      | Idempotent webhook                    | Signed event errors   | Checkout states      | Reconciliation/refund    |
 
 ## 11. Decisions and ownership to record
 

@@ -19,7 +19,6 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - In an unflagged production build, `/beta-kit` returns a true non-cacheable `404` and `/` remains available.
 - The current API-contract drift in the adapter test was repaired by adding B2's required `unlocked` and `retry_question_count` fields to its fixture.
 
-
 ## B4.1 live integration (30 September 2026)
 
 - `/learn` uses the authenticated learner's active enrolment instead of a hard-coded course.
@@ -43,21 +42,33 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - The public `/` route now uses an honest NextScholar landing page with supported beta features only; sample reward claims were removed.
 - The next B4 slice is checkpoint/retry/progress visual integration, followed by authentication/onboarding and administrator surfaces.
 
+## B4.3 checkpoint, retry and progress integration (30 September 2026)
+
+- `/progress` now renders real proficiency, question outcomes, unresolved retry counts, scheduled-review timing and checkpoint states through the final responsive component system.
+- A learner can start a server-owned `retry_review` session from a lesson with unresolved questions and continue it through the shared practice state machine.
+- Checkpoint actions preserve their distinct semantics: an active attempt resumes its existing session, while a failed completed attempt creates a fresh retake session.
+- `/checkpoints/[sessionId]` now uses the final focused practice presentation. Checkpoint mode continues to suppress hints, Give up and worked solutions.
+- Retry selection, the five-question daily cap, checkpoint availability, scoring and mastery remain enforced by the Learning API.
+- Browser extensions such as Grammarly can inject attributes into the document body before React starts; the root body now suppresses that expected attribute-only hydration warning.
+- The rollout flag continues to restore the established progress and checkpoint screens without changing API state.
+- Validation passes 49 web tests and TypeScript. Full lint and production-build results are recorded with the implementation commit.
+- The next B4 slice is authentication/onboarding visual integration, then diagnostic and administrator surfaces.
+
 ## What can be wired now
 
-| Area | Existing source of truth | B4 work |
-| --- | --- | --- |
-| Landing and sign-in | Supabase server actions and `/login` errors | Replace visuals while preserving callback/session behavior |
-| Onboarding | Invitation-bound profile/enrolment API | Bind the kit form to the existing action; do not add a client-owned track decision |
-| Dashboard/course map | Learning-home, course-map and progress APIs | Use the supplied adapters and replace sample player/game data with absent states |
-| Lesson | Versioned lesson response and section progress | Render real `MathContent`, material states and progress through kit slots/wrappers |
-| Guided practice | Existing practice player, deterministic checking, hints and Give up | Keep the state machine and render kit screens for each server state |
-| Spaced retry | B2 scheduling, selection, counts and next-due data | Wire available states; add a grouped list endpoint only if the exact ready/later/cleared view is required |
-| Checkpoint | B2 checkpoint-mode practice and mastery | Replace current checkpoint visuals; keep server-owned rules and answer locking |
-| Question report | B2 learner/admin report APIs | Connect the report sheet and admin inbox |
-| Diagnostic | B1 APIs and technical pages | A design is missing from this kit; retain the technical UI until an approved replacement exists |
-| Account deletion | B3 academic-admin preview/execute workflow | Build an admin confirmation UI; do not connect the learner settings sheet to this privileged endpoint |
-| Errors/loading | Standard API code/request ID and route states | Map error codes without hiding request IDs needed for support |
+| Area                 | Existing source of truth                                            | B4 work                                                                                                   |
+| -------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Landing and sign-in  | Supabase server actions and `/login` errors                         | Replace visuals while preserving callback/session behavior                                                |
+| Onboarding           | Invitation-bound profile/enrolment API                              | Bind the kit form to the existing action; do not add a client-owned track decision                        |
+| Dashboard/course map | Learning-home, course-map and progress APIs                         | Use the supplied adapters and replace sample player/game data with absent states                          |
+| Lesson               | Versioned lesson response and section progress                      | Render real `MathContent`, material states and progress through kit slots/wrappers                        |
+| Guided practice      | Existing practice player, deterministic checking, hints and Give up | Keep the state machine and render kit screens for each server state                                       |
+| Spaced retry         | B2 scheduling, selection, counts and next-due data                  | Wire available states; add a grouped list endpoint only if the exact ready/later/cleared view is required |
+| Checkpoint           | B2 checkpoint-mode practice and mastery                             | Replace current checkpoint visuals; keep server-owned rules and answer locking                            |
+| Question report      | B2 learner/admin report APIs                                        | Connect the report sheet and admin inbox                                                                  |
+| Diagnostic           | B1 APIs and technical pages                                         | A design is missing from this kit; retain the technical UI until an approved replacement exists           |
+| Account deletion     | B3 academic-admin preview/execute workflow                          | Build an admin confirmation UI; do not connect the learner settings sheet to this privileged endpoint     |
+| Errors/loading       | Standard API code/request ID and route states                       | Map error codes without hiding request IDs needed for support                                             |
 
 ## Sample-only or deferred data
 
