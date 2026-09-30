@@ -2,6 +2,8 @@
 
 **Decision:** Build a reviewed bank across all 19 Singapore G3/Express Mathematics topic groups for the beta. The existing 40 N1 questions are the first pilot batch, not the complete beta bank.
 
+Working defaults and the Codex batch workflow are recorded in [`QUESTION_AUTHORING_RECOMMENDATIONS.md`](QUESTION_AUTHORING_RECOMMENDATIONS.md).
+
 ## Target inventory
 
 The syllabus supplied covers 19 level-specific topic groups across Secondary 1 and Secondary 2. At 100–150 questions per group, the target inventory is 1,900–2,850 reviewed questions.
