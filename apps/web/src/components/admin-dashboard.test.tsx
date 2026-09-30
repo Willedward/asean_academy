@@ -1,8 +1,20 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { UsersPanel, QuestionsPanel, OperationsPanel } from "./admin-dashboard";
+import {
+  UsersPanel,
+  QuestionsPanel,
+  OperationsPanel,
+  ReportsPanel,
+} from "./admin-dashboard";
 
 afterEach(() => {
+  cleanup();
   vi.unstubAllGlobals();
 });
 const user = {
@@ -121,6 +133,63 @@ describe("administrator dashboard", () => {
         expect.anything(),
       ),
     );
+  });
+
+  it("records a learner-visible report resolution without a browser prompt", async () => {
+    const report = {
+      report_id: "30000000-0000-4000-8000-000000000001",
+      learner_id: user.learner_id,
+      learner_email: user.email,
+      session_id: null,
+      question_key: "n1-l1-01",
+      question_revision: 1,
+      question_title: "Prime factorisation of 360",
+      category: "possible_error",
+      comment: "The wording may be ambiguous.",
+      status: "in_review",
+      resolution: null,
+      created_at: "2026-09-30T00:00:00Z",
+      updated_at: "2026-09-30T00:00:00Z",
+      resolved_at: null,
+    };
+    const fetcher = vi.fn(
+      async (_url: string, init: RequestInit) =>
+        new Response(
+          JSON.stringify(
+            init.method === "PATCH"
+              ? {
+                  ...report,
+                  status: "resolved",
+                  resolution: "Confirmed and corrected in revision 2.",
+                }
+              : { reports: [report], total: 1 },
+          ),
+        ),
+    );
+    vi.stubGlobal("fetch", fetcher);
+    render(<ReportsPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "Resolve" }));
+    const confirmation = screen.getByRole("button", {
+      name: "Confirm resolution",
+    });
+    expect(confirmation).toBeDisabled();
+
+    fireEvent.change(screen.getByLabelText("Resolution shown to the learner"), {
+      target: { value: "Confirmed and corrected in revision 2." },
+    });
+    fireEvent.click(confirmation);
+
+    await waitFor(() =>
+      expect(
+        fetcher.mock.calls.filter((call) => call[1].method === "PATCH"),
+      ).toHaveLength(1),
+    );
+    const patch = fetcher.mock.calls.find((call) => call[1].method === "PATCH");
+    expect(JSON.parse(String(patch?.[1].body))).toEqual({
+      status: "resolved",
+      resolution: "Confirmed and corrected in revision 2.",
+    });
   });
 
   it("shows actionable content errors independently of system status", async () => {

@@ -60,3 +60,102 @@ a {
   font-size: 0.875rem;
   line-height: 1.5;
 }
+
+/* B4 administrator integration. These rules are deliberately scoped to the
+   rollout-controlled admin shell so the established interface remains an
+   immediate rollback option. */
+.ns-admin-content {
+  color: var(--color-ns-ink);
+}
+
+.ns-admin-content > h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.ns-admin-content > h1 + p {
+  margin: 0 0 1.5rem;
+  max-width: 52rem;
+  color: var(--color-ns-muted);
+  line-height: 1.6;
+}
+
+.ns-admin-content > h1 + div,
+.ns-admin-content > h1 + section,
+.ns-admin-content > h1 + p + div,
+.ns-admin-content > h1 + p + section {
+  margin-top: 1.5rem;
+}
+
+.ns-admin-content :where(.status-card) {
+  border-color: var(--color-ns-line);
+  background: var(--color-ns-raised);
+  box-shadow: var(--shadow-ns-sm);
+}
+
+.ns-admin-content :where(.rounded-2xl, .rounded-3xl)[class*="border"] {
+  border-color: var(--color-ns-line);
+}
+
+.ns-admin-content :where(.rounded-2xl, .rounded-3xl)[class*="bg-white"] {
+  background: var(--color-ns-raised);
+  box-shadow: var(--shadow-ns-sm);
+}
+
+.ns-admin-content :where(input, select, textarea) {
+  border-color: var(--color-ns-line-strong);
+  color: var(--color-ns-ink);
+  background: var(--color-ns-raised);
+}
+
+.ns-admin-content :where(input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-ns-success);
+  outline-offset: 2px;
+}
+
+.ns-admin-content :where(label) {
+  color: var(--color-ns-ink);
+  font-weight: 600;
+}
+
+.ns-admin-content :where(table) {
+  border-collapse: collapse;
+}
+
+.ns-admin-content :where(thead) {
+  background: var(--color-ns-sunken);
+  color: var(--color-ns-muted);
+}
+
+.ns-admin-content :where(tbody tr:hover) {
+  background: color-mix(in srgb, var(--color-ns-brand-soft) 55%, white);
+}
+
+.ns-admin-content :where(th) {
+  white-space: nowrap;
+}
+
+.ns-admin-content :where(td) {
+  vertical-align: top;
+}
+
+.ns-admin-content :where(code, pre) {
+  font-size: 0.78rem;
+}
+
+.ns-admin-content a[class*="text-teal"] {
+  color: var(--color-ns-teal-2);
+}
+
+@media (max-width: 639px) {
+  .ns-admin-content :where(table) {
+    min-width: 46rem;
+  }
+
+  .ns-admin-content > h1 {
+    font-size: 1.75rem;
+  }
+}

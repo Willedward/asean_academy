@@ -1,22 +1,28 @@
 import Link from "next/link";
-import { requireAdministrator } from "@/lib/auth/admin";
-import { Button } from "@/components/ui/button";
 
-export default async function AdminLayout({
+import { AdminShell } from "@/beta-kit/live/admin-shell";
+import { Button } from "@/components/ui/button";
+import { requireAdministrator } from "@/lib/auth/admin";
+import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
+
+function Unavailable() {
+  return (
+    <main className="mx-auto max-w-2xl p-10">
+      <h1 className="text-3xl font-bold">
+        Administrator access requires Supabase configuration.
+      </h1>
+      <Link href="/learn">Return to learning</Link>
+    </main>
+  );
+}
+
+function EstablishedAdminLayout({
+  administrator,
   children,
 }: {
+  administrator: NonNullable<Awaited<ReturnType<typeof requireAdministrator>>>;
   children: React.ReactNode;
 }) {
-  const administrator = await requireAdministrator();
-  if (!administrator)
-    return (
-      <main className="mx-auto max-w-2xl p-10">
-        <h1 className="text-3xl font-bold">
-          Administrator access requires Supabase configuration.
-        </h1>
-        <Link href="/learn">Return to learning</Link>
-      </main>
-    );
   const academic = administrator.profile.role === "academic_admin";
   const links: [string, string][] = [
     ["/admin", "Overview"],
@@ -67,5 +73,39 @@ export default async function AdminLayout({
       </header>
       <main className="mx-auto max-w-7xl space-y-6 px-6 py-8">{children}</main>
     </>
+  );
+}
+
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const administrator = await requireAdministrator();
+  if (!administrator) return <Unavailable />;
+
+  if (!betaLearningUiEnabled()) {
+    return (
+      <EstablishedAdminLayout administrator={administrator}>
+        {children}
+      </EstablishedAdminLayout>
+    );
+  }
+
+  const displayName =
+    administrator.profile.display_name?.trim() ||
+    administrator.profile.email.split("@")[0] ||
+    "Administrator";
+
+  return (
+    <AdminShell
+      identity={{
+        displayName,
+        email: administrator.profile.email,
+        role: administrator.profile.role as "content_admin" | "academic_admin",
+      }}
+    >
+      {children}
+    </AdminShell>
   );
 }

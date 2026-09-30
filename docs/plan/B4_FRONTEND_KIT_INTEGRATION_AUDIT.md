@@ -79,6 +79,19 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - Regression coverage includes content-pending fallback, API-selected start, multipart completeness, delayed autosave, submission routing and supportive results. Validation passes 56 web tests, ESLint, TypeScript and the production Next.js build.
 - Authenticated Playwright remains environment-gated by `E2E_DATABASE_URL`. The next B4 slice is administrator visual integration, followed by the final responsive/accessibility and authenticated-journey acceptance pass.
 
+## B4.6 administrator integration (30 September 2026)
+
+- Every protected administrator route now uses a responsive NextScholar administration shell with active navigation, administrator identity, learner-view access and POST sign-out.
+- Navigation reflects the verified backend role. Content administrators can access overview, students, question analytics, reports, content, invitations and audit; users/roles and system status remain visible only to academic administrators.
+- Existing server guards remain authoritative. A student is still redirected to learning, an onboarding-required identity to onboarding, and a content administrator attempting an academic-only URL back to the admin overview.
+- Overview metrics, student evidence, question analytics, content review/publication requests, invitations, immutable audit events, role changes, curriculum migration previews and operational status continue using their existing APIs and safeguards.
+- Report resolution now uses an accessible inline confirmation instead of a browser prompt. The learner-visible resolution and API request ID errors remain available in the page.
+- Academic administrators can reset an exceptional baseline/endline attempt only after entering an audit reason. The Learning API continues to preserve the old result as reset history and to enforce the role.
+- Academic administrators can preview permanent learner deletion, inspect affected and retained records, and execute only with the signed expiring preview token, exact learner email and a minimum-length audit reason. The interface never exposes this operation to content administrators or learner settings.
+- Admin tables, forms, loading/errors, cards and focus states receive scoped NextScholar styling only inside the rollout-controlled shell. Setting `ASEAN_ACADEMY_BETA_LEARNING_UI=false` restores the established admin navigation.
+- Validation passes 61 web tests, ESLint, strict TypeScript and the production Next.js build across all 152 generated pages.
+- Authenticated Playwright and screenshots at 390, 768 and 1440 pixels remain environment-gated acceptance work. This is the next B4 slice.
+
 ## What can be wired now
 
 | Area                 | Existing source of truth                                            | B4 work                                                                                                   |
@@ -90,9 +103,9 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 | Guided practice      | Existing practice player, deterministic checking, hints and Give up | Keep the state machine and render kit screens for each server state                                       |
 | Spaced retry         | B2 scheduling, selection, counts and next-due data                  | Wire available states; add a grouped list endpoint only if the exact ready/later/cleared view is required |
 | Checkpoint           | B2 checkpoint-mode practice and mastery                             | Replace current checkpoint visuals; keep server-owned rules and answer locking                            |
-| Question report      | B2 learner/admin report APIs                                        | Connect the report sheet and admin inbox                                                                  |
+| Question report      | B2 learner/admin report APIs                                        | Integrated through learner reporting and the B4.6 inline administrator resolution workflow                |
 | Diagnostic           | B1 APIs and technical pages                                         | Integrated in B4.5 across next/start/resume/player/result states; production forms remain a content gate  |
-| Account deletion     | B3 academic-admin preview/execute workflow                          | Build an admin confirmation UI; do not connect the learner settings sheet to this privileged endpoint     |
+| Account deletion     | B3 academic-admin preview/execute workflow                          | Integrated in B4.6 with signed preview, exact-email confirmation, audit reason and academic-only access   |
 | Errors/loading       | Standard API code/request ID and route states                       | Map error codes without hiding request IDs needed for support                                             |
 
 ## Sample-only or deferred data
@@ -109,7 +122,7 @@ These fields must never be calculated authoritatively in the browser. If selecte
 4. Reuse the existing practice state machine with the new practice components.
 5. Integrate retry, checkpoint and question-report states already supported by B2.
 6. Integrate the diagnostic journey with the shared component system while keeping B1 session and scoring rules server-owned. Completed in B4.5.
-7. Integrate progress and administrator views; the submitted kit primarily covers student screens, so the admin UI still needs B4 design work.
+7. Integrate progress and administrator views with role-aware navigation and guarded operations. Completed through B4.3 and B4.6.
 8. Run authenticated E2E, keyboard/screen-reader checks and screenshots at 390, 768 and 1440 pixels before replacing the technical shell.
 
 ## Merge boundary

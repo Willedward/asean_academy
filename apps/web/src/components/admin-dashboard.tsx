@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminAccountDeletion } from "@/components/admin-account-deletion";
+import { AdminDiagnosticReset } from "@/components/admin-diagnostic-reset";
 import { Button } from "@/components/ui/button";
 import { ApiRequestError } from "@/lib/api/errors";
 import {
@@ -255,7 +257,13 @@ export function StudentsPanel() {
     </div>
   );
 }
-export function StudentPanel({ learnerId }: { learnerId: string }) {
+export function StudentPanel({
+  learnerId,
+  academic = false,
+}: {
+  learnerId: string;
+  academic?: boolean;
+}) {
   const { data, error, reload } = useResource<StudentDetail>(
     `students/${encodeURIComponent(learnerId)}`,
   );
@@ -292,15 +300,38 @@ export function StudentPanel({ learnerId }: { learnerId: string }) {
           {(["baseline", "endline"] as const).map((purpose) => {
             const result = diagnostics.data?.[purpose];
             return (
-              <div className="rounded-2xl border border-slate-200 bg-white p-5" key={purpose}>
-                <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">{purpose}</p>
+              <div
+                className="rounded-2xl border border-slate-200 bg-white p-5"
+                key={purpose}
+              >
+                <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">
+                  {purpose}
+                </p>
                 {result ? (
                   <>
-                    <p className="my-1 text-3xl font-black">{result.percentage}%</p>
-                    <p className="m-0 capitalize text-slate-600">{pretty(result.band)}</p>
-                    <p className="mb-0 mt-3 text-sm text-slate-500">Priorities: {result.priorities.length ? result.priorities.join(", ") : "none"}</p>
+                    <p className="my-1 text-3xl font-black">
+                      {result.percentage}%
+                    </p>
+                    <p className="m-0 capitalize text-slate-600">
+                      {pretty(result.band)}
+                    </p>
+                    <p className="mb-0 mt-3 text-sm text-slate-500">
+                      Priorities:{" "}
+                      {result.priorities.length
+                        ? result.priorities.join(", ")
+                        : "none"}
+                    </p>
+                    {academic ? (
+                      <AdminDiagnosticReset
+                        learnerId={learnerId}
+                        purpose={purpose}
+                        onReset={diagnostics.reload}
+                      />
+                    ) : null}
                   </>
-                ) : <p className="mb-0 text-slate-500">Not completed</p>}
+                ) : (
+                  <p className="mb-0 text-slate-500">Not completed</p>
+                )}
               </div>
             );
           })}
@@ -349,6 +380,12 @@ export function StudentPanel({ learnerId }: { learnerId: string }) {
           ))}
         </Table>
       )}
+      {academic ? (
+        <AdminAccountDeletion
+          learnerId={learnerId}
+          studentEmail={data.student.email}
+        />
+      ) : null}
     </div>
   );
 }
@@ -776,43 +813,210 @@ export function ReportsPanel() {
   const [status, setStatus] = useState("open");
   const [offset, setOffset] = useState(0);
   const [revision, setRevision] = useState(0);
-  const query = new URLSearchParams({ status, limit: "25", offset: String(offset), revision: String(revision) });
-  const { data, error, reload } = useResource<Reports>(`question-reports?${query}`);
+  const [decision, setDecision] = useState<{
+    reportId: string;
+    status: "resolved" | "dismissed";
+  } | null>(null);
+  const [resolution, setResolution] = useState("");
+  const [busyReportId, setBusyReportId] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
+  const query = new URLSearchParams({
+    status,
+    limit: "25",
+    offset: String(offset),
+    revision: String(revision),
+  });
+  const { data, error, reload } = useResource<Reports>(
+    "question-reports?" + query.toString(),
+  );
 
-  async function update(reportId: string, nextStatus: "in_review" | "resolved" | "dismissed") {
-    const resolution = nextStatus === "in_review" ? null : window.prompt("Resolution shown to the learner:");
-    if (nextStatus !== "in_review" && !resolution?.trim()) return;
-    await adminRequest<Report>(
-      `question-reports/${encodeURIComponent(reportId)}`,
-      { status: nextStatus, resolution },
-      "PATCH",
-    );
-    setRevision((value) => value + 1);
-    reload();
+  async function update(
+    reportId: string,
+    nextStatus: "in_review" | "resolved" | "dismissed",
+    resolutionText: string | null = null,
+  ) {
+    setBusyReportId(reportId);
+    setActionError(null);
+    try {
+      await adminRequest<Report>(
+        "question-reports/" + encodeURIComponent(reportId),
+        { status: nextStatus, resolution: resolutionText },
+        "PATCH",
+      );
+      setDecision(null);
+      setResolution("");
+      setRevision((value) => value + 1);
+      reload();
+    } catch (caught) {
+      setActionError(message(caught));
+    } finally {
+      setBusyReportId(null);
+    }
   }
 
   return (
     <div className="space-y-5">
-      <label className="block max-w-xs text-sm font-bold">Status
-        <select className="mt-1 block w-full rounded-lg border bg-white p-3" onChange={(event) => { setStatus(event.target.value); setOffset(0); }} value={status}>
-          <option value="open">Open</option><option value="in_review">In review</option><option value="resolved">Resolved</option><option value="dismissed">Dismissed</option>
+      <p className="max-w-3xl text-sm leading-6 text-slate-600">
+        Review learner reports against the immutable question revision. A
+        resolution is shown to the learner and recorded in the audit trail.
+      </p>
+      <label className="block max-w-xs text-sm font-bold">
+        Status
+        <select
+          className="mt-1 block w-full rounded-lg border bg-white p-3"
+          onChange={(event) => {
+            setStatus(event.target.value);
+            setOffset(0);
+            setDecision(null);
+            setActionError(null);
+          }}
+          value={status}
+        >
+          <option value="open">Open</option>
+          <option value="in_review">In review</option>
+          <option value="resolved">Resolved</option>
+          <option value="dismissed">Dismissed</option>
         </select>
       </label>
-      {!data ? <State error={error} reload={reload} /> : !data.reports.length ? <p>No reports in this state.</p> : (
+      {actionError ? (
+        <p
+          className="rounded-xl bg-rose-50 p-3 text-sm text-rose-800"
+          role="alert"
+        >
+          {actionError}
+        </p>
+      ) : null}
+      {!data ? (
+        <State error={error} reload={reload} />
+      ) : !data.reports.length ? (
+        <p>No reports in this state.</p>
+      ) : (
         <div className="space-y-4">
-          {data.reports.map((report) => (
-            <article className="rounded-2xl border border-slate-200 bg-white p-5" key={report.report_id}>
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div><p className="m-0 text-xs font-bold uppercase text-teal-700">{pretty(report.category)} · {report.question_key} r{report.question_revision}</p><h2 className="mt-1 text-xl font-bold">{report.question_title}</h2></div>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold capitalize">{pretty(report.status)}</span>
-              </div>
-              <p className="text-sm text-slate-500">{report.learner_email} · {date(report.created_at)}</p>
-              <p className="whitespace-pre-wrap">{report.comment}</p>
-              {report.resolution ? <p className="rounded-xl bg-emerald-50 p-3"><strong>Resolution:</strong> {report.resolution}</p> : null}
-              {report.status === "open" ? <Button onClick={() => void update(report.report_id, "in_review")}>Start review</Button> : null}
-              {report.status === "in_review" ? <div className="flex gap-2"><Button onClick={() => void update(report.report_id, "resolved")}>Resolve</Button><Button onClick={() => void update(report.report_id, "dismissed")} variant="outline">Dismiss</Button></div> : null}
-            </article>
-          ))}
+          {data.reports.map((report) => {
+            const deciding = decision?.reportId === report.report_id;
+            return (
+              <article
+                className="rounded-2xl border border-slate-200 bg-white p-5"
+                key={report.report_id}
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="m-0 text-xs font-bold uppercase text-teal-700">
+                      {pretty(report.category)} · {report.question_key} r
+                      {report.question_revision}
+                    </p>
+                    <h2 className="mt-1 text-xl font-bold">
+                      {report.question_title}
+                    </h2>
+                  </div>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold capitalize">
+                    {pretty(report.status)}
+                  </span>
+                </div>
+                <p className="text-sm text-slate-500">
+                  {report.learner_email} · {date(report.created_at)}
+                </p>
+                <p className="whitespace-pre-wrap">{report.comment}</p>
+                {report.resolution ? (
+                  <p className="rounded-xl bg-emerald-50 p-3">
+                    <strong>Resolution:</strong> {report.resolution}
+                  </p>
+                ) : null}
+                {report.status === "open" ? (
+                  <Button
+                    disabled={busyReportId === report.report_id}
+                    onClick={() => void update(report.report_id, "in_review")}
+                  >
+                    {busyReportId === report.report_id
+                      ? "Updating…"
+                      : "Start review"}
+                  </Button>
+                ) : null}
+                {report.status === "in_review" && !deciding ? (
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      onClick={() => {
+                        setDecision({
+                          reportId: report.report_id,
+                          status: "resolved",
+                        });
+                        setResolution("");
+                        setActionError(null);
+                      }}
+                    >
+                      Resolve
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setDecision({
+                          reportId: report.report_id,
+                          status: "dismissed",
+                        });
+                        setResolution("");
+                        setActionError(null);
+                      }}
+                      variant="outline"
+                    >
+                      Dismiss
+                    </Button>
+                  </div>
+                ) : null}
+                {report.status === "in_review" && deciding ? (
+                  <div className="mt-4 space-y-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p className="m-0 font-bold capitalize">
+                      {decision.status === "resolved"
+                        ? "Resolve report"
+                        : "Dismiss report"}
+                    </p>
+                    <label
+                      className="block text-sm font-bold"
+                      htmlFor={"report-resolution-" + report.report_id}
+                    >
+                      Resolution shown to the learner
+                    </label>
+                    <textarea
+                      className="block min-h-24 w-full rounded-lg border bg-white p-3"
+                      id={"report-resolution-" + report.report_id}
+                      maxLength={2000}
+                      onChange={(event) => setResolution(event.target.value)}
+                      value={resolution}
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        disabled={
+                          resolution.trim().length < 3 ||
+                          busyReportId === report.report_id
+                        }
+                        onClick={() =>
+                          void update(
+                            report.report_id,
+                            decision.status,
+                            resolution.trim(),
+                          )
+                        }
+                      >
+                        {busyReportId === report.report_id
+                          ? "Saving…"
+                          : decision.status === "resolved"
+                            ? "Confirm resolution"
+                            : "Confirm dismissal"}
+                      </Button>
+                      <Button
+                        disabled={busyReportId === report.report_id}
+                        onClick={() => {
+                          setDecision(null);
+                          setResolution("");
+                        }}
+                        variant="outline"
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
+              </article>
+            );
+          })}
           <Pager offset={offset} total={data.total} onChange={setOffset} />
         </div>
       )}

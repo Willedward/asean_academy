@@ -4,7 +4,8 @@ import { apiRequestError } from "./errors";
 export type Overview = components["schemas"]["AdminAnalyticsOverviewResponse"];
 export type Students = components["schemas"]["AdminStudentListResponse"];
 export type StudentDetail = components["schemas"]["AdminStudentDetailResponse"];
-export type Diagnostics = components["schemas"]["AdminStudentDiagnosticsResponse"];
+export type Diagnostics =
+  components["schemas"]["AdminStudentDiagnosticsResponse"];
 export type Questions =
   components["schemas"]["AdminQuestionAnalyticsListResponse"];
 export type Users = components["schemas"]["AdminUserListResponse"];
@@ -17,9 +18,12 @@ export type ContentStatus = components["schemas"]["ContentStatusResponse"];
 export type Audit = components["schemas"]["AuditEventListResponse"];
 export type Reports = components["schemas"]["AdminQuestionReportListResponse"];
 export type Report = components["schemas"]["AdminQuestionReportResponse"];
+export type ResetDiagnosticResult =
+  components["schemas"]["ResetDiagnosticResponse"];
 export type ContentQueue = components["schemas"]["ContentReviewQueueResponse"];
 export type ContentItem = components["schemas"]["ContentReviewItemResponse"];
-export type ContentPreview = components["schemas"]["ContentStudentPreviewResponse"];
+export type ContentPreview =
+  components["schemas"]["ContentStudentPreviewResponse"];
 export type ReviewInput = components["schemas"]["RecordContentReviewRequest"];
 export type LifecycleInput = components["schemas"]["CreateLifecycleRequest"];
 
