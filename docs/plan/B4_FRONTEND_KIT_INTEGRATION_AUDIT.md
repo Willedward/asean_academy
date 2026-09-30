@@ -40,7 +40,8 @@ The kit supplies 69 responsive, props-driven review states under `/beta-kit`. B4
 - The live views do not display sample XP, stars, streak, quest or league values.
 - The same server-only B4 rollout flag restores the established lesson and practice screens immediately.
 - Validation now passes 45 web tests, ESLint, TypeScript and the production Next.js build.
-- The next B4 slice is checkpoint/retry/progress visual integration, followed by public authentication/onboarding and administrator surfaces.
+- The public `/` route now uses an honest NextScholar landing page with supported beta features only; sample reward claims were removed.
+- The next B4 slice is checkpoint/retry/progress visual integration, followed by authentication/onboarding and administrator surfaces.
 
 ## What can be wired now
 
