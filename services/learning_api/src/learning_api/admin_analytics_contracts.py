@@ -56,7 +56,7 @@ class AdminLessonProgressResponse(ApiModel):
 
 
 class AdminDifficultyPerformanceResponse(ApiModel):
-    difficulty: int = Field(ge=1, le=3)
+    difficulty: int = Field(ge=1, le=5)
     attempts: int
     correct_attempts: int
     accuracy_percentage: float
@@ -100,7 +100,7 @@ class AdminAnalyticsOverviewResponse(ApiModel):
 class AdminQuestionAnalyticsResponse(ApiModel):
     question_key: str
     title: str
-    difficulty: int = Field(ge=1, le=3)
+    difficulty: int = Field(ge=1, le=5)
     outcome_code: str
     attempt_count: int
     unique_students: int

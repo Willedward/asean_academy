@@ -6,6 +6,7 @@ from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Header, HTTPException, Path
+from question_bank.models import QUESTION_KEY_PATTERN
 from question_bank.practice import PracticeError
 
 from ..course_catalogue import CatalogueError
@@ -127,7 +128,7 @@ async def submit_attempt(
 )
 async def reveal_hint(
     session_id: UUID,
-    question_key: Annotated[str, Path(pattern=r"^n1-l[1-3]-[0-9]{2}$")],
+    question_key: Annotated[str, Path(pattern=QUESTION_KEY_PATTERN)],
     stage: Annotated[int, Path(ge=1, le=2)],
     service: PracticeServiceDependency,
     _rate_limit: PracticeSupportRateLimitDependency,
@@ -149,7 +150,7 @@ async def reveal_hint(
 )
 async def give_up(
     session_id: UUID,
-    question_key: Annotated[str, Path(pattern=r"^n1-l[1-3]-[0-9]{2}$")],
+    question_key: Annotated[str, Path(pattern=QUESTION_KEY_PATTERN)],
     service: PracticeServiceDependency,
     _rate_limit: PracticeSupportRateLimitDependency,
 ) -> GiveUpResponse:

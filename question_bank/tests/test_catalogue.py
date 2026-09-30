@@ -1,6 +1,9 @@
 import json
 import shutil
 
+import pytest
+from pydantic import ValidationError
+
 from question_bank.catalogue import load_catalogue
 from question_bank.course_models import Course
 from question_bank.models import Question
@@ -45,6 +48,31 @@ def test_generic_question_contract_accepts_another_confirmed_topic(bank_root):
     assert question.topic_code == "N2"
     assert question.school_level == "secondary_1"
     assert question.calculator_allowed is False
+
+
+@pytest.mark.parametrize("difficulty", [4, 5])
+def test_question_contract_accepts_extended_difficulty_levels(bank_root, difficulty):
+    source = json.loads(next((bank_root / "questions").glob("*.json")).read_text())
+    source.update(
+        stable_key=f"n2-l{difficulty}-001",
+        bank_key="g3-sec1-n2-v1",
+        topic_code="N2",
+        primary_outcome="2.1",
+        difficulty=difficulty,
+    )
+    for part in source["parts"]:
+        part["primary_outcome"] = "2.1"
+        part["secondary_outcomes"] = []
+
+    assert Question.model_validate(source).difficulty == difficulty
+
+
+def test_question_contract_rejects_difficulty_above_five(bank_root):
+    source = json.loads(next((bank_root / "questions").glob("*.json")).read_text())
+    source.update(stable_key="n1-l6-001", difficulty=6)
+
+    with pytest.raises(ValidationError):
+        Question.model_validate(source)
 
 
 def test_bank_validator_rejects_outcome_outside_catalogue(

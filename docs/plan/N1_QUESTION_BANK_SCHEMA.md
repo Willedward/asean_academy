@@ -24,22 +24,18 @@ The application should obtain question content from the backend API. Answer spec
 
 The initial bank is `g3-sec1-n1-v1`, aligned to Singapore Secondary 1 G3 Mathematics, topic N1: Numbers and their operations. It contains 40 fixed, calculator-allowed, structured questions:
 
-| Syllabus outcome | Level 1 | Level 2 | Level 3 | Total |
-| --- | ---: | ---: | ---: | ---: |
-| 1.1 Primes and prime factorisation | 3 | 2 | 1 | 6 |
-| 1.2 HCF, LCM, squares, cubes and roots | 3 | 3 | 2 | 8 |
-| 1.3 Number sets and four operations | 3 | 3 | 2 | 8 |
-| 1.4 Calculator calculations | 1 | 2 | 1 | 4 |
-| 1.5 Representation and ordering on a number line | 2 | 1 | 1 | 4 |
-| 1.6 Inequality symbols | 1 | 1 | 1 | 3 |
-| 1.7 Approximation and estimation | 2 | 3 | 2 | 7 |
-| **Total** | **15** | **15** | **10** | **40** |
+| Syllabus outcome | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 | Total |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1.1 Primes and prime factorisation | 3 | 2 | 1 | 0 | 0 | 6 |
+| 1.2 HCF, LCM, squares, cubes and roots | 3 | 3 | 2 | 0 | 0 | 8 |
+| 1.3 Number sets and four operations | 3 | 3 | 2 | 0 | 0 | 8 |
+| 1.4 Calculator calculations | 1 | 2 | 1 | 0 | 0 | 4 |
+| 1.5 Representation and ordering on a number line | 2 | 1 | 1 | 0 | 0 | 4 |
+| 1.6 Inequality symbols | 1 | 1 | 1 | 0 | 0 | 3 |
+| 1.7 Approximation and estimation | 2 | 3 | 2 | 0 | 0 | 7 |
+| **Total** | **15** | **15** | **10** | **0** | **0** | **40** |
 
-Difficulty is a bank-design level, not a predicted student ability:
-
-- Level 1: direct use of one taught idea, with familiar representation and little interpretation.
-- Level 2: two or more linked steps, a less direct representation, or a routine word problem.
-- Level 3: unfamiliar structure, justification, constraints, or a multi-step problem requiring a choice of method.
+Difficulty follows the canonical five-level rubric in [FIVE_LEVEL_DIFFICULTY_MIGRATION.md](FIVE_LEVEL_DIFFICULTY_MIGRATION.md). The original N1 pilot has no Level 4 or 5 records; zero counts preserve its reviewed content while making the blueprint compatible with all future five-level banks.
 
 ## Relational model
 
@@ -105,13 +101,13 @@ Generated questions should be placed under:
 backend_resources/question_bank/g3_math/secondary_1/n1/v1/questions/
 ```
 
-One file per question keeps review diffs small. Suggested names are `n1-l1-01.json` through `n1-l3-10.json`. The database importer will derive content checksums, create UUIDs, and upsert by `bank_key`, `stable_key`, and question version.
+One file per question keeps review diffs small. Stable keys encode one of the five levels, for example `n1-l1-01.json` through `n1-l5-01.json`. The database importer will derive content checksums, create UUIDs, and upsert by `bank_key`, `stable_key`, and question version.
 
 ## Publication checks
 
 A bank must remain in `draft` until an application validator confirms all of the following:
 
-- exactly 40 questions with the required 15/15/10 difficulty split;
+- exactly 40 questions with the required 15/15/10/0/0 difficulty split;
 - the outcome allocation in the blueprint;
 - at least one primary outcome per part;
 - part marks sum to the question total;
@@ -127,6 +123,6 @@ Row-level security is enabled by the migration without browser-facing table poli
 
 ## Implementation status and next slice
 
-The `question_bank` package now provides JSON Schema and cross-record validation, deterministic checking for the N1 answer formats, a local KaTeX reviewer preview, and transactional PostgreSQL import. All 40 fixed questions exist as drafts with the required 15/15/10 difficulty distribution. They exercise exact numbers, significant figures, prime-factor form, ordered values, inequalities, multipart marking, two-stage hints, worked solutions, and an SVG number line.
+The `question_bank` package now provides JSON Schema and cross-record validation, deterministic checking for the N1 answer formats, a local KaTeX reviewer preview, and transactional PostgreSQL import. All 40 fixed questions exist as drafts with the preserved 15/15/10/0/0 difficulty distribution. They exercise exact numbers, significant figures, prime-factor form, ordered values, inequalities, multipart marking, two-stage hints, worked solutions, and an SVG number line.
 
 The next content step is founder mathematical and editorial review in the local preview. The next application step is an attempt schema and practice API that reference `math_question_versions` and `math_question_parts`, preserving exactly which revision the learner answered. Runtime question selection belongs in that API; the OCR extractor remains an optional offline pipeline for converting permitted PDFs into candidate source records.

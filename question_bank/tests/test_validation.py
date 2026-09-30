@@ -42,8 +42,14 @@ def test_blueprint_totals_remain_consistent(bank_root):
         str(level): sum(
             row["difficulty_counts"][str(level)] for row in blueprint["outcome_distribution"]
         )
-        for level in (1, 2, 3)
+        for level in (1, 2, 3, 4, 5)
     }
 
-    assert totals == blueprint["difficulty_distribution"] == {"1": 15, "2": 15, "3": 10}
+    assert totals == blueprint["difficulty_distribution"] == {
+        "1": 15,
+        "2": 15,
+        "3": 10,
+        "4": 0,
+        "5": 0,
+    }
     assert sum(row["total"] for row in blueprint["outcome_distribution"]) == 40

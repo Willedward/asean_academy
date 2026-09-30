@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-from question_bank.models import AlgebraicResponse, NumericResponse
+from question_bank.models import AlgebraicResponse, NumericResponse, Question
 from question_bank.practice import PracticeEngine, PracticeError
 from question_bank.validation import validate_bank
 
@@ -147,3 +147,31 @@ def test_configured_pool_is_ordered_and_creation_is_idempotent(engine):
     assert current["question"]["stable_key"] == "n1-l1-01"
     assert current["stage"] == "guided"
     assert current["session"]["lesson_key"] == "n1-lesson-01"
+
+
+def test_session_can_select_level_four_and_five_questions(tmp_path, bank_root):
+    source = validate_bank(bank_root).questions[0].model_dump(mode="json")
+    questions = []
+    for difficulty in (4, 5):
+        payload = json.loads(json.dumps(source))
+        payload.update(stable_key=f"n1-l{difficulty}-099", difficulty=difficulty)
+        questions.append(Question.model_validate(payload))
+
+    extended_engine = PracticeEngine(
+        tmp_path / "extended-practice.sqlite3",
+        questions,
+        allow_drafts=True,
+        rng=random.Random(7),
+    )
+    selected = set()
+    for difficulty in (4, 5):
+        session = extended_engine.create_session(question_count=1, difficulties=[difficulty])
+        current = extended_engine.next_question(session["session_id"])
+        selected.add(current["question"]["stable_key"])
+
+    assert selected == {"n1-l4-099", "n1-l5-099"}
+
+
+def test_session_rejects_difficulty_above_five(engine):
+    with pytest.raises(PracticeError, match="levels 1 through 5"):
+        engine.create_session(question_count=1, difficulties=[6])

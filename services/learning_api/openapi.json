@@ -458,7 +458,7 @@
             "type": "integer"
           },
           "difficulty": {
-            "maximum": 3.0,
+            "maximum": 5.0,
             "minimum": 1.0,
             "title": "Difficulty",
             "type": "integer"
@@ -686,7 +686,7 @@
             "type": "integer"
           },
           "difficulty": {
-            "maximum": 3.0,
+            "maximum": 5.0,
             "minimum": 1.0,
             "title": "Difficulty",
             "type": "integer"
@@ -1749,7 +1749,7 @@
           "difficulty": {
             "anyOf": [
               {
-                "maximum": 3.0,
+                "maximum": 5.0,
                 "minimum": 1.0,
                 "type": "integer"
               },
@@ -2457,7 +2457,7 @@
           "lesson_key": {
             "anyOf": [
               {
-                "pattern": "^n1-lesson-[0-9]{2}$",
+                "pattern": "^[ngs][0-9]+-lesson-[0-9]{2,3}$",
                 "type": "string"
               },
               {
@@ -3076,7 +3076,7 @@
             "type": "boolean"
           },
           "difficulty": {
-            "maximum": 3.0,
+            "maximum": 5.0,
             "minimum": 1.0,
             "title": "Difficulty",
             "type": "integer"
@@ -4793,6 +4793,8 @@
             "type": "boolean"
           },
           "difficulty": {
+            "maximum": 5.0,
+            "minimum": 1.0,
             "title": "Difficulty",
             "type": "integer"
           },
@@ -5481,7 +5483,7 @@
             "type": "object"
           },
           "question_key": {
-            "pattern": "^n1-l[1-3]-[0-9]{2}$",
+            "pattern": "^[ngs][0-9]+-l[1-5]-[0-9]{2,4}$",
             "title": "Question Key",
             "type": "string"
           },
@@ -5877,7 +5879,7 @@
             "schema": {
               "anyOf": [
                 {
-                  "maximum": 3,
+                  "maximum": 5,
                   "minimum": 1,
                   "type": "integer"
                 },
@@ -12061,7 +12063,7 @@
             "name": "question_key",
             "required": true,
             "schema": {
-              "pattern": "^n1-l[1-3]-[0-9]{2}$",
+              "pattern": "^[ngs][0-9]+-l[1-5]-[0-9]{2,4}$",
               "title": "Question Key",
               "type": "string"
             }
@@ -12199,7 +12201,7 @@
             "name": "question_key",
             "required": true,
             "schema": {
-              "pattern": "^n1-l[1-3]-[0-9]{2}$",
+              "pattern": "^[ngs][0-9]+-l[1-5]-[0-9]{2,4}$",
               "title": "Question Key",
               "type": "string"
             }

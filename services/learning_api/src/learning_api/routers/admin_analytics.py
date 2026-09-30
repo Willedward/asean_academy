@@ -92,7 +92,7 @@ async def analytics_overview(
 async def question_analytics(
     administrator: AdminLearnerDependency,
     repository: AdminAnalyticsRepositoryDependency,
-    difficulty: int | None = Query(default=None, ge=1, le=3),
+    difficulty: int | None = Query(default=None, ge=1, le=5),
     outcome: str | None = Query(default=None, min_length=1, max_length=40),
     limit: int = Query(default=50, ge=1, le=200),
     offset: int = Query(default=0, ge=0),

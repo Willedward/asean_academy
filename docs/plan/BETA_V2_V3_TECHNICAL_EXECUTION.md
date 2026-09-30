@@ -14,6 +14,10 @@ The product roadmap remains the source for desired behaviour. This document is t
 source for engineering order, release gates and technical readiness. `PLAN_V2.md`
 continues to define domain boundaries and long-term architecture.
 
+## Five-level difficulty foundation
+
+The authoring and runtime contracts now use a shared Level 1–5 rubric. Existing N1 content remains at `15/15/10/0/0`; new topic calibration batches can include Levels 4 and 5. See [FIVE_LEVEL_DIFFICULTY_MIGRATION.md](FIVE_LEVEL_DIFFICULTY_MIGRATION.md) for stage ranges, compatibility, database rollout, and review rules.
+
 ## 1. Feasibility decision
 
 A **full Secondary 1–2 Mathematics invitation beta for 10–30 students is technically feasible in

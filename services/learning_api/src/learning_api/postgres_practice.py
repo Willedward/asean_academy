@@ -11,6 +11,7 @@ import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from question_bank.checking import check_answer
+from question_bank.difficulty import DIFFICULTY_LEVELS
 from question_bank.models import NumericResponse, Question
 from question_bank.practice import PracticeError, public_question, solution_for
 
@@ -193,10 +194,12 @@ class PostgresPracticeEngine:
             )
         if idempotency_key is not None and not 1 <= len(idempotency_key) <= 200:
             raise PracticeError("invalid_idempotency_key", "Supply a non-empty idempotency key.")
-        difficulties = sorted(set(difficulties or [1, 2, 3]))
+        difficulties = sorted(set(difficulties or DIFFICULTY_LEVELS))
         outcomes = sorted(set(outcomes or []))
-        if not difficulties or any(level not in {1, 2, 3} for level in difficulties):
-            raise PracticeError("invalid_difficulties", "difficulties must contain levels 1, 2, or 3.")
+        if not difficulties or any(level not in DIFFICULTY_LEVELS for level in difficulties):
+            raise PracticeError(
+                "invalid_difficulties", "difficulties must contain levels 1 through 5."
+            )
         ordered_question_keys = list(ordered_question_keys or [])
         if len(ordered_question_keys) != len(set(ordered_question_keys)):
             raise PracticeError("invalid_question_pool", "Question-pool keys must be unique.")
@@ -340,7 +343,7 @@ class PostgresPracticeEngine:
             (session["id"],),
         ).fetchall()
         assigned = {row["stable_key"] for row in assigned_rows}
-        difficulty_counts = {1: 0, 2: 0, 3: 0}
+        difficulty_counts = dict.fromkeys(DIFFICULTY_LEVELS, 0)
         for row in assigned_rows:
             difficulty_counts[row["difficulty"]] += 1
         progress_rows = connection.execute(

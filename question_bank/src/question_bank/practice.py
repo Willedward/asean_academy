@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from .checking import check_answer
+from .difficulty import DIFFICULTY_LEVELS
 from .models import NumericResponse, Question
 
 
@@ -254,10 +255,12 @@ class PracticeEngine:
             )
         if idempotency_key is not None and not 1 <= len(idempotency_key) <= 200:
             raise PracticeError("invalid_idempotency_key", "Supply a non-empty idempotency key.")
-        difficulties = sorted(set(difficulties or [1, 2, 3]))
+        difficulties = sorted(set(difficulties or DIFFICULTY_LEVELS))
         outcomes = sorted(set(outcomes or []))
-        if not difficulties or any(level not in {1, 2, 3} for level in difficulties):
-            raise PracticeError("invalid_difficulties", "difficulties must contain levels 1, 2, or 3.")
+        if not difficulties or any(level not in DIFFICULTY_LEVELS for level in difficulties):
+            raise PracticeError(
+                "invalid_difficulties", "difficulties must contain levels 1 through 5."
+            )
         ordered_question_keys = list(ordered_question_keys or [])
         if len(ordered_question_keys) != len(set(ordered_question_keys)):
             raise PracticeError("invalid_question_pool", "Question-pool keys must be unique.")
@@ -352,7 +355,7 @@ class PracticeEngine:
                 (session["id"],),
             )
         }
-        difficulty_counts = {1: 0, 2: 0, 3: 0}
+        difficulty_counts = dict.fromkeys(DIFFICULTY_LEVELS, 0)
         for row in connection.execute(
             """
             select question_key from session_questions where session_id = ?

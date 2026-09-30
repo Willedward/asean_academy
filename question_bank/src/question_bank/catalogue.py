@@ -9,6 +9,7 @@ from uuid import UUID
 
 from pydantic import Field, model_validator
 
+from .difficulty import DIFFICULTY_DEFINITIONS, DIFFICULTY_KEYS
 from .models import Model
 
 SchoolLevel = Literal["secondary_1", "secondary_2"]
@@ -122,8 +123,8 @@ class OutcomeDistribution(Model):
 
     @model_validator(mode="after")
     def counts_add_up(self):
-        if set(self.difficulty_counts) != {"1", "2", "3"}:
-            raise ValueError("Outcome difficulty_counts must contain levels 1, 2 and 3")
+        if set(self.difficulty_counts) != set(DIFFICULTY_KEYS):
+            raise ValueError("Outcome difficulty_counts must contain levels 1 through 5")
         if any(value < 0 for value in self.difficulty_counts.values()):
             raise ValueError("Outcome difficulty counts cannot be negative")
         if sum(self.difficulty_counts.values()) != self.total:
@@ -151,8 +152,8 @@ class BankBlueprint(Model):
 
     @model_validator(mode="after")
     def blueprint_is_consistent(self):
-        if set(self.difficulty_distribution) != {"1", "2", "3"}:
-            raise ValueError("difficulty_distribution must contain levels 1, 2 and 3")
+        if set(self.difficulty_distribution) != set(DIFFICULTY_KEYS):
+            raise ValueError("difficulty_distribution must contain levels 1 through 5")
         if any(value < 0 for value in self.difficulty_distribution.values()):
             raise ValueError("Difficulty counts cannot be negative")
         if sum(self.difficulty_distribution.values()) != self.question_count:
@@ -161,10 +162,12 @@ class BankBlueprint(Model):
             raise ValueError("Outcome distribution must add up to question_count")
         aggregated = {
             level: sum(item.difficulty_counts[level] for item in self.outcome_distribution)
-            for level in ("1", "2", "3")
+            for level in DIFFICULTY_KEYS
         }
         if aggregated != self.difficulty_distribution:
             raise ValueError("Outcome difficulty counts must match difficulty_distribution")
+        if self.difficulty_definitions != DIFFICULTY_DEFINITIONS:
+            raise ValueError("difficulty_definitions must match the canonical five-level rubric")
         codes = [item.code for item in self.outcome_distribution]
         if len(codes) != len(set(codes)):
             raise ValueError("Outcome distribution codes must be unique")

@@ -10,6 +10,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_catalogue
+from .difficulty import DIFFICULTY_KEYS
 from .models import Question
 
 
@@ -298,7 +299,7 @@ def validate_bank(
         _validate_assets(bank_root, question, report)
         report.questions.append(question)
 
-    difficulty = {str(level): 0 for level in (1, 2, 3)}
+    difficulty = {level: 0 for level in DIFFICULTY_KEYS}
     outcome = {row.code: 0 for row in blueprint.outcome_distribution}
     for question in report.questions:
         difficulty[str(question.difficulty)] += 1

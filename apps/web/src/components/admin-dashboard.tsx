@@ -421,7 +421,7 @@ export function QuestionsPanel() {
             name="difficulty"
           >
             <option value="">All</option>
-            {[1, 2, 3].map((n) => (
+            {[1, 2, 3, 4, 5].map((n) => (
               <option key={n}>{n}</option>
             ))}
           </select>

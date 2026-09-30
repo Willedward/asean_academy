@@ -17,5 +17,12 @@
       "match": "drop constraint session_questions_selection_reason_check",
       "reason": "The constraint is recreated in the same transaction with retry as an additional value."
     }
+  ],
+  "202609300016_five_level_difficulty.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint math_questions_difficulty_check",
+      "reason": "The three-level constraint is replaced in the same transaction after the five-level constraint has been validated; all existing levels remain valid."
+    }
   ]
 }

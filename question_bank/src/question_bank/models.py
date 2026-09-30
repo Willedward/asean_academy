@@ -7,10 +7,12 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from .difficulty import DIFFICULTY_LEVELS
+
 SCHEMA_VERSION = "1.0.0"
 OUTCOME_PATTERN = r"^[0-9]+\.[0-9]+$"
 TOPIC_PATTERN = r"^[NGS][0-9]+$"
-QUESTION_KEY_PATTERN = r"^[ngs][0-9]+-l[1-3]-[0-9]{2,4}$"
+QUESTION_KEY_PATTERN = r"^[ngs][0-9]+-l[1-5]-[0-9]{2,4}$"
 BANK_KEY_PATTERN = r"^g3-sec[12]-[ngs][0-9]+-v[0-9]+$"
 
 
@@ -220,7 +222,7 @@ class Question(Model):
     topic_code: str = Field(pattern=TOPIC_PATTERN)
     primary_outcome: str = Field(pattern=OUTCOME_PATTERN)
     title: str = Field(min_length=1, max_length=160)
-    difficulty: int = Field(ge=1, le=3)
+    difficulty: int = Field(ge=min(DIFFICULTY_LEVELS), le=max(DIFFICULTY_LEVELS))
     calculator_allowed: bool
     question_type: Literal["structured"]
     status: Literal["draft", "reviewed", "published", "retired"]

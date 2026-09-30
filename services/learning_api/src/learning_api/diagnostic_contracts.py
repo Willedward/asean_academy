@@ -43,7 +43,7 @@ class DiagnosticQuestionResponse(ApiModel):
     stable_key: str
     revision: int
     title: str
-    difficulty: int = Field(ge=1, le=3)
+    difficulty: int = Field(ge=1, le=5)
     calculator_allowed: bool
     stem: list[dict[str, Any]]
     total_marks: int

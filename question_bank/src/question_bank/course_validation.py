@@ -16,6 +16,7 @@ from .course_models import (
     QuestionPoolCollection,
     QuestionPools,
 )
+from .difficulty import PRACTICE_STAGE_DIFFICULTIES
 from .validation import ValidationReport, validate_bank
 
 
@@ -384,18 +385,15 @@ def validate_course(
                         pool.stable_key,
                         f"{item.question_key} outcome {question.primary_outcome} is outside {lesson.outcomes}",
                     )
-                expected_difficulty = {
-                    "guided": 1,
-                    "independent": 2,
-                    "challenge": 3,
-                }.get(item.stage)
-                if expected_difficulty and question.difficulty != expected_difficulty:
+                allowed_difficulties = PRACTICE_STAGE_DIFFICULTIES[item.stage]
+                if question.difficulty not in allowed_difficulties:
                     _issue(
                         report,
                         "error",
                         "pool_difficulty_mismatch",
                         pool.stable_key,
-                        f"{item.question_key} is difficulty {question.difficulty}, expected {expected_difficulty}",
+                        f"{item.question_key} is difficulty {question.difficulty}; "
+                        f"{item.stage} allows {sorted(allowed_difficulties)}",
                     )
         question_keys = set(question_by_key)
         if allocated_keys != question_keys:

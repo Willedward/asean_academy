@@ -39,7 +39,7 @@ One question per topic would be shorter but too noisy for topic-level claims. If
 Question generation should run as a controlled content pipeline:
 
 1. Freeze a machine-readable syllabus catalogue for all 19 level-specific topic groups and their outcomes.
-2. Define a blueprint for each topic: difficulty, response type, marks, multipart rate, calculator use, context type, diagram requirement and pool allocation.
+2. Define a blueprint for each topic using the canonical five-level difficulty rubric, response type, marks, multipart rate, calculator use, context type, diagram requirement and pool allocation.
 3. Ingest sample papers only as style and mark-allocation references. Questions remain original and do not reproduce paper wording.
 4. Generate small batches of 20–30 questions per topic group.
 5. Validate schema, LaTeX, marks, hints, solutions, deterministic answer specs and referenced assets automatically.
@@ -75,14 +75,14 @@ Before full production, record:
 
 - the canonical list and ordering of the 19 level-specific topic groups and all outcome codes;
 - whether the target is exactly 100, a weighted 100–150 range, or 150 for every topic;
-- preferred difficulty distribution for practice and checkpoint pools;
+- preferred five-level difficulty distribution for practice and checkpoint pools; every blueprint must declare Levels 1–5, including zero counts;
 - any schools/paper sections that should carry more style weight;
 - notation, rounding and unit conventions that reviewers will enforce;
 - excluded contexts or culturally sensitive examples;
 - named mathematics and editorial reviewers; and
 - the maximum review batch size each reviewer can handle weekly.
 
-The screenshots already provide a good syllabus starting point. The extra papers and answer schemes are the most valuable next input.
+The confirmed syllabus is recorded in `docs/reference/G3_MATHEMATICS_SYLLABUS.md`, and the five-level calibration rule is recorded in `docs/plan/FIVE_LEVEL_DIFFICULTY_MIGRATION.md`. The extra papers and answer schemes are the most valuable next input.
 
 ## Delivery sequence
 

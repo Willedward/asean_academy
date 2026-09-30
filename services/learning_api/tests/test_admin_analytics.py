@@ -125,7 +125,7 @@ class FakeAdminAnalyticsRepository:
         }
 
     def question_analytics(self, *, difficulty, outcome, limit, offset):
-        assert difficulty in {None, 1}
+        assert difficulty in {None, 1, 5}
         assert outcome is None
         return {
             "questions": [
@@ -277,8 +277,20 @@ def test_question_analytics_filters_are_bounded():
     response = request(
         app,
         "GET",
-        "/api/v1/admin/analytics/questions?difficulty=4",
+        "/api/v1/admin/analytics/questions?difficulty=6",
         "academic-admin-token",
     )
     assert response.status_code == 422
     assert response.json()["error"]["code"] == "validation_error"
+
+
+def test_question_analytics_accepts_level_five():
+    app, _ = application()
+    response = request(
+        app,
+        "GET",
+        "/api/v1/admin/analytics/questions?difficulty=5",
+        "academic-admin-token",
+    )
+
+    assert response.status_code == 200

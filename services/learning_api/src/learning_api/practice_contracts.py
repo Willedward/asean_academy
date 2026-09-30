@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Annotated, Any, Literal
 
 from pydantic import Field, StringConstraints, model_validator
+from question_bank.models import QUESTION_KEY_PATTERN
 
 from .contracts import ApiModel
 
@@ -13,7 +14,7 @@ PracticeStage = Literal["guided", "independent", "challenge", "checkpoint", "ada
 
 
 class CreatePracticeSessionRequest(ApiModel):
-    lesson_key: str | None = Field(default=None, pattern=r"^n1-lesson-[0-9]{2}$")
+    lesson_key: str | None = Field(default=None, pattern=r"^[ngs][0-9]+-lesson-[0-9]{2,3}$")
     unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     mode: PracticeMode = "guided_practice"
     question_count: int | None = Field(default=None, ge=1, le=20)
@@ -76,7 +77,7 @@ class PublicQuestionResponse(ApiModel):
     stable_key: str
     revision: int
     title: str
-    difficulty: int
+    difficulty: int = Field(ge=1, le=5)
     primary_outcome: str
     calculator_allowed: bool
     total_marks: int
@@ -103,7 +104,7 @@ AnswerText = Annotated[str, StringConstraints(max_length=500)]
 
 class SubmitAttemptRequest(ApiModel):
     session_id: str
-    question_key: str = Field(pattern=r"^n1-l[1-3]-[0-9]{2}$")
+    question_key: str = Field(pattern=QUESTION_KEY_PATTERN)
     question_revision: int = Field(ge=1)
     answers: dict[str, AnswerText] = Field(min_length=1, max_length=20)
 

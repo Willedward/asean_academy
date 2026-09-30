@@ -53,7 +53,7 @@ class ContentReviewItemResponse(ApiModel):
     review_fingerprint: str
     title: str
     source_status: Literal["draft", "reviewed", "published", "retired"]
-    difficulty: int | None = Field(default=None, ge=1, le=3)
+    difficulty: int | None = Field(default=None, ge=1, le=5)
     outcome_code: str | None = None
     position: int | None = Field(default=None, ge=1)
     review_state: ReviewState
