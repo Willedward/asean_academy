@@ -105,3 +105,53 @@ class LessonResponse(ApiModel):
     sections: list[PublicLessonSection]
     assets: list[Asset]
     practice: PracticeEntry
+
+
+RegistryContentStatus = Literal["planned", "draft", "reviewed", "published"]
+
+
+class CourseRegistryLessonResponse(ApiModel):
+    stable_key: str
+    position: int
+    title: str
+    outcomes: list[str]
+    content_status: RegistryContentStatus
+    available: bool
+    href: str | None
+
+
+class CourseRegistryUnitResponse(ApiModel):
+    stable_key: str
+    position: int
+    syllabus_position: int
+    topic_code: str
+    title: str
+    strand: str
+    content_status: RegistryContentStatus
+    available: bool
+    lessons: list[CourseRegistryLessonResponse]
+
+
+class CourseRegistryCourseResponse(ApiModel):
+    stable_key: str
+    position: int
+    school_level: str
+    title: str
+    description: str
+    content_status: RegistryContentStatus
+    available: bool
+    href: str | None
+    units: list[CourseRegistryUnitResponse]
+
+
+class CourseRegistryResponse(ApiModel):
+    version_key: str
+    programme_key: str
+    curriculum_version: str
+    subject: str
+    content_status: Literal["draft", "active", "retired"]
+    course_count: int
+    topic_group_count: int
+    lesson_count: int
+    outcome_count: int
+    courses: list[CourseRegistryCourseResponse]

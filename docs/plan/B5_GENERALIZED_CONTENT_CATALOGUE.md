@@ -12,7 +12,7 @@ Question identities now support any confirmed `N`, `G`, or `S` topic, both Secon
 
 Every bank blueprint has a `bank_role` of `learning` or `diagnostic`. The existing N1 bank is explicitly a learning bank. PostgreSQL migration `202609300015_generalized_question_catalogue.sql` adds that role and an index used to isolate student learning pools from diagnostic forms.
 
-Course contracts now support multiple ordered topic units. Each unit has its own question-pool manifest and bank. The legacy single `question_pools.json` layout remains accepted; future multi-unit sources place one manifest per unit under `question_pools/*.json`. The collection preserves the legacy one-manifest serialization so N1 course revision hashes do not change.
+The full course registry now defines two courses, 19 ordered level-specific topic groups, and 87 outcome-linked lesson slots. Course contracts also support multiple ordered authored topic units. Each authored unit has its own question-pool manifest and bank. The legacy single `question_pools.json` layout remains accepted; future multi-unit sources place one manifest per unit under `question_pools/*.json`. The collection preserves the legacy one-manifest serialization so N1 course revision hashes do not change.
 
 ## Validation and imports
 
@@ -56,4 +56,6 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The team must now author and review learning banks for all 19 level-specific topic groups, the 76 isolated diagnostic items, lesson notes, examples, active-recall sections, hints and solutions.
 
-The B5 release gate still measures authored course units and reviewed question inventory. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
+The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
+
+The registry contract, coverage, identifiers and rollout rules are documented in [FULL_SEC1_SEC2_COURSE_REGISTRY.md](FULL_SEC1_SEC2_COURSE_REGISTRY.md).

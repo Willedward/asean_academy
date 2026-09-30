@@ -123,3 +123,30 @@ def test_active_recall_section_does_not_leak_answer_or_locked_feedback():
     assert "canonical_answer" not in encoded
     assert "canonical_latex" not in encoded
     assert "exactly two positive factors" not in encoded
+
+
+def test_course_registry_exposes_complete_planned_scope():
+    response = get("/api/v1/courses")
+
+    assert response.status_code == 200
+    registry = response.json()
+    assert registry["course_count"] == 2
+    assert registry["topic_group_count"] == 19
+    assert registry["lesson_count"] == registry["outcome_count"] == 87
+    secondary_one, secondary_two = registry["courses"]
+    assert secondary_one["stable_key"] == "g3-sec1-math"
+    assert len(secondary_one["units"]) == 10
+    assert secondary_one["available"] is True
+    assert secondary_one["units"][0]["topic_code"] == "N1"
+    assert secondary_one["units"][0]["available"] is True
+    assert secondary_one["units"][1]["available"] is False
+    assert secondary_two["stable_key"] == "g3-sec2-math"
+    assert len(secondary_two["units"]) == 9
+    assert secondary_two["available"] is False
+
+
+def test_draft_registry_entries_are_not_available_without_preview():
+    response = get("/api/v1/courses", allow_drafts=False)
+
+    assert response.status_code == 200
+    assert all(course["available"] is False for course in response.json()["courses"])

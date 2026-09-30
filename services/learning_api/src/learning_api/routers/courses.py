@@ -7,8 +7,12 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Path, Request
 
 from ..course_catalogue import CatalogueError, CourseCatalogue
-from ..course_contracts import CourseMapResponse, LessonResponse
-from ..dependencies import EnrolledLearnerDependency, ProgressServiceDependency
+from ..course_contracts import CourseMapResponse, CourseRegistryResponse, LessonResponse
+from ..dependencies import (
+    EnrolledLearnerDependency,
+    LearnerDependency,
+    ProgressServiceDependency,
+)
 
 router = APIRouter(prefix="/api/v1", tags=["courses"])
 
@@ -25,6 +29,19 @@ def _safe(call):
             status_code=exc.status_code,
             detail={"code": exc.code, "message": str(exc)},
         ) from exc
+
+
+@router.get(
+    "/courses",
+    operation_id="listCourses",
+    response_model=CourseRegistryResponse,
+    summary="List the complete Secondary 1–2 Mathematics course registry",
+)
+async def courses(
+    request: Request,
+    _learner: LearnerDependency,
+) -> CourseRegistryResponse:
+    return _safe(lambda: _catalogue(request).course_registry())
 
 
 @router.get(

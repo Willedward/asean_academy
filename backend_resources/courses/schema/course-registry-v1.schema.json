@@ -1,0 +1,283 @@
+{
+  "$defs": {
+    "RegisteredCourse": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^g3-sec[12]-math$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "school_level": {
+          "enum": [
+            "secondary_1",
+            "secondary_2"
+          ],
+          "title": "School Level",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "content_status": {
+          "enum": [
+            "planned",
+            "draft",
+            "reviewed",
+            "published"
+          ],
+          "title": "Content Status",
+          "type": "string"
+        },
+        "expected_unit_count": {
+          "minimum": 1,
+          "title": "Expected Unit Count",
+          "type": "integer"
+        },
+        "expected_lesson_count": {
+          "minimum": 1,
+          "title": "Expected Lesson Count",
+          "type": "integer"
+        },
+        "expected_outcome_count": {
+          "minimum": 1,
+          "title": "Expected Outcome Count",
+          "type": "integer"
+        },
+        "units": {
+          "items": {
+            "$ref": "#/$defs/RegisteredUnit"
+          },
+          "minItems": 1,
+          "title": "Units",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "school_level",
+        "title",
+        "description",
+        "content_status",
+        "expected_unit_count",
+        "expected_lesson_count",
+        "expected_outcome_count",
+        "units"
+      ],
+      "title": "RegisteredCourse",
+      "type": "object"
+    },
+    "RegisteredLesson": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^[ngs][0-9]+-lesson-[0-9]{2,3}$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "title": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "outcomes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Outcomes",
+          "type": "array"
+        },
+        "content_status": {
+          "enum": [
+            "planned",
+            "draft",
+            "reviewed",
+            "published"
+          ],
+          "title": "Content Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "title",
+        "outcomes",
+        "content_status"
+      ],
+      "title": "RegisteredLesson",
+      "type": "object"
+    },
+    "RegisteredUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^g3-sec[12]-[ngs][0-9]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "syllabus_position": {
+          "minimum": 1,
+          "title": "Syllabus Position",
+          "type": "integer"
+        },
+        "topic_code": {
+          "pattern": "^[NGS][0-9]+$",
+          "title": "Topic Code",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "strand": {
+          "enum": [
+            "number_and_algebra",
+            "geometry_and_measurement",
+            "statistics_and_probability"
+          ],
+          "title": "Strand",
+          "type": "string"
+        },
+        "content_status": {
+          "enum": [
+            "planned",
+            "draft",
+            "reviewed",
+            "published"
+          ],
+          "title": "Content Status",
+          "type": "string"
+        },
+        "lessons": {
+          "items": {
+            "$ref": "#/$defs/RegisteredLesson"
+          },
+          "minItems": 1,
+          "title": "Lessons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "stable_key",
+        "position",
+        "syllabus_position",
+        "topic_code",
+        "title",
+        "strand",
+        "content_status",
+        "lessons"
+      ],
+      "title": "RegisteredUnit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "version_key": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Version Key",
+      "type": "string"
+    },
+    "programme_key": {
+      "pattern": "^[a-z0-9-]+$",
+      "title": "Programme Key",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "pattern": "^[a-z0-9_]+$",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "subject": {
+      "const": "Mathematics",
+      "title": "Subject",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "expected_course_count": {
+      "minimum": 1,
+      "title": "Expected Course Count",
+      "type": "integer"
+    },
+    "expected_topic_group_count": {
+      "minimum": 1,
+      "title": "Expected Topic Group Count",
+      "type": "integer"
+    },
+    "expected_lesson_count": {
+      "minimum": 1,
+      "title": "Expected Lesson Count",
+      "type": "integer"
+    },
+    "expected_outcome_count": {
+      "minimum": 1,
+      "title": "Expected Outcome Count",
+      "type": "integer"
+    },
+    "courses": {
+      "items": {
+        "$ref": "#/$defs/RegisteredCourse"
+      },
+      "minItems": 1,
+      "title": "Courses",
+      "type": "array"
+    }
+  },
+  "required": [
+    "version_key",
+    "programme_key",
+    "curriculum_version",
+    "subject",
+    "status",
+    "expected_course_count",
+    "expected_topic_group_count",
+    "expected_lesson_count",
+    "expected_outcome_count",
+    "courses"
+  ],
+  "title": "CourseRegistry",
+  "type": "object"
+}

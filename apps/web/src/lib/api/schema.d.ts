@@ -431,6 +431,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/courses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List the complete Secondary 1–2 Mathematics course registry */
+        get: operations["listCourses"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/courses/{course_key}/map": {
         parameters: {
             query?: never;
@@ -1755,6 +1772,100 @@ export interface components {
             title: string;
             /** Units */
             units: components["schemas"]["CourseUnitMap"][];
+        };
+        /** CourseRegistryCourseResponse */
+        CourseRegistryCourseResponse: {
+            /** Available */
+            available: boolean;
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "planned" | "draft" | "reviewed" | "published";
+            /** Description */
+            description: string;
+            /** Href */
+            href: string | null;
+            /** Position */
+            position: number;
+            /** School Level */
+            school_level: string;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+            /** Units */
+            units: components["schemas"]["CourseRegistryUnitResponse"][];
+        };
+        /** CourseRegistryLessonResponse */
+        CourseRegistryLessonResponse: {
+            /** Available */
+            available: boolean;
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "planned" | "draft" | "reviewed" | "published";
+            /** Href */
+            href: string | null;
+            /** Outcomes */
+            outcomes: string[];
+            /** Position */
+            position: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+        };
+        /** CourseRegistryResponse */
+        CourseRegistryResponse: {
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "draft" | "active" | "retired";
+            /** Course Count */
+            course_count: number;
+            /** Courses */
+            courses: components["schemas"]["CourseRegistryCourseResponse"][];
+            /** Curriculum Version */
+            curriculum_version: string;
+            /** Lesson Count */
+            lesson_count: number;
+            /** Outcome Count */
+            outcome_count: number;
+            /** Programme Key */
+            programme_key: string;
+            /** Subject */
+            subject: string;
+            /** Topic Group Count */
+            topic_group_count: number;
+            /** Version Key */
+            version_key: string;
+        };
+        /** CourseRegistryUnitResponse */
+        CourseRegistryUnitResponse: {
+            /** Available */
+            available: boolean;
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "planned" | "draft" | "reviewed" | "published";
+            /** Lessons */
+            lessons: components["schemas"]["CourseRegistryLessonResponse"][];
+            /** Position */
+            position: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Strand */
+            strand: string;
+            /** Syllabus Position */
+            syllabus_position: number;
+            /** Title */
+            title: string;
+            /** Topic Code */
+            topic_code: string;
         };
         /** CourseUnitMap */
         CourseUnitMap: {
@@ -5792,6 +5903,107 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AttemptResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listCourses: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseRegistryResponse"];
                 };
             };
             /** @description Bad Request */

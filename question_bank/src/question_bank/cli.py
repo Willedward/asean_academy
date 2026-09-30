@@ -8,6 +8,7 @@ from pathlib import Path
 from .catalogue import write_schemas as write_catalogue_schemas
 from .catalogue_repository import CatalogueImporter
 from .course_preview import serve_course
+from .course_registry import validate_course_registry
 from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .practice import PracticeEngine
@@ -26,6 +27,9 @@ DEFAULT_COURSE = (
 )
 DEFAULT_BANK_CATALOGUE = REPOSITORY_ROOT / "backend_resources/question_bank/g3_math"
 DEFAULT_SYLLABUS = REPOSITORY_ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
+DEFAULT_COURSE_REGISTRY = (
+    REPOSITORY_ROOT / "backend_resources/courses/g3_math/v1/registry.json"
+)
 
 
 def parser():
@@ -64,6 +68,16 @@ def parser():
     course_validate.add_argument("--bank", type=Path, default=DEFAULT_BANK)
     course_validate.add_argument(
         "--publish", action="store_true", help="Require complete reviewed course content"
+    )
+    course_registry_validate = commands.add_parser(
+        "course-registry-validate",
+        help="Validate the complete planned and authored course registry",
+    )
+    course_registry_validate.add_argument(
+        "registry", type=Path, nargs="?", default=DEFAULT_COURSE_REGISTRY
+    )
+    course_registry_validate.add_argument(
+        "--syllabus", type=Path, default=DEFAULT_SYLLABUS
     )
     course_preview = commands.add_parser(
         "course-preview", help="Serve the local course-map author preview"
@@ -124,6 +138,10 @@ def parser():
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "course-registry-validate":
+        report = validate_course_registry(args.registry, args.syllabus)
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0 if report.valid else 1
     if args.command == "catalogue-validate":
         report = validate_catalogue(args.banks, args.syllabus, publish=args.publish)
         print(json.dumps(report.as_dict(), indent=2))

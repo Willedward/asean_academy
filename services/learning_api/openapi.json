@@ -2307,6 +2307,266 @@
         "title": "CourseMapResponse",
         "type": "object"
       },
+      "CourseRegistryCourseResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "content_status": {
+            "enum": [
+              "planned",
+              "draft",
+              "reviewed",
+              "published"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "href": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Href"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "school_level": {
+            "title": "School Level",
+            "type": "string"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "units": {
+            "items": {
+              "$ref": "#/components/schemas/CourseRegistryUnitResponse"
+            },
+            "title": "Units",
+            "type": "array"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "school_level",
+          "title",
+          "description",
+          "content_status",
+          "available",
+          "href",
+          "units"
+        ],
+        "title": "CourseRegistryCourseResponse",
+        "type": "object"
+      },
+      "CourseRegistryLessonResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "content_status": {
+            "enum": [
+              "planned",
+              "draft",
+              "reviewed",
+              "published"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "href": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Href"
+          },
+          "outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "title",
+          "outcomes",
+          "content_status",
+          "available",
+          "href"
+        ],
+        "title": "CourseRegistryLessonResponse",
+        "type": "object"
+      },
+      "CourseRegistryResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_status": {
+            "enum": [
+              "draft",
+              "active",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "course_count": {
+            "title": "Course Count",
+            "type": "integer"
+          },
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/CourseRegistryCourseResponse"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
+          "curriculum_version": {
+            "title": "Curriculum Version",
+            "type": "string"
+          },
+          "lesson_count": {
+            "title": "Lesson Count",
+            "type": "integer"
+          },
+          "outcome_count": {
+            "title": "Outcome Count",
+            "type": "integer"
+          },
+          "programme_key": {
+            "title": "Programme Key",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "topic_group_count": {
+            "title": "Topic Group Count",
+            "type": "integer"
+          },
+          "version_key": {
+            "title": "Version Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version_key",
+          "programme_key",
+          "curriculum_version",
+          "subject",
+          "content_status",
+          "course_count",
+          "topic_group_count",
+          "lesson_count",
+          "outcome_count",
+          "courses"
+        ],
+        "title": "CourseRegistryResponse",
+        "type": "object"
+      },
+      "CourseRegistryUnitResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "content_status": {
+            "enum": [
+              "planned",
+              "draft",
+              "reviewed",
+              "published"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/CourseRegistryLessonResponse"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "strand": {
+            "title": "Strand",
+            "type": "string"
+          },
+          "syllabus_position": {
+            "title": "Syllabus Position",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_code": {
+            "title": "Topic Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "position",
+          "syllabus_position",
+          "topic_code",
+          "title",
+          "strand",
+          "content_status",
+          "available",
+          "lessons"
+        ],
+        "title": "CourseRegistryUnitResponse",
+        "type": "object"
+      },
       "CourseUnitMap": {
         "additionalProperties": false,
         "properties": {
@@ -9572,6 +9832,122 @@
         "summary": "Submit typed final answers for deterministic marking",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/api/v1/courses": {
+      "get": {
+        "operationId": "listCourses",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseRegistryResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List the complete Secondary 1\u20132 Mathematics course registry",
+        "tags": [
+          "courses"
         ]
       }
     },

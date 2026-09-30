@@ -16,6 +16,7 @@ from .course_models import (
     QuestionPoolCollection,
     QuestionPools,
 )
+from .course_registry import CourseRegistry
 from .difficulty import PRACTICE_STAGE_DIFFICULTIES
 from .validation import ValidationReport, validate_bank
 
@@ -441,6 +442,7 @@ def schema_documents():
         "course-v1.schema.json": Course.model_json_schema(),
         "lesson-v1.schema.json": Lesson.model_json_schema(),
         "question-pools-v1.schema.json": QuestionPools.model_json_schema(),
+        "course-registry-v1.schema.json": CourseRegistry.model_json_schema(),
     }
 
 

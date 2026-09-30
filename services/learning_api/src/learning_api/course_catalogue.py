@@ -6,11 +6,16 @@ from functools import cached_property
 from pathlib import Path
 
 from question_bank.course_models import ActiveRecallSection
+from question_bank.course_registry import validate_course_registry
 from question_bank.course_validation import validate_course
 
 from .course_contracts import (
     CourseLessonMap,
     CourseMapResponse,
+    CourseRegistryCourseResponse,
+    CourseRegistryLessonResponse,
+    CourseRegistryResponse,
+    CourseRegistryUnitResponse,
     CourseUnitMap,
     LessonResponse,
     PracticeEntry,
@@ -18,6 +23,8 @@ from .course_contracts import (
 
 COURSE_ROOT = Path("backend_resources/courses/g3_math/secondary_1/n1/v1")
 BANK_ROOT = Path("backend_resources/question_bank/g3_math")
+COURSE_REGISTRY_PATH = Path("backend_resources/courses/g3_math/v1/registry.json")
+SYLLABUS_PATH = Path("backend_resources/syllabi/g3_math/v1/catalogue.json")
 
 
 class CatalogueError(RuntimeError):
@@ -61,8 +68,95 @@ class CourseCatalogue:
         return report
 
     @cached_property
+    def registry_report(self):
+        report = validate_course_registry(
+            self.repository_root / COURSE_REGISTRY_PATH,
+            self.repository_root / SYLLABUS_PATH,
+        )
+        if not report.valid or report.registry is None:
+            raise CatalogueError(
+                "course_registry_invalid",
+                "The course registry failed validation and is temporarily unavailable.",
+                503,
+            )
+        return report
+
+    @cached_property
     def questions(self):
         return self.report.questions
+
+    def course_registry(self) -> CourseRegistryResponse:
+        registry = self.registry_report.registry
+
+        def available(status: str) -> bool:
+            return status == "published" or (
+                self.allow_drafts and status in {"draft", "reviewed"}
+            )
+
+        courses = []
+        for course in registry.courses:
+            course_available = available(course.content_status)
+            units = []
+            for unit in course.units:
+                unit_available = course_available and available(unit.content_status)
+                lessons = []
+                for lesson in unit.lessons:
+                    lesson_available = unit_available and available(lesson.content_status)
+                    lessons.append(
+                        CourseRegistryLessonResponse(
+                            stable_key=lesson.stable_key,
+                            position=lesson.position,
+                            title=lesson.title,
+                            outcomes=lesson.outcomes,
+                            content_status=lesson.content_status,
+                            available=lesson_available,
+                            href=(
+                                f"/lessons/{lesson.stable_key}"
+                                if lesson_available
+                                else None
+                            ),
+                        )
+                    )
+                units.append(
+                    CourseRegistryUnitResponse(
+                        stable_key=unit.stable_key,
+                        position=unit.position,
+                        syllabus_position=unit.syllabus_position,
+                        topic_code=unit.topic_code,
+                        title=unit.title,
+                        strand=unit.strand,
+                        content_status=unit.content_status,
+                        available=unit_available,
+                        lessons=lessons,
+                    )
+                )
+            courses.append(
+                CourseRegistryCourseResponse(
+                    stable_key=course.stable_key,
+                    position=course.position,
+                    school_level=course.school_level,
+                    title=course.title,
+                    description=course.description,
+                    content_status=course.content_status,
+                    available=course_available,
+                    href=(
+                        f"/courses/{course.stable_key}" if course_available else None
+                    ),
+                    units=units,
+                )
+            )
+        return CourseRegistryResponse(
+            version_key=registry.version_key,
+            programme_key=registry.programme_key,
+            curriculum_version=registry.curriculum_version,
+            subject=registry.subject,
+            content_status=registry.status,
+            course_count=len(registry.courses),
+            topic_group_count=registry.topic_group_count,
+            lesson_count=registry.lesson_count,
+            outcome_count=registry.outcome_count,
+            courses=courses,
+        )
 
     def _assert_visible(self, status: str):
         if status != "published" and not self.allow_drafts:

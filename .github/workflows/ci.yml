@@ -52,6 +52,7 @@ jobs:
       - run: uv run --project services/learning_api pytest services/learning_api/tests
       - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py
       - run: uv sync --project question_bank --locked
+      - run: uv run --project question_bank question-bank course-registry-validate
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
       - run: uv run --project question_bank pytest question_bank/tests
 
