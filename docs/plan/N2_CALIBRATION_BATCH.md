@@ -36,11 +36,11 @@ Generate the reviewer packet from the repository root:
 ```bash
 uv run --project question_bank question-bank authoring-export \
   backend_resources/question_bank/g3_math/secondary_1/n2/v1/batches/g3-sec1-n2-b001.json \
-  /tmp/g3-sec1-n2-b001-review \
+  backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001 \
   --syllabus backend_resources/syllabi/g3_math/v1/catalogue.json
 ```
 
-Open `/tmp/g3-sec1-n2-b001-review/index.html` for the formatted questions, hints, and solutions. Record per-question decisions and comments in `review.csv`. Mathematical and editorial reviewers should check correctness, age-appropriate wording, curriculum alignment, difficulty, marks, and whether each hint reveals an appropriate amount.
+Open `backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001/index.html` for the formatted questions, hints, and solutions. Record per-question decisions and comments in `review.csv`. Mathematical and editorial reviewers should check correctness, age-appropriate wording, curriculum alignment, difficulty, marks, and whether each hint reveals an appropriate amount.
 
 ## When more examination data helps
 

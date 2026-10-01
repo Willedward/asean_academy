@@ -55,7 +55,7 @@ Export an authored batch after its manifest lists all generated question keys:
 ```bash
 uv run --project question_bank question-bank authoring-export \
   backend_resources/question_bank/g3_math/secondary_1/n2/v1/batches/g3-sec1-n2-b001.json \
-  /tmp/g3-sec1-n2-b001-review
+  backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001
 ```
 
 The export contains `index.html`, the manifest, source question JSON, validation evidence, a reviewer CSV, and referenced assets.
