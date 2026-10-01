@@ -106,6 +106,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/content/{kind}/{stable_key}/review-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Preview protected authoring content with answers and feedback */
+        get: operations["previewContentForReview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/content/{kind}/{stable_key}/reviews": {
         parameters: {
             query?: never;
@@ -1541,6 +1558,8 @@ export interface components {
         };
         /** ContentReviewItemResponse */
         ContentReviewItemResponse: {
+            /** Batch Id */
+            batch_id?: string | null;
             /** Blockers */
             blockers: string[];
             /** Can Request Publication */
@@ -1584,6 +1603,8 @@ export interface components {
         };
         /** ContentReviewQueueResponse */
         ContentReviewQueueResponse: {
+            /** Batch Ids */
+            batch_ids: string[];
             /** Items */
             items: components["schemas"]["ContentReviewItemResponse"][];
             /** Limit */
@@ -1668,6 +1689,26 @@ export interface components {
             reviewer_id: string;
             /** Reviewer Role */
             reviewer_role: string;
+        };
+        /** ContentReviewerPreviewResponse */
+        ContentReviewerPreviewResponse: {
+            /** Batch Id */
+            batch_id?: string | null;
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question";
+            /** Review Content */
+            review_content: {
+                [key: string]: unknown;
+            };
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Revision */
+            revision: number;
+            /** Stable Key */
+            stable_key: string;
         };
         /** ContentStatusResponse */
         ContentStatusResponse: {
@@ -3476,6 +3517,7 @@ export interface operations {
                 source_status?: string | null;
                 review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
                 search?: string | null;
+                batch_id?: string | null;
                 limit?: number;
                 offset?: number;
             };
@@ -3704,6 +3746,110 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ContentStudentPreviewResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    previewContentForReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                kind: "course" | "lesson" | "question";
+                stable_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContentReviewerPreviewResponse"];
                 };
             };
             /** @description Bad Request */

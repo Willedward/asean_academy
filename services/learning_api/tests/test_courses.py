@@ -6,7 +6,7 @@ import httpx
 from question_bank.course_models import ActiveRecallSection
 
 from learning_api.config import Settings
-from learning_api.course_catalogue import public_lesson_section
+from learning_api.course_catalogue import CourseCatalogue, public_lesson_section
 from learning_api.main import create_app
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -150,3 +150,12 @@ def test_draft_registry_entries_are_not_available_without_preview():
 
     assert response.status_code == 200
     assert all(course["available"] is False for course in response.json()["courses"])
+
+
+def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
+    catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
+
+    assert len(catalogue.questions) == 40
+    assert len(catalogue.review_questions) == 66
+    assert catalogue.review_question_batches["n2-l1-001"] == "g3-sec1-n2-b001"
+    assert "n1-l1-01" not in catalogue.review_question_batches

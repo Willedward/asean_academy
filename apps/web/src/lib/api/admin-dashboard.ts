@@ -23,7 +23,7 @@ export type ResetDiagnosticResult =
 export type ContentQueue = components["schemas"]["ContentReviewQueueResponse"];
 export type ContentItem = components["schemas"]["ContentReviewItemResponse"];
 export type ContentPreview =
-  components["schemas"]["ContentStudentPreviewResponse"];
+  components["schemas"]["ContentReviewerPreviewResponse"];
 export type ReviewInput = components["schemas"]["RecordContentReviewRequest"];
 export type LifecycleInput = components["schemas"]["CreateLifecycleRequest"];
 

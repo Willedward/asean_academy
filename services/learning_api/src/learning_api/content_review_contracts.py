@@ -56,6 +56,7 @@ class ContentReviewItemResponse(ApiModel):
     difficulty: int | None = Field(default=None, ge=1, le=5)
     outcome_code: str | None = None
     position: int | None = Field(default=None, ge=1)
+    batch_id: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     review_state: ReviewState
     mathematics_review: ContentReviewSummary | None
     editorial_review: ContentReviewSummary | None
@@ -67,6 +68,7 @@ class ContentReviewItemResponse(ApiModel):
 
 class ContentReviewQueueResponse(ApiModel):
     items: list[ContentReviewItemResponse]
+    batch_ids: list[str]
     total: int
     limit: int
     offset: int
@@ -113,3 +115,12 @@ class ContentStudentPreviewResponse(ApiModel):
     revision: int
     review_fingerprint: str
     public_content: dict[str, Any]
+
+
+class ContentReviewerPreviewResponse(ApiModel):
+    content_kind: ContentKind
+    stable_key: str
+    revision: int
+    review_fingerprint: str
+    batch_id: str | None = None
+    review_content: dict[str, Any]

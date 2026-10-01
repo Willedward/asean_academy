@@ -15,6 +15,7 @@ from learning_api.content_review import (
     list_review_queue,
     record_review,
     request_lifecycle,
+    reviewer_preview,
     student_preview,
     verify_release_workflow,
 )
@@ -103,6 +104,27 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
     assert "canonical" not in serialized_preview
     assert "hint" not in serialized_preview
     assert "solution" not in serialized_preview
+
+    protected_preview = reviewer_preview(catalogue, "question", "n2-l1-001")
+    assert protected_preview["batch_id"] == "g3-sec1-n2-b001"
+    assert "canonical_answer" in json.dumps(protected_preview)
+
+    n2_batch = list_review_queue(
+        repository,
+        catalogue,
+        kind="question",
+        source_status=None,
+        review_state=None,
+        search=None,
+        limit=100,
+        offset=0,
+        batch_id="g3-sec1-n2-b001",
+    )
+    assert n2_batch["total"] == 26
+    assert {entry["batch_id"] for entry in n2_batch["items"]} == {
+        "g3-sec1-n2-b001"
+    }
+    assert "g3-sec1-n2-b001" in n2_batch["batch_ids"]
 
     with pytest.raises(BetaOperationsError, match="academic administrator"):
         record_review(

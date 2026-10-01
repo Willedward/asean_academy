@@ -17,13 +17,13 @@ database import and deployment checks all agree.
 
 ## Roles and separation of duties
 
-| Action | `content_admin` | `academic_admin` |
-| --- | --- | --- |
-| List and filter the review queue | Yes | Yes |
-| Preview the exact student-visible content | Yes | Yes |
-| Record editorial approval or request changes | Yes | Yes |
-| Record Mathematics approval or request changes | No | Yes |
-| Request publication or retirement | No | Yes |
+| Action                                         | `content_admin`                       | `academic_admin`                      |
+| ---------------------------------------------- | ------------------------------------- | ------------------------------------- |
+| List and filter the review queue               | Yes                                   | Yes                                   |
+| Preview the exact student-visible content      | Yes                                   | Yes                                   |
+| Record editorial approval or request changes   | Yes                                   | Yes                                   |
+| Record Mathematics approval or request changes | No                                    | Yes                                   |
+| Request publication or retirement              | No                                    | Yes                                   |
 | Change authored JSON or its publication status | Through the normal Git review process | Through the normal Git review process |
 
 The API reads `profiles.role` for every protected request. Hiding controls in the web
@@ -35,7 +35,7 @@ interface is only a convenience; backend authorization is authoritative.
 flowchart LR
   AUTHOR["Author edits Git JSON"] --> VALIDATE["Schema, syllabus, answer and pool validation"]
   VALIDATE --> QUEUE["Admin content review queue"]
-  QUEUE --> PREVIEW["Student-safe preview"]
+  QUEUE --> PREVIEW["Protected reviewer preview"]
   PREVIEW --> MATH["Mathematics decision<br/>academic_admin"]
   PREVIEW --> EDIT["Editorial decision<br/>either admin role"]
   MATH --> GATE{"Both latest decisions approved?"}
@@ -113,23 +113,28 @@ ownership and role rules.
 
 All routes are below `/api/v1/admin/content`.
 
-| Method and route | Role | Behavior |
-| --- | --- | --- |
-| `GET /` | either admin | Filter/paginate course, lesson and question review state |
-| `GET /{kind}/{stable_key}/preview` | either admin | Return only the public student representation |
-| `POST /{kind}/{stable_key}/reviews` | either admin; Mathematics requires academic | Append an approval or changes-requested decision |
-| `POST /{kind}/{stable_key}/lifecycle-requests` | academic only | Append a publication or retirement request after eligibility checks |
+| Method and route                               | Role                                        | Behavior                                                                        |
+| ---------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
+| `GET /`                                        | either admin                                | Filter/paginate every authored item, including question batch ID                |
+| `GET /{kind}/{stable_key}/preview`             | either admin                                | Return only the public student representation                                   |
+| `GET /{kind}/{stable_key}/review-preview`      | either admin                                | Return the full reviewer representation, including answers, hints and solutions |
+| `POST /{kind}/{stable_key}/reviews`            | either admin; Mathematics requires academic | Append an approval or changes-requested decision                                |
+| `POST /{kind}/{stable_key}/lifecycle-requests` | academic only                               | Append a publication or retirement request after eligibility checks             |
 
-The preview uses the same public serializers as the learning flow. It omits canonical
-answers, answer specifications, hints, worked solutions and locked active-recall
-feedback. The preview answer fields are disabled in the admin interface.
+The student-safe preview uses the same public serializers as the learning flow and omits
+canonical answers, answer specifications, hints, worked solutions and locked
+active-recall feedback. The separately protected reviewer preview exposes the complete
+authored material to administrators so Mathematics and editorial review can happen in
+the dashboard. Neither route is available to a learner.
 
 ## Administrator workflow
 
 1. Sign in with an administrator Google account.
 2. Open <http://localhost:3000/admin/content>.
-3. Filter by kind, authored status or review state, or search a stable key/title.
-4. Select **Preview as student** and inspect exactly what the learner can see.
+3. Filter by authoring batch, kind, authored status or review state, or search a stable
+   key/title. Selecting a batch shows its dual-approval progress.
+4. Select **Open reviewer preview** and inspect the prompt, answer, hints, solution,
+   marks, outcome and difficulty.
 5. Choose Mathematics or editorial review, choose a decision, and record detailed
    notes. A content administrator can select editorial only.
 6. Resolve every requested change in Git. Increment the authored revision whenever
@@ -179,7 +184,8 @@ does not rewrite learner history.
 - API tests verify student denial, content-admin preview and academic-only lifecycle
   requests.
 - Browser component tests verify safe preview, disabled Mathematics review for a
-  content administrator, review submission and explicit publication confirmation.
+  content administrator, protected full-content preview, batch filtering and progress,
+  review submission and explicit publication confirmation.
 - OpenAPI and TypeScript contracts are generated from the backend models.
 
 ## Next backend milestones

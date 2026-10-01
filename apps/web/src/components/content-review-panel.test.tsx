@@ -1,21 +1,32 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { ContentItem, ContentPreview, ContentQueue } from "@/lib/api/admin-dashboard";
+import type {
+  ContentItem,
+  ContentPreview,
+  ContentQueue,
+} from "@/lib/api/admin-dashboard";
 
 import { ContentReviewPanel } from "./content-review-panel";
 
 const item: ContentItem = {
   content_kind: "question",
-  stable_key: "n1-l1-01",
+  stable_key: "n2-l1-001",
   revision: 1,
   source_content_sha256: "a".repeat(64),
   review_fingerprint: "b".repeat(64),
-  title: "Prime factorisation",
+  title: "Simplifying a ratio",
   source_status: "draft",
   difficulty: 1,
-  outcome_code: "1.1",
+  outcome_code: "2.1",
   position: null,
+  batch_id: "g3-sec1-n2-b001",
   review_state: "approved",
   mathematics_review: null,
   editorial_review: null,
@@ -25,25 +36,52 @@ const item: ContentItem = {
   can_request_retirement: false,
 };
 
-const queue: ContentQueue = { items: [item], total: 1, limit: 25, offset: 0 };
+const queue: ContentQueue = {
+  items: [item],
+  batch_ids: ["g3-sec1-n2-b001"],
+  total: 1,
+  limit: 25,
+  offset: 0,
+};
 const preview: ContentPreview = {
   content_kind: "question",
   stable_key: item.stable_key,
   revision: item.revision,
   review_fingerprint: item.review_fingerprint,
-  public_content: {
+  batch_id: "g3-sec1-n2-b001",
+  review_content: {
     title: item.title,
     stem: [],
     difficulty: 1,
-    primary_outcome: "1.1",
+    primary_outcome: "2.1",
     total_marks: 2,
+    calculator_allowed: false,
     parts: [
       {
         position: 1,
         label: null,
         marks: 2,
-        prompt: [],
-        input_placeholder: "Enter your answer",
+        prompt: [{ type: "text", text: "Simplify the ratio 12:18." }],
+        response: {
+          type: "algebraic_expression",
+          canonical_expression: "2:3",
+        },
+        hints: [
+          {
+            stage: 1,
+            content: [
+              { type: "text", text: "Find the greatest common factor." },
+            ],
+          },
+        ],
+        solution: [
+          {
+            position: 1,
+            content: [{ type: "display_math", latex: "12:18=2:3" }],
+            mark_type: "A",
+            mark_value: 2,
+          },
+        ],
       },
     ],
   },
@@ -55,38 +93,73 @@ afterEach(() => {
 });
 
 describe("ContentReviewPanel", () => {
-  it("lets a content administrator preview safely and submit only editorial review", async () => {
+  it("lets a content administrator open the protected preview and submit only editorial review", async () => {
     const fetcher = vi.fn(async (url: string, init: RequestInit) => {
       void init;
-      if (url.includes("/preview")) return new Response(JSON.stringify(preview));
-      if (url.includes("/reviews")) return new Response(JSON.stringify({}), { status: 201 });
+      if (url.includes("/review-preview"))
+        return new Response(JSON.stringify(preview));
+      if (url.includes("/reviews"))
+        return new Response(JSON.stringify({}), { status: 201 });
       return new Response(JSON.stringify(queue));
     });
     vi.stubGlobal("fetch", fetcher);
 
     render(<ContentReviewPanel academic={false} />);
-    await screen.findByText("Prime factorisation");
+    await screen.findByText("Simplifying a ratio");
 
-    const reviewArea = screen.getByLabelText("Review area for n1-l1-01");
+    const reviewArea = screen.getByLabelText("Review area for n2-l1-001");
     expect(reviewArea).toHaveValue("editorial");
     expect(screen.getByRole("option", { name: "Mathematics" })).toBeDisabled();
 
-    fireEvent.click(screen.getByRole("button", { name: "Preview as student" }));
-    expect(await screen.findByLabelText("Student answer for part 1")).toBeDisabled();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Open reviewer preview" }),
+    );
+    expect(await screen.findByText("Canonical answer")).toBeInTheDocument();
+    expect(screen.getByText("Authored hints")).toBeInTheDocument();
+    expect(screen.getByText("Worked solution")).toBeInTheDocument();
 
-    fireEvent.change(screen.getByLabelText("Review notes for n1-l1-01"), {
+    fireEvent.change(screen.getByLabelText("Review notes for n2-l1-001"), {
       target: { value: "Language and marks have been checked." },
     });
     fireEvent.click(screen.getByRole("button", { name: "Record review" }));
 
     await waitFor(() => {
-      const call = fetcher.mock.calls.find(([url]) => String(url).includes("/reviews"));
+      const call = fetcher.mock.calls.find(([url]) =>
+        String(url).includes("/reviews"),
+      );
       expect(call).toBeDefined();
       expect(JSON.parse(String(call?.[1]?.body))).toMatchObject({
         dimension: "editorial",
         decision: "approved",
       });
     });
+  });
+
+  it("filters the queue by authoring batch and shows batch approval progress", async () => {
+    const fetcher = vi.fn(async () => new Response(JSON.stringify(queue)));
+    vi.stubGlobal("fetch", fetcher);
+
+    render(<ContentReviewPanel academic />);
+    await screen.findByText("Simplifying a ratio");
+
+    fireEvent.change(screen.getByLabelText("Authoring batch"), {
+      target: { value: "g3-sec1-n2-b001" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Apply filters" }));
+
+    await waitFor(() => {
+      expect(fetcher).toHaveBeenCalledWith(
+        expect.stringContaining("batch_id=g3-sec1-n2-b001"),
+        expect.anything(),
+      );
+      expect(fetcher).toHaveBeenCalledWith(
+        expect.stringContaining("limit=100"),
+        expect.anything(),
+      );
+    });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "1 of 1 questions have both approvals.",
+    );
   });
 
   it("requires an explicit reason before an academic publication request", async () => {
@@ -100,9 +173,13 @@ describe("ContentReviewPanel", () => {
     vi.stubGlobal("fetch", fetcher);
 
     render(<ContentReviewPanel academic />);
-    fireEvent.click(await screen.findByRole("button", { name: "Review publication request" }));
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Review publication request" }),
+    );
 
-    const confirm = screen.getByRole("button", { name: "Confirm publish request" });
+    const confirm = screen.getByRole("button", {
+      name: "Confirm publish request",
+    });
     expect(confirm).toBeDisabled();
     fireEvent.change(screen.getByLabelText("Reason for publish request"), {
       target: { value: "Both independent reviews are complete." },

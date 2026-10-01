@@ -284,6 +284,31 @@ def test_content_admin_can_preview_student_content_without_private_answers():
     assert "worked_solution" not in preview.text
 
 
+def test_content_admin_can_open_protected_n2_reviewer_preview():
+    app, _ = application()
+
+    forbidden = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/question/n2-l1-001/review-preview",
+        "student-token",
+    )
+    preview = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/question/n2-l1-001/review-preview",
+        "admin-token",
+    )
+
+    assert forbidden.status_code == 403
+    assert preview.status_code == 200, preview.text
+    assert preview.json()["batch_id"] == "g3-sec1-n2-b001"
+    assert preview.json()["review_content"]["stable_key"] == "n2-l1-001"
+    assert "canonical_answer" in preview.text
+    assert "hints" in preview.text
+    assert "solution" in preview.text
+
+
 def test_content_admin_cannot_request_publication():
     app, _ = application()
 

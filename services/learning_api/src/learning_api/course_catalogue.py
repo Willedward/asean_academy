@@ -5,9 +5,11 @@ from __future__ import annotations
 from functools import cached_property
 from pathlib import Path
 
+from question_bank.authoring import load_manifest
 from question_bank.course_models import ActiveRecallSection
 from question_bank.course_registry import validate_course_registry
 from question_bank.course_validation import validate_course
+from question_bank.validation import validate_catalogue
 
 from .course_contracts import (
     CourseLessonMap,
@@ -84,6 +86,37 @@ class CourseCatalogue:
     @cached_property
     def questions(self):
         return self.report.questions
+
+    @cached_property
+    def review_catalogue_report(self):
+        report = validate_catalogue(
+            self.repository_root / BANK_ROOT,
+            self.repository_root / SYLLABUS_PATH,
+        )
+        if not report.valid:
+            raise CatalogueError(
+                "review_content_invalid",
+                "The authored question catalogue failed validation and cannot be reviewed.",
+                503,
+            )
+        return report
+
+    @cached_property
+    def review_questions(self):
+        """Return every valid authored question, including banks not deployed to learners."""
+        return self.review_catalogue_report.questions
+
+    @cached_property
+    def review_question_batches(self) -> dict[str, str]:
+        """Map authored question keys to their controlled authoring batch."""
+        authored_keys = {question.stable_key for question in self.review_questions}
+        batches: dict[str, str] = {}
+        for path in sorted((self.repository_root / BANK_ROOT).glob("**/batches/*.json")):
+            manifest = load_manifest(path)
+            for question_key in manifest.question_keys:
+                if question_key in authored_keys:
+                    batches[question_key] = manifest.batch_id
+        return batches
 
     def course_registry(self) -> CourseRegistryResponse:
         registry = self.registry_report.registry

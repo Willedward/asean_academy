@@ -1722,6 +1722,18 @@
       "ContentReviewItemResponse": {
         "additionalProperties": false,
         "properties": {
+          "batch_id": {
+            "anyOf": [
+              {
+                "pattern": "^[a-z0-9-]+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Batch Id"
+          },
           "blockers": {
             "items": {
               "type": "string"
@@ -1879,6 +1891,13 @@
       "ContentReviewQueueResponse": {
         "additionalProperties": false,
         "properties": {
+          "batch_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Batch Ids",
+            "type": "array"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/ContentReviewItemResponse"
@@ -1901,6 +1920,7 @@
         },
         "required": [
           "items",
+          "batch_ids",
           "total",
           "limit",
           "offset"
@@ -2050,6 +2070,57 @@
           "created_at"
         ],
         "title": "ContentReviewSummary",
+        "type": "object"
+      },
+      "ContentReviewerPreviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "batch_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Batch Id"
+          },
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "review_content": {
+            "additionalProperties": true,
+            "title": "Review Content",
+            "type": "object"
+          },
+          "review_fingerprint": {
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_kind",
+          "stable_key",
+          "revision",
+          "review_fingerprint",
+          "review_content"
+        ],
+        "title": "ContentReviewerPreviewResponse",
         "type": "object"
       },
       "ContentStatusResponse": {
@@ -6523,6 +6594,23 @@
           },
           {
             "in": "query",
+            "name": "batch_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^[a-z0-9-]+$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Batch Id"
+            }
+          },
+          {
+            "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
@@ -6947,6 +7035,148 @@
           }
         ],
         "summary": "Preview public content without private answers or locked feedback",
+        "tags": [
+          "admin",
+          "content-review"
+        ]
+      }
+    },
+    "/api/v1/admin/content/{kind}/{stable_key}/review-preview": {
+      "get": {
+        "operationId": "previewContentForReview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "course",
+                "lesson",
+                "question"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stable_key",
+            "required": true,
+            "schema": {
+              "title": "Stable Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentReviewerPreviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Preview protected authoring content with answers and feedback",
         "tags": [
           "admin",
           "content-review"

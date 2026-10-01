@@ -336,6 +336,13 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 **Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The complete registry now contains two courses, 19 level-specific topic groups and 87 outcome-linked lesson slots; only N1 currently has authored deployable content. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
 
+**Shared review integration (1 October 2026):** every authored bank can now enter the
+protected administrator queue before it becomes learner-deployable. Reviewers can filter
+by authoring batch, inspect full answers, hints and solutions, and record separate
+Mathematics and editorial decisions tied to the exact content fingerprint. The portable
+HTML/Markdown/CSV packet remains a fallback. See
+[SHARED_CONTENT_REVIEW_STAGING.md](SHARED_CONTENT_REVIEW_STAGING.md).
+
 The bulk authoring sequence and approximately 1,900–2,850-question target are defined in [QUESTION_BANK_SCALE_PLAN.md](QUESTION_BANK_SCALE_PLAN.md).
 
 - Review the existing N1 pilot, build the 19-topic bank, and create/review 76 matched diagnostic items.

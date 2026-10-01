@@ -10,11 +10,13 @@ from ..content_review import (
     list_review_queue,
     record_review,
     request_lifecycle,
+    reviewer_preview,
     student_preview,
 )
 from ..content_review_contracts import (
     ContentKind,
     ContentLifecycleRequestResponse,
+    ContentReviewerPreviewResponse,
     ContentReviewQueueResponse,
     ContentReviewRecordResponse,
     ContentStudentPreviewResponse,
@@ -49,6 +51,7 @@ async def review_queue(
     source_status: str | None = Query(default=None, pattern="^(draft|reviewed|published|retired)$"),
     review_state: ReviewState | None = None,
     search: str | None = Query(default=None, min_length=1, max_length=100),
+    batch_id: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
     limit: int = Query(default=25, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
 ) -> ContentReviewQueueResponse:
@@ -63,6 +66,7 @@ async def review_queue(
             search=search,
             limit=limit,
             offset=offset,
+            batch_id=batch_id,
         )
     )
 
@@ -82,6 +86,24 @@ async def preview_content(
     del administrator
     return _safe(
         lambda: student_preview(request.app.state.course_catalogue, kind, stable_key)
+    )
+
+
+@router.get(
+    "/{kind}/{stable_key}/review-preview",
+    operation_id="previewContentForReview",
+    response_model=ContentReviewerPreviewResponse,
+    summary="Preview protected authoring content with answers and feedback",
+)
+async def preview_content_for_review(
+    kind: ContentKind,
+    stable_key: str,
+    request: Request,
+    administrator: AdminLearnerDependency,
+) -> ContentReviewerPreviewResponse:
+    del administrator
+    return _safe(
+        lambda: reviewer_preview(request.app.state.course_catalogue, kind, stable_key)
     )
 
 

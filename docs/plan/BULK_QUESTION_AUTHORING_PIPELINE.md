@@ -58,7 +58,14 @@ uv run --project question_bank question-bank authoring-export \
   backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001
 ```
 
-The export contains `index.html`, editable `review.md` and `review.csv` files, the manifest, source question JSON, validation evidence, and referenced assets.
+The export contains `index.html`, editable `review.md` and `review.csv` files, the
+manifest, source question JSON, validation evidence, and referenced assets. These are
+portable fallback and audit artifacts. The normal collaborative review surface is the
+protected `/admin/content` dashboard, where reviewers can filter by batch, inspect full
+answers/hints/solutions and record append-only Mathematics and editorial decisions.
+
+The shared deployment and contribution workflow is documented in
+[SHARED_CONTENT_REVIEW_STAGING.md](SHARED_CONTENT_REVIEW_STAGING.md).
 
 ## Batch lifecycle
 

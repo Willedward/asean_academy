@@ -29,6 +29,7 @@ class CatalogueReviewItem:
     difficulty: int | None = None
     outcome_code: str | None = None
     position: int | None = None
+    batch_id: str | None = None
 
 
 def _without_workflow_metadata(value):
@@ -94,8 +95,9 @@ def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIt
             question,
             difficulty=question.difficulty,
             outcome_code=question.primary_outcome,
+            batch_id=catalogue.review_question_batches.get(question.stable_key),
         )
-        for question in catalogue.questions
+        for question in catalogue.review_questions
     )
     return items
 
@@ -256,6 +258,7 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
         "difficulty": item.difficulty,
         "outcome_code": item.outcome_code,
         "position": item.position,
+        "batch_id": item.batch_id,
         "review_state": state,
         "mathematics_review": _review_summary(mathematics),
         "editorial_review": _review_summary(editorial),
@@ -279,16 +282,25 @@ def list_review_queue(
     search: str | None,
     limit: int,
     offset: int,
+    batch_id: str | None = None,
 ) -> dict:
     with repository._connect() as connection:
         reviews, lifecycle = _snapshot(connection)
-    items = [_serialize_item(item, reviews, lifecycle) for item in catalogue_review_items(catalogue)]
+    items = [
+        _serialize_item(item, reviews, lifecycle)
+        for item in catalogue_review_items(catalogue)
+    ]
+    batch_ids = sorted(
+        {item["batch_id"] for item in items if item["batch_id"] is not None}
+    )
     if kind:
         items = [item for item in items if item["content_kind"] == kind]
     if source_status:
         items = [item for item in items if item["source_status"] == source_status]
     if review_state:
         items = [item for item in items if item["review_state"] == review_state]
+    if batch_id:
+        items = [item for item in items if item["batch_id"] == batch_id]
     if search:
         query = search.strip().casefold()
         items = [
@@ -297,7 +309,13 @@ def list_review_queue(
             if query in item["stable_key"].casefold() or query in item["title"].casefold()
         ]
     items.sort(key=lambda item: ({"course": 0, "lesson": 1, "question": 2}[item["content_kind"]], item["position"] or 0, item["stable_key"]))
-    return {"items": items[offset:offset + limit], "total": len(items), "limit": limit, "offset": offset}
+    return {
+        "items": items[offset : offset + limit],
+        "batch_ids": batch_ids,
+        "total": len(items),
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:
@@ -333,6 +351,19 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
         "revision": item.revision,
         "review_fingerprint": item.fingerprint,
         "public_content": content,
+    }
+
+
+def reviewer_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:
+    """Return protected authoring content, including answers and feedback."""
+    item = _item(catalogue, kind, stable_key)
+    return {
+        "content_kind": item.kind,
+        "stable_key": item.stable_key,
+        "revision": item.revision,
+        "review_fingerprint": item.fingerprint,
+        "batch_id": item.batch_id,
+        "review_content": item.model.model_dump(mode="json"),
     }
 
 
