@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "BatchClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "batch_id": {
+          "pattern": "^g3-sec[12]-[ngs][0-9]+-b[0-9]{3}$",
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 100,
+          "minLength": 2,
+          "title": "Owner",
+          "type": "string"
+        },
+        "branch": {
+          "maxLength": 240,
+          "minLength": 3,
+          "pattern": "^[A-Za-z0-9._/-]+$",
+          "title": "Branch",
+          "type": "string"
+        },
+        "claimed_at": {
+          "format": "date-time",
+          "title": "Claimed At",
+          "type": "string"
+        },
+        "released_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Released At"
+        }
+      },
+      "required": [
+        "batch_id",
+        "owner",
+        "branch",
+        "claimed_at"
+      ],
+      "title": "BatchClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "pattern": "^1\\.0\\.0$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/BatchClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "claims"
+  ],
+  "title": "BatchClaimRegistry",
+  "type": "object"
+}

@@ -96,6 +96,14 @@ Near-duplicate warnings are evidence for a reviewer because similarity can be le
 
 ## Parallel Codex authoring
 
-Each contributor claims one manifest, updates its generator metadata, works on a separate branch, and authors only the allocated cells. The manifest is the coordination contract, so contributors do not depend on shared conversation memory. Aggregate validation must run again after branches merge.
+Each contributor claims one manifest in the versioned claim registry, updates its
+generator metadata, works on the exact registered branch, and authors only the allocated
+cells. Pull-request CI rejects missing or mismatched claims, multi-batch changes and
+unallocated files. It also runs aggregate validation and uploads reviewer evidence. The
+manifest remains the content-allocation contract, while the registry is the coordination
+contract, so contributors do not depend on shared conversation memory.
+
+See [MULTI_AUTHOR_QUESTION_PIPELINE.md](MULTI_AUTHOR_QUESTION_PIPELINE.md) for commands,
+branch sequencing, CI evidence and claim release.
 
 Additional examination papers can be added as checksum-tracked style references later. They improve calibration but are not needed to build or exercise this workflow.

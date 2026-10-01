@@ -53,8 +53,49 @@ jobs:
       - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py
       - run: uv sync --project question_bank --locked
       - run: uv run --project question_bank question-bank course-registry-validate
+      - run: uv run --project question_bank question-bank authoring-validate
+      - run: uv run --project question_bank question-bank authoring-claims-validate
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
       - run: uv run --project question_bank pytest question_bank/tests
+
+  authoring-pull-request:
+    name: Question batch ownership and reviewer evidence
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
+      - run: uv sync --project question_bank --locked
+      - name: List pull-request changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git diff --name-only "$BASE_SHA...$HEAD_SHA" > "$RUNNER_TEMP/authoring-changed-files.txt"
+      - name: Validate ownership and export reviewer evidence
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set +e
+          uv run --project question_bank --locked question-bank authoring-pr-check \
+            --changed-files "$RUNNER_TEMP/authoring-changed-files.txt" \
+            --head-branch "$HEAD_BRANCH" \
+            --output build/authoring-pr-review
+          status=$?
+          cat build/authoring-pr-review/summary.md >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+      - name: Upload question reviewer packets and validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: question-authoring-review-${{ github.event.pull_request.number }}
+          path: build/authoring-pr-review
+          if-no-files-found: error
+          retention-days: 14
 
   migrations:
     name: PostgreSQL migrations and integration tests

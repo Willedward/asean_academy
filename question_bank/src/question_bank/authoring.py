@@ -223,10 +223,13 @@ def load_manifest(path: Path) -> QuestionBatchManifest:
 
 
 def write_authoring_schemas(output: Path) -> None:
+    from .collaboration import BatchClaimRegistry
+
     output.mkdir(parents=True, exist_ok=True)
     documents = {
         "question-v1.schema.json": Question.model_json_schema(),
         "question-batch-manifest-v1.schema.json": QuestionBatchManifest.model_json_schema(),
+        "question-batch-claims-v1.schema.json": BatchClaimRegistry.model_json_schema(),
         "question-house-rules-v1.schema.json": HouseRules.model_json_schema(),
     }
     for filename, schema in documents.items():

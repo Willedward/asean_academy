@@ -30,15 +30,17 @@ def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
     assert report.valid
     assert report.blueprint_count == 19
     assert len(report.batch_reports) == 75
-    assert {batch.manifest.expected_question_count for batch in report.batch_reports} == {21, 22, 26}
+    assert {batch.manifest.expected_question_count for batch in report.batch_reports} == {
+        21,
+        22,
+        26,
+    }
     assert sum(batch.manifest.expected_question_count for batch in report.batch_reports) == 1_936
     assert report.question_count == 66
     assert not report.duplicate_matches
 
     n2_first_batch = next(
-        batch
-        for batch in report.batch_reports
-        if batch.manifest.batch_id == "g3-sec1-n2-b001"
+        batch for batch in report.batch_reports if batch.manifest.batch_id == "g3-sec1-n2-b001"
     )
     assert n2_first_batch.valid
     assert n2_first_batch.manifest.status == "ready_for_review"
@@ -50,6 +52,7 @@ def test_authoring_schemas_are_valid_json_schema(repository_root):
     for filename in (
         "question-v1.schema.json",
         "question-batch-manifest-v1.schema.json",
+        "question-batch-claims-v1.schema.json",
         "question-house-rules-v1.schema.json",
     ):
         Draft202012Validator.check_schema(json.loads((schema_root / filename).read_text()))
@@ -108,9 +111,7 @@ def test_authored_batch_executes_answers_and_exports_reviewer_packet(
         Question.model_validate_json(path.read_text())
         for path in sorted((target / "questions").glob("*.json"))[:20]
     ]
-    allocation = Counter(
-        (question.primary_outcome, question.difficulty) for question in questions
-    )
+    allocation = Counter((question.primary_outcome, question.difficulty) for question in questions)
     syllabus = repository_root / "backend_resources/syllabi/g3_math/v1/catalogue.json"
     manifest = QuestionBatchManifest(
         batch_id="g3-sec1-n1-b001",
@@ -165,3 +166,161 @@ def test_authored_batch_executes_answers_and_exports_reviewer_packet(
     assert "Mathematics decision: `pending`" in review_markdown
     assert "Editorial decision: `pending`" in review_markdown
     assert questions[0].stable_key in review_markdown
+
+
+def test_batch_claims_are_exclusive_idempotent_and_releasable(repository_root, tmp_path):
+    from question_bank.collaboration import (
+        BatchClaimRegistry,
+        claim_batch,
+        load_claim_registry,
+        release_batch_claim,
+    )
+
+    registry_path = tmp_path / "claims.json"
+    registry_path.write_text('{"schema_version":"1.0.0","claims":[]}\n')
+    banks = repository_root / "backend_resources/question_bank/g3_math"
+    claimed_at = datetime(2026, 10, 1, tzinfo=UTC)
+
+    result = claim_batch(
+        registry_path,
+        banks,
+        batch_id="g3-sec1-n2-b002",
+        owner="william",
+        branch="questions/g3-sec1-n2-b002-william",
+        now=claimed_at,
+    )
+    assert result["changed"] is True
+    assert (
+        claim_batch(
+            registry_path,
+            banks,
+            batch_id="g3-sec1-n2-b002",
+            owner="william",
+            branch="questions/g3-sec1-n2-b002-william",
+            now=claimed_at,
+        )["changed"]
+        is False
+    )
+
+    with pytest.raises(ValueError, match="already claimed"):
+        claim_batch(
+            registry_path,
+            banks,
+            batch_id="g3-sec1-n2-b002",
+            owner="friend",
+            branch="questions/g3-sec1-n2-b002-friend",
+            now=claimed_at,
+        )
+    with pytest.raises(ValueError, match="already has an active batch claim"):
+        claim_batch(
+            registry_path,
+            banks,
+            batch_id="g3-sec1-n2-b003",
+            owner="william",
+            branch="questions/g3-sec1-n2-b002-william",
+            now=claimed_at,
+        )
+
+    release_batch_claim(
+        registry_path,
+        batch_id="g3-sec1-n2-b002",
+        owner="william",
+        now=datetime(2026, 10, 2, tzinfo=UTC),
+    )
+    registry = load_claim_registry(registry_path)
+    assert isinstance(registry, BatchClaimRegistry)
+    assert registry.active_claim("g3-sec1-n2-b002") is None
+    assert registry.claims[0].released_at == datetime(2026, 10, 2, tzinfo=UTC)
+
+    ready_claim = claim_batch(
+        registry_path,
+        banks,
+        batch_id="g3-sec1-n2-b001",
+        owner="math-reviewer",
+        branch="questions/g3-sec1-n2-b001-review",
+        now=datetime(2026, 10, 3, tzinfo=UTC),
+    )
+    assert ready_claim["changed"] is True
+
+
+def test_pull_request_check_exports_claimed_ready_batch(repository_root, tmp_path):
+    from question_bank.collaboration import check_pull_request
+
+    branch = "questions/g3-sec1-n2-b001-william"
+    registry_path = tmp_path / "claims.json"
+    registry_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0.0",
+                "claims": [
+                    {
+                        "batch_id": "g3-sec1-n2-b001",
+                        "owner": "william",
+                        "branch": branch,
+                        "claimed_at": "2026-10-01T00:00:00Z",
+                        "released_at": None,
+                    }
+                ],
+            }
+        )
+    )
+
+    report = check_pull_request(
+        changed_files=[
+            "backend_resources/question_bank/g3_math/secondary_1/n2/v1/questions/n2-l1-001.json"
+        ],
+        head_branch=branch,
+        repository_root=repository_root,
+        bank_root=repository_root / "backend_resources/question_bank/g3_math",
+        syllabus_path=repository_root / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        registry_path=registry_path,
+        output=tmp_path / "evidence",
+    )
+
+    assert report.valid
+    assert report.changed_batches == ["g3-sec1-n2-b001"]
+    assert report.exported_batches == ["g3-sec1-n2-b001"]
+    assert (tmp_path / "evidence/batches/g3-sec1-n2-b001/index.html").is_file()
+    assert "Difficulty L1–L5" in (tmp_path / "evidence/summary.md").read_text()
+    assert json.loads((tmp_path / "evidence/report.json").read_text())["valid"] is True
+
+
+def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository_root, tmp_path):
+    from question_bank.collaboration import check_pull_request
+
+    registry_path = tmp_path / "claims.json"
+    registry_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0.0",
+                "claims": [
+                    {
+                        "batch_id": "g3-sec1-n2-b002",
+                        "owner": "william",
+                        "branch": "questions/g3-sec1-n2-b002-william",
+                        "claimed_at": "2026-10-01T00:00:00Z",
+                        "released_at": None,
+                    }
+                ],
+            }
+        )
+    )
+
+    report = check_pull_request(
+        changed_files=[
+            "backend_resources/question_bank/g3_math/secondary_1/n2/v1/questions/n2-l1-007.json"
+        ],
+        head_branch="questions/wrong-branch",
+        repository_root=repository_root,
+        bank_root=repository_root / "backend_resources/question_bank/g3_math",
+        syllabus_path=repository_root / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        registry_path=registry_path,
+        output=tmp_path / "evidence",
+    )
+
+    assert not report.valid
+    assert {issue.code for issue in report.errors} >= {
+        "claim_branch_mismatch",
+        "planned_batch_has_changed_questions",
+    }
+    assert not (tmp_path / "evidence/batches").exists()

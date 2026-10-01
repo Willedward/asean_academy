@@ -343,6 +343,12 @@ Mathematics and editorial decisions tied to the exact content fingerprint. The p
 HTML/Markdown/CSV packet remains a fallback. See
 [SHARED_CONTENT_REVIEW_STAGING.md](SHARED_CONTENT_REVIEW_STAGING.md).
 
+**Multi-author automation (1 October 2026):** a versioned claim registry now prevents
+two active branches from owning the same question batch. Pull-request CI enforces the
+claim and single-batch boundary, runs aggregate validation and duplicate detection, adds
+a concise job summary, and uploads reviewer-ready HTML, Markdown, CSV and JSON evidence.
+See [MULTI_AUTHOR_QUESTION_PIPELINE.md](MULTI_AUTHOR_QUESTION_PIPELINE.md).
+
 The bulk authoring sequence and approximately 1,900–2,850-question target are defined in [QUESTION_BANK_SCALE_PLAN.md](QUESTION_BANK_SCALE_PLAN.md).
 
 - Review the existing N1 pilot, build the 19-topic bank, and create/review 76 matched diagnostic items.

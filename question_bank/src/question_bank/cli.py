@@ -3,7 +3,10 @@
 import argparse
 import json
 import os
+from dataclasses import asdict
 from pathlib import Path
+
+from pydantic import ValidationError
 
 from .authoring import (
     export_reviewer_batch,
@@ -14,6 +17,12 @@ from .authoring import (
 )
 from .catalogue import write_schemas as write_catalogue_schemas
 from .catalogue_repository import CatalogueImporter
+from .collaboration import (
+    check_pull_request,
+    claim_batch,
+    release_batch_claim,
+    validate_claim_registry,
+)
 from .course_preview import serve_course
 from .course_registry import validate_course_registry
 from .course_repository import CourseImporter
@@ -41,6 +50,9 @@ DEFAULT_HOUSE_RULES = (
     REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v1.json"
 )
 DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/schema"
+DEFAULT_CLAIMS = (
+    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/batch-claims-v1.json"
+)
 
 
 def parser():
@@ -182,11 +194,107 @@ def parser():
     authoring_schema.add_argument(
         "output", type=Path, nargs="?", default=DEFAULT_AUTHORING_SCHEMA
     )
+    authoring_claim = commands.add_parser(
+        "authoring-claim", help="Claim one planned authoring batch for a named Git branch"
+    )
+    authoring_claim.add_argument("batch_id")
+    authoring_claim.add_argument("--owner", required=True)
+    authoring_claim.add_argument("--branch", required=True)
+    authoring_claim.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_claim.add_argument("--banks", type=Path, default=DEFAULT_BANK_CATALOGUE)
+    authoring_release = commands.add_parser(
+        "authoring-release", help="Release a completed or abandoned batch claim"
+    )
+    authoring_release.add_argument("batch_id")
+    authoring_release.add_argument("--owner", required=True)
+    authoring_release.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_claims_validate = commands.add_parser(
+        "authoring-claims-validate",
+        help="Validate exclusive batch claims against the current manifests",
+    )
+    authoring_claims_validate.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_claims_validate.add_argument(
+        "--banks", type=Path, default=DEFAULT_BANK_CATALOGUE
+    )
+    authoring_pr_check = commands.add_parser(
+        "authoring-pr-check",
+        help="Validate changed authoring files, claims, duplicates, and reviewer artifacts",
+    )
+    authoring_pr_check.add_argument("--changed-files", type=Path, required=True)
+    authoring_pr_check.add_argument("--head-branch", required=True)
+    authoring_pr_check.add_argument("--output", type=Path, required=True)
+    authoring_pr_check.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_pr_check.add_argument("--banks", type=Path, default=DEFAULT_BANK_CATALOGUE)
+    authoring_pr_check.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "authoring-claim":
+        try:
+            result = claim_batch(
+                args.claims,
+                args.banks,
+                batch_id=args.batch_id,
+                owner=args.owner,
+                branch=args.branch,
+            )
+        except (OSError, ValueError, ValidationError) as exc:
+            raise SystemExit(str(exc)) from exc
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-release":
+        try:
+            result = release_batch_claim(
+                args.claims,
+                batch_id=args.batch_id,
+                owner=args.owner,
+            )
+        except (OSError, ValueError, ValidationError) as exc:
+            raise SystemExit(str(exc)) from exc
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-claims-validate":
+        registry, issues = validate_claim_registry(args.claims, args.banks)
+        errors = [issue for issue in issues if issue.severity == "error"]
+        active = [claim for claim in registry.claims if claim.active] if registry else []
+        print(
+            json.dumps(
+                {
+                    "valid": not errors,
+                    "active_claim_count": len(active),
+                    "history_count": len(registry.claims) if registry else 0,
+                    "issues": [asdict(issue) for issue in issues],
+                },
+                indent=2,
+            )
+        )
+        return 0 if not errors else 1
+    if args.command == "authoring-pr-check":
+        report = check_pull_request(
+            changed_files=args.changed_files.read_text().splitlines(),
+            head_branch=args.head_branch,
+            repository_root=REPOSITORY_ROOT,
+            bank_root=args.banks,
+            syllabus_path=args.syllabus,
+            registry_path=args.claims,
+            output=args.output,
+        )
+        print(
+            json.dumps(
+                {
+                    "valid": report.valid,
+                    "changed_batches": report.changed_batches,
+                    "exported_batches": report.exported_batches,
+                    "error_count": len(report.errors),
+                    "warning_count": len(report.warnings),
+                    "output": str(args.output),
+                },
+                indent=2,
+            )
+        )
+        return 0 if report.valid else 1
     if args.command == "authoring-blueprints":
         result = write_missing_blueprints(
             args.syllabus, args.banks, question_count=args.question_count

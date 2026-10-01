@@ -89,11 +89,32 @@ uv run --project question_bank question-bank authoring-plan
 uv run --project question_bank question-bank authoring-validate
 ```
 
-A planned manifest contains an exact outcome/difficulty allocation of 20–30 questions and reserves every stable question key. Before
-questions are added, claim the manifest by replacing its `unassigned` generator fields with the
-actual provider/model, generator version, and prompt version. Add all stable question keys and
-change its status to `draft`; validation then executes every canonical and accepted answer and
-checks the batch distribution and assets.
+A planned manifest contains an exact outcome/difficulty allocation of 20–30 questions and
+reserves every stable question key. Claim it through the registry before changing its source.
+On the exact claimed branch, replace the manifest's `unassigned` generator fields with the
+actual provider/model, generator version, and prompt version, then change its status to `draft`.
+Validation executes every canonical and accepted answer and checks the batch distribution and
+assets.
+
+Before editing a manifest or its reserved questions, register the owner and exact target branch:
+
+```bash
+uv run --project question_bank question-bank authoring-claim \
+  g3-sec1-n2-b002 \
+  --owner YOUR_GITHUB_USERNAME \
+  --branch questions/g3-sec1-n2-b002-YOUR_GITHUB_USERNAME
+```
+
+Merge that small claim first, then create the named branch from the updated integration
+branch. Pull requests verify the claim, restrict authoring changes to one batch, run the
+aggregate validator and upload a reviewer packet. Release the claim after the batch merges:
+
+```bash
+uv run --project question_bank question-bank authoring-release \
+  g3-sec1-n2-b002 --owner YOUR_GITHUB_USERNAME
+```
 
 See [`docs/plan/BULK_QUESTION_AUTHORING_PIPELINE.md`](../docs/plan/BULK_QUESTION_AUTHORING_PIPELINE.md)
 for the lifecycle, repository layout, reviewer export command, and parallel Codex workflow.
+The complete claim and CI workflow is in
+[`docs/plan/MULTI_AUTHOR_QUESTION_PIPELINE.md`](../docs/plan/MULTI_AUTHOR_QUESTION_PIPELINE.md).
