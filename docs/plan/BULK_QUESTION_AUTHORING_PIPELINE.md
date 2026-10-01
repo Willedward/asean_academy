@@ -14,7 +14,7 @@ flowchart LR
     A --> Q[Question JSON and SVG assets]
     Q --> V[Schema, outcome, distribution, answer, hint, solution and asset validation]
     V --> D[Cross-bank exact and near-duplicate scan]
-    D --> E[HTML, JSON and CSV reviewer packet]
+    D --> E[HTML, Markdown, JSON and CSV reviewer packet]
     E --> R[Maths and editorial approval]
     R --> I[Immutable database import]
 ```
@@ -58,7 +58,7 @@ uv run --project question_bank question-bank authoring-export \
   backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001
 ```
 
-The export contains `index.html`, the manifest, source question JSON, validation evidence, a reviewer CSV, and referenced assets.
+The export contains `index.html`, editable `review.md` and `review.csv` files, the manifest, source question JSON, validation evidence, and referenced assets.
 
 ## Batch lifecycle
 

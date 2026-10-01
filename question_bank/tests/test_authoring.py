@@ -157,6 +157,11 @@ def test_authored_batch_executes_answers_and_exports_reviewer_packet(
         "manifest.json",
         "questions.json",
         "review.csv",
+        "review.md",
         "validation.json",
     }
     assert "g3-sec1-n1-b001" in (tmp_path / "review/index.html").read_text()
+    review_markdown = (tmp_path / "review/review.md").read_text()
+    assert "Mathematics decision: `pending`" in review_markdown
+    assert "Editorial decision: `pending`" in review_markdown
+    assert questions[0].stable_key in review_markdown

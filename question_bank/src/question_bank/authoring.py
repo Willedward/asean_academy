@@ -942,7 +942,7 @@ def export_reviewer_batch(
     )
     _write_json(output / "validation.json", report.as_dict())
     with (output / "review.csv").open("w", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(
             [
                 "question_key",
@@ -968,6 +968,35 @@ def export_reviewer_batch(
                     "",
                 ]
             )
+    review_lines = [
+        f"# Review: {manifest.batch_id}",
+        "",
+        "Replace each `pending` decision with `approved` or `changes_requested`.",
+        "Add a note whenever a change is requested. Keep question keys unchanged.",
+        "",
+        "- Mathematics reviewer:",
+        "- Editorial reviewer:",
+        "- Review date:",
+        "",
+    ]
+    for question in report.questions:
+        review_lines.extend(
+            [
+                f"## {question.stable_key} — {question.title}",
+                "",
+                f"[Open this question in the HTML preview](index.html#{question.stable_key})",
+                "",
+                f"- Outcome: `{question.primary_outcome}`",
+                f"- Difficulty: `{question.difficulty}`",
+                f"- Marks: `{question.total_marks}`",
+                "- Mathematics decision: `pending`",
+                "- Editorial decision: `pending`",
+                "- Reviewer notes: _Replace this text with notes, or write `None`._",
+                "",
+            ]
+        )
+    (output / "review.md").write_text("\n".join(review_lines))
+
     cards: list[str] = []
     asset_output = output / "assets"
     for question in report.questions:
@@ -1016,5 +1045,12 @@ def export_reviewer_batch(
         "batch_id": manifest.batch_id,
         "question_count": len(report.questions),
         "output": str(output),
-        "files": ["index.html", "manifest.json", "questions.json", "review.csv", "validation.json"],
+        "files": [
+            "index.html",
+            "manifest.json",
+            "questions.json",
+            "review.csv",
+            "review.md",
+            "validation.json",
+        ],
     }
