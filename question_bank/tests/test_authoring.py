@@ -36,7 +36,11 @@ def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
         26,
     }
     assert sum(batch.manifest.expected_question_count for batch in report.batch_reports) == 1_936
-    assert report.question_count == 66
+    assert report.question_count >= 66
+    authored_question_paths = (
+        repository_root / "backend_resources/question_bank/g3_math"
+    ).glob("**/questions/*.json")
+    assert report.question_count == sum(1 for _ in authored_question_paths)
     assert not report.duplicate_matches
 
     n2_first_batch = next(
@@ -288,6 +292,23 @@ def test_pull_request_check_exports_claimed_ready_batch(repository_root, tmp_pat
 def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository_root, tmp_path):
     from question_bank.collaboration import check_pull_request
 
+    manifest_paths = sorted(
+        (repository_root / "backend_resources/question_bank/g3_math").glob(
+            "**/batches/*.json"
+        )
+    )
+    manifest_path = next(
+        path
+        for path in manifest_paths
+        if json.loads(path.read_text())["status"] == "planned"
+    )
+    manifest = json.loads(manifest_path.read_text())
+    batch_id = manifest["batch_id"]
+    claimed_branch = f"questions/{batch_id}-william"
+    question_path = manifest_path.parent.parent / "questions" / (
+        f"{manifest['question_keys'][0]}.json"
+    )
+
     registry_path = tmp_path / "claims.json"
     registry_path.write_text(
         json.dumps(
@@ -295,9 +316,9 @@ def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository
                 "schema_version": "1.0.0",
                 "claims": [
                     {
-                        "batch_id": "g3-sec1-n2-b002",
+                        "batch_id": batch_id,
                         "owner": "william",
-                        "branch": "questions/g3-sec1-n2-b002-william",
+                        "branch": claimed_branch,
                         "claimed_at": "2026-10-01T00:00:00Z",
                         "released_at": None,
                     }
@@ -307,9 +328,7 @@ def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository
     )
 
     report = check_pull_request(
-        changed_files=[
-            "backend_resources/question_bank/g3_math/secondary_1/n2/v1/questions/n2-l1-007.json"
-        ],
+        changed_files=[question_path.relative_to(repository_root).as_posix()],
         head_branch="questions/wrong-branch",
         repository_root=repository_root,
         bank_root=repository_root / "backend_resources/question_bank/g3_math",
