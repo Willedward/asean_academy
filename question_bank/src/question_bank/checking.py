@@ -6,7 +6,7 @@ import operator
 import re
 from decimal import InvalidOperation
 from fractions import Fraction
-from math import isqrt
+from math import gcd, isqrt
 
 from .models import AlgebraicResponse, NumericResponse, Response
 
@@ -126,6 +126,34 @@ def _check_numeric(spec: NumericResponse, answer: str) -> bool:
     return actual == expected
 
 
+def _ratio(value: str, terms: int) -> list[Fraction]:
+    normalized = value.strip().lower().replace("\\colon", ":")
+    normalized = re.sub(r"\s+to\s+", ":", normalized)
+    pieces = [piece.strip() for piece in normalized.split(":")]
+    if len(pieces) != terms or any(not piece for piece in pieces):
+        raise AnswerFormatError(f"Enter a ratio with {terms} terms separated by colons.")
+    values = [_fraction(piece) for piece in pieces]
+    if any(value <= 0 for value in values):
+        raise AnswerFormatError("Ratio terms must be positive.")
+    return values
+
+
+def _is_simplest_integer_ratio(values: list[Fraction]) -> bool:
+    if any(value.denominator != 1 for value in values):
+        return False
+    divisor = 0
+    for value in values:
+        divisor = gcd(divisor, abs(value.numerator))
+    return divisor == 1
+
+
+def _equivalent_ratio(actual: list[Fraction], expected: list[Fraction]) -> bool:
+    return all(
+        actual[index] * expected[0] == expected[index] * actual[0]
+        for index in range(1, len(actual))
+    )
+
+
 def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
     if spec.comparison_mode == "symbolic_equivalence" and answer.strip() == spec.canonical_expression.strip():
         return True
@@ -139,6 +167,13 @@ def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
         order = spec.checker_config["order"]
         correctly_ordered = actual == sorted(actual, reverse=order == "descending")
         return actual == expected and correctly_ordered
+    if spec.comparison_mode == "exact_ratio":
+        terms = spec.checker_config["terms"]
+        actual = _ratio(answer, terms)
+        expected = _ratio(spec.canonical_expression, terms)
+        if spec.checker_config["require_simplest_integer_terms"]:
+            return _is_simplest_integer_ratio(actual) and _equivalent_ratio(actual, expected)
+        return _equivalent_ratio(actual, expected)
     if spec.comparison_mode == "exact_relation":
         actual_left, actual_op, actual_right = _relation(answer)
         expected_left, expected_op, expected_right = _relation(spec.canonical_expression)
@@ -153,7 +188,7 @@ def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
                 expected_left,
             )
         return False
-    raise AnswerFormatError("Symbolic equivalence checking is not enabled in the N1 pilot.")
+    raise AnswerFormatError("This answer comparison mode is not supported.")
 
 
 def check_answer(spec: Response, answer: str) -> dict:

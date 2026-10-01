@@ -79,3 +79,37 @@ def test_every_canonical_answer_is_accepted(bank_root):
                 answer = spec.canonical_answer
             result = check_answer(spec, answer)
             assert result["correct"], (question.stable_key, part.position, answer, result)
+
+
+def test_exact_ratio_accepts_colons_and_to_notation():
+    spec = AlgebraicResponse(
+        type="algebraic_expression",
+        comparison_mode="exact_ratio",
+        canonical_expression="3:5",
+        canonical_latex="3:5",
+        variables=[],
+        domain_constraints=[],
+        accepted_equivalents=[],
+        checker_config={"terms": 2, "require_simplest_integer_terms": False},
+    )
+
+    assert check_answer(spec, "6:10")["correct"]
+    assert check_answer(spec, "3 to 5")["correct"]
+    assert not check_answer(spec, "5:3")["correct"]
+
+
+def test_exact_ratio_can_require_simplest_three_term_form():
+    spec = AlgebraicResponse(
+        type="algebraic_expression",
+        comparison_mode="exact_ratio",
+        canonical_expression="2:3:1",
+        canonical_latex="2:3:1",
+        variables=[],
+        domain_constraints=[],
+        accepted_equivalents=[],
+        checker_config={"terms": 3, "require_simplest_integer_terms": True},
+    )
+
+    assert check_answer(spec, "2:3:1")["correct"]
+    assert not check_answer(spec, "4:6:2")["correct"]
+    assert not check_answer(spec, "2/3:1:1/3")["correct"]

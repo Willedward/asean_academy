@@ -32,13 +32,23 @@ def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
     assert len(report.batch_reports) == 75
     assert {batch.manifest.expected_question_count for batch in report.batch_reports} == {21, 22, 26}
     assert sum(batch.manifest.expected_question_count for batch in report.batch_reports) == 1_936
-    assert report.question_count == 40
+    assert report.question_count == 66
     assert not report.duplicate_matches
+
+    n2_first_batch = next(
+        batch
+        for batch in report.batch_reports
+        if batch.manifest.batch_id == "g3-sec1-n2-b001"
+    )
+    assert n2_first_batch.valid
+    assert n2_first_batch.manifest.status == "ready_for_review"
+    assert len(n2_first_batch.questions) == 26
 
 
 def test_authoring_schemas_are_valid_json_schema(repository_root):
     schema_root = repository_root / "backend_resources/question_bank/schema"
     for filename in (
+        "question-v1.schema.json",
         "question-batch-manifest-v1.schema.json",
         "question-house-rules-v1.schema.json",
     ):

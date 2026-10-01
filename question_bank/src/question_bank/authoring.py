@@ -225,6 +225,7 @@ def load_manifest(path: Path) -> QuestionBatchManifest:
 def write_authoring_schemas(output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     documents = {
+        "question-v1.schema.json": Question.model_json_schema(),
         "question-batch-manifest-v1.schema.json": QuestionBatchManifest.model_json_schema(),
         "question-house-rules-v1.schema.json": HouseRules.model_json_schema(),
     }
@@ -304,6 +305,7 @@ def build_blueprint(
                 "prime_factorisation",
                 "ordered_numeric_list",
                 "exact_relation",
+                "exact_ratio",
             ],
             "diagram_formats": ["svg"],
             "math_rendering": ["KaTeX", "MathJax"],
@@ -805,6 +807,7 @@ def validate_authoring_pipeline(
         question.stable_key: question.bank_key for question in catalogue_report.questions
     }
     question_claims: dict[str, str] = {}
+    claimed_keys_by_bank: dict[str, set[str]] = defaultdict(set)
     allocations: dict[str, Counter] = defaultdict(Counter)
     manifests_by_bank: dict[str, int] = defaultdict(int)
     for manifest_path in sorted(bank_catalogue_root.glob("**/batches/*.json")):
@@ -825,13 +828,16 @@ def validate_authoring_pipeline(
         for item in manifest.allocation:
             allocations[manifest.bank_key][(item.outcome_code, item.difficulty)] += item.count
         for key in manifest.question_keys:
-            if key in authored_keys:
+            authored_bank = authored_keys.get(key)
+            if authored_bank is not None and (
+                authored_bank != manifest.bank_key or manifest.status == "planned"
+            ):
                 _issue(
                     report,
                     "error",
                     "reserved_key_already_authored",
                     manifest_path,
-                    f"{key} already exists in {authored_keys[key]}",
+                    f"{key} already exists in {authored_bank}",
                 )
             previous = question_claims.get(key)
             if previous:
@@ -843,18 +849,20 @@ def validate_authoring_pipeline(
                     f"{key} is also claimed by {previous}",
                 )
             question_claims[key] = manifest.batch_id
+            claimed_keys_by_bank[manifest.bank_key].add(key)
     for bank_report in catalogue_report.banks:
         blueprint = bank_report.blueprint
         if blueprint is None:
             continue
-        actual = Counter(
+        unclaimed_actual = Counter(
             (question.primary_outcome, question.difficulty)
             for question in bank_report.questions
+            if question.stable_key not in claimed_keys_by_bank[blueprint.bank_key]
         )
         expected = Counter()
         for row in blueprint.outcome_distribution:
             for level, target in row.difficulty_counts.items():
-                remaining = target - actual[(row.code, int(level))]
+                remaining = target - unclaimed_actual[(row.code, int(level))]
                 if remaining > 0:
                     expected[(row.code, int(level))] = remaining
         if not manifests_by_bank[blueprint.bank_key]:

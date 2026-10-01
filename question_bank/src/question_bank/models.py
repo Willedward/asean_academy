@@ -66,6 +66,7 @@ ExpressionMode = Literal[
     "prime_factorisation",
     "ordered_numeric_list",
     "exact_relation",
+    "exact_ratio",
 ]
 
 
@@ -119,6 +120,13 @@ class AlgebraicResponse(Model):
             allowed = self.checker_config.get("allowed_operators")
             if not isinstance(allowed, list) or not allowed:
                 raise ValueError("Exact relation checker requires allowed_operators")
+        if self.comparison_mode == "exact_ratio":
+            terms = self.checker_config.get("terms")
+            if terms not in {2, 3}:
+                raise ValueError("Exact ratio checker requires two or three terms")
+            require_simplest = self.checker_config.get("require_simplest_integer_terms")
+            if not isinstance(require_simplest, bool):
+                raise ValueError("Exact ratio checker must declare whether simplest terms are required")
         return self
 
 
