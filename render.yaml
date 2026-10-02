@@ -12,7 +12,6 @@ services:
       uv run --project services/learning_api --locked python services/learning_api/scripts/bootstrap_hosted.py
     startCommand: uv run --project services/learning_api --locked uvicorn learning_api.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/v1/ready
-    maxShutdownDelaySeconds: 30
     envVars:
       - key: ASEAN_ACADEMY_ENV
         value: preview
@@ -48,7 +47,6 @@ services:
     buildCommand: corepack pnpm install --frozen-lockfile && corepack pnpm --filter @asean-academy/web build
     startCommand: cd apps/web && corepack pnpm exec next start --hostname 0.0.0.0 --port $PORT
     healthCheckPath: /login
-    maxShutdownDelaySeconds: 30
     envVars:
       - key: NODE_VERSION
         value: "24"
