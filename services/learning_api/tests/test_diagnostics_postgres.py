@@ -74,7 +74,7 @@ def _seed_diagnostics(connection, learner_id: str, administrator_id: str) -> Non
             title, status, expected_question_count, difficulty_counts,
             source_style_references, published_at
         ) values (%s, %s, %s, %s, 'secondary_1', 'Diagnostic test bank',
-                  'published', 2, '{"1": 2, "2": 0, "3": 0}'::jsonb,
+                  'published', 2, '{"1": 2, "2": 0, "3": 0, "4": 0, "5": 0}'::jsonb,
                   '[]'::jsonb, now())
         """,
         (bank_id, f"diagnostic-test-{learner_id}", course[2], topic),
