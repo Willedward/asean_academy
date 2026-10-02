@@ -184,13 +184,21 @@ def test_batch_claims_are_exclusive_idempotent_and_releasable(repository_root, t
     registry_path.write_text('{"schema_version":"1.0.0","claims":[]}\n')
     banks = repository_root / "backend_resources/question_bank/g3_math"
     claimed_at = datetime(2026, 10, 1, tzinfo=UTC)
+    claimable_statuses = {"planned", "draft", "ready_for_review", "changes_requested"}
+    claimable_batch_ids = [
+        manifest["batch_id"]
+        for path in sorted(banks.glob("**/batches/*.json"))
+        if (manifest := json.loads(path.read_text()))["status"] in claimable_statuses
+    ]
+    batch_id, other_batch_id = claimable_batch_ids[:2]
+    branch = f"questions/{batch_id}-william"
 
     result = claim_batch(
         registry_path,
         banks,
-        batch_id="g3-sec1-n2-b002",
+        batch_id=batch_id,
         owner="william",
-        branch="questions/g3-sec1-n2-b002-william",
+        branch=branch,
         now=claimed_at,
     )
     assert result["changed"] is True
@@ -198,9 +206,9 @@ def test_batch_claims_are_exclusive_idempotent_and_releasable(repository_root, t
         claim_batch(
             registry_path,
             banks,
-            batch_id="g3-sec1-n2-b002",
+            batch_id=batch_id,
             owner="william",
-            branch="questions/g3-sec1-n2-b002-william",
+            branch=branch,
             now=claimed_at,
         )["changed"]
         is False
@@ -210,41 +218,41 @@ def test_batch_claims_are_exclusive_idempotent_and_releasable(repository_root, t
         claim_batch(
             registry_path,
             banks,
-            batch_id="g3-sec1-n2-b002",
+            batch_id=batch_id,
             owner="friend",
-            branch="questions/g3-sec1-n2-b002-friend",
+            branch=f"questions/{batch_id}-friend",
             now=claimed_at,
         )
     with pytest.raises(ValueError, match="already has an active batch claim"):
         claim_batch(
             registry_path,
             banks,
-            batch_id="g3-sec1-n2-b003",
+            batch_id=other_batch_id,
             owner="william",
-            branch="questions/g3-sec1-n2-b002-william",
+            branch=branch,
             now=claimed_at,
         )
 
     release_batch_claim(
         registry_path,
-        batch_id="g3-sec1-n2-b002",
+        batch_id=batch_id,
         owner="william",
         now=datetime(2026, 10, 2, tzinfo=UTC),
     )
     registry = load_claim_registry(registry_path)
     assert isinstance(registry, BatchClaimRegistry)
-    assert registry.active_claim("g3-sec1-n2-b002") is None
+    assert registry.active_claim(batch_id) is None
     assert registry.claims[0].released_at == datetime(2026, 10, 2, tzinfo=UTC)
 
-    ready_claim = claim_batch(
+    reclaimed = claim_batch(
         registry_path,
         banks,
-        batch_id="g3-sec1-n2-b001",
+        batch_id=batch_id,
         owner="math-reviewer",
-        branch="questions/g3-sec1-n2-b001-review",
+        branch=f"questions/{batch_id}-review",
         now=datetime(2026, 10, 3, tzinfo=UTC),
     )
-    assert ready_claim["changed"] is True
+    assert reclaimed["changed"] is True
 
 
 def test_pull_request_check_exports_claimed_ready_batch(repository_root, tmp_path):
