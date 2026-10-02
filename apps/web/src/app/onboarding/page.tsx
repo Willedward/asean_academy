@@ -8,6 +8,7 @@ import {
   LiveOnboardingShell,
 } from "@/beta-kit/live/live-entry";
 import { OnboardingForm } from "@/components/onboarding-form";
+import { OnboardingLoadState } from "@/components/onboarding-load-state";
 import { Button } from "@/components/ui/button";
 import { hasActiveEnrolment } from "@/lib/auth/learner-state";
 import { onboardingPath } from "@/lib/auth/navigation";
@@ -139,16 +140,32 @@ export default async function OnboardingPage({
   if (!session) redirect("/login");
 
   let currentLearner = null;
+  let loadError: ServerLearningApiError | null = null;
   try {
     currentLearner = await getServerLearner(session);
   } catch (error) {
-    if (!(
+    if (
       error instanceof ServerLearningApiError &&
       error.status === 403 &&
       error.code === "onboarding_required"
-    )) {
+    ) {
+      // A new invited learner does not have a profile until the form succeeds.
+    } else if (error instanceof ServerLearningApiError) {
+      loadError = error;
+    } else {
       throw error;
     }
+  }
+
+  if (loadError) {
+    return (
+      <OnboardingLoadState
+        code={loadError.code}
+        message={loadError.message}
+        requestId={loadError.requestId}
+        retryAutomatically={[502, 503, 504].includes(loadError.status)}
+      />
+    );
   }
 
   if (
