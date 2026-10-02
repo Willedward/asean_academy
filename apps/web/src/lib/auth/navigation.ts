@@ -45,6 +45,9 @@ export function getSiteOrigin(): string {
   const vercelDomain = process.env.VERCEL_URL?.trim();
   if (vercelDomain) return normalizeSiteOrigin(vercelDomain);
 
+  const renderUrl = process.env.RENDER_EXTERNAL_URL?.trim();
+  if (renderUrl) return normalizeSiteOrigin(renderUrl);
+
   if (process.env.NODE_ENV !== "production") return "http://localhost:3000";
   throw new Error("Set NEXT_PUBLIC_SITE_URL for hosted authentication.");
 }

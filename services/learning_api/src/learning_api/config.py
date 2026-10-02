@@ -83,6 +83,7 @@ class Settings:
         release_sha = (
             os.getenv("ASEAN_ACADEMY_RELEASE_SHA")
             or os.getenv("RAILWAY_GIT_COMMIT_SHA")
+            or os.getenv("RENDER_GIT_COMMIT")
             or os.getenv("OTEL_SERVICE_VERSION")
             or "local"
         ).strip()
@@ -118,7 +119,15 @@ class Settings:
             slow_request_ms=_positive_integer("ASEAN_ACADEMY_SLOW_REQUEST_MS", 1000),
             release_sha=release_sha,
             deployment_id=(
-                value if (value := os.getenv("RAILWAY_DEPLOYMENT_ID", "").strip()) else None
+                value
+                if (
+                    value := (
+                        os.getenv("RAILWAY_DEPLOYMENT_ID")
+                        or os.getenv("RENDER_INSTANCE_ID")
+                        or ""
+                    ).strip()
+                )
+                else None
             ),
             repository_root=Path(
                 os.getenv("ASEAN_ACADEMY_REPOSITORY_ROOT", DEFAULT_REPOSITORY_ROOT)

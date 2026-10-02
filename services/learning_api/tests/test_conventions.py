@@ -103,3 +103,17 @@ def test_enabled_rate_limits_require_a_long_abuse_secret(monkeypatch):
 
     with pytest.raises(RuntimeError, match="at least 32"):
         Settings.from_environment()
+
+
+def test_render_metadata_identifies_the_release_and_deployment(monkeypatch):
+    monkeypatch.delenv("ASEAN_ACADEMY_RELEASE_SHA", raising=False)
+    monkeypatch.delenv("RAILWAY_GIT_COMMIT_SHA", raising=False)
+    monkeypatch.delenv("RAILWAY_DEPLOYMENT_ID", raising=False)
+    monkeypatch.delenv("OTEL_SERVICE_VERSION", raising=False)
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123")
+    monkeypatch.setenv("RENDER_INSTANCE_ID", "srv-instance-1")
+
+    settings = Settings.from_environment()
+
+    assert settings.release_sha == "abc123"
+    assert settings.deployment_id == "srv-instance-1"

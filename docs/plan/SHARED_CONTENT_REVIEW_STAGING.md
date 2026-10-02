@@ -75,8 +75,8 @@ that CI validated.
 
 ### Recommended for zero-cost, intermittent review
 
-Use two Render Free web services, one for FastAPI and one for Next.js, plus a Supabase
-Free staging project. This fits intermittent founder review because Render Free services
+Use the two Render Free web services declared in the repository's `render.yaml`, one for
+FastAPI and one for Next.js, plus a Supabase Free staging project. This fits intermittent founder review because Render Free services
 sleep after 15 minutes without inbound traffic and wake on the next request. The first
 request after sleep can take about a minute. The free workspace includes 750 instance
 hours per month; running two always-active services would exceed that allowance, so the
@@ -123,7 +123,9 @@ smoke checks. Do not point a temporary deployment at a production Supabase proje
 
 ## Current boundary
 
-The repository integration is complete, but no external service has been created by this
-commit. Hosting requires the team-owned Supabase, Google OAuth and host credentials.
-Once those values exist, use the existing Railway runbook or configure the equivalent two
-Render services and perform the hosted authentication check before sharing the URL.
+The free shared-review deployment is code-complete. Follow
+[Free shared question-review staging](RENDER_FREE_REVIEW_STAGING.md) to create the
+team-owned Supabase project and apply the Render Blueprint. No external account or
+credential is committed to Git. The first deployment still requires a repository owner
+to enter the staging database URL, Supabase URL and public key in Render, then configure
+the generated web URL in Google and Supabase Auth.

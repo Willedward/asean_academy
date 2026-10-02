@@ -154,8 +154,14 @@ def test_draft_registry_entries_are_not_available_without_preview():
 
 def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
+    authored_paths = list(
+        (REPOSITORY_ROOT / "backend_resources/question_bank/g3_math").glob(
+            "**/questions/*.json"
+        )
+    )
 
     assert len(catalogue.questions) == 40
-    assert len(catalogue.review_questions) == 66
+    assert len(catalogue.review_questions) == len(authored_paths)
     assert catalogue.review_question_batches["n2-l1-001"] == "g3-sec1-n2-b001"
+    assert catalogue.review_question_batches["n2-l1-007"] == "g3-sec1-n2-b002"
     assert "n1-l1-01" not in catalogue.review_question_batches

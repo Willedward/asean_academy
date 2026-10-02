@@ -1,0 +1,75 @@
+services:
+  - type: web
+    name: nextscholar-review-api
+    runtime: python
+    plan: free
+    region: singapore
+    branch: feature/bulk-question-authoring-pipeline
+    autoDeployTrigger: checksPass
+    buildCommand: >-
+      pip install uv==0.12.5 &&
+      uv sync --project services/learning_api --locked --no-dev &&
+      uv run --project services/learning_api --locked python services/learning_api/scripts/bootstrap_hosted.py
+    startCommand: uv run --project services/learning_api --locked uvicorn learning_api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/ready
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: ASEAN_ACADEMY_ENV
+        value: preview
+      - key: ASEAN_ACADEMY_ALLOW_DRAFT_CONTENT
+        value: "true"
+      - key: ASEAN_ACADEMY_LOG_FORMAT
+        value: json
+      - key: ASEAN_ACADEMY_RATE_LIMITS_ENABLED
+        value: "true"
+      - key: ASEAN_ACADEMY_TRUST_PROXY_HEADERS
+        value: "true"
+      - key: ASEAN_ACADEMY_ABUSE_HASH_SECRET
+        generateValue: true
+      - key: ASEAN_ACADEMY_DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: ASEAN_ACADEMY_CORS_ORIGINS
+        fromService:
+          type: web
+          name: nextscholar-review-web
+          envVarKey: RENDER_EXTERNAL_URL
+
+  - type: web
+    name: nextscholar-review-web
+    runtime: node
+    plan: free
+    region: singapore
+    branch: feature/bulk-question-authoring-pipeline
+    autoDeployTrigger: checksPass
+    buildCommand: corepack pnpm install --frozen-lockfile && corepack pnpm --filter @asean-academy/web build
+    startCommand: cd apps/web && corepack pnpm exec next start --hostname 0.0.0.0 --port $PORT
+    healthCheckPath: /login
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXT_PUBLIC_USE_API_FIXTURES
+        value: "false"
+      - key: ASEAN_ACADEMY_BETA_LEARNING_UI
+        value: "true"
+      - key: LEARNING_API_URL
+        fromService:
+          type: web
+          name: nextscholar-review-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        fromService:
+          type: web
+          name: nextscholar-review-api
+          envVarKey: SUPABASE_URL
+      - key: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+        fromService:
+          type: web
+          name: nextscholar-review-api
+          envVarKey: SUPABASE_ANON_KEY
