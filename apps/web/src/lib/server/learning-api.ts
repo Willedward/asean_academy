@@ -7,6 +7,7 @@ import type {
   ProgressResponse,
 } from "@/lib/api/progress";
 import type { VerifiedSession } from "@/lib/auth/session";
+import { ensureLearningApiReady } from "@/lib/server/learning-api-readiness";
 
 function baseUrl(): string {
   return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(
@@ -50,14 +51,27 @@ async function getServerJson<T>(
   session: VerifiedSession,
   path: string,
 ): Promise<T> {
-  const response = await fetch(`${baseUrl()}${path}`, {
-    cache: "no-store",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${session.accessToken}`,
-      "X-Request-ID": crypto.randomUUID(),
-    },
-  });
+  const apiBaseUrl = baseUrl();
+  const requestId = crypto.randomUUID();
+  let response: Response;
+  try {
+    await ensureLearningApiReady(apiBaseUrl);
+    response = await fetch(`${apiBaseUrl}${path}`, {
+      cache: "no-store",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${session.accessToken}`,
+        "X-Request-ID": requestId,
+      },
+    });
+  } catch {
+    throw new ServerLearningApiError(
+      "The learning service could not be reached.",
+      503,
+      "learning_api_unavailable",
+      requestId,
+    );
+  }
   if (!response.ok) throw await parseError(response);
   return (await response.json()) as T;
 }

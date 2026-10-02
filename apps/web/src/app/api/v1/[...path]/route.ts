@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { getVerifiedSession, isAuthenticationConfigured } from "@/lib/auth/session";
+import { ensureLearningApiReady } from "@/lib/server/learning-api-readiness";
 
 const FORWARDED_REQUEST_HEADERS = [
   "accept",
@@ -46,7 +47,8 @@ function authenticationError() {
 async function forward(request: NextRequest, context: Context): Promise<Response> {
   const { path } = await context.params;
   const relativePath = path.join("/");
-  const target = new URL(`/api/v1/${relativePath}`, learningApiBaseUrl());
+  const baseUrl = learningApiBaseUrl();
+  const target = new URL(`/api/v1/${relativePath}`, baseUrl);
   target.search = request.nextUrl.search;
 
   const headers = new Headers();
@@ -64,6 +66,7 @@ async function forward(request: NextRequest, context: Context): Promise<Response
   const hasBody = request.method !== "GET" && request.method !== "HEAD";
   let upstream: Response;
   try {
+    await ensureLearningApiReady(baseUrl);
     upstream = await fetch(target, {
       method: request.method,
       headers,
