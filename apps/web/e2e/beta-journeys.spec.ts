@@ -263,7 +263,7 @@ test.describe.serial("authenticated beta journeys", () => {
     await page.getByRole("button", { name: "Open reviewer preview" }).click();
     await expect(page.getByText("Canonical answer")).toBeVisible();
     await expect(page.getByText("Authored hints")).toBeVisible();
-    await expect(page.getByText("Worked solution")).toBeVisible();
+    await expect(page.getByText("Worked solution", { exact: true })).toBeVisible();
     await page.goto("/admin/users");
     await expect(
       page.getByRole("heading", { name: "Users, roles and course revisions" }),
