@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l2-020",
+  "bank_key": "g3-sec1-n2-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "primary_outcome": "2.2",
+  "title": "Simplifying a ratio of three liquid volumes",
+  "difficulty": 2,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Three containers hold 0.75 litres, 1.5 litres and 2.25 litres of water respectively. Write these volumes as a ratio in its simplest form."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "2.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_ratio",
+        "canonical_expression": "1:2:3",
+        "canonical_latex": "1:2:3",
+        "variables": [],
+        "domain_constraints": [
+          "positive ratio terms"
+        ],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "terms": 3,
+          "require_simplest_integer_terms": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Remove the decimals by multiplying every term by the same power of 10."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "After multiplying by 100, divide 75:150:225 by 75."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "0.75:1.5:2.25=75:150:225"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "75:150:225=1:2:3"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf"
+    ],
+    "created_at": "2026-10-03T05:20:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
