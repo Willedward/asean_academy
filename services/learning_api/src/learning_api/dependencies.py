@@ -31,6 +31,9 @@ from .practice_service import PracticeService
 from .progress_repository import PostgresProgressRepository, SQLiteProgressRepository
 from .progress_service import ProgressService
 from .question_report_repository import PostgresQuestionReportRepository
+from .tutor_provider import provider_for
+from .tutor_repository import PostgresTutorRepository, TutorLimits, TutorRepository
+from .tutor_service import TutorService
 
 bearer = HTTPBearer(auto_error=False)
 LOGGER = logging.getLogger("learning_api.abuse")
@@ -327,6 +330,67 @@ def practice_service(
 PracticeServiceDependency = Annotated[PracticeService, Depends(practice_service)]
 
 
+def tutor_repository(request: Request):
+    settings = request.app.state.settings
+    repository = getattr(request.app.state, "tutor_repository", None)
+    if repository is None:
+        if not settings.database_url:
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "code": "tutor_not_configured",
+                    "message": "Tutor persistence requires the PostgreSQL database.",
+                },
+            )
+        repository = PostgresTutorRepository(settings.database_url)
+        request.app.state.tutor_repository = repository
+    return repository
+
+
+TutorRepositoryDependency = Annotated[TutorRepository, Depends(tutor_repository)]
+
+
+def tutor_service(
+    request: Request,
+    learner: EnrolledLearnerDependency,
+) -> TutorService:
+    settings = request.app.state.settings
+    if not settings.tutor_enabled:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "tutor_disabled",
+                "message": "The AI tutor is not enabled. Authored hints and solutions remain available.",
+            },
+        )
+    repository = tutor_repository(request)
+    provider = getattr(request.app.state, "tutor_provider", None)
+    if provider is None:
+        provider = provider_for(settings.tutor_provider, environment=settings.environment)
+        request.app.state.tutor_provider = provider
+    return TutorService(
+        repository,
+        provider,
+        learner.learner_id,
+        limits=TutorLimits(
+            daily_messages=settings.tutor_daily_message_limit,
+            daily_tokens=settings.tutor_daily_token_limit,
+            monthly_cost_micros_sgd=settings.tutor_monthly_cost_limit_micros_sgd,
+            academy_monthly_cost_micros_sgd=(
+                settings.tutor_academy_monthly_cost_limit_micros_sgd
+            ),
+            max_input_tokens=settings.tutor_max_input_tokens,
+            max_output_tokens=settings.tutor_max_output_tokens,
+            max_turn_cost_micros_sgd=settings.tutor_max_turn_cost_micros_sgd,
+        ),
+        model_policy_version=settings.tutor_model_policy_version,
+        prompt_version=settings.tutor_prompt_version,
+    )
+
+
+TutorServiceDependency = Annotated[TutorService, Depends(tutor_service)]
+
+
 def rate_limiter(request: Request) -> RateLimiter:
     limiter = getattr(request.app.state, "rate_limiter", None)
     if limiter is None:
@@ -435,4 +499,8 @@ LearnerProgressWriteRateLimitDependency = Annotated[
 AdminWriteRateLimitDependency = Annotated[
     None,
     Depends(_rate_limit_dependency("admin_write")),
+]
+TutorMessageRateLimitDependency = Annotated[
+    None,
+    Depends(_rate_limit_dependency("tutor_message")),
 ]

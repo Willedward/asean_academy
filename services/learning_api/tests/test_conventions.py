@@ -117,3 +117,11 @@ def test_render_metadata_identifies_the_release_and_deployment(monkeypatch):
 
     assert settings.release_sha == "abc123"
     assert settings.deployment_id == "srv-instance-1"
+
+
+def test_synthetic_tutor_provider_is_rejected_outside_tests(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "development")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "synthetic")
+
+    with pytest.raises(RuntimeError, match="allowed only in test"):
+        Settings.from_environment()

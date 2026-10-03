@@ -43,6 +43,7 @@ POLICIES = {
     "practice_attempt": RateLimitPolicy("practice_attempt", 120, 10 * 60),
     "practice_support": RateLimitPolicy("practice_support", 60, 10 * 60),
     "learner_progress_write": RateLimitPolicy("learner_progress_write", 120, 10 * 60),
+    "tutor_message": RateLimitPolicy("tutor_message", 20, 10 * 60),
     "admin_write": RateLimitPolicy("admin_write", 30, 10 * 60),
 }
 

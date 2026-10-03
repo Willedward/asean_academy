@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202609290014"
+REQUIRED_SCHEMA_REVISION = "202610030017"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -59,6 +59,17 @@ class Settings:
     abuse_hash_secret: str = "development-only-abuse-hash-secret"
     trust_proxy_headers: bool = False
     max_request_body_bytes: int = 65536
+    tutor_enabled: bool = False
+    tutor_provider: str = "disabled"
+    tutor_daily_message_limit: int = 10
+    tutor_daily_token_limit: int = 20000
+    tutor_monthly_cost_limit_micros_sgd: int = 7_000_000
+    tutor_academy_monthly_cost_limit_micros_sgd: int = 7_000_000_000
+    tutor_max_input_tokens: int = 5000
+    tutor_max_output_tokens: int = 1000
+    tutor_max_turn_cost_micros_sgd: int = 250_000
+    tutor_model_policy_version: str = "math-tutor-policy-v1"
+    tutor_prompt_version: str = "math-tutor-prompt-v1"
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -162,6 +173,38 @@ class Settings:
             max_request_body_bytes=_positive_integer(
                 "ASEAN_ACADEMY_MAX_REQUEST_BODY_BYTES", 65536
             ),
+            tutor_enabled=_boolean("ASEAN_ACADEMY_TUTOR_ENABLED", False),
+            tutor_provider=os.getenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "disabled")
+            .strip()
+            .lower(),
+            tutor_daily_message_limit=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_DAILY_MESSAGE_LIMIT", 10
+            ),
+            tutor_daily_token_limit=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_DAILY_TOKEN_LIMIT", 20000
+            ),
+            tutor_monthly_cost_limit_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_MONTHLY_COST_LIMIT_MICROS_SGD", 7_000_000
+            ),
+            tutor_academy_monthly_cost_limit_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_ACADEMY_MONTHLY_COST_LIMIT_MICROS_SGD",
+                7_000_000_000,
+            ),
+            tutor_max_input_tokens=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_MAX_INPUT_TOKENS", 5000
+            ),
+            tutor_max_output_tokens=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_MAX_OUTPUT_TOKENS", 1000
+            ),
+            tutor_max_turn_cost_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_MAX_TURN_COST_MICROS_SGD", 250_000
+            ),
+            tutor_model_policy_version=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_MODEL_POLICY_VERSION", "math-tutor-policy-v1"
+            ).strip(),
+            tutor_prompt_version=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v1"
+            ).strip(),
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:
@@ -189,4 +232,14 @@ class Settings:
                 raise RuntimeError(
                     "ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID must be a UUID when PostgreSQL is enabled"
                 ) from exc
+        if settings.tutor_provider not in {"disabled", "synthetic"}:
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled or synthetic"
+            )
+        if settings.tutor_provider == "synthetic" and environment != "test":
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_PROVIDER=synthetic is allowed only in test"
+            )
+        if not settings.tutor_model_policy_version or not settings.tutor_prompt_version:
+            raise RuntimeError("Tutor policy and prompt versions must not be empty")
         return settings

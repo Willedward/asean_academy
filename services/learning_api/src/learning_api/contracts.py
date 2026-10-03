@@ -25,7 +25,7 @@ class ErrorEnvelope(ApiModel):
 class HealthDependencies(ApiModel):
     course_content: Literal["versioned_catalogue"] = "versioned_catalogue"
     authentication: Literal["supabase_bearer"] = "supabase_bearer"
-    tutor: Literal["disabled"] = "disabled"
+    tutor: Literal["disabled", "enabled"] = "disabled"
 
 
 class ReleaseMetadata(ApiModel):
