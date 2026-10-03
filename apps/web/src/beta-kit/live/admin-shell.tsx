@@ -6,6 +6,7 @@ import {
   BookOpenCheck,
   ClipboardList,
   FileQuestion,
+  FlaskConical,
   GraduationCap,
   History,
   LayoutDashboard,
@@ -53,6 +54,11 @@ const links: AdminLink[] = [
   { href: "/admin/questions", label: "Question analytics", icon: BarChart3 },
   { href: "/admin/reports", label: "Reports inbox", icon: FileQuestion },
   { href: "/admin/content", label: "Content review", icon: BookOpenCheck },
+  {
+    href: "/admin/tutor-evaluation",
+    label: "Tutor evaluation",
+    icon: FlaskConical,
+  },
   { href: "/admin/invitations", label: "Invitations", icon: Send },
   { href: "/admin/audit", label: "Audit history", icon: History },
   {
