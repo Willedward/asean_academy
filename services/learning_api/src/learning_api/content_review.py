@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from psycopg.types.json import Jsonb
@@ -14,6 +15,8 @@ from question_bank.repository import content_hash
 
 from .admin_repository import BetaOperationsError
 from .course_catalogue import CourseCatalogue, public_lesson_section
+
+TUTOR_GROUNDING_ROOT = Path("backend_resources/tutor_evaluations")
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,7 +40,14 @@ def _without_workflow_metadata(value):
         return [_without_workflow_metadata(item) for item in value]
     if not isinstance(value, dict):
         return value
-    ignored = {"revision", "status", "reviewed_at", "reviewed_by", "review_notes"}
+    ignored = {
+        "revision",
+        "status",
+        "review",
+        "reviewed_at",
+        "reviewed_by",
+        "review_notes",
+    }
     return {
         key: _without_workflow_metadata(item)
         for key, item in value.items()
@@ -47,7 +57,9 @@ def _without_workflow_metadata(value):
 
 def review_fingerprint(*models: Any) -> str:
     payload = [
-        _without_workflow_metadata(model.model_dump(mode="json"))
+        _without_workflow_metadata(
+            model.model_dump(mode="json") if hasattr(model, "model_dump") else model
+        )
         for model in models
     ]
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
@@ -99,6 +111,64 @@ def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIt
         )
         for question in catalogue.review_questions
     )
+    items.extend(_tutor_grounding_review_items(catalogue.repository_root))
+    return items
+
+
+def _tutor_grounding_review_items(repository_root: Path) -> list[CatalogueReviewItem]:
+    root = repository_root / TUTOR_GROUNDING_ROOT
+    items: list[CatalogueReviewItem] = []
+    for path in sorted(root.glob("**/*grounding*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        required = {
+            "grounding_id",
+            "revision",
+            "status",
+            "title",
+            "topic_code",
+            "scope",
+            "source_references",
+            "sections_by_outcome",
+        }
+        missing = sorted(required - payload.keys())
+        if missing:
+            raise BetaOperationsError(
+                "tutor_grounding_invalid",
+                f"Tutor grounding {path.name} is missing: {', '.join(missing)}.",
+                503,
+            )
+        revision = payload["revision"]
+        if not isinstance(revision, int) or revision < 1:
+            raise BetaOperationsError(
+                "tutor_grounding_invalid",
+                f"Tutor grounding {path.name} must have a positive integer revision.",
+                503,
+            )
+        source_status = {
+            "draft_for_review": "draft",
+            "reviewed": "reviewed",
+            "published": "published",
+            "retired": "retired",
+        }.get(payload["status"])
+        if source_status is None:
+            raise BetaOperationsError(
+                "tutor_grounding_invalid",
+                f"Tutor grounding {path.name} has an unsupported status.",
+                503,
+            )
+        items.append(
+            CatalogueReviewItem(
+                kind="tutor_grounding",
+                stable_key=str(payload["grounding_id"]),
+                revision=revision,
+                source_hash=hashlib.sha256(path.read_bytes()).hexdigest(),
+                fingerprint=review_fingerprint(payload),
+                title=str(payload["title"]),
+                source_status=source_status,
+                model=payload,
+                outcome_code=str(payload["topic_code"]),
+            )
+        )
     return items
 
 
@@ -264,7 +334,8 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
         "editorial_review": _review_summary(editorial),
         "lifecycle_request": _lifecycle_summary(active_request),
         "blockers": blockers,
-        "can_request_publication": not blockers
+        "can_request_publication": item.kind != "tutor_grounding"
+        and not blockers
         and item.source_status not in {"published", "retired"}
         and not (active_request and active_request["action"] == "publish"),
         "can_request_retirement": item.source_status == "published"
@@ -308,7 +379,14 @@ def list_review_queue(
             for item in items
             if query in item["stable_key"].casefold() or query in item["title"].casefold()
         ]
-    items.sort(key=lambda item: ({"course": 0, "lesson": 1, "question": 2}[item["content_kind"]], item["position"] or 0, item["stable_key"]))
+    priority = {"course": 0, "lesson": 1, "question": 2, "tutor_grounding": 3}
+    items.sort(
+        key=lambda item: (
+            priority[item["content_kind"]],
+            item["position"] or 0,
+            item["stable_key"],
+        )
+    )
     return {
         "items": items[offset : offset + limit],
         "batch_ids": batch_ids,
@@ -320,6 +398,12 @@ def list_review_queue(
 
 def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:
     item = _item(catalogue, kind, stable_key)
+    if kind == "tutor_grounding":
+        raise BetaOperationsError(
+            "tutor_grounding_has_no_student_preview",
+            "Tutor calibration grounding is available only in the protected reviewer preview.",
+            409,
+        )
     if kind == "question":
         content = public_question(item.model)
     elif kind == "lesson":
@@ -363,7 +447,11 @@ def reviewer_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> 
         "revision": item.revision,
         "review_fingerprint": item.fingerprint,
         "batch_id": item.batch_id,
-        "review_content": item.model.model_dump(mode="json"),
+        "review_content": (
+            item.model.model_dump(mode="json")
+            if hasattr(item.model, "model_dump")
+            else item.model
+        ),
     }
 
 
@@ -436,6 +524,12 @@ def record_review(repository, catalogue, administrator, kind, stable_key, body, 
 def request_lifecycle(repository, catalogue, administrator, kind, stable_key, body, request_id):
     item = _item(catalogue, kind, stable_key)
     _assert_expected(item, body)
+    if kind == "tutor_grounding":
+        raise BetaOperationsError(
+            "tutor_grounding_lifecycle_not_applicable",
+            "Tutor grounding approval unlocks evaluation; it is not a student publication request.",
+            409,
+        )
     with repository._connect() as connection:
         connection.execute(
             "select pg_advisory_xact_lock(hashtextextended(%s, 0))",

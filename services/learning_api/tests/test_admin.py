@@ -309,6 +309,39 @@ def test_content_admin_can_open_protected_n2_reviewer_preview():
     assert "solution" in preview.text
 
 
+def test_content_admin_can_open_protected_n2_tutor_grounding_preview():
+    app, _ = application()
+    path = (
+        "/api/v1/admin/content/tutor_grounding/"
+        "g3-sec1-n2-tutor-grounding-v1/review-preview"
+    )
+
+    forbidden = request(app, "GET", path, "student-token")
+    preview = request(app, "GET", path, "admin-token")
+
+    assert forbidden.status_code == 403
+    assert preview.status_code == 200, preview.text
+    assert preview.json()["content_kind"] == "tutor_grounding"
+    assert preview.json()["review_content"]["topic_code"] == "N2"
+    assert set(preview.json()["review_content"]["sections_by_outcome"]) == {
+        "2.1",
+        "2.2",
+        "2.3",
+    }
+
+    no_student_preview = request(
+        app,
+        "GET",
+        path.replace("review-preview", "preview"),
+        "admin-token",
+    )
+    assert no_student_preview.status_code == 409
+    assert (
+        no_student_preview.json()["error"]["code"]
+        == "tutor_grounding_has_no_student_preview"
+    )
+
+
 def test_content_admin_cannot_request_publication():
     app, _ = application()
 

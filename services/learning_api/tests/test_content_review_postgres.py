@@ -263,3 +263,92 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
                 "update content_review_records set notes='Mutation is forbidden' where stable_key=%s",
                 (item["stable_key"],),
             )
+
+
+@pytest.mark.postgres
+def test_tutor_grounding_uses_persisted_dual_review_without_publication_request():
+    url = os.getenv("TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("Requires a migrated and imported disposable database")
+
+    content_admin_id, academic_admin_id = uuid4(), uuid4()
+    content_admin = AuthenticatedLearner(
+        str(content_admin_id), "content_admin", f"editor-{content_admin_id}@example.test"
+    )
+    academic_admin = AuthenticatedLearner(
+        str(academic_admin_id),
+        "academic_admin",
+        f"academic-{academic_admin_id}@example.test",
+    )
+    repository = PostgresBetaOperationsRepository(url)
+    catalogue = CourseCatalogue(ROOT, allow_drafts=True)
+
+    with psycopg.connect(url) as connection:
+        connection.execute("truncate content_lifecycle_requests, content_review_records")
+        for administrator in (content_admin, academic_admin):
+            connection.execute(
+                "insert into auth.users(id, email) values (%s, %s)",
+                (administrator.learner_id, administrator.email),
+            )
+            connection.execute(
+                "insert into profiles(id, email, role) values (%s, %s, %s)",
+                (administrator.learner_id, administrator.email, administrator.role),
+            )
+
+    queue = list_review_queue(
+        repository,
+        catalogue,
+        kind="tutor_grounding",
+        source_status=None,
+        review_state=None,
+        search="g3-sec1-n2-tutor-grounding-v1",
+        limit=20,
+        offset=0,
+    )
+    assert queue["total"] == 1
+    item = queue["items"][0]
+    assert item["review_state"] == "unreviewed"
+    assert not item["can_request_publication"]
+
+    record_review(
+        repository,
+        catalogue,
+        content_admin,
+        "tutor_grounding",
+        item["stable_key"],
+        _body(
+            item,
+            "editorial",
+            "approved",
+            "Terminology and explanations are clear for Secondary 1 learners.",
+        ),
+        "grounding-editorial-review",
+    )
+    record_review(
+        repository,
+        catalogue,
+        academic_admin,
+        "tutor_grounding",
+        item["stable_key"],
+        _body(
+            item,
+            "mathematics",
+            "approved",
+            "All N2 statements and worked examples are mathematically correct.",
+        ),
+        "grounding-mathematics-review",
+    )
+
+    approved = list_review_queue(
+        repository,
+        catalogue,
+        kind="tutor_grounding",
+        source_status=None,
+        review_state="approved",
+        search=item["stable_key"],
+        limit=20,
+        offset=0,
+    )["items"][0]
+    assert approved["review_state"] == "approved"
+    assert not approved["can_request_publication"]
+    assert approved["lifecycle_request"] is None

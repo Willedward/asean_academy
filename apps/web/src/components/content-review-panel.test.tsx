@@ -87,6 +87,61 @@ const preview: ContentPreview = {
   },
 };
 
+const groundingItem: ContentItem = {
+  ...item,
+  content_kind: "tutor_grounding",
+  stable_key: "g3-sec1-n2-tutor-grounding-v1",
+  title: "Ratio and proportion tutor calibration grounding",
+  outcome_code: "N2",
+  batch_id: null,
+  review_state: "unreviewed",
+  blockers: [
+    "Mathematics approval is required.",
+    "Editorial approval is required.",
+  ],
+  can_request_publication: false,
+};
+
+const groundingPreview: ContentPreview = {
+  content_kind: "tutor_grounding",
+  stable_key: groundingItem.stable_key,
+  revision: 1,
+  review_fingerprint: groundingItem.review_fingerprint,
+  batch_id: null,
+  review_content: {
+    grounding_id: groundingItem.stable_key,
+    revision: 1,
+    status: "draft_for_review",
+    title: groundingItem.title,
+    topic_code: "N2",
+    scope: "Secondary 1 outcomes 2.1, 2.2 and 2.3 only",
+    source_references: [
+      {
+        path: "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        role: "official_syllabus_transcription",
+      },
+    ],
+    sections_by_outcome: {
+      "2.1": [
+        {
+          section_key: "ratio-meaning-and-order",
+          section_type: "explanation",
+          title: "Meaning and order of a ratio",
+          content: {
+            blocks: [
+              {
+                type: "text",
+                text: "A ratio compares quantities in a stated order.",
+              },
+              { type: "display_math", content: "3:5" },
+            ],
+          },
+        },
+      ],
+    },
+  },
+};
+
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
@@ -196,5 +251,38 @@ describe("ContentReviewPanel", () => {
         reason: "Both independent reviews are complete.",
       });
     });
+  });
+
+  it("renders protected tutor grounding without a student publication action", async () => {
+    const groundingQueue: ContentQueue = {
+      ...queue,
+      items: [groundingItem],
+      batch_ids: [],
+    };
+    const fetcher = vi.fn(async (url: string) => {
+      if (url.includes("/review-preview")) {
+        return new Response(JSON.stringify(groundingPreview));
+      }
+      return new Response(JSON.stringify(groundingQueue));
+    });
+    vi.stubGlobal("fetch", fetcher);
+
+    render(<ContentReviewPanel academic />);
+    await screen.findByText(groundingItem.title);
+    expect(
+      screen.getByText(/Both approvals unlock the live model-evaluation milestone/),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Review publication request" }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Open reviewer preview" }),
+    );
+
+    expect(await screen.findByText("Outcome 2.1")).toBeInTheDocument();
+    expect(screen.getByText("Meaning and order of a ratio")).toBeInTheDocument();
+    expect(screen.getByLabelText("3:5")).toBeInTheDocument();
+    expect(screen.getByText("Source references")).toBeInTheDocument();
   });
 });
