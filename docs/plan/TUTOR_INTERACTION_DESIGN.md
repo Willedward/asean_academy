@@ -64,7 +64,8 @@ The first real calibration slice now uses 20 questions from the Mathematics- and
 editorial-approved N2 B002 batch. It covers all five difficulty levels, outcomes 2.1–2.3,
 all seven tutor modes, locked-answer conversations and one unlocked-solution explanation.
 Its draft lesson grounding is intentionally marked `draft_for_review`; the review packet is
-in `docs/plan/N2_TUTOR_GROUNDING_REVIEW.md`. A synthetic run passes all 20 structural and
+in `docs/plan/N2_TUTOR_GROUNDING_REVIEW.md` and its decisions are recorded through the
+protected `/admin/content` workflow. A synthetic run passes all 20 structural and
 leakage checks, but a live provider run remains blocked on grounding approval and a local
 API key.
 

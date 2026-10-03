@@ -10,7 +10,7 @@ from pydantic import Field
 
 from .contracts import ApiModel
 
-ContentKind = Literal["course", "lesson", "question"]
+ContentKind = Literal["course", "lesson", "question", "tutor_grounding"]
 ReviewDimension = Literal["mathematics", "editorial"]
 ReviewDecision = Literal["approved", "changes_requested"]
 LifecycleAction = Literal["publish", "retire"]

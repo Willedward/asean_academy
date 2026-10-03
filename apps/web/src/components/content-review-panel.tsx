@@ -75,6 +75,52 @@ type ReviewCourse = {
   school_level: string;
   units: { title: string; lessons: { title: string; outcomes: string[] }[] }[];
 };
+type GroundingBlock = {
+  type: "text" | "inline_math" | "display_math";
+  text?: string;
+  latex?: string;
+  content?: string;
+};
+type GroundingSection = {
+  section_key: string;
+  section_type: string;
+  title: string;
+  content: {
+    blocks?: GroundingBlock[];
+    prompt?: GroundingBlock[];
+    steps?: {
+      position: number;
+      content: GroundingBlock[];
+    }[];
+  };
+};
+type ReviewTutorGrounding = {
+  grounding_id: string;
+  revision: number;
+  status: string;
+  title: string;
+  topic_code: string;
+  scope: string;
+  source_references: { path: string; role: string }[];
+  sections_by_outcome: Record<string, GroundingSection[]>;
+};
+
+function GroundingBlocks({ value }: { value?: GroundingBlock[] }) {
+  const blocks = (value ?? []).flatMap<ContentBlock>((block) => {
+    if (block.type === "text" && block.text) {
+      return [{ type: "text", text: block.text }];
+    }
+    const latex = block.latex ?? block.content;
+    if (block.type === "inline_math" && latex) {
+      return [{ type: "inline_math", latex }];
+    }
+    if (block.type === "display_math" && latex) {
+      return [{ type: "display_math", latex }];
+    }
+    return [];
+  });
+  return <MathContent blocks={blocks} />;
+}
 
 function canonicalAnswer(response: ReviewResponse) {
   return (
@@ -145,6 +191,69 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
             </div>
           </section>
         ))}
+      </article>
+    );
+  }
+  if (preview.content_kind === "tutor_grounding") {
+    const grounding = content as unknown as ReviewTutorGrounding;
+    return (
+      <article className="space-y-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-5">
+        <div>
+          <p className="m-0 text-sm font-semibold uppercase text-amber-800">
+            AI tutor calibration grounding · {grounding.topic_code} · revision{" "}
+            {grounding.revision}
+          </p>
+          <h3 className="mt-1 text-xl font-bold">{grounding.title}</h3>
+          <p>{grounding.scope}</p>
+          <p className="rounded-xl border border-amber-200 bg-white p-3 text-sm">
+            This protected material is supplied to the model during calibration.
+            Approval unlocks model evaluation; it does not publish content to learners.
+          </p>
+        </div>
+        {Object.entries(grounding.sections_by_outcome).map(
+          ([outcome, sections]) => (
+            <section className="space-y-4" key={outcome}>
+              <h4 className="text-lg font-bold">Outcome {outcome}</h4>
+              {sections.map((section) => (
+                <article
+                  className="space-y-3 rounded-xl border bg-white p-4"
+                  key={section.section_key}
+                >
+                  <p className="m-0 text-xs font-semibold uppercase text-teal-700">
+                    {label(section.section_type)} · {section.section_key}
+                  </p>
+                  <h5 className="font-bold">{section.title}</h5>
+                  <GroundingBlocks value={section.content.blocks} />
+                  {section.content.prompt ? (
+                    <div>
+                      <p className="font-semibold">Example prompt</p>
+                      <GroundingBlocks value={section.content.prompt} />
+                    </div>
+                  ) : null}
+                  {section.content.steps?.length ? (
+                    <ol className="list-decimal space-y-2 pl-5">
+                      {section.content.steps.map((step) => (
+                        <li key={step.position}>
+                          <GroundingBlocks value={step.content} />
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
+                </article>
+              ))}
+            </section>
+          ),
+        )}
+        <section>
+          <h4 className="font-bold">Source references</h4>
+          <ul className="list-disc space-y-1 pl-5 text-sm">
+            {grounding.source_references.map((source) => (
+              <li key={source.path}>
+                <code>{source.path}</code> · {label(source.role)}
+              </li>
+            ))}
+          </ul>
+        </section>
       </article>
     );
   }
@@ -494,9 +603,10 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   return (
     <div className="space-y-6">
       <p>
-        Review questions directly from every authored bank. Protected previews
-        include answers, hints and worked solutions; decisions remain
-        append-only and tied to the exact content hash.
+        Review questions and AI tutor grounding directly from their Git-authored
+        sources. Protected previews include answers, hints, worked solutions and
+        calibration explanations; decisions remain append-only and tied to the
+        exact content hash.
       </p>
       <form
         className="grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-5"
@@ -542,6 +652,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             <option value="course">Course</option>
             <option value="lesson">Lesson</option>
             <option value="question">Question</option>
+            <option value="tutor_grounding">Tutor grounding</option>
           </select>
         </label>
         <label>
@@ -650,6 +761,12 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
                   setRevision((value) => value + 1);
                 }}
               />
+              {item.content_kind === "tutor_grounding" ? (
+                <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
+                  Both approvals unlock the live model-evaluation milestone. This
+                  item does not use the student publication workflow.
+                </p>
+              ) : null}
             </article>
           ))}
         </div>

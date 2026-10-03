@@ -1,6 +1,17 @@
 # N2 AI tutor grounding review
 
-## Review status
+## Administrator workflow
+
+The deployed review source is available at `/admin/content`. Select **Tutor grounding**
+under **Kind**, apply the filter and open the protected reviewer preview. Mathematics and
+editorial reviewers record their decisions and notes there. Those database decisions are
+append-only, audited and bound to the exact grounding fingerprint.
+
+This Markdown file remains the repository review guide. The administrator panel is the
+authoritative place for recording decisions; reviewers do not need to edit this file or
+the grounding JSON manually.
+
+## Repository baseline status
 
 - Mathematics decision: `pending`
 - Editorial decision: `pending`
@@ -9,7 +20,11 @@
 - Review date:
 - Review notes:
 
-Replace each pending decision with `approved` or `changes_requested`. Record the exact
+These fields describe the initial Git-authored draft. After deployment, the current
+decisions, reviewer identities, notes and timestamps are shown in the administrator panel
+and stored in the append-only review ledger.
+
+In the administrator panel, choose `approved` or `changes_requested` and record the exact
 section key and requested correction in the notes. Approval applies only to the calibration
 grounding described here; it does not publish an N2 course lesson.
 

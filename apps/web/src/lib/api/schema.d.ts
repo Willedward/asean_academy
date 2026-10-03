@@ -1590,7 +1590,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question";
+            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -1662,7 +1662,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question";
+            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
             /** Difficulty */
             difficulty?: number | null;
             editorial_review: components["schemas"]["ContentReviewSummary"] | null;
@@ -1712,7 +1712,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question";
+            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -1790,7 +1790,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question";
+            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
             /** Review Content */
             review_content: {
                 [key: string]: unknown;
@@ -1821,7 +1821,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question";
+            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
             /** Public Content */
             public_content: {
                 [key: string]: unknown;
@@ -3749,7 +3749,7 @@ export interface operations {
     listContentReviewQueue: {
         parameters: {
             query?: {
-                kind?: ("course" | "lesson" | "question") | null;
+                kind?: ("course" | "lesson" | "question" | "tutor_grounding") | null;
                 source_status?: string | null;
                 review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
                 search?: string | null;
@@ -3860,7 +3860,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question";
+                kind: "course" | "lesson" | "question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -3968,7 +3968,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question";
+                kind: "course" | "lesson" | "question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -4072,7 +4072,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question";
+                kind: "course" | "lesson" | "question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -4176,7 +4176,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question";
+                kind: "course" | "lesson" | "question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
