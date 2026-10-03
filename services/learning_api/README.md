@@ -77,3 +77,19 @@ TEST_DATABASE_URL=postgresql://... \
 It checks invitation onboarding, per-learner idempotency, cross-learner session isolation, immutable attempts, and concurrent duplicate session creation.
 
 The Google OAuth and hosted environment runbook is in `docs/plan/HOSTED_AUTH_ONBOARDING.md`. Administrator invitation operations and observability are documented in `docs/plan/BETA_OPERATIONS.md`. Student analytics and role management are documented in `docs/plan/ADMIN_ANALYTICS_ROLE_MANAGEMENT.md`, and rolling release procedures are in `docs/plan/RELEASE_OPERATIONS.md`. Checkpoint, mastery, retry behavior and the frontend contract are documented in `docs/plan/CHECKPOINT_MASTERY_RETRY.md`.
+
+## AI tutor provider evaluation
+
+The AI tutor remains disabled by default. Run the synthetic provider contract and leakage
+suite without an API key:
+
+```bash
+uv run --project services/learning_api --locked \
+  python services/learning_api/scripts/evaluate_tutor.py --provider synthetic
+```
+
+For an intentional live Gemini evaluation, set `GEMINI_API_KEY` only in the local server
+environment and add `--provider gemini --live`. The runner writes JSON evidence and a
+Markdown human-review form under `build/tutor-evaluation/`. Automated checks never approve
+a model for production; Mathematics and editorial reviewers must score the outputs against
+published lessons and approved question sources.

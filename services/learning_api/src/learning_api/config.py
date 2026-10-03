@@ -37,6 +37,16 @@ def _positive_integer(name: str, default: int) -> int:
     return value
 
 
+def _non_negative_integer(name: str, default: int) -> int:
+    try:
+        value = int(os.getenv(name, str(default)))
+    except ValueError as exc:
+        raise RuntimeError(f"{name} must be a non-negative integer") from exc
+    if value < 0:
+        raise RuntimeError(f"{name} must be a non-negative integer")
+    return value
+
+
 @dataclass(frozen=True, slots=True)
 class Settings:
     environment: str
@@ -70,6 +80,12 @@ class Settings:
     tutor_max_turn_cost_micros_sgd: int = 250_000
     tutor_model_policy_version: str = "math-tutor-policy-v1"
     tutor_prompt_version: str = "math-tutor-prompt-v1"
+    tutor_gemini_api_key: str | None = None
+    tutor_gemini_model: str = "gemini-3.8-flash"
+    tutor_provider_timeout_seconds: int = 20
+    tutor_provider_max_attempts: int = 2
+    tutor_gemini_input_cost_per_million_micros_sgd: int = 0
+    tutor_gemini_output_cost_per_million_micros_sgd: int = 0
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -205,6 +221,24 @@ class Settings:
             tutor_prompt_version=os.getenv(
                 "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v1"
             ).strip(),
+            tutor_gemini_api_key=(
+                value if (value := os.getenv("GEMINI_API_KEY", "").strip()) else None
+            ),
+            tutor_gemini_model=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL", "gemini-3.8-flash"
+            ).strip(),
+            tutor_provider_timeout_seconds=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_PROVIDER_TIMEOUT_SECONDS", 20
+            ),
+            tutor_provider_max_attempts=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_PROVIDER_MAX_ATTEMPTS", 2
+            ),
+            tutor_gemini_input_cost_per_million_micros_sgd=_non_negative_integer(
+                "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD", 0
+            ),
+            tutor_gemini_output_cost_per_million_micros_sgd=_non_negative_integer(
+                "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", 0
+            ),
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:
@@ -232,14 +266,30 @@ class Settings:
                 raise RuntimeError(
                     "ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID must be a UUID when PostgreSQL is enabled"
                 ) from exc
-        if settings.tutor_provider not in {"disabled", "synthetic"}:
+        if settings.tutor_provider not in {"disabled", "synthetic", "gemini"}:
             raise RuntimeError(
-                "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled or synthetic"
+                "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled, synthetic, or gemini"
             )
         if settings.tutor_provider == "synthetic" and environment != "test":
             raise RuntimeError(
                 "ASEAN_ACADEMY_TUTOR_PROVIDER=synthetic is allowed only in test"
             )
+        if settings.tutor_enabled and settings.tutor_provider == "disabled":
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_PROVIDER must name a live provider when the tutor is enabled"
+            )
+        if settings.tutor_provider == "gemini" and not settings.tutor_gemini_model:
+            raise RuntimeError("ASEAN_ACADEMY_TUTOR_GEMINI_MODEL must not be empty")
+        if settings.tutor_enabled and settings.tutor_provider == "gemini":
+            if not settings.tutor_gemini_api_key:
+                raise RuntimeError("GEMINI_API_KEY is required when the Gemini tutor is enabled")
+            if (
+                settings.tutor_gemini_input_cost_per_million_micros_sgd == 0
+                or settings.tutor_gemini_output_cost_per_million_micros_sgd == 0
+            ):
+                raise RuntimeError(
+                    "Gemini tutor shadow input and output prices must be configured when enabled"
+                )
         if not settings.tutor_model_policy_version or not settings.tutor_prompt_version:
             raise RuntimeError("Tutor policy and prompt versions must not be empty")
         return settings

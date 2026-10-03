@@ -366,7 +366,20 @@ def tutor_service(
     repository = tutor_repository(request)
     provider = getattr(request.app.state, "tutor_provider", None)
     if provider is None:
-        provider = provider_for(settings.tutor_provider, environment=settings.environment)
+        provider = provider_for(
+            settings.tutor_provider,
+            environment=settings.environment,
+            gemini_api_key=settings.tutor_gemini_api_key,
+            gemini_model=settings.tutor_gemini_model,
+            timeout_seconds=settings.tutor_provider_timeout_seconds,
+            max_attempts=settings.tutor_provider_max_attempts,
+            input_cost_per_million_micros_sgd=(
+                settings.tutor_gemini_input_cost_per_million_micros_sgd
+            ),
+            output_cost_per_million_micros_sgd=(
+                settings.tutor_gemini_output_cost_per_million_micros_sgd
+            ),
+        )
         request.app.state.tutor_provider = provider
     return TutorService(
         repository,

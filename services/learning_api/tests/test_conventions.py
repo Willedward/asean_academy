@@ -125,3 +125,40 @@ def test_synthetic_tutor_provider_is_rejected_outside_tests(monkeypatch):
 
     with pytest.raises(RuntimeError, match="allowed only in test"):
         Settings.from_environment()
+
+
+def test_enabled_gemini_tutor_requires_server_key(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+
+    with pytest.raises(RuntimeError, match="GEMINI_API_KEY"):
+        Settings.from_environment()
+
+
+def test_enabled_gemini_tutor_requires_shadow_prices(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-test-key")
+
+    with pytest.raises(RuntimeError, match="shadow input and output prices"):
+        Settings.from_environment()
+
+
+def test_enabled_gemini_tutor_loads_server_only_configuration(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-test-key")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD", "1000"
+    )
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", "2000"
+    )
+
+    settings = Settings.from_environment()
+
+    assert settings.tutor_provider == "gemini"
+    assert settings.tutor_gemini_api_key == "private-test-key"
+    assert settings.tutor_gemini_input_cost_per_million_micros_sgd == 1000
+    assert settings.tutor_gemini_output_cost_per_million_micros_sgd == 2000

@@ -28,10 +28,37 @@ The provider-neutral backend foundation is implemented behind
   prompts excluded from operational logs; and
 - a kill switch that leaves lessons, marking, authored hints and solutions usable.
 
-The synthetic provider is accepted only in the test environment. No live Gemini,
-Anthropic or OpenAI adapter is enabled yet. A live adapter and student access remain
-blocked until published grounding exists and the fixed correctness, pedagogy, leakage,
-latency and cost evaluation passes.
+The synthetic provider is accepted only in the test environment. A Gemini REST adapter
+is implemented but remains disabled. It accepts only structured responses, uses bounded
+timeouts and retries, and records a configurable micro-SGD shadow cost from provider token
+usage. The API key is read only from the server environment. No key is stored in content,
+reports, logs or browser configuration.
+
+The fixed provider evaluation begins with 14 synthetic cases covering all seven tutor
+modes, locked and unlocked solutions, repeated confusion and prompt injection. The runner
+exports a machine-readable JSON report and a reviewer-friendly Markdown rubric. Automated
+PASS means only that the response was structurally valid, bounded and did not contain the
+case's prohibited phrases. It never grants production approval.
+
+Run the local no-cost contract evaluation from the repository root:
+
+```bash
+uv run --project services/learning_api --locked \
+  python services/learning_api/scripts/evaluate_tutor.py --provider synthetic
+```
+
+A live Gemini run is deliberately explicit and reads the private key from the shell:
+
+```bash
+GEMINI_API_KEY=... \
+  uv run --project services/learning_api --locked \
+  python services/learning_api/scripts/evaluate_tutor.py --provider gemini --live
+```
+
+Reports are written under the git-ignored `build/tutor-evaluation/` directory unless an
+output directory is supplied. Before student access is enabled, replace or extend the
+synthetic suite with reviewed published Lesson 1 questions, hints, solutions and lesson
+explanations, then obtain Mathematics and editorial approval for every output.
 
 ## Learner interaction
 
