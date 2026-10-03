@@ -12,6 +12,27 @@ the grounding source must be reviewed lesson material, and current lesson bodies
 are blank drafts. Practice, hints, deterministic marking, Give up, and approved
 solutions remain fully usable without an LLM.
 
+## Foundation status (2026-10-03)
+
+The provider-neutral backend foundation is implemented behind
+`ASEAN_ACADEMY_TUTOR_ENABLED=false`. It includes:
+
+- learner-owned sessions pinned to exact lesson and assigned-question revisions;
+- server-derived answer and solution locks refreshed from practice state;
+- structured provider requests and responses with a deterministic test provider;
+- an output leakage guard that replaces suspected locked-answer disclosures;
+- atomic per-turn reservations, reconciliation and release records;
+- daily learner message/token limits, a monthly S$7 learner cost boundary, one
+  concurrent generation per learner, and an academy monthly circuit breaker;
+- append-only tutor messages and usage events with provider credentials and raw
+  prompts excluded from operational logs; and
+- a kill switch that leaves lessons, marking, authored hints and solutions usable.
+
+The synthetic provider is accepted only in the test environment. No live Gemini,
+Anthropic or OpenAI adapter is enabled yet. A live adapter and student access remain
+blocked until published grounding exists and the fixed correctness, pedagogy, leakage,
+latency and cost evaluation passes.
+
 ## Learner interaction
 
 The question screen should offer **Ask teacher** alongside the two authored hints.

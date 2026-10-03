@@ -20,6 +20,7 @@ from .content_sync import ContentSyncError, verify_database_content
 from .contracts import (
     ErrorDetail,
     ErrorEnvelope,
+    HealthDependencies,
     HealthResponse,
     ReadinessDependencies,
     ReadinessResponse,
@@ -43,6 +44,8 @@ from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
 from .routers.progress import router as progress_router
 from .routers.question_reports import router as question_reports_router
+from .routers.tutor import admin_router as tutor_admin_router
+from .routers.tutor import router as tutor_router
 
 LOGGER = logging.getLogger("learning_api")
 
@@ -257,6 +260,9 @@ def create_app(
                 deployment_id=settings.deployment_id,
                 required_schema_revision=REQUIRED_SCHEMA_REVISION,
             ),
+            dependencies=HealthDependencies(
+                tutor="enabled" if settings.tutor_enabled else "disabled"
+            ),
         )
 
     @application.get(
@@ -318,6 +324,10 @@ def create_app(
                                 select 1 from information_schema.tables
                                 where table_schema = 'public'
                                   and table_name = 'account_deletion_records'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'tutor_usage_events'
                             ) as schema_ready
                         """
                     ).fetchone()
@@ -391,6 +401,8 @@ def create_app(
     application.include_router(practice_router)
     application.include_router(progress_router)
     application.include_router(question_reports_router)
+    application.include_router(tutor_router)
+    application.include_router(tutor_admin_router)
 
     return application
 
