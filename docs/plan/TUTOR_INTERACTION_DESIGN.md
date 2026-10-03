@@ -60,6 +60,18 @@ output directory is supplied. Before student access is enabled, replace or exten
 synthetic suite with reviewed published Lesson 1 questions, hints, solutions and lesson
 explanations, then obtain Mathematics and editorial approval for every output.
 
+The first real calibration slice now uses 20 questions from the Mathematics- and
+editorial-approved N2 B002 batch. It covers all five difficulty levels, outcomes 2.1–2.3,
+all seven tutor modes, locked-answer conversations and one unlocked-solution explanation.
+Its draft lesson grounding is intentionally marked `draft_for_review`; the review packet is
+in `docs/plan/N2_TUTOR_GROUNDING_REVIEW.md`. A synthetic run passes all 20 structural and
+leakage checks, but a live provider run remains blocked on grounding approval and a local
+API key.
+
+Frontend engineers should use
+`docs/plan/AI_TUTOR_FRONTEND_BACKEND_HANDOFF.md` for the typed API integration boundary.
+That handoff deliberately excludes visual chat design.
+
 ## Learner interaction
 
 The question screen should offer **Ask teacher** alongside the two authored hints.

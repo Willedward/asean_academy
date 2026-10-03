@@ -1,0 +1,329 @@
+{
+  "schema_version": "1.0.0",
+  "grounding_id": "g3-sec1-n2-tutor-grounding-v1",
+  "status": "draft_for_review",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "title": "Ratio and proportion tutor calibration grounding",
+  "language": "en-SG",
+  "scope": "Secondary 1 outcomes 2.1, 2.2 and 2.3 only",
+  "source_references": [
+    {
+      "path": "backend_resources/syllabi/g3_math/v1/catalogue.json",
+      "role": "official_syllabus_transcription"
+    },
+    {
+      "path": "backend_resources/question_bank/g3_math/secondary_1/n2/v1/batches/g3-sec1-n2-b002.json",
+      "role": "approved_calibration_question_batch"
+    },
+    {
+      "path": "backend_resources/question_bank/authoring/house-rules-v1.json",
+      "role": "notation_and_editorial_rules"
+    }
+  ],
+  "review": {
+    "mathematics": "pending",
+    "editorial": "pending",
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "notes": null
+  },
+  "sections_by_outcome": {
+    "2.1": [
+      {
+        "section_key": "ratio-meaning-and-order",
+        "section_type": "explanation",
+        "title": "Meaning and order of a ratio",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "A ratio compares quantities in a stated order. In A:B, the first term represents A and the second term represents B. Reversing the order changes the comparison. Quantities should use compatible units before they are compared. A ratio has no unit after the units have been made the same."
+            },
+            {
+              "type": "text",
+              "text": "When a question asks how many times as much one quantity is as another, divide the first named quantity by the second named quantity. Keep the wording and the order visible while setting up the division."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "rational-ratio-equivalence",
+        "section_type": "worked_example",
+        "title": "Worked example: compare fractional quantities",
+        "content": {
+          "prompt": [
+            {
+              "type": "text",
+              "text": "Write three quarters to five sixths as a ratio with integer terms."
+            }
+          ],
+          "steps": [
+            {
+              "position": 1,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Use a common multiplier that clears both denominators. The lowest common multiple of 4 and 6 is 12."
+                }
+              ]
+            },
+            {
+              "position": 2,
+              "content": [
+                {
+                  "type": "display_math",
+                  "content": "\\frac34:\\frac56=(12\\times\\frac34):(12\\times\\frac56)=9:10"
+                }
+              ]
+            },
+            {
+              "position": 3,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Both terms were multiplied by the same positive number, so the ratio remains equivalent."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "equivalent-ratio-scale-factor",
+        "section_type": "explanation",
+        "title": "Equivalent ratios and scale factors",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Equivalent ratios are produced by multiplying or dividing every term by the same non-zero number. If one term changes from 4 to 18, first determine the scale factor 18 divided by 4, then apply that same factor to every corresponding term."
+            },
+            {
+              "type": "text",
+              "text": "For linked ratios such as A:B and B:C, rewrite both ratios so that the two values representing B are equal. The other terms can then be joined without changing their relative sizes."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "ratio-comparison-misconceptions",
+        "section_type": "explanation",
+        "title": "Common mistakes when comparing quantities",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Do not subtract quantities when the question asks for a ratio. Do not compare centimetres directly with metres or grams directly with kilograms. Do not apply a scale factor to only one term. Finally, keep the requested order: the ratio of red to blue is not interchangeable with the ratio of blue to red."
+            }
+          ]
+        }
+      }
+    ],
+    "2.2": [
+      {
+        "section_key": "simplest-ratio-method",
+        "section_type": "explanation",
+        "title": "Writing a ratio in simplest form",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "A ratio is in simplest form when its terms are positive integers with no common factor greater than 1. First make units consistent. Then clear decimals or fractions by multiplying every term by a suitable common multiplier. Finally divide every integer term by their greatest common divisor."
+            },
+            {
+              "type": "text",
+              "text": "For a three-term ratio, the same operation must be applied to all three terms. Checking only adjacent pairs is not enough; find a common divisor of the complete set of terms."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "simplify-decimal-ratio-example",
+        "section_type": "worked_example",
+        "title": "Worked example: simplify a three-term decimal ratio",
+        "content": {
+          "prompt": [
+            {
+              "type": "text",
+              "text": "Write 1.2:1.8:3 in its simplest form."
+            }
+          ],
+          "steps": [
+            {
+              "position": 1,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Multiply every term by 10 to remove the decimals."
+                },
+                {
+                  "type": "display_math",
+                  "content": "1.2:1.8:3=12:18:30"
+                }
+              ]
+            },
+            {
+              "position": 2,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The greatest common divisor of 12, 18 and 30 is 6. Divide every term by 6."
+                },
+                {
+                  "type": "display_math",
+                  "content": "12:18:30=2:3:5"
+                }
+              ]
+            },
+            {
+              "position": 3,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The terms 2, 3 and 5 have no common factor greater than 1, so the ratio is in simplest form."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "simplify-fraction-ratio",
+        "section_type": "explanation",
+        "title": "Ratios containing fractions",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "When ratio terms contain fractions, multiply every term by the lowest common multiple of all denominators. This creates an equivalent integer ratio. Then check whether the resulting integers still share a common factor."
+            },
+            {
+              "type": "text",
+              "text": "Mixed numbers should first be rewritten as improper fractions. Percentages should be rewritten using a common representation before simplifying."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "simplest-form-misconceptions",
+        "section_type": "explanation",
+        "title": "Common mistakes in simplest form",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Do not round decimal terms merely to make them integers. Do not divide different terms by different numbers. Do not stop after clearing fractions or decimals without checking for a remaining common factor. A final ratio such as 0.5:1 is equivalent to 1:2 but is not in the expected positive-integer simplest form."
+            }
+          ]
+        }
+      }
+    ],
+    "2.3": [
+      {
+        "section_key": "sharing-a-total-by-ratio",
+        "section_type": "worked_example",
+        "title": "Worked example: share a total in a ratio",
+        "content": {
+          "prompt": [
+            {
+              "type": "text",
+              "text": "A total of 96 tokens is shared in the ratio 3:5. Find the two shares."
+            }
+          ],
+          "steps": [
+            {
+              "position": 1,
+              "content": [
+                {
+                  "type": "text",
+                  "text": "The ratio contains 3 + 5 = 8 equal parts."
+                }
+              ]
+            },
+            {
+              "position": 2,
+              "content": [
+                {
+                  "type": "display_math",
+                  "content": "96\\div8=12"
+                },
+                {
+                  "type": "text",
+                  "text": "One ratio part represents 12 tokens."
+                }
+              ]
+            },
+            {
+              "position": 3,
+              "content": [
+                {
+                  "type": "display_math",
+                  "content": "3\\times12=36,\\qquad5\\times12=60"
+                },
+                {
+                  "type": "text",
+                  "text": "Check that the shares add to 96."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "ratio-problem-unitary-method",
+        "section_type": "explanation",
+        "title": "Use one ratio part as a unit",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "In a ratio problem, label what each term represents and count the relevant number of ratio parts. If a total is given, divide the total by the sum of the parts. If one share is given, divide that share by its own number of parts. Use the value of one part to calculate the required quantity."
+            },
+            {
+              "type": "text",
+              "text": "Always verify whether the stated number is the original total, a remaining total, a difference between shares or one individual share. These correspond to different combinations of ratio parts."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "ratio-problems-after-change",
+        "section_type": "explanation",
+        "title": "Ratios after quantities change",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "For a before-and-after ratio problem, represent the original quantities with a common multiplier, for example 3k and 5k. Apply additions, removals or transfers to the actual quantities, not to the ratio terms alone. Then use the new ratio or new total to form an equation."
+            },
+            {
+              "type": "text",
+              "text": "A transfer between two groups preserves the combined total, while an addition or removal changes it. State which invariant you are using before solving."
+            }
+          ]
+        }
+      },
+      {
+        "section_key": "ratio-word-problem-checks",
+        "section_type": "summary",
+        "title": "Checks for ratio word problems",
+        "content": {
+          "blocks": [
+            {
+              "type": "text",
+              "text": "Label every quantity, preserve the requested order and keep units consistent. After solving, reconstruct the original or changed quantities and check the stated total, difference and ratio. Reject a result that gives a negative count or conflicts with a whole-number requirement in the context."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "provenance": {
+    "authoring_method": "original_authored_for_calibration",
+    "authored_by": "OpenAI Codex",
+    "created_at": "2026-10-03T00:00:00+08:00",
+    "review_required": true
+  }
+}

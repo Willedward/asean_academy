@@ -1186,6 +1186,25 @@
         "title": "AdminUserRoleResponse",
         "type": "object"
       },
+      "AnswerLockState": {
+        "additionalProperties": false,
+        "properties": {
+          "answer_locked": {
+            "title": "Answer Locked",
+            "type": "boolean"
+          },
+          "solution_locked": {
+            "title": "Solution Locked",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "answer_locked",
+          "solution_locked"
+        ],
+        "title": "AnswerLockState",
+        "type": "object"
+      },
       "Asset": {
         "additionalProperties": false,
         "properties": {
@@ -2882,6 +2901,34 @@
         "title": "CreateQuestionReportRequest",
         "type": "object"
       },
+      "CreateTutorSessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "practice_session_id": {
+            "format": "uuid",
+            "title": "Practice Session Id",
+            "type": "string"
+          },
+          "question_key": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Question Key",
+            "type": "string"
+          },
+          "question_revision": {
+            "minimum": 1.0,
+            "title": "Question Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "practice_session_id",
+          "question_key",
+          "question_revision"
+        ],
+        "title": "CreateTutorSessionRequest",
+        "type": "object"
+      },
       "CreatedInvitationResponse": {
         "additionalProperties": false,
         "properties": {
@@ -3871,8 +3918,11 @@
             "type": "string"
           },
           "tutor": {
-            "const": "disabled",
             "default": "disabled",
+            "enum": [
+              "disabled",
+              "enabled"
+            ],
             "title": "Tutor",
             "type": "string"
           }
@@ -5714,6 +5764,22 @@
         "title": "SaveDiagnosticResponseRequest",
         "type": "object"
       },
+      "SendTutorMessageRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "maxLength": 1200,
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "SendTutorMessageRequest",
+        "type": "object"
+      },
       "SetLessonSectionCompletionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -5921,6 +5987,324 @@
           "text"
         ],
         "title": "TextBlock",
+        "type": "object"
+      },
+      "TutorBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "text",
+              "display_math",
+              "bullets"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "content"
+        ],
+        "title": "TutorBlock",
+        "type": "object"
+      },
+      "TutorMessageResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "blocks": {
+            "items": {
+              "$ref": "#/components/schemas/TutorBlock"
+            },
+            "title": "Blocks",
+            "type": "array"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "enum": [
+                  "clarify_question",
+                  "diagnose_misconception",
+                  "socratic_prompt",
+                  "alternative_explanation",
+                  "analogous_example",
+                  "solution_explanation",
+                  "lesson_recommendation"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode"
+          },
+          "role": {
+            "enum": [
+              "student",
+              "assistant"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "safety_outcome": {
+            "enum": [
+              "accepted",
+              "answer_leakage_blocked",
+              "provider_fallback"
+            ],
+            "title": "Safety Outcome",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "role",
+          "blocks",
+          "safety_outcome",
+          "created_at"
+        ],
+        "title": "TutorMessageResponse",
+        "type": "object"
+      },
+      "TutorQuotaResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "daily_messages_remaining": {
+            "minimum": 0.0,
+            "title": "Daily Messages Remaining",
+            "type": "integer"
+          },
+          "daily_tokens_remaining": {
+            "minimum": 0.0,
+            "title": "Daily Tokens Remaining",
+            "type": "integer"
+          },
+          "monthly_cost_remaining_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Monthly Cost Remaining Micros Sgd",
+            "type": "integer"
+          },
+          "resets_at": {
+            "format": "date-time",
+            "title": "Resets At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "daily_messages_remaining",
+          "daily_tokens_remaining",
+          "monthly_cost_remaining_micros_sgd",
+          "resets_at"
+        ],
+        "title": "TutorQuotaResponse",
+        "type": "object"
+      },
+      "TutorReplyResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "answer_lock_state": {
+            "$ref": "#/components/schemas/AnswerLockState"
+          },
+          "message": {
+            "$ref": "#/components/schemas/TutorMessageResponse"
+          },
+          "quota": {
+            "$ref": "#/components/schemas/TutorQuotaResponse"
+          },
+          "recommended_next_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recommended Next Action"
+          },
+          "response_type": {
+            "const": "tutor_reply",
+            "default": "tutor_reply",
+            "title": "Response Type",
+            "type": "string"
+          },
+          "session_id": {
+            "format": "uuid",
+            "title": "Session Id",
+            "type": "string"
+          },
+          "suggested_replies": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Suggested Replies",
+            "type": "array"
+          }
+        },
+        "required": [
+          "session_id",
+          "message",
+          "suggested_replies",
+          "answer_lock_state",
+          "quota"
+        ],
+        "title": "TutorReplyResponse",
+        "type": "object"
+      },
+      "TutorSessionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "answer_lock_state": {
+            "$ref": "#/components/schemas/AnswerLockState"
+          },
+          "closed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/TutorMessageResponse"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "model_policy_version": {
+            "title": "Model Policy Version",
+            "type": "string"
+          },
+          "practice_session_id": {
+            "format": "uuid",
+            "title": "Practice Session Id",
+            "type": "string"
+          },
+          "question_key": {
+            "title": "Question Key",
+            "type": "string"
+          },
+          "question_revision": {
+            "title": "Question Revision",
+            "type": "integer"
+          },
+          "session_id": {
+            "format": "uuid",
+            "title": "Session Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "closed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "practice_session_id",
+          "question_key",
+          "question_revision",
+          "status",
+          "answer_lock_state",
+          "model_policy_version",
+          "messages",
+          "created_at"
+        ],
+        "title": "TutorSessionResponse",
+        "type": "object"
+      },
+      "TutorUsageAdminResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "active_reservations": {
+            "minimum": 0.0,
+            "title": "Active Reservations",
+            "type": "integer"
+          },
+          "actual_cost_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Actual Cost Micros Sgd",
+            "type": "integer"
+          },
+          "actual_requests": {
+            "minimum": 0.0,
+            "title": "Actual Requests",
+            "type": "integer"
+          },
+          "failed_requests": {
+            "minimum": 0.0,
+            "title": "Failed Requests",
+            "type": "integer"
+          },
+          "input_tokens": {
+            "minimum": 0.0,
+            "title": "Input Tokens",
+            "type": "integer"
+          },
+          "learners": {
+            "minimum": 0.0,
+            "title": "Learners",
+            "type": "integer"
+          },
+          "output_tokens": {
+            "minimum": 0.0,
+            "title": "Output Tokens",
+            "type": "integer"
+          },
+          "reserved_cost_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Reserved Cost Micros Sgd",
+            "type": "integer"
+          },
+          "usage_month": {
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Usage Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "usage_month",
+          "learners",
+          "actual_requests",
+          "failed_requests",
+          "input_tokens",
+          "output_tokens",
+          "actual_cost_micros_sgd",
+          "reserved_cost_micros_sgd",
+          "active_reservations"
+        ],
+        "title": "TutorUsageAdminResponse",
         "type": "object"
       },
       "UpdateUserRoleRequest": {
@@ -9348,6 +9732,134 @@
         "summary": "Audit and reset one exceptional diagnostic attempt",
         "tags": [
           "diagnostics",
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-usage": {
+      "get": {
+        "operationId": "getAdminTutorUsage",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "pattern": "^\\d{4}-\\d{2}$",
+              "title": "Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorUsageAdminResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Tutor Usage",
+        "tags": [
           "admin"
         ]
       }
@@ -13529,6 +14041,526 @@
         "summary": "Check database and schema readiness before receiving traffic",
         "tags": [
           "system"
+        ]
+      }
+    },
+    "/api/v1/tutor/sessions": {
+      "post": {
+        "operationId": "createTutorSession",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTutorSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Session",
+        "tags": [
+          "tutor"
+        ]
+      }
+    },
+    "/api/v1/tutor/sessions/{session_id}": {
+      "get": {
+        "operationId": "getTutorSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Session",
+        "tags": [
+          "tutor"
+        ]
+      }
+    },
+    "/api/v1/tutor/sessions/{session_id}/close": {
+      "post": {
+        "operationId": "closeTutorSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Close Session",
+        "tags": [
+          "tutor"
+        ]
+      }
+    },
+    "/api/v1/tutor/sessions/{session_id}/messages": {
+      "post": {
+        "operationId": "sendTutorMessage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTutorMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorReplyResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Send Message",
+        "tags": [
+          "tutor"
         ]
       }
     }
