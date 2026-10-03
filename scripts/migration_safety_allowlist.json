@@ -24,5 +24,12 @@
       "match": "drop constraint math_questions_difficulty_check",
       "reason": "The three-level constraint is replaced in the same transaction after the five-level constraint has been validated; all existing levels remain valid."
     }
+  ],
+  "202610030018_tutor_grounding_review.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_review_records_item_kind_check",
+      "reason": "The constraint is recreated in the same transaction with tutor_grounding added; every previously allowed review item kind remains valid."
+    }
   ]
 }
