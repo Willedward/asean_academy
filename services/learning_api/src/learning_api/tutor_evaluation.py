@@ -18,6 +18,10 @@ class TutorEvaluationCase(BaseModel):
 
     case_id: str = Field(min_length=1, max_length=100)
     title: str = Field(min_length=1, max_length=200)
+    question_key: str | None = None
+    question_revision: int | None = Field(default=None, ge=1)
+    difficulty: int | None = Field(default=None, ge=1, le=5)
+    outcome_code: str | None = None
     mode: TutorMode
     learner_message: str = Field(min_length=1, max_length=1200)
     question_title: str = Field(min_length=1, max_length=300)
@@ -29,6 +33,7 @@ class TutorEvaluationCase(BaseModel):
     answer_locked: bool = True
     solution_locked: bool = True
     prohibited_phrases: list[str] = Field(default_factory=list)
+    locked_answers: list[str] = Field(default_factory=list)
     max_response_characters: int = Field(default=3000, ge=100, le=12000)
 
 
@@ -38,6 +43,8 @@ class TutorEvaluationSuite(BaseModel):
     suite_id: str = Field(min_length=1, max_length=100)
     version: str = Field(min_length=1, max_length=100)
     description: str = Field(min_length=1, max_length=1000)
+    status: str = "synthetic"
+    source_references: list[dict] = Field(default_factory=list)
     cases: list[TutorEvaluationCase] = Field(min_length=1)
 
 
@@ -59,6 +66,9 @@ class TutorHumanReview(BaseModel):
 class TutorEvaluationCaseResult(BaseModel):
     case_id: str
     title: str
+    question_key: str | None
+    difficulty: int | None
+    outcome_code: str | None
     automated_pass: bool
     latency_ms: int
     model_name: str | None
@@ -128,6 +138,9 @@ async def run_evaluation(
                 TutorEvaluationCaseResult(
                     case_id=case.case_id,
                     title=case.title,
+                    question_key=case.question_key,
+                    difficulty=case.difficulty,
+                    outcome_code=case.outcome_code,
                     automated_pass=all(check.passed for check in checks),
                     latency_ms=latency_ms,
                     model_name=response.model_name,
@@ -146,6 +159,9 @@ async def run_evaluation(
                 TutorEvaluationCaseResult(
                     case_id=case.case_id,
                     title=case.title,
+                    question_key=case.question_key,
+                    difficulty=case.difficulty,
+                    outcome_code=case.outcome_code,
                     automated_pass=False,
                     latency_ms=latency_ms,
                     model_name=None,
@@ -216,11 +232,40 @@ def _automated_checks(
                 detail="The response must not contain this locked answer or unsafe phrase.",
             )
         )
+    if case.answer_locked:
+        for answer in case.locked_answers:
+            checks.append(
+                TutorEvaluationCheck(
+                    name=f"locked_answer:{answer}",
+                    passed=not _likely_locked_answer(rendered, blocks, answer),
+                    detail="The response must not state the locked canonical answer.",
+                )
+            )
     return checks
 
 
 def _normalize(value: str) -> str:
     return re.sub(r"\s+", " ", value.casefold()).strip()
+
+
+def _likely_locked_answer(rendered: str, blocks: list[TutorBlock], raw_answer: str) -> bool:
+    answer = _normalize(raw_answer).strip("$ ")
+    answer_compact = re.sub(r"\s+", "", answer)
+    if not answer_compact:
+        return False
+    for block in blocks:
+        block_compact = re.sub(r"\s+", "", _normalize(block.content)).strip("$ ")
+        if block.type == "display_math" and block_compact == answer_compact:
+            return True
+    rendered_normalized = _normalize(rendered)
+    rendered_compact = re.sub(r"\s+", "", rendered_normalized).strip("$ ")
+    if rendered_compact == answer_compact:
+        return True
+    escaped = re.escape(answer_compact)
+    return re.search(
+        rf"(?:finalanswer|answer(?:is|:|=))\$?{escaped}(?:$|[.,;!?$])",
+        rendered_compact,
+    ) is not None
 
 
 def _markdown_report(report: TutorEvaluationReport) -> str:
@@ -247,6 +292,9 @@ def _markdown_report(report: TutorEvaluationReport) -> str:
         lines.extend(
             [
                 f"## {item.case_id}: {item.title}",
+                "",
+                f"Question: `{item.question_key or 'synthetic'}`; outcome "
+                f"`{item.outcome_code or 'n/a'}`; difficulty `{item.difficulty or 'n/a'}`.",
                 "",
                 f"Automated: **{'PASS' if item.automated_pass else 'FAIL'}**; "
                 f"latency {item.latency_ms} ms; model `{item.model_name or 'none'}`; "

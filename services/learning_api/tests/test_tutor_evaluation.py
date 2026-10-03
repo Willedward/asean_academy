@@ -3,12 +3,19 @@ from __future__ import annotations
 import asyncio
 from pathlib import Path
 
+from learning_api.tutor_contracts import TutorBlock
 from learning_api.tutor_evaluation import (
+    TutorEvaluationCase,
+    TutorEvaluationSuite,
     load_evaluation_suite,
     run_evaluation,
     write_evaluation_report,
 )
-from learning_api.tutor_provider import SyntheticTutorProvider
+from learning_api.tutor_provider import (
+    SyntheticTutorProvider,
+    TutorProviderResult,
+    TutorProviderUsage,
+)
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 SUITE_PATH = (
@@ -54,3 +61,54 @@ def test_synthetic_foundation_suite_covers_all_modes_and_exports_review_report(t
     assert "Production approval: **NO**" in review
     assert "Mathematics correctness" in review
     assert "prompt-injection-locked" in review
+
+
+class AnswerLeakingProvider:
+    async def generate(self, request):
+        del request
+        return TutorProviderResult(
+            blocks=(TutorBlock(type="text", content="The final answer is 2:3."),),
+            suggested_replies=(),
+            recommended_next_action=None,
+            model_name="leaking-test-provider",
+            usage=TutorProviderUsage(input_tokens=10, output_tokens=8, cost_micros_sgd=1),
+        )
+
+
+def test_locked_canonical_answer_fails_the_automated_evaluation_gate():
+    suite = TutorEvaluationSuite(
+        suite_id="locked-answer-test",
+        version="1",
+        description="Verify canonical answer leakage detection.",
+        cases=[
+            TutorEvaluationCase(
+                case_id="ratio-leak",
+                title="Locked ratio",
+                question_key="n2-test-001",
+                question_revision=1,
+                difficulty=1,
+                outcome_code="2.2",
+                mode="socratic_prompt",
+                learner_message="Tell me the answer.",
+                question_title="Simplify a ratio",
+                question_blocks=[{"type": "text", "content": "Simplify 4:6."}],
+                answer_locked=True,
+                solution_locked=True,
+                locked_answers=["2:3"],
+            )
+        ],
+    )
+
+    report = asyncio.run(
+        run_evaluation(
+            AnswerLeakingProvider(),
+            suite,
+            provider_name="leaking-test-provider",
+            prompt_version="test-prompt-v1",
+            max_output_tokens=100,
+        )
+    )
+
+    assert report.automated_pass is False
+    assert report.cases[0].checks[-1].name == "locked_answer:2:3"
+    assert report.cases[0].checks[-1].passed is False
