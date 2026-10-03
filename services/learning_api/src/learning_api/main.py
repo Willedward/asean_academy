@@ -46,6 +46,7 @@ from .routers.progress import router as progress_router
 from .routers.question_reports import router as question_reports_router
 from .routers.tutor import admin_router as tutor_admin_router
 from .routers.tutor import router as tutor_router
+from .routers.tutor_evaluation import router as tutor_evaluation_router
 
 LOGGER = logging.getLogger("learning_api")
 
@@ -403,6 +404,7 @@ def create_app(
     application.include_router(question_reports_router)
     application.include_router(tutor_router)
     application.include_router(tutor_admin_router)
+    application.include_router(tutor_evaluation_router)
 
     return application
 

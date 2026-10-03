@@ -101,6 +101,7 @@ class AuditEventResponse(ApiModel):
         "content_retirement_requested",
         "question_report_created", "question_report_status_changed",
         "account_deletion_completed",
+        "tutor_evaluation_run_created", "tutor_evaluation_review_recorded",
     ]
     actor_user_id: UUID | None
     invitation_id: UUID | None

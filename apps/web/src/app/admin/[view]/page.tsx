@@ -9,6 +9,7 @@ import {
 } from "@/components/admin-dashboard";
 import { requireAdministrator } from "@/lib/auth/admin";
 import { ContentReviewPanel } from "@/components/content-review-panel";
+import { TutorEvaluationPanel } from "@/components/tutor-evaluation-panel";
 
 export default async function AdminView({
   params,
@@ -51,6 +52,16 @@ export default async function AdminView({
         "Review exact immutable revisions and request publication or retirement without editing Git-authored content.",
       content: (
         <ContentReviewPanel
+          academic={administrator.profile.role === "academic_admin"}
+        />
+      ),
+    },
+    "tutor-evaluation": {
+      title: "AI tutor evaluation lab",
+      description:
+        "Run approved N2 calibration cases, inspect automated checks and cost evidence, and record mathematics and editorial reviews of each AI response.",
+      content: (
+        <TutorEvaluationPanel
           academic={administrator.profile.role === "academic_admin"}
         />
       ),

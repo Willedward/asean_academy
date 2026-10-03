@@ -30,6 +30,7 @@ function EstablishedAdminLayout({
     ["/admin/questions", "Question analytics"],
     ["/admin/reports", "Reports inbox"],
     ["/admin/content", "Content review"],
+    ["/admin/tutor-evaluation", "Tutor evaluation"],
     ["/admin/invitations", "Invitations"],
     ["/admin/audit", "Audit history"],
     ...(academic

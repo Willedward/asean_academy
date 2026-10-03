@@ -13,7 +13,7 @@ const healthFixture: HealthResponse = {
   release: {
     sha: "fixture",
     deployment_id: null,
-    required_schema_revision: "202610030018",
+    required_schema_revision: "202610030019",
   },
   dependencies: {
     course_content: "versioned_catalogue",
@@ -27,7 +27,8 @@ export async function getHealth(): Promise<HealthResponse> {
     return healthFixture;
   }
 
-  const { data, error, response } = await createApiClient().GET("/api/v1/health");
+  const { data, error, response } =
+    await createApiClient().GET("/api/v1/health");
   if (error || !data) {
     throw new Error(apiErrorMessage(error, response.status));
   }

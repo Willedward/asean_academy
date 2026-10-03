@@ -3,6 +3,9 @@ from __future__ import annotations
 import asyncio
 from pathlib import Path
 
+import pytest
+from pydantic import ValidationError
+
 from learning_api.tutor_contracts import TutorBlock
 from learning_api.tutor_evaluation import (
     TutorEvaluationCase,
@@ -11,6 +14,7 @@ from learning_api.tutor_evaluation import (
     run_evaluation,
     write_evaluation_report,
 )
+from learning_api.tutor_evaluation_contracts import TutorEvaluationRunRequest
 from learning_api.tutor_provider import (
     SyntheticTutorProvider,
     TutorProviderResult,
@@ -26,6 +30,22 @@ SUITE_PATH = (
     / "v1"
     / "synthetic_foundation.json"
 )
+N2_SUITE_PATH = (
+    REPOSITORY_ROOT / "backend_resources/tutor_evaluations/g3_math/v1/n2_calibration_v1.json"
+)
+
+
+def test_admin_lab_suite_contains_twenty_reviewed_n2_cases():
+    suite = load_evaluation_suite(N2_SUITE_PATH)
+    assert suite.suite_id == "g3-sec1-n2-reviewed-question-calibration"
+    assert len(suite.cases) == 20
+    assert {case.difficulty for case in suite.cases} == {1, 2, 3, 4, 5}
+
+
+def test_gemini_run_requires_explicit_live_confirmation():
+    with pytest.raises(ValidationError):
+        TutorEvaluationRunRequest(provider="gemini")
+    assert TutorEvaluationRunRequest(provider="gemini", confirm_live=True).confirm_live
 
 
 def test_synthetic_foundation_suite_covers_all_modes_and_exports_review_report(tmp_path):

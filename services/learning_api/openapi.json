@@ -1453,7 +1453,9 @@
               "content_retirement_requested",
               "question_report_created",
               "question_report_status_changed",
-              "account_deletion_completed"
+              "account_deletion_completed",
+              "tutor_evaluation_run_created",
+              "tutor_evaluation_review_recorded"
             ],
             "title": "Event Type",
             "type": "string"
@@ -6020,6 +6022,89 @@
         "title": "TutorBlock",
         "type": "object"
       },
+      "TutorEvaluationReviewRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "curriculum_fit": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Curriculum Fit",
+            "type": "integer"
+          },
+          "decision": {
+            "enum": [
+              "approved",
+              "changes_requested"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "mathematics",
+              "editorial"
+            ],
+            "title": "Dimension",
+            "type": "string"
+          },
+          "mathematics_correctness": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Mathematics Correctness",
+            "type": "integer"
+          },
+          "notes": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Notes",
+            "type": "string"
+          },
+          "pedagogical_quality": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Pedagogical Quality",
+            "type": "integer"
+          },
+          "safety_and_leakage": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Safety And Leakage",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dimension",
+          "decision",
+          "mathematics_correctness",
+          "pedagogical_quality",
+          "curriculum_fit",
+          "safety_and_leakage",
+          "notes"
+        ],
+        "title": "TutorEvaluationReviewRequest",
+        "type": "object"
+      },
+      "TutorEvaluationRunRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "confirm_live": {
+            "default": false,
+            "title": "Confirm Live",
+            "type": "boolean"
+          },
+          "provider": {
+            "default": "synthetic",
+            "enum": [
+              "synthetic",
+              "gemini"
+            ],
+            "title": "Provider",
+            "type": "string"
+          }
+        },
+        "title": "TutorEvaluationRunRequest",
+        "type": "object"
+      },
       "TutorMessageResponse": {
         "additionalProperties": false,
         "properties": {
@@ -9742,6 +9827,391 @@
         "summary": "Audit and reset one exceptional diagnostic attempt",
         "tags": [
           "diagnostics",
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-evaluation": {
+      "get": {
+        "operationId": "getTutorEvaluationLab",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Lab",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-evaluation/cases/{case_id}/runs": {
+      "post": {
+        "operationId": "runTutorEvaluationCase",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TutorEvaluationRunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Run Case",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-evaluation/runs/{run_id}/reviews": {
+      "post": {
+        "operationId": "reviewTutorEvaluationRun",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TutorEvaluationReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Review Run",
+        "tags": [
           "admin"
         ]
       }

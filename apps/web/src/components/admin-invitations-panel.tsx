@@ -66,6 +66,8 @@ const eventLabels: Record<
   question_report_created: "Question report created",
   question_report_status_changed: "Question report status changed",
   account_deletion_completed: "Student account deleted",
+  tutor_evaluation_run_created: "Tutor evaluation run created",
+  tutor_evaluation_review_recorded: "Tutor evaluation review recorded",
 };
 
 function formatDate(value: string): string {
