@@ -203,8 +203,14 @@ class GeminiTutorProvider:
                 )
                 break
             except HTTPError as exc:
-                if exc.code not in _RETRYABLE_HTTP_STATUSES or attempt == self._max_attempts:
-                    raise TutorProviderError("The tutor provider could not complete the request.") from exc
+                if exc.code not in _RETRYABLE_HTTP_STATUSES:
+                    raise TutorProviderError(
+                        f"The tutor provider rejected the request (HTTP {exc.code})."
+                    ) from exc
+                if attempt == self._max_attempts:
+                    raise TutorProviderError(
+                        f"The tutor provider remained unavailable (HTTP {exc.code})."
+                    ) from exc
             except (TimeoutError, URLError, OSError) as exc:
                 if attempt == self._max_attempts:
                     raise TutorProviderError("The tutor provider is temporarily unavailable.") from exc

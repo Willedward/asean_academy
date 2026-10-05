@@ -27,6 +27,7 @@ type Run = {
   response_blocks: ContentBlock[];
   automated_checks: { name: string; passed: boolean; detail: string }[];
   reviews: Review[];
+  provider_error?: string;
   created_at: string;
 };
 type Case = {
@@ -283,6 +284,11 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                           active.latest_run.cost_micros_sgd / 1_000_000
                         ).toFixed(4)}
                       </p>
+                      {active.latest_run.provider_error ? (
+                        <p className="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">
+                          {active.latest_run.provider_error}
+                        </p>
+                      ) : null}
                       <ul className="mt-3 space-y-1">
                         {active.latest_run.automated_checks.map((check) => (
                           <li

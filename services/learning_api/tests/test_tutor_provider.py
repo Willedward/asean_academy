@@ -111,6 +111,25 @@ def test_gemini_adapter_retries_retryable_http_failure_once():
     assert result.usage.total_tokens == 150
 
 
+def test_gemini_adapter_reports_safe_nonretryable_http_status():
+    def transport(url, headers, body, timeout):
+        del url, headers, body, timeout
+        raise HTTPError(
+            "https://example.invalid",
+            403,
+            "forbidden",
+            {},
+            io.BytesIO(b"private provider response"),
+        )
+
+    with pytest.raises(TutorProviderError, match=r"HTTP 403") as raised:
+        asyncio.run(provider(transport).generate(tutor_request()))
+
+    message = str(raised.value)
+    assert "private provider response" not in message
+    assert "private-test-key" not in message
+
+
 def test_gemini_adapter_rejects_malformed_output_with_safe_error():
     def transport(url, headers, body, timeout):
         del url, headers, body, timeout
