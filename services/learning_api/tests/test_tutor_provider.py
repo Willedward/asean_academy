@@ -119,15 +119,26 @@ def test_gemini_adapter_reports_safe_nonretryable_http_status():
             403,
             "forbidden",
             {},
-            io.BytesIO(b"private provider response"),
+            io.BytesIO(
+                json.dumps(
+                    {
+                        "error": {
+                            "status": "PERMISSION_DENIED",
+                            "message": "Key private-test-key cannot use this model.",
+                        }
+                    }
+                ).encode()
+            ),
         )
 
     with pytest.raises(TutorProviderError, match=r"HTTP 403") as raised:
         asyncio.run(provider(transport).generate(tutor_request()))
 
     message = str(raised.value)
-    assert "private provider response" not in message
+    assert "PERMISSION_DENIED" in message
+    assert "cannot use this model" in message
     assert "private-test-key" not in message
+    assert "[redacted]" in message
 
 
 def test_gemini_adapter_rejects_malformed_output_with_safe_error():

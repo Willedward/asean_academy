@@ -150,6 +150,26 @@ def _default_gemini_transport(
         return response.read()
 
 
+def _safe_http_error_detail(exc: HTTPError, api_key: str) -> str:
+    """Return bounded Google error context without exposing credentials."""
+
+    status = ""
+    message = ""
+    try:
+        payload = json.loads(exc.read(8192))
+        error = payload.get("error", {}) if isinstance(payload, dict) else {}
+        if isinstance(error, dict):
+            status = str(error.get("status") or "").strip()
+            message = str(error.get("message") or "").strip()
+    except (OSError, TypeError, ValueError):
+        pass
+    if api_key:
+        message = message.replace(api_key, "[redacted]")
+    message = " ".join(message.split())[:500]
+    context = ": ".join(value for value in (status, message) if value)
+    return f"HTTP {exc.code}{f' ({context})' if context else ''}"
+
+
 class GeminiTutorProvider:
     """Gemini REST adapter with structured output, bounded retry, and local costing."""
 
@@ -203,13 +223,14 @@ class GeminiTutorProvider:
                 )
                 break
             except HTTPError as exc:
+                detail = _safe_http_error_detail(exc, self._api_key)
                 if exc.code not in _RETRYABLE_HTTP_STATUSES:
                     raise TutorProviderError(
-                        f"The tutor provider rejected the request (HTTP {exc.code})."
+                        f"The tutor provider rejected the request: {detail}."
                     ) from exc
                 if attempt == self._max_attempts:
                     raise TutorProviderError(
-                        f"The tutor provider remained unavailable (HTTP {exc.code})."
+                        f"The tutor provider remained unavailable: {detail}."
                     ) from exc
             except (TimeoutError, URLError, OSError) as exc:
                 if attempt == self._max_attempts:
