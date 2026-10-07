@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { MathContent, type ContentBlock } from "@/components/math-content";
+import { TutorContent, type TutorBlock } from "@/components/tutor-content";
 import { Button } from "@/components/ui/button";
 import { adminRequest } from "@/lib/api/admin-dashboard";
 import { ApiRequestError } from "@/lib/api/errors";
@@ -24,7 +25,9 @@ type Run = {
   input_tokens: number;
   output_tokens: number;
   cost_micros_sgd: number;
-  response_blocks: ContentBlock[];
+  response_blocks: TutorBlock[];
+  suggested_replies: string[];
+  recommended_next_action?: string;
   automated_checks: { name: string; passed: boolean; detail: string }[];
   reviews: Review[];
   provider_error?: string;
@@ -320,8 +323,30 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                   <>
                     <section className="rounded-xl border p-4">
                       <h3 className="font-bold">Latest AI response</h3>
-                      <MathContent blocks={active.latest_run.response_blocks} />
-                      <p className="text-sm">
+                      <div className="mt-3 rounded-lg bg-slate-50 p-3">
+                        <TutorContent
+                          blocks={active.latest_run.response_blocks}
+                        />
+                      </div>
+                      {active.latest_run.recommended_next_action ? (
+                        <p className="mt-3 text-sm">
+                          <strong>Recommended next action:</strong>{" "}
+                          {active.latest_run.recommended_next_action}
+                        </p>
+                      ) : null}
+                      {active.latest_run.suggested_replies.length ? (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {active.latest_run.suggested_replies.map((reply) => (
+                            <span
+                              key={reply}
+                              className="rounded-full border bg-white px-3 py-1 text-xs"
+                            >
+                              {reply}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                      <p className="mt-3 text-sm text-slate-600">
                         {active.latest_run.model_name} ·{" "}
                         {active.latest_run.latency_ms} ms ·{" "}
                         {active.latest_run.input_tokens +
