@@ -11,6 +11,7 @@ from learning_api.tutor_provider import (
     GeminiTutorProvider,
     TutorProviderError,
     TutorProviderRequest,
+    probe_gemini_connection,
     provider_for,
 )
 
@@ -97,13 +98,77 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     assert '"submitted_answers":{"1":"2:6"}' in payload["contents"][0]["parts"][0]["text"]
     assert "authoritative" in payload["systemInstruction"]["parts"][0]["text"]
     assert '"unlocked_solution":[]' in payload["contents"][0]["parts"][0]["text"]
-    assert payload["generationConfig"]["responseFormat"]["text"]["mimeType"] == (
-        "APPLICATION_JSON"
-    )
+    assert payload["generationConfig"]["responseFormat"]["text"]["mimeType"] == ("APPLICATION_JSON")
     assert "temperature" not in payload["generationConfig"]
     schema = payload["generationConfig"]["responseFormat"]["text"]["schema"]
     assert "$defs" not in schema
     assert schema["additionalProperties"] is False
+
+
+def test_gemini_connection_probe_sends_minimal_prompt_and_accepts_plain_text():
+    captured = {}
+
+    def transport(url, headers, body, timeout):
+        captured.update(url=url, headers=headers, body=body, timeout=timeout)
+        return json.dumps(
+            {
+                "candidates": [{"content": {"parts": [{"text": "CONNECTED"}]}}],
+                "usageMetadata": {"promptTokenCount": 6, "candidatesTokenCount": 1},
+            }
+        ).encode()
+
+    result = asyncio.run(
+        probe_gemini_connection(
+            api_key="private-test-key",
+            model="gemini-3.5-flash-lite",
+            timeout_seconds=7,
+            transport=transport,
+        )
+    )
+
+    assert result.response_text == "CONNECTED"
+    assert result.model_name == "gemini-3.5-flash-lite"
+    assert result.input_tokens == 6
+    assert result.output_tokens == 1
+    assert captured["timeout"] == 7.0
+    assert captured["url"].endswith("/gemini-3.5-flash-lite:generateContent")
+    payload = json.loads(captured["body"])
+    assert payload["contents"][0]["parts"] == [{"text": "Reply with exactly CONNECTED"}]
+    assert payload["generationConfig"] == {"maxOutputTokens": 32, "temperature": 0}
+
+
+def test_gemini_connection_probe_reports_safe_provider_error():
+    def transport(url, headers, body, timeout):
+        del url, headers, body, timeout
+        raise HTTPError(
+            "https://example.invalid",
+            403,
+            "forbidden",
+            {},
+            io.BytesIO(
+                json.dumps(
+                    {
+                        "error": {
+                            "status": "PERMISSION_DENIED",
+                            "message": "Key private-test-key is invalid.",
+                        }
+                    }
+                ).encode()
+            ),
+        )
+
+    with pytest.raises(TutorProviderError, match=r"HTTP 403") as raised:
+        asyncio.run(
+            probe_gemini_connection(
+                api_key="private-test-key",
+                model="gemini-3.5-flash-lite",
+                timeout_seconds=7,
+                transport=transport,
+            )
+        )
+
+    assert "private-test-key" not in str(raised.value)
+    assert "PERMISSION_DENIED" in str(raised.value)
 
 
 def test_gemini_adapter_retries_retryable_http_failure_once():

@@ -58,6 +58,14 @@ class TutorProviderResult:
     usage: TutorProviderUsage
 
 
+@dataclass(frozen=True, slots=True)
+class GeminiConnectionResult:
+    response_text: str
+    model_name: str
+    input_tokens: int
+    output_tokens: int
+
+
 class TutorProvider(Protocol):
     async def generate(self, request: TutorProviderRequest) -> TutorProviderResult: ...
 
@@ -171,6 +179,75 @@ def _safe_http_error_detail(exc: HTTPError, api_key: str) -> str:
     return f"HTTP {exc.code}{f' ({context})' if context else ''}"
 
 
+async def probe_gemini_connection(
+    *,
+    api_key: str,
+    model: str,
+    timeout_seconds: int,
+    transport: GeminiTransport = _default_gemini_transport,
+) -> GeminiConnectionResult:
+    """Send a minimal generation request to verify Gemini connectivity."""
+
+    if not api_key:
+        raise RuntimeError("A Gemini API key is required")
+    if not _MODEL_PATTERN.fullmatch(model):
+        raise RuntimeError("The Gemini model name is invalid")
+    if timeout_seconds <= 0:
+        raise RuntimeError("The Gemini timeout must be positive")
+    body = json.dumps(
+        {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [{"text": "Reply with exactly CONNECTED"}],
+                }
+            ],
+            "generationConfig": {"maxOutputTokens": 32, "temperature": 0},
+        },
+        ensure_ascii=True,
+    ).encode("utf-8")
+    url = f"{GeminiTutorProvider._BASE_URL}/{quote(model, safe='')}:generateContent"
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": api_key,
+    }
+    try:
+        raw = await asyncio.to_thread(
+            transport,
+            url,
+            headers,
+            body,
+            float(timeout_seconds),
+        )
+    except HTTPError as exc:
+        detail = _safe_http_error_detail(exc, api_key)
+        if exc.code in _RETRYABLE_HTTP_STATUSES:
+            raise TutorProviderError(f"Gemini is temporarily unavailable: {detail}.") from exc
+        raise TutorProviderError(f"Gemini rejected the connection check: {detail}.") from exc
+    except (TimeoutError, URLError, OSError) as exc:
+        raise TutorProviderError("The server could not reach Gemini in time.") from exc
+
+    try:
+        payload = json.loads(raw)
+        parts = payload["candidates"][0]["content"]["parts"]
+        response_text = "".join(str(part.get("text", "")) for part in parts).strip()
+        if not response_text:
+            raise ValueError("empty response")
+        usage = payload.get("usageMetadata", {})
+        input_tokens = int(usage.get("promptTokenCount", 0))
+        output_tokens = int(usage.get("candidatesTokenCount", 0))
+        if input_tokens < 0 or output_tokens < 0:
+            raise ValueError("negative usage")
+    except (IndexError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise TutorProviderError("Gemini returned an invalid connection-check response.") from exc
+    return GeminiConnectionResult(
+        response_text=response_text[:200],
+        model_name=model,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
+    )
+
+
 class GeminiTutorProvider:
     """Gemini REST adapter with structured output, bounded retry, and local costing."""
 
@@ -235,7 +312,9 @@ class GeminiTutorProvider:
                     ) from exc
             except (TimeoutError, URLError, OSError) as exc:
                 if attempt == self._max_attempts:
-                    raise TutorProviderError("The tutor provider is temporarily unavailable.") from exc
+                    raise TutorProviderError(
+                        "The tutor provider is temporarily unavailable."
+                    ) from exc
             await asyncio.sleep(min(0.25 * (2 ** (attempt - 1)), 1.0))
         if raw is None:  # pragma: no cover - defensive invariant
             raise TutorProviderError("The tutor provider is temporarily unavailable.")
@@ -312,7 +391,14 @@ class GeminiTutorProvider:
             output_tokens = int(usage["candidatesTokenCount"])
             if input_tokens < 0 or output_tokens < 0:
                 raise ValueError("negative usage")
-        except (IndexError, KeyError, TypeError, ValueError, json.JSONDecodeError, ValidationError) as exc:
+        except (
+            IndexError,
+            KeyError,
+            TypeError,
+            ValueError,
+            json.JSONDecodeError,
+            ValidationError,
+        ) as exc:
             raise TutorProviderError("The tutor provider returned an invalid response.") from exc
         cost = self._token_cost(input_tokens, self._input_price) + self._token_cost(
             output_tokens, self._output_price

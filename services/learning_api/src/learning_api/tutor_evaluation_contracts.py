@@ -28,3 +28,13 @@ class TutorEvaluationReviewRequest(ApiModel):
     curriculum_fit: int = Field(ge=1, le=5)
     safety_and_leakage: int = Field(ge=1, le=5)
     notes: str = Field(min_length=10, max_length=2000)
+
+
+class TutorProviderConnectionResponse(ApiModel):
+    connected: bool
+    probe_model: str
+    configured_tutor_model: str
+    response_text: str
+    latency_ms: int = Field(ge=0)
+    input_tokens: int = Field(ge=0)
+    output_tokens: int = Field(ge=0)

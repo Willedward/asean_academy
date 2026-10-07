@@ -9,8 +9,17 @@ from fastapi import APIRouter, HTTPException, Request, status
 from ..admin_repository import BetaOperationsError
 from ..conventions import current_request_id
 from ..dependencies import AdminLearnerDependency, BetaOperationsRepositoryDependency
-from ..tutor_evaluation_contracts import TutorEvaluationReviewRequest, TutorEvaluationRunRequest
-from ..tutor_evaluation_lab import execute_case, lab_state, record_evaluation_review
+from ..tutor_evaluation_contracts import (
+    TutorEvaluationReviewRequest,
+    TutorEvaluationRunRequest,
+    TutorProviderConnectionResponse,
+)
+from ..tutor_evaluation_lab import (
+    check_gemini_connection,
+    execute_case,
+    lab_state,
+    record_evaluation_review,
+)
 
 router = APIRouter(prefix="/api/v1/admin/tutor-evaluation", tags=["admin"])
 
@@ -36,6 +45,24 @@ def get_lab(
             repository, request.app.state.course_catalogue, request.app.state.settings
         )
     )
+
+
+@router.post(
+    "/connection-check",
+    operation_id="checkTutorProviderConnection",
+    response_model=TutorProviderConnectionResponse,
+)
+async def check_connection(
+    request: Request,
+    administrator: AdminLearnerDependency,
+):
+    del administrator
+    try:
+        return await check_gemini_connection(request.app.state.settings)
+    except BetaOperationsError as exc:
+        raise HTTPException(
+            status_code=exc.status, detail={"code": exc.code, "message": str(exc)}
+        ) from exc
 
 
 @router.post(

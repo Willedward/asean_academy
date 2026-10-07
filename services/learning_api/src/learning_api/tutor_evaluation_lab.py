@@ -3,16 +3,23 @@
 from __future__ import annotations
 
 from pathlib import Path
+from time import perf_counter
 
 from psycopg.types.json import Jsonb
 
 from .admin_repository import BetaOperationsError
 from .content_review import list_review_queue
 from .tutor_evaluation import TutorEvaluationSuite, load_evaluation_suite, run_evaluation
-from .tutor_provider import GeminiTutorProvider, SyntheticTutorProvider
+from .tutor_provider import (
+    GeminiTutorProvider,
+    SyntheticTutorProvider,
+    TutorProviderError,
+    probe_gemini_connection,
+)
 
 SUITE_PATH = Path("backend_resources/tutor_evaluations/g3_math/v1/n2_calibration_v1.json")
 GROUNDING_KEY = "g3-sec1-n2-tutor-grounding-v1"
+GEMINI_CONNECTION_MODEL = "gemini-3.5-flash-lite"
 
 
 def _suite(settings) -> TutorEvaluationSuite:
@@ -82,6 +89,35 @@ def lab_state(repository, catalogue, settings) -> dict:
         "gemini_model": settings.tutor_gemini_model,
         "prompt_version": settings.tutor_prompt_version,
         "cases": cases,
+    }
+
+
+async def check_gemini_connection(settings) -> dict:
+    """Verify credentials and generation independently from the tutor prompt."""
+
+    if not settings.tutor_gemini_api_key:
+        raise BetaOperationsError(
+            "gemini_not_configured",
+            "Set GEMINI_API_KEY on the API service before checking the connection.",
+            503,
+        )
+    started = perf_counter()
+    try:
+        result = await probe_gemini_connection(
+            api_key=settings.tutor_gemini_api_key,
+            model=GEMINI_CONNECTION_MODEL,
+            timeout_seconds=min(settings.tutor_provider_timeout_seconds, 12),
+        )
+    except TutorProviderError as exc:
+        raise BetaOperationsError("gemini_connection_failed", str(exc), 503) from exc
+    return {
+        "connected": True,
+        "probe_model": result.model_name,
+        "configured_tutor_model": settings.tutor_gemini_model,
+        "response_text": result.response_text,
+        "latency_ms": max(0, round((perf_counter() - started) * 1000)),
+        "input_tokens": result.input_tokens,
+        "output_tokens": result.output_tokens,
     }
 
 

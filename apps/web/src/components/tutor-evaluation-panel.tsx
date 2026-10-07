@@ -60,6 +60,15 @@ type Lab = {
   };
   cases: Case[];
 };
+type ConnectionCheck = {
+  connected: boolean;
+  probe_model: string;
+  configured_tutor_model: string;
+  response_text: string;
+  latency_ms: number;
+  input_tokens: number;
+  output_tokens: number;
+};
 
 function message(error: unknown) {
   if (error instanceof ApiRequestError)
@@ -78,6 +87,7 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
   const [selected, setSelected] = useState<string>();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
+  const [connection, setConnection] = useState<ConnectionCheck>();
   const [dimension, setDimension] = useState<"mathematics" | "editorial">(
     academic ? "mathematics" : "editorial",
   );
@@ -121,6 +131,23 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
     () => lab?.cases.find((value) => value.case_id === selected),
     [lab, selected],
   );
+
+  async function checkConnection() {
+    setBusy(true);
+    setError(undefined);
+    setConnection(undefined);
+    try {
+      const result = await adminRequest<ConnectionCheck>(
+        "tutor-evaluation/connection-check",
+        {},
+      );
+      setConnection(result);
+    } catch (cause) {
+      setError(message(cause));
+    } finally {
+      setBusy(false);
+    }
+  }
 
   async function run(provider: "synthetic" | "gemini") {
     if (!active) return;
@@ -200,10 +227,30 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
               </p>
               <p className="font-bold">
                 {lab.gemini_configured
-                  ? `${lab.gemini_model} ready`
+                  ? `${lab.gemini_model} configured`
                   : "Gemini key not configured"}
               </p>
               <p>{lab.prompt_version}</p>
+              <Button
+                className="mt-3"
+                disabled={busy || !lab.gemini_configured}
+                onClick={() => void checkConnection()}
+              >
+                Check Gemini connection
+              </Button>
+              <p className="mt-2 text-xs text-slate-600">
+                Sends one tiny Flash-Lite prompt.
+              </p>
+              {connection ? (
+                <div className="mt-3 rounded-lg bg-green-50 p-3 text-sm text-green-800">
+                  <p className="font-bold">Connection confirmed</p>
+                  <p>
+                    {connection.probe_model} · {connection.latency_ms} ms ·{" "}
+                    {connection.input_tokens + connection.output_tokens} tokens
+                  </p>
+                  <p>Reply: {connection.response_text}</p>
+                </div>
+              ) : null}
             </div>
           </section>
           <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
