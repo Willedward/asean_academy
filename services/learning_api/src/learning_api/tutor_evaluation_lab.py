@@ -118,7 +118,10 @@ async def execute_case(
             api_key=settings.tutor_gemini_api_key,
             model=settings.tutor_gemini_model,
             timeout_seconds=settings.tutor_provider_timeout_seconds,
-            max_attempts=settings.tutor_provider_max_attempts,
+            # The administrator explicitly retries evaluation runs. Keep one live
+            # attempt below the web gateway's request window instead of holding the
+            # browser through two provider timeouts.
+            max_attempts=1,
             input_cost_per_million_micros_sgd=settings.tutor_gemini_input_cost_per_million_micros_sgd,
             output_cost_per_million_micros_sgd=settings.tutor_gemini_output_cost_per_million_micros_sgd,
         )

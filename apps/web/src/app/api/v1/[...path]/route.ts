@@ -44,6 +44,23 @@ function authenticationError() {
   );
 }
 
+function invalidUpstreamResponse(upstream: Response, requestId: string) {
+  return NextResponse.json(
+    {
+      error: {
+        code: "learning_api_invalid_response",
+        message: "The learning service timed out or restarted. Please try again.",
+        request_id: requestId,
+        details: null,
+      },
+    },
+    {
+      status: upstream.ok ? 502 : upstream.status,
+      headers: { "Cache-Control": "no-store", "X-Request-ID": requestId },
+    },
+  );
+}
+
 async function forward(request: NextRequest, context: Context): Promise<Response> {
   const { path } = await context.params;
   const relativePath = path.join("/");
@@ -89,6 +106,16 @@ async function forward(request: NextRequest, context: Context): Promise<Response
         status: 503,
         headers: { "Cache-Control": "no-store", "X-Request-ID": requestId },
       },
+    );
+  }
+
+  const contentType = upstream.headers.get("content-type")?.toLowerCase() ?? "";
+  if (!contentType.includes("application/json")) {
+    return invalidUpstreamResponse(
+      upstream,
+      upstream.headers.get("x-request-id") ??
+        headers.get("x-request-id") ??
+        crypto.randomUUID(),
     );
   }
 

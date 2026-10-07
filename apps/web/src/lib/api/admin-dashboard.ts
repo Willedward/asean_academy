@@ -1,5 +1,5 @@
 import type { components } from "./schema";
-import { apiRequestError } from "./errors";
+import { ApiRequestError, apiRequestError } from "./errors";
 
 export type Overview = components["schemas"]["AdminAnalyticsOverviewResponse"];
 export type Students = components["schemas"]["AdminStudentListResponse"];
@@ -27,6 +27,9 @@ export type ContentPreview =
 export type ReviewInput = components["schemas"]["RecordContentReviewRequest"];
 export type LifecycleInput = components["schemas"]["CreateLifecycleRequest"];
 
+const INVALID_RESPONSE_MESSAGE =
+  "The learning service timed out or restarted. Please try again.";
+
 export async function adminRequest<T>(
   path: string,
   body?: unknown,
@@ -36,12 +39,23 @@ export async function adminRequest<T>(
     method: body === undefined ? "GET" : method,
     cache: "no-store",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       "X-Request-ID": crypto.randomUUID(),
     },
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   });
-  const data: unknown = await response.json();
+  let data: unknown;
+  try {
+    data = await response.json();
+  } catch {
+    throw new ApiRequestError(
+      INVALID_RESPONSE_MESSAGE,
+      response.ok ? 502 : response.status,
+      "learning_api_invalid_response",
+      response.headers.get("x-request-id") ?? undefined,
+    );
+  }
   if (!response.ok) throw apiRequestError(data, response.status);
   return data as T;
 }
