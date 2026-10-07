@@ -80,7 +80,7 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     assert "canonical_answer" not in encoded
     assert '"unlocked_solution":[]' in payload["contents"][0]["parts"][0]["text"]
     assert payload["generationConfig"]["responseFormat"]["text"]["mimeType"] == (
-        "application/json"
+        "APPLICATION_JSON"
     )
     assert "temperature" not in payload["generationConfig"]
     schema = payload["generationConfig"]["responseFormat"]["text"]["schema"]

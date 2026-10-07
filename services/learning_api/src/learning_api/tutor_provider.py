@@ -289,7 +289,7 @@ class GeminiTutorProvider:
                 "maxOutputTokens": request.max_output_tokens,
                 "responseFormat": {
                     "text": {
-                        "mimeType": "application/json",
+                        "mimeType": "APPLICATION_JSON",
                         "schema": _GEMINI_RESPONSE_SCHEMA,
                     }
                 },
