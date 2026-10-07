@@ -79,7 +79,7 @@ class Settings:
     tutor_max_output_tokens: int = 1000
     tutor_max_turn_cost_micros_sgd: int = 250_000
     tutor_model_policy_version: str = "math-tutor-policy-v1"
-    tutor_prompt_version: str = "math-tutor-prompt-v1"
+    tutor_prompt_version: str = "math-tutor-prompt-v2"
     tutor_gemini_api_key: str | None = None
     tutor_gemini_model: str = "gemini-3.8-flash"
     tutor_provider_timeout_seconds: int = 20
@@ -219,7 +219,7 @@ class Settings:
                 "ASEAN_ACADEMY_TUTOR_MODEL_POLICY_VERSION", "math-tutor-policy-v1"
             ).strip(),
             tutor_prompt_version=os.getenv(
-                "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v1"
+                "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v2"
             ).strip(),
             tutor_gemini_api_key=(
                 value if (value := os.getenv("GEMINI_API_KEY", "").strip()) else None

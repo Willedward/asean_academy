@@ -95,6 +95,39 @@ class AnswerLeakingProvider:
         )
 
 
+class InvalidFormattingProvider:
+    async def generate(self, request):
+        del request
+        return TutorProviderResult(
+            blocks=(
+                TutorBlock(
+                    type="text",
+                    content=r"Use **fractions** such as $y$ or \(\frac{5}{6}\).",
+                ),
+                TutorBlock(type="display_math", content=r"$$\frac{5}{6}$$"),
+            ),
+            suggested_replies=(r"Try \(\frac{5}{6}\)",),
+            recommended_next_action="prompt_learner",
+            model_name="formatting-test-provider",
+            usage=TutorProviderUsage(input_tokens=10, output_tokens=8, cost_micros_sgd=1),
+        )
+
+
+class ValidFormattingProvider:
+    async def generate(self, request):
+        del request
+        return TutorProviderResult(
+            blocks=(
+                TutorBlock(type="text", content="Write the comparison as a division."),
+                TutorBlock(type="display_math", content=r"\frac{5}{6}\div\frac{1}{3}"),
+            ),
+            suggested_replies=("I will put apple juice first.",),
+            recommended_next_action="Ask the learner to write the division expression.",
+            model_name="formatting-test-provider",
+            usage=TutorProviderUsage(input_tokens=10, output_tokens=8, cost_micros_sgd=1),
+        )
+
+
 class AttemptCapturingProvider:
     def __init__(self):
         self.latest_attempt = None
@@ -147,6 +180,76 @@ def test_evaluation_case_can_supply_safe_attempt_evidence():
     )
 
     assert provider.latest_attempt["submitted_answers"] == {"1": "4:3"}
+
+
+def test_evaluation_rejects_raw_markdown_latex_and_internal_action_labels():
+    suite = TutorEvaluationSuite(
+        suite_id="formatting-test",
+        version="1",
+        description="Verify learner-facing formatting checks.",
+        cases=[
+            TutorEvaluationCase(
+                case_id="raw-formatting",
+                title="Raw formatting",
+                mode="alternative_explanation",
+                learner_message="Show this another way.",
+                question_title="Compare fractions",
+                question_blocks=[{"type": "text", "content": "Compare two fractions."}],
+            )
+        ],
+    )
+
+    report = asyncio.run(
+        run_evaluation(
+            InvalidFormattingProvider(),
+            suite,
+            provider_name="formatting-test-provider",
+            prompt_version="test-prompt-v2",
+            max_output_tokens=100,
+        )
+    )
+
+    checks = {check.name: check for check in report.cases[0].checks}
+    assert report.automated_pass is False
+    assert checks["learner_facing_formatting"].passed is False
+    assert "text block 1 (Markdown emphasis)" in checks["learner_facing_formatting"].detail
+    assert "display_math block 2 (outer math delimiter)" in checks[
+        "learner_facing_formatting"
+    ].detail
+    assert checks["learner_facing_next_action"].passed is False
+
+
+def test_evaluation_accepts_raw_latex_inside_display_math_blocks():
+    suite = TutorEvaluationSuite(
+        suite_id="valid-formatting-test",
+        version="1",
+        description="Verify the supported display mathematics contract.",
+        cases=[
+            TutorEvaluationCase(
+                case_id="valid-display-math",
+                title="Valid display mathematics",
+                mode="socratic_prompt",
+                learner_message="What should I do first?",
+                question_title="Compare fractions",
+                question_blocks=[{"type": "text", "content": "Compare two fractions."}],
+            )
+        ],
+    )
+
+    report = asyncio.run(
+        run_evaluation(
+            ValidFormattingProvider(),
+            suite,
+            provider_name="formatting-test-provider",
+            prompt_version="test-prompt-v2",
+            max_output_tokens=100,
+        )
+    )
+
+    checks = {check.name: check for check in report.cases[0].checks}
+    assert report.automated_pass is True
+    assert checks["learner_facing_formatting"].passed is True
+    assert checks["learner_facing_next_action"].passed is True
 
 
 def test_locked_canonical_answer_fails_the_automated_evaluation_gate():

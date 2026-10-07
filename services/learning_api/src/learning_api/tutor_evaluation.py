@@ -135,7 +135,13 @@ async def run_evaluation(
             )
             latency_ms = round((time.perf_counter() - started) * 1000)
             rendered = "\n".join(block.content for block in response.blocks)
-            checks = _automated_checks(case, rendered, list(response.blocks))
+            checks = _automated_checks(
+                case,
+                rendered,
+                list(response.blocks),
+                list(response.suggested_replies),
+                response.recommended_next_action,
+            )
             results.append(
                 TutorEvaluationCaseResult(
                     case_id=case.case_id,
@@ -212,7 +218,11 @@ def _automated_checks(
     case: TutorEvaluationCase,
     rendered: str,
     blocks: list[TutorBlock],
+    suggested_replies: list[str],
+    recommended_next_action: str | None,
 ) -> list[TutorEvaluationCheck]:
+    formatting_violations = _learner_facing_formatting_violations(blocks, suggested_replies)
+    next_action_is_valid = _is_learner_facing_action(recommended_next_action)
     checks = [
         TutorEvaluationCheck(
             name="non_empty_structured_blocks",
@@ -223,6 +233,24 @@ def _automated_checks(
             name="bounded_response_length",
             passed=len(rendered) <= case.max_response_characters,
             detail=f"Response has {len(rendered)} of {case.max_response_characters} allowed characters.",
+        ),
+        TutorEvaluationCheck(
+            name="learner_facing_formatting",
+            passed=not formatting_violations,
+            detail=(
+                "Text and reply controls use plain prose; display mathematics uses raw LaTeX."
+                if not formatting_violations
+                else "Invalid formatting in " + ", ".join(formatting_violations[:6]) + "."
+            ),
+        ),
+        TutorEvaluationCheck(
+            name="learner_facing_next_action",
+            passed=next_action_is_valid,
+            detail=(
+                "The next action is a readable sentence or is omitted."
+                if next_action_is_valid
+                else "The next action must not expose an internal snake_case label."
+            ),
         ),
     ]
     normalized = _normalize(rendered)
@@ -248,6 +276,56 @@ def _automated_checks(
 
 def _normalize(value: str) -> str:
     return re.sub(r"\s+", " ", value.casefold()).strip()
+
+
+_MARKDOWN_EMPHASIS = re.compile(r"\*\*|__")
+_LATEX_DELIMITER = re.compile(r"\$\$|(?<!\\)\$[^$\n]+(?<!\\)\$|\\\(|\\\)|\\\[|\\\]")
+_RAW_LATEX_COMMAND = re.compile(
+    r"\\(?:begin|cdot|dfrac|div|end|frac|geq|leq|neq|operatorname|sqrt|tfrac|times)\b"
+)
+_INTERNAL_ACTION = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$")
+
+
+def _learner_facing_formatting_violations(
+    blocks: list[TutorBlock], suggested_replies: list[str]
+) -> list[str]:
+    violations: list[str] = []
+    for index, block in enumerate(blocks, start=1):
+        content = block.content.strip()
+        label = f"{block.type} block {index}"
+        if _MARKDOWN_EMPHASIS.search(content):
+            violations.append(f"{label} (Markdown emphasis)")
+        if block.type == "display_math":
+            if _LATEX_DELIMITER.search(content):
+                violations.append(f"{label} (outer math delimiter)")
+            continue
+        if _LATEX_DELIMITER.search(content):
+            violations.append(f"{label} (inline math delimiter)")
+        if _RAW_LATEX_COMMAND.search(content):
+            violations.append(f"{label} (raw LaTeX command)")
+
+    for index, reply in enumerate(suggested_replies, start=1):
+        label = f"suggested reply {index}"
+        if _MARKDOWN_EMPHASIS.search(reply):
+            violations.append(f"{label} (Markdown emphasis)")
+        if _LATEX_DELIMITER.search(reply):
+            violations.append(f"{label} (inline math delimiter)")
+        if _RAW_LATEX_COMMAND.search(reply):
+            violations.append(f"{label} (raw LaTeX command)")
+    return violations
+
+
+def _is_learner_facing_action(action: str | None) -> bool:
+    if action is None:
+        return True
+    normalized = action.strip()
+    if not normalized or _INTERNAL_ACTION.fullmatch(normalized):
+        return False
+    return not (
+        _MARKDOWN_EMPHASIS.search(normalized)
+        or _LATEX_DELIMITER.search(normalized)
+        or _RAW_LATEX_COMMAND.search(normalized)
+    )
 
 
 def _likely_locked_answer(rendered: str, blocks: list[TutorBlock], raw_answer: str) -> bool:

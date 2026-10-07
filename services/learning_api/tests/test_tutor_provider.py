@@ -96,7 +96,12 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     encoded = json.dumps(payload)
     assert "canonical_answer" not in encoded
     assert '"submitted_answers":{"1":"2:6"}' in payload["contents"][0]["parts"][0]["text"]
-    assert "authoritative" in payload["systemInstruction"]["parts"][0]["text"]
+    system_instruction = payload["systemInstruction"]["parts"][0]["text"]
+    assert "authoritative" in system_instruction
+    assert "display_math" in system_instruction
+    assert "raw KaTeX-compatible LaTeX without outer delimiters" in system_instruction
+    assert "suggested_replies" in system_instruction
+    assert "snake_case" in system_instruction
     assert '"unlocked_solution":[]' in payload["contents"][0]["parts"][0]["text"]
     assert payload["generationConfig"]["responseFormat"]["text"]["mimeType"] == ("APPLICATION_JSON")
     assert "temperature" not in payload["generationConfig"]
