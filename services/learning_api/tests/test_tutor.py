@@ -12,12 +12,16 @@ from learning_api.identity import AuthenticatedLearner
 from learning_api.main import create_app
 from learning_api.tutor_contracts import AnswerLockState, TutorBlock
 from learning_api.tutor_provider import TutorProviderResult, TutorProviderUsage
-from learning_api.tutor_repository import InMemoryTutorRepository, TutorGrounding
+from learning_api.tutor_repository import (
+    InMemoryTutorRepository,
+    TutorGrounding,
+    _safe_attempt_evidence,
+)
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 
 
-def grounding(*, answer_locked: bool = True) -> TutorGrounding:
+def grounding(*, answer_locked: bool = True, incorrect_attempts: int = 0) -> TutorGrounding:
     return TutorGrounding(
         session_id=str(uuid4()),
         question_title="A safe synthetic ratio question",
@@ -25,12 +29,32 @@ def grounding(*, answer_locked: bool = True) -> TutorGrounding:
         unlocked_hint_blocks=(),
         lesson_sections=({"section_key": "ratio", "content": {"blocks": []}},),
         unlocked_solution_blocks=(),
+        latest_attempt=(
+            {
+                "attempt_number": 1,
+                "submitted_answers": {"1": "2:6"},
+                "correct": False,
+                "parts": [
+                    {
+                        "position": 1,
+                        "correct": False,
+                        "error": None,
+                        "marks_awarded": 0,
+                        "marks_available": 1,
+                    }
+                ],
+                "marks_awarded": 0,
+                "marks_available": 1,
+            }
+            if incorrect_attempts
+            else None
+        ),
         recent_messages=(),
         answer_lock_state=AnswerLockState(
             answer_locked=answer_locked,
             solution_locked=answer_locked,
         ),
-        incorrect_attempts=0,
+        incorrect_attempts=incorrect_attempts,
         leakage_answers=("42",),
         grounding_revision_ids=(str(uuid4()), str(uuid4())),
     )
@@ -121,6 +145,69 @@ class LeakingProvider:
             model_name="unsafe-test-provider",
             usage=TutorProviderUsage(input_tokens=50, output_tokens=8, cost_micros_sgd=100),
         )
+
+
+class CapturingProvider:
+    def __init__(self):
+        self.request = None
+
+    async def generate(self, request):
+        self.request = request
+        return TutorProviderResult(
+            blocks=(TutorBlock(type="text", content="Which step produced 2:6?"),),
+            suggested_replies=(),
+            recommended_next_action="Check both ratio terms.",
+            model_name="capturing-test-provider",
+            usage=TutorProviderUsage(input_tokens=50, output_tokens=8, cost_micros_sgd=100),
+        )
+
+
+def test_incorrect_attempt_is_grounded_for_misconception_chat():
+    repo = InMemoryTutorRepository(grounding(incorrect_attempts=1))
+    app = application(repo)
+    provider = CapturingProvider()
+    app.state.tutor_provider = provider
+    session_id = create_session(app).json()["session_id"]
+
+    response = request(
+        app,
+        "POST",
+        f"/api/v1/tutor/sessions/{session_id}/messages",
+        json={"message": "Why is my answer wrong?"},
+    )
+
+    assert response.status_code == 200
+    assert provider.request.mode == "diagnose_misconception"
+    assert provider.request.latest_attempt["submitted_answers"] == {"1": "2:6"}
+    assert provider.request.latest_attempt["correct"] is False
+
+
+def test_attempt_grounding_excludes_canonical_answer_fields():
+    evidence = _safe_attempt_evidence(
+        {
+            "attempt_number": 1,
+            "answers": {"1": "2:6"},
+            "is_correct": False,
+            "marks_awarded": 0,
+            "result": {
+                "parts": [
+                    {
+                        "position": 1,
+                        "correct": False,
+                        "error": None,
+                        "marks_awarded": 0,
+                        "marks_available": 1,
+                        "canonical_answer": "2:3",
+                    }
+                ],
+                "marks_available": 1,
+                "canonical_answer": "2:3",
+            },
+        }
+    )
+
+    assert evidence["submitted_answers"] == {"1": "2:6"}
+    assert "canonical_answer" not in str(evidence)
 
 
 def test_locked_answer_is_replaced_when_provider_output_leaks():

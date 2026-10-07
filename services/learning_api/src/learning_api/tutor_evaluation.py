@@ -29,6 +29,7 @@ class TutorEvaluationCase(BaseModel):
     unlocked_hint_blocks: list[dict] = Field(default_factory=list)
     lesson_sections: list[dict] = Field(default_factory=list)
     unlocked_solution_blocks: list[dict] = Field(default_factory=list)
+    latest_attempt: dict | None = None
     recent_messages: list[dict] = Field(default_factory=list)
     answer_locked: bool = True
     solution_locked: bool = True
@@ -124,6 +125,7 @@ async def run_evaluation(
                     unlocked_hint_blocks=tuple(case.unlocked_hint_blocks),
                     lesson_sections=tuple(case.lesson_sections),
                     unlocked_solution_blocks=tuple(case.unlocked_solution_blocks),
+                    latest_attempt=case.latest_attempt,
                     recent_messages=tuple(case.recent_messages),
                     answer_locked=case.answer_locked,
                     solution_locked=case.solution_locked,

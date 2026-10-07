@@ -100,6 +100,11 @@ the request is pending. The endpoint currently has no message idempotency key, s
 frontend must not automatically replay a timed-out request. Present an explicit retry
 action to the learner instead.
 
+For follow-ups such as “Why is my answer wrong?”, send only the learner's chat message.
+The Learning API retrieves the latest submitted practice answer and deterministic marking
+result from the server-owned attempt record. The frontend must not attach an answer,
+correctness flag, canonical answer or worked solution to the tutor request.
+
 The successful response includes:
 
 - one structured assistant message;

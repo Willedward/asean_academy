@@ -46,6 +46,7 @@ class TutorGrounding:
     unlocked_hint_blocks: tuple[dict, ...]
     lesson_sections: tuple[dict, ...]
     unlocked_solution_blocks: tuple[dict, ...]
+    latest_attempt: dict | None
     recent_messages: tuple[dict, ...]
     answer_lock_state: AnswerLockState
     incorrect_attempts: int
@@ -142,6 +143,36 @@ class TutorRepository(Protocol):
 
 def _next_utc_day(day: date) -> datetime:
     return datetime.combine(day + timedelta(days=1), datetime.min.time(), tzinfo=UTC)
+
+
+def _safe_attempt_evidence(row: dict | None) -> dict | None:
+    if row is None:
+        return None
+    answers = row["answers"] if isinstance(row["answers"], dict) else {}
+    result = row["result"] if isinstance(row["result"], dict) else {}
+    parts = []
+    for item in result.get("parts", []):
+        if not isinstance(item, dict):
+            continue
+        parts.append(
+            {
+                "position": item.get("position"),
+                "correct": item.get("correct"),
+                "error": str(item["error"])[:500] if item.get("error") else None,
+                "marks_awarded": item.get("marks_awarded"),
+                "marks_available": item.get("marks_available"),
+            }
+        )
+    return {
+        "attempt_number": row["attempt_number"],
+        "submitted_answers": {
+            str(position): str(answer)[:500] for position, answer in answers.items()
+        },
+        "correct": row["is_correct"],
+        "parts": parts,
+        "marks_awarded": row["marks_awarded"],
+        "marks_available": result.get("marks_available"),
+    }
 
 
 def _session_record(row: dict, messages: list[dict]) -> dict:
@@ -372,6 +403,17 @@ class PostgresTutorRepository:
                     """,
                     (row["question_version_id"],),
                 ).fetchall()
+            latest_attempt_row = connection.execute(
+                """
+                select attempt_number, answers, result, is_correct, marks_awarded
+                from attempts
+                where student_id=%s and session_question_id=%s
+                order by attempt_number desc, submitted_at desc, id desc
+                limit 1
+                """,
+                (learner_id, row["session_question_id"]),
+            ).fetchone()
+            latest_attempt = _safe_attempt_evidence(latest_attempt_row)
             message_rows = connection.execute(
                 """
                 select role::text as role, mode::text as mode, content
@@ -413,6 +455,7 @@ class PostgresTutorRepository:
                 unlocked_solution_blocks=tuple(
                     item["content_blocks"] for item in solution_rows
                 ),
+                latest_attempt=latest_attempt,
                 recent_messages=tuple(dict(item) for item in reversed(message_rows)),
                 answer_lock_state=lock,
                 incorrect_attempts=row["incorrect_attempts"],

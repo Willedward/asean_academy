@@ -112,6 +112,12 @@ question changes or the session is closed.
 The API, never the browser or model, selects the allowed modes from the current
 answer-lock state.
 
+The runtime now loads the latest immutable practice attempt on the server and sends only
+the learner's submitted values and deterministic checker result to the provider. Canonical
+answers, accepted-answer lists and locked solution steps are excluded. This supports
+questions such as “Why is my answer wrong?” while keeping marking authoritative and
+deterministic.
+
 ## Grounding and answer protection
 
 Every model request receives only:

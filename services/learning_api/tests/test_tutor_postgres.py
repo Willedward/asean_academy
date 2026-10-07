@@ -102,7 +102,47 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
         grounding = repository.grounding(learner_id, session["session_id"])
         assert grounding.answer_lock_state.answer_locked is True
         assert grounding.unlocked_solution_blocks == ()
+        assert grounding.latest_attempt is None
         assert grounding.leakage_answers
+
+        with psycopg.connect(database_url) as connection:
+            assignment = connection.execute(
+                """
+                select id, question_version_id from session_questions
+                where practice_session_id=%s
+                """,
+                (practice_session_id,),
+            ).fetchone()
+            connection.execute(
+                """
+                insert into attempts (
+                    student_id, session_question_id, question_version_id, attempt_number,
+                    idempotency_key, answers, result, is_correct, marks_awarded
+                ) values (
+                    %s, %s, %s, 1, %s, '{"1":"learner response"}'::jsonb,
+                    '{"parts":[{"position":1,"correct":false,"error":null,"marks_awarded":0,"marks_available":1,"canonical_answer":"must not escape"}],"marks_available":1,"canonical_answer":"must not escape"}'::jsonb,
+                    false, 0
+                )
+                """,
+                (learner_id, assignment[0], assignment[1], str(uuid4())),
+            )
+        attempt_grounding = repository.grounding(learner_id, session["session_id"])
+        assert attempt_grounding.latest_attempt == {
+            "attempt_number": 1,
+            "submitted_answers": {"1": "learner response"},
+            "correct": False,
+            "parts": [
+                {
+                    "position": 1,
+                    "correct": False,
+                    "error": None,
+                    "marks_awarded": 0,
+                    "marks_available": 1,
+                }
+            ],
+            "marks_awarded": 0,
+            "marks_available": 1,
+        }
 
         reserved = repository.reserve(
             learner_id, session["session_id"], limits, request_id="reserve-test"

@@ -95,6 +95,60 @@ class AnswerLeakingProvider:
         )
 
 
+class AttemptCapturingProvider:
+    def __init__(self):
+        self.latest_attempt = None
+
+    async def generate(self, request):
+        self.latest_attempt = request.latest_attempt
+        return TutorProviderResult(
+            blocks=(TutorBlock(type="text", content="Which operation led to that value?"),),
+            suggested_replies=(),
+            recommended_next_action=None,
+            model_name="attempt-test-provider",
+            usage=TutorProviderUsage(input_tokens=10, output_tokens=8, cost_micros_sgd=1),
+        )
+
+
+def test_evaluation_case_can_supply_safe_attempt_evidence():
+    provider = AttemptCapturingProvider()
+    suite = TutorEvaluationSuite(
+        suite_id="attempt-evidence-test",
+        version="1",
+        description="Verify attempt evidence reaches the provider.",
+        cases=[
+            TutorEvaluationCase(
+                case_id="wrong-ratio",
+                title="Wrong ratio",
+                mode="diagnose_misconception",
+                learner_message="Why is my answer wrong?",
+                question_title="Simplify a ratio",
+                question_blocks=[{"type": "text", "content": "Simplify 4:6."}],
+                latest_attempt={
+                    "attempt_number": 1,
+                    "submitted_answers": {"1": "4:3"},
+                    "correct": False,
+                    "parts": [{"position": 1, "correct": False, "error": None}],
+                    "marks_awarded": 0,
+                    "marks_available": 1,
+                },
+            )
+        ],
+    )
+
+    asyncio.run(
+        run_evaluation(
+            provider,
+            suite,
+            provider_name="attempt-test-provider",
+            prompt_version="test-prompt-v1",
+            max_output_tokens=100,
+        )
+    )
+
+    assert provider.latest_attempt["submitted_answers"] == {"1": "4:3"}
+
+
 def test_locked_canonical_answer_fails_the_automated_evaluation_gate():
     suite = TutorEvaluationSuite(
         suite_id="locked-answer-test",

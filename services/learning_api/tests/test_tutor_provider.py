@@ -24,6 +24,22 @@ def tutor_request(*, answer_locked: bool = True) -> TutorProviderRequest:
         unlocked_hint_blocks=({"type": "text", "content": "Form two equal groups."},),
         lesson_sections=({"section_key": "ratio", "blocks": []},),
         unlocked_solution_blocks=(),
+        latest_attempt={
+            "attempt_number": 1,
+            "submitted_answers": {"1": "2:6"},
+            "correct": False,
+            "parts": [
+                {
+                    "position": 1,
+                    "correct": False,
+                    "error": None,
+                    "marks_awarded": 0,
+                    "marks_available": 1,
+                }
+            ],
+            "marks_awarded": 0,
+            "marks_available": 1,
+        },
         recent_messages=(),
         answer_locked=answer_locked,
         solution_locked=answer_locked,
@@ -78,6 +94,8 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     payload = json.loads(captured["body"])
     encoded = json.dumps(payload)
     assert "canonical_answer" not in encoded
+    assert '"submitted_answers":{"1":"2:6"}' in payload["contents"][0]["parts"][0]["text"]
+    assert "authoritative" in payload["systemInstruction"]["parts"][0]["text"]
     assert '"unlocked_solution":[]' in payload["contents"][0]["parts"][0]["text"]
     assert payload["generationConfig"]["responseFormat"]["text"]["mimeType"] == (
         "APPLICATION_JSON"

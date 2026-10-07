@@ -79,6 +79,7 @@ class TutorService:
             unlocked_hint_blocks=grounding.unlocked_hint_blocks,
             lesson_sections=grounding.lesson_sections,
             unlocked_solution_blocks=grounding.unlocked_solution_blocks,
+            latest_attempt=grounding.latest_attempt,
             recent_messages=grounding.recent_messages,
             answer_locked=grounding.answer_lock_state.answer_locked,
             solution_locked=grounding.answer_lock_state.solution_locked,
