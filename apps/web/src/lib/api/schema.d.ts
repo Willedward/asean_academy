@@ -3341,7 +3341,7 @@ export interface components {
              * Type
              * @enum {string}
              */
-            type: "text" | "display_math" | "bullets";
+            type: "text" | "inline_math" | "display_math" | "bullets";
         };
         /** TutorEvaluationReviewRequest */
         TutorEvaluationReviewRequest: {

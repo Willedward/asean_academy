@@ -147,6 +147,18 @@ class LeakingProvider:
         )
 
 
+class InlineMathLeakingProvider:
+    async def generate(self, request):
+        del request
+        return TutorProviderResult(
+            blocks=(TutorBlock(type="inline_math", content="42"),),
+            suggested_replies=(),
+            recommended_next_action=None,
+            model_name="unsafe-test-provider",
+            usage=TutorProviderUsage(input_tokens=50, output_tokens=8, cost_micros_sgd=100),
+        )
+
+
 class CapturingProvider:
     def __init__(self):
         self.request = None
@@ -228,6 +240,25 @@ def test_locked_answer_is_replaced_when_provider_output_leaks():
     assert payload["message"]["safety_outcome"] == "answer_leakage_blocked"
     assert "42" not in payload["message"]["blocks"][0]["content"]
     assert "cannot reveal" in payload["message"]["blocks"][0]["content"]
+
+
+def test_locked_answer_is_replaced_when_inline_math_output_leaks():
+    repo = InMemoryTutorRepository(grounding(answer_locked=True))
+    app = application(repo)
+    app.state.tutor_provider = InlineMathLeakingProvider()
+    session_id = create_session(app).json()["session_id"]
+
+    response = request(
+        app,
+        "POST",
+        f"/api/v1/tutor/sessions/{session_id}/messages",
+        json={"message": "Please tell me the answer."},
+    )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["message"]["safety_outcome"] == "answer_leakage_blocked"
+    assert "42" not in payload["message"]["blocks"][0]["content"]
 
 
 def test_daily_message_hard_cap_does_not_disable_other_learning_features():

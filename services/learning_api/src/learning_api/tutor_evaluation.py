@@ -238,7 +238,7 @@ def _automated_checks(
             name="learner_facing_formatting",
             passed=not formatting_violations,
             detail=(
-                "Text and reply controls use plain prose; display mathematics uses raw LaTeX."
+                "Text and reply controls use plain prose; math blocks use raw LaTeX."
                 if not formatting_violations
                 else "Invalid formatting in " + ", ".join(formatting_violations[:6]) + "."
             ),
@@ -283,6 +283,9 @@ _LATEX_DELIMITER = re.compile(r"\$\$|(?<!\\)\$[^$\n]+(?<!\\)\$|\\\(|\\\)|\\\[|\\
 _RAW_LATEX_COMMAND = re.compile(
     r"\\(?:begin|cdot|dfrac|div|end|frac|geq|leq|neq|operatorname|sqrt|tfrac|times)\b"
 )
+_PLAIN_FRACTION = re.compile(
+    r"(?<![\w.])(?:\d+|[A-Za-z])\s*/\s*(?:\d+|[A-Za-z])(?![\w.])"
+)
 _INTERNAL_ACTION = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$")
 
 
@@ -295,7 +298,7 @@ def _learner_facing_formatting_violations(
         label = f"{block.type} block {index}"
         if _MARKDOWN_EMPHASIS.search(content):
             violations.append(f"{label} (Markdown emphasis)")
-        if block.type == "display_math":
+        if block.type in {"inline_math", "display_math"}:
             if _LATEX_DELIMITER.search(content):
                 violations.append(f"{label} (outer math delimiter)")
             continue
@@ -303,6 +306,8 @@ def _learner_facing_formatting_violations(
             violations.append(f"{label} (inline math delimiter)")
         if _RAW_LATEX_COMMAND.search(content):
             violations.append(f"{label} (raw LaTeX command)")
+        if _PLAIN_FRACTION.search(content):
+            violations.append(f"{label} (plain-text fraction)")
 
     for index, reply in enumerate(suggested_replies, start=1):
         label = f"suggested reply {index}"
@@ -312,6 +317,8 @@ def _learner_facing_formatting_violations(
             violations.append(f"{label} (inline math delimiter)")
         if _RAW_LATEX_COMMAND.search(reply):
             violations.append(f"{label} (raw LaTeX command)")
+        if _PLAIN_FRACTION.search(reply):
+            violations.append(f"{label} (plain-text fraction)")
     return violations
 
 
@@ -325,6 +332,7 @@ def _is_learner_facing_action(action: str | None) -> bool:
         _MARKDOWN_EMPHASIS.search(normalized)
         or _LATEX_DELIMITER.search(normalized)
         or _RAW_LATEX_COMMAND.search(normalized)
+        or _PLAIN_FRACTION.search(normalized)
     )
 
 
@@ -335,7 +343,7 @@ def _likely_locked_answer(rendered: str, blocks: list[TutorBlock], raw_answer: s
         return False
     for block in blocks:
         block_compact = re.sub(r"\s+", "", _normalize(block.content)).strip("$ ")
-        if block.type == "display_math" and block_compact == answer_compact:
+        if block.type in {"inline_math", "display_math"} and block_compact == answer_compact:
             return True
     rendered_normalized = _normalize(rendered)
     rendered_compact = re.sub(r"\s+", "", rendered_normalized).strip("$ ")

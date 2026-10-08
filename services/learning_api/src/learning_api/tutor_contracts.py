@@ -45,7 +45,7 @@ class SendTutorMessageRequest(ApiModel):
 
 
 class TutorBlock(ApiModel):
-    type: Literal["text", "display_math", "bullets"]
+    type: Literal["text", "inline_math", "display_math", "bullets"]
     content: str = Field(min_length=1, max_length=4000)
 
 

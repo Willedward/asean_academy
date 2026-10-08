@@ -100,7 +100,7 @@ async def main() -> int:
         suite,
         provider_name=provider_name,
         prompt_version=os.getenv(
-            "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v2"
+            "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v3"
         ),
         max_output_tokens=integer_environment("ASEAN_ACADEMY_TUTOR_MAX_OUTPUT_TOKENS", 1000),
     )

@@ -129,6 +129,7 @@ Render only the `message.blocks` returned by the Learning API. Supported block t
 | Type | Frontend responsibility |
 | --- | --- |
 | `text` | Render as ordinary escaped text. |
+| `inline_math` | Render through the existing KaTeX path within the surrounding paragraph. |
 | `display_math` | Render through the existing KaTeX path as display mathematics. |
 | `bullets` | Render the backend-provided content as a list without executing HTML. |
 
@@ -223,7 +224,7 @@ The frontend branch should add contract-level tests for:
 
 1. Creating a tutor session from a real practice-session/question identity.
 2. Sending one message and appending the structured assistant response.
-3. Rendering `text`, `display_math` and `bullets` safely.
+3. Rendering `text`, `inline_math`, `display_math` and `bullets` safely.
 4. Preventing a duplicate send while one request is pending.
 5. Restoring an existing session after refresh.
 6. Resetting state when the practice question changes.

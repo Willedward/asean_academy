@@ -4,14 +4,16 @@ import { describe, expect, it } from "vitest";
 import { TutorContent } from "./tutor-content";
 
 describe("TutorContent", () => {
-  it("renders text, display mathematics, and bullet response blocks", () => {
+  it("renders inline and display mathematics with surrounding tutor prose", () => {
     render(
       <TutorContent
         blocks={[
           {
             type: "text",
-            content: "Compare the two masses in the stated order.",
+            content: "Compare ",
           },
+          { type: "inline_math", content: "\\frac{5}{6}:\\frac{7}{9}" },
+          { type: "text", content: " in the stated order." },
           { type: "display_math", content: "2.4\\div0.8" },
           {
             type: "bullets",
@@ -21,8 +23,9 @@ describe("TutorContent", () => {
       />,
     );
 
+    expect(screen.getByText(/Compare/)).toBeInTheDocument();
     expect(
-      screen.getByText("Compare the two masses in the stated order."),
+      screen.getByLabelText("\\frac{5}{6}:\\frac{7}{9}"),
     ).toBeInTheDocument();
     expect(screen.getByLabelText("2.4\\div0.8")).toBeInTheDocument();
     expect(screen.getByText("Identify the first mass")).toBeInTheDocument();

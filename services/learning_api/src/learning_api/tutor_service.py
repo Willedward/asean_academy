@@ -198,7 +198,9 @@ class TutorService:
                 answer_compact = re.sub(r"\s+", "", answer)
                 if not answer_compact:
                     continue
-                if block.type == "display_math" and compact.strip("$ ") == answer_compact.strip("$ "):
+                if block.type in {"inline_math", "display_math"} and compact.strip(
+                    "$ "
+                ) == answer_compact.strip("$ "):
                     return True
                 escaped = re.escape(answer)
                 if re.search(rf"(?:final answer|answer is|answer:)\s*\$?{escaped}(?:\b|\$|$)", rendered):

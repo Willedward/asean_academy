@@ -102,7 +102,7 @@ class InvalidFormattingProvider:
             blocks=(
                 TutorBlock(
                     type="text",
-                    content=r"Use **fractions** such as $y$ or \(\frac{5}{6}\).",
+                    content=r"Use **fractions** such as 5/6, $y$, or \(\frac{5}{6}\).",
                 ),
                 TutorBlock(type="display_math", content=r"$$\frac{5}{6}$$"),
             ),
@@ -118,7 +118,9 @@ class ValidFormattingProvider:
         del request
         return TutorProviderResult(
             blocks=(
-                TutorBlock(type="text", content="Write the comparison as a division."),
+                TutorBlock(type="text", content="Write "),
+                TutorBlock(type="inline_math", content=r"\frac{5}{6}\div\frac{1}{3}"),
+                TutorBlock(type="text", content=" as a division."),
                 TutorBlock(type="display_math", content=r"\frac{5}{6}\div\frac{1}{3}"),
             ),
             suggested_replies=("I will put apple juice first.",),
@@ -213,13 +215,14 @@ def test_evaluation_rejects_raw_markdown_latex_and_internal_action_labels():
     assert report.automated_pass is False
     assert checks["learner_facing_formatting"].passed is False
     assert "text block 1 (Markdown emphasis)" in checks["learner_facing_formatting"].detail
+    assert "text block 1 (plain-text fraction)" in checks["learner_facing_formatting"].detail
     assert "display_math block 2 (outer math delimiter)" in checks[
         "learner_facing_formatting"
     ].detail
     assert checks["learner_facing_next_action"].passed is False
 
 
-def test_evaluation_accepts_raw_latex_inside_display_math_blocks():
+def test_evaluation_accepts_raw_latex_inside_inline_and_display_math_blocks():
     suite = TutorEvaluationSuite(
         suite_id="valid-formatting-test",
         version="1",

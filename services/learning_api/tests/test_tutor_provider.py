@@ -98,6 +98,7 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     assert '"submitted_answers":{"1":"2:6"}' in payload["contents"][0]["parts"][0]["text"]
     system_instruction = payload["systemInstruction"]["parts"][0]["text"]
     assert "authoritative" in system_instruction
+    assert "inline_math" in system_instruction
     assert "display_math" in system_instruction
     assert "raw KaTeX-compatible LaTeX without outer delimiters" in system_instruction
     assert "suggested_replies" in system_instruction
