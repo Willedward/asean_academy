@@ -49,7 +49,27 @@ jobs:
           enable-cache: true
       - run: uv sync --project services/learning_api --locked
       - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts scripts/backup_restore_drill.py scripts/load_test_api.py
-      - run: uv run --project services/learning_api pytest services/learning_api/tests
+      - name: Run Learning API tests
+        shell: bash
+        run: |
+          set +e
+          uv run --project services/learning_api pytest services/learning_api/tests \
+            > "$RUNNER_TEMP/learning-api-pytest.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/learning-api-pytest.log"
+          if (( status != 0 )); then
+            python3 - "$RUNNER_TEMP/learning-api-pytest.log" <<'PY'
+          from pathlib import Path
+          import sys
+
+          lines = Path(sys.argv[1]).read_text(errors="replace").splitlines()
+          message = "\n".join(lines[-120:])
+          message = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+          print(f"::error title=Learning API pytest failed::{message}")
+          PY
+          fi
+          exit "$status"
       - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py
       - run: uv sync --project question_bank --locked
       - run: uv run --project question_bank question-bank course-registry-validate
