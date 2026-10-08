@@ -22,17 +22,41 @@ services:
       - key: ASEAN_ACADEMY_RATE_LIMITS_ENABLED
         value: "true"
       - key: ASEAN_ACADEMY_TUTOR_ENABLED
-        value: "false"
+        value: "true"
       - key: ASEAN_ACADEMY_TUTOR_PROVIDER
-        value: disabled
+        value: gemini
       - key: ASEAN_ACADEMY_TUTOR_GEMINI_MODEL
         value: gemini-3.5-flash-lite
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD
+        value: "384000"
+      - key: ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD
+        value: "3200000"
       - key: ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED
         value: "false"
       - key: ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED
-        value: "false"
+        value: "true"
       - key: ASEAN_ACADEMY_TUTOR_ROUTING_COHORT
-        value: "off"
+        value: admins
+      - key: ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS
+        value: "500"
+      - key: ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER
+        value: openai
+      - key: ASEAN_ACADEMY_TUTOR_OPENAI_MODEL
+        value: gpt-4o-2024-11-20
+      - key: ASEAN_ACADEMY_TUTOR_OPENAI_INPUT_COST_PER_MILLION_MICROS_SGD
+        value: "3200000"
+      - key: ASEAN_ACADEMY_TUTOR_OPENAI_OUTPUT_COST_PER_MILLION_MICROS_SGD
+        value: "12800000"
+      - key: ASEAN_ACADEMY_TUTOR_ROUTING_POLICY_VERSION
+        value: math-tutor-routing-v1
+      - key: ASEAN_ACADEMY_TUTOR_PREMIUM_THRESHOLD
+        value: "5"
+      - key: ASEAN_ACADEMY_TUTOR_MAX_PREMIUM_TURNS_PER_SESSION
+        value: "3"
+      - key: ASEAN_ACADEMY_TUTOR_PREMIUM_MAX_OUTPUT_TOKENS
+        value: "700"
       - key: ASEAN_ACADEMY_TRUST_PROXY_HEADERS
         value: "true"
       - key: ASEAN_ACADEMY_ABUSE_HASH_SECRET
