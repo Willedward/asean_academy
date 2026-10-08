@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { MathContent, type ContentBlock } from "@/components/math-content";
 import { TutorConversationLab } from "@/components/tutor-conversation-lab";
 import { TutorContent, type TutorBlock } from "@/components/tutor-content";
+import { TutorRoutingEvidencePanel } from "@/components/tutor-routing-evidence-panel";
 import { Button } from "@/components/ui/button";
 import { adminRequest } from "@/lib/api/admin-dashboard";
 import { ApiRequestError } from "@/lib/api/errors";
@@ -257,6 +258,7 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
               ) : null}
             </div>
           </section>
+          {academic ? <TutorRoutingEvidencePanel /> : null}
           <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
             <aside className="max-h-[70vh] space-y-2 overflow-auto rounded-2xl border bg-white p-3">
               {lab.cases.map((item) => (

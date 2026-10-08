@@ -23,11 +23,13 @@ usage, and produces a written go/no-go decision for a later administrator-only l
 
 The milestone does **not** enable live premium routing for students.
 
-**Implementation update:** Work packages A and B are implemented on the feature branch.
+**Implementation update:** Work packages A, B and C are implemented on the feature branch.
 The API resolves `off`, `shadow` or `live` from the PostgreSQL role and configured cohort;
 adds restricted routing status and cursor-paginated decision endpoints; and includes the
-pagination index in migration `202610080023_tutor_routing_evidence_pagination.sql`. Work
-package C, the administrator evidence panel, is next.
+pagination index in migration `202610080023_tutor_routing_evidence_pagination.sql`. The
+Tutor Evaluation Lab now renders the restricted status, monthly aggregates, shadow safety
+invariant, server-side filters and paginated decision evidence. Work package D, staging
+activation, is next.
 
 ## 2. Required outcome
 
@@ -225,7 +227,7 @@ decision evidence; other roles receive `403`.
 
 ### Work package C — administrator UI
 
-**Status:** Next implementation package.
+**Status:** Implemented in code; hosted layout and session-state verification remain.
 
 1. Add routing status and metric cards to the Tutor Evaluation Lab.
 2. Add the decision table, filters and accessible details view.
@@ -236,7 +238,16 @@ decision evidence; other roles receive `403`.
 **Exit:** an administrator can understand why a route was recommended without querying the
 database or reading logs.
 
+**Implementation note (9 October 2026):** The panel uses generated OpenAPI types and is
+only mounted for academic administrators. Monthly evidence includes the server-calculated
+`shadow_premium_executions` metric, so the isolation indicator remains accurate even if the
+same month later contains live decisions. Costs are rendered in SGD while retaining the
+raw micro-SGD value as inspectable detail. Component tests cover populated data, empty
+results, filters, cursor pagination, API failure and invariant breach.
+
 ### Work package D — staging activation
+
+**Status:** Next implementation package.
 
 1. Apply the migrations in a disposable PostgreSQL database and run repository integration
    tests.

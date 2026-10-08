@@ -1021,6 +1021,10 @@ class PostgresTutorRepository:
                                where decisions.routing_mode = 'shadow'
                            )::integer as shadow_decisions,
                            count(*) filter (
+                               where decisions.routing_mode = 'shadow'
+                                 and decisions.selected_tier = 'premium'
+                           )::integer as shadow_premium_executions,
+                           count(*) filter (
                                where decisions.recommended_tier = 'premium'
                            )::integer as recommended_premium,
                            count(*) filter (
@@ -1052,7 +1056,8 @@ class PostgresTutorRepository:
                        daily.input_tokens, daily.output_tokens,
                        monthly.actual_cost, monthly.reserved_cost,
                        active.reservations, routes.decisions,
-                       routes.shadow_decisions, routes.recommended_premium,
+                       routes.shadow_decisions, routes.shadow_premium_executions,
+                       routes.recommended_premium,
                        routes.executed_premium, routes.projected_recommended_cost
                 from daily cross join monthly cross join active cross join routes
                 """,
@@ -1070,6 +1075,7 @@ class PostgresTutorRepository:
             "active_reservations": row["reservations"],
             "route_decisions": row["decisions"],
             "shadow_route_decisions": row["shadow_decisions"],
+            "shadow_premium_executions": row["shadow_premium_executions"],
             "recommended_premium_routes": row["recommended_premium"],
             "executed_premium_routes": row["executed_premium"],
             "projected_recommended_cost_micros_sgd": row[
@@ -1384,6 +1390,10 @@ class InMemoryTutorRepository:
             "route_decisions": len(self.route_plans),
             "shadow_route_decisions": sum(
                 plan.routing_mode == "shadow" for plan in self.route_plans.values()
+            ),
+            "shadow_premium_executions": sum(
+                plan.routing_mode == "shadow" and plan.execution.tier == "premium"
+                for plan in self.route_plans.values()
             ),
             "recommended_premium_routes": sum(
                 plan.recommendation.tier == "premium"

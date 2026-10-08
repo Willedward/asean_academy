@@ -212,6 +212,7 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
         assert admin_usage["actual_requests"] >= 1
         assert admin_usage["actual_cost_micros_sgd"] >= 1_000
         assert admin_usage["route_decisions"] >= 1
+        assert admin_usage["shadow_premium_executions"] == 0
         assert admin_usage["recommended_premium_routes"] == 0
         assert admin_usage["executed_premium_routes"] == 0
         assert admin_usage["projected_recommended_cost_micros_sgd"] >= 600

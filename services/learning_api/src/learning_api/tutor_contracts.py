@@ -100,6 +100,7 @@ class TutorUsageAdminResponse(ApiModel):
     active_reservations: int = Field(ge=0)
     route_decisions: int = Field(ge=0)
     shadow_route_decisions: int = Field(ge=0)
+    shadow_premium_executions: int = Field(ge=0)
     recommended_premium_routes: int = Field(ge=0)
     executed_premium_routes: int = Field(ge=0)
     projected_recommended_cost_micros_sgd: int = Field(ge=0)

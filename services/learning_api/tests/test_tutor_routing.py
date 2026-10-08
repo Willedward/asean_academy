@@ -498,6 +498,7 @@ def test_shadow_service_never_calls_or_reserves_the_premium_provider():
     assert repository.last_quote.max_cost_micros_sgd == 3_520
     usage = repository.admin_usage(repository.reservations[next(iter(repository.reservations))].usage_month)
     assert usage["shadow_route_decisions"] == 1
+    assert usage["shadow_premium_executions"] == 0
     assert usage["recommended_premium_routes"] == 1
     assert usage["executed_premium_routes"] == 0
 

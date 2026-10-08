@@ -3745,6 +3745,8 @@ export interface components {
             reserved_cost_micros_sgd: number;
             /** Route Decisions */
             route_decisions: number;
+            /** Shadow Premium Executions */
+            shadow_premium_executions: number;
             /** Shadow Route Decisions */
             shadow_route_decisions: number;
             /** Usage Month */

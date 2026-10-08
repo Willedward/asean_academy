@@ -422,8 +422,11 @@ panel, staging activation runbook and measurable go/no-go gates before any live 
 request is allowed.
 
 **Implementation update (9 October 2026):** The server-side `academic_admin` cohort gate,
-routing status endpoint and cursor-paginated decision evidence endpoint are implemented.
-The next work package renders this evidence in the existing Tutor Evaluation Lab.
+routing status endpoint, cursor-paginated decision evidence endpoint and Tutor Evaluation
+Lab evidence panel are implemented. The panel exposes server-owned monthly cost and route
+aggregates, filterable decision evidence and an explicit zero-shadow-premium-execution
+invariant without returning learner prompts or answers. The next work package activates
+administrator-only shadow routing in staging and records the deployment evidence.
 
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.
