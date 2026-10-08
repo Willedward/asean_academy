@@ -233,7 +233,7 @@ def test_only_academic_admin_can_view_deployment_status():
     assert response.status_code == 200
     assert response.json()["request_id"] == "operations-test"
     assert response.json()["database"]["resources"]["current_questions"] == 40
-    assert response.json()["release"]["required_schema_revision"] == "202610080020"
+    assert response.json()["release"]["required_schema_revision"] == "202610080023"
 
 
 def test_admin_invitation_contract_rejects_invalid_email():
