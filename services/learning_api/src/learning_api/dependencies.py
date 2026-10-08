@@ -37,6 +37,8 @@ from .tutor_routing import (
     TutorModelRouter,
     TutorModelTarget,
     TutorRoutingPolicy,
+    configured_routing_mode,
+    resolve_routing_mode,
 )
 from .tutor_service import TutorService
 
@@ -434,12 +436,20 @@ def tutor_service(
             input_cost_per_million_micros_sgd=premium_input_price,
             output_cost_per_million_micros_sgd=premium_output_price,
         )
-    routing_mode = (
-        "live"
-        if settings.tutor_hybrid_routing_enabled
-        else "shadow"
-        if settings.tutor_hybrid_routing_shadow_enabled
-        else "off"
+    configured_mode = configured_routing_mode(
+        live_enabled=settings.tutor_hybrid_routing_enabled,
+        shadow_enabled=settings.tutor_hybrid_routing_shadow_enabled,
+    )
+    database_role = None
+    if settings.tutor_routing_cohort == "admins":
+        role_repository = getattr(
+            request.app.state, "beta_operations_repository", None
+        ) or beta_operations_repository(request)
+        database_role = role_repository.role_for(learner.learner_id)
+    routing_mode = resolve_routing_mode(
+        configured_mode,
+        settings.tutor_routing_cohort,
+        database_role,
     )
     router = TutorModelRouter(
         TutorRoutingPolicy(

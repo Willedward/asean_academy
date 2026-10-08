@@ -499,6 +499,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/tutor-routing/decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Tutor Routing Decisions */
+        get: operations["listAdminTutorRoutingDecisions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/tutor-routing/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Tutor Routing Status */
+        get: operations["getAdminTutorRoutingStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/tutor-usage": {
         parameters: {
             query?: never;
@@ -3545,6 +3579,111 @@ export interface components {
             session_id: string;
             /** Suggested Replies */
             suggested_replies: string[];
+        };
+        /** TutorRouteDecisionAdminResponse */
+        TutorRouteDecisionAdminResponse: {
+            /** Actual Cost Micros Sgd */
+            actual_cost_micros_sgd?: number | null;
+            /** Actual Input Tokens */
+            actual_input_tokens?: number | null;
+            /** Actual Output Tokens */
+            actual_output_tokens?: number | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Decision Id
+             * Format: uuid
+             */
+            decision_id: string;
+            /** Executed Model */
+            executed_model: string;
+            /** Executed Provider */
+            executed_provider: string;
+            /**
+             * Executed Tier
+             * @enum {string}
+             */
+            executed_tier: "economy" | "premium";
+            /** Latency Ms */
+            latency_ms?: number | null;
+            /** Policy Version */
+            policy_version: string;
+            /** Projected Recommended Cost Micros Sgd */
+            projected_recommended_cost_micros_sgd?: number | null;
+            /** Question Difficulty */
+            question_difficulty: number;
+            /** Reason Codes */
+            reason_codes: string[];
+            /** Recommended Model */
+            recommended_model: string;
+            /** Recommended Provider */
+            recommended_provider: string;
+            /**
+             * Recommended Tier
+             * @enum {string}
+             */
+            recommended_tier: "economy" | "premium";
+            /**
+             * Reservation Status
+             * @enum {string}
+             */
+            reservation_status: "reserved" | "reconciled" | "released";
+            /** Route Score */
+            route_score: number;
+            /**
+             * Routing Mode
+             * @enum {string}
+             */
+            routing_mode: "legacy" | "off" | "shadow" | "live";
+            /** Safety Outcome */
+            safety_outcome?: ("accepted" | "answer_leakage_blocked" | "provider_fallback") | null;
+            /**
+             * Tutor Mode
+             * @enum {string}
+             */
+            tutor_mode: "clarify_question" | "diagnose_misconception" | "socratic_prompt" | "alternative_explanation" | "analogous_example" | "solution_explanation" | "lesson_recommendation";
+        };
+        /** TutorRouteDecisionListAdminResponse */
+        TutorRouteDecisionListAdminResponse: {
+            /** Items */
+            items: components["schemas"]["TutorRouteDecisionAdminResponse"][];
+            /** Next Cursor */
+            next_cursor?: string | null;
+            /** Usage Month */
+            usage_month: string;
+        };
+        /** TutorRoutingStatusAdminResponse */
+        TutorRoutingStatusAdminResponse: {
+            /**
+             * Cohort
+             * @enum {string}
+             */
+            cohort: "off" | "admins" | "all";
+            /**
+             * Configured Mode
+             * @enum {string}
+             */
+            configured_mode: "off" | "shadow" | "live";
+            /** Economy Model */
+            economy_model: string;
+            /** Economy Provider */
+            economy_provider: string;
+            /** Policy Version */
+            policy_version: string;
+            /** Premium Model */
+            premium_model?: string | null;
+            /** Premium Provider */
+            premium_provider?: string | null;
+            /**
+             * Resolved Mode
+             * @enum {string}
+             */
+            resolved_mode: "off" | "shadow" | "live";
+            /** Schema Revision */
+            schema_revision: string;
         };
         /** TutorSessionResponse */
         TutorSessionResponse: {
@@ -6809,6 +6948,219 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listAdminTutorRoutingDecisions: {
+        parameters: {
+            query: {
+                month: string;
+                cursor?: string | null;
+                limit?: number;
+                routing_mode?: ("legacy" | "off" | "shadow" | "live") | null;
+                recommended_tier?: ("economy" | "premium") | null;
+                executed_tier?: ("economy" | "premium") | null;
+                tutor_mode?: ("clarify_question" | "diagnose_misconception" | "socratic_prompt" | "alternative_explanation" | "analogous_example" | "solution_explanation" | "lesson_recommendation") | null;
+                question_difficulty?: number | null;
+                reason_code?: string | null;
+                reservation_status?: ("reserved" | "reconciled" | "released") | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TutorRouteDecisionListAdminResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getAdminTutorRoutingStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TutorRoutingStatusAdminResponse"];
                 };
             };
             /** @description Bad Request */

@@ -1,8 +1,13 @@
 # Tutor Shadow Routing Staging Milestone
 
-**Status:** Planned  
-**Prepared:** 8 October 2026  
-**Depends on:** hybrid routing commit `8376c5a` and shadow evidence commit `acfca30`  
+**Status:** In progress
+
+**Prepared:** 8 October 2026
+
+**Updated:** 9 October 2026
+
+**Depends on:** hybrid routing commit `8376c5a` and shadow evidence commit `acfca30`
+
 **Target environment:** hosted staging, restricted to academic administrators
 
 ## 1. Objective
@@ -17,6 +22,12 @@ understand each recommendation, validates the projected cost model against recon
 usage, and produces a written go/no-go decision for a later administrator-only live trial.
 
 The milestone does **not** enable live premium routing for students.
+
+**Implementation update:** Work packages A and B are implemented on the feature branch.
+The API resolves `off`, `shadow` or `live` from the PostgreSQL role and configured cohort;
+adds restricted routing status and cursor-paginated decision endpoints; and includes the
+pagination index in migration `202610080023_tutor_routing_evidence_pagination.sql`. Work
+package C, the administrator evidence panel, is next.
 
 ## 2. Required outcome
 
@@ -65,6 +76,7 @@ Keep the existing monthly aggregate endpoint and add a paginated decision read m
 
 ```http
 GET /api/v1/admin/tutor-usage?month=YYYY-MM
+GET /api/v1/admin/tutor-routing/status
 GET /api/v1/admin/tutor-routing/decisions?month=YYYY-MM&cursor=...&limit=50
 ```
 
@@ -126,8 +138,8 @@ Create a repeatable activation procedure:
 
 1. record the API and web release SHAs;
 2. back up or snapshot staging according to the existing database procedure;
-3. apply migrations through `202610080022_tutor_routing_shadow_mode.sql`;
-4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610080022`;
+3. apply migrations through `202610080023_tutor_routing_evidence_pagination.sql`;
+4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610080023`;
 5. configure current economy and premium model identifiers and micro-SGD price snapshots;
 6. keep live hybrid routing `false`;
 7. set the cohort to `admins` and shadow routing to `true`;
@@ -185,6 +197,8 @@ surface only.
 
 ### Work package A — cohort gate and configuration
 
+**Status:** Implemented in code; hosted staging verification remains.
+
 1. Add the routing cohort setting and validation.
 2. Resolve eligibility from the authenticated role in the API dependency layer.
 3. Pass the resolved `off`, `shadow` or `live` mode into `TutorService`.
@@ -195,6 +209,9 @@ surface only.
 on the recorded `off` economy route.
 
 ### Work package B — evidence read model
+
+**Status:** Implemented in code; disposable PostgreSQL and hosted staging verification
+remain.
 
 1. Define response contracts and cursor encoding.
 2. Add an indexed repository query over route decisions, reservations and assistant
@@ -207,6 +224,8 @@ on the recorded `off` economy route.
 decision evidence; other roles receive `403`.
 
 ### Work package C — administrator UI
+
+**Status:** Next implementation package.
 
 1. Add routing status and metric cards to the Tutor Evaluation Lab.
 2. Add the decision table, filters and accessible details view.

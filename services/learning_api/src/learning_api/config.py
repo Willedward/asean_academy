@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202610080022"
+REQUIRED_SCHEMA_REVISION = "202610080023"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -84,6 +84,7 @@ class Settings:
     tutor_gemini_model: str = "gemini-3.8-flash"
     tutor_hybrid_routing_enabled: bool = False
     tutor_hybrid_routing_shadow_enabled: bool = False
+    tutor_routing_cohort: str = "off"
     tutor_economy_max_output_tokens: int = 500
     tutor_premium_provider: str = "openai"
     tutor_routing_policy_version: str = "math-tutor-routing-v1"
@@ -245,6 +246,11 @@ class Settings:
             tutor_hybrid_routing_shadow_enabled=_boolean(
                 "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED", False
             ),
+            tutor_routing_cohort=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_ROUTING_COHORT", "off"
+            )
+            .strip()
+            .lower(),
             tutor_economy_max_output_tokens=_positive_integer(
                 "ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS", 500
             ),
@@ -368,6 +374,14 @@ class Settings:
             settings.tutor_hybrid_routing_enabled
             or settings.tutor_hybrid_routing_shadow_enabled
         )
+        if settings.tutor_routing_cohort not in {"off", "admins", "all"}:
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_ROUTING_COHORT must be off, admins, or all"
+            )
+        if settings.tutor_routing_cohort != "off" and not routing_policy_enabled:
+            raise RuntimeError(
+                "A tutor routing cohort requires shadow or live hybrid routing"
+            )
         if routing_policy_enabled:
             if not settings.tutor_enabled:
                 raise RuntimeError(

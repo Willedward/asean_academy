@@ -69,6 +69,9 @@ def application(
     *,
     enabled: bool = True,
     daily_messages: int = 10,
+    shadow_routing: bool = False,
+    routing_cohort: str = "off",
+    database_role: str | None = None,
 ):
     app = create_app(
         Settings(
@@ -81,9 +84,18 @@ def application(
             tutor_enabled=enabled,
             tutor_provider="synthetic",
             tutor_daily_message_limit=daily_messages,
+            tutor_hybrid_routing_shadow_enabled=shadow_routing,
+            tutor_routing_cohort=routing_cohort,
+            tutor_premium_provider="openai",
         )
     )
     app.state.tutor_repository = repo
+    if database_role is not None:
+        app.state.beta_operations_repository = type(
+            "RoleRepository",
+            (),
+            {"role_for": lambda self, learner_id: database_role},
+        )()
     return app
 
 
@@ -142,6 +154,50 @@ def test_synthetic_tutor_creates_session_and_reconciles_quota():
     encoded = response.text.casefold()
     assert "provider api key" not in encoded
     assert "canonical_answer" not in encoded
+
+
+def test_shadow_cohort_uses_the_database_role_and_ignores_the_token_role():
+    admin_repo = InMemoryTutorRepository(
+        grounding(difficulty=5, incorrect_attempts=2)
+    )
+    admin_app = application(
+        admin_repo,
+        shadow_routing=True,
+        routing_cohort="admins",
+        database_role="academic_admin",
+    )
+    admin_session = create_session(admin_app).json()["session_id"]
+    admin_response = request(
+        admin_app,
+        "POST",
+        f"/api/v1/tutor/sessions/{admin_session}/messages",
+        json={"message": "I am still confused. Explain it another way."},
+    )
+
+    learner_repo = InMemoryTutorRepository(
+        grounding(difficulty=5, incorrect_attempts=2)
+    )
+    learner_app = application(
+        learner_repo,
+        shadow_routing=True,
+        routing_cohort="admins",
+        database_role="student",
+    )
+    learner_session = create_session(learner_app).json()["session_id"]
+    learner_response = request(
+        learner_app,
+        "POST",
+        f"/api/v1/tutor/sessions/{learner_session}/messages",
+        json={"message": "I am still confused. Explain it another way."},
+    )
+
+    assert admin_response.status_code == 200, admin_response.text
+    assert admin_repo.last_route_plan.routing_mode == "shadow"
+    assert admin_repo.last_route_plan.recommendation.tier == "premium"
+    assert admin_repo.last_route_plan.execution.tier == "economy"
+    assert learner_response.status_code == 200, learner_response.text
+    assert learner_repo.last_route_plan.routing_mode == "off"
+    assert learner_repo.last_route_plan.recommendation.tier == "economy"
 
 
 class LeakingProvider:
@@ -339,4 +395,127 @@ def test_academic_admin_can_read_monthly_tutor_usage_while_tutor_is_disabled():
         "recommended_premium_routes": 0,
         "executed_premium_routes": 0,
         "projected_recommended_cost_micros_sgd": 0,
+    }
+
+
+def test_academic_admin_can_page_filtered_tutor_routing_evidence():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo)
+    app.dependency_overrides[admin_learner] = lambda: AuthenticatedLearner(
+        learner_id=str(uuid4()),
+        role="academic_admin",
+        source="test",
+    )
+    session_id = create_session(app).json()["session_id"]
+    for message in ("Help me begin.", "Can you explain that another way?"):
+        response = request(
+            app,
+            "POST",
+            f"/api/v1/tutor/sessions/{session_id}/messages",
+            json={"message": message},
+        )
+        assert response.status_code == 200, response.text
+    month = next(iter(repo.reservations.values())).usage_month.strftime("%Y-%m")
+
+    first = request(
+        app,
+        "GET",
+        f"/api/v1/admin/tutor-routing/decisions?month={month}&limit=1&executed_tier=economy",
+    )
+
+    assert first.status_code == 200, first.text
+    first_payload = first.json()
+    assert len(first_payload["items"]) == 1
+    assert first_payload["next_cursor"]
+    item = first_payload["items"][0]
+    assert item["routing_mode"] == "off"
+    assert item["executed_tier"] == "economy"
+    assert item["reservation_status"] == "reconciled"
+    assert item["actual_input_tokens"] > 0
+    assert item["actual_output_tokens"] > 0
+    assert item["projected_recommended_cost_micros_sgd"] == 0
+    assert "learner_id" not in item
+    assert "message" not in item
+
+    second = request(
+        app,
+        "GET",
+        "/api/v1/admin/tutor-routing/decisions",
+        params={
+            "month": month,
+            "limit": 1,
+            "cursor": first_payload["next_cursor"],
+            "recommended_tier": "economy",
+        },
+    )
+
+    assert second.status_code == 200, second.text
+    assert len(second.json()["items"]) == 1
+    assert (
+        second.json()["items"][0]["decision_id"]
+        != first_payload["items"][0]["decision_id"]
+    )
+    assert second.json()["next_cursor"] is None
+
+
+def test_tutor_routing_evidence_rejects_invalid_cursor():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo)
+    app.dependency_overrides[admin_learner] = lambda: AuthenticatedLearner(
+        learner_id=str(uuid4()),
+        role="academic_admin",
+        source="test",
+    )
+
+    response = request(
+        app,
+        "GET",
+        "/api/v1/admin/tutor-routing/decisions?month=2026-10&cursor=not-a-cursor",
+    )
+
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "invalid_tutor_routing_cursor"
+
+
+def test_tutor_routing_evidence_requires_an_academic_administrator():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo)
+    app.dependency_overrides[admin_learner] = lambda: AuthenticatedLearner(
+        learner_id=str(uuid4()),
+        role="content_admin",
+        source="test",
+    )
+
+    response = request(
+        app,
+        "GET",
+        "/api/v1/admin/tutor-routing/decisions?month=2026-10",
+    )
+
+    assert response.status_code == 403
+    assert response.json()["error"]["code"] == "academic_administrator_required"
+
+
+def test_academic_admin_can_read_tutor_routing_status():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo)
+    app.dependency_overrides[admin_learner] = lambda: AuthenticatedLearner(
+        learner_id=str(uuid4()),
+        role="academic_admin",
+        source="test",
+    )
+
+    response = request(app, "GET", "/api/v1/admin/tutor-routing/status")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "configured_mode": "off",
+        "resolved_mode": "off",
+        "cohort": "off",
+        "policy_version": "math-tutor-routing-v1",
+        "schema_revision": "202610080023",
+        "economy_provider": "synthetic",
+        "economy_model": "synthetic-tutor-v1",
+        "premium_provider": None,
+        "premium_model": None,
     }

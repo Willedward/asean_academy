@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import json
 import threading
+from base64 import urlsafe_b64decode, urlsafe_b64encode
+from binascii import Error as BinasciiError
 from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime, timedelta
 from typing import Protocol
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import psycopg
 from psycopg.rows import dict_row
@@ -97,6 +100,39 @@ class QuotaSnapshot:
     resets_at: datetime
 
 
+@dataclass(frozen=True, slots=True)
+class TutorRouteDecisionCursor:
+    created_at: datetime
+    decision_id: str
+
+
+def encode_tutor_route_cursor(created_at: datetime, decision_id: str) -> str:
+    payload = json.dumps(
+        [created_at.astimezone(UTC).isoformat(), str(UUID(decision_id))],
+        separators=(",", ":"),
+    ).encode()
+    return urlsafe_b64encode(payload).decode().rstrip("=")
+
+
+def decode_tutor_route_cursor(cursor: str) -> TutorRouteDecisionCursor:
+    try:
+        padding = "=" * (-len(cursor) % 4)
+        payload = json.loads(urlsafe_b64decode(cursor + padding))
+        if not isinstance(payload, list) or len(payload) != 2:
+            raise ValueError
+        created_at = datetime.fromisoformat(str(payload[0]))
+        if created_at.tzinfo is None:
+            raise ValueError
+        decision_id = str(UUID(str(payload[1])))
+    except (BinasciiError, UnicodeDecodeError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        raise TutorError(
+            "invalid_tutor_routing_cursor",
+            "The tutor routing cursor is invalid or expired.",
+            422,
+        ) from exc
+    return TutorRouteDecisionCursor(created_at.astimezone(UTC), decision_id)
+
+
 class TutorRepository(Protocol):
     def create_session(
         self,
@@ -159,6 +195,21 @@ class TutorRepository(Protocol):
     ) -> None: ...
 
     def admin_usage(self, usage_month: date) -> dict: ...
+
+    def admin_route_decisions(
+        self,
+        usage_month: date,
+        *,
+        cursor: str | None = None,
+        limit: int = 50,
+        routing_mode: str | None = None,
+        recommended_tier: str | None = None,
+        executed_tier: str | None = None,
+        tutor_mode: str | None = None,
+        question_difficulty: int | None = None,
+        reason_code: str | None = None,
+        reservation_status: str | None = None,
+    ) -> dict: ...
 
 
 def _next_utc_day(day: date) -> datetime:
@@ -1026,6 +1077,139 @@ class PostgresTutorRepository:
             ],
         }
 
+    def admin_route_decisions(
+        self,
+        usage_month: date,
+        *,
+        cursor: str | None = None,
+        limit: int = 50,
+        routing_mode: str | None = None,
+        recommended_tier: str | None = None,
+        executed_tier: str | None = None,
+        tutor_mode: str | None = None,
+        question_difficulty: int | None = None,
+        reason_code: str | None = None,
+        reservation_status: str | None = None,
+    ) -> dict:
+        if not 1 <= limit <= 100:
+            raise TutorError(
+                "invalid_tutor_routing_limit",
+                "Tutor routing evidence pages must contain 1 to 100 decisions.",
+                422,
+            )
+        next_month = (
+            usage_month.replace(year=usage_month.year + 1, month=1)
+            if usage_month.month == 12
+            else usage_month.replace(month=usage_month.month + 1)
+        )
+        conditions = [
+            "decisions.created_at >= %(month)s",
+            "decisions.created_at < %(next_month)s",
+        ]
+        parameters: dict[str, object] = {
+            "month": usage_month,
+            "next_month": next_month,
+            "fetch_limit": limit + 1,
+        }
+        filters = {
+            "routing_mode": ("decisions.routing_mode", routing_mode),
+            "recommended_tier": (
+                "decisions.recommended_tier",
+                recommended_tier,
+            ),
+            "executed_tier": ("decisions.selected_tier", executed_tier),
+            "tutor_mode": ("decisions.tutor_mode::text", tutor_mode),
+            "question_difficulty": (
+                "decisions.question_difficulty",
+                question_difficulty,
+            ),
+            "reservation_status": (
+                "reservations.status::text",
+                reservation_status,
+            ),
+        }
+        for name, (column, value) in filters.items():
+            if value is not None:
+                conditions.append(f"{column} = %({name})s")
+                parameters[name] = value
+        if reason_code is not None:
+            conditions.append("%(reason_code)s = any(decisions.reason_codes)")
+            parameters["reason_code"] = reason_code
+        if cursor is not None:
+            decoded = decode_tutor_route_cursor(cursor)
+            conditions.append(
+                "(decisions.created_at, decisions.id) "
+                "< (%(cursor_created_at)s, %(cursor_decision_id)s::uuid)"
+            )
+            parameters["cursor_created_at"] = decoded.created_at
+            parameters["cursor_decision_id"] = decoded.decision_id
+
+        with self._connect() as connection:
+            rows = connection.execute(
+                f"""
+                select decisions.id as decision_id, decisions.created_at,
+                       decisions.policy_version,
+                       decisions.routing_mode,
+                       decisions.tutor_mode::text as tutor_mode,
+                       decisions.question_difficulty,
+                       decisions.route_score,
+                       decisions.reason_codes,
+                       decisions.recommended_tier,
+                       decisions.recommended_provider_name as recommended_provider,
+                       decisions.recommended_model_name as recommended_model,
+                       decisions.selected_tier as executed_tier,
+                       decisions.provider_name as executed_provider,
+                       decisions.model_name as executed_model,
+                       reservations.status::text as reservation_status,
+                       case when reservations.status = 'reconciled'
+                            then reservations.actual_input_tokens end
+                            as actual_input_tokens,
+                       case when reservations.status = 'reconciled'
+                            then reservations.actual_output_tokens end
+                            as actual_output_tokens,
+                       case when reservations.status = 'reconciled'
+                            then reservations.actual_cost_micros_sgd end
+                            as actual_cost_micros_sgd,
+                       case when reservations.status = 'reconciled' then
+                           (
+                               reservations.actual_input_tokens
+                               * decisions.recommended_input_cost_per_million_micros_sgd
+                               + 999999
+                           ) / 1000000
+                           +
+                           (
+                               reservations.actual_output_tokens
+                               * decisions.recommended_output_cost_per_million_micros_sgd
+                               + 999999
+                           ) / 1000000
+                       end::bigint as projected_recommended_cost_micros_sgd,
+                       messages.latency_ms,
+                       messages.safety_outcome::text as safety_outcome
+                from tutor_route_decisions decisions
+                join tutor_usage_reservations reservations
+                  on reservations.id = decisions.reservation_id
+                left join tutor_messages messages
+                  on messages.route_decision_id = decisions.id
+                where {" and ".join(conditions)}
+                order by decisions.created_at desc, decisions.id desc
+                limit %(fetch_limit)s
+                """,
+                parameters,
+            ).fetchall()
+
+        page = rows[:limit]
+        next_cursor = None
+        if len(rows) > limit and page:
+            next_cursor = encode_tutor_route_cursor(
+                page[-1]["created_at"],
+                str(page[-1]["decision_id"]),
+            )
+        return {
+            "usage_month": usage_month.strftime("%Y-%m"),
+            "items": [dict(row) for row in page],
+            "next_cursor": next_cursor,
+        }
+
 
 class InMemoryTutorRepository:
     """Deterministic repository for service tests; never selected in hosted environments."""
@@ -1044,6 +1228,9 @@ class InMemoryTutorRepository:
         self.last_route_plan: TutorRoutePlan | None = None
         self.last_quote: UsageReservationQuote | None = None
         self.route_plans: dict[str, TutorRoutePlan] = {}
+        self.route_created_at: dict[str, datetime] = {}
+        self.route_status: dict[str, str] = {}
+        self.route_actuals: dict[str, UsageActual] = {}
         self.projected_recommended_cost = 0
         self._lock = threading.Lock()
 
@@ -1100,12 +1287,12 @@ class InMemoryTutorRepository:
         )
 
     def append_message(self, session_id: str, *, role: str, mode: TutorMode | None, content: dict, grounding_revision_ids: tuple[str, ...] = (), model_name: str | None = None, prompt_version: str | None = None, safety_outcome: str = "accepted", latency_ms: int | None = None, token_usage: dict | None = None, provider_name: str | None = None, model_tier: str | None = None, route_decision_id: str | None = None) -> dict:
-        del grounding_revision_ids, prompt_version, latency_ms, token_usage
+        del grounding_revision_ids, prompt_version, token_usage
         row = {"id": str(uuid4()), "role": role, "mode": mode,
                "blocks": content.get("blocks", []), "safety_outcome": safety_outcome,
                "provider_name": provider_name, "model_name": model_name,
                "model_tier": model_tier, "route_decision_id": route_decision_id,
-               "created_at": datetime.now(UTC)}
+               "latency_ms": latency_ms, "created_at": datetime.now(UTC)}
         self.messages[session_id].append(row)
         return {
             key: row[key]
@@ -1148,6 +1335,8 @@ class InMemoryTutorRepository:
             self.last_routing = execution
             if routing is not None:
                 self.route_plans[item.reservation_id] = routing
+                self.route_created_at[item.reservation_id] = datetime.now(UTC)
+                self.route_status[item.reservation_id] = "reserved"
             return item
 
     def reconcile(self, reservation: UsageReservation, actual: UsageActual, limits: TutorLimits, *, request_id: str) -> QuotaSnapshot:
@@ -1158,6 +1347,8 @@ class InMemoryTutorRepository:
             self.actual_tokens += actual.total_tokens
             self.actual_cost += actual.cost_micros_sgd
             if plan := self.route_plans.get(reservation.reservation_id):
+                self.route_status[reservation.reservation_id] = "reconciled"
+                self.route_actuals[reservation.reservation_id] = actual
                 self.projected_recommended_cost += _priced_tokens(
                     actual.input_tokens,
                     plan.recommendation.input_cost_per_million_micros_sgd,
@@ -1173,9 +1364,11 @@ class InMemoryTutorRepository:
         )
 
     def release(self, reservation: UsageReservation, *, request_id: str, reason: str) -> None:
-        del reservation, request_id, reason
+        del request_id, reason
         with self._lock:
             self.reserved = False
+            if reservation.reservation_id in self.route_plans:
+                self.route_status[reservation.reservation_id] = "released"
 
     def admin_usage(self, usage_month: date) -> dict:
         return {
@@ -1202,4 +1395,138 @@ class InMemoryTutorRepository:
             "projected_recommended_cost_micros_sgd": (
                 self.projected_recommended_cost
             ),
+        }
+
+    def admin_route_decisions(
+        self,
+        usage_month: date,
+        *,
+        cursor: str | None = None,
+        limit: int = 50,
+        routing_mode: str | None = None,
+        recommended_tier: str | None = None,
+        executed_tier: str | None = None,
+        tutor_mode: str | None = None,
+        question_difficulty: int | None = None,
+        reason_code: str | None = None,
+        reservation_status: str | None = None,
+    ) -> dict:
+        if not 1 <= limit <= 100:
+            raise TutorError(
+                "invalid_tutor_routing_limit",
+                "Tutor routing evidence pages must contain 1 to 100 decisions.",
+                422,
+            )
+        decoded = decode_tutor_route_cursor(cursor) if cursor is not None else None
+        next_month = (
+            usage_month.replace(year=usage_month.year + 1, month=1)
+            if usage_month.month == 12
+            else usage_month.replace(month=usage_month.month + 1)
+        )
+        records = []
+        for reservation_id, plan in self.route_plans.items():
+            reservation = self.reservations[reservation_id]
+            decision_id = reservation.route_decision_id
+            created_at = self.route_created_at[reservation_id]
+            status = self.route_status[reservation_id]
+            if decision_id is None or not (
+                usage_month <= created_at.date() < next_month
+            ):
+                continue
+            if decoded is not None and (created_at, decision_id) >= (
+                decoded.created_at,
+                decoded.decision_id,
+            ):
+                continue
+            recommendation = plan.recommendation
+            execution = plan.execution
+            if routing_mode is not None and plan.routing_mode != routing_mode:
+                continue
+            if (
+                recommended_tier is not None
+                and recommendation.tier != recommended_tier
+            ):
+                continue
+            if executed_tier is not None and execution.tier != executed_tier:
+                continue
+            if tutor_mode is not None and recommendation.mode != tutor_mode:
+                continue
+            if (
+                question_difficulty is not None
+                and recommendation.question_difficulty != question_difficulty
+            ):
+                continue
+            if reason_code is not None and reason_code not in recommendation.reason_codes:
+                continue
+            if reservation_status is not None and status != reservation_status:
+                continue
+            actual = self.route_actuals.get(reservation_id)
+            assistant = next(
+                (
+                    item
+                    for item in self.messages.get(reservation.session_id, ())
+                    if item.get("route_decision_id") == decision_id
+                ),
+                None,
+            )
+            projected_cost = (
+                _priced_tokens(
+                    actual.input_tokens,
+                    recommendation.input_cost_per_million_micros_sgd,
+                )
+                + _priced_tokens(
+                    actual.output_tokens,
+                    recommendation.output_cost_per_million_micros_sgd,
+                )
+                if actual is not None
+                else None
+            )
+            records.append(
+                {
+                    "decision_id": decision_id,
+                    "created_at": created_at,
+                    "policy_version": recommendation.policy_version,
+                    "routing_mode": plan.routing_mode,
+                    "tutor_mode": recommendation.mode,
+                    "question_difficulty": recommendation.question_difficulty,
+                    "route_score": recommendation.score,
+                    "reason_codes": list(recommendation.reason_codes),
+                    "recommended_tier": recommendation.tier,
+                    "recommended_provider": recommendation.provider_name,
+                    "recommended_model": recommendation.model_name,
+                    "executed_tier": execution.tier,
+                    "executed_provider": execution.provider_name,
+                    "executed_model": execution.model_name,
+                    "reservation_status": status,
+                    "actual_input_tokens": (
+                        actual.input_tokens if actual is not None else None
+                    ),
+                    "actual_output_tokens": (
+                        actual.output_tokens if actual is not None else None
+                    ),
+                    "actual_cost_micros_sgd": (
+                        actual.cost_micros_sgd if actual is not None else None
+                    ),
+                    "projected_recommended_cost_micros_sgd": projected_cost,
+                    "latency_ms": assistant.get("latency_ms") if assistant else None,
+                    "safety_outcome": (
+                        assistant.get("safety_outcome") if assistant else None
+                    ),
+                }
+            )
+
+        records.sort(
+            key=lambda item: (item["created_at"], item["decision_id"]),
+            reverse=True,
+        )
+        page = records[:limit]
+        next_cursor = None
+        if len(records) > limit and page:
+            next_cursor = encode_tutor_route_cursor(
+                page[-1]["created_at"], page[-1]["decision_id"]
+            )
+        return {
+            "usage_month": usage_month.strftime("%Y-%m"),
+            "items": page,
+            "next_cursor": next_cursor,
         }

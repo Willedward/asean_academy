@@ -102,7 +102,12 @@ The disabled economy/premium learner router, OpenAI premium adapter, route evide
 cost calculation, configuration, and activation gates are documented in
 `docs/plan/TUTOR_HYBRID_MODEL_ROUTING.md`.
 
-After applying migrations through `202610080022`, shadow routing can be enabled with
+After applying migrations through `202610080023`, shadow routing can be enabled with
 `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED=true`. It records the premium route
 the policy would recommend while executing and charging only the configured economy
 provider. Shadow and live hybrid routing cannot be enabled together.
+
+Set `ASEAN_ACADEMY_TUTOR_ROUTING_COHORT=admins` to resolve eligibility from the stored
+`academic_admin` role. Restricted administrators can inspect runtime configuration at
+`GET /api/v1/admin/tutor-routing/status` and paginated operational evidence at
+`GET /api/v1/admin/tutor-routing/decisions`; neither endpoint returns prompts or answers.

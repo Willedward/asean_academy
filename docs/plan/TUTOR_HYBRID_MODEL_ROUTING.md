@@ -187,7 +187,9 @@ input and output token distributions from the evaluation lab.
 Migration `202610080021_tutor_hybrid_model_routing.sql` adds one append-only decision table
 and links assistant messages to the decision that produced them. Migration
 `202610080022_tutor_routing_shadow_mode.sql` records the policy recommendation separately
-from the route that actually executed.
+from the route that actually executed. Migration
+`202610080023_tutor_routing_evidence_pagination.sql` adds the stable cursor-pagination index
+used by the restricted administrator evidence API.
 
 ```text
 tutor_route_decisions
@@ -244,6 +246,7 @@ Hybrid routing remains off by default.
 | --- | --- |
 | `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED` | `true` during evidence collection; never calls premium |
 | `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED` | `false` until rollout gates pass |
+| `ASEAN_ACADEMY_TUTOR_ROUTING_COHORT` | `off`, then `admins` for staging evidence; resolved from the database role |
 | `ASEAN_ACADEMY_TUTOR_PROVIDER` | Economy provider, currently `gemini` in hosted evaluation |
 | `ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS` | `500` |
 | `ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER` | `openai` |
@@ -259,6 +262,11 @@ Hybrid routing remains off by default.
 Shadow and live hybrid routing cannot both be enabled. Shadow mode requires current
 premium model prices so its projection is meaningful, but it does not require the unused
 premium provider key. Live mode requires the premium provider key.
+
+The configured mode is resolved per request against the server-owned cohort. `admins`
+requires the `academic_admin` role stored in PostgreSQL; client role claims and request
+parameters cannot opt an account into routing. Accounts outside the cohort use mode `off`
+and execute economy.
 
 The configured route output limits must not exceed the existing global output limit. Each
 route's calculated maximum cost must also remain below the global maximum turn cost.
@@ -286,7 +294,7 @@ idempotency. Add it only after failure-rate evidence shows that the extra path i
 The implementation plan for gates 1–6 is
 [TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md](TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md).
 
-1. Apply database migrations through revision `202610080022` and confirm readiness.
+1. Apply database migrations through revision `202610080023` and confirm readiness.
 2. Configure server-only provider keys and current micro-SGD token prices.
 3. Keep hybrid routing disabled and run the fixed evaluation suite separately against
    both target models with `--provider gemini --live` and `--provider openai --live`.

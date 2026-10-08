@@ -29,7 +29,7 @@ The repository contains a working end-to-end product foundation:
 - Google sign-in through Supabase Auth, invitation-only onboarding and database-backed roles;
 - a responsive Next.js student and administration application;
 - a FastAPI learning backend with courses, diagnostics, lessons, practice, progress, reports and tutor APIs;
-- a versioned PostgreSQL content and learner-state model with 22 additive migrations;
+- a versioned PostgreSQL content and learner-state model with 23 additive migrations;
 - deterministic checking for structured Mathematics answers;
 - content review, audit history, operational health and account-deletion workflows;
 - an offline pipeline for extracting questions from papers, preserving source evidence and mapping content to the syllabus;
@@ -268,7 +268,7 @@ The API follows router → service → repository boundaries. PostgreSQL impleme
 | --- | --- |
 | Supabase Auth | Google OAuth identity, access/refresh tokens and browser sessions |
 | PostgreSQL 16 in CI | Content, identity profile, enrolment, learner state, reviews, audit and usage ledger |
-| Supabase migrations | 22 ordered additive migrations through hybrid tutor shadow routing |
+| Supabase migrations | 23 ordered additive migrations through tutor routing evidence pagination |
 | Row-level security | Defence in depth on application tables |
 | Application authorization | Ownership, enrolment and administrator-role checks at API boundaries |
 
@@ -530,7 +530,7 @@ The product does not need to become a network of microservices at a particular u
 
 ### Immediate
 
-1. Apply migrations through `202610080022_tutor_routing_shadow_mode.sql` in a disposable and then hosted staging database.
+1. Apply migrations through `202610080023_tutor_routing_evidence_pagination.sql` in a disposable and then hosted staging database.
 2. Configure the economy and premium providers with current model identifiers and prices.
 3. Run both models across the fixed evaluation set and compare Mathematics, editorial, latency and cost evidence.
 4. Enable shadow mode for administrators and collect recommended-versus-executed route and projected-cost evidence without premium calls.

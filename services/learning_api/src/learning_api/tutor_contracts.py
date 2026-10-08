@@ -103,3 +103,49 @@ class TutorUsageAdminResponse(ApiModel):
     recommended_premium_routes: int = Field(ge=0)
     executed_premium_routes: int = Field(ge=0)
     projected_recommended_cost_micros_sgd: int = Field(ge=0)
+
+
+class TutorRoutingStatusAdminResponse(ApiModel):
+    configured_mode: Literal["off", "shadow", "live"]
+    resolved_mode: Literal["off", "shadow", "live"]
+    cohort: Literal["off", "admins", "all"]
+    policy_version: str
+    schema_revision: str
+    economy_provider: str
+    economy_model: str
+    premium_provider: str | None = None
+    premium_model: str | None = None
+
+
+class TutorRouteDecisionAdminResponse(ApiModel):
+    decision_id: UUID
+    created_at: datetime
+    policy_version: str
+    routing_mode: Literal["legacy", "off", "shadow", "live"]
+    tutor_mode: TutorMode
+    question_difficulty: int = Field(ge=1, le=5)
+    route_score: int = Field(ge=0)
+    reason_codes: list[str]
+    recommended_tier: Literal["economy", "premium"]
+    recommended_provider: str
+    recommended_model: str
+    executed_tier: Literal["economy", "premium"]
+    executed_provider: str
+    executed_model: str
+    reservation_status: Literal["reserved", "reconciled", "released"]
+    actual_input_tokens: int | None = Field(default=None, ge=0)
+    actual_output_tokens: int | None = Field(default=None, ge=0)
+    actual_cost_micros_sgd: int | None = Field(default=None, ge=0)
+    projected_recommended_cost_micros_sgd: int | None = Field(
+        default=None, ge=0
+    )
+    latency_ms: int | None = Field(default=None, ge=0)
+    safety_outcome: Literal[
+        "accepted", "answer_leakage_blocked", "provider_fallback"
+    ] | None = None
+
+
+class TutorRouteDecisionListAdminResponse(ApiModel):
+    usage_month: str = Field(pattern=r"^\d{4}-\d{2}$")
+    items: list[TutorRouteDecisionAdminResponse]
+    next_cursor: str | None = Field(default=None, max_length=500)

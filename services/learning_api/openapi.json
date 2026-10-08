@@ -6344,6 +6344,318 @@
         "title": "TutorReplyResponse",
         "type": "object"
       },
+      "TutorRouteDecisionAdminResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "actual_cost_micros_sgd": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Cost Micros Sgd"
+          },
+          "actual_input_tokens": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Input Tokens"
+          },
+          "actual_output_tokens": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Output Tokens"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision_id": {
+            "format": "uuid",
+            "title": "Decision Id",
+            "type": "string"
+          },
+          "executed_model": {
+            "title": "Executed Model",
+            "type": "string"
+          },
+          "executed_provider": {
+            "title": "Executed Provider",
+            "type": "string"
+          },
+          "executed_tier": {
+            "enum": [
+              "economy",
+              "premium"
+            ],
+            "title": "Executed Tier",
+            "type": "string"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "policy_version": {
+            "title": "Policy Version",
+            "type": "string"
+          },
+          "projected_recommended_cost_micros_sgd": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projected Recommended Cost Micros Sgd"
+          },
+          "question_difficulty": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Question Difficulty",
+            "type": "integer"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "recommended_model": {
+            "title": "Recommended Model",
+            "type": "string"
+          },
+          "recommended_provider": {
+            "title": "Recommended Provider",
+            "type": "string"
+          },
+          "recommended_tier": {
+            "enum": [
+              "economy",
+              "premium"
+            ],
+            "title": "Recommended Tier",
+            "type": "string"
+          },
+          "reservation_status": {
+            "enum": [
+              "reserved",
+              "reconciled",
+              "released"
+            ],
+            "title": "Reservation Status",
+            "type": "string"
+          },
+          "route_score": {
+            "minimum": 0.0,
+            "title": "Route Score",
+            "type": "integer"
+          },
+          "routing_mode": {
+            "enum": [
+              "legacy",
+              "off",
+              "shadow",
+              "live"
+            ],
+            "title": "Routing Mode",
+            "type": "string"
+          },
+          "safety_outcome": {
+            "anyOf": [
+              {
+                "enum": [
+                  "accepted",
+                  "answer_leakage_blocked",
+                  "provider_fallback"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Safety Outcome"
+          },
+          "tutor_mode": {
+            "enum": [
+              "clarify_question",
+              "diagnose_misconception",
+              "socratic_prompt",
+              "alternative_explanation",
+              "analogous_example",
+              "solution_explanation",
+              "lesson_recommendation"
+            ],
+            "title": "Tutor Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "decision_id",
+          "created_at",
+          "policy_version",
+          "routing_mode",
+          "tutor_mode",
+          "question_difficulty",
+          "route_score",
+          "reason_codes",
+          "recommended_tier",
+          "recommended_provider",
+          "recommended_model",
+          "executed_tier",
+          "executed_provider",
+          "executed_model",
+          "reservation_status"
+        ],
+        "title": "TutorRouteDecisionAdminResponse",
+        "type": "object"
+      },
+      "TutorRouteDecisionListAdminResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TutorRouteDecisionAdminResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "usage_month": {
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Usage Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "usage_month",
+          "items"
+        ],
+        "title": "TutorRouteDecisionListAdminResponse",
+        "type": "object"
+      },
+      "TutorRoutingStatusAdminResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "cohort": {
+            "enum": [
+              "off",
+              "admins",
+              "all"
+            ],
+            "title": "Cohort",
+            "type": "string"
+          },
+          "configured_mode": {
+            "enum": [
+              "off",
+              "shadow",
+              "live"
+            ],
+            "title": "Configured Mode",
+            "type": "string"
+          },
+          "economy_model": {
+            "title": "Economy Model",
+            "type": "string"
+          },
+          "economy_provider": {
+            "title": "Economy Provider",
+            "type": "string"
+          },
+          "policy_version": {
+            "title": "Policy Version",
+            "type": "string"
+          },
+          "premium_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premium Model"
+          },
+          "premium_provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premium Provider"
+          },
+          "resolved_mode": {
+            "enum": [
+              "off",
+              "shadow",
+              "live"
+            ],
+            "title": "Resolved Mode",
+            "type": "string"
+          },
+          "schema_revision": {
+            "title": "Schema Revision",
+            "type": "string"
+          }
+        },
+        "required": [
+          "configured_mode",
+          "resolved_mode",
+          "cohort",
+          "policy_version",
+          "schema_revision",
+          "economy_provider",
+          "economy_model"
+        ],
+        "title": "TutorRoutingStatusAdminResponse",
+        "type": "object"
+      },
       "TutorSessionResponse": {
         "additionalProperties": false,
         "properties": {
@@ -10964,6 +11276,425 @@
           }
         ],
         "summary": "Review Run",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-routing/decisions": {
+      "get": {
+        "operationId": "listAdminTutorRoutingDecisions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "pattern": "^\\d{4}-\\d{2}$",
+              "title": "Month",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 500,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "routing_mode",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "legacy",
+                    "off",
+                    "shadow",
+                    "live"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Routing Mode"
+            }
+          },
+          {
+            "in": "query",
+            "name": "recommended_tier",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "economy",
+                    "premium"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recommended Tier"
+            }
+          },
+          {
+            "in": "query",
+            "name": "executed_tier",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "economy",
+                    "premium"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Executed Tier"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tutor_mode",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "clarify_question",
+                    "diagnose_misconception",
+                    "socratic_prompt",
+                    "alternative_explanation",
+                    "analogous_example",
+                    "solution_explanation",
+                    "lesson_recommendation"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tutor Mode"
+            }
+          },
+          {
+            "in": "query",
+            "name": "question_difficulty",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Question Difficulty"
+            }
+          },
+          {
+            "in": "query",
+            "name": "reason_code",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "pattern": "^[a-z0-9_]+$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Reason Code"
+            }
+          },
+          {
+            "in": "query",
+            "name": "reservation_status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "reserved",
+                    "reconciled",
+                    "released"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Reservation Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorRouteDecisionListAdminResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Tutor Routing Decisions",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/tutor-routing/status": {
+      "get": {
+        "operationId": "getAdminTutorRoutingStatus",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorRoutingStatusAdminResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Tutor Routing Status",
         "tags": [
           "admin"
         ]

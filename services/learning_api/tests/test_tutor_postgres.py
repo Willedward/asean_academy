@@ -215,6 +215,25 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
         assert admin_usage["recommended_premium_routes"] == 0
         assert admin_usage["executed_premium_routes"] == 0
         assert admin_usage["projected_recommended_cost_micros_sgd"] >= 600
+        evidence = repository.admin_route_decisions(
+            reserved.usage_month,
+            routing_mode="live",
+            recommended_tier="economy",
+            executed_tier="economy",
+            reservation_status="reconciled",
+        )
+        assert evidence["usage_month"] == reserved.usage_month.strftime("%Y-%m")
+        assert evidence["next_cursor"] is None
+        decision = next(
+            item
+            for item in evidence["items"]
+            if str(item["decision_id"]) == reserved.route_decision_id
+        )
+        assert decision["actual_input_tokens"] == 100
+        assert decision["actual_output_tokens"] == 50
+        assert decision["actual_cost_micros_sgd"] == 1_000
+        assert decision["projected_recommended_cost_micros_sgd"] == 600
+        assert "learner_id" not in decision
 
         repository.append_message(
             session["session_id"],

@@ -226,6 +226,7 @@ def test_shadow_routing_requires_prices_but_not_the_unused_premium_key(monkeypat
     monkeypatch.setenv(
         "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED", "true"
     )
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ROUTING_COHORT", "admins")
     monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER", "openai")
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     monkeypatch.setenv(
@@ -238,8 +239,27 @@ def test_shadow_routing_requires_prices_but_not_the_unused_premium_key(monkeypat
     settings = Settings.from_environment()
 
     assert settings.tutor_hybrid_routing_shadow_enabled is True
+    assert settings.tutor_routing_cohort == "admins"
     assert settings.tutor_hybrid_routing_enabled is False
     assert settings.tutor_openai_api_key is None
+
+
+def test_tutor_routing_cohort_rejects_unknown_values(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ROUTING_COHORT", "friends")
+
+    with pytest.raises(RuntimeError, match="must be off, admins, or all"):
+        Settings.from_environment()
+
+
+def test_tutor_routing_cohort_requires_a_routing_mode(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ROUTING_COHORT", "admins")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", "false")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED", "false"
+    )
+
+    with pytest.raises(RuntimeError, match="requires shadow or live"):
+        Settings.from_environment()
 
 
 def test_live_and_shadow_routing_cannot_both_be_enabled(monkeypatch):

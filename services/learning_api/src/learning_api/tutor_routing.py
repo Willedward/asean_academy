@@ -9,6 +9,35 @@ from .tutor_contracts import TutorMode
 
 TutorModelTier = Literal["economy", "premium"]
 TutorRoutingMode = Literal["off", "shadow", "live"]
+TutorRoutingCohort = Literal["off", "admins", "all"]
+
+
+def configured_routing_mode(
+    *,
+    live_enabled: bool,
+    shadow_enabled: bool,
+) -> TutorRoutingMode:
+    if live_enabled:
+        return "live"
+    if shadow_enabled:
+        return "shadow"
+    return "off"
+
+
+def resolve_routing_mode(
+    configured_mode: TutorRoutingMode,
+    cohort: TutorRoutingCohort,
+    database_role: str | None,
+) -> TutorRoutingMode:
+    """Resolve a server-owned rollout mode without trusting request data."""
+
+    if configured_mode == "off" or cohort == "off":
+        return "off"
+    if cohort == "all":
+        return configured_mode
+    if cohort == "admins" and database_role == "academic_admin":
+        return configured_mode
+    return "off"
 
 
 @dataclass(frozen=True, slots=True)

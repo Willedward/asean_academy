@@ -421,6 +421,10 @@ It adds a server-side rollout cohort, decision-level evidence API, administrator
 panel, staging activation runbook and measurable go/no-go gates before any live premium
 request is allowed.
 
+**Implementation update (9 October 2026):** The server-side `academic_admin` cohort gate,
+routing status endpoint and cursor-paginated decision evidence endpoint are implemented.
+The next work package renders this evidence in the existing Tutor Evaluation Lab.
+
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.
 - Add tutor sessions/messages, prompt-policy versions, answer-lock context and structured
