@@ -13,7 +13,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
 from .tutor_contracts import AnswerLockState, TutorMode
-from .tutor_routing import TutorRouteDecision
+from .tutor_routing import TutorRouteDecision, TutorRoutePlan
 
 
 class TutorError(RuntimeError):
@@ -138,7 +138,7 @@ class TutorRepository(Protocol):
         *,
         request_id: str,
         quote: UsageReservationQuote | None = None,
-        routing: TutorRouteDecision | None = None,
+        routing: TutorRoutePlan | None = None,
     ) -> UsageReservation: ...
 
     def reconcile(
@@ -163,6 +163,12 @@ class TutorRepository(Protocol):
 
 def _next_utc_day(day: date) -> datetime:
     return datetime.combine(day + timedelta(days=1), datetime.min.time(), tzinfo=UTC)
+
+
+def _priced_tokens(tokens: int, per_million_micros_sgd: int) -> int:
+    if tokens == 0 or per_million_micros_sgd == 0:
+        return 0
+    return (tokens * per_million_micros_sgd + 999_999) // 1_000_000
 
 
 def _safe_attempt_evidence(row: dict | None) -> dict | None:
@@ -552,7 +558,7 @@ class PostgresTutorRepository:
         *,
         request_id: str,
         quote: UsageReservationQuote | None = None,
-        routing: TutorRouteDecision | None = None,
+        routing: TutorRoutePlan | None = None,
     ) -> UsageReservation:
         now = datetime.now(UTC)
         usage_date = now.date()
@@ -563,11 +569,12 @@ class PostgresTutorRepository:
             max_output_tokens=limits.max_output_tokens,
             max_cost_micros_sgd=limits.max_turn_cost_micros_sgd,
         )
-        if routing is not None and (
+        execution = routing.execution if routing is not None else None
+        if execution is not None and (
             quote is None
-            or selected_quote.max_output_tokens != routing.max_output_tokens
+            or selected_quote.max_output_tokens != execution.max_output_tokens
             or selected_quote.max_cost_micros_sgd
-            != routing.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
+            != execution.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
         ):
             raise TutorError(
                 "tutor_reservation_invalid",
@@ -675,15 +682,21 @@ class PostgresTutorRepository:
                 ),
             )
             if routing is not None:
+                recommendation = routing.recommendation
                 connection.execute(
                     """
                     insert into tutor_route_decisions (
                         id, reservation_id, tutor_session_id, student_id, request_id,
                         policy_version, tutor_mode, question_difficulty, route_score,
                         selected_tier, provider_name, model_name, reason_codes,
-                        estimated_input_tokens, max_output_tokens, reserved_cost_micros_sgd
+                        estimated_input_tokens, max_output_tokens, reserved_cost_micros_sgd,
+                        routing_mode, recommended_tier, recommended_provider_name,
+                        recommended_model_name, recommended_max_output_tokens,
+                        recommended_input_cost_per_million_micros_sgd,
+                        recommended_output_cost_per_million_micros_sgd
                     ) values (
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s
                     )
                     """,
                     (
@@ -692,17 +705,24 @@ class PostgresTutorRepository:
                         session_id,
                         learner_id,
                         request_id,
-                        routing.policy_version,
-                        routing.mode,
-                        routing.question_difficulty,
-                        routing.score,
-                        routing.tier,
-                        routing.provider_name,
-                        routing.model_name,
-                        list(routing.reason_codes),
+                        recommendation.policy_version,
+                        recommendation.mode,
+                        recommendation.question_difficulty,
+                        recommendation.score,
+                        execution.tier,
+                        execution.provider_name,
+                        execution.model_name,
+                        list(recommendation.reason_codes),
                         selected_quote.max_input_tokens,
                         selected_quote.max_output_tokens,
                         selected_quote.max_cost_micros_sgd,
+                        routing.routing_mode,
+                        recommendation.tier,
+                        recommendation.provider_name,
+                        recommendation.model_name,
+                        recommendation.max_output_tokens,
+                        recommendation.input_cost_per_million_micros_sgd,
+                        recommendation.output_cost_per_million_micros_sgd,
                     ),
                 )
             connection.execute(
@@ -733,9 +753,15 @@ class PostgresTutorRepository:
                     "tokens": selected_quote.max_tokens,
                     "cost_micros_sgd": selected_quote.max_cost_micros_sgd,
                     "route_decision_id": route_decision_id,
-                    "model_tier": routing.tier if routing is not None else None,
-                    "provider_name": routing.provider_name if routing is not None else None,
-                    "model_name": routing.model_name if routing is not None else None,
+                    "routing_mode": routing.routing_mode if routing is not None else None,
+                    "model_tier": execution.tier if execution is not None else None,
+                    "provider_name": (
+                        execution.provider_name if execution is not None else None
+                    ),
+                    "model_name": execution.model_name if execution is not None else None,
+                    "recommended_model_tier": (
+                        routing.recommendation.tier if routing is not None else None
+                    ),
                 },
             )
         return UsageReservation(
@@ -938,13 +964,46 @@ class PostgresTutorRepository:
                     select count(*)::integer as reservations
                     from tutor_usage_reservations
                     where usage_month = %(month)s and status = 'reserved'
+                ), routes as (
+                    select count(*)::integer as decisions,
+                           count(*) filter (
+                               where decisions.routing_mode = 'shadow'
+                           )::integer as shadow_decisions,
+                           count(*) filter (
+                               where decisions.recommended_tier = 'premium'
+                           )::integer as recommended_premium,
+                           count(*) filter (
+                               where decisions.selected_tier = 'premium'
+                           )::integer as executed_premium,
+                           coalesce(sum(
+                               case when reservations.status = 'reconciled' then
+                                   (
+                                       reservations.actual_input_tokens
+                                       * decisions.recommended_input_cost_per_million_micros_sgd
+                                       + 999999
+                                   ) / 1000000
+                                   +
+                                   (
+                                       reservations.actual_output_tokens
+                                       * decisions.recommended_output_cost_per_million_micros_sgd
+                                       + 999999
+                                   ) / 1000000
+                               else 0 end
+                           ), 0)::bigint as projected_recommended_cost
+                    from tutor_route_decisions decisions
+                    join tutor_usage_reservations reservations
+                      on reservations.id = decisions.reservation_id
+                    where decisions.created_at >= %(month)s
+                      and decisions.created_at < %(next_month)s
                 )
                 select greatest(daily.learners, monthly.learners) as learners,
                        daily.actual_requests, daily.failed_requests,
                        daily.input_tokens, daily.output_tokens,
                        monthly.actual_cost, monthly.reserved_cost,
-                       active.reservations
-                from daily cross join monthly cross join active
+                       active.reservations, routes.decisions,
+                       routes.shadow_decisions, routes.recommended_premium,
+                       routes.executed_premium, routes.projected_recommended_cost
+                from daily cross join monthly cross join active cross join routes
                 """,
                 {"month": usage_month, "next_month": next_month},
             ).fetchone()
@@ -958,6 +1017,13 @@ class PostgresTutorRepository:
             "actual_cost_micros_sgd": row["actual_cost"],
             "reserved_cost_micros_sgd": row["reserved_cost"],
             "active_reservations": row["reservations"],
+            "route_decisions": row["decisions"],
+            "shadow_route_decisions": row["shadow_decisions"],
+            "recommended_premium_routes": row["recommended_premium"],
+            "executed_premium_routes": row["executed_premium"],
+            "projected_recommended_cost_micros_sgd": row[
+                "projected_recommended_cost"
+            ],
         }
 
 
@@ -975,7 +1041,10 @@ class InMemoryTutorRepository:
         self.actual_cost = 0
         self.reserved = False
         self.last_routing: TutorRouteDecision | None = None
+        self.last_route_plan: TutorRoutePlan | None = None
         self.last_quote: UsageReservationQuote | None = None
+        self.route_plans: dict[str, TutorRoutePlan] = {}
+        self.projected_recommended_cost = 0
         self._lock = threading.Lock()
 
     def create_session(self, learner_id: str, *, practice_session_id: str, question_key: str, question_revision: int, model_policy_version: str) -> dict:
@@ -1043,18 +1112,19 @@ class InMemoryTutorRepository:
             for key in ("id", "role", "mode", "blocks", "safety_outcome", "created_at")
         }
 
-    def reserve(self, learner_id: str, session_id: str, limits: TutorLimits, *, request_id: str, quote: UsageReservationQuote | None = None, routing: TutorRouteDecision | None = None) -> UsageReservation:
+    def reserve(self, learner_id: str, session_id: str, limits: TutorLimits, *, request_id: str, quote: UsageReservationQuote | None = None, routing: TutorRoutePlan | None = None) -> UsageReservation:
         del request_id
         selected_quote = quote or UsageReservationQuote(
             limits.max_input_tokens,
             limits.max_output_tokens,
             limits.max_turn_cost_micros_sgd,
         )
-        if routing is not None and (
+        execution = routing.execution if routing is not None else None
+        if execution is not None and (
             quote is None
-            or selected_quote.max_output_tokens != routing.max_output_tokens
+            or selected_quote.max_output_tokens != execution.max_output_tokens
             or selected_quote.max_cost_micros_sgd
-            != routing.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
+            != execution.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
         ):
             raise TutorError(
                 "tutor_reservation_invalid",
@@ -1074,7 +1144,10 @@ class InMemoryTutorRepository:
             )
             self.reservations[item.reservation_id] = item
             self.last_quote = selected_quote
-            self.last_routing = routing
+            self.last_route_plan = routing
+            self.last_routing = execution
+            if routing is not None:
+                self.route_plans[item.reservation_id] = routing
             return item
 
     def reconcile(self, reservation: UsageReservation, actual: UsageActual, limits: TutorLimits, *, request_id: str) -> QuotaSnapshot:
@@ -1084,6 +1157,14 @@ class InMemoryTutorRepository:
             self.actual_requests += 1
             self.actual_tokens += actual.total_tokens
             self.actual_cost += actual.cost_micros_sgd
+            if plan := self.route_plans.get(reservation.reservation_id):
+                self.projected_recommended_cost += _priced_tokens(
+                    actual.input_tokens,
+                    plan.recommendation.input_cost_per_million_micros_sgd,
+                ) + _priced_tokens(
+                    actual.output_tokens,
+                    plan.recommendation.output_cost_per_million_micros_sgd,
+                )
         return QuotaSnapshot(
             max(0, limits.daily_messages-self.actual_requests),
             max(0, limits.daily_tokens-self.actual_tokens),
@@ -1107,4 +1188,18 @@ class InMemoryTutorRepository:
             "actual_cost_micros_sgd": self.actual_cost,
             "reserved_cost_micros_sgd": 0,
             "active_reservations": int(self.reserved),
+            "route_decisions": len(self.route_plans),
+            "shadow_route_decisions": sum(
+                plan.routing_mode == "shadow" for plan in self.route_plans.values()
+            ),
+            "recommended_premium_routes": sum(
+                plan.recommendation.tier == "premium"
+                for plan in self.route_plans.values()
+            ),
+            "executed_premium_routes": sum(
+                plan.execution.tier == "premium" for plan in self.route_plans.values()
+            ),
+            "projected_recommended_cost_micros_sgd": (
+                self.projected_recommended_cost
+            ),
         }

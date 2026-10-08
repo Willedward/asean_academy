@@ -407,9 +407,11 @@ feature.
 ### V2.2 — Grounded tutor and AI cost controls
 
 **Implementation update (8 October 2026):** The provider-neutral foundation, Gemini
-evaluation path, multi-turn administrator lab, and disabled deterministic economy/premium
-router are implemented on the tutor feature chain. The routing score, GPT-4o premium
-adapter, append-only evidence schema, cost reservations, and rollout gates are defined in
+evaluation path, multi-turn administrator lab, and deterministic economy/premium router
+are implemented on the tutor feature chain. Shadow mode records premium recommendations
+while executing only the economy provider, and monthly administrator evidence compares
+recommended versus executed premium routes and projected versus actual cost. The routing
+score, GPT-4o premium adapter, append-only evidence schema, cost reservations, and rollout gates are defined in
 [TUTOR_HYBRID_MODEL_ROUTING.md](TUTOR_HYBRID_MODEL_ROUTING.md). Hosted migration and
 human evaluation remain release gates.
 

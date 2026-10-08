@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Literal
 
 from .tutor_contracts import TutorMode
 
 TutorModelTier = Literal["economy", "premium"]
+TutorRoutingMode = Literal["off", "shadow", "live"]
 
 
 @dataclass(frozen=True, slots=True)
@@ -88,6 +89,25 @@ class TutorRouteDecision:
         ) + _token_cost(
             self.max_output_tokens, self.output_cost_per_million_micros_sgd
         )
+
+
+@dataclass(frozen=True, slots=True)
+class TutorRoutePlan:
+    """Recommendation evidence plus the route that may actually spend quota."""
+
+    routing_mode: TutorRoutingMode
+    recommendation: TutorRouteDecision
+    execution: TutorRouteDecision
+
+    def __post_init__(self) -> None:
+        if self.routing_mode == "shadow" and self.execution.tier != "economy":
+            raise ValueError("Shadow routing must execute the economy target")
+        if self.routing_mode == "off" and (
+            self.recommendation.tier != "economy" or self.execution.tier != "economy"
+        ):
+            raise ValueError("Disabled routing must remain on the economy target")
+        if self.routing_mode == "live" and self.recommendation != self.execution:
+            raise ValueError("Live routing must execute its recommendation")
 
 
 MODE_WEIGHTS: dict[TutorMode, int] = {
@@ -197,6 +217,41 @@ class TutorModelRouter:
             question_difficulty=context.question_difficulty,
             score=score,
             reason_codes=tuple(dict.fromkeys(reasons)),
+            max_output_tokens=target.max_output_tokens,
+            input_cost_per_million_micros_sgd=(
+                target.input_cost_per_million_micros_sgd
+            ),
+            output_cost_per_million_micros_sgd=(
+                target.output_cost_per_million_micros_sgd
+            ),
+        )
+
+    def plan(
+        self,
+        context: TutorRoutingContext,
+        routing_mode: TutorRoutingMode,
+    ) -> TutorRoutePlan:
+        candidate = self.decide(context)
+        if routing_mode == "live":
+            return TutorRoutePlan(routing_mode, candidate, candidate)
+
+        economy = self._with_target(candidate, self.policy.economy)
+        if routing_mode == "shadow":
+            return TutorRoutePlan(routing_mode, candidate, economy)
+        if routing_mode == "off":
+            return TutorRoutePlan(routing_mode, economy, economy)
+        raise ValueError("Tutor routing mode must be off, shadow, or live")
+
+    @staticmethod
+    def _with_target(
+        decision: TutorRouteDecision,
+        target: TutorModelTarget,
+    ) -> TutorRouteDecision:
+        return replace(
+            decision,
+            tier=target.tier,
+            provider_name=target.provider_name,
+            model_name=target.model_name,
             max_output_tokens=target.max_output_tokens,
             input_cost_per_million_micros_sgd=(
                 target.input_cost_per_million_micros_sgd

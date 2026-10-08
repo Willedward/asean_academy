@@ -400,12 +400,19 @@ def tutor_service(
     )
     premium_provider = None
     premium_target = None
-    if settings.tutor_hybrid_routing_enabled:
-        premium_provider = getattr(request.app.state, "tutor_premium_provider", None)
+    routing_policy_enabled = (
+        settings.tutor_hybrid_routing_enabled
+        or settings.tutor_hybrid_routing_shadow_enabled
+    )
+    if routing_policy_enabled:
         premium_input_price, premium_output_price = _tutor_prices(
             settings, settings.tutor_premium_provider
         )
-        if premium_provider is None:
+        if settings.tutor_hybrid_routing_enabled:
+            premium_provider = getattr(
+                request.app.state, "tutor_premium_provider", None
+            )
+        if settings.tutor_hybrid_routing_enabled and premium_provider is None:
             premium_provider = provider_for(
                 settings.tutor_premium_provider,
                 environment=settings.environment,
@@ -427,6 +434,13 @@ def tutor_service(
             input_cost_per_million_micros_sgd=premium_input_price,
             output_cost_per_million_micros_sgd=premium_output_price,
         )
+    routing_mode = (
+        "live"
+        if settings.tutor_hybrid_routing_enabled
+        else "shadow"
+        if settings.tutor_hybrid_routing_shadow_enabled
+        else "off"
+    )
     router = TutorModelRouter(
         TutorRoutingPolicy(
             version=settings.tutor_routing_policy_version,
@@ -444,6 +458,7 @@ def tutor_service(
         router,
         learner.learner_id,
         premium_provider=premium_provider,
+        routing_mode=routing_mode,
         limits=TutorLimits(
             daily_messages=settings.tutor_daily_message_limit,
             daily_tokens=settings.tutor_daily_token_limit,

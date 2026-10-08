@@ -334,4 +334,9 @@ def test_academic_admin_can_read_monthly_tutor_usage_while_tutor_is_disabled():
         "actual_cost_micros_sgd": 0,
         "reserved_cost_micros_sgd": 0,
         "active_reservations": 0,
+        "route_decisions": 0,
+        "shadow_route_decisions": 0,
+        "recommended_premium_routes": 0,
+        "executed_premium_routes": 0,
+        "projected_recommended_cost_micros_sgd": 0,
     }

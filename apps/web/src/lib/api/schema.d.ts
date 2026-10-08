@@ -3588,6 +3588,8 @@ export interface components {
             actual_cost_micros_sgd: number;
             /** Actual Requests */
             actual_requests: number;
+            /** Executed Premium Routes */
+            executed_premium_routes: number;
             /** Failed Requests */
             failed_requests: number;
             /** Input Tokens */
@@ -3596,8 +3598,16 @@ export interface components {
             learners: number;
             /** Output Tokens */
             output_tokens: number;
+            /** Projected Recommended Cost Micros Sgd */
+            projected_recommended_cost_micros_sgd: number;
+            /** Recommended Premium Routes */
+            recommended_premium_routes: number;
             /** Reserved Cost Micros Sgd */
             reserved_cost_micros_sgd: number;
+            /** Route Decisions */
+            route_decisions: number;
+            /** Shadow Route Decisions */
+            shadow_route_decisions: number;
             /** Usage Month */
             usage_month: string;
         };

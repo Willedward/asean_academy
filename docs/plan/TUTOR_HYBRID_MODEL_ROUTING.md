@@ -185,7 +185,9 @@ input and output token distributions from the evaluation lab.
 ## Persistence schema
 
 Migration `202610080021_tutor_hybrid_model_routing.sql` adds one append-only decision table
-and links assistant messages to the decision that produced them.
+and links assistant messages to the decision that produced them. Migration
+`202610080022_tutor_routing_shadow_mode.sql` records the policy recommendation separately
+from the route that actually executed.
 
 ```text
 tutor_route_decisions
@@ -201,6 +203,13 @@ tutor_route_decisions
   selected_tier                       economy | premium
   provider_name                       text
   model_name                          text
+  routing_mode                        legacy | off | shadow | live
+  recommended_tier                    economy | premium
+  recommended_provider_name           text
+  recommended_model_name              text
+  recommended_max_output_tokens       integer > 0
+  recommended_input_cost_per_million_micros_sgd   bigint >= 0
+  recommended_output_cost_per_million_micros_sgd  bigint >= 0
   reason_codes                        text[]
   estimated_input_tokens              integer > 0
   max_output_tokens                   integer > 0
@@ -212,6 +221,12 @@ tutor_messages additions
   model_tier                          economy | premium, assistant only
   route_decision_id                   uuid unique -> tutor_route_decisions
 ```
+
+`selected_*` records the provider actually called and charged. `recommended_*` records
+the versioned policy result. In shadow mode the selected tier is always economy, even
+when the recommendation is premium. Administrator monthly usage reports include route
+counts and project the recommended model cost using actual reconciled token counts and
+the saved price snapshot.
 
 The decision table contains selection evidence and cost ceilings, not learner prompts,
 answers, canonical solutions, provider credentials, or raw provider responses. It uses
@@ -227,6 +242,7 @@ Hybrid routing remains off by default.
 
 | Environment variable | Initial value or purpose |
 | --- | --- |
+| `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED` | `true` during evidence collection; never calls premium |
 | `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED` | `false` until rollout gates pass |
 | `ASEAN_ACADEMY_TUTOR_PROVIDER` | Economy provider, currently `gemini` in hosted evaluation |
 | `ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS` | `500` |
@@ -240,13 +256,19 @@ Hybrid routing remains off by default.
 | `ASEAN_ACADEMY_TUTOR_MAX_PREMIUM_TURNS_PER_SESSION` | `3` |
 | `ASEAN_ACADEMY_TUTOR_PREMIUM_MAX_OUTPUT_TOKENS` | `700` |
 
+Shadow and live hybrid routing cannot both be enabled. Shadow mode requires current
+premium model prices so its projection is meaningful, but it does not require the unused
+premium provider key. Live mode requires the premium provider key.
+
 The configured route output limits must not exceed the existing global output limit. Each
 route's calculated maximum cost must also remain below the global maximum turn cost.
 
 ## Failure behaviour
 
-- If hybrid routing is disabled, every request uses the configured economy provider.
-- If required premium credentials or prices are missing while hybrid routing is enabled,
+- If both hybrid flags are disabled, every request uses the configured economy provider.
+- If shadow routing is enabled, the policy recommendation is persisted while the economy
+  provider remains the only provider called and reserved against the learner allowance.
+- If required premium credentials or prices are missing while live routing is enabled,
   the service refuses to start with a configuration error.
 - If the selected provider fails, the reservation is released and the API returns the
   existing safe `tutor_provider_unavailable` response.
@@ -261,18 +283,20 @@ idempotency. Add it only after failure-rate evidence shows that the extra path i
 
 ## Rollout gates
 
-1. Apply database migrations through revision `202610080021` and confirm readiness.
+1. Apply database migrations through revision `202610080022` and confirm readiness.
 2. Configure server-only provider keys and current micro-SGD token prices.
 3. Keep hybrid routing disabled and run the fixed evaluation suite separately against
    both target models with `--provider gemini --live` and `--provider openai --live`.
 4. Obtain Mathematics and editorial approval for all seven tutor modes on both routes.
 5. Confirm locked-answer leakage, structured output, LaTeX rendering, latency, retry, and
    provider-unavailable behaviour.
-6. Enable hybrid routing only for administrators, then inspect premium rate, route reasons,
-   cost per accepted response, and disagreement with human review.
-7. Pilot with a small invited learner group under the S$7 boundary and academy circuit
+6. Enable shadow routing for administrators and inspect recommended premium rate,
+   projected recommended cost, route reasons, and disagreement with human review.
+7. Disable shadow mode, enable live routing only for administrators, and compare executed
+   premium rate, actual cost per accepted response, and provider failures.
+8. Pilot with a small invited learner group under the S$7 boundary and academy circuit
    breaker.
-8. Change thresholds only through a new policy version with before-and-after evaluation.
+9. Change thresholds only through a new policy version with before-and-after evaluation.
 
 ## Acceptance criteria
 
@@ -280,6 +304,8 @@ idempotency. Add it only after failure-rate evidence shows that the extra path i
 - Hard and repeatedly unsuccessful teaching cases use the premium provider.
 - Premium use stops at the configured per-session cap.
 - Route-specific output limits reach the selected provider.
+- Shadow mode can recommend premium without calling or reserving premium.
+- Administrator evidence distinguishes recommended and executed premium routes.
 - The atomic reservation uses the selected target's prices and token ceiling.
 - Each provider-backed assistant message links to an immutable route decision.
 - Provider and model details remain absent from learner API responses.

@@ -18,6 +18,7 @@ from .tutor_repository import (
 from .tutor_routing import (
     TutorModelRouter,
     TutorRoutingContext,
+    TutorRoutingMode,
     repeated_confusion_count,
 )
 
@@ -81,6 +82,7 @@ class TutorService:
         learner_id: str,
         *,
         premium_provider: TutorProvider | None = None,
+        routing_mode: TutorRoutingMode = "live",
         limits: TutorLimits,
         model_policy_version: str,
         prompt_version: str,
@@ -89,6 +91,7 @@ class TutorService:
         self.economy_provider = provider
         self.premium_provider = premium_provider or provider
         self.router = router
+        self.routing_mode = routing_mode
         self.learner_id = learner_id
         self.limits = limits
         self.model_policy_version = model_policy_version
@@ -122,7 +125,7 @@ class TutorService:
             grounding.answer_lock_state.solution_locked,
             grounding.incorrect_attempts,
         )
-        routing = self.router.decide(
+        route_plan = self.router.plan(
             TutorRoutingContext(
                 question_difficulty=grounding.question_difficulty,
                 mode=mode,
@@ -131,15 +134,17 @@ class TutorService:
                     message, grounding.recent_messages
                 ),
                 premium_turns_this_session=grounding.premium_turns_this_session,
-            )
+            ),
+            self.routing_mode,
         )
+        execution = route_plan.execution
         route_max_output_tokens = min(
-            routing.max_output_tokens, self.limits.max_output_tokens
+            execution.max_output_tokens, self.limits.max_output_tokens
         )
         quote = UsageReservationQuote(
             max_input_tokens=self.limits.max_input_tokens,
             max_output_tokens=route_max_output_tokens,
-            max_cost_micros_sgd=routing.maximum_cost_micros_sgd(
+            max_cost_micros_sgd=execution.maximum_cost_micros_sgd(
                 self.limits.max_input_tokens
             ),
         )
@@ -149,7 +154,7 @@ class TutorService:
             self.limits,
             request_id=request_id,
             quote=quote,
-            routing=routing,
+            routing=route_plan,
         )
         self.repository.append_message(
             session_id,
@@ -173,7 +178,9 @@ class TutorService:
             max_output_tokens=route_max_output_tokens,
         )
         provider = (
-            self.premium_provider if routing.tier == "premium" else self.economy_provider
+            self.premium_provider
+            if execution.tier == "premium"
+            else self.economy_provider
         )
         started = perf_counter()
         try:
@@ -241,8 +248,8 @@ class TutorService:
                 "total_tokens": actual.total_tokens,
                 "cost_micros_sgd": actual.cost_micros_sgd,
             },
-            provider_name=routing.provider_name,
-            model_tier=routing.tier,
+            provider_name=execution.provider_name,
+            model_tier=execution.tier,
             route_decision_id=reservation.route_decision_id,
         )
         return {

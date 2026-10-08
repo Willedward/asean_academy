@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202610080021"
+REQUIRED_SCHEMA_REVISION = "202610080022"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -83,6 +83,7 @@ class Settings:
     tutor_gemini_api_key: str | None = None
     tutor_gemini_model: str = "gemini-3.8-flash"
     tutor_hybrid_routing_enabled: bool = False
+    tutor_hybrid_routing_shadow_enabled: bool = False
     tutor_economy_max_output_tokens: int = 500
     tutor_premium_provider: str = "openai"
     tutor_routing_policy_version: str = "math-tutor-routing-v1"
@@ -241,6 +242,9 @@ class Settings:
             tutor_hybrid_routing_enabled=_boolean(
                 "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", False
             ),
+            tutor_hybrid_routing_shadow_enabled=_boolean(
+                "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED", False
+            ),
             tutor_economy_max_output_tokens=_positive_integer(
                 "ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS", 500
             ),
@@ -353,7 +357,18 @@ class Settings:
                 raise RuntimeError(
                     "OpenAI tutor shadow input and output prices must be configured when enabled"
                 )
-        if settings.tutor_hybrid_routing_enabled:
+        if (
+            settings.tutor_hybrid_routing_enabled
+            and settings.tutor_hybrid_routing_shadow_enabled
+        ):
+            raise RuntimeError(
+                "Live and shadow hybrid tutor routing cannot both be enabled"
+            )
+        routing_policy_enabled = (
+            settings.tutor_hybrid_routing_enabled
+            or settings.tutor_hybrid_routing_shadow_enabled
+        )
+        if routing_policy_enabled:
             if not settings.tutor_enabled:
                 raise RuntimeError(
                     "Hybrid tutor routing requires ASEAN_ACADEMY_TUTOR_ENABLED=true"
@@ -363,9 +378,12 @@ class Settings:
                     "Hybrid tutor routing requires distinct economy and premium providers"
                 )
             if settings.tutor_premium_provider == "openai":
-                if not settings.tutor_openai_api_key:
+                if (
+                    settings.tutor_hybrid_routing_enabled
+                    and not settings.tutor_openai_api_key
+                ):
                     raise RuntimeError(
-                        "OPENAI_API_KEY is required when hybrid tutor routing uses OpenAI"
+                        "OPENAI_API_KEY is required when live hybrid tutor routing uses OpenAI"
                     )
                 if (
                     settings.tutor_openai_input_cost_per_million_micros_sgd == 0
@@ -375,9 +393,12 @@ class Settings:
                         "OpenAI premium shadow input and output prices must be configured"
                     )
             if settings.tutor_premium_provider == "gemini":
-                if not settings.tutor_gemini_api_key:
+                if (
+                    settings.tutor_hybrid_routing_enabled
+                    and not settings.tutor_gemini_api_key
+                ):
                     raise RuntimeError(
-                        "GEMINI_API_KEY is required when hybrid tutor routing uses Gemini"
+                        "GEMINI_API_KEY is required when live hybrid tutor routing uses Gemini"
                     )
                 if (
                     settings.tutor_gemini_input_cost_per_million_micros_sgd == 0

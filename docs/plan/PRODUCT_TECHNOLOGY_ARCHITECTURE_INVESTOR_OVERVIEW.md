@@ -29,14 +29,14 @@ The repository contains a working end-to-end product foundation:
 - Google sign-in through Supabase Auth, invitation-only onboarding and database-backed roles;
 - a responsive Next.js student and administration application;
 - a FastAPI learning backend with courses, diagnostics, lessons, practice, progress, reports and tutor APIs;
-- a versioned PostgreSQL content and learner-state model with 21 additive migrations;
+- a versioned PostgreSQL content and learner-state model with 22 additive migrations;
 - deterministic checking for structured Mathematics answers;
 - content review, audit history, operational health and account-deletion workflows;
 - an offline pipeline for extracting questions from papers, preserving source evidence and mapping content to the syllabus;
 - a seven-mode, multi-turn AI tutor evaluation lab with human Mathematics and editorial review; and
 - a provider-neutral hybrid model router that can reserve expensive models for turns where their quality is most useful.
 
-The tutor routing implementation is complete in code on its feature branch, but remains disabled by default until its database migration, provider credentials, fixed evaluation suite and cost controls pass in the hosted environment.
+The tutor routing implementation and its no-premium-spend shadow mode are complete in code on the feature branch, but remain disabled by default until their database migrations, fixed evaluation suite and cost controls pass in the hosted environment.
 
 ## Why the architecture matters commercially
 
@@ -125,7 +125,7 @@ This data and workflow compound over time. A model provider can be replaced; the
 | Content/versioning/review | Implemented workflow | Complete and approve the production curriculum |
 | Mathematics marking | Implemented deterministic engine | Expand reviewed answer-contract coverage |
 | AI tutor foundation | Implemented and evaluated in admin lab | Complete fixed evaluation gate and student pilot |
-| Hybrid model routing | Implemented on feature branch, disabled | Apply migration, configure providers, shadow-test, then enable gradually |
+| Hybrid model routing | Router and shadow evidence implemented, disabled by default | Apply migrations, configure prices, collect shadow evidence, then enable gradually |
 | Operations and release gates | Implemented | Confirm production secrets, alerts, restore and rollback drills |
 
 ---
@@ -268,7 +268,7 @@ The API follows router → service → repository boundaries. PostgreSQL impleme
 | --- | --- |
 | Supabase Auth | Google OAuth identity, access/refresh tokens and browser sessions |
 | PostgreSQL 16 in CI | Content, identity profile, enrolment, learner state, reviews, audit and usage ledger |
-| Supabase migrations | 21 ordered additive migrations through hybrid tutor routing |
+| Supabase migrations | 22 ordered additive migrations through hybrid tutor shadow routing |
 | Row-level security | Defence in depth on application tables |
 | Application authorization | Ownership, enrolment and administrator-role checks at API boundaries |
 
@@ -530,11 +530,11 @@ The product does not need to become a network of microservices at a particular u
 
 ### Immediate
 
-1. Apply migration `202610080021_tutor_hybrid_model_routing.sql` in a disposable and then hosted staging database.
+1. Apply migrations through `202610080022_tutor_routing_shadow_mode.sql` in a disposable and then hosted staging database.
 2. Configure the economy and premium providers with current model identifiers and prices.
 3. Run both models across the fixed evaluation set and compare Mathematics, editorial, latency and cost evidence.
-4. Run routing in shadow mode so decisions are recorded without changing the provider used for learners.
-5. Tune score weights and thresholds from evidence, then enable for administrators only.
+4. Enable shadow mode for administrators and collect recommended-versus-executed route and projected-cost evidence without premium calls.
+5. Tune score weights and thresholds from that evidence, then enable live hybrid routing for administrators only.
 
 ### Before a student tutor pilot
 

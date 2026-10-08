@@ -6437,6 +6437,11 @@
             "title": "Actual Requests",
             "type": "integer"
           },
+          "executed_premium_routes": {
+            "minimum": 0.0,
+            "title": "Executed Premium Routes",
+            "type": "integer"
+          },
           "failed_requests": {
             "minimum": 0.0,
             "title": "Failed Requests",
@@ -6457,9 +6462,29 @@
             "title": "Output Tokens",
             "type": "integer"
           },
+          "projected_recommended_cost_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Projected Recommended Cost Micros Sgd",
+            "type": "integer"
+          },
+          "recommended_premium_routes": {
+            "minimum": 0.0,
+            "title": "Recommended Premium Routes",
+            "type": "integer"
+          },
           "reserved_cost_micros_sgd": {
             "minimum": 0.0,
             "title": "Reserved Cost Micros Sgd",
+            "type": "integer"
+          },
+          "route_decisions": {
+            "minimum": 0.0,
+            "title": "Route Decisions",
+            "type": "integer"
+          },
+          "shadow_route_decisions": {
+            "minimum": 0.0,
+            "title": "Shadow Route Decisions",
             "type": "integer"
           },
           "usage_month": {
@@ -6477,7 +6502,12 @@
           "output_tokens",
           "actual_cost_micros_sgd",
           "reserved_cost_micros_sgd",
-          "active_reservations"
+          "active_reservations",
+          "route_decisions",
+          "shadow_route_decisions",
+          "recommended_premium_routes",
+          "executed_premium_routes",
+          "projected_recommended_cost_micros_sgd"
         ],
         "title": "TutorUsageAdminResponse",
         "type": "object"

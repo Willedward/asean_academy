@@ -15,6 +15,7 @@ from learning_api.tutor_repository import (
 from learning_api.tutor_routing import (
     TutorModelRouter,
     TutorModelTarget,
+    TutorRoutePlan,
     TutorRoutingContext,
     TutorRoutingPolicy,
     repeated_confusion_count,
@@ -78,6 +79,19 @@ def test_difficult_solution_explanation_uses_premium_model():
     assert decision.provider_name == "openai"
     assert "level_5_complex_mode" in decision.reason_codes
     assert "premium_threshold_reached" in decision.reason_codes
+
+
+def test_shadow_plan_recommends_premium_but_executes_economy():
+    plan = router().plan(
+        context(question_difficulty=5, mode="solution_explanation"),
+        "shadow",
+    )
+
+    assert plan.routing_mode == "shadow"
+    assert plan.recommendation.tier == "premium"
+    assert plan.recommendation.provider_name == "openai"
+    assert plan.execution.tier == "economy"
+    assert plan.execution.provider_name == "gemini"
 
 
 def test_repeated_confusion_and_attempts_can_escalate_a_mid_level_question():
@@ -224,6 +238,76 @@ def test_service_calls_premium_provider_and_reserves_its_cost_boundary():
     assert "model_tier" not in response["message"]
 
 
+def test_shadow_service_never_calls_or_reserves_the_premium_provider():
+    session_id = str(uuid4())
+    repository = InMemoryTutorRepository(
+        TutorGrounding(
+            session_id=session_id,
+            question_title="A difficult ratio question",
+            question_difficulty=5,
+            question_blocks=({"type": "text", "content": "Compare the ratios."},),
+            unlocked_hint_blocks=(),
+            lesson_sections=(),
+            unlocked_solution_blocks=(),
+            latest_attempt=None,
+            recent_messages=(),
+            answer_lock_state=AnswerLockState(
+                answer_locked=True,
+                solution_locked=True,
+            ),
+            incorrect_attempts=0,
+            premium_turns_this_session=0,
+            leakage_answers=("42",),
+            grounding_revision_ids=(str(uuid4()),),
+        )
+    )
+    economy_provider = CapturingProvider()
+    premium_provider = CapturingProvider()
+    service = TutorService(
+        repository,
+        economy_provider,
+        router(),
+        "learner-1",
+        premium_provider=premium_provider,
+        routing_mode="shadow",
+        limits=TutorLimits(
+            daily_messages=10,
+            daily_tokens=20_000,
+            monthly_cost_micros_sgd=7_000_000,
+            academy_monthly_cost_micros_sgd=7_000_000_000,
+            max_input_tokens=5_000,
+            max_output_tokens=1_000,
+            max_turn_cost_micros_sgd=250_000,
+        ),
+        model_policy_version="test-policy-v1",
+        prompt_version="test-prompt-v1",
+    )
+    service.create_session(
+        practice_session_id=str(uuid4()),
+        question_key="n2-l5-001",
+        question_revision=1,
+    )
+
+    asyncio.run(
+        service.send_message(
+            session_id,
+            "I still don't understand. Explain this a different way.",
+            request_id="shadow-request-1",
+        )
+    )
+
+    assert economy_provider.request.max_output_tokens == 500
+    assert premium_provider.request is None
+    assert repository.last_route_plan.routing_mode == "shadow"
+    assert repository.last_route_plan.recommendation.tier == "premium"
+    assert repository.last_routing.tier == "economy"
+    assert repository.last_quote.max_cost_micros_sgd == 3_520
+    usage = repository.admin_usage(repository.reservations[next(iter(repository.reservations))].usage_month)
+    assert usage["shadow_route_decisions"] == 1
+    assert usage["recommended_premium_routes"] == 1
+    assert usage["executed_premium_routes"] == 0
+
+
 def test_repository_rejects_a_quote_that_understates_the_route_cost():
     session_id = str(uuid4())
     repository = InMemoryTutorRepository(
@@ -278,5 +362,5 @@ def test_repository_rejects_a_quote_that_understates_the_route_cost():
                 max_output_tokens=700,
                 max_cost_micros_sgd=1,
             ),
-            routing=routing,
-        )
+                routing=TutorRoutePlan("live", routing, routing),
+            )
