@@ -415,6 +415,12 @@ score, GPT-4o premium adapter, append-only evidence schema, cost reservations, a
 [TUTOR_HYBRID_MODEL_ROUTING.md](TUTOR_HYBRID_MODEL_ROUTING.md). Hosted migration and
 human evaluation remain release gates.
 
+The next implementation milestone is the administrator-only staging shadow pilot defined in
+[TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md](TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md).
+It adds a server-side rollout cohort, decision-level evidence API, administrator evidence
+panel, staging activation runbook and measurable go/no-go gates before any live premium
+request is allowed.
+
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.
 - Add tutor sessions/messages, prompt-policy versions, answer-lock context and structured

@@ -283,6 +283,9 @@ idempotency. Add it only after failure-rate evidence shows that the extra path i
 
 ## Rollout gates
 
+The implementation plan for gates 1–6 is
+[TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md](TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md).
+
 1. Apply database migrations through revision `202610080022` and confirm readiness.
 2. Configure server-only provider keys and current micro-SGD token prices.
 3. Keep hybrid routing disabled and run the fixed evaluation suite separately against
