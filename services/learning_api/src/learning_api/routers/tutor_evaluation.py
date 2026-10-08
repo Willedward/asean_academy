@@ -10,14 +10,20 @@ from ..admin_repository import BetaOperationsError
 from ..conventions import current_request_id
 from ..dependencies import AdminLearnerDependency, BetaOperationsRepositoryDependency
 from ..tutor_evaluation_contracts import (
+    TutorEvaluationConversationRequest,
+    TutorEvaluationConversationTurnRequest,
     TutorEvaluationReviewRequest,
     TutorEvaluationRunRequest,
     TutorProviderConnectionResponse,
 )
 from ..tutor_evaluation_lab import (
     check_gemini_connection,
+    create_conversation,
+    create_conversation_turn,
     execute_case,
+    get_conversation,
     lab_state,
+    latest_conversation,
     record_evaluation_review,
 )
 
@@ -85,6 +91,90 @@ async def run_case(
             administrator,
             case_id,
             body.provider,
+            current_request_id(request),
+        )
+    except BetaOperationsError as exc:
+        raise HTTPException(
+            status_code=exc.status, detail={"code": exc.code, "message": str(exc)}
+        ) from exc
+
+
+@router.get(
+    "/cases/{case_id}/conversations/latest",
+    operation_id="getLatestTutorEvaluationConversation",
+)
+def get_latest_conversation(
+    case_id: str,
+    request: Request,
+    administrator: AdminLearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+):
+    return _safe(
+        lambda: latest_conversation(
+            repository, request.app.state.settings, administrator, case_id
+        )
+    )
+
+
+@router.post(
+    "/cases/{case_id}/conversations",
+    operation_id="createTutorEvaluationConversation",
+    status_code=status.HTTP_201_CREATED,
+)
+def start_conversation(
+    case_id: str,
+    body: TutorEvaluationConversationRequest,
+    request: Request,
+    administrator: AdminLearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+):
+    return _safe(
+        lambda: create_conversation(
+            repository,
+            request.app.state.course_catalogue,
+            request.app.state.settings,
+            administrator,
+            case_id,
+            body.provider,
+            current_request_id(request),
+        )
+    )
+
+
+@router.get(
+    "/conversations/{conversation_id}",
+    operation_id="getTutorEvaluationConversation",
+)
+def read_conversation(
+    conversation_id: UUID,
+    administrator: AdminLearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+):
+    return _safe(
+        lambda: get_conversation(repository, administrator, conversation_id)
+    )
+
+
+@router.post(
+    "/conversations/{conversation_id}/turns",
+    operation_id="createTutorEvaluationConversationTurn",
+    status_code=status.HTTP_201_CREATED,
+)
+async def send_conversation_turn(
+    conversation_id: UUID,
+    body: TutorEvaluationConversationTurnRequest,
+    request: Request,
+    administrator: AdminLearnerDependency,
+    repository: BetaOperationsRepositoryDependency,
+):
+    try:
+        return await create_conversation_turn(
+            repository,
+            request.app.state.course_catalogue,
+            request.app.state.settings,
+            administrator,
+            conversation_id,
+            body.message,
             current_request_id(request),
         )
     except BetaOperationsError as exc:

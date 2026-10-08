@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { MathContent, type ContentBlock } from "@/components/math-content";
+import { TutorConversationLab } from "@/components/tutor-conversation-lab";
 import { TutorContent, type TutorBlock } from "@/components/tutor-content";
 import { Button } from "@/components/ui/button";
 import { adminRequest } from "@/lib/api/admin-dashboard";
@@ -319,6 +320,15 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                     Run Gemini (uses quota)
                   </Button>
                 </div>
+                <TutorConversationLab
+                  key={active.case_id}
+                  caseId={active.case_id}
+                  initialPrompt={active.learner_message}
+                  geminiConfigured={lab.gemini_configured}
+                  groundingApproved={
+                    lab.grounding_gate.review_state === "approved"
+                  }
+                />
                 {active.latest_run ? (
                   <>
                     <section className="rounded-xl border p-4">

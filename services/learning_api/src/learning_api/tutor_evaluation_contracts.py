@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from .contracts import ApiModel
 
@@ -18,6 +18,29 @@ class TutorEvaluationRunRequest(ApiModel):
         if self.provider == "gemini" and not self.confirm_live:
             raise ValueError("confirm_live must be true for a Gemini evaluation run")
         return self
+
+
+class TutorEvaluationConversationRequest(ApiModel):
+    provider: Literal["synthetic", "gemini"] = "gemini"
+    confirm_live: bool = False
+
+    @model_validator(mode="after")
+    def confirm_paid_conversation(self):
+        if self.provider == "gemini" and not self.confirm_live:
+            raise ValueError("confirm_live must be true for a Gemini conversation")
+        return self
+
+
+class TutorEvaluationConversationTurnRequest(ApiModel):
+    message: str = Field(min_length=1, max_length=1200)
+
+    @field_validator("message")
+    @classmethod
+    def meaningful_message(cls, value: str) -> str:
+        cleaned = value.strip()
+        if not cleaned:
+            raise ValueError("message must contain visible text")
+        return cleaned
 
 
 class TutorEvaluationReviewRequest(ApiModel):

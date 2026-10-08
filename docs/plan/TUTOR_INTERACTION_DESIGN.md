@@ -73,6 +73,22 @@ Frontend engineers should use
 `docs/plan/AI_TUTOR_FRONTEND_BACKEND_HANDOFF.md` for the typed API integration boundary.
 That handoff deliberately excludes visual chat design.
 
+## Administrator conversation evaluation milestone (2026-10-08)
+
+The protected Tutor evaluation panel includes a durable multi-turn conversation lab. An
+administrator can start a synthetic or live Gemini conversation from any approved N2
+calibration case, send realistic learner follow-ups, and inspect the selected tutor mode,
+structured response, automated checks, latency, token usage and shadow cost for every
+turn. The latest conversation for each administrator and case is restored after refresh.
+
+Conversation records pin the exact suite, case snapshot, model and prompt version used at
+creation. Each turn retains only the bounded recent history sent to the provider, while
+the complete evaluation transcript remains append-only in the database. Provider failures
+are also recorded so reliability problems are distinguishable from content-review
+failures. This tool is the permanent pre-release quality-control path for repeated prompts
+such as “Why is my answer wrong?” and “I still don't understand.” It does not enable the
+student-facing feature flag or consume a learner's quota.
+
 ## Learner interaction
 
 The question screen should offer **Ask teacher** alongside the two authored hints.

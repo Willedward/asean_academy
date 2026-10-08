@@ -14,12 +14,18 @@ from learning_api.tutor_evaluation import (
     run_evaluation,
     write_evaluation_report,
 )
-from learning_api.tutor_evaluation_contracts import TutorEvaluationRunRequest
+from learning_api.tutor_evaluation_contracts import (
+    TutorEvaluationConversationRequest,
+    TutorEvaluationConversationTurnRequest,
+    TutorEvaluationRunRequest,
+)
+from learning_api.tutor_evaluation_lab import _conversation_case
 from learning_api.tutor_provider import (
     SyntheticTutorProvider,
     TutorProviderResult,
     TutorProviderUsage,
 )
+from learning_api.tutor_service import select_tutor_mode
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 SUITE_PATH = (
@@ -46,6 +52,64 @@ def test_gemini_run_requires_explicit_live_confirmation():
     with pytest.raises(ValidationError):
         TutorEvaluationRunRequest(provider="gemini")
     assert TutorEvaluationRunRequest(provider="gemini", confirm_live=True).confirm_live
+
+
+def test_gemini_conversation_requires_confirmation_and_visible_message():
+    with pytest.raises(ValidationError):
+        TutorEvaluationConversationRequest(provider="gemini")
+    confirmed = TutorEvaluationConversationRequest(provider="gemini", confirm_live=True)
+    assert confirmed.confirm_live
+    assert TutorEvaluationConversationTurnRequest(message="  Why is this wrong?  ").message == (
+        "Why is this wrong?"
+    )
+    with pytest.raises(ValidationError):
+        TutorEvaluationConversationTurnRequest(message="   ")
+
+
+def test_conversation_case_selects_mode_and_keeps_only_recent_history():
+    case = TutorEvaluationCase(
+        case_id="conversation-test",
+        title="Conversation test",
+        mode="socratic_prompt",
+        learner_message="Help me begin.",
+        question_title="Simplify a ratio",
+        question_blocks=[{"type": "text", "content": "Simplify 4:6."}],
+    )
+    turns = [
+        {
+            "learner_message": f"Learner turn {index}",
+            "mode": "socratic_prompt",
+            "response_blocks": [{"type": "text", "content": f"Tutor turn {index}"}],
+            "suggested_replies": [],
+            "recommended_next_action": None,
+        }
+        for index in range(1, 6)
+    ]
+
+    dynamic = _conversation_case(case, turns, "I still don't understand. Show another way.")
+
+    assert dynamic.mode == "alternative_explanation"
+    assert len(dynamic.recent_messages) == 8
+    assert dynamic.recent_messages[0]["content"]["blocks"][0]["content"] == "Learner turn 2"
+    assert dynamic.recent_messages[-1]["content"]["blocks"][0]["content"] == "Tutor turn 5"
+
+
+@pytest.mark.parametrize(
+    ("message", "solution_locked", "expected"),
+    [
+        ("Please rephrase the question.", True, "clarify_question"),
+        ("What went wrong in my method?", True, "diagnose_misconception"),
+        ("What should I try first?", True, "socratic_prompt"),
+        ("I do not understand. Explain differently.", True, "alternative_explanation"),
+        ("Show me a simpler example.", True, "analogous_example"),
+        ("Explain the worked solution.", False, "solution_explanation"),
+        ("Which lesson should I revisit?", True, "lesson_recommendation"),
+    ],
+)
+def test_conversation_mode_selection_covers_all_seven_modes(
+    message, solution_locked, expected
+):
+    assert select_tutor_mode(message, solution_locked, 0) == expected
 
 
 def test_synthetic_foundation_suite_covers_all_modes_and_exports_review_report(tmp_path):

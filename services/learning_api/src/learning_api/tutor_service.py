@@ -16,6 +16,56 @@ from .tutor_repository import (
 )
 
 
+def select_tutor_mode(
+    message: str, solution_locked: bool, incorrect_attempts: int
+) -> TutorMode:
+    """Choose the next teaching mode from learner intent and attempt evidence."""
+
+    normalized = message.casefold()
+    if not solution_locked and any(
+        word in normalized for word in ("solution", "answer", "working")
+    ):
+        return "solution_explanation"
+    if any(
+        phrase in normalized
+        for phrase in (
+            "don't understand",
+            "dont understand",
+            "do not understand",
+            "don't get",
+            "dont get",
+            "still confused",
+            "another way",
+            "different way",
+            "explain differently",
+        )
+    ):
+        return "alternative_explanation"
+    if "example" in normalized:
+        return "analogous_example"
+    if any(
+        phrase in normalized
+        for phrase in (
+            "what does",
+            "what is the question",
+            "rephrase",
+            "restate",
+            "meaning",
+        )
+    ):
+        return "clarify_question"
+    if any(
+        phrase in normalized for phrase in ("lesson", "revise", "review", "revisit")
+    ):
+        return "lesson_recommendation"
+    if incorrect_attempts or any(
+        phrase in normalized
+        for phrase in ("wrong", "mistake", "is that valid", "my error")
+    ):
+        return "diagnose_misconception"
+    return "socratic_prompt"
+
+
 class TutorService:
     def __init__(
         self,
@@ -57,8 +107,11 @@ class TutorService:
 
     async def send_message(self, session_id: str, message: str, *, request_id: str) -> dict:
         grounding = self.repository.grounding(self.learner_id, session_id)
-        mode = self._select_mode(message, grounding.answer_lock_state.solution_locked,
-                                 grounding.incorrect_attempts)
+        mode = select_tutor_mode(
+            message,
+            grounding.answer_lock_state.solution_locked,
+            grounding.incorrect_attempts,
+        )
         reservation = self.repository.reserve(
             self.learner_id,
             session_id,
@@ -173,20 +226,7 @@ class TutorService:
 
     @staticmethod
     def _select_mode(message: str, solution_locked: bool, incorrect_attempts: int) -> TutorMode:
-        normalized = message.casefold()
-        if not solution_locked and any(word in normalized for word in ("solution", "answer", "working")):
-            return "solution_explanation"
-        if any(phrase in normalized for phrase in ("don't understand", "dont understand", "still confused", "another way")):
-            return "alternative_explanation"
-        if "example" in normalized:
-            return "analogous_example"
-        if any(phrase in normalized for phrase in ("what does", "what is the question", "rephrase", "meaning")):
-            return "clarify_question"
-        if any(phrase in normalized for phrase in ("lesson", "revise", "review")):
-            return "lesson_recommendation"
-        if incorrect_attempts:
-            return "diagnose_misconception"
-        return "socratic_prompt"
+        return select_tutor_mode(message, solution_locked, incorrect_attempts)
 
     @staticmethod
     def _likely_leakage(blocks: tuple[TutorBlock, ...], answers: tuple[str, ...]) -> bool:
