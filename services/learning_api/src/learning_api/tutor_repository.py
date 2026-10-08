@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import threading
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime, timedelta
 from typing import Protocol
 from uuid import uuid4
@@ -13,6 +13,7 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
 from .tutor_contracts import AnswerLockState, TutorMode
+from .tutor_routing import TutorRouteDecision
 
 
 class TutorError(RuntimeError):
@@ -42,6 +43,7 @@ class TutorLimits:
 class TutorGrounding:
     session_id: str
     question_title: str
+    question_difficulty: int
     question_blocks: tuple[dict, ...]
     unlocked_hint_blocks: tuple[dict, ...]
     lesson_sections: tuple[dict, ...]
@@ -50,6 +52,7 @@ class TutorGrounding:
     recent_messages: tuple[dict, ...]
     answer_lock_state: AnswerLockState
     incorrect_attempts: int
+    premium_turns_this_session: int
     leakage_answers: tuple[str, ...]
     grounding_revision_ids: tuple[str, ...]
 
@@ -61,6 +64,18 @@ class UsageReservation:
     learner_id: str
     usage_date: date
     usage_month: date
+    route_decision_id: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class UsageReservationQuote:
+    max_input_tokens: int
+    max_output_tokens: int
+    max_cost_micros_sgd: int
+
+    @property
+    def max_tokens(self) -> int:
+        return self.max_input_tokens + self.max_output_tokens
 
 
 @dataclass(frozen=True, slots=True)
@@ -110,6 +125,9 @@ class TutorRepository(Protocol):
         safety_outcome: str = "accepted",
         latency_ms: int | None = None,
         token_usage: dict | None = None,
+        provider_name: str | None = None,
+        model_tier: str | None = None,
+        route_decision_id: str | None = None,
     ) -> dict: ...
 
     def reserve(
@@ -119,6 +137,8 @@ class TutorRepository(Protocol):
         limits: TutorLimits,
         *,
         request_id: str,
+        quote: UsageReservationQuote | None = None,
+        routing: TutorRouteDecision | None = None,
     ) -> UsageReservation: ...
 
     def reconcile(
@@ -336,7 +356,7 @@ class PostgresTutorRepository:
                        assigned.status::text as question_status,
                        assigned.incorrect_attempts, assigned.highest_hint_stage,
                        versions.id as question_version_id, versions.title,
-                       versions.stem_blocks, questions.stable_key,
+                       versions.stem_blocks, questions.stable_key, questions.difficulty,
                        lesson_versions.status::text as lesson_status,
                        questions.status::text as content_status
                 from tutor_sessions tutor
@@ -416,12 +436,20 @@ class PostgresTutorRepository:
             latest_attempt = _safe_attempt_evidence(latest_attempt_row)
             message_rows = connection.execute(
                 """
-                select role::text as role, mode::text as mode, content
+                select role::text as role, mode::text as mode, content, model_tier
                 from tutor_messages where tutor_session_id=%s
                 order by created_at desc, id desc limit 8
                 """,
                 (session_id,),
             ).fetchall()
+            premium_turns_this_session = connection.execute(
+                """
+                select count(*)::integer as turns
+                from tutor_messages
+                where tutor_session_id=%s and role='assistant' and model_tier='premium'
+                """,
+                (session_id,),
+            ).fetchone()["turns"]
             lock = AnswerLockState(
                 answer_locked=row["question_status"] == "pending",
                 solution_locked=row["question_status"] != "gave_up",
@@ -438,6 +466,7 @@ class PostgresTutorRepository:
             return TutorGrounding(
                 session_id=session_id,
                 question_title=row["title"],
+                question_difficulty=row["difficulty"],
                 question_blocks=(
                     {"kind": "stem", "blocks": row["stem_blocks"]},
                     *(
@@ -459,6 +488,7 @@ class PostgresTutorRepository:
                 recent_messages=tuple(dict(item) for item in reversed(message_rows)),
                 answer_lock_state=lock,
                 incorrect_attempts=row["incorrect_attempts"],
+                premium_turns_this_session=premium_turns_this_session,
                 leakage_answers=tuple(leakage),
                 grounding_revision_ids=(
                     str(row["lesson_version_id"]),
@@ -479,14 +509,18 @@ class PostgresTutorRepository:
         safety_outcome: str = "accepted",
         latency_ms: int | None = None,
         token_usage: dict | None = None,
+        provider_name: str | None = None,
+        model_tier: str | None = None,
+        route_decision_id: str | None = None,
     ) -> dict:
         with self._connect() as connection:
             row = connection.execute(
                 """
                 insert into tutor_messages (
                     tutor_session_id, student_id, role, mode, content, grounding_revision_ids,
-                    model_name, prompt_version, safety_outcome, latency_ms, token_usage
-                ) select %s, student_id, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    model_name, prompt_version, safety_outcome, latency_ms, token_usage,
+                    provider_name, model_tier, route_decision_id
+                ) select %s, student_id, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                   from tutor_sessions where id=%s
                 returning id, role::text as role, mode::text as mode, content,
                           safety_outcome, created_at
@@ -502,6 +536,9 @@ class PostgresTutorRepository:
                     safety_outcome,
                     latency_ms,
                     Jsonb(token_usage or {}),
+                    provider_name,
+                    model_tier,
+                    route_decision_id,
                     session_id,
                 ),
             ).fetchone()
@@ -514,11 +551,43 @@ class PostgresTutorRepository:
         limits: TutorLimits,
         *,
         request_id: str,
+        quote: UsageReservationQuote | None = None,
+        routing: TutorRouteDecision | None = None,
     ) -> UsageReservation:
         now = datetime.now(UTC)
         usage_date = now.date()
         usage_month = usage_date.replace(day=1)
         reservation_id = str(uuid4())
+        selected_quote = quote or UsageReservationQuote(
+            max_input_tokens=limits.max_input_tokens,
+            max_output_tokens=limits.max_output_tokens,
+            max_cost_micros_sgd=limits.max_turn_cost_micros_sgd,
+        )
+        if routing is not None and (
+            quote is None
+            or selected_quote.max_output_tokens != routing.max_output_tokens
+            or selected_quote.max_cost_micros_sgd
+            != routing.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
+        ):
+            raise TutorError(
+                "tutor_reservation_invalid",
+                "Tutor routing and usage reservation boundaries do not match.",
+                503,
+            )
+        if (
+            selected_quote.max_input_tokens <= 0
+            or selected_quote.max_output_tokens <= 0
+            or selected_quote.max_cost_micros_sgd <= 0
+            or selected_quote.max_input_tokens > limits.max_input_tokens
+            or selected_quote.max_output_tokens > limits.max_output_tokens
+            or selected_quote.max_cost_micros_sgd > limits.max_turn_cost_micros_sgd
+        ):
+            raise TutorError(
+                "tutor_reservation_invalid",
+                "Tutor usage could not be reserved within the configured boundary.",
+                503,
+            )
+        route_decision_id = str(uuid4()) if routing is not None else None
         with self._connect() as connection:
             connection.execute(
                 "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
@@ -569,11 +638,24 @@ class PostgresTutorRepository:
             ).fetchone()["cost"]
             if daily["actual_requests"] + daily["reserved_requests"] + 1 > limits.daily_messages:
                 self._quota_error(usage_date, "daily_messages")
-            if daily["actual_tokens"] + daily["reserved_tokens"] + limits.max_turn_tokens > limits.daily_tokens:
+            if (
+                daily["actual_tokens"]
+                + daily["reserved_tokens"]
+                + selected_quote.max_tokens
+                > limits.daily_tokens
+            ):
                 self._quota_error(usage_date, "daily_tokens")
-            if monthly["actual_cost_micros_sgd"] + monthly["reserved_cost_micros_sgd"] + limits.max_turn_cost_micros_sgd > limits.monthly_cost_micros_sgd:
+            if (
+                monthly["actual_cost_micros_sgd"]
+                + monthly["reserved_cost_micros_sgd"]
+                + selected_quote.max_cost_micros_sgd
+                > limits.monthly_cost_micros_sgd
+            ):
                 self._quota_error(usage_date, "monthly_cost")
-            if academy_cost + limits.max_turn_cost_micros_sgd > limits.academy_monthly_cost_micros_sgd:
+            if (
+                academy_cost + selected_quote.max_cost_micros_sgd
+                > limits.academy_monthly_cost_micros_sgd
+            ):
                 self._quota_error(usage_date, "academy_circuit_breaker")
             connection.execute(
                 """
@@ -588,10 +670,41 @@ class PostgresTutorRepository:
                     learner_id,
                     usage_date,
                     usage_month,
-                    limits.max_turn_tokens,
-                    limits.max_turn_cost_micros_sgd,
+                    selected_quote.max_tokens,
+                    selected_quote.max_cost_micros_sgd,
                 ),
             )
+            if routing is not None:
+                connection.execute(
+                    """
+                    insert into tutor_route_decisions (
+                        id, reservation_id, tutor_session_id, student_id, request_id,
+                        policy_version, tutor_mode, question_difficulty, route_score,
+                        selected_tier, provider_name, model_name, reason_codes,
+                        estimated_input_tokens, max_output_tokens, reserved_cost_micros_sgd
+                    ) values (
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    )
+                    """,
+                    (
+                        route_decision_id,
+                        reservation_id,
+                        session_id,
+                        learner_id,
+                        request_id,
+                        routing.policy_version,
+                        routing.mode,
+                        routing.question_difficulty,
+                        routing.score,
+                        routing.tier,
+                        routing.provider_name,
+                        routing.model_name,
+                        list(routing.reason_codes),
+                        selected_quote.max_input_tokens,
+                        selected_quote.max_output_tokens,
+                        selected_quote.max_cost_micros_sgd,
+                    ),
+                )
             connection.execute(
                 """
                 update tutor_usage_daily
@@ -599,7 +712,7 @@ class PostgresTutorRepository:
                     reserved_tokens=reserved_tokens+%s, updated_at=now()
                 where student_id=%s and usage_date=%s
                 """,
-                (limits.max_turn_tokens, learner_id, usage_date),
+                (selected_quote.max_tokens, learner_id, usage_date),
             )
             connection.execute(
                 """
@@ -607,7 +720,7 @@ class PostgresTutorRepository:
                 set reserved_cost_micros_sgd=reserved_cost_micros_sgd+%s, updated_at=now()
                 where student_id=%s and usage_month=%s
                 """,
-                (limits.max_turn_cost_micros_sgd, learner_id, usage_month),
+                (selected_quote.max_cost_micros_sgd, learner_id, usage_month),
             )
             self._event(
                 connection,
@@ -616,9 +729,23 @@ class PostgresTutorRepository:
                 session_id,
                 "reserved",
                 request_id,
-                {"tokens": limits.max_turn_tokens, "cost_micros_sgd": limits.max_turn_cost_micros_sgd},
+                {
+                    "tokens": selected_quote.max_tokens,
+                    "cost_micros_sgd": selected_quote.max_cost_micros_sgd,
+                    "route_decision_id": route_decision_id,
+                    "model_tier": routing.tier if routing is not None else None,
+                    "provider_name": routing.provider_name if routing is not None else None,
+                    "model_name": routing.model_name if routing is not None else None,
+                },
             )
-        return UsageReservation(reservation_id, session_id, learner_id, usage_date, usage_month)
+        return UsageReservation(
+            reservation_id,
+            session_id,
+            learner_id,
+            usage_date,
+            usage_month,
+            route_decision_id,
+        )
 
     @staticmethod
     def _quota_error(usage_date: date, boundary: str) -> None:
@@ -654,6 +781,25 @@ class PostgresTutorRepository:
             raise TutorError(
                 "tutor_provider_usage_invalid",
                 "The tutor provider reported usage outside the reserved boundary.",
+                503,
+            )
+        with self._connect() as connection:
+            reserved = connection.execute(
+                "select reserved_tokens, reserved_cost_micros_sgd from tutor_usage_reservations where id=%s",
+                (reservation.reservation_id,),
+            ).fetchone()
+        if reserved is not None and (
+            actual.total_tokens > reserved["reserved_tokens"]
+            or actual.cost_micros_sgd > reserved["reserved_cost_micros_sgd"]
+        ):
+            self.release(
+                reservation,
+                request_id=request_id,
+                reason="provider_usage_exceeded_route_reservation",
+            )
+            raise TutorError(
+                "tutor_provider_usage_invalid",
+                "The tutor provider reported usage outside the route reservation.",
                 503,
             )
         with self._connect() as connection:
@@ -828,6 +974,8 @@ class InMemoryTutorRepository:
         self.actual_tokens = 0
         self.actual_cost = 0
         self.reserved = False
+        self.last_routing: TutorRouteDecision | None = None
+        self.last_quote: UsageReservationQuote | None = None
         self._lock = threading.Lock()
 
     def create_session(self, learner_id: str, *, practice_session_id: str, question_key: str, question_revision: int, model_policy_version: str) -> dict:
@@ -861,27 +1009,72 @@ class InMemoryTutorRepository:
         row = self.get_session(learner_id, session_id)
         if row["status"] != "active":
             raise TutorError("tutor_session_closed", "This tutor session is closed.", 409)
-        return self.grounding_value
+        stored_messages = tuple(
+            {
+                "role": item["role"],
+                "mode": item["mode"],
+                "content": {"blocks": item["blocks"]},
+                "model_tier": item["model_tier"],
+            }
+            for item in self.messages[session_id]
+        )
+        recent_messages = (self.grounding_value.recent_messages + stored_messages)[-8:]
+        premium_turns = sum(
+            1
+            for item in self.grounding_value.recent_messages + stored_messages
+            if item.get("role") == "assistant" and item.get("model_tier") == "premium"
+        )
+        return replace(
+            self.grounding_value,
+            recent_messages=recent_messages,
+            premium_turns_this_session=premium_turns,
+        )
 
-    def append_message(self, session_id: str, *, role: str, mode: TutorMode | None, content: dict, grounding_revision_ids: tuple[str, ...] = (), model_name: str | None = None, prompt_version: str | None = None, safety_outcome: str = "accepted", latency_ms: int | None = None, token_usage: dict | None = None) -> dict:
-        del grounding_revision_ids, model_name, prompt_version, latency_ms, token_usage
+    def append_message(self, session_id: str, *, role: str, mode: TutorMode | None, content: dict, grounding_revision_ids: tuple[str, ...] = (), model_name: str | None = None, prompt_version: str | None = None, safety_outcome: str = "accepted", latency_ms: int | None = None, token_usage: dict | None = None, provider_name: str | None = None, model_tier: str | None = None, route_decision_id: str | None = None) -> dict:
+        del grounding_revision_ids, prompt_version, latency_ms, token_usage
         row = {"id": str(uuid4()), "role": role, "mode": mode,
                "blocks": content.get("blocks", []), "safety_outcome": safety_outcome,
+               "provider_name": provider_name, "model_name": model_name,
+               "model_tier": model_tier, "route_decision_id": route_decision_id,
                "created_at": datetime.now(UTC)}
         self.messages[session_id].append(row)
-        return row
+        return {
+            key: row[key]
+            for key in ("id", "role", "mode", "blocks", "safety_outcome", "created_at")
+        }
 
-    def reserve(self, learner_id: str, session_id: str, limits: TutorLimits, *, request_id: str) -> UsageReservation:
+    def reserve(self, learner_id: str, session_id: str, limits: TutorLimits, *, request_id: str, quote: UsageReservationQuote | None = None, routing: TutorRouteDecision | None = None) -> UsageReservation:
         del request_id
+        selected_quote = quote or UsageReservationQuote(
+            limits.max_input_tokens,
+            limits.max_output_tokens,
+            limits.max_turn_cost_micros_sgd,
+        )
+        if routing is not None and (
+            quote is None
+            or selected_quote.max_output_tokens != routing.max_output_tokens
+            or selected_quote.max_cost_micros_sgd
+            != routing.maximum_cost_micros_sgd(selected_quote.max_input_tokens)
+        ):
+            raise TutorError(
+                "tutor_reservation_invalid",
+                "Tutor routing and usage reservation boundaries do not match.",
+                503,
+            )
         with self._lock:
             if self.reserved:
                 raise TutorError("tutor_generation_in_progress", "Wait for the current tutor response before sending another message.", 409)
             today = datetime.now(UTC).date()
-            if self.actual_requests + 1 > limits.daily_messages or self.actual_tokens + limits.max_turn_tokens > limits.daily_tokens or self.actual_cost + limits.max_turn_cost_micros_sgd > limits.monthly_cost_micros_sgd:
+            if self.actual_requests + 1 > limits.daily_messages or self.actual_tokens + selected_quote.max_tokens > limits.daily_tokens or self.actual_cost + selected_quote.max_cost_micros_sgd > limits.monthly_cost_micros_sgd:
                 PostgresTutorRepository._quota_error(today, "test_boundary")
             self.reserved = True
-            item = UsageReservation(str(uuid4()), session_id, learner_id, today, today.replace(day=1))
+            route_decision_id = str(uuid4()) if routing is not None else None
+            item = UsageReservation(
+                str(uuid4()), session_id, learner_id, today, today.replace(day=1), route_decision_id
+            )
             self.reservations[item.reservation_id] = item
+            self.last_quote = selected_quote
+            self.last_routing = routing
             return item
 
     def reconcile(self, reservation: UsageReservation, actual: UsageActual, limits: TutorLimits, *, request_id: str) -> QuotaSnapshot:

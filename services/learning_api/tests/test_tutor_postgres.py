@@ -13,7 +13,9 @@ from learning_api.tutor_repository import (
     TutorError,
     TutorLimits,
     UsageActual,
+    UsageReservationQuote,
 )
+from learning_api.tutor_routing import TutorRouteDecision
 
 
 def _database_url() -> str:
@@ -100,7 +102,9 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
             "solution_locked": True,
         }
         grounding = repository.grounding(learner_id, session["session_id"])
+        assert 1 <= grounding.question_difficulty <= 5
         assert grounding.answer_lock_state.answer_locked is True
+        assert grounding.premium_turns_this_session == 0
         assert grounding.unlocked_solution_blocks == ()
         assert grounding.latest_attempt is None
         assert grounding.leakage_answers
@@ -145,8 +149,39 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
         }
 
         reserved = repository.reserve(
-            learner_id, session["session_id"], limits, request_id="reserve-test"
+            learner_id,
+            session["session_id"],
+            limits,
+            request_id="reserve-test",
+            quote=UsageReservationQuote(
+                max_input_tokens=5_000,
+                max_output_tokens=500,
+                max_cost_micros_sgd=10_000,
+            ),
+            routing=TutorRouteDecision(
+                policy_version="test-policy-v1",
+                tier="economy",
+                provider_name="synthetic",
+                model_name="synthetic-tutor-v1",
+                mode="socratic_prompt",
+                question_difficulty=grounding.question_difficulty,
+                score=grounding.question_difficulty - 1,
+                reason_codes=("economy_sufficient",),
+                max_output_tokens=500,
+                input_cost_per_million_micros_sgd=1_000_000,
+                output_cost_per_million_micros_sgd=10_000_000,
+            ),
         )
+        assert reserved.route_decision_id is not None
+        with psycopg.connect(database_url) as connection:
+            route = connection.execute(
+                """
+                select selected_tier, provider_name, model_name, max_output_tokens
+                from tutor_route_decisions where id=%s
+                """,
+                (reserved.route_decision_id,),
+            ).fetchone()
+        assert route == ("economy", "synthetic", "synthetic-tutor-v1", 500)
         with pytest.raises(TutorError, match="current tutor response") as concurrent:
             repository.reserve(
                 learner_id, session["session_id"], limits, request_id="concurrent-test"
@@ -180,6 +215,9 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
             model_name="test-provider",
             prompt_version="test-prompt-v1",
             token_usage={"input_tokens": 100, "output_tokens": 50},
+            provider_name="synthetic",
+            model_tier="economy",
+            route_decision_id=reserved.route_decision_id,
         )
         assert assistant["role"] == "assistant"
         assert len(repository.get_session(learner_id, session["session_id"])["messages"]) == 2

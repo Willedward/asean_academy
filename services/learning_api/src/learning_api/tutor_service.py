@@ -13,6 +13,12 @@ from .tutor_repository import (
     TutorLimits,
     TutorRepository,
     UsageActual,
+    UsageReservationQuote,
+)
+from .tutor_routing import (
+    TutorModelRouter,
+    TutorRoutingContext,
+    repeated_confusion_count,
 )
 
 
@@ -71,14 +77,18 @@ class TutorService:
         self,
         repository: TutorRepository,
         provider: TutorProvider,
+        router: TutorModelRouter,
         learner_id: str,
         *,
+        premium_provider: TutorProvider | None = None,
         limits: TutorLimits,
         model_policy_version: str,
         prompt_version: str,
     ):
         self.repository = repository
-        self.provider = provider
+        self.economy_provider = provider
+        self.premium_provider = premium_provider or provider
+        self.router = router
         self.learner_id = learner_id
         self.limits = limits
         self.model_policy_version = model_policy_version
@@ -112,11 +122,34 @@ class TutorService:
             grounding.answer_lock_state.solution_locked,
             grounding.incorrect_attempts,
         )
+        routing = self.router.decide(
+            TutorRoutingContext(
+                question_difficulty=grounding.question_difficulty,
+                mode=mode,
+                incorrect_attempts=grounding.incorrect_attempts,
+                repeated_confusion_count=repeated_confusion_count(
+                    message, grounding.recent_messages
+                ),
+                premium_turns_this_session=grounding.premium_turns_this_session,
+            )
+        )
+        route_max_output_tokens = min(
+            routing.max_output_tokens, self.limits.max_output_tokens
+        )
+        quote = UsageReservationQuote(
+            max_input_tokens=self.limits.max_input_tokens,
+            max_output_tokens=route_max_output_tokens,
+            max_cost_micros_sgd=routing.maximum_cost_micros_sgd(
+                self.limits.max_input_tokens
+            ),
+        )
         reservation = self.repository.reserve(
             self.learner_id,
             session_id,
             self.limits,
             request_id=request_id,
+            quote=quote,
+            routing=routing,
         )
         self.repository.append_message(
             session_id,
@@ -137,11 +170,14 @@ class TutorService:
             answer_locked=grounding.answer_lock_state.answer_locked,
             solution_locked=grounding.answer_lock_state.solution_locked,
             prompt_version=self.prompt_version,
-            max_output_tokens=self.limits.max_output_tokens,
+            max_output_tokens=route_max_output_tokens,
+        )
+        provider = (
+            self.premium_provider if routing.tier == "premium" else self.economy_provider
         )
         started = perf_counter()
         try:
-            generated = await self.provider.generate(request)
+            generated = await provider.generate(request)
         except TutorProviderError as exc:
             self.repository.release(
                 reservation,
@@ -205,6 +241,9 @@ class TutorService:
                 "total_tokens": actual.total_tokens,
                 "cost_micros_sgd": actual.cost_micros_sgd,
             },
+            provider_name=routing.provider_name,
+            model_tier=routing.tier,
+            route_decision_id=reservation.route_decision_id,
         )
         return {
             "session_id": session_id,

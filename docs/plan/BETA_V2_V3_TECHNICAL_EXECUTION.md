@@ -10,6 +10,10 @@ commit `b9763e7`.
 implementation statuses, identify content and external-service dependencies, and keep
 the December beta small enough to operate safely.
 
+For an investor-oriented summary followed by the detailed current technical stack,
+architecture, security, scaling and AI-tutor design, see
+[PRODUCT_TECHNOLOGY_ARCHITECTURE_INVESTOR_OVERVIEW.md](PRODUCT_TECHNOLOGY_ARCHITECTURE_INVESTOR_OVERVIEW.md).
+
 The product roadmap remains the source for desired behaviour. This document is the
 source for engineering order, release gates and technical readiness. `PLAN_V2.md`
 continues to define domain boundaries and long-term architecture.
@@ -401,6 +405,13 @@ feature.
 - Implement pro-rated season pricing only after the product decision is confirmed.
 
 ### V2.2 — Grounded tutor and AI cost controls
+
+**Implementation update (8 October 2026):** The provider-neutral foundation, Gemini
+evaluation path, multi-turn administrator lab, and disabled deterministic economy/premium
+router are implemented on the tutor feature chain. The routing score, GPT-4o premium
+adapter, append-only evidence schema, cost reservations, and rollout gates are defined in
+[TUTOR_HYBRID_MODEL_ROUTING.md](TUTOR_HYBRID_MODEL_ROUTING.md). Hosted migration and
+human evaluation remain release gates.
 
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.

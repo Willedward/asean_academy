@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202610080020"
+REQUIRED_SCHEMA_REVISION = "202610080021"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -82,10 +82,21 @@ class Settings:
     tutor_prompt_version: str = "math-tutor-prompt-v3"
     tutor_gemini_api_key: str | None = None
     tutor_gemini_model: str = "gemini-3.8-flash"
+    tutor_hybrid_routing_enabled: bool = False
+    tutor_economy_max_output_tokens: int = 500
+    tutor_premium_provider: str = "openai"
+    tutor_routing_policy_version: str = "math-tutor-routing-v1"
+    tutor_premium_threshold: int = 5
+    tutor_max_premium_turns_per_session: int = 3
+    tutor_premium_max_output_tokens: int = 700
+    tutor_openai_api_key: str | None = None
+    tutor_openai_model: str = "gpt-4o-2024-11-20"
     tutor_provider_timeout_seconds: int = 20
     tutor_provider_max_attempts: int = 2
     tutor_gemini_input_cost_per_million_micros_sgd: int = 0
     tutor_gemini_output_cost_per_million_micros_sgd: int = 0
+    tutor_openai_input_cost_per_million_micros_sgd: int = 0
+    tutor_openai_output_cost_per_million_micros_sgd: int = 0
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -227,6 +238,36 @@ class Settings:
             tutor_gemini_model=os.getenv(
                 "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL", "gemini-3.8-flash"
             ).strip(),
+            tutor_hybrid_routing_enabled=_boolean(
+                "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", False
+            ),
+            tutor_economy_max_output_tokens=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_ECONOMY_MAX_OUTPUT_TOKENS", 500
+            ),
+            tutor_premium_provider=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER", "openai"
+            )
+            .strip()
+            .lower(),
+            tutor_routing_policy_version=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_ROUTING_POLICY_VERSION",
+                "math-tutor-routing-v1",
+            ).strip(),
+            tutor_premium_threshold=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_PREMIUM_THRESHOLD", 5
+            ),
+            tutor_max_premium_turns_per_session=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_MAX_PREMIUM_TURNS_PER_SESSION", 3
+            ),
+            tutor_premium_max_output_tokens=_positive_integer(
+                "ASEAN_ACADEMY_TUTOR_PREMIUM_MAX_OUTPUT_TOKENS", 700
+            ),
+            tutor_openai_api_key=(
+                value if (value := os.getenv("OPENAI_API_KEY", "").strip()) else None
+            ),
+            tutor_openai_model=os.getenv(
+                "ASEAN_ACADEMY_TUTOR_OPENAI_MODEL", "gpt-4o-2024-11-20"
+            ).strip(),
             tutor_provider_timeout_seconds=_positive_integer(
                 "ASEAN_ACADEMY_TUTOR_PROVIDER_TIMEOUT_SECONDS", 20
             ),
@@ -238,6 +279,12 @@ class Settings:
             ),
             tutor_gemini_output_cost_per_million_micros_sgd=_non_negative_integer(
                 "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", 0
+            ),
+            tutor_openai_input_cost_per_million_micros_sgd=_non_negative_integer(
+                "ASEAN_ACADEMY_TUTOR_OPENAI_INPUT_COST_PER_MILLION_MICROS_SGD", 0
+            ),
+            tutor_openai_output_cost_per_million_micros_sgd=_non_negative_integer(
+                "ASEAN_ACADEMY_TUTOR_OPENAI_OUTPUT_COST_PER_MILLION_MICROS_SGD", 0
             ),
         )
         if environment in {"preview", "production"}:
@@ -266,9 +313,13 @@ class Settings:
                 raise RuntimeError(
                     "ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID must be a UUID when PostgreSQL is enabled"
                 ) from exc
-        if settings.tutor_provider not in {"disabled", "synthetic", "gemini"}:
+        if settings.tutor_provider not in {"disabled", "synthetic", "gemini", "openai"}:
             raise RuntimeError(
-                "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled, synthetic, or gemini"
+                "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled, synthetic, gemini, or openai"
+            )
+        if settings.tutor_premium_provider not in {"gemini", "openai"}:
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER must be gemini or openai"
             )
         if settings.tutor_provider == "synthetic" and environment != "test":
             raise RuntimeError(
@@ -290,6 +341,63 @@ class Settings:
                 raise RuntimeError(
                     "Gemini tutor shadow input and output prices must be configured when enabled"
                 )
-        if not settings.tutor_model_policy_version or not settings.tutor_prompt_version:
-            raise RuntimeError("Tutor policy and prompt versions must not be empty")
+        if settings.tutor_provider == "openai" and not settings.tutor_openai_model:
+            raise RuntimeError("ASEAN_ACADEMY_TUTOR_OPENAI_MODEL must not be empty")
+        if settings.tutor_enabled and settings.tutor_provider == "openai":
+            if not settings.tutor_openai_api_key:
+                raise RuntimeError("OPENAI_API_KEY is required when the OpenAI tutor is enabled")
+            if (
+                settings.tutor_openai_input_cost_per_million_micros_sgd == 0
+                or settings.tutor_openai_output_cost_per_million_micros_sgd == 0
+            ):
+                raise RuntimeError(
+                    "OpenAI tutor shadow input and output prices must be configured when enabled"
+                )
+        if settings.tutor_hybrid_routing_enabled:
+            if not settings.tutor_enabled:
+                raise RuntimeError(
+                    "Hybrid tutor routing requires ASEAN_ACADEMY_TUTOR_ENABLED=true"
+                )
+            if settings.tutor_premium_provider == settings.tutor_provider:
+                raise RuntimeError(
+                    "Hybrid tutor routing requires distinct economy and premium providers"
+                )
+            if settings.tutor_premium_provider == "openai":
+                if not settings.tutor_openai_api_key:
+                    raise RuntimeError(
+                        "OPENAI_API_KEY is required when hybrid tutor routing uses OpenAI"
+                    )
+                if (
+                    settings.tutor_openai_input_cost_per_million_micros_sgd == 0
+                    or settings.tutor_openai_output_cost_per_million_micros_sgd == 0
+                ):
+                    raise RuntimeError(
+                        "OpenAI premium shadow input and output prices must be configured"
+                    )
+            if settings.tutor_premium_provider == "gemini":
+                if not settings.tutor_gemini_api_key:
+                    raise RuntimeError(
+                        "GEMINI_API_KEY is required when hybrid tutor routing uses Gemini"
+                    )
+                if (
+                    settings.tutor_gemini_input_cost_per_million_micros_sgd == 0
+                    or settings.tutor_gemini_output_cost_per_million_micros_sgd == 0
+                ):
+                    raise RuntimeError(
+                        "Gemini premium shadow input and output prices must be configured"
+                    )
+        if settings.tutor_premium_max_output_tokens > settings.tutor_max_output_tokens:
+            raise RuntimeError(
+                "The premium tutor output limit must not exceed the global tutor output limit"
+            )
+        if settings.tutor_economy_max_output_tokens > settings.tutor_max_output_tokens:
+            raise RuntimeError(
+                "The economy tutor output limit must not exceed the global tutor output limit"
+            )
+        if (
+            not settings.tutor_model_policy_version
+            or not settings.tutor_prompt_version
+            or not settings.tutor_routing_policy_version
+        ):
+            raise RuntimeError("Tutor policy, prompt, and routing versions must not be empty")
         return settings

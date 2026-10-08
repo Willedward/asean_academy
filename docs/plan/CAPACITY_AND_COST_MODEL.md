@@ -177,6 +177,14 @@ attribution efficiently, and run a separate spike test before publication.
 
 ## AI tutor model recommendation
 
+**Implementation note (8 October 2026):** The first hybrid router now keeps the configured
+Gemini provider as the economy route and supports a pinned GPT-4o premium route. The
+implemented score, S$0.017 representative GPT-4o turn estimate, reservation ceiling, and
+activation gates are maintained in
+[TUTOR_HYBRID_MODEL_ROUTING.md](TUTOR_HYBRID_MODEL_ROUTING.md). The older illustrative
+Gemini Pro blend below remains a capacity-planning scenario rather than the implemented
+premium target.
+
 ### Default model
 
 Use **Gemini 2.5 Flash** as the first production tutor model, subject to the fixed mathematics

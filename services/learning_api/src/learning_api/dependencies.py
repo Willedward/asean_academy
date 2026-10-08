@@ -33,6 +33,11 @@ from .progress_service import ProgressService
 from .question_report_repository import PostgresQuestionReportRepository
 from .tutor_provider import provider_for
 from .tutor_repository import PostgresTutorRepository, TutorLimits, TutorRepository
+from .tutor_routing import (
+    TutorModelRouter,
+    TutorModelTarget,
+    TutorRoutingPolicy,
+)
 from .tutor_service import TutorService
 
 bearer = HTTPBearer(auto_error=False)
@@ -366,25 +371,79 @@ def tutor_service(
     repository = tutor_repository(request)
     provider = getattr(request.app.state, "tutor_provider", None)
     if provider is None:
+        economy_input_price, economy_output_price = _tutor_prices(
+            settings, settings.tutor_provider
+        )
         provider = provider_for(
             settings.tutor_provider,
             environment=settings.environment,
             gemini_api_key=settings.tutor_gemini_api_key,
             gemini_model=settings.tutor_gemini_model,
+            openai_api_key=settings.tutor_openai_api_key,
+            openai_model=settings.tutor_openai_model,
             timeout_seconds=settings.tutor_provider_timeout_seconds,
             max_attempts=settings.tutor_provider_max_attempts,
-            input_cost_per_million_micros_sgd=(
-                settings.tutor_gemini_input_cost_per_million_micros_sgd
-            ),
-            output_cost_per_million_micros_sgd=(
-                settings.tutor_gemini_output_cost_per_million_micros_sgd
-            ),
+            input_cost_per_million_micros_sgd=economy_input_price,
+            output_cost_per_million_micros_sgd=economy_output_price,
         )
         request.app.state.tutor_provider = provider
+    economy_input_price, economy_output_price = _tutor_prices(
+        settings, settings.tutor_provider
+    )
+    economy_target = TutorModelTarget(
+        tier="economy",
+        provider_name=settings.tutor_provider,
+        model_name=_tutor_model_name(settings, settings.tutor_provider),
+        max_output_tokens=settings.tutor_economy_max_output_tokens,
+        input_cost_per_million_micros_sgd=economy_input_price,
+        output_cost_per_million_micros_sgd=economy_output_price,
+    )
+    premium_provider = None
+    premium_target = None
+    if settings.tutor_hybrid_routing_enabled:
+        premium_provider = getattr(request.app.state, "tutor_premium_provider", None)
+        premium_input_price, premium_output_price = _tutor_prices(
+            settings, settings.tutor_premium_provider
+        )
+        if premium_provider is None:
+            premium_provider = provider_for(
+                settings.tutor_premium_provider,
+                environment=settings.environment,
+                gemini_api_key=settings.tutor_gemini_api_key,
+                gemini_model=settings.tutor_gemini_model,
+                openai_api_key=settings.tutor_openai_api_key,
+                openai_model=settings.tutor_openai_model,
+                timeout_seconds=settings.tutor_provider_timeout_seconds,
+                max_attempts=settings.tutor_provider_max_attempts,
+                input_cost_per_million_micros_sgd=premium_input_price,
+                output_cost_per_million_micros_sgd=premium_output_price,
+            )
+            request.app.state.tutor_premium_provider = premium_provider
+        premium_target = TutorModelTarget(
+            tier="premium",
+            provider_name=settings.tutor_premium_provider,
+            model_name=_tutor_model_name(settings, settings.tutor_premium_provider),
+            max_output_tokens=settings.tutor_premium_max_output_tokens,
+            input_cost_per_million_micros_sgd=premium_input_price,
+            output_cost_per_million_micros_sgd=premium_output_price,
+        )
+    router = TutorModelRouter(
+        TutorRoutingPolicy(
+            version=settings.tutor_routing_policy_version,
+            economy=economy_target,
+            premium=premium_target,
+            premium_threshold=settings.tutor_premium_threshold,
+            max_premium_turns_per_session=(
+                settings.tutor_max_premium_turns_per_session
+            ),
+        )
+    )
     return TutorService(
         repository,
         provider,
+        router,
         learner.learner_id,
+        premium_provider=premium_provider,
         limits=TutorLimits(
             daily_messages=settings.tutor_daily_message_limit,
             daily_tokens=settings.tutor_daily_token_limit,
@@ -399,6 +458,32 @@ def tutor_service(
         model_policy_version=settings.tutor_model_policy_version,
         prompt_version=settings.tutor_prompt_version,
     )
+
+
+def _tutor_model_name(settings, provider_name: str) -> str:
+    if provider_name == "gemini":
+        return settings.tutor_gemini_model
+    if provider_name == "openai":
+        return settings.tutor_openai_model
+    if provider_name == "synthetic":
+        return "synthetic-tutor-v1"
+    raise RuntimeError(f"Unsupported tutor provider: {provider_name}")
+
+
+def _tutor_prices(settings, provider_name: str) -> tuple[int, int]:
+    if provider_name == "gemini":
+        return (
+            settings.tutor_gemini_input_cost_per_million_micros_sgd,
+            settings.tutor_gemini_output_cost_per_million_micros_sgd,
+        )
+    if provider_name == "openai":
+        return (
+            settings.tutor_openai_input_cost_per_million_micros_sgd,
+            settings.tutor_openai_output_cost_per_million_micros_sgd,
+        )
+    if provider_name == "synthetic":
+        return (0, 0)
+    raise RuntimeError(f"Unsupported tutor provider: {provider_name}")
 
 
 TutorServiceDependency = Annotated[TutorService, Depends(tutor_service)]

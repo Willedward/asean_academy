@@ -2,6 +2,7 @@
 
 An ASEAN scholarship preparation platform in early development.
 
+- [NextScholar technology and architecture](docs/plan/PRODUCT_TECHNOLOGY_ARCHITECTURE_INVESTOR_OVERVIEW.md) gives an investor brief followed by the detailed current stack, system design, security, scaling and AI-tutor architecture.
 - [Beta, V2 and V3 product roadmap](docs/plan/ROADMAP_BETA_V2_V3.md) defines the proposed release features.
 - [Frontend technology and Figma handoff plan](docs/plan/FRONTEND_TECH_STACK_PLAN.md) specifies the implementation stack and design handoff contract.
 - [Beta, V2 and V3 technical execution](docs/plan/BETA_V2_V3_TECHNICAL_EXECUTION.md) audits feasibility, current readiness, sequencing and release gates.

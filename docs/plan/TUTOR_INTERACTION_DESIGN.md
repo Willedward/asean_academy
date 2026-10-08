@@ -89,6 +89,21 @@ failures. This tool is the permanent pre-release quality-control path for repeat
 such as “Why is my answer wrong?” and “I still don't understand.” It does not enable the
 student-facing feature flag or consume a learner's quota.
 
+## Hybrid model routing milestone (2026-10-08)
+
+The learner backend now has a deterministic economy/premium model router behind a second
+disabled feature flag. It considers question difficulty, selected tutor mode, incorrect
+attempts, bounded learner-confusion signals, and prior premium turns in the same
+question-scoped session. Route-specific token and cost ceilings are reserved before the
+provider call, and the decision is recorded as append-only server evidence. Provider and
+model details remain outside the learner API response.
+
+The initial route uses the configured Gemini adapter for ordinary turns and a pinned
+GPT-4o Responses API adapter for premium turns. This is an implementation target, not a
+production-quality approval. The complete score, persistence schema, cost calculation,
+configuration, and rollout gates are documented in
+[`TUTOR_HYBRID_MODEL_ROUTING.md`](TUTOR_HYBRID_MODEL_ROUTING.md).
+
 ## Learner interaction
 
 The question screen should offer **Ask teacher** alongside the two authored hints.

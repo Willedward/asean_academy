@@ -14,7 +14,11 @@ from learning_api.tutor_evaluation import (
     run_evaluation,
     write_evaluation_report,
 )
-from learning_api.tutor_provider import GeminiTutorProvider, SyntheticTutorProvider
+from learning_api.tutor_provider import (
+    GeminiTutorProvider,
+    OpenAITutorProvider,
+    SyntheticTutorProvider,
+)
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SUITE = (
@@ -31,13 +35,17 @@ def arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Run deterministic checks and export a human-reviewable tutor report."
     )
-    parser.add_argument("--provider", choices=("synthetic", "gemini"), default="synthetic")
+    parser.add_argument(
+        "--provider",
+        choices=("synthetic", "gemini", "openai"),
+        default="synthetic",
+    )
     parser.add_argument("--suite", type=Path, default=DEFAULT_SUITE)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument(
         "--live",
         action="store_true",
-        help="Required with --provider gemini because the run may use paid API tokens.",
+        help="Required with a live provider because the run may use paid API tokens.",
     )
     return parser.parse_args()
 
@@ -57,7 +65,37 @@ def selected_provider(name: str, *, live: bool):
     if name == "synthetic":
         return SyntheticTutorProvider(), "synthetic-tutor-v1"
     if not live:
-        raise SystemExit("Pass --live to confirm a Gemini evaluation may consume API quota.")
+        raise SystemExit("Pass --live to confirm a provider evaluation may consume API quota.")
+    if name == "openai":
+        api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        if not api_key:
+            raise SystemExit("Set OPENAI_API_KEY in the local environment before a live run.")
+        model = os.getenv(
+            "ASEAN_ACADEMY_TUTOR_OPENAI_MODEL", "gpt-4o-2024-11-20"
+        ).strip()
+        return (
+            OpenAITutorProvider(
+                api_key=api_key,
+                model=model,
+                timeout_seconds=integer_environment(
+                    "ASEAN_ACADEMY_TUTOR_PROVIDER_TIMEOUT_SECONDS", 20
+                ),
+                max_attempts=integer_environment(
+                    "ASEAN_ACADEMY_TUTOR_PROVIDER_MAX_ATTEMPTS", 2
+                ),
+                input_cost_per_million_micros_sgd=integer_environment(
+                    "ASEAN_ACADEMY_TUTOR_OPENAI_INPUT_COST_PER_MILLION_MICROS_SGD",
+                    0,
+                    allow_zero=True,
+                ),
+                output_cost_per_million_micros_sgd=integer_environment(
+                    "ASEAN_ACADEMY_TUTOR_OPENAI_OUTPUT_COST_PER_MILLION_MICROS_SGD",
+                    0,
+                    allow_zero=True,
+                ),
+            ),
+            model,
+        )
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key:
         raise SystemExit("Set GEMINI_API_KEY in the local environment before a live run.")
@@ -102,7 +140,14 @@ async def main() -> int:
         prompt_version=os.getenv(
             "ASEAN_ACADEMY_TUTOR_PROMPT_VERSION", "math-tutor-prompt-v3"
         ),
-        max_output_tokens=integer_environment("ASEAN_ACADEMY_TUTOR_MAX_OUTPUT_TOKENS", 1000),
+        max_output_tokens=integer_environment(
+            (
+                "ASEAN_ACADEMY_TUTOR_PREMIUM_MAX_OUTPUT_TOKENS"
+                if args.provider == "openai"
+                else "ASEAN_ACADEMY_TUTOR_MAX_OUTPUT_TOKENS"
+            ),
+            700 if args.provider == "openai" else 1000,
+        ),
     )
     json_path, markdown_path = write_evaluation_report(report, output_directory)
     print(f"Automated checks: {report.passed_cases}/{report.total_cases} passed")

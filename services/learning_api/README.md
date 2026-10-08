@@ -93,3 +93,11 @@ environment and add `--provider gemini --live`. The runner writes JSON evidence 
 Markdown human-review form under `build/tutor-evaluation/`. Automated checks never approve
 a model for production; Mathematics and editorial reviewers must score the outputs against
 published lessons and approved question sources.
+
+For the premium OpenAI target, set `OPENAI_API_KEY` only in the local server environment
+and use `--provider openai --live`. The same suite, response schema, automated checks, and
+human-review requirement apply.
+
+The disabled economy/premium learner router, OpenAI premium adapter, route evidence schema,
+cost calculation, configuration, and activation gates are documented in
+`docs/plan/TUTOR_HYBRID_MODEL_ROUTING.md`.

@@ -9,11 +9,23 @@ import pytest
 
 from learning_api.tutor_provider import (
     GeminiTutorProvider,
+    OpenAITutorProvider,
     TutorProviderError,
     TutorProviderRequest,
+    _request_with_retries,
     probe_gemini_connection,
     provider_for,
 )
+
+
+def run(coroutine):
+    """Run one provider coroutine without pytest waiting on Python's default executor."""
+
+    loop = asyncio.new_event_loop()
+    try:
+        return loop.run_until_complete(coroutine)
+    finally:
+        loop.close()
 
 
 def tutor_request(*, answer_locked: bool = True) -> TutorProviderRequest:
@@ -75,6 +87,38 @@ def successful_response() -> bytes:
     ).encode()
 
 
+def openai_provider(transport, *, attempts: int = 1) -> OpenAITutorProvider:
+    return OpenAITutorProvider(
+        api_key="private-openai-key",
+        model="gpt-4o-2024-11-20",
+        timeout_seconds=5,
+        max_attempts=attempts,
+        input_cost_per_million_micros_sgd=1_000_000,
+        output_cost_per_million_micros_sgd=2_000_000,
+        transport=transport,
+    )
+
+
+def successful_openai_response() -> bytes:
+    output = {
+        "blocks": [{"type": "text", "content": "Which ratio fact could you use first?"}],
+        "suggested_replies": ["Can I have one hint?"],
+        "recommended_next_action": "Write one ratio statement.",
+    }
+    return json.dumps(
+        {
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "content": [{"type": "output_text", "text": json.dumps(output)}],
+                }
+            ],
+            "usage": {"input_tokens": 125, "output_tokens": 25, "total_tokens": 150},
+        }
+    ).encode()
+
+
 def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cost():
     captured = {}
 
@@ -82,7 +126,7 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
         captured.update(url=url, headers=headers, body=body, timeout=timeout)
         return successful_response()
 
-    result = asyncio.run(provider(transport).generate(tutor_request()))
+    result = run(provider(transport).generate(tutor_request()))
 
     assert result.model_name == "gemini-test-flash"
     assert result.blocks[0].content == "Which ratio fact could you use first?"
@@ -111,6 +155,45 @@ def test_gemini_adapter_sends_grounded_structured_request_and_records_shadow_cos
     assert schema["additionalProperties"] is False
 
 
+def test_openai_adapter_uses_responses_structured_output_without_server_storage():
+    captured = {}
+
+    def transport(url, headers, body, timeout):
+        captured.update(url=url, headers=headers, body=body, timeout=timeout)
+        return successful_openai_response()
+
+    result = run(openai_provider(transport).generate(tutor_request()))
+
+    assert result.model_name == "gpt-4o-2024-11-20"
+    assert result.blocks[0].content == "Which ratio fact could you use first?"
+    assert result.usage.input_tokens == 125
+    assert result.usage.output_tokens == 25
+    assert result.usage.cost_micros_sgd == 175
+    assert captured["url"] == "https://api.openai.com/v1/responses"
+    assert captured["headers"]["Authorization"] == "Bearer private-openai-key"
+    assert captured["timeout"] == 5.0
+    payload = json.loads(captured["body"])
+    assert payload["store"] is False
+    assert payload["max_output_tokens"] == 200
+    assert payload["text"]["format"]["type"] == "json_schema"
+    assert payload["text"]["format"]["strict"] is True
+    assert payload["text"]["format"]["schema"]["additionalProperties"] is False
+    encoded = json.dumps(payload)
+    assert "canonical_answer" not in encoded
+    assert '"submitted_answers":{"1":"2:6"}' in payload["input"][0]["content"][0]["text"]
+
+
+def test_openai_adapter_rejects_malformed_output_with_safe_error():
+    def transport(url, headers, body, timeout):
+        del url, headers, body, timeout
+        return b'{"status":"completed","output":[],"usage":{"input_tokens":1,"output_tokens":1}}'
+
+    with pytest.raises(TutorProviderError, match="invalid response") as raised:
+        run(openai_provider(transport).generate(tutor_request()))
+
+    assert "private-openai-key" not in str(raised.value)
+
+
 def test_gemini_connection_probe_sends_minimal_prompt_and_accepts_plain_text():
     captured = {}
 
@@ -123,7 +206,7 @@ def test_gemini_connection_probe_sends_minimal_prompt_and_accepts_plain_text():
             }
         ).encode()
 
-    result = asyncio.run(
+    result = run(
         probe_gemini_connection(
             api_key="private-test-key",
             model="gemini-3.5-flash-lite",
@@ -164,7 +247,7 @@ def test_gemini_connection_probe_reports_safe_provider_error():
         )
 
     with pytest.raises(TutorProviderError, match=r"HTTP 403") as raised:
-        asyncio.run(
+        run(
             probe_gemini_connection(
                 api_key="private-test-key",
                 model="gemini-3.5-flash-lite",
@@ -194,7 +277,17 @@ def test_gemini_adapter_retries_retryable_http_failure_once():
             )
         return successful_response()
 
-    result = asyncio.run(provider(transport, attempts=2).generate(tutor_request()))
+    selected = provider(transport, attempts=2)
+    raw = _request_with_retries(
+        transport,
+        "https://example.invalid",
+        {},
+        b"{}",
+        5.0,
+        2,
+        "private-test-key",
+    )
+    result = selected._parse_response(raw)
 
     assert calls == 2
     assert result.usage.total_tokens == 150
@@ -221,7 +314,7 @@ def test_gemini_adapter_reports_safe_nonretryable_http_status():
         )
 
     with pytest.raises(TutorProviderError, match=r"HTTP 403") as raised:
-        asyncio.run(provider(transport).generate(tutor_request()))
+        run(provider(transport).generate(tutor_request()))
 
     message = str(raised.value)
     assert "PERMISSION_DENIED" in message
@@ -236,7 +329,7 @@ def test_gemini_adapter_rejects_malformed_output_with_safe_error():
         return b'{"candidates": []}'
 
     with pytest.raises(TutorProviderError, match="invalid response") as raised:
-        asyncio.run(provider(transport).generate(tutor_request()))
+        run(provider(transport).generate(tutor_request()))
 
     assert "candidate" not in str(raised.value).casefold()
     assert "private-test-key" not in str(raised.value)
@@ -256,3 +349,14 @@ def test_provider_factory_keeps_synthetic_test_only_and_builds_gemini():
     )
 
     assert isinstance(selected, GeminiTutorProvider)
+
+    openai = provider_for(
+        "openai",
+        environment="development",
+        openai_api_key="private-openai-key",
+        openai_model="gpt-4o-2024-11-20",
+        input_cost_per_million_micros_sgd=1,
+        output_cost_per_million_micros_sgd=1,
+    )
+
+    assert isinstance(openai, OpenAITutorProvider)

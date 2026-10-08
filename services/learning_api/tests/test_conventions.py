@@ -162,3 +162,69 @@ def test_enabled_gemini_tutor_loads_server_only_configuration(monkeypatch):
     assert settings.tutor_gemini_api_key == "private-test-key"
     assert settings.tutor_gemini_input_cost_per_million_micros_sgd == 1000
     assert settings.tutor_gemini_output_cost_per_million_micros_sgd == 2000
+
+
+def test_hybrid_tutor_requires_the_premium_provider_key(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-gemini-key")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD", "1000"
+    )
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", "2000"
+    )
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER", "openai")
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
+    with pytest.raises(RuntimeError, match="OPENAI_API_KEY"):
+        Settings.from_environment()
+
+
+def test_hybrid_tutor_loads_server_only_routing_and_openai_prices(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-gemini-key")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD", "384000"
+    )
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", "3200000"
+    )
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER", "openai")
+    monkeypatch.setenv("OPENAI_API_KEY", "private-openai-key")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_OPENAI_INPUT_COST_PER_MILLION_MICROS_SGD", "3200000"
+    )
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_OPENAI_OUTPUT_COST_PER_MILLION_MICROS_SGD", "12800000"
+    )
+
+    settings = Settings.from_environment()
+
+    assert settings.tutor_hybrid_routing_enabled is True
+    assert settings.tutor_provider == "gemini"
+    assert settings.tutor_premium_provider == "openai"
+    assert settings.tutor_routing_policy_version == "math-tutor-routing-v1"
+    assert settings.tutor_openai_api_key == "private-openai-key"
+    assert settings.tutor_openai_input_cost_per_million_micros_sgd == 3_200_000
+    assert settings.tutor_openai_output_cost_per_million_micros_sgd == 12_800_000
+
+
+def test_hybrid_tutor_rejects_identical_economy_and_premium_providers(monkeypatch):
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_ENABLED", "true")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PROVIDER", "gemini")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_PREMIUM_PROVIDER", "gemini")
+    monkeypatch.setenv("ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED", "true")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-gemini-key")
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD", "1000"
+    )
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD", "2000"
+    )
+
+    with pytest.raises(RuntimeError, match="distinct economy and premium providers"):
+        Settings.from_environment()

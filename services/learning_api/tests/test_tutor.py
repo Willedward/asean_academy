@@ -21,10 +21,13 @@ from learning_api.tutor_repository import (
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 
 
-def grounding(*, answer_locked: bool = True, incorrect_attempts: int = 0) -> TutorGrounding:
+def grounding(
+    *, answer_locked: bool = True, incorrect_attempts: int = 0, difficulty: int = 1
+) -> TutorGrounding:
     return TutorGrounding(
         session_id=str(uuid4()),
         question_title="A safe synthetic ratio question",
+        question_difficulty=difficulty,
         question_blocks=({"kind": "stem", "blocks": [{"type": "text", "content": "Find the ratio."}]},),
         unlocked_hint_blocks=(),
         lesson_sections=({"section_key": "ratio", "content": {"blocks": []}},),
@@ -55,12 +58,18 @@ def grounding(*, answer_locked: bool = True, incorrect_attempts: int = 0) -> Tut
             solution_locked=answer_locked,
         ),
         incorrect_attempts=incorrect_attempts,
+        premium_turns_this_session=0,
         leakage_answers=("42",),
         grounding_revision_ids=(str(uuid4()), str(uuid4())),
     )
 
 
-def application(repo: InMemoryTutorRepository, *, enabled: bool = True, daily_messages: int = 10):
+def application(
+    repo: InMemoryTutorRepository,
+    *,
+    enabled: bool = True,
+    daily_messages: int = 10,
+):
     app = create_app(
         Settings(
             environment="test",
