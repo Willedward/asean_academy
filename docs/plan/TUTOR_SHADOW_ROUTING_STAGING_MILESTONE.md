@@ -4,7 +4,7 @@
 
 **Prepared:** 8 October 2026
 
-**Updated:** 9 October 2026
+**Updated:** 10 October 2026
 
 **Depends on:** hybrid routing commit `8376c5a` and shadow evidence commit `acfca30`
 
@@ -23,13 +23,15 @@ usage, and produces a written go/no-go decision for a later administrator-only l
 
 The milestone does **not** enable live premium routing for students.
 
-**Implementation update:** Work packages A, B and C are implemented on the feature branch.
+**Implementation update:** Work packages A, B and C are implemented and deployed to hosted
+staging. Work package D is activated for the `admins` cohort with live hybrid routing off.
 The API resolves `off`, `shadow` or `live` from the PostgreSQL role and configured cohort;
 adds restricted routing status and cursor-paginated decision endpoints; and includes the
 pagination index in migration `202610080023_tutor_routing_evidence_pagination.sql`. The
 Tutor Evaluation Lab now renders the restricted status, monthly aggregates, shadow safety
-invariant, server-side filters and paginated decision evidence. Work package D, staging
-activation, is next.
+invariant, server-side filters and paginated decision evidence. The remaining staging work
+is to record the hosted backup state, run an authenticated administrator smoke conversation,
+and perform the evidence review in work package E.
 
 ## 2. Required outcome
 
@@ -199,7 +201,7 @@ surface only.
 
 ### Work package A — cohort gate and configuration
 
-**Status:** Implemented in code; hosted staging verification remains.
+**Status:** Implemented and deployed; authenticated cohort verification remains.
 
 1. Add the routing cohort setting and validation.
 2. Resolve eligibility from the authenticated role in the API dependency layer.
@@ -212,8 +214,8 @@ on the recorded `off` economy route.
 
 ### Work package B — evidence read model
 
-**Status:** Implemented in code; disposable PostgreSQL and hosted staging verification
-remain.
+**Status:** Implemented and deployed. CI PostgreSQL migration and repository integration
+tests pass; authenticated hosted evidence inspection remains.
 
 1. Define response contracts and cursor encoding.
 2. Add an indexed repository query over route decisions, reservations and assistant
@@ -227,7 +229,8 @@ decision evidence; other roles receive `403`.
 
 ### Work package C — administrator UI
 
-**Status:** Implemented in code; hosted layout and session-state verification remain.
+**Status:** Implemented and deployed; authenticated layout and session-state verification
+remain.
 
 1. Add routing status and metric cards to the Tutor Evaluation Lab.
 2. Add the decision table, filters and accessible details view.
@@ -247,7 +250,8 @@ results, filters, cursor pagination, API failure and invariant breach.
 
 ### Work package D — staging activation
 
-**Status:** Next implementation package.
+**Status:** Activated in hosted staging; backup evidence and the authenticated smoke
+conversation remain.
 
 1. Apply the migrations in a disposable PostgreSQL database and run repository integration
    tests.
@@ -257,6 +261,40 @@ results, filters, cursor pagination, API failure and invariant breach.
 5. Record release SHAs, configuration names, policy version and activation time.
 
 **Exit:** staging collects real shadow evidence and has a tested one-setting rollback.
+
+#### Hosted activation record
+
+Observed on **10 October 2026 at 01:03 WITA**:
+
+| Item | Recorded value |
+| --- | --- |
+| Active API source release | `519ab749b22bce1da88a8aee8ab738299a20d2e5` |
+| Shadow configuration commit included in release | `4ab492628c45780f4bdcd84ccfe6f884796abe3b` |
+| CI run | `37818702809`; API, web, PostgreSQL and authenticated browser jobs passed |
+| Required and current schema | `202610080023` |
+| Economy target | `gemini` / `gemini-3.5-flash-lite` |
+| Premium recommendation target | `openai` / `gpt-4o-2024-11-20` |
+| Routing configuration | live `false`; shadow `true`; cohort `admins` |
+| Routing policy | `math-tutor-routing-v1`; threshold `5`; premium session cap `3` |
+| Price snapshot | Gemini input/output `384000` / `3200000`; OpenAI input/output `3200000` / `12800000` micro-SGD per million tokens |
+| Public API checks | health `ok`, tutor `enabled`; readiness `ready`; database, schema and content `ready/current/current` |
+| Public web check | `/login` returned HTTP `200` over HTTP/1.1 |
+| Authorization check | unauthenticated routing-status request returned `authentication_required` |
+| Backup evidence | Not available to this shell; confirm the current hosted backup or snapshot in the provider dashboard before expanding the cohort |
+
+The checked-in configuration declares `GEMINI_API_KEY` as a server-only Render secret and
+does not add an OpenAI key. Shadow mode therefore records premium recommendations while the
+Gemini economy provider remains the only callable provider. Automated tests include the
+economy-only provider spy and passed before activation.
+
+This shell has no authenticated browser session or Supabase access token, so it did not
+send a hosted administrator tutor message. Complete the activation smoke in the Tutor
+Evaluation Lab by sending one hard or repeated-confusion turn and confirming:
+
+1. resolved mode is `shadow` and cohort is `admins`;
+2. the decision has a recommendation but `executed_tier=economy`;
+3. `Shadow premium executions` remains `0`; and
+4. the reservation is reconciled with non-zero provider token usage.
 
 ### Work package E — evidence review and decision
 
