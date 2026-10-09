@@ -13,11 +13,11 @@ the grounding JSON manually.
 
 ## Repository baseline status
 
-- Mathematics decision: `pending`
-- Editorial decision: `pending`
-- Mathematics reviewer:
-- Editorial reviewer:
-- Review date:
+- Mathematics decision: `approved`
+- Editorial decision: `approved`
+- Mathematics reviewer: WILLIAM
+- Editorial reviewer: WILLIAM
+- Review date: 3 OCT 2026
 - Review notes:
 
 These fields describe the initial Git-authored draft. After deployment, the current
@@ -132,15 +132,15 @@ ratio, units and contextual constraints such as non-negative whole-number counts
 
 ## Acceptance checklist
 
-- [ ] Every mathematical statement is correct for Singapore Secondary 1 G3 Mathematics.
-- [ ] The material stays within syllabus outcomes 2.1, 2.2 and 2.3.
-- [ ] Examples use accepted notation and do not rely on unintroduced algebra.
-- [ ] Explanations do not contradict the approved B002 hints or solutions.
-- [ ] Common misconceptions are realistic and accurately corrected.
-- [ ] Wording is suitable for Secondary 1 learners.
-- [ ] The grounding gives enough help for tutoring without including unrelated content.
-- [ ] Mathematics decision and reviewer identity are recorded above.
-- [ ] Editorial decision and reviewer identity are recorded above.
+- [x] Every mathematical statement is correct for Singapore Secondary 1 G3 Mathematics.
+- [x] The material stays within syllabus outcomes 2.1, 2.2 and 2.3.
+- [x] Examples use accepted notation and do not rely on unintroduced algebra.
+- [x] Explanations do not contradict the approved B002 hints or solutions.
+- [x] Common misconceptions are realistic and accurately corrected.
+- [x] Wording is suitable for Secondary 1 learners.
+- [x] The grounding gives enough help for tutoring without including unrelated content.
+- [x] Mathematics decision and reviewer identity are recorded above.
+- [x] Editorial decision and reviewer identity are recorded above.
 
 ## What happens after approval
 
