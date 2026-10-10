@@ -47,3 +47,9 @@ uv run --project question_bank question-bank course-registry-validate
 Reviewer packets for all four batches are stored under `backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/`. Open each `index.html` for the formatted questions, hints and solutions, then record Mathematics and editorial decisions through the protected content dashboard or the packet's `review.md` fallback.
 
 The deployment bootstrap imports the complete question catalogue before the course snapshot, so the N2 pool foreign keys resolve in disposable CI databases and hosted staging. The production release workflow still fails closed until all required review and publication evidence exists.
+
+The technical pre-review audit recomputed all 78 pending-question answers and inspected all
+three lessons. It corrected B004 outcome alignment, a semantic duplicate and currency
+notation, then produced house rules and prompt contract v2 for future batches. See
+[N2_CALIBRATION_PRE_REVIEW_AUDIT.md](N2_CALIBRATION_PRE_REVIEW_AUDIT.md). This audit does not
+replace the pending human Mathematics and editorial decisions.

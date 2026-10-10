@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-024 — Simplifying a ratio of two fractions
+## n2-l2-024 — Scaling a ratio of two fractions
 
 [Open this question in the HTML preview](index.html#n2-l2-024)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-026 — Simplifying a decimal comparison
+## n2-l2-026 — Completing an equivalent decimal ratio
 
 [Open this question in the HTML preview](index.html#n2-l2-026)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-030 — Scaling a recipe ratio
+## n2-l2-030 — Ordering folders in a ratio
 
 [Open this question in the HTML preview](index.html#n2-l2-030)
 

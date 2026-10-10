@@ -7,7 +7,7 @@
   "school_level": "secondary_1",
   "topic_code": "N2",
   "primary_outcome": "2.1",
-  "title": "Simplifying a ratio of two fractions",
+  "title": "Scaling a ratio of two fractions",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,26 +20,21 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write the ratio 3/4 : 5/6 in its simplest positive integer form."
+          "text": "P:Q = 3/4:5/6. Given that P = 27, find Q."
         }
       ],
       "marks": 2,
       "primary_outcome": "2.1",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "exact_ratio",
-        "canonical_expression": "9:10",
-        "canonical_latex": "9:10",
-        "variables": [],
-        "domain_constraints": [
-          "positive ratio terms"
-        ],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "terms": 2,
-          "require_simplest_integer_terms": true
-        }
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "30",
+        "canonical_latex": "30",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -47,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use a common multiplier that clears both denominators."
+              "text": "First express the fractional ratio using integer terms."
             }
           ]
         },
@@ -56,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply both ratio terms by 12."
+              "text": "The ratio is 9:10. Compare 9 parts with P = 27."
             }
           ]
         }
@@ -67,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac34:\\frac56=(\\frac34\\times12):(\\frac56\\times12)"
+              "latex": "\\frac34:\\frac56=9:10"
             }
           ],
           "mark_type": "M",
@@ -78,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "9:10"
+              "latex": "Q=27\\div9\\times10=30"
             }
           ],
           "mark_type": "A",

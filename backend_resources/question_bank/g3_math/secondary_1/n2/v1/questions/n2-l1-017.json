@@ -20,26 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parcel has mass 1.5 kg and a box has mass 2.25 kg. Write the ratio of the parcel mass to the box mass in its simplest form."
+          "text": "A parcel has mass 1.5 kg and a box has mass 2.25 kg. How many times as heavy is the box as the parcel?"
         }
       ],
       "marks": 1,
       "primary_outcome": "2.1",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "exact_ratio",
-        "canonical_expression": "2:3",
-        "canonical_latex": "2:3",
-        "variables": [],
-        "domain_constraints": [
-          "positive ratio terms"
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1.5",
+        "canonical_latex": "1.5",
+        "accepted_answers": [
+          "3/2"
         ],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "terms": 2,
-          "require_simplest_integer_terms": true
-        }
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -47,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove the decimals by multiplying both terms by the same power of 10."
+              "text": "Divide the box's mass by the parcel's mass."
             }
           ]
         },
@@ -56,7 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write 1.5:2.25 as 150:225, then divide both terms by their highest common factor."
+              "text": "Calculate 2.25 divided by 1.5."
             }
           ]
         }
@@ -67,7 +64,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "1.5:2.25=150:225\\quad 150:225=2:3"
+              "latex": "2.25\\div1.5=1.5"
             }
           ],
           "mark_type": "A",

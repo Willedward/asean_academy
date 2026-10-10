@@ -7,7 +7,7 @@
   "school_level": "secondary_1",
   "topic_code": "N2",
   "primary_outcome": "2.1",
-  "title": "Simplifying a decimal comparison",
+  "title": "Completing an equivalent decimal ratio",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,26 +20,21 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write 2.5:0.75 in its simplest positive integer form."
+          "text": "The ratios 2.5:0.75 and 30:x are equivalent. Find x."
         }
       ],
       "marks": 2,
       "primary_outcome": "2.1",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "exact_ratio",
-        "canonical_expression": "10:3",
-        "canonical_latex": "10:3",
-        "variables": [],
-        "domain_constraints": [
-          "positive ratio terms"
-        ],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "terms": 2,
-          "require_simplest_integer_terms": true
-        }
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -47,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply both terms by 100 to remove the decimals."
+              "text": "Find the scale factor that changes 2.5 into 30."
             }
           ]
         },
@@ -56,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Simplify 250:75 by dividing both terms by 25."
+              "text": "Multiply both terms of 2.5:0.75 by the same scale factor."
             }
           ]
         }
@@ -67,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "2.5:0.75=250:75"
+              "latex": "30\\div2.5=12"
             }
           ],
           "mark_type": "M",
@@ -78,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "250:75=10:3"
+              "latex": "x=0.75\\times12=9"
             }
           ],
           "mark_type": "A",

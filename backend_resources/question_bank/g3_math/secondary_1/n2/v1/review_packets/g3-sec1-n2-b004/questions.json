@@ -21,26 +21,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A parcel has mass 1.5 kg and a box has mass 2.25 kg. Write the ratio of the parcel mass to the box mass in its simplest form."
+            "text": "A parcel has mass 1.5 kg and a box has mass 2.25 kg. How many times as heavy is the box as the parcel?"
           }
         ],
         "marks": 1,
         "primary_outcome": "2.1",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "exact_ratio",
-          "canonical_expression": "2:3",
-          "canonical_latex": "2:3",
-          "variables": [],
-          "domain_constraints": [
-            "positive ratio terms"
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1.5",
+          "canonical_latex": "1.5",
+          "accepted_answers": [
+            "3/2"
           ],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "terms": 2,
-            "require_simplest_integer_terms": true
-          }
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -48,7 +45,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove the decimals by multiplying both terms by the same power of 10."
+                "text": "Divide the box's mass by the parcel's mass."
               }
             ]
           },
@@ -57,7 +54,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 1.5:2.25 as 150:225, then divide both terms by their highest common factor."
+                "text": "Calculate 2.25 divided by 1.5."
               }
             ]
           }
@@ -68,7 +65,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "1.5:2.25=150:225\\quad 150:225=2:3"
+                "latex": "2.25\\div1.5=1.5"
               }
             ],
             "mark_type": "A",
@@ -102,7 +99,7 @@
     "school_level": "secondary_1",
     "topic_code": "N2",
     "primary_outcome": "2.1",
-    "title": "Simplifying a ratio of two fractions",
+    "title": "Scaling a ratio of two fractions",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -115,26 +112,21 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Write the ratio 3/4 : 5/6 in its simplest positive integer form."
+            "text": "P:Q = 3/4:5/6. Given that P = 27, find Q."
           }
         ],
         "marks": 2,
         "primary_outcome": "2.1",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "exact_ratio",
-          "canonical_expression": "9:10",
-          "canonical_latex": "9:10",
-          "variables": [],
-          "domain_constraints": [
-            "positive ratio terms"
-          ],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "terms": 2,
-            "require_simplest_integer_terms": true
-          }
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "30",
+          "canonical_latex": "30",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -142,7 +134,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use a common multiplier that clears both denominators."
+                "text": "First express the fractional ratio using integer terms."
               }
             ]
           },
@@ -151,7 +143,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply both ratio terms by 12."
+                "text": "The ratio is 9:10. Compare 9 parts with P = 27."
               }
             ]
           }
@@ -162,7 +154,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\frac34:\\frac56=(\\frac34\\times12):(\\frac56\\times12)"
+                "latex": "\\frac34:\\frac56=9:10"
               }
             ],
             "mark_type": "M",
@@ -173,7 +165,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "9:10"
+                "latex": "Q=27\\div9\\times10=30"
               }
             ],
             "mark_type": "A",
@@ -307,7 +299,7 @@
     "school_level": "secondary_1",
     "topic_code": "N2",
     "primary_outcome": "2.1",
-    "title": "Simplifying a decimal comparison",
+    "title": "Completing an equivalent decimal ratio",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -320,26 +312,21 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Write 2.5:0.75 in its simplest positive integer form."
+            "text": "The ratios 2.5:0.75 and 30:x are equivalent. Find x."
           }
         ],
         "marks": 2,
         "primary_outcome": "2.1",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "exact_ratio",
-          "canonical_expression": "10:3",
-          "canonical_latex": "10:3",
-          "variables": [],
-          "domain_constraints": [
-            "positive ratio terms"
-          ],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "terms": 2,
-            "require_simplest_integer_terms": true
-          }
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -347,7 +334,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply both terms by 100 to remove the decimals."
+                "text": "Find the scale factor that changes 2.5 into 30."
               }
             ]
           },
@@ -356,7 +343,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Simplify 250:75 by dividing both terms by 25."
+                "text": "Multiply both terms of 2.5:0.75 by the same scale factor."
               }
             ]
           }
@@ -367,7 +354,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "2.5:0.75=250:75"
+                "latex": "30\\div2.5=12"
               }
             ],
             "mark_type": "M",
@@ -378,7 +365,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "250:75=10:3"
+                "latex": "x=0.75\\times12=9"
               }
             ],
             "mark_type": "A",
@@ -2044,7 +2031,7 @@
     "school_level": "secondary_1",
     "topic_code": "N2",
     "primary_outcome": "2.3",
-    "title": "Scaling a recipe ratio",
+    "title": "Ordering folders in a ratio",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2057,7 +2044,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A recipe uses flour and sugar in the ratio 5:2. If 350 g of flour is used, find the mass of sugar."
+            "text": "A school orders red and blue folders in the ratio 3:8. If it orders 120 blue folders, how many red folders does it order?"
           }
         ],
         "marks": 2,
@@ -2066,8 +2053,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "140",
-          "canonical_latex": "140",
+          "canonical_answer": "45",
+          "canonical_latex": "45",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2079,7 +2066,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find how many grams one ratio part represents."
+                "text": "Use the number of blue folders to find the value of one ratio part."
               }
             ]
           },
@@ -2088,7 +2075,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Five parts represent 350 g, so one part represents 70 g."
+                "text": "Eight parts represent 120 blue folders."
               }
             ]
           }
@@ -2099,7 +2086,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "350\\div5=70"
+                "latex": "120\\div8=15"
               }
             ],
             "mark_type": "M",
@@ -2110,7 +2097,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "2\\times70=140"
+                "latex": "3\\times15=45"
               }
             ],
             "mark_type": "A",
@@ -2157,7 +2144,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A prize of $420 is divided between Hana and Idris in the ratio 3:4. Find the larger share."
+            "text": "A prize of S$420 is divided between Hana and Idris in the ratio 3:4. Find the larger share, in dollars."
           }
         ],
         "marks": 2,
@@ -2188,7 +2175,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Seven parts represent $420."
+                "text": "Seven parts represent S$420."
               }
             ]
           }
@@ -2479,7 +2466,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The savings of Ali and Ben are in the ratio 3:5. Ali spends $40 and Ben adds $20. Their new savings are in the ratio 1:2. Find their original total savings."
+            "text": "The savings of Ali and Ben are in the ratio 3:5. Ali spends S$40 and Ben adds S$20. Their new savings are in the ratio 1:2. Find their original total savings, in dollars."
           }
         ],
         "marks": 3,
@@ -2712,7 +2699,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The amounts of money held by A, B and C are in the ratio 3:4:5. First, A gives one third of A’s original amount to B. Then C gives 20% of C’s original amount, shared equally between A and B. After both transfers, B has $360 more than A. Find the original total amount of money."
+            "text": "The amounts of money held by A, B and C are in the ratio 3:4:5. First, A gives one third of A’s original amount to B. Then C gives 20% of C’s original amount, shared equally between A and B. After both transfers, B has S$360 more than A. Find the original total amount of money, in dollars."
           }
         ],
         "marks": 5,

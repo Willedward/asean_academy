@@ -48,7 +48,7 @@ DEFAULT_COURSE_REGISTRY = (
     REPOSITORY_ROOT / "backend_resources/courses/g3_math/v1/registry.json"
 )
 DEFAULT_HOUSE_RULES = (
-    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v1.json"
+    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v2.json"
 )
 DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/schema"
 DEFAULT_CLAIMS = (
