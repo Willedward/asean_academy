@@ -1,49 +1,49 @@
-# Secondary 1 N2 calibration batch
+# Secondary 1 N2 calibration unit
 
 ## Status
 
-The first controlled N2 batch, `g3-sec1-n2-b001`, is authored and marked `ready_for_review`. It contains 26 original questions covering the Secondary 1 syllabus outcomes:
+Secondary 1 N2 is the first complete non-N1 calibration unit. Its source contains all 104 planned questions across the three syllabus outcomes and all five difficulty levels:
 
 - 2.1 ratios involving rational numbers;
 - 2.2 writing a ratio in its simplest form; and
 - 2.3 problems involving ratio.
 
-The files are under `backend_resources/question_bank/g3_math/secondary_1/n2/v1/`. The batch manifest records the generator and prompt versions, syllabus and house-rule checksums, style references, exact allocation, and reserved question keys.
+The aggregate authoring validator reports 144 authored questions across N1 and N2 with zero errors, zero warnings and no exact or near-prompt duplicates. N2 batch state is:
 
-## Calibration distribution
+| Batch | Questions | State |
+| --- | ---: | --- |
+| `g3-sec1-n2-b001` | 26 | `ready_for_review` |
+| `g3-sec1-n2-b002` | 26 | `approved` |
+| `g3-sec1-n2-b003` | 26 | `ready_for_review` |
+| `g3-sec1-n2-b004` | 26 | `ready_for_review` |
+| **Total** | **104** | Complete draft inventory |
 
-| Outcome | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 | Total |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 2.1 | 2 | 3 | 2 | 2 | 0 | 9 |
-| 2.2 | 2 | 2 | 3 | 1 | 1 | 9 |
-| 2.3 | 2 | 2 | 3 | 1 | 0 | 8 |
-| **Total** | **6** | **7** | **8** | **4** | **1** | **26** |
+Every question has two staged hints, a marked worked solution, provenance and a deterministic answer contract. The bank includes `exact_ratio`, which accepts supported ratio notation and can require simplest positive integer terms.
 
-Each question has two staged hints, a fully marked worked solution, provenance, and a deterministic answer contract. This batch also introduces `exact_ratio`, which accepts equivalent colon or `to` notation and can require simplest positive integer terms.
+## Deployable course integration
 
-## Automated evidence
+The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully written draft lessons. Each lesson has explanations, worked examples, active recall and a summary. The N2 pool manifest allocates every question exactly once:
 
-The aggregate validator confirms:
+| Pool role | Questions |
+| --- | ---: |
+| Lesson practice | 60, split evenly across the three outcomes |
+| Unit checkpoint | 20 |
+| Adaptive reserve | 24 |
+| **Total** | **104** |
 
-- all 19 blueprints and 75 manifests remain covered;
-- all 26 N2 files match the batch allocation and reserved keys;
-- canonical and accepted answers execute successfully;
-- source checksums and question contracts are valid; and
-- there are no exact or near-prompt duplicates across the 66 authored questions.
+The draft snapshot is available when the API enables development previews. Production publication remains gated on Mathematics and editorial approval for batches B001, B003 and B004, followed by reviewed/published lesson and course revisions. These human decisions must not be inferred from automated validation.
 
-Generate the reviewer packet from the repository root:
+## Validation and review
+
+Run from the repository root:
 
 ```bash
-uv run --project question_bank question-bank authoring-export \
-  backend_resources/question_bank/g3_math/secondary_1/n2/v1/batches/g3-sec1-n2-b001.json \
-  backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001 \
-  --syllabus backend_resources/syllabi/g3_math/v1/catalogue.json
+uv run --project question_bank question-bank authoring-validate
+uv run --project question_bank question-bank catalogue-validate
+uv run --project question_bank question-bank course-validate
+uv run --project question_bank question-bank course-registry-validate
 ```
 
-Open `backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/g3-sec1-n2-b001/index.html` for the formatted questions, hints, and solutions. Record per-question decisions and comments in `review.md` directly from VS Code; `review.csv` remains available for spreadsheet workflows. Mathematical and editorial reviewers should check correctness, age-appropriate wording, curriculum alignment, difficulty, marks, and whether each hint reveals an appropriate amount.
+Reviewer packets for all four batches are stored under `backend_resources/question_bank/g3_math/secondary_1/n2/v1/review_packets/`. Open each `index.html` for the formatted questions, hints and solutions, then record Mathematics and editorial decisions through the protected content dashboard or the packet's `review.md` fallback.
 
-## When more examination data helps
-
-Additional papers are not required to review this calibration batch or test the pipeline. The existing references are enough for an initial N2 sample. More representative Secondary 1 papers and marking schemes become valuable after the team reviews this batch and before batches B002–B004 are authored. They can help calibrate school-specific phrasing, mark allocation, calculator expectations, multi-step difficulty, and the balance between routine and unfamiliar problems.
-
-The most useful feedback before scaling is the completed Markdown review (or CSV export) plus any notes describing which questions felt easier or harder than their assigned level. That evidence should be used to adjust the remaining N2 blueprint and authoring prompt before producing another 78 N2 questions.
+The deployment bootstrap imports the complete question catalogue before the course snapshot, so the N2 pool foreign keys resolve in disposable CI databases and hosted staging. The production release workflow still fails closed until all required review and publication evidence exists.

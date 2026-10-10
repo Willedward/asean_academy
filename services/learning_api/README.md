@@ -30,7 +30,7 @@ Apply migrations, import the validated authored records, and configure the serve
 
 ```bash
 DATABASE_URL=postgresql://... bash scripts/validate_migrations.sh
-DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank import-db
+DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank catalogue-import-db
 DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank course-import-db
 ```
 

@@ -346,7 +346,13 @@ class ProgressService:
             record.lesson_key: record
             for record in self.repository.lesson_progress(self.learner_id)
         }
-        lessons = sorted(report.lessons, key=lambda lesson: lesson.position)
+        unit_positions = {
+            unit.stable_key: unit.position for unit in report.course.units
+        }
+        lessons = sorted(
+            report.lessons,
+            key=lambda lesson: (unit_positions[lesson.unit_key], lesson.position),
+        )
         retry_counts = self._retry_counts()
         lesson_responses = []
         for lesson in lessons:
@@ -382,6 +388,9 @@ class ProgressService:
 
     def learning_home(self) -> dict:
         progress = self.progress()
+        unit_by_key = {
+            unit.stable_key: unit for unit in self.catalogue.report.course.units
+        }
         lesson_by_key = {
             lesson.stable_key: lesson for lesson in self.catalogue.report.lessons
         }
@@ -409,9 +418,10 @@ class ProgressService:
                 "session_id": active.session_id,
             }
         elif active_checkpoint is not None:
+            unit = unit_by_key[active_checkpoint["unit_key"]]
             action = {
                 "type": "resume_checkpoint",
-                "title": "Resume the N1 checkpoint",
+                "title": f"Resume the {unit.topic_code} checkpoint",
                 "description": "Continue the unit checkpoint from your last question.",
                 "href": f"/checkpoints/{active_checkpoint['last_session_id']}",
                 "lesson_key": None,
@@ -465,9 +475,10 @@ class ProgressService:
                     "session_id": None,
                 }
             elif checkpoint is not None:
+                unit = unit_by_key[checkpoint["unit_key"]]
                 action = {
                     "type": "start_checkpoint",
-                    "title": "Start the N1 checkpoint",
+                    "title": f"Start the {unit.topic_code} checkpoint",
                     "description": "Complete the checkpoint to turn proficiency into mastery.",
                     "href": "/progress#checkpoint-title",
                     "lesson_key": None,
@@ -487,8 +498,8 @@ class ProgressService:
                 if first_incomplete is None:
                     action = {
                         "type": "course_complete",
-                        "title": "N1 mastery complete",
-                        "description": "You passed the checkpoint and mastered this unit.",
+                        "title": "Course mastery complete",
+                        "description": "You passed every checkpoint and mastered this course.",
                         "href": "/progress",
                         "lesson_key": None,
                         "unit_key": None,
@@ -498,7 +509,7 @@ class ProgressService:
                     action = {
                         "type": "start_lesson",
                         "title": f"Start {first_incomplete['lesson_title']}",
-                        "description": "Begin the first N1 lesson and its guided practice.",
+                        "description": "Begin this lesson and its guided practice.",
                         "href": f"/lessons/{first_incomplete['lesson_key']}",
                         "lesson_key": first_incomplete["lesson_key"],
                         "unit_key": None,

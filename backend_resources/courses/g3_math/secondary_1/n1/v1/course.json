@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,10 +8,18 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, beginning with N1 Numbers and their operations.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers and N2 Ratio and proportion calibration units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n2-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -91,12 +99,48 @@
           "required_practice_count": 3
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-n2",
+      "position": 2,
+      "topic_code": "N2",
+      "title": "Ratio and proportion",
+      "checkpoint_question_count": 15,
+      "lessons": [
+        {
+          "stable_key": "n2-lesson-01",
+          "position": 1,
+          "title": "Ratios involving rational numbers",
+          "outcomes": [
+            "2.1"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "n2-lesson-02",
+          "position": 2,
+          "title": "Writing a ratio in its simplest form",
+          "outcomes": [
+            "2.2"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "n2-lesson-03",
+          "position": 3,
+          "title": "Problems involving ratio",
+          "outcomes": [
+            "2.3"
+          ],
+          "required_practice_count": 20
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 19,
-    "unit_checkpoint": 11,
-    "adaptive_reserve": 10
+    "lesson_practice": 79,
+    "unit_checkpoint": 31,
+    "adaptive_reserve": 34
   },
   "provenance": {
     "authoring_method": "original_authored",

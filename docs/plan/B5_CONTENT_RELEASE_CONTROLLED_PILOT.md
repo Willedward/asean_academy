@@ -25,19 +25,19 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source is a valid N1 pilot, not the full Beta catalogue:
+The current authored source contains valid N1 and N2 draft units, not the full Beta catalogue:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
-| Topic groups                       |                                      1 |                                      19 | Blocked |
-| Questions                          |                                     40 |                                   1,900 | Blocked |
+| Topic groups                       |                                      2 |                                      19 | Blocked |
+| Questions                          |                                    144 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                      7 |                            7 N1 lessons | Present |
-| Lessons with notes                 |                                      1 |                                       7 | Blocked |
+| Lessons                            |                                     10 |  All authored and planned Beta lessons | Blocked |
+| Lessons with notes                 |                                      4 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
-| Local pool inventory               | 19 practice, 11 checkpoint, 10 reserve |            Complete and non-overlapping | Pass    |
+| Local pool inventory               | 79 practice, 31 checkpoint, 34 reserve |            Complete and non-overlapping | Pass    |
 
-The N1 v1 authoring models currently constrain the catalogue to one N1 unit and N1-shaped keys. The 19-topic bank therefore requires a generalized course/question contract before bulk authoring can be imported. The gate exposes this as `source.full_syllabus`; it does not weaken the requirement or infer readiness from a large file count.
+The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete draft path through lesson pools and catalogue import. The gate still exposes the missing 17 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the N2 calibration unit.
 
 ## Development sequencing decision — 10 October 2026
 

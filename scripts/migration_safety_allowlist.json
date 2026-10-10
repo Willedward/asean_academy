@@ -43,5 +43,12 @@
       "match": "drop constraint tutor_route_decisions_reserved_cost_micros_sgd_check",
       "reason": "The constraint is recreated in the same transaction with zero added as a valid routed cost; every previously valid positive value remains valid."
     }
+  ],
+  "202610100026_exact_ratio_answer_constraint.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint math_answer_specs_check",
+      "reason": "A named response-mode constraint that adds exact_ratio is created and validated before the original constraint is removed; every previously allowed response and comparison mode remains valid."
+    }
   ]
 }

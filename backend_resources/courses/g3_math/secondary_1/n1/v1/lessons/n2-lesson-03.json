@@ -1,0 +1,295 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n2",
+  "position": 3,
+  "status": "draft",
+  "title": "Problems involving ratio",
+  "summary": "Model sharing, scaling, linked ratios and changing quantities by representing each ratio term as a number of equal parts.",
+  "outcomes": [
+    "2.3"
+  ],
+  "prerequisite_lessons": [
+    "n2-lesson-02"
+  ],
+  "estimated_minutes": 40,
+  "objectives": [
+    "Divide a total or a difference in a stated ratio.",
+    "Scale recipes and linked comparisons with a consistent part value.",
+    "Reconstruct original quantities after transfers, additions or removals change a ratio."
+  ],
+  "mastery_policy_key": "n2-default-v1",
+  "sections": [
+    {
+      "stable_key": "ratio-parts-model",
+      "position": 1,
+      "type": "explanation",
+      "title": "Turn ratio terms into equal parts",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If three quantities are in the ratio "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a:b:c"
+        },
+        {
+          "type": "text",
+          "text": ", write them as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "ak,bk,ck"
+        },
+        {
+          "type": "text",
+          "text": " for one positive part value "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": ". A known total gives "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(a+b+c)k"
+        },
+        {
+          "type": "text",
+          "text": ". A known difference gives the difference between the relevant coefficients multiplied by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": ". Keep labels beside the parts so the final value answers the correct quantity."
+        }
+      ]
+    },
+    {
+      "stable_key": "sharing-total-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example: divide a total among three groups",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A sum of $252 is shared among A, B and C in the ratio "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3:4:5"
+        },
+        {
+          "type": "text",
+          "text": ". Find C's share."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Count the total number of equal parts."
+            },
+            {
+              "type": "display_math",
+              "latex": "3+4+5=12"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the value of one part."
+            },
+            {
+              "type": "display_math",
+              "latex": "252\\div12=21"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "C receives 5 parts."
+            },
+            {
+              "type": "display_math",
+              "latex": "5\\times21=105"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The three shares are 63, 84 and 105; they add to 252 and have ratio 3:4:5."
+    },
+    {
+      "stable_key": "scaling-and-linked-ratios",
+      "position": 3,
+      "type": "explanation",
+      "title": "Scale and link ratios",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a recipe or map scale, find the multiplier connecting a known amount to the required amount and apply it to every linked quantity. To combine two ratios that share a quantity, scale both ratios until the shared term has the same number of parts, then join the remaining terms. The shared quantity is counted once."
+        }
+      ]
+    },
+    {
+      "stable_key": "changed-ratio-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: reconstruct a changed ratio",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The ratio of red to blue beads is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3:5"
+        },
+        {
+          "type": "text",
+          "text": ". After 12 red beads are added, the ratio becomes "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1:1"
+        },
+        {
+          "type": "text",
+          "text": ". Find the original total number of beads."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the original numbers be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3k"
+            },
+            {
+              "type": "text",
+              "text": " red and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5k"
+            },
+            {
+              "type": "text",
+              "text": " blue."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The new 1:1 ratio means the two quantities are equal."
+            },
+            {
+              "type": "display_math",
+              "latex": "3k+12=5k"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve for one part, then find the original total."
+            },
+            {
+              "type": "display_math",
+              "latex": "12=2k\\Rightarrow k=6"
+            },
+            {
+              "type": "display_math",
+              "latex": "3k+5k=8k=48"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Originally there are 18 red and 30 blue beads; adding 12 red beads gives 30:30, which is 1:1."
+    },
+    {
+      "stable_key": "ratio-problem-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "$84 is divided in the ratio "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2:5"
+        },
+        {
+          "type": "text",
+          "text": ". Find the smaller share."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "24",
+        "canonical_latex": "24",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "There are 7 equal parts. Each part is $12, so the smaller share is 2 \u00d7 $12 = $24."
+        }
+      ]
+    },
+    {
+      "stable_key": "ratio-problem-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Problem-solving checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Label the ratio terms, represent each quantity with a common part value, translate the known total or change into an equation, solve for one part, answer the named quantity with its unit, and substitute back into the story to verify the total and final ratio."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-10T18:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

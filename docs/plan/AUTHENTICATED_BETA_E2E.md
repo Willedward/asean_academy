@@ -92,7 +92,7 @@ commands at the hosted beta project.
 export E2E_DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/asean_academy_e2e'
 
 DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
-DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank import-db
+DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
 DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
 uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
 
