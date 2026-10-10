@@ -296,6 +296,12 @@ Evaluation Lab by sending one hard or repeated-confusion turn and confirming:
 3. `Shadow premium executions` remains `0`; and
 4. the reservation is reconciled with non-zero provider token usage.
 
+The hosted learner smoke also requires preview-only draft grounding because the shared
+review environment intentionally serves draft lesson and question revisions. That exception
+is resolved from the authenticated PostgreSQL role at request time: it applies only to an
+`academic_admin` in `preview` when draft content is enabled. Students and production remain
+restricted to published lesson and question grounding.
+
 ### Work package E — evidence review and decision
 
 1. Run the fixed cases and multi-turn paths.

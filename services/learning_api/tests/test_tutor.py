@@ -1,19 +1,21 @@
 from __future__ import annotations
 
 import asyncio
+from dataclasses import replace
 from pathlib import Path
 from uuid import uuid4
 
 import httpx
 
 from learning_api.config import Settings
-from learning_api.dependencies import admin_learner
+from learning_api.dependencies import _tutor_repository_for_request, admin_learner
 from learning_api.identity import AuthenticatedLearner
 from learning_api.main import create_app
 from learning_api.tutor_contracts import AnswerLockState, TutorBlock
 from learning_api.tutor_provider import TutorProviderResult, TutorProviderUsage
 from learning_api.tutor_repository import (
     InMemoryTutorRepository,
+    PostgresTutorRepository,
     TutorGrounding,
     _safe_attempt_evidence,
 )
@@ -198,6 +200,34 @@ def test_shadow_cohort_uses_the_database_role_and_ignores_the_token_role():
     assert learner_response.status_code == 200, learner_response.text
     assert learner_repo.last_route_plan.routing_mode == "off"
     assert learner_repo.last_route_plan.recommendation.tier == "economy"
+
+
+def test_preview_draft_grounding_is_scoped_to_academic_administrators():
+    settings = Settings(
+        environment="preview",
+        allow_draft_content=True,
+        cors_origins=("https://staging.example",),
+        database_url="postgresql://example.test/staging",
+        log_level="INFO",
+        repository_root=REPOSITORY_ROOT,
+    )
+    strict = PostgresTutorRepository(settings.database_url)
+
+    administrator = _tutor_repository_for_request(
+        strict, settings, "academic_admin"
+    )
+    student = _tutor_repository_for_request(strict, settings, "student")
+    production = _tutor_repository_for_request(
+        strict,
+        replace(settings, environment="production", allow_draft_content=False),
+        "academic_admin",
+    )
+
+    assert administrator is not strict
+    assert administrator.allow_draft_grounding is True
+    assert student is strict
+    assert student.allow_draft_grounding is False
+    assert production is strict
 
 
 class LeakingProvider:
