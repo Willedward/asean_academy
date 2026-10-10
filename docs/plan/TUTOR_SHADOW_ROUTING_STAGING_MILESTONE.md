@@ -1,6 +1,7 @@
 # Tutor Shadow Routing Staging Milestone
 
-**Status:** In progress; hosted activation smoke complete, evidence dataset collection remains
+**Status:** Deferred to the pre-Beta gate after content completion; hosted activation smoke
+complete, backup prerequisite and evidence dataset remain
 
 **Prepared:** 8 October 2026
 
@@ -22,6 +23,12 @@ understand each recommendation, validates the projected cost model against recon
 usage, and produces a written go/no-go decision for a later administrator-only live trial.
 
 The milestone does **not** enable live premium routing for students.
+
+**Sequencing decision (10 October 2026):** Paid backup infrastructure and the representative
+shadow dataset are deferred until the content candidate is ready. During question and lesson
+authoring, staging remains disposable, premium execution remains disabled and this milestone
+does not block content work. The consolidated last-mile checklist is in
+[B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md#pre-beta-hosted-operations-checklist).
 
 **Implementation update:** Work packages A, B and C are implemented and deployed to hosted
 staging. Work package D is activated for the `admins` cohort with live hybrid routing off.
