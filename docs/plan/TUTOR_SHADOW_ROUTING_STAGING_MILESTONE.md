@@ -142,8 +142,8 @@ Create a repeatable activation procedure:
 
 1. record the API and web release SHAs;
 2. back up or snapshot staging according to the existing database procedure;
-3. apply migrations through `202610080023_tutor_routing_evidence_pagination.sql`;
-4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610080023`;
+3. apply migrations through `202610100024_tutor_zero_cost_reservations.sql`;
+4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610100024`;
 5. configure current economy and premium model identifiers and micro-SGD price snapshots;
 6. keep live hybrid routing `false`;
 7. set the cohort to `admins` and shadow routing to `true`;
@@ -271,7 +271,7 @@ Observed on **10 October 2026 at 01:03 WITA**:
 | Active API source release | `519ab749b22bce1da88a8aee8ab738299a20d2e5` |
 | Shadow configuration commit included in release | `4ab492628c45780f4bdcd84ccfe6f884796abe3b` |
 | CI run | `37818702809`; API, web, PostgreSQL and authenticated browser jobs passed |
-| Required and current schema | `202610080023` |
+| Required and current schema | `202610100024` |
 | Economy target | `gemini` / `gemini-3.5-flash-lite` |
 | Premium recommendation target | `openai` / `gpt-4o-2024-11-20` |
 | Routing configuration | live `false`; shadow `true`; cohort `admins` |

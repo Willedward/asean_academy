@@ -514,7 +514,7 @@ def test_academic_admin_can_read_tutor_routing_status():
         "resolved_mode": "off",
         "cohort": "off",
         "policy_version": "math-tutor-routing-v1",
-        "schema_revision": "202610080023",
+        "schema_revision": "202610100024",
         "economy_provider": "synthetic",
         "economy_model": "synthetic-tutor-v1",
         "premium_provider": None,

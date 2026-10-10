@@ -428,6 +428,14 @@ aggregates, filterable decision evidence and an explicit zero-shadow-premium-exe
 invariant without returning learner prompts or answers. The next work package activates
 administrator-only shadow routing in staging and records the deployment evidence.
 
+**Implementation update (10 October 2026):** The learner `TutorDock` is integrated into the
+live practice screen after the first wrong try and remains available to explain an unlocked
+solution. The authenticated browser journey now covers student answer submission, tutor
+session creation, a grounded message round trip through Next.js, FastAPI and PostgreSQL,
+and the deterministic synthetic provider. Migration `202610100024` permits zero-cost
+reservations for synthetic or free providers while retaining token and spend boundaries.
+Live-provider acceptance still requires a configured server-side provider key.
+
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.
 - Add tutor sessions/messages, prompt-policy versions, answer-lock context and structured

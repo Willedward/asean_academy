@@ -349,7 +349,14 @@ def tutor_repository(request: Request):
                     "message": "Tutor persistence requires the PostgreSQL database.",
                 },
             )
-        repository = PostgresTutorRepository(settings.database_url)
+        repository = PostgresTutorRepository(
+            settings.database_url,
+            # Disposable browser tests exercise the real tutor path against the
+            # reviewed draft fixtures without weakening hosted grounding rules.
+            allow_draft_grounding=(
+                settings.environment == "test" and settings.allow_draft_content
+            ),
+        )
         request.app.state.tutor_repository = repository
     return repository
 

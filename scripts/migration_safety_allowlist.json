@@ -31,5 +31,17 @@
       "match": "drop constraint if exists content_review_records_item_kind_check",
       "reason": "The constraint is recreated in the same transaction with tutor_grounding added; every previously allowed review item kind remains valid."
     }
+  ],
+  "202610100024_tutor_zero_cost_reservations.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint tutor_usage_reservations_reserved_cost_micros_sgd_check",
+      "reason": "The constraint is recreated in the same transaction with zero added as a valid reserved cost; every previously valid positive value remains valid."
+    },
+    {
+      "category": "drop_object",
+      "match": "drop constraint tutor_route_decisions_reserved_cost_micros_sgd_check",
+      "reason": "The constraint is recreated in the same transaction with zero added as a valid routed cost; every previously valid positive value remains valid."
+    }
   ]
 }
