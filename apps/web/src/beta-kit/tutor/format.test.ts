@@ -26,6 +26,7 @@ describe("tutor quota", () => {
     const now = new Date("2026-10-09T09:30:00+07:00");
     expect(resetLabel("2026-10-10T00:00:00Z", now, "Asia/Jakarta")).toBe("7:00 tomorrow");
     expect(resetLabel("2026-10-09T12:30:00Z", now, "Asia/Jakarta")).toBe("19:30 today");
+    expect(resetLabel("2026-10-12T00:00:00Z", now, "Asia/Jakarta")).toBe("7:00 on Monday");
     expect(resetLabel(null, now, "Asia/Jakarta")).toBe("tomorrow");
   });
 });

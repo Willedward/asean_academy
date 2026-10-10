@@ -226,7 +226,7 @@ describe("TutorDock", () => {
     await waitFor(() => expect(createTutorSession).toHaveBeenCalled());
     await typeAndSend("hello");
     await screen.findByText("That’s all my help for today");
-    expect(screen.getByText(/back at/).textContent).toMatch(/(today|tomorrow|day at)\.$/);
+    expect(screen.getByText(/back at/).textContent).toMatch(/(today|tomorrow|on \w+)\.$/);
     expect(screen.queryByLabelText("Message the hornbill")).toBeNull();
   });
 
