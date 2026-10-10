@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l4-015",
+  "bank_key": "g3-sec1-n2-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "primary_outcome": "2.2",
+  "title": "Comparing three flow rates",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Pipe A delivers 1.2 litres in 18 seconds, pipe B delivers 5/6 litre in 10 seconds, and pipe C delivers 1.5 litres in 24 seconds. Find the ratio of their delivery rates A:B:C in its simplest positive integer form."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "2.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_ratio",
+        "canonical_expression": "16:20:15",
+        "canonical_latex": "16:20:15",
+        "variables": [],
+        "domain_constraints": [
+          "positive ratio terms"
+        ],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "terms": 3,
+          "require_simplest_integer_terms": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert every delivery rate to litres per minute."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The rates are 4, 5 and 15/4 litres per minute."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A:\\ 1.2\\times\\frac{60}{18}=4"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "B:\\ \\frac56\\times\\frac{60}{10}=5"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "C:\\ 1.5\\times\\frac{60}{24}=\\frac{15}{4}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "4:5:\\frac{15}{4}=16:20:15"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf"
+    ],
+    "created_at": "2026-10-10T10:40:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

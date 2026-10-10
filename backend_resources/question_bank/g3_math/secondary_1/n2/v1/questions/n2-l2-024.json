@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l2-024",
+  "bank_key": "g3-sec1-n2-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "primary_outcome": "2.1",
+  "title": "Simplifying a ratio of two fractions",
+  "difficulty": 2,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write the ratio 3/4 : 5/6 in its simplest positive integer form."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "2.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_ratio",
+        "canonical_expression": "9:10",
+        "canonical_latex": "9:10",
+        "variables": [],
+        "domain_constraints": [
+          "positive ratio terms"
+        ],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "terms": 2,
+          "require_simplest_integer_terms": true
+        }
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use a common multiplier that clears both denominators."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply both ratio terms by 12."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac34:\\frac56=(\\frac34\\times12):(\\frac56\\times12)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "9:10"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf"
+    ],
+    "created_at": "2026-10-10T10:40:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

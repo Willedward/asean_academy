@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l3-031",
+  "bank_key": "g3-sec1-n2-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "primary_outcome": "2.3",
+  "title": "Recovering savings after two changes",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The savings of Ali and Ben are in the ratio 3:5. Ali spends $40 and Ben adds $20. Their new savings are in the ratio 1:2. Find their original total savings."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "2.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "800",
+        "canonical_latex": "800",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the original savings be 3k and 5k."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use (3k-40):(5k+20)=1:2."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=3k,\\quad B=5k"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{3k-40}{5k+20}=\\frac12\\Rightarrow6k-80=5k+20\\Rightarrow k=100"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A+B=8k=800"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf"
+    ],
+    "created_at": "2026-10-10T10:40:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

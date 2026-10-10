@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l5-005",
+  "bank_key": "g3-sec1-n2-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N2",
+  "primary_outcome": "2.3",
+  "title": "Tracking a three-way transfer",
+  "difficulty": 5,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The amounts of money held by A, B and C are in the ratio 3:4:5. First, A gives one third of A’s original amount to B. Then C gives 20% of C’s original amount, shared equally between A and B. After both transfers, B has $360 more than A. Find the original total amount of money."
+        }
+      ],
+      "marks": 5,
+      "primary_outcome": "2.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1440",
+        "canonical_latex": "1440",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the original amounts be 3k, 4k and 5k. Track each transfer using the original amounts."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "After the first transfer A and B have 2k and 5k. C then gives k in total, so A and B each receive 0.5k."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=3k,\\quad B=4k,\\quad C=5k"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A\\text{ gives }k\\text{ to }B:\\quad A=2k,\\ B=5k"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "20\\%\\text{ of }5k=k,\\text{ so }A=2.5k,\\ B=5.5k"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "B-A=3k=360\\Rightarrow k=120"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A+B+C=12k=1440"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 5,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf"
+    ],
+    "created_at": "2026-10-10T10:40:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
