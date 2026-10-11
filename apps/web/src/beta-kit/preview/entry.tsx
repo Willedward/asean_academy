@@ -25,7 +25,7 @@ const onboarding: OnboardingProps = {
     welcomeXp: 50,
     firstOutfit: { outfit: "scarf", name: "Batik scarf", level: 3 },
   },
-  continueHref: preview("dashboard-new"),
+  continueHref: preview("readiness-intro"),
   switchAccountHref: preview("sign-in"),
 };
 
