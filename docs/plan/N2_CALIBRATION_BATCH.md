@@ -12,7 +12,7 @@ The aggregate authoring validator reports 144 authored questions across N1 and N
 
 | Batch | Questions | State |
 | --- | ---: | --- |
-| `g3-sec1-n2-b001` | 26 | `ready_for_review` |
+| `g3-sec1-n2-b001` | 26 | `approved` |
 | `g3-sec1-n2-b002` | 26 | `approved` |
 | `g3-sec1-n2-b003` | 26 | `ready_for_review` |
 | `g3-sec1-n2-b004` | 26 | `ready_for_review` |
@@ -31,7 +31,7 @@ The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully wri
 | Adaptive reserve | 24 |
 | **Total** | **104** |
 
-The draft snapshot is available when the API enables development previews. Production publication remains gated on Mathematics and editorial approval for batches B001, B003 and B004, followed by reviewed/published lesson and course revisions. These human decisions must not be inferred from automated validation.
+The draft snapshot is available when the API enables development previews. Production publication remains gated on Mathematics and editorial approval for batches B003 and B004, followed by reviewed/published lesson and course revisions. These human decisions must not be inferred from automated validation.
 
 ## Validation and review
 

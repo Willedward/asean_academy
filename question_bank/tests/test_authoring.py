@@ -47,7 +47,9 @@ def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
         batch for batch in report.batch_reports if batch.manifest.batch_id == "g3-sec1-n2-b001"
     )
     assert n2_first_batch.valid
-    assert n2_first_batch.manifest.status == "ready_for_review"
+    assert n2_first_batch.manifest.status == "approved"
+    assert n2_first_batch.manifest.review.mathematics == "approved"
+    assert n2_first_batch.manifest.review.editorial == "approved"
     assert len(n2_first_batch.questions) == 26
 
 
