@@ -219,14 +219,17 @@ describe("TutorDock", () => {
 
   it("8. shows the reset time when the daily allowance is used up", async () => {
     sendTutorMessage.mockRejectedValue(
-      new api.TutorApiError("used", 429, "tutor_quota_exceeded", "req_9", { resets_at: "2026-10-10T00:00:00Z" }),
+      // Two hours from now, so the label is "today" or "tomorrow" whenever the test runs.
+      new api.TutorApiError("used", 429, "tutor_quota_exceeded", "req_9", { resets_at: new Date(Date.now() + 2 * 3600_000).toISOString() }),
     );
     render(<TutorDock {...props} />);
     await openTutor();
     await waitFor(() => expect(createTutorSession).toHaveBeenCalled());
     await typeAndSend("hello");
     await screen.findByText("That’s all my help for today");
-    expect(screen.getByText(/back at/).textContent).toMatch(/(today|tomorrow|day at)\.$/);
+    expect(screen.getByText(/back at/).textContent).toMatch(
+      /\d{1,2}:\d{2} (today|tomorrow|on \w+)\.$/,
+    );
     expect(screen.queryByLabelText("Message the hornbill")).toBeNull();
   });
 

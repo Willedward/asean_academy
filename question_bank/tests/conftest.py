@@ -14,3 +14,8 @@ def bank_root(repository_root):
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_1/n1/v1"
     )
+
+
+@pytest.fixture(scope="session")
+def course_bank_root(repository_root):
+    return repository_root / "backend_resources/question_bank/g3_math"

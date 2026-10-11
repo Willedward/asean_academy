@@ -68,7 +68,7 @@ question bank and course records:
 
 ```bash
 DATABASE_URL='postgresql://...' \
-  uv run --project question_bank --extra postgres question-bank import-db
+  uv run --project question_bank --extra postgres question-bank catalogue-import-db
 
 DATABASE_URL='postgresql://...' \
   uv run --project question_bank --extra postgres question-bank course-import-db

@@ -140,7 +140,7 @@ Run against a disposable database, never a live student database:
 ```bash
 # DATABASE_URL and TEST_DATABASE_URL must point to the disposable instance.
 bash scripts/validate_migrations.sh
-uv run --project services/learning_api --locked question-bank import-db
+uv run --project services/learning_api --locked question-bank catalogue-import-db
 uv run --project services/learning_api --locked question-bank course-import-db
 uv run --project services/learning_api --locked pytest services/learning_api/tests
 corepack pnpm ci:web

@@ -907,7 +907,14 @@ def _blocks_html(blocks, question: Question) -> str:
         if getattr(block, "type", None) == "text":
             rendered.append(html.escape(block.text))
         elif getattr(block, "type", None) in {"inline_math", "display_math"}:
-            rendered.append(f"<code>{html.escape(block.latex)}</code>")
+            display = block.type == "display_math"
+            tag = "div" if display else "span"
+            class_name = "math display-math" if display else "math inline-math"
+            rendered.append(
+                f'<{tag} class="{class_name}" '
+                f'data-latex="{html.escape(block.latex, quote=True)}">'
+                f"{html.escape(block.latex)}</{tag}>"
+            )
         else:
             asset = next(
                 (item for item in question.assets if item.asset_key == block.asset_key), None
@@ -918,6 +925,28 @@ def _blocks_html(blocks, question: Question) -> str:
                     f'alt="{html.escape(asset.alt_text)}">'
                 )
     return " ".join(rendered)
+
+
+def _reviewer_katex(repository_root: Path, asset_output: Path) -> tuple[str, str]:
+    source = (
+        repository_root
+        / "ocr_extractor/src/ocr_extractor/web/vendor/katex"
+    )
+    required = [source / "katex.min.css", source / "katex.min.js"]
+    if not all(path.is_file() for path in required):
+        raise ValueError("Vendored KaTeX assets are required for reviewer exports")
+
+    target = asset_output / "katex"
+    fonts = target / "fonts"
+    fonts.mkdir(parents=True, exist_ok=True)
+    if (source / "LICENSE").is_file():
+        shutil.copy2(source / "LICENSE", target / "LICENSE")
+    for font in sorted((source / "fonts").glob("*.woff2")):
+        shutil.copy2(font, fonts / font.name)
+    stylesheet = (source / "katex.min.css").read_text().replace(
+        "url(fonts/", "url(assets/katex/fonts/"
+    )
+    return stylesheet, (source / "katex.min.js").read_text()
 
 
 def export_reviewer_batch(
@@ -1002,6 +1031,7 @@ def export_reviewer_batch(
 
     cards: list[str] = []
     asset_output = output / "assets"
+    katex_stylesheet, katex_script = _reviewer_katex(repository_root, asset_output)
     for question in report.questions:
         parts: list[str] = []
         for part in question.parts:
@@ -1023,7 +1053,10 @@ def export_reviewer_batch(
             parts.append(
                 f"<section><h3>Part {part.position} · {part.marks} marks</h3>"
                 f"<p>{_blocks_html(part.prompt, question)}</p>"
-                f"<p><strong>Answer:</strong> {html.escape(answer)}</p>"
+                f"<p><strong>Answer:</strong> "
+                f'<span class="math inline-math" data-latex="'
+                f'{html.escape(response.canonical_latex, quote=True)}">'
+                f"{html.escape(answer)}</span></p>"
                 f"<ul>{hints}</ul><ol>{solution}</ol></section>"
             )
         cards.append(
@@ -1040,8 +1073,12 @@ def export_reviewer_batch(
     document = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(manifest.batch_id)} reviewer packet</title>
-<style>body{{font-family:system-ui,sans-serif;max-width:980px;margin:auto;padding:32px;color:#172033;background:#f4f6f8}}article{{background:white;border:1px solid #dce3e8;border-radius:14px;padding:24px;margin:20px 0}}section{{border-top:1px solid #e4e8ec;margin-top:18px}}code{{font-size:1rem;background:#f1f3f5;padding:2px 5px}}img{{max-width:100%}}small{{color:#65737e}}</style></head>
-<body><h1>{html.escape(manifest.batch_id)}</h1><p>{len(report.questions)} questions · {html.escape(manifest.bank_key)} · {html.escape(manifest.generator.prompt_version)}</p>{''.join(cards)}</body></html>
+<style>{katex_stylesheet}</style>
+<style>body{{font-family:system-ui,sans-serif;max-width:980px;margin:auto;padding:32px;color:#172033;background:#f4f6f8}}article{{background:white;border:1px solid #dce3e8;border-radius:14px;padding:24px;margin:20px 0}}section{{border-top:1px solid #e4e8ec;margin-top:18px}}img{{max-width:100%}}small{{color:#65737e}}.display-math{{overflow-x:auto;padding:.25rem 0}}.katex-display{{margin:.35rem 0;text-align:left}}</style></head>
+<body><h1>{html.escape(manifest.batch_id)}</h1><p>{len(report.questions)} questions · {html.escape(manifest.bank_key)} · {html.escape(manifest.generator.prompt_version)}</p>{''.join(cards)}
+<script>{katex_script}</script>
+<script>document.querySelectorAll('[data-latex]').forEach(function(element){{katex.render(element.dataset.latex,element,{{throwOnError:false,displayMode:element.classList.contains('display-math'),strict:'warn'}});}});</script>
+</body></html>
 """
     (output / "index.html").write_text(document)
     return {

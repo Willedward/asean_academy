@@ -24,7 +24,7 @@ const status = {
   resolved_mode: "shadow",
   cohort: "admins",
   policy_version: "math-tutor-routing-v1",
-  schema_revision: "202610080023",
+  schema_revision: "202610100024",
   economy_provider: "gemini",
   economy_model: "gemini-3.5-flash-lite",
   premium_provider: "openai",

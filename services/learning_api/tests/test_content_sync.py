@@ -36,7 +36,7 @@ def imported(catalogue):
 def test_exact_content_revisions_are_required_even_when_database_exists():
     catalogue = CourseCatalogue(ROOT, allow_drafts=True)
     rows = imported(catalogue)
-    assert check_content(Rows(rows), catalogue)["questions"] == 40
+    assert check_content(Rows(rows), catalogue)["questions"] == 144
     # A healthy database with an older lesson must not report ready.
     missing_lesson = [row for row in rows if row[1] != "n1-lesson-01"]
     with pytest.raises(ContentSyncError, match="lesson:n1-lesson-01:r2"):

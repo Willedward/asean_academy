@@ -25,7 +25,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
-| `g3-sec1-math` | 10 | 52 | Draft: N1 authored; remaining units planned |
+| `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
 | `g3-sec2-math` | 9 | 35 | Planned |
 | **Total** | **19** | **87** | Structurally registered |
 
@@ -45,8 +45,8 @@ Topics taught at both levels retain unique lesson IDs because their outcome suff
 
 Authenticated clients can read `GET /api/v1/courses`. The response reports both courses and all registered units, with `content_status`, `available`, and nullable links. Planned content has no link and cannot be opened. Draft content becomes available only when the API explicitly enables development previews; production continues to require published content.
 
-The existing `GET /api/v1/courses/{course_key}/map` endpoint still serves only the validated authored N1 snapshot. As each topic bank and lesson set is completed, its registry status and deployable snapshot advance together.
+The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authored N1 and N2 snapshot when draft previews are enabled. As each later topic bank and lesson set is completed, its registry status and deployable snapshot advance together.
 
 ## Next content slice
 
-Use the registry to create one complete non-N1 calibration unit before bulk generation. N2 Secondary 1 is the recommended slice because it is small, exercises shared-topic identifiers across both school levels, and can validate the complete workflow: blueprint, five difficulty levels, lesson notes, practice pools, checkpoint allocation, review, import, and API delivery.
+Secondary 1 N2 now completes the first non-N1 calibration slice: 104 questions, three lesson notes, practice pools, checkpoint and adaptive allocation, catalogue import, and API delivery are wired. All four question batches, all three N2 lessons and the N2 additions in course revision 3 have Mathematics and editorial approval. The seven N1 lessons retain their independent review gate before the complete Secondary 1 course can be published. Use the N2 calibration evidence when scaling the next topic bank.

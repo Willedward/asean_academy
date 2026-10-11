@@ -15,6 +15,7 @@ export interface PreviewEntry {
 
 export const GROUPS = [
   "Entry",
+  "Readiness check",
   "Learn",
   "Lesson",
   "Practice",

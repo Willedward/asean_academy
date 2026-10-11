@@ -354,8 +354,9 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
             select lessons.id as lesson_id, versions.id as lesson_version_id,
                    lessons.lesson_key
             from course_lessons lessons
+            join course_units units on units.id = lessons.unit_id
             join lesson_versions versions on versions.lesson_id = lessons.id
-            where versions.is_current
+            where versions.is_current and units.unit_key = 'g3-sec1-n1'
             order by lessons.lesson_key
             """
         ).fetchall()

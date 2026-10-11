@@ -14,6 +14,10 @@ BANK_ROOT = (
     REPOSITORY_ROOT
     / "backend_resources/question_bank/g3_math/secondary_1/n1/v1"
 )
+N2_BANK_ROOT = (
+    REPOSITORY_ROOT
+    / "backend_resources/question_bank/g3_math/secondary_1/n2/v1"
+)
 
 
 def application(tmp_path: Path, *, allow_drafts: bool = True):
@@ -131,6 +135,64 @@ def test_lesson_practice_uses_only_configured_pool_in_order(tmp_path):
         ("n1-l1-01", "guided"),
         ("n1-l2-03", "independent"),
         ("n1-l3-02", "challenge"),
+    ]
+
+
+def test_n2_lesson_practice_runs_a_real_draft_question_flow(tmp_path):
+    app = application(tmp_path)
+    created = request(
+        app,
+        "POST",
+        "/api/v1/practice-sessions",
+        headers={"Idempotency-Key": "n2-ratio-practice"},
+        json={
+            "lesson_key": "n2-lesson-01",
+            "mode": "guided_practice",
+            "question_count": 3,
+        },
+    )
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 3
+    questions = {
+        question.stable_key: question
+        for question in validate_bank(N2_BANK_ROOT).questions
+    }
+    session_id = created.json()["session_id"]
+    observed = []
+
+    for number in range(1, 4):
+        current = request(
+            app,
+            "GET",
+            f"/api/v1/practice-sessions/{session_id}/next",
+        ).json()
+        key = current["question"]["stable_key"]
+        observed.append((key, current["stage"]))
+        answered = request(
+            app,
+            "POST",
+            "/api/v1/attempts",
+            headers={"Idempotency-Key": f"n2-ratio-answer-{number}"},
+            json={
+                "session_id": session_id,
+                "question_key": key,
+                "question_revision": current["question"]["revision"],
+                "answers": canonical_answers(questions[key]),
+            },
+        )
+        assert answered.status_code == 200, answered.text
+        assert answered.json()["correct"] is True
+
+    completed = request(
+        app,
+        "GET",
+        f"/api/v1/practice-sessions/{session_id}/next",
+    )
+    assert completed.json()["status"] == "completed"
+    assert observed == [
+        ("n2-l1-001", "guided"),
+        ("n2-l1-002", "guided"),
+        ("n2-l1-007", "guided"),
     ]
 
 

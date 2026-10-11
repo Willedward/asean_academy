@@ -37,21 +37,21 @@ Publication validation remains unsuccessful until all 40 draft questions receive
 uv run question-bank validate --publish
 ```
 
-Validate the N1 course structure, seven lesson shells, and all 40 pool mappings:
+Validate the N1 and N2 course structure, ten lessons, and all 144 pool mappings:
 
 ```bash
 uv run question-bank course-validate
 ```
 
-Preview the draft course map at <http://127.0.0.1:8767>:
+Preview the course map at <http://127.0.0.1:8767>:
 
 ```bash
 uv run question-bank course-preview
 ```
 
 The six `lesson_content_required` warnings are expected while teaching sections for
-Lessons 2–7 are authored and reviewed. Publication validation deliberately fails while course,
-lesson, or question content remains in `draft` state:
+Lessons 2–7 are authored and reviewed. Publication validation deliberately fails while any
+required lesson or question content remains in `draft` state:
 
 ```bash
 uv run question-bank course-validate --publish
@@ -67,12 +67,11 @@ To import a valid draft or reviewed bank into a database after applying the Supa
 
 ```bash
 uv sync --extra postgres
-DATABASE_URL=postgresql://... uv run question-bank import-db
+DATABASE_URL=postgresql://... uv run question-bank catalogue-import-db
 DATABASE_URL=postgresql://... uv run question-bank course-import-db
 ```
 
-Apply migrations `202609200001` through `202609200003` before importing. Import the question
-bank first because course pools reference stable question identities. Imports are transactional.
+Apply migrations `202609200001` through `202609200003` before importing. Import the complete question catalogue first because the multi-unit course pools reference N1 and N2 question identities. Imports are transactional.
 Existing question, course, and lesson revisions are immutable: changed content requires an
 incremented `revision`; review-state promotion may retain the same revision.
 

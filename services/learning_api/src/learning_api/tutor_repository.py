@@ -280,8 +280,9 @@ def _message_record(row: dict) -> dict:
 
 
 class PostgresTutorRepository:
-    def __init__(self, database_url: str):
+    def __init__(self, database_url: str, *, allow_draft_grounding: bool = False):
         self.database_url = database_url
+        self.allow_draft_grounding = allow_draft_grounding
 
     def _connect(self):
         return psycopg.connect(
@@ -318,10 +319,17 @@ class PostgresTutorRepository:
                   on lesson_versions.lesson_id = lessons.id and lesson_versions.is_current
                 where practice.id = %s and practice.student_id = %s
                   and questions.stable_key = %s and versions.revision = %s
-                  and questions.status = 'published'
-                  and lesson_versions.status = 'published'
+                  and (%s or questions.status = 'published')
+                  and (%s or lesson_versions.status = 'published')
                 """,
-                (practice_session_id, learner_id, question_key, question_revision),
+                (
+                    practice_session_id,
+                    learner_id,
+                    question_key,
+                    question_revision,
+                    self.allow_draft_grounding,
+                    self.allow_draft_grounding,
+                ),
             ).fetchone()
             if source is None:
                 raise TutorError(
@@ -429,7 +437,10 @@ class PostgresTutorRepository:
                 raise TutorError("tutor_session_not_found", "The tutor session was not found.", 404)
             if row["tutor_status"] != "active":
                 raise TutorError("tutor_session_closed", "This tutor session is closed.", 409)
-            if row["lesson_status"] != "published" or row["content_status"] != "published":
+            if not self.allow_draft_grounding and (
+                row["lesson_status"] != "published"
+                or row["content_status"] != "published"
+            ):
                 raise TutorError(
                     "tutor_grounding_unavailable",
                     "The reviewed tutor grounding is no longer available.",
@@ -635,7 +646,7 @@ class PostgresTutorRepository:
         if (
             selected_quote.max_input_tokens <= 0
             or selected_quote.max_output_tokens <= 0
-            or selected_quote.max_cost_micros_sgd <= 0
+            or selected_quote.max_cost_micros_sgd < 0
             or selected_quote.max_input_tokens > limits.max_input_tokens
             or selected_quote.max_output_tokens > limits.max_output_tokens
             or selected_quote.max_cost_micros_sgd > limits.max_turn_cost_micros_sgd

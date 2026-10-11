@@ -30,7 +30,7 @@ Apply migrations, import the validated authored records, and configure the serve
 
 ```bash
 DATABASE_URL=postgresql://... bash scripts/validate_migrations.sh
-DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank import-db
+DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank catalogue-import-db
 DATABASE_URL=postgresql://... uv run --project question_bank --extra postgres question-bank course-import-db
 ```
 
@@ -102,7 +102,7 @@ The disabled economy/premium learner router, OpenAI premium adapter, route evide
 cost calculation, configuration, and activation gates are documented in
 `docs/plan/TUTOR_HYBRID_MODEL_ROUTING.md`.
 
-After applying migrations through `202610080023`, shadow routing can be enabled with
+After applying migrations through `202610100024`, shadow routing can be enabled with
 `ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED=true`. It records the premium route
 the policy would recommend while executing and charging only the configured economy
 provider. Shadow and live hybrid routing cannot be enabled together.

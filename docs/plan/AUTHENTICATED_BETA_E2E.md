@@ -65,6 +65,12 @@ It refuses remote hosts, requires a database name containing e2e, and refuses to
 again when fixture identities are present. This guard reduces the chance of running it
 against shared data. It runs only after migrations and content imports.
 
+The Playwright API process enables the deterministic synthetic tutor. In test mode only,
+the tutor repository may ground against the imported draft fixtures when draft content is
+explicitly enabled. Preview and production still require published question and lesson
+grounding. The student journey submits a wrong answer, starts a tutor session, sends a
+message, and checks the grounded reply before continuing through hints and Give up.
+
 ## CI execution
 
 The **authenticated-e2e** job in **.github/workflows/ci.yml** starts PostgreSQL 16,
@@ -86,7 +92,7 @@ commands at the hosted beta project.
 export E2E_DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/asean_academy_e2e'
 
 DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
-DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank import-db
+DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
 DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
 uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
 

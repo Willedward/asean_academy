@@ -69,6 +69,10 @@ describe("core learning screens", () => {
   });
 
   it("renders all real course units and no invented reward data", () => {
+    const lessonCount = courseMapFixture.units.reduce(
+      (total, unit) => total + unit.lessons.length,
+      0,
+    );
     render(
       <CoreCourseMapScreen
         learner={learner}
@@ -80,7 +84,8 @@ describe("core learning screens", () => {
     expect(
       screen.getByRole("heading", { name: courseMapFixture.title }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Being reviewed")).toHaveLength(7);
+    expect(screen.getAllByText("Being reviewed")).toHaveLength(lessonCount);
+    expect(screen.getByText("Ratio and proportion")).toBeInTheDocument();
     expect(screen.queryByText(/reward/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/\bXP\b/i)).not.toBeInTheDocument();
   });

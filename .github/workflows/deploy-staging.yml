@@ -66,7 +66,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: python3 scripts/check_migration_safety.py
       - run: bash scripts/validate_migrations.sh
-      - run: uv run --project services/learning_api --locked question-bank import-db
+      - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
       - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts scripts/smoke_deployment.py scripts/verify_supabase_auth_config.py scripts/test_smoke_deployment.py scripts/load_test_api.py scripts/backup_restore_drill.py
       - run: uv run --project services/learning_api pytest services/learning_api/tests scripts/test_smoke_deployment.py
@@ -146,7 +146,7 @@ jobs:
           DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
         run: |
           uv sync --project services/learning_api --locked --no-dev
-          uv run --project services/learning_api --locked question-bank import-db
+          uv run --project services/learning_api --locked question-bank catalogue-import-db
           uv run --project services/learning_api --locked question-bank course-import-db
       - name: Configure and deploy the staging API
         run: |

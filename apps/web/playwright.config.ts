@@ -37,6 +37,8 @@ export default defineConfig({
         ASEAN_ACADEMY_E2E_AUTH_SECRET: e2eSecret,
         ASEAN_ACADEMY_ENV: "test",
         ASEAN_ACADEMY_REPOSITORY_ROOT: "../..",
+        ASEAN_ACADEMY_TUTOR_ENABLED: "true",
+        ASEAN_ACADEMY_TUTOR_PROVIDER: "synthetic",
       },
     },
     {

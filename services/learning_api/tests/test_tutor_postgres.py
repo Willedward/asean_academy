@@ -236,6 +236,38 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
         assert decision["projected_recommended_cost_micros_sgd"] == 600
         assert "learner_id" not in decision
 
+        free_decision = TutorRouteDecision(
+            policy_version="test-policy-v1",
+            tier="economy",
+            provider_name="synthetic",
+            model_name="synthetic-tutor-v1",
+            mode="socratic_prompt",
+            question_difficulty=grounding.question_difficulty,
+            score=grounding.question_difficulty - 1,
+            reason_codes=("economy_sufficient",),
+            max_output_tokens=500,
+            input_cost_per_million_micros_sgd=0,
+            output_cost_per_million_micros_sgd=0,
+        )
+        free_reservation = repository.reserve(
+            learner_id,
+            session["session_id"],
+            limits,
+            request_id="free-provider-reserve-test",
+            quote=UsageReservationQuote(
+                max_input_tokens=5_000,
+                max_output_tokens=500,
+                max_cost_micros_sgd=0,
+            ),
+            routing=TutorRoutePlan("live", free_decision, free_decision),
+        )
+        repository.reconcile(
+            free_reservation,
+            UsageActual(input_tokens=20, output_tokens=10, cost_micros_sgd=0),
+            limits,
+            request_id="free-provider-reconcile-test",
+        )
+
         repository.append_message(
             session["session_id"],
             role="student",

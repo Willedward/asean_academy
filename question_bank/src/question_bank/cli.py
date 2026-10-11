@@ -42,12 +42,13 @@ DEFAULT_COURSE = (
     / "backend_resources/courses/g3_math/secondary_1/n1/v1"
 )
 DEFAULT_BANK_CATALOGUE = REPOSITORY_ROOT / "backend_resources/question_bank/g3_math"
+DEFAULT_COURSE_BANKS = DEFAULT_BANK_CATALOGUE
 DEFAULT_SYLLABUS = REPOSITORY_ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
 DEFAULT_COURSE_REGISTRY = (
     REPOSITORY_ROOT / "backend_resources/courses/g3_math/v1/registry.json"
 )
 DEFAULT_HOUSE_RULES = (
-    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v1.json"
+    REPOSITORY_ROOT / "backend_resources/question_bank/authoring/house-rules-v2.json"
 )
 DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/schema"
 DEFAULT_CLAIMS = (
@@ -88,7 +89,7 @@ def parser():
         "course-validate", help="Validate course, lesson and question-pool sources"
     )
     course_validate.add_argument("course", type=Path, nargs="?", default=DEFAULT_COURSE)
-    course_validate.add_argument("--bank", type=Path, default=DEFAULT_BANK)
+    course_validate.add_argument("--bank", type=Path, default=DEFAULT_COURSE_BANKS)
     course_validate.add_argument(
         "--publish", action="store_true", help="Require complete reviewed course content"
     )
@@ -106,7 +107,7 @@ def parser():
         "course-preview", help="Serve the local course-map author preview"
     )
     course_preview.add_argument("course", type=Path, nargs="?", default=DEFAULT_COURSE)
-    course_preview.add_argument("--bank", type=Path, default=DEFAULT_BANK)
+    course_preview.add_argument("--bank", type=Path, default=DEFAULT_COURSE_BANKS)
     course_preview.add_argument("--host", default="127.0.0.1")
     course_preview.add_argument("--port", type=int, default=8767)
     course_schema = commands.add_parser(
@@ -122,7 +123,7 @@ def parser():
         "course-import-db", help="Import a validated course snapshot into PostgreSQL"
     )
     course_importer.add_argument("course", type=Path, nargs="?", default=DEFAULT_COURSE)
-    course_importer.add_argument("--bank", type=Path, default=DEFAULT_BANK)
+    course_importer.add_argument("--bank", type=Path, default=DEFAULT_COURSE_BANKS)
     course_importer.add_argument(
         "--publish", action="store_true", help="Require publication validation"
     )

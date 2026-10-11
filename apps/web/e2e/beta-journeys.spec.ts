@@ -138,6 +138,21 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByRole("status").filter({ hasText: "Try again" }),
     ).toContainText("Try again");
+    await page.getByRole("button", { name: "Ask the hornbill" }).click();
+    const tutor = page.getByRole("dialog", { name: "Hornbill" });
+    await expect(tutor).toBeVisible();
+    await tutor
+      .getByLabel("Message the hornbill")
+      .fill("Why did my first step go wrong?");
+    await tutor.getByRole("button", { name: "Send" }).click();
+    await expect(tutor).toContainText(
+      "Let's inspect the step that changed the value. Which operation did you apply first?",
+    );
+    await tutor
+      .getByRole("button", {
+        name: "Close the hornbill and go back to the question",
+      })
+      .click();
     await page.getByRole("button", { name: "Hint 1", exact: true }).click();
     await expect(page.getByRole("region", { name: "Hints" })).toContainText(
       "Hint 1",

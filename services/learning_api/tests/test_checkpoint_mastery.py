@@ -170,7 +170,8 @@ def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_
         complete_lesson_correctly(app, lesson_key, sequence)
 
     before = request(app, "GET", "/api/v1/progress").json()
-    assert all(lesson["state"] == "proficient" for lesson in before["lessons"])
+    n1_lessons = [lesson for lesson in before["lessons"] if lesson["lesson_key"] in LESSON_KEYS]
+    assert all(lesson["state"] == "proficient" for lesson in n1_lessons)
     assert before["checkpoints"][0]["state"] == "available"
     assert before["checkpoints"][0]["question_count"] == 8
     assert before["checkpoints"][0]["passing_percentage"] == 70
@@ -255,11 +256,13 @@ def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_
 
     progress = request(app, "GET", "/api/v1/progress").json()
     home = request(app, "GET", "/api/v1/learning-home").json()
-    assert all(lesson["state"] == "mastered" for lesson in progress["lessons"])
-    assert all(lesson["checkpoint_passed"] for lesson in progress["lessons"])
+    n1_lessons = [lesson for lesson in progress["lessons"] if lesson["lesson_key"] in LESSON_KEYS]
+    assert all(lesson["state"] == "mastered" for lesson in n1_lessons)
+    assert all(lesson["checkpoint_passed"] for lesson in n1_lessons)
     assert progress["checkpoints"][0]["state"] == "passed"
     assert progress["checkpoints"][0]["last_percentage"] == 87.5
-    assert home["next_action"]["type"] == "course_complete"
+    assert home["next_action"]["type"] == "start_lesson"
+    assert home["next_action"]["lesson_key"] == "n2-lesson-01"
 
     with sqlite3.connect(database) as connection:
         events = connection.execute(
@@ -327,8 +330,9 @@ def test_failed_checkpoint_preserves_proficiency_and_allows_a_retake(tmp_path):
     assert completed["session"]["incorrect_count"] == 8
 
     progress = request(app, "GET", "/api/v1/progress").json()
-    assert all(lesson["state"] == "proficient" for lesson in progress["lessons"])
-    assert not any(lesson["checkpoint_passed"] for lesson in progress["lessons"])
+    n1_lessons = [lesson for lesson in progress["lessons"] if lesson["lesson_key"] in LESSON_KEYS]
+    assert all(lesson["state"] == "proficient" for lesson in n1_lessons)
+    assert not any(lesson["checkpoint_passed"] for lesson in n1_lessons)
     assert sum(lesson["retry_question_count"] for lesson in progress["lessons"]) == 8
     assert progress["checkpoints"][0]["state"] == "available"
     assert progress["checkpoints"][0]["last_percentage"] == 0

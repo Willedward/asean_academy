@@ -14,13 +14,13 @@ from learning_api.course_catalogue import CourseCatalogue
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 
 
-def test_current_n1_catalogue_is_reported_as_blocked_without_mutating_it():
+def test_current_n1_n2_catalogue_is_reported_as_blocked_without_mutating_it():
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
     checks, snapshot = source_checks(catalogue, BetaReleaseRequirements())
     by_id = {check.check_id: check for check in checks}
 
-    assert snapshot["topics"] == 1
-    assert snapshot["questions"] == 40
+    assert snapshot["topics"] == 2
+    assert snapshot["questions"] == 144
     assert len(snapshot["course_content_sha256"]) == 64
     assert not by_id["source.full_syllabus"].passed
     assert not by_id["source.question_volume"].passed
@@ -130,4 +130,4 @@ def test_draft_only_review_result_does_not_count_as_complete_approval(monkeypatc
     by_id = {check.check_id: check for check in checks}
 
     assert not by_id["database.human_approvals"].passed
-    assert by_id["database.human_approvals"].details["expected_items"] == 48
+    assert by_id["database.human_approvals"].details["expected_items"] == 155

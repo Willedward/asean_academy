@@ -6,7 +6,8 @@ PostgreSQL becomes the production source of truth only after validation, review,
 ## Layout
 
 ```text
-authoring/house-rules-v1.json
+authoring/house-rules-v{1,2}.json
+authoring/math-question-authoring-v2.md
 authoring/batch-claims-v1.json
 schema/question-v1.schema.json
 schema/question-batch-manifest-v1.schema.json
@@ -24,6 +25,10 @@ difficulty distribution, syllabus coverage, and publication checks. A batch mani
 20–30 questions and records generator, prompt, sources, checksums, and review state.
 The claim registry ensures that one named branch owns each active batch while multiple
 authors work in parallel.
+
+New batches default to house rules v2 and the math-question-authoring-v2 prompt contract.
+Existing manifests retain the checksum and prompt version used to create them. Update those
+references only while working under an active claim for that batch.
 
 Binary or SVG assets are uploaded to object storage during import; their metadata and checksums
 are stored in PostgreSQL. Questions must be original. Sample examination papers are style,

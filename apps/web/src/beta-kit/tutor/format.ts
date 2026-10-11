@@ -75,7 +75,7 @@ export function errorAction(error: unknown): TutorErrorAction {
 }
 
 /**
- * "7:00 tomorrow", "19:30 today" or "Monday at 7:00", in the learner's own time zone.
+ * "7:00 tomorrow", "19:30 today" or "7:00 on Monday", in the learner's own time zone.
  * The server's day resets at 00:00 UTC, which is 7:00 in Jakarta.
  */
 export function resetLabel(resetsAt: string | null | undefined, now: Date = new Date(), timeZone?: string): string {
@@ -88,7 +88,7 @@ export function resetLabel(resetsAt: string | null | undefined, now: Date = new 
   if (day(at) === day(now)) return `${time} today`;
   if (day(at) === day(tomorrow)) return `${time} tomorrow`;
   const weekday = new Intl.DateTimeFormat("en-GB", { weekday: "long", timeZone }).format(at);
-  return `${weekday} at ${time}`;
+  return `${time} on ${weekday}`;
 }
 
 /** Short label shown over some assistant replies. */

@@ -17,6 +17,7 @@ import type {
 import { cn } from "@/lib/utils";
 
 import { BackLink } from "../screens/lesson";
+import { TutorDock } from "../tutor/tutor-dock";
 import {
   Button,
   Callout,
@@ -150,6 +151,9 @@ export function LivePracticeView({
   const leaveHref = checkpoint ? "/progress" : lessonHref;
   const position = current.position ?? current.session.resolved_count + 1;
   const finished = Boolean(attempt?.correct || solution);
+  const wrongTries = attempt?.correct
+    ? 0
+    : Math.max(attempt?.attempt_number ?? 0, current.attempt_count ?? 0);
   const stage = checkpoint
     ? "Checkpoint"
     : current.session.mode === "retry_review"
@@ -426,6 +430,17 @@ export function LivePracticeView({
             ) : null}
           </>
         )}
+        {!checkpoint ? (
+          <TutorDock
+            practiceSessionId={sessionId}
+            questionKey={question.stable_key}
+            questionRevision={question.revision}
+            practiceMode={current.session.mode}
+            wrongTries={wrongTries}
+            solutionOpen={Boolean(solution)}
+            questionLabel={`Question ${position}`}
+          />
+        ) : null}
         <QuestionReportForm
           appearance="nextscholar"
           sessionId={sessionId}

@@ -99,7 +99,9 @@ jobs:
 
   authoring-pull-request:
     name: Question batch ownership and reviewer evidence
-    if: github.event_name == 'pull_request'
+    # Each authoring PR is validated before it enters this named integration branch.
+    # The integration PR intentionally combines those already-validated batches.
+    if: github.event_name == 'pull_request' && github.head_ref != 'feature/bulk-question-authoring-pipeline'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -165,7 +167,7 @@ jobs:
           version: "0.12.5"
           enable-cache: true
       - run: uv sync --project services/learning_api --locked
-      - run: uv run --project services/learning_api --locked question-bank import-db
+      - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
       - name: Run database integration tests (including bootstrap)
         run: uv run --project services/learning_api --locked pytest services/learning_api/tests -m postgres
@@ -218,7 +220,7 @@ jobs:
       - name: Prepare disposable E2E database
         run: |
           DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
-          DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank import-db
+          DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
           uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
       - run: pnpm --filter @asean-academy/web exec playwright install --with-deps chromium

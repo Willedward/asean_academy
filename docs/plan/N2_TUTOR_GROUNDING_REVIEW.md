@@ -31,8 +31,8 @@ grounding described here; it does not publish an N2 course lesson.
 ## What has already been approved
 
 The 20 calibration questions come only from `g3-sec1-n2-b002`, whose batch manifest records
-both Mathematics and editorial approval. The suite does not use pending batches B001 or
-B003. It also does not use the locally edited `n2-l1-001` question.
+both Mathematics and editorial approval. The suite does not use the approved B001, B003 or
+B004 batches.
 
 The fixed selection covers:
 
