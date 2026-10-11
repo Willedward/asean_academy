@@ -6,6 +6,10 @@ import { MathContent, type ContentBlock } from "@/components/math-content";
 import { Button } from "@/components/ui/button";
 import {
   adminRequest,
+  type BulkReviewInput,
+  type BulkReviewPreview,
+  type BulkReviewPreviewInput,
+  type BulkReviewResponse,
   type ContentItem,
   type ContentPreview,
   type ContentQueue,
@@ -207,7 +211,8 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
           <p>{grounding.scope}</p>
           <p className="rounded-xl border border-amber-200 bg-white p-3 text-sm">
             This protected material is supplied to the model during calibration.
-            Approval unlocks model evaluation; it does not publish content to learners.
+            Approval unlocks model evaluation; it does not publish content to
+            learners.
           </p>
         </div>
         {Object.entries(grounding.sections_by_outcome).map(
@@ -344,6 +349,331 @@ function ReviewSummary({ item }: { item: ContentItem }) {
         );
       })}
     </div>
+  );
+}
+
+function itemIdentity(item: ContentItem) {
+  return `${item.content_kind}:${item.stable_key}`;
+}
+
+function bulkTarget(item: ContentItem) {
+  return {
+    content_kind: item.content_kind,
+    stable_key: item.stable_key,
+    source_revision: item.revision,
+    source_content_sha256: item.source_content_sha256,
+    review_fingerprint: item.review_fingerprint,
+  };
+}
+
+function BulkReviewSession({
+  academic,
+  items,
+  onChanged,
+  scope,
+  scopeKey,
+}: {
+  academic: boolean;
+  items: ContentItem[];
+  onChanged: () => void;
+  scope: "batch" | "unit";
+  scopeKey: string;
+}) {
+  const [selected, setSelected] = useState<Set<string>>(
+    () => new Set(items.map(itemIdentity)),
+  );
+  const [dimension, setDimension] = useState<"mathematics" | "editorial">(
+    academic ? "mathematics" : "editorial",
+  );
+  const [decision, setDecision] = useState<"approved" | "changes_requested">(
+    "approved",
+  );
+  const [notes, setNotes] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [preview, setPreview] = useState<BulkReviewPreview>();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string>();
+  const [success, setSuccess] = useState<string>();
+
+  const selectedItems = items.filter((item) =>
+    selected.has(itemIdentity(item)),
+  );
+  const targets = selectedItems.map(bulkTarget);
+  const excluded = items.length - selectedItems.length;
+
+  function toggle(item: ContentItem) {
+    const identity = itemIdentity(item);
+    setSelected((current) => {
+      const next = new Set(current);
+      if (next.has(identity)) next.delete(identity);
+      else next.add(identity);
+      return next;
+    });
+    setPreview(undefined);
+    setConfirmed(false);
+    setSuccess(undefined);
+  }
+
+  function selectAwaiting() {
+    setSelected(
+      new Set(
+        items
+          .filter((item) => {
+            const review =
+              dimension === "mathematics"
+                ? item.mathematics_review
+                : item.editorial_review;
+            return review?.decision !== "approved";
+          })
+          .map(itemIdentity),
+      ),
+    );
+    setPreview(undefined);
+    setConfirmed(false);
+    setSuccess(undefined);
+  }
+
+  async function openPreview() {
+    const body: BulkReviewPreviewInput = {
+      scope,
+      scope_key: scopeKey,
+      targets,
+    };
+    setBusy(true);
+    try {
+      setPreview(
+        await adminRequest<BulkReviewPreview>(
+          "content/bulk-review-preview",
+          body,
+        ),
+      );
+      setError(undefined);
+      setSuccess(undefined);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function submitReviews() {
+    const body: BulkReviewInput = {
+      scope,
+      scope_key: scopeKey,
+      targets,
+      dimension,
+      decision,
+      notes,
+      confirmed: true,
+    };
+    setBusy(true);
+    try {
+      const result = await adminRequest<BulkReviewResponse>(
+        "content/bulk-reviews",
+        body,
+      );
+      setSuccess(
+        `${result.recorded_count} immutable ${dimension} review records were added.`,
+      );
+      setNotes("");
+      setConfirmed(false);
+      setPreview(undefined);
+      setError(undefined);
+      onChanged();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section
+      aria-labelledby="bulk-review-heading"
+      className="space-y-5 rounded-2xl border-2 border-teal-200 bg-teal-50/50 p-5"
+    >
+      <div>
+        <p className="m-0 text-xs font-semibold uppercase text-teal-700">
+          {scope} review session
+        </p>
+        <h2 className="mt-1 text-xl font-bold" id="bulk-review-heading">
+          Review {scopeKey} as one consolidated packet
+        </h2>
+        <p className="mb-0 text-sm text-slate-700">
+          {selectedItems.length} of {items.length} matched items selected
+          {excluded ? ` · ${excluded} excluded for correction` : ""}. Every
+          included item receives its own append-only approval record.
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            setSelected(new Set(items.map(itemIdentity)));
+            setPreview(undefined);
+            setConfirmed(false);
+          }}
+        >
+          Select all
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            setSelected(new Set());
+            setPreview(undefined);
+            setConfirmed(false);
+          }}
+        >
+          Clear all
+        </Button>
+        <Button type="button" variant="outline" onClick={selectAwaiting}>
+          Select items awaiting {dimension}
+        </Button>
+      </div>
+
+      <fieldset className="max-h-80 space-y-2 overflow-y-auto rounded-xl border bg-white p-4">
+        <legend className="px-2 font-bold">Included content</legend>
+        {items.map((item) => (
+          <label
+            className="flex cursor-pointer items-start gap-3 rounded-lg p-2 hover:bg-slate-50"
+            key={itemIdentity(item)}
+          >
+            <input
+              aria-label={`Include ${item.stable_key}`}
+              checked={selected.has(itemIdentity(item))}
+              className="mt-1"
+              onChange={() => toggle(item)}
+              type="checkbox"
+            />
+            <span>
+              <span className="block font-semibold">{item.title}</span>
+              <span className="text-xs text-slate-600">
+                {item.content_kind} · {item.stable_key} · math{" "}
+                {item.mathematics_review?.decision
+                  ? label(item.mathematics_review.decision)
+                  : "awaiting"}
+                {" · editorial "}
+                {item.editorial_review?.decision
+                  ? label(item.editorial_review.decision)
+                  : "awaiting"}
+              </span>
+            </span>
+          </label>
+        ))}
+      </fieldset>
+
+      <div className="grid gap-3 rounded-xl border bg-white p-4 md:grid-cols-[180px_220px_1fr]">
+        <label>
+          Review area
+          <select
+            aria-label="Bulk review area"
+            className="mt-1 w-full rounded-lg border bg-white p-2"
+            onChange={(event) => {
+              setDimension(event.target.value as typeof dimension);
+              setConfirmed(false);
+            }}
+            value={dimension}
+          >
+            <option disabled={!academic} value="mathematics">
+              Mathematics
+            </option>
+            <option value="editorial">Editorial</option>
+          </select>
+        </label>
+        <label>
+          Decision
+          <select
+            aria-label="Bulk review decision"
+            className="mt-1 w-full rounded-lg border bg-white p-2"
+            onChange={(event) => {
+              setDecision(event.target.value as typeof decision);
+              setConfirmed(false);
+            }}
+            value={decision}
+          >
+            <option value="approved">Approve selected</option>
+            <option value="changes_requested">Request changes</option>
+          </select>
+        </label>
+        <label>
+          Shared review notes
+          <textarea
+            aria-label="Bulk review notes"
+            className="mt-1 block min-h-20 w-full rounded-lg border bg-white p-2"
+            maxLength={2000}
+            onChange={(event) => {
+              setNotes(event.target.value);
+              setConfirmed(false);
+            }}
+            placeholder="Record the checks completed for every selected item"
+            value={notes}
+          />
+        </label>
+      </div>
+
+      <label className="flex items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4">
+        <input
+          aria-label="Confirm bulk review"
+          checked={confirmed}
+          className="mt-1"
+          onChange={(event) => setConfirmed(event.target.checked)}
+          type="checkbox"
+        />
+        <span>
+          I confirm that I reviewed every selected item in this exact revision
+          and want to record {selectedItems.length} separate {dimension} review
+          decisions.
+        </span>
+      </label>
+
+      <div className="flex flex-wrap gap-3">
+        <Button
+          disabled={busy || !selectedItems.length}
+          onClick={() => void openPreview()}
+          type="button"
+          variant="outline"
+        >
+          {preview
+            ? "Refresh consolidated reviewer preview"
+            : "Open consolidated reviewer preview"}
+        </Button>
+        <Button
+          disabled={
+            busy ||
+            !selectedItems.length ||
+            notes.trim().length < 10 ||
+            !confirmed
+          }
+          onClick={() => void submitReviews()}
+          type="button"
+        >
+          Record {selectedItems.length} reviews
+        </Button>
+      </div>
+
+      {error ? (
+        <p className="text-sm text-rose-700" role="alert">
+          {error}
+        </p>
+      ) : null}
+      {success ? <p className="text-sm text-teal-800">{success}</p> : null}
+      {preview ? (
+        <div className="space-y-5">
+          <h3 className="text-lg font-bold">
+            Consolidated reviewer preview · {preview.items.length} items
+          </h3>
+          {preview.items.map((itemPreview) => (
+            <ReviewerPreview
+              key={`${itemPreview.content_kind}:${itemPreview.stable_key}:${itemPreview.review_fingerprint}`}
+              preview={itemPreview}
+            />
+          ))}
+        </div>
+      ) : null}
+    </section>
   );
 }
 
@@ -555,6 +885,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     status: "",
     state: "",
     batch: "",
+    unit: "",
     search: "",
   };
   const [filters, setFilters] = useState(initialFilters);
@@ -563,8 +894,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   const [revision, setRevision] = useState(0);
   const [data, setData] = useState<ContentQueue>();
   const [batchIds, setBatchIds] = useState<string[]>([]);
+  const [unitKeys, setUnitKeys] = useState<string[]>([]);
   const [error, setError] = useState<string>();
-  const pageSize = applied.batch ? 100 : 25;
+  const pageSize = applied.batch || applied.unit ? 250 : 25;
   const query = new URLSearchParams({
     limit: String(pageSize),
     offset: String(offset),
@@ -573,6 +905,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   if (applied.status) query.set("source_status", applied.status);
   if (applied.state) query.set("review_state", applied.state);
   if (applied.batch) query.set("batch_id", applied.batch);
+  if (applied.unit) query.set("unit_key", applied.unit);
   if (applied.search) query.set("search", applied.search);
   const path = `content?${query}`;
 
@@ -583,6 +916,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
         if (active) {
           setData(value);
           setBatchIds(value.batch_ids);
+          setUnitKeys(value.unit_keys);
           setError(undefined);
         }
       },
@@ -595,10 +929,30 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     };
   }, [path, revision]);
 
-  const approvedInBatch = applied.batch
-    ? (data?.items.filter((item) => item.review_state === "approved").length ??
-      0)
-    : 0;
+  const activeScope = applied.batch
+    ? ({ scope: "batch", key: applied.batch } as const)
+    : applied.unit
+      ? ({ scope: "unit", key: applied.unit } as const)
+      : undefined;
+  const mathematicsApproved =
+    data?.items.filter(
+      (item) => item.mathematics_review?.decision === "approved",
+    ).length ?? 0;
+  const editorialApproved =
+    data?.items.filter((item) => item.editorial_review?.decision === "approved")
+      .length ?? 0;
+  const fullyApproved =
+    data?.items.filter(
+      (item) =>
+        item.mathematics_review?.decision === "approved" &&
+        item.editorial_review?.decision === "approved",
+    ).length ?? 0;
+  const changesRequested =
+    data?.items.filter(
+      (item) =>
+        item.mathematics_review?.decision === "changes_requested" ||
+        item.editorial_review?.decision === "changes_requested",
+    ).length ?? 0;
 
   return (
     <div className="space-y-6">
@@ -609,7 +963,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
         exact content hash.
       </p>
       <form
-        className="grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-5"
+        className="grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-6"
         onSubmit={(event) => {
           event.preventDefault();
           setOffset(0);
@@ -627,6 +981,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
               setFilters({
                 ...filters,
                 batch: event.target.value,
+                unit: event.target.value ? "" : filters.unit,
                 kind: event.target.value ? "question" : filters.kind,
               })
             }
@@ -635,6 +990,29 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             {batchIds.map((batchId) => (
               <option key={batchId} value={batchId}>
                 {batchId}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Unit
+          <select
+            aria-label="Curriculum unit"
+            className="mt-1 block w-full rounded-lg border p-2"
+            value={filters.unit}
+            onChange={(event) =>
+              setFilters({
+                ...filters,
+                unit: event.target.value,
+                batch: event.target.value ? "" : filters.batch,
+                kind: event.target.value ? "" : filters.kind,
+              })
+            }
+          >
+            <option value="">All units</option>
+            {unitKeys.map((unitKey) => (
+              <option key={unitKey} value={unitKey}>
+                {unitKey}
               </option>
             ))}
           </select>
@@ -701,17 +1079,19 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             }
           />
         </label>
-        <Button className="md:col-start-5" type="submit">
+        <Button className="md:col-start-6" type="submit">
           Apply filters
         </Button>
       </form>
-      {applied.batch && data ? (
+      {activeScope && data ? (
         <div
           className="rounded-2xl border border-teal-200 bg-teal-50 p-4"
-          role="status"
+          data-testid="scope-progress"
         >
-          <strong>{applied.batch}</strong> · {approvedInBatch} of {data.total}{" "}
-          questions have both approvals.
+          <strong>{activeScope.key}</strong> · {data.total} matched items ·{" "}
+          {mathematicsApproved} Mathematics approved · {editorialApproved}{" "}
+          editorial approved · {fullyApproved} fully approved ·{" "}
+          {changesRequested} with changes requested.
         </div>
       ) : null}
       {!data ? (
@@ -730,6 +1110,19 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
         <p>No content matches these filters.</p>
       ) : (
         <div className="space-y-5">
+          {activeScope ? (
+            <BulkReviewSession
+              academic={academic}
+              items={data.items}
+              key={`${activeScope.scope}:${activeScope.key}:${data.items.map((item) => item.review_fingerprint).join(":")}`}
+              onChanged={() => {
+                setData(undefined);
+                setRevision((value) => value + 1);
+              }}
+              scope={activeScope.scope}
+              scopeKey={activeScope.key}
+            />
+          ) : null}
           {data.items.map((item) => (
             <article
               className="space-y-4 rounded-2xl border bg-white p-5"
@@ -763,8 +1156,8 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
               />
               {item.content_kind === "tutor_grounding" ? (
                 <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
-                  Both approvals unlock the live model-evaluation milestone. This
-                  item does not use the student publication workflow.
+                  Both approvals unlock the live model-evaluation milestone.
+                  This item does not use the student publication workflow.
                 </p>
               ) : null}
             </article>
