@@ -12,9 +12,7 @@ import pytest
 
 from learning_api.admin_repository import BetaOperationsError, PostgresBetaOperationsRepository
 from learning_api.content_review import (
-    bulk_reviewer_preview,
     list_review_queue,
-    record_bulk_reviews,
     record_review,
     request_lifecycle,
     reviewer_preview,
@@ -22,9 +20,6 @@ from learning_api.content_review import (
     verify_release_workflow,
 )
 from learning_api.content_review_contracts import (
-    BulkContentReviewPreviewRequest,
-    BulkContentReviewRequest,
-    BulkContentReviewTarget,
     CreateLifecycleRequest,
     RecordContentReviewRequest,
 )
@@ -52,16 +47,6 @@ def _lifecycle_body(item: dict):
         review_fingerprint=item["review_fingerprint"],
         action="publish",
         reason="Ready for the controlled content release pipeline.",
-    )
-
-
-def _bulk_target(item: dict):
-    return BulkContentReviewTarget(
-        content_kind=item["content_kind"],
-        stable_key=item["stable_key"],
-        source_revision=item["revision"],
-        source_content_sha256=item["source_content_sha256"],
-        review_fingerprint=item["review_fingerprint"],
     )
 
 
@@ -140,98 +125,6 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
         "g3-sec1-n2-b001"
     }
     assert "g3-sec1-n2-b001" in n2_batch["batch_ids"]
-    assert "g3-sec1-n2" in n2_batch["unit_keys"]
-
-    n2_unit = list_review_queue(
-        repository,
-        catalogue,
-        kind=None,
-        source_status=None,
-        review_state=None,
-        search=None,
-        limit=250,
-        offset=0,
-        unit_key="g3-sec1-n2",
-    )
-    assert n2_unit["total"] == 107
-    assert {entry["content_kind"] for entry in n2_unit["items"]} == {
-        "lesson",
-        "question",
-    }
-    assert {entry["unit_key"] for entry in n2_unit["items"]} == {"g3-sec1-n2"}
-
-    bulk_items = n2_batch["items"][:3]
-    preview_body = BulkContentReviewPreviewRequest(
-        scope="batch",
-        scope_key="g3-sec1-n2-b001",
-        targets=[_bulk_target(entry) for entry in bulk_items[:2]],
-    )
-    bulk_preview = bulk_reviewer_preview(catalogue, preview_body)
-    assert [entry["stable_key"] for entry in bulk_preview["items"]] == sorted(
-        entry["stable_key"] for entry in bulk_items[:2]
-    )
-    assert "canonical_answer" in json.dumps(bulk_preview)
-
-    stale_target = _bulk_target(bulk_items[1]).model_copy(
-        update={"source_content_sha256": "0" * 64}
-    )
-    with pytest.raises(BetaOperationsError, match="changed after this page loaded"):
-        record_bulk_reviews(
-            repository,
-            catalogue,
-            content_admin,
-            BulkContentReviewRequest(
-                scope="batch",
-                scope_key="g3-sec1-n2-b001",
-                targets=[_bulk_target(bulk_items[0]), stale_target],
-                dimension="editorial",
-                decision="approved",
-                notes="Both selected questions were checked for editorial quality.",
-                confirmed=True,
-            ),
-            "bulk-review-stale",
-        )
-    with repository._connect() as connection:
-        assert connection.execute(
-            "select count(*) from content_review_records where stable_key=%s",
-            (bulk_items[0]["stable_key"],),
-        ).fetchone()["count"] == 0
-
-    bulk_result = record_bulk_reviews(
-        repository,
-        catalogue,
-        content_admin,
-        BulkContentReviewRequest(
-            scope="batch",
-            scope_key="g3-sec1-n2-b001",
-            targets=[_bulk_target(entry) for entry in bulk_items[:2]],
-            dimension="editorial",
-            decision="approved",
-            notes="Both selected questions were checked for editorial quality.",
-            confirmed=True,
-        ),
-        "bulk-review-editorial",
-    )
-    assert bulk_result["recorded_count"] == 2
-    refreshed_batch = list_review_queue(
-        repository,
-        catalogue,
-        kind="question",
-        source_status=None,
-        review_state=None,
-        search=None,
-        limit=100,
-        offset=0,
-        batch_id="g3-sec1-n2-b001",
-    )
-    refreshed_by_key = {
-        entry["stable_key"]: entry for entry in refreshed_batch["items"]
-    }
-    for selected in bulk_items[:2]:
-        assert refreshed_by_key[selected["stable_key"]]["editorial_review"][
-            "decision"
-        ] == "approved"
-    assert refreshed_by_key[bulk_items[2]["stable_key"]]["editorial_review"] is None
 
     with pytest.raises(BetaOperationsError, match="academic administrator"):
         record_review(
@@ -346,56 +239,10 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
     )
     assert second_request["lifecycle_request_id"] != first_request["lifecycle_request_id"]
 
-    reviewed_source = list_review_queue(
-        repository,
-        catalogue,
-        kind=None,
-        source_status="reviewed",
-        review_state=None,
-        search=None,
-        limit=100,
-        offset=0,
-    )["items"]
-    assert {(entry["content_kind"], entry["stable_key"]) for entry in reviewed_source} == {
-        ("course", "g3-sec1-math"),
-        ("lesson", "n2-lesson-01"),
-        ("lesson", "n2-lesson-02"),
-        ("lesson", "n2-lesson-03"),
-    }
-    for reviewed_item in reviewed_source:
-        record_review(
-            repository,
-            catalogue,
-            content_admin,
-            reviewed_item["content_kind"],
-            reviewed_item["stable_key"],
-            _body(
-                reviewed_item,
-                "editorial",
-                "approved",
-                "The source approval is represented in the disposable review ledger.",
-            ),
-            f"source-editorial-{reviewed_item['stable_key']}",
-        )
-        record_review(
-            repository,
-            catalogue,
-            academic_admin,
-            reviewed_item["content_kind"],
-            reviewed_item["stable_key"],
-            _body(
-                reviewed_item,
-                "mathematics",
-                "approved",
-                "The source approval is represented in the disposable review ledger.",
-            ),
-            f"source-mathematics-{reviewed_item['stable_key']}",
-        )
-
     with repository._connect() as connection:
         assert verify_release_workflow(connection, catalogue) == {
             "status": "approved",
-            "checked_items": 4,
+            "checked_items": 0,
         }
         assert connection.execute(
             "select count(*) from content_review_records where stable_key=%s",
@@ -406,8 +253,8 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
             (item["stable_key"],),
         ).fetchone()["count"] == 2
         assert connection.execute(
-            "select count(*) from beta_audit_events where event_type='content_review_recorded' and actor_user_id in (%s, %s) and metadata->>'stable_key'=%s",
-            (content_admin_id, academic_admin_id, item["stable_key"]),
+            "select count(*) from beta_audit_events where event_type='content_review_recorded' and actor_user_id in (%s, %s)",
+            (content_admin_id, academic_admin_id),
         ).fetchone()["count"] == 4
 
     with pytest.raises(psycopg.DatabaseError, match="append-only"):

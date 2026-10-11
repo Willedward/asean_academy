@@ -1,6 +1,6 @@
 # B5 generalized Mathematics content catalogue
 
-**Implementation status (11 October 2026): engineering foundation complete; N2 is reviewed, N1 retains independent lesson review gates, and the remaining syllabus content is incomplete.**
+**Implementation status (10 October 2026): engineering foundation complete; N1 and N2 are integrated drafts, while the remaining syllabus content is incomplete.**
 
 This milestone removes the N1-only constraints from the Git-authored question and course pipeline before the team expands the Beta bank to roughly 1,900–2,850 questions. Existing N1 source files remain valid and keep their current immutable content hashes.
 
@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The N2 batches and lessons are reviewed. The team must now author and review the remaining 17 level-specific topic groups, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The team must now author and review the remaining 17 level-specific topic groups, review the pending N2 batches and lessons, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 

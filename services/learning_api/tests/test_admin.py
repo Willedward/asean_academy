@@ -6,13 +6,9 @@ from pathlib import Path
 from uuid import UUID
 
 import httpx
-import pytest
 
 from learning_api.admin_contracts import CreateInvitationRequest
-from learning_api.admin_repository import BetaOperationsError
 from learning_api.config import Settings
-from learning_api.content_review import catalogue_review_items, record_bulk_reviews
-from learning_api.content_review_contracts import BulkContentReviewRequest
 from learning_api.dependencies import beta_operations_repository
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.main import create_app
@@ -311,60 +307,6 @@ def test_content_admin_can_open_protected_n2_reviewer_preview():
     assert "canonical_answer" in preview.text
     assert "hints" in preview.text
     assert "solution" in preview.text
-
-
-def test_bulk_review_requires_admin_and_reserves_mathematics_for_academic_admin():
-    app, _ = application()
-    item = next(
-        entry
-        for entry in catalogue_review_items(app.state.course_catalogue)
-        if entry.kind == "question" and entry.stable_key == "n2-l1-001"
-    )
-    selection = {
-        "scope": "batch",
-        "scope_key": "g3-sec1-n2-b001",
-        "targets": [
-            {
-                "content_kind": item.kind,
-                "stable_key": item.stable_key,
-                "source_revision": item.revision,
-                "source_content_sha256": item.source_hash,
-                "review_fingerprint": item.fingerprint,
-            }
-        ],
-    }
-
-    forbidden = request(
-        app,
-        "POST",
-        "/api/v1/admin/content/bulk-review-preview",
-        "student-token",
-        json=selection,
-    )
-    preview = request(
-        app,
-        "POST",
-        "/api/v1/admin/content/bulk-review-preview",
-        "admin-token",
-        json=selection,
-    )
-    assert forbidden.status_code == 403
-    assert preview.status_code == 200, preview.text
-    assert preview.json()["items"][0]["stable_key"] == "n2-l1-001"
-    with pytest.raises(BetaOperationsError, match="academic administrator"):
-        record_bulk_reviews(
-            object(),
-            app.state.course_catalogue,
-            AuthenticatedLearner(ADMIN_ID, "content_admin", "admin@example.test"),
-            BulkContentReviewRequest(
-                **selection,
-                dimension="mathematics",
-                decision="approved",
-                notes="The selected answer and worked solution are correct.",
-                confirmed=True,
-            ),
-            "bulk-mathematics-forbidden",
-        )
 
 
 def test_content_admin_can_open_protected_n2_tutor_grounding_preview():

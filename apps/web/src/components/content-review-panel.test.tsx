@@ -27,7 +27,6 @@ const item: ContentItem = {
   outcome_code: "2.1",
   position: null,
   batch_id: "g3-sec1-n2-b001",
-  unit_key: "g3-sec1-n2",
   review_state: "approved",
   mathematics_review: null,
   editorial_review: null,
@@ -40,7 +39,6 @@ const item: ContentItem = {
 const queue: ContentQueue = {
   items: [item],
   batch_ids: ["g3-sec1-n2-b001"],
-  unit_keys: ["g3-sec1-n2"],
   total: 1,
   limit: 25,
   offset: 0,
@@ -96,7 +94,6 @@ const groundingItem: ContentItem = {
   title: "Ratio and proportion tutor calibration grounding",
   outcome_code: "N2",
   batch_id: null,
-  unit_key: null,
   review_state: "unreviewed",
   blockers: [
     "Mathematics approval is required.",
@@ -211,118 +208,13 @@ describe("ContentReviewPanel", () => {
         expect.anything(),
       );
       expect(fetcher).toHaveBeenCalledWith(
-        expect.stringContaining("limit=250"),
+        expect.stringContaining("limit=100"),
         expect.anything(),
       );
     });
-    expect(screen.getByTestId("scope-progress")).toHaveTextContent(
-      "0 fully approved",
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "1 of 1 questions have both approvals.",
     );
-  });
-
-  it("reviews a unit as one packet while excluding an item that needs correction", async () => {
-    const lesson: ContentItem = {
-      ...item,
-      content_kind: "lesson",
-      stable_key: "g3-sec1-n2-l1",
-      source_content_sha256: "c".repeat(64),
-      review_fingerprint: "d".repeat(64),
-      title: "Ratios and equivalent ratios",
-      batch_id: null,
-      position: 1,
-      review_state: "unreviewed",
-    };
-    const unitQueue: ContentQueue = {
-      ...queue,
-      items: [lesson, item],
-      total: 2,
-      limit: 250,
-    };
-    const fetcher = vi.fn(async (url: string, init?: RequestInit) => {
-      if (url.includes("bulk-review-preview")) {
-        return new Response(
-          JSON.stringify({
-            scope: "unit",
-            scope_key: "g3-sec1-n2",
-            items: [preview],
-          }),
-        );
-      }
-      if (url.includes("bulk-reviews")) {
-        return new Response(
-          JSON.stringify({
-            scope: "unit",
-            scope_key: "g3-sec1-n2",
-            recorded_count: 1,
-            records: [],
-          }),
-          { status: 201 },
-        );
-      }
-      if (url.includes("unit_key=g3-sec1-n2")) {
-        return new Response(JSON.stringify(unitQueue));
-      }
-      void init;
-      return new Response(JSON.stringify(queue));
-    });
-    vi.stubGlobal("fetch", fetcher);
-
-    render(<ContentReviewPanel academic />);
-    await screen.findByText("Simplifying a ratio");
-
-    fireEvent.change(screen.getByLabelText("Curriculum unit"), {
-      target: { value: "g3-sec1-n2" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Apply filters" }));
-
-    await screen.findByText("Review g3-sec1-n2 as one consolidated packet");
-    fireEvent.click(screen.getByLabelText("Include g3-sec1-n2-l1"));
-    expect(screen.getByText(/1 excluded for correction/)).toBeInTheDocument();
-
-    fireEvent.click(
-      screen.getByRole("button", {
-        name: "Open consolidated reviewer preview",
-      }),
-    );
-    expect(
-      await screen.findByText("Consolidated reviewer preview · 1 items"),
-    ).toBeInTheDocument();
-
-    const previewCall = fetcher.mock.calls.find(([url]) =>
-      String(url).includes("bulk-review-preview"),
-    );
-    expect(JSON.parse(String(previewCall?.[1]?.body))).toMatchObject({
-      scope: "unit",
-      scope_key: "g3-sec1-n2",
-      targets: [
-        {
-          content_kind: "question",
-          stable_key: "n2-l1-001",
-          source_revision: 1,
-        },
-      ],
-    });
-
-    fireEvent.change(screen.getByLabelText("Bulk review notes"), {
-      target: { value: "All selected answers and explanations were checked." },
-    });
-    fireEvent.click(screen.getByLabelText("Confirm bulk review"));
-    fireEvent.click(screen.getByRole("button", { name: "Record 1 reviews" }));
-
-    await waitFor(() => {
-      const reviewCall = fetcher.mock.calls.find(([url]) =>
-        String(url).includes("bulk-reviews"),
-      );
-      expect(reviewCall).toBeDefined();
-      expect(JSON.parse(String(reviewCall?.[1]?.body))).toMatchObject({
-        scope: "unit",
-        scope_key: "g3-sec1-n2",
-        dimension: "mathematics",
-        decision: "approved",
-        confirmed: true,
-        targets: [{ stable_key: "n2-l1-001" }],
-      });
-    });
   });
 
   it("requires an explicit reason before an academic publication request", async () => {
@@ -366,7 +258,6 @@ describe("ContentReviewPanel", () => {
       ...queue,
       items: [groundingItem],
       batch_ids: [],
-      unit_keys: [],
     };
     const fetcher = vi.fn(async (url: string) => {
       if (url.includes("/review-preview")) {
@@ -379,9 +270,7 @@ describe("ContentReviewPanel", () => {
     render(<ContentReviewPanel academic />);
     await screen.findByText(groundingItem.title);
     expect(
-      screen.getByText(
-        /Both approvals unlock the live model-evaluation milestone/,
-      ),
+      screen.getByText(/Both approvals unlock the live model-evaluation milestone/),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: "Review publication request" }),
@@ -392,9 +281,7 @@ describe("ContentReviewPanel", () => {
     );
 
     expect(await screen.findByText("Outcome 2.1")).toBeInTheDocument();
-    expect(
-      screen.getByText("Meaning and order of a ratio"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Meaning and order of a ratio")).toBeInTheDocument();
     expect(screen.getByLabelText("3:5")).toBeInTheDocument();
     expect(screen.getByText("Source references")).toBeInTheDocument();
   });

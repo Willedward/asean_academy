@@ -33,7 +33,6 @@ class CatalogueReviewItem:
     outcome_code: str | None = None
     position: int | None = None
     batch_id: str | None = None
-    unit_key: str | None = None
 
 
 def _without_workflow_metadata(value):
@@ -93,7 +92,6 @@ def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIt
             lesson.status,
             lesson,
             position=lesson.position,
-            unit_key=lesson.unit_key,
         )
         for lesson in report.lessons
     )
@@ -110,9 +108,6 @@ def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIt
             difficulty=question.difficulty,
             outcome_code=question.primary_outcome,
             batch_id=catalogue.review_question_batches.get(question.stable_key),
-            unit_key=(
-                f"g3-sec{question.school_level[-1]}-{question.topic_code.lower()}"
-            ),
         )
         for question in catalogue.review_questions
     )
@@ -334,7 +329,6 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
         "outcome_code": item.outcome_code,
         "position": item.position,
         "batch_id": item.batch_id,
-        "unit_key": item.unit_key,
         "review_state": state,
         "mathematics_review": _review_summary(mathematics),
         "editorial_review": _review_summary(editorial),
@@ -360,7 +354,6 @@ def list_review_queue(
     limit: int,
     offset: int,
     batch_id: str | None = None,
-    unit_key: str | None = None,
 ) -> dict:
     with repository._connect() as connection:
         reviews, lifecycle = _snapshot(connection)
@@ -371,9 +364,6 @@ def list_review_queue(
     batch_ids = sorted(
         {item["batch_id"] for item in items if item["batch_id"] is not None}
     )
-    unit_keys = sorted(
-        {item["unit_key"] for item in items if item["unit_key"] is not None}
-    )
     if kind:
         items = [item for item in items if item["content_kind"] == kind]
     if source_status:
@@ -382,8 +372,6 @@ def list_review_queue(
         items = [item for item in items if item["review_state"] == review_state]
     if batch_id:
         items = [item for item in items if item["batch_id"] == batch_id]
-    if unit_key:
-        items = [item for item in items if item["unit_key"] == unit_key]
     if search:
         query = search.strip().casefold()
         items = [
@@ -402,7 +390,6 @@ def list_review_queue(
     return {
         "items": items[offset : offset + limit],
         "batch_ids": batch_ids,
-        "unit_keys": unit_keys,
         "total": len(items),
         "limit": limit,
         "offset": offset,
@@ -451,7 +438,9 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
     }
 
 
-def _reviewer_preview_item(item: CatalogueReviewItem) -> dict:
+def reviewer_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:
+    """Return protected authoring content, including answers and feedback."""
+    item = _item(catalogue, kind, stable_key)
     return {
         "content_kind": item.kind,
         "stable_key": item.stable_key,
@@ -463,131 +452,6 @@ def _reviewer_preview_item(item: CatalogueReviewItem) -> dict:
             if hasattr(item.model, "model_dump")
             else item.model
         ),
-    }
-
-
-def reviewer_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:
-    """Return protected authoring content, including answers and feedback."""
-    return _reviewer_preview_item(_item(catalogue, kind, stable_key))
-
-
-def _bulk_targets(catalogue: CourseCatalogue, body) -> list[CatalogueReviewItem]:
-    available = {
-        (item.kind, item.stable_key): item for item in catalogue_review_items(catalogue)
-    }
-    identities = [(target.content_kind, target.stable_key) for target in body.targets]
-    if len(identities) != len(set(identities)):
-        raise BetaOperationsError(
-            "bulk_review_duplicate_target",
-            "Each content item may appear only once in a bulk review session.",
-            422,
-        )
-    items = []
-    for target in body.targets:
-        item = available.get((target.content_kind, target.stable_key))
-        if item is None:
-            raise BetaOperationsError(
-                "content_not_found", "A selected content item was not found.", 404
-            )
-        _assert_expected(item, target)
-        actual_scope = item.batch_id if body.scope == "batch" else item.unit_key
-        if actual_scope != body.scope_key:
-            raise BetaOperationsError(
-                "bulk_review_scope_mismatch",
-                "Every selected item must belong to the requested batch or unit.",
-                422,
-            )
-        items.append(item)
-    return sorted(items, key=lambda item: (item.kind, item.stable_key))
-
-
-def bulk_reviewer_preview(catalogue: CourseCatalogue, body) -> dict:
-    items = _bulk_targets(catalogue, body)
-    return {
-        "scope": body.scope,
-        "scope_key": body.scope_key,
-        "items": [_reviewer_preview_item(item) for item in items],
-    }
-
-
-def record_bulk_reviews(repository, catalogue, administrator, body, request_id):
-    items = _bulk_targets(catalogue, body)
-    if body.dimension == "mathematics" and administrator.role != "academic_admin":
-        raise BetaOperationsError(
-            "academic_review_required",
-            "Only an academic administrator can record Mathematics review.",
-            403,
-        )
-    with repository._connect() as connection:
-        for item in items:
-            connection.execute(
-                "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
-                (f"content:{item.kind}:{item.stable_key}",),
-            )
-        profile = connection.execute(
-            "select email, role::text as role from profiles where id=%s",
-            (administrator.learner_id,),
-        ).fetchone()
-        records = []
-        for item in items:
-            row = connection.execute(
-                """
-                insert into content_review_records (
-                    item_kind, stable_key, source_revision, source_content_sha256,
-                    review_fingerprint, dimension, decision, reviewer_id, notes, request_id
-                ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                returning id as record_id, item_kind as content_kind, stable_key,
-                          source_revision, source_content_sha256, review_fingerprint,
-                          dimension, decision, reviewer_id, notes, created_at
-                """,
-                (
-                    item.kind,
-                    item.stable_key,
-                    item.revision,
-                    item.source_hash,
-                    item.fingerprint,
-                    body.dimension,
-                    body.decision,
-                    administrator.learner_id,
-                    body.notes.strip(),
-                    request_id,
-                ),
-            ).fetchone()
-            connection.execute(
-                """
-                insert into beta_audit_events(event_type, actor_user_id, request_id, metadata)
-                values ('content_review_recorded', %s, %s, %s)
-                """,
-                (
-                    administrator.learner_id,
-                    request_id,
-                    Jsonb(
-                        {
-                            "content_kind": item.kind,
-                            "stable_key": item.stable_key,
-                            "source_revision": item.revision,
-                            "review_fingerprint": item.fingerprint,
-                            "dimension": body.dimension,
-                            "decision": body.decision,
-                            "bulk_scope": body.scope,
-                            "bulk_scope_key": body.scope_key,
-                            "bulk_size": len(items),
-                        }
-                    ),
-                ),
-            )
-            records.append(
-                {
-                    **dict(row),
-                    "reviewer_email": profile["email"],
-                    "reviewer_role": profile["role"],
-                }
-            )
-    return {
-        "scope": body.scope,
-        "scope_key": body.scope_key,
-        "recorded_count": len(records),
-        "records": records,
     }
 
 

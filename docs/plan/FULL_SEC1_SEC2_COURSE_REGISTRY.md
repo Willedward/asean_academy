@@ -25,7 +25,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
-| `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
+| `g3-sec1-math` | 10 | 52 | Draft: N1 and N2 authored; remaining units planned |
 | `g3-sec2-math` | 9 | 35 | Planned |
 | **Total** | **19** | **87** | Structurally registered |
 
@@ -49,4 +49,4 @@ The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authore
 
 ## Next content slice
 
-Secondary 1 N2 now completes the first non-N1 calibration slice: 104 questions, three lesson notes, practice pools, checkpoint and adaptive allocation, catalogue import, and API delivery are wired. All four question batches, all three N2 lessons and the N2 additions in course revision 3 have Mathematics and editorial approval. The seven N1 lessons retain their independent review gate before the complete Secondary 1 course can be published. Use the N2 calibration evidence when scaling the next topic bank.
+Secondary 1 N2 now completes the first non-N1 calibration slice: 104 questions, three lesson notes, practice pools, checkpoint and adaptive allocation, catalogue import, and API delivery are wired. B001, B002 and B003 are approved; complete the remaining B004 Mathematics and editorial review before publication, and use the calibration evidence before scaling the next topic bank.

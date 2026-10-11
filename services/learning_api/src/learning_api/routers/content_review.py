@@ -7,19 +7,13 @@ import logging
 from fastapi import APIRouter, Query, Request, status
 
 from ..content_review import (
-    bulk_reviewer_preview,
     list_review_queue,
-    record_bulk_reviews,
     record_review,
     request_lifecycle,
     reviewer_preview,
     student_preview,
 )
 from ..content_review_contracts import (
-    BulkContentReviewerPreviewResponse,
-    BulkContentReviewPreviewRequest,
-    BulkContentReviewRequest,
-    BulkContentReviewResponse,
     ContentKind,
     ContentLifecycleRequestResponse,
     ContentReviewerPreviewResponse,
@@ -58,8 +52,7 @@ async def review_queue(
     review_state: ReviewState | None = None,
     search: str | None = Query(default=None, min_length=1, max_length=100),
     batch_id: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
-    unit_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
-    limit: int = Query(default=25, ge=1, le=250),
+    limit: int = Query(default=25, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
 ) -> ContentReviewQueueResponse:
     del administrator
@@ -74,63 +67,8 @@ async def review_queue(
             limit=limit,
             offset=offset,
             batch_id=batch_id,
-            unit_key=unit_key,
         )
     )
-
-
-@router.post(
-    "/bulk-review-preview",
-    operation_id="previewBulkContentForReview",
-    response_model=BulkContentReviewerPreviewResponse,
-    summary="Preview an exact batch or unit selection in one review session",
-)
-async def preview_bulk_content_for_review(
-    body: BulkContentReviewPreviewRequest,
-    request: Request,
-    administrator: AdminLearnerDependency,
-) -> BulkContentReviewerPreviewResponse:
-    del administrator
-    return _safe(
-        lambda: bulk_reviewer_preview(request.app.state.course_catalogue, body)
-    )
-
-
-@router.post(
-    "/bulk-reviews",
-    operation_id="recordBulkContentReview",
-    response_model=BulkContentReviewResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Append one review decision for every selected content fingerprint",
-)
-async def review_bulk_content(
-    body: BulkContentReviewRequest,
-    request: Request,
-    administrator: AdminLearnerDependency,
-    repository: AdminAnalyticsRepositoryDependency,
-    _rate_limit: AdminWriteRateLimitDependency,
-) -> BulkContentReviewResponse:
-    result = _safe(
-        lambda: record_bulk_reviews(
-            repository,
-            request.app.state.course_catalogue,
-            administrator,
-            body,
-            current_request_id(request),
-        )
-    )
-    LOGGER.info(
-        "bulk_content_review_recorded",
-        extra={
-            "request_id": current_request_id(request),
-            "scope": body.scope,
-            "scope_key": body.scope_key,
-            "recorded_count": result["recorded_count"],
-            "dimension": body.dimension,
-            "decision": body.decision,
-        },
-    )
-    return result
 
 
 @router.get(

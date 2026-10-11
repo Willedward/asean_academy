@@ -41,12 +41,6 @@ flowchart LR
   the learner runtime catalogue stays restricted to deployable content;
 - a batch selector lists the manifests that currently own authored questions;
 - selecting a batch shows all of its questions and the number with both approvals;
-- selecting a unit combines its lessons and questions into one review session and shows
-  Mathematics, editorial, full-approval and correction progress;
-- reviewers can preview one consolidated selection, exclude individual items that need
-  corrections, and approve the remaining selection with one confirmed action;
-- the bulk action remains atomic and writes a separate immutable, fingerprint-bound
-  decision and audit entry for every included item;
 - the protected reviewer preview includes the prompt, canonical response, two authored
   hints, worked solution, marks, outcome, difficulty and calculator setting;
 - Mathematics and editorial decisions remain separate and append-only;
@@ -68,13 +62,10 @@ audit trail clearly identifies each reviewer.
 6. Merge only after CI passes. Avoid pushing two authors' generated files directly to
    the same branch.
 7. Deploy the merge commit and record its SHA.
-8. In `/admin/content`, select a batch or unit, exclude any item that needs correction,
-   and inspect the consolidated reviewer preview.
-9. Confirm the scope once to append separate decisions for every selected fingerprint,
-   or use the individual controls for item-specific notes.
-10. Record `changes_requested` with specific notes for excluded items. Make corrections
-   in Git and deploy the new revision.
-11. Request publication only after both latest approvals match the deployed fingerprint.
+8. In `/admin/content`, select the batch ID and review each full question.
+9. Record `changes_requested` with specific notes, or approve the appropriate review
+   dimension. Make corrections in Git and deploy the new revision.
+10. Request publication only after both latest approvals match the deployed fingerprint.
 
 This workflow keeps Git as the authored source of truth and Supabase as the review and
 audit store. It also prevents a dashboard edit from silently diverging from the files

@@ -72,40 +72,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/admin/content/bulk-review-preview": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Preview an exact batch or unit selection in one review session */
-        post: operations["previewBulkContentForReview"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/admin/content/bulk-reviews": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Append one review decision for every selected content fingerprint */
-        post: operations["recordBulkContentReview"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/v1/admin/content/{kind}/{stable_key}/lifecycle-requests": {
         parameters: {
             query?: never;
@@ -1763,89 +1729,6 @@ export interface components {
             /** Total Students */
             total_students: number;
         };
-        /** BulkContentReviewPreviewRequest */
-        BulkContentReviewPreviewRequest: {
-            /**
-             * Scope
-             * @enum {string}
-             */
-            scope: "batch" | "unit";
-            /** Scope Key */
-            scope_key: string;
-            /** Targets */
-            targets: components["schemas"]["BulkContentReviewTarget"][];
-        };
-        /** BulkContentReviewRequest */
-        BulkContentReviewRequest: {
-            /**
-             * Confirmed
-             * @constant
-             */
-            confirmed: true;
-            /**
-             * Decision
-             * @enum {string}
-             */
-            decision: "approved" | "changes_requested";
-            /**
-             * Dimension
-             * @enum {string}
-             */
-            dimension: "mathematics" | "editorial";
-            /** Notes */
-            notes: string;
-            /**
-             * Scope
-             * @enum {string}
-             */
-            scope: "batch" | "unit";
-            /** Scope Key */
-            scope_key: string;
-            /** Targets */
-            targets: components["schemas"]["BulkContentReviewTarget"][];
-        };
-        /** BulkContentReviewResponse */
-        BulkContentReviewResponse: {
-            /** Recorded Count */
-            recorded_count: number;
-            /** Records */
-            records: components["schemas"]["ContentReviewRecordResponse"][];
-            /**
-             * Scope
-             * @enum {string}
-             */
-            scope: "batch" | "unit";
-            /** Scope Key */
-            scope_key: string;
-        };
-        /** BulkContentReviewTarget */
-        BulkContentReviewTarget: {
-            /**
-             * Content Kind
-             * @enum {string}
-             */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
-            /** Review Fingerprint */
-            review_fingerprint: string;
-            /** Source Content Sha256 */
-            source_content_sha256: string;
-            /** Source Revision */
-            source_revision: number;
-            /** Stable Key */
-            stable_key: string;
-        };
-        /** BulkContentReviewerPreviewResponse */
-        BulkContentReviewerPreviewResponse: {
-            /** Items */
-            items: components["schemas"]["ContentReviewerPreviewResponse"][];
-            /**
-             * Scope
-             * @enum {string}
-             */
-            scope: "batch" | "unit";
-            /** Scope Key */
-            scope_key: string;
-        };
         /** CheckpointProgressResponse */
         CheckpointProgressResponse: {
             /** Available */
@@ -1979,8 +1862,6 @@ export interface components {
             stable_key: string;
             /** Title */
             title: string;
-            /** Unit Key */
-            unit_key?: string | null;
         };
         /** ContentReviewQueueResponse */
         ContentReviewQueueResponse: {
@@ -1994,8 +1875,6 @@ export interface components {
             offset: number;
             /** Total */
             total: number;
-            /** Unit Keys */
-            unit_keys: string[];
         };
         /** ContentReviewRecordResponse */
         ContentReviewRecordResponse: {
@@ -4235,7 +4114,6 @@ export interface operations {
                 review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
                 search?: string | null;
                 batch_id?: string | null;
-                unit_key?: string | null;
                 limit?: number;
                 offset?: number;
             };
@@ -4252,216 +4130,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ContentReviewQueueResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Request Entity Too Large */
-            413: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-        };
-    };
-    previewBulkContentForReview: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["BulkContentReviewPreviewRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BulkContentReviewerPreviewResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Conflict */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Request Entity Too Large */
-            413: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Unprocessable Entity */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Too Many Requests */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorEnvelope"];
-                };
-            };
-        };
-    };
-    recordBulkContentReview: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["BulkContentReviewRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BulkContentReviewResponse"];
                 };
             };
             /** @description Bad Request */

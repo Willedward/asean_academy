@@ -26,13 +26,6 @@ export type ContentPreview =
   components["schemas"]["ContentReviewerPreviewResponse"];
 export type ReviewInput = components["schemas"]["RecordContentReviewRequest"];
 export type LifecycleInput = components["schemas"]["CreateLifecycleRequest"];
-export type BulkReviewPreviewInput =
-  components["schemas"]["BulkContentReviewPreviewRequest"];
-export type BulkReviewPreview =
-  components["schemas"]["BulkContentReviewerPreviewResponse"];
-export type BulkReviewInput = components["schemas"]["BulkContentReviewRequest"];
-export type BulkReviewResponse =
-  components["schemas"]["BulkContentReviewResponse"];
 
 const INVALID_RESPONSE_MESSAGE =
   "The learning service timed out or restarted. Please try again.";

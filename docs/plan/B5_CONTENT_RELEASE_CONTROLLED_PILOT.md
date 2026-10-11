@@ -25,7 +25,7 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source contains a reviewed N2 unit and an N1 unit with independent lesson review gates, not the full Beta catalogue:
+The current authored source contains valid N1 and N2 draft units, not the full Beta catalogue:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
@@ -37,7 +37,7 @@ The current authored source contains a reviewed N2 unit and an N1 unit with inde
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 79 practice, 31 checkpoint, 34 reserve |            Complete and non-overlapping | Pass    |
 
-The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete reviewed path through lesson pools and catalogue import. The gate still exposes the missing 17 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the N2 calibration unit.
+The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete draft path through lesson pools and catalogue import. The gate still exposes the missing 17 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the N2 calibration unit.
 
 ## Development sequencing decision — 10 October 2026
 

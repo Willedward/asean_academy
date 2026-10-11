@@ -9,7 +9,7 @@ from question_bank.course_models import Course, Lesson, QuestionPools
 from question_bank.course_validation import schema_documents, validate_course
 
 
-def test_n1_and_n2_course_source_is_valid(repository_root, course_bank_root):
+def test_n1_and_n2_course_source_is_valid_draft(repository_root, course_bank_root):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
     report = validate_course(course_root, course_bank_root)
 
@@ -21,7 +21,7 @@ def test_n1_and_n2_course_source_is_valid(repository_root, course_bank_root):
     assert {issue.code for issue in report.warnings} == {"lesson_content_required"}
 
 
-def test_n1_and_n2_course_cannot_publish_while_n1_lessons_and_questions_are_drafts(
+def test_n1_and_n2_course_cannot_publish_while_content_and_questions_are_drafts(
     repository_root, course_bank_root
 ):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
@@ -29,7 +29,7 @@ def test_n1_and_n2_course_cannot_publish_while_n1_lessons_and_questions_are_draf
 
     assert not report.valid
     codes = {issue.code for issue in report.errors}
-    assert "course_review_required" not in codes
+    assert "course_review_required" in codes
     assert "lesson_review_required" in codes
     assert "question_bank_review_required" in codes
 
