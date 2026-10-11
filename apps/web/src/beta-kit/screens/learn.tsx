@@ -39,6 +39,7 @@ import type {
   XpLine,
 } from "../types";
 import { ContinueCard, WeekStatsCard } from "./dashboard";
+import { SubjectSwitch, type SubjectLinks } from "./english";
 
 /* ------------------------------------------------------------------ */
 /* Shared pieces (also used by screens/me.tsx)                         */
@@ -503,6 +504,8 @@ export interface CourseMapProps {
   badgeHolderCount: number;
   /** True while more units are still being reviewed. */
   moreUnitsComing: boolean;
+  /** Maths | English switch (same as on the English home). Leave out to hide it. */
+  subjectLinks?: SubjectLinks;
   routes?: KitRoutes;
 }
 
@@ -556,7 +559,7 @@ function MoreUnitsCard() {
 }
 
 /** Canvas: CourseMap.m, CourseMap.d */
-export function CourseMapScreen({ player, course, units, badgeHolderCount, moreUnitsComing, routes = PREVIEW_ROUTES }: CourseMapProps) {
+export function CourseMapScreen({ player, course, units, badgeHolderCount, moreUnitsComing, subjectLinks, routes = PREVIEW_ROUTES }: CourseMapProps) {
   const first = units[0];
   return (
     <AppShell
@@ -566,10 +569,17 @@ export function CourseMapScreen({ player, course, units, badgeHolderCount, moreU
       maxWidth={1040}
       top={<TopBar title="Course" right={<MiniChips player={player} routes={routes} />} />}
     >
-      <div className="flex flex-col gap-1.5">
-        <Eyebrow muted>Your course</Eyebrow>
-        <H1>{course.title}</H1>
-        <Muted className="text-base leading-6">{course.description}</Muted>
+      <div className="flex flex-col gap-5 lg:flex-row-reverse lg:items-end lg:gap-6">
+        {subjectLinks ? (
+          <div className="lg:w-[260px] lg:shrink-0">
+            <SubjectSwitch active="maths" links={subjectLinks} />
+          </div>
+        ) : null}
+        <div className="flex grow flex-col gap-1.5">
+          <Eyebrow muted>Your course</Eyebrow>
+          <H1>{course.title}</H1>
+          <Muted className="text-base leading-6">{course.description}</Muted>
+        </div>
       </div>
       <div className="grid items-start gap-4 lg:grid-cols-2 lg:gap-6">
         <div className="flex flex-col gap-4">

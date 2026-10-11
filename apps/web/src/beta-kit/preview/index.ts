@@ -6,11 +6,13 @@ import { learnEntries } from "./learn";
 import { lessonEntries } from "./lesson";
 import { meEntries } from "./me";
 import { practiceEntries } from "./practice";
+import { readinessEntries } from "./readiness";
 import type { PreviewEntry } from "./registry";
 import { systemEntries } from "./system";
 
 export const ENTRIES: PreviewEntry[] = [
   ...entryEntries,
+  ...readinessEntries,
   ...learnEntries,
   ...lessonEntries,
   ...practiceEntries,
