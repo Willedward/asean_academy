@@ -239,10 +239,56 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
     )
     assert second_request["lifecycle_request_id"] != first_request["lifecycle_request_id"]
 
+    reviewed_source = list_review_queue(
+        repository,
+        catalogue,
+        kind=None,
+        source_status="reviewed",
+        review_state=None,
+        search=None,
+        limit=100,
+        offset=0,
+    )["items"]
+    assert {(entry["content_kind"], entry["stable_key"]) for entry in reviewed_source} == {
+        ("course", "g3-sec1-math"),
+        ("lesson", "n2-lesson-01"),
+        ("lesson", "n2-lesson-02"),
+        ("lesson", "n2-lesson-03"),
+    }
+    for reviewed_item in reviewed_source:
+        record_review(
+            repository,
+            catalogue,
+            content_admin,
+            reviewed_item["content_kind"],
+            reviewed_item["stable_key"],
+            _body(
+                reviewed_item,
+                "editorial",
+                "approved",
+                "The source approval is represented in the disposable review ledger.",
+            ),
+            f"source-editorial-{reviewed_item['stable_key']}",
+        )
+        record_review(
+            repository,
+            catalogue,
+            academic_admin,
+            reviewed_item["content_kind"],
+            reviewed_item["stable_key"],
+            _body(
+                reviewed_item,
+                "mathematics",
+                "approved",
+                "The source approval is represented in the disposable review ledger.",
+            ),
+            f"source-mathematics-{reviewed_item['stable_key']}",
+        )
+
     with repository._connect() as connection:
         assert verify_release_workflow(connection, catalogue) == {
             "status": "approved",
-            "checked_items": 0,
+            "checked_items": 4,
         }
         assert connection.execute(
             "select count(*) from content_review_records where stable_key=%s",
@@ -253,8 +299,8 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
             (item["stable_key"],),
         ).fetchone()["count"] == 2
         assert connection.execute(
-            "select count(*) from beta_audit_events where event_type='content_review_recorded' and actor_user_id in (%s, %s)",
-            (content_admin_id, academic_admin_id),
+            "select count(*) from beta_audit_events where event_type='content_review_recorded' and actor_user_id in (%s, %s) and metadata->>'stable_key'=%s",
+            (content_admin_id, academic_admin_id, item["stable_key"]),
         ).fetchone()["count"] == 4
 
     with pytest.raises(psycopg.DatabaseError, match="append-only"):

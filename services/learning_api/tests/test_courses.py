@@ -38,7 +38,7 @@ def test_course_map_returns_n1_and_n2_content_units():
     assert response.status_code == 200
     course = response.json()
     assert course["development_preview"] is True
-    assert course["content_status"] == "draft"
+    assert course["content_status"] == "reviewed"
     assert len(course["units"]) == 2
     assert len(course["units"][0]["lessons"]) == 7
     assert len(course["units"][1]["lessons"]) == 3
@@ -87,7 +87,7 @@ def test_draft_lesson_returns_authored_sections_without_private_recall_answer():
     assert "Correct. Repeated division" not in encoded
 
 
-def test_n2_lesson_is_available_as_a_complete_draft_preview():
+def test_n2_lesson_is_available_as_a_complete_reviewed_preview():
     response = get("/api/v1/lessons/n2-lesson-01")
 
     assert response.status_code == 200
@@ -108,7 +108,7 @@ def test_n2_lesson_is_available_as_a_complete_draft_preview():
     assert "Convert 1.5 kg to 1500 g" not in encoded
 
 
-def test_draft_course_is_hidden_when_preview_is_disabled():
+def test_unpublished_course_is_hidden_when_preview_is_disabled():
     response = get("/api/v1/courses/g3-sec1-math/map", allow_drafts=False)
 
     assert response.status_code == 404
