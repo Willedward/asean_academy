@@ -357,7 +357,6 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
         offset=0,
     )["items"]
     assert {(entry["content_kind"], entry["stable_key"]) for entry in reviewed_source} == {
-        ("course", "g3-sec1-math"),
         ("lesson", "n2-lesson-01"),
         ("lesson", "n2-lesson-02"),
         ("lesson", "n2-lesson-03"),
@@ -395,7 +394,7 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
     with repository._connect() as connection:
         assert verify_release_workflow(connection, catalogue) == {
             "status": "approved",
-            "checked_items": 4,
+            "checked_items": 3,
         }
         assert connection.execute(
             "select count(*) from content_review_records where stable_key=%s",

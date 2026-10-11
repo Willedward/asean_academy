@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 3,
+  "status": "draft",
+  "title": "Percentages greater than 100%",
+  "summary": "Interpret and calculate percentages above 100%, including chained percentage relationships between three quantities.",
+  "outcomes": [
+    "3.3"
+  ],
+  "prerequisite_lessons": [
+    "n3-lesson-02"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Interpret a percentage greater than 100% as a quantity larger than its reference.",
+    "Convert percentages to multipliers and back to percentages.",
+    "Combine chained percentage relationships by multiplying their multipliers."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "greater-than-one-hundred",
+      "position": 1,
+      "type": "explanation",
+      "title": "More than the whole can exceed 100%",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "100% means one complete reference quantity. Therefore 140% means "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1.4"
+        },
+        {
+          "type": "text",
+          "text": " times the reference, and 250% means "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2.5"
+        },
+        {
+          "type": "text",
+          "text": " times the reference. A percentage above 100% is valid whenever the compared quantity is larger than the reference."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-multipliers",
+      "position": 2,
+      "type": "explanation",
+      "title": "Use multipliers for chained relationships",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Convert a percentage p% to the multiplier "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{p}{100}"
+        },
+        {
+          "type": "text",
+          "text": ". If A is 125% of B and B is 120% of C, multiply 1.25 by 1.20 to compare A directly with C."
+        }
+      ]
+    },
+    {
+      "stable_key": "greater-percentage-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: calculate more than 100%",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 84 as a percentage of 60."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use 60 as the reference."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{84}{60}\\times100\\%"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate the quotient."
+            },
+            {
+              "type": "display_math",
+              "latex": "1.4\\times100\\%=140\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "84 is 1.4 times 60, so the answer must be 140%."
+    },
+    {
+      "stable_key": "chained-percentage-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: chain two percentages",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A is 125% of B, and B is 120% of C. Express A as a percentage of C."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write each relationship as a multiplier."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=1.25B,\\quad B=1.20C"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute and multiply."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=1.25(1.20C)=1.50C=150\\%\\text{ of }C"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Using C = 100 gives B = 120 and A = 150, confirming 150%."
+    },
+    {
+      "stable_key": "greater-percentage-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 78 as a percentage of 60."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "130",
+        "canonical_latex": "130\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "78 divided by 60 is 1.3, which is 130%."
+        }
+      ]
+    },
+    {
+      "stable_key": "greater-percentage-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Treat 100% as a multiplier of 1. Convert percentages to decimal multipliers, multiply when relationships are chained, then convert the final multiplier back to a percentage."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

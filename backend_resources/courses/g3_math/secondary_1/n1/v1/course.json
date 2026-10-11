@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "subject": "Mathematics",
-  "status": "reviewed",
+  "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers and N2 Ratio and proportion calibration units.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, N2 Ratio and proportion, and review-ready N3 Percentage units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
@@ -20,6 +20,14 @@
     },
     {
       "key": "n2-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n3-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -135,19 +143,82 @@
           "required_practice_count": 20
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-n3",
+      "position": 3,
+      "topic_code": "N3",
+      "title": "Percentage",
+      "checkpoint_question_count": 12,
+      "lessons": [
+        {
+          "stable_key": "n3-lesson-01",
+          "position": 1,
+          "title": "Expressing one quantity as a percentage of another",
+          "outcomes": [
+            "3.1"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "n3-lesson-02",
+          "position": 2,
+          "title": "Comparing two quantities by percentage",
+          "outcomes": [
+            "3.2"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "n3-lesson-03",
+          "position": 3,
+          "title": "Percentages greater than 100%",
+          "outcomes": [
+            "3.3"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "n3-lesson-04",
+          "position": 4,
+          "title": "Increasing or decreasing a quantity by a given percentage, including the concept of percentage point",
+          "outcomes": [
+            "3.4"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "n3-lesson-05",
+          "position": 5,
+          "title": "Reverse percentages",
+          "outcomes": [
+            "3.5"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "n3-lesson-06",
+          "position": 6,
+          "title": "Problems involving percentages",
+          "outcomes": [
+            "3.6"
+          ],
+          "required_practice_count": 12
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 79,
-    "unit_checkpoint": 31,
-    "adaptive_reserve": 34
+    "lesson_practice": 151,
+    "unit_checkpoint": 47,
+    "adaptive_reserve": 50
   },
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-09-27T12:00:00+08:00",
-    "authored_by": "ASEAN Academy content team",
-    "reviewed_at": "2026-10-11T19:45:09+08:00",
-    "reviewed_by": "William Edward Sugiharto",
-    "review_notes": "Approved for Mathematics and editorial review for the Secondary 1 N2 additions in course revision 3. N1 lessons retain their independent review status."
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "N1 and N2 retain their recorded approvals. N3 is awaiting Mathematics and editorial review."
   }
 }

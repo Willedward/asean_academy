@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-05",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 5,
+  "status": "draft",
+  "title": "Reverse percentages",
+  "summary": "Recover an original quantity from a known final quantity after one or more percentage changes.",
+  "outcomes": [
+    "3.5"
+  ],
+  "prerequisite_lessons": [
+    "n3-lesson-04"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Identify the multiplier that changed the original quantity into the final quantity.",
+    "Divide by the multiplier to recover the original quantity.",
+    "Reverse multi-stage percentage changes without reversing each percentage informally."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "reverse-percentage-model",
+      "position": 1,
+      "type": "explanation",
+      "title": "Work backwards by division",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A final amount equals the original amount multiplied by a percentage multiplier. Therefore "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\text{original}=\\frac{\\text{final}}{\\text{multiplier}}"
+        },
+        {
+          "type": "text",
+          "text": ". After a 20% discount, for example, the final price is 80% or 0.8 of the original."
+        }
+      ]
+    },
+    {
+      "stable_key": "reverse-compound-change",
+      "position": 2,
+      "type": "explanation",
+      "title": "Combine multiple multipliers before reversing",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For several changes, multiply their multipliers to form one overall multiplier, then divide the final amount by it. Do not simply add or subtract the stated percentages because each change may use a different base."
+        }
+      ]
+    },
+    {
+      "stable_key": "reverse-discount-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: recover a marked price",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A shirt costs $64 after a 20% discount. Find its marked price."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The sale price is 80% of the marked price."
+            },
+            {
+              "type": "display_math",
+              "latex": "64=0.8\\times\\text{marked price}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by 0.8."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\text{marked price}=\\frac{64}{0.8}=80"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Checking forwards, 20% of $80 is $16 and $80 \u2212 $16 = $64."
+    },
+    {
+      "stable_key": "reverse-tax-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: reverse two changes",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "After a 10% discount and then 9% GST, an item costs $196.20. Find the original price."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine the discount and GST multipliers."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.90\\times1.09=0.981"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide the final price by the overall multiplier."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\text{original}=\\frac{196.20}{0.981}=200"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Checking forwards, $200 \u00d7 0.90 \u00d7 1.09 = $196.20."
+    },
+    {
+      "stable_key": "reverse-percentage-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A quantity becomes 264 after a 10% increase. Find the original quantity."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "240",
+        "canonical_latex": "240",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The final amount is 110% of the original. Divide 264 by 1.10 to get 240."
+        }
+      ]
+    },
+    {
+      "stable_key": "reverse-percentage-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Identify what percentage of the original the final amount represents, convert it to a multiplier, and divide the final amount by that multiplier. Verify by applying the change forwards."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-06",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 6,
+  "status": "draft",
+  "title": "Problems involving percentages",
+  "summary": "Model multi-step percentage problems involving profit, loss, discounts, taxes, budgets and mixtures while tracking the reference quantity at each step.",
+  "outcomes": [
+    "3.6"
+  ],
+  "prerequisite_lessons": [
+    "n3-lesson-05"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Translate a percentage problem into quantities, reference bases and multipliers.",
+    "Solve multi-step applications involving money, budgets and mixtures.",
+    "Verify a solution using estimation, units and a forward calculation."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "percentage-problem-model",
+      "position": 1,
+      "type": "explanation",
+      "title": "Label the base at every step",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Many errors come from using the correct percentage with the wrong base. Mark the quantity that represents 100% at each stage. Profit percentage commonly uses cost price as its base; discount uses marked price; tax is applied to the price specified after any earlier change."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-problem-strategy",
+      "position": 2,
+      "type": "explanation",
+      "title": "Build the calculation before evaluating it",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Write each increase or decrease as a multiplier and keep exact values until the last step. For mixtures or budgets, translate each statement separately, then combine the resulting amounts. Finally check that the units and size of the answer fit the context."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-budget-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: percentages of a budget",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A club spends 35% of a $2400 budget on equipment and 25% of the remainder on transport. How much remains?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "After equipment, 65% of the budget remains."
+            },
+            {
+              "type": "display_math",
+              "latex": "2400\\times0.65=1560"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "After transport, 75% of that remainder is left."
+            },
+            {
+              "type": "display_math",
+              "latex": "1560\\times0.75=1170"
+            }
+          ]
+        }
+      ],
+      "verification_note": "$1170 is 48.75% of the original budget, matching the combined multiplier 0.65 \u00d7 0.75."
+    },
+    {
+      "stable_key": "percentage-mixture-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: change a concentration",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 500 ml drink is 30% juice. How much water must be added so that juice is 20% of the final drink?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the fixed amount of juice."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.30\\times500=150\\text{ ml}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the final volume be V. The 150 ml of juice is 20% of V."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.20V=150\\quad\\Rightarrow\\quad V=750\\text{ ml}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract the original volume."
+            },
+            {
+              "type": "display_math",
+              "latex": "750-500=250\\text{ ml}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "After adding 250 ml of water, 150/750 = 0.20, so the final drink is 20% juice."
+    },
+    {
+      "stable_key": "percentage-profit-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "An item costs $200 and sells for $230. Find the profit as a percentage of the cost price."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "15",
+        "canonical_latex": "15\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The profit is $30. Cost price is the reference, so 30 \u00f7 200 \u00d7 100% = 15%."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-problem-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the 100% base for every percentage, translate changes into multipliers, preserve exact values through the working, and verify the final result against the wording, units and a reasonable estimate."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-04",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 4,
+  "status": "draft",
+  "title": "Increasing or decreasing a quantity by a given percentage, including the concept of percentage point",
+  "summary": "Apply percentage multipliers for increases and decreases, handle successive changes, and distinguish percentage change from percentage-point change.",
+  "outcomes": [
+    "3.4"
+  ],
+  "prerequisite_lessons": [
+    "n3-lesson-03"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Use a single multiplier to increase or decrease a quantity by a percentage.",
+    "Apply successive percentage changes in the correct order.",
+    "Distinguish a change in percentage points from a relative percentage change."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "increase-decrease-multiplier",
+      "position": 1,
+      "type": "explanation",
+      "title": "A percentage change has one multiplier",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Increasing by p% multiplies the original quantity by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1+\\frac{p}{100}"
+        },
+        {
+          "type": "text",
+          "text": ". Decreasing by p% multiplies it by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1-\\frac{p}{100}"
+        },
+        {
+          "type": "text",
+          "text": ". This combines the original amount and the change in one calculation."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-points",
+      "position": 2,
+      "type": "explanation",
+      "title": "Percentage points compare two stated rates",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If a rate moves from 64% to 76%, it rises by 12 percentage points. Its relative percentage increase is different: "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{76-64}{64}\\times100\\%=18.75\\%"
+        },
+        {
+          "type": "text",
+          "text": ". Use \u2018percentage points\u2019 only for the direct difference between percentages."
+        }
+      ]
+    },
+    {
+      "stable_key": "successive-change-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: successive percentage changes",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A $240 price increases by 12% and is then discounted by 5%. Find the final price."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use 1.12 for the increase and 0.95 for the decrease."
+            },
+            {
+              "type": "display_math",
+              "latex": "240\\times1.12\\times0.95"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate without rounding between steps."
+            },
+            {
+              "type": "display_math",
+              "latex": "240\\times1.12\\times0.95=255.36"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The final multiplier is 1.064, so the final price is 6.4% above $240."
+    },
+    {
+      "stable_key": "percentage-point-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: percentage points and relative change",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A success rate rises from 64% to 76%. State the rise in percentage points and as a percentage of the original rate."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract the rates for the percentage-point change."
+            },
+            {
+              "type": "display_math",
+              "latex": "76\\%-64\\%=12\\text{ percentage points}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare that difference with the original 64%."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{12}{64}\\times100\\%=18.75\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The direct 12-point rise and the 18.75% relative increase answer different questions."
+    },
+    {
+      "stable_key": "percentage-change-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Decrease 150 by 18%."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "123",
+        "canonical_latex": "123",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "A decrease of 18% leaves 82%. Calculate 150 \u00d7 0.82 = 123."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-change-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Translate each change into a multiplier, multiply successive changes without early rounding, and distinguish a percentage-point difference from a percentage change relative to the starting rate."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
