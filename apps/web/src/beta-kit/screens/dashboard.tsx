@@ -25,6 +25,7 @@ import { Button, Card, Eyebrow, H1, H2, H3, Muted, ProgressBar, Stat } from "../
 import { AppShell, StatBar } from "../shell/app-shell";
 import { PREVIEW_ROUTES, type KitRoutes } from "../routes";
 import type { ContinueCard as ContinueData, League, Player, QuestBoard, StreakWeek, UnitSummary } from "../types";
+import { EnglishUpNextCard, type EnglishUpNext } from "./english-up-next";
 
 /* ------------------------------------------------------------------ */
 /* Pieces reused by other screens                                      */
@@ -154,11 +155,13 @@ export interface DashboardProps {
   league: League;
   unit: UnitSummary;
   reviewDue: { count: number; xp: number; href: string } | null;
+  /** NEW. "Up next in English" card under the maths card. Leave out to hide it. */
+  english?: EnglishUpNext;
   routes?: KitRoutes;
 }
 
 /** Canvas: Dashboard.m, Dashboard.d, Dashboard.t */
-export function DashboardScreen({ player, greeting, continueCard, quests, week, league, unit, reviewDue, routes = PREVIEW_ROUTES }: DashboardProps) {
+export function DashboardScreen({ player, greeting, continueCard, quests, week, league, unit, reviewDue, english, routes = PREVIEW_ROUTES }: DashboardProps) {
   const bonusLeft = quests.quests.filter((q) => q.progress < q.target).length;
   const nudge =
     bonusLeft > 0 ? (
@@ -196,6 +199,7 @@ export function DashboardScreen({ player, greeting, continueCard, quests, week, 
             {nudge}
           </MascotSays>
           <ContinueCard data={continueCard} />
+          {english ? <EnglishUpNextCard data={english} /> : null}
           <div className="lg:hidden">
             <StreakCard player={player} week={week} />
           </div>
