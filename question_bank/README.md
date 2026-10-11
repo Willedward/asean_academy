@@ -43,15 +43,15 @@ Validate the N1 and N2 course structure, ten lessons, and all 144 pool mappings:
 uv run question-bank course-validate
 ```
 
-Preview the draft course map at <http://127.0.0.1:8767>:
+Preview the course map at <http://127.0.0.1:8767>:
 
 ```bash
 uv run question-bank course-preview
 ```
 
 The six `lesson_content_required` warnings are expected while teaching sections for
-Lessons 2–7 are authored and reviewed. Publication validation deliberately fails while course,
-lesson, or question content remains in `draft` state:
+Lessons 2–7 are authored and reviewed. Publication validation deliberately fails while any
+required lesson or question content remains in `draft` state:
 
 ```bash
 uv run question-bank course-validate --publish

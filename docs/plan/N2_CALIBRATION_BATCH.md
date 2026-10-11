@@ -22,7 +22,7 @@ Every question has two staged hints, a marked worked solution, provenance and a 
 
 ## Deployable course integration
 
-The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully written draft lessons. Each lesson has explanations, worked examples, active recall and a summary. The N2 pool manifest allocates every question exactly once:
+The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully written, reviewed lessons. Each lesson has explanations, worked examples, active recall and a summary. The N2 pool manifest allocates every question exactly once:
 
 | Pool role | Questions |
 | --- | ---: |
@@ -31,7 +31,7 @@ The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully wri
 | Adaptive reserve | 24 |
 | **Total** | **104** |
 
-The draft snapshot is available when the API enables development previews. All four question batches have Mathematics and editorial approval. Production publication remains gated on reviewed/published lesson and course revisions.
+All four question batches, all three N2 lessons and the N2 additions in course revision 3 have Mathematics and editorial approval. The complete Secondary 1 course cannot be published until the seven N1 lessons pass their independent review and the remaining publication evidence is recorded.
 
 ## Validation and review
 
@@ -52,4 +52,5 @@ The technical pre-review audit recomputed all 78 pending-question answers and in
 three lessons. It corrected B004 outcome alignment, a semantic duplicate and currency
 notation, then produced house rules and prompt contract v2 for future batches. See
 [N2_CALIBRATION_PRE_REVIEW_AUDIT.md](N2_CALIBRATION_PRE_REVIEW_AUDIT.md). The audit did not
-replace human review; those decisions are now recorded as approved for all four batches.
+replace human review; those decisions are now recorded as approved for all four batches,
+all three N2 lessons and the N2 additions in course revision 3.
