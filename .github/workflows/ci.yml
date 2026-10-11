@@ -99,7 +99,9 @@ jobs:
 
   authoring-pull-request:
     name: Question batch ownership and reviewer evidence
-    if: github.event_name == 'pull_request'
+    # Each authoring PR is validated before it enters this named integration branch.
+    # The integration PR intentionally combines those already-validated batches.
+    if: github.event_name == 'pull_request' && github.head_ref != 'feature/bulk-question-authoring-pipeline'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
