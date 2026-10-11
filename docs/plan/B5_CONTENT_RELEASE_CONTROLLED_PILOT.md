@@ -37,7 +37,7 @@ The current authored source contains a reviewed N2 unit and an N1 unit with inde
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 79 practice, 31 checkpoint, 34 reserve |            Complete and non-overlapping | Pass    |
 
-The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete reviewed path through lesson pools and catalogue import. The gate still exposes the missing 17 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the N2 calibration unit.
+The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete reviewed path through lesson pools and catalogue import. N3 now provides the next complete draft path with 104 questions, six lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing 16 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the completed N2 and draft N3 units.
 
 ## Development sequencing decision — 10 October 2026
 

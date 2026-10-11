@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 2,
+  "status": "draft",
+  "title": "Comparing two quantities by percentage",
+  "summary": "Calculate percentage increase or decrease between two quantities by measuring the difference against the stated reference quantity.",
+  "outcomes": [
+    "3.2"
+  ],
+  "prerequisite_lessons": [
+    "n3-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Find the absolute difference between two quantities.",
+    "Choose the original or stated comparison quantity as the denominator.",
+    "Explain why reversing a percentage comparison usually changes the answer."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "percentage-change-model",
+      "position": 1,
+      "type": "explanation",
+      "title": "Compare the change with the starting quantity",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For \u2018A is what percentage more than B?\u2019, the difference is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A-B"
+        },
+        {
+          "type": "text",
+          "text": " and B is the reference. Use "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{A-B}{B}\\times100\\%"
+        },
+        {
+          "type": "text",
+          "text": ". For \u2018A is what percentage less than B?\u2019, B is again the stated reference."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-comparison-direction",
+      "position": 2,
+      "type": "explanation",
+      "title": "Direction changes the denominator",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Percentage comparisons are directional. If 50 is 25% more than 40, then 40 is 20% less than 50 because the same difference of 10 is divided by a different reference. Read the words after \u2018than\u2019 to identify the denominator."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-more-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: percentage more",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A club has 54 members this year and had 45 members last year. By what percentage did membership increase?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the increase."
+            },
+            {
+              "type": "display_math",
+              "latex": "54-45=9"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the increase with last year\u2019s membership."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{9}{45}\\times100\\%=20\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The increase is one fifth of the original membership, so 20% is reasonable."
+    },
+    {
+      "stable_key": "percentage-reverse-comparison",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: reverse the comparison",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A is 25% more than B. By what percentage is B less than A?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Choose a convenient value, such as B = 100. Then A = 125."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=125,\\quad B=100"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the difference with A because B is being described relative to A."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{125-100}{125}\\times100\\%=20\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The two percentages differ because their reference quantities are 100 and 125."
+    },
+    {
+      "stable_key": "percentage-comparison-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A price rises from $60 to $72. Find the percentage increase."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "20",
+        "canonical_latex": "20\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The increase is $12. Divide 12 by the original price of 60 and multiply by 100%."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-comparison-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Find the difference, identify the reference named by the comparison, divide the difference by that reference, and multiply by 100%. Check the direction before choosing the denominator."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

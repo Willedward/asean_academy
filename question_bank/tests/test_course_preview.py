@@ -12,7 +12,9 @@ def test_course_preview_renders_course_map_without_answers(repository_root, cour
 
     assert "Singapore Secondary 1 G3 Mathematics" in page
     assert "Primes and prime factorisation" in page
-    assert "144" in page
+    assert "248" in page
     assert "Ratios involving rational numbers" in page
+    assert "Expressing one quantity as a percentage of another" in page
     assert "n1-unit-checkpoint" in page
+    assert "n3-unit-checkpoint" in page
     assert "canonical_answer" not in page

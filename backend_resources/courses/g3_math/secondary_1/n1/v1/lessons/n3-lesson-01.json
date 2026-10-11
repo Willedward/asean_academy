@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-lesson-01",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n3",
+  "position": 1,
+  "status": "draft",
+  "title": "Expressing one quantity as a percentage of another",
+  "summary": "Express a part or comparison quantity as a percentage of a clearly identified reference quantity, including quantities given in different units.",
+  "outcomes": [
+    "3.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Identify the quantity that represents the whole or reference value.",
+    "Convert compared quantities to the same unit before calculating a percentage.",
+    "Use part divided by whole, multiplied by 100%, and check whether the result is reasonable."
+  ],
+  "mastery_policy_key": "n3-default-v1",
+  "sections": [
+    {
+      "stable_key": "percentage-reference",
+      "position": 1,
+      "type": "explanation",
+      "title": "A percentage compares with a reference quantity",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A percentage answers \u2018how many hundredths of the reference quantity?\u2019 First identify the part and the whole or reference. Then use "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{\\text{part}}{\\text{reference}}\\times100\\%"
+        },
+        {
+          "type": "text",
+          "text": ". The denominator is the quantity being compared against, so choosing it correctly matters."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-units",
+      "position": 2,
+      "type": "explanation",
+      "title": "Make the units comparable first",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The fraction must compare like units. Convert lengths, masses, times or money to the same unit before dividing. A useful estimate should come first: a part smaller than the reference gives less than 100%, while an equal quantity gives 100%."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-basic-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: find a percentage",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 18 as a percentage of 60."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Place the reference quantity in the denominator."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{18}{60}\\times100\\%"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify and calculate."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{3}{10}\\times100\\%=30\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Since 18 is less than half of 60, an answer of 30% is reasonable."
+    },
+    {
+      "stable_key": "percentage-unit-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: convert units before comparing",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 45 cm as a percentage of 1.8 m."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert 1.8 m to 180 cm."
+            },
+            {
+              "type": "display_math",
+              "latex": "1.8\\text{ m}=180\\text{ cm}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare in centimetres."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{45}{180}\\times100\\%=25\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "45 cm is one quarter of 180 cm, so it must be 25%."
+    },
+    {
+      "stable_key": "percentage-reference-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 24 as a percentage of 80."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "30",
+        "canonical_latex": "30\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Calculate 24 divided by 80, then multiply by 100%. The result is 30%."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-reference-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the reference quantity, put it in the denominator, make units match, multiply the resulting fraction by 100%, and compare the answer with an estimate."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T02:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
