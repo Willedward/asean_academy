@@ -338,7 +338,7 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 **Engineering status (30 September 2026): the fail-closed release-evidence gate, protected GitHub rehearsal, exact-SHA/content binding, diagnostic-isolation checks and controlled cohort phases are implemented. The current N1 source remains below the 19-topic-group/1,900-question/76-diagnostic threshold, six lesson notes remain empty, content is draft, and hosted/manual evidence has not passed. See [B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md).**
 
-**Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The complete registry now contains two courses, 19 level-specific topic groups and 87 outcome-linked lesson slots; N1 and N2 now have authored draft deployable content; the other 17 topic groups remain planned. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
+**Catalogue foundation (updated 11 October 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The complete registry now contains two courses, 19 level-specific topic groups and 87 outcome-linked lesson slots; N2 has reviewed deployable content, N1 retains independent lesson review gates, and the other 17 topic groups remain planned. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
 
 **Shared review integration (1 October 2026):** every authored bank can now enter the
 protected administrator queue before it becomes learner-deployable. Reviewers can filter
@@ -346,6 +346,13 @@ by authoring batch, inspect full answers, hints and solutions, and record separa
 Mathematics and editorial decisions tied to the exact content fingerprint. The portable
 HTML/Markdown/CSV packet remains a fallback. See
 [SHARED_CONTENT_REVIEW_STAGING.md](SHARED_CONTENT_REVIEW_STAGING.md).
+
+**Batch and unit review sessions (11 October 2026):** the protected dashboard now
+combines all questions in a batch or all lessons and questions in a unit into one
+review session. Reviewers can exclude corrections, inspect the exact consolidated
+selection, and record one confirmed decision that creates separate append-only records
+for every included fingerprint. Scope-level progress remains visible while content
+authoring continues asynchronously.
 
 **Multi-author automation (1 October 2026):** a versioned claim registry now prevents
 two active branches from owning the same question batch. Pull-request CI enforces the
