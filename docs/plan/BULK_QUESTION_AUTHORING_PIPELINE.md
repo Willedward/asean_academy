@@ -50,6 +50,20 @@ uv run --project question_bank question-bank authoring-plan
 uv run --project question_bank question-bank authoring-validate
 ```
 
+Select the next unclaimed planned batch and package its exact generation contract:
+
+```bash
+uv run --project question_bank question-bank authoring-next \
+  --owner YOUR_GITHUB_USERNAME --school-level secondary_1 --topic N4
+uv run --project question_bank question-bank authoring-work-order \
+  PATH/TO/BATCH.json build/authoring-work-orders/BATCH_ID
+```
+
+`authoring-work-order` produces `prompt.md`, `work-order.json` and
+`response-template.json`. This is the model-independent runner boundary: Codex, an API model
+or a human author receives the same stable-key, outcome, difficulty, schema, house-rule and
+source-reference contract. Generation does not change review state or bypass validation.
+
 Export an authored batch after its manifest lists all generated question keys:
 
 ```bash
