@@ -15,6 +15,7 @@ import {
   sampleWeek,
 } from "../sample-data";
 import { DashboardScreen } from "../screens/dashboard";
+import type { EnglishUpNext } from "../screens/english-up-next";
 import {
   CourseMapScreen,
   DashboardNewScreen,
@@ -71,6 +72,16 @@ const october: StreakMonth = {
   }),
 };
 
+const subjectLinks = { maths: preview("course-map"), english: preview("english") };
+
+const englishUpNext: EnglishUpNext = {
+  grammar: { title: "Tenses", done: 6, total: 15, href: preview("grammar-question") },
+  draft: { title: "Email to your principal", words: 180, minWords: 250, submitXp: 30, href: preview("essay-editor") },
+  quest: { id: "grammar-10", title: "Answer 10 grammar questions", icon: "check", progress: 6, target: 10, xp: 15 },
+  xp: 15,
+  homeHref: preview("english"),
+};
+
 export const learnEntries: PreviewEntry[] = [
   {
     key: "dashboard",
@@ -87,6 +98,7 @@ export const learnEntries: PreviewEntry[] = [
         league={sampleLeague}
         unit={sampleUnit}
         reviewDue={{ count: 1, xp: 20, href: preview("review") }}
+        english={englishUpNext}
       />
     ),
   },
@@ -173,6 +185,7 @@ export const learnEntries: PreviewEntry[] = [
         units={[sampleUnit]}
         badgeHolderCount={4}
         moreUnitsComing
+        subjectLinks={subjectLinks}
       />
     ),
   },
