@@ -166,6 +166,11 @@ def test_authored_batch_executes_answers_and_exports_reviewer_packet(
         "validation.json",
     }
     assert "g3-sec1-n1-b001" in (tmp_path / "review/index.html").read_text()
+    preview_html = (tmp_path / "review/index.html").read_text()
+    assert "KaTeX_Main" in preview_html
+    assert "document.querySelectorAll('[data-latex]')" in preview_html
+    assert 'class="math display-math"' in preview_html
+    assert list((tmp_path / "review/assets/katex/fonts").glob("*.woff2"))
     review_markdown = (tmp_path / "review/review.md").read_text()
     assert "Mathematics decision: `pending`" in review_markdown
     assert "Editorial decision: `pending`" in review_markdown
