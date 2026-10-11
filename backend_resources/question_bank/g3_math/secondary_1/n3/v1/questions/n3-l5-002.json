@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n3-l5-002",
+  "bank_key": "g3-sec1-n3-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N3",
+  "primary_outcome": "3.4",
+  "title": "Membership composition changes",
+  "difficulty": 5,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A club has 600 members, of whom 40% are women. The following year, total membership increases by 25% and the number of women increases by 50%."
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": "a",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the percentage of members who are women in the following year."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "3.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "48",
+        "canonical_latex": "48\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the new total membership and the new number of women separately."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The original number of women is 40% of 600. Increase this by 50%, and increase 600 by 25%."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "0.40\\times600=240"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "240\\times1.50=360,\\quad600\\times1.25=750"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{360}{750}\\times100\\%=48\\%"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "label": "b",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the increase in the percentage of women, in percentage points."
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "3.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "A percentage-point change is the difference between the new and old percentages."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 40% from 48%."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "48\\%-40\\%=8\\text{ percentage points}"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        }
+      ]
+    },
+    {
+      "position": 3,
+      "label": "c",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the relative percentage increase in the percentage of women."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "3.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "20",
+        "canonical_latex": "20\\%",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the 8-point increase with the original rate of 40%."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide 8 by 40 and multiply by 100%."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{48-40}{40}\\times100\\%=20\\%"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Relative increase}=20\\%"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 6,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-12T01:00:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
