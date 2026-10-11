@@ -15,8 +15,8 @@ The aggregate authoring validator reports 144 authored questions across N1 and N
 | `g3-sec1-n2-b001` | 26 | `approved` |
 | `g3-sec1-n2-b002` | 26 | `approved` |
 | `g3-sec1-n2-b003` | 26 | `approved` |
-| `g3-sec1-n2-b004` | 26 | `ready_for_review` |
-| **Total** | **104** | Complete draft inventory |
+| `g3-sec1-n2-b004` | 26 | `approved` |
+| **Total** | **104** | All four batches approved |
 
 Every question has two staged hints, a marked worked solution, provenance and a deterministic answer contract. The bank includes `exact_ratio`, which accepts supported ratio notation and can require simplest positive integer terms.
 
@@ -31,7 +31,7 @@ The `g3-sec1-math` course snapshot now includes `g3-sec1-n2` and three fully wri
 | Adaptive reserve | 24 |
 | **Total** | **104** |
 
-The draft snapshot is available when the API enables development previews. Production publication remains gated on Mathematics and editorial approval for batch B004, followed by reviewed/published lesson and course revisions. These human decisions must not be inferred from automated validation.
+The draft snapshot is available when the API enables development previews. All four question batches have Mathematics and editorial approval. Production publication remains gated on reviewed/published lesson and course revisions.
 
 ## Validation and review
 
@@ -51,5 +51,5 @@ The deployment bootstrap imports the complete question catalogue before the cour
 The technical pre-review audit recomputed all 78 pending-question answers and inspected all
 three lessons. It corrected B004 outcome alignment, a semantic duplicate and currency
 notation, then produced house rules and prompt contract v2 for future batches. See
-[N2_CALIBRATION_PRE_REVIEW_AUDIT.md](N2_CALIBRATION_PRE_REVIEW_AUDIT.md). This audit does not
-replace the pending human Mathematics and editorial decisions.
+[N2_CALIBRATION_PRE_REVIEW_AUDIT.md](N2_CALIBRATION_PRE_REVIEW_AUDIT.md). The audit did not
+replace human review; those decisions are now recorded as approved for all four batches.

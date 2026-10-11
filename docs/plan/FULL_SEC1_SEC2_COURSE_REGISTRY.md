@@ -49,4 +49,4 @@ The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authore
 
 ## Next content slice
 
-Secondary 1 N2 now completes the first non-N1 calibration slice: 104 questions, three lesson notes, practice pools, checkpoint and adaptive allocation, catalogue import, and API delivery are wired. B001, B002 and B003 are approved; complete the remaining B004 Mathematics and editorial review before publication, and use the calibration evidence before scaling the next topic bank.
+Secondary 1 N2 now completes the first non-N1 calibration slice: 104 questions, three lesson notes, practice pools, checkpoint and adaptive allocation, catalogue import, and API delivery are wired. All four question batches have Mathematics and editorial approval. Complete the remaining lesson and course review before publication, and use the calibration evidence before scaling the next topic bank.
