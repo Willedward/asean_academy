@@ -347,6 +347,13 @@ Mathematics and editorial decisions tied to the exact content fingerprint. The p
 HTML/Markdown/CSV packet remains a fallback. See
 [SHARED_CONTENT_REVIEW_STAGING.md](SHARED_CONTENT_REVIEW_STAGING.md).
 
+**Batch and unit review sessions (11 October 2026):** the protected dashboard now
+combines all questions in a batch or all lessons and questions in a unit into one
+review session. Reviewers can exclude corrections, inspect the exact consolidated
+selection, and record one confirmed decision that creates separate append-only records
+for every included fingerprint. Scope-level progress remains visible while content
+authoring continues asynchronously.
+
 **Multi-author automation (1 October 2026):** a versioned claim registry now prevents
 two active branches from owning the same question batch. Pull-request CI enforces the
 claim and single-batch boundary, runs aggregate validation and duplicate detection, adds
