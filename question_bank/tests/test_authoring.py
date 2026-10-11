@@ -3,6 +3,7 @@ import json
 import shutil
 from collections import Counter
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -16,6 +17,10 @@ from question_bank.authoring import (
     detect_prompt_duplicates,
     export_reviewer_batch,
     validate_authoring_pipeline,
+)
+from question_bank.authoring_runner import (
+    create_authoring_work_order,
+    next_authoring_batch,
 )
 from question_bank.models import Question
 
@@ -62,6 +67,79 @@ def test_authoring_schemas_are_valid_json_schema(repository_root):
         "question-house-rules-v1.schema.json",
     ):
         Draft202012Validator.check_schema(json.loads((schema_root / filename).read_text()))
+
+
+def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
+    repository_root, tmp_path
+):
+    banks = repository_root / "backend_resources/question_bank/g3_math"
+    claims = repository_root / "backend_resources/question_bank/authoring/batch-claims-v1.json"
+    next_batch = next_authoring_batch(
+        banks,
+        claims,
+        owner="Willedward",
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        school_level="secondary_1",
+        topic_code="N4",
+    )
+
+    assert next_batch["status"] == "ready"
+    assert next_batch["batch_id"] == "g3-sec1-n4-b001"
+    assert next_batch["branch"] == "questions/g3-sec1-n4-b001-willedward"
+    assert "authoring-claim g3-sec1-n4-b001" in next_batch["claim_command"]
+
+    result = create_authoring_work_order(
+        Path(next_batch["manifest"]),
+        tmp_path,
+        repository_root=repository_root,
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        house_rules_path=repository_root
+        / "backend_resources/question_bank/authoring/house-rules-v1.json",
+    )
+    work_order = json.loads((tmp_path / "work-order.json").read_text())
+
+    assert result["question_count"] == 26
+    assert len(work_order["slots"]) == 26
+    assert {slot["stable_key"] for slot in work_order["slots"]} == {
+        "n4-l1-001",
+        "n4-l1-002",
+        "n4-l1-003",
+        "n4-l1-004",
+        "n4-l1-005",
+        "n4-l1-006",
+        "n4-l2-001",
+        "n4-l2-002",
+        "n4-l2-003",
+        "n4-l2-004",
+        "n4-l2-005",
+        "n4-l2-006",
+        "n4-l2-007",
+        "n4-l3-001",
+        "n4-l3-002",
+        "n4-l3-003",
+        "n4-l3-004",
+        "n4-l3-005",
+        "n4-l3-006",
+        "n4-l3-007",
+        "n4-l3-008",
+        "n4-l4-001",
+        "n4-l4-002",
+        "n4-l4-003",
+        "n4-l4-004",
+        "n4-l5-001",
+    }
+    assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
+        "4.1",
+        "4.2",
+        "4.3",
+    }
+    assert work_order["generation_contract"]["human_review_required"] == [
+        "mathematics",
+        "editorial",
+    ]
+    assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
 def test_manifest_rejects_batches_outside_reviewable_size():

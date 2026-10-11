@@ -15,6 +15,7 @@ from .authoring import (
     write_authoring_schemas,
     write_missing_blueprints,
 )
+from .authoring_runner import create_authoring_work_order, next_authoring_batch
 from .catalogue import write_schemas as write_catalogue_schemas
 from .catalogue_repository import CatalogueImporter
 from .collaboration import (
@@ -227,11 +228,52 @@ def parser():
     authoring_pr_check.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
     authoring_pr_check.add_argument("--banks", type=Path, default=DEFAULT_BANK_CATALOGUE)
     authoring_pr_check.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_next = commands.add_parser(
+        "authoring-next",
+        help="Select the next unclaimed planned batch and print exact claim instructions",
+    )
+    authoring_next.add_argument("--owner", required=True)
+    authoring_next.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_next.add_argument("--banks", type=Path, default=DEFAULT_BANK_CATALOGUE)
+    authoring_next.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_next.add_argument(
+        "--school-level", choices=("secondary_1", "secondary_2")
+    )
+    authoring_next.add_argument("--topic")
+    authoring_work_order = commands.add_parser(
+        "authoring-work-order",
+        help="Package one planned batch as a deterministic model work order",
+    )
+    authoring_work_order.add_argument("manifest", type=Path)
+    authoring_work_order.add_argument("output", type=Path)
+    authoring_work_order.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    authoring_work_order.add_argument("--house-rules", type=Path, default=DEFAULT_HOUSE_RULES)
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "authoring-next":
+        result = next_authoring_batch(
+            args.banks,
+            args.claims,
+            owner=args.owner,
+            syllabus_path=args.syllabus,
+            school_level=args.school_level,
+            topic_code=args.topic,
+        )
+        print(json.dumps(result, indent=2))
+        return 0
+    if args.command == "authoring-work-order":
+        result = create_authoring_work_order(
+            args.manifest,
+            args.output,
+            repository_root=REPOSITORY_ROOT,
+            syllabus_path=args.syllabus,
+            house_rules_path=args.house_rules,
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
     if args.command == "authoring-claim":
         try:
             result = claim_batch(

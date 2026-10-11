@@ -117,3 +117,18 @@ See [`docs/plan/BULK_QUESTION_AUTHORING_PIPELINE.md`](../docs/plan/BULK_QUESTION
 for the lifecycle, repository layout, reviewer export command, and parallel Codex workflow.
 The complete claim and CI workflow is in
 [`docs/plan/MULTI_AUTHOR_QUESTION_PIPELINE.md`](../docs/plan/MULTI_AUTHOR_QUESTION_PIPELINE.md).
+
+Prepare the next unclaimed batch and a provider-independent generation work order:
+
+```bash
+uv run --project question_bank question-bank authoring-next \
+  --owner YOUR_GITHUB_USERNAME --school-level secondary_1 --topic N4
+uv run --project question_bank question-bank authoring-work-order \
+  backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches/g3-sec1-n4-b001.json \
+  build/authoring-work-orders/g3-sec1-n4-b001
+```
+
+The work order contains the exact reserved keys, outcome and difficulty assignment, house
+rules, source checksums, complete Question JSON Schema, response template and model prompt.
+It removes allocation and prompt assembly from each authoring session. Generated questions
+still pass through the existing executable checks, duplicate scan and human review gates.
