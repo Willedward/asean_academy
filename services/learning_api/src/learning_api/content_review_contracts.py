@@ -57,6 +57,7 @@ class ContentReviewItemResponse(ApiModel):
     outcome_code: str | None = None
     position: int | None = Field(default=None, ge=1)
     batch_id: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
+    unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     review_state: ReviewState
     mathematics_review: ContentReviewSummary | None
     editorial_review: ContentReviewSummary | None
@@ -69,6 +70,7 @@ class ContentReviewItemResponse(ApiModel):
 class ContentReviewQueueResponse(ApiModel):
     items: list[ContentReviewItemResponse]
     batch_ids: list[str]
+    unit_keys: list[str]
     total: int
     limit: int
     offset: int
@@ -83,6 +85,27 @@ class RecordContentReviewRequest(ApiModel):
     notes: str = Field(min_length=10, max_length=2000)
 
 
+class BulkContentReviewTarget(ApiModel):
+    content_kind: ContentKind
+    stable_key: str = Field(min_length=1, max_length=160)
+    source_revision: int = Field(ge=1)
+    source_content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    review_fingerprint: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class BulkContentReviewPreviewRequest(ApiModel):
+    scope: Literal["batch", "unit"]
+    scope_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    targets: list[BulkContentReviewTarget] = Field(min_length=1, max_length=250)
+
+
+class BulkContentReviewRequest(BulkContentReviewPreviewRequest):
+    dimension: ReviewDimension
+    decision: ReviewDecision
+    notes: str = Field(min_length=10, max_length=2000)
+    confirmed: Literal[True]
+
+
 class ContentReviewRecordResponse(ContentReviewSummary):
     record_id: UUID
     content_kind: ContentKind
@@ -90,6 +113,13 @@ class ContentReviewRecordResponse(ContentReviewSummary):
     source_revision: int
     source_content_sha256: str
     review_fingerprint: str
+
+
+class BulkContentReviewResponse(ApiModel):
+    scope: Literal["batch", "unit"]
+    scope_key: str
+    recorded_count: int = Field(ge=1, le=250)
+    records: list[ContentReviewRecordResponse]
 
 
 class CreateLifecycleRequest(ApiModel):
@@ -124,3 +154,9 @@ class ContentReviewerPreviewResponse(ApiModel):
     review_fingerprint: str
     batch_id: str | None = None
     review_content: dict[str, Any]
+
+
+class BulkContentReviewerPreviewResponse(ApiModel):
+    scope: Literal["batch", "unit"]
+    scope_key: str
+    items: list[ContentReviewerPreviewResponse]

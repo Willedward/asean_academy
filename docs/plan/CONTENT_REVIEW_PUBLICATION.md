@@ -115,7 +115,9 @@ All routes are below `/api/v1/admin/content`.
 
 | Method and route                               | Role                                        | Behavior                                                                        |
 | ---------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
-| `GET /`                                        | either admin                                | Filter/paginate every authored item, including question batch ID                |
+| `GET /`                                        | either admin                                | Filter/paginate authored items by batch or curriculum unit                      |
+| `POST /bulk-review-preview`                    | either admin                                | Return one protected preview for an exact selected batch/unit revision set      |
+| `POST /bulk-reviews`                           | either admin; Mathematics requires academic | Atomically append one decision per selected fingerprint                         |
 | `GET /{kind}/{stable_key}/preview`             | either admin                                | Return only the public student representation                                   |
 | `GET /{kind}/{stable_key}/review-preview`      | either admin                                | Return the full reviewer representation, including answers, hints and solutions |
 | `POST /{kind}/{stable_key}/reviews`            | either admin; Mathematics requires academic | Append an approval or changes-requested decision                                |
@@ -131,17 +133,23 @@ the dashboard. Neither route is available to a learner.
 
 1. Sign in with an administrator Google account.
 2. Open <http://localhost:3000/admin/content>.
-3. Filter by authoring batch, kind, authored status or review state, or search a stable
-   key/title. Selecting a batch shows its dual-approval progress.
-4. Select **Open reviewer preview** and inspect the prompt, answer, hints, solution,
+3. Filter by authoring batch or curriculum unit. A batch contains its authored
+   questions; a unit combines its lessons and questions. The scope summary shows
+   Mathematics, editorial, full-approval and changes-requested progress.
+4. In a scoped review session, deselect any item that requires correction, then select
+   **Open consolidated reviewer preview** to inspect the exact selected revisions.
+5. Choose Mathematics or editorial review, add shared notes, explicitly confirm the
+   selection, and record the session. The server verifies every hash before atomically
+   appending a separate immutable record for every included item.
+6. For a single item, select **Open reviewer preview** and inspect the prompt, answer, hints, solution,
    marks, outcome and difficulty.
-5. Choose Mathematics or editorial review, choose a decision, and record detailed
+7. Choose Mathematics or editorial review, choose a decision, and record detailed
    notes. A content administrator can select editorial only.
-6. Resolve every requested change in Git. Increment the authored revision whenever
+8. Resolve every requested change in Git. Increment the authored revision whenever
    immutable content changes.
-7. After both latest decisions approve the same fingerprint, an academic administrator
+9. After both latest decisions approve the same fingerprint, an academic administrator
    selects **Review publication request**, enters the reason and confirms.
-8. Create the reviewed/published Git revision without changing the approved teaching
+10. Create the reviewed/published Git revision without changing the approved teaching
    content, submit it for code review, and run the release pipeline.
 
 The confirmation text states that the action records a request and does not directly
@@ -178,14 +186,14 @@ does not rewrite learner history.
 ## Verification delivered
 
 - Migration safety and a fresh-migration rehearsal cover the additive schema.
-- PostgreSQL integration coverage verifies role separation, safe preview, dual
-  approval, publication request invalidation, reapproval, a fresh request, audit rows
-  and append-only mutation rejection.
+- PostgreSQL integration coverage verifies role separation, safe preview, atomic bulk
+  review, individual exclusions, dual approval, publication request invalidation,
+  reapproval, a fresh request, audit rows and append-only mutation rejection.
 - API tests verify student denial, content-admin preview and academic-only lifecycle
   requests.
 - Browser component tests verify safe preview, disabled Mathematics review for a
-  content administrator, protected full-content preview, batch filtering and progress,
-  review submission and explicit publication confirmation.
+  content administrator, protected full-content preview, batch/unit filtering and
+  progress, bulk exclusion and review submission, and explicit publication confirmation.
 - OpenAPI and TypeScript contracts are generated from the backend models.
 
 ## Next backend milestones

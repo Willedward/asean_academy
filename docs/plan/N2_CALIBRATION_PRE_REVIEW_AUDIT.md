@@ -36,12 +36,13 @@ B004 required four kinds of correction before human review:
    avoidance, currency notation, hint boundaries and independent answer verification
    explicit for future batches.
 
-## Human review still required
+## Human review outcome
 
-Reviewers must inspect the regenerated packets for B001, B003 and B004 and record separate
-Mathematics and editorial decisions. The N2 lesson and course revisions also remain draft
-until named human reviewers approve them. Only then may the batch, question, lesson and
-course states be promoted for publication.
+The regenerated packets for B001, B003 and B004 received separate Mathematics and
+editorial approval. All three N2 lessons and the N2 additions in course revision 3 were
+approved for Mathematics and editorial review on 11 October 2026. The seven N1 lessons
+retain their independent review state, so the complete Secondary 1 course remains blocked
+from publication until those lesson reviews and the remaining release evidence are complete.
 
 The next authoring claim should be g3-sec1-n3-b001, after the active B004 claim is released.
 That claim must update its manifest to house rules v2 and prompt
