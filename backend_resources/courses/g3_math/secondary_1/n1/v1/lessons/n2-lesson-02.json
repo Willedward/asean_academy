@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n2",
+  "position": 2,
+  "status": "draft",
+  "title": "Writing a ratio in its simplest form",
+  "summary": "Reduce two-term and multi-term ratios to relatively prime positive integer terms, including ratios with unlike units and rational values.",
+  "outcomes": [
+    "2.2"
+  ],
+  "prerequisite_lessons": [
+    "n2-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Reduce whole-number ratios using the highest common factor of every term.",
+    "Convert unlike units before simplifying a ratio.",
+    "Clear fractions and decimals to obtain a simplest multi-term integer ratio."
+  ],
+  "mastery_policy_key": "n2-default-v1",
+  "sections": [
+    {
+      "stable_key": "simplest-ratio-definition",
+      "position": 1,
+      "type": "explanation",
+      "title": "What simplest form means",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A ratio is in simplest form when every term is a positive integer and the terms have no common factor greater than 1. For a three-term ratio, the divisor must be common to all three terms. Pairwise simplification can give a wrong result because every term must be scaled together."
+        }
+      ]
+    },
+    {
+      "stable_key": "simplest-ratio-process",
+      "position": 2,
+      "type": "explanation",
+      "title": "Use one consistent process",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "First convert all quantities to the same unit. Next clear fractions or decimals by multiplying every term by one common number. Finally divide all integer terms by their highest common factor. A final check should confirm both that the ratio is equivalent to the original and that the integer terms are relatively prime."
+        }
+      ]
+    },
+    {
+      "stable_key": "three-term-ratio-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: simplify three rational terms",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac12:\\frac34:1.25"
+        },
+        {
+          "type": "text",
+          "text": " in its simplest form."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write 1.25 as 5/4. The denominators are now 2, 4 and 4."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply every term by 4, the lowest common multiple of the denominators."
+            },
+            {
+              "type": "display_math",
+              "latex": "4\\left(\\frac12:\\frac34:\\frac54\\right)=2:3:5"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The integers 2, 3 and 5 have highest common factor 1, so the ratio is already simplest."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Dividing each resulting term by its original term gives the same scale factor of 4."
+    },
+    {
+      "stable_key": "mixed-unit-ratio-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: convert units before simplifying",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2.4\\text{ m}:90\\text{ cm}"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert metres to centimetres."
+            },
+            {
+              "type": "display_math",
+              "latex": "2.4\\text{ m}=240\\text{ cm}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide both terms by their highest common factor, 30."
+            },
+            {
+              "type": "display_math",
+              "latex": "240:90=8:3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The terms use the same unit before cancellation, and 8 and 3 are relatively prime."
+    },
+    {
+      "stable_key": "simplest-ratio-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "0.6:1.5"
+        },
+        {
+          "type": "text",
+          "text": " in its simplest form."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_ratio",
+        "canonical_expression": "2:5",
+        "canonical_latex": "2:5",
+        "variables": [],
+        "domain_constraints": [
+          "positive ratio terms"
+        ],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "terms": 2,
+          "require_simplest_integer_terms": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Multiply both terms by 10 to get 6:15, then divide both terms by 3 to get 2:5."
+        }
+      ]
+    },
+    {
+      "stable_key": "simplest-ratio-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Make units identical, clear rational terms with one common multiplier, divide every term by the common highest factor, and confirm the final positive integer terms have highest common factor 1."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-10T18:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

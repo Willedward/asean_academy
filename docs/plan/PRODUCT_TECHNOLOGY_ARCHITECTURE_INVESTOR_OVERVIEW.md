@@ -530,7 +530,7 @@ The product does not need to become a network of microservices at a particular u
 
 ### Immediate
 
-1. Apply migrations through `202610080023_tutor_routing_evidence_pagination.sql` in a disposable and then hosted staging database.
+1. Apply migrations through `202610100024_tutor_zero_cost_reservations.sql` in a disposable and then hosted staging database.
 2. Configure the economy and premium providers with current model identifiers and prices.
 3. Run both models across the fixed evaluation set and compare Mathematics, editorial, latency and cost evidence.
 4. Enable shadow mode for administrators and collect recommended-versus-executed route and projected-cost evidence without premium calls.

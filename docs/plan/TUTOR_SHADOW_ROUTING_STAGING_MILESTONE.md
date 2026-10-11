@@ -1,6 +1,7 @@
 # Tutor Shadow Routing Staging Milestone
 
-**Status:** In progress
+**Status:** Deferred to the pre-Beta gate after content completion; hosted activation smoke
+complete, backup prerequisite and evidence dataset remain
 
 **Prepared:** 8 October 2026
 
@@ -23,15 +24,24 @@ usage, and produces a written go/no-go decision for a later administrator-only l
 
 The milestone does **not** enable live premium routing for students.
 
+**Sequencing decision (10 October 2026):** Paid backup infrastructure and the representative
+shadow dataset are deferred until the content candidate is ready. During question and lesson
+authoring, staging remains disposable, premium execution remains disabled and this milestone
+does not block content work. The consolidated last-mile checklist is in
+[B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md#pre-beta-hosted-operations-checklist).
+
 **Implementation update:** Work packages A, B and C are implemented and deployed to hosted
 staging. Work package D is activated for the `admins` cohort with live hybrid routing off.
 The API resolves `off`, `shadow` or `live` from the PostgreSQL role and configured cohort;
 adds restricted routing status and cursor-paginated decision endpoints; and includes the
 pagination index in migration `202610080023_tutor_routing_evidence_pagination.sql`. The
 Tutor Evaluation Lab now renders the restricted status, monthly aggregates, shadow safety
-invariant, server-side filters and paginated decision evidence. The remaining staging work
-is to record the hosted backup state, run an authenticated administrator smoke conversation,
-and perform the evidence review in work package E.
+invariant, server-side filters and paginated decision evidence. The authenticated hosted
+administrator smoke is complete. The hosted backup state is now recorded: the Supabase Free
+plan does not provide project backups, so a managed backup or an operator-created snapshot
+remains a prerequisite before the cohort expands. The remaining pilot work is to resolve
+that prerequisite, collect the representative dataset and perform the evidence review in
+work package E.
 
 ## 2. Required outcome
 
@@ -142,8 +152,8 @@ Create a repeatable activation procedure:
 
 1. record the API and web release SHAs;
 2. back up or snapshot staging according to the existing database procedure;
-3. apply migrations through `202610080023_tutor_routing_evidence_pagination.sql`;
-4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610080023`;
+3. apply migrations through `202610100024_tutor_zero_cost_reservations.sql`;
+4. confirm `/api/v1/health` and `/api/v1/ready`, including schema revision `202610100024`;
 5. configure current economy and premium model identifiers and micro-SGD price snapshots;
 6. keep live hybrid routing `false`;
 7. set the cohort to `admins` and shadow routing to `true`;
@@ -201,7 +211,7 @@ surface only.
 
 ### Work package A — cohort gate and configuration
 
-**Status:** Implemented and deployed; authenticated cohort verification remains.
+**Status:** Implemented, deployed and verified with an authenticated academic administrator.
 
 1. Add the routing cohort setting and validation.
 2. Resolve eligibility from the authenticated role in the API dependency layer.
@@ -215,7 +225,7 @@ on the recorded `off` economy route.
 ### Work package B — evidence read model
 
 **Status:** Implemented and deployed. CI PostgreSQL migration and repository integration
-tests pass; authenticated hosted evidence inspection remains.
+tests pass, and authenticated hosted evidence inspection is complete.
 
 1. Define response contracts and cursor encoding.
 2. Add an indexed repository query over route decisions, reservations and assistant
@@ -229,8 +239,7 @@ decision evidence; other roles receive `403`.
 
 ### Work package C — administrator UI
 
-**Status:** Implemented and deployed; authenticated layout and session-state verification
-remain.
+**Status:** Implemented, deployed and verified in the authenticated hosted administrator UI.
 
 1. Add routing status and metric cards to the Tutor Evaluation Lab.
 2. Add the decision table, filters and accessible details view.
@@ -250,8 +259,9 @@ results, filters, cursor pagination, API failure and invariant breach.
 
 ### Work package D — staging activation
 
-**Status:** Activated in hosted staging; backup evidence and the authenticated smoke
-conversation remain.
+**Status:** Hosted shadow routing and the authenticated smoke are complete. Backup posture is
+verified but does not pass: the staging project is on Supabase Free, which has no project
+backups.
 
 1. Apply the migrations in a disposable PostgreSQL database and run repository integration
    tests.
@@ -268,10 +278,10 @@ Observed on **10 October 2026 at 01:03 WITA**:
 
 | Item | Recorded value |
 | --- | --- |
-| Active API source release | `519ab749b22bce1da88a8aee8ab738299a20d2e5` |
+| Active API source release | `a5633f67fe900797a278e068358b5d832c118b99` |
 | Shadow configuration commit included in release | `4ab492628c45780f4bdcd84ccfe6f884796abe3b` |
-| CI run | `37818702809`; API, web, PostgreSQL and authenticated browser jobs passed |
-| Required and current schema | `202610080023` |
+| CI run | `38030808486`; API, web, PostgreSQL and authenticated browser jobs passed |
+| Required and current schema | `202610100024` |
 | Economy target | `gemini` / `gemini-3.5-flash-lite` |
 | Premium recommendation target | `openai` / `gpt-4o-2024-11-20` |
 | Routing configuration | live `false`; shadow `true`; cohort `admins` |
@@ -280,21 +290,35 @@ Observed on **10 October 2026 at 01:03 WITA**:
 | Public API checks | health `ok`, tutor `enabled`; readiness `ready`; database, schema and content `ready/current/current` |
 | Public web check | `/login` returned HTTP `200` over HTTP/1.1 |
 | Authorization check | unauthenticated routing-status request returned `authentication_required` |
-| Backup evidence | Not available to this shell; confirm the current hosted backup or snapshot in the provider dashboard before expanding the cohort |
+| Backup evidence | Supabase dashboard inspected 10 October 2026 at 17:57 SGT: staging is on Free and has no project backups; resolve with a managed backup or operator-created snapshot before expanding the cohort |
 
 The checked-in configuration declares `GEMINI_API_KEY` as a server-only Render secret and
 does not add an OpenAI key. Shadow mode therefore records premium recommendations while the
 Gemini economy provider remains the only callable provider. Automated tests include the
 economy-only provider spy and passed before activation.
 
-This shell has no authenticated browser session or Supabase access token, so it did not
-send a hosted administrator tutor message. Complete the activation smoke in the Tutor
-Evaluation Lab by sending one hard or repeated-confusion turn and confirming:
+The Supabase backup dashboard for `ASEAN Academy Staging` was inspected on **10 October
+2026 at 17:57 SGT**. It states that the Free plan does not include project backups and that
+scheduled backups require an upgraded plan. Work package D therefore remains open even
+though routing activation and the authenticated smoke passed. Before any cohort expansion,
+either enable managed backups with recorded retention or create and verify an
+operator-controlled `pg_dump` snapshot under the existing recovery procedure.
 
-1. resolved mode is `shadow` and cohort is `admins`;
-2. the decision has a recommendation but `executed_tier=economy`;
-3. `Shadow premium executions` remains `0`; and
-4. the reservation is reconciled with non-zero provider token usage.
+The authenticated administrator smoke completed on **10 October 2026 at 14:29 SGT**. After
+three incorrect attempts, the administrator asked for another explanation. Policy
+`math-tutor-routing-v1` scored the `alternative_explanation` turn at `5` from
+`difficulty_1`, `mode_alternative_explanation`, `three_or_more_incorrect_attempts`,
+`learner_confusion` and `premium_threshold_reached`. The router recommended OpenAI premium
+but executed Gemini economy in `shadow` mode. The reservation reconciled with 2,118 input
+and 167 output tokens, 1,349 micro-SGD actual cost and 8,916 micro-SGD projected premium
+cost. `Shadow premium executions` remained `0`, and locked-answer protection recorded
+`answer_leakage_blocked` without exposing the answer to the learner.
+
+The hosted learner smoke also requires preview-only draft grounding because the shared
+review environment intentionally serves draft lesson and question revisions. That exception
+is resolved from the authenticated PostgreSQL role at request time: it applies only to an
+`academic_admin` in `preview` when draft content is enabled. Students and production remain
+restricted to published lesson and question grounding.
 
 ### Work package E — evidence review and decision
 

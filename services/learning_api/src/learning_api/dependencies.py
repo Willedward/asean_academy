@@ -349,7 +349,14 @@ def tutor_repository(request: Request):
                     "message": "Tutor persistence requires the PostgreSQL database.",
                 },
             )
-        repository = PostgresTutorRepository(settings.database_url)
+        repository = PostgresTutorRepository(
+            settings.database_url,
+            # Disposable browser tests exercise the real tutor path against the
+            # reviewed draft fixtures without weakening hosted grounding rules.
+            allow_draft_grounding=(
+                settings.environment == "test" and settings.allow_draft_content
+            ),
+        )
         request.app.state.tutor_repository = repository
     return repository
 
@@ -446,6 +453,7 @@ def tutor_service(
             request.app.state, "beta_operations_repository", None
         ) or beta_operations_repository(request)
         database_role = role_repository.role_for(learner.learner_id)
+    repository = _tutor_repository_for_request(repository, settings, database_role)
     routing_mode = resolve_routing_mode(
         configured_mode,
         settings.tutor_routing_cohort,
@@ -483,6 +491,22 @@ def tutor_service(
         model_policy_version=settings.tutor_model_policy_version,
         prompt_version=settings.tutor_prompt_version,
     )
+
+
+def _tutor_repository_for_request(repository, settings, database_role):
+    """Permit reviewed staging admins to exercise routing against preview content."""
+    if (
+        settings.environment == "preview"
+        and settings.allow_draft_content
+        and database_role == "academic_admin"
+        and isinstance(repository, PostgresTutorRepository)
+        and settings.database_url
+    ):
+        return PostgresTutorRepository(
+            settings.database_url,
+            allow_draft_grounding=True,
+        )
+    return repository
 
 
 def _tutor_model_name(settings, provider_name: str) -> str:

@@ -32,15 +32,16 @@ def get(path: str, *, allow_drafts: bool = True):
     return asyncio.run(request())
 
 
-def test_course_map_returns_seven_explicit_content_placeholders():
+def test_course_map_returns_n1_and_n2_content_units():
     response = get("/api/v1/courses/g3-sec1-math/map")
 
     assert response.status_code == 200
     course = response.json()
     assert course["development_preview"] is True
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 1
+    assert len(course["units"]) == 2
     assert len(course["units"][0]["lessons"]) == 7
+    assert len(course["units"][1]["lessons"]) == 3
     assert [lesson["position"] for lesson in course["units"][0]["lessons"]] == list(
         range(1, 8)
     )
@@ -84,6 +85,27 @@ def test_draft_lesson_returns_authored_sections_without_private_recall_answer():
     assert "canonical_answer" not in encoded
     assert "canonical_expression" not in encoded
     assert "Correct. Repeated division" not in encoded
+
+
+def test_n2_lesson_is_available_as_a_complete_draft_preview():
+    response = get("/api/v1/lessons/n2-lesson-01")
+
+    assert response.status_code == 200
+    lesson = response.json()
+    assert lesson["title"] == "Ratios involving rational numbers"
+    assert [section["type"] for section in lesson["sections"]] == [
+        "explanation",
+        "explanation",
+        "worked_example",
+        "worked_example",
+        "active_recall",
+        "summary",
+    ]
+    assert lesson["practice"]["question_count"] == 20
+    assert lesson["practice"]["development_available"] is True
+    encoded = json.dumps(lesson)
+    assert "canonical_expression" not in encoded
+    assert "Convert 1.5 kg to 1500 g" not in encoded
 
 
 def test_draft_course_is_hidden_when_preview_is_disabled():
@@ -139,7 +161,7 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_one["available"] is True
     assert secondary_one["units"][0]["topic_code"] == "N1"
     assert secondary_one["units"][0]["available"] is True
-    assert secondary_one["units"][1]["available"] is False
+    assert secondary_one["units"][1]["available"] is True
     assert secondary_two["stable_key"] == "g3-sec2-math"
     assert len(secondary_two["units"]) == 9
     assert secondary_two["available"] is False
@@ -160,7 +182,7 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
         )
     )
 
-    assert len(catalogue.questions) == 40
+    assert len(catalogue.questions) == 144
     assert len(catalogue.review_questions) == len(authored_paths)
     assert catalogue.review_question_batches["n2-l1-001"] == "g3-sec1-n2-b001"
     assert catalogue.review_question_batches["n2-l1-007"] == "g3-sec1-n2-b002"

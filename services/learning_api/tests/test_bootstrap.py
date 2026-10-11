@@ -36,13 +36,13 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         with psycopg.connect(target) as c:
             assert c.execute("select to_regclass('public.profiles')").fetchone()[0] is None
         result = bootstrap_module.bootstrap(target, apply=True)
-        assert result["questions"] == 40
+        assert result["questions"] == 144
         assert result["status"] == "current"
         assert bootstrap_module.bootstrap(target, apply=False)["pending_migrations"] == 0
         assert bootstrap_module.bootstrap(target, apply=True) == result
         with psycopg.connect(target) as c:
             assert c.execute("select count(*) from profiles").fetchone()[0] == 0
-            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 40
+            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 144
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0
             c.execute("insert into supabase_migrations.schema_migrations(version) values ('299999999999')")
         with pytest.raises(ValueError, match="absent from this branch"):

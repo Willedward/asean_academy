@@ -37,6 +37,13 @@ Author and export questions in batches of 20–30; 25 is the default batch size.
 
 The reviewers' weekly capacity is still an open input. Until it is known, generation should not run so far ahead that a large unreviewed backlog accumulates. Reviewer corrections from the first calibration batch must be incorporated into prompts, blueprints, and validators before bulk drafting continues.
 
+The N2 technical pre-review is now incorporated in
+house-rules-v2.json and math-question-authoring-v2.md. New work must distinguish the
+allocated outcome in the task itself, reject semantic repeats that reuse the same context,
+operation pattern and numbers, use S$ consistently, preserve staged hint boundaries and
+independently recompute each answer. Human reviewer corrections remain pending and take
+precedence over these provisional rules.
+
 ## Provisional house rules
 
 The pipeline must make house rules versioned configuration rather than embedding them in prompts. The initial rules should cover:

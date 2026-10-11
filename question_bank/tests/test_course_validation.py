@@ -9,23 +9,23 @@ from question_bank.course_models import Course, Lesson, QuestionPools
 from question_bank.course_validation import schema_documents, validate_course
 
 
-def test_n1_course_source_is_valid_draft(repository_root, bank_root):
+def test_n1_and_n2_course_source_is_valid_draft(repository_root, course_bank_root):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
-    report = validate_course(course_root, bank_root)
+    report = validate_course(course_root, course_bank_root)
 
     assert report.valid
     assert report.course.stable_key == "g3-sec1-math"
-    assert len(report.lessons) == 7
-    assert len(report.pools.pools) == 9
-    assert report.as_dict()["allocated_question_count"] == 40
+    assert len(report.lessons) == 10
+    assert len(report.pools.pools) == 14
+    assert report.as_dict()["allocated_question_count"] == 144
     assert {issue.code for issue in report.warnings} == {"lesson_content_required"}
 
 
-def test_n1_course_cannot_publish_while_content_and_questions_are_drafts(
-    repository_root, bank_root
+def test_n1_and_n2_course_cannot_publish_while_content_and_questions_are_drafts(
+    repository_root, course_bank_root
 ):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
-    report = validate_course(course_root, bank_root, publish=True)
+    report = validate_course(course_root, course_bank_root, publish=True)
 
     assert not report.valid
     codes = {issue.code for issue in report.errors}
@@ -83,19 +83,19 @@ def test_worked_example_steps_are_explicit_and_ordered(repository_root):
         Lesson.model_validate(payload)
 
 
-def test_all_questions_are_allocated_once(repository_root, bank_root):
+def test_all_questions_are_allocated_once(repository_root, course_bank_root):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
-    report = validate_course(course_root, bank_root)
+    report = validate_course(course_root, course_bank_root)
     allocated = [
         item.question_key for pool in report.pools.pools for item in pool.items
     ]
 
-    assert len(allocated) == 40
-    assert len(set(allocated)) == 40
+    assert len(allocated) == 144
+    assert len(set(allocated)) == 144
 
 
 def test_lesson_required_practice_must_match_its_pool(
-    repository_root, bank_root, tmp_path
+    repository_root, course_bank_root, tmp_path
 ):
     source = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
     course_root = tmp_path / "course"
@@ -105,7 +105,7 @@ def test_lesson_required_practice_must_match_its_pool(
     payload["units"][0]["lessons"][0]["required_practice_count"] = 4
     course_path.write_text(json.dumps(payload))
 
-    report = validate_course(course_root, bank_root)
+    report = validate_course(course_root, course_bank_root)
 
     assert not report.valid
     assert "required_practice_count" in {issue.code for issue in report.errors}

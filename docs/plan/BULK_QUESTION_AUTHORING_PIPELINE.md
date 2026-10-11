@@ -37,7 +37,7 @@ backend_resources/question_bank/
 
 All 19 level-specific topic groups now have 104-question target blueprints. The existing 40 N1 draft questions remain unchanged and occupy their matching blueprint cells; its remaining 64 questions are split into batches of 22, 21, and 21. Each of the other 18 banks is split into four 26-question manifests. Together, 75 manifests reserve 1,936 new questions, producing the 1,976-question initial inventory when combined with the N1 pilot.
 
-The first Secondary 1 N2 calibration batch is now authored: `g3-sec1-n2-b001` contains 26 questions across outcomes 2.1–2.3 and difficulty Levels 1–5. It is in `ready_for_review` state. The repository currently contains 66 authored questions: the 40-question N1 pilot and this 26-question N2 batch.
+The Secondary 1 N2 calibration bank is now complete: four 26-question batches provide all 104 planned questions across outcomes 2.1–2.3 and difficulty Levels 1–5. B002 is approved; B001, B003 and B004 are `ready_for_review`. The repository contains 144 authored questions: the 40-question N1 pilot and the 104-question N2 unit.
 
 ## Commands
 

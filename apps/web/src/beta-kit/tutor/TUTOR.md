@@ -4,7 +4,9 @@ The learner side of William's tutor backend (`feat/tutor-hybrid-model-routing`),
 design canvas page "AI tutor (V2)". Product plan: `AI_TUTOR_PLAN.md` in the ASEAN Academy project.
 API contract: `docs/plan/AI_TUTOR_FRONTEND_BACKEND_HANDOFF.md`.
 
-Only new files were added. No existing page or component was changed.
+**Integrated 10 October 2026:** `TutorDock` is mounted in the live student practice
+screen. It appears after the first wrong try, remains available after Give up so it can
+explain the unlocked solution, and stays hidden in checkpoints and after a correct answer.
 
 ## See it
 
@@ -31,10 +33,10 @@ over the question, desktops a panel on the right. "Phone and desktop" shows both
 | `tutor/preview.tsx`, `tutor/sample.tsx` | Previews and sample data only. |
 | `app/beta-kit/tutor/**` | Preview routes (same production gate as `/beta-kit`). |
 
-## Wiring it into practice
+## Live practice integration
 
-`TutorDock` is one component. Put it where the button should appear; the window is fixed to the
-screen, so it does not change the page layout. Each question key gets a fresh conversation.
+`TutorDock` is mounted in the practice action bar. The window is fixed to the screen, so it does
+not change the page layout. Each question key gets a fresh conversation.
 
 In `live-practice-view.tsx`, next to the Hint buttons:
 
@@ -96,4 +98,7 @@ Mapped by `code` and status, never by message text (`format.ts`, tested):
 
 `src/lib/api/tutor.test.ts`, `tutor/format.test.ts`, `tutor/tutor-dock.test.tsx`. They cover all 10
 "minimum integration tests" in the handoff, plus hidden-before-first-try, low quota, explicit retry
-and the free plan. Run with `corepack pnpm test:web`.
+and the free plan. `src/components/practice-player.test.tsx` verifies the live identity wiring.
+The authenticated Playwright journey verifies a wrong student answer through the Next.js gateway,
+FastAPI, PostgreSQL grounding and quota accounting, and the deterministic synthetic provider. Run
+with `corepack pnpm test:web`; see `docs/plan/AUTHENTICATED_BETA_E2E.md` for the browser suite.

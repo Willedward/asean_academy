@@ -25,19 +25,36 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source is a valid N1 pilot, not the full Beta catalogue:
+The current authored source contains valid N1 and N2 draft units, not the full Beta catalogue:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
-| Topic groups                       |                                      1 |                                      19 | Blocked |
-| Questions                          |                                     40 |                                   1,900 | Blocked |
+| Topic groups                       |                                      2 |                                      19 | Blocked |
+| Questions                          |                                    144 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                      7 |                            7 N1 lessons | Present |
-| Lessons with notes                 |                                      1 |                                       7 | Blocked |
+| Lessons                            |                                     10 |  All authored and planned Beta lessons | Blocked |
+| Lessons with notes                 |                                      4 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
-| Local pool inventory               | 19 practice, 11 checkpoint, 10 reserve |            Complete and non-overlapping | Pass    |
+| Local pool inventory               | 79 practice, 31 checkpoint, 34 reserve |            Complete and non-overlapping | Pass    |
 
-The N1 v1 authoring models currently constrain the catalogue to one N1 unit and N1-shaped keys. The 19-topic bank therefore requires a generalized course/question contract before bulk authoring can be imported. The gate exposes this as `source.full_syllabus`; it does not weaken the requirement or infer readiness from a large file count.
+The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete draft path through lesson pools and catalogue import. The gate still exposes the missing 17 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the N2 calibration unit.
+
+## Development sequencing decision — 10 October 2026
+
+Finish the authored questions, lessons, reviews and deterministic release tooling before
+paying for the hosted Beta operating tier. This is an acceptable development sequence while:
+
+- no real learners are invited and staging is treated as disposable;
+- Git remains the authority for questions, lessons, migrations and configuration;
+- database changes stay additive and continue to pass migration and restore tests in CI;
+- any staging state that would be costly to recreate is exported with an operator-controlled
+  `pg_dump` before a risky schema or data operation; and
+- premium tutor routing remains disabled. Administrator shadow mode may remain available for
+  engineering smoke tests.
+
+A manual dump reduces the risk of losing useful development state, but it is not a substitute
+for managed backups during a real learner cohort. Local exports contain database data and must
+follow the same-session deletion rule in the operational retention plan.
 
 ## Controlled rollout
 
@@ -87,6 +104,61 @@ The command writes `beta-release-evidence.json` and `beta-release-evidence.md`. 
 6. Import exact revisions into staging and rerun the gate until source, hashes, reviews and diagnostic isolation pass.
 7. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.
 8. Run founder alpha, then 3–5 friendly users, then the 10–30 cohort. Do not skip a phase because automation is available.
+
+## Pre-Beta hosted operations checklist
+
+Complete this checklist after the content candidate is ready and before the first
+`founder_alpha` invitation. These items are intentionally deferred during bulk content
+authoring.
+
+### Candidate and data recovery
+
+- [ ] Freeze the exact Git SHA, course revision and content hash for the candidate.
+- [ ] Run the strict Beta release gate and resolve every content, review, publication and
+  database-hash failure.
+- [ ] Upgrade the Supabase staging project to a tier with managed backups.
+- [ ] Confirm a recent scheduled backup and record the actual retention and point-in-time
+  recovery settings available on the selected plan.
+- [ ] Restore the candidate backup into an empty isolated database, run
+  `scripts/backup_restore_drill.py`, record the evidence and destroy the temporary restore.
+- [ ] Repeat the backup and restore check after any material pre-Beta schema change.
+
+### Hosted acceptance
+
+- [ ] Verify the deployed SHA, database schema revision, readiness and content hashes.
+- [ ] Complete private-window Google OAuth and the authenticated learner journey.
+- [ ] Complete keyboard, focus, contrast and 390/768/1440-pixel visual checks.
+- [ ] Run the bounded load and intentional rate-limit checks with test identities.
+- [ ] Test alert delivery to the primary and backup operator.
+- [ ] Rehearse an application rollback to the recorded known-good SHA.
+
+### Tutor release decision
+
+- [ ] Decide whether the first learner Beta ships with the tutor disabled, economy-only, or
+  in a separately approved learner pilot. Live premium routing is not required for the core
+  learning Beta.
+- [ ] If premium routing will advance beyond administrator shadow mode, collect at least 100
+  reconciled administrator shadow decisions under one unchanged policy version.
+- [ ] Cover all seven tutor modes, difficulty levels 1–5, the approved 20-case calibration
+  suite and at least three repeated-confusion paths.
+- [ ] Confirm zero premium executions in shadow mode, independently recompute projected cost,
+  review safety and pedagogy, and record a go/no-go decision before provisioning live premium
+  access.
+
+One shadow decision is one real provider-backed tutor turn, recorded automatically after an
+administrator sends a message. It contains the selected teaching mode, question difficulty,
+routing score and reasons, recommended model tier, economy tier actually executed, token use,
+cost, latency and safety result. It is evidence for later human review, not a person making
+100 manual approval decisions.
+
+The seven modes are `clarify_question`, `diagnose_misconception`, `socratic_prompt`,
+`alternative_explanation`, `analogous_example`, `solution_explanation` after the server
+unlocks the solution, and `lesson_recommendation`. The 100-turn minimum provides a useful
+first distribution across modes, difficulty and repeated confusion; it is a calibration
+sample rather than a claim of statistical certainty.
+
+The detailed tutor evidence requirements remain in
+[TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md](TUTOR_SHADOW_ROUTING_STAGING_MILESTONE.md).
 
 ## Cohort measurements
 

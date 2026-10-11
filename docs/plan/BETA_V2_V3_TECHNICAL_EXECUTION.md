@@ -338,7 +338,7 @@ It must not duplicate business rules or call PostgreSQL/Supabase learning tables
 
 **Engineering status (30 September 2026): the fail-closed release-evidence gate, protected GitHub rehearsal, exact-SHA/content binding, diagnostic-isolation checks and controlled cohort phases are implemented. The current N1 source remains below the 19-topic-group/1,900-question/76-diagnostic threshold, six lesson notes remain empty, content is draft, and hosted/manual evidence has not passed. See [B5_CONTENT_RELEASE_CONTROLLED_PILOT.md](B5_CONTENT_RELEASE_CONTROLLED_PILOT.md).**
 
-**Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The complete registry now contains two courses, 19 level-specific topic groups and 87 outcome-linked lesson slots; only N1 currently has authored deployable content. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
+**Catalogue foundation (30 September 2026):** generic Secondary 1/2 topic, outcome, bank, multi-unit course and PostgreSQL import contracts are implemented. The complete registry now contains two courses, 19 level-specific topic groups and 87 outcome-linked lesson slots; N1 and N2 now have authored draft deployable content; the other 17 topic groups remain planned. The supplied official pages confirm the complete scope: 13 unique topic codes, 19 level-specific topic groups and 87 outcomes. See [B5_GENERALIZED_CONTENT_CATALOGUE.md](B5_GENERALIZED_CONTENT_CATALOGUE.md) and [G3_MATHEMATICS_SYLLABUS.md](../reference/G3_MATHEMATICS_SYLLABUS.md).
 
 **Shared review integration (1 October 2026):** every authored bank can now enter the
 protected administrator queue before it becomes learner-deployable. Reviewers can filter
@@ -427,6 +427,14 @@ Lab evidence panel are implemented. The panel exposes server-owned monthly cost 
 aggregates, filterable decision evidence and an explicit zero-shadow-premium-execution
 invariant without returning learner prompts or answers. The next work package activates
 administrator-only shadow routing in staging and records the deployment evidence.
+
+**Implementation update (10 October 2026):** The learner `TutorDock` is integrated into the
+live practice screen after the first wrong try and remains available to explain an unlocked
+solution. The authenticated browser journey now covers student answer submission, tutor
+session creation, a grounded message round trip through Next.js, FastAPI and PostgreSQL,
+and the deterministic synthetic provider. Migration `202610100024` permits zero-cost
+reservations for synthetic or free providers while retaining token and spend boundaries.
+Live-provider acceptance still requires a configured server-side provider key.
 
 - Add provider-neutral Gemini/Anthropic/OpenAI adapters and a disabled provider.
 - Develop first with a private server-side Gemini free-tier key using synthetic data only.

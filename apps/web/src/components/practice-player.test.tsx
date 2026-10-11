@@ -13,6 +13,20 @@ import type {
   HintResponse,
   NextQuestionResponse,
 } from "@/lib/api/practice";
+import type { TutorSessionResponse } from "@/lib/api/tutor";
+
+vi.mock("@/lib/api/tutor", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/api/tutor")>();
+  return {
+    ...actual,
+    createTutorSession: vi.fn(),
+    getTutorSession: vi.fn(),
+    sendTutorMessage: vi.fn(),
+    closeTutorSession: vi.fn(),
+  };
+});
+
+import * as tutorApi from "@/lib/api/tutor";
 
 import { PracticePlayer } from "./practice-player";
 
@@ -83,7 +97,11 @@ const correct: AttemptResponse = {
   solution_available: false,
 };
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  window.sessionStorage.clear();
+  vi.clearAllMocks();
+});
 
 describe("PracticePlayer", () => {
   it("collects a typed final answer and sends it for backend marking", async () => {
@@ -270,9 +288,91 @@ describe("PracticePlayer", () => {
     expect(
       screen.getByText("Divide 360 by successive prime numbers."),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /ask the hornbill/i }),
+    ).toBeInTheDocument();
     expect(api.giveUp).toHaveBeenCalledWith(
       "69284c2d-018f-4ddb-8935-51918af14954",
       "n1-l1-01",
+    );
+  });
+
+  it("offers the tutor after a wrong try and pins it to the live question", async () => {
+    const incorrect: AttemptResponse = {
+      attempt_number: 1,
+      correct: false,
+      parts: [
+        {
+          position: 1,
+          correct: false,
+          error: null,
+          marks_awarded: 0,
+          marks_available: 2,
+        },
+      ],
+      marks_awarded: 0,
+      marks_available: 2,
+      question_finished: false,
+      solution_available: true,
+    };
+    const tutorSession: TutorSessionResponse = {
+      session_id: "6b0f8d0e-1c2b-4d3e-9f40-5a6b7c8d9e0f",
+      practice_session_id: current.session.session_id,
+      question_key: current.question!.stable_key,
+      question_revision: current.question!.revision,
+      status: "active",
+      answer_lock_state: { answer_locked: true, solution_locked: true },
+      model_policy_version: "v1",
+      messages: [],
+      created_at: "2026-10-10T02:00:00Z",
+      closed_at: null,
+    };
+    vi.mocked(tutorApi.createTutorSession).mockResolvedValue(tutorSession);
+    vi.mocked(tutorApi.closeTutorSession).mockResolvedValue({
+      ...tutorSession,
+      status: "closed",
+      closed_at: "2026-10-10T02:01:00Z",
+    });
+    const api = {
+      getNextQuestion: vi.fn(async () => current),
+      submitAttempt: vi.fn(async () => incorrect),
+      revealHint: vi.fn(async () => ({ stage: 1, parts: [] }) as HintResponse),
+      giveUp: vi.fn(
+        async () => ({ status: "gave_up", solution: {} }) as GiveUpResponse,
+      ),
+    };
+
+    render(
+      <PracticePlayer
+        appearance="nextscholar"
+        api={api}
+        sessionId={current.session.session_id}
+      />,
+    );
+
+    await screen.findByRole("heading", { name: "Question 1 of 3" });
+    expect(
+      screen.queryByRole("button", { name: /ask the hornbill/i }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText(/Your answer/), {
+      target: { value: "12" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Check final answer" }));
+    fireEvent.click(
+      await screen.findByRole("button", { name: /ask the hornbill/i }),
+    );
+
+    await screen.findByRole("dialog", { name: "Hornbill" });
+    await waitFor(() =>
+      expect(tutorApi.createTutorSession).toHaveBeenCalledWith(
+        {
+          practice_session_id: current.session.session_id,
+          question_key: current.question!.stable_key,
+          question_revision: current.question!.revision,
+        },
+        undefined,
+      ),
     );
   });
 });

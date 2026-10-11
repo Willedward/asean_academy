@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-lesson-01",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n2",
+  "position": 1,
+  "status": "draft",
+  "title": "Ratios involving rational numbers",
+  "summary": "Interpret ordered ratios and form equivalent ratios when quantities include integers, fractions, decimals and different units.",
+  "outcomes": [
+    "2.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Interpret the order and meaning of each term in a ratio.",
+    "Compare rational quantities by converting them to a common unit or a convenient integer ratio.",
+    "Use one scale factor to form an equivalent ratio or find a missing term."
+  ],
+  "mastery_policy_key": "n2-default-v1",
+  "sections": [
+    {
+      "stable_key": "ratio-meaning-and-order",
+      "position": 1,
+      "type": "explanation",
+      "title": "A ratio is an ordered comparison",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A ratio compares quantities in a stated order. In the ratio "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a:b"
+        },
+        {
+          "type": "text",
+          "text": ", the first term describes the first named quantity and the second term describes the second named quantity. Reversing the order changes the meaning. Ratios have no unit only after the quantities have been expressed in the same unit. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1.5\\text{ kg}:600\\text{ g}"
+        },
+        {
+          "type": "text",
+          "text": " must first become "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1500\\text{ g}:600\\text{ g}"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "stable_key": "rational-ratio-method",
+      "position": 2,
+      "type": "explanation",
+      "title": "Clear decimals and fractions without changing the comparison",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Multiplying every term by the same positive number produces an equivalent ratio. For decimals, multiply by a power of 10 that clears all decimal places. For fractions, multiply by a common multiple of the denominators. Then divide every integer term by their highest common factor. Never scale only one term."
+        }
+      ]
+    },
+    {
+      "stable_key": "decimal-ratio-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: compare decimal lengths",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "0.75:1.2"
+        },
+        {
+          "type": "text",
+          "text": " as a ratio in its simplest integer form."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply both terms by 100 to remove the decimals."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.75:1.2=75:120"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The highest common factor of 75 and 120 is 15."
+            },
+            {
+              "type": "display_math",
+              "latex": "75:120=(75\\div15):(120\\div15)=5:8"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Both original terms are multiplied by the same factor, and 5 and 8 have no common factor greater than 1."
+    },
+    {
+      "stable_key": "equivalent-ratio-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: find a missing term",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The ratios "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1.2:1.8"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x:15"
+        },
+        {
+          "type": "text",
+          "text": " are equivalent. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify the known ratio."
+            },
+            {
+              "type": "display_math",
+              "latex": "1.2:1.8=2:3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The second term is scaled from 3 to 15 by multiplying by 5, so apply the same scale factor to the first term."
+            },
+            {
+              "type": "display_math",
+              "latex": "x=2\\times5=10"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The fractions 10/15 and 2/3 are equal, so the completed ratio is equivalent."
+    },
+    {
+      "stable_key": "rational-ratio-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1.5\\text{ kg}:600\\text{ g}"
+        },
+        {
+          "type": "text",
+          "text": " as a ratio in its simplest form."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "exact_ratio",
+        "canonical_expression": "5:2",
+        "canonical_latex": "5:2",
+        "variables": [],
+        "domain_constraints": [
+          "positive ratio terms"
+        ],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "terms": 2,
+          "require_simplest_integer_terms": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Convert 1.5 kg to 1500 g, then divide both terms of 1500:600 by 300 to obtain 5:2."
+        }
+      ]
+    },
+    {
+      "stable_key": "rational-ratio-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Keep the named order. Convert quantities to the same unit. Clear decimals or fractions by multiplying every term by the same positive factor. Simplify only after the quantities are comparable, and check equivalent ratios with a common scale factor."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-10T18:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

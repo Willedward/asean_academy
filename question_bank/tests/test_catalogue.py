@@ -136,17 +136,6 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
 def test_course_contract_accepts_multiple_topic_units(repository_root):
     path = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1/course.json"
     payload = json.loads(path.read_text())
-    second = json.loads(json.dumps(payload["units"][0]))
-    second.update(
-        stable_key="g3-sec1-n2",
-        position=2,
-        topic_code="N2",
-        title="Ratio and proportion",
-    )
-    for position, lesson in enumerate(second["lessons"], start=1):
-        lesson["stable_key"] = f"n2-lesson-{position:02d}"
-        lesson["outcomes"] = ["2.1"]
-    payload["units"].append(second)
 
     course = Course.model_validate(payload)
 
