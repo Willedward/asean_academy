@@ -37,7 +37,12 @@ backend_resources/question_bank/
 
 All 19 level-specific topic groups now have 104-question target blueprints. The existing 40 N1 draft questions remain unchanged and occupy their matching blueprint cells; its remaining 64 questions are split into batches of 22, 21, and 21. Each of the other 18 banks is split into four 26-question manifests. Together, 75 manifests reserve 1,936 new questions, producing the 1,976-question initial inventory when combined with the N1 pilot.
 
-The Secondary 1 N2 calibration bank is complete and approved. The Secondary 1 N3 bank also contains all 104 planned questions across outcomes 3.1–3.6 and difficulty Levels 1–5; its four batches await Mathematics and editorial approval. The repository therefore contains 248 authored questions: the 40-question N1 pilot, 104 N2 questions and 104 N3 questions.
+The Secondary 1 N2 calibration bank is complete and approved. The Secondary 1 N3 bank also
+contains all 104 planned questions across outcomes 3.1–3.6 and difficulty Levels 1–5; its four
+batches await Mathematics and editorial approval. The first automated executor pilot produced
+the 26-question Secondary 1 N4 B001 batch across outcomes 4.1–4.3. It is ready for Mathematics
+and editorial review. The repository therefore contains 274 authored questions: the 40-question
+N1 pilot, 104 N2 questions, 104 N3 questions and 26 N4 questions.
 
 ## Commands
 
@@ -79,7 +84,8 @@ most twice, validates slots, answers, assets and duplicates, and performs transa
 Success advances the manifest to `ready_for_review`, creates the reviewer packet and writes an
 execution report. Mathematics and editorial decisions remain pending. A saved response can be
 rehearsed without writing by using `--provider response-file --response-file questions.json
---dry-run`.
+--recorded-provider openai --model YOUR_APPROVED_MODEL --dry-run` so the eventual manifest
+records the content generator rather than the file adapter.
 
 Export an authored batch after its manifest lists all generated question keys:
 

@@ -501,7 +501,8 @@ def materialise_batch(
         raise AuthoringExecutionError(
             f"Batch {manifest.batch_id} is {manifest.status}; only planned batches can execute"
         )
-    if [question.stable_key for question in batch.questions] != manifest.question_keys:
+    generated_keys = {question.stable_key for question in batch.questions}
+    if generated_keys != set(manifest.question_keys):
         raise AuthoringExecutionError("Validated questions no longer match the manifest keys")
     question_root = manifest_path.parent.parent / "questions"
     target_paths = [question_root / f"{question.stable_key}.json" for question in batch.questions]
@@ -573,6 +574,7 @@ def execute_authoring_work_order(
     review_output: Path | None = None,
     dry_run: bool = False,
     claim_registry_path: Path | None = None,
+    execution_adapter: str | None = None,
 ) -> dict[str, Any]:
     """Generate, validate and optionally materialise one complete authoring batch."""
 
@@ -609,6 +611,7 @@ def execute_authoring_work_order(
         "batch_id": work_order["batch_id"],
         "question_count": len(batch.questions),
         "provider": provider,
+        "execution_adapter": execution_adapter or provider,
         "model": model,
         "attempts": [attempt.__dict__ for attempt in attempts],
         "warnings": batch.warnings,

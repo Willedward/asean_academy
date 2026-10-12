@@ -150,7 +150,8 @@ structured response and `--dry-run`:
 ```bash
 uv run --project question_bank question-bank authoring-execute \
   build/authoring-work-orders/g3-sec1-n4-b001/work-order.json \
-  --provider response-file --response-file questions.json --dry-run
+  --provider response-file --response-file questions.json \
+  --recorded-provider openai --model YOUR_APPROVED_MODEL --dry-run
 ```
 
 The executor validates exact slot order, Pydantic contracts, canonical and accepted answers,

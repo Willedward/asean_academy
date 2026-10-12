@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n4-l4-001",
+  "bank_key": "g3-sec1-n4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N4",
+  "primary_outcome": "4.1",
+  "title": "Average speed for an equal-distance return trip",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A driver travels from Town A to Town B at 60 km/h and returns along the same route at 90 km/h. Without using a specific distance between the towns, find the average speed for the complete trip in km/h."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "4.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "72",
+        "canonical_latex": "72\\text{ km/h}",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Choose a convenient one-way distance that is a common multiple of both speeds."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let each direction be 180 km, then find the total distance and the two travel times."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Let each one-way distance be }180\\text{ km}"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "t_1=\\frac{180}{60}=3\\text{ h},\\quad t_2=\\frac{180}{90}=2\\text{ h}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Total distance}=360\\text{ km},\\quad \\text{total time}=5\\text{ h}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Average speed}=\\frac{360}{5}=72\\text{ km/h}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-12T01:23:34.602648Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

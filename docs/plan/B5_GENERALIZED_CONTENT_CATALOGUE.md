@@ -30,7 +30,7 @@ Catalogue validation succeeds and reports:
 - 19 of 19 level-specific topic groups;
 - 87 syllabus outcomes;
 - two authored topic-level banks;
-- 248 authored questions across N1, N2 and N3; N3 remains review-gated.
+- 274 authored questions across N1, N2, N3 and the first N4 batch; N3 and N4 remain review-gated.
 
 The 104-question N2 bank matches its complete blueprint distribution. The remaining catalogue warnings describe the intentionally partial 40-question N1 blueprint.
 
