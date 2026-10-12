@@ -37,10 +37,10 @@ backend_resources/question_bank/
 
 All 19 level-specific topic groups now have 104-question target blueprints. The existing 40 N1 draft questions remain unchanged and occupy their matching blueprint cells; its remaining 64 questions are split into batches of 22, 21, and 21. Each of the other 18 banks is split into four 26-question manifests. Together, 75 manifests reserve 1,936 new questions, producing the 1,976-question initial inventory when combined with the N1 pilot.
 
-The Secondary 1 N2 calibration bank is complete and approved. Secondary 1 N3 through N7 each
-contain all 104 planned questions, complete lesson notes and pool allocations, and remain gated
-for Mathematics and editorial review. The repository therefore contains 664 authored questions:
-the 40-question N1 pilot and 104 questions in each of N2 through N7.
+The Secondary 1 N2 calibration bank is complete and approved. Secondary 1 N3 through N7 and G1
+each contain all 104 planned questions, complete lesson notes and pool allocations, and remain
+gated for Mathematics and editorial review. The repository therefore contains 768 authored
+questions: the 40-question N1 pilot and 104 questions in each of N2 through N7 and G1.
 
 ## Commands
 
@@ -57,7 +57,7 @@ Select the next unclaimed planned batch and package its exact generation contrac
 
 ```bash
 uv run --project question_bank question-bank authoring-next \
-  --owner YOUR_GITHUB_USERNAME --school-level secondary_1 --topic G1
+  --owner YOUR_GITHUB_USERNAME --school-level secondary_1 --topic G5
 uv run --project question_bank question-bank authoring-work-order \
   PATH/TO/BATCH.json build/authoring-work-orders/BATCH_ID
 ```

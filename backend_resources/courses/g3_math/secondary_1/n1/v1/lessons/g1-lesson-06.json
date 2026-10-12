@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g1-lesson-06",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-g1",
+  "position": 6,
+  "status": "draft",
+  "title": "Interior and exterior angles of convex polygons",
+  "summary": "Calculate polygon angle sums, regular angles and side counts.",
+  "outcomes": [
+    "1.6"
+  ],
+  "prerequisite_lessons": [
+    "g1-lesson-05"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Calculate the interior-angle sum of any convex polygon.",
+    "Relate interior and exterior angles of regular polygons.",
+    "Determine a polygon's number of sides from angle information."
+  ],
+  "mastery_policy_key": "g1-default-v1",
+  "sections": [
+    {
+      "stable_key": "g1-16-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "From triangles to any convex polygon",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Drawing diagonals from one vertex divides an n-sided convex polygon into n - 2 triangles, so its interior-angle sum is (n - 2)180\u00b0. One exterior angle at each vertex always totals 360\u00b0."
+        },
+        {
+          "type": "display_math",
+          "latex": "S=(n-2)180^\\circ\\qquad E=360^\\circ"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-16-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find one exterior angle of a regular 15-gon."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "360^\\circ\\div15=24^\\circ"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
+    },
+    {
+      "stable_key": "g1-16-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the interior-angle sum of a hexagon."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "720",
+        "canonical_latex": "720",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "A hexagon has four triangles, so 4 \u00d7 180\u00b0 = 720\u00b0."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-06-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T10:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

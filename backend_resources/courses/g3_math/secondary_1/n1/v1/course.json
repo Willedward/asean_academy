@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 8,
+  "revision": 9,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3 Percentage, N4 Rate and Speed, N5 Algebraic expressions and formulae, N6 Functions and graphs, and N7 Equations and inequalities units.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3\u2013N7 Number and Algebra plus G1 Angles, triangles and polygons units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
@@ -60,6 +60,14 @@
     },
     {
       "key": "n7-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "g1-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -454,12 +462,84 @@
           "required_practice_count": 15
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-g1",
+      "position": 8,
+      "topic_code": "G1",
+      "title": "Angles, triangles and polygons",
+      "checkpoint_question_count": 14,
+      "lessons": [
+        {
+          "stable_key": "g1-lesson-01",
+          "position": 1,
+          "title": "Right, acute, obtuse and reflex angles",
+          "outcomes": [
+            "1.1"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-02",
+          "position": 2,
+          "title": "Vertically opposite angles, straight lines and angles at a point",
+          "outcomes": [
+            "1.2"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-03",
+          "position": 3,
+          "title": "Angles formed by parallel lines and a transversal",
+          "outcomes": [
+            "1.3"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-04",
+          "position": 4,
+          "title": "Properties of triangles, quadrilaterals and regular polygons",
+          "outcomes": [
+            "1.4"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-05",
+          "position": 5,
+          "title": "Classifying special quadrilaterals by their properties",
+          "outcomes": [
+            "1.5"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-06",
+          "position": 6,
+          "title": "Interior and exterior angles of convex polygons",
+          "outcomes": [
+            "1.6"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "g1-lesson-07",
+          "position": 7,
+          "title": "Constructing simple geometrical figures",
+          "outcomes": [
+            "1.7"
+          ],
+          "required_practice_count": 10
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 395,
-    "unit_checkpoint": 127,
-    "adaptive_reserve": 142
+    "lesson_practice": 465,
+    "unit_checkpoint": 141,
+    "adaptive_reserve": 162
   },
   "provenance": {
     "authoring_method": "original_authored",

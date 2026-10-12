@@ -47,11 +47,35 @@ class ProgressService:
         for question in self.catalogue.questions:
             if question.stable_key not in unresolved:
                 continue
+            manifest = next(
+                (
+                    candidate
+                    for candidate in self.catalogue.report.pools.manifests
+                    if candidate.bank_key == question.bank_key
+                ),
+                None,
+            )
+            unit = (
+                next(
+                    (
+                        candidate
+                        for candidate in self.catalogue.report.course.units
+                        if candidate.stable_key == manifest.unit_key
+                    ),
+                    None,
+                )
+                if manifest is not None
+                else None
+            )
+            lesson_keys = {
+                candidate.stable_key for candidate in unit.lessons
+            } if unit is not None else set()
             lesson = next(
                 (
                     candidate
                     for candidate in self.catalogue.report.lessons
-                    if question.primary_outcome in candidate.outcomes
+                    if candidate.stable_key in lesson_keys
+                    and question.primary_outcome in candidate.outcomes
                 ),
                 None,
             )

@@ -168,12 +168,13 @@ class PracticeService:
         pool = self._lesson_pool(lesson_key)
         pool_keys = [item.question_key for item in pool.items]
         if mode == "retry_review":
+            manifest = self._lesson_manifest(lesson_key)
             lesson_keys = [
                 question.stable_key
                 for question in self.questions
-                if question.primary_outcome in lesson.outcomes
+                if question.bank_key == manifest.bank_key
+                and question.primary_outcome in lesson.outcomes
             ]
-            manifest = self._lesson_manifest(lesson_key)
             reserve_pool = next(
                 (
                     candidate
