@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -55,7 +56,7 @@ def create_authoring_work_order(
     *,
     repository_root: Path,
     syllabus_path: Path,
-    house_rules_path: Path,
+    house_rules_path: Path | None = None,
 ) -> dict:
     """Package one planned batch into exact model input and a human-readable prompt."""
 
@@ -79,6 +80,27 @@ def create_authoring_work_order(
         for outcome in topic.outcomes
         if outcome.school_level == manifest.school_level
     }
+    house_rules_reference = next(
+        (
+            reference
+            for reference in manifest.source_references
+            if reference.role == "house_rules"
+        ),
+        None,
+    )
+    if house_rules_reference is None:
+        raise ValueError("Manifest has no checksum-tracked house-rules reference")
+    referenced_house_rules = repository_root / house_rules_reference.path
+    if house_rules_path is not None and (
+        house_rules_path.resolve() != referenced_house_rules.resolve()
+    ):
+        raise ValueError(
+            f"Manifest references {house_rules_reference.path}, not {house_rules_path}"
+        )
+    house_rules_path = referenced_house_rules
+    actual_checksum = hashlib.sha256(house_rules_path.read_bytes()).hexdigest()
+    if actual_checksum != house_rules_reference.sha256:
+        raise ValueError("House-rules checksum no longer matches the batch manifest")
     house_rules = HouseRules.model_validate_json(house_rules_path.read_text())
     slots = _question_slots(manifest, outcomes_by_code)
 
@@ -100,7 +122,10 @@ def create_authoring_work_order(
         "slots": slots,
         "generation_contract": {
             "response_file": "questions.json",
-            "response_shape": "A JSON array containing one complete Question object per slot.",
+            "response_shape": (
+                "A JSON object with a questions array containing one complete Question "
+                "object per slot."
+            ),
             "stable_keys_must_match": True,
             "slot_outcome_and_difficulty_must_match": True,
             "original_wording_required": True,
@@ -122,14 +147,15 @@ def create_authoring_work_order(
 
 Create exactly {manifest.expected_question_count} original Singapore Secondary Mathematics
 questions for **{topic.code} · {topic.title}**. Read `work-order.json` as the authoritative
-contract and return only `questions.json`: a JSON array of complete Question objects that
-validate against `question_json_schema`.
+contract and return only one JSON object with a `questions` array of complete Question
+objects that validate against `question_json_schema`.
 
 Every question must use its reserved key, outcome and difficulty below. Include complete
 stems, parts, deterministic response contracts, two staged hints per part, fully marked
 solutions, calculator permission, provenance and any referenced asset metadata. Use
 Singapore/British English, metric units and SGD where money is needed. Do not copy wording
-from source papers. Do not mark content reviewed or published.
+from source papers. Do not mark content reviewed or published. Set `assets` to an empty
+array unless matching checksum-tracked asset files have already been prepared in the bank.
 
 ## Reserved slots
 

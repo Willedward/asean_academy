@@ -15,6 +15,12 @@ from .authoring import (
     write_authoring_schemas,
     write_missing_blueprints,
 )
+from .authoring_executor import (
+    AuthoringExecutionError,
+    OpenAIResponsesProvider,
+    execute_authoring_work_order,
+    response_file_provider,
+)
 from .authoring_runner import create_authoring_work_order, next_authoring_batch
 from .catalogue import write_schemas as write_catalogue_schemas
 from .catalogue_repository import CatalogueImporter
@@ -247,7 +253,27 @@ def parser():
     authoring_work_order.add_argument("manifest", type=Path)
     authoring_work_order.add_argument("output", type=Path)
     authoring_work_order.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
-    authoring_work_order.add_argument("--house-rules", type=Path, default=DEFAULT_HOUSE_RULES)
+    authoring_work_order.add_argument(
+        "--house-rules",
+        type=Path,
+        help="Override only when it exactly matches the manifest's tracked reference",
+    )
+    authoring_execute = commands.add_parser(
+        "authoring-execute",
+        help="Generate, validate and package one authoring work order",
+    )
+    authoring_execute.add_argument("work_order", type=Path)
+    authoring_execute.add_argument(
+        "--provider", choices=("openai", "response-file"), required=True
+    )
+    authoring_execute.add_argument("--model")
+    authoring_execute.add_argument("--response-file", type=Path)
+    authoring_execute.add_argument("--authored-by", default="ASEAN Academy content pipeline")
+    authoring_execute.add_argument("--max-repairs", type=int, default=2)
+    authoring_execute.add_argument("--max-output-tokens", type=int, default=50_000)
+    authoring_execute.add_argument("--review-output", type=Path)
+    authoring_execute.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    authoring_execute.add_argument("--dry-run", action="store_true")
     return root
 
 
@@ -273,6 +299,40 @@ def main(argv=None):
             house_rules_path=args.house_rules,
         )
         print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "authoring-execute":
+        try:
+            if args.provider == "openai":
+                if not args.model:
+                    raise AuthoringExecutionError(
+                        "--model is required when --provider openai is selected"
+                    )
+                provider_call = OpenAIResponsesProvider(
+                    args.model, max_output_tokens=args.max_output_tokens
+                )
+                model = args.model
+            else:
+                if args.response_file is None:
+                    raise AuthoringExecutionError(
+                        "--response-file is required when --provider response-file is selected"
+                    )
+                provider_call = response_file_provider(args.response_file)
+                model = args.model or "saved-structured-response"
+            result = execute_authoring_work_order(
+                args.work_order,
+                provider_call,
+                repository_root=REPOSITORY_ROOT,
+                provider=args.provider,
+                model=model,
+                authored_by=args.authored_by,
+                max_repairs=args.max_repairs,
+                review_output=args.review_output,
+                dry_run=args.dry_run,
+                claim_registry_path=args.claims,
+            )
+        except (OSError, ValueError, ValidationError) as exc:
+            raise SystemExit(str(exc)) from exc
+        print(json.dumps(result, indent=2))
         return 0
     if args.command == "authoring-claim":
         try:

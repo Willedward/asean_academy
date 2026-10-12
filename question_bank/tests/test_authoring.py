@@ -18,11 +18,104 @@ from question_bank.authoring import (
     export_reviewer_batch,
     validate_authoring_pipeline,
 )
+from question_bank.authoring_executor import (
+    AuthoringExecutionError,
+    execute_authoring_work_order,
+    response_schema,
+)
 from question_bank.authoring_runner import (
     create_authoring_work_order,
     next_authoring_batch,
 )
 from question_bank.models import Question
+
+
+def _generated_response_for(work_order):
+    distinct_words = (
+        "amber birch cedar dahlia elm fern granite hazel iris juniper kelp linen "
+        "maple nectar orchid pebble quartz reed saffron tulip umber velvet willow "
+        "xylem yarrow zircon"
+    ).split()
+    questions = []
+    for index, slot in enumerate(work_order["slots"], start=1):
+        key = slot["stable_key"]
+        outcome = slot["primary_outcome"]
+        distinct = distinct_words[index - 1]
+        questions.append(
+            {
+                "schema_version": "1.0.0",
+                "revision": 1,
+                "stable_key": key,
+                "bank_key": work_order["bank_key"],
+                "curriculum_version": work_order["curriculum_version"],
+                "school_level": work_order["school_level"],
+                "topic_code": work_order["topic"]["code"],
+                "primary_outcome": outcome,
+                "title": f"Executor contract example {distinct}",
+                "difficulty": slot["difficulty"],
+                "calculator_allowed": False,
+                "question_type": "structured",
+                "status": "draft",
+                "stem": [],
+                "parts": [
+                    {
+                        "position": 1,
+                        "label": None,
+                        "prompt": [
+                            {
+                                "type": "text",
+                                "text": (
+                                    f"For the {distinct} contract, write the value of one."
+                                ),
+                            }
+                        ],
+                        "marks": 1,
+                        "primary_outcome": outcome,
+                        "secondary_outcomes": [],
+                        "response": {
+                            "type": "numeric",
+                            "comparison_mode": "exact_numeric",
+                            "canonical_answer": "1",
+                            "canonical_latex": "1",
+                            "accepted_answers": [],
+                            "absolute_tolerance": None,
+                            "rounding_precision": None,
+                            "unit": None,
+                        },
+                        "hints": [
+                            {
+                                "stage": 1,
+                                "content": [{"type": "text", "text": "Read the value."}],
+                            },
+                            {
+                                "stage": 2,
+                                "content": [{"type": "text", "text": "Enter one."}],
+                            },
+                        ],
+                        "solution": [
+                            {
+                                "position": 1,
+                                "content": [{"type": "display_math", "latex": "1"}],
+                                "mark_type": "B",
+                                "mark_value": 1,
+                            }
+                        ],
+                    }
+                ],
+                "total_marks": 1,
+                "assets": [],
+                "provenance": {
+                    "authoring_method": "original_generated",
+                    "style_references": ["replaced-by-executor"],
+                    "created_at": "2026-10-12T00:00:00Z",
+                    "authored_by": "replaced-by-executor",
+                    "reviewed_at": None,
+                    "reviewed_by": None,
+                    "review_notes": None,
+                },
+            }
+        )
+    return {"questions": questions}
 
 
 def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
@@ -140,6 +233,108 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         "editorial",
     ]
     assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
+
+
+def test_executor_repairs_and_validates_complete_n4_work_order(repository_root, tmp_path):
+    manifest = (
+        repository_root
+        / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
+        / "g3-sec1-n4-b001.json"
+    )
+    create_authoring_work_order(
+        manifest,
+        tmp_path,
+        repository_root=repository_root,
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        house_rules_path=repository_root
+        / "backend_resources/question_bank/authoring/house-rules-v1.json",
+    )
+    work_order = json.loads((tmp_path / "work-order.json").read_text())
+    valid_response = _generated_response_for(work_order)
+    calls = []
+
+    def provider(prompt, schema):
+        calls.append((prompt, schema))
+        if len(calls) == 1:
+            return {"questions": []}
+        return valid_response
+
+    result = execute_authoring_work_order(
+        tmp_path / "work-order.json",
+        provider,
+        repository_root=repository_root,
+        provider="test",
+        model="deterministic-fixture",
+        authored_by="Test pipeline",
+        max_repairs=1,
+        dry_run=True,
+    )
+
+    assert result["status"] == "validated"
+    assert result["question_count"] == 26
+    assert [attempt["valid"] for attempt in result["attempts"]] == [False, True]
+    assert "Correction request" in calls[1][0]
+    assert calls[0][1]["required"] == ["questions"]
+    assert calls[0][1]["properties"]["questions"]["items"]["additionalProperties"] is False
+
+
+def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_path):
+    manifest = (
+        repository_root
+        / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
+        / "g3-sec1-n4-b001.json"
+    )
+    create_authoring_work_order(
+        manifest,
+        tmp_path,
+        repository_root=repository_root,
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        house_rules_path=repository_root
+        / "backend_resources/question_bank/authoring/house-rules-v1.json",
+    )
+    work_order = json.loads((tmp_path / "work-order.json").read_text())
+    response = _generated_response_for(work_order)
+    response["questions"][0]["stable_key"] = "n4-l1-999"
+
+    with pytest.raises(AuthoringExecutionError, match="exact stable keys"):
+        execute_authoring_work_order(
+            tmp_path / "work-order.json",
+            lambda _prompt, _schema: response,
+            repository_root=repository_root,
+            provider="test",
+            model="deterministic-fixture",
+            authored_by="Test pipeline",
+            max_repairs=0,
+            dry_run=True,
+        )
+
+
+def test_openai_response_schema_requires_every_question_field():
+    schema = response_schema(Question.model_json_schema())
+    question = schema["properties"]["questions"]["items"]
+
+    assert set(question["required"]) == set(question["properties"])
+    assert question["additionalProperties"] is False
+
+    def assert_strict(node):
+        if isinstance(node, list):
+            for item in node:
+                assert_strict(item)
+            return
+        if not isinstance(node, dict):
+            return
+        assert "oneOf" not in node
+        assert "prefixItems" not in node
+        assert "discriminator" not in node
+        if node.get("type") == "object" or "properties" in node:
+            assert node["additionalProperties"] is False
+            assert set(node["required"]) == set(node.get("properties", {}))
+        for value in node.values():
+            assert_strict(value)
+
+    assert_strict(schema)
 
 
 def test_manifest_rejects_batches_outside_reviewable_size():

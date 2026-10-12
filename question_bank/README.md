@@ -130,5 +130,32 @@ uv run --project question_bank question-bank authoring-work-order \
 
 The work order contains the exact reserved keys, outcome and difficulty assignment, house
 rules, source checksums, complete Question JSON Schema, response template and model prompt.
-It removes allocation and prompt assembly from each authoring session. Generated questions
-still pass through the existing executable checks, duplicate scan and human review gates.
+It derives the checksum-tracked house rules from the manifest, removing allocation and prompt
+assembly from each authoring session.
+
+After the claim has merged and you are on its registered branch, execute the work order with
+OpenAI Structured Outputs:
+
+```bash
+export OPENAI_API_KEY=...
+uv run --project question_bank question-bank authoring-execute \
+  build/authoring-work-orders/g3-sec1-n4-b001/work-order.json \
+  --provider openai --model YOUR_APPROVED_MODEL \
+  --authored-by "ASEAN Academy content pipeline"
+```
+
+The paid provider is always explicit. For an offline validation rehearsal, pass a saved
+structured response and `--dry-run`:
+
+```bash
+uv run --project question_bank question-bank authoring-execute \
+  build/authoring-work-orders/g3-sec1-n4-b001/work-order.json \
+  --provider response-file --response-file questions.json --dry-run
+```
+
+The executor validates exact slot order, Pydantic contracts, canonical and accepted answers,
+assets and cross-bank duplicates. Invalid model output receives at most two bounded whole-batch
+repair attempts. A valid run writes all question files, advances the manifest directly from
+`planned` to `ready_for_review`, exports the reviewer packet, and records an execution report.
+Writes are rolled back if validation or export fails. It never records Mathematics or editorial
+approval.
