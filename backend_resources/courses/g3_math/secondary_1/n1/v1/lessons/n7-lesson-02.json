@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n7-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n7",
+  "position": 2,
+  "status": "draft",
+  "title": "Solving linear equations in one variable",
+  "summary": "Solve linear equations by reversing operations, expanding brackets and collecting variable terms without breaking equality.",
+  "outcomes": [
+    "7.2"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Solve one-step and two-step linear equations.",
+    "Expand brackets and collect like terms accurately.",
+    "Solve equations with the variable on both sides and verify the result."
+  ],
+  "mastery_policy_key": "n7-default-v1",
+  "sections": [
+    {
+      "stable_key": "n7-72-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "A reliable solving sequence",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Aim to isolate the variable. Simplify each side first, move variable terms to one side, move constants to the other, and divide by the remaining coefficient. Write each operation on both sides so sign errors are visible."
+        },
+        {
+          "type": "display_math",
+          "latex": "a(bx+c)+d=ex+f"
+        },
+        {
+          "type": "text",
+          "text": "For bracketed equations, distribute the outside factor to every term. For variables on both sides, choose a subtraction that leaves a positive coefficient when convenient. Check by substituting the final value into the original equation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-72-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Solving with brackets and variables on both sides",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 3(2x - 1) = 4x + 11."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand the bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "6x-3=4x+11"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 4x and add 3."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x=14"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by 2."
+            },
+            {
+              "type": "display_math",
+              "latex": "x=7"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives 3(14 - 1) = 39 and 28 + 11 = 39."
+    },
+    {
+      "stable_key": "n7-72-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 5x - 8 = 22."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Adding 8 gives 5x = 30, and dividing by 5 gives x = 6."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Simplify first, collect x-terms, collect constants, divide by the coefficient, and substitute to check."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T00:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

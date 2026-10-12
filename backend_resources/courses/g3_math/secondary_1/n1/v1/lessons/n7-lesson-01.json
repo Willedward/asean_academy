@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n7-lesson-01",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n7",
+  "position": 1,
+  "status": "draft",
+  "title": "Concept of equation",
+  "summary": "Interpret an equation as a balance, test proposed solutions and recognise transformations that preserve the solution set.",
+  "outcomes": [
+    "7.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Explain what it means for two expressions to be equal.",
+    "Test whether a value satisfies an equation by substitution.",
+    "Recognise that applying the same valid operation to both sides preserves equality."
+  ],
+  "mastery_policy_key": "n7-default-v1",
+  "sections": [
+    {
+      "stable_key": "n7-71-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Equality, solutions and balance",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An equation states that two expressions have the same value. A solution is a value of the variable that makes the statement true. The equals sign describes a relationship; it does not mean that a calculation must always follow it."
+        },
+        {
+          "type": "display_math",
+          "latex": "2x+3=11"
+        },
+        {
+          "type": "text",
+          "text": "Substituting x = 4 gives 2(4) + 3 = 11, so 4 is a solution. An equation stays balanced when the same addition, subtraction, multiplication by a non-zero number, or division by a non-zero number is applied to both sides."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-71-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Testing and transforming an equation",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Show that x = 5 satisfies 3x - 4 = 11, then write an equivalent equation after adding 4 to both sides."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute x = 5."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(5)-4=15-4=11"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Because the two sides agree, x = 5 is a solution."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add 4 to both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "3x-4+4=11+4\\Rightarrow3x=15"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives 11 = 11, and both equations have the same solution x = 5."
+    },
+    {
+      "stable_key": "n7-71-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For 4x + 1 = 21, what value does the left-hand side have when x = 5?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "21",
+        "canonical_latex": "21",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Substituting x = 5 gives 4(5) + 1 = 21, matching the right-hand side."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-lesson-01-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the equals sign as a balance, test solutions by substitution, and change both sides with the same valid operation."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T00:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

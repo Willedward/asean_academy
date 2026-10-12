@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 7,
+  "revision": 8,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3 Percentage, N4 Rate and Speed, N5 Algebraic expressions and formulae, and N6 Functions and graphs units.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3 Percentage, N4 Rate and Speed, N5 Algebraic expressions and formulae, N6 Functions and graphs, and N7 Equations and inequalities units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
@@ -52,6 +52,14 @@
     },
     {
       "key": "n6-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n7-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -401,12 +409,57 @@
           "required_practice_count": 12
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-n7",
+      "position": 7,
+      "topic_code": "N7",
+      "title": "Equations and inequalities",
+      "checkpoint_question_count": 20,
+      "lessons": [
+        {
+          "stable_key": "n7-lesson-01",
+          "position": 1,
+          "title": "Concept of equation",
+          "outcomes": [
+            "7.1"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "n7-lesson-02",
+          "position": 2,
+          "title": "Solving linear equations in one variable",
+          "outcomes": [
+            "7.2"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "n7-lesson-03",
+          "position": 3,
+          "title": "Solving simple fractional equations reducible to linear equations",
+          "outcomes": [
+            "7.3"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "n7-lesson-04",
+          "position": 4,
+          "title": "Formulating a linear equation in one variable to solve problems",
+          "outcomes": [
+            "7.4"
+          ],
+          "required_practice_count": 15
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 335,
-    "unit_checkpoint": 107,
-    "adaptive_reserve": 118
+    "lesson_practice": 395,
+    "unit_checkpoint": 127,
+    "adaptive_reserve": 142
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -414,6 +467,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "N1 and N2 retain their recorded approvals. N3, N4, N5 and N6 await Mathematics and editorial review."
+    "review_notes": "N1 and N2 retain their recorded approvals. N3, N4, N5, N6 and N7 await Mathematics and editorial review."
   }
 }

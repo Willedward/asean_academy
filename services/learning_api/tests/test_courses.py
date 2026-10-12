@@ -32,20 +32,21 @@ def get(path: str, *, allow_drafts: bool = True):
     return asyncio.run(request())
 
 
-def test_course_map_returns_n1_to_n6_content_units():
+def test_course_map_returns_n1_to_n7_content_units():
     response = get("/api/v1/courses/g3-sec1-math/map")
 
     assert response.status_code == 200
     course = response.json()
     assert course["development_preview"] is True
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 6
+    assert len(course["units"]) == 7
     assert len(course["units"][0]["lessons"]) == 7
     assert len(course["units"][1]["lessons"]) == 3
     assert len(course["units"][2]["lessons"]) == 6
     assert len(course["units"][3]["lessons"]) == 3
     assert len(course["units"][4]["lessons"]) == 8
     assert len(course["units"][5]["lessons"]) == 5
+    assert len(course["units"][6]["lessons"]) == 4
     assert [lesson["position"] for lesson in course["units"][0]["lessons"]] == list(
         range(1, 8)
     )
@@ -186,10 +187,11 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
         )
     )
 
-    assert len(catalogue.questions) == 560
+    assert len(catalogue.questions) == 664
     assert len(catalogue.review_questions) == len(authored_paths)
     assert catalogue.review_question_batches["n2-l1-001"] == "g3-sec1-n2-b001"
     assert catalogue.review_question_batches["n2-l1-007"] == "g3-sec1-n2-b002"
     assert catalogue.review_question_batches["n3-l1-001"] == "g3-sec1-n3-b001"
     assert catalogue.review_question_batches["n6-l1-001"] == "g3-sec1-n6-b001"
+    assert catalogue.review_question_batches["n7-l1-001"] == "g3-sec1-n7-b001"
     assert "n1-l1-01" not in catalogue.review_question_batches

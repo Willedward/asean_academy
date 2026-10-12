@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n7-lesson-04",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n7",
+  "position": 4,
+  "status": "draft",
+  "title": "Formulating a linear equation in one variable to solve problems",
+  "summary": "Define one unknown, translate relationships into expressions, solve a linear equation and interpret the answer in context.",
+  "outcomes": [
+    "7.4"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-03"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Choose and define a useful variable with its unit.",
+    "Translate verbal relationships into algebraic expressions and one equation.",
+    "Solve, check and report a context-appropriate answer."
+  ],
+  "mastery_policy_key": "n7-default-v1",
+  "sections": [
+    {
+      "stable_key": "n7-74-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "From words to one equation",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Begin by stating what the variable represents. Express every other unknown quantity in terms of that variable. Use the sentence describing a total, difference or equality to form one equation."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{relationship}\\;\\longrightarrow\\;\\text{expressions}\\;\\longrightarrow\\;\\text{equation}"
+        },
+        {
+          "type": "text",
+          "text": "After solving, attach the correct unit and check the value against the original story. Reject values that are impossible in context, such as a negative number of people."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-74-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Modelling a perimeter problem",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The length of a rectangle is 3 cm more than twice its width. Its perimeter is 42 cm. Find its width."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the width be x cm, so the length is 2x + 3 cm."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the perimeter."
+            },
+            {
+              "type": "display_math",
+              "latex": "2[x+(2x+3)]=42"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve and interpret."
+            },
+            {
+              "type": "display_math",
+              "latex": "6x+6=42\\Rightarrow x=6"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The dimensions are 6 cm and 15 cm, and 2(6 + 15) = 42 cm."
+    },
+    {
+      "stable_key": "n7-74-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Three identical folders and a S$2 pen cost S$17. What is the price of one folder in dollars?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "If x is the folder price, 3x + 2 = 17, so 3x = 15 and x = 5."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-lesson-04-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Define the variable and unit, express related quantities, form one equality, solve it, and check that the result makes sense in the story."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T00:45:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
