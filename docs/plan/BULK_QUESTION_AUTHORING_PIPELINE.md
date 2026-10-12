@@ -40,9 +40,9 @@ All 19 level-specific topic groups now have 104-question target blueprints. The 
 The Secondary 1 N2 calibration bank is complete and approved. The Secondary 1 N3 bank also
 contains all 104 planned questions across outcomes 3.1–3.6 and difficulty Levels 1–5; its four
 batches await Mathematics and editorial approval. The automated executor has produced the
-26-question Secondary 1 N4 B001 and B002 batches across outcomes 4.1–4.3. Both are ready for
-Mathematics and editorial review. The repository therefore contains 300 authored questions:
-the 40-question N1 pilot, 104 N2 questions, 104 N3 questions and 52 N4 questions.
+26-question Secondary 1 N4 B001, B002 and B003 batches across outcomes 4.1–4.3. All three are
+ready for Mathematics and editorial review. The repository therefore contains 326 authored
+questions: the 40-question N1 pilot, 104 N2 questions, 104 N3 questions and 78 N4 questions.
 
 ## Commands
 
