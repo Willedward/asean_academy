@@ -25,19 +25,19 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source contains a reviewed N2 unit and an N1 unit with independent lesson review gates, not the full Beta catalogue:
+The current authored source contains N1 through N4, including a reviewed N2 unit and draft review gates for the remaining content, rather than the full Beta catalogue:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
-| Topic groups                       |                                      2 |                                      19 | Blocked |
-| Questions                          |                                    144 |                                   1,900 | Blocked |
+| Topic groups                       |                                      4 |                                      19 | Blocked |
+| Questions                          |                                    352 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                     10 |  All authored and planned Beta lessons | Blocked |
-| Lessons with notes                 |                                      4 |                   All authored lessons | Blocked |
+| Lessons                            |                                     19 |  All authored and planned Beta lessons | Blocked |
+| Lessons with notes                 |                                     13 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
-| Local pool inventory               | 79 practice, 31 checkpoint, 34 reserve |            Complete and non-overlapping | Pass    |
+| Local pool inventory               | 211 practice, 67 checkpoint, 74 reserve |           Complete and non-overlapping | Pass    |
 
-The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete reviewed path through lesson pools and catalogue import. N3 now provides the next complete draft path with 104 questions, six lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing 16 topic groups as `source.full_syllabus`; it does not infer Beta readiness from the completed N2 and draft N3 units.
+The generalized course and question contracts now support multiple level/topic banks, and N2 proves the complete reviewed path through lesson pools and catalogue import. N3 and N4 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing 15 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
 
 ## Development sequencing decision — 10 October 2026
 
