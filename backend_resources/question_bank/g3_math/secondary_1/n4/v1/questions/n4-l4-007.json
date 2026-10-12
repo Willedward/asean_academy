@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n4-l4-007",
+  "bank_key": "g3-sec1-n4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N4",
+  "primary_outcome": "4.3",
+  "title": "Meeting point after a delayed departure",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Towns A and B are 252 km apart. A coach leaves Town A for Town B at 08:00 and travels at 60 km/h. A car leaves Town B for Town A at 08:30 and travels at 84 km/h. Find the distance from Town A, in kilometres, at which they meet."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "4.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "122.5",
+        "canonical_latex": "122.5\\text{ km}",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Account for the coach's 30-minute head start, then use the combined closing speed."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "At 08:30 the remaining separation is 252 - 60(0.5) km; divide it by 60 + 84."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Coach head start}=60\\times0.5=30\\text{ km}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Time after 08:30}=\\frac{252-30}{60+84}=\\frac{37}{24}\\text{ h}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Coach's total time}=\\frac12+\\frac{37}{24}=\\frac{49}{24}\\text{ h}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "60\\times\\frac{49}{24}=122.5\\text{ km from A}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-12T04:10:52.415875Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

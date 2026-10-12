@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n4-l5-003",
+  "bank_key": "g3-sec1-n4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N4",
+  "primary_outcome": "4.2",
+  "title": "Rainwater collection rate",
+  "difficulty": 5,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "During a storm, 18 mm of rain falls uniformly on a horizontal roof of area 250 square metres in 12 minutes. Assume all the rainwater is collected. Find the average collection rate in litres per second."
+        }
+      ],
+      "marks": 5,
+      "primary_outcome": "4.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "6.25",
+        "canonical_latex": "6.25\\text{ L/s}",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Treat the rainfall depth as a length and use volume equals base area times depth."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert 18 mm to metres, convert the resulting cubic metres to litres, then divide by 12 times 60 seconds."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "18\\text{ mm}=0.018\\text{ m}"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Volume}=250\\times0.018=4.5\\text{ m}^3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "4.5\\text{ m}^3=4500\\text{ L}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "12\\text{ min}=720\\text{ s}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{4500}{720}=6.25\\text{ L/s}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 5,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-12T04:10:52.415875Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
