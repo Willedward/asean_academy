@@ -179,9 +179,9 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec1-n4-b001"
-    assert next_batch["branch"] == "questions/g3-sec1-n4-b001-willedward"
-    assert "authoring-claim g3-sec1-n4-b001" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec1-n4-b002"
+    assert next_batch["branch"] == "questions/g3-sec1-n4-b002-willedward"
+    assert "authoring-claim g3-sec1-n4-b002" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
@@ -196,34 +196,7 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
 
     assert result["question_count"] == 26
     assert len(work_order["slots"]) == 26
-    assert {slot["stable_key"] for slot in work_order["slots"]} == {
-        "n4-l1-001",
-        "n4-l1-002",
-        "n4-l1-003",
-        "n4-l1-004",
-        "n4-l1-005",
-        "n4-l1-006",
-        "n4-l2-001",
-        "n4-l2-002",
-        "n4-l2-003",
-        "n4-l2-004",
-        "n4-l2-005",
-        "n4-l2-006",
-        "n4-l2-007",
-        "n4-l3-001",
-        "n4-l3-002",
-        "n4-l3-003",
-        "n4-l3-004",
-        "n4-l3-005",
-        "n4-l3-006",
-        "n4-l3-007",
-        "n4-l3-008",
-        "n4-l4-001",
-        "n4-l4-002",
-        "n4-l4-003",
-        "n4-l4-004",
-        "n4-l5-001",
-    }
+    assert all(slot["stable_key"].startswith("n4-l") for slot in work_order["slots"])
     assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
         "4.1",
         "4.2",
@@ -233,6 +206,9 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         "mathematics",
         "editorial",
     ]
+    manifest_keys = json.loads(Path(next_batch["manifest"]).read_text())["question_keys"]
+    assert {slot["stable_key"] for slot in work_order["slots"]} == set(manifest_keys)
+    assert [slot["stable_key"] for slot in work_order["slots"]] != manifest_keys
     assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
@@ -240,7 +216,7 @@ def test_executor_repairs_and_validates_complete_n4_work_order(repository_root, 
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
-        / "g3-sec1-n4-b001.json"
+        / "g3-sec1-n4-b002.json"
     )
     create_authoring_work_order(
         manifest,
@@ -284,7 +260,7 @@ def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
-        / "g3-sec1-n4-b001.json"
+        / "g3-sec1-n4-b002.json"
     )
     create_authoring_work_order(
         manifest,

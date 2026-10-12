@@ -266,6 +266,10 @@ def parser():
     authoring_execute.add_argument(
         "--provider", choices=("openai", "response-file"), required=True
     )
+    authoring_execute.add_argument(
+        "--recorded-provider",
+        help="Generator provider recorded in the manifest; useful for saved responses",
+    )
     authoring_execute.add_argument("--model")
     authoring_execute.add_argument("--response-file", type=Path)
     authoring_execute.add_argument("--authored-by", default="ASEAN Academy content pipeline")
@@ -322,13 +326,14 @@ def main(argv=None):
                 args.work_order,
                 provider_call,
                 repository_root=REPOSITORY_ROOT,
-                provider=args.provider,
+                provider=args.recorded_provider or args.provider,
                 model=model,
                 authored_by=args.authored_by,
                 max_repairs=args.max_repairs,
                 review_output=args.review_output,
                 dry_run=args.dry_run,
                 claim_registry_path=args.claims,
+                execution_adapter=args.provider,
             )
         except (OSError, ValueError, ValidationError) as exc:
             raise SystemExit(str(exc)) from exc
