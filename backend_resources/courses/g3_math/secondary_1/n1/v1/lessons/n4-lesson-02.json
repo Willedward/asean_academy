@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n4-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n4",
+  "position": 2,
+  "status": "draft",
+  "title": "Conversion of units such as kilometres per hour to metres per second",
+  "summary": "Convert speed and other rates by changing the numerator and denominator units systematically, including compound and volume rates.",
+  "outcomes": [
+    "4.2"
+  ],
+  "prerequisite_lessons": [
+    "n4-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Convert between kilometres per hour and metres per second.",
+    "Use unit factors to convert rates involving minutes, seconds, litres and cubic metres.",
+    "Check a converted rate by predicting whether its numerical value should increase or decrease."
+  ],
+  "mastery_policy_key": "n4-default-v1",
+  "sections": [
+    {
+      "stable_key": "rate-unit-factors",
+      "position": 1,
+      "type": "explanation",
+      "title": "Convert the numerator and denominator",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A rate contains at least two units. Convert each one without changing the physical rate. For speed, use "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1\\text{ km}=1000\\text{ m}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1\\text{ h}=3600\\text{ s}"
+        },
+        {
+          "type": "text",
+          "text": ". Keep units beside every conversion so that unwanted units cancel."
+        }
+      ]
+    },
+    {
+      "stable_key": "speed-conversion-shortcut",
+      "position": 2,
+      "type": "explanation",
+      "title": "The 3.6 speed conversion",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Because 1000 \u00f7 3600 = 1 \u00f7 3.6, divide kilometres per hour by 3.6 to obtain metres per second. Multiply metres per second by 3.6 to return to kilometres per hour. For other rates, rebuild the conversion from unit factors instead of applying this shortcut blindly."
+        }
+      ]
+    },
+    {
+      "stable_key": "kilometres-hour-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: kilometres per hour to metres per second",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 90 km/h in metres per second."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Replace kilometres and hours by metres and seconds."
+            },
+            {
+              "type": "display_math",
+              "latex": "90\\times\\frac{1000}{3600}\\text{ m/s}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify, or divide 90 by 3.6."
+            },
+            {
+              "type": "display_math",
+              "latex": "90\\div3.6=25\\text{ m/s}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Multiplying 25 m/s by 3.6 returns 90 km/h."
+    },
+    {
+      "stable_key": "flow-rate-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: convert a volume rate",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Water flows at 0.018 cubic metres per second. Express the rate in litres per minute. Use 1 cubic metre = 1000 litres."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert cubic metres to litres."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.018\\times1000=18\\text{ L/s}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the per-second rate to a per-minute rate."
+            },
+            {
+              "type": "display_math",
+              "latex": "18\\times60=1080\\text{ L/min}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Dividing 1080 L/min by 60 gives 18 L/s, which is 0.018 cubic metres per second."
+    },
+    {
+      "stable_key": "speed-conversion-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Express 12.5 m/s in kilometres per hour."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "45",
+        "canonical_latex": "45\\text{ km/h}",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "km/h",
+          "accepted": [
+            "km/h",
+            "kilometres per hour"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Multiply 12.5 by 3.6. The converted speed is 45 km/h."
+        }
+      ]
+    },
+    {
+      "stable_key": "rate-conversion-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Write the original rate with units, convert every numerator and denominator unit, cancel units explicitly, and reverse the conversion as a check. Use \u00d73.6 from m/s to km/h and \u00f73.6 in the opposite direction."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T13:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

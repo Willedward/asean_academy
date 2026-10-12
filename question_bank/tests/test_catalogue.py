@@ -139,4 +139,4 @@ def test_course_contract_accepts_multiple_topic_units(repository_root):
 
     course = Course.model_validate(payload)
 
-    assert [unit.topic_code for unit in course.units] == ["N1", "N2", "N3"]
+    assert [unit.topic_code for unit in course.units] == ["N1", "N2", "N3", "N4"]

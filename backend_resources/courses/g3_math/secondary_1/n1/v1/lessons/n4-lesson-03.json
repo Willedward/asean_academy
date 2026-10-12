@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n4-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n4",
+  "position": 3,
+  "status": "draft",
+  "title": "Problems involving rate and speed",
+  "summary": "Model multi-step rate and speed situations involving missing quantities, relative motion, stops, net rates and scheduled arrival times.",
+  "outcomes": [
+    "4.3"
+  ],
+  "prerequisite_lessons": [
+    "n4-lesson-02"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Select and rearrange the distance\u2013speed\u2013time relationship for an unknown quantity.",
+    "Model closing speed, relative speed and net rates from the direction of change.",
+    "Check multi-stage solutions using time, distance and unit constraints."
+  ],
+  "mastery_policy_key": "n4-default-v1",
+  "sections": [
+    {
+      "stable_key": "distance-speed-time-model",
+      "position": 1,
+      "type": "explanation",
+      "title": "Choose the relationship that matches the unknown",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Start from "
+        },
+        {
+          "type": "inline_math",
+          "latex": "d=st"
+        },
+        {
+          "type": "text",
+          "text": ". Rearrange it as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "s=\\frac{d}{t}"
+        },
+        {
+          "type": "text",
+          "text": " or "
+        },
+        {
+          "type": "inline_math",
+          "latex": "t=\\frac{d}{s}"
+        },
+        {
+          "type": "text",
+          "text": ". Convert units before substituting, and write a short definition for any unknown used in a multi-stage problem."
+        }
+      ]
+    },
+    {
+      "stable_key": "relative-and-net-rates",
+      "position": 2,
+      "type": "explanation",
+      "title": "Combine rates according to direction",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When objects move towards each other, add their speeds to find the closing speed. When one follows another in the same direction, subtract to find the rate at which the gap closes. For filling and draining, inflow minus outflow gives the net rate. A schedule problem is often easiest when total allowed time is found first."
+        }
+      ]
+    },
+    {
+      "stable_key": "catch-up-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: catch-up motion",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A van is 15 km ahead of a car. They travel in the same direction at 50 km/h and 65 km/h respectively. How long does the car take to catch the van?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find how quickly the car closes the gap."
+            },
+            {
+              "type": "display_math",
+              "latex": "65-50=15\\text{ km/h}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide the initial gap by the closing speed."
+            },
+            {
+              "type": "display_math",
+              "latex": "t=\\frac{15}{15}=1\\text{ h}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "In one hour, the car travels 15 km farther than the van, exactly closing the initial gap."
+    },
+    {
+      "stable_key": "scheduled-journey-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: recover time after a stop",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A vehicle must travel 180 km in 3 hours. It covers the first 60 km at 40 km/h and then stops for 15 minutes. Find the speed needed for the remaining distance."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the time already used."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{60}{40}+0.25=1.75\\text{ h}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the remaining time and distance."
+            },
+            {
+              "type": "display_math",
+              "latex": "3-1.75=1.25\\text{ h},\\qquad180-60=120\\text{ km}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the required speed."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{120}{1.25}=96\\text{ km/h}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The final stage takes 120 \u00f7 96 = 1.25 hours, so the travel and stop times total exactly 3 hours."
+    },
+    {
+      "stable_key": "journey-time-recall",
+      "position": 5,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A train travels 144 km at 72 km/h. Find the travelling time."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "2",
+        "canonical_latex": "2\\text{ h}",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "h",
+          "accepted": [
+            "h",
+            "hour",
+            "hours"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Use time = distance \u00f7 speed. The travelling time is 144 \u00f7 72 = 2 hours."
+        }
+      ]
+    },
+    {
+      "stable_key": "rate-problems-summary",
+      "position": 6,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Define the unknown, align units, choose d = st or the correct combined rate, account for every stage and stop, solve with units attached, and substitute the result back into the original situation."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T13:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

@@ -37,7 +37,7 @@ Publication validation remains unsuccessful until all 40 draft questions receive
 uv run question-bank validate --publish
 ```
 
-Validate the N1 through N3 course structure, 16 lessons, and all 248 pool mappings:
+Validate the N1 through N4 course structure, 19 lessons, and all 352 pool mappings:
 
 ```bash
 uv run question-bank course-validate
@@ -71,7 +71,7 @@ DATABASE_URL=postgresql://... uv run question-bank catalogue-import-db
 DATABASE_URL=postgresql://... uv run question-bank course-import-db
 ```
 
-Apply migrations `202609200001` through `202609200003` before importing. Import the complete question catalogue first because the multi-unit course pools reference N1, N2 and N3 question identities. Imports are transactional.
+Apply migrations `202609200001` through `202609200003` before importing. Import the complete question catalogue first because the multi-unit course pools reference N1 through N4 question identities. Imports are transactional.
 Existing question, course, and lesson revisions are immutable: changed content requires an
 incremented `revision`; review-state promotion may retain the same revision.
 
