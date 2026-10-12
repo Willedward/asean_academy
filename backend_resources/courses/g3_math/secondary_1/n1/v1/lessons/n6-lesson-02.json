@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n6",
+  "position": 2,
+  "status": "draft",
+  "title": "Graph of ordered pairs as a relationship between two variables",
+  "summary": "Connect inputs and outputs in tables, ordered pairs, rules and contextual graphs.",
+  "outcomes": [
+    "6.2"
+  ],
+  "prerequisite_lessons": [
+    "n6-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Interpret an ordered pair as an input-output relationship.",
+    "Complete tables and ordered-pair patterns from a rule.",
+    "Derive and use a simple linear rule from values or context."
+  ],
+  "mastery_policy_key": "n6-default-v1",
+  "sections": [
+    {
+      "stable_key": "n6-relationships-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Four representations of one relationship",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A relationship can be shown by a rule, a table, a set of ordered pairs or a graph. Each ordered pair (x, y) links one input x to its output y. Moving between these representations should preserve every pair."
+        },
+        {
+          "type": "display_math",
+          "latex": "x\\longrightarrow \\text{rule}\\longrightarrow y\\qquad (x,y)"
+        },
+        {
+          "type": "text",
+          "text": "For a linear relationship, equal changes in x produce equal changes in y. This constant change helps extend a table and identify the rule."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-relationships-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Build a rule from ordered pairs",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The pairs (0, 2), (1, 6) and (2, 10) follow a linear relationship. Write y as an expression in x."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the change in output for an input increase of 1."
+            },
+            {
+              "type": "display_math",
+              "latex": "6-2=4"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use x = 0 to read the constant output."
+            },
+            {
+              "type": "display_math",
+              "latex": "b=2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=4x+2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives outputs 2, 6 and 10 for x = 0, 1 and 2 respectively."
+    },
+    {
+      "stable_key": "n6-relationships-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For y = 3x - 1, find y when x = 5."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "14",
+        "canonical_latex": "14",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Substitute x = 5: y = 3(5) - 1 = 14."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Treat x as the input and y as the output; check that a rule reproduces every given ordered pair."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T20:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

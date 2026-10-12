@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-lesson-05",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n6",
+  "position": 5,
+  "status": "draft",
+  "title": "Gradient of a linear graph as the ratio of vertical change to horizontal change",
+  "summary": "Calculate and interpret positive, negative, zero and fractional gradients from points, graphs and contexts.",
+  "outcomes": [
+    "6.5"
+  ],
+  "prerequisite_lessons": [
+    "n6-lesson-04"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Calculate gradient from vertical and horizontal changes.",
+    "Find gradient from two coordinates using a consistent subtraction order.",
+    "Use equal gradients to solve problems involving parallel or collinear lines."
+  ],
+  "mastery_policy_key": "n6-default-v1",
+  "sections": [
+    {
+      "stable_key": "n6-gradient-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Rise over run",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Gradient measures how y changes as x increases. Use the same point order in the numerator and denominator. A line rising from left to right has positive gradient, a falling line has negative gradient, and a horizontal line has gradient zero."
+        },
+        {
+          "type": "display_math",
+          "latex": "m=\\frac{\\text{vertical change}}{\\text{horizontal change}}=\\frac{y_2-y_1}{x_2-x_1}"
+        },
+        {
+          "type": "text",
+          "text": "Parallel non-vertical lines have equal gradients. Collinear points also give the same gradient whichever pair is chosen."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-gradient-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Gradient from two points",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the gradient of the line through (-2, 7) and (4, -5)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate the signed vertical change."
+            },
+            {
+              "type": "display_math",
+              "latex": "-5-7=-12"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate the matching horizontal change."
+            },
+            {
+              "type": "display_math",
+              "latex": "4-(-2)=6"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide vertical change by horizontal change."
+            },
+            {
+              "type": "display_math",
+              "latex": "m=\\frac{-12}{6}=-2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The negative gradient agrees with the line falling as x increases."
+    },
+    {
+      "stable_key": "n6-gradient-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A line rises 15 units while moving 5 units to the right. Find its gradient."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Gradient = vertical change / horizontal change = 15/5 = 3."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-lesson-05-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Subtract coordinates in a consistent order, divide vertical change by horizontal change, and use the sign to interpret the line's direction."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T20:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

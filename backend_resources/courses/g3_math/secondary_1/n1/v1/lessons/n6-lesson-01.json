@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-lesson-01",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n6",
+  "position": 1,
+  "status": "draft",
+  "title": "Cartesian coordinates in two dimensions",
+  "summary": "Read, plot and transform points in four quadrants, then use coordinate differences to solve geometric problems.",
+  "outcomes": [
+    "6.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Read and interpret ordered pairs in all four quadrants.",
+    "Use coordinates to describe translations, reflections and midpoints.",
+    "Find horizontal and vertical lengths, perimeters and areas from coordinates."
+  ],
+  "mastery_policy_key": "n6-default-v1",
+  "sections": [
+    {
+      "stable_key": "n6-coordinates-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Coordinates, signs and movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An ordered pair is written (x, y): move horizontally to x first, then vertically to y. The signs identify the quadrant. Points on the x-axis have y = 0, points on the y-axis have x = 0, and the origin is (0, 0)."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\mathrm{I}:(+,+),\\quad \\mathrm{II}:(-,+),\\quad \\mathrm{III}:(-,-),\\quad \\mathrm{IV}:(+,-)"
+        },
+        {
+          "type": "text",
+          "text": "A horizontal length is the absolute difference between x-coordinates; a vertical length is the absolute difference between y-coordinates. Reflection in the x-axis changes the sign of y, while reflection in the y-axis changes the sign of x."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-coordinates-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Rectangle from four coordinates",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A rectangle has vertices (-3, 4), (5, 4), (5, -2) and (-3, -2). Find its perimeter."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the horizontal side length."
+            },
+            {
+              "type": "display_math",
+              "latex": "5-(-3)=8"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the vertical side length."
+            },
+            {
+              "type": "display_math",
+              "latex": "4-(-2)=6"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the perimeter formula."
+            },
+            {
+              "type": "display_math",
+              "latex": "P=2(8+6)=28\\text{ units}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The opposite sides have equal lengths, and 8 + 6 + 8 + 6 = 28."
+    },
+    {
+      "stable_key": "n6-coordinates-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Point A(-4, 7) is reflected in the y-axis. State the x-coordinate of its image."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Reflection in the y-axis changes -4 to 4 and keeps the y-coordinate unchanged."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-lesson-01-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read x before y, track signs carefully, and use coordinate differences for axis-aligned lengths."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T20:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

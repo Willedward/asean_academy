@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-lesson-04",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n6",
+  "position": 4,
+  "status": "draft",
+  "title": "Graphs of linear functions",
+  "summary": "Plot and interpret straight-line graphs using points, intercepts, equations and intersections.",
+  "outcomes": [
+    "6.4"
+  ],
+  "prerequisite_lessons": [
+    "n6-lesson-03"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Generate points for a straight-line graph from its equation.",
+    "Find and interpret x- and y-intercepts.",
+    "Find equations and intersections of straight-line graphs."
+  ],
+  "mastery_policy_key": "n6-default-v1",
+  "sections": [
+    {
+      "stable_key": "n6-graphs-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Points, intercepts and intersections",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A point lies on a graph only if its coordinates satisfy the equation. The y-intercept occurs when x = 0, and the x-intercept occurs when y = 0. Two graphs intersect where they have the same x-value and the same y-value."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{x-intercept: }y=0\\qquad \\text{y-intercept: }x=0"
+        },
+        {
+          "type": "text",
+          "text": "Two accurate points determine a straight line. Choose convenient x-values, calculate their y-values, plot the points and join them with a straight line."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-graphs-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Find two graph intersections",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For y = -2x + 8, find both coordinate-axis intercepts."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set x = 0 for the y-intercept."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=-2(0)+8=8"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set y = 0 for the x-intercept."
+            },
+            {
+              "type": "display_math",
+              "latex": "0=-2x+8\\Rightarrow x=4"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "State the two plotted points."
+            },
+            {
+              "type": "display_math",
+              "latex": "(0,8)\\text{ and }(4,0)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Both points satisfy y = -2x + 8."
+    },
+    {
+      "stable_key": "n6-graphs-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the x-coordinate where y = 3x - 12 crosses the x-axis."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "At the x-axis y = 0, so 3x - 12 = 0 and x = 4."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-lesson-04-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Substitute to test or plot points, set one coordinate to zero for an intercept, and equate equations at an intersection."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T20:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
