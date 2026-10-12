@@ -166,7 +166,8 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     repository_root, tmp_path
 ):
     banks = repository_root / "backend_resources/question_bank/g3_math"
-    claims = repository_root / "backend_resources/question_bank/authoring/batch-claims-v1.json"
+    claims = tmp_path / "batch-claims-v1.json"
+    claims.write_text('{"schema_version":"1.0.0","claims":[]}\n')
     next_batch = next_authoring_batch(
         banks,
         claims,
