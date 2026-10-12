@@ -60,9 +60,26 @@ uv run --project question_bank question-bank authoring-work-order \
 ```
 
 `authoring-work-order` produces `prompt.md`, `work-order.json` and
-`response-template.json`. This is the model-independent runner boundary: Codex, an API model
-or a human author receives the same stable-key, outcome, difficulty, schema, house-rule and
-source-reference contract. Generation does not change review state or bypass validation.
+`response-template.json`. It resolves the exact checksum-tracked house-rules file from the
+manifest. Codex, an API model or a human author therefore receives the same stable-key,
+outcome, difficulty, schema, house-rule and source-reference contract.
+
+On the batch's active claimed branch, the executor can call OpenAI Structured Outputs and
+materialise a complete batch:
+
+```bash
+export OPENAI_API_KEY=...
+uv run --project question_bank question-bank authoring-execute \
+  build/authoring-work-orders/BATCH_ID/work-order.json \
+  --provider openai --model YOUR_APPROVED_MODEL
+```
+
+It verifies the active claim before any paid call, retries deterministically invalid output at
+most twice, validates slots, answers, assets and duplicates, and performs transactional writes.
+Success advances the manifest to `ready_for_review`, creates the reviewer packet and writes an
+execution report. Mathematics and editorial decisions remain pending. A saved response can be
+rehearsed without writing by using `--provider response-file --response-file questions.json
+--dry-run`.
 
 Export an authored batch after its manifest lists all generated question keys:
 
