@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-g5",
+  "position": 2,
+  "status": "draft",
+  "title": "Problems involving perimeter and area of composite plane figures",
+  "summary": "Decompose plane figures, subtract cut-outs and account for shared edges.",
+  "outcomes": [
+    "5.2"
+  ],
+  "prerequisite_lessons": [
+    "g5-lesson-01"
+  ],
+  "estimated_minutes": 40,
+  "objectives": [
+    "Split a composite figure into familiar plane shapes.",
+    "Use subtraction for holes and cut-outs.",
+    "Find outside perimeter without counting internal shared edges."
+  ],
+  "mastery_policy_key": "g5-default-v1",
+  "sections": [
+    {
+      "stable_key": "g5-52-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Core method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Decompose plane figures, subtract cut-outs and account for shared edges. Keep every measurement in compatible units before substituting."
+        },
+        {
+          "type": "display_math",
+          "latex": "A_{composite}=\\sum A_{parts}-\\sum A_{cutouts}"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-52-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner removed. Find the remaining area."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=12(8)-4(3)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=84\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+    },
+    {
+      "stable_key": "g5-52-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 10 cm by 6 cm rectangle has a 2 cm by 3 cm corner removed. Find the remaining area in cm\u00b2."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "54",
+        "canonical_latex": "54",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Subtract the cut-out: 60 - 6 = 54."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T11:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

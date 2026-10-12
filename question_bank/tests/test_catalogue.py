@@ -113,7 +113,7 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
     assert report.as_dict()["known_topic_group_count"] == 19
     assert report.as_dict()["unconfirmed_topic_group_count"] == 0
     assert report.as_dict()["blueprinted_topic_level_count"] == 19
-    assert report.as_dict()["authored_topic_level_count"] == 8
+    assert report.as_dict()["authored_topic_level_count"] == 9
     assert {issue.code for issue in report.warnings} == {
         "difficulty_distribution",
         "outcome_distribution",
@@ -140,5 +140,5 @@ def test_course_contract_accepts_multiple_topic_units(repository_root):
     course = Course.model_validate(payload)
 
     assert [unit.topic_code for unit in course.units] == [
-        "N1", "N2", "N3", "N4", "N5", "N6", "N7", "G1"
+        "N1", "N2", "N3", "N4", "N5", "N6", "N7", "G1", "G5"
     ]

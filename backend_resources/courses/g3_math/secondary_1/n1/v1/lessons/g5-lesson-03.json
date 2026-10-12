@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-g5",
+  "position": 3,
+  "status": "draft",
+  "title": "Volume and surface area of prism and cylinder",
+  "summary": "Use cross-sections and nets to calculate prism and cylinder measures.",
+  "outcomes": [
+    "5.3"
+  ],
+  "prerequisite_lessons": [
+    "g5-lesson-02"
+  ],
+  "estimated_minutes": 40,
+  "objectives": [
+    "Calculate a prism volume from cross-sectional area and length.",
+    "Calculate cylinder volume using \u03c0r\u00b2h.",
+    "Build total surface area from end faces and lateral faces."
+  ],
+  "mastery_policy_key": "g5-default-v1",
+  "sections": [
+    {
+      "stable_key": "g5-53-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Core method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use cross-sections and nets to calculate prism and cylinder measures. Keep every measurement in compatible units before substituting."
+        },
+        {
+          "type": "display_math",
+          "latex": "V_{prism}=A_{cross-section}\\ell,\\qquad V_{cylinder}=\\pi r^2h"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-53-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A prism has cross-sectional area 18 cm\u00b2 and length 7 cm. Find its volume."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=18(7)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=126\\text{ cm}^3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+    },
+    {
+      "stable_key": "g5-53-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A prism has cross-sectional area 15 cm\u00b2 and length 8 cm. Find its volume in cm\u00b3."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "120",
+        "canonical_latex": "120",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Multiply cross-sectional area by length: 15 \u00d7 8 = 120."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-03-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T11:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 9,
+  "revision": 10,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3\u2013N7 Number and Algebra plus G1 Angles, triangles and polygons units.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3\u2013N7 Number and Algebra plus G1 Angles, triangles and polygons and G5 Mensuration units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
@@ -68,6 +68,14 @@
     },
     {
       "key": "g1-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "g5-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -534,12 +542,66 @@
           "required_practice_count": 10
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-g5",
+      "position": 9,
+      "topic_code": "G5",
+      "title": "Mensuration",
+      "checkpoint_question_count": 20,
+      "lessons": [
+        {
+          "stable_key": "g5-lesson-01",
+          "position": 1,
+          "title": "Area of a parallelogram and trapezium",
+          "outcomes": [
+            "5.1"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "g5-lesson-02",
+          "position": 2,
+          "title": "Problems involving perimeter and area of composite plane figures",
+          "outcomes": [
+            "5.2"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "g5-lesson-03",
+          "position": 3,
+          "title": "Volume and surface area of prism and cylinder",
+          "outcomes": [
+            "5.3"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "g5-lesson-04",
+          "position": 4,
+          "title": "Conversion between square and cubic metric units",
+          "outcomes": [
+            "5.4"
+          ],
+          "required_practice_count": 12
+        },
+        {
+          "stable_key": "g5-lesson-05",
+          "position": 5,
+          "title": "Volume and surface area of composite solids",
+          "outcomes": [
+            "5.5"
+          ],
+          "required_practice_count": 12
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 465,
-    "unit_checkpoint": 141,
-    "adaptive_reserve": 162
+    "lesson_practice": 525,
+    "unit_checkpoint": 161,
+    "adaptive_reserve": 186
   },
   "provenance": {
     "authoring_method": "original_authored",

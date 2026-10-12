@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-lesson-05",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-g5",
+  "position": 5,
+  "status": "draft",
+  "title": "Volume and surface area of composite solids",
+  "summary": "Combine component measures and remove overlaps, holes or hidden faces.",
+  "outcomes": [
+    "5.5"
+  ],
+  "prerequisite_lessons": [
+    "g5-lesson-04"
+  ],
+  "estimated_minutes": 40,
+  "objectives": [
+    "Add or subtract component volumes without double-counting.",
+    "Remove two copies of each hidden contact face from surface area.",
+    "Solve multi-step capacity and material problems involving composite solids."
+  ],
+  "mastery_policy_key": "g5-default-v1",
+  "sections": [
+    {
+      "stable_key": "g5-55-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Core method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Combine component measures and remove overlaps, holes or hidden faces. Keep every measurement in compatible units before substituting."
+        },
+        {
+          "type": "display_math",
+          "latex": "V_{composite}=\\sum V_{added}-\\sum V_{removed}"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-55-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two cuboids of volumes 180 cm\u00b3 and 75 cm\u00b3 are joined without overlap. Find the total volume."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=180+75"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=255\\text{ cm}^3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+    },
+    {
+      "stable_key": "g5-55-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 6 cm by 5 cm by 4 cm cuboid has a 2 cm cube removed. Find the remaining volume in cm\u00b3."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "112",
+        "canonical_latex": "112",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Subtract 2\u00b3 from 6 \u00d7 5 \u00d7 4: 120 - 8 = 112."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-05-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T11:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
