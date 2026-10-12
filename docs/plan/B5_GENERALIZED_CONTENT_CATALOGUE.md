@@ -1,6 +1,6 @@
 # B5 generalized Mathematics content catalogue
 
-**Implementation status (11 October 2026): engineering foundation complete; N2 is reviewed, N1 retains independent lesson review gates, and the remaining syllabus content is incomplete.**
+**Implementation status (12 October 2026): engineering foundation complete; N2 is reviewed, N3–N5 are review-ready, N1 retains independent lesson review gates, and the remaining syllabus content is incomplete.**
 
 This milestone removes the N1-only constraints from the Git-authored question and course pipeline before the team expands the Beta bank to roughly 1,900–2,850 questions. Existing N1 source files remain valid and keep their current immutable content hashes.
 
@@ -29,8 +29,8 @@ Catalogue validation succeeds and reports:
 - 13 of 13 unique topic definitions;
 - 19 of 19 level-specific topic groups;
 - 87 syllabus outcomes;
-- four authored topic-level banks;
-- 352 authored questions across N1, N2, N3 and the complete N4 bank; N3 and N4 remain review-gated.
+- five authored topic-level banks;
+- 456 authored questions across N1–N5; N3, N4 and N5 remain review-gated.
 
 The 104-question N2 bank matches its complete blueprint distribution. The remaining catalogue warnings describe the intentionally partial 40-question N1 blueprint.
 
@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The N2 batches and lessons are reviewed. The team must now author and review the remaining 17 level-specific topic groups, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The N2 batches and lessons are reviewed, while N3–N5 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. The team must now author the remaining 14 level-specific topic groups, review every pending unit, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 

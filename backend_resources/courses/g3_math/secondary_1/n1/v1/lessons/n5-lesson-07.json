@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-lesson-07",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n5",
+  "position": 7,
+  "status": "draft",
+  "title": "Simplification of linear expressions",
+  "summary": "Expand brackets and simplify nested or fractional linear expressions.",
+  "outcomes": [
+    "5.7"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-06"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Apply the distributive law to positive and negative factors.",
+    "Simplify nested brackets and simple fractional coefficients."
+  ],
+  "mastery_policy_key": "n5-default-v1",
+  "sections": [
+    {
+      "stable_key": "distributive-law",
+      "position": 1,
+      "type": "explanation",
+      "title": "The distributive law",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Multiply the factor outside a bracket by every term inside. A negative factor changes signs as it multiplies."
+        },
+        {
+          "type": "display_math",
+          "latex": "-2(3x-5)=-6x+10"
+        },
+        {
+          "type": "text",
+          "text": "After expanding, collect like terms and reduce numerical fractions."
+        }
+      ]
+    },
+    {
+      "stable_key": "fractional-simplification-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Simplify a fractional expression",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify [2x - 3(x - 5)]/3."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand inside the numerator."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{2x-3x+15}{3}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Collect the numerator terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{15-x}{3}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Expanding (15 - x)/3 gives the same two terms as the simplified numerator divided by 3."
+    },
+    {
+      "stable_key": "simplification-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify 2(3x - 4) + x."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "7x-8",
+        "canonical_latex": "7x-8",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Expand the bracket to 6x - 8, then add x."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-lesson-07-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Work from inner brackets outwards, distribute every factor, and collect like terms using common denominators when required."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

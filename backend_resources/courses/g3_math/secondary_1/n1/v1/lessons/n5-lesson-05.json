@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-lesson-05",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n5",
+  "position": 5,
+  "status": "draft",
+  "title": "Recognising and representing patterns and relationships by finding an algebraic expression for the nth term",
+  "summary": "Find algebraic rules for arithmetic sequences and linear patterns.",
+  "outcomes": [
+    "5.5"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-04"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Use the common difference as the coefficient of n.",
+    "Determine the constant adjustment and verify the rule with known terms."
+  ],
+  "mastery_policy_key": "n5-default-v1",
+  "sections": [
+    {
+      "stable_key": "nth-term-rule",
+      "position": 1,
+      "type": "explanation",
+      "title": "From common difference to nth term",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a linear sequence, the common difference is the coefficient of n. Adjust the constant so the rule produces the first term when n = 1."
+        },
+        {
+          "type": "display_math",
+          "latex": "4,7,10,13,\\ldots\\quad\\Rightarrow\\quad 3n+1"
+        }
+      ]
+    },
+    {
+      "stable_key": "later-terms-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Find a rule from later terms",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A linear sequence has 4th term 19 and 9th term 39. Find its nth term."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the change per term."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{39-19}{9-4}=4"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use 19 = 4(4) + c."
+            },
+            {
+              "type": "display_math",
+              "latex": "c=3,\\qquad T_n=4n+3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The rule gives T₉ = 4(9) + 3 = 39."
+    },
+    {
+      "stable_key": "nth-term-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the nth term of 6, 10, 14, 18, ..."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "4n+2",
+        "canonical_latex": "4n+2",
+        "variables": [
+          "n"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The common difference is 4, and 4(1) needs 2 more to make the first term 6."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-lesson-05-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a linear pattern, find the common difference, determine the adjustment, and verify the rule against known terms."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

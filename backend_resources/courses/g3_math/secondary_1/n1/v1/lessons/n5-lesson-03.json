@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n5",
+  "position": 3,
+  "status": "draft",
+  "title": "Evaluation of algebraic expressions and formulae",
+  "summary": "Substitute values safely and evaluate in the correct order.",
+  "outcomes": [
+    "5.3"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-02"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Substitute values into expressions and formulae.",
+    "Use brackets for negative values and follow the order of operations."
+  ],
+  "mastery_policy_key": "n5-default-v1",
+  "sections": [
+    {
+      "stable_key": "substitution-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Substitute, then calculate",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Replace every occurrence of a letter with its given value. Put a negative substituted value in brackets and complete powers before multiplication, division, addition and subtraction."
+        },
+        {
+          "type": "display_math",
+          "latex": "2p^2-3p+1\\text{ at }p=-2:\\quad 2(-2)^2-3(-2)+1"
+        }
+      ]
+    },
+    {
+      "stable_key": "formula-evaluation-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Evaluate a formula",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Use s = ut + at²/2 when u = 4, a = 6 and t = 3."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute the three values."
+            },
+            {
+              "type": "display_math",
+              "latex": "s=4(3)+\\frac{6(3^2)}2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate powers and products."
+            },
+            {
+              "type": "display_math",
+              "latex": "s=12+27=39"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Evaluating 3² before multiplying gives 39."
+    },
+    {
+      "stable_key": "substitution-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find 3x - 2y when x = 5 and y = -2."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "19",
+        "canonical_latex": "19",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Substitute with brackets: 3(5) - 2(-2) = 15 + 4 = 19."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-lesson-03-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Substitute first, use brackets around negative values, and calculate powers before the other operations."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

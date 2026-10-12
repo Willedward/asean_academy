@@ -112,7 +112,7 @@ class FakeBetaOperationsRepository:
         }
 
 
-def application():
+def application(*, allow_drafts: bool = True):
     repository = FakeBetaOperationsRepository()
     app = create_app(
         Settings(
@@ -120,7 +120,7 @@ def application():
             cors_origins=("http://localhost:3000",),
             log_level="INFO",
             repository_root=REPOSITORY_ROOT,
-            allow_draft_content=True,
+            allow_draft_content=allow_drafts,
             development_learner_id=None,
         ),
         token_verifier=StaticTokenVerifier(
@@ -311,6 +311,28 @@ def test_content_admin_can_open_protected_n2_reviewer_preview():
     assert "canonical_answer" in preview.text
     assert "hints" in preview.text
     assert "solution" in preview.text
+
+
+def test_admin_review_remains_available_when_learner_drafts_are_disabled():
+    app, _ = application(allow_drafts=False)
+
+    learner = request(
+        app,
+        "GET",
+        "/api/v1/courses/g3-sec1-math/map",
+        "student-token",
+    )
+    reviewer = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/lesson/n5-lesson-01/review-preview",
+        "admin-token",
+    )
+
+    assert learner.status_code == 404
+    assert learner.json()["error"]["code"] == "course_not_found"
+    assert reviewer.status_code == 200, reviewer.text
+    assert reviewer.json()["stable_key"] == "n5-lesson-01"
 
 
 def test_bulk_review_requires_admin_and_reserves_mathematics_for_academic_admin():

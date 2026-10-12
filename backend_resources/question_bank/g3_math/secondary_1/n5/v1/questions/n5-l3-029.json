@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-l3-029",
+  "bank_key": "g3-sec1-n5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N5",
+  "primary_outcome": "5.6",
+  "title": "Subtract expressions with fractions",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (5y/6 - 2) - (y/3 + 4)."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "y/2-6",
+        "canonical_latex": "\\frac y2-6",
+        "variables": [
+          "y"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Group terms that contain the same variables and group the constants."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "When subtracting a bracket, change the sign of every term inside it."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{5y}{6}-2-\\frac y3-4"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{5y-2y}{6}-6"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac y2-6"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-12T09:00:00Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

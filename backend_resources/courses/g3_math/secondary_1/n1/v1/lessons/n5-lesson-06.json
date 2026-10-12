@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-lesson-06",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n5",
+  "position": 6,
+  "status": "draft",
+  "title": "Addition and subtraction of linear expressions",
+  "summary": "Combine linear expressions by handling signs and collecting like terms.",
+  "outcomes": [
+    "5.6"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-05"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Add and subtract linear expressions.",
+    "Change every sign when subtracting a bracket and combine only like terms."
+  ],
+  "mastery_policy_key": "n5-default-v1",
+  "sections": [
+    {
+      "stable_key": "like-terms",
+      "position": 1,
+      "type": "explanation",
+      "title": "Only like terms combine",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Terms are like terms when their variable parts match exactly. Group x-terms, y-terms and constants separately."
+        },
+        {
+          "type": "display_math",
+          "latex": "(7x+2y-4)-(3x-5y+6)=4x+7y-10"
+        },
+        {
+          "type": "text",
+          "text": "A subtraction sign before a bracket changes the sign of every term inside the bracket."
+        }
+      ]
+    },
+    {
+      "stable_key": "expression-subtraction-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Subtract two expressions",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (8a - 3) - (2a + 5)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Remove the second bracket and change both signs."
+            },
+            {
+              "type": "display_math",
+              "latex": "8a-3-2a-5"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Collect like terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "6a-8"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting any value of a into both forms gives the same result."
+    },
+    {
+      "stable_key": "linear-operations-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (4x + 3) + (2x - 5)."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "6x-2",
+        "canonical_latex": "6x-2",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Combine the x-terms and constants separately: 4x + 2x + 3 - 5."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-lesson-06-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Remove brackets carefully, change all signs when subtracting, and combine only matching variable terms."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

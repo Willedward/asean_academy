@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n5-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n5",
+  "position": 2,
+  "status": "draft",
+  "title": "Interpreting algebraic notation",
+  "summary": "Read coefficients, products, powers, brackets and fractions accurately.",
+  "outcomes": [
+    "5.2"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Interpret coefficients, products and powers.",
+    "Use brackets and fraction bars to preserve the intended operation order."
+  ],
+  "mastery_policy_key": "n5-default-v1",
+  "sections": [
+    {
+      "stable_key": "notation-structure",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read the structure before calculating",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Brackets keep a sum or difference together. A fraction bar acts like brackets around its numerator and denominator."
+        },
+        {
+          "type": "display_math",
+          "latex": "3(x+y)=3\\times(x+y),\\qquad \\frac{3+y}{5}=(3+y)\\div5"
+        },
+        {
+          "type": "text",
+          "text": "Reading the structure aloud helps prevent common errors such as treating 3(x+y) as 3x+y."
+        }
+      ]
+    },
+    {
+      "stable_key": "notation-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Interpret a squared quotient",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write the square of (a + b) divided by 3c as one expression."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the quotient first."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{a+b}{3c}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Square the complete quotient."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\left(\\frac{a+b}{3c}\\right)^2=\\frac{(a+b)^2}{9c^2}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The square applies to the numerator and every factor in the denominator."
+    },
+    {
+      "stable_key": "notation-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write one fifth of the sum of x and 7 as an algebraic expression."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(x+7)/5",
+        "canonical_latex": "\\frac{x+7}{5}",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Keep x + 7 together in the numerator: (x + 7)/5."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Distinguish coefficients from powers, and use brackets or a fraction bar to keep grouped quantities together."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-12T17:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
