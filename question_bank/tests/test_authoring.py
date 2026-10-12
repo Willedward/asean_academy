@@ -175,13 +175,13 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         syllabus_path=repository_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         school_level="secondary_1",
-        topic_code="N4",
+        topic_code="N5",
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec1-n4-b004"
-    assert next_batch["branch"] == "questions/g3-sec1-n4-b004-willedward"
-    assert "authoring-claim g3-sec1-n4-b004" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec1-n5-b001"
+    assert next_batch["branch"] == "questions/g3-sec1-n5-b001-willedward"
+    assert "authoring-claim g3-sec1-n5-b001" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
@@ -196,11 +196,16 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
 
     assert result["question_count"] == 26
     assert len(work_order["slots"]) == 26
-    assert all(slot["stable_key"].startswith("n4-l") for slot in work_order["slots"])
+    assert all(slot["stable_key"].startswith("n5-l") for slot in work_order["slots"])
     assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
-        "4.1",
-        "4.2",
-        "4.3",
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.5",
+        "5.6",
+        "5.7",
+        "5.8",
     }
     assert work_order["generation_contract"]["human_review_required"] == [
         "mathematics",
@@ -212,11 +217,11 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
-def test_executor_repairs_and_validates_complete_n4_work_order(repository_root, tmp_path):
+def test_executor_repairs_and_validates_complete_n5_work_order(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
-        / "g3-sec1-n4-b004.json"
+        / "backend_resources/question_bank/g3_math/secondary_1/n5/v1/batches"
+        / "g3-sec1-n5-b001.json"
     )
     create_authoring_work_order(
         manifest,
@@ -259,8 +264,8 @@ def test_executor_repairs_and_validates_complete_n4_work_order(repository_root, 
 def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_1/n4/v1/batches"
-        / "g3-sec1-n4-b004.json"
+        / "backend_resources/question_bank/g3_math/secondary_1/n5/v1/batches"
+        / "g3-sec1-n5-b001.json"
     )
     create_authoring_work_order(
         manifest,
@@ -273,7 +278,7 @@ def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_
     )
     work_order = json.loads((tmp_path / "work-order.json").read_text())
     response = _generated_response_for(work_order)
-    response["questions"][0]["stable_key"] = "n4-l1-999"
+    response["questions"][0]["stable_key"] = "n5-l1-999"
 
     with pytest.raises(AuthoringExecutionError, match="exact stable keys"):
         execute_authoring_work_order(
