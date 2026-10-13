@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n6-lesson-01"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Interpret an ordered pair as an input-output relationship.",
     "Complete tables and ordered-pair patterns from a rule.",
@@ -26,11 +26,11 @@
       "stable_key": "n6-relationships-method",
       "position": 1,
       "type": "explanation",
-      "title": "Four representations of one relationship",
+      "title": "Connect a rule, table, ordered pairs and graph",
       "blocks": [
         {
           "type": "text",
-          "text": "A relationship can be shown by a rule, a table, a set of ordered pairs or a graph. Each ordered pair (x, y) links one input x to its output y. Moving between these representations should preserve every pair."
+          "text": "A relationship links an input x to an output y. It can be represented by a verbal description, an equation, a table, ordered pairs or a graph. Each row x and y in a table becomes one point (x, y), and a correct rule must reproduce every given pair."
         },
         {
           "type": "display_math",
@@ -38,19 +38,59 @@
         },
         {
           "type": "text",
-          "text": "For a linear relationship, equal changes in x produce equal changes in y. This constant change helps extend a table and identify the rule."
+          "text": "Label the variables before calculating. The independent variable is the chosen or controlled input; the dependent variable changes in response. In a time context, time is usually placed on the horizontal axis, but the wording of the problem decides the roles."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-relationship-patterns",
+      "position": 2,
+      "type": "explanation",
+      "title": "Use constant differences to recognise a linear relationship",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When x increases by equal amounts, a linear relationship produces equal changes in y. For the points in the diagram, each increase of 1 in x increases y by 4, and y = 2 when x = 0. This gives y = 4x + 2."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-02-ordered-pairs"
+        },
+        {
+          "type": "text",
+          "text": "If the x-values do not increase by 1, compare change in y with the matching change in x. For example, a rise of 12 while x increases by 3 is still a change of 4 in y per one unit of x."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-discrete-continuous-relationships",
+      "position": 3,
+      "type": "explanation",
+      "title": "Decide whether points should be joined",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Discrete data take separate allowable values, such as the number of tickets or books. Plot the valid points but do not assume values between them are possible. Continuous quantities, such as time, mass or distance, may take every value in an interval, so a connected line or curve can be meaningful."
+        },
+        {
+          "type": "text",
+          "text": "A graph represents the context only on its sensible domain. A rule might work algebraically for negative x, but negative time or a negative number of objects may be impossible. State restrictions from the situation instead of extending the graph automatically."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{relationship} = \\text{rule} + \\text{meaningful domain}"
         }
       ]
     },
     {
       "stable_key": "n6-relationships-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Build a rule from ordered pairs",
+      "title": "Worked example: build a rule from ordered pairs",
       "prompt": [
         {
           "type": "text",
-          "text": "The pairs (0, 2), (1, 6) and (2, 10) follow a linear relationship. Write y as an expression in x."
+          "text": "The pairs (0, 2), (1, 6), (2, 10) and (3, 14) follow a linear relationship. Write y as an expression in x and find y when x = 8."
         }
       ],
       "steps": [
@@ -59,11 +99,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the change in output for an input increase of 1."
+              "text": "Find the change in output for each input increase of 1."
             },
             {
               "type": "display_math",
-              "latex": "6-2=4"
+              "latex": "6-2=10-6=14-10=4"
             }
           ]
         },
@@ -72,11 +112,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x = 0 to read the constant output."
+              "text": "Use x = 0 to identify the starting output."
             },
             {
               "type": "display_math",
-              "latex": "b=2"
+              "latex": "y=4x+2"
             }
           ]
         },
@@ -85,20 +125,74 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the relationship."
+              "text": "Substitute x = 8."
             },
             {
               "type": "display_math",
-              "latex": "y=4x+2"
+              "latex": "y=4(8)+2=34"
             }
           ]
         }
       ],
-      "verification_note": "Substitution gives outputs 2, 6 and 10 for x = 0, 1 and 2 respectively."
+      "verification_note": "The rule gives 2, 6, 10 and 14 for the four original inputs, so both its rate and starting value agree with the data."
+    },
+    {
+      "stable_key": "n6-relationship-context-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: interpret a contextual relationship",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A tank initially contains 18 litres of water and is filled at 3 litres per minute. Let t be time in minutes and V be volume in litres. Write the relationship, then find the volume after 7 minutes and the time when the volume reaches 48 litres."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The starting volume is 18 and each minute adds 3."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=18+3t,\\qquad t\\geq0"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute t = 7."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=18+3(7)=39\\text{ litres}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set V = 48 and solve for t."
+            },
+            {
+              "type": "display_math",
+              "latex": "48=18+3t\\Rightarrow30=3t\\Rightarrow t=10\\text{ minutes}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At 10 minutes the added volume is 3 × 10 = 30 litres, and 18 + 30 = 48 litres as required."
     },
     {
       "stable_key": "n6-relationships-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -126,24 +220,44 @@
     },
     {
       "stable_key": "n6-lesson-02-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Treat x as the input and y as the output; check that a rule reproduces every given ordered pair."
+          "text": "Identify the input and output, preserve every ordered pair when moving between representations, and use matched changes to test whether a relationship is linear."
+        },
+        {
+          "type": "text",
+          "text": "Check the rule against all supplied data and restrict the graph to values that make sense. Join points only when intermediate values are meaningful in the context."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-02-ordered-pairs",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-02-ordered-pairs.svg",
+      "alt_text": "Coordinate graph of the ordered pairs (0, 2), (1, 6), (2, 10) and (3, 14) on the line y = 4x + 2.",
+      "generation_spec": {
+        "renderer": "nextscholar-coordinate-svg-v1",
+        "diagram_kind": "coordinate_graph",
+        "lesson_key": "n6-lesson-02"
+      },
+      "sha256": "2da8e6ea603602e23497698d1bf24dc5c0afccdb49b1e5dfbcb5b7beb6c2d461",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-12T20:30:00+08:00",
+    "created_at": "2026-10-14T01:02:52+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
   }
 }

@@ -22,7 +22,6 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert {issue.code for issue in report.warnings} == {"lesson_notes_thin"}
     assert {issue.path.rsplit("/", 1)[-1] for issue in report.warnings} == {
         *(f"n5-lesson-{number:02}.json" for number in range(1, 9)),
-        *(f"n6-lesson-{number:02}.json" for number in range(1, 6)),
         *(f"n7-lesson-{number:02}.json" for number in range(1, 5)),
         *(f"s1-lesson-{number:02}.json" for number in range(1, 5)),
     }
