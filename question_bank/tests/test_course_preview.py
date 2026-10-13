@@ -10,7 +10,7 @@ def test_course_preview_renders_course_map_without_answers(repository_root, cour
 
     page = render_course_preview(report)
 
-    assert "Singapore Secondary 1 G3 Mathematics" in page
+    assert "ASEAN Scholarship Mathematics — Level 1" in page
     assert "Primes and prime factorisation" in page
     assert "976" in page
     assert "Ratios involving rational numbers" in page
