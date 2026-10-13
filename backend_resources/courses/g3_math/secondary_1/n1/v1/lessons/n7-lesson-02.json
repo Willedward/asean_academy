@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n7-lesson-01"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Solve one-step and two-step linear equations.",
     "Expand brackets and collect like terms accurately.",
@@ -26,27 +26,67 @@
       "stable_key": "n7-72-method",
       "position": 1,
       "type": "explanation",
-      "title": "A reliable solving sequence",
+      "title": "Reverse operations in a reliable order",
       "blocks": [
         {
           "type": "text",
-          "text": "Aim to isolate the variable. Simplify each side first, move variable terms to one side, move constants to the other, and divide by the remaining coefficient. Write each operation on both sides so sign errors are visible."
+          "text": "The goal is to isolate the variable while preserving equality. For a simple equation, undo addition or subtraction before undoing multiplication or division. Record the operation on both sides rather than moving a term without explanation; this makes negative signs easier to track."
         },
         {
           "type": "display_math",
-          "latex": "a(bx+c)+d=ex+f"
+          "latex": "5x-8=22\\Rightarrow5x=30\\Rightarrow x=6"
         },
         {
           "type": "text",
-          "text": "For bracketed equations, distribute the outside factor to every term. For variables on both sides, choose a subtraction that leaves a positive coefficient when convenient. Check by substituting the final value into the original equation."
+          "text": "You may use a different valid order and still reach the same answer, but each line must follow from an equivalent operation. A quick estimate helps: because 5x is about 30, x should be about 6."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-72-simplify-first",
+      "position": 2,
+      "type": "explanation",
+      "title": "Simplify brackets and like terms first",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When an equation contains brackets, expand by multiplying every term inside. Then collect like terms on each side before moving variable terms. A minus sign before a bracket changes the sign of every term in that bracket."
+        },
+        {
+          "type": "display_math",
+          "latex": "4-2(x-3)=4-2x+6=10-2x"
+        },
+        {
+          "type": "text",
+          "text": "Write an intermediate expansion line rather than trying to do several changes mentally. This separates algebraic simplification from balance operations and reduces the most common bracket error."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-72-both-sides",
+      "position": 3,
+      "type": "explanation",
+      "title": "Collect variables from both sides",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If x appears on both sides, subtract one variable term from both sides so that all remaining x-terms are together. When possible, choose the subtraction that leaves a positive coefficient. Then collect constants on the other side and divide by the coefficient."
+        },
+        {
+          "type": "display_math",
+          "latex": "7x+2=3x+18\\Rightarrow4x+2=18\\Rightarrow4x=16\\Rightarrow x=4"
+        },
+        {
+          "type": "text",
+          "text": "Always check in the original equation, especially after expanding brackets or working with a negative coefficient. Matching values on the two original sides confirms the complete chain, not just the last line."
         }
       ]
     },
     {
       "stable_key": "n7-72-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Solving with brackets and variables on both sides",
+      "title": "Worked example: brackets and variables on both sides",
       "prompt": [
         {
           "type": "text",
@@ -72,7 +112,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 4x and add 3."
+              "text": "Subtract 4x from both sides, then add 3 to both sides."
             },
             {
               "type": "display_math",
@@ -85,7 +125,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by 2."
+              "text": "Divide both sides by 2."
             },
             {
               "type": "display_math",
@@ -94,11 +134,65 @@
           ]
         }
       ],
-      "verification_note": "Substitution gives 3(14 - 1) = 39 and 28 + 11 = 39."
+      "verification_note": "Substitution gives 3(14 - 1) = 39 on the left and 28 + 11 = 39 on the right."
+    },
+    {
+      "stable_key": "n7-72-negative-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: manage a negative coefficient",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 5 - 2(3x - 4) = x + 20."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand -2(3x - 4) carefully and simplify the left side."
+            },
+            {
+              "type": "display_math",
+              "latex": "5-6x+8=x+20\\Rightarrow13-6x=x+20"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract x and 13 from both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "-7x=7"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by -7."
+            },
+            {
+              "type": "display_math",
+              "latex": "x=-1"
+            }
+          ]
+        }
+      ],
+      "verification_note": "For x = -1, the left side is 5 - 2(-3 - 4) = 19 and the right side is -1 + 20 = 19."
     },
     {
       "stable_key": "n7-72-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -126,13 +220,17 @@
     },
     {
       "stable_key": "n7-lesson-02-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Simplify first, collect x-terms, collect constants, divide by the coefficient, and substitute to check."
+          "text": "Expand brackets and collect like terms before isolating the variable. Apply every balance operation to both sides and show one clear algebraic change per line."
+        },
+        {
+          "type": "text",
+          "text": "Collect x-terms on one side, constants on the other, divide by the coefficient, and substitute into the original equation to verify the result."
         }
       ]
     }
@@ -140,10 +238,10 @@
   "assets": [],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T00:45:00+08:00",
+    "created_at": "2026-10-14T01:25:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence and worked examples; awaiting Mathematics and editorial review."
   }
 }
