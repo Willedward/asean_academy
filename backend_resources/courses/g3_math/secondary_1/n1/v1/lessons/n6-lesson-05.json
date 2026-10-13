@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n6-lesson-04"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Calculate gradient from vertical and horizontal changes.",
     "Find gradient from two coordinates using a consistent subtraction order.",
@@ -26,31 +26,75 @@
       "stable_key": "n6-gradient-method",
       "position": 1,
       "type": "explanation",
-      "title": "Rise over run",
+      "title": "Calculate vertical change over horizontal change",
       "blocks": [
         {
           "type": "text",
-          "text": "Gradient measures how y changes as x increases. Use the same point order in the numerator and denominator. A line rising from left to right has positive gradient, a falling line has negative gradient, and a horizontal line has gradient zero."
+          "text": "Gradient measures how y changes as x increases. Choose two distinct points on the line and subtract their coordinates in the same order. The numerator is the signed vertical change and the denominator is the signed horizontal change."
         },
         {
           "type": "display_math",
           "latex": "m=\\frac{\\text{vertical change}}{\\text{horizontal change}}=\\frac{y_2-y_1}{x_2-x_1}"
         },
         {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-05-gradient"
+        },
+        {
           "type": "text",
-          "text": "Parallel non-vertical lines have equal gradients. Collinear points also give the same gradient whichever pair is chosen."
+          "text": "In the diagram, moving from (1, 1) to (5, 3) gives a horizontal change of 4 and a vertical change of 2, so the gradient is 2/4 = 1/2. Reversing both point orders gives (-2)/(-4), the same result."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-gradient-sign-steepness",
+      "position": 2,
+      "type": "explanation",
+      "title": "Interpret sign, steepness and units",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A line rising from left to right has positive gradient; a falling line has negative gradient. A horizontal line has zero vertical change and gradient 0. A vertical line has zero horizontal change, so its gradient is undefined because division by zero is impossible."
+        },
+        {
+          "type": "text",
+          "text": "For axes with equal visual scaling, a larger absolute gradient appears steeper. When the axes represent different quantities, attach units: a distance-time gradient may be kilometres per hour, while a cost-quantity gradient may be dollars per item."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{gradient units}=\\frac{\\text{vertical-axis units}}{\\text{horizontal-axis units}}"
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-gradient-parallel-collinear",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use gradients for parallel and collinear lines",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Parallel non-vertical lines have equal gradients because they rise or fall at the same rate. Points are collinear when the gradient between one pair matches the gradient between another pair on the same proposed line."
+        },
+        {
+          "type": "text",
+          "text": "Equal gradients alone do not prove that two equations represent the same line: parallel lines can have different intercepts. To prove that a point lies on a given line, substitute it into the equation or show both the correct gradient and a shared point."
+        },
+        {
+          "type": "display_math",
+          "latex": "m_1=m_2\\Rightarrow\\text{parallel or the same line, depending on intercepts}"
         }
       ]
     },
     {
       "stable_key": "n6-gradient-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Gradient from two points",
+      "title": "Worked example: gradient from two points",
       "prompt": [
         {
           "type": "text",
-          "text": "Find the gradient of the line through (-2, 7) and (4, -5)."
+          "text": "Find the gradient of the line through (-2, 7) and (4, -5), and interpret its sign."
         }
       ],
       "steps": [
@@ -85,7 +129,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide vertical change by horizontal change."
+              "text": "Divide and interpret."
             },
             {
               "type": "display_math",
@@ -94,11 +138,65 @@
           ]
         }
       ],
-      "verification_note": "The negative gradient agrees with the line falling as x increases."
+      "verification_note": "The negative result agrees with the line falling as x increases. Moving 1 unit right corresponds to moving 2 units down."
+    },
+    {
+      "stable_key": "n6-gradient-missing-coordinate-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: use a parallel gradient",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The line through (1, 4) and (k, 10) is parallel to a line of gradient 3/2. Find k."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Parallel lines have the same gradient."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{10-4}{k-1}=\\frac32"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Cross-multiply and solve."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac6{k-1}=\\frac32\\Rightarrow12=3(k-1)\\Rightarrow k=5"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Check using the two completed points."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{10-4}{5-1}=\\frac64=\\frac32"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The verified gradient equals 3/2, and k = 5 places the second point to the right of the first, consistent with a positive gradient."
     },
     {
       "stable_key": "n6-gradient-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -126,24 +224,44 @@
     },
     {
       "stable_key": "n6-lesson-05-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Subtract coordinates in a consistent order, divide vertical change by horizontal change, and use the sign to interpret the line's direction."
+          "text": "Subtract y-coordinates and x-coordinates in the same point order, simplify the ratio, and use the sign to check whether the line should rise or fall from left to right."
+        },
+        {
+          "type": "text",
+          "text": "State gradient units in context. Equal gradients identify parallel directions; combine gradient with a shared point or intercept when deciding whether two descriptions give the same line."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-05-gradient",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-05-gradient.svg",
+      "alt_text": "Line through (1, 1) and (5, 3), with a right triangle showing horizontal change 4 and vertical change 2.",
+      "generation_spec": {
+        "renderer": "nextscholar-coordinate-svg-v1",
+        "diagram_kind": "coordinate_graph",
+        "lesson_key": "n6-lesson-05"
+      },
+      "sha256": "4ab775822e7bfc3d3d18227a82970fcda25a93bd1303f2f458b764c109166794",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-12T20:30:00+08:00",
+    "created_at": "2026-10-14T01:02:52+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
   }
 }

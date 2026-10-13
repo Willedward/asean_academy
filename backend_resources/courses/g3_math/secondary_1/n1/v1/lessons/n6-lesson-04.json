@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n6-lesson-03"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Generate points for a straight-line graph from its equation.",
     "Find and interpret x- and y-intercepts.",
@@ -26,31 +26,71 @@
       "stable_key": "n6-graphs-method",
       "position": 1,
       "type": "explanation",
-      "title": "Points, intercepts and intersections",
+      "title": "Generate accurate points for a straight-line graph",
       "blocks": [
         {
           "type": "text",
-          "text": "A point lies on a graph only if its coordinates satisfy the equation. The y-intercept occurs when x = 0, and the x-intercept occurs when y = 0. Two graphs intersect where they have the same x-value and the same y-value."
-        },
-        {
-          "type": "display_math",
-          "latex": "\\text{x-intercept: }y=0\\qquad \\text{y-intercept: }x=0"
+          "text": "A point lies on a graph only if its coordinates satisfy the equation. Choose several convenient x-values, calculate the matching y-values, plot the ordered pairs using the axis scales, and draw one straight line through them. Two points determine a mathematical line, while a third point provides a useful accuracy check."
         },
         {
           "type": "text",
-          "text": "Two accurate points determine a straight line. Choose convenient x-values, calculate their y-values, plot the points and join them with a straight line."
+          "text": "Use a ruler or a digital straight-line tool rather than joining points with separate short segments. Extend only across the shown or meaningful domain and label the line with its equation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-graph-intercepts",
+      "position": 2,
+      "type": "explanation",
+      "title": "Find and interpret intercepts",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The y-intercept is where the graph crosses the y-axis, so x = 0. The x-intercept is where the graph crosses the x-axis, so y = 0. An intercept is a complete coordinate, not just one number."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{x-intercept: set }y=0,\\qquad \\text{y-intercept: set }x=0"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-04-linear-graph"
+        },
+        {
+          "type": "text",
+          "text": "For y = -2x + 8, the diagram shows the two intercepts (0, 8) and (4, 0). Substituting either coordinate into the equation gives a true statement."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-graph-intersections",
+      "position": 3,
+      "type": "explanation",
+      "title": "Interpret the intersection of two graphs",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Two graphs intersect at an ordered pair that satisfies both equations. On a drawn graph, read both coordinates carefully from the scales. Algebraically, set the two expressions for y equal, solve for x, and substitute to find the shared y-value."
+        },
+        {
+          "type": "display_math",
+          "latex": "y=f(x),\\ y=g(x)\\quad\\Rightarrow\\quad f(x)=g(x)"
+        },
+        {
+          "type": "text",
+          "text": "A graph gives an estimate when the intersection falls between grid lines; algebra gives an exact value when the equations are known. In a context, interpret both coordinates and reject intersections outside the meaningful domain."
         }
       ]
     },
     {
       "stable_key": "n6-graphs-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Find two graph intersections",
+      "title": "Worked example: find both coordinate-axis intercepts",
       "prompt": [
         {
           "type": "text",
-          "text": "For y = -2x + 8, find both coordinate-axis intercepts."
+          "text": "For y = -2x + 8, find both coordinate-axis intercepts and use them to describe how to draw the graph."
         }
       ],
       "steps": [
@@ -63,7 +103,7 @@
             },
             {
               "type": "display_math",
-              "latex": "y=-2(0)+8=8"
+              "latex": "y=-2(0)+8=8\\Rightarrow(0,8)"
             }
           ]
         },
@@ -76,7 +116,7 @@
             },
             {
               "type": "display_math",
-              "latex": "0=-2x+8\\Rightarrow x=4"
+              "latex": "0=-2x+8\\Rightarrow x=4\\Rightarrow(4,0)"
             }
           ]
         },
@@ -85,7 +125,7 @@
           "content": [
             {
               "type": "text",
-              "text": "State the two plotted points."
+              "text": "Plot the two points and draw the straight line through them."
             },
             {
               "type": "display_math",
@@ -94,11 +134,65 @@
           ]
         }
       ],
-      "verification_note": "Both points satisfy y = -2x + 8."
+      "verification_note": "Both points satisfy y = -2x + 8. The graph falls from left to right, which agrees with the negative coefficient of x."
+    },
+    {
+      "stable_key": "n6-graph-intersection-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: solve a graph intersection",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the intersection of y = 2x + 1 and y = -x + 7."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "At the intersection, both expressions have the same y-value."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x+1=-x+7"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve for x."
+            },
+            {
+              "type": "display_math",
+              "latex": "3x=6\\Rightarrow x=2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute into either equation to find y."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=2(2)+1=5\\Rightarrow(2,5)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The point checks in the second equation because -2 + 7 = 5, so (2, 5) lies on both lines."
     },
     {
       "stable_key": "n6-graphs-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -126,24 +220,44 @@
     },
     {
       "stable_key": "n6-lesson-04-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Substitute to test or plot points, set one coordinate to zero for an intercept, and equate equations at an intersection."
+          "text": "Calculate and plot ordered pairs using the marked scales, use an additional point to check accuracy, and draw one labelled straight line through the valid domain."
+        },
+        {
+          "type": "text",
+          "text": "Set x = 0 for the y-intercept and y = 0 for the x-intercept. At an intersection, equate the two expressions for y, find the shared point and verify it in both equations."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-04-linear-graph",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-04-linear-graph.svg",
+      "alt_text": "Graph of y = -2x + 8 with y-intercept (0, 8) and x-intercept (4, 0) marked.",
+      "generation_spec": {
+        "renderer": "nextscholar-coordinate-svg-v1",
+        "diagram_kind": "coordinate_graph",
+        "lesson_key": "n6-lesson-04"
+      },
+      "sha256": "b83f2d72ba0bed4638a7ab22837c3fcf0c9d594cf359d0c20fb9f6462f3ea37e",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-12T20:30:00+08:00",
+    "created_at": "2026-10-14T01:02:52+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n6-lesson-02"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Interpret a and b in a linear function y = ax + b.",
     "Evaluate a function for a given input and solve for an input from an output.",
@@ -26,31 +26,75 @@
       "stable_key": "n6-functions-method",
       "position": 1,
       "type": "explanation",
-      "title": "Rate of change and starting value",
+      "title": "Interpret the rate of change and starting value",
       "blocks": [
         {
           "type": "text",
-          "text": "In y = ax + b, a is the change in y for each increase of 1 in x, while b is the output when x = 0. Substitute an input carefully, using brackets for negative values."
+          "text": "In y = ax + b, the coefficient a is the change in y for each increase of 1 in x, and b is the output when x = 0. The value b is therefore the y-intercept. Substitute input values using brackets, especially when x or a is negative."
         },
         {
           "type": "display_math",
           "latex": "a=\\frac{\\text{change in }y}{\\text{change in }x},\\qquad b=y\\text{ when }x=0"
         },
         {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-03-function-parts"
+        },
+        {
           "type": "text",
-          "text": "When two function values are known, find a from their changes and then substitute either pair to find b."
+          "text": "A positive a produces a line that rises from left to right; a negative a produces a line that falls; a = 0 gives a horizontal line. Increasing |a| makes the line steeper when both axes use fixed scales."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-functions-evaluate-invert",
+      "position": 2,
+      "type": "explanation",
+      "title": "Evaluate an output or work backwards to an input",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To evaluate a function, replace x with the given input and follow the order of operations. To find an input from a known output, replace y and solve the resulting linear equation. Keep the equation balanced at every step."
+        },
+        {
+          "type": "display_math",
+          "latex": "y=-3x+11,\\ x=-2\\Rightarrow y=-3(-2)+11=17"
+        },
+        {
+          "type": "text",
+          "text": "A common error is to ignore the sign of the substituted value. Writing the substitution line before calculating makes the multiplication of two negative numbers visible."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-functions-from-values",
+      "position": 3,
+      "type": "explanation",
+      "title": "Determine a linear function from values",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Given two input-output pairs, first divide the change in output by the matching change in input to find a. Then substitute either complete pair into y = ax + b to find b. Never assume b from the first listed output unless that pair has x = 0."
+        },
+        {
+          "type": "display_math",
+          "latex": "a=\\frac{y_2-y_1}{x_2-x_1},\\qquad b=y_1-ax_1"
+        },
+        {
+          "type": "text",
+          "text": "Verify the finished rule using the other pair. If it fails, recheck the subtraction order and signs. Swapping both subtraction orders leaves the ratio unchanged, but swapping only one reverses the sign incorrectly."
         }
       ]
     },
     {
       "stable_key": "n6-functions-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Determine a function from two points",
+      "title": "Worked example: determine a function from two points",
       "prompt": [
         {
           "type": "text",
-          "text": "A linear function has y = 6 when x = 1 and y = 15 when x = 4. Find its rule."
+          "text": "A linear function has y = 6 when x = 1 and y = 15 when x = 4. Find its rule and then find the output when x = -2."
         }
       ],
       "steps": [
@@ -59,11 +103,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the rate of change."
+              "text": "Find the rate of change from the two pairs."
             },
             {
               "type": "display_math",
-              "latex": "a=\\frac{15-6}{4-1}=3"
+              "latex": "a=\\frac{15-6}{4-1}=\\frac93=3"
             }
           ]
         },
@@ -72,7 +116,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the first pair to find b."
+              "text": "Use (1, 6) to find b."
             },
             {
               "type": "display_math",
@@ -85,20 +129,74 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the function."
+              "text": "Write the rule and substitute x = -2."
             },
             {
               "type": "display_math",
-              "latex": "y=3x+3"
+              "latex": "y=3x+3,\\qquad y=3(-2)+3=-3"
             }
           ]
         }
       ],
-      "verification_note": "The second pair checks the rule because 3(4) + 3 = 15."
+      "verification_note": "The second original pair checks the rule because 3(4) + 3 = 15; the new output follows from the same constant rate."
+    },
+    {
+      "stable_key": "n6-function-context-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: interpret a decreasing function",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A container starts with 18 litres and drains at 2.5 litres per minute. Let V be the remaining volume after t minutes. Write V as a function of t, find V after 4 minutes, and find when 3 litres remain."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The initial value is 18 and the rate is negative because the volume decreases."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=-2.5t+18"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute t = 4."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=-2.5(4)+18=8\\text{ litres}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set V = 3 and solve."
+            },
+            {
+              "type": "display_math",
+              "latex": "3=-2.5t+18\\Rightarrow2.5t=15\\Rightarrow t=6\\text{ minutes}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "After 6 minutes the amount drained is 2.5 × 6 = 15 litres, leaving 18 − 15 = 3 litres. The physical domain ends when the container becomes empty."
     },
     {
       "stable_key": "n6-functions-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -126,24 +224,44 @@
     },
     {
       "stable_key": "n6-lesson-03-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Use changes to find a, use any known pair to find b, and verify the completed function with another input-output pair."
+          "text": "Read a as the change in output per unit input and b as the output at x = 0. Substitute with brackets, and solve a linear equation when the output is given instead."
+        },
+        {
+          "type": "text",
+          "text": "From two pairs, find a using matched changes, then find b from one whole pair. Verify the final function with the unused pair and interpret the sign and domain in context."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-03-function-parts",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-03-function-parts.svg",
+      "alt_text": "Two linear graphs sharing y-intercept 1: one rises for positive a and one falls for negative a.",
+      "generation_spec": {
+        "renderer": "nextscholar-coordinate-svg-v1",
+        "diagram_kind": "coordinate_graph",
+        "lesson_key": "n6-lesson-03"
+      },
+      "sha256": "01cf3f293887f0f264792e08f460b239ea1b9fbcb89cad0915b8cb7a27e14318",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-12T20:30:00+08:00",
+    "created_at": "2026-10-14T01:02:52+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
   }
 }

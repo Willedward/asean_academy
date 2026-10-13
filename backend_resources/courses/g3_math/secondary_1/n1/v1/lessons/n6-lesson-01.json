@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -12,7 +12,7 @@
     "6.1"
   ],
   "prerequisite_lessons": [],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Read and interpret ordered pairs in all four quadrants.",
     "Use coordinates to describe translations, reflections and midpoints.",
@@ -24,11 +24,11 @@
       "stable_key": "n6-coordinates-method",
       "position": 1,
       "type": "explanation",
-      "title": "Coordinates, signs and movement",
+      "title": "Read an ordered pair from the axes",
       "blocks": [
         {
           "type": "text",
-          "text": "An ordered pair is written (x, y): move horizontally to x first, then vertically to y. The signs identify the quadrant. Points on the x-axis have y = 0, points on the y-axis have x = 0, and the origin is (0, 0)."
+          "text": "An ordered pair is written (x, y). Start at the origin, move horizontally to the x-coordinate, and then move vertically to the y-coordinate. Reversing the order usually names a different point. A point on the x-axis has y = 0, a point on the y-axis has x = 0, and the origin is (0, 0)."
         },
         {
           "type": "display_math",
@@ -36,19 +36,67 @@
         },
         {
           "type": "text",
-          "text": "A horizontal length is the absolute difference between x-coordinates; a vertical length is the absolute difference between y-coordinates. Reflection in the x-axis changes the sign of y, while reflection in the y-axis changes the sign of x."
+          "text": "The quadrant sign pattern is a check, not a replacement for reading the scales. First identify the value represented by one grid interval, especially when an axis is marked in twos, halves or another scale."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-01-coordinate-plane"
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-coordinate-transformations",
+      "position": 2,
+      "type": "explanation",
+      "title": "Describe movement and reflection with coordinates",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A translation adds the same horizontal and vertical changes to every point. Moving h units right and k units up maps (x, y) to (x + h, y + k); a negative value means left or down. The shape, size and orientation stay unchanged."
+        },
+        {
+          "type": "display_math",
+          "latex": "(x,y)\\xrightarrow{\\text{translation by }(h,k)}(x+h,y+k)"
+        },
+        {
+          "type": "text",
+          "text": "A reflection changes the coordinate perpendicular to the mirror line. In the x-axis, y changes sign: (x, y) becomes (x, -y). In the y-axis, x changes sign: (x, y) becomes (-x, y). A point on the mirror line remains fixed. In the diagram, A and A-prime have opposite x-coordinates and the same y-coordinate."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-coordinate-measurement",
+      "position": 3,
+      "type": "explanation",
+      "title": "Measure lengths and locate midpoints",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a horizontal segment, subtract the x-coordinates and use the positive distance. For a vertical segment, subtract the y-coordinates. These distances can be combined to find the perimeter and area of an axis-aligned rectangle."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{horizontal length}=|x_2-x_1|,\\qquad \\text{vertical length}=|y_2-y_1|"
+        },
+        {
+          "type": "text",
+          "text": "The midpoint is halfway in both directions, so average the x-coordinates and average the y-coordinates. Keep brackets around negative values before adding. A quick check is that the midpoint must lie between the two endpoint coordinates on each axis."
+        },
+        {
+          "type": "display_math",
+          "latex": "M=\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)"
         }
       ]
     },
     {
       "stable_key": "n6-coordinates-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Rectangle from four coordinates",
+      "title": "Worked example: rectangle from four coordinates",
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle has vertices (-3, 4), (5, 4), (5, -2) and (-3, -2). Find its perimeter."
+          "text": "A rectangle has vertices (-3, 4), (5, 4), (5, -2) and (-3, -2). Find its perimeter and area."
         }
       ],
       "steps": [
@@ -57,11 +105,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the horizontal side length."
+              "text": "Find the horizontal side using the two x-values."
             },
             {
               "type": "display_math",
-              "latex": "5-(-3)=8"
+              "latex": "|5-(-3)|=8"
             }
           ]
         },
@@ -70,11 +118,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the vertical side length."
+              "text": "Find the vertical side using the two y-values."
             },
             {
               "type": "display_math",
-              "latex": "4-(-2)=6"
+              "latex": "|4-(-2)|=6"
             }
           ]
         },
@@ -83,20 +131,74 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the perimeter formula."
+              "text": "Use the perimeter and area formulas."
             },
             {
               "type": "display_math",
-              "latex": "P=2(8+6)=28\\text{ units}"
+              "latex": "P=2(8+6)=28\\text{ units},\\qquad A=8\\times6=48\\text{ square units}"
             }
           ]
         }
       ],
-      "verification_note": "The opposite sides have equal lengths, and 8 + 6 + 8 + 6 = 28."
+      "verification_note": "Opposite sides have equal coordinate differences; 8 + 6 + 8 + 6 = 28, and an 8-by-6 rectangle has area 48."
+    },
+    {
+      "stable_key": "n6-coordinate-transform-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: translate, reflect and find a midpoint",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Point P(-5, 2) is translated 7 units right and 3 units down to Q. Q is then reflected in the x-axis to R. Find Q, R and the midpoint of QR."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add 7 to x and subtract 3 from y."
+            },
+            {
+              "type": "display_math",
+              "latex": "Q=(-5+7,\\ 2-3)=(2,-1)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Reflection in the x-axis keeps x and reverses the sign of y."
+            },
+            {
+              "type": "display_math",
+              "latex": "R=(2,1)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Average corresponding coordinates for the midpoint."
+            },
+            {
+              "type": "display_math",
+              "latex": "M=\\left(\\frac{2+2}{2},\\frac{-1+1}{2}\\right)=(2,0)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Q and R are one unit below and above the x-axis, so their midpoint (2, 0) lies on the mirror line."
     },
     {
       "stable_key": "n6-coordinates-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -124,24 +226,44 @@
     },
     {
       "stable_key": "n6-lesson-01-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Read x before y, track signs carefully, and use coordinate differences for axis-aligned lengths."
+          "text": "Read x before y and check the quadrant signs against the axis scales. For translations, add the stated movement; for reflections, change only the coordinate perpendicular to the mirror axis."
+        },
+        {
+          "type": "text",
+          "text": "Use absolute coordinate differences for horizontal and vertical lengths. Average matching coordinates for a midpoint, then check that the result lies halfway between the endpoints."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-01-coordinate-plane",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-01-coordinate-plane.svg",
+      "alt_text": "Coordinate plane showing A at (-4, 3) and its reflection A-prime at (4, 3), equally spaced from the y-axis.",
+      "generation_spec": {
+        "renderer": "nextscholar-coordinate-svg-v1",
+        "diagram_kind": "coordinate_graph",
+        "lesson_key": "n6-lesson-01"
+      },
+      "sha256": "a4ca97a514479fc42d5a9e9b1ced7cdc8e79a3a88a2d4e6ab643910fe4b11b03",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-12T20:30:00+08:00",
+    "created_at": "2026-10-14T01:02:52+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
   }
 }
