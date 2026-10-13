@@ -9,19 +9,19 @@ from question_bank.course_models import Course, Lesson, QuestionPools
 from question_bank.course_validation import schema_documents, validate_course
 
 
-def test_n1_to_g5_course_source_is_valid(repository_root, course_bank_root):
+def test_complete_secondary_1_course_source_is_valid(repository_root, course_bank_root):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
     report = validate_course(course_root, course_bank_root)
 
     assert report.valid
     assert report.course.stable_key == "g3-sec1-math"
-    assert len(report.lessons) == 48
-    assert len(report.pools.pools) == 66
-    assert report.as_dict()["allocated_question_count"] == 872
+    assert len(report.lessons) == 52
+    assert len(report.pools.pools) == 72
+    assert report.as_dict()["allocated_question_count"] == 976
     assert {issue.code for issue in report.warnings} == {"lesson_content_required"}
 
 
-def test_n1_to_g5_course_cannot_publish_while_course_lessons_and_questions_are_drafts(
+def test_secondary_1_course_cannot_publish_while_course_lessons_and_questions_are_drafts(
     repository_root, course_bank_root
 ):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
@@ -90,8 +90,8 @@ def test_all_questions_are_allocated_once(repository_root, course_bank_root):
         item.question_key for pool in report.pools.pools for item in pool.items
     ]
 
-    assert len(allocated) == 872
-    assert len(set(allocated)) == 872
+    assert len(allocated) == 976
+    assert len(set(allocated)) == 976
 
 
 def test_lesson_required_practice_must_match_its_pool(

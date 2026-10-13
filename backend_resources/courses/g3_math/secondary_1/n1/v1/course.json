@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 10,
+  "revision": 11,
   "stable_key": "g3-sec1-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "Singapore Secondary 1 G3 Mathematics",
-  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3\u2013N7 Number and Algebra plus G1 Angles, triangles and polygons and G5 Mensuration units.",
+  "description": "A course-led preparation path for Singapore Secondary 1 G3 Mathematics, with complete N1 Numbers, reviewed N2 Ratio and proportion, and review-ready N3\u2013N7 Number and Algebra, G1 Angles, G5 Mensuration and S1 Data handling and analysis units.",
   "mastery_policies": [
     {
       "key": "n1-default-v1",
@@ -76,6 +76,14 @@
     },
     {
       "key": "g5-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "s1-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -596,12 +604,57 @@
           "required_practice_count": 12
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec1-s1",
+      "position": 10,
+      "topic_code": "S1",
+      "title": "Data handling and analysis",
+      "checkpoint_question_count": 20,
+      "lessons": [
+        {
+          "stable_key": "s1-lesson-01",
+          "position": 1,
+          "title": "Collecting, classifying and tabulating data",
+          "outcomes": [
+            "1.1"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "s1-lesson-02",
+          "position": 2,
+          "title": "Analysis and interpretation of tables, bar graphs, pictograms, line graphs and pie charts",
+          "outcomes": [
+            "1.2"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "s1-lesson-03",
+          "position": 3,
+          "title": "Purposes, uses, advantages and disadvantages of statistical representations",
+          "outcomes": [
+            "1.3"
+          ],
+          "required_practice_count": 15
+        },
+        {
+          "stable_key": "s1-lesson-04",
+          "position": 4,
+          "title": "Explaining why a statistical diagram leads to misinterpretation of data",
+          "outcomes": [
+            "1.4"
+          ],
+          "required_practice_count": 15
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 525,
-    "unit_checkpoint": 161,
-    "adaptive_reserve": 186
+    "lesson_practice": 585,
+    "unit_checkpoint": 181,
+    "adaptive_reserve": 210
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -609,6 +662,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "N1 and N2 retain their recorded approvals. N3, N4, N5, N6 and N7 await Mathematics and editorial review."
+    "review_notes": "N1 and N2 retain their recorded approvals. N3\u2013N7, G1, G5 and S1 await Mathematics and editorial review."
   }
 }

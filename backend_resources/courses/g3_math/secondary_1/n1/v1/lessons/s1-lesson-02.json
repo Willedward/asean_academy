@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-s1",
+  "position": 2,
+  "status": "draft",
+  "title": "Analysis and interpretation of tables, bar graphs, pictograms, line graphs and pie charts",
+  "summary": "Read scales and keys, compare categories, and connect chart values to totals and proportions.",
+  "outcomes": [
+    "1.2"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-01"
+  ],
+  "estimated_minutes": 40,
+  "objectives": [
+    "Read values from common tables and graphs.",
+    "Use pictogram keys and graph scales correctly.",
+    "Convert between pie-chart angles, frequencies and percentages."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-12-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Core method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the title, labels, scale and key before calculating. Bar heights show category values, pictogram symbols use a stated key, line graphs emphasise ordered change, and a pie-chart angle is the same fraction of 360\u00b0 as its frequency is of the total."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{\\text{sector angle}}{360^\\circ}=\\frac{\\text{category frequency}}{\\text{total frequency}}"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-12-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 90\u00b0 pie-chart sector represents 15 students. Find the total number of students."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{90}{360}=\\frac{15}{N}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "N=60"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check the title, scale, key, labels and total before accepting the interpretation."
+    },
+    {
+      "stable_key": "s1-12-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "One pictogram symbol represents 5 books. How many books do 4 symbols represent?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "20",
+        "canonical_latex": "20",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Multiply the symbol count by the key: 4 \u00d7 5 = 20."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Interpretation checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Identify the data structure and purpose, read every scale and key carefully, calculate from the stated values, then check whether the display gives an accurate and complete impression."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
