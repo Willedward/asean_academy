@@ -116,6 +116,7 @@ All routes are below `/api/v1/admin/content`.
 | Method and route                               | Role                                        | Behavior                                                                        |
 | ---------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
 | `GET /`                                        | either admin                                | Filter/paginate authored items by batch or curriculum unit                      |
+| `GET /corrections`                             | either admin                                | Export requested changes with exact keys, revisions, fingerprints and notes     |
 | `POST /bulk-review-preview`                    | either admin                                | Return one protected preview for an exact selected batch/unit revision set      |
 | `POST /bulk-reviews`                           | either admin; Mathematics requires academic | Atomically append one decision per selected fingerprint                         |
 | `GET /{kind}/{stable_key}/preview`             | either admin                                | Return only the public student representation                                   |
@@ -146,7 +147,9 @@ the dashboard. Neither route is available to a learner.
 7. Choose Mathematics or editorial review, choose a decision, and record detailed
    notes. A content administrator can select editorial only.
 8. Resolve every requested change in Git. Increment the authored revision whenever
-   immutable content changes.
+   immutable content changes. The **Open correction export** action returns the current
+   filtered correction queue as JSON so Codex can apply the exact reviewer notes to the
+   correct source fingerprints.
 9. After both latest decisions approve the same fingerprint, an academic administrator
    selects **Review publication request**, enters the reason and confirms.
 10. Create the reviewed/published Git revision without changing the approved teaching

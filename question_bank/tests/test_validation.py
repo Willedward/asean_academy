@@ -1,4 +1,6 @@
+import hashlib
 import json
+import shutil
 
 from jsonschema import Draft202012Validator
 
@@ -57,3 +59,39 @@ def test_blueprint_totals_remain_consistent(bank_root):
         "5": 5,
     }
     assert sum(row["total"] for row in blueprint["outcome_distribution"]) == 104
+
+
+def test_question_angle_diagram_rays_must_match_the_declared_classification(
+    repository_root, tmp_path
+):
+    source = (
+        repository_root
+        / "backend_resources/question_bank/g3_math/secondary_1/g1/v1"
+    )
+    bank_root = tmp_path / "question_bank/g3_math/secondary_1/g1/v1"
+    shutil.copytree(source, bank_root)
+    shutil.copytree(
+        repository_root / "backend_resources/question_bank/schema",
+        tmp_path / "question_bank/schema",
+    )
+    question_path = bank_root / "questions/g1-l1-001.json"
+    question = json.loads(question_path.read_text())
+    asset = question["assets"][0]
+    svg_path = bank_root / asset["path"]
+    svg = svg_path.read_text().replace(
+        '<line x1="520" y1="230" x2="628.25" y2="292.5"/>',
+        '<line x1="520" y1="230" x2="628.25" y2="167.5"/>',
+        1,
+    )
+    svg_path.write_text(svg)
+    asset["sha256"] = hashlib.sha256(svg_path.read_bytes()).hexdigest()
+    question_path.write_text(json.dumps(question))
+
+    report = validate_bank(
+        bank_root,
+        catalogue_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+    )
+
+    assert not report.valid
+    assert "geometry_angle_measure" in {issue.code for issue in report.errors}

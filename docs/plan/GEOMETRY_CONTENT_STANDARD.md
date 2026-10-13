@@ -31,6 +31,12 @@ SVG assets are deterministic source files stored beside the lesson or question b
 checksums are validated during authoring. The authenticated content-asset endpoint serves them to
 the lesson, practice, checkpoint, diagnostic and administrator review interfaces.
 
+Diagrams that teach angle classification also declare their intended acute, right, obtuse and
+reflex measures in the authored JSON. Each pair of SVG rays carries matching machine-readable
+labels and coordinates. Course validation calculates the angle between those rays and rejects a
+diagram when its geometry, label or declared measure disagrees. This catches visual errors such
+as an acute drawing labelled as obtuse before the content reaches hosted review.
+
 ## October 2026 recalibration
 
 The initial recalibration covers all currently authored geometry material:

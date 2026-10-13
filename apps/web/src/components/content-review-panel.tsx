@@ -958,6 +958,12 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   if (applied.unit) query.set("unit_key", applied.unit);
   if (applied.search) query.set("search", applied.search);
   const path = `content?${query}`;
+  const correctionQuery = new URLSearchParams({ limit: "250", offset: "0" });
+  if (applied.kind) correctionQuery.set("kind", applied.kind);
+  if (applied.batch) correctionQuery.set("batch_id", applied.batch);
+  if (applied.unit) correctionQuery.set("unit_key", applied.unit);
+  if (applied.search) correctionQuery.set("search", applied.search);
+  const correctionsHref = `/api/v1/admin/content/corrections?${correctionQuery}`;
 
   useEffect(() => {
     let active = true;
@@ -1133,6 +1139,17 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
           Apply filters
         </Button>
       </form>
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
+        <span>
+          Correction export contains exact stable keys, revisions, fingerprints and
+          the latest Mathematics or editorial notes for Codex.
+        </span>
+        <Button asChild variant="outline">
+          <a href={correctionsHref} rel="noreferrer" target="_blank">
+            Open correction export
+          </a>
+        </Button>
+      </div>
       {activeScope && data ? (
         <div
           className="rounded-2xl border border-teal-200 bg-teal-50 p-4"

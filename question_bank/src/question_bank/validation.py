@@ -11,6 +11,7 @@ from pydantic import ValidationError
 
 from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_catalogue
 from .difficulty import DIFFICULTY_KEYS
+from .geometry_validation import angle_diagram_issues
 from .models import Question
 
 
@@ -160,6 +161,8 @@ def _validate_assets(bank_root: Path, question: Question, report: ValidationRepo
                 path,
                 f"Expected {asset.sha256}, found {digest}",
             )
+        for code, message in angle_diagram_issues(path, asset.generation_spec):
+            _issue(report, "error", code, path, message)
 
 
 def _compare_distribution(report, actual, expected, path, code, publish):

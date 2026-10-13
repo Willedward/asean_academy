@@ -1,3 +1,4 @@
+import hashlib
 import json
 import shutil
 
@@ -121,3 +122,29 @@ def test_lesson_required_practice_must_match_its_pool(
 
     assert not report.valid
     assert "required_practice_count" in {issue.code for issue in report.errors}
+
+
+def test_angle_type_diagram_rays_must_match_the_declared_classification(
+    repository_root, course_bank_root, tmp_path
+):
+    source = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
+    course_root = tmp_path / "course"
+    shutil.copytree(source, course_root)
+    lesson_path = course_root / "lessons/g1-lesson-01.json"
+    lesson = json.loads(lesson_path.read_text())
+    asset = lesson["assets"][0]
+    svg_path = course_root / asset["path"]
+    svg = svg_path.read_text()
+    svg = svg.replace(
+        '<line x1="520" y1="230" x2="628.25" y2="292.5"/>',
+        '<line x1="520" y1="230" x2="628.25" y2="167.5"/>',
+        1,
+    )
+    svg_path.write_text(svg)
+    asset["sha256"] = hashlib.sha256(svg_path.read_bytes()).hexdigest()
+    lesson_path.write_text(json.dumps(lesson))
+
+    report = validate_course(course_root, course_bank_root)
+
+    assert not report.valid
+    assert "geometry_angle_measure" in {issue.code for issue in report.errors}

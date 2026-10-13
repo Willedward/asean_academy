@@ -76,6 +76,21 @@ audit trail clearly identifies each reviewer.
    in Git and deploy the new revision.
 11. Request publication only after both latest approvals match the deployed fingerprint.
 
+### Codex correction pass
+
+After recording all corrections for a unit, keep the same unit filter selected and use
+**Open correction export**. Give that authenticated JSON response to Codex with a request
+such as: `Process every requested correction for g3-sec1-g1, validate the new revisions,
+regenerate reviewer artifacts and deploy the hosted review branch.`
+
+The export contains the stable key, source revision, source hash, semantic fingerprint,
+latest Mathematics and editorial decisions, reviewer notes and timestamps. Codex should
+apply only those current notes, increment every changed lesson or question revision,
+update asset checksums, regenerate reviewer artifacts and run course and question-bank
+validation. After deployment, changed teaching content has a new fingerprint and appears
+unreviewed. The previous decisions remain immutable in the audit history, while reviewers
+inspect and approve the corrected fingerprint at their own pace.
+
 This workflow keeps Git as the authored source of truth and Supabase as the review and
 audit store. It also prevents a dashboard edit from silently diverging from the files
 that CI validated.

@@ -79,6 +79,41 @@ async def review_queue(
     )
 
 
+@router.get(
+    "/corrections",
+    operation_id="exportContentReviewCorrections",
+    response_model=ContentReviewQueueResponse,
+    summary="Export the current requested corrections for repository authoring",
+)
+async def correction_queue(
+    request: Request,
+    administrator: AdminLearnerDependency,
+    repository: AdminAnalyticsRepositoryDependency,
+    kind: ContentKind | None = None,
+    search: str | None = Query(default=None, min_length=1, max_length=100),
+    batch_id: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
+    unit_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
+    limit: int = Query(default=250, ge=1, le=250),
+    offset: int = Query(default=0, ge=0),
+) -> ContentReviewQueueResponse:
+    """Return only deployed fingerprints whose latest review requests changes."""
+    del administrator
+    return _safe(
+        lambda: list_review_queue(
+            repository=repository,
+            catalogue=request.app.state.course_catalogue,
+            kind=kind,
+            source_status=None,
+            review_state="changes_requested",
+            search=search,
+            limit=limit,
+            offset=offset,
+            batch_id=batch_id,
+            unit_key=unit_key,
+        )
+    )
+
+
 @router.post(
     "/bulk-review-preview",
     operation_id="previewBulkContentForReview",

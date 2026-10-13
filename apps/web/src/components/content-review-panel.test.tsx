@@ -218,6 +218,12 @@ describe("ContentReviewPanel", () => {
     expect(screen.getByTestId("scope-progress")).toHaveTextContent(
       "0 fully approved",
     );
+    expect(
+      screen.getByRole("link", { name: "Open correction export" }),
+    ).toHaveAttribute(
+      "href",
+      expect.stringContaining("batch_id=g3-sec1-n2-b001"),
+    );
   });
 
   it("reviews a unit as one packet while excluding an item that needs correction", async () => {

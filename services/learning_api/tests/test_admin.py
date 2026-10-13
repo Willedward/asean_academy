@@ -13,9 +13,10 @@ from learning_api.admin_repository import BetaOperationsError
 from learning_api.config import Settings
 from learning_api.content_review import catalogue_review_items, record_bulk_reviews
 from learning_api.content_review_contracts import BulkContentReviewRequest
-from learning_api.dependencies import beta_operations_repository
+from learning_api.dependencies import admin_analytics_repository, beta_operations_repository
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.main import create_app
+from learning_api.routers import content_review as content_review_router
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 ADMIN_ID = "00000000-0000-4000-8000-000000000010"
@@ -311,6 +312,46 @@ def test_content_admin_can_open_protected_n2_reviewer_preview():
     assert "canonical_answer" in preview.text
     assert "hints" in preview.text
     assert "solution" in preview.text
+
+
+def test_content_admin_can_export_a_scoped_correction_queue(monkeypatch):
+    app, _ = application()
+    app.dependency_overrides[admin_analytics_repository] = lambda: object()
+    observed = {}
+
+    def corrections(repository, catalogue, **filters):
+        del repository, catalogue
+        observed.update(filters)
+        return {
+            "items": [],
+            "batch_ids": [],
+            "unit_keys": ["g3-sec1-g1"],
+            "total": 0,
+            "limit": filters["limit"],
+            "offset": filters["offset"],
+        }
+
+    monkeypatch.setattr(content_review_router, "list_review_queue", corrections)
+
+    forbidden = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/corrections?unit_key=g3-sec1-g1",
+        "student-token",
+    )
+    exported = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/corrections?unit_key=g3-sec1-g1",
+        "admin-token",
+    )
+
+    assert forbidden.status_code == 403
+    assert exported.status_code == 200, exported.text
+    assert exported.json()["total"] == 0
+    assert observed["review_state"] == "changes_requested"
+    assert observed["unit_key"] == "g3-sec1-g1"
+    assert observed["limit"] == 250
 
 
 def test_admin_review_remains_available_when_learner_drafts_are_disabled():

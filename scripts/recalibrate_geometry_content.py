@@ -275,7 +275,7 @@ OUTCOME_KIND = {
 
 def svg_shape(kind: str) -> str:
     shapes = {
-        "angle_types": '<path d="M100 230 L100 105 M100 230 L225 185 M310 230 L310 105 M310 230 L435 230"/><path d="M520 230 L520 105 M520 230 L635 175 M730 230 L730 105 M730 230 L835 185"/><path class="arc" d="M100 190 A40 40 0 0 1 138 216 M310 190 A40 40 0 0 1 350 230 M520 188 A42 42 0 0 1 558 212 M730 188 A42 42 0 1 0 770 217"/><text x="82" y="280">acute</text><text x="280" y="280">right</text><text x="490" y="280">obtuse</text><text x="700" y="280">reflex</text>',
+        "angle_types": '<g data-angle-kind="acute" data-angle-degrees="60"><line x1="100" y1="230" x2="100" y2="105"/><line x1="100" y1="230" x2="208.25" y2="167.5"/><path class="arc" d="M100 190 A40 40 0 0 1 134.64 210"/><text x="120" y="183" class="degree">60°</text><text x="73" y="305">acute</text></g><g data-angle-kind="right" data-angle-degrees="90"><line x1="310" y1="230" x2="310" y2="105"/><line x1="310" y1="230" x2="435" y2="230"/><path class="arc" d="M310 190 A40 40 0 0 1 350 230"/><text x="329" y="188" class="degree">90°</text><text x="280" y="305">right</text></g><g data-angle-kind="obtuse" data-angle-degrees="120"><line x1="520" y1="230" x2="520" y2="105"/><line x1="520" y1="230" x2="628.25" y2="292.5"/><path class="arc" d="M520 190 A40 40 0 0 1 554.64 250"/><text x="548" y="207" class="degree">120°</text><text x="486" y="325">obtuse</text></g><g data-angle-kind="reflex" data-angle-degrees="240"><line x1="730" y1="230" x2="730" y2="105"/><line x1="730" y1="230" x2="838.25" y2="292.5"/><path class="arc" d="M730 180 A50 50 0 1 0 773.3 255"/><text x="675" y="270" class="degree">240°</text><text x="708" y="325">reflex</text></g>',
         "intersection": '<path d="M180 270 L430 80 M180 80 L430 270"/><text x="290" y="120">a</text><text x="370" y="185">b</text><text x="290" y="245">a</text><text x="220" y="185">b</text><text x="500" y="145">a = a</text><text x="500" y="190">a + b = 180°</text><text x="500" y="235">2a + 2b = 360°</text>',
         "parallel": '<path d="M100 115 H810 M100 255 H810 M270 320 L620 50"/><path class="mark" d="M170 105 l18 10 -18 10 M190 105 l18 10 -18 10 M170 245 l18 10 -18 10 M190 245 l18 10 -18 10"/><text x="570" y="100">corresponding</text><text x="340" y="160">alternate</text><text x="565" y="220">co-interior</text>',
         "polygons": '<path d="M80 260 L180 85 L280 260 Z M355 105 L535 105 L580 250 L310 250 Z M690 90 L790 90 L845 175 L790 260 L690 260 L635 175 Z"/><text x="120" y="300">triangle</text><text x="370" y="300">quadrilateral</text><text x="690" y="300">regular polygon</text>',
@@ -310,17 +310,25 @@ def svg_document(kind: str, title: str, subtitle: str) -> str:
 def asset(
     path: Path, source_path: Path, key: str, kind: str, alt: str, spec: dict
 ) -> dict:
+    generation_spec = {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": kind,
+        **spec,
+    }
+    if kind == "angle_types":
+        generation_spec["angle_measures"] = {
+            "acute": 60,
+            "right": 90,
+            "obtuse": 120,
+            "reflex": 240,
+        }
     return {
         "asset_key": key,
         "kind": "geometry",
         "format": "svg",
         "path": path.as_posix(),
         "alt_text": alt,
-        "generation_spec": {
-            "renderer": "nextscholar-geometry-svg-v1",
-            "diagram_kind": kind,
-            **spec,
-        },
+        "generation_spec": generation_spec,
         "sha256": hashlib.sha256(source_path.read_bytes()).hexdigest(),
         "width": 940,
         "height": 390,
