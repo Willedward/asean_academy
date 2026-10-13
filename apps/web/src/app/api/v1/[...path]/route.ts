@@ -14,7 +14,6 @@ const FORWARDED_REQUEST_HEADERS = [
 ] as const;
 const FORWARDED_RESPONSE_HEADERS = [
   "content-type",
-  "content-length",
   "content-security-policy",
   "retry-after",
   "x-content-type-options",
