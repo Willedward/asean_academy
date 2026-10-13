@@ -8,6 +8,18 @@ from pathlib import Path
 from typing import Any
 
 
+def revisioned_asset_path_issues(storage_path: str, revision: int) -> list[tuple[str, str]]:
+    """Keep asset bytes addressable for every immutable content revision."""
+    if revision < 3 or f"-r{revision}." in Path(storage_path).name:
+        return []
+    return [
+        (
+            "asset_revision_path",
+            f"Revision {revision} assets require an -r{revision} filename before the extension.",
+        )
+    ]
+
+
 def _angle_is_valid(kind: str, degrees: float) -> bool:
     return {
         "acute": 0 < degrees < 90,

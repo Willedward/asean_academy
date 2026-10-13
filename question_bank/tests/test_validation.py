@@ -4,6 +4,7 @@ import shutil
 
 from jsonschema import Draft202012Validator
 
+from question_bank.geometry_validation import revisioned_asset_path_issues
 from question_bank.models import Question
 from question_bank.validation import validate_bank
 
@@ -26,6 +27,17 @@ def test_unreviewed_draft_cannot_be_published(bank_root):
 
     assert not report.valid
     assert len([issue for issue in report.errors if issue.code == "review_required"]) == 40
+
+
+def test_changed_assets_use_a_revisioned_storage_path():
+    assert revisioned_asset_path_issues("assets/angle.svg", 2) == []
+    assert revisioned_asset_path_issues("assets/angle-r3.svg", 3) == []
+    assert revisioned_asset_path_issues("assets/angle.svg", 3) == [
+        (
+            "asset_revision_path",
+            "Revision 3 assets require an -r3 filename before the extension.",
+        )
+    ]
 
 
 def test_every_question_matches_the_source_contract(bank_root):

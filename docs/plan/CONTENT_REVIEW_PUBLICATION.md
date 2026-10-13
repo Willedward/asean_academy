@@ -147,7 +147,9 @@ the dashboard. Neither route is available to a learner.
 7. Choose Mathematics or editorial review, choose a decision, and record detailed
    notes. A content administrator can select editorial only.
 8. Resolve every requested change in Git. Increment the authored revision whenever
-   immutable content changes. The **Open correction export** action returns the current
+   immutable content changes. A changed asset also receives a revisioned filename such as
+   `diagram-r3.svg`, preserving the bytes referenced by earlier immutable revisions. The
+   **Open correction export** action returns the current
    filtered correction queue as JSON so Codex can apply the exact reviewer notes to the
    correct source fingerprints.
 9. After both latest decisions approve the same fingerprint, an academic administrator

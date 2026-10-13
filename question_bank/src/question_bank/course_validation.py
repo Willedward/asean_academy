@@ -18,7 +18,7 @@ from .course_models import (
 )
 from .course_registry import CourseRegistry
 from .difficulty import PRACTICE_STAGE_DIFFICULTIES
-from .geometry_validation import angle_diagram_issues
+from .geometry_validation import angle_diagram_issues, revisioned_asset_path_issues
 from .validation import ValidationReport, validate_bank
 
 
@@ -98,6 +98,8 @@ def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidation
                 path,
                 f"Expected {asset.sha256}, found {digest}",
             )
+        for code, message in revisioned_asset_path_issues(asset.path, lesson.revision):
+            _issue(report, "error", code, path, message)
         for code, message in angle_diagram_issues(path, asset.generation_spec):
             _issue(report, "error", code, path, message)
 

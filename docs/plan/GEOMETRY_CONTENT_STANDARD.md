@@ -30,6 +30,8 @@ question in `diagram_audit.json`.
 SVG assets are deterministic source files stored beside the lesson or question bank. Their
 checksums are validated during authoring. The authenticated content-asset endpoint serves them to
 the lesson, practice, checkpoint, diagnostic and administrator review interfaces.
+When an asset changes in revision 3 or later, its filename includes the content revision (for
+example, `angle-types-r3.svg`). Earlier asset bytes remain available to immutable learner records.
 
 Diagrams that teach angle classification also declare their intended acute, right, obtuse and
 reflex measures in the authored JSON. Each pair of SVG rays carries matching machine-readable
