@@ -22,6 +22,11 @@ Free web services:
 Render's local filesystem is not used for durable data. Authored question JSON stays in
 Git, and review decisions stay in Supabase.
 
+Because this is an invitation-only review environment, its API enables draft content so
+reviewers can inspect the learner journey before publication. This setting does not alter
+the authored status of any course, lesson or question. Keep draft content disabled in a
+real student beta and in production until the controlled release gates pass.
+
 ## First deployment
 
 ### 1. Create the isolated Supabase project
