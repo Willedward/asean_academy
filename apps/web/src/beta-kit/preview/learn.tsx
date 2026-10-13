@@ -42,7 +42,7 @@ export const sampleXpRules: XpLine[] = [
 
 const reviewMaster = sampleBadges.find((badge) => badge.id === "review-master") as Badge;
 
-const courseTitle = "Singapore Secondary 1 G3 Mathematics";
+const courseTitle = "ASEAN Scholarship Mathematics — Level 1";
 
 /** Unit N1 later on: every lesson proficient, two mastered, checkpoint open. */
 const recheckUnit: UnitSummary = {

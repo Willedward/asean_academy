@@ -74,8 +74,8 @@ export function LiveLandingScreen({ signInHref }: { signInHref: string }) {
                 Current beta course
               </div>
               <div className="mt-1 text-sm leading-5 text-ns-muted">
-                Singapore Secondary 1 G3 Mathematics, beginning with Numbers and
-                their Operations.
+                ASEAN Scholarship Mathematics — Level 1, beginning with Numbers
+                and Operations.
               </div>
             </div>
           </div>

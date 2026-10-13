@@ -61,7 +61,7 @@ async function continueFromReadiness(page: Page) {
     page.getByRole("heading", { name: /^Welcome back, / }),
   ).toBeVisible();
   await expect(
-    page.getByText("Singapore Secondary 1 G3 Mathematics course", {
+    page.getByText("ASEAN Scholarship Mathematics — Level 1 course", {
       exact: false,
     }),
   ).toBeVisible();

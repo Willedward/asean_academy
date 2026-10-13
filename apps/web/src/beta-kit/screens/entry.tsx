@@ -263,7 +263,7 @@ export interface OnboardingProps {
   /** NEW: AcceptInvitationRequest.target_track (today only ProfileResponse.target_track exists). */
   tracks: TrackOption[];
   selectedTrack: string;
-  /** e.g. "Singapore Secondary 1 G3 Mathematics, unit N1 Numbers and their operations." */
+  /** e.g. "ASEAN Scholarship Mathematics — Level 1, unit N1 Numbers and their operations." */
   startingCourse: string;
   /** NEW */
   starterPack: StarterPack;

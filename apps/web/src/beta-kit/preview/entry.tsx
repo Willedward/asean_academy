@@ -20,7 +20,7 @@ const onboarding: OnboardingProps = {
     },
   ],
   selectedTrack: "sec3-entry",
-  startingCourse: "Singapore Secondary 1 G3 Mathematics, unit N1 Numbers and their operations.",
+  startingCourse: "ASEAN Scholarship Mathematics — Level 1, unit N1 Numbers and their operations.",
   starterPack: {
     welcomeXp: 50,
     firstOutfit: { outfit: "scarf", name: "Batik scarf", level: 3 },

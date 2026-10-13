@@ -19,7 +19,7 @@ const settingsBase: Omit<SettingsProps, "deleteDialog"> = {
   player: samplePlayer,
   profile: { displayName: "Dimas", email: "dimas@example.com" },
   gameSettings: { sounds: true, celebrations: true, showInLeague: true, streakReminder: true, reminderTime: "19:30" },
-  course: { title: "Singapore Secondary 1 G3 Mathematics", intake: "Sec 3 entry" },
+  course: { title: "ASEAN Scholarship Mathematics — Level 1", intake: "Sec 3 entry" },
   deleteHref: preview("settings-delete"),
 };
 
@@ -35,7 +35,7 @@ export const meEntries: PreviewEntry[] = [
     render: () => (
       <ProgressScreen
         player={samplePlayer}
-        courseTitle="Singapore Secondary 1 G3 Mathematics"
+        courseTitle="ASEAN Scholarship Mathematics — Level 1"
         league={sampleLeague}
         unit={sampleUnit}
         badges={sampleBadges}
