@@ -1,10 +1,286 @@
 {
-  "schema_version": "1.0.0", "revision": 1, "stable_key": "n1-lesson-06",
-  "course_key": "g3-sec1-math", "unit_key": "g3-sec1-n1", "position": 6,
-  "status": "draft", "title": "Inequalities",
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "stable_key": "n1-lesson-06",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n1",
+  "position": 6,
+  "status": "draft",
+  "title": "Inequalities",
   "summary": "Express comparisons using less than, greater than, less than or equal to, and greater than or equal to.",
-  "outcomes": ["1.6"], "prerequisite_lessons": ["n1-lesson-05"], "estimated_minutes": 20,
-  "objectives": ["Choose the correct inequality symbol for a comparison.", "Describe all integers satisfying a compound inequality."],
-  "mastery_policy_key": "n1-default-v1", "sections": [], "assets": [],
-  "provenance": {"authoring_method": "original_authored", "created_at": "2026-09-20T17:00:00+08:00", "authored_by": "ASEAN Academy content team"}
+  "outcomes": [
+    "1.6"
+  ],
+  "prerequisite_lessons": [
+    "n1-lesson-05"
+  ],
+  "estimated_minutes": 20,
+  "objectives": [
+    "Choose the correct inequality symbol for a comparison.",
+    "Describe all integers satisfying a compound inequality."
+  ],
+  "mastery_policy_key": "n1-default-v1",
+  "sections": [
+    {
+      "stable_key": "inequality-symbols",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read an inequality as a complete statement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The symbols < and > describe strict comparisons, while ≤ and ≥ include equality. Read from left to right: "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a<b"
+        },
+        {
+          "type": "text",
+          "text": " means a is less than b, and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a\\ge b"
+        },
+        {
+          "type": "text",
+          "text": " means a is greater than or equal to b. The wider side of < or > faces the greater value. A reliable check is to say the statement aloud rather than relying only on the symbol's shape."
+        }
+      ]
+    },
+    {
+      "stable_key": "compound-inequalities",
+      "position": 2,
+      "type": "explanation",
+      "title": "A compound inequality describes an interval",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A statement such as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-2<x\\le3"
+        },
+        {
+          "type": "text",
+          "text": " combines two conditions: x is greater than -2 and x is at most 3. On a number line, use an open point when the endpoint is excluded (< or >) and a filled point when it is included (≤ or ≥). Both conditions must be satisfied at the same time."
+        }
+      ]
+    },
+    {
+      "stable_key": "integer-solutions",
+      "position": 3,
+      "type": "explanation",
+      "title": "List integer solutions systematically",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When the variable is restricted to integers, locate the two endpoints, decide whether each endpoint is included, and list the whole-number steps between them. Do not include fractional values. For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3\\le n<2"
+        },
+        {
+          "type": "text",
+          "text": ", the integer solutions are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3,-2,-1,0,1"
+        },
+        {
+          "type": "text",
+          "text": ". Checking the first and last listed values against both inequality signs prevents endpoint mistakes."
+        }
+      ]
+    },
+    {
+      "stable_key": "translate-inequality-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: translate a real condition",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A storage temperature must be above "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-4^\\circ\\text{C}"
+        },
+        {
+          "type": "text",
+          "text": " and no higher than "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3^\\circ\\text{C}"
+        },
+        {
+          "type": "text",
+          "text": ". Write an inequality for the temperature "
+        },
+        {
+          "type": "inline_math",
+          "latex": "T"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "“Above -4” excludes -4, so use a strict inequality."
+            },
+            {
+              "type": "display_math",
+              "latex": "T>-4"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "“No higher than 3” includes 3, so use less than or equal to."
+            },
+            {
+              "type": "display_math",
+              "latex": "T\\le3"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine the two limits in increasing order."
+            },
+            {
+              "type": "display_math",
+              "latex": "-4<T\\le3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "A value such as 0 satisfies both limits, -4 is excluded, and 3 is included."
+    },
+    {
+      "stable_key": "list-integers-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: list values in an interval",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "List all integers "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " satisfying "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-2\\le k<4"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The filled lower endpoint includes -2. The open upper endpoint excludes 4."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Move through the integer steps between the endpoints."
+            },
+            {
+              "type": "display_math",
+              "latex": "k=-2,-1,0,1,2,3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The first value equals the included lower bound, and the last integer is the greatest value still below 4."
+    },
+    {
+      "stable_key": "inequality-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "How many integers satisfy "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3<n\\le2"
+        },
+        {
+          "type": "text",
+          "text": "?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The integers are -2, -1, 0, 1 and 2. The lower endpoint -3 is excluded and the upper endpoint 2 is included."
+        }
+      ]
+    },
+    {
+      "stable_key": "inequality-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Inequality checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Translate each comparison word carefully, distinguish strict from inclusive endpoints, write compound inequalities in increasing order, use open or filled endpoints consistently, and test boundary values before finalising an interval or list of integers."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T18:22:31+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex"
+  }
 }

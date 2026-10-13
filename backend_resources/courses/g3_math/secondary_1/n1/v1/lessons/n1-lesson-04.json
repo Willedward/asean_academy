@@ -1,10 +1,258 @@
 {
-  "schema_version": "1.0.0", "revision": 1, "stable_key": "n1-lesson-04",
-  "course_key": "g3-sec1-math", "unit_key": "g3-sec1-n1", "position": 4,
-  "status": "draft", "title": "Calculator calculations",
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "stable_key": "n1-lesson-04",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n1",
+  "position": 4,
+  "status": "draft",
+  "title": "Calculator calculations",
   "summary": "Enter, interpret and check multi-step numerical calculations with a calculator.",
-  "outcomes": ["1.4"], "prerequisite_lessons": ["n1-lesson-03"], "estimated_minutes": 20,
-  "objectives": ["Enter expressions with powers, roots, brackets and fractions correctly.", "Use estimation to decide whether a calculator result is reasonable."],
-  "mastery_policy_key": "n1-default-v1", "sections": [], "assets": [],
-  "provenance": {"authoring_method": "original_authored", "created_at": "2026-09-20T17:00:00+08:00", "authored_by": "ASEAN Academy content team"}
+  "outcomes": [
+    "1.4"
+  ],
+  "prerequisite_lessons": [
+    "n1-lesson-03"
+  ],
+  "estimated_minutes": 20,
+  "objectives": [
+    "Enter expressions with powers, roots, brackets and fractions correctly.",
+    "Use estimation to decide whether a calculator result is reasonable."
+  ],
+  "mastery_policy_key": "n1-default-v1",
+  "sections": [
+    {
+      "stable_key": "calculator-entry",
+      "position": 1,
+      "type": "explanation",
+      "title": "Translate the written expression before pressing keys",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A calculator follows the mathematical structure you enter, not the structure you intended. Read the entire expression first and identify fraction bars, brackets, powers and roots. Use brackets to preserve a grouped numerator, denominator or exponent. For example, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3+5}{2^3}"
+        },
+        {
+          "type": "text",
+          "text": " must be entered as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3+5)\\div(2^3)"
+        },
+        {
+          "type": "text",
+          "text": ", not as 3 + 5 ÷ 2³. When a calculator has a fraction template, move deliberately between the numerator and denominator before continuing."
+        }
+      ]
+    },
+    {
+      "stable_key": "calculator-precision",
+      "position": 2,
+      "type": "explanation",
+      "title": "Keep full precision until the final answer",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Intermediate rounding can move the final result away from the correct value. Store or reuse the calculator's full displayed value, then round once to the accuracy requested. If a display uses scientific notation, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "4.72\\text{E}5"
+        },
+        {
+          "type": "text",
+          "text": " means "
+        },
+        {
+          "type": "inline_math",
+          "latex": "4.72\\times10^5"
+        },
+        {
+          "type": "text",
+          "text": ". Check whether the question wants an exact value, a decimal, or a stated number of decimal places or significant figures."
+        }
+      ]
+    },
+    {
+      "stable_key": "calculator-estimation",
+      "position": 3,
+      "type": "explanation",
+      "title": "Estimate independently to catch entry errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Before accepting a calculator result, estimate its sign and size. Round awkward values to nearby convenient numbers and use the operation structure. A positive quantity divided by a number close to 2 should be about half as large. A square root of a number between 81 and 100 must lie between 9 and 10. Estimation catches missing brackets, misplaced decimal points and incorrect negative signs."
+        }
+      ]
+    },
+    {
+      "stable_key": "calculator-brackets-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: enter a multi-step expression",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3.6^2-\\sqrt{49}}{1.25+0.75}"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Treat the whole numerator and denominator as grouped expressions."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{(3.6)^2-\\sqrt{49}}{1.25+0.75}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate the power, root and denominator."
+            },
+            {
+              "type": "display_math",
+              "latex": "3.6^2=12.96,\\qquad\\sqrt{49}=7,\\qquad1.25+0.75=2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Complete the division."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{12.96-7}{2}=\\frac{5.96}{2}=2.98"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The numerator is just under 6 and the denominator is 2, so a result just under 3 is reasonable."
+    },
+    {
+      "stable_key": "calculator-rounding-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: preserve an unrounded value",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{17}{6}+\\sqrt{5}"
+        },
+        {
+          "type": "text",
+          "text": " and give the answer to three decimal places."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Enter the complete expression and keep the full calculator display."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{17}{6}+\\sqrt5=5.069401310\\ldots"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "For three decimal places, inspect the fourth decimal digit."
+            },
+            {
+              "type": "display_math",
+              "latex": "5.069401310\\ldots\\approx5.069"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The fourth decimal digit is 4, so the third decimal digit remains unchanged. Rounding each term first could give a different result."
+    },
+    {
+      "stable_key": "calculator-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{225}+2^3"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "23",
+        "canonical_latex": "23",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The principal square root of 225 is 15 and 2³ = 8, so the value is 15 + 8 = 23."
+        }
+      ]
+    },
+    {
+      "stable_key": "calculator-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Calculator checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Identify the expression's structure before entering it, use brackets around grouped numerators and denominators, check powers and roots carefully, retain the full internal value, round only at the end, and compare the result with an independent estimate."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T18:22:31+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex"
+  }
 }

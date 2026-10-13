@@ -99,7 +99,9 @@ The command writes `beta-release-evidence.json` and `beta-release-evidence.md`. 
 1. Generalize the N1-only authoring contract to all 19 supplied topic groups while preserving immutable revisions.
 2. Commission and review the 1,900-question minimum, including enough independent practice, checkpoint and adaptive-reserve capacity.
 3. Author 76 additional diagnostic-only questions: 38 baseline and 38 matched endline items, with two items per topic group per form.
-4. Complete the six remaining N1 lesson notes and confirm all seven include explanation, worked examples, active recall and summary material.
+4. N1.2–N1.7 were completed on 13 October 2026. All seven N1 lessons now include
+   explanations, two worked examples, active recall and a summary. Expand the 21 lessons
+   flagged by the general depth audit in N5, N6, N7 and S1 before publication.
 5. Record Mathematics and editorial decisions in the admin review workflow; publish through an audited lifecycle request.
 6. Import exact revisions into staging and rerun the gate until source, hashes, reviews and diagnostic isolation pass.
 7. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.

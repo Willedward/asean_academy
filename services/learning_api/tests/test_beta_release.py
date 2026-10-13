@@ -26,6 +26,8 @@ def test_current_secondary_1_catalogue_is_reported_as_blocked_without_mutating_i
     assert not by_id["source.question_volume"].passed
     assert not by_id["source.publication_status"].passed
     assert not by_id["source.lesson_materials"].passed
+    assert by_id["source.lesson_materials"].details["populated_lessons"] == 52
+    assert len(by_id["source.lesson_materials"].details["thin_lessons"]) == 21
     assert by_id["source.pool_inventory"].passed
     assert by_id["source.checkpoint_reserve_capacity"].passed
 

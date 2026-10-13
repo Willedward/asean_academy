@@ -1,10 +1,257 @@
 {
-  "schema_version": "1.0.0", "revision": 1, "stable_key": "n1-lesson-03",
-  "course_key": "g3-sec1-math", "unit_key": "g3-sec1-n1", "position": 3,
-  "status": "draft", "title": "Number sets and operations",
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "stable_key": "n1-lesson-03",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n1",
+  "position": 3,
+  "status": "draft",
+  "title": "Number sets and operations",
   "summary": "Classify and calculate with negative numbers, integers, rational numbers and real numbers.",
-  "outcomes": ["1.3"], "prerequisite_lessons": [], "estimated_minutes": 35,
-  "objectives": ["Distinguish integers, rational numbers and real numbers.", "Apply the four operations accurately to signed and rational numbers."],
-  "mastery_policy_key": "n1-default-v1", "sections": [], "assets": [],
-  "provenance": {"authoring_method": "original_authored", "created_at": "2026-09-20T17:00:00+08:00", "authored_by": "ASEAN Academy content team"}
+  "outcomes": [
+    "1.3"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Distinguish integers, rational numbers and real numbers.",
+    "Apply the four operations accurately to signed and rational numbers."
+  ],
+  "mastery_policy_key": "n1-default-v1",
+  "sections": [
+    {
+      "stable_key": "number-set-hierarchy",
+      "position": 1,
+      "type": "explanation",
+      "title": "Recognise the hierarchy of real numbers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Natural numbers are the counting numbers 1, 2, 3, and so on. Whole numbers also include 0. Integers include positive whole numbers, zero and negative whole numbers. Rational numbers can be written as a fraction of two integers with a non-zero denominator; their decimal forms terminate or repeat. Irrational numbers, such as "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{2}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi"
+        },
+        {
+          "type": "text",
+          "text": ", cannot be written as such a fraction. Rational and irrational numbers together form the real numbers. A number may belong to several nested sets, so name the smallest relevant set when classifying it."
+        }
+      ]
+    },
+    {
+      "stable_key": "signed-number-operations",
+      "position": 2,
+      "type": "explanation",
+      "title": "Calculate accurately with signed numbers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "On a number line, adding a positive number moves right and adding a negative number moves left. Subtracting a number is equivalent to adding its opposite. For multiplication and division, equal signs give a positive result and different signs give a negative result."
+        },
+        {
+          "type": "display_math",
+          "latex": "-7-(-3)=-7+3=-4,\\qquad (-6)(-5)=30,\\qquad 24\\div(-3)=-8"
+        },
+        {
+          "type": "text",
+          "text": "Keep the sign attached to its number, especially when brackets are present."
+        }
+      ]
+    },
+    {
+      "stable_key": "rational-order-operations",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use exact values and the correct operation order",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Fractions, terminating decimals and recurring decimals are rational numbers. Convert to a common form when comparing or combining them. In a multi-step calculation, evaluate brackets first, then powers and roots, then multiplication and division, and finally addition and subtraction. Operations at the same level are completed from left to right. Delay decimal rounding until the final answer unless the question instructs otherwise."
+        }
+      ]
+    },
+    {
+      "stable_key": "classify-numbers-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: classify several numbers",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Classify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-4,\\ 0.375,\\ \\sqrt{49},\\ \\sqrt{3}"
+        },
+        {
+          "type": "text",
+          "text": " using the smallest suitable number set."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The number -4 is a negative whole number, so its smallest listed set is the integers."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The terminating decimal 0.375 equals 3/8, so it is rational but not an integer."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.375=\\frac{375}{1000}=\\frac38"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The principal square root of 49 is 7, which is natural. The number √3 is irrational because it cannot be written as a fraction of integers."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\sqrt{49}=7"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Every value is real; the labels identify the smallest set that gives the most information."
+    },
+    {
+      "stable_key": "signed-rational-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: evaluate a signed rational expression",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3+4\\left(2-\\frac52\\right)"
+        },
+        {
+          "type": "text",
+          "text": " exactly."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Complete the brackets first."
+            },
+            {
+              "type": "display_math",
+              "latex": "2-\\frac52=\\frac42-\\frac52=-\\frac12"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply before adding."
+            },
+            {
+              "type": "display_math",
+              "latex": "4\\left(-\\frac12\\right)=-2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Finish the addition."
+            },
+            {
+              "type": "display_math",
+              "latex": "-3+(-2)=-5"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting -1/2 for the bracket gives -3 - 2, so the negative result is reasonable."
+    },
+    {
+      "stable_key": "number-sets-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-6+3(4-5)"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "-9",
+        "canonical_latex": "-9",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Calculate the bracket first: 4 - 5 = -1. Then 3(-1) = -3 and -6 + (-3) = -9."
+        }
+      ]
+    },
+    {
+      "stable_key": "number-sets-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Reasoning checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Classify a number using the smallest suitable set, remember that the number sets are nested, keep negative signs attached to their values, use the standard order of operations, and retain exact fractions until the final step whenever possible."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T18:22:31+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex"
+  }
 }

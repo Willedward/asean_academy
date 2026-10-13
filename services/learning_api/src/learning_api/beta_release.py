@@ -8,6 +8,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from question_bank.course_repository import course_content_hash
+from question_bank.course_validation import lesson_note_depth_shortfalls
 
 from .content_review import verify_release_workflow
 from .content_sync import check_content
@@ -96,6 +97,14 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
         {"explanation", "worked_example", "active_recall", "summary"}.issubset(types)
         for types in section_types.values()
     )
+    thin_lessons = sorted(
+        lesson.stable_key for lesson in lessons if lesson_note_depth_shortfalls(lesson)
+    )
+    lesson_materials_ready = (
+        populated_lessons == len(lessons)
+        and lesson_material_types_ready
+        and not thin_lessons
+    )
     all_source_published = (
         course.status == "published"
         and published_lessons == len(lessons)
@@ -138,11 +147,12 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
         ),
         _check(
             "source.lesson_materials",
-            populated_lessons == len(lessons) and lesson_material_types_ready,
-            "Every lesson has explanation, example, active-recall and summary material.",
-            "One or more lessons lack the required reviewed learning-note sections.",
+            lesson_materials_ready,
+            "Every lesson meets the reviewed learning-note depth standard.",
+            "One or more lessons lack the required reviewed learning-note depth.",
             populated_lessons=populated_lessons,
             lesson_count=len(lessons),
+            thin_lessons=thin_lessons,
             required_section_types=[
                 "explanation",
                 "worked_example",

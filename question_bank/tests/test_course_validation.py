@@ -19,7 +19,13 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert len(report.lessons) == 52
     assert len(report.pools.pools) == 72
     assert report.as_dict()["allocated_question_count"] == 976
-    assert {issue.code for issue in report.warnings} == {"lesson_content_required"}
+    assert {issue.code for issue in report.warnings} == {"lesson_notes_thin"}
+    assert {issue.path.rsplit("/", 1)[-1] for issue in report.warnings} == {
+        *(f"n5-lesson-{number:02}.json" for number in range(1, 9)),
+        *(f"n6-lesson-{number:02}.json" for number in range(1, 6)),
+        *(f"n7-lesson-{number:02}.json" for number in range(1, 5)),
+        *(f"s1-lesson-{number:02}.json" for number in range(1, 5)),
+    }
 
 
 def test_secondary_2_g2_course_source_is_valid(repository_root, course_bank_root):
@@ -32,6 +38,32 @@ def test_secondary_2_g2_course_source_is_valid(repository_root, course_bank_root
     assert len(report.pools.pools) == 7
     assert report.as_dict()["allocated_question_count"] == 104
     assert report.warnings == []
+
+
+def test_thin_lesson_notes_block_publication(repository_root, course_bank_root, tmp_path):
+    source = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
+    course_root = tmp_path / "course"
+    shutil.copytree(source, course_root)
+
+    draft_report = validate_course(course_root, course_bank_root)
+    assert "lesson_notes_thin" in {issue.code for issue in draft_report.warnings}
+
+    publish_report = validate_course(course_root, course_bank_root, publish=True)
+    assert "lesson_notes_thin" in {issue.code for issue in publish_report.errors}
+
+    thin_path = course_root / "lessons/n5-lesson-01.json"
+    thin_lesson = json.loads(thin_path.read_text())
+    thin_lesson["status"] = "reviewed"
+    thin_lesson["provenance"].update(
+        {
+            "reviewed_at": "2026-10-13T12:00:00+08:00",
+            "reviewed_by": "Test reviewer",
+            "review_notes": "Structural gate test.",
+        }
+    )
+    thin_path.write_text(json.dumps(thin_lesson))
+    reviewed_report = validate_course(course_root, course_bank_root)
+    assert "lesson_notes_thin" in {issue.code for issue in reviewed_report.errors}
 
 
 def test_secondary_1_course_cannot_publish_while_course_lessons_and_questions_are_drafts(

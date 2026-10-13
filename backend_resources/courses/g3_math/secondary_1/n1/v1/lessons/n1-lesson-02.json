@@ -1,10 +1,262 @@
 {
-  "schema_version": "1.0.0", "revision": 1, "stable_key": "n1-lesson-02",
-  "course_key": "g3-sec1-math", "unit_key": "g3-sec1-n1", "position": 2,
-  "status": "draft", "title": "HCF, LCM, squares, cubes and roots",
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "stable_key": "n1-lesson-02",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n1",
+  "position": 2,
+  "status": "draft",
+  "title": "HCF, LCM, squares, cubes and roots",
   "summary": "Use prime factorisation to find HCF, LCM, squares, cubes, square roots and cube roots.",
-  "outcomes": ["1.2"], "prerequisite_lessons": ["n1-lesson-01"], "estimated_minutes": 35,
-  "objectives": ["Find the HCF and LCM of positive integers using prime factors.", "Recognise and calculate square, cube, square-root and cube-root relationships."],
-  "mastery_policy_key": "n1-default-v1", "sections": [], "assets": [],
-  "provenance": {"authoring_method": "original_authored", "created_at": "2026-09-20T17:00:00+08:00", "authored_by": "ASEAN Academy content team"}
+  "outcomes": [
+    "1.2"
+  ],
+  "prerequisite_lessons": [
+    "n1-lesson-01"
+  ],
+  "estimated_minutes": 35,
+  "objectives": [
+    "Find the HCF and LCM of positive integers using prime factors.",
+    "Recognise and calculate square, cube, square-root and cube-root relationships."
+  ],
+  "mastery_policy_key": "n1-default-v1",
+  "sections": [
+    {
+      "stable_key": "hcf-lcm-prime-powers",
+      "position": 1,
+      "type": "explanation",
+      "title": "Use prime powers to compare factors and multiples",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Prime factorisation exposes the building blocks of a positive integer. To find the highest common factor (HCF), take each prime shared by all the numbers with its smallest index. To find the lowest common multiple (LCM), take every prime that appears with its largest index. This works because an HCF must divide every number, while an LCM must contain enough of every prime factor to be divisible by every number."
+        },
+        {
+          "type": "display_math",
+          "latex": "84=2^2\\times3\\times7,\\qquad126=2\\times3^2\\times7"
+        },
+        {
+          "type": "text",
+          "text": "For these two numbers, the common prime powers with the smaller indices give the HCF; all prime powers with the larger indices give the LCM."
+        }
+      ]
+    },
+    {
+      "stable_key": "squares-cubes-roots",
+      "position": 2,
+      "type": "explanation",
+      "title": "Squares, cubes and their inverse operations",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Squaring multiplies a number by itself, while cubing multiplies three equal factors. A square root reverses squaring and a cube root reverses cubing. For positive numbers, the symbol "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{x}"
+        },
+        {
+          "type": "text",
+          "text": " means the non-negative square root. A negative number has no real square root, but it can have a real cube root because three negative factors give a negative product."
+        },
+        {
+          "type": "display_math",
+          "latex": "12^2=144,\\quad \\sqrt{144}=12,\\quad (-5)^3=-125,\\quad \\sqrt[3]{-125}=-5"
+        }
+      ]
+    },
+    {
+      "stable_key": "factor-multiple-checks",
+      "position": 3,
+      "type": "explanation",
+      "title": "Choose the operation that matches the question",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use HCF when a quantity must be split into the largest equal groups or pieces with nothing left over. Use LCM when repeating events must meet again, or when finding the smallest quantity divisible by several given numbers. A quick check prevents the common reversal: an HCF cannot exceed the smallest input, whereas an LCM cannot be smaller than the largest positive input. For roots, estimate between nearby perfect squares or cubes before using a calculator."
+        }
+      ]
+    },
+    {
+      "stable_key": "hcf-lcm-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: find an HCF and an LCM",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the HCF and LCM of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "84"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "126"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write both numbers as products of prime factors."
+            },
+            {
+              "type": "display_math",
+              "latex": "84=2^2\\times3\\times7,\\qquad126=2\\times3^2\\times7"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "For the HCF, use the shared primes with the smaller indices."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\operatorname{HCF}=2\\times3\\times7=42"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "For the LCM, use every prime with the larger index."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\operatorname{LCM}=2^2\\times3^2\\times7=252"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Both 84 and 126 are divisible by 42, and 252 is divisible by both original numbers."
+    },
+    {
+      "stable_key": "roots-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: combine powers and roots",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{196}+\\sqrt[3]{216}-3^2"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate each power or root before adding and subtracting."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\sqrt{196}=14,\\qquad \\sqrt[3]{216}=6,\\qquad3^2=9"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute these values and calculate from left to right."
+            },
+            {
+              "type": "display_math",
+              "latex": "14+6-9=11"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Squaring 14 gives 196, cubing 6 gives 216, and the final arithmetic is 20 minus 9."
+    },
+    {
+      "stable_key": "hcf-lcm-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the HCF of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "72"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "120"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "24",
+        "canonical_latex": "24",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The prime factorizations are 72 = 2^3 × 3^2 and 120 = 2^3 × 3 × 5. The shared prime powers are 2^3 × 3 = 24."
+        }
+      ]
+    },
+    {
+      "stable_key": "hcf-lcm-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Prime-factorise each number first. Use the smallest shared indices for the HCF and the largest available indices for the LCM. Treat square and cube roots as inverse operations, estimate before calculating, and verify an HCF by division and an LCM by checking divisibility."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T18:22:31+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex"
+  }
 }

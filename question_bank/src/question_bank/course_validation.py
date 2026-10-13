@@ -104,6 +104,62 @@ def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidation
             _issue(report, "error", code, path, message)
 
 
+def lesson_note_depth_shortfalls(lesson: Lesson) -> list[str]:
+    """Return deviations from the common outcome-level teaching scaffold."""
+    if not lesson.sections:
+        return ["no teaching sections"]
+
+    counts = {
+        section_type: sum(section.type == section_type for section in lesson.sections)
+        for section_type in ("explanation", "worked_example", "active_recall", "summary")
+    }
+    authored_size = len(
+        json.dumps(
+            [section.model_dump(mode="json") for section in lesson.sections],
+            ensure_ascii=False,
+        )
+    )
+    shortfalls = []
+    if len(lesson.sections) < 6:
+        shortfalls.append(f"{len(lesson.sections)} sections (minimum 6)")
+    if counts["explanation"] < 2:
+        shortfalls.append(f"{counts['explanation']} explanation section(s) (minimum 2)")
+    if counts["worked_example"] < 2:
+        shortfalls.append(f"{counts['worked_example']} worked example(s) (minimum 2)")
+    if counts["active_recall"] < 1:
+        shortfalls.append("no active-recall check")
+    if counts["summary"] < 1:
+        shortfalls.append("no summary")
+    if authored_size < 2500:
+        shortfalls.append(f"{authored_size} authored characters (minimum 2500)")
+
+    return shortfalls
+
+
+def _validate_lesson_note_depth(
+    lesson: Lesson,
+    path: Path,
+    report: CourseValidationReport,
+    *,
+    publish: bool,
+):
+    """Flag lesson notes that do not meet the common outcome-level teaching scaffold."""
+
+    if not lesson.sections:
+        return
+
+    shortfalls = lesson_note_depth_shortfalls(lesson)
+    if shortfalls:
+        release_blocking = publish or lesson.status in {"reviewed", "published"}
+        _issue(
+            report,
+            "error" if release_blocking else "warning",
+            "lesson_notes_thin",
+            path,
+            "Lesson notes need expansion: " + "; ".join(shortfalls),
+        )
+
+
 def _validate_geometry_lesson_depth(lesson: Lesson, path: Path, report: CourseValidationReport):
     if not lesson.unit_key.rsplit("-", 1)[-1].startswith("g"):
         return
@@ -233,6 +289,7 @@ def validate_course(
             continue
         seen.add(lesson.stable_key)
         _validate_assets(course_root, lesson, report)
+        _validate_lesson_note_depth(lesson, path, report, publish=publish)
         _validate_geometry_lesson_depth(lesson, path, report)
         report.lessons.append(lesson)
 
@@ -311,9 +368,10 @@ def validate_course(
                     f"Prerequisite {prerequisite} must appear earlier",
                 )
         if not lesson.sections:
+            release_blocking = publish or lesson.status in {"reviewed", "published"}
             _issue(
                 report,
-                "error" if publish else "warning",
+                "error" if release_blocking else "warning",
                 "lesson_content_required",
                 key,
                 "Lesson needs reviewed sections before publication",

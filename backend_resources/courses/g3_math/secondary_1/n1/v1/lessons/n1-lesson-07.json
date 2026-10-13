@@ -1,10 +1,223 @@
 {
-  "schema_version": "1.0.0", "revision": 1, "stable_key": "n1-lesson-07",
-  "course_key": "g3-sec1-math", "unit_key": "g3-sec1-n1", "position": 7,
-  "status": "draft", "title": "Approximation and estimation",
+  "schema_version": "1.0.0",
+  "revision": 2,
+  "stable_key": "n1-lesson-07",
+  "course_key": "g3-sec1-math",
+  "unit_key": "g3-sec1-n1",
+  "position": 7,
+  "status": "draft",
+  "title": "Approximation and estimation",
   "summary": "Round values to decimal places or significant figures and estimate numerical results.",
-  "outcomes": ["1.7"], "prerequisite_lessons": ["n1-lesson-04"], "estimated_minutes": 30,
-  "objectives": ["Round positive and negative values to a stated accuracy.", "Use rounded values and bounds to estimate and interpret results."],
-  "mastery_policy_key": "n1-default-v1", "sections": [], "assets": [],
-  "provenance": {"authoring_method": "original_authored", "created_at": "2026-09-20T17:00:00+08:00", "authored_by": "ASEAN Academy content team"}
+  "outcomes": [
+    "1.7"
+  ],
+  "prerequisite_lessons": [
+    "n1-lesson-04"
+  ],
+  "estimated_minutes": 30,
+  "objectives": [
+    "Round positive and negative values to a stated accuracy.",
+    "Use rounded values and bounds to estimate and interpret results."
+  ],
+  "mastery_policy_key": "n1-default-v1",
+  "sections": [
+    {
+      "stable_key": "rounding-place-value",
+      "position": 1,
+      "type": "explanation",
+      "title": "Round using the first discarded digit",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To round to a stated decimal place, locate that place and inspect the digit immediately to its right. To round to significant figures, begin counting at the first non-zero digit. If the first discarded digit is 5 or more, increase the retained digit by 1; otherwise leave it unchanged. Replace discarded whole-number places with zeros so the value's magnitude remains clear."
+        },
+        {
+          "type": "display_math",
+          "latex": "38.746\\approx38.75\\text{ (2 d.p.)},\\qquad0.004836\\approx0.00484\\text{ (3 s.f.)}"
+        }
+      ]
+    },
+    {
+      "stable_key": "rounding-negative-values",
+      "position": 2,
+      "type": "explanation",
+      "title": "Apply place value consistently to negative numbers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Round the magnitude using the ordinary place-value rule, then retain the negative sign. For example, -6.47 rounds to -6.5 to one decimal place because 6.47 rounds to 6.5. On the number line, -6.5 is slightly smaller than -6.47, but it is the nearer tenth. Trailing zeros may be necessary to communicate accuracy: 4.50 to three significant figures is more precise than 4.5."
+        }
+      ]
+    },
+    {
+      "stable_key": "estimation-and-bounds",
+      "position": 3,
+      "type": "explanation",
+      "title": "Estimate with convenient values and interpret accuracy",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An estimate replaces exact values with nearby numbers that are easy to calculate mentally. Preserve the sign and approximate scale of each quantity. State the chosen approximations before calculating so the reasoning can be checked. If a value rounds to a stated unit, the original lies from half a unit below the rounded value up to, but not including, half a unit above it. These bounds describe possible original values; they are not additional rounding."
+        },
+        {
+          "type": "display_math",
+          "latex": "7.3\\text{ correct to 1 d.p.}\\quad\\Rightarrow\\quad7.25\\le x<7.35"
+        }
+      ]
+    },
+    {
+      "stable_key": "significant-figures-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: round a small decimal",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Round "
+        },
+        {
+          "type": "inline_math",
+          "latex": "0.007846"
+        },
+        {
+          "type": "text",
+          "text": " to three significant figures."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Leading zeros locate the decimal point but are not significant. The first three significant digits are 7, 8 and 4."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.00\\underline{784}6"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The next digit is 6, so increase the third significant digit from 4 to 5."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.007846\\approx0.00785"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The rounded value has exactly three significant digits—7, 8 and 5—and remains close to 0.008."
+    },
+    {
+      "stable_key": "estimation-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: estimate a numerical expression",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Estimate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{19.8\\times0.503}{4.98}"
+        },
+        {
+          "type": "text",
+          "text": " using one significant figure for each number."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Round each value to one significant figure."
+            },
+            {
+              "type": "display_math",
+              "latex": "19.8\\approx20,\\qquad0.503\\approx0.5,\\qquad4.98\\approx5"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate the simplified expression."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{20\\times0.5}{5}=\\frac{10}{5}=2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The exact numerator is close to 10 and the denominator is close to 5, so an estimate of 2 has a sensible magnitude."
+    },
+    {
+      "stable_key": "approximation-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Round "
+        },
+        {
+          "type": "inline_math",
+          "latex": "78\\,649"
+        },
+        {
+          "type": "text",
+          "text": " to three significant figures."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "78600",
+        "canonical_latex": "78\\,600",
+        "accepted_answers": [
+          "78600.0"
+        ],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The first three significant digits are 7, 8 and 6. The next digit is 4, so keep 6 unchanged and replace the remaining places with zeros: 78,600."
+        }
+      ]
+    },
+    {
+      "stable_key": "approximation-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Accuracy checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Identify whether the question asks for decimal places or significant figures, inspect the first discarded digit, preserve zeros that communicate place value, round only at the final step unless estimating, state the convenient values used in an estimate, and compare the result with the expected sign and magnitude."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T18:22:31+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex"
+  }
 }

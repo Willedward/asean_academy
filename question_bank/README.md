@@ -37,7 +37,7 @@ Publication validation remains unsuccessful until all 40 draft questions receive
 uv run question-bank validate --publish
 ```
 
-Validate the N1 through N5 course structure, 27 lessons, and all 456 pool mappings:
+Validate the complete authored course structure and pool mappings:
 
 ```bash
 uv run question-bank course-validate
@@ -49,9 +49,11 @@ Preview the course map at <http://127.0.0.1:8767>:
 uv run question-bank course-preview
 ```
 
-The six `lesson_content_required` warnings are expected while teaching sections for
-Lessons 2–7 are authored and reviewed. Publication validation deliberately fails while any
-required lesson or question content remains in `draft` state:
+The command also audits the common lesson-note scaffold. Draft notes below the six-section
+depth standard receive `lesson_notes_thin` warnings; the same findings block strict
+publication. The current warnings identify N5, N6, N7 and S1 lessons that still require a
+second explanation and worked example. Publication validation also fails while any required
+lesson or question content remains in `draft` state:
 
 ```bash
 uv run question-bank course-validate --publish
