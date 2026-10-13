@@ -33,7 +33,7 @@ The current authored source contains every Secondary 1 unit (N1 through N7, G1, 
 | Questions                          |                                  1,080 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
 | Lessons                            |                                     57 |  All authored and planned Beta lessons | Blocked |
-| Lessons meeting the note-depth gate |                                     45 |                   All authored lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     49 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 660 practice, 201 checkpoint, 219 reserve |          Complete and non-overlapping | Pass    |
 
@@ -99,9 +99,10 @@ The command writes `beta-release-evidence.json` and `beta-release-evidence.md`. 
 1. Generalize the N1-only authoring contract to all 19 supplied topic groups while preserving immutable revisions.
 2. Commission and review the 1,900-question minimum, including enough independent practice, checkpoint and adaptive-reserve capacity.
 3. Author 76 additional diagnostic-only questions: 38 baseline and 38 matched endline items, with two items per topic group per form.
-4. N1.2–N1.7 were completed on 13 October 2026. N6.1–N6.5 and N7.1–N7.4 were
-   expanded on 14 October 2026 with deeper teaching sequences and a second worked example.
-   Expand the 12 lessons still flagged by the general depth audit in N5 and S1 before publication.
+4. N1.2–N1.7 were completed on 13 October 2026. N6.1–N6.5, N7.1–N7.4 and S1.1–S1.4
+   were expanded on 14 October 2026 with deeper teaching sequences and a second worked
+   example. Expand the eight lessons still flagged by the general depth audit in N5 before
+   publication.
 5. Record Mathematics and editorial decisions in the admin review workflow; publish through an audited lifecycle request.
 6. Import exact revisions into staging and rerun the gate until source, hashes, reviews and diagnostic isolation pass.
 7. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.

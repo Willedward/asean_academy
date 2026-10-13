@@ -1,36 +1,44 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
   "position": 4,
   "status": "draft",
   "title": "Explaining why a statistical diagram leads to misinterpretation of data",
-  "summary": "Detect distorted scales, misleading symbols, missing context and selective reporting.",
+  "summary": "Audit scales, symbols, labels, samples and selected time windows, quantify the distortion, and propose a fairer display.",
   "outcomes": [
     "1.4"
   ],
   "prerequisite_lessons": [
     "s1-lesson-03"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 50,
   "objectives": [
-    "Identify common features that distort statistical diagrams.",
-    "Quantify how a truncated scale or resized symbol exaggerates change.",
-    "Recommend a fair scale, label set and time window."
+    "Identify visual and contextual features that can distort a statistical diagram.",
+    "Quantify exaggeration caused by truncated axes or resized symbols.",
+    "Explain how to redraw or annotate a diagram so that it communicates fairly."
   ],
   "mastery_policy_key": "s1-default-v1",
   "sections": [
     {
-      "stable_key": "s1-14-method",
+      "stable_key": "s1-14-axis-audit",
       "position": 1,
       "type": "explanation",
-      "title": "Core method",
+      "title": "Audit the scale before trusting the shape",
       "blocks": [
         {
           "type": "text",
-          "text": "A fair diagram uses consistent intervals, clear labels and enough context. A truncated axis can magnify small differences. Enlarging both dimensions of a picture changes its area, and enlarging three dimensions changes its volume. Selective dates can hide the broader pattern."
+          "text": "Check where each axis begins, whether tick intervals are equal, whether any break is marked and whether two graphs use comparable scales. A bar graph normally begins at zero because bar length encodes magnitude. A truncated baseline can be legitimate when small changes need detailed study, but it must be conspicuous and the reader should not mistake the displayed height for the full value."
+        },
+        {
+          "type": "text",
+          "text": "The same values 92 and 98 look dramatically different above a baseline of 90. Their displayed heights are 2 and 8, a ratio of 4, although the actual values differ by only 6 and have a ratio close to 1.07. The paired diagrams expose this change in impression."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-04-truncated-axis"
         },
         {
           "type": "display_math",
@@ -39,14 +47,30 @@
       ]
     },
     {
-      "stable_key": "s1-14-example",
+      "stable_key": "s1-14-symbol-context",
       "position": 2,
+      "type": "explanation",
+      "title": "Inspect symbols, labels and missing context",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A picture scaled in both width and height represents quantity by area, not by side length. Doubling the side of a square makes its area four times as large; doubling every dimension of a solid makes its volume eight times as large. Decorative three-dimensional bars also introduce perspective, making front objects appear larger than equal objects behind them."
+        },
+        {
+          "type": "text",
+          "text": "Misinterpretation can also come from missing units, an unclear key, unequal time intervals, sectors that do not total 360°, or selecting only dates that support a claim. A percentage without the original sample size can exaggerate a small change, and an average without its type or data spread may hide important differences."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-14-axis-example",
+      "position": 3,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: quantify a truncated-axis exaggeration",
       "prompt": [
         {
           "type": "text",
-          "text": "Values 52 and 56 are drawn above a baseline of 50. Compare their displayed heights."
+          "text": "A bar graph shows scores 92 and 98 above a baseline of 90. Compare the displayed-height ratio with the actual-value ratio and explain the risk."
         }
       ],
       "steps": [
@@ -54,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Subtract the baseline to find the visible bar heights."
+            },
+            {
               "type": "display_math",
-              "latex": "h_1=52-50=2,\\qquad h_2=56-50=6"
+              "latex": "h_1=92-90=2,\\qquad h_2=98-90=8"
             }
           ]
         },
@@ -63,23 +91,128 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Compare the displayed heights."
+            },
+            {
               "type": "display_math",
-              "latex": "\\frac{h_2}{h_1}=3"
+              "latex": "\\frac{h_2}{h_1}=\\frac{8}{2}=4"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the actual values."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{98}{92}\\approx1.065"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "The graph makes the second score appear four times the first in bar height, although the score is only about 6.5% greater. Redraw bars from zero or mark and explain the truncated scale prominently."
             }
           ]
         }
       ],
-      "verification_note": "Check the title, scale, key, labels and total before accepting the interpretation."
+      "verification_note": "The arithmetic separates the visual ratio 4 from the data ratio about 1.065; the proposed zero baseline restores bar length as a fair magnitude comparison."
+    },
+    {
+      "stable_key": "s1-14-area-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: detect area distortion",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two square icons represent values 20 and 40. The first has side length 3 cm and the second has side length 6 cm. Explain why the display exaggerates the increase."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The data value doubles."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{40}{20}=2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate the two icon areas."
+            },
+            {
+              "type": "display_math",
+              "latex": "A_1=3^2=9\\text{ cm}^2,\\qquad A_2=6^2=36\\text{ cm}^2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the visible areas."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{A_2}{A_1}=\\frac{36}{9}=4"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "The area appears four times as large for a value that is only twice as large. Use equal-sized repeated symbols, a bar whose length doubles, or square sides scaled by the square root of the value ratio."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Equal-sized unit symbols or a zero-based bar graph would show a factor of 2, matching the data instead of the misleading area factor of 4."
+    },
+    {
+      "stable_key": "s1-14-repair",
+      "position": 5,
+      "type": "explanation",
+      "title": "Explain the effect and propose a repair",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A strong critique names the feature, describes the false impression and supports the claim with numbers. ‘The graph is misleading’ is incomplete. A precise explanation might say that the non-zero baseline changes bar heights from 92 and 98 to 2 and 8, making a 6.5% increase look like a fourfold comparison."
+        },
+        {
+          "type": "text",
+          "text": "Then recommend a repair: begin a magnitude-encoding bar chart at zero, use equal intervals, label units and sample sizes, preserve proportional symbol area, show the complete relevant time period and identify missing or estimated values. If a truncated axis is necessary for detailed fluctuation, mark the break and state that the chart focuses on differences rather than full magnitudes."
+        }
+      ]
     },
     {
       "stable_key": "s1-14-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A square icon's side is doubled. By what factor does its area grow?"
+          "text": "Values 72 and 78 are drawn above a baseline of 70. By what factor is the second displayed bar height greater than the first?"
         }
       ],
       "response": {
@@ -95,30 +228,54 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Area scales with the square of length, so 2\u00b2 = 4."
+          "text": "The displayed heights are 72 − 70 = 2 and 78 − 70 = 8. Their ratio is 8 ÷ 2 = 4, even though the actual values are close."
         }
       ]
     },
     {
       "stable_key": "s1-lesson-04-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
-      "title": "Interpretation checklist",
+      "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Identify the data structure and purpose, read every scale and key carefully, calculate from the stated values, then check whether the display gives an accurate and complete impression."
+          "text": "Inspect titles, units, baselines, tick intervals, axis breaks, keys, time windows, sample sizes and totals before accepting the visual impression."
+        },
+        {
+          "type": "text",
+          "text": "Quantify the distortion by comparing displayed lengths or areas with the actual data relationship. Remember that area scales with length squared and volume with length cubed."
+        },
+        {
+          "type": "text",
+          "text": "State the likely misinterpretation and propose a specific fairer scale, symbol, label set or time window. A critique should connect visual design to mathematical evidence."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-04-truncated-axis",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-04-truncated-axis.svg",
+      "alt_text": "Values 92 and 98 shown on a truncated axis and on a zero-based axis to compare the resulting visual impressions.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "truncated_axis_comparison",
+        "lesson_key": "s1-lesson-04"
+      },
+      "sha256": "ddb8899e5cfe62fb7f45188f8c7e790acc548e6ebc6c9c50d4ede31a3029afec",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T16:00:00+08:00",
+    "created_at": "2026-10-14T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
   }
 }

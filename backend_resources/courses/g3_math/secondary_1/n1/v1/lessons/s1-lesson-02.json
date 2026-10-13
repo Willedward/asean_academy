@@ -1,52 +1,76 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
   "position": 2,
   "status": "draft",
   "title": "Analysis and interpretation of tables, bar graphs, pictograms, line graphs and pie charts",
-  "summary": "Read scales and keys, compare categories, and connect chart values to totals and proportions.",
+  "summary": "Read scales and keys precisely, calculate comparisons and changes, and connect pie-chart angles to frequencies and percentages.",
   "outcomes": [
     "1.2"
   ],
   "prerequisite_lessons": [
     "s1-lesson-01"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 50,
   "objectives": [
-    "Read values from common tables and graphs.",
-    "Use pictogram keys and graph scales correctly.",
-    "Convert between pie-chart angles, frequencies and percentages."
+    "Read exact values and comparisons from common statistical representations.",
+    "Apply pictogram keys and graph scales, including partial symbols and non-unit intervals.",
+    "Convert between pie-chart angles, frequencies, fractions and percentages."
   ],
   "mastery_policy_key": "s1-default-v1",
   "sections": [
     {
-      "stable_key": "s1-12-method",
+      "stable_key": "s1-12-reading-framework",
       "position": 1,
       "type": "explanation",
-      "title": "Core method",
+      "title": "Read the frame before the data",
       "blocks": [
         {
           "type": "text",
-          "text": "Read the title, labels, scale and key before calculating. Bar heights show category values, pictogram symbols use a stated key, line graphs emphasise ordered change, and a pie-chart angle is the same fraction of 360\u00b0 as its frequency is of the total."
+          "text": "Begin with the title: it identifies what was measured and often when or where. Read both axis labels, units, tick intervals, category labels and any legend or key. Do not assume that each grid line represents 1 or that a vertical axis begins at zero. Estimate between ticks only when the scale supports it."
         },
         {
-          "type": "display_math",
-          "latex": "\\frac{\\text{sector angle}}{360^\\circ}=\\frac{\\text{category frequency}}{\\text{total frequency}}"
+          "type": "text",
+          "text": "Tables support exact lookup. Bar graphs compare separate categories, so bars usually have gaps. Line graphs connect ordered observations and emphasise change, often over time. The visual model contrasts these two purposes: the bars compare clubs, while the connected points follow attendance from Monday to Friday."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-02-chart-reading"
         }
       ]
     },
     {
-      "stable_key": "s1-12-example",
+      "stable_key": "s1-12-keys-and-parts",
       "position": 2,
+      "type": "explanation",
+      "title": "Use keys, totals and proportions",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "In a pictogram, multiply the number of symbols by the value represented by one complete symbol. A half-symbol represents half of the key only when the picture is divided proportionally. State the unit in the answer. In a table, use row and column totals to choose the correct comparison rather than adding unrelated entries."
+        },
+        {
+          "type": "text",
+          "text": "A pie chart divides one total into sectors. A category’s fraction of the total equals its fraction of 360°, and multiplying the fraction by 100 gives its percentage. All sector angles should total 360°, allowing for reasonable rounding when angles are estimated from a diagram."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{\\text{sector angle}}{360^\\circ}=\\frac{\\text{category frequency}}{\\text{total frequency}}=\\frac{\\text{percentage}}{100}"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-12-line-example",
+      "position": 3,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: interpret ordered change",
       "prompt": [
         {
           "type": "text",
-          "text": "A 90\u00b0 pie-chart sector represents 15 students. Find the total number of students."
+          "text": "A line graph records attendance from Monday to Friday as 32, 36, 34, 42 and 46. Find the overall increase and the greatest one-day increase."
         }
       ],
       "steps": [
@@ -54,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The overall increase compares the last value with the first."
+            },
+            {
               "type": "display_math",
-              "latex": "\\frac{90}{360}=\\frac{15}{N}"
+              "latex": "46-32=14"
             }
           ]
         },
@@ -63,30 +91,126 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Calculate consecutive changes, keeping their signs."
+            },
+            {
               "type": "display_math",
-              "latex": "N=60"
+              "latex": "36-32=4,\\quad34-36=-2,\\quad42-34=8,\\quad46-42=4"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The greatest one-day increase is 8, from Wednesday to Thursday. The decrease of 2 from Tuesday to Wednesday should not be described as an increase."
             }
           ]
         }
       ],
-      "verification_note": "Check the title, scale, key, labels and total before accepting the interpretation."
+      "verification_note": "Starting at 32 and applying the four changes gives 32 + 4 − 2 + 8 + 4 = 46, matching Friday’s plotted value."
+    },
+    {
+      "stable_key": "s1-12-pie-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: convert a pie-chart sector",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 72° sector in a survey of 150 learners represents cycling. Find the cycling frequency and percentage."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the sector as a fraction of the complete circle and simplify."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{72}{360}=\\frac{1}{5}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Apply this fraction to the total frequency."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{1}{5}\\times150=30"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the same fraction to a percentage."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{1}{5}\\times100\\%=20\\%"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Therefore the sector represents 30 learners, or 20% of the survey."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Thirty out of 150 is 30 ÷ 150 = 0.2 = 20%, and 20% of 360° is 72°, so all three forms agree."
+    },
+    {
+      "stable_key": "s1-12-comparisons",
+      "position": 5,
+      "type": "explanation",
+      "title": "Separate absolute and relative comparisons",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An absolute difference subtracts two values. A relative comparison divides by a chosen reference value. Saying that one category has 12 more responses is different from saying it is 30% greater. Name the reference group whenever you calculate a percentage increase or decrease."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{percentage change}=\\frac{\\text{new}-\\text{original}}{\\text{original}}\\times100\\%"
+        },
+        {
+          "type": "text",
+          "text": "A graph shows only the observations supplied. A line between two measured points can suggest a trend, but it does not prove what happened at every point between them. Avoid extending a trend beyond the shown interval unless the question supplies a model or additional evidence."
+        }
+      ]
     },
     {
       "stable_key": "s1-12-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "One pictogram symbol represents 5 books. How many books do 4 symbols represent?"
+          "text": "A pie-chart sector is 54°. What percentage of the whole does it represent? Enter the number without the percent sign."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20",
+        "canonical_answer": "15",
+        "canonical_latex": "15",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -95,30 +219,54 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Multiply the symbol count by the key: 4 \u00d7 5 = 20."
+          "text": "Calculate 54 ÷ 360 × 100 = 15, so the sector represents 15% of the whole."
         }
       ]
     },
     {
       "stable_key": "s1-lesson-02-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
-      "title": "Interpretation checklist",
+      "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Identify the data structure and purpose, read every scale and key carefully, calculate from the stated values, then check whether the display gives an accurate and complete impression."
+          "text": "Read the title, labels, units, tick interval, baseline, key and legend before extracting a value."
+        },
+        {
+          "type": "text",
+          "text": "Use tables for exact entries, bars for category comparisons, lines for ordered change, pictogram keys for symbol values and 360° as the pie-chart total."
+        },
+        {
+          "type": "text",
+          "text": "State whether a comparison is an absolute difference, a fraction of a total or a percentage change, and verify calculated values against the display."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-02-chart-reading",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-02-chart-reading.svg",
+      "alt_text": "A bar graph comparing three clubs and a line graph showing attendance from Monday to Friday.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "bar_and_line_graph_reading",
+        "lesson_key": "s1-lesson-02"
+      },
+      "sha256": "4b026623c35c2c02529258bbb1f5024e1c626bf2a853d695aa7d40ab55e6fff2",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T16:00:00+08:00",
+    "created_at": "2026-10-14T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
   }
 }
