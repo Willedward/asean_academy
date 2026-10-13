@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n7-lesson-03"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Choose and define a useful variable with its unit.",
     "Translate verbal relationships into algebraic expressions and one equation.",
@@ -26,27 +26,67 @@
       "stable_key": "n7-74-method",
       "position": 1,
       "type": "explanation",
-      "title": "From words to one equation",
+      "title": "Define one unknown before writing expressions",
       "blocks": [
         {
           "type": "text",
-          "text": "Begin by stating what the variable represents. Express every other unknown quantity in terms of that variable. Use the sentence describing a total, difference or equality to form one equation."
+          "text": "Begin by stating what the variable represents and include its unit. Choose an unknown that allows every other unknown quantity to be described in terms of it. A precise definition such as 'let x be the width in centimetres' prevents the final answer from losing its meaning."
         },
         {
           "type": "display_math",
-          "latex": "\\text{relationship}\\;\\longrightarrow\\;\\text{expressions}\\;\\longrightarrow\\;\\text{equation}"
+          "latex": "\\text{words}\\longrightarrow\\text{expressions}\\longrightarrow\\text{one equation}"
         },
         {
           "type": "text",
-          "text": "After solving, attach the correct unit and check the value against the original story. Reject values that are impossible in context, such as a negative number of people."
+          "text": "Do not write an equation immediately from isolated keywords. First list the quantities and relationships, then identify the sentence that says two totals or values are equal."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-74-translate-relationships",
+      "position": 2,
+      "type": "explanation",
+      "title": "Translate relationships without reversing them",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If one quantity is 5 more than x, write x + 5. If it is 5 less than x, write x - 5. 'Twice a number, then increased by 3' is 2x + 3, while 'twice the result of increasing a number by 3' is 2(x + 3). Brackets preserve the intended order."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{A is 4 more than twice B:}\\qquad A=2B+4"
+        },
+        {
+          "type": "text",
+          "text": "Check the expression with a simple trial value. If B were 10, A should be 24. A trial value exposes a reversed relationship before it becomes part of the equation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-74-interpret-check",
+      "position": 3,
+      "type": "explanation",
+      "title": "Interpret and test the modelled answer",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Solve the equation using valid balance operations, but finish by returning to the story. Attach the unit, calculate any related quantities and check the original condition. A numerical solution can be algebraically correct but impossible in context."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{equation check}+\\text{context check}=\\text{complete solution}"
+        },
+        {
+          "type": "text",
+          "text": "Reject a negative count, a length that contradicts the stated relationship, or a non-whole answer when the objects cannot be divided. If the context permits decimals, state a sensible precision and keep full accuracy until the final line."
         }
       ]
     },
     {
       "stable_key": "n7-74-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Modelling a perimeter problem",
+      "title": "Worked example: model a perimeter problem",
       "prompt": [
         {
           "type": "text",
@@ -59,7 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the width be x cm, so the length is 2x + 3 cm."
+              "text": "Let the width be x cm. Then the length is 2x + 3 cm."
             }
           ]
         },
@@ -68,7 +108,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the perimeter."
+              "text": "Use P = 2(width + length) to form one equation."
             },
             {
               "type": "display_math",
@@ -81,26 +121,76 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve and interpret."
+              "text": "Expand, solve and interpret."
             },
             {
               "type": "display_math",
-              "latex": "6x+6=42\\Rightarrow x=6"
+              "latex": "6x+6=42\\Rightarrow6x=36\\Rightarrow x=6"
             }
           ]
         }
       ],
-      "verification_note": "The dimensions are 6 cm and 15 cm, and 2(6 + 15) = 42 cm."
+      "verification_note": "The width is 6 cm and the length is 15 cm. Their perimeter is 2(6 + 15) = 42 cm, and 15 = 2(6) + 3."
+    },
+    {
+      "stable_key": "n7-74-ticket-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: model related prices",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "An adult ticket costs 4 dollars more than a student ticket. Three student tickets and two adult tickets cost 48 dollars. Find the price of one student ticket."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let x be the student-ticket price in dollars. The adult-ticket price is x + 4."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Translate the total cost into an equation."
+            },
+            {
+              "type": "display_math",
+              "latex": "3x+2(x+4)=48"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand and solve."
+            },
+            {
+              "type": "display_math",
+              "latex": "5x+8=48\\Rightarrow5x=40\\Rightarrow x=8"
+            }
+          ]
+        }
+      ],
+      "verification_note": "A student ticket costs 8 dollars and an adult ticket costs 12 dollars. The total is 3(8) + 2(12) = 48 dollars."
     },
     {
       "stable_key": "n7-74-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "Three identical folders and a S$2 pen cost S$17. What is the price of one folder in dollars?"
+          "text": "Three identical folders and a pen costing 2 dollars cost 17 dollars altogether. What is the price of one folder in dollars?"
         }
       ],
       "response": {
@@ -122,13 +212,17 @@
     },
     {
       "stable_key": "n7-lesson-04-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Define the variable and unit, express related quantities, form one equality, solve it, and check that the result makes sense in the story."
+          "text": "Define one variable with its unit, express every related unknown in terms of it, and use the equality in the story to form one linear equation."
+        },
+        {
+          "type": "text",
+          "text": "Solve the equation, attach the correct unit, calculate related quantities and verify both the original relationship and the context restrictions."
         }
       ]
     }
@@ -136,10 +230,10 @@
   "assets": [],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T00:45:00+08:00",
+    "created_at": "2026-10-14T01:25:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence and worked examples; awaiting Mathematics and editorial review."
   }
 }

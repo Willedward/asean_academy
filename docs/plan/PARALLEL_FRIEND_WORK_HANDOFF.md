@@ -330,7 +330,7 @@ any unresolved risk. Never merge or force-push a shared branch yourself.
 ## Founder-side ownership while these branches are active
 
 While the teammate owns a listed branch, the founder's Codex should avoid its files and
-continue in a disjoint unit. Good founder-side work includes N7 or S1 lesson expansion,
+continue in a disjoint unit. Good founder-side work includes S1 lesson expansion,
 another separately claimed question manifest, content review, tutor calibration, or release
 verification. Before either side starts new work, fetch the integration branch and check
 open claims and pull requests again.

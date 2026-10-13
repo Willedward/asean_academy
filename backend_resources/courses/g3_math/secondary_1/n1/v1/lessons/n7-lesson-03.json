@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "n7-lesson-02"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 50,
   "objectives": [
     "Identify a lowest common multiple for all denominators.",
     "Multiply every term by the same common multiple.",
@@ -26,11 +26,11 @@
       "stable_key": "n7-73-method",
       "position": 1,
       "type": "explanation",
-      "title": "Clearing fractions safely",
+      "title": "Clear numerical denominators safely",
       "blocks": [
         {
           "type": "text",
-          "text": "A fractional equation can be converted into an equivalent linear equation by multiplying every term on both sides by a common multiple of all denominators. Brackets are essential when a whole numerator has more than one term."
+          "text": "A fractional equation with numerical denominators can be converted into an equivalent linear equation by multiplying every term on both sides by a common multiple of all denominators. The lowest common multiple usually keeps the numbers smallest."
         },
         {
           "type": "display_math",
@@ -38,15 +38,55 @@
         },
         {
           "type": "text",
-          "text": "The lowest common multiple is 12. Multiplying every term by 12 produces 4(x + 1) - 3(x - 2) = 60. Missing one term during this step changes the equation, so mark each denominator as it is cancelled."
+          "text": "The lowest common multiple is 12. Multiplying every complete term by 12 gives 4(x + 1) - 3(x - 2) = 60. Mark each cancelled denominator so that no term is missed."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-73-numerators",
+      "position": 2,
+      "type": "explanation",
+      "title": "Treat each numerator as one grouped expression",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A fraction bar groups its whole numerator. When the numerator contains more than one term, keep brackets after clearing the denominator. A minus sign before a fraction subtracts the entire numerator, so it must distribute to every term when brackets are expanded."
+        },
+        {
+          "type": "display_math",
+          "latex": "-\\frac{x-3}{5}\\xrightarrow{\\times 5}-(x-3)=-x+3"
+        },
+        {
+          "type": "text",
+          "text": "Writing -(x - 3) as -x - 3 is incorrect because the sign of -3 must also reverse. Delay expansion until all denominators have been cancelled; this makes the structure easier to audit."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-73-check-original",
+      "position": 3,
+      "type": "explanation",
+      "title": "Solve the linear equation, then check the fractions",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "After denominators are cleared, expand brackets, collect like terms and solve as in an ordinary linear equation. The clearing step is valid because the common multiple is a non-zero number, so the transformed equation has the same solutions."
+        },
+        {
+          "type": "display_math",
+          "latex": "6\\left(\\frac{x+2}{3}+\\frac{x-1}{2}\\right)=6(6)"
+        },
+        {
+          "type": "text",
+          "text": "Verify the answer in the original fractional equation rather than only in the cleared version. Simplify each fraction separately and confirm that the two original sides match. This check catches a missed term or a bracket-sign error."
         }
       ]
     },
     {
       "stable_key": "n7-73-example",
-      "position": 2,
+      "position": 4,
       "type": "worked_example",
-      "title": "Using the lowest common multiple",
+      "title": "Worked example: use the lowest common multiple",
       "prompt": [
         {
           "type": "text",
@@ -94,11 +134,65 @@
           ]
         }
       ],
-      "verification_note": "Substituting x = 7 gives 3 + 3 = 6."
+      "verification_note": "Substituting x = 7 into the original equation gives 9/3 + 6/2 = 3 + 3 = 6."
+    },
+    {
+      "stable_key": "n7-73-subtraction-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: preserve brackets during subtraction",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve (2x - 1)/4 - (x + 2)/6 = 3/4."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The lowest common multiple of 4 and 6 is 12. Multiply every term by 12."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(2x-1)-2(x+2)=9"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand both grouped numerators, including the subtraction."
+            },
+            {
+              "type": "display_math",
+              "latex": "6x-3-2x-4=9"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Collect terms and solve."
+            },
+            {
+              "type": "display_math",
+              "latex": "4x-7=9\\Rightarrow4x=16\\Rightarrow x=4"
+            }
+          ]
+        }
+      ],
+      "verification_note": "For x = 4, the original left side is 7/4 - 6/6 = 7/4 - 1 = 3/4, matching the right side."
     },
     {
       "stable_key": "n7-73-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -120,19 +214,23 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Multiplying by 5 gives x - 4 = 15, so x = 19."
+          "text": "Multiplying both sides by 5 gives x - 4 = 15, so x = 19."
         }
       ]
     },
     {
       "stable_key": "n7-lesson-03-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Choose a common multiple, multiply every term, preserve brackets around numerators, solve the linear equation, and check the original fractions."
+          "text": "Find a common multiple of every denominator and multiply every complete term on both sides. Keep brackets around multi-term numerators and distribute subtraction signs carefully."
+        },
+        {
+          "type": "text",
+          "text": "Solve the resulting linear equation, then substitute into the original fractional equation to check that both sides have the same value."
         }
       ]
     }
@@ -140,10 +238,10 @@
   "assets": [],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T00:45:00+08:00",
+    "created_at": "2026-10-14T01:25:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence and worked examples; awaiting Mathematics and editorial review."
   }
 }

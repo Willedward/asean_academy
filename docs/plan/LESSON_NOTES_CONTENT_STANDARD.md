@@ -65,14 +65,14 @@ become errors when a lesson is marked `reviewed` or `published`, or under
 | N4 | 3 | Meets the baseline |
 | N5 | 8 | **Flagged for expansion** |
 | N6 | 5 | Meets the baseline after expansion and graph-diagram additions |
-| N7 | 4 | **Flagged for expansion** |
+| N7 | 4 | Meets the baseline after equation-model and worked-example expansion |
 | G1 | 7 | Meets the expanded geometry standard |
 | G5 | 5 | Meets the expanded geometry standard |
 | S1 | 4 | **Flagged for expansion** |
 | Secondary 2 G2 | 5 | Meets the expanded geometry standard |
 
-The current audit therefore passes 41 of 57 authored lessons and flags 16 thin lessons:
-N5.1–N5.8, N7.1–N7.4 and S1.1–S1.4. They contain all four required section
+The current audit therefore passes 45 of 57 authored lessons and flags 12 thin lessons:
+N5.1–N5.8 and S1.1–S1.4. They contain all four required section
 types, but currently have only one explanation and one worked example and are below the
 six-section depth target. They remain valid drafts for review, but cannot pass the strict
 publication gate until expanded.
