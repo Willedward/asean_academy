@@ -29,8 +29,8 @@ Catalogue validation succeeds and reports:
 - 13 of 13 unique topic definitions;
 - 19 of 19 level-specific topic groups;
 - 87 syllabus outcomes;
-- ten authored topic-level banks;
-- 976 authored questions across every Secondary 1 topic group; N3–N7, G1, G5 and S1 remain review-gated.
+- eleven authored topic-level banks;
+- 1,080 authored questions across every Secondary 1 topic group and Secondary 2 G2; N3–N7, G1, G5, S1 and Secondary 2 G2 remain review-gated.
 
 The 104-question N2 bank matches its complete blueprint distribution. The remaining catalogue warnings describe the intentionally partial 40-question N1 blueprint.
 
@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The N2 batches and lessons are reviewed, while N3–N7, G1, G5 and S1 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. The team must now author the remaining nine Secondary 2 topic groups, review every pending unit, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while Secondary 1 N3–N7, G1, G5 and S1 plus Secondary 2 G2 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. The team must now author the remaining eight Secondary 2 topic groups, review every pending unit, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 

@@ -175,13 +175,13 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         syllabus_path=repository_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         school_level="secondary_2",
-        topic_code="G2",
+        topic_code="G4",
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec2-g2-b001"
-    assert next_batch["branch"] == "questions/g3-sec2-g2-b001-willedward"
-    assert "authoring-claim g3-sec2-g2-b001" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec2-g4-b001"
+    assert next_batch["branch"] == "questions/g3-sec2-g4-b001-willedward"
+    assert "authoring-claim g3-sec2-g4-b001" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
@@ -196,13 +196,11 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
 
     assert result["question_count"] == 26
     assert len(work_order["slots"]) == 26
-    assert all(slot["stable_key"].startswith("g2-l") for slot in work_order["slots"])
+    assert all(slot["stable_key"].startswith("g4-l") for slot in work_order["slots"])
     assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
-        "2.1",
-        "2.2",
-        "2.3",
-        "2.4",
-        "2.5",
+        "4.1",
+        "4.2",
+        "4.3",
     }
     assert work_order["generation_contract"]["human_review_required"] == [
         "mathematics",
@@ -214,11 +212,11 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
-def test_executor_repairs_and_validates_complete_g2_work_order(repository_root, tmp_path):
+def test_executor_repairs_and_validates_complete_g4_work_order(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_2/g2/v1/batches"
-        / "g3-sec2-g2-b001.json"
+        / "backend_resources/question_bank/g3_math/secondary_2/g4/v1/batches"
+        / "g3-sec2-g4-b001.json"
     )
     create_authoring_work_order(
         manifest,
@@ -261,8 +259,8 @@ def test_executor_repairs_and_validates_complete_g2_work_order(repository_root, 
 def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_2/g2/v1/batches"
-        / "g3-sec2-g2-b001.json"
+        / "backend_resources/question_bank/g3_math/secondary_2/g4/v1/batches"
+        / "g3-sec2-g4-b001.json"
     )
     create_authoring_work_order(
         manifest,

@@ -566,6 +566,8 @@ class ProgressService:
         }
 
     def apply_to_course_map(self, course_map: CourseMapResponse) -> CourseMapResponse:
+        if course_map.stable_key != self.catalogue.report.course.stable_key:
+            return course_map
         progress = self.progress()
         lesson_progress = {item["lesson_key"]: item for item in progress["lessons"]}
         checkpoint_progress = {

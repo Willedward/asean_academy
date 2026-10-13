@@ -24,6 +24,7 @@ from .course_contracts import (
 )
 
 COURSE_ROOT = Path("backend_resources/courses/g3_math/secondary_1/n1/v1")
+COURSE_CATALOGUE_ROOT = Path("backend_resources/courses/g3_math")
 BANK_ROOT = Path("backend_resources/question_bank/g3_math")
 COURSE_REGISTRY_PATH = Path("backend_resources/courses/g3_math/v1/registry.json")
 SYLLABUS_PATH = Path("backend_resources/syllabi/g3_math/v1/catalogue.json")
@@ -56,18 +57,38 @@ class CourseCatalogue:
         self.allow_drafts = allow_drafts
 
     @cached_property
-    def report(self):
-        report = validate_course(
-            self.repository_root / COURSE_ROOT,
-            self.repository_root / BANK_ROOT,
-        )
-        if not report.valid or report.course is None or report.pools is None:
+    def reports(self):
+        reports = {}
+        course_root = self.repository_root / COURSE_CATALOGUE_ROOT
+        for course_path in sorted(course_root.glob("**/v1/course.json")):
+            report = validate_course(course_path.parent, self.repository_root / BANK_ROOT)
+            if not report.valid or report.course is None or report.pools is None:
+                raise CatalogueError(
+                    "course_content_invalid",
+                    f"The course source at {course_path.parent} failed validation and is "
+                    "temporarily unavailable.",
+                    503,
+                )
+            reports[report.course.stable_key] = report
+        if not reports:
             raise CatalogueError(
                 "course_content_invalid",
-                "The course source failed validation and is temporarily unavailable.",
+                "No authored course sources were found.",
                 503,
             )
-        return report
+        return reports
+
+    @cached_property
+    def report(self):
+        """Return the current learner-release course for legacy practice services."""
+        try:
+            return self.reports["g3-sec1-math"]
+        except KeyError as exc:
+            raise CatalogueError(
+                "course_content_invalid",
+                f"The learner course source at {COURSE_ROOT} is unavailable.",
+                503,
+            ) from exc
 
     @cached_property
     def registry_report(self):
@@ -200,10 +221,10 @@ class CourseCatalogue:
             )
 
     def course_map(self, course_key: str) -> CourseMapResponse:
-        report = self.report
-        course = report.course
-        if course.stable_key != course_key:
+        report = self.reports.get(course_key)
+        if report is None:
             raise CatalogueError("course_not_found", "The requested course was not found.", 404)
+        course = report.course
         self._assert_visible(course.status)
 
         lesson_by_key = {lesson.stable_key: lesson for lesson in report.lessons}
@@ -257,13 +278,19 @@ class CourseCatalogue:
         )
 
     def lesson(self, lesson_key: str) -> LessonResponse:
-        report = self.report
-        course = report.course
-        self._assert_visible(course.status)
-        lesson = next(
-            (candidate for candidate in report.lessons if candidate.stable_key == lesson_key),
+        report = next(
+            (
+                candidate
+                for candidate in self.reports.values()
+                if any(lesson.stable_key == lesson_key for lesson in candidate.lessons)
+            ),
             None,
         )
+        if report is None:
+            raise CatalogueError("lesson_not_found", "The requested lesson was not found.", 404)
+        course = report.course
+        self._assert_visible(course.status)
+        lesson = next(candidate for candidate in report.lessons if candidate.stable_key == lesson_key)
         if lesson is None:
             raise CatalogueError("lesson_not_found", "The requested lesson was not found.", 404)
         self._assert_visible(lesson.status)

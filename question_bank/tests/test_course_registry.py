@@ -40,7 +40,14 @@ def test_full_secondary_one_two_registry_matches_syllabus(repository_root):
     }
     assert len(lesson_keys) == 87
     assert secondary_one.units[0].content_status == "draft"
-    assert all(unit.content_status == "planned" for unit in secondary_two.units)
+    assert secondary_two.content_status == "draft"
+    assert secondary_two.units[4].topic_code == "G2"
+    assert secondary_two.units[4].content_status == "draft"
+    assert all(
+        unit.content_status == "planned"
+        for position, unit in enumerate(secondary_two.units)
+        if position != 4
+    )
 
 
 def test_registry_validation_detects_outcome_drift(repository_root, tmp_path):

@@ -21,6 +21,18 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert {issue.code for issue in report.warnings} == {"lesson_content_required"}
 
 
+def test_secondary_2_g2_course_source_is_valid(repository_root, course_bank_root):
+    course_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g2/v1"
+    report = validate_course(course_root, course_bank_root)
+
+    assert report.valid
+    assert report.course.stable_key == "g3-sec2-math"
+    assert len(report.lessons) == 5
+    assert len(report.pools.pools) == 7
+    assert report.as_dict()["allocated_question_count"] == 104
+    assert report.warnings == []
+
+
 def test_secondary_1_course_cannot_publish_while_course_lessons_and_questions_are_drafts(
     repository_root, course_bank_root
 ):

@@ -68,35 +68,36 @@ def review_fingerprint(*models: Any) -> str:
 
 
 def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewItem]:
-    report = catalogue.report
-    course = report.course
-    items = [
-        CatalogueReviewItem(
-            "course",
-            course.stable_key,
-            course.revision,
-            course_content_hash(course, report.lessons, report.pools),
-            review_fingerprint(course, report.pools),
-            course.title,
-            course.status,
-            course,
+    items = []
+    for report in catalogue.reports.values():
+        course = report.course
+        items.append(
+            CatalogueReviewItem(
+                "course",
+                course.stable_key,
+                course.revision,
+                course_content_hash(course, report.lessons, report.pools),
+                review_fingerprint(course, report.pools),
+                course.title,
+                course.status,
+                course,
+            )
         )
-    ]
-    items.extend(
-        CatalogueReviewItem(
-            "lesson",
-            lesson.stable_key,
-            lesson.revision,
-            lesson_content_hash(lesson),
-            review_fingerprint(lesson),
-            lesson.title,
-            lesson.status,
-            lesson,
-            position=lesson.position,
-            unit_key=lesson.unit_key,
+        items.extend(
+            CatalogueReviewItem(
+                "lesson",
+                lesson.stable_key,
+                lesson.revision,
+                lesson_content_hash(lesson),
+                review_fingerprint(lesson),
+                lesson.title,
+                lesson.status,
+                lesson,
+                position=lesson.position,
+                unit_key=lesson.unit_key,
+            )
+            for lesson in report.lessons
         )
-        for lesson in report.lessons
-    )
     items.extend(
         CatalogueReviewItem(
             "question",

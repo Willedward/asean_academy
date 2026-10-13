@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g2-lesson-02",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-g2",
+  "position": 2,
+  "status": "draft",
+  "title": "Similar figures",
+  "summary": "Recognise similar figures and work with one constant linear scale factor.",
+  "outcomes": [
+    "2.2"
+  ],
+  "prerequisite_lessons": [
+    "g2-lesson-01"
+  ],
+  "estimated_minutes": 45,
+  "objectives": [
+    "Distinguish similarity from congruence.",
+    "Determine a linear scale factor.",
+    "Use scale factors for sides, perimeters and areas."
+  ],
+  "mastery_policy_key": "g2-default-v1",
+  "sections": [
+    {
+      "stable_key": "g2-22-method",
+      "position": 1,
+      "type": "explanation",
+      "title": "Core method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Similar figures have equal corresponding angles and proportional corresponding sides. A scale factor of 1 gives congruent figures; any other positive factor changes size."
+        },
+        {
+          "type": "display_math",
+          "latex": "k=\\frac{\\text{image length}}{\\text{original length}},\\qquad\\text{area factor}=k^2"
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-22-example",
+      "position": 2,
+      "type": "worked_example",
+      "title": "Worked example",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 6 cm side becomes 15 cm in a similar figure. Find the scale factor."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "k=\\frac{15}{6}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "k=2.5"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check that every side and angle was matched in the stated corresponding order."
+    },
+    {
+      "stable_key": "g2-22-recall",
+      "position": 3,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A perimeter of 20 cm is enlarged by scale factor 3. Find the new perimeter."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "60",
+        "canonical_latex": "60",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Perimeters are linear, so 20 × 3 = 60."
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-lesson-02-summary",
+      "position": 4,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-13T20:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

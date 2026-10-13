@@ -172,7 +172,32 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_one["units"][1]["available"] is True
     assert secondary_two["stable_key"] == "g3-sec2-math"
     assert len(secondary_two["units"]) == 9
-    assert secondary_two["available"] is False
+    assert secondary_two["available"] is True
+    assert secondary_two["units"][4]["topic_code"] == "G2"
+    assert secondary_two["units"][4]["available"] is True
+    assert all(
+        lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"]
+    )
+
+
+def test_secondary_2_g2_course_and_lesson_are_available_in_draft_preview():
+    course_response = get("/api/v1/courses/g3-sec2-math/map")
+
+    assert course_response.status_code == 200
+    course = course_response.json()
+    assert course["school_level"] == "secondary_2"
+    assert course["content_status"] == "draft"
+    assert len(course["units"]) == 1
+    assert course["units"][0]["stable_key"] == "g3-sec2-g2"
+    assert len(course["units"][0]["lessons"]) == 5
+
+    lesson_response = get("/api/v1/lessons/g2-lesson-01")
+    assert lesson_response.status_code == 200
+    lesson = lesson_response.json()
+    assert lesson["course_key"] == "g3-sec2-math"
+    assert lesson["unit_key"] == "g3-sec2-g2"
+    assert lesson["practice"]["question_count"] == 15
+    assert lesson["practice"]["development_available"] is True
 
 
 def test_draft_registry_entries_are_not_available_without_preview():
@@ -199,4 +224,5 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
     assert catalogue.review_question_batches["n7-l1-001"] == "g3-sec1-n7-b001"
     assert catalogue.review_question_batches["g1-l1-001"] == "g3-sec1-g1-b001"
     assert catalogue.review_question_batches["s1-l1-001"] == "g3-sec1-s1-b001"
+    assert catalogue.review_question_batches["g2-l1-501"] == "g3-sec2-g2-b001"
     assert "n1-l1-01" not in catalogue.review_question_batches
