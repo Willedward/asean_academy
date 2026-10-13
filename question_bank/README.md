@@ -51,8 +51,8 @@ uv run question-bank course-preview
 
 The command also audits the common lesson-note scaffold. Draft notes below the six-section
 depth standard receive `lesson_notes_thin` warnings; the same findings block strict
-publication. The current warnings identify N5 and S1 lessons that still require a
-second explanation and worked example. Publication validation also fails while any required
+publication. The current warnings identify the N5 lessons that still require a second
+explanation and worked example. Publication validation also fails while any required
 lesson or question content remains in `draft` state:
 
 ```bash

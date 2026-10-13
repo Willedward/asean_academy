@@ -1,52 +1,72 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
   "position": 3,
   "status": "draft",
   "title": "Purposes, uses, advantages and disadvantages of statistical representations",
-  "summary": "Select a representation that matches the data, audience and comparison task.",
+  "summary": "Choose a representation from the data structure, comparison task and audience, and justify the choice using specific strengths and limitations.",
   "outcomes": [
     "1.3"
   ],
   "prerequisite_lessons": [
     "s1-lesson-02"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 50,
   "objectives": [
-    "Match tables and graphs to their main purposes.",
-    "Explain the strengths and limits of each representation.",
-    "Choose a display using the structure of the data and the reader's needs."
+    "Match tables, bar graphs, pictograms, line graphs and pie charts to their main purposes.",
+    "Explain a representation’s advantages and disadvantages in the context of a task.",
+    "Recommend a clear display from the data structure and the reader’s needs."
   ],
   "mastery_policy_key": "s1-default-v1",
   "sections": [
     {
-      "stable_key": "s1-13-method",
+      "stable_key": "s1-13-purpose",
       "position": 1,
       "type": "explanation",
-      "title": "Core method",
+      "title": "Start with the reader’s task",
       "blocks": [
         {
           "type": "text",
-          "text": "Tables preserve exact values; bar graphs compare categories; pictograms offer an accessible visual summary; line graphs reveal change over an ordered variable such as time; pie charts emphasise a few parts of one whole. Selection depends on the task, not decoration."
+          "text": "A representation is useful when it makes the intended comparison accurate and efficient. First identify whether the data consist of separate categories, ordered measurements, change over time or parts of one total. Then identify what the reader must do: look up exact values, compare groups, follow change or judge composition."
         },
         {
-          "type": "display_math",
-          "latex": "\\text{representation choice}=f(\\text{data structure},\\text{task},\\text{audience})"
+          "type": "text",
+          "text": "The decision guide gives strong default choices. A table serves exact lookup, a bar graph makes category lengths easy to compare, a line graph follows ordered change, and a pie chart highlights a small number of parts within one meaningful whole. These are guidelines rather than automatic rules; the audience and amount of data also matter."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-03-display-choice"
         }
       ]
     },
     {
-      "stable_key": "s1-13-example",
+      "stable_key": "s1-13-strengths-limits",
       "position": 2,
+      "type": "explanation",
+      "title": "Name both the strength and the limitation",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Tables preserve exact values and can handle many entries, but patterns may be slow to notice. Bar graphs make differences between categories visible, but crowded labels or too many categories reduce clarity. Pictograms can be engaging for a small audience, but partial symbols and decorative pictures can make precise comparison difficult."
+        },
+        {
+          "type": "text",
+          "text": "Line graphs reveal direction, turning points and rate of change across an ordered variable, but connecting points may imply values between observations. Pie charts communicate a few shares of one whole, but similar angles are hard to compare and many small sectors become unreadable. A reasoned recommendation should link one of these properties to the stated task."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-13-exact-comparison-example",
+      "position": 3,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: exact lookup or category comparison",
       "prompt": [
         {
           "type": "text",
-          "text": "Choose the best display for monthly rainfall over two years when the trend matters most."
+          "text": "A community programme records participant counts for 12 activities. Coordinators need exact counts for room bookings, while a presentation should show which activities are most popular. Recommend a representation for each purpose."
         }
       ],
       "steps": [
@@ -54,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{The measurements form an ordered time series.}"
+              "type": "text",
+              "text": "For room bookings, the reader must retrieve many exact values. Use a labelled table because every activity and count can be read directly without estimating a bar length."
             }
           ]
         },
@@ -63,30 +83,97 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Choose a line graph.}"
+              "type": "text",
+              "text": "For the presentation, the main task is rapid comparison across separate activities. Use a bar graph with a zero baseline and a common scale."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "If space is limited, sort the bars consistently or show only a clearly stated subset. Do not replace missing categories with an unexplained ‘other’ group."
             }
           ]
         }
       ],
-      "verification_note": "Check the title, scale, key, labels and total before accepting the interpretation."
+      "verification_note": "The recommendations change because the tasks change, even though the underlying data are identical: the table preserves exact counts and the bar graph makes relative category sizes visible."
+    },
+    {
+      "stable_key": "s1-13-time-series-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: compare two time series",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Monthly rainfall for two towns is recorded for one year. The reader must compare seasonal patterns and identify months when the towns move differently. Choose and design a suitable display."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Months form an ordered time variable, and the task concerns patterns of change. Choose a double line graph, one line for each town."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the same vertical scale for both series, plot the months at equal horizontal intervals and include a clear legend. Distinct line styles should remain understandable without relying only on colour."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "A grouped bar graph could compare individual months, but 24 bars would make the year-long pattern harder to follow. A pie chart is unsuitable because monthly rainfall is not being presented as shares of one fixed total."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The chosen graph matches the ordered structure, permits month-by-month comparison on one scale and makes rises, falls and crossings between the two series visible."
+    },
+    {
+      "stable_key": "s1-13-communication",
+      "position": 5,
+      "type": "explanation",
+      "title": "Design for accurate communication",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A correct graph still needs a descriptive title, units, readable labels, a sensible scale and a legend when several series appear. Use consistent visual encodings: equal quantities should have equal lengths, areas or angles. Avoid three-dimensional decoration that changes apparent size without adding information."
+        },
+        {
+          "type": "text",
+          "text": "Consider accessibility and the likely reading setting. Patterns or labels can distinguish series that colour alone would hide. A brief source note, sample size and time period help readers judge whether the display supports a broad conclusion. When no single representation serves every purpose, a concise graph can be paired with a small table of exact values."
+        }
+      ]
     },
     {
       "stable_key": "s1-13-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "Using code 1 for table and code 2 for bar graph, enter the better choice for looking up many exact values."
+          "text": "Use code 1 for table, 2 for bar graph, 3 for line graph and 4 for pie chart. Which code best shows a temperature trend measured each hour?"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -95,30 +182,54 @@
       "feedback": [
         {
           "type": "text",
-          "text": "A table supports exact lookup, so the correct code is 1."
+          "text": "Hourly observations are ordered in time and the task is to follow change, so a line graph is the strongest default choice: code 3."
         }
       ]
     },
     {
       "stable_key": "s1-lesson-03-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
-      "title": "Interpretation checklist",
+      "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Identify the data structure and purpose, read every scale and key carefully, calculate from the stated values, then check whether the display gives an accurate and complete impression."
+          "text": "Identify the data structure and the reader’s task before choosing a display. Do not choose a graph because it looks decorative."
+        },
+        {
+          "type": "text",
+          "text": "Justify the choice with a relevant advantage, then acknowledge a limitation that matters in the same context."
+        },
+        {
+          "type": "text",
+          "text": "Use clear titles, labels, units, scales and legends. Pair a graph with a table when readers need both a visual pattern and exact lookup."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-03-display-choice",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-03-display-choice.svg",
+      "alt_text": "A decision guide linking exact lookup, category comparison, ordered change and parts of a whole to suitable statistical displays.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "statistical_display_decision_guide",
+        "lesson_key": "s1-lesson-03"
+      },
+      "sha256": "bdafdd4d347e9dec9d2039e049c31047b49b66475d79a23824cb831975da6cbb",
+      "width": 940,
+      "height": 500
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
-    "created_at": "2026-10-13T16:00:00+08:00",
+    "created_at": "2026-10-14T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
   }
 }
