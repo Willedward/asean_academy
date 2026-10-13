@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l5-005",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l5-005-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it. Using \u03c0 = 22/7, find the remaining volume in cm\u00b3. Enter the numerical value only."
+          "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it. Using π = 22/7, find the remaining volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The cube volume is 14\u00b3 and the cylinder height is 14 cm."
+              "text": "The cube volume is 14³ and the cylinder height is 14 cm."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 5,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l5-005-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l5-005-diagram.svg",
+      "alt_text": "Schematic for Cube with a cylindrical core removed. Not drawn to scale. Stated measures include 14 cm, 3.5 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "composite_solid",
+        "question_key": "g5-l5-005",
+        "outcome": "5.5",
+        "not_to_scale": true
+      },
+      "sha256": "4df89040b58f15cb295975f35b0bd1ccb4952386616c66afc792465885834640",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g5-lesson-01"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 55,
   "objectives": [
     "Split a composite figure into familiar plane shapes.",
     "Use subtraction for holes and cut-outs.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g5-52-example",
+      "stable_key": "g5-lesson-02-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A composite plane figure can be partitioned into non-overlapping familiar shapes or enclosed in a large shape with cut-outs subtracted. Area counts internal coverage. Perimeter follows only the outside boundary, so shared internal edges are excluded."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-02-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-02-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Mark every required length before calculating. Missing boundary lengths often come from subtraction along a common total width or height. For area, choose a decomposition that avoids overlap. For perimeter, trace the boundary once in order and list each exposed segment."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-52-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -72,14 +100,68 @@
       "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
     },
     {
+      "stable_key": "g5-lesson-02-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 14 m by 10 m rectangle has a 6 m by 4 m corner removed. Find both the remaining area and the outside perimeter."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Area=14×10−6×4=116 m²."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Removing a corner replaces two outer lengths by two equal inner lengths, so the total perimeter remains 2(14+10)."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The outside perimeter is 48 m."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The remaining area is smaller than 140 m², and the boundary trace closes without counting internal edges."
+    },
+    {
+      "stable_key": "g5-lesson-02-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not add the area of a cut-out. Do not count shared edges in the outside perimeter. Area and perimeter use different units and cannot be combined in the same arithmetic expression."
+        }
+      ]
+    },
+    {
       "stable_key": "g5-52-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A 10 cm by 6 cm rectangle has a 2 cm by 3 cm corner removed. Find the remaining area in cm\u00b2."
+          "text": "A 10 cm by 6 cm rectangle has a 2 cm by 3 cm corner removed. Find the remaining area in cm²."
         }
       ],
       "response": {
@@ -101,24 +183,44 @@
     },
     {
       "stable_key": "g5-lesson-02-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-lesson-02-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-02-composite_plane.svg",
+      "alt_text": "An L-shaped region shown as a large rectangle with a smaller rectangular corner removed.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "composite_plane",
+        "lesson_key": "g5-lesson-02"
+      },
+      "sha256": "4c860a94646e884caef27d38adce8f497d3f99c20c43fb591f75fbfb1d2c1da4",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T11:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

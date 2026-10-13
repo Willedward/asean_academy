@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l1-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parallelogram display has base 8 cm and perpendicular height 5 cm. Find its area in cm\u00b2. Enter the numerical value only."
+          "text": "A parallelogram display has base 8 cm and perpendicular height 5 cm. Find its area in cm². Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use base \u00d7 perpendicular height."
+              "text": "Use base × perpendicular height."
             }
           ]
         },
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l1-001-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l1-001-diagram.svg",
+      "alt_text": "Schematic for Area of a classroom display. Not drawn to scale. Stated measures include 8 cm, 5 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "area",
+        "question_key": "g5-l1-001",
+        "outcome": "5.1",
+        "not_to_scale": true
+      },
+      "sha256": "0b0781bc49aa6adb3c87ac6453cf6acb6aaed6b11e7a9ca9e9a5770ba66a1034",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

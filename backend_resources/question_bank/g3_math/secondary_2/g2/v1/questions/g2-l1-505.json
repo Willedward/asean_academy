@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l1-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l1-505-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l1-505-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l1-505-diagram.svg",
+      "alt_text": "Schematic for Beacon point enlargement. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "enlargement",
+        "question_key": "g2-l1-505",
+        "outcome": "2.4",
+        "not_to_scale": true
+      },
+      "sha256": "21bc90e2154ca6360b9036e355931243196e5f075016a1f730c9d2f6f861461a",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

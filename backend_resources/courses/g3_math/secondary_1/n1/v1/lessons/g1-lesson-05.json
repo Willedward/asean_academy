@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g1-lesson-04"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Classify special quadrilaterals from their sides, angles and parallel sides.",
     "Use diagonal and symmetry properties to distinguish related quadrilaterals.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g1-15-example",
+      "stable_key": "g1-lesson-05-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Quadrilaterals form a hierarchy. Every square is also a rectangle, rhombus and parallelogram. Every rectangle and every rhombus is a parallelogram. A kite has two pairs of adjacent equal sides, while a trapezium has one pair of parallel sides under the syllabus convention used here."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-05-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-05-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Classify a figure by the most specific set of guaranteed properties. Sides and angles often narrow the class first; diagonals then distinguish related shapes. Rectangle diagonals are equal and bisect each other. Rhombus diagonals are perpendicular and bisect each other. Square diagonals have both sets of properties."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-15-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -63,8 +91,62 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-05-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A parallelogram has perpendicular diagonals and one right angle. Classify it as specifically as possible."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "One right angle in a parallelogram makes all four angles right angles, so it is a rectangle."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Perpendicular diagonals in a parallelogram also make it a rhombus."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "A quadrilateral that is both a rectangle and a rhombus is a square."
+            }
+          ]
+        }
+      ],
+      "verification_note": "A square satisfies every stated property: opposite sides parallel, four right angles and perpendicular bisecting diagonals."
+    },
+    {
+      "stable_key": "g1-lesson-05-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not stop at a broad name when a more specific one is guaranteed. Equal diagonals alone do not prove a square, and perpendicular diagonals alone do not prove a square. Combine all given properties before classifying."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-15-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -92,24 +174,44 @@
     },
     {
       "stable_key": "g1-lesson-05-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-05-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-05-quadrilateral.svg",
+      "alt_text": "A hierarchy diagram linking parallelogram, rectangle, rhombus and square, with kite and trapezium shown separately.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "quadrilateral",
+        "lesson_key": "g1-lesson-05"
+      },
+      "sha256": "ec315b31d231ee223a6204b299a90f503728013bf416a35ab70a224548c47af0",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

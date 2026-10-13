@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-lesson-04",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g2-lesson-03"
   ],
-  "estimated_minutes": 45,
+  "estimated_minutes": 55,
   "objectives": [
     "Enlarge coordinates about a stated centre.",
     "Distinguish linear and area scale factors.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g2-24-example",
+      "stable_key": "g2-lesson-04-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An enlargement with centre C and scale factor k maps each point P along line CP so that vector CP′=k vector CP. On a coordinate grid, P′=C+k(P−C). Positive fractional factors create reductions while preserving direction from the centre."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g2-lesson-04-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-lesson-04-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "About the origin, multiply both coordinates by k. About another centre, subtract the centre coordinates, scale the displacement, then add the centre back. Linear dimensions use |k| and areas use k². The centre, object point and image point must be collinear."
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-24-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -72,8 +100,62 @@
       "verification_note": "Check that every side and angle was matched in the stated corresponding order."
     },
     {
+      "stable_key": "g2-lesson-04-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Point P=(6,4) is enlarged by scale factor 1/2 about C=(2,−2). Find P′."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The displacement from C to P is (6−2,4−(−2))=(4,6)."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Scale the displacement: 1/2(4,6)=(2,3)."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add C back: P′=(2,−2)+(2,3)=(4,1)."
+            }
+          ]
+        }
+      ],
+      "verification_note": "P′ lies halfway from C to P, so C, P′ and P are collinear."
+    },
+    {
+      "stable_key": "g2-lesson-04-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not multiply the coordinates directly unless the centre is the origin. Scale both horizontal and vertical displacements. An area factor is the square of the linear factor, even for a reduction."
+        }
+      ]
+    },
+    {
       "stable_key": "g2-24-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -101,24 +183,44 @@
     },
     {
       "stable_key": "g2-lesson-04-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-lesson-04-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-lesson-04-enlargement.svg",
+      "alt_text": "A coordinate grid showing a triangle and its enlargement from a marked centre, with construction rays through corresponding vertices.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "enlargement",
+        "lesson_key": "g2-lesson-04"
+      },
+      "sha256": "aed00e69013bba642cabec31799333d6498a8534c4f4ce27d95339c4009187af",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T20:00:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

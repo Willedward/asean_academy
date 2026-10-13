@@ -212,6 +212,7 @@ export function LessonPanel({
           <LessonMediaPanel />
           <LessonContent
             api={sectionApi}
+            assets={lesson.assets}
             lessonKey={lesson.stable_key}
             sections={lesson.sections}
           />

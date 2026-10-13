@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l1-006",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l1-006-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l1-006-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l1-006-diagram.svg",
+      "alt_text": "Schematic for Midpoint from a perpendicular bisector. Not drawn to scale. Stated measures include 8 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "construction",
+        "question_key": "g1-l1-006",
+        "outcome": "1.7",
+        "not_to_scale": true
+      },
+      "sha256": "06dc210d9351fd9a0cbde1601e248bcab0ff19a0d2db11eaaeca4e289a69f6f6",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -12,7 +12,7 @@
     "1.1"
   ],
   "prerequisite_lessons": [],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Classify angles as acute, right, obtuse or reflex from their measures.",
     "Use complements, supplements and complete turns to calculate unknown angles.",
@@ -28,7 +28,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Acute angles lie between 0\u00b0 and 90\u00b0, a right angle is 90\u00b0, obtuse angles lie between 90\u00b0 and 180\u00b0, and reflex angles lie between 180\u00b0 and 360\u00b0."
+          "text": "Acute angles lie between 0° and 90°, a right angle is 90°, obtuse angles lie between 90° and 180°, and reflex angles lie between 180° and 360°."
         },
         {
           "type": "display_math",
@@ -37,14 +37,42 @@
       ]
     },
     {
-      "stable_key": "g1-11-example",
+      "stable_key": "g1-lesson-01-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An angle is the amount of turn from one ray to another, measured at the vertex. Read the smaller turn unless a reflex angle is explicitly marked. Acute angles lie between 0° and 90°, a right angle is exactly 90°, obtuse angles lie between 90° and 180°, and reflex angles lie between 180° and 360°."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-01-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-01-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Complementary angles total 90°, supplementary angles total 180°, and angles in a complete turn total 360°. Translate the geometry into one of these totals before forming an equation. An angle bisector divides one angle into two equal angles, so represent both parts by the same expression."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-11-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "Find the reflex angle paired with a 128\u00b0 smaller angle."
+          "text": "Find the reflex angle paired with a 128° smaller angle."
         }
       ],
       "steps": [
@@ -61,14 +89,68 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-01-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A reflex angle is three times its smaller angle around the same point. Find both angles."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let the smaller angle be x°. The reflex angle is 3x°."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Angles around a point total 360°, so x+3x=360."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Hence x=90, so the two angles are 90° and 270°."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The two results total 360°, and 270° is between 180° and 360°."
+    },
+    {
+      "stable_key": "g1-lesson-01-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not classify an angle from the way a sketch looks. Use its stated or calculated measure. Do not call 90° acute or 180° obtuse: boundary values have their own names. For a reflex angle, confirm that the answer exceeds 180°."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-11-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "What is the complement of 34\u00b0?"
+          "text": "What is the complement of 34°?"
         }
       ],
       "response": {
@@ -84,30 +166,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Complements total 90\u00b0, so 90 - 34 = 56."
+          "text": "Complements total 90°, so 90 - 34 = 56."
         }
       ]
     },
     {
       "stable_key": "g1-lesson-01-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-01-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-01-angle_types.svg",
+      "alt_text": "Four labelled examples showing an acute angle, a right angle, an obtuse angle and a reflex angle.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "angle_types",
+        "lesson_key": "g1-lesson-01"
+      },
+      "sha256": "605780d35411eac8c30c5e2a609fd3be5030e8fa1334d05325c744823f603483",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

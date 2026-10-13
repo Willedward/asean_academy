@@ -12,7 +12,11 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { Button as KitButton } from "@/beta-kit/components/ui";
-import { MathContent, type ContentBlock } from "@/components/math-content";
+import {
+  MathContent,
+  type ContentAsset,
+  type ContentBlock,
+} from "@/components/math-content";
 import { Button } from "@/components/ui/button";
 import {
   checkLessonActiveRecall,
@@ -260,14 +264,20 @@ function RecallCheck({
 export function LessonContent({
   api = defaultApi,
   appearance = "established",
+  assets = [],
   lessonKey,
   sections,
 }: {
   api?: LessonContentApi;
   appearance?: "established" | "nextscholar";
+  assets?: ContentAsset[];
   lessonKey: string;
   sections: LessonSection[];
 }) {
+  const assetProps = {
+    assets,
+    assetScope: { kind: "lesson" as const, stableKey: lessonKey },
+  };
   const [progress, setProgress] =
     useState<LessonSectionProgressResponse | null>(null);
   const [busyKey, setBusyKey] = useState<string | null>(null);
@@ -483,7 +493,7 @@ export function LessonContent({
                     : "whitespace-pre-line text-base leading-8 text-slate-700"
                 }
               >
-                <MathContent blocks={section.blocks} />
+                <MathContent {...assetProps} blocks={section.blocks} />
               </div>
             ) : null}
 
@@ -496,7 +506,7 @@ export function LessonContent({
                       : "rounded-2xl bg-slate-100 p-4 text-lg font-semibold leading-8"
                   }
                 >
-                  <MathContent blocks={section.prompt} />
+                  <MathContent {...assetProps} blocks={section.prompt} />
                 </div>
                 <ol className="mt-5 space-y-4 pl-0">
                   {section.steps.map((step) => (
@@ -517,7 +527,7 @@ export function LessonContent({
                             : "min-w-0 grow whitespace-pre-line pt-0.5 leading-8 text-slate-700"
                         }
                       >
-                        <MathContent blocks={step.content} />
+                        <MathContent {...assetProps} blocks={step.content} />
                       </div>
                     </li>
                   ))}
@@ -543,7 +553,7 @@ export function LessonContent({
                       : "text-lg leading-8 text-slate-800"
                   }
                 >
-                  <MathContent blocks={section.prompt} />
+                  <MathContent {...assetProps} blocks={section.prompt} />
                 </p>
                 <RecallCheck
                   appearance={appearance}

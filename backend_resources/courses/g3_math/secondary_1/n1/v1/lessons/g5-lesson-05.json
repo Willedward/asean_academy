@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g5-lesson-04"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 55,
   "objectives": [
     "Add or subtract component volumes without double-counting.",
     "Remove two copies of each hidden contact face from surface area.",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g5-55-example",
+      "stable_key": "g5-lesson-05-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a composite solid, volume is additive for joined non-overlapping pieces and subtractive for holes. Surface area requires a face audit: count exposed faces only. When two solids are joined, the contact region disappears from the outside surface on both pieces."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-05-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-05-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Sketch an exploded view or table of components. Calculate each component volume using consistent units. For surface area, start with the separate totals and subtract twice the contact area. For a drilled hole, subtract its volume and add any newly exposed inner curved surface if surface area is required."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-55-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "Two cuboids of volumes 180 cm\u00b3 and 75 cm\u00b3 are joined without overlap. Find the total volume."
+          "text": "Two cuboids of volumes 180 cm³ and 75 cm³ are joined without overlap. Find the total volume."
         }
       ],
       "steps": [
@@ -72,14 +100,68 @@
       "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
     },
     {
+      "stable_key": "g5-lesson-05-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two cuboids are joined across a 4 cm by 3 cm rectangular face. Their separate surface areas are 94 cm² and 112 cm². Find the exposed surface area of the composite solid."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The contact area is 4×3=12 cm²."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "That face was counted once on each separate cuboid, so subtract 2×12."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Exposed surface area=94+112−24=182 cm²."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The joined solid has less surface area than the sum 206 cm² of the separate solids."
+    },
+    {
+      "stable_key": "g5-lesson-05-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not subtract a contact face only once. Do not subtract contact volume when pieces merely touch. Distinguish a cavity, which creates internal exposed surfaces, from a removed block whose opening and faces must be considered explicitly."
+        }
+      ]
+    },
+    {
       "stable_key": "g5-55-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A 6 cm by 5 cm by 4 cm cuboid has a 2 cm cube removed. Find the remaining volume in cm\u00b3."
+          "text": "A 6 cm by 5 cm by 4 cm cuboid has a 2 cm cube removed. Find the remaining volume in cm³."
         }
       ],
       "response": {
@@ -95,30 +177,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Subtract 2\u00b3 from 6 \u00d7 5 \u00d7 4: 120 - 8 = 112."
+          "text": "Subtract 2³ from 6 × 5 × 4: 120 - 8 = 112."
         }
       ]
     },
     {
       "stable_key": "g5-lesson-05-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-lesson-05-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-05-composite_solid.svg",
+      "alt_text": "Two cuboids joined at a shaded contact face, plus a cube with a cylindrical hole.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "composite_solid",
+        "lesson_key": "g5-lesson-05"
+      },
+      "sha256": "ac89b5553db7545d221e106dcccf474d364c20bbf9d6a4c02d36c1a244b8abd1",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T11:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

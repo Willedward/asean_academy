@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-005",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l1-005-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Convert 3 m\u00b2 to cm\u00b2. Enter the numerical value only."
+          "text": "Convert 3 m² to cm². Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "1 m\u00b2 = 10 000 cm\u00b2."
+              "text": "1 m² = 10 000 cm²."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l1-005-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l1-005-diagram.svg",
+      "alt_text": "Schematic for Square metres to square centimetres. Not drawn to scale. Stated measures include 3 m².",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "conversion",
+        "question_key": "g5-l1-005",
+        "outcome": "5.4",
+        "not_to_scale": true
+      },
+      "sha256": "980f32c9ddfe95663f490095f1c88f82474ca20cd9049eb6a752c02b34b70fba",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

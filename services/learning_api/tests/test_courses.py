@@ -50,9 +50,7 @@ def test_course_map_returns_complete_secondary_1_content_units():
     assert len(course["units"][7]["lessons"]) == 7
     assert len(course["units"][8]["lessons"]) == 5
     assert len(course["units"][9]["lessons"]) == 4
-    assert [lesson["position"] for lesson in course["units"][0]["lessons"]] == list(
-        range(1, 8)
-    )
+    assert [lesson["position"] for lesson in course["units"][0]["lessons"]] == list(range(1, 8))
     assert {lesson["learning_material_state"] for lesson in course["units"][0]["lessons"]} == {
         "pending"
     }
@@ -175,9 +173,7 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_two["available"] is True
     assert secondary_two["units"][4]["topic_code"] == "G2"
     assert secondary_two["units"][4]["available"] is True
-    assert all(
-        lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"]
-    )
+    assert all(lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"])
 
 
 def test_secondary_2_g2_course_and_lesson_are_available_in_draft_preview():
@@ -200,6 +196,21 @@ def test_secondary_2_g2_course_and_lesson_are_available_in_draft_preview():
     assert lesson["practice"]["development_available"] is True
 
 
+def test_validated_geometry_assets_are_served_for_lessons_and_questions():
+    lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
+    assert lesson_response.status_code == 200
+    assert lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"Congruent figures" in lesson_response.content
+
+    question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
+    assert question_response.status_code == 200
+    assert question_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"Matching triangular tiles" in question_response.content
+
+    missing_response = get("/api/v1/content-assets/question/g2-l1-501/not-a-real-diagram")
+    assert missing_response.status_code == 404
+
+
 def test_draft_registry_entries_are_not_available_without_preview():
     response = get("/api/v1/courses", allow_drafts=False)
 
@@ -210,9 +221,7 @@ def test_draft_registry_entries_are_not_available_without_preview():
 def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
     authored_paths = list(
-        (REPOSITORY_ROOT / "backend_resources/question_bank/g3_math").glob(
-            "**/questions/*.json"
-        )
+        (REPOSITORY_ROOT / "backend_resources/question_bank/g3_math").glob("**/questions/*.json")
     )
 
     assert len(catalogue.questions) == 976

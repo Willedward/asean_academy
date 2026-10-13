@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g1-lesson-02"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Recognise corresponding, alternate and co-interior angle relationships.",
     "Calculate unknown angles formed by parallel lines and a transversal.",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For parallel lines, corresponding angles are equal, alternate interior angles are equal, and co-interior angles on the same side of a transversal total 180\u00b0."
+          "text": "For parallel lines, corresponding angles are equal, alternate interior angles are equal, and co-interior angles on the same side of a transversal total 180°."
         },
         {
           "type": "display_math",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g1-13-example",
+      "stable_key": "g1-lesson-03-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A transversal crossing parallel lines creates matching angle positions. Corresponding angles are equal, alternate angles are equal, and co-interior angles on the same side total 180°. The arrow markings on the lines, rather than their appearance, establish that the lines are parallel."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-03-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-03-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Trace a Z shape for alternate angles, an F shape for corresponding angles and a C shape for co-interior angles, but always confirm which lines form the angle. Converse facts also work: if a valid pair of corresponding or alternate angles is equal, or co-interior angles total 180°, the lines are parallel."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-13-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "A co-interior angle is 117\u00b0. Find its partner."
+          "text": "A co-interior angle is 117°. Find its partner."
         }
       ],
       "steps": [
@@ -63,14 +91,68 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-03-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two parallel lines are cut by a transversal. A co-interior pair is (3x+12)° and (5x−8)°. Find x and both angles."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Co-interior angles between parallel lines are supplementary."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write (3x+12)+(5x−8)=180, giving 8x+4=180 and x=22."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The angles are 78° and 102°."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The calculated angles add to 180°, as a co-interior pair must."
+    },
+    {
+      "stable_key": "g1-lesson-03-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not use a parallel-line fact unless parallel arrows are shown or parallelism has been proved. Corresponding and alternate angles are equal; co-interior angles are supplementary. Keep the transversal fixed when identifying the pair."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-13-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A corresponding angle is 68\u00b0. Find its matching angle."
+          "text": "A corresponding angle is 68°. Find its matching angle."
         }
       ],
       "response": {
@@ -92,24 +174,44 @@
     },
     {
       "stable_key": "g1-lesson-03-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-03-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-03-parallel.svg",
+      "alt_text": "Two parallel horizontal lines crossed by a transversal, with corresponding, alternate and co-interior angle positions highlighted.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "parallel",
+        "lesson_key": "g1-lesson-03"
+      },
+      "sha256": "96babc5c4a2eebc7c84cb9445867947fd190c86eda58308187d52e906b41c941",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

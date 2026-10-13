@@ -312,7 +312,11 @@ export function PracticePlayer({
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         {question.stem.length ? (
           <p className="mt-0 text-lg leading-8">
-            <MathContent blocks={question.stem as ContentBlock[]} />
+            <MathContent
+              assets={question.assets}
+              assetScope={{ kind: "question", stableKey: question.stable_key }}
+              blocks={question.stem as ContentBlock[]}
+            />
           </p>
         ) : null}
 
@@ -327,7 +331,14 @@ export function PracticePlayer({
                   {part.label ? (
                     <span className="mr-2">({part.label})</span>
                   ) : null}
-                  <MathContent blocks={part.prompt as ContentBlock[]} />
+                  <MathContent
+                    assets={question.assets}
+                    assetScope={{
+                      kind: "question",
+                      stableKey: question.stable_key,
+                    }}
+                    blocks={part.prompt as ContentBlock[]}
+                  />
                   <span className="ml-2 text-sm font-normal text-slate-500">
                     [{part.marks}]
                   </span>
@@ -372,7 +383,14 @@ export function PracticePlayer({
           <h2 className="mt-0 text-lg font-extrabold">Hint {hint.stage}</h2>
           {hint.parts.map((part) => (
             <p className="mb-0 leading-7" key={part.position}>
-              <MathContent blocks={part.content as ContentBlock[]} />
+              <MathContent
+                assets={question.assets}
+                assetScope={{
+                  kind: "question",
+                  stableKey: question.stable_key,
+                }}
+                blocks={part.content as ContentBlock[]}
+              />
             </p>
           ))}
         </section>
@@ -418,7 +436,14 @@ export function PracticePlayer({
                     className="rounded-xl bg-white p-4 leading-7"
                     key={index}
                   >
-                    <MathContent blocks={content as ContentBlock[]} />
+                    <MathContent
+                      assets={question.assets}
+                      assetScope={{
+                        kind: "question",
+                        stableKey: question.stable_key,
+                      }}
+                      blocks={content as ContentBlock[]}
+                    />
                   </div>
                 );
               })}

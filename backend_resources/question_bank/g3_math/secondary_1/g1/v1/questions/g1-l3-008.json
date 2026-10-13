@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-008",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-008-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-008-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-008-diagram.svg",
+      "alt_text": "Schematic for Compass radius in an SSS construction. Not drawn to scale. Stated measures include 5 cm, 6 cm, 7 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "construction",
+        "question_key": "g1-l3-008",
+        "outcome": "1.7",
+        "not_to_scale": true
+      },
+      "sha256": "ba5eaa8446f098ec45c62506dfa6054a343fdceeb6fb0536b2439bfc786b89f9",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

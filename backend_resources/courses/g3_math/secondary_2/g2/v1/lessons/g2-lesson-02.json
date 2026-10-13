@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-lesson-02",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g2-lesson-01"
   ],
-  "estimated_minutes": 45,
+  "estimated_minutes": 55,
   "objectives": [
     "Distinguish similarity from congruence.",
     "Determine a linear scale factor.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g2-22-example",
+      "stable_key": "g2-lesson-02-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Similar figures have equal corresponding angles and proportional corresponding lengths. The image length equals scale factor times original length. Perimeters use the same linear factor, while areas use the square of that factor."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g2-lesson-02-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-lesson-02-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Choose one direction for the scale factor and keep it throughout. If the factor from A to B is k, then length_B=k×length_A, perimeter_B=k×perimeter_A and area_B=k²×area_A. A scale factor of 1 gives congruent figures."
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-22-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -72,8 +100,62 @@
       "verification_note": "Check that every side and angle was matched in the stated corresponding order."
     },
     {
+      "stable_key": "g2-lesson-02-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two similar rectangles have areas 54 cm² and 150 cm². A side of the smaller rectangle is 9 cm. Find the corresponding side of the larger rectangle."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The area factor is 150/54=25/9."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The positive linear factor is √(25/9)=5/3."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The corresponding side is 9×5/3=15 cm."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The length factor 5/3 squared gives the area factor 25/9."
+    },
+    {
+      "stable_key": "g2-lesson-02-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not apply the area factor directly to a length. Keep original and image in the same order in every ratio. Similar figures need equal corresponding angles as well as proportional sides."
+        }
+      ]
+    },
+    {
       "stable_key": "g2-22-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -101,24 +183,44 @@
     },
     {
       "stable_key": "g2-lesson-02-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-lesson-02-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-lesson-02-similar.svg",
+      "alt_text": "A small rectangle and an enlarged similar rectangle with corresponding sides and a scale-factor arrow.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "similar",
+        "lesson_key": "g2-lesson-02"
+      },
+      "sha256": "ab08c09d1e83a879b5b922557ca7ac21ccea68cb65cf1ccff45515675757b88f",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T20:00:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

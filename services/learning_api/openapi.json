@@ -3689,6 +3689,13 @@
       "DiagnosticQuestionResponse": {
         "additionalProperties": false,
         "properties": {
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/QuestionAssetResponse"
+            },
+            "title": "Assets",
+            "type": "array"
+          },
           "calculator_allowed": {
             "title": "Calculator Allowed",
             "type": "boolean"
@@ -3739,7 +3746,8 @@
           "calculator_allowed",
           "stem",
           "total_marks",
-          "parts"
+          "parts",
+          "assets"
         ],
         "title": "DiagnosticQuestionResponse",
         "type": "object"
@@ -13048,6 +13056,150 @@
         "summary": "Submit typed final answers for deterministic marking",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/api/v1/content-assets/{content_kind}/{stable_key}/{asset_key}": {
+      "get": {
+        "operationId": "getContentAsset",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "content_kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "lesson",
+                "question"
+              ],
+              "title": "Content Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "stable_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Stable Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "asset_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Asset Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Return an authenticated validated lesson or question diagram",
+        "tags": [
+          "content-assets"
         ]
       }
     },

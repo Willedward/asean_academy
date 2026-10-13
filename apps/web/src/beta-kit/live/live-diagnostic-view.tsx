@@ -309,7 +309,14 @@ export function LiveDiagnosticPlayer({
         <H2>{item.question.title}</H2>
         {item.question.stem.length ? (
           <div className="text-[17px] leading-7 lg:text-lg">
-            <MathContent blocks={item.question.stem as ContentBlock[]} />
+            <MathContent
+              assets={item.question.assets}
+              assetScope={{
+                kind: "question",
+                stableKey: item.question.stable_key,
+              }}
+              blocks={item.question.stem as ContentBlock[]}
+            />
           </div>
         ) : null}
         <Divider />
@@ -332,7 +339,14 @@ export function LiveDiagnosticPlayer({
                   >
                     <span className="text-[15px] font-bold">{partName}</span>
                     <span className="text-sm leading-6 text-ns-muted">
-                      <MathContent blocks={part.prompt as ContentBlock[]} />
+                      <MathContent
+                        assets={item.question.assets}
+                        assetScope={{
+                          kind: "question",
+                          stableKey: item.question.stable_key,
+                        }}
+                        blocks={part.prompt as ContentBlock[]}
+                      />
                     </span>
                   </label>
                   <Tag>

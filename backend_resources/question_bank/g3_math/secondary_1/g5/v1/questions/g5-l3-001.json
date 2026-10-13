@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 8 cm and 14 cm and height 6 cm. Find their combined area in cm\u00b2. Enter the numerical value only."
+          "text": "A parallelogram panel has base 12 cm and height 6 cm. Beside it is a trapezium with parallel sides 8 cm and 14 cm and height 6 cm. Find their combined area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 12 \u00d7 6 to \u00bd(8 + 14) \u00d7 6."
+              "text": "Add 12 × 6 to ½(8 + 14) × 6."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-001-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-001-diagram.svg",
+      "alt_text": "Schematic for Combined area of two panels. Not drawn to scale. Stated measures include 12 cm, 6 cm, 8 cm, 14 cm, 6 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "area",
+        "question_key": "g5-l3-001",
+        "outcome": "5.1",
+        "not_to_scale": true
+      },
+      "sha256": "69ebcc88ecd9e2e66d0e0692d6c91c9a80ab6efb865ccae759e3efc0ccc2eba6",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

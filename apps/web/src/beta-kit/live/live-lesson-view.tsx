@@ -131,6 +131,7 @@ export function LiveLessonView({
           <LessonContent
             api={sectionApi}
             appearance="nextscholar"
+            assets={lesson.assets}
             lessonKey={lesson.stable_key}
             sections={lesson.sections}
           />

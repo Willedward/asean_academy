@@ -9,6 +9,7 @@ from uuid import UUID
 from pydantic import Field, StringConstraints
 
 from .contracts import ApiModel
+from .practice_contracts import QuestionAssetResponse
 
 DiagnosticPurpose = Literal["baseline", "endline"]
 DiagnosticSessionState = Literal["in_progress", "submitted"]
@@ -48,6 +49,7 @@ class DiagnosticQuestionResponse(ApiModel):
     stem: list[dict[str, Any]]
     total_marks: int
     parts: list[DiagnosticPartResponse]
+    assets: list[QuestionAssetResponse]
 
 
 class DiagnosticItemResponse(ApiModel):

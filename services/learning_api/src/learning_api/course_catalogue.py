@@ -143,9 +143,7 @@ class CourseCatalogue:
         registry = self.registry_report.registry
 
         def available(status: str) -> bool:
-            return status == "published" or (
-                self.allow_drafts and status in {"draft", "reviewed"}
-            )
+            return status == "published" or (self.allow_drafts and status in {"draft", "reviewed"})
 
         courses = []
         for course in registry.courses:
@@ -164,11 +162,7 @@ class CourseCatalogue:
                             outcomes=lesson.outcomes,
                             content_status=lesson.content_status,
                             available=lesson_available,
-                            href=(
-                                f"/lessons/{lesson.stable_key}"
-                                if lesson_available
-                                else None
-                            ),
+                            href=(f"/lessons/{lesson.stable_key}" if lesson_available else None),
                         )
                     )
                 units.append(
@@ -193,9 +187,7 @@ class CourseCatalogue:
                     description=course.description,
                     content_status=course.content_status,
                     available=course_available,
-                    href=(
-                        f"/courses/{course.stable_key}" if course_available else None
-                    ),
+                    href=(f"/courses/{course.stable_key}" if course_available else None),
                     units=units,
                 )
             )
@@ -219,6 +211,65 @@ class CourseCatalogue:
                 "The requested course is not available.",
                 404,
             )
+
+    def content_asset(self, content_kind: str, stable_key: str, asset_key: str):
+        """Resolve a validated authored image without exposing repository paths."""
+        if content_kind == "question":
+            model = next(
+                (
+                    question
+                    for question in self.review_questions
+                    if question.stable_key == stable_key
+                ),
+                None,
+            )
+            if model is None:
+                raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+            version = model.bank_key.rsplit("-v", 1)[-1]
+            source_root = (
+                self.repository_root
+                / BANK_ROOT
+                / model.school_level
+                / model.topic_code.lower()
+                / f"v{version}"
+            )
+        elif content_kind == "lesson":
+            model = next(
+                (
+                    lesson
+                    for report in self.reports.values()
+                    for lesson in report.lessons
+                    if lesson.stable_key == stable_key
+                ),
+                None,
+            )
+            if model is None:
+                raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+            candidates = list(
+                (self.repository_root / COURSE_CATALOGUE_ROOT).glob(f"**/lessons/{stable_key}.json")
+            )
+            source_path = next(
+                (
+                    path
+                    for path in candidates
+                    if f'"course_key": "{model.course_key}"' in path.read_text(encoding="utf-8")
+                ),
+                None,
+            )
+            if source_path is None:
+                raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+            source_root = source_path.parent.parent
+        else:
+            raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+
+        asset = next((item for item in model.assets if item.asset_key == asset_key), None)
+        if asset is None:
+            raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+        source_root = source_root.resolve()
+        asset_path = (source_root / asset.path).resolve()
+        if not asset_path.is_relative_to(source_root) or not asset_path.is_file():
+            raise CatalogueError("content_asset_not_found", "The diagram was not found.", 404)
+        return asset_path, asset
 
     def course_map(self, course_key: str) -> CourseMapResponse:
         report = self.reports.get(course_key)
@@ -249,9 +300,7 @@ class CourseCatalogue:
                         learning_material_state="ready" if material_ready else "pending",
                         availability="available" if material_ready else "content_pending",
                         unlocked=unlocked,
-                        unlock_reason=(
-                            None if unlocked else "prerequisite_not_proficient"
-                        ),
+                        unlock_reason=(None if unlocked else "prerequisite_not_proficient"),
                         href=f"/lessons/{lesson.stable_key}",
                     )
                 )
@@ -290,7 +339,9 @@ class CourseCatalogue:
             raise CatalogueError("lesson_not_found", "The requested lesson was not found.", 404)
         course = report.course
         self._assert_visible(course.status)
-        lesson = next(candidate for candidate in report.lessons if candidate.stable_key == lesson_key)
+        lesson = next(
+            candidate for candidate in report.lessons if candidate.stable_key == lesson_key
+        )
         if lesson is None:
             raise CatalogueError("lesson_not_found", "The requested lesson was not found.", 404)
         self._assert_visible(lesson.status)

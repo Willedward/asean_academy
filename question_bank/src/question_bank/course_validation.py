@@ -39,11 +39,7 @@ class CourseValidationReport:
 
     @property
     def questions(self):
-        return [
-            question
-            for bank in self.bank_reports.values()
-            for question in bank.questions
-        ]
+        return [question for bank in self.bank_reports.values() for question in bank.questions]
 
     @property
     def errors(self):
@@ -103,6 +99,63 @@ def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidation
             )
 
 
+def _validate_geometry_lesson_depth(lesson: Lesson, path: Path, report: CourseValidationReport):
+    if not lesson.unit_key.rsplit("-", 1)[-1].startswith("g"):
+        return
+    if len(lesson.sections) < 7:
+        _issue(
+            report,
+            "error",
+            "geometry_lesson_too_short",
+            path,
+            "Geometry lessons require at least seven substantive sections.",
+        )
+    worked_examples = sum(section.type == "worked_example" for section in lesson.sections)
+    if worked_examples < 2:
+        _issue(
+            report,
+            "error",
+            "geometry_lesson_worked_examples",
+            path,
+            "Geometry lessons require at least two worked examples.",
+        )
+    authored_size = len(
+        json.dumps(
+            [section.model_dump(mode="json") for section in lesson.sections],
+            ensure_ascii=False,
+        )
+    )
+    if authored_size < 3000:
+        _issue(
+            report,
+            "error",
+            "geometry_lesson_explanation_depth",
+            path,
+            "Geometry lesson notes require at least 3,000 authored section characters.",
+        )
+    referenced_assets = {
+        block.asset_key
+        for section in lesson.sections
+        for blocks in (
+            [section.blocks]
+            if hasattr(section, "blocks")
+            else [section.prompt]
+            if hasattr(section, "prompt")
+            else []
+        )
+        for block in blocks
+        if block.type == "asset_ref"
+    }
+    if not referenced_assets:
+        _issue(
+            report,
+            "error",
+            "geometry_lesson_diagram_missing",
+            path,
+            "Geometry lessons require at least one referenced diagram.",
+        )
+
+
 def _pool_paths(course_root: Path) -> list[Path]:
     legacy = course_root / "question_pools.json"
     paths = [legacy] if legacy.is_file() else []
@@ -112,7 +165,9 @@ def _pool_paths(course_root: Path) -> list[Path]:
 
 def _bank_root_for(question_bank_root: Path, bank_key: str) -> Path | None:
     direct = question_bank_root / "blueprint.json"
-    candidates = [direct] if direct.is_file() else sorted(question_bank_root.glob("**/blueprint.json"))
+    candidates = (
+        [direct] if direct.is_file() else sorted(question_bank_root.glob("**/blueprint.json"))
+    )
     for path in candidates:
         try:
             if load_blueprint(path).bank_key == bank_key:
@@ -173,6 +228,7 @@ def validate_course(
             continue
         seen.add(lesson.stable_key)
         _validate_assets(course_root, lesson, report)
+        _validate_geometry_lesson_depth(lesson, path, report)
         report.lessons.append(lesson)
 
     if report.course is None or report.pools is None:
@@ -192,9 +248,7 @@ def validate_course(
         )
 
     references = {
-        lesson.stable_key: (unit, lesson)
-        for unit in course.units
-        for lesson in unit.lessons
+        lesson.stable_key: (unit, lesson) for unit in course.units for lesson in unit.lessons
     }
     lesson_by_key = {lesson.stable_key: lesson for lesson in report.lessons}
     if set(lesson_by_key) != set(references):
@@ -271,7 +325,11 @@ def validate_course(
         if manifest is None:
             continue
         path = next(
-            (item for item in pool_paths if _load_pool_identity(item) == (manifest.unit_key, manifest.bank_key)),
+            (
+                item
+                for item in pool_paths
+                if _load_pool_identity(item) == (manifest.unit_key, manifest.bank_key)
+            ),
             course_root,
         )
         if manifest.course_key != course.stable_key:
@@ -343,9 +401,7 @@ def validate_course(
         question_by_key = {question.stable_key: question for question in bank_report.questions}
         lesson_refs = {reference.stable_key: reference for reference in unit.lessons}
         practice_pool_by_lesson = {
-            pool.lesson_key: pool
-            for pool in manifest.pools
-            if pool.type == "lesson_practice"
+            pool.lesson_key: pool for pool in manifest.pools if pool.type == "lesson_practice"
         }
         for reference in unit.lessons:
             pool = practice_pool_by_lesson.get(reference.stable_key)
@@ -371,11 +427,15 @@ def validate_course(
             pool_type_counts[pool.type] += len(pool.items)
             lesson = lesson_by_key.get(pool.lesson_key) if pool.lesson_key else None
             if pool.type == "lesson_practice" and pool.lesson_key not in lesson_refs:
-                _issue(report, "error", "unknown_pool_lesson", pool.stable_key, str(pool.lesson_key))
+                _issue(
+                    report, "error", "unknown_pool_lesson", pool.stable_key, str(pool.lesson_key)
+                )
             for item in pool.items:
                 question = question_by_key.get(item.question_key)
                 if question is None:
-                    _issue(report, "error", "unknown_pool_question", pool.stable_key, item.question_key)
+                    _issue(
+                        report, "error", "unknown_pool_question", pool.stable_key, item.question_key
+                    )
                     continue
                 allocated_keys.add(item.question_key)
                 if lesson and question.primary_outcome not in lesson.outcomes:

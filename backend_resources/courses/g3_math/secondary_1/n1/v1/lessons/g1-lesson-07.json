@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-07",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g1-lesson-06"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Choose suitable instruments and data for a geometric construction.",
     "Construct and verify angle bisectors, perpendicular bisectors and parallel lines.",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g1-17-example",
+      "stable_key": "g1-lesson-07-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Straightedge-and-compass construction preserves exact geometric conditions. Equal-radius arcs from the endpoints of a segment locate points equidistant from both endpoints; joining the arc intersections gives the perpendicular bisector. Equal arcs from the sides of an angle locate its angle bisector."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-07-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-07-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Keep construction arcs visible because they are the evidence. For SSS, draw one side and intersect two circles. For SAS, construct the included angle between the two known sides. For ASA, construct the two known angles at the ends of the known side. Verify lengths and angles after construction."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-17-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "A 92\u00b0 angle is bisected. Find either constructed angle."
+          "text": "A 92° angle is bisected. Find either constructed angle."
         }
       ],
       "steps": [
@@ -63,8 +91,62 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-07-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Construct triangle ABC with AB=7 cm, AC=5 cm and BC=4 cm, then describe why the construction is unique up to reflection."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Draw AB=7 cm."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "With centre A and radius 5 cm draw an arc. With centre B and radius 4 cm draw a second arc."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Label an intersection C and join AC and BC. The two possible intersections are mirror images across AB."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Measure AC and BC and keep both intersecting arcs visible as evidence of the SSS construction."
+    },
+    {
+      "stable_key": "g1-lesson-07-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not erase the arcs used to locate a point. A ruler with no compass construction does not demonstrate an exact bisector. Check that two arcs actually intersect; otherwise the proposed triangle data may be impossible."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-17-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -86,30 +168,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The crossing is the midpoint, 12 \u00f7 2 = 6 cm."
+          "text": "The crossing is the midpoint, 12 ÷ 2 = 6 cm."
         }
       ]
     },
     {
       "stable_key": "g1-lesson-07-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-07-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-07-construction.svg",
+      "alt_text": "A line segment AB with intersecting compass arcs locating C, together with a perpendicular-bisector construction.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "construction",
+        "lesson_key": "g1-lesson-07"
+      },
+      "sha256": "645010227789f956a49b0d51e96f676834e1f1ebe3bdb5bacd09d1187621a188",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

@@ -208,7 +208,11 @@ export function LivePracticeView({
         <H2>{question.title}</H2>
         {question.stem.length ? (
           <div className="text-[17px] leading-7 lg:text-lg">
-            <MathContent blocks={question.stem as ContentBlock[]} />
+            <MathContent
+              assets={question.assets}
+              assetScope={{ kind: "question", stableKey: question.stable_key }}
+              blocks={question.stem as ContentBlock[]}
+            />
           </div>
         ) : null}
       </Card>
@@ -240,7 +244,14 @@ export function LivePracticeView({
                       : `Part (${part.label ?? part.position})`}
                   </span>
                   <span className="text-sm leading-6 text-ns-muted">
-                    <MathContent blocks={part.prompt as ContentBlock[]} />
+                    <MathContent
+                      assets={question.assets}
+                      assetScope={{
+                        kind: "question",
+                        stableKey: question.stable_key,
+                      }}
+                      blocks={part.prompt as ContentBlock[]}
+                    />
                   </span>
                 </label>
                 <Tag
@@ -317,6 +328,11 @@ export function LivePracticeView({
                 <div className="flex min-w-0 flex-col gap-2 text-[15px] leading-6">
                   {hint.parts.map((part) => (
                     <MathContent
+                      assets={question.assets}
+                      assetScope={{
+                        kind: "question",
+                        stableKey: question.stable_key,
+                      }}
                       key={part.position}
                       blocks={part.content as ContentBlock[]}
                     />
@@ -369,7 +385,14 @@ export function LivePracticeView({
                         {index + 1}
                       </span>
                       <div className="min-w-0 grow pt-0.5 leading-7">
-                        <MathContent blocks={content as ContentBlock[]} />
+                        <MathContent
+                          assets={question.assets}
+                          assetScope={{
+                            kind: "question",
+                            stableKey: question.stable_key,
+                          }}
+                          blocks={content as ContentBlock[]}
+                        />
                       </div>
                     </li>
                   );

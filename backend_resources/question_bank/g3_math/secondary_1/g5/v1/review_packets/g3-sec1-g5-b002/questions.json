@@ -1010,7 +1010,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l5-002",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1022,7 +1022,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l5-002-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1115,7 +1124,25 @@
       }
     ],
     "total_marks": 5,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l5-002-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l5-002-diagram.svg",
+        "alt_text": "Schematic for Perimeter from a composite area. Not drawn to scale. Stated measures include 8 cm, 5 cm, 5 cm, 120 cm².",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v1",
+          "diagram_kind": "composite_plane",
+          "question_key": "g5-l5-002",
+          "outcome": "5.2",
+          "not_to_scale": true
+        },
+        "sha256": "3550c1c16e183080db520ed5b8f9a5a9d132e9af55891d390a91464c16bc50ef",
+        "width": 940,
+        "height": 390
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1129,7 +1156,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
     }
   },
   {

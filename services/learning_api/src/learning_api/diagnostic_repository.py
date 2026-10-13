@@ -386,6 +386,19 @@ class PostgresDiagnosticRepository:
             """,
             (session["form_id"],),
         ).fetchall()
+        assets = connection.execute(
+            """
+            select assets.question_version_id, assets.asset_key, assets.kind,
+                   assets.format, assets.storage_path, assets.alt_text,
+                   assets.width, assets.height
+            from math_question_assets assets
+            join diagnostic_form_items items
+              on items.question_version_id = assets.question_version_id
+            where items.form_id = %s
+            order by assets.question_version_id, assets.asset_key
+            """,
+            (session["form_id"],),
+        ).fetchall()
         by_version: dict[UUID, list[dict]] = defaultdict(list)
         for part in parts:
             by_version[part["question_version_id"]].append(
@@ -396,6 +409,19 @@ class PostgresDiagnosticRepository:
                     "marks": part["marks"],
                     "response_type": part["response_type"],
                     "input_placeholder": "Enter your final answer",
+                }
+            )
+        assets_by_version: dict[UUID, list[dict]] = defaultdict(list)
+        for asset in assets:
+            assets_by_version[asset["question_version_id"]].append(
+                {
+                    "asset_key": asset["asset_key"],
+                    "kind": asset["kind"],
+                    "format": asset["format"],
+                    "path": asset["storage_path"],
+                    "alt_text": asset["alt_text"],
+                    "width": asset["width"],
+                    "height": asset["height"],
                 }
             )
         items = []
@@ -414,6 +440,7 @@ class PostgresDiagnosticRepository:
                         "stem": row["stem_blocks"],
                         "total_marks": row["total_marks"],
                         "parts": by_version[row["question_version_id"]],
+                        "assets": assets_by_version[row["question_version_id"]],
                     },
                     "saved_answers": row["answer_payload"],
                     "saved_at": row["saved_at"],

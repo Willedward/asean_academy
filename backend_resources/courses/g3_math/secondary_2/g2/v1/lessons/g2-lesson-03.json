@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-lesson-03",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g2-lesson-02"
   ],
-  "estimated_minutes": 45,
+  "estimated_minutes": 55,
   "objectives": [
     "State a correct correspondence between vertices.",
     "Form and solve proportions from corresponding sides.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g2-23-example",
+      "stable_key": "g2-lesson-03-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A similarity statement such as triangle ABC similar to triangle PQR fixes A↔P, B↔Q and C↔R. Corresponding sides are therefore AB↔PQ, BC↔QR and AC↔PR. Mark the correspondence before forming any proportion."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g2-lesson-03-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-lesson-03-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use ratios with matching orientation, such as AB/PQ=BC/QR. Cross-multiplication then solves an unknown side. Equal corresponding angles can establish AA similarity; once similarity is known, every corresponding length follows the same scale factor."
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-23-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -72,8 +100,62 @@
       "verification_note": "Check that every side and angle was matched in the stated corresponding order."
     },
     {
+      "stable_key": "g2-lesson-03-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Triangles ABC and PQR are similar in that order. AB=8 cm, BC=12 cm, PQ=14 cm and PR=21 cm. Find QR and AC if AC corresponds to PR."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The scale factor from ABC to PQR is PQ/AB=14/8=7/4."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "QR=BC×7/4=21 cm."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Since PR=AC×7/4, AC=21×4/7=12 cm."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The three larger-to-smaller side ratios are all 7/4."
+    },
+    {
+      "stable_key": "g2-lesson-03-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not pair sides because they occupy a similar place on the page. Use vertex order or equal-angle markings. Avoid reversing only one ratio; write a complete correspondence line before calculating."
+        }
+      ]
+    },
+    {
       "stable_key": "g2-23-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -101,24 +183,44 @@
     },
     {
       "stable_key": "g2-lesson-03-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-lesson-03-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-lesson-03-proportion.svg",
+      "alt_text": "Two similar labelled triangles showing the vertex correspondence A to P, B to Q and C to R.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "proportion",
+        "lesson_key": "g2-lesson-03"
+      },
+      "sha256": "0fb2e5bee87d9f39930d746313c6151f2c269feb01ed12367cd889ace3f8f80e",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T20:00:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

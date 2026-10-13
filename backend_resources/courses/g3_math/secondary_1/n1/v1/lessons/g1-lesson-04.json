@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g1-lesson-03"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Use angle and side properties of triangles and special quadrilaterals.",
     "Determine line and rotational symmetry of regular polygons and quadrilaterals.",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Triangles have interior-angle sum 180\u00b0. Special quadrilaterals are distinguished by parallel sides, equal sides, right angles and diagonal properties. A regular polygon has equal sides and equal angles, with rotational order and number of symmetry lines equal to its number of sides."
+          "text": "Triangles have interior-angle sum 180°. Special quadrilaterals are distinguished by parallel sides, equal sides, right angles and diagonal properties. A regular polygon has equal sides and equal angles, with rotational order and number of symmetry lines equal to its number of sides."
         },
         {
           "type": "display_math",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g1-14-example",
+      "stable_key": "g1-lesson-04-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Shape properties come from definitions and markings. A triangle totals 180°. A quadrilateral totals 360°. Isosceles triangles have two equal sides and two equal base angles. Equilateral triangles have three equal sides and three 60° angles. Regular polygons have all sides and all interior angles equal."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-04-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-04-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a multi-step problem, record every justified property beside the diagram: equal sides, equal angles, parallel sides and symmetry. Then use triangle or quadrilateral angle sums. A diagonal can split a quadrilateral into triangles, but properties of the diagonal depend on the quadrilateral type."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-14-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "An isosceles triangle has equal angles of 64\u00b0. Find its remaining angle."
+          "text": "An isosceles triangle has equal angles of 64°. Find its remaining angle."
         }
       ],
       "steps": [
@@ -63,8 +91,62 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-04-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "An isosceles trapezium has two equal angles of 68° on one base. Find the two angles on the other base."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Adjacent interior angles between the parallel bases are supplementary."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Each angle on the other base is 180°−68°=112°."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The four angles are 68°, 68°, 112° and 112°."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The four angles total 360° and the base-angle pairs are equal."
+    },
+    {
+      "stable_key": "g1-lesson-04-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not assume a property merely because a drawing looks symmetric. Use stated markings and definitions. A regular polygon requires both equal sides and equal angles. When a diagonal is drawn, identify which new triangles and angle sums it creates."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-14-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -92,24 +174,44 @@
     },
     {
       "stable_key": "g1-lesson-04-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-04-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-04-polygons.svg",
+      "alt_text": "Reference drawings of a triangle, parallelogram, trapezium and regular hexagon with standard equality and parallel markings.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "polygons",
+        "lesson_key": "g1-lesson-04"
+      },
+      "sha256": "e805d0eb7f177d99d1e8b9d89f3dcd13eec5eb5cefc6b58216f28f78d26b0f03",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

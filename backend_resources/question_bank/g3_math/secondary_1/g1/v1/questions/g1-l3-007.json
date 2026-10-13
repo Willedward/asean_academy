@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-007",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-007-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A convex polygon has interior-angle sum 1260\u00b0. Find its number of sides."
+          "text": "A convex polygon has interior-angle sum 1260°. Find its number of sides."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set (n - 2) \u00d7 180\u00b0 equal to 1260\u00b0."
+              "text": "Set (n - 2) × 180° equal to 1260°."
             }
           ]
         },
@@ -94,7 +103,25 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-007-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-007-diagram.svg",
+      "alt_text": "Schematic for Sides from an interior sum. Not drawn to scale. Stated measures include 1260°.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "exterior",
+        "question_key": "g1-l3-007",
+        "outcome": "1.6",
+        "not_to_scale": true
+      },
+      "sha256": "7f91ca59da3f882faf8a0164f80bac21315a4f403878b3514bd41943a50b262a",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -108,6 +135,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

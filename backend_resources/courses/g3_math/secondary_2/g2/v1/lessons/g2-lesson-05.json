@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-lesson-05",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g2-lesson-04"
   ],
-  "estimated_minutes": 45,
+  "estimated_minutes": 55,
   "objectives": [
     "Translate a real context into a scale or proportion.",
     "Convert units before using a map or model scale.",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g2-25-example",
+      "stable_key": "g2-lesson-05-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Scale drawings, maps and models are applications of similarity. A scale 1:n means one unit on the representation corresponds to n of the same units in reality. Convert units before multiplying or dividing by the scale factor."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g2-lesson-05-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-lesson-05-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Decide the direction: actual length=plan length×n, while plan length=actual length÷n. Areas use n². In nested scale problems, multiply successive linear factors first, then square only if the requested quantity is an area."
+        }
+      ]
+    },
+    {
+      "stable_key": "g2-25-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -72,8 +100,62 @@
       "verification_note": "Check that every side and angle was matched in the stated corresponding order."
     },
     {
+      "stable_key": "g2-lesson-05-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A rectangular garden measures 36 m by 24 m. It is drawn at scale 1:600. Find the plan dimensions in centimetres and its plan area."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert actual lengths: 36 m=3600 cm and 24 m=2400 cm."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by 600 to obtain plan dimensions 6 cm by 4 cm."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The plan area is 6×4=24 cm²."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Using the area factor 600² gives 864 m²=8,640,000 cm² and 8,640,000÷360,000=24 cm²."
+    },
+    {
+      "stable_key": "g2-lesson-05-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not use metres on one side of a ratio and centimetres on the other. A 1:600 scale is a linear ratio; area changes by 600². Label whether each quantity belongs to the plan, model or real object."
+        }
+      ]
+    },
+    {
       "stable_key": "g2-25-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -101,24 +183,44 @@
     },
     {
       "stable_key": "g2-lesson-05-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-lesson-05-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-lesson-05-scale.svg",
+      "alt_text": "A plan rectangle and a larger real courtyard connected by a scale arrow, with linear and area scale factors shown.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "scale",
+        "lesson_key": "g2-lesson-05"
+      },
+      "sha256": "3c6e4fec5156d8c6e2b00fa665bdc58667b22130dcca5dfe1c661c991d0d49c5",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T20:00:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-008",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-008-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two cubes of side 4 cm are joined face to face. Find the total exposed surface area in cm\u00b2. Enter the numerical value only."
+          "text": "Two cubes of side 4 cm are joined face to face. Find the total exposed surface area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 2(6 \u00d7 4\u00b2) - 2(4\u00b2)."
+              "text": "Calculate 2(6 × 4²) - 2(4²)."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-008-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-008-diagram.svg",
+      "alt_text": "Schematic for Exposed area of joined cubes. Not drawn to scale. Stated measures include 4 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "composite_solid",
+        "question_key": "g5-l3-008",
+        "outcome": "5.5",
+        "not_to_scale": true
+      },
+      "sha256": "577280dc12f75a62aacf4a988e36921561feb8de7c112fa5730cb71878767168",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

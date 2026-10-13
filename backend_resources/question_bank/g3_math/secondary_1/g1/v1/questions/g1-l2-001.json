@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l2-001",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l2-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An acute angle is 38\u00b0. Find its complement in degrees."
+          "text": "An acute angle is 38°. Find its complement in degrees."
         }
       ],
       "marks": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Complementary angles total 90\u00b0."
+              "text": "Complementary angles total 90°."
             }
           ]
         },
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l2-001-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l2-001-diagram.svg",
+      "alt_text": "Schematic for Complement of an acute angle. Not drawn to scale. Stated measures include 38°.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "angle_types",
+        "question_key": "g1-l2-001",
+        "outcome": "1.1",
+        "not_to_scale": true
+      },
+      "sha256": "5faecff11f90bd5a1a2c396c0626c3ea908965abf256331f094260109a50d315",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

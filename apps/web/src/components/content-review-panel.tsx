@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { MathContent, type ContentBlock } from "@/components/math-content";
+import {
+  MathContent,
+  type ContentAsset,
+  type ContentBlock,
+} from "@/components/math-content";
 import { Button } from "@/components/ui/button";
 import {
   adminRequest,
@@ -31,9 +35,21 @@ function label(value: string) {
   return value.replaceAll("_", " ");
 }
 
-function Blocks({ value }: { value: unknown }) {
+function Blocks({
+  assets,
+  kind,
+  stableKey,
+  value,
+}: {
+  assets?: ContentAsset[];
+  kind?: "lesson" | "question";
+  stableKey?: string;
+  value: unknown;
+}) {
   return (
     <MathContent
+      assets={assets}
+      assetScope={kind && stableKey ? { kind, stableKey } : undefined}
       blocks={(Array.isArray(value) ? value : []) as ContentBlock[]}
     />
   );
@@ -45,12 +61,14 @@ type ReviewResponse = {
   canonical_expression?: string;
 };
 type ReviewQuestion = {
+  stable_key: string;
   title: string;
   stem: ContentBlock[];
   difficulty: number;
   primary_outcome: string;
   total_marks: number;
   calculator_allowed: boolean;
+  assets: ContentAsset[];
   parts: {
     position: number;
     label?: string | null;
@@ -67,10 +85,12 @@ type ReviewQuestion = {
   }[];
 };
 type ReviewLesson = {
+  stable_key: string;
   title: string;
   summary: string;
   objectives: string[];
   sections: Record<string, unknown>[];
+  assets: ContentAsset[];
 };
 type ReviewCourse = {
   title: string;
@@ -150,7 +170,12 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
             Calculator {question.calculator_allowed ? "allowed" : "not allowed"}
             {preview.batch_id ? ` · Batch ${preview.batch_id}` : ""}
           </p>
-          <Blocks value={question.stem} />
+          <Blocks
+            assets={question.assets}
+            kind="question"
+            stableKey={question.stable_key}
+            value={question.stem}
+          />
         </div>
         {question.parts.map((part) => (
           <section className="space-y-4 border-t pt-4" key={part.position}>
@@ -159,7 +184,12 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
                 {part.label ? `Part (${part.label})` : `Part ${part.position}`}{" "}
                 · {part.marks} marks
               </h4>
-              <Blocks value={part.prompt} />
+              <Blocks
+                assets={question.assets}
+                kind="question"
+                stableKey={question.stable_key}
+                value={part.prompt}
+              />
             </div>
             <div className="rounded-xl border bg-white p-4">
               <p className="m-0 text-xs font-semibold uppercase text-teal-700">
@@ -172,7 +202,12 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
               <ol className="list-decimal space-y-2 pl-5">
                 {part.hints.map((hint) => (
                   <li key={hint.stage}>
-                    <Blocks value={hint.content} />
+                    <Blocks
+                      assets={question.assets}
+                      kind="question"
+                      stableKey={question.stable_key}
+                      value={hint.content}
+                    />
                   </li>
                 ))}
               </ol>
@@ -182,7 +217,12 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
               <ol className="list-decimal space-y-2 pl-5">
                 {part.solution.map((step) => (
                   <li key={step.position}>
-                    <Blocks value={step.content} />
+                    <Blocks
+                      assets={question.assets}
+                      kind="question"
+                      stableKey={question.stable_key}
+                      value={step.content}
+                    />
                     {step.mark_type || step.mark_value ? (
                       <span className="ml-2 text-xs text-slate-600">
                         {step.mark_type ?? ""}
@@ -282,14 +322,24 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
               {label(String(section.type))}
             </p>
             <h4 className="font-bold">{String(section.title)}</h4>
-            <Blocks value={section.blocks ?? section.prompt} />
+            <Blocks
+              assets={lesson.assets}
+              kind="lesson"
+              stableKey={lesson.stable_key}
+              value={section.blocks ?? section.prompt}
+            />
             {Array.isArray(section.steps)
               ? section.steps.map((step) => (
                   <p
                     className="border-l-2 border-teal-200 pl-3"
                     key={String(step.position)}
                   >
-                    <Blocks value={step.content} />
+                    <Blocks
+                      assets={lesson.assets}
+                      kind="lesson"
+                      stableKey={lesson.stable_key}
+                      value={step.content}
+                    />
                   </p>
                 ))
               : null}

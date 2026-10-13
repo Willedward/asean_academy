@@ -37,6 +37,7 @@ from .identity import E2ETokenVerifier, SupabaseTokenVerifier, TokenVerifier
 from .observability import configure_logging
 from .routers.admin import router as admin_router
 from .routers.admin_analytics import router as admin_analytics_router
+from .routers.content_assets import router as content_assets_router
 from .routers.content_review import router as content_review_router
 from .routers.courses import router as courses_router
 from .routers.diagnostics import router as diagnostics_router
@@ -186,8 +187,12 @@ def create_app(
 
     @application.exception_handler(ContentSyncError)
     async def content_error(request: Request, exc: ContentSyncError):
-        return _error_response(request, status_code=503, code="content_out_of_sync",
-                               message="Learning content is awaiting a database import.")
+        return _error_response(
+            request,
+            status_code=503,
+            code="content_out_of_sync",
+            message="Learning content is awaiting a database import.",
+        )
 
     @application.exception_handler(HTTPException)
     async def http_exception(request: Request, exc: HTTPException):
@@ -360,16 +365,24 @@ def create_app(
             try:
                 verify_database_content(settings.database_url, application.state.course_catalogue)
             except ContentSyncError as exc:
-                raise HTTPException(status_code=503, detail={
-                    "code": "content_out_of_sync",
-                    "message": "Learning content is awaiting a database import.",
-                }) from exc
+                raise HTTPException(
+                    status_code=503,
+                    detail={
+                        "code": "content_out_of_sync",
+                        "message": "Learning content is awaiting a database import.",
+                    },
+                ) from exc
             except psycopg.Error as exc:
-                raise HTTPException(status_code=503, detail={
-                    "code": "database_unavailable",
-                    "message": "The learning database is unavailable.",
-                }) from exc
-            dependencies = ReadinessDependencies(database="ready", schema_status="current", content_status="current")
+                raise HTTPException(
+                    status_code=503,
+                    detail={
+                        "code": "database_unavailable",
+                        "message": "The learning database is unavailable.",
+                    },
+                ) from exc
+            dependencies = ReadinessDependencies(
+                database="ready", schema_status="current", content_status="current"
+            )
         return ReadinessResponse(
             version=__version__,
             environment=settings.environment,
@@ -397,6 +410,7 @@ def create_app(
     application.include_router(admin_router)
     application.include_router(admin_analytics_router)
     application.include_router(content_review_router)
+    application.include_router(content_assets_router)
     application.include_router(courses_router)
     application.include_router(diagnostics_router)
     application.include_router(practice_router)

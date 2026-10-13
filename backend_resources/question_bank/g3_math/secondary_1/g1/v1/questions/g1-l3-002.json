@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-002",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-002-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Split 180\u00b0 into 5 ratio parts."
+              "text": "Split 180° into 5 ratio parts."
             }
           ]
         },
@@ -83,7 +92,25 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-002-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-002-diagram.svg",
+      "alt_text": "Schematic for Straight-line ratio. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "intersection",
+        "question_key": "g1-l3-002",
+        "outcome": "1.2",
+        "not_to_scale": true
+      },
+      "sha256": "9155fa62954d30ab81d956cd8dfff7de0ffc545fa23bf236254c9880d51d080f",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +124,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

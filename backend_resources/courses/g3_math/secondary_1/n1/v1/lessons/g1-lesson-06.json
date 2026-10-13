@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-06",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,7 +14,7 @@
   "prerequisite_lessons": [
     "g1-lesson-05"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Calculate the interior-angle sum of any convex polygon.",
     "Relate interior and exterior angles of regular polygons.",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Drawing diagonals from one vertex divides an n-sided convex polygon into n - 2 triangles, so its interior-angle sum is (n - 2)180\u00b0. One exterior angle at each vertex always totals 360\u00b0."
+          "text": "Drawing diagonals from one vertex divides an n-sided convex polygon into n - 2 triangles, so its interior-angle sum is (n - 2)180°. One exterior angle at each vertex always totals 360°."
         },
         {
           "type": "display_math",
@@ -39,8 +39,36 @@
       ]
     },
     {
-      "stable_key": "g1-16-example",
+      "stable_key": "g1-lesson-06-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Drawing diagonals from one vertex divides a convex n-sided polygon into n−2 triangles, so its interior-angle sum is (n−2)×180°. One exterior angle at each vertex, taken in the same direction, always totals 360°. In a regular polygon all exterior angles are equal."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-06-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-06-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a regular polygon, exterior angle=360°/n and interior angle=180°−exterior angle. To recover n, divide 360° by the exterior angle. If an interior angle is given, first subtract it from 180°. The resulting side count must be a whole number at least 3."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-16-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -63,8 +91,62 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-06-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Each interior angle of a regular polygon is 156°. Find the number of sides."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The exterior angle is 180°−156°=24°."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The exterior angles total 360°, so n=360/24."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Therefore n=15."
+            }
+          ]
+        }
+      ],
+      "verification_note": "(15−2)×180°=2340°, and 2340°÷15=156°."
+    },
+    {
+      "stable_key": "g1-lesson-06-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not divide 360° by an interior angle. Convert to the exterior angle first. The formula (n−2)×180° gives the total interior sum, not one interior angle unless you divide by n for a regular polygon."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-16-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -86,30 +168,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "A hexagon has four triangles, so 4 \u00d7 180\u00b0 = 720\u00b0."
+          "text": "A hexagon has four triangles, so 4 × 180° = 720°."
         }
       ]
     },
     {
       "stable_key": "g1-lesson-06-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-06-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-06-exterior.svg",
+      "alt_text": "A regular hexagon showing a fan of four triangles and one exterior angle at a vertex.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "exterior",
+        "lesson_key": "g1-lesson-06"
+      },
+      "sha256": "4ffe5ce38192d51f1f781318a8dacd7e2ee5e1d3010732259de4780d68562b90",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

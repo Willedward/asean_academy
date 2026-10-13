@@ -1520,7 +1520,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g2-l5-503",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1532,7 +1532,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l5-503-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1625,7 +1634,25 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g2-l5-503-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l5-503-diagram.svg",
+        "alt_text": "Schematic for Similar-triangle ratio synthesis. Not drawn to scale. Stated measures include 12 cm, 21 cm.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v1",
+          "diagram_kind": "proportion",
+          "question_key": "g2-l5-503",
+          "outcome": "2.3",
+          "not_to_scale": true
+        },
+        "sha256": "b921099f3885721c803feff0ff0bf5f07f461c05d9bf389f7782f6e3534029ff",
+        "width": 940,
+        "height": 390
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1639,7 +1666,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
     }
   },
   {

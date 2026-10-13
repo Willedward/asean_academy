@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { getVerifiedSession, isAuthenticationConfigured } from "@/lib/auth/session";
+import {
+  getVerifiedSession,
+  isAuthenticationConfigured,
+} from "@/lib/auth/session";
 import { ensureLearningApiReady } from "@/lib/server/learning-api-readiness";
 
 const FORWARDED_REQUEST_HEADERS = [
@@ -11,7 +14,10 @@ const FORWARDED_REQUEST_HEADERS = [
 ] as const;
 const FORWARDED_RESPONSE_HEADERS = [
   "content-type",
+  "content-length",
+  "content-security-policy",
   "retry-after",
+  "x-content-type-options",
   "x-request-id",
 ] as const;
 const PUBLIC_PATHS = new Set(["health"]);
@@ -19,7 +25,10 @@ const PUBLIC_PATHS = new Set(["health"]);
 type Context = { params: Promise<{ path: string[] }> };
 
 function learningApiBaseUrl(): string {
-  return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+  return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(
+    /\/$/,
+    "",
+  );
 }
 
 function authenticationError() {
@@ -49,7 +58,8 @@ function invalidUpstreamResponse(upstream: Response, requestId: string) {
     {
       error: {
         code: "learning_api_invalid_response",
-        message: "The learning service timed out or restarted. Please try again.",
+        message:
+          "The learning service timed out or restarted. Please try again.",
         request_id: requestId,
         details: null,
       },
@@ -61,7 +71,10 @@ function invalidUpstreamResponse(upstream: Response, requestId: string) {
   );
 }
 
-async function forward(request: NextRequest, context: Context): Promise<Response> {
+async function forward(
+  request: NextRequest,
+  context: Context,
+): Promise<Response> {
   const { path } = await context.params;
   const relativePath = path.join("/");
   const baseUrl = learningApiBaseUrl();
@@ -110,7 +123,10 @@ async function forward(request: NextRequest, context: Context): Promise<Response
   }
 
   const contentType = upstream.headers.get("content-type")?.toLowerCase() ?? "";
-  if (!contentType.includes("application/json")) {
+  if (
+    !contentType.includes("application/json") &&
+    !contentType.startsWith("image/")
+  ) {
     return invalidUpstreamResponse(
       upstream,
       upstream.headers.get("x-request-id") ??
@@ -119,7 +135,11 @@ async function forward(request: NextRequest, context: Context): Promise<Response
     );
   }
 
-  const responseHeaders = new Headers({ "Cache-Control": "private, no-store" });
+  const responseHeaders = new Headers({
+    "Cache-Control": contentType.startsWith("image/")
+      ? "private, max-age=3600"
+      : "private, no-store",
+  });
   FORWARDED_RESPONSE_HEADERS.forEach((name) => {
     const value = upstream.headers.get(name);
     if (value) responseHeaders.set(name, value);

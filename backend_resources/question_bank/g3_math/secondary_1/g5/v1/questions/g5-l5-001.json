@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l5-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l5-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A design uses a trapezium with parallel sides x cm and (x + 4) cm and height 10 cm, together with a non-overlapping parallelogram of base (x + 3) cm and height 8 cm. The combined area is 260 cm\u00b2. Find x. Enter the numerical value only."
+          "text": "A design uses a trapezium with parallel sides x cm and (x + 4) cm and height 10 cm, together with a non-overlapping parallelogram of base (x + 3) cm and height 8 cm. The combined area is 260 cm². Find x. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve \u00bd[x + (x + 4)](10) + 8(x + 3) = 260."
+              "text": "Solve ½[x + (x + 4)](10) + 8(x + 3) = 260."
             }
           ]
         }
@@ -105,7 +114,25 @@
     }
   ],
   "total_marks": 5,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l5-001-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l5-001-diagram.svg",
+      "alt_text": "Schematic for Linked quadrilateral design. Not drawn to scale. Stated measures include 10 cm, 8 cm, 260 cm².",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "area",
+        "question_key": "g5-l5-001",
+        "outcome": "5.1",
+        "not_to_scale": true
+      },
+      "sha256": "362659a1553181539325d47d6de3af6b6000f82abe0ce3a02e09a95fa3b211d6",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -119,6 +146,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

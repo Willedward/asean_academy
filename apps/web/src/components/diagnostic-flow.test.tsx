@@ -41,6 +41,7 @@ const session: DiagnosticSession = {
       saved_answers: null,
       saved_at: null,
       question: {
+        assets: [],
         stable_key: "n1-diagnostic-a-01",
         revision: 1,
         title: "Prime recognition",

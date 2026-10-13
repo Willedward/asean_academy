@@ -7,7 +7,20 @@ export type ContentBlock =
   | { type: "display_math"; latex: string }
   | { type: "asset_ref"; asset_key: string };
 
-function MathExpression({ latex, displayMode }: { latex: string; displayMode: boolean }) {
+export type ContentAsset = {
+  asset_key: string;
+  alt_text: string;
+  width?: number | null;
+  height?: number | null;
+};
+
+function MathExpression({
+  latex,
+  displayMode,
+}: {
+  latex: string;
+  displayMode: boolean;
+}) {
   const markup = katex.renderToString(latex, {
     displayMode,
     throwOnError: false,
@@ -17,13 +30,24 @@ function MathExpression({ latex, displayMode }: { latex: string; displayMode: bo
   return (
     <span
       aria-label={latex}
-      className={displayMode ? "my-3 block overflow-x-auto py-1" : "inline-block"}
+      className={
+        displayMode ? "my-3 block overflow-x-auto py-1" : "inline-block"
+      }
       dangerouslySetInnerHTML={{ __html: markup }}
     />
   );
 }
 
-export function MathContent({ blocks }: { blocks: ContentBlock[] }) {
+export function MathContent({
+  assets = [],
+  assetScope,
+  blocks,
+}: {
+  assets?: ContentAsset[];
+  assetScope?: { kind: "lesson" | "question"; stableKey: string };
+  blocks: ContentBlock[];
+}) {
+  const assetByKey = new Map(assets.map((asset) => [asset.asset_key, asset]));
   return (
     <>
       {blocks.map((block, index) => (
@@ -35,9 +59,33 @@ export function MathContent({ blocks }: { blocks: ContentBlock[] }) {
           {block.type === "display_math" ? (
             <MathExpression displayMode latex={block.latex} />
           ) : null}
-          {block.type === "asset_ref" ? (
-            <span className="text-amber-800">[Diagram: {block.asset_key}]</span>
-          ) : null}
+          {block.type === "asset_ref"
+            ? (() => {
+                const asset = assetByKey.get(block.asset_key);
+                if (!asset || !assetScope) {
+                  return (
+                    <span className="text-amber-800">
+                      [Diagram unavailable]
+                    </span>
+                  );
+                }
+                const source = `/api/v1/content-assets/${assetScope.kind}/${encodeURIComponent(assetScope.stableKey)}/${encodeURIComponent(asset.asset_key)}`;
+                return (
+                  <span className="my-4 block overflow-hidden rounded-2xl border border-slate-200 bg-white p-3">
+                    {/* Authenticated dynamic SVGs are intentionally served through the app proxy. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt={asset.alt_text}
+                      className="mx-auto h-auto max-h-[32rem] w-auto max-w-full"
+                      height={asset.height ?? undefined}
+                      loading="lazy"
+                      src={source}
+                      width={asset.width ?? undefined}
+                    />
+                  </span>
+                );
+              })()
+            : null}
         </Fragment>
       ))}
     </>

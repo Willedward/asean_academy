@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-006",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l1-006-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two non-overlapping cuboids have volumes 120 cm\u00b3 and 80 cm\u00b3. They are joined to form one solid. Find the total volume in cm\u00b3. Enter the numerical value only."
+          "text": "Two non-overlapping cuboids have volumes 120 cm³ and 80 cm³. They are joined to form one solid. Find the total volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l1-006-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l1-006-diagram.svg",
+      "alt_text": "Schematic for Volume of joined cuboids. Not drawn to scale. Stated measures include 120 cm³, 80 cm³.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "composite_solid",
+        "question_key": "g5-l1-006",
+        "outcome": "5.5",
+        "not_to_scale": true
+      },
+      "sha256": "02c14f08e915e99c6a36c62c70ab68d12ef155de17f5effe00f5d1cec847cf19",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

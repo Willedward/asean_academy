@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -14,10 +14,10 @@
   "prerequisite_lessons": [
     "g5-lesson-02"
   ],
-  "estimated_minutes": 40,
+  "estimated_minutes": 55,
   "objectives": [
     "Calculate a prism volume from cross-sectional area and length.",
-    "Calculate cylinder volume using \u03c0r\u00b2h.",
+    "Calculate cylinder volume using πr²h.",
     "Build total surface area from end faces and lateral faces."
   ],
   "mastery_policy_key": "g5-default-v1",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g5-53-example",
+      "stable_key": "g5-lesson-03-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A prism has a constant cross-section, so volume=cross-sectional area×length. A cylinder is a circular prism with volume πr²h. Surface area unfolds every exposed face: two congruent ends plus the lateral surface."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-03-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-03-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a right prism, the lateral area is perimeter of cross-section×length. For a cylinder, curved area=2πrh and total surface area=2πr²+2πrh. Check whether a container is open or closed before including circular ends."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-53-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "A prism has cross-sectional area 18 cm\u00b2 and length 7 cm. Find its volume."
+          "text": "A prism has cross-sectional area 18 cm² and length 7 cm. Find its volume."
         }
       ],
       "steps": [
@@ -72,14 +100,68 @@
       "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
     },
     {
+      "stable_key": "g5-lesson-03-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A closed cylinder has radius 3 cm and height 8 cm. Find its total surface area in terms of π."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The two circular ends have area 2πr²=18π."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The curved surface has area 2πrh=48π."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Total surface area=66π cm²."
+            }
+          ]
+        }
+      ],
+      "verification_note": "A closed cylinder includes two ends; every term has square units."
+    },
+    {
+      "stable_key": "g5-lesson-03-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not confuse diameter with radius. Volume uses cubic units; surface area uses square units. For prisms, the cross-sectional area is multiplied by the prism length, which may not be the vertical dimension in the sketch."
+        }
+      ]
+    },
+    {
       "stable_key": "g5-53-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A prism has cross-sectional area 15 cm\u00b2 and length 8 cm. Find its volume in cm\u00b3."
+          "text": "A prism has cross-sectional area 15 cm² and length 8 cm. Find its volume in cm³."
         }
       ],
       "response": {
@@ -95,30 +177,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Multiply cross-sectional area by length: 15 \u00d7 8 = 120."
+          "text": "Multiply cross-sectional area by length: 15 × 8 = 120."
         }
       ]
     },
     {
       "stable_key": "g5-lesson-03-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-lesson-03-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-03-solids.svg",
+      "alt_text": "A triangular prism and a cylinder with their cross-sections and lengths highlighted.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "solids",
+        "lesson_key": "g5-lesson-03"
+      },
+      "sha256": "6658fcfd750cd5641ef189949feffcd0afa09837cd6ccb23290aa9d48f8cc5b2",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T11:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l1-001",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l1-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use this code: acute = 1, right = 2, obtuse = 3, reflex = 4. Enter the code for an angle of 35\u00b0."
+          "text": "Use this code: acute = 1, right = 2, obtuse = 3, reflex = 4. Enter the code for an angle of 35°."
         }
       ],
       "marks": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare 35\u00b0 with 90\u00b0."
+              "text": "Compare 35° with 90°."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "An angle between 0\u00b0 and 90\u00b0 is acute."
+              "text": "An angle between 0° and 90° is acute."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l1-001-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l1-001-diagram.svg",
+      "alt_text": "Schematic for Classifying a 35-degree angle. Not drawn to scale. Stated measures include 35°.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "angle_types",
+        "question_key": "g1-l1-001",
+        "outcome": "1.1",
+        "not_to_scale": true
+      },
+      "sha256": "d5e45fa08dcb39e44dd6065fa6f3a208581e12902ac274d3071ff2a599b518c7",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

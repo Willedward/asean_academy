@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-007",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-007-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "One sheet has area 2.4 m\u00b2 and another has area 6 500 cm\u00b2. Find the difference in cm\u00b2. Enter the numerical value only."
+          "text": "One sheet has area 2.4 m² and another has area 6 500 cm². Find the difference in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert the first area to cm\u00b2 before subtracting."
+              "text": "Convert the first area to cm² before subtracting."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "2.4 m\u00b2 = 24 000 cm\u00b2."
+              "text": "2.4 m² = 24 000 cm²."
             }
           ]
         }
@@ -72,7 +81,25 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-007-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-007-diagram.svg",
+      "alt_text": "Schematic for Difference between two areas. Not drawn to scale. Stated measures include 2.4 m², 500 cm².",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "conversion",
+        "question_key": "g5-l3-007",
+        "outcome": "5.4",
+        "not_to_scale": true
+      },
+      "sha256": "8e2c3b3f65d1beef39a7d6b816eb670df936b77c8db55e0d21dafa463bdb3116",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +113,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

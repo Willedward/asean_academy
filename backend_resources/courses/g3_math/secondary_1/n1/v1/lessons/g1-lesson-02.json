@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -14,11 +14,11 @@
   "prerequisite_lessons": [
     "g1-lesson-01"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 55,
   "objectives": [
     "Apply vertically opposite, straight-line and angles-at-a-point facts.",
     "Form equations from angle expressions at intersections.",
-    "Check that calculated angles satisfy the relevant 180\u00b0 or 360\u00b0 total."
+    "Check that calculated angles satisfy the relevant 180° or 360° total."
   ],
   "mastery_policy_key": "g1-default-v1",
   "sections": [
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Vertically opposite angles are equal, adjacent angles on a straight line total 180\u00b0, and angles around a point total 360\u00b0."
+          "text": "Vertically opposite angles are equal, adjacent angles on a straight line total 180°, and angles around a point total 360°."
         },
         {
           "type": "display_math",
@@ -39,14 +39,42 @@
       ]
     },
     {
-      "stable_key": "g1-12-example",
+      "stable_key": "g1-lesson-02-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "At an intersection, vertically opposite angles are the non-adjacent pair across the vertex and are equal. Adjacent angles on a straight line total 180°. All angles around the point total 360°. Mark one known angle first, then propagate only relationships that share the same vertex."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g1-lesson-02-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-lesson-02-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When algebraic expressions label vertically opposite angles, equate them. When expressions label an adjacent linear pair, add them and set the sum to 180°. A reliable check is to alternate the two angle sizes around a two-line intersection and verify that all four total 360°."
+        }
+      ]
+    },
+    {
+      "stable_key": "g1-12-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
         {
           "type": "text",
-          "text": "Two intersecting lines make an obtuse angle of 124\u00b0. Find either acute angle."
+          "text": "Two intersecting lines make an obtuse angle of 124°. Find either acute angle."
         }
       ],
       "steps": [
@@ -63,14 +91,68 @@
       "verification_note": "The result follows the stated property and satisfies the original geometric conditions."
     },
     {
+      "stable_key": "g1-lesson-02-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Vertically opposite angles are (5x+7)° and (8x−38)°. Find every angle at the intersection."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Vertically opposite angles are equal, so 5x+7=8x−38."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve 45=3x to obtain x=15. Each of that opposite pair is 82°."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Each adjacent angle is 180°−82°=98°, so the four angles alternate 82°, 98°, 82°, 98°."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Opposite angles match and 82+98+82+98=360."
+    },
+    {
+      "stable_key": "g1-lesson-02-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not equate adjacent angles unless another fact says they are equal. A straight line gives a total of 180°, while angles around a point give 360°. State the angle fact before writing the equation so the correct total is clear."
+        }
+      ]
+    },
+    {
       "stable_key": "g1-12-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "One angle on a straight line is 73\u00b0. Find the other."
+          "text": "One angle on a straight line is 73°. Find the other."
         }
       ],
       "response": {
@@ -86,30 +168,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Angles on a straight line total 180\u00b0, so 180 - 73 = 107."
+          "text": "Angles on a straight line total 180°, so 180 - 73 = 107."
         }
       ]
     },
     {
       "stable_key": "g1-lesson-02-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Name the relevant property, write the complete angle or construction relationship, calculate carefully, and check that every angle and length is geometrically possible."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-lesson-02-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-lesson-02-intersection.svg",
+      "alt_text": "Two intersecting straight lines with the four angles around the intersection labelled a, b, a and b.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "intersection",
+        "lesson_key": "g1-lesson-02"
+      },
+      "sha256": "0d8fa1d90e799663542bc6466758259b38b9278637cc89d9de75cbb33aca58ee",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T10:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

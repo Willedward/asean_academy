@@ -1374,7 +1374,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l5-005",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1386,7 +1386,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g1-l5-005-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1468,7 +1477,25 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g1-l5-005-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l5-005-diagram.svg",
+        "alt_text": "Schematic for Angles in a symmetric kite. Not drawn to scale. Stated measures include 70°, 110°.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v1",
+          "diagram_kind": "polygons",
+          "question_key": "g1-l5-005",
+          "outcome": "1.4",
+          "not_to_scale": true
+        },
+        "sha256": "4b71365549e2c0344a414de9ac5c42c25fce0a838a5f0e3be2e5940e782333c5",
+        "width": 940,
+        "height": 390
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1482,7 +1509,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
     }
   },
   {

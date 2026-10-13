@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -12,7 +12,7 @@
     "5.1"
   ],
   "prerequisite_lessons": [],
-  "estimated_minutes": 40,
+  "estimated_minutes": 55,
   "objectives": [
     "Calculate the area of a parallelogram from its base and perpendicular height.",
     "Calculate the area of a trapezium from its parallel sides and perpendicular height.",
@@ -37,8 +37,36 @@
       ]
     },
     {
-      "stable_key": "g5-51-example",
+      "stable_key": "g5-lesson-01-visual",
       "position": 2,
+      "type": "explanation",
+      "title": "Read the diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A parallelogram has area base×perpendicular height. The height must meet the base at 90°, even when it falls outside the sloping side. A trapezium has area one half times the sum of its parallel sides times the perpendicular height."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-01-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-01-reasoning",
+      "position": 3,
+      "type": "explanation",
+      "title": "Reasoning method",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Choose either parallel side as the parallelogram base, then pair it with the corresponding perpendicular height. For a trapezium, identify the parallel pair before substituting. Keep units consistent and square the final length unit because area measures two-dimensional coverage."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-51-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example",
       "prompt": [
@@ -70,14 +98,68 @@
       "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
     },
     {
+      "stable_key": "g5-lesson-01-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: apply the method",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A trapezium has area 126 cm², height 9 cm and one parallel side 10 cm. Find the other parallel side."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use 126=1/2(10+b)×9."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply by 2 and divide by 9: 28=10+b."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Hence b=18 cm."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives 1/2(10+18)×9=126 cm²."
+    },
+    {
+      "stable_key": "g5-lesson-01-pitfalls",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not use a sloping side as the height. Do not forget to add the parallel sides before halving. State cm² or m² for an area and check that a recovered length is positive and plausible."
+        }
+      ]
+    },
+    {
       "stable_key": "g5-51-recall",
-      "position": 3,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "A parallelogram has base 9 cm and perpendicular height 7 cm. Find its area in cm\u00b2."
+          "text": "A parallelogram has base 9 cm and perpendicular height 7 cm. Find its area in cm²."
         }
       ],
       "response": {
@@ -93,30 +175,50 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Use base \u00d7 perpendicular height: 9 \u00d7 7 = 63."
+          "text": "Use base × perpendicular height: 9 × 7 = 63."
         }
       ]
     },
     {
       "stable_key": "g5-lesson-01-summary",
-      "position": 4,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
           "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+        },
+        {
+          "type": "text",
+          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
         }
       ]
     }
   ],
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-lesson-01-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-01-area.svg",
+      "alt_text": "A parallelogram and a trapezium with bases and perpendicular heights clearly marked.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "area",
+        "lesson_key": "g5-lesson-01"
+      },
+      "sha256": "beb5d82c3b8aed40d7c1090e87b069fe1db85ebd140ed6f0018e7f7c2cd5e3b9",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_authored",
     "created_at": "2026-10-13T11:30:00+08:00",
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

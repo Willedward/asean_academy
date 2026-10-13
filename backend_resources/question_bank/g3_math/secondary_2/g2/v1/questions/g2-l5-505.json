@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l5-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l5-505-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -105,7 +114,25 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l5-505-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l5-505-diagram.svg",
+      "alt_text": "Schematic for Scale-plan courtyard synthesis. Not drawn to scale. Stated measures include 7.5 cm, 4.8 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "scale",
+        "question_key": "g2-l5-505",
+        "outcome": "2.5",
+        "not_to_scale": true
+      },
+      "sha256": "df1b4027f1b0cacf74281f52f7cbfb9633d5d16e7ad9793b89fcc328efe2ccc9",
+      "width": 940,
+      "height": 390
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -119,6 +146,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
   }
 }

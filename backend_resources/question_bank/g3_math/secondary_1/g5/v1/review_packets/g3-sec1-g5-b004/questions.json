@@ -1931,7 +1931,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l5-004",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1943,7 +1943,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l5-004-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2025,7 +2034,25 @@
       }
     ],
     "total_marks": 5,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l5-004-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l5-004-diagram.svg",
+        "alt_text": "Schematic for Packing cubes with mixed units. Not drawn to scale. Stated measures include 1.2 m, 80 cm, 50 cm, 10 cm.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v1",
+          "diagram_kind": "conversion",
+          "question_key": "g5-l5-004",
+          "outcome": "5.4",
+          "not_to_scale": true
+        },
+        "sha256": "f67c5eb79e67a8d04592d9de2d594e4495634260430a3bb53224a109bf0d9ec5",
+        "width": 940,
+        "height": 390
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2039,7 +2066,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2419,7 +2446,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l5-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2431,7 +2458,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l5-005-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2491,7 +2527,25 @@
       }
     ],
     "total_marks": 5,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l5-005-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l5-005-diagram.svg",
+        "alt_text": "Schematic for Cube with a cylindrical core removed. Not drawn to scale. Stated measures include 14 cm, 3.5 cm.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v1",
+          "diagram_kind": "composite_solid",
+          "question_key": "g5-l5-005",
+          "outcome": "5.5",
+          "not_to_scale": true
+        },
+        "sha256": "4df89040b58f15cb295975f35b0bd1ccb4952386616c66afc792465885834640",
+        "width": 940,
+        "height": 390
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2505,7 +2559,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
     }
   }
 ]

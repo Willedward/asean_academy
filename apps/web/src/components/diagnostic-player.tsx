@@ -273,7 +273,14 @@ export function DiagnosticPlayer({
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         {item.question.stem.length ? (
           <div className="mb-6 text-lg leading-8">
-            <MathContent blocks={item.question.stem as ContentBlock[]} />
+            <MathContent
+              assets={item.question.assets}
+              assetScope={{
+                kind: "question",
+                stableKey: item.question.stable_key,
+              }}
+              blocks={item.question.stem as ContentBlock[]}
+            />
           </div>
         ) : null}
         <div className="space-y-7">
@@ -283,7 +290,14 @@ export function DiagnosticPlayer({
                 {part.label ? (
                   <span className="mr-2">({part.label})</span>
                 ) : null}
-                <MathContent blocks={part.prompt as ContentBlock[]} />
+                <MathContent
+                  assets={item.question.assets}
+                  assetScope={{
+                    kind: "question",
+                    stableKey: item.question.stable_key,
+                  }}
+                  blocks={part.prompt as ContentBlock[]}
+                />
                 <span className="ml-2 text-sm font-normal text-slate-500">
                   [{part.marks}]
                 </span>
