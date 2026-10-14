@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l4-505",
+  "bank_key": "g3-sec2-g5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G5",
+  "primary_outcome": "5.6",
+  "title": "Cost of covering a pyramid",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled mensuration schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l4-505-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Quality inspectors considered high daytime temperatures while preparing a replacement design for the forest ranger outpost. Rangers assemble the shelter from parts carried on foot. A later inspection will compare the finished dimensions with this record. A closed square-based pyramid has base side 8 m and slant height 13 m on every face. Covering costs $6 per m². Find the total covering cost in dollars."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1632",
+        "canonical_latex": "1632",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Include one square base and four triangular faces."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the total area, then multiply by $6 per m²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select the relevant dimensions and apply the mensuration relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=8^2+4(\\frac12)(8)(13)=272,\\quad C=272(6)=1632"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{1632}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [
+    {
+      "asset_key": "g5-l4-505-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l4-505-diagram.svg",
+      "alt_text": "Cost of covering a pyramid: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-mensuration-svg-v1",
+        "diagram_kind": "pyramid",
+        "question_key": "g5-l4-505",
+        "outcome": "5.6",
+        "not_to_scale": true
+      },
+      "sha256": "7dbbb9d6a5594000ccf6fbb79e7fccbba91ab50360955e4b4c05cb133a5c3c6d",
+      "width": 760,
+      "height": 430
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T19:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
