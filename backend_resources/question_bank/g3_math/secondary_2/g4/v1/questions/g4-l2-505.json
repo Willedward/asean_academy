@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l2-505",
+  "bank_key": "g3-sec2-g4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.2",
+  "title": "Test whether a triangle is right-angled",
+  "difficulty": 2,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l2-505-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Site coordinators noted salt exposure near the coast while preparing a replacement frame. A triangular support at the clinic wheelchair ramp has side lengths 17 cm, 144 cm and 145 cm. Enter 1 if it is right-angled and 0 if it is not."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "4.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Treat the longest side as the possible hypotenuse."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare 17² + 144² with 145²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select and apply the right-triangle relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "17^2+144^2=21025,\\quad 145^2=21025"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{1}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [
+    {
+      "asset_key": "g4-l2-505-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l2-505-diagram.svg",
+      "alt_text": "Test whether a triangle is right-angled: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-right-triangle-svg-v1",
+        "diagram_kind": "right_triangle",
+        "question_key": "g4-l2-505",
+        "outcome": "4.2",
+        "not_to_scale": true
+      },
+      "sha256": "c35a9143fe62ae558def1234ae50888bd23bcfd60bce1d17d1c5438ed342d355",
+      "width": 760,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
