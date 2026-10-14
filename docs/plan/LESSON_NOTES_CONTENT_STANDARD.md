@@ -71,20 +71,15 @@ become errors when a lesson is marked `reviewed` or `published`, or under
 | S1 | 4 | Meets the baseline after data-handling and statistical-diagram expansion |
 | Secondary 2 G2 | 5 | Meets the expanded geometry standard |
 | Secondary 2 S2 | 2 | Meets the baseline and is integrated as a draft unit |
-| Secondary 2 N2 | 2 | Meets the baseline in lesson-only staging |
+| Secondary 2 N2 | 2 | Meets the baseline and is integrated as a draft unit |
 
-The current audit therefore passes 53 of 61 authored or staged lessons and flags eight thin lessons:
+The current audit therefore passes 53 of 61 authored lessons and flags eight thin lessons:
 N5.1–N5.8. Those N5 lessons contain all four required section types, but currently have
 only one explanation and one worked example and are below the six-section depth target.
 They remain valid drafts for review, but cannot pass the strict publication gate until
 expanded.
 
-Secondary 2 S2.1–S2.2 are authored at full depth and integrated into the draft Level 2
-course with their complete question bank and pools. Secondary 2 N2.4–N2.5 are authored at
-full depth in a lesson-only staging package. They remain outside the deployable course until
-the planned N2 bank has 104 authored questions and complete practice, checkpoint and
-adaptive-reserve pools. This keeps lesson review moving without implying learner
-availability.
+Secondary 2 S2.1–S2.2 and N2.4–N2.5 are authored at full depth and integrated into the draft Level 2 course with their complete question banks and pools. Draft integration makes them available to the authenticated admin review workflow without implying production learner availability.
 
 ## Review and publication
 

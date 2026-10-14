@@ -171,6 +171,9 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_two["stable_key"] == "g3-sec2-math"
     assert len(secondary_two["units"]) == 9
     assert secondary_two["available"] is True
+    assert secondary_two["units"][0]["topic_code"] == "N2"
+    assert secondary_two["units"][0]["available"] is True
+    assert all(lesson["available"] is True for lesson in secondary_two["units"][0]["lessons"])
     assert secondary_two["units"][4]["topic_code"] == "G2"
     assert secondary_two["units"][4]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"])
@@ -186,11 +189,16 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     course = course_response.json()
     assert course["school_level"] == "secondary_2"
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 2
+    assert len(course["units"]) == 3
     assert course["units"][0]["stable_key"] == "g3-sec2-g2"
     assert len(course["units"][0]["lessons"]) == 5
     assert course["units"][1]["stable_key"] == "g3-sec2-s2"
     assert len(course["units"][1]["lessons"]) == 2
+    assert course["units"][2]["stable_key"] == "g3-sec2-n2"
+    assert [lesson["stable_key"] for lesson in course["units"][2]["lessons"]] == [
+        "n2-lesson-04",
+        "n2-lesson-05",
+    ]
 
     lesson_response = get("/api/v1/lessons/g2-lesson-01")
     assert lesson_response.status_code == 200
@@ -208,6 +216,14 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert s2_lesson["practice"]["question_count"] == 20
     assert s2_lesson["practice"]["development_available"] is True
 
+    n2_response = get("/api/v1/lessons/n2-lesson-04")
+    assert n2_response.status_code == 200
+    n2_lesson = n2_response.json()
+    assert n2_lesson["course_key"] == "g3-sec2-math"
+    assert n2_lesson["unit_key"] == "g3-sec2-n2"
+    assert n2_lesson["practice"]["question_count"] == 20
+    assert n2_lesson["practice"]["development_available"] is True
+
 
 def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
@@ -221,6 +237,13 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     assert s2_lesson_response.status_code == 200
     assert s2_lesson_response.headers["content-type"].startswith("image/svg+xml")
     assert b"Probability scale" in s2_lesson_response.content
+
+    n2_lesson_response = get(
+        "/api/v1/content-assets/lesson/n2-lesson-04/n2-lesson-04-map-scales"
+    )
+    assert n2_lesson_response.status_code == 200
+    assert n2_lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"map scale" in n2_lesson_response.content
 
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200
