@@ -107,6 +107,25 @@ def test_integrated_secondary_2_g5_lesson_meets_the_depth_and_asset_gates(reposi
         assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 
 
+def test_staged_secondary_2_n5_lessons_meet_the_depth_gate(repository_root):
+    lesson_root = (
+        repository_root
+        / "backend_resources/courses/g3_math/secondary_2/n5/v1/lessons"
+    )
+    lesson_paths = sorted(lesson_root.glob("n5-*.json"))
+
+    assert [path.stem for path in lesson_paths] == [
+        *(f"n5-lesson-{number:02}" for number in range(9, 17)),
+    ]
+    for position, path in enumerate(lesson_paths, 1):
+        lesson = Lesson.model_validate_json(path.read_text())
+        assert lesson.status == "draft"
+        assert lesson.position == position
+        assert lesson.outcomes == [f"5.{position + 8}"]
+        assert lesson_note_depth_shortfalls(lesson) == []
+        assert lesson.assets == []
+
+
 def test_thin_lesson_notes_block_publication(repository_root, course_bank_root, tmp_path):
     source = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
     course_root = tmp_path / "course"

@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-09",
+  "position": 1,
+  "title": "Expanding products of algebraic expressions",
+  "summary": "Use the distributive law accurately with two or more brackets, then collect like terms and verify the expansion.",
+  "outcomes": [
+    "5.9"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Expand a term across a bracket, including negative terms.",
+    "Expand the product of two binomials and collect like terms.",
+    "Check an expansion by substitution or reverse factorisation."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-09-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "The distributive law controls every expansion",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Expanding removes brackets without changing the value of an expression. The distributive law says that a factor outside a bracket multiplies every term inside it. Write each product before simplifying; this makes missed terms visible and keeps negative signs attached to the terms they affect."
+        },
+        {
+          "type": "display_math",
+          "latex": "k(a+b)=ka+kb"
+        },
+        {
+          "type": "text",
+          "text": "A negative multiplier changes the sign of every term in the bracket. For example, -3(x-4) becomes -3x+12, because (-3)(-4)=12. Treat subtraction before a bracket as multiplication by -1 rather than changing only the first term."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-09-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Multiply every term by every term",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For two binomials, each term in the first bracket must multiply each term in the second. A small multiplication grid or four clearly written products is safer than relying on memory. Only after all products are present should like terms be collected."
+        },
+        {
+          "type": "display_math",
+          "latex": "(a+b)(c+d)=ac+ad+bc+bd"
+        },
+        {
+          "type": "text",
+          "text": "The leading term comes from multiplying the variable terms; the constant term comes from multiplying the constants. The two middle products often combine. If the brackets contain unlike variables, combine only terms with exactly the same variable part and powers."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-09-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Collect terms and verify the result",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Like terms have identical variable factors and powers. For example, 10x and -3x combine, while 10x and -3x² do not. Arrange a polynomial in descending powers so that omitted or duplicated terms are easier to detect."
+        },
+        {
+          "type": "text",
+          "text": "A quick check is to substitute a convenient value such as x=1 or x=2 into both the original factored form and the expanded form. Matching values do not prove every step, but a mismatch immediately reveals an error. You can also factor the final expression when the original brackets are obvious."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-09-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Expand a pair of binomials",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Expand and simplify (2x-3)(x+5)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write all four products."
+            },
+            {
+              "type": "display_math",
+              "latex": "(2x)(x)+(2x)(5)+(-3)(x)+(-3)(5)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify each product and collect the x-terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x^2+10x-3x-15=2x^2+7x-15"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At x=1, the original expression is (-1)(6)=-6 and the expansion gives 2+7-15=-6."
+    },
+    {
+      "stable_key": "n5-09-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Expand with two variables",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Expand and simplify (3a+2b)(a-4b)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply every term in the first bracket by every term in the second."
+            },
+            {
+              "type": "display_math",
+              "latex": "3a^2-12ab+2ab-8b^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine the two ab terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "3a^2-10ab-8b^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting a=2 and b=1 gives (8)(-2)=-16 in the original and 12-20-8=-16 after expansion."
+    },
+    {
+      "stable_key": "n5-09-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Expand and simplify (x-4)(x+3)."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "x^2-x-12",
+        "canonical_latex": "x^2-x-12",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The four products are x²+3x-4x-12. Combining the middle terms gives x²-x-12."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-09-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Multiply every outside term by every inside term, preserve signs, and write all products before collecting like terms."
+        },
+        {
+          "type": "text",
+          "text": "Order the simplified polynomial by descending powers and verify with a small substitution when the signs are easy to confuse."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

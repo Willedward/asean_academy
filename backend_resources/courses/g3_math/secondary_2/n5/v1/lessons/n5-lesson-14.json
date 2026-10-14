@@ -1,0 +1,228 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-14",
+  "position": 6,
+  "title": "Factorising quadratic expressions",
+  "summary": "Factorise monic and non-monic quadratics by finding compatible number pairs, splitting the middle term, and checking by expansion.",
+  "outcomes": [
+    "5.14"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-13"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Factorise x²+bx+c by finding a pair with the required sum and product.",
+    "Factorise ax²+bx+c using the product ac and grouping.",
+    "Recognise common factors and special quadratic forms before using a general method."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-14-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Monic quadratics use a sum-and-product pair",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For x²+bx+c, seek numbers p and q whose sum is b and product is c. Then the factorisation is (x+p)(x+q). The sign of c tells whether p and q have the same sign or opposite signs."
+        },
+        {
+          "type": "display_math",
+          "latex": "x^2+(p+q)x+pq=(x+p)(x+q)"
+        },
+        {
+          "type": "text",
+          "text": "List factor pairs of |c| systematically and test their sums. If c is positive, the pair has matching signs; use the sign of b to choose both positive or both negative. If c is negative, use opposite signs and match their difference to b."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-14-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Non-monic quadratics: split the middle term",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For ax²+bx+c with a≠1, multiply a and c. Find two numbers whose product is ac and sum is b. Split bx using those numbers, then factor the four terms by grouping."
+        },
+        {
+          "type": "text",
+          "text": "Several equivalent orders are possible, but the grouped brackets must match. This method explains the factorisation rather than guessing two brackets, and it works reliably when the leading coefficient has several factor pairs."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-14-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Simplify first and verify last",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Always check for a common factor before factorising the quadratic. Special forms such as a difference of squares can be quicker than the sum-and-product method. A complete answer has every common numerical and algebraic factor outside the brackets."
+        },
+        {
+          "type": "text",
+          "text": "Expand the proposed factors. The product of the first terms must be ax², the product of the constants must be c, and the two cross-products must add to bx. This three-part check catches nearly every incorrect factorisation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-14-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Factorise a monic quadratic",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise x²+7x+12."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find a pair with product 12 and sum 7."
+            },
+            {
+              "type": "display_math",
+              "latex": "3\\times4=12,\\qquad3+4=7"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the factors."
+            },
+            {
+              "type": "display_math",
+              "latex": "x^2+7x+12=(x+3)(x+4)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Expansion gives x²+4x+3x+12=x²+7x+12."
+    },
+    {
+      "stable_key": "n5-14-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Factorise a non-monic quadratic",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise 6x²+x-2."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use ac=-12 and find numbers summing to 1."
+            },
+            {
+              "type": "display_math",
+              "latex": "4\\times(-3)=-12,\\qquad4+(-3)=1"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Split the middle term and group."
+            },
+            {
+              "type": "display_math",
+              "latex": "6x^2+4x-3x-2=2x(3x+2)-1(3x+2)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factor the repeated binomial."
+            },
+            {
+              "type": "display_math",
+              "latex": "(3x+2)(2x-1)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The cross-products are -3x and 4x, giving the required +x; the leading and constant products are also correct."
+    },
+    {
+      "stable_key": "n5-14-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise x²-5x+6."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(x-2)*(x-3)",
+        "canonical_latex": "(x-2)(x-3)",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The numbers -2 and -3 have product 6 and sum -5."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-14-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Take out any common factor. For a monic quadratic, match sum b and product c; otherwise match sum b and product ac, then group."
+        },
+        {
+          "type": "text",
+          "text": "Expand the factors and check the leading term, middle coefficient and constant term separately."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-10",
+  "position": 2,
+  "title": "Changing the subject of a formula",
+  "summary": "Rearrange a formula by applying inverse operations to both sides while preserving its meaning and restrictions.",
+  "outcomes": [
+    "5.10"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-09"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Identify the variable that must become the subject.",
+    "Reverse operations in a safe order on both sides of an equation.",
+    "Rearrange formulae containing brackets, fractions, powers and roots."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-10-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "The subject stands alone",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The subject of a formula is the variable isolated on one side of the equals sign. Changing the subject rewrites the same relationship in a form that directly calculates a different variable. The equality must stay balanced, so every operation performed on one side must also be performed on the other."
+        },
+        {
+          "type": "display_math",
+          "latex": "y=mx+c\\quad\\Longrightarrow\\quad x=\\frac{y-c}{m}"
+        },
+        {
+          "type": "text",
+          "text": "First identify the operations currently acting on the target variable. Undo additions or subtractions, then multiplications or divisions, working in the reverse order from the original calculation. Keep the target visible and avoid moving symbols across the equals sign without naming the inverse operation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-10-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Factor the target when it appears more than once",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If the target variable occurs in two terms, collect those terms on one side and factor the target out. Only then divide by the remaining bracket. This is especially useful in formulae such as P=ax+bx+c, where trying to isolate each x-term separately does not finish the rearrangement."
+        },
+        {
+          "type": "display_math",
+          "latex": "P=ax+bx+c\\Longrightarrow P-c=x(a+b)\\Longrightarrow x=\\frac{P-c}{a+b}"
+        },
+        {
+          "type": "text",
+          "text": "Brackets can also make the route shorter. If the target appears inside one bracket, isolate the entire bracket first and then undo its internal operation. Expanding too early can create extra terms and increase the chance of sign errors."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-10-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Fractions, powers and restrictions",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To remove a denominator, multiply both sides by it, provided it is not zero. To undo a square, take a square root and consider whether the context allows both positive and negative roots. A length, time or mass normally requires the positive root, while a purely algebraic equation may require ±."
+        },
+        {
+          "type": "display_math",
+          "latex": "A=\\pi r^2\\Longrightarrow r=\\sqrt{\\frac{A}{\\pi}}\\quad(r\\ge0)"
+        },
+        {
+          "type": "text",
+          "text": "State restrictions created by division. A rearrangement containing 1/m requires m≠0. If a square root appears, its radicand must be non-negative for real-valued quantities. These restrictions are part of the meaning of the rearranged formula."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-10-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Make a length the subject",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The perimeter of a rectangle is P=2l+2w. Make w the subject."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 2l from both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "P-2l=2w"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide both sides by 2 and simplify."
+            },
+            {
+              "type": "display_math",
+              "latex": "w=\\frac{P-2l}{2}=\\frac P2-l"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting w=P/2-l into 2l+2w gives 2l+P-2l=P, so the rearrangement preserves the formula."
+    },
+    {
+      "stable_key": "n5-10-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Make time the subject",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Given v=u+at, make t the subject."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract u from both sides."
+            },
+            {
+              "type": "display_math",
+              "latex": "v-u=at"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by a."
+            },
+            {
+              "type": "display_math",
+              "latex": "t=\\frac{v-u}{a},\\quad a\\ne0"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Multiplying the final expression by a and adding u returns v, confirming the inverse steps."
+    },
+    {
+      "stable_key": "n5-10-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Make x the subject of y=5x-7."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(y+7)/5",
+        "canonical_latex": "\\frac{y+7}{5}",
+        "variables": [
+          "x",
+          "y"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Add 7 to both sides, then divide by 5: x=(y+7)/5."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-10-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Circle the required subject, list the operations acting on it, and undo them in reverse order on both sides."
+        },
+        {
+          "type": "text",
+          "text": "When the target appears more than once, collect its terms and factor it. Record non-zero denominators and relevant root restrictions."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

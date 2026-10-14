@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-12",
+  "position": 4,
+  "title": "Using standard algebraic identities",
+  "summary": "Recognise three standard identities, use them for expansion and factorisation, and apply them to efficient numerical and algebraic reasoning.",
+  "outcomes": [
+    "5.12"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-11"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Recall and distinguish the two perfect-square identities and the difference-of-squares identity.",
+    "Apply identities to expand, factorise and simplify expressions.",
+    "Use identities for efficient exact calculations and verification."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-12-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Perfect squares contain a middle term",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Squaring a binomial means multiplying the complete binomial by itself. The middle term appears twice, so (a+b)² is a²+2ab+b². With subtraction, the middle term is negative but both square terms remain positive."
+        },
+        {
+          "type": "display_math",
+          "latex": "(a+b)^2=a^2+2ab+b^2,\\qquad(a-b)^2=a^2-2ab+b^2"
+        },
+        {
+          "type": "text",
+          "text": "A common error is to write (a+b)²=a²+b². This omits 2ab. To recognise a perfect-square trinomial, check that the first and last terms are squares and that the middle term is twice the product of their square roots."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-12-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Difference of squares has conjugate factors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The expression a²-b² factorises because the middle terms cancel when (a+b)(a-b) is expanded. The operation must be subtraction; a sum of two squares does not factorise this way over the real numbers."
+        },
+        {
+          "type": "display_math",
+          "latex": "a^2-b^2=(a+b)(a-b)"
+        },
+        {
+          "type": "text",
+          "text": "Look beyond single letters. For example, 9x²-25 is (3x)²-5², so its factors are (3x+5)(3x-5). Remove any common factor first, then check whether the remaining expression is a difference of squares."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-12-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use identities as reversible tools",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The identities work in both directions. They can expand a compact product, factorise a polynomial, simplify an expression or calculate numbers near a convenient base. For 103×97, view the factors as (100+3)(100-3)."
+        },
+        {
+          "type": "text",
+          "text": "Verification is built in: expand proposed factors and compare every coefficient with the original expression. For numerical calculations, estimate first so that a missing square or incorrect sign is obvious."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-12-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Expand a squared binomial",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Expand and simplify (3x-2)²."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Identify a=3x and b=2 in (a-b)²."
+            },
+            {
+              "type": "display_math",
+              "latex": "(3x)^2-2(3x)(2)+2^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify every term."
+            },
+            {
+              "type": "display_math",
+              "latex": "9x^2-12x+4"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At x=1, the original is 1 and the expansion is 9-12+4=1."
+    },
+    {
+      "stable_key": "n5-12-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Calculate with conjugates",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Evaluate 103×97 without long multiplication."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the numbers equally far from 100."
+            },
+            {
+              "type": "display_math",
+              "latex": "103\\times97=(100+3)(100-3)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Apply the difference-of-squares identity."
+            },
+            {
+              "type": "display_math",
+              "latex": "100^2-3^2=10000-9=9991"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The product should be slightly below 10,000 because one factor is above 100 and the other is equally below it."
+    },
+    {
+      "stable_key": "n5-12-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise x²-64."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(x-8)*(x+8)",
+        "canonical_latex": "(x-8)(x+8)",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "This is x²-8², so the conjugate factors are (x-8)(x+8)."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-12-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a perfect square, include ±2ab between the two square terms. For a difference of squares, use conjugate factors."
+        },
+        {
+          "type": "text",
+          "text": "Treat each algebraic term as a complete object, remove common factors first, and expand the result to verify every coefficient."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

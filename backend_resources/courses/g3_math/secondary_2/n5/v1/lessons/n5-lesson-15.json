@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-15",
+  "position": 7,
+  "title": "Multiplying and dividing algebraic fractions",
+  "summary": "Factor numerators and denominators, cancel common factors, and convert division into multiplication by the reciprocal while respecting restrictions.",
+  "outcomes": [
+    "5.15"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-14"
+  ],
+  "estimated_minutes": 65,
+  "objectives": [
+    "Factor expressions before cancelling common factors.",
+    "Multiply algebraic fractions and simplify completely.",
+    "Divide algebraic fractions using the reciprocal and state excluded values."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-15-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Cancel factors, not terms",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Algebraic fractions follow the same rules as numerical fractions. Before multiplying, factor each numerator and denominator. A factor may be cancelled only when it multiplies the whole numerator and whole denominator."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{ab}{ac}=\\frac bc\\quad(a\\ne0)"
+        },
+        {
+          "type": "text",
+          "text": "Terms joined by addition or subtraction cannot be cancelled separately. For example, x/(x+2) cannot be simplified because x is not a factor of the complete denominator. Writing brackets around factored expressions makes valid cancellation visible."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-15-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Multiply across after simplifying",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For multiplication, combine numerators and combine denominators. Cross-cancellation is simply cancellation of common factors before those products are formed. Cancelling early keeps coefficients and powers small."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac ab\\times\\frac cd=\\frac{ac}{bd}"
+        },
+        {
+          "type": "text",
+          "text": "Use index laws on repeated variables: a^m/a^n=a^{m-n} when a≠0. Keep factors in a readable order and place any factor with a negative remaining power in the denominator."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-15-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Division means multiply by the reciprocal",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To divide by an algebraic fraction, multiply by its reciprocal. Reverse the entire divisor, including every factor, then proceed as for multiplication. The divisor itself must not equal zero, and every original denominator must also be non-zero."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac ab\\div\\frac cd=\\frac ab\\times\\frac dc"
+        },
+        {
+          "type": "text",
+          "text": "Restrictions come from the original expression, even if a factor later cancels. Record excluded values before simplifying. This prevents the simplified expression from appearing defined at a value that was forbidden in the original question."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-15-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Multiply and cancel powers",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (3a/4b)(10b²/9a²)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply and display all factors."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{3a\\cdot10b^2}{4b\\cdot9a^2}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Cancel numerical and variable factors."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{5b}{6a},\\quad a\\ne0,\\ b\\ne0"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Multiplying 5b/(6a) by the cancelled ratio 6a²b/(6a²b) reconstructs the unsimplified product."
+    },
+    {
+      "stable_key": "n5-15-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Divide using a reciprocal",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (5x/6y)÷(10x²/9y²)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply by the reciprocal of the complete divisor."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{5x}{6y}\\times\\frac{9y^2}{10x^2}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Cancel common factors."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{3y}{4x},\\quad x\\ne0,\\ y\\ne0"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting x=3 and y=2 gives 1.25 in both the original expression and 3y/(4x)."
+    },
+    {
+      "stable_key": "n5-15-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (2a/3b)(9b/4a²)."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "3/(2*a)",
+        "canonical_latex": "\\frac{3}{2a}",
+        "variables": [
+          "a",
+          "b"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Cancel b and one factor of a, and reduce 18/12 to 3/2. The original requires a≠0 and b≠0."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-15-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Factor first, write multiplication explicitly, and cancel only complete common factors. Use index laws for remaining powers."
+        },
+        {
+          "type": "text",
+          "text": "For division, reverse the entire divisor. Record restrictions from all original denominators and from the divisor before cancellation."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

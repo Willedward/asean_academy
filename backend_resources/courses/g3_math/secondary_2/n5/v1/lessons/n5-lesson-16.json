@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-16",
+  "position": 8,
+  "title": "Adding and subtracting algebraic fractions",
+  "summary": "Build the least common denominator from factored forms, combine adjusted numerators, and simplify without losing restrictions.",
+  "outcomes": [
+    "5.16"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-15"
+  ],
+  "estimated_minutes": 65,
+  "objectives": [
+    "Factor denominators and identify their least common denominator.",
+    "Add or subtract fractions with linear, quadratic or repeated denominators.",
+    "Simplify the resulting numerator and state excluded values."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-16-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Factor denominators before choosing the LCD",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Fractions can be added or subtracted only after their denominators match. Factor every denominator first. The least common denominator contains each distinct factor at its highest required power."
+        },
+        {
+          "type": "display_math",
+          "latex": "x^2-9=(x-3)(x+3)"
+        },
+        {
+          "type": "text",
+          "text": "For x²-9 and x-3, factor x²-9=(x-3)(x+3). The LCD is therefore (x-3)(x+3), not the product of both original denominators, because x-3 is already included."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-16-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Adjust every numerator and preserve subtraction",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Multiply each fraction by the factors missing from its denominator. Whatever multiplies the denominator must multiply the entire numerator. Use brackets around a numerator when subtracting so that the minus sign changes every term inside."
+        },
+        {
+          "type": "text",
+          "text": "Once denominators match, combine numerators over the common denominator. Expand and collect the numerator only as far as helpful. The denominator should usually remain factored because common factors and restrictions are then easier to see."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-16-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Simplify and keep original restrictions",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "After combining, factor the numerator and cancel any common factor with the denominator. Cancellation is allowed only for factors, and the original excluded values remain excluded even if their factor cancels."
+        },
+        {
+          "type": "text",
+          "text": "Check by substituting an allowed number into both the original and simplified expressions. Avoid values that make any original denominator zero. A numerical check is particularly useful after subtraction, where one missing bracket can reverse several signs."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-16-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Add fractions with different linear denominators",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify 1/(x-2)+2/(x-3)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the LCD (x-2)(x-3) and adjust both numerators."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{x-3+2(x-2)}{(x-2)(x-3)}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand and collect the numerator."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{3x-7}{(x-2)(x-3)},\\quad x\\ne2,3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At x=4, the original is 1/2+2=5/2 and the simplified expression is 5/(2×1)=5/2."
+    },
+    {
+      "stable_key": "n5-16-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Use a factored quadratic denominator",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify 1/(x²-9)+2/(x-3)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factor x²-9 and use the shared LCD."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{1}{(x-3)(x+3)}+\\frac{2(x+3)}{(x-3)(x+3)}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine the numerators."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{2x+7}{(x-3)(x+3)},\\quad x\\ne-3,3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At x=5, the original is 1/16+1=17/16 and the simplified form is 17/(2×8)=17/16."
+    },
+    {
+      "stable_key": "n5-16-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify 1/(x-3)-2/(x-3)²."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(x-5)/(x-3)^2",
+        "canonical_latex": "\\frac{x-5}{(x-3)^2}",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The LCD is (x-3)². The numerator becomes (x-3)-2=x-5, with x≠3."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-16-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Factor every denominator and form the LCD using each factor at its highest power. Multiply each complete numerator by its missing factors."
+        },
+        {
+          "type": "text",
+          "text": "Use brackets for subtraction, combine and factor the numerator, cancel only factors, and retain all restrictions from the original expression."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}
