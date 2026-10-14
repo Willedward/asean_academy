@@ -25,23 +25,19 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source contains every Secondary 1 unit (N1 through N7, G1, G5 and S1) and the Secondary 2 G2 unit. Secondary 1 N2 is reviewed; the other complete units remain behind draft review gates:
+The current authored source contains every Secondary 1 unit (N1 through N7, G1, G5 and S1) and the Secondary 2 G2 and S2 units. Secondary 1 N2 is reviewed; the other complete units remain behind draft review gates:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
-| Topic groups                       |                                     11 |                                      19 | Blocked |
-| Questions                          |                                  1,080 |                                   1,900 | Blocked |
+| Topic groups                       |                                     12 |                                      19 | Blocked |
+| Questions                          |                                  1,184 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                     57 |  All authored and planned Beta lessons | Blocked |
-| Lessons meeting the note-depth gate |                                     49 |                   All authored lessons | Blocked |
+| Lessons                            |                                     59 |  All authored and planned Beta lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     51 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
-| Local pool inventory               | 660 practice, 201 checkpoint, 219 reserve |          Complete and non-overlapping | Pass    |
+| Local pool inventory               | 700 practice, 225 checkpoint, 259 reserve |          Complete and non-overlapping | Pass    |
 
-The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing eight Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
-
-Secondary 2 S2 has two expanded lesson drafts staged for early Mathematics and editorial
-feedback. The release gate continues to count S2 as incomplete because its four planned
-question batches contain no authored questions and no source pools exist yet.
+The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2 and S2 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing seven Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
 
 ## Development sequencing decision — 10 October 2026
 

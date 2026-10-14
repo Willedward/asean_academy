@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The course registry is the canonical structural map for the complete Singapore Secondary 1 and Secondary 2 G3 Mathematics scope. It lets engineering, content generation, review tooling, and the frontend use stable course, unit, and lesson identifiers before every lesson and question bank has been authored.
+The course registry is the canonical structural map for the complete Secondary 1 and Secondary 2 G3 Mathematics scope used by the ASEAN Scholarship preparation programme for students across Southeast Asia. It lets engineering, content generation, review tooling, and the frontend use stable course, unit, and lesson identifiers before every lesson and question bank has been authored.
 
 The registry is separate from a deployable course snapshot. A deployable snapshot requires lesson files, reviewed notes, a learning question bank, practice pools, checkpoint capacity, and immutable database imports. A `planned` registry entry does not make unfinished content available to learners.
 
@@ -26,7 +26,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
 | `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
-| `g3-sec2-math` | 9 | 35 | Planned |
+| `g3-sec2-math` | 9 | 35 | G2 and S2 draft; remaining units planned |
 | **Total** | **19** | **87** | Structurally registered |
 
 Secondary 1 contains N1, N2, N3, N4, N5, N6, N7, G1, G5, and S1. Secondary 2 contains N2, N5, N6, N7, G2, G4, G5, S1, and S2.
