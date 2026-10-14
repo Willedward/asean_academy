@@ -74,8 +74,9 @@ become errors when a lesson is marked `reviewed` or `published`, or under
 | Secondary 2 N2 | 2 | Meets the baseline and is integrated as a draft unit |
 | Secondary 2 G4 | 3 | Meets the baseline and is integrated as a draft unit |
 | Secondary 2 G5 | 1 | Meets the expanded geometry standard and is integrated as a draft unit |
+| Secondary 2 N5 | 8 | Meets the baseline and is staged for draft-course integration |
 
-The current audit therefore passes 57 of 65 authored or staged lessons and flags eight thin lessons:
+The current audit therefore passes 65 of 73 authored or staged lessons and flags eight thin lessons:
 N5.1–N5.8. Those N5 lessons contain all four required section types, but currently have
 only one explanation and one worked example and are below the six-section depth target.
 They remain valid drafts for review, but cannot pass the strict publication gate until
@@ -84,6 +85,8 @@ expanded.
 Secondary 2 S2.1–S2.2, N2.4–N2.5 and G4.1–G4.3 are authored at full depth and integrated into the draft Level 2 course with their complete question banks and pools. G4 includes deterministic right-triangle diagrams in every lesson and question. Draft integration makes completed units available to the authenticated admin review workflow without implying production learner availability.
 
 Secondary 2 G5.6 is authored at full depth with deterministic pyramid, cone and sphere diagrams and is integrated with all four validated question batches. Its draft status makes it available to the authenticated admin review workflow without making it learner-published.
+
+Secondary 2 N5.9–N5.16 are authored as eight independent, full-depth lessons covering expansion, formulae, identities, factorisation and algebraic fractions. They remain staged until the four N5 question batches and draft-course pools are integrated.
 
 ## Review and publication
 

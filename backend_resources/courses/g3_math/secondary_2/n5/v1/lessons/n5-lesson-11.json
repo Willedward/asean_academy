@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-11",
+  "position": 3,
+  "title": "Finding an unknown quantity in a formula",
+  "summary": "Substitute known values with units, solve the resulting equation, and check that the answer fits the formula and context.",
+  "outcomes": [
+    "5.11"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-10"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Substitute known quantities without losing signs or powers.",
+    "Solve the resulting linear or quadratic relationship for the unknown.",
+    "Check units, restrictions and reasonableness of the result."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-11-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Substitute first, then solve",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A formula links several quantities. When all but one are known, replace each known symbol with its value and keep the unknown as a symbol. Use brackets around negative values and values raised to powers. The formula then becomes an equation in one unknown."
+        },
+        {
+          "type": "display_math",
+          "latex": "A=\\frac12h(a+b)"
+        },
+        {
+          "type": "text",
+          "text": "Write the substitution line before calculator work. This makes it clear which value belongs to each symbol and prevents a unit from being used as though it were a numerical factor. Retain exact values such as π or fractions until the final step unless the question requests an approximation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-11-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Choose a route that preserves accuracy",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If the unknown is multiplied by a known factor, divide by the entire factor. If it lies inside a bracket, isolate the bracket before opening it. When the unknown is squared, isolate its square before taking a root and decide which root is meaningful in context."
+        },
+        {
+          "type": "text",
+          "text": "Do not round an intermediate value that will be used again. Premature rounding can shift the final answer, especially in formulas containing squares, roots or several operations. Keep the calculator display or an exact fraction and round only once to the requested precision."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-11-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use units and a substitution check",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Units help reveal an incorrect rearrangement. Area formulas should produce square units, speed formulas should produce distance per time, and a calculated length should have a length unit. Convert measurements to consistent units before substitution."
+        },
+        {
+          "type": "text",
+          "text": "Finally insert the calculated unknown back into the original formula. The left and right sides should agree, allowing for stated rounding. Also check whether the sign and size are possible: a negative physical length or a time longer than the entire journey signals a mistake."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-11-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Find a trapezium height",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A trapezium has area 84 cm² and parallel sides 9 cm and 15 cm. Using A=½h(a+b), find h."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute the known values."
+            },
+            {
+              "type": "display_math",
+              "latex": "84=\\frac12h(9+15)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify and solve."
+            },
+            {
+              "type": "display_math",
+              "latex": "84=12h\\Longrightarrow h=7\\text{ cm}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives ½×7×24=84 cm², exactly the stated area."
+    },
+    {
+      "stable_key": "n5-11-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Find acceleration from a motion formula",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Use v²=u²+2as. If v=14 m/s, u=8 m/s and s=22 m, find a."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute with the squared speeds shown explicitly."
+            },
+            {
+              "type": "display_math",
+              "latex": "14^2=8^2+2(a)(22)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Isolate a."
+            },
+            {
+              "type": "display_math",
+              "latex": "196-64=44a\\Longrightarrow a=3\\text{ m/s}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The positive acceleration is reasonable because the final speed exceeds the initial speed; 64+2(3)(22)=196."
+    },
+    {
+      "stable_key": "n5-11-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Use C=2πr. If C=18π, enter r."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "9",
+        "canonical_latex": "9",
+        "variables": [
+          "r"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Substitute 18π=2πr and divide by 2π to obtain r=9."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-11-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Label every known value, convert units, substitute with brackets where needed, and keep the unknown symbolic."
+        },
+        {
+          "type": "text",
+          "text": "Solve carefully, attach the correct unit, then substitute the result into the original formula and judge whether its sign and size make sense."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

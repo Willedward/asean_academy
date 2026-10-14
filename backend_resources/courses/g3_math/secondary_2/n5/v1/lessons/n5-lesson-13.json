@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n5",
+  "status": "draft",
+  "mastery_policy_key": "n5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T21:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n5-lesson-13",
+  "position": 5,
+  "title": "Factorising linear expressions by grouping",
+  "summary": "Group four-term linear expressions, expose a common binomial factor, and verify the product by expansion.",
+  "outcomes": [
+    "5.13"
+  ],
+  "prerequisite_lessons": [
+    "n5-lesson-12"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Choose useful pairs of terms and extract their common factors.",
+    "Recognise and factor a repeated binomial.",
+    "Handle reordered terms and negative common factors accurately."
+  ],
+  "sections": [
+    {
+      "stable_key": "n5-13-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Factorisation reverses expansion",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Factorising rewrites a sum as a product. In a four-term expression, useful grouping creates the same bracket from two pairs. For ax+bx+kay+kby, group the x-terms and y-terms: x(a+b)+ky(a+b). The repeated bracket can then be factored out."
+        },
+        {
+          "type": "display_math",
+          "latex": "ax+bx+kay+kby=(a+b)(x+ky)"
+        },
+        {
+          "type": "text",
+          "text": "The final product is (a+b)(x+ky). Expanding it reproduces all four original terms. This reverse-expansion check is the most reliable way to confirm that no coefficient or sign was lost."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-13-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Choose groups that reveal a common bracket",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Terms are sometimes presented in an inconvenient order. Reorder them before grouping, keeping each sign attached. Look for coefficient ratios or shared variable patterns that suggest which terms belong together."
+        },
+        {
+          "type": "text",
+          "text": "After taking the highest common factor from each group, the bracketed expressions must match exactly. If they differ only by sign, factor a negative number from one group so that both brackets have the same order and signs."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-13-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Check for a complete factorisation",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "First remove any common factor shared by all four terms. Then apply grouping to what remains. A response is fully factorised when no factor contains a further common numerical or algebraic factor appropriate to the syllabus."
+        },
+        {
+          "type": "text",
+          "text": "Expand the final pair of brackets term by term and compare with the original expression. Pay particular attention to a negative factor: multiplying it through must recreate the original signs, not merely the same variables."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-13-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Factorise by matching coefficient ratios",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise 6x+9y+4kx+6ky completely."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Reorder and group the terms with and without k."
+            },
+            {
+              "type": "display_math",
+              "latex": "(6x+9y)+(4kx+6ky)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factor each group to expose the same bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(2x+3y)+2k(2x+3y)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factor the repeated binomial."
+            },
+            {
+              "type": "display_math",
+              "latex": "(3+2k)(2x+3y)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Expansion gives 6x+9y+4kx+6ky, matching all four terms."
+    },
+    {
+      "stable_key": "n5-13-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Use a negative common factor",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise ax-bx+3ay-3by."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Group the x-terms and y-terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "x(a-b)+3y(a-b)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factor the common bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "(a-b)(x+3y)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Expanding (a-b)(x+3y) gives ax-bx+3ay-3by in the original order."
+    },
+    {
+      "stable_key": "n5-13-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise px+qx+2py+2qy."
+        }
+      ],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "(p+q)*(x+2*y)",
+        "canonical_latex": "(p+q)(x+2y)",
+        "variables": [
+          "p",
+          "q",
+          "x",
+          "y"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Group as x(p+q)+2y(p+q), then factor out the repeated bracket p+q."
+        }
+      ]
+    },
+    {
+      "stable_key": "n5-13-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Remove a common factor from all terms first, reorder if useful, and group terms so both groups produce the same bracket."
+        },
+        {
+          "type": "text",
+          "text": "Factor the repeated bracket and expand the answer to confirm every coefficient, variable and sign."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}
