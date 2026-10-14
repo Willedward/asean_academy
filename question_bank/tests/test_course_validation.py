@@ -35,10 +35,10 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
 
     assert report.valid
     assert report.course.stable_key == "g3-sec2-math"
-    assert [unit.topic_code for unit in report.course.units] == ["G2", "S2", "N2", "G4"]
-    assert len(report.lessons) == 12
-    assert len(report.pools.pools) == 20
-    assert report.as_dict()["allocated_question_count"] == 416
+    assert [unit.topic_code for unit in report.course.units] == ["G2", "S2", "N2", "G4", "G5"]
+    assert len(report.lessons) == 13
+    assert len(report.pools.pools) == 24
+    assert report.as_dict()["allocated_question_count"] == 520
     assert report.warnings == []
 
 
@@ -91,8 +91,8 @@ def test_integrated_secondary_2_g4_lessons_meet_the_depth_and_asset_gates(reposi
             assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 
 
-def test_staged_secondary_2_g5_lesson_meets_the_depth_and_asset_gates(repository_root):
-    course_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g5/v1"
+def test_integrated_secondary_2_g5_lesson_meets_the_depth_and_asset_gates(repository_root):
+    course_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g2/v1"
     lesson_path = course_root / "lessons/g5-lesson-06.json"
 
     lesson = Lesson.model_validate_json(lesson_path.read_text())
