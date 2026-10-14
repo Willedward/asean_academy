@@ -1,0 +1,287 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-lesson-01",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n2",
+  "position": 1,
+  "status": "draft",
+  "title": "Map scales involving distance and area",
+  "summary": "Interpret ratio and statement scales, convert map lengths to real distances, and apply the squared scale factor to areas.",
+  "outcomes": [
+    "2.4"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Interpret a scale written as 1 : n using consistent units.",
+    "Convert between map length and real distance in either direction.",
+    "Use the square of the linear scale factor for corresponding areas."
+  ],
+  "mastery_policy_key": "n2-default-v1",
+  "sections": [
+    {
+      "stable_key": "n2-24-meaning",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read a scale as a ratio in matching units",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A map is a reduced representation of a real place. A representative fraction such as 1 : 50 000 means that 1 unit on the map represents 50 000 of the same unit in reality. It may mean 1 cm represents 50 000 cm, or 1 mm represents 50 000 mm. The ratio itself has no unit because both quantities use the same unit."
+        },
+        {
+          "type": "display_math",
+          "latex": "1:50\\,000=1\\text{ cm}:50\\,000\\text{ cm}=1\\text{ cm}:500\\text{ m}"
+        },
+        {
+          "type": "text",
+          "text": "A statement scale, such as ‘1 cm represents 2 km’, can be converted to ratio form only after both sides use the same unit. Since 2 km = 200 000 cm, the representative fraction is 1 : 200 000. Keeping a short unit-conversion line prevents the common error of comparing centimetres directly with kilometres."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-24-distance",
+      "position": 2,
+      "type": "explanation",
+      "title": "Move between map length and real distance",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a scale 1 : n, multiply a map length by n to obtain the corresponding real length in the same unit. Divide a real length by n to obtain its map length. Decide the direction before calculating: a real distance should normally be much larger than the map measurement."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{real length}=\\text{map length}\\times n,\\qquad \\text{map length}=\\frac{\\text{real length}}{n}"
+        },
+        {
+          "type": "text",
+          "text": "Convert units after applying the scale, or convert both measurements to the same unit before applying it. For long distances, centimetres can then be converted using 100 cm = 1 m and 100 000 cm = 1 km. Record the unit at every stage so that a numerically plausible answer does not hide a conversion error."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n2-lesson-01-map-scales"
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-24-area",
+      "position": 3,
+      "type": "explanation",
+      "title": "Square the scale factor for area",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Area measures two dimensions. If every length is multiplied by n, both the length and width receive that factor, so the area is multiplied by n². The area scale for a linear scale 1 : n is therefore 1 : n². Do not multiply an area by n only."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{\\text{real area}}{\\text{map area}}=n^2"
+        },
+        {
+          "type": "text",
+          "text": "A safer alternative for rectangles and other simple shapes is to convert each map dimension to its real length first, then calculate the real area. Both methods agree. When changing square units, square the unit conversion too: 1 m² = 10 000 cm² and 1 km² = 1 000 000 m²."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-24-distance-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: find a real route distance",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A route measures 7.4 cm on a map with scale 1 : 50 000. Find the real distance in kilometres."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply the map length by the scale factor to obtain centimetres in reality."
+            },
+            {
+              "type": "display_math",
+              "latex": "7.4\\times50\\,000=370\\,000\\text{ cm}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert centimetres to metres."
+            },
+            {
+              "type": "display_math",
+              "latex": "370\\,000\\div100=3\\,700\\text{ m}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert metres to kilometres."
+            },
+            {
+              "type": "display_math",
+              "latex": "3\\,700\\div1\\,000=3.7\\text{ km}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "At this scale, each map centimetre represents 0.5 km, so 7.4 × 0.5 = 3.7 km confirms the answer."
+    },
+    {
+      "stable_key": "n2-24-area-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: find a real land area",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A rectangular reserve measures 3.2 cm by 2.4 cm on a map with scale 1 : 25 000. Find its real area in square kilometres."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert each map dimension to its real length."
+            },
+            {
+              "type": "display_math",
+              "latex": "3.2\\times25\\,000=80\\,000\\text{ cm}=0.8\\text{ km}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "2.4\\times25\\,000=60\\,000\\text{ cm}=0.6\\text{ km}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply the real dimensions."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.8\\times0.6=0.48\\text{ km}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The map area is 7.68 cm². Multiplying by 25 000² and converting cm² to km² also gives 0.48 km²."
+    },
+    {
+      "stable_key": "n2-24-errors",
+      "position": 6,
+      "type": "explanation",
+      "title": "Choose the correct factor and check reasonableness",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Three checks catch most scale errors. First, make the ratio units match. Second, multiply when moving from map to reality and divide when moving from reality to map. Third, use n² for an area comparison. A larger scale denominator produces a smaller drawing of the same place, even though the number in the denominator is larger."
+        },
+        {
+          "type": "text",
+          "text": "A curved road measured with string or a digital tool uses the same length-scale rule, but measurement precision matters. Give a sensible number of significant figures based on the map measurement. If the prompt asks for straight-line distance, do not substitute the longer road route; identify exactly what was measured."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-24-recall",
+      "position": 7,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A straight path is 6 cm long on a map with scale 1 : 20 000. Enter the real length in kilometres."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1.2",
+        "canonical_latex": "1.2",
+        "accepted_answers": [
+          "6/5"
+        ],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "km",
+          "accepted": [
+            "km",
+            "kilometre",
+            "kilometres"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "6 × 20 000 = 120 000 cm = 1 200 m = 1.2 km. The real length is larger than the map length, as expected."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-lesson-01-summary",
+      "position": 8,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Write the scale in matching units and decide whether you are moving from map to reality or from reality to map. Apply the linear factor to every length, then convert to the requested unit."
+        },
+        {
+          "type": "text",
+          "text": "For area, convert both dimensions before multiplying or use the squared scale factor. Check square-unit conversions separately and confirm that the size of the answer is reasonable for the place shown."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n2-lesson-01-map-scales",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n2-lesson-01-map-scales.svg",
+      "alt_text": "Comparison for scale 1 to 50 000: one centimetre on a map represents five hundred metres, while a two-centimetre square represents a one-kilometre square and therefore one square kilometre.",
+      "generation_spec": {
+        "renderer": "nextscholar-scale-svg-v1",
+        "diagram_kind": "linear_and_area_scale",
+        "lesson_key": "n2-lesson-01"
+      },
+      "sha256": "4c4659d681bbf0a9579ad8e6b5e609fd4add01a994ef50d8839f9443a611821b",
+      "width": 940,
+      "height": 470
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T12:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

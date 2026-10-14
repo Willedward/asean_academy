@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-lesson-02",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n2",
+  "position": 2,
+  "status": "draft",
+  "title": "Direct and inverse proportion",
+  "summary": "Recognise direct and inverse proportion, determine the constant of proportionality, and solve contextual problems using equations, tables and checks.",
+  "outcomes": [
+    "2.5"
+  ],
+  "prerequisite_lessons": [
+    "n2-lesson-01"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Distinguish direct proportion from inverse proportion using invariant quantities.",
+    "Find and use a constant of proportionality from data or context.",
+    "Form equations and test whether answers fit the stated relationship."
+  ],
+  "mastery_policy_key": "n2-default-v1",
+  "sections": [
+    {
+      "stable_key": "n2-25-recognise",
+      "position": 1,
+      "type": "explanation",
+      "title": "Identify what stays constant",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Two variables are in direct proportion when multiplying one by a factor multiplies the other by the same factor. Their quotient y/x remains constant. They are in inverse proportion when multiplying one by a factor divides the other by that factor, so their product xy remains constant."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{direct: }\\frac{y}{x}=k\\Rightarrow y=kx,\\qquad\\text{inverse: }xy=k\\Rightarrow y=\\frac{k}{x}"
+        },
+        {
+          "type": "text",
+          "text": "Do not decide from one pair of values alone. Test several rows of a table or use the relationship described by the context. A quantity that increases when another increases is not automatically directly proportional: y = 3x + 5 increases with x but is not direct proportion because y/x changes and its graph does not pass through the origin."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n2-lesson-02-proportion-models"
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-25-direct",
+      "position": 2,
+      "type": "explanation",
+      "title": "Model direct proportion with y = kx",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For direct proportion, divide a known y-value by its matching x-value to find k. The constant k is the amount of y for one unit of x, so include its meaning and unit when the variables describe real quantities. Substitute k into y = kx before using a new value."
+        },
+        {
+          "type": "display_math",
+          "latex": "k=\\frac{y}{x}"
+        },
+        {
+          "type": "text",
+          "text": "A direct-proportion table has a constant y/x in every valid row, and its graph is a straight line through the origin. The point (0, 0) matters: if zero items still carry a fixed fee, the total cost is linear but is not directly proportional to the number of items."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-25-direct-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: direct proportion",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The mass m grams of identical metal rods is directly proportional to their total length L centimetres. A total length of 75 cm has mass 210 g. Find the mass of 130 cm of the same rod."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the direct-proportion model and find k."
+            },
+            {
+              "type": "display_math",
+              "latex": "m=kL,\\qquad k=\\frac{210}{75}=2.8\\text{ g/cm}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the new total length."
+            },
+            {
+              "type": "display_math",
+              "latex": "m=2.8(130)=364\\text{ g}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "State the answer with the requested unit: the mass is 364 g."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The new length is 130/75 times the old length, and 364/210 = 130/75, so both quantities changed by the same factor."
+    },
+    {
+      "stable_key": "n2-25-inverse",
+      "position": 4,
+      "type": "explanation",
+      "title": "Model inverse proportion with xy = k",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For inverse proportion, multiply a known pair to find k. Common contexts include a fixed job shared among equally productive workers, travel time for a fixed distance at different constant speeds, or the dimensions of a rectangle with fixed area. The assumptions must remain valid: adding workers helps only if they work at the same rate and can share the task without interference."
+        },
+        {
+          "type": "display_math",
+          "latex": "k=xy,\\qquad y=\\frac{k}{x}"
+        },
+        {
+          "type": "text",
+          "text": "An inverse-proportion graph is a decreasing curve in the positive quadrant for positive quantities. It approaches the axes but never reaches them, because x = 0 would require division by zero. In a table, x doubling makes y halve; x multiplying by five makes y one fifth as large."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-25-inverse-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: inverse proportion",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Eight pumps with equal output can empty a reservoir in 15 hours. Assuming they work continuously at the same rate, how long would 12 pumps take?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "For a fixed job, number of pumps and time are inversely proportional."
+            },
+            {
+              "type": "display_math",
+              "latex": "pt=k"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the constant in pump-hours."
+            },
+            {
+              "type": "display_math",
+              "latex": "k=8\\times15=120"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use 12 pumps and solve for time."
+            },
+            {
+              "type": "display_math",
+              "latex": "12t=120\\Rightarrow t=10\\text{ hours}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The number of pumps increased by a factor of 12/8 = 1.5, while time decreased by the reciprocal factor: 15/1.5 = 10 hours."
+    },
+    {
+      "stable_key": "n2-25-model-checks",
+      "position": 6,
+      "type": "explanation",
+      "title": "Translate the context and reject false models",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the variables, state the proportional relationship and find k from a matching pair. Keep pairs aligned when reading a table. After solving, describe how the variables should move: direct proportion keeps their change factors equal, while inverse proportion keeps the factors reciprocal."
+        },
+        {
+          "type": "text",
+          "text": "Some situations only approximate a proportional model. A journey may include fixed stopping time; a group task may not divide perfectly; a price may include a delivery charge. Use direct or inverse proportion only when the question states it or when the assumptions justify a constant quotient or product. Check units and reject impossible results such as negative workers or a time longer after adding equally productive workers to the same divisible job."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-25-recall",
+      "position": 7,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A fixed job takes 12 workers 15 days. Assuming inverse proportion and equal productivity, enter the number of days needed by 20 workers."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "days",
+          "accepted": [
+            "day",
+            "days"
+          ],
+          "required": true
+        }
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Worker-days stay constant: 12 × 15 = 180, then 180 ÷ 20 = 9 days. More workers give a shorter time, which fits inverse proportion."
+        }
+      ]
+    },
+    {
+      "stable_key": "n2-lesson-02-summary",
+      "position": 8,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For direct proportion, test that y/x is constant, write y = kx and expect both quantities to change by the same factor. Its graph is a straight line through the origin."
+        },
+        {
+          "type": "text",
+          "text": "For inverse proportion, test that xy is constant, write y = k/x and expect reciprocal change factors. State the assumptions, use matching data pairs, preserve units and check the direction of change before accepting the answer."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n2-lesson-02-proportion-models",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n2-lesson-02-proportion-models.svg",
+      "alt_text": "Side-by-side graphs: direct proportion is a straight line through the origin with y divided by x constant, while inverse proportion is a decreasing curve with x times y constant.",
+      "generation_spec": {
+        "renderer": "nextscholar-proportion-svg-v1",
+        "diagram_kind": "direct_inverse_comparison",
+        "lesson_key": "n2-lesson-02"
+      },
+      "sha256": "73b025d4ac583da95604cd7bd96f9b98309dd5ba08085a2b40b6e0d3f37a7d16",
+      "width": 940,
+      "height": 470
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T12:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
