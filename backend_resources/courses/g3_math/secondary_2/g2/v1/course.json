@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 7,
+  "revision": 8,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, and solid mensuration.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, and algebraic expressions and formulae.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -44,6 +44,14 @@
     },
     {
       "key": "g5-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n5-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -213,12 +221,93 @@
           "required_practice_count": 20
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-n5",
+      "position": 6,
+      "topic_code": "N5",
+      "title": "Algebraic expressions and formulae",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "n5-lesson-09",
+          "position": 1,
+          "title": "Expanding products of algebraic expressions",
+          "outcomes": [
+            "5.9"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-10",
+          "position": 2,
+          "title": "Changing the subject of a formula",
+          "outcomes": [
+            "5.10"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-11",
+          "position": 3,
+          "title": "Finding an unknown quantity in a formula",
+          "outcomes": [
+            "5.11"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-12",
+          "position": 4,
+          "title": "Using standard algebraic identities",
+          "outcomes": [
+            "5.12"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-13",
+          "position": 5,
+          "title": "Factorising linear expressions by grouping",
+          "outcomes": [
+            "5.13"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-14",
+          "position": 6,
+          "title": "Factorising quadratic expressions",
+          "outcomes": [
+            "5.14"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-15",
+          "position": 7,
+          "title": "Multiplying and dividing algebraic fractions",
+          "outcomes": [
+            "5.15"
+          ],
+          "required_practice_count": 8
+        },
+        {
+          "stable_key": "n5-lesson-16",
+          "position": 8,
+          "title": "Adding and subtracting algebraic fractions",
+          "outcomes": [
+            "5.16"
+          ],
+          "required_practice_count": 8
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 235,
-    "unit_checkpoint": 116,
-    "adaptive_reserve": 169
+    "lesson_practice": 299,
+    "unit_checkpoint": 140,
+    "adaptive_reserve": 185
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -226,6 +315,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2, N2, G4 and G5 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2, S2, N2, G4, G5 and N5 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
   }
 }

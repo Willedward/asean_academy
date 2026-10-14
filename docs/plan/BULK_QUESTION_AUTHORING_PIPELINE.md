@@ -38,9 +38,9 @@ backend_resources/question_bank/
 All 19 level-specific topic groups now have 104-question target blueprints. The existing 40 N1 draft questions remain unchanged and occupy their matching blueprint cells; its remaining 64 questions are split into batches of 22, 21, and 21. Each of the other 18 banks is split into four 26-question manifests. Together, 75 manifests reserve 1,936 new questions, producing the 1,976-question initial inventory when combined with the N1 pilot.
 
 The Secondary 1 N2 calibration bank is complete and approved. Secondary 1 N3 through N7, G1, G5 and S1,
-and Secondary 2 G2, S2, N2, G4 and G5 each contain all 104 planned questions, complete lesson notes and pool
+and Secondary 2 G2, S2, N2, G4, G5 and N5 each contain all 104 planned questions, complete lesson notes and pool
 allocations, and remain gated for Mathematics and editorial review. The repository therefore contains
-1,496 authored questions: the 40-question N1 pilot and 104 questions in fourteen complete topic groups.
+1,600 authored questions: the 40-question N1 pilot and 104 questions in fifteen complete topic groups.
 
 ## Commands
 
