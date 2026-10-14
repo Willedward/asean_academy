@@ -177,6 +177,9 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_two["units"][4]["topic_code"] == "G2"
     assert secondary_two["units"][4]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"])
+    assert secondary_two["units"][5]["topic_code"] == "G4"
+    assert secondary_two["units"][5]["available"] is True
+    assert all(lesson["available"] is True for lesson in secondary_two["units"][5]["lessons"])
     assert secondary_two["units"][8]["topic_code"] == "S2"
     assert secondary_two["units"][8]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][8]["lessons"])
@@ -189,7 +192,7 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     course = course_response.json()
     assert course["school_level"] == "secondary_2"
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 3
+    assert len(course["units"]) == 4
     assert course["units"][0]["stable_key"] == "g3-sec2-g2"
     assert len(course["units"][0]["lessons"]) == 5
     assert course["units"][1]["stable_key"] == "g3-sec2-s2"
@@ -198,6 +201,12 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert [lesson["stable_key"] for lesson in course["units"][2]["lessons"]] == [
         "n2-lesson-04",
         "n2-lesson-05",
+    ]
+    assert course["units"][3]["stable_key"] == "g3-sec2-g4"
+    assert [lesson["stable_key"] for lesson in course["units"][3]["lessons"]] == [
+        "g4-lesson-01",
+        "g4-lesson-02",
+        "g4-lesson-03",
     ]
 
     lesson_response = get("/api/v1/lessons/g2-lesson-01")
@@ -224,6 +233,14 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert n2_lesson["practice"]["question_count"] == 20
     assert n2_lesson["practice"]["development_available"] is True
 
+    g4_response = get("/api/v1/lessons/g4-lesson-01")
+    assert g4_response.status_code == 200
+    g4_lesson = g4_response.json()
+    assert g4_lesson["course_key"] == "g3-sec2-math"
+    assert g4_lesson["unit_key"] == "g3-sec2-g4"
+    assert g4_lesson["practice"]["question_count"] == 20
+    assert g4_lesson["practice"]["development_available"] is True
+
 
 def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
@@ -244,6 +261,13 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     assert n2_lesson_response.status_code == 200
     assert n2_lesson_response.headers["content-type"].startswith("image/svg+xml")
     assert b"map scale" in n2_lesson_response.content
+
+    g4_lesson_response = get(
+        "/api/v1/content-assets/lesson/g4-lesson-01/g4-lesson-01-pythagoras"
+    )
+    assert g4_lesson_response.status_code == 200
+    assert g4_lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"Pythagoras" in g4_lesson_response.content
 
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200

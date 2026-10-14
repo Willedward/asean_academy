@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 5,
+  "revision": 6,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, and right-triangle geometry.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -28,6 +28,14 @@
     },
     {
       "key": "n2-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "g4-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -143,12 +151,48 @@
           "required_practice_count": 20
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-g4",
+      "position": 4,
+      "topic_code": "G4",
+      "title": "Pythagoras' theorem and trigonometry",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "g4-lesson-01",
+          "position": 1,
+          "title": "Use of Pythagoras’ theorem",
+          "outcomes": [
+            "4.1"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "g4-lesson-02",
+          "position": 2,
+          "title": "Determining whether a triangle is right-angled",
+          "outcomes": [
+            "4.2"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "g4-lesson-03",
+          "position": 3,
+          "title": "Sine, cosine and tangent in right-angled triangles",
+          "outcomes": [
+            "4.3"
+          ],
+          "required_practice_count": 20
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 155,
-    "unit_checkpoint": 68,
-    "adaptive_reserve": 89
+    "lesson_practice": 215,
+    "unit_checkpoint": 92,
+    "adaptive_reserve": 109
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -156,6 +200,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2 and N2 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2, S2, N2 and G4 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
   }
 }

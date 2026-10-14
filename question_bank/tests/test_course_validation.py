@@ -35,10 +35,10 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
 
     assert report.valid
     assert report.course.stable_key == "g3-sec2-math"
-    assert [unit.topic_code for unit in report.course.units] == ["G2", "S2", "N2"]
-    assert len(report.lessons) == 9
-    assert len(report.pools.pools) == 15
-    assert report.as_dict()["allocated_question_count"] == 312
+    assert [unit.topic_code for unit in report.course.units] == ["G2", "S2", "N2", "G4"]
+    assert len(report.lessons) == 12
+    assert len(report.pools.pools) == 20
+    assert report.as_dict()["allocated_question_count"] == 416
     assert report.warnings == []
 
 
@@ -72,9 +72,9 @@ def test_integrated_secondary_2_n2_lessons_meet_the_depth_and_asset_gates(reposi
             assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 
 
-def test_staged_secondary_2_g4_lessons_meet_the_depth_and_asset_gates(repository_root):
-    stage_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g4/v1"
-    lesson_paths = sorted((stage_root / "lessons").glob("*.json"))
+def test_integrated_secondary_2_g4_lessons_meet_the_depth_and_asset_gates(repository_root):
+    course_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g2/v1"
+    lesson_paths = sorted((course_root / "lessons").glob("g4-*.json"))
 
     assert [path.stem for path in lesson_paths] == [
         "g4-lesson-01",
@@ -86,7 +86,7 @@ def test_staged_secondary_2_g4_lessons_meet_the_depth_and_asset_gates(repository
         assert lesson.status == "draft"
         assert lesson_note_depth_shortfalls(lesson) == []
         for asset in lesson.assets:
-            asset_path = stage_root / asset.path
+            asset_path = course_root / asset.path
             assert asset_path.is_file()
             assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 

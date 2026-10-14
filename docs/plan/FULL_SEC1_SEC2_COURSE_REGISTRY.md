@@ -26,7 +26,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
 | `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
-| `g3-sec2-math` | 9 | 35 | G2, S2 and N2 draft; remaining units planned |
+| `g3-sec2-math` | 9 | 35 | G2, S2, N2 and G4 draft; remaining units planned |
 | **Total** | **19** | **87** | Structurally registered |
 
 Secondary 1 contains N1, N2, N3, N4, N5, N6, N7, G1, G5, and S1. Secondary 2 contains N2, N5, N6, N7, G2, G4, G5, S1, and S2.
@@ -45,8 +45,8 @@ Topics taught at both levels retain unique lesson IDs because their outcome suff
 
 Authenticated clients can read `GET /api/v1/courses`. The response reports both courses and all registered units, with `content_status`, `available`, and nullable links. Planned content has no link and cannot be opened. Draft content becomes available only when the API explicitly enables development previews; production continues to require published content.
 
-The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authored N1 and N2 snapshot when draft previews are enabled. As each later topic bank and lesson set is completed, its registry status and deployable snapshot advance together.
+The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authored course snapshots when draft previews are enabled. As each later topic bank and lesson set is completed, its registry status and deployable snapshot advance together.
 
 ## Next content slice
 
-Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 N2 now adds a complete draft slice with 104 questions, two full-depth lesson notes, deterministic diagrams, two practice pools, a 24-question checkpoint and a 40-question adaptive reserve. It is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.
+Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 G4 now adds a complete draft slice with 104 questions, three full-depth lesson notes, deterministic right-triangle diagrams, three practice pools, a 24-question checkpoint and a 20-question adaptive reserve. It is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.
