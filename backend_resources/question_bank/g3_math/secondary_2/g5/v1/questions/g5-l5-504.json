@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l5-504",
+  "bank_key": "g3-sec2-g5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G5",
+  "primary_outcome": "5.6",
+  "title": "Pyramid with a volume constraint",
+  "difficulty": 5,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled mensuration schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l5-504-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Community planners considered restricted transport access while preparing a capacity check for the mangrove research station. Researchers carry the equipment along a narrow mangrove boardwalk. A scale model will be stored with the project documentation. A square-based pyramid has base side 12 cm and perpendicular height 9 cm. A second pyramid has the same volume but base side 6 cm. Find the second pyramid’s perpendicular height in cm."
+        }
+      ],
+      "marks": 5,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "36",
+        "canonical_latex": "36",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the first volume, then keep it fixed for the second pyramid."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Because the base side is halved, its area is quartered, so the height must become four times as large."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select the relevant dimensions and apply the mensuration relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13(12)^2(9)=432,\\quad 432=\\frac13(6)^2H\\Rightarrow H=36"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 4
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{36}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 5,
+  "assets": [
+    {
+      "asset_key": "g5-l5-504-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l5-504-diagram.svg",
+      "alt_text": "Pyramid with a volume constraint: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-mensuration-svg-v1",
+        "diagram_kind": "pyramid",
+        "question_key": "g5-l5-504",
+        "outcome": "5.6",
+        "not_to_scale": true
+      },
+      "sha256": "74b2de17a9e95602457aefc6ca765d6265e33e2ca8cb278c25dda818b5f6ee7b",
+      "width": 760,
+      "height": 430
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T19:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
