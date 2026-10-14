@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l1-514",
+  "bank_key": "g3-sec2-g5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G5",
+  "primary_outcome": "5.6",
+  "title": "Surface area of a sphere",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled mensuration schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l1-514-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Community planners considered a narrow installation area while preparing a replacement design for the wetland monitoring float. Floating instruments must remain stable in shallow wetland water. A later inspection will compare the finished dimensions with this record. A sphere has radius 9 cm. Its surface area is kπ cm². Find k."
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "324",
+        "canonical_latex": "324",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the surface-area formula 4πr²."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate 4 × 9²; π is already shown in kπ."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "S=4\\pi(9)^2=324\\pi"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 1,
+  "assets": [
+    {
+      "asset_key": "g5-l1-514-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l1-514-diagram.svg",
+      "alt_text": "Surface area of a sphere: a labelled sphere mensuration schematic; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-mensuration-svg-v1",
+        "diagram_kind": "sphere",
+        "question_key": "g5-l1-514",
+        "outcome": "5.6",
+        "not_to_scale": true
+      },
+      "sha256": "e0310cfd36dfdc9a86330d77817564930f55753b083b5b44bde7757fca787279",
+      "width": 760,
+      "height": 430
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T19:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}

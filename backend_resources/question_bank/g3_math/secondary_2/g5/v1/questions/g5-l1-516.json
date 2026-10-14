@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l1-516",
+  "bank_key": "g3-sec2-g5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G5",
+  "primary_outcome": "5.6",
+  "title": "Volume of a pyramid",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled mensuration schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l1-516-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Survey crew considered frequent handling during training while preparing a replacement design for the robotics club prototype. The prototype must pass through the laboratory doorway. A later inspection will compare the finished dimensions with this record. A pyramid has base area 12 cm² and perpendicular height 9 cm. Find its volume in cm³. Enter the numerical value only."
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "36",
+        "canonical_latex": "36",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "A pyramid occupies one third of the matching prism."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate (12 × 9) ÷ 3."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13(12)(9)=36"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 1,
+  "assets": [
+    {
+      "asset_key": "g5-l1-516-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l1-516-diagram.svg",
+      "alt_text": "Volume of a pyramid: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-mensuration-svg-v1",
+        "diagram_kind": "pyramid",
+        "question_key": "g5-l1-516",
+        "outcome": "5.6",
+        "not_to_scale": true
+      },
+      "sha256": "543ef76d52409dd48bfacf406ca5968dff3f2a1b2b7b267b36d50ce4651ad858",
+      "width": 760,
+      "height": 430
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T19:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
