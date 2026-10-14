@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l1-507",
+  "bank_key": "g3-sec2-g4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.1",
+  "title": "Find the hypotenuse",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l1-507-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Survey crew noted a narrow foundation beside drainage while preparing a replacement frame. For the reservoir service road, a right triangular panel has perpendicular sides 24 cm and 143 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "4.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "145",
+        "canonical_latex": "145",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Identify the two perpendicular sides before using Pythagoras’ theorem."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate the square root of 24² + 143²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "c=\\sqrt{24^2+143^2}=145"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 1,
+  "assets": [
+    {
+      "asset_key": "g4-l1-507-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l1-507-diagram.svg",
+      "alt_text": "Find the hypotenuse: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-right-triangle-svg-v1",
+        "diagram_kind": "right_triangle",
+        "question_key": "g4-l1-507",
+        "outcome": "4.1",
+        "not_to_scale": true
+      },
+      "sha256": "cbc66765a2b5b550e2cfebad4d2b5e2405a8e8a69b9be0963922d8e3eed86c0e",
+      "width": 760,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}

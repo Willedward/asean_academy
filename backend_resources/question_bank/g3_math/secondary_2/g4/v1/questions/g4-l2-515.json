@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l2-515",
+  "bank_key": "g3-sec2-g4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.3",
+  "title": "Calculate a side using tangent",
+  "difficulty": 2,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l2-515-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Environmental officers noted high winds during seasonal storms while preparing a replacement frame. A sight line at the island ferry terminal makes an angle of 55° with level ground. The horizontal distance is 17 m. Find the vertical height x in metres, correct to 1 decimal place."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "4.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_dp",
+        "canonical_answer": "24.3",
+        "canonical_latex": "24.3",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": 1,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Relative to the given angle, identify the vertical side as opposite and the horizontal side as adjacent."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use tan 55° = x/17 and round only the final answer."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select and apply the right-triangle relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "x=17\\tan 55^\\circ=24.3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{24.3}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [
+    {
+      "asset_key": "g4-l2-515-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l2-515-diagram.svg",
+      "alt_text": "Calculate a side using tangent: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-right-triangle-svg-v1",
+        "diagram_kind": "right_triangle",
+        "question_key": "g4-l2-515",
+        "outcome": "4.3",
+        "not_to_scale": true
+      },
+      "sha256": "e833f67e231b9a2b78471f40edaa5913fdb7bbe7987fdad84a03ae519b3b8be2",
+      "width": 760,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
