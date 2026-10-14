@@ -57,6 +57,21 @@ def test_integrated_secondary_2_s2_lessons_meet_the_depth_and_asset_gates(reposi
             assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 
 
+def test_staged_secondary_2_n2_lessons_meet_the_depth_and_asset_gates(repository_root):
+    stage_root = repository_root / "backend_resources/courses/g3_math/secondary_2/n2/v1"
+    lesson_paths = sorted((stage_root / "lessons").glob("*.json"))
+
+    assert [path.stem for path in lesson_paths] == ["n2-lesson-01", "n2-lesson-02"]
+    for path in lesson_paths:
+        lesson = Lesson.model_validate_json(path.read_text())
+        assert lesson.status == "draft"
+        assert lesson_note_depth_shortfalls(lesson) == []
+        for asset in lesson.assets:
+            asset_path = stage_root / asset.path
+            assert asset_path.is_file()
+            assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
+
+
 def test_thin_lesson_notes_block_publication(repository_root, course_bank_root, tmp_path):
     source = repository_root / "backend_resources/courses/g3_math/secondary_1/n1/v1"
     course_root = tmp_path / "course"

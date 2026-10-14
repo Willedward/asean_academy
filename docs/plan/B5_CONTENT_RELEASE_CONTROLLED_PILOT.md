@@ -32,12 +32,16 @@ The current authored source contains every Secondary 1 unit (N1 through N7, G1, 
 | Topic groups                       |                                     12 |                                      19 | Blocked |
 | Questions                          |                                  1,184 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                     59 |  All authored and planned Beta lessons | Blocked |
-| Lessons meeting the note-depth gate |                                     51 |                   All authored lessons | Blocked |
+| Lessons                            |                                     61 |  All authored and planned Beta lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     53 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 700 practice, 225 checkpoint, 259 reserve |          Complete and non-overlapping | Pass    |
 
 The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2 and S2 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing seven Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
+
+Secondary 2 N2 now has two full-depth lesson drafts staged for review. It remains one of
+those seven missing deployable topic groups until all four planned question batches and its
+practice, checkpoint and adaptive-reserve pools are authored and validated.
 
 ## Development sequencing decision — 10 October 2026
 
