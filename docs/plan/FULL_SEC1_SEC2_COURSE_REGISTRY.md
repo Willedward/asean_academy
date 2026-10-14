@@ -26,7 +26,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
 | `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
-| `g3-sec2-math` | 9 | 35 | G2, S2, N2, G4 and G5 draft; remaining units planned |
+| `g3-sec2-math` | 9 | 35 | G2, S2, N2, G4, G5 and N5 draft; remaining units planned |
 | **Total** | **19** | **87** | Structurally registered |
 
 Secondary 1 contains N1, N2, N3, N4, N5, N6, N7, G1, G5, and S1. Secondary 2 contains N2, N5, N6, N7, G2, G4, G5, S1, and S2.
@@ -49,4 +49,4 @@ The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authore
 
 ## Next content slice
 
-Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 G5 now adds a complete draft slice with 104 questions, one full-depth lesson note, deterministic pyramid, cone, sphere and composite-solid diagrams, one 20-question practice pool, a 24-question checkpoint and a 60-question adaptive reserve. It is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.
+Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 N5 now adds a complete draft slice with 104 questions, eight full-depth outcome lessons, eight 8-question practice pools, a 24-question checkpoint and a 16-question adaptive reserve. It is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.
