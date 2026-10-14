@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s2-lesson-01",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s2",
+  "position": 1,
+  "status": "draft",
+  "title": "Probability as a measure of chance",
+  "summary": "Represent likelihood on the probability scale, convert among fractions, decimals and percentages, and distinguish theoretical probability from experimental results.",
+  "outcomes": [
+    "2.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 50,
+  "objectives": [
+    "Interpret probability as a number from 0 to 1 inclusive.",
+    "Express the same probability as a fraction, decimal or percentage.",
+    "Use complements and repeated-trial evidence to reason about chance."
+  ],
+  "mastery_policy_key": "s2-default-v1",
+  "sections": [
+    {
+      "stable_key": "s2-21-scale",
+      "position": 1,
+      "type": "explanation",
+      "title": "Place chance on a numerical scale",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Probability measures how likely an event is. An event is a stated result or collection of results, such as ‘the spinner lands on blue’. Probability 0 means the event is impossible and probability 1 means it is certain. Every valid probability lies between these endpoints, including 0 and 1. Values closer to 1 describe more likely events; values closer to 0 describe less likely events."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s2-lesson-01-probability-scale"
+        },
+        {
+          "type": "display_math",
+          "latex": "0\\le P(A)\\le1"
+        },
+        {
+          "type": "text",
+          "text": "The point 1/2 represents an even chance: the event and its opposite are equally likely. Words such as unlikely and likely describe regions rather than exact values, so translate them carefully. An event with probability 0.48 is slightly less likely than an even chance, while probability 0.8 is likely but still not certain."
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-21-forms-and-complements",
+      "position": 2,
+      "type": "explanation",
+      "title": "Move between forms and use the complement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A probability may be written as a fraction, decimal or percentage. These forms name the same point on the scale. Divide the numerator by the denominator to obtain a decimal, and multiply a decimal by 100% to obtain a percentage. Keep an exact fraction when rounding a decimal would lose information."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{3}{8}=0.375=37.5\\%"
+        },
+        {
+          "type": "text",
+          "text": "The complement of event A, written A', means that A does not occur. Exactly one of A and A' must occur, so their probabilities total 1. This gives a fast route when the opposite event is easier to describe. For example, ‘at least one rainy day’ is the complement of ‘no rainy days’."
+        },
+        {
+          "type": "display_math",
+          "latex": "P(A')=1-P(A)"
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-21-scale-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: interpret and convert a probability",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The probability that a ferry arrives within five minutes is 0.68. Express this as a percentage, find the probability that it does not arrive within five minutes, and describe which event is more likely."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the decimal to a percentage."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.68\\times100\\%=68\\%"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the complement for the probability of waiting longer than five minutes."
+            },
+            {
+              "type": "display_math",
+              "latex": "1-0.68=0.32"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Since 0.68 is greater than 0.32 and greater than 0.5, arriving within five minutes is the more likely event. It is not certain because 0.68 is less than 1."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The event and its complement give 0.68 + 0.32 = 1, and 68% + 32% = 100%, so the two forms agree."
+    },
+    {
+      "stable_key": "s2-21-experimental-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: use experimental probability",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A new game wheel is spun 80 times and lands on gold 18 times. Estimate the probability of gold and use the estimate to predict the number of gold results in the next 200 spins."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Experimental probability is the observed relative frequency."
+            },
+            {
+              "type": "display_math",
+              "latex": "P(\\text{gold})\\approx\\frac{18}{80}=\\frac{9}{40}=0.225"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply the estimated probability by the new number of trials."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.225\\times200=45"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Predict about 45 gold results. This is a long-run estimate, not a promise that exactly 45 will occur."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The prediction preserves the observed rate: 45/200 = 0.225, the same relative frequency as 18/80."
+    },
+    {
+      "stable_key": "s2-21-theory-experiment",
+      "position": 5,
+      "type": "explanation",
+      "title": "Separate a model from observed results",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Theoretical probability comes from a mathematical model of the possible outcomes. For a fair coin, the model gives P(heads) = 1/2. Experimental probability comes from actual trials: number of times the event occurs divided by total trials. A small experiment can differ noticeably from the theoretical value because chance creates natural variation."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{experimental probability}=\\frac{\\text{event frequency}}{\\text{number of trials}}"
+        },
+        {
+          "type": "text",
+          "text": "As the number of independent trials grows, experimental probability often becomes more stable and tends towards the theoretical probability when the model is appropriate. A disagreement after only a few trials does not prove that an object is unfair. Evidence of bias becomes stronger when a substantial, well-controlled set of trials repeatedly departs from the model."
+        },
+        {
+          "type": "text",
+          "text": "Check every answer against the probability scale. A negative probability, a value greater than 1, or complementary probabilities that do not total 1 signals an error. Also distinguish probability from frequency: 0.3 is a proportion, while 30 successes is a count and needs a stated number of trials."
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-21-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "An event has probability 0.37. Enter the probability of its complement."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "0.63",
+        "canonical_latex": "0.63",
+        "accepted_answers": [
+          "63/100"
+        ],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Subtract from 1: 1 − 0.37 = 0.63. The event and its complement must total 1."
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-lesson-01-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Identify the event precisely, then place its probability between 0 and 1. Use 0 for impossible, 1/2 for an even chance and 1 for certain."
+        },
+        {
+          "type": "text",
+          "text": "Convert consistently among fractions, decimals and percentages. For the opposite event, calculate 1 − P(A) and check that the pair totals 1."
+        },
+        {
+          "type": "text",
+          "text": "Use theoretical probability for a justified model and experimental probability for observed trials. Treat expected frequency as a prediction over many trials rather than an exact short-run result."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s2-lesson-01-probability-scale",
+      "kind": "number_line",
+      "format": "svg",
+      "path": "assets/s2-lesson-01-probability-scale.svg",
+      "alt_text": "A probability scale from 0 to 1, with impossible at 0, unlikely near one quarter, an even chance at one half, likely near three quarters and certain at 1.",
+      "generation_spec": {
+        "renderer": "nextscholar-probability-svg-v1",
+        "diagram_kind": "probability_scale",
+        "lesson_key": "s2-lesson-01"
+      },
+      "sha256": "7cad87901c600142a227742059da67aa01a55285f3c203f3aca0031100dcdfe5",
+      "width": 940,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T15:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Initial expanded S2 lesson draft; awaiting Mathematics and editorial review and the complete S2 question bank before course integration."
+  }
+}

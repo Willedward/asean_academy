@@ -77,6 +77,12 @@ only one explanation and one worked example and are below the six-section depth 
 They remain valid drafts for review, but cannot pass the strict publication gate until
 expanded.
 
+Secondary 2 S2.1–S2.2 are also authored at full depth in a lesson-only staging package.
+They are excluded from the 57-lesson deployable-course count until the planned S2 bank has
+104 authored questions and complete practice, checkpoint and adaptive-reserve pools. This
+keeps lesson review work moving without weakening the course validation or implying learner
+availability.
+
 ## Review and publication
 
 Completing the structural gate does not approve or publish a lesson. Every new teaching

@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s2-lesson-02",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s2",
+  "position": 2,
+  "status": "draft",
+  "title": "Probability of single events",
+  "summary": "Construct complete sample spaces, recognise equally likely outcomes, and calculate single-event probabilities using systematic lists, tables and complements.",
+  "outcomes": [
+    "2.2"
+  ],
+  "prerequisite_lessons": [
+    "s2-lesson-01"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "List all possible outcomes in a simple chance situation without omissions or repetition.",
+    "Calculate event probabilities when elementary outcomes are equally likely.",
+    "Use tables, ordered pairs and complements to solve single-event problems."
+  ],
+  "mastery_policy_key": "s2-default-v1",
+  "sections": [
+    {
+      "stable_key": "s2-22-sample-space",
+      "position": 1,
+      "type": "explanation",
+      "title": "Define the sample space and event",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A sample space is the complete set of possible outcomes of a chance situation. An event is any selected subset of that sample space. For one fair six-sided die, the sample space is {1, 2, 3, 4, 5, 6}; the event ‘an even number’ is {2, 4, 6}. Listing the sample space first makes the denominator visible and prevents an attractive outcome from being counted twice."
+        },
+        {
+          "type": "display_math",
+          "latex": "P(A)=\\frac{\\text{number of outcomes in }A}{\\text{total number of outcomes}}"
+        },
+        {
+          "type": "text",
+          "text": "This counting formula applies only when the elementary outcomes are equally likely. The six faces of a fair die are equally likely, but the totals from two dice are not: there is one ordered outcome producing 2 and six producing 7. When outcomes carry different probabilities, add the probabilities of the outcomes in the event instead of merely counting labels."
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-22-systematic-listing",
+      "position": 2,
+      "type": "explanation",
+      "title": "List outcomes systematically",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a situation with two stages, use ordered pairs, a table or a tree diagram. Fix one first-stage outcome and pair it with every second-stage outcome before moving to the next row or branch. Order matters when the stages or objects are distinct: HT and TH are different sequences even though both contain one head and one tail."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s2-lesson-02-sample-space"
+        },
+        {
+          "type": "text",
+          "text": "The table shows three colour choices followed by two coin results, giving 3 × 2 = 6 outcomes. The two highlighted outcomes form the event ‘red is chosen’, so its probability is 2/6 = 1/3. A product counts all outcomes only when each first-stage choice can be paired with every second-stage choice."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\text{number of outcomes}=\\text{first-stage choices}\\times\\text{second-stage choices}"
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-22-coins-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: list a two-stage sample space",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A fair coin is tossed twice. Find the probability of getting exactly one head."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "List the ordered outcomes."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=\\{HH,HT,TH,TT\\}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Exactly one head occurs in HT and TH, so there are two favourable outcomes."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "P(\\text{exactly one head})=\\frac{2}{4}=\\frac12"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Do not combine HT and TH into one outcome: they are two different ordered sequences and each has probability 1/4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The four outcomes are equally likely and exhaustive. The complementary events zero heads and two heads occupy TT and HH, leaving two of the four outcomes for exactly one head."
+    },
+    {
+      "stable_key": "s2-22-die-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: combine conditions in one event",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A fair die is rolled once. Find the probability that the result is a factor of 6 or greater than 4."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write each condition as a subset of the sample space."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\text{factors of 6}=\\{1,2,3,6\\},\\qquad\\text{greater than 4}=\\{5,6\\}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "For ‘or’, combine the sets and count the shared value 6 only once."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=\\{1,2,3,5,6\\}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "P(A)=\\frac56"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The only outcome outside the event is 4, so the complement has probability 1/6 and 5/6 + 1/6 = 1."
+    },
+    {
+      "stable_key": "s2-22-model-checks",
+      "position": 5,
+      "type": "explanation",
+      "title": "Check equally likely outcomes and wording",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Translate words before counting. ‘Exactly one’ excludes zero and two; ‘at least one’ includes one or more; ‘at most one’ includes zero and one. For an ‘or’ event, include outcomes satisfying either condition and count an overlap once. For an ‘and’ event, keep outcomes satisfying both conditions. A complement is often the shortest route for ‘at least one’."
+        },
+        {
+          "type": "text",
+          "text": "Do not assume visible categories are equally likely. A spinner with unequal sectors, a bag with different numbers of each colour, or the possible sums of two dice requires weighted outcomes. Build the sample space at the elementary level—for example, ordered die pairs—then collect the outcomes that satisfy the event."
+        },
+        {
+          "type": "text",
+          "text": "When an item is selected and returned, the next stage has the same composition; without replacement, it changes. That distinction affects later probabilities and the branches of a tree. This lesson focuses on one stated event, but the sample-space discipline remains the same: define the experiment, list valid elementary outcomes and match the denominator to that list."
+        },
+        {
+          "type": "display_math",
+          "latex": "P(A)+P(A')=1"
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-22-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A fair coin is tossed and a fair three-section spinner labelled 1, 2 and 3 is spun. How many equally likely ordered outcomes are in the sample space?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "There are 2 coin outcomes and 3 spinner outcomes. Pairing every coin result with every spinner result gives 2 × 3 = 6 outcomes."
+        }
+      ]
+    },
+    {
+      "stable_key": "s2-lesson-02-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Method checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Define the experiment and event, then list a complete sample space using a systematic list, table, ordered pairs or a tree. Include each elementary outcome exactly once."
+        },
+        {
+          "type": "text",
+          "text": "Check whether the elementary outcomes are equally likely before using favourable outcomes divided by total outcomes. Otherwise, add their individual probabilities."
+        },
+        {
+          "type": "text",
+          "text": "Translate exactly, at least, at most, and/or carefully; handle overlaps once; simplify the final fraction; and verify that the answer lies from 0 to 1 and agrees with its complement."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s2-lesson-02-sample-space",
+      "kind": "table",
+      "format": "svg",
+      "path": "assets/s2-lesson-02-sample-space.svg",
+      "alt_text": "A sample-space table pairs red, blue and green choices with heads and tails, creating six equally likely outcomes; the two red outcomes are highlighted.",
+      "generation_spec": {
+        "renderer": "nextscholar-probability-svg-v1",
+        "diagram_kind": "two_stage_sample_space",
+        "lesson_key": "s2-lesson-02"
+      },
+      "sha256": "ba5ea2c5d4247dd1943635e702cd4b490e516296d21800bb60bc9ea82946b61f",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T15:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Initial expanded S2 lesson draft; awaiting Mathematics and editorial review and the complete S2 question bank before course integration."
+  }
+}

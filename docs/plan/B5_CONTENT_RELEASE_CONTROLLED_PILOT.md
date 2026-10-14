@@ -39,6 +39,10 @@ The current authored source contains every Secondary 1 unit (N1 through N7, G1, 
 
 The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing eight Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
 
+Secondary 2 S2 has two expanded lesson drafts staged for early Mathematics and editorial
+feedback. The release gate continues to count S2 as incomplete because its four planned
+question batches contain no authored questions and no source pools exist yet.
+
 ## Development sequencing decision — 10 October 2026
 
 Finish the authored questions, lessons, reviews and deterministic release tooling before

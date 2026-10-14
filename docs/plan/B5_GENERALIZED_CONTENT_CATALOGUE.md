@@ -1,6 +1,6 @@
 # B5 generalized Mathematics content catalogue
 
-**Implementation status (13 October 2026): engineering foundation complete; N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, and the remaining syllabus content is incomplete.**
+**Implementation status (14 October 2026): engineering foundation complete; N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, and Secondary 2 S2 has expanded lesson drafts staged while its question bank remains planned.**
 
 This milestone removes the N1-only constraints from the Git-authored question and course pipeline before the team expands the Beta bank to roughly 1,900–2,850 questions. Existing N1 source files remain valid and keep their current immutable content hashes.
 
@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while Secondary 1 N3–N7, G1, G5 and S1 plus Secondary 2 G2 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. The team must now author the remaining eight Secondary 2 topic groups, review every pending unit, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while Secondary 1 N3–N7, G1, G5 and S1 plus Secondary 2 G2 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. Secondary 2 S2 now has two full-depth lesson drafts and deterministic diagrams under `backend_resources/courses/g3_math/secondary_2/s2/v1/`; its four planned batches still require 104 questions and source-pool allocation before the unit can enter the deployable course snapshot or hosted admin workflow. The team must author those S2 questions and the other seven Secondary 2 topic groups, review every pending unit, create the 76 isolated diagnostic items, and complete the remaining lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 
