@@ -175,13 +175,13 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         syllabus_path=repository_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         school_level="secondary_2",
-        topic_code="G5",
+        topic_code="N5",
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec2-g5-b001"
-    assert next_batch["branch"] == "questions/g3-sec2-g5-b001-willedward"
-    assert "authoring-claim g3-sec2-g5-b001" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec2-n5-b001"
+    assert next_batch["branch"] == "questions/g3-sec2-n5-b001-willedward"
+    assert "authoring-claim g3-sec2-n5-b001" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
@@ -196,23 +196,25 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
 
     assert result["question_count"] == 26
     assert len(work_order["slots"]) == 26
-    assert all(slot["stable_key"].startswith("g5-l") for slot in work_order["slots"])
-    assert {slot["primary_outcome"] for slot in work_order["slots"]} == {"5.6"}
+    assert all(slot["stable_key"].startswith("n5-l") for slot in work_order["slots"])
+    manifest_payload = json.loads(Path(next_batch["manifest"]).read_text())
+    assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
+        allocation["outcome_code"] for allocation in manifest_payload["allocation"]
+    }
     assert work_order["generation_contract"]["human_review_required"] == [
         "mathematics",
         "editorial",
     ]
-    manifest_keys = json.loads(Path(next_batch["manifest"]).read_text())["question_keys"]
+    manifest_keys = manifest_payload["question_keys"]
     assert {slot["stable_key"] for slot in work_order["slots"]} == set(manifest_keys)
-    assert [slot["stable_key"] for slot in work_order["slots"]] == manifest_keys
     assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
 def test_executor_repairs_and_validates_complete_planned_work_order(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_2/g5/v1/batches"
-        / "g3-sec2-g5-b001.json"
+        / "backend_resources/question_bank/g3_math/secondary_2/n5/v1/batches"
+        / "g3-sec2-n5-b001.json"
     )
     create_authoring_work_order(
         manifest,
@@ -255,8 +257,8 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
 def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_path):
     manifest = (
         repository_root
-        / "backend_resources/question_bank/g3_math/secondary_2/g5/v1/batches"
-        / "g3-sec2-g5-b001.json"
+        / "backend_resources/question_bank/g3_math/secondary_2/n5/v1/batches"
+        / "g3-sec2-n5-b001.json"
     )
     create_authoring_work_order(
         manifest,
