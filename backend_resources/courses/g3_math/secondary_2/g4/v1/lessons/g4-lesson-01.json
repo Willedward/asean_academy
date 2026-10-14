@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-g4",
+  "status": "draft",
+  "mastery_policy_key": "g4-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "g4-lesson-01",
+  "position": 1,
+  "title": "Use of Pythagoras’ theorem",
+  "summary": "Use the relationship between the three sides of a right triangle to calculate missing lengths and solve contextual problems.",
+  "outcomes": [
+    "4.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Identify the hypotenuse and the two perpendicular sides.",
+    "Calculate a missing hypotenuse or shorter side.",
+    "Model diagonals, heights and straight-line distances with right triangles."
+  ],
+  "sections": [
+    {
+      "stable_key": "g4-41-relationship",
+      "position": 1,
+      "type": "explanation",
+      "title": "The relationship in a right triangle",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Pythagoras’ theorem applies only to a right-angled triangle. Label the side opposite the right angle c; it is the hypotenuse and is always the longest side. If the perpendicular sides are a and b, then a² + b² = c²."
+        },
+        {
+          "type": "display_math",
+          "latex": "a^2+b^2=c^2"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g4-lesson-01-pythagoras"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-41-hypotenuse",
+      "position": 2,
+      "type": "explanation",
+      "title": "Finding the hypotenuse",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When both shorter sides are known, square each length, add, and take the positive square root. Lengths cannot be negative. Keep the exact square-root form during working and round only if the question requests it."
+        },
+        {
+          "type": "display_math",
+          "latex": "c=\\sqrt{a^2+b^2}"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-41-example-hyp",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: diagonal",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A rectangular courtyard is 9 m by 12 m. Find its diagonal."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The diagonal is the hypotenuse of a right triangle."
+            },
+            {
+              "type": "display_math",
+              "latex": "d^2=9^2+12^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{225}=15\\text{ m}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The diagonal exceeds both side lengths and 9² + 12² = 15²."
+    },
+    {
+      "stable_key": "g4-41-shorter",
+      "position": 4,
+      "type": "explanation",
+      "title": "Finding a shorter side",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If the hypotenuse and one shorter side are known, subtract the known shorter-side square from the hypotenuse square. Adding would produce a result longer than the hypotenuse and cannot be correct."
+        },
+        {
+          "type": "display_math",
+          "latex": "a=\\sqrt{c^2-b^2}"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-41-example-leg",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: ladder height",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A 13 m ladder reaches a wall with its foot 5 m from the wall. Find the vertical height reached."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h^2+5^2=13^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=\\sqrt{169-25}=12\\text{ m}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The answer is shorter than the 13 m ladder, and 5² + 12² = 13²."
+    },
+    {
+      "stable_key": "g4-41-model",
+      "position": 6,
+      "type": "explanation",
+      "title": "Build the right triangle from context",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Draw a simple sketch before substituting. Vertical and horizontal directions are perpendicular, and a rectangle’s diagonal creates two right triangles. Separate any extra cable, border or path length from the Pythagoras calculation."
+        },
+        {
+          "type": "text",
+          "text": "Use consistent units before squaring. Squared centimetres and squared metres cannot be added, even though the final result is a length."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-41-recall",
+      "position": 7,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A right triangle has shorter sides 8 and 15. Enter the hypotenuse."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "17",
+        "canonical_latex": "17",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "8² + 15² = 64 + 225 = 289 = 17²."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-lesson-01-summary",
+      "position": 8,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Mark the right angle, label the hypotenuse opposite it, and decide whether to add squares or subtract one square."
+        },
+        {
+          "type": "text",
+          "text": "Check units, take the positive square root, and confirm that the hypotenuse is the longest side."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "g4-lesson-01-pythagoras",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-lesson-01-pythagoras.svg",
+      "alt_text": "A 6-8-10 right triangle demonstrating a squared plus b squared equals c squared.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "pythagoras",
+        "lesson_key": "g4-lesson-01"
+      },
+      "sha256": "76f7d10b9fa89f7ce1ca4e17002cdfaa95827f0d50e783ada6d812fb72c74f49",
+      "width": 940,
+      "height": 470
+    }
+  ]
+}

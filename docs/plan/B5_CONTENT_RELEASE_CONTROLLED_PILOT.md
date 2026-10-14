@@ -32,8 +32,8 @@ The current authored source contains every Secondary 1 unit (N1 through N7, G1, 
 | Topic groups                       |                                     13 |                                      19 | Blocked |
 | Questions                          |                                  1,288 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                     61 |  All authored and planned Beta lessons | Blocked |
-| Lessons meeting the note-depth gate |                                     53 |                   All authored lessons | Blocked |
+| Lessons                            |                                     64 |  All authored and planned Beta lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     56 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 740 practice, 249 checkpoint, 299 reserve |          Complete and non-overlapping | Pass    |
 

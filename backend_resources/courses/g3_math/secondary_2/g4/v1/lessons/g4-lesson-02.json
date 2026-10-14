@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-g4",
+  "status": "draft",
+  "mastery_policy_key": "g4-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "g4-lesson-02",
+  "position": 2,
+  "title": "Determining whether a triangle is right-angled",
+  "summary": "Apply the converse of Pythagoras’ theorem to classify triangles from their side lengths and justify the decision.",
+  "outcomes": [
+    "4.2"
+  ],
+  "prerequisite_lessons": [
+    "g4-lesson-01"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Select the longest side as the possible hypotenuse.",
+    "Compare the sum of two side squares with the longest-side square.",
+    "Use equality or inequality to justify a classification."
+  ],
+  "sections": [
+    {
+      "stable_key": "g4-42-converse",
+      "position": 1,
+      "type": "explanation",
+      "title": "The converse test",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If three positive lengths are arranged a ≤ b < c, the triangle is right-angled exactly when a² + b² = c². This is the converse of Pythagoras’ theorem. Always identify the longest side before testing."
+        },
+        {
+          "type": "display_math",
+          "latex": "a^2+b^2=c^2\\iff\\text{ the triangle is right-angled}"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g4-lesson-02-converse"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-42-compare",
+      "position": 2,
+      "type": "explanation",
+      "title": "Interpret the comparison",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Equality proves a right angle opposite c. If a² + b² is greater than c², the largest angle is acute; if it is less than c², the largest angle is obtuse. For this syllabus outcome, show both numerical totals rather than stating a result from appearance."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-42-example-yes",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: confirm a right triangle",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Determine whether side lengths 10 cm, 24 cm and 26 cm form a right triangle."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The possible hypotenuse is 26 cm."
+            },
+            {
+              "type": "display_math",
+              "latex": "10^2+24^2=100+576=676"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "26^2=676"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The values are equal, so the triangle is right-angled."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The right angle lies opposite the longest side, 26 cm."
+    },
+    {
+      "stable_key": "g4-42-example-no",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: reject a false right triangle",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Determine whether side lengths 8 m, 15 m and 18 m form a right triangle."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "8^2+15^2=289"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "18^2=324"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Because 289 ≠ 324, the triangle is not right-angled."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The calculation uses the longest side 18 m as c; using another side as c would invalidate the test."
+    },
+    {
+      "stable_key": "g4-42-validity",
+      "position": 5,
+      "type": "explanation",
+      "title": "Check that the sides form a triangle",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Before classifying, confirm the two shorter sides add to more than the longest side. If a + b ≤ c, the lengths cannot form a non-degenerate triangle. This check matters in unfamiliar or constructed data."
+        },
+        {
+          "type": "display_math",
+          "latex": "a+b>c"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-42-errors",
+      "position": 6,
+      "type": "explanation",
+      "title": "Common errors and clear justification",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Do not compare a + b with c as a right-angle test; that is only the triangle inequality. Do not round square totals. Write the side ordering, both square calculations and a conclusion linked to equality or inequality."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-42-recall",
+      "position": 7,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A triangle has sides 12, 35 and 37. Enter 1 if it is right-angled and 0 otherwise."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "12² + 35² = 144 + 1225 = 1369 = 37², so it is right-angled."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-lesson-02-summary",
+      "position": 8,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Order the sides and use the longest as c. Confirm the triangle inequality, then compare a² + b² with c²."
+        },
+        {
+          "type": "text",
+          "text": "State the numerical comparison and conclusion; a diagram that looks right-angled is not proof."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "g4-lesson-02-converse",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-lesson-02-converse.svg",
+      "alt_text": "Comparison of a 7-24-25 right triangle with a 7-24-26 non-right triangle using squared side lengths.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "pythagoras_converse",
+        "lesson_key": "g4-lesson-02"
+      },
+      "sha256": "9b26ef3e840d3716050711d95dba932edf74d00a33c66f21b9b4f2780deea6cd",
+      "width": 940,
+      "height": 470
+    }
+  ]
+}
