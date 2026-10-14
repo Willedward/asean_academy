@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,10 +8,18 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, beginning with the review-ready G2 Congruence and similarity unit.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity and probability.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "s2-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -73,12 +81,39 @@
           "required_practice_count": 15
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-s2",
+      "position": 2,
+      "topic_code": "S2",
+      "title": "Probability",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "s2-lesson-01",
+          "position": 1,
+          "title": "Probability as a measure of chance",
+          "outcomes": [
+            "2.1"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "s2-lesson-02",
+          "position": 2,
+          "title": "Probability of single events",
+          "outcomes": [
+            "2.2"
+          ],
+          "required_practice_count": 20
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 75,
-    "unit_checkpoint": 20,
-    "adaptive_reserve": 9
+    "lesson_practice": 115,
+    "unit_checkpoint": 44,
+    "adaptive_reserve": 49
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -86,6 +121,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2 awaits Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2 and S2 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
   }
 }
