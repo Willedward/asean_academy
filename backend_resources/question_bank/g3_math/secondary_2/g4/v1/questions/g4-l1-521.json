@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l1-521",
+  "bank_key": "g3-sec2-g4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.3",
+  "title": "Use tangent at 45 degrees",
+  "difficulty": 1,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l1-521-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Design technicians noted a protected habitat boundary while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the weather-sensor mast, the opposite side is 4 m. Find the adjacent side x in metres. Enter the numerical value only."
+        }
+      ],
+      "marks": 1,
+      "primary_outcome": "4.3",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Tangent compares the opposite and adjacent sides."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use tan 45° = 1."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\tan45^\\circ=\\frac{4}{x}=1\\Rightarrow x=4"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 1,
+  "assets": [
+    {
+      "asset_key": "g4-l1-521-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l1-521-diagram.svg",
+      "alt_text": "Use tangent at 45 degrees: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-right-triangle-svg-v1",
+        "diagram_kind": "right_triangle",
+        "question_key": "g4-l1-521",
+        "outcome": "4.3",
+        "not_to_scale": true
+      },
+      "sha256": "2a717aa9941a485e43caf5571188406a4aae8bd51a587b5dac7afafbfbcd6832",
+      "width": 760,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
