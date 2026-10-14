@@ -41,6 +41,8 @@ def test_full_secondary_one_two_registry_matches_syllabus(repository_root):
     assert len(lesson_keys) == 87
     assert secondary_one.units[0].content_status == "draft"
     assert secondary_two.content_status == "draft"
+    assert secondary_two.units[0].topic_code == "N2"
+    assert secondary_two.units[0].content_status == "draft"
     assert secondary_two.units[4].topic_code == "G2"
     assert secondary_two.units[4].content_status == "draft"
     assert secondary_two.units[8].topic_code == "S2"
@@ -48,7 +50,7 @@ def test_full_secondary_one_two_registry_matches_syllabus(repository_root):
     assert all(
         unit.content_status == "planned"
         for position, unit in enumerate(secondary_two.units)
-        if position not in {4, 8}
+        if position not in {0, 4, 8}
     )
 
 
