@@ -7,7 +7,11 @@ from jsonschema import Draft202012Validator
 from pydantic import ValidationError
 
 from question_bank.course_models import Course, Lesson, QuestionPools
-from question_bank.course_validation import schema_documents, validate_course
+from question_bank.course_validation import (
+    lesson_note_depth_shortfalls,
+    schema_documents,
+    validate_course,
+)
 
 
 def test_complete_secondary_1_course_source_is_valid(repository_root, course_bank_root):
@@ -35,6 +39,21 @@ def test_secondary_2_g2_course_source_is_valid(repository_root, course_bank_root
     assert len(report.pools.pools) == 7
     assert report.as_dict()["allocated_question_count"] == 104
     assert report.warnings == []
+
+
+def test_staged_secondary_2_s2_lessons_meet_the_depth_and_asset_gates(repository_root):
+    stage_root = repository_root / "backend_resources/courses/g3_math/secondary_2/s2/v1"
+    lesson_paths = sorted((stage_root / "lessons").glob("*.json"))
+
+    assert [path.stem for path in lesson_paths] == ["s2-lesson-01", "s2-lesson-02"]
+    for path in lesson_paths:
+        lesson = Lesson.model_validate_json(path.read_text())
+        assert lesson.status == "draft"
+        assert lesson_note_depth_shortfalls(lesson) == []
+        for asset in lesson.assets:
+            asset_path = stage_root / asset.path
+            assert asset_path.is_file()
+            assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
 
 
 def test_thin_lesson_notes_block_publication(repository_root, course_bank_root, tmp_path):
