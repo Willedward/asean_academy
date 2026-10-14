@@ -180,6 +180,9 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_two["units"][5]["topic_code"] == "G4"
     assert secondary_two["units"][5]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][5]["lessons"])
+    assert secondary_two["units"][6]["topic_code"] == "G5"
+    assert secondary_two["units"][6]["available"] is True
+    assert all(lesson["available"] is True for lesson in secondary_two["units"][6]["lessons"])
     assert secondary_two["units"][8]["topic_code"] == "S2"
     assert secondary_two["units"][8]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][8]["lessons"])
@@ -192,7 +195,7 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     course = course_response.json()
     assert course["school_level"] == "secondary_2"
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 4
+    assert len(course["units"]) == 5
     assert course["units"][0]["stable_key"] == "g3-sec2-g2"
     assert len(course["units"][0]["lessons"]) == 5
     assert course["units"][1]["stable_key"] == "g3-sec2-s2"
@@ -207,6 +210,10 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
         "g4-lesson-01",
         "g4-lesson-02",
         "g4-lesson-03",
+    ]
+    assert course["units"][4]["stable_key"] == "g3-sec2-g5"
+    assert [lesson["stable_key"] for lesson in course["units"][4]["lessons"]] == [
+        "g5-lesson-06",
     ]
 
     lesson_response = get("/api/v1/lessons/g2-lesson-01")
@@ -241,6 +248,14 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert g4_lesson["practice"]["question_count"] == 20
     assert g4_lesson["practice"]["development_available"] is True
 
+    g5_response = get("/api/v1/lessons/g5-lesson-06")
+    assert g5_response.status_code == 200
+    g5_lesson = g5_response.json()
+    assert g5_lesson["course_key"] == "g3-sec2-math"
+    assert g5_lesson["unit_key"] == "g3-sec2-g5"
+    assert g5_lesson["practice"]["question_count"] == 20
+    assert g5_lesson["practice"]["development_available"] is True
+
 
 def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
@@ -268,6 +283,13 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     assert g4_lesson_response.status_code == 200
     assert g4_lesson_response.headers["content-type"].startswith("image/svg+xml")
     assert b"Pythagoras" in g4_lesson_response.content
+
+    g5_lesson_response = get(
+        "/api/v1/content-assets/lesson/g5-lesson-06/g5-lesson-06-cone"
+    )
+    assert g5_lesson_response.status_code == 200
+    assert g5_lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"Right circular cone" in g5_lesson_response.content
 
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200

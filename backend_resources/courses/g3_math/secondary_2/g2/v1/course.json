@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 6,
+  "revision": 7,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, and right-triangle geometry.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, and solid mensuration.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -36,6 +36,14 @@
     },
     {
       "key": "g4-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "g5-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -187,12 +195,30 @@
           "required_practice_count": 20
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-g5",
+      "position": 5,
+      "topic_code": "G5",
+      "title": "Mensuration",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "g5-lesson-06",
+          "position": 1,
+          "title": "Volume and surface area of pyramid, cone and sphere",
+          "outcomes": [
+            "5.6"
+          ],
+          "required_practice_count": 20
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 215,
-    "unit_checkpoint": 92,
-    "adaptive_reserve": 109
+    "lesson_practice": 235,
+    "unit_checkpoint": 116,
+    "adaptive_reserve": 169
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -200,6 +226,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2, N2 and G4 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2, S2, N2, G4 and G5 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
   }
 }
