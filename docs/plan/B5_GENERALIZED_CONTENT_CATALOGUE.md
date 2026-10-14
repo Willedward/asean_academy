@@ -1,6 +1,6 @@
 # B5 generalized Mathematics content catalogue
 
-**Implementation status (14 October 2026): engineering foundation complete; Secondary 1 N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, Secondary 2 G2, S2 and N2 have complete draft banks, lessons and course-unit pool allocations ready for review.**
+**Implementation status (14 October 2026): engineering foundation complete; Secondary 1 N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, Secondary 2 G2, S2 and N2 have complete draft banks and course units, while Secondary 2 G4 has three full-depth lesson drafts staged for question authoring.**
 
 This milestone removes the N1-only constraints from the Git-authored question and course pipeline before the team expands the Beta bank to roughly 1,900–2,850 questions. Existing N1 source files remain valid and keep their current immutable content hashes.
 

@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-g4",
+  "status": "draft",
+  "mastery_policy_key": "g4-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "g4-lesson-03",
+  "position": 3,
+  "title": "Sine, cosine and tangent in right-angled triangles",
+  "summary": "Choose and apply sine, cosine or tangent to calculate unknown sides and acute angles, including contextual elevation problems.",
+  "outcomes": [
+    "4.3"
+  ],
+  "prerequisite_lessons": [
+    "g4-lesson-01",
+    "g4-lesson-02"
+  ],
+  "estimated_minutes": 70,
+  "objectives": [
+    "Label opposite, adjacent and hypotenuse relative to a chosen angle.",
+    "Choose a trigonometric ratio containing the known and required quantities.",
+    "Calculate sides and angles using degree mode and appropriate rounding."
+  ],
+  "sections": [
+    {
+      "stable_key": "g4-43-label",
+      "position": 1,
+      "type": "explanation",
+      "title": "Label sides relative to the angle",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The hypotenuse is always opposite the right angle. The opposite and adjacent labels depend on the acute reference angle θ. The adjacent side touches θ but is not the hypotenuse."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g4-lesson-03-trigonometry"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-43-ratios",
+      "position": 2,
+      "type": "explanation",
+      "title": "Choose a ratio",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Sine uses opposite and hypotenuse, cosine uses adjacent and hypotenuse, and tangent uses opposite and adjacent. Choose the ratio containing the side you know and the quantity you need."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\sin\\theta=\\frac{O}{H},\\quad\\cos\\theta=\\frac{A}{H},\\quad\\tan\\theta=\\frac{O}{A}"
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-43-example-side",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: calculate a side",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A ramp makes a 28° angle with horizontal ground and has horizontal length 7.5 m. Find its vertical rise correct to 2 decimal places."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The rise is opposite and 7.5 m is adjacent."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\tan28^\\circ=\\frac{h}{7.5}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=7.5\\tan28^\\circ=3.99\\text{ m}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The rise is shorter than the horizontal run because the angle is less than 45°."
+    },
+    {
+      "stable_key": "g4-43-example-angle",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: calculate an angle",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A right triangle has opposite side 9 cm and adjacent side 12 cm relative to θ. Find θ correct to 1 decimal place."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\tan\\theta=\\frac{9}{12}=0.75"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\theta=\\tan^{-1}(0.75)=36.9^\\circ"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check that the calculator is in degree mode and that tan 36.9° is approximately 0.75."
+    },
+    {
+      "stable_key": "g4-43-elevation",
+      "position": 5,
+      "type": "explanation",
+      "title": "Angles of elevation and depression",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An angle of elevation is measured upward from a horizontal line; an angle of depression is measured downward from a horizontal line. Parallel horizontal lines make the corresponding acute angles equal. Add observer or instrument height only after calculating the vertical difference from eye level."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-43-precision",
+      "position": 6,
+      "type": "explanation",
+      "title": "Calculator and precision checks",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use degree mode for school geometry. Keep full calculator values through intermediate steps and round the final answer to the requested decimal places or significant figures. An acute angle must lie between 0° and 90°."
+        },
+        {
+          "type": "text",
+          "text": "Check the direction of change: a larger angle with the same adjacent length gives a greater opposite height. The hypotenuse must remain longer than either shorter side."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-43-recall",
+      "position": 7,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Relative to angle θ, the opposite side is 5 and the adjacent side is 5. Enter θ in degrees."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "45",
+        "canonical_latex": "45",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "tan θ = 5/5 = 1, so θ = tan⁻¹(1) = 45°."
+        }
+      ]
+    },
+    {
+      "stable_key": "g4-lesson-03-summary",
+      "position": 8,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Mark the right angle and reference angle, label O, A and H, then choose the ratio that contains the known and required quantities."
+        },
+        {
+          "type": "text",
+          "text": "Use inverse trigonometry for an angle, work in degree mode, delay rounding, include observer height when needed and check the result against the diagram."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "g4-lesson-03-trigonometry",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-lesson-03-trigonometry.svg",
+      "alt_text": "A right triangle showing opposite, adjacent and hypotenuse relative to theta alongside sine, cosine and tangent ratios.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "trigonometric_ratios",
+        "lesson_key": "g4-lesson-03"
+      },
+      "sha256": "e252a2dea54b4b06ac01ec437a533a75524cd216cd0051b3b13dbd222bdca4fd",
+      "width": 940,
+      "height": 470
+    }
+  ]
+}
