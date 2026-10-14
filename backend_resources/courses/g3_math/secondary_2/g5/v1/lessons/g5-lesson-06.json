@@ -1,0 +1,347 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-g5",
+  "status": "draft",
+  "mastery_policy_key": "g5-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-14T18:30:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "g5-lesson-06",
+  "position": 1,
+  "title": "Volume and surface area of pyramid, cone and sphere",
+  "summary": "Distinguish perpendicular height, slant height and radius, then calculate volumes and exposed surface areas of pyramids, cones, spheres and composite solids.",
+  "outcomes": [
+    "5.6"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 85,
+  "objectives": [
+    "Choose the correct dimensions and formula for a pyramid, cone or sphere.",
+    "Calculate volume, curved surface area and total exposed surface area.",
+    "Solve reverse and composite-solid problems with consistent units and suitable rounding."
+  ],
+  "sections": [
+    {
+      "stable_key": "g5-56-dimensions",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read the solid before choosing a formula",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Mensuration questions often provide several lengths, but each formula uses particular dimensions. The radius runs from the centre of a circular base to its edge, so it is half the diameter. A perpendicular height meets the base at 90° and is used in every volume formula. A slant height lies on a triangular or curved face and is used for surface area."
+        },
+        {
+          "type": "text",
+          "text": "Volume measures space inside a solid and uses cubic units. Surface area measures the exposed covering and uses square units. Sketch the solid, label r, h and l, and decide whether the question asks for inside space, curved covering, or every exposed face before substituting."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-pyramid",
+      "position": 2,
+      "type": "explanation",
+      "title": "Pyramids: one third of the matching prism",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A pyramid has a polygon base and triangular faces meeting at an apex. Its volume is one third of the volume of a prism with the same base area and perpendicular height. For surface area, calculate the base and each triangular face separately. A triangular face area uses the perpendicular height within that face, which is usually a slant height rather than the pyramid’s vertical height."
+        },
+        {
+          "type": "display_math",
+          "latex": "V=\\frac13 A_{\\text{base}}h"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-06-pyramid"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-pyramid-example",
+      "position": 3,
+      "type": "worked_example",
+      "title": "Worked example: square-based pyramid",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A square-based pyramid has base side 10 cm, perpendicular height 12 cm and slant height 13 cm on every triangular face. Find its volume and total surface area."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The base area is 10² = 100 cm². Use the perpendicular height for volume."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13(100)(12)=400\\text{ cm}^3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Each triangular face has area ½ × 10 × 13 = 65 cm². There are four equal faces."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=100+4(65)=360\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The volume is one third of the 1,200 cm³ matching prism, and the surface area includes exactly one base plus four triangular faces."
+    },
+    {
+      "stable_key": "g5-56-cone",
+      "position": 4,
+      "type": "explanation",
+      "title": "Cones: keep vertical and slant height separate",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A cone is one third of the matching cylinder, so its volume uses the vertical height h. Its curved surface unwraps to a sector and has area πrl, where l is the slant height. Add the circular base πr² only when the base is exposed. In a right cone, r, h and l form a right triangle, so l² = r² + h²."
+        },
+        {
+          "type": "display_math",
+          "latex": "V=\\frac13\\pi r^2h,\\qquad A_{\\text{curved}}=\\pi rl"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-06-cone"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-cone-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: find a cone’s slant height first",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A closed cone has radius 5 cm and perpendicular height 12 cm. Find its volume and total surface area, giving answers to 1 decimal place."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the right triangle through the centre to find the slant height."
+            },
+            {
+              "type": "display_math",
+              "latex": "l=\\sqrt{5^2+12^2}=13\\text{ cm}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13\\pi(5)^2(12)=100\\pi\\approx314.2\\text{ cm}^3"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The cone is closed, so include curved area and its base."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=\\pi(5)(13)+\\pi(5)^2=90\\pi\\approx282.7\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The slant height 13 cm is longer than both perpendicular sides, and the total area exceeds the curved area 65π cm²."
+    },
+    {
+      "stable_key": "g5-56-sphere",
+      "position": 6,
+      "type": "explanation",
+      "title": "Spheres and hemispheres",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Every point on a sphere is the same distance r from its centre. The volume formula contains r³, while surface area contains r², so confusing radius with diameter causes a large error. A hemisphere has half the sphere’s volume and half its curved area. Its total surface area also includes the flat circular base."
+        },
+        {
+          "type": "display_math",
+          "latex": "V_{\\text{sphere}}=\\frac43\\pi r^3,\\qquad S_{\\text{sphere}}=4\\pi r^2"
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-06-sphere"
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-sphere-example",
+      "position": 7,
+      "type": "worked_example",
+      "title": "Worked example: hemisphere container",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "An open hemispherical bowl has internal diameter 18 cm. Find its capacity and the curved internal area, giving answers to 1 decimal place."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The radius is 9 cm. Capacity is the hemisphere’s internal volume."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac12\\left(\\frac43\\pi(9)^3\\right)=486\\pi\\approx1526.8\\text{ cm}^3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The bowl is open, so no flat circular base is included."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=2\\pi(9)^2=162\\pi\\approx508.9\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The hemisphere’s results are half the corresponding sphere results, and the radius used is half the stated diameter."
+    },
+    {
+      "stable_key": "g5-56-composite",
+      "position": 8,
+      "type": "explanation",
+      "title": "Composite solids and exposed surfaces",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For a composite solid, add volumes of joined pieces and subtract volumes of holes or removed pieces. For surface area, count only surfaces exposed to air, liquid, paint or wrapping. A circular join between a cone and hemisphere is internal, so it is excluded from the outside area. Write a short surface inventory before calculating."
+        },
+        {
+          "type": "text",
+          "text": "Convert all lengths to one unit before using formulas. Since 1 m = 100 cm, 1 m² = 10,000 cm² and 1 m³ = 1,000,000 cm³. Keep π and unrounded intermediate values on the calculator, then round once at the end and attach the correct square or cubic unit."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-56-recall",
+      "position": 9,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A sphere has diameter 12 cm. Enter its surface area as a multiple of π; for example, enter 20 for 20π."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "144",
+        "canonical_latex": "144\\pi\\text{ cm}^2",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The radius is 6 cm, so 4πr² = 4π(6²) = 144π cm²."
+        }
+      ]
+    },
+    {
+      "stable_key": "g5-lesson-06-summary",
+      "position": 10,
+      "type": "summary",
+      "title": "Mensuration checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Mark radius versus diameter and vertical height versus slant height. Choose volume or surface area, list the exposed faces, and convert lengths before substituting."
+        },
+        {
+          "type": "text",
+          "text": "Use cubic units for volume and square units for area. Retain π and full calculator precision until the final line, round only as requested, and check that a one-third or one-half factor has not been missed."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "g5-lesson-06-pyramid",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-06-pyramid.svg",
+      "alt_text": "A square-based pyramid showing its base side, perpendicular vertical height, and formulas for volume and surface area.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "pyramid",
+        "lesson_key": "g5-lesson-06"
+      },
+      "sha256": "40b886fef75cafcfbe8f6c84b36618015810c7e7ed00fe30d942eaa92c63b5fc",
+      "width": 940,
+      "height": 500
+    },
+    {
+      "asset_key": "g5-lesson-06-cone",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-06-cone.svg",
+      "alt_text": "A cone showing radius, perpendicular height and slant height, with its volume, curved surface area and total surface area formulas.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "cone",
+        "lesson_key": "g5-lesson-06"
+      },
+      "sha256": "24ac5ae905422bce4b81ffa2af1be8309a2ec7d03d2d8f2f4b8dc807ffd3a5be",
+      "width": 940,
+      "height": 500
+    },
+    {
+      "asset_key": "g5-lesson-06-sphere",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-06-sphere.svg",
+      "alt_text": "A sphere with its radius and formulas for sphere volume and surface area, plus curved and total surface area of a hemisphere.",
+      "generation_spec": {
+        "renderer": "nextscholar-geometry-svg-v1",
+        "diagram_kind": "sphere",
+        "lesson_key": "g5-lesson-06"
+      },
+      "sha256": "38665364244eaff652ae6dcb16b3e30badf0c022689bea78d55b7fd821e0a060",
+      "width": 940,
+      "height": 500
+    }
+  ]
+}
