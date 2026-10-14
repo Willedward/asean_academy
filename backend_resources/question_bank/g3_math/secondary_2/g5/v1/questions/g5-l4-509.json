@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l4-509",
+  "bank_key": "g3-sec2-g5-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G5",
+  "primary_outcome": "5.6",
+  "title": "Percentage change in sphere volume",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled mensuration schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l4-509-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Student designers considered heavy seasonal rainfall while preparing a capacity check for the public library sculpture. Visitors can walk around the sculpture but cannot touch it. The design must also be explained clearly in the safety briefing. The radius of a sphere is increased by 50%. Find the percentage increase in its volume, correct to 1 decimal place."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "5.6",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_dp",
+        "canonical_answer": "237.5",
+        "canonical_latex": "237.5",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": 1,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Sphere volume is proportional to the cube of its radius."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Cube the radius scale factor 1.5, subtract 1, then convert to a percentage."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select the relevant dimensions and apply the mensuration relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\left(1.5^3-1\\right)\\times100\\%=237.5\\%"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{237.5}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [
+    {
+      "asset_key": "g5-l4-509-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l4-509-diagram.svg",
+      "alt_text": "Percentage change in sphere volume: a labelled sphere mensuration schematic; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-mensuration-svg-v1",
+        "diagram_kind": "sphere",
+        "question_key": "g5-l4-509",
+        "outcome": "5.6",
+        "not_to_scale": true
+      },
+      "sha256": "f4c9c8aa070165a3a2f357c9fd5ba04c2c8d5696ddc6d57591bf58a1e8e7f2b7",
+      "width": 760,
+      "height": 430
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T19:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
