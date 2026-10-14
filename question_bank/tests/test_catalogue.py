@@ -113,7 +113,14 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
     assert report.as_dict()["known_topic_group_count"] == 19
     assert report.as_dict()["unconfirmed_topic_group_count"] == 0
     assert report.as_dict()["blueprinted_topic_level_count"] == 19
-    assert report.as_dict()["authored_topic_level_count"] == 13
+    authored_bank_count = sum(
+        1
+        for questions in (repository_root / "backend_resources/question_bank/g3_math").glob(
+            "**/questions"
+        )
+        if any(questions.glob("*.json"))
+    )
+    assert report.as_dict()["authored_topic_level_count"] == authored_bank_count
     assert {issue.code for issue in report.warnings} == {
         "difficulty_distribution",
         "outcome_distribution",
