@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l4-510",
+  "bank_key": "g3-sec2-g4-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.2",
+  "title": "Complete a right-angled specification",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l4-510-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Safety inspectors noted restricted clearance for equipment while preparing a replacement frame. Two shorter sides of a triangular frame for the laboratory equipment stand are 12 cm and 16 cm. The angle between them must be 90°. Find the required longest side x in centimetres. Enter the numerical value only."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "4.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "20",
+        "canonical_latex": "20",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "A right angle between the known sides makes the unknown side the hypotenuse."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve x² = 12² + 16²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Select and apply the right-triangle relationship."
+            },
+            {
+              "type": "display_math",
+              "latex": "x^2=12^2+16^2\\Rightarrow x=20"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{20}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [
+    {
+      "asset_key": "g4-l4-510-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l4-510-diagram.svg",
+      "alt_text": "Complete a right-angled specification: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-right-triangle-svg-v1",
+        "diagram_kind": "right_triangle",
+        "question_key": "g4-l4-510",
+        "outcome": "4.2",
+        "not_to_scale": true
+      },
+      "sha256": "c9155460e598d80ebee8bb1137a5f31dbe28e189017134f18e44da640d7b3c6f",
+      "width": 760,
+      "height": 420
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-14T14:30:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+  }
+}
