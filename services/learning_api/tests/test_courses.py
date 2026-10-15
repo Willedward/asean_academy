@@ -177,6 +177,9 @@ def test_course_registry_exposes_complete_planned_scope():
     assert secondary_two["units"][1]["topic_code"] == "N5"
     assert secondary_two["units"][1]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][1]["lessons"])
+    assert secondary_two["units"][2]["topic_code"] == "N6"
+    assert secondary_two["units"][2]["available"] is True
+    assert all(lesson["available"] is True for lesson in secondary_two["units"][2]["lessons"])
     assert secondary_two["units"][4]["topic_code"] == "G2"
     assert secondary_two["units"][4]["available"] is True
     assert all(lesson["available"] is True for lesson in secondary_two["units"][4]["lessons"])
@@ -198,7 +201,7 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     course = course_response.json()
     assert course["school_level"] == "secondary_2"
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 6
+    assert len(course["units"]) == 7
     assert course["units"][0]["stable_key"] == "g3-sec2-g2"
     assert len(course["units"][0]["lessons"]) == 5
     assert course["units"][1]["stable_key"] == "g3-sec2-s2"
@@ -221,6 +224,11 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert course["units"][5]["stable_key"] == "g3-sec2-n5"
     assert [lesson["stable_key"] for lesson in course["units"][5]["lessons"]] == [
         *(f"n5-lesson-{number:02}" for number in range(9, 17)),
+    ]
+    assert course["units"][6]["stable_key"] == "g3-sec2-n6"
+    assert [lesson["stable_key"] for lesson in course["units"][6]["lessons"]] == [
+        "n6-lesson-06",
+        "n6-lesson-07",
     ]
 
     lesson_response = get("/api/v1/lessons/g2-lesson-01")
@@ -271,6 +279,14 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert n5_lesson["practice"]["question_count"] == 8
     assert n5_lesson["practice"]["development_available"] is True
 
+    n6_response = get("/api/v1/lessons/n6-lesson-06")
+    assert n6_response.status_code == 200
+    n6_lesson = n6_response.json()
+    assert n6_lesson["course_key"] == "g3-sec2-math"
+    assert n6_lesson["unit_key"] == "g3-sec2-n6"
+    assert n6_lesson["practice"]["question_count"] == 20
+    assert n6_lesson["practice"]["development_available"] is True
+
 
 def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
@@ -306,6 +322,13 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     assert g5_lesson_response.headers["content-type"].startswith("image/svg+xml")
     assert b"Right circular cone" in g5_lesson_response.content
 
+    n6_lesson_response = get(
+        "/api/v1/content-assets/lesson/n6-lesson-06/n6-lesson-06-graph"
+    )
+    assert n6_lesson_response.status_code == 200
+    assert n6_lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"From a rule to a table and graph" in n6_lesson_response.content
+
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200
     assert question_response.headers["content-type"].startswith("image/svg+xml")
@@ -339,4 +362,5 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
     assert catalogue.review_question_batches["s1-l1-001"] == "g3-sec1-s1-b001"
     assert catalogue.review_question_batches["g2-l1-501"] == "g3-sec2-g2-b001"
     assert catalogue.review_question_batches["n5-l1-501"] == "g3-sec2-n5-b001"
+    assert catalogue.review_question_batches["n6-l1-501"] == "g3-sec2-n6-b001"
     assert "n1-l1-01" not in catalogue.review_question_batches

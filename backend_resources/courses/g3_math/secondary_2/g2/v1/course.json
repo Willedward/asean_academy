@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 8,
+  "revision": 9,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, and algebraic expressions and formulae.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, algebraic expressions and formulae, and functions and graphs.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -52,6 +52,14 @@
     },
     {
       "key": "n5-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n6-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -302,12 +310,39 @@
           "required_practice_count": 8
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-n6",
+      "position": 7,
+      "topic_code": "N6",
+      "title": "Functions and graphs",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "n6-lesson-06",
+          "position": 1,
+          "title": "Quadratic functions y = ax² + bx + c",
+          "outcomes": [
+            "6.6"
+          ],
+          "required_practice_count": 20
+        },
+        {
+          "stable_key": "n6-lesson-07",
+          "position": 2,
+          "title": "Graphs of quadratic functions and their properties",
+          "outcomes": [
+            "6.7"
+          ],
+          "required_practice_count": 20
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 299,
-    "unit_checkpoint": 140,
-    "adaptive_reserve": 185
+    "lesson_practice": 339,
+    "unit_checkpoint": 164,
+    "adaptive_reserve": 225
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -315,6 +350,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2, N2, G4, G5 and N5 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2, S2, N2, G4, G5, N5 and N6 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
   }
 }

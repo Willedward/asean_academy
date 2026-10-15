@@ -25,25 +25,27 @@ The manual **Beta release readiness** GitHub workflow adds protected staging che
 
 ## Current evidence and blockers
 
-The current authored source contains every Secondary 1 unit (N1 through N7, G1, G5 and S1) and the Secondary 2 G2, S2, N2, G4, G5 and N5 units. Secondary 1 N2 is reviewed; the other complete units remain behind draft review gates:
+The current authored source contains every Secondary 1 unit (N1 through N7, G1, G5 and S1) and the Secondary 2 G2, S2, N2, G4, G5, N5 and N6 units. Secondary 1 N2 is reviewed; the other complete units remain behind draft review gates:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
-| Topic groups                       |                                     16 |                                      19 | Blocked |
-| Questions                          |                                  1,600 |                                   1,900 | Blocked |
+| Topic groups                       |                                     17 |                                      19 | Blocked |
+| Questions                          |                                  1,704 |                                   1,900 | Blocked |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
-| Lessons                            |                                     73 |  All authored and planned Beta lessons | Blocked |
-| Lessons meeting the note-depth gate |                                     65 |                   All authored lessons | Blocked |
+| Lessons                            |                                     75 |  All authored and planned Beta lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     67 |                   All authored lessons | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
-| Local pool inventory               | 884 practice, 321 checkpoint, 395 reserve |          Complete and non-overlapping | Pass    |
+| Local pool inventory               | 924 practice, 345 checkpoint, 435 reserve |          Complete and non-overlapping | Pass    |
 
-The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2, S2, N2, G4, G5 and N5 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing three Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
+The generalized course and question contracts now support multiple level/topic banks and multiple authored courses, and Secondary 1 N2 proves the complete reviewed path through lesson pools and catalogue import. Secondary 1 N3 through N7, G1, G5 and S1 plus Secondary 2 G2, S2, N2, G4, G5, N5 and N6 provide complete draft paths with 104 questions each, authored lessons and source pools, pending Mathematics and editorial approval. The gate still exposes the missing two Secondary 2 topic groups as `source.full_syllabus`; it does not infer Beta readiness from these completed draft units.
 
 Secondary 2 G4 now has three full-depth lesson drafts, 104 questions and complete practice, checkpoint and adaptive-reserve pools in the deployable draft course snapshot. It remains unavailable to production learners until Mathematics and editorial review and the later publication gate pass.
 
 Secondary 2 G5 now has one full-depth lesson draft, 104 diagram-backed questions and complete practice, checkpoint and adaptive-reserve pools in the deployable draft course snapshot. It remains unavailable to production learners until Mathematics and editorial review and the later publication gate pass.
 
 Secondary 2 N5 now has eight full-depth lesson drafts, 104 questions and complete per-outcome practice, unit-checkpoint and adaptive-reserve pools in the deployable draft course snapshot. It remains unavailable to production learners until Mathematics and editorial review and the later publication gate pass.
+
+Secondary 2 N6 now has two full-depth lesson drafts, 104 questions and complete per-outcome practice, unit-checkpoint and adaptive-reserve pools in the deployable draft course snapshot. Its two deterministic SVG diagrams connect quadratic rules, tables, graphs and graph properties. It remains unavailable to production learners until Mathematics and editorial review and the later publication gate pass.
 
 ## Development sequencing decision — 10 October 2026
 
