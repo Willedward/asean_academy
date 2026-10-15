@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-07",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 7,
   "status": "draft",
   "title": "Simplification of linear expressions",
-  "summary": "Expand brackets and simplify nested or fractional linear expressions.",
+  "summary": "Simplify linear expressions by applying the distributive law, resolving nested brackets and managing fractional coefficients.",
   "outcomes": [
     "5.7"
   ],
   "prerequisite_lessons": [
     "n5-lesson-06"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Apply the distributive law to positive and negative factors.",
-    "Simplify nested brackets and simple fractional coefficients."
+    "Distribute positive and negative factors to every term in a bracket.",
+    "Simplify nested and fractional linear expressions in a reliable order.",
+    "Recognise when terms cannot be combined and verify equivalence by substitution."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -25,19 +26,19 @@
       "stable_key": "distributive-law",
       "position": 1,
       "type": "explanation",
-      "title": "The distributive law",
+      "title": "Apply the distributive law to every term",
       "blocks": [
         {
           "type": "text",
-          "text": "Multiply the factor outside a bracket by every term inside. A negative factor changes signs as it multiplies."
+          "text": "A factor outside a bracket multiplies every term inside. Preserve each internal sign while multiplying coefficients and variable parts. A negative outside factor reverses the sign of every resulting term, not only the first."
         },
         {
           "type": "display_math",
-          "latex": "-2(3x-5)=-6x+10"
+          "latex": "-2(3x-5)=(-2)(3x)+(-2)(-5)=-6x+10"
         },
         {
           "type": "text",
-          "text": "After expanding, collect like terms and reduce numerical fractions."
+          "text": "After expanding all required brackets, collect like terms. Expansion changes the form of an expression but not its value. It is often helpful to write one multiplication arrow or intermediate product for each bracket term before simplifying."
         }
       ]
     },
@@ -45,11 +46,11 @@
       "stable_key": "fractional-simplification-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Simplify a fractional expression",
+      "title": "Worked example: simplify a fractional expression",
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify [2x - 3(x - 5)]/3."
+          "text": "Simplify [2x − 3(x − 5)]/3."
         }
       ],
       "steps": [
@@ -58,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Expand inside the numerator."
+              "text": "Expand the bracket in the numerator, including the negative factor."
             },
             {
               "type": "display_math",
@@ -71,20 +72,127 @@
           "content": [
             {
               "type": "text",
-              "text": "Collect the numerator terms."
+              "text": "Collect like terms inside the numerator."
             },
             {
               "type": "display_math",
               "latex": "\\frac{15-x}{3}"
             }
           ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Optionally separate the fraction into two terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "5-\\frac{x}{3}"
+            }
+          ]
         }
       ],
-      "verification_note": "Expanding (15 - x)/3 gives the same two terms as the simplified numerator divided by 3."
+      "verification_note": "The two final forms are equivalent because (15 − x)/3 = 15/3 − x/3."
+    },
+    {
+      "stable_key": "nested-and-fractional-structure",
+      "position": 3,
+      "type": "explanation",
+      "title": "Work from inner structure outward",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For nested brackets, simplify the innermost group first when this reduces the work, then distribute the next factor. A minus sign immediately before a bracket is multiplication by −1. With fractions, decide whether the denominator divides one term or a complete numerator before doing any cancellation."
+        },
+        {
+          "type": "display_math",
+          "latex": "3[2x-(x-4)]=3[2x-x+4]"
+        },
+        {
+          "type": "text",
+          "text": "Fractional coefficients follow the same distributive law: one half of (6x − 8) is 3x − 4. Do not cancel across addition or subtraction. Cancellation is division of common factors in a product, so a common factor must first be visible in every numerator term."
+        }
+      ]
+    },
+    {
+      "stable_key": "nested-bracket-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: simplify nested brackets",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify 3[2x − (x − 4)] − 5."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Remove the inner subtraction bracket by changing both signs."
+            },
+            {
+              "type": "display_math",
+              "latex": "3[2x-x+4]-5"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Collect inside the square bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "3(x+4)-5"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Distribute and combine constants."
+            },
+            {
+              "type": "display_math",
+              "latex": "3x+12-5=3x+7"
+            }
+          ]
+        }
+      ],
+      "verification_note": "For x = 2, the original expression and 3x + 7 both evaluate to 13."
+    },
+    {
+      "stable_key": "simplification-decisions",
+      "position": 5,
+      "type": "explanation",
+      "title": "Know when simplification is complete",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An expression is simplified when the requested brackets have been expanded, numerical fractions reduced, and all like terms combined. Unlike terms such as 3x and 4, or 2x and 5x², must remain separate. A shorter-looking expression is not automatically equivalent if an operation has been lost."
+        },
+        {
+          "type": "display_math",
+          "latex": "3x+4\\text{ cannot become }7x"
+        },
+        {
+          "type": "text",
+          "text": "Use structure and substitution together as checks. First verify each distribution algebraically. Then substitute a value such as x = 0 or x = 2 into the original and final forms. A mismatch identifies an error in signs, a missed bracket term or an invalid combination."
+        }
+      ]
     },
     {
       "stable_key": "simplification-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -114,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-07-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Work from inner brackets outwards, distribute every factor, and collect like terms using common denominators when required."
+          "text": "Read the grouping first, work from inner brackets outward, and multiply an outside factor by every bracket term. Keep negative signs attached, reduce fractions only through valid factors, and combine only like terms. Verify the final expression against the original using one simple value."
         }
       ]
     }
@@ -132,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

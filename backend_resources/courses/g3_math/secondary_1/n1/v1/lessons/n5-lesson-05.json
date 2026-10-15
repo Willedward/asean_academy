@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 5,
   "status": "draft",
   "title": "Recognising and representing patterns and relationships by finding an algebraic expression for the nth term",
-  "summary": "Find algebraic rules for arithmetic sequences and linear patterns.",
+  "summary": "Find and verify nth-term rules for arithmetic sequences and growing linear patterns using the common difference and constant adjustment.",
   "outcomes": [
     "5.5"
   ],
   "prerequisite_lessons": [
     "n5-lesson-04"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Use the common difference as the coefficient of n.",
-    "Determine the constant adjustment and verify the rule with known terms."
+    "Recognise when a numerical or visual pattern has a constant first difference.",
+    "Form an nth-term rule dn + c from the common difference and a known term.",
+    "Verify a rule against several terms and use it to find or test term positions."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -29,11 +30,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For a linear sequence, the common difference is the coefficient of n. Adjust the constant so the rule produces the first term when n = 1."
+          "text": "An arithmetic sequence changes by the same amount from one term to the next. That common difference d becomes the coefficient of n in a linear nth-term rule. Start with dn, compare its first value d with the actual first term, and add the constant adjustment c."
         },
         {
           "type": "display_math",
-          "latex": "4,7,10,13,\\ldots\\quad\\Rightarrow\\quad 3n+1"
+          "latex": "T_n=dn+c"
+        },
+        {
+          "type": "text",
+          "text": "For 4, 7, 10, 13, … the common difference is 3. The trial rule 3n starts 3, 6, 9, 12, which is always 1 too small, so Tₙ = 3n + 1. The position n begins at 1 unless the problem explicitly defines a stage 0."
         }
       ]
     },
@@ -41,11 +46,11 @@
       "stable_key": "later-terms-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Find a rule from later terms",
+      "title": "Worked example: use two later terms",
       "prompt": [
         {
           "type": "text",
-          "text": "A linear sequence has 4th term 19 and 9th term 39. Find its nth term."
+          "text": "A linear sequence has fourth term 19 and ninth term 39. Find its nth term."
         }
       ],
       "steps": [
@@ -54,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the change per term."
+              "text": "Five term intervals separate positions 4 and 9, so find the change per interval."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{39-19}{9-4}=4"
+              "latex": "d=\\frac{39-19}{9-4}=4"
             }
           ]
         },
@@ -67,7 +72,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 19 = 4(4) + c."
+              "text": "Use Tₙ = 4n + c and substitute the fourth term."
+            },
+            {
+              "type": "display_math",
+              "latex": "19=4(4)+c"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve for c and state the rule."
             },
             {
               "type": "display_math",
@@ -76,11 +94,105 @@
           ]
         }
       ],
-      "verification_note": "The rule gives T₉ = 4(9) + 3 = 39."
+      "verification_note": "The rule gives T₄ = 19 and T₉ = 39, confirming both pieces of supplied information."
+    },
+    {
+      "stable_key": "visual-linear-patterns",
+      "position": 3,
+      "type": "explanation",
+      "title": "Count what is fixed and what grows",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A visual pattern can also be linear. Separate a fixed starting part from a group added at every new stage. If stage 1 has 4 sticks and each later stage shares one side while adding 3 sticks, the total is 4 + 3(n − 1). Simplifying gives the same dn + c form used for a number sequence."
+        },
+        {
+          "type": "display_math",
+          "latex": "4+3(n-1)=4+3n-3=3n+1"
+        },
+        {
+          "type": "text",
+          "text": "The coefficient 3 describes the growth per stage. The constant 1 is an adjustment determined by the starting arrangement; it does not necessarily count a visible group by itself. Draw or tabulate the first few stages before deciding which part repeats."
+        }
+      ]
+    },
+    {
+      "stable_key": "matchstick-pattern-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: model joined squares",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Stage 1 is one square made from 4 sticks. Each new square shares one side with the previous square. Find the rule and the number of sticks at stage 12."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The first square contributes 4 sticks; each of the remaining n − 1 squares adds 3."
+            },
+            {
+              "type": "display_math",
+              "latex": "T_n=4+3(n-1)"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand and simplify the nth-term rule."
+            },
+            {
+              "type": "display_math",
+              "latex": "T_n=3n+1"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute n = 12."
+            },
+            {
+              "type": "display_math",
+              "latex": "T_{12}=3(12)+1=37"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The first three values from the rule are 4, 7 and 10, matching the construction’s increase of 3 sticks per stage."
+    },
+    {
+      "stable_key": "rule-verification",
+      "position": 5,
+      "type": "explanation",
+      "title": "Verify linearity and position",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A constant first difference supports a linear rule; changing first differences require another model. Do not write “first term plus the difference times n” because that counts one extra increase. The safe form is first term + (n − 1) differences, which simplifies to dn + c."
+        },
+        {
+          "type": "display_math",
+          "latex": "T_n=T_1+(n-1)d"
+        },
+        {
+          "type": "text",
+          "text": "Check at least two known positions, including n = 1. To decide whether a value belongs to a sequence, set Tₙ equal to that value and solve for n. It is a term only if the solution is an allowed positive whole-number position."
+        }
+      ]
     },
     {
       "stable_key": "nth-term-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -110,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-05-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "For a linear pattern, find the common difference, determine the adjustment, and verify the rule against known terms."
+          "text": "Confirm a constant first difference, use it as the coefficient of n, and find the constant adjustment from a known term. For visual patterns, separate the initial structure from the repeated growth. Verify the rule at n = 1 and another known position before using it to predict or test a term."
         }
       ]
     }
@@ -128,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

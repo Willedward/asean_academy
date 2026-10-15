@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-08",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 8,
   "status": "draft",
   "title": "Use of brackets and extraction of common factors",
-  "summary": "Expand brackets and reverse the process by extracting common factors.",
+  "summary": "Expand brackets and reverse the process by extracting the greatest common numerical and variable factor from every term.",
   "outcomes": [
     "5.8"
   ],
   "prerequisite_lessons": [
     "n5-lesson-07"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Expand brackets term by term.",
-    "Factorise by extracting the greatest common numerical and variable factor."
+    "Expand a factor across every term and track signs accurately.",
+    "Identify and extract the greatest common factor of coefficients and variable parts.",
+    "Verify complete factorisation by re-expanding and checking that no common factor remains inside."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -29,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Find the greatest factor shared by every term, place it outside a bracket, and divide each original term by it."
+          "text": "Expansion multiplies an outside factor into every bracket term. Factorisation reverses that process: identify a factor shared by every term, write it outside a bracket, and divide each original term by it to obtain the bracket contents. The equality must preserve both coefficients and signs."
         },
         {
           "type": "display_math",
@@ -37,7 +38,7 @@
         },
         {
           "type": "text",
-          "text": "Multiply the factor back through the bracket to verify the result."
+          "text": "The greatest common factor gives a complete single-factor extraction. For the numerical part, use the greatest common divisor of the coefficients. For each variable, use the lowest exponent that appears in every term. A variable missing from one term is not common to all terms."
         }
       ]
     },
@@ -45,7 +46,7 @@
       "stable_key": "common-factor-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Extract a common factor",
+      "title": "Worked example: extract a common factor",
       "prompt": [
         {
           "type": "text",
@@ -58,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The greatest common factor is 7a."
+              "text": "The greatest common numerical factor is 7 and both terms contain a."
             },
             {
               "type": "display_math",
-              "latex": "14ab\\div7a=2b,\\qquad21a\\div7a=3"
+              "latex": "\\operatorname{GCF}=7a"
             }
           ]
         },
@@ -71,20 +72,127 @@
           "content": [
             {
               "type": "text",
-              "text": "Place the common factor outside."
+              "text": "Divide each term by 7a."
             },
             {
               "type": "display_math",
-              "latex": "7a(2b+3)"
+              "latex": "14ab\\div7a=2b,\\qquad 21a\\div7a=3"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Place the common factor outside the bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "14ab+21a=7a(2b+3)"
             }
           ]
         }
       ],
-      "verification_note": "Expanding 7a(2b + 3) gives 14ab + 21a."
+      "verification_note": "Expanding 7a(2b + 3) gives 14ab + 21a, and 2b and 3 have no further common factor."
+    },
+    {
+      "stable_key": "greatest-variable-factor",
+      "position": 3,
+      "type": "explanation",
+      "title": "Choose numerical and variable factors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Consider coefficients and variables separately. For 18x³y and 24x²y², the greatest numerical factor is 6. The lowest shared power of x is x² and the lowest shared power of y is y. Therefore the greatest common factor is 6x²y."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\gcd(18,24)=6,\\qquad \\min(x^3,x^2)=x^2,\\qquad \\min(y,y^2)=y"
+        },
+        {
+          "type": "text",
+          "text": "A negative common factor may be useful when the leading term is negative, because it leaves a positive first term inside the bracket. Either sign can produce an equivalent factorisation, but the chosen factor must divide every term and the re-expanded signs must match exactly."
+        }
+      ]
+    },
+    {
+      "stable_key": "negative-common-factor-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: factorise with a negative leading term",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Factorise −18x²y + 24xy² completely, leaving a positive first term inside the bracket."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the greatest shared magnitude and variable part."
+            },
+            {
+              "type": "display_math",
+              "latex": "6xy"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Choose −6xy so the first bracket term will be positive."
+            },
+            {
+              "type": "display_math",
+              "latex": "(-18x^2y)\\div(-6xy)=3x,\\quad (24xy^2)\\div(-6xy)=-4y"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write the complete factorisation."
+            },
+            {
+              "type": "display_math",
+              "latex": "-6xy(3x-4y)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Expanding gives −18x²y + 24xy², and 3x and −4y share no numerical or variable factor."
+    },
+    {
+      "stable_key": "factorisation-verification",
+      "position": 5,
+      "type": "explanation",
+      "title": "Verify completeness by expanding",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Always multiply the proposed outside factor back through the bracket. Each reconstructed term must match the original coefficient, variables, exponents and sign. This check catches division mistakes immediately and confirms that factorisation has not changed the expression."
+        },
+        {
+          "type": "display_math",
+          "latex": "k(A+B)=kA+kB"
+        },
+        {
+          "type": "text",
+          "text": "Then inspect the bracket for any factor common to every term. If one remains, the original extraction was not greatest. Factorisation is especially useful for revealing a shared structure, solving later equations and rewriting area expressions as products of possible side lengths."
+        }
+      ]
     },
     {
       "stable_key": "factorisation-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -114,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-08-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Expand term by term; factorise with the greatest common factor and verify by expanding the result."
+          "text": "For expansion, multiply the outside factor by every term. For factorisation, find the greatest common divisor of the coefficients and the lowest shared power of each variable, divide every term, and place the common factor outside. Re-expand to verify all signs and confirm that no common factor remains inside."
         }
       ]
     }
@@ -132,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

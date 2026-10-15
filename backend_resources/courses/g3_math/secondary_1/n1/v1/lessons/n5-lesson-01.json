@@ -1,21 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 1,
   "status": "draft",
   "title": "Using letters to represent numbers",
-  "summary": "Represent unknown and changing quantities with letters.",
+  "summary": "Use letters to represent unknown, changing and related quantities, including consecutive numbers and place-value expressions.",
   "outcomes": [
     "5.1"
   ],
   "prerequisite_lessons": [],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Use a letter to represent an unknown number.",
-    "Represent consecutive numbers, place value and repeated quantities algebraically."
+    "Distinguish an unknown, a variable, a constant and a coefficient.",
+    "Represent consecutive integers, repeated quantities and place value algebraically.",
+    "Check an algebraic representation by substituting a permissible numerical value."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -23,19 +24,19 @@
       "stable_key": "letters-as-quantities",
       "position": 1,
       "type": "explanation",
-      "title": "Letters stand for numbers",
+      "title": "Letters represent quantities",
       "blocks": [
         {
           "type": "text",
-          "text": "A letter may represent an unknown number or a quantity that can change. State what the letter means, then apply the operations in the order described."
+          "text": "Algebra uses a letter when a number is unknown or can change. In 5x + 2, x is the variable, 5 is its coefficient and 2 is a constant. The coefficient tells us how many copies of x are present: 5x means 5 multiplied by x, not the two-digit number 5x. Define the letter before forming an expression so that every symbol has a clear meaning."
         },
         {
           "type": "display_math",
-          "latex": "n+1,\\quad 3x,\\quad a^2b"
+          "latex": "x,\\qquad 5x=x+x+x+x+x,\\qquad 5x+2"
         },
         {
           "type": "text",
-          "text": "The coefficient 3 in 3x means three times x. A power applies only to its base unless brackets show otherwise."
+          "text": "The same letter must represent the same number throughout one expression. Different letters may have equal values in a particular case, but algebra does not assume that they are equal. Units also matter: if x is a length in centimetres, then 5x is a length while x² describes an area."
         }
       ]
     },
@@ -43,11 +44,11 @@
       "stable_key": "consecutive-number-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Represent consecutive numbers",
+      "title": "Worked example: consecutive integers",
       "prompt": [
         {
           "type": "text",
-          "text": "The first of three consecutive integers is n. Write their sum."
+          "text": "The first of three consecutive integers is n. Write and simplify their sum."
         }
       ],
       "steps": [
@@ -56,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "List the three integers."
+              "text": "Consecutive integers increase by 1, so list all three in terms of n."
             },
             {
               "type": "display_math",
@@ -69,20 +70,127 @@
           "content": [
             {
               "type": "text",
-              "text": "Add them and simplify."
+              "text": "Add the expressions before collecting like terms."
             },
             {
               "type": "display_math",
-              "latex": "n+(n+1)+(n+2)=3n+3"
+              "latex": "n+(n+1)+(n+2)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine the three n-terms and the constants."
+            },
+            {
+              "type": "display_math",
+              "latex": "3n+3"
             }
           ]
         }
       ],
-      "verification_note": "Substituting n = 4 gives 4 + 5 + 6 = 15 and 3(4) + 3 = 15."
+      "verification_note": "For n = 4, the integers are 4, 5 and 6. Their sum is 15, and 3(4) + 3 is also 15."
+    },
+    {
+      "stable_key": "place-value-and-repetition",
+      "position": 3,
+      "type": "explanation",
+      "title": "Place value and repeated quantities",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A digit obtains its value from its position. If a is the hundreds digit, b the tens digit and c the ones digit, the number is 100a + 10b + c. Writing abc would mean a multiplied by b multiplied by c in algebra, so it cannot represent a three-digit numeral. Digit variables must be whole numbers from 0 to 9, and the leading digit of a multi-digit number cannot be 0."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\overline{abc}=100a+10b+c"
+        },
+        {
+          "type": "text",
+          "text": "Repeated geometric or practical quantities use the same idea. A square with side s has perimeter 4s because it contains four equal side lengths. If one ticket costs p dollars, k tickets cost kp dollars. State what each letter counts before multiplying."
+        }
+      ]
+    },
+    {
+      "stable_key": "reversed-digit-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: reverse a two-digit number",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A two-digit number has tens digit t and ones digit 3. Write the original number, its reversal and the original minus the reversal."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use place value for the original number."
+            },
+            {
+              "type": "display_math",
+              "latex": "10t+3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "After reversal, 3 is the tens digit and t is the ones digit."
+            },
+            {
+              "type": "display_math",
+              "latex": "30+t"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract with brackets and simplify."
+            },
+            {
+              "type": "display_math",
+              "latex": "(10t+3)-(30+t)=9t-27=9(t-3)"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Taking t = 7 gives 73 − 37 = 36, while 9(7 − 3) = 36."
+    },
+    {
+      "stable_key": "representation-checks",
+      "position": 5,
+      "type": "explanation",
+      "title": "Translate relationships before simplifying",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Words describe relationships, so preserve their order. The integer after q is q + 1; the integer before q is q − 1. Consecutive even integers differ by 2, so starting with 2m they are 2m, 2m + 2 and 2m + 4. An expression represents a quantity and therefore does not need an equals sign unless it is part of an equation."
+        },
+        {
+          "type": "display_math",
+          "latex": "2m,\\quad 2m+2,\\quad 2m+4"
+        },
+        {
+          "type": "text",
+          "text": "A quick substitution checks the structure without proving every case. Choose a simple allowed value, evaluate the words directly, and compare it with the expression. If the results differ, revisit the coefficient, place value or operation order rather than changing the test value."
+        }
+      ]
     },
     {
       "stable_key": "letters-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -112,13 +220,13 @@
     },
     {
       "stable_key": "n5-lesson-01-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Define what each letter represents and translate the stated relationship one operation at a time."
+          "text": "Define each letter and its units. Translate one relationship at a time, use coefficients for repeated quantities, use powers only for repeated multiplication, and use 100a + 10b + c for place value. Test the final expression with one simple allowed value and confirm that it matches the original description."
         }
       ]
     }
@@ -130,6 +238,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

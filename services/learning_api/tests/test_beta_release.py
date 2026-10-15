@@ -25,11 +25,9 @@ def test_current_secondary_1_catalogue_is_reported_as_blocked_without_mutating_i
     assert not by_id["source.full_syllabus"].passed
     assert not by_id["source.question_volume"].passed
     assert not by_id["source.publication_status"].passed
-    assert not by_id["source.lesson_materials"].passed
+    assert by_id["source.lesson_materials"].passed
     assert by_id["source.lesson_materials"].details["populated_lessons"] == 52
-    assert by_id["source.lesson_materials"].details["thin_lessons"] == [
-        f"n5-lesson-{number:02}" for number in range(1, 9)
-    ]
+    assert by_id["source.lesson_materials"].details["thin_lessons"] == []
     assert by_id["source.pool_inventory"].passed
     assert by_id["source.checkpoint_reserve_capacity"].passed
 

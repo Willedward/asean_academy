@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-06",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 6,
   "status": "draft",
   "title": "Addition and subtraction of linear expressions",
-  "summary": "Combine linear expressions by handling signs and collecting like terms.",
+  "summary": "Add and subtract linear expressions by removing brackets correctly and combining only terms with identical variable parts.",
   "outcomes": [
     "5.6"
   ],
   "prerequisite_lessons": [
     "n5-lesson-05"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Add and subtract linear expressions.",
-    "Change every sign when subtracting a bracket and combine only like terms."
+    "Identify like terms by matching their complete variable parts.",
+    "Add and subtract expressions while preserving every sign.",
+    "Verify equivalent expressions through substitution or reverse grouping."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -29,15 +30,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Terms are like terms when their variable parts match exactly. Group x-terms, y-terms and constants separately."
+          "text": "Like terms have exactly the same variable part, including every variable and exponent. The terms 4x and −7x are like terms, while 4x and 4x² are not. Constants form their own group. Combine coefficients and keep the shared variable part unchanged."
         },
         {
           "type": "display_math",
-          "latex": "(7x+2y-4)-(3x-5y+6)=4x+7y-10"
+          "latex": "4x-7x=-3x,\\qquad 2ab+5ab=7ab"
         },
         {
           "type": "text",
-          "text": "A subtraction sign before a bracket changes the sign of every term inside the bracket."
+          "text": "Addition allows brackets to be removed without changing internal signs. Subtraction is different: subtracting an expression means adding its opposite, so every sign in the subtracted bracket changes. Writing an intermediate line prevents the minus sign from affecting only the first term."
         }
       ]
     },
@@ -45,11 +46,11 @@
       "stable_key": "expression-subtraction-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Subtract two expressions",
+      "title": "Worked example: subtract two expressions",
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify (8a - 3) - (2a + 5)."
+          "text": "Simplify (8a − 3) − (2a + 5)."
         }
       ],
       "steps": [
@@ -58,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove the second bracket and change both signs."
+              "text": "Rewrite subtraction of the second bracket by changing both signs."
             },
             {
               "type": "display_math",
@@ -71,7 +72,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Collect like terms."
+              "text": "Group the a-terms and constants."
+            },
+            {
+              "type": "display_math",
+              "latex": "(8a-2a)+(-3-5)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine each group."
             },
             {
               "type": "display_math",
@@ -80,11 +94,105 @@
           ]
         }
       ],
-      "verification_note": "Substituting any value of a into both forms gives the same result."
+      "verification_note": "For a = 4, the original expression is 29 − 13 = 16, and 6(4) − 8 is also 16."
+    },
+    {
+      "stable_key": "multi-variable-collection",
+      "position": 3,
+      "type": "explanation",
+      "title": "Organise several kinds of terms",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Expressions may contain several variables. Treat x-terms, y-terms and constants as separate columns. A term xy belongs to another group because its variable part contains both x and y. Reordering by the commutative law makes the groups visible without changing their values."
+        },
+        {
+          "type": "display_math",
+          "latex": "3x-2y+5+4y-x-7=(3x-x)+(-2y+4y)+(5-7)"
+        },
+        {
+          "type": "text",
+          "text": "Keep the sign attached to each term while moving it. The expression above simplifies to 2x + 2y − 2. A negative coefficient belongs to the term, so −2y must move as one unit rather than leaving its minus sign behind."
+        }
+      ]
+    },
+    {
+      "stable_key": "two-variable-subtraction-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: subtract with negative terms",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Simplify (5p − 2q + 7) − (−3p + 4q − 6)."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Change every sign in the second bracket."
+            },
+            {
+              "type": "display_math",
+              "latex": "5p-2q+7+3p-4q+6"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Group like terms."
+            },
+            {
+              "type": "display_math",
+              "latex": "(5p+3p)+(-2q-4q)+(7+6)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Combine coefficients and constants."
+            },
+            {
+              "type": "display_math",
+              "latex": "8p-6q+13"
+            }
+          ]
+        }
+      ],
+      "verification_note": "With p = 2 and q = 1, both the original and simplified expressions evaluate to 23."
+    },
+    {
+      "stable_key": "equivalence-checks",
+      "position": 5,
+      "type": "explanation",
+      "title": "Use substitution to detect sign errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Two expressions are equivalent when they have the same value for every permitted variable choice. Substituting one convenient set of values is a useful error check, although it is not a proof. Values such as 0, 1 and −1 expose missing constants and sign changes quickly."
+        },
+        {
+          "type": "display_math",
+          "latex": "(A)-(B)=A+(-B)"
+        },
+        {
+          "type": "text",
+          "text": "Common errors include combining unlike terms, changing only the first sign after a subtraction bracket, or losing a zero coefficient. If x-terms cancel, write 0x mentally and retain any remaining y-terms and constants. Then present the final expression without the zero term."
+        }
+      ]
     },
     {
       "stable_key": "linear-operations-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -114,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-06-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Remove brackets carefully, change all signs when subtracting, and combine only matching variable terms."
+          "text": "Attach each sign to its term, remove addition brackets directly, and change every sign in a subtracted bracket. Group terms only when their full variable parts match, combine their coefficients, and keep constants separate. Check the simplified form with a simple substitution."
         }
       ]
     }
@@ -132,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

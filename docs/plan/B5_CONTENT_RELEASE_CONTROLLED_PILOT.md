@@ -33,7 +33,7 @@ The current authored source contains every Secondary 1 and Secondary 2 unit in t
 | Questions                          |                                  1,912 |                                   1,900 | Pass    |
 | Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
 | Lessons                            |                                     87 |  All authored and planned Beta lessons | Pass    |
-| Lessons meeting the note-depth gate |                                     79 |                   All authored lessons | Blocked |
+| Lessons meeting the note-depth gate |                                     87 |                   All authored lessons | Pass    |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 1,044 practice, 393 checkpoint, 475 reserve |        Complete and non-overlapping | Pass    |
 
@@ -112,9 +112,9 @@ The command writes `beta-release-evidence.json` and `beta-release-evidence.md`. 
 2. Commission and review the 1,900-question minimum, including enough independent practice, checkpoint and adaptive-reserve capacity.
 3. Author 76 additional diagnostic-only questions: 38 baseline and 38 matched endline items, with two items per topic group per form.
 4. N1.2–N1.7 were completed on 13 October 2026. N6.1–N6.5, N7.1–N7.4 and S1.1–S1.4
-   were expanded on 14 October 2026 with deeper teaching sequences and a second worked
-   example. Expand the eight lessons still flagged by the general depth audit in N5 before
-   publication.
+   were expanded on 14 October 2026. N5.1–N5.8 were expanded on 16 October 2026. All 87
+   lessons now pass the structural note-depth gate and remain subject to Mathematics and
+   editorial review before publication.
 5. Record Mathematics and editorial decisions in the admin review workflow; publish through an audited lifecycle request.
 6. Import exact revisions into staging and rerun the gate until source, hashes, reviews and diagnostic isolation pass.
 7. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.
