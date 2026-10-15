@@ -26,7 +26,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
 | `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
-| `g3-sec2-math` | 9 | 35 | G2, S2, N2, G4, G5, N5 and N6 draft; remaining units planned |
+| `g3-sec2-math` | 9 | 35 | G2, S2, N2, G4, G5, N5, N6 and N7 draft; S1 planned |
 | **Total** | **19** | **87** | Structurally registered |
 
 Secondary 1 contains N1, N2, N3, N4, N5, N6, N7, G1, G5, and S1. Secondary 2 contains N2, N5, N6, N7, G2, G4, G5, S1, and S2.

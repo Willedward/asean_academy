@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-05",
+  "position": 1,
+  "title": "Equations and inequalities: meaning and solution sets",
+  "summary": "Distinguish equations from inequalities, test candidate values and reason about equivalent statements.",
+  "outcomes": [
+    "7.5"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Classify algebraic statements as equations or inequalities and identify their solution sets.",
+    "Test whether a value satisfies a statement by substitution.",
+    "Create equivalent statements by preserving balance or order."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-05-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read mathematical statements",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An equation states that two expressions are equal. It may be true for one value, several values, every allowed value or no value. An inequality compares expressions using <, >, ≤ or ≥, so its solution is often a range rather than a single number. The solution set contains every value that makes the original statement true."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-05-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Test before you transform",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Substitution is the safest way to test a proposed solution. Replace every occurrence of the variable, evaluate both sides independently and then compare them. For an equation the values must be equal; for an inequality the stated order must hold. A failed test proves the candidate is not in the solution set."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-05-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Preserve equivalence",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Adding or subtracting the same expression on both sides preserves an equation and an inequality. Multiplying or dividing an equation by a non-zero number preserves equality. For inequalities, multiplying or dividing by a negative number reverses the comparison sign; this rule is explored fully in the next lesson."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-05-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Check a candidate",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Does x=4 satisfy 3x-2=10?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute x=4 into the left side."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "3(4)-2=12-2=10."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The two sides match, so x=4 is a solution."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The original equation becomes 10=10."
+    },
+    {
+      "stable_key": "n7-05-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Identify an identity",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Choose k so that (k-1)x+5=3x+5 for every x."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "An identity needs matching x-coefficients."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set k-1=3."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Therefore k=4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "With k=4, both sides simplify to 3x+5."
+    },
+    {
+      "stable_key": "n7-05-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Does x=2 satisfy 4x+1=9? Enter 1 for yes or 0 for no."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Substitution gives 4(2)+1=9, so the statement is true."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-05-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

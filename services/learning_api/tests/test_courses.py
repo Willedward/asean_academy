@@ -201,7 +201,7 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     course = course_response.json()
     assert course["school_level"] == "secondary_2"
     assert course["content_status"] == "draft"
-    assert len(course["units"]) == 7
+    assert len(course["units"]) == 8
     assert course["units"][0]["stable_key"] == "g3-sec2-g2"
     assert len(course["units"][0]["lessons"]) == 5
     assert course["units"][1]["stable_key"] == "g3-sec2-s2"
@@ -229,6 +229,10 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert [lesson["stable_key"] for lesson in course["units"][6]["lessons"]] == [
         "n6-lesson-06",
         "n6-lesson-07",
+    ]
+    assert course["units"][7]["stable_key"] == "g3-sec2-n7"
+    assert [lesson["stable_key"] for lesson in course["units"][7]["lessons"]] == [
+        *(f"n7-lesson-{number:02}" for number in range(5, 11)),
     ]
 
     lesson_response = get("/api/v1/lessons/g2-lesson-01")
@@ -287,6 +291,14 @@ def test_secondary_2_authored_units_and_lessons_are_available_in_draft_preview()
     assert n6_lesson["practice"]["question_count"] == 20
     assert n6_lesson["practice"]["development_available"] is True
 
+    n7_response = get("/api/v1/lessons/n7-lesson-05")
+    assert n7_response.status_code == 200
+    n7_lesson = n7_response.json()
+    assert n7_lesson["course_key"] == "g3-sec2-math"
+    assert n7_lesson["unit_key"] == "g3-sec2-n7"
+    assert n7_lesson["practice"]["question_count"] == 10
+    assert n7_lesson["practice"]["development_available"] is True
+
 
 def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     lesson_response = get("/api/v1/content-assets/lesson/g2-lesson-01/g2-lesson-01-diagram")
@@ -329,6 +341,13 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     assert n6_lesson_response.headers["content-type"].startswith("image/svg+xml")
     assert b"From a rule to a table and graph" in n6_lesson_response.content
 
+    n7_lesson_response = get(
+        "/api/v1/content-assets/lesson/n7-lesson-06/n7-lesson-06-diagram"
+    )
+    assert n7_lesson_response.status_code == 200
+    assert n7_lesson_response.headers["content-type"].startswith("image/svg+xml")
+    assert b"Solving an inequality on a number line" in n7_lesson_response.content
+
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200
     assert question_response.headers["content-type"].startswith("image/svg+xml")
@@ -363,4 +382,5 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
     assert catalogue.review_question_batches["g2-l1-501"] == "g3-sec2-g2-b001"
     assert catalogue.review_question_batches["n5-l1-501"] == "g3-sec2-n5-b001"
     assert catalogue.review_question_batches["n6-l1-501"] == "g3-sec2-n6-b001"
+    assert catalogue.review_question_batches["n7-l1-501"] == "g3-sec2-n7-b001"
     assert "n1-l1-01" not in catalogue.review_question_batches

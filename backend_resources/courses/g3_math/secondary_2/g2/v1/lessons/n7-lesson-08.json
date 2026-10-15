@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-08",
+  "position": 4,
+  "title": "Simultaneous linear equations",
+  "summary": "Solve pairs of linear equations by substitution, elimination and graphs, then check the common solution.",
+  "outcomes": [
+    "7.8"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-07"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Choose between substitution and elimination efficiently.",
+    "Interpret the intersection of two lines as a simultaneous solution.",
+    "Verify a solution in both original equations."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-08-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "One pair, one common solution",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A solution of simultaneous equations must satisfy both equations at the same time. Algebraically, substitution or elimination reduces the pair to one variable. Graphically, the solution is the coordinate where the two straight lines intersect."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n7-lesson-08-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-08-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Choose substitution or elimination",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Substitution is efficient when one variable is already isolated or has coefficient 1. Elimination is efficient when coefficients match or become opposites after a small multiplication. Record any multiplication across every term of an equation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-08-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use graphs with the right precision",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Plot at least two accurate points for each line and read the intersection using the stated scale. A graph may give an estimate, so substitute the read coordinates into both equations when an exact answer is expected. Parallel distinct lines have no common solution; the same line has infinitely many."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-08-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Eliminate directly",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 2x+y=11 and x-y=1."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the equations to eliminate y."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "3x=12, so x=4."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute into x-y=1 to get y=3."
+            }
+          ]
+        }
+      ],
+      "verification_note": "(4,3) satisfies both 8+3=11 and 4-3=1."
+    },
+    {
+      "stable_key": "n7-08-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Use substitution",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve x+y=9 and 3x+2y=23."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "From x+y=9, write y=9-x."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute: 3x+2(9-x)=23."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Then x=5 and y=4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "(5,4) gives 9 in the first equation and 23 in the second."
+    },
+    {
+      "stable_key": "n7-08-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For x+y=7 and x-y=1, find x."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Adding gives 2x=8, so x=4."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-08-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n7-lesson-08-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-lesson-08-intersection.svg",
+      "alt_text": "Two straight lines crossing at their common simultaneous-equation solution.",
+      "generation_spec": {
+        "renderer": "nextscholar-chart-svg-v1",
+        "diagram_kind": "simultaneous_intersection",
+        "lesson_key": "n7-lesson-08"
+      },
+      "sha256": "f6b92a442a62c4d779f629973ba1f28ff8617d0b3da0df84806a76ff79bb5481",
+      "width": 960,
+      "height": 460
+    }
+  ]
+}

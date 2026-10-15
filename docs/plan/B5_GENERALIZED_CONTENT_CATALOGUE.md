@@ -1,6 +1,6 @@
 # B5 generalized Mathematics content catalogue
 
-**Implementation status (15 October 2026): engineering foundation complete; Secondary 1 N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, and Secondary 2 G2, S2, N2, G4, G5, N5 and N6 have complete draft banks and course units.**
+**Implementation status (15 October 2026): engineering foundation complete; Secondary 1 N2 is reviewed, N3–N7, G1, G5 and S1 are review-ready, N1 retains independent lesson review gates, and Secondary 2 G2, S2, N2, G4, G5, N5, N6 and N7 have complete draft banks and course units.**
 
 This milestone removes the N1-only constraints from the Git-authored question and course pipeline before the team expands the Beta bank to roughly 1,900–2,850 questions. Existing N1 source files remain valid and keep their current immutable content hashes.
 
@@ -29,8 +29,8 @@ Catalogue validation succeeds and reports:
 - 13 of 13 unique topic definitions;
 - 19 of 19 level-specific topic groups;
 - 87 syllabus outcomes;
-- seventeen authored topic-level banks;
-- 1,704 authored questions across every Secondary 1 topic group plus Secondary 2 G2, S2, N2, G4, G5, N5 and N6; all sixteen complete 104-question banks except the approved Secondary 1 N2 calibration unit remain review-gated.
+- eighteen authored topic-level banks;
+- 1,808 authored questions across every Secondary 1 topic group plus Secondary 2 G2, S2, N2, G4, G5, N5, N6 and N7; all seventeen complete 104-question banks except the approved Secondary 1 N2 calibration unit remain review-gated.
 
 The 104-question N2 bank matches its complete blueprint distribution. The remaining catalogue warnings describe the intentionally partial 40-question N1 blueprint.
 
@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while Secondary 1 N3–N7, G1, G5 and S1 plus Secondary 2 G2, S2, N2, G4, G5, N5 and N6 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. Secondary 2 N6 contributes two full-depth outcome lessons, 104 questions, two 20-question lesson-practice pools, a 24-question checkpoint and a 40-question adaptive reserve to the deployable `g3-sec2-math` draft snapshot. The team must author the other two Secondary 2 topic groups, review every pending unit, create the 76 isolated diagnostic items, and finish the remaining lesson notes, examples, active-recall sections, hints and solutions.
+No additional syllabus definitions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while Secondary 1 N3–N7, G1, G5 and S1 plus Secondary 2 G2, S2, N2, G4, G5, N5, N6 and N7 have complete draft banks, lessons and pool allocations awaiting Mathematics and editorial review. Secondary 2 N7 contributes six full-depth outcome lessons, 104 questions, six 10-question lesson-practice pools, a 24-question checkpoint and a 20-question adaptive reserve to the deployable `g3-sec2-math` draft snapshot. The team must author the final Secondary 2 S1 topic group, review every pending unit, create the 76 isolated diagnostic items, and finish the remaining lesson notes, examples, active-recall sections, hints and solutions.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 

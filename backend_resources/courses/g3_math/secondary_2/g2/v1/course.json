@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 9,
+  "revision": 10,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, algebraic expressions and formulae, and functions and graphs.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, algebraic expressions and formulae, functions and graphs, and equations and inequalities.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -60,6 +60,14 @@
     },
     {
       "key": "n6-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "n7-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -337,12 +345,75 @@
           "required_practice_count": 20
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-n7",
+      "position": 8,
+      "topic_code": "N7",
+      "title": "Equations and inequalities",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "n7-lesson-05",
+          "position": 1,
+          "title": "Equations and inequalities: meaning and solution sets",
+          "outcomes": [
+            "7.5"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "n7-lesson-06",
+          "position": 2,
+          "title": "Linear inequalities and number-line solutions",
+          "outcomes": [
+            "7.6"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "n7-lesson-07",
+          "position": 3,
+          "title": "Graphs of linear equations in two variables",
+          "outcomes": [
+            "7.7"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "n7-lesson-08",
+          "position": 4,
+          "title": "Simultaneous linear equations",
+          "outcomes": [
+            "7.8"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "n7-lesson-09",
+          "position": 5,
+          "title": "Quadratic equations by factorisation",
+          "outcomes": [
+            "7.9"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "n7-lesson-10",
+          "position": 6,
+          "title": "Formulating simultaneous equations from problems",
+          "outcomes": [
+            "7.10"
+          ],
+          "required_practice_count": 10
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 339,
-    "unit_checkpoint": 164,
-    "adaptive_reserve": 225
+    "lesson_practice": 399,
+    "unit_checkpoint": 188,
+    "adaptive_reserve": 245
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -350,6 +421,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2, N2, G4, G5, N5 and N6 await Mathematics and editorial review; the remaining Secondary 2 units are still planned."
+    "review_notes": "G2, S2, N2, G4, G5, N5, N6 and N7 await Mathematics and editorial review; Secondary 2 S1 is still planned."
   }
 }
