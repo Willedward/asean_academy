@@ -179,9 +179,9 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec2-n7-b002"
-    assert next_batch["branch"] == "questions/g3-sec2-n7-b002-willedward"
-    assert "authoring-claim g3-sec2-n7-b002" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec2-n7-b003"
+    assert next_batch["branch"] == "questions/g3-sec2-n7-b003-willedward"
+    assert "authoring-claim g3-sec2-n7-b003" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
@@ -214,7 +214,7 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_2/n7/v1/batches"
-        / "g3-sec2-n7-b002.json"
+        / "g3-sec2-n7-b003.json"
     )
     create_authoring_work_order(
         manifest,
@@ -258,7 +258,7 @@ def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_2/n7/v1/batches"
-        / "g3-sec2-n7-b002.json"
+        / "g3-sec2-n7-b003.json"
     )
     create_authoring_work_order(
         manifest,
