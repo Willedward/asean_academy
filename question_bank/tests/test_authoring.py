@@ -3,7 +3,6 @@ import json
 import shutil
 from collections import Counter
 from datetime import UTC, datetime
-from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
