@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-10",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 6,
+  "status": "draft",
+  "title": "Estimated mean for grouped data",
+  "summary": "Use class midpoints and frequencies to estimate a mean, solve missing-frequency problems and judge the limits of the estimate.",
+  "outcomes": [
+    "1.10"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-09"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Find class midpoints and construct frequency products.",
+    "Calculate an estimated grouped mean using Σfx/Σf.",
+    "Use a grouped-mean equation to find an unknown frequency."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-10-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Represent each class by its midpoint",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Grouped data do not reveal individual observations, so use each class midpoint as a representative value. The midpoint is the average of the lower and upper class boundaries. Multiply it by the class frequency to estimate that class's contribution to the total."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-10-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-10-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Apply the weighted-mean formula",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Add every midpoint-frequency product to obtain Σfx, then divide by total frequency Σf. Keep the numerator and denominator visible to reduce transcription errors. Include every class even if its midpoint is zero."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-10-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Interpret the result as an estimate",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The answer is estimated because observations may not actually equal their class midpoints. Narrower classes usually reduce possible approximation error, but only the raw data give the exact mean. For an unknown frequency, place the variable in both Σfx and Σf before solving."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-10-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Calculate a grouped mean",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Midpoints 15, 25 and 35 have frequencies 4, 7 and 3."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compute Σfx=15(4)+25(7)+35(3)=340."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compute Σf=4+7+3=14."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Estimated mean=340/14≈24.29."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The answer lies between the smallest and largest midpoints."
+    },
+    {
+      "stable_key": "s1-10-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Find a missing frequency",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Midpoints 10, 20, 30 have frequencies 3, f, 5 and estimated mean 22."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Form [10(3)+20f+30(5)]/(8+f)=22."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve 180+20f=176+22f."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Hence f=2."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives total frequency 10 and weighted total 220."
+    },
+    {
+      "stable_key": "s1-10-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Midpoints 5 and 15 each have frequency 4. Find the estimated mean."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Equal frequencies balance the estimated mean halfway between 5 and 15."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-10-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-10-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-10-grouped-mean.svg",
+      "alt_text": "A grouped frequency table showing class intervals, midpoints and frequencies for estimating a mean.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "grouped_mean_table",
+        "lesson_key": "s1-lesson-10"
+      },
+      "sha256": "e12bc3d56e2de7cc0eaf26066b22a5a9129ac323b66794a3236db238828ca981",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

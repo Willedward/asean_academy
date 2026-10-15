@@ -26,7 +26,7 @@ Validation compares the registry with the syllabus rather than trusting duplicat
 | Course | Topic groups | Outcome-linked lesson slots | Current state |
 | --- | ---: | ---: | --- |
 | `g3-sec1-math` | 10 | 52 | N2 reviewed; N1 lesson reviews and remaining units pending |
-| `g3-sec2-math` | 9 | 35 | G2, S2, N2, G4, G5, N5, N6 and N7 draft; S1 planned |
+| `g3-sec2-math` | 9 | 35 | All nine topic groups authored as draft units |
 | **Total** | **19** | **87** | Structurally registered |
 
 Secondary 1 contains N1, N2, N3, N4, N5, N6, N7, G1, G5, and S1. Secondary 2 contains N2, N5, N6, N7, G2, G4, G5, S1, and S2.
@@ -47,6 +47,6 @@ Authenticated clients can read `GET /api/v1/courses`. The response reports both 
 
 The `GET /api/v1/courses/{course_key}/map` endpoint serves the validated authored course snapshots when draft previews are enabled. As each later topic bank and lesson set is completed, its registry status and deployable snapshot advance together.
 
-## Next content slice
+## Completed draft scope
 
-Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 N6 adds a complete draft slice with 104 questions, two full-depth outcome lessons, two 20-question practice pools, a 24-question checkpoint and a 40-question adaptive reserve. It is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.
+Secondary 1 N2 remains the first reviewed non-N1 calibration slice. Secondary 2 S1 completes the Level 2 draft course with 104 questions, six full-depth outcome lessons, six 10-question practice pools, a 24-question checkpoint and a 20-question adaptive reserve. Every Level 2 topic is available to the authenticated admin review workflow but remains unavailable to production learners until Mathematics and editorial approval and the publication gate pass.

@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-09",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 5,
+  "status": "draft",
+  "title": "Selecting an appropriate measure of centre",
+  "summary": "Select mean, median or mode according to distribution shape, outliers, data type and the decision being made.",
+  "outcomes": [
+    "1.9"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-08"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Recognise when outliers or skew make the median preferable.",
+    "Use the mode for most-common categories or values.",
+    "Use the mean when every numerical observation should contribute."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-09-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Match the measure to the question",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use the mode when the most common category or size matters. Use the median when the middle ranked observation should resist extreme values. Use the mean when totals matter and the numerical distribution is reasonably balanced."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-09-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-09-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Inspect shape and outliers",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A long tail or isolated extreme can pull the mean away from where most observations lie. The median usually remains near the central cluster. Reporting both can reveal skew: a mean far above the median suggests a high-value tail."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-09-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Explain, do not merely name",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A complete choice states why the selected measure serves the purpose and why an alternative may mislead. Context matters: the mean is useful for planning an overall total, while the median may better describe a typical person's experience."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-09-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Choose for household income",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Most incomes cluster below one very large income. Choose a representative measure."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The extreme income strongly raises the mean."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The median depends on the middle position."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the median for a typical household."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The choice is tied to skew and the intended interpretation."
+    },
+    {
+      "stable_key": "s1-09-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Choose for stock planning",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A shop needs the most frequently requested shoe size."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The decision concerns the most common value."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Count the frequency of each size."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the mode."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The modal size directly answers the stocking question."
+    },
+    {
+      "stable_key": "s1-09-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Use code 1 for mean and 2 for median. Which is more resistant to one extreme outlier?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The median is determined by position and is resistant to one extreme value."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-09-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-09-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-09-resistant-centre.svg",
+      "alt_text": "A data strip showing a central cluster, one outlier and the different locations of the median and mean.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "outlier_effect",
+        "lesson_key": "s1-lesson-09"
+      },
+      "sha256": "cf83f848c9a5aef3e3cbc50d0951508c0b5f0d5f7ac752562e12cfec8603da18",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

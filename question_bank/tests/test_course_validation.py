@@ -36,11 +36,11 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
     assert report.valid
     assert report.course.stable_key == "g3-sec2-math"
     assert [unit.topic_code for unit in report.course.units] == [
-        "G2", "S2", "N2", "G4", "G5", "N5", "N6", "N7",
+        "G2", "S2", "N2", "G4", "G5", "N5", "N6", "N7", "S1",
     ]
-    assert len(report.lessons) == 29
-    assert len(report.pools.pools) == 46
-    assert report.as_dict()["allocated_question_count"] == 832
+    assert len(report.lessons) == 35
+    assert len(report.pools.pools) == 54
+    assert report.as_dict()["allocated_question_count"] == 936
     assert report.warnings == []
 
 
@@ -166,6 +166,29 @@ def test_integrated_secondary_2_n7_lessons_meet_the_depth_and_asset_gates(reposi
         assert lesson.position == position
         assert lesson.outcomes == [f"7.{position + 4}"]
         assert lesson_note_depth_shortfalls(lesson) == []
+        for asset in lesson.assets:
+            asset_path = course_root / asset.path
+            assert asset_path.is_file()
+            assert hashlib.sha256(asset_path.read_bytes()).hexdigest() == asset.sha256
+
+
+def test_integrated_secondary_2_s1_lessons_meet_the_depth_and_asset_gates(repository_root):
+    course_root = (
+        repository_root
+        / "backend_resources/courses/g3_math/secondary_2/g2/v1"
+    )
+    lesson_paths = sorted((course_root / "lessons").glob("s1-*.json"))
+
+    assert [path.stem for path in lesson_paths] == [
+        *(f"s1-lesson-{number:02}" for number in range(5, 11)),
+    ]
+    for position, path in enumerate(lesson_paths, 1):
+        lesson = Lesson.model_validate_json(path.read_text())
+        assert lesson.status == "draft"
+        assert lesson.position == position
+        assert lesson.outcomes == [f"1.{position + 4}"]
+        assert lesson_note_depth_shortfalls(lesson) == []
+        assert len(lesson.assets) == 1
         for asset in lesson.assets:
             asset_path = course_root / asset.path
             assert asset_path.is_file()

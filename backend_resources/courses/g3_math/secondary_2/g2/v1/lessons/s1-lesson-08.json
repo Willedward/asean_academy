@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-08",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 4,
+  "status": "draft",
+  "title": "Mean, median and mode",
+  "summary": "Calculate and interpret the three principal measures of central tendency, including missing-value problems.",
+  "outcomes": [
+    "1.8"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-07"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Calculate mean, median and mode from raw data.",
+    "Recover a missing value from a stated mean.",
+    "Explain how ordering, frequency and magnitude affect the three measures."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-08-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Mean uses every magnitude",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Add all values and divide by the number of observations. The mean balances the data total equally across observations. Because every magnitude contributes, one extreme value can move the mean substantially."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-08-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-08-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Median uses ordered position",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Order the data before finding the middle. For an odd number of values, select the central value. For an even number, average the two central values. The median is resistant to extremes because it depends mainly on position."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-08-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Mode uses frequency",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The mode is the most frequent value and may be unique, multiple or absent. It can describe numerical or categorical data. Check frequencies rather than choosing a visually central value."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-08-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Recover a missing value",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Five values have mean 12. Four values total 43. Find the fifth value."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The required total is 5×12=60."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract the known total: 60-43=17."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The missing value is 17."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The reconstructed total 43+17=60 gives mean 12."
+    },
+    {
+      "stable_key": "s1-08-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Compare all three measures",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For 2, 4, 4, 7, 13, find mean, median and mode."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The total is 30, so mean=30/5=6."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The ordered middle value is 4, so median=4."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The repeated value is 4, so mode=4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Each result follows a different definition."
+    },
+    {
+      "stable_key": "s1-08-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the median of 3, 5, 8, 9, 12."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The data are ordered and the third of five values is 8."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-08-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-08-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-08-centre.svg",
+      "alt_text": "An ordered data strip identifying the mean, median and mode.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "centre_measures",
+        "lesson_key": "s1-lesson-08"
+      },
+      "sha256": "e8cf0ce88b1b1cd4b3eadd24e08a4ab98000e768e15c298e8477608c775fac05",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
