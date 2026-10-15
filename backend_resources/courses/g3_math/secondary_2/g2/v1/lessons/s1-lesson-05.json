@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-05",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 1,
+  "status": "draft",
+  "title": "Dot diagrams, histograms and stem-and-leaf diagrams",
+  "summary": "Read distributions accurately from dot diagrams, histograms and stem-and-leaf diagrams, including unequal class widths.",
+  "outcomes": [
+    "1.5"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Read frequencies, clusters, gaps and spread from dot diagrams.",
+    "Decode ordered values and keys in stem-and-leaf diagrams.",
+    "Interpret histogram area and frequency density when class widths differ."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-05-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Read a dot diagram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Each dot represents one observation. Read the horizontal scale first, then count stacked dots to obtain a frequency. The layout exposes repeated values, gaps, clusters and possible outliers while preserving every observation. Range is the greatest value minus the least value."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-05-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-05-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Decode stem-and-leaf values",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A stem-and-leaf diagram orders exact observations while showing distribution shape. The key is essential: 4|7 may mean 47, 4.7 or another scale. For back-to-back diagrams, both leaf sets share the same stem but extend in opposite directions."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-05-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use area in a histogram",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Histogram bars touch because the variable is continuous. With equal class widths, frequency comparisons can use bar heights. With unequal widths, bar area represents frequency and height represents frequency density: frequency density = frequency divided by class width."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-05-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Interpret unequal widths",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A class of width 5 has density 4 and a class of width 10 has density 2. Find both frequencies."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use frequency = class width × frequency density."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The first frequency is 5×4=20."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The second frequency is 10×2=20."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Equal bar areas confirm equal frequencies even though the heights differ."
+    },
+    {
+      "stable_key": "s1-05-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Read a stem-and-leaf diagram",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The row 3 | 1 4 4 8 has key 3|1=31. Find its median and range."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The ordered values are 31, 34, 34 and 38."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The median is (34+34)/2=34."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The range is 38-31=7."
+            }
+          ]
+        }
+      ],
+      "verification_note": "All four values were preserved by the display."
+    },
+    {
+      "stable_key": "s1-05-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A class of width 6 has frequency density 3. Find its frequency."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "18",
+        "canonical_latex": "18",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Frequency equals class width multiplied by density: 6×3=18."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-05-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-05-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-05-distributions.svg",
+      "alt_text": "Side-by-side examples of a dot plot, histogram and stem-and-leaf diagram.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "distribution_representations",
+        "lesson_key": "s1-lesson-05"
+      },
+      "sha256": "cd832f88325351cc82594f9dae48eb143df4bb4dd193992576dfb7a412cdf24d",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

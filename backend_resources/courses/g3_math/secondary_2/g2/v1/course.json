@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 10,
+  "revision": 11,
   "stable_key": "g3-sec2-math",
   "programme_key": "asean-scholarship-preparation",
   "curriculum_version": "g3_math_v1_draft",
@@ -8,7 +8,7 @@
   "subject": "Mathematics",
   "status": "draft",
   "title": "ASEAN Scholarship Mathematics — Level 2",
-  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units in congruence and similarity, probability, ratio and proportion, right-triangle geometry, solid mensuration, algebraic expressions and formulae, functions and graphs, and equations and inequalities.",
+  "description": "Advanced-foundation Mathematics preparation for secondary-school students across Southeast Asia, with review-ready units spanning number and algebra, geometry and measurement, probability, and data handling and analysis.",
   "mastery_policies": [
     {
       "key": "g2-default-v1",
@@ -68,6 +68,14 @@
     },
     {
       "key": "n7-default-v1",
+      "minimum_eventual_correct_percentage": 70,
+      "mastery_requires_checkpoint": true,
+      "checkpoint_passing_percentage": 70,
+      "give_up_after_incorrect_attempts": 2,
+      "hints_penalize_marks": false
+    },
+    {
+      "key": "s1-default-v1",
       "minimum_eventual_correct_percentage": 70,
       "mastery_requires_checkpoint": true,
       "checkpoint_passing_percentage": 70,
@@ -408,12 +416,75 @@
           "required_practice_count": 10
         }
       ]
+    },
+    {
+      "stable_key": "g3-sec2-s1",
+      "position": 9,
+      "topic_code": "S1",
+      "title": "Data handling and analysis",
+      "checkpoint_question_count": 24,
+      "lessons": [
+        {
+          "stable_key": "s1-lesson-05",
+          "position": 1,
+          "title": "Dot diagrams, histograms and stem-and-leaf diagrams",
+          "outcomes": [
+            "1.5"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "s1-lesson-06",
+          "position": 2,
+          "title": "Choosing statistical representations",
+          "outcomes": [
+            "1.6"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "s1-lesson-07",
+          "position": 3,
+          "title": "Detecting misleading statistical diagrams",
+          "outcomes": [
+            "1.7"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "s1-lesson-08",
+          "position": 4,
+          "title": "Mean, median and mode",
+          "outcomes": [
+            "1.8"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "s1-lesson-09",
+          "position": 5,
+          "title": "Selecting an appropriate measure of centre",
+          "outcomes": [
+            "1.9"
+          ],
+          "required_practice_count": 10
+        },
+        {
+          "stable_key": "s1-lesson-10",
+          "position": 6,
+          "title": "Estimated mean for grouped data",
+          "outcomes": [
+            "1.10"
+          ],
+          "required_practice_count": 10
+        }
+      ]
     }
   ],
   "question_allocation_counts": {
-    "lesson_practice": 399,
-    "unit_checkpoint": 188,
-    "adaptive_reserve": 245
+    "lesson_practice": 459,
+    "unit_checkpoint": 212,
+    "adaptive_reserve": 265
   },
   "provenance": {
     "authoring_method": "original_authored",
@@ -421,6 +492,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "G2, S2, N2, G4, G5, N5, N6 and N7 await Mathematics and editorial review; Secondary 2 S1 is still planned."
+    "review_notes": "All nine Level 2 units are drafted and await Mathematics and editorial review."
   }
 }

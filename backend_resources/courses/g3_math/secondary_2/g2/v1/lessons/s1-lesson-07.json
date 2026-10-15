@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-07",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 3,
+  "status": "draft",
+  "title": "Detecting misleading statistical diagrams",
+  "summary": "Audit axes, spacing, class widths, symbols and selected ranges before accepting a visual comparison.",
+  "outcomes": [
+    "1.7"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-06"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Identify common construction choices that exaggerate or conceal differences.",
+    "Quantify the effect of a truncated axis or distorted scale.",
+    "Describe how to redraw a diagram fairly."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-07-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Inspect both axes",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A truncated vertical axis is not automatically invalid, but it can exaggerate small differences if the break is unclear. Time points must be spaced according to their actual intervals. Labels, units and a consistent scale allow the reader to judge what is shown."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-07-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-07-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Check whether visual size matches data",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "In a histogram with unequal class widths, frequency must be represented by area, so height is frequency density. Pictograms using two-dimensional pictures must control area: doubling both height and width multiplies area by four, not two."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-07-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Look for omitted context",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A selectively chosen start date can reverse the impression of a longer trend. Compare the displayed window with the claim being made, check whether categories are omitted, and distinguish absolute changes from percentage changes. A fair redesign should retain relevant context and use proportional visual encoding."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-07-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Quantify a truncated axis",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Values 96 and 100 are drawn from a baseline of 92. Compare their visible heights."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Visible heights are 96-92=4 and 100-92=8."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The second bar looks twice the first height."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The actual increase is only 4/96≈4.2%."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The calculation explains why the visual impression is exaggerated."
+    },
+    {
+      "stable_key": "s1-07-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Correct an unequal-width histogram",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Classes of widths 5 and 10 have frequencies 20 and 20."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compute density 20/5=4 for the first class."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compute density 20/10=2 for the second class."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use these densities as heights so both bar areas equal 20."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Equal frequencies produce equal areas, not equal heights."
+    },
+    {
+      "stable_key": "s1-07-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A chart places years 2020, 2021 and 2025 at equal intervals. Enter 1 if this can mislead or 0 if it is fair."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Equal drawn spacing should not represent unequal time intervals."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-07-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-07-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-07-misleading-axis.svg",
+      "alt_text": "Two bar charts of the same values showing how a truncated baseline exaggerates their difference.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "misleading_axis",
+        "lesson_key": "s1-lesson-07"
+      },
+      "sha256": "66c0fe5b246d6e04c614f9f3d00ff8b5bf64835c976f825b9aae548b4fd29925",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

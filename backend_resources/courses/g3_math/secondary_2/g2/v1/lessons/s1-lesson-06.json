@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-lesson-06",
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-s1",
+  "position": 2,
+  "status": "draft",
+  "title": "Choosing statistical representations",
+  "summary": "Choose a statistical display by matching its purpose, data type, audience and required detail.",
+  "outcomes": [
+    "1.6"
+  ],
+  "prerequisite_lessons": [
+    "s1-lesson-05"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Compare the strengths and limits of dot diagrams, histograms, stem-and-leaf diagrams and tables.",
+    "Select a representation for discrete or continuous data.",
+    "Justify a choice using the information it preserves or hides."
+  ],
+  "mastery_policy_key": "s1-default-v1",
+  "sections": [
+    {
+      "stable_key": "s1-06-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Start with the communication purpose",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A useful representation answers the intended question. Dot plots reveal individual repeats and gaps in small datasets. Stem-and-leaf diagrams retain exact ordered values. Histograms reveal the shape of a grouped continuous distribution. Frequency tables support compact lookup and calculation."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "s1-lesson-06-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-06-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Account for scale and sample size",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A display that works for 20 observations may fail for 2,000. Dot plots and stem-and-leaf diagrams can become crowded, while grouping makes a histogram scalable but sacrifices exact individual values. Choose class widths deliberately because wide classes can hide local structure."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-06-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "State a defensible trade-off",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A strong justification names both a benefit and a cost. For example, a histogram clearly compares distribution shape across many measurements, but exact readings cannot be recovered. Avoid selecting a chart only because it looks familiar."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-06-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Choose for exact retrieval",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Twenty-four integer scores must remain individually recoverable while showing their distribution. Choose a representation."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The dataset is small and numerical."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Exact values and ordering are required."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "A stem-and-leaf diagram meets both needs."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Every leaf can be decoded with the key."
+    },
+    {
+      "stable_key": "s1-06-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Choose for a large continuous sample",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two thousand reaction times must be compared by shape, not by individual lookup."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The data are continuous and numerous."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Group into sensible adjacent intervals."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use a histogram with frequency density if widths differ."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The display scales well while making shape visible."
+    },
+    {
+      "stable_key": "s1-06-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Use code 1 for dot plot and 2 for histogram. Which code suits 500 grouped continuous measurements?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "A histogram communicates the shape of a large grouped continuous dataset."
+        }
+      ]
+    },
+    {
+      "stable_key": "s1-06-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+        },
+        {
+          "type": "text",
+          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "s1-lesson-06-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-lesson-06-representation-choice.svg",
+      "alt_text": "A decision guide linking data purposes to dot plots, stem-and-leaf diagrams, histograms and frequency tables.",
+      "generation_spec": {
+        "renderer": "nextscholar-statistics-svg-v1",
+        "diagram_kind": "representation_decision",
+        "lesson_key": "s1-lesson-06"
+      },
+      "sha256": "eefe41436519259046473ddf0c0efaefc2562854e501fd0ff0f0eff316309079",
+      "width": 960,
+      "height": 480
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

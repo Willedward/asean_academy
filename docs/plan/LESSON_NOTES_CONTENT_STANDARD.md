@@ -77,8 +77,9 @@ become errors when a lesson is marked `reviewed` or `published`, or under
 | Secondary 2 N5 | 8 | Meets the baseline and is integrated as a draft unit |
 | Secondary 2 N6 | 2 | Meets the baseline and is integrated as a draft unit |
 | Secondary 2 N7 | 6 | Meets the baseline and is integrated as a draft unit |
+| Secondary 2 S1 | 6 | Meets the baseline and is integrated as a draft unit |
 
-The current audit therefore passes 73 of 81 authored or staged lessons and flags eight thin lessons:
+The current audit therefore passes 79 of 87 authored or staged lessons and flags eight thin lessons:
 N5.1–N5.8. Those N5 lessons contain all four required section types, but currently have
 only one explanation and one worked example and are below the six-section depth target.
 They remain valid drafts for review, but cannot pass the strict publication gate until
@@ -93,6 +94,8 @@ Secondary 2 N5.9–N5.16 are authored as eight independent, full-depth lessons c
 Secondary 2 N6.6–N6.7 are authored as two independent, full-depth lessons covering quadratic functions and quadratic graph properties. Each lesson includes a deterministic SVG graph, and all four question batches and the draft-course pools are integrated for authenticated admin review.
 
 Secondary 2 N7.5–N7.10 are authored as six independent, full-depth lessons covering equations, inequalities, linear graphs, simultaneous equations, quadratic equations and problem formulation. Deterministic SVG diagrams support the graphical outcomes, and all four question batches and the draft-course pools are integrated for authenticated admin review.
+
+Secondary 2 S1.5–S1.10 are authored as six independent, full-depth lessons covering distribution displays, representation choice, misleading diagrams, measures of centre and grouped-mean estimation. Each lesson includes a deterministic SVG teaching diagram, and all four question batches and the draft-course pools are integrated for authenticated admin review.
 
 ## Review and publication
 
