@@ -179,9 +179,9 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
     )
 
     assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec2-s1-b003"
-    assert next_batch["branch"] == "questions/g3-sec2-s1-b003-willedward"
-    assert "authoring-claim g3-sec2-s1-b003" in next_batch["claim_command"]
+    assert next_batch["batch_id"] == "g3-sec2-s1-b004"
+    assert next_batch["branch"] == "questions/g3-sec2-s1-b004-willedward"
+    assert "authoring-claim g3-sec2-s1-b004" in next_batch["claim_command"]
 
     result = create_authoring_work_order(
         Path(next_batch["manifest"]),
