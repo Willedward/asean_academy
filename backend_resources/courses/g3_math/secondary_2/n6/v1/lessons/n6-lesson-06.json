@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n6",
+  "status": "draft",
+  "mastery_policy_key": "n6-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T10:15:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n6-lesson-06",
+  "position": 1,
+  "title": "Quadratic functions y = ax² + bx + c",
+  "summary": "Interpret a quadratic rule, calculate function values accurately, build a value table and connect algebraic features to points on its graph.",
+  "outcomes": [
+    "6.6"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Identify the coefficients a, b and c in a quadratic function with a non-zero.",
+    "Evaluate a quadratic function for positive, zero and negative inputs using correct order of operations.",
+    "Construct and check a table of values, then plot the corresponding quadratic graph."
+  ],
+  "sections": [
+    {
+      "stable_key": "n6-06-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Recognise a quadratic function",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A quadratic function assigns exactly one output y to each permitted input x and has highest power x². In the standard form y=ax²+bx+c, the leading coefficient a must be non-zero; otherwise the x² term disappears and the rule is linear. Coefficients may be positive, negative, fractional or zero, but the exponent on x remains 2."
+        },
+        {
+          "type": "display_math",
+          "latex": "y=ax^2+bx+c,\\qquad a\\ne 0"
+        },
+        {
+          "type": "text",
+          "text": "Read missing terms as zero coefficients. For y=3x²-5, the coefficients are a=3, b=0 and c=-5. For y=x²-4x+1, the unwritten coefficient of x² is 1. Keeping this standard order makes comparison and substitution easier."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-06-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Evaluate outputs without losing signs",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To find a function value, replace every x with the stated input and use brackets around a negative input. Square the input before multiplying by a, then calculate the linear and constant terms. The distinction between (-3)²=9 and -3²=-9 is a common source of errors."
+        },
+        {
+          "type": "display_math",
+          "latex": "f(-3)=a(-3)^2+b(-3)+c=9a-3b+c"
+        },
+        {
+          "type": "text",
+          "text": "A table of values is a collection of ordered pairs (x,y). Inputs chosen on both sides of zero often reveal the curve clearly. Recalculate any output that breaks an expected symmetric pattern before plotting it."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-06-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Connect the rule, table and graph",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Each row in a value table gives one point on the graph. Plot x horizontally and y vertically, use a consistent scale, and draw a smooth curve through the calculated points. A quadratic graph is a parabola rather than a chain of straight line segments."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-06-graph"
+        },
+        {
+          "type": "text",
+          "text": "For y=x²-4, the point (0,-4) is the y-intercept because x=0. The points (-2,0) and (2,0) are x-intercepts because y=0. Substituting each coordinate into the original rule verifies that it lies on the graph."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-06-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Build a table of values",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For y=2x²-3x-2, find y when x=-1, 0, 1 and 2."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute x=-1 with brackets."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=2(-1)^2-3(-1)-2=2+3-2=3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate the remaining inputs in the same order."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\begin{array}{c|rrrr}x&-1&0&1&2\\\\\\hline y&3&-2&-3&0\\end{array}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The four graph points are (-1,3), (0,-2), (1,-3) and (2,0)."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substituting x=2 into the original rule gives 8-6-2=0, matching the last table entry."
+    },
+    {
+      "stable_key": "n6-06-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Find a missing coefficient from a point",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The graph of y=x²+bx+6 passes through (2,4). Find b."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Because (2,4) lies on the graph, substitute x=2 and y=4."
+            },
+            {
+              "type": "display_math",
+              "latex": "4=2^2+2b+6"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Simplify and solve the resulting linear equation."
+            },
+            {
+              "type": "display_math",
+              "latex": "4=10+2b\\quad\\Rightarrow\\quad 2b=-6\\quad\\Rightarrow\\quad b=-3"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The function is therefore y=x²-3x+6."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check the point: when x=2, y=4-6+6=4, so (2,4) satisfies the completed rule."
+    },
+    {
+      "stable_key": "n6-06-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For f(x)=-2x²+5x+1, find f(-2)."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "-17",
+        "canonical_latex": "-17",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Use brackets: f(-2)=-2(-2)²+5(-2)+1=-8-10+1=-17."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-06-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Confirm that the highest power is 2 and identify a, b and c in standard order, remembering that a cannot be zero."
+        },
+        {
+          "type": "text",
+          "text": "Bracket negative inputs, calculate powers before multiplication, plot each table row as an ordered pair, and verify suspicious points in the original rule."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-06-graph",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-06-quadratic-function.svg",
+      "alt_text": "A value table and coordinate graph for y equals x squared minus 4, showing roots at negative two and two and vertex at zero negative four.",
+      "generation_spec": {
+        "renderer": "nextscholar-chart-svg-v1",
+        "diagram_kind": "quadratic_table_graph",
+        "lesson_key": "n6-lesson-06"
+      },
+      "sha256": "34cfb50db63ed6797408f184716dffd1074956f869b7ebf95fd47e66dccc1939",
+      "width": 960,
+      "height": 460
+    }
+  ]
+}

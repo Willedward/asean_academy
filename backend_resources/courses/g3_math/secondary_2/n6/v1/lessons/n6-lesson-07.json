@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n6",
+  "status": "draft",
+  "mastery_policy_key": "n6-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T10:15:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n6-lesson-07",
+  "position": 2,
+  "title": "Graphs of quadratic functions and their properties",
+  "summary": "Read the direction, turning point, axis of symmetry and intercepts of a parabola, and connect these features to the coefficients and forms of its quadratic rule.",
+  "outcomes": [
+    "6.7"
+  ],
+  "prerequisite_lessons": [
+    "n6-lesson-06"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Use the sign of a to determine whether a quadratic graph opens upward or downward.",
+    "Identify the maximum or minimum point and the vertical axis of symmetry.",
+    "Use roots, symmetric points and completed-square form to locate key graph features."
+  ],
+  "sections": [
+    {
+      "stable_key": "n6-07-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "The sign of a controls the opening",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Every graph of y=ax²+bx+c with a non-zero is a parabola. If a is positive, the arms rise and the turning point is a minimum. If a is negative, the arms fall and the turning point is a maximum. A larger absolute value of a usually produces a narrower curve, while a value of |a| between 0 and 1 produces a wider curve."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-07-graph"
+        },
+        {
+          "type": "text",
+          "text": "The sign tells you the direction, but it does not by itself locate the turning point. The b and c terms can shift the graph horizontally and vertically."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-07-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Turning point and axis of symmetry",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The turning point is the lowest or highest point of the parabola. A vertical line through it is the axis of symmetry: reflected points on the curve have equal y-values. In completed-square form y=a(x-h)²+k, the turning point is (h,k) and the axis of symmetry is x=h."
+        },
+        {
+          "type": "display_math",
+          "latex": "y=a(x-h)^2+k\\quad\\Rightarrow\\quad\\text{turning point }(h,k),\\;\\text{axis }x=h"
+        },
+        {
+          "type": "text",
+          "text": "Watch the sign inside the bracket. In (x-3)² the horizontal coordinate is 3, while in (x+3)² it is -3. The sign outside the bracket is not copied directly."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-07-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Use intercepts and symmetry together",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "The y-intercept is found by setting x=0, so it is (0,c) in standard form. The x-intercepts, also called roots, occur where y=0. If two roots are r₁ and r₂, the axis of symmetry lies halfway between them."
+        },
+        {
+          "type": "display_math",
+          "latex": "x=\\frac{r_1+r_2}{2}"
+        },
+        {
+          "type": "text",
+          "text": "Once the axis is known, any plotted point has a partner the same horizontal distance on the other side. This provides a fast graph check and can supply missing table values without repeating the full substitution."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-07-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Read a quadratic in completed-square form",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For y=-2(x-3)²+8, state the opening direction, turning point, axis of symmetry and maximum value."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The leading multiplier is -2, so the graph opens downward and has a maximum."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Compare the rule with y=a(x-h)²+k."
+            },
+            {
+              "type": "display_math",
+              "latex": "a=-2,\\qquad h=3,\\qquad k=8"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The turning point is (3,8), the axis is x=3, and the maximum value of y is 8."
+            }
+          ]
+        }
+      ],
+      "verification_note": "At x=3 the squared term is zero, giving y=8; every other input makes -2(x-3)² non-positive, so no larger y-value is possible."
+    },
+    {
+      "stable_key": "n6-07-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Use roots to locate the axis and turning point",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The function y=x²-6x+5 has roots 1 and 5. Find its axis of symmetry and minimum point."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Average the two roots to obtain the axis."
+            },
+            {
+              "type": "display_math",
+              "latex": "x=\\frac{1+5}{2}=3"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute x=3 into the function."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=3^2-6(3)+5=9-18+5=-4"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Since a=1 is positive, the graph opens upward. Its minimum point is (3,-4)."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The roots are equally spaced two units from x=3, and y=(x-3)²-4 confirms the same minimum point."
+    },
+    {
+      "stable_key": "n6-07-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A quadratic has roots x=-2 and x=8. What is the x-coordinate of its axis of symmetry?"
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The axis lies halfway between the roots: (-2+8)/2=3."
+        }
+      ]
+    },
+    {
+      "stable_key": "n6-07-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use the sign of a for the opening direction, and describe the turning point as a minimum when a>0 or a maximum when a<0."
+        },
+        {
+          "type": "text",
+          "text": "Read (h,k) from y=a(x-h)²+k, find the y-intercept from x=0, and use the midpoint of two roots to locate the axis of symmetry."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n6-lesson-07-graph",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-07-quadratic-properties.svg",
+      "alt_text": "Side-by-side quadratic graphs showing that positive a gives an upward-opening curve with a minimum and negative a gives a downward-opening curve with a maximum.",
+      "generation_spec": {
+        "renderer": "nextscholar-chart-svg-v1",
+        "diagram_kind": "quadratic_properties",
+        "lesson_key": "n6-lesson-07"
+      },
+      "sha256": "df42e9b8ac5c560ce0a0a82d70e79aeded3a2dadf99abf417dae4b47e98d3640",
+      "width": 960,
+      "height": 460
+    }
+  ]
+}
