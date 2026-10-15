@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-l5-504",
+  "bank_key": "g3-sec2-s1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "S1",
+  "primary_outcome": "1.10",
+  "title": "Silver Reed Bay — River clean-up: reconstruct a grouped table",
+  "difficulty": 5,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Silver Reed Bay dataset for River clean-up: reconstruct a grouped table — A grouped distribution has midpoints 10, 20 and 40 with frequencies 3, 5 and k. Its estimated mean is 30. Find k."
+        }
+      ],
+      "marks": 5,
+      "primary_outcome": "1.10",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "11",
+        "canonical_latex": "11",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Translate the grouped table into a weighted-mean equation."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use [10(3)+20(5)+40k]/(8+k)=30, then solve for k."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Extract the relevant values and apply the stated statistical method."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{130+40k}{8+k}=30\\Rightarrow k=11"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 4
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "State the requested value and check that it matches the data and representation."
+            },
+            {
+              "type": "display_math",
+              "latex": "11"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 5,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
