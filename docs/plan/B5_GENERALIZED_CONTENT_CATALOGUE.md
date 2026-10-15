@@ -56,7 +56,7 @@ The importer runs one transaction that upserts the curriculum, topics, outcomes,
 
 ## Remaining content work
 
-No additional syllabus definitions or 104-question learning banks are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while the other complete topic groups await Mathematics and editorial review. Secondary 2 S1 contributes six full-depth outcome lessons, 104 questions, six 10-question lesson-practice pools, a 24-question checkpoint and a 20-question adaptive reserve to the deployable `g3-sec2-math` draft snapshot. The team must review every pending unit, create the 76 isolated diagnostic items, expand the eight thin Secondary 1 N5 lessons, and complete Secondary 1 N1's independent content review work.
+No additional syllabus definitions, 104-question learning banks or lesson-depth expansions are required for the supplied Secondary One and Secondary Two Beta scope. The Secondary 1 N2 batches and lessons are reviewed, while the other complete topic groups await Mathematics and editorial review. Secondary 2 S1 contributes six full-depth outcome lessons, 104 questions, six 10-question lesson-practice pools, a 24-question checkpoint and a 20-question adaptive reserve to the deployable `g3-sec2-math` draft snapshot. The team must review every pending unit, create the 76 isolated diagnostic items and complete Secondary 1 N1's independent content review work.
 
 The B5 release gate still measures authored course units and reviewed question inventory; planned registry entries do not count as released content. A topic definition alone does not count as Beta coverage; it needs a valid bank, course unit and reviewed content.
 

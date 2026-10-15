@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 2,
   "status": "draft",
   "title": "Interpreting algebraic notation",
-  "summary": "Read coefficients, products, powers, brackets and fractions accurately.",
+  "summary": "Interpret coefficients, powers, products, brackets and fraction bars so that algebraic notation matches the intended operation order.",
   "outcomes": [
     "5.2"
   ],
   "prerequisite_lessons": [
     "n5-lesson-01"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Interpret coefficients, products and powers.",
-    "Use brackets and fraction bars to preserve the intended operation order."
+    "Identify terms, factors, coefficients, powers, numerators and denominators.",
+    "Translate verbal descriptions into unambiguous bracketed or fractional notation.",
+    "Distinguish expressions that look similar but have different structures."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -25,19 +26,19 @@
       "stable_key": "notation-structure",
       "position": 1,
       "type": "explanation",
-      "title": "Read the structure before calculating",
+      "title": "Read structure before calculating",
       "blocks": [
         {
           "type": "text",
-          "text": "Brackets keep a sum or difference together. A fraction bar acts like brackets around its numerator and denominator."
+          "text": "An expression is built from terms separated by addition or subtraction. Each term may contain numerical and variable factors. In −4x²y, the coefficient is −4 and the variable factors are x² and y. The exponent 2 applies only to x; it means x multiplied by x. A missing multiplication sign between a number, letter or bracket is conventional algebraic notation."
         },
         {
           "type": "display_math",
-          "latex": "3(x+y)=3\\times(x+y),\\qquad \\frac{3+y}{5}=(3+y)\\div5"
+          "latex": "-4x^2y=(-4)\\times x\\times x\\times y"
         },
         {
           "type": "text",
-          "text": "Reading the structure aloud helps prevent common errors such as treating 3(x+y) as 3x+y."
+          "text": "Brackets make a group act as one quantity. Thus 3(x + y) means three copies of the entire sum, while 3x + y multiplies only x by 3. Read from the outermost operation inward: 3(x + y) says “three times the sum”, whereas (3x + y)/5 says “one fifth of the whole numerator”."
         }
       ]
     },
@@ -45,11 +46,11 @@
       "stable_key": "notation-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Interpret a squared quotient",
+      "title": "Worked example: a squared quotient",
       "prompt": [
         {
           "type": "text",
-          "text": "Write the square of (a + b) divided by 3c as one expression."
+          "text": "Write the square of the quotient of a + b and 3c, then simplify the squared denominator."
         }
       ],
       "steps": [
@@ -58,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the quotient first."
+              "text": "Keep the sum a + b together and form the quotient."
             },
             {
               "type": "display_math",
@@ -71,20 +72,127 @@
           "content": [
             {
               "type": "text",
-              "text": "Square the complete quotient."
+              "text": "Square the complete quotient with outer brackets."
             },
             {
               "type": "display_math",
-              "latex": "\\left(\\frac{a+b}{3c}\\right)^2=\\frac{(a+b)^2}{9c^2}"
+              "latex": "\\left(\\frac{a+b}{3c}\\right)^2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Apply the square to numerator and denominator."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{(a+b)^2}{9c^2}"
             }
           ]
         }
       ],
-      "verification_note": "The square applies to the numerator and every factor in the denominator."
+      "verification_note": "For any non-zero c, substituting values into the bracketed quotient before squaring gives the same result as the final fraction."
+    },
+    {
+      "stable_key": "fractions-and-brackets",
+      "position": 3,
+      "type": "explanation",
+      "title": "Fraction bars are grouping symbols",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A fraction bar groups everything in its numerator and everything in its denominator. The expression (x + 7)/5 means add first and divide the result by 5. By contrast, x + 7/5 divides only 7 by 5. When typing, use brackets to reproduce the grouping shown by a printed fraction bar."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{x+7}{5}\\ne x+\\frac75"
+        },
+        {
+          "type": "text",
+          "text": "Powers also depend on grouping. In −p² the square applies to p before the negative sign, giving −(p²). In (−p)² the negative value is included in the base, so the result is positive. Careful brackets prevent sign errors during later substitution."
+        }
+      ]
+    },
+    {
+      "stable_key": "verbal-notation-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: translate a layered phrase",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write twice the difference between p and 5, divided by q squared."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The difference between p and 5 is a grouped subtraction."
+            },
+            {
+              "type": "display_math",
+              "latex": "p-5"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Twice that difference forms the complete numerator."
+            },
+            {
+              "type": "display_math",
+              "latex": "2(p-5)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by q squared, keeping the denominator intact."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{2(p-5)}{q^2}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "With p = 9 and q = 2, the phrase gives twice 4 divided by 4, which is 2; the expression also gives 2."
+    },
+    {
+      "stable_key": "notation-misreadings",
+      "position": 5,
+      "type": "explanation",
+      "title": "Prevent common notation misreadings",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A coefficient and an exponent perform different operations: 3x is three copies of x, while x³ is three factors of x. The expression ab means a multiplied by b, but a + b remains a sum. Never cancel terms across addition: the a in (a + b)/a cannot be cancelled because the numerator is not a single product."
+        },
+        {
+          "type": "display_math",
+          "latex": "3x\\ne x^3,\\qquad \\frac{a+b}{a}=1+\\frac ba\\quad(a\\ne0)"
+        },
+        {
+          "type": "text",
+          "text": "To interpret unfamiliar notation, name the outermost operation, identify its complete inputs, and then move inward. Rewrite the expression with explicit multiplication signs and brackets if necessary. This process is slower than guessing from visual proximity and is far more reliable."
+        }
+      ]
     },
     {
       "stable_key": "notation-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -114,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-02-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Distinguish coefficients from powers, and use brackets or a fraction bar to keep grouped quantities together."
+          "text": "Identify terms and factors, distinguish coefficients from powers, and treat brackets and fraction bars as grouping symbols. Translate phrases from the named group outward, add brackets when typing a fraction or power, and check that every multiplier or exponent acts on exactly the intended quantity."
         }
       ]
     }
@@ -132,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

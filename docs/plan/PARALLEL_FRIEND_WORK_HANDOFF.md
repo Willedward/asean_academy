@@ -1,6 +1,6 @@
 # Parallel friend work handoff
 
-**Prepared:** 13 October 2026  
+**Prepared:** 13 October 2026; allocation updated 16 October 2026
 **Shared integration branch:** `feature/bulk-question-authoring-pipeline`  
 **Audience:** the teammate operating a separate Codex or Claude session  
 **Product audience:** secondary-school students across Indonesia and Southeast Asia preparing for ASEAN Scholarship selection tests
@@ -13,8 +13,9 @@ truth. Each deliverable uses a separate branch and pull request; no agent should
 directly over another agent's branch.
 
 The teammate's primary assignment is the Layer 2 gamification foundation: experience
-points, levels, streaks and the opt-in weekly leaderboard. The optional content assignment
-is to expand the eight N5 lesson notes and author one separately claimed N1 question batch.
+points, levels, streaks and the opt-in weekly leaderboard. The remaining optional content
+assignment is one separately claimed N1 question batch. The founder completed the N5
+lesson-note expansion on 16 October 2026, so no teammate branch should edit those files.
 
 This handoff contains the complete operational scope for the teammate. Also read these
 already-versioned repository documents before changing code or content:
@@ -50,18 +51,16 @@ practical.
 
 | Order | Branch | Scope | May run in parallel with |
 | --- | --- | --- | --- |
-| 1 | `feature/gamification-ledger-player-<github-user>` | XP ledger, levels and player read API/UI | N5 lessons and N1 questions |
-| 2 | `feature/gamification-streaks-<github-user>` | Activity days, streaks, freezes and calendar UI | N5 lessons and N1 questions |
-| 3 | `feature/gamification-league-<github-user>` | Private opt-in weekly leaderboard | N5 lessons and N1 questions |
-| 4 | `content/g3-sec1-n5-lessons-<github-user>` | Expand N5.1–N5.8 lesson notes | Any gamification branch and N1 questions |
-| 5 | `questions/g3-sec1-n1-b001-<github-user>` | Author only N1 batch B001 (22 questions) | Any gamification branch and N5 lessons |
+| 1 | `feature/gamification-ledger-player-<github-user>` | XP ledger, levels and player read API/UI | N1 questions |
+| 2 | `feature/gamification-streaks-<github-user>` | Activity days, streaks, freezes and calendar UI | N1 questions |
+| 3 | `feature/gamification-league-<github-user>` | Private opt-in weekly leaderboard | N1 questions |
+| 4 | `questions/g3-sec1-n1-b001-<github-user>` | Author only N1 batch B001 (22 questions) | Any gamification branch |
 
 Gamification branches 1–3 are sequential. Branch 2 begins from the merged result of branch
 1, and branch 3 begins from the merged result of branch 2. They must not be implemented as
 three concurrent branches because they share migrations, reward contracts and UI adapters.
 
-The N5 lesson branch and N1 question branch are optional. They must remain separate from
-each other and from gamification even if the same person operates all three sessions.
+The N1 question branch is optional and must remain separate from gamification.
 
 ## Clean checkout
 
@@ -168,7 +167,11 @@ Implement the **G3 weekly Beta League**:
 The exit condition is a privacy-safe leaderboard whose score can be recomputed from the XP
 ledger and whose enablement does not affect academic access or marks.
 
-## Assignment D — N5 lesson-note expansion
+## Completed assignment — N5 lesson-note expansion
+
+**Status:** completed by the founder on 16 October 2026. Do not open a new N5 expansion
+branch or edit these lesson revisions. The instructions below remain as the acceptance
+record for the completed work.
 
 Create this branch directly from the current integration branch:
 

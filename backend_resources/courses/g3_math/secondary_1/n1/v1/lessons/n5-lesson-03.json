@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 3,
   "status": "draft",
   "title": "Evaluation of algebraic expressions and formulae",
-  "summary": "Substitute values safely and evaluate in the correct order.",
+  "summary": "Evaluate expressions and formulae by substituting values with brackets, respecting operation order and checking units and scale.",
   "outcomes": [
     "5.3"
   ],
   "prerequisite_lessons": [
     "n5-lesson-02"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Substitute values into expressions and formulae.",
-    "Use brackets for negative values and follow the order of operations."
+    "Substitute values into every occurrence of a variable without changing the formula structure.",
+    "Use brackets for negative values and follow the order of operations accurately.",
+    "Check an evaluated result using units, estimation or an alternative calculation."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -25,15 +26,19 @@
       "stable_key": "substitution-method",
       "position": 1,
       "type": "explanation",
-      "title": "Substitute, then calculate",
+      "title": "Substitute before calculating",
       "blocks": [
         {
           "type": "text",
-          "text": "Replace every occurrence of a letter with its given value. Put a negative substituted value in brackets and complete powers before multiplication, division, addition and subtraction."
+          "text": "Evaluation turns an algebraic expression into a number for specified variable values. Copy the expression first, replace every occurrence of each letter, and keep the original operations visible. Put a substituted negative number in brackets so that its sign stays attached to the value, especially when the variable is squared or multiplied."
         },
         {
           "type": "display_math",
           "latex": "2p^2-3p+1\\text{ at }p=-2:\\quad 2(-2)^2-3(-2)+1"
+        },
+        {
+          "type": "text",
+          "text": "After substitution, follow the usual operation order: brackets, powers, multiplication and division, then addition and subtraction. Do not calculate from left to right when this would ignore a power or product. In the example, (−2)² is 4 and −3(−2) is +6."
         }
       ]
     },
@@ -41,7 +46,7 @@
       "stable_key": "formula-evaluation-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Evaluate a formula",
+      "title": "Worked example: evaluate a motion formula",
       "prompt": [
         {
           "type": "text",
@@ -54,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the three values."
+              "text": "Substitute all three values without removing the fraction structure."
             },
             {
               "type": "display_math",
@@ -67,7 +72,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate powers and products."
+              "text": "Evaluate the power and each product."
+            },
+            {
+              "type": "display_math",
+              "latex": "s=12+\\frac{6\\times9}{2}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Complete the division and addition."
             },
             {
               "type": "display_math",
@@ -76,11 +94,105 @@
           ]
         }
       ],
-      "verification_note": "Evaluating 3² before multiplying gives 39."
+      "verification_note": "Evaluating 3² first gives 39. Substitution into the original formula with a calculator produces the same value."
+    },
+    {
+      "stable_key": "formula-inputs-and-units",
+      "position": 3,
+      "type": "explanation",
+      "title": "Match values to variables and units",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A formula is a rule with named inputs. Match each given value to the correct letter rather than inserting numbers in the order they appear in the question. When physical quantities are involved, convert to compatible units before substitution. A length in metres and another in centimetres cannot be combined until one is converted."
+        },
+        {
+          "type": "display_math",
+          "latex": "A=\\frac{(a+b)h}{2}"
+        },
+        {
+          "type": "text",
+          "text": "The output unit follows from the operations. In an area formula, multiplying two lengths produces square units. In a speed formula, distance divided by time produces a compound unit such as kilometres per hour. Units provide a useful error check because an answer with the wrong type of unit cannot be correct."
+        }
+      ]
+    },
+    {
+      "stable_key": "trapezium-formula-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: evaluate a geometric formula",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A trapezium has parallel sides a = 8 cm and b = 14 cm, with height h = 5 cm. Use A = (a + b)h/2."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute the three lengths into their matching variables."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=\\frac{(8+14)\\times5}{2}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Evaluate the bracket before multiplying."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=\\frac{22\\times5}{2}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide to obtain the area and include square units."
+            },
+            {
+              "type": "display_math",
+              "latex": "A=55\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The average of the parallel sides is 11 cm; 11 × 5 cm gives the same area, 55 cm²."
+    },
+    {
+      "stable_key": "evaluation-checks",
+      "position": 5,
+      "type": "explanation",
+      "title": "Check signs, size and repeated variables",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Circle or highlight every occurrence of a variable before substituting. In x² + 3x, the value of x appears twice and both copies must be replaced. For negative inputs, compare −x² with (−x)² carefully: if x = 4, the first is −16 while the second is 16."
+        },
+        {
+          "type": "display_math",
+          "latex": "-x^2=-(x^2),\\qquad (-x)^2=x^2"
+        },
+        {
+          "type": "text",
+          "text": "Estimate the expected size before final calculation. If every length is positive, an area should be positive. If a rate and time are modest, an enormous output suggests a unit or power error. A second evaluation with a different order of equivalent arithmetic can confirm the result."
+        }
+      ]
     },
     {
       "stable_key": "substitution-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -108,13 +220,13 @@
     },
     {
       "stable_key": "n5-lesson-03-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Substitute first, use brackets around negative values, and calculate powers before the other operations."
+          "text": "Copy the formula, match each value to its variable, convert units, and substitute every occurrence using brackets around negative values. Evaluate brackets and powers before products and sums. Finish by checking the sign, approximate size and output unit against the situation."
         }
       ]
     }
@@ -126,6 +238,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }

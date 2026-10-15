@@ -1,23 +1,24 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
   "position": 4,
   "status": "draft",
   "title": "Translation of simple real-world situations into algebraic expressions",
-  "summary": "Translate practical rules and sequential events into algebraic models.",
+  "summary": "Translate real-world descriptions into algebraic expressions by separating fixed and variable parts and preserving the order of events.",
   "outcomes": [
     "5.4"
   ],
   "prerequisite_lessons": [
     "n5-lesson-03"
   ],
-  "estimated_minutes": 35,
+  "estimated_minutes": 45,
   "objectives": [
-    "Identify fixed and variable parts of a situation.",
-    "Build an expression in the same order as the described events."
+    "Define variables and separate fixed amounts from rates or repeated quantities.",
+    "Use brackets when a later operation acts on a complete total.",
+    "Check that an expression has sensible units and reproduces a sample case."
   ],
   "mastery_policy_key": "n5-default-v1",
   "sections": [
@@ -29,15 +30,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Identify fixed amounts, amounts per item, totals and equal sharing. Follow events in their stated order."
+          "text": "Begin by naming the unknown or changing quantity and its unit. Then identify fixed amounts, rates per item, totals and equal sharing. A fixed charge is added once; a rate is multiplied by the number of units. Building the expression in the same stages as the situation makes the structure visible."
         },
         {
           "type": "display_math",
-          "latex": "\\text{fixed charge}+\\text{rate}\\times\\text{quantity}"
+          "latex": "\\text{total}=\\text{fixed charge}+(\\text{rate per unit})(\\text{number of units})"
         },
         {
           "type": "text",
-          "text": "Use brackets before applying a percentage, multiplier or division to a whole total."
+          "text": "If a later action applies to the complete total, use brackets. A discount on the whole bill, tax on the whole subtotal or equal sharing of the whole cost must occur after the internal additions. Brackets communicate that order even before any values are known."
         }
       ]
     },
@@ -45,11 +46,11 @@
       "stable_key": "shared-cost-example",
       "position": 2,
       "type": "worked_example",
-      "title": "Model a shared cost",
+      "title": "Worked example: model a shared cost",
       "prompt": [
         {
           "type": "text",
-          "text": "A meal costs c dollars before a $12 delivery fee. The total is shared by n people."
+          "text": "A meal costs c dollars before a $12 delivery fee. The entire total is shared equally by n people. Write each person’s share."
         }
       ],
       "steps": [
@@ -58,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the delivery fee to the meal cost."
+              "text": "Add the one-time delivery fee to the meal cost."
             },
             {
               "type": "display_math",
@@ -71,7 +72,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the whole total equally."
+              "text": "Treat the subtotal as one quantity using a numerator or brackets."
+            },
+            {
+              "type": "display_math",
+              "latex": "(c+12)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide the complete subtotal by the number of people."
             },
             {
               "type": "display_math",
@@ -80,11 +94,105 @@
           ]
         }
       ],
-      "verification_note": "Multiplying the share by n reconstructs the full cost c + 12."
+      "verification_note": "Multiplying one person’s share by n reconstructs c + 12, the complete bill."
+    },
+    {
+      "stable_key": "language-to-operations",
+      "position": 3,
+      "type": "explanation",
+      "title": "Translate comparison words carefully",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Words such as more than, less than, times and shared by indicate operations, but their order matters. “Five less than x” means x − 5, whereas “x less than five” means 5 − x. “Three times the sum of a and b” is 3(a + b), not 3a + b."
+        },
+        {
+          "type": "display_math",
+          "latex": "5\\text{ less than }x=x-5,\\qquad 3\\text{ times }(a+b)=3(a+b)"
+        },
+        {
+          "type": "text",
+          "text": "Units help separate valid operations. A fixed fare in dollars can be added to a distance charge measured in dollars, but kilometres cannot be added directly to dollars. Track how a rate such as dollars per kilometre becomes dollars after multiplication by a distance."
+        }
+      ]
+    },
+    {
+      "stable_key": "discounted-journey-example",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Worked example: apply a discount to a total",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A delivery costs $4.50 plus $1.20 per kilometre for d kilometres. A voucher reduces the whole charge by 10%. Write the final charge."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Model the fixed and distance-dependent parts."
+            },
+            {
+              "type": "display_math",
+              "latex": "4.50+1.20d"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "A 10% reduction leaves 90% of the whole charge."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.90(4.50+1.20d)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Expand only if a simplified linear form is useful."
+            },
+            {
+              "type": "display_math",
+              "latex": "4.05+1.08d"
+            }
+          ]
+        }
+      ],
+      "verification_note": "For d = 5, the original charge is $10.50; 90% is $9.45, and 4.05 + 1.08(5) also gives $9.45."
+    },
+    {
+      "stable_key": "model-validation",
+      "position": 5,
+      "type": "explanation",
+      "title": "Test the model at meaningful values",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use a boundary or simple input to test an expression. Setting the number of items to 0 should usually leave only a fixed charge. Setting the number of people to 1 should leave the full shared total. These checks reveal missing brackets and rates that were added instead of multiplied."
+        },
+        {
+          "type": "display_math",
+          "latex": "F(d)=4.50+1.20d\\quad\\Rightarrow\\quad F(0)=4.50"
+        },
+        {
+          "type": "text",
+          "text": "Also state domain restrictions from the context. A number of tickets is a non-negative whole number, while distance may be any non-negative measurement. A model can be algebraically meaningful outside that domain but irrelevant to the real situation."
+        }
+      ]
     },
     {
       "stable_key": "modelling-recall",
-      "position": 3,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -114,13 +222,13 @@
     },
     {
       "stable_key": "n5-lesson-04-summary",
-      "position": 4,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Separate fixed and variable quantities, follow events in order, and bracket any total acted on as a whole."
+          "text": "Define variables with units, separate fixed and variable contributions, and follow events in order. Multiply rates by quantities, bracket a subtotal before discounts or sharing, and translate “less than” in the correct order. Check a zero, one or other simple case and state any practical domain restrictions."
         }
       ]
     }
@@ -132,6 +240,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Expanded to the full lesson-note standard; awaiting Mathematics and editorial review."
   }
 }
