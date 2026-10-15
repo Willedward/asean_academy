@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "s1-l4-515",
+  "bank_key": "g3-sec2-s1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "S1",
+  "primary_outcome": "1.7",
+  "title": "Bronze Teak Bay — Robotics club: diagnose unequal histogram widths",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Bronze Teak Bay dataset for Robotics club: diagnose unequal histogram widths — A misleading histogram uses frequency as bar height. A width-5 class has frequency 10; a width-15 class has frequency 60. By how much does the larger class frequency exceed the smaller class frequency? Use this calculation before judging the misleading heights."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "1.7",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "50",
+        "canonical_latex": "50",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The numerical comparison must use frequencies, even though a correct histogram would use frequency density for height."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 10 from 60."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Extract the relevant values and apply the stated statistical method."
+            },
+            {
+              "type": "display_math",
+              "latex": "60-10=50"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "State the requested value and check that it matches the data and representation."
+            },
+            {
+              "type": "display_math",
+              "latex": "50"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-15T22:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

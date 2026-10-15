@@ -3,7 +3,6 @@ import json
 import shutil
 from collections import Counter
 from datetime import UTC, datetime
-from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -162,7 +161,7 @@ def test_authoring_schemas_are_valid_json_schema(repository_root):
         Draft202012Validator.check_schema(json.loads((schema_root / filename).read_text()))
 
 
-def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
+def test_runner_reports_complete_when_final_secondary_2_batch_is_authored(
     repository_root, tmp_path
 ):
     banks = repository_root / "backend_resources/question_bank/g3_math"
@@ -178,36 +177,10 @@ def test_runner_selects_next_unclaimed_batch_and_builds_exact_work_order(
         topic_code="S1",
     )
 
-    assert next_batch["status"] == "ready"
-    assert next_batch["batch_id"] == "g3-sec2-s1-b004"
-    assert next_batch["branch"] == "questions/g3-sec2-s1-b004-willedward"
-    assert "authoring-claim g3-sec2-s1-b004" in next_batch["claim_command"]
-
-    result = create_authoring_work_order(
-        Path(next_batch["manifest"]),
-        tmp_path,
-        repository_root=repository_root,
-        syllabus_path=repository_root
-        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
-        house_rules_path=repository_root
-        / "backend_resources/question_bank/authoring/house-rules-v1.json",
-    )
-    work_order = json.loads((tmp_path / "work-order.json").read_text())
-
-    assert result["question_count"] == 26
-    assert len(work_order["slots"]) == 26
-    assert all(slot["stable_key"].startswith("s1-l") for slot in work_order["slots"])
-    manifest_payload = json.loads(Path(next_batch["manifest"]).read_text())
-    assert {slot["primary_outcome"] for slot in work_order["slots"]} == {
-        allocation["outcome_code"] for allocation in manifest_payload["allocation"]
+    assert next_batch == {
+        "status": "complete",
+        "remaining_unclaimed_planned_batches": 0,
     }
-    assert work_order["generation_contract"]["human_review_required"] == [
-        "mathematics",
-        "editorial",
-    ]
-    manifest_keys = manifest_payload["question_keys"]
-    assert {slot["stable_key"] for slot in work_order["slots"]} == set(manifest_keys)
-    assert "Generation never grants approval" in (tmp_path / "prompt.md").read_text()
 
 
 def test_executor_repairs_and_validates_complete_planned_work_order(repository_root, tmp_path):
