@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-09",
+  "position": 5,
+  "title": "Quadratic equations by factorisation",
+  "summary": "Rearrange quadratic equations, factorise them and apply the zero-product rule to obtain and check both roots.",
+  "outcomes": [
+    "7.9"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-08"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Write a quadratic equation with zero on one side.",
+    "Factorise monic and simple non-monic quadratic expressions.",
+    "Use the zero-product rule and verify both roots."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-09-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Prepare the equation",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Factorisation solves a quadratic equation only after every term has been moved to one side and the other side is zero. Collect like terms and order the expression by descending powers. This prevents factoring an expression that is not equivalent to the original equation."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-09-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Factorise systematically",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "For x²+bx+c, find two numbers whose sum is b and product is c. For a non-monic quadratic, use a suitable splitting or grouping method. Always expand the proposed factors mentally to verify the middle and constant terms."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-09-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Apply the zero-product rule",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If AB=0, then A=0 or B=0. Set each linear factor equal to zero and solve, keeping both roots unless a stated context excludes one. Substitute each root into the original equation, especially when rearrangement occurred."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-09-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Solve a monic quadratic",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve x²-7x+12=0."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find two numbers with sum -7 and product 12."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factorise: (x-3)(x-4)=0."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Thus x=3 or x=4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Both 9-21+12 and 16-28+12 equal zero."
+    },
+    {
+      "stable_key": "n7-09-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Rearrange first",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve x²+2x=15."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Move 15 left: x²+2x-15=0."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Factorise: (x+5)(x-3)=0."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Hence x=-5 or x=3."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Substitution gives 25-10=15 and 9+6=15."
+    },
+    {
+      "stable_key": "n7-09-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve (x-2)(x-6)=0 and enter the larger root."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The roots are 2 and 6."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-09-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

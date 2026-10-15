@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-07",
+  "position": 3,
+  "title": "Graphs of linear equations in two variables",
+  "summary": "Build and interpret straight-line graphs for equations of the form ax + by = c using points, intercepts and checks.",
+  "outcomes": [
+    "7.7"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-06"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Generate ordered pairs that satisfy a linear equation.",
+    "Find and plot x- and y-intercepts.",
+    "Use a straight-line graph to read values and verify whether points lie on the line."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-07-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "An equation describes a line",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A linear equation ax+by=c links two variables. Every ordered pair (x,y) that satisfies it is a point on one straight line. A table of values supplies points, but each row must be checked in the original equation before plotting."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n7-lesson-07-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-07-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Intercepts give two efficient points",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "At the x-intercept, y=0. At the y-intercept, x=0. If both intercepts are within the plotting window, they provide two points that determine the line. Label scales consistently and extend the line rather than drawing only the segment between the points."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-07-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Read and verify graph information",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A graph can estimate one variable from the other, while substitution gives an exact check. A point above or below the drawn line does not satisfy the equation. Rearranging to y=mx+c can reveal gradient and y-intercept, but intercept substitution works without rearrangement."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-07-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Plot from intercepts",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the intercepts of 2x+y=6."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set y=0 to obtain 2x=6, so x=3."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set x=0 to obtain y=6."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Plot (3,0) and (0,6), then join them with a straight line."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Both points give 6 when substituted into 2x+y."
+    },
+    {
+      "stable_key": "n7-07-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Find a missing coordinate",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The point (4,k) lies on 3x+2y=20. Find k."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute x=4 and y=k."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "12+2k=20, so 2k=8."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Hence k=4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The point (4,4) gives 12+8=20."
+    },
+    {
+      "stable_key": "n7-07-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the y-intercept of 3x+y=8."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Set x=0, giving y=8."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-07-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n7-lesson-07-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-lesson-07-linear-graph.svg",
+      "alt_text": "A coordinate graph of two x plus y equals six using the intercepts zero comma six and three comma zero.",
+      "generation_spec": {
+        "renderer": "nextscholar-chart-svg-v1",
+        "diagram_kind": "linear_intercept_graph",
+        "lesson_key": "n7-lesson-07"
+      },
+      "sha256": "912e99e4a6fe66e965731f683fe2998045d8b9e1f2946438ef28502d409e0a79",
+      "width": 960,
+      "height": 460
+    }
+  ]
+}

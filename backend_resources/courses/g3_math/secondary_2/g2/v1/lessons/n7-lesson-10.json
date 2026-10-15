@@ -1,0 +1,199 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-10",
+  "position": 6,
+  "title": "Formulating simultaneous equations from problems",
+  "summary": "Define variables, translate two independent conditions into linear equations and interpret the simultaneous solution in context.",
+  "outcomes": [
+    "7.10"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-09"
+  ],
+  "estimated_minutes": 60,
+  "objectives": [
+    "Choose clear variables with units.",
+    "Translate two independent totals or relationships into linear equations.",
+    "Solve, check and interpret the values in the original situation."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-10-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Define before forming",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "State what each variable represents, including units where relevant. Two unknowns require two independent conditions. Common models include total number, total cost, total mass, perimeter, age relationships and digit values."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-10-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Translate one condition at a time",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Words such as altogether usually signal addition, while “three more than” describes a difference. A cost or mass total is a weighted sum: quantity multiplied by value per item. Keep the two conditions separate until both equations are complete."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-10-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Interpret and reject impossible values",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "After solving, substitute into both model equations and read the question again. Counts must normally be whole and non-negative; digits lie from 0 to 9 and a tens digit cannot be zero. A mathematically valid intersection may still be unsuitable for the stated context."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-10-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Model ticket sales",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Adult tickets cost S$8 and student tickets S$5. Twelve tickets earn S$75. Find each number."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let x and y be adult and student ticket counts."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Form x+y=12 and 8x+5y=75."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Elimination gives x=5 and y=7."
+            }
+          ]
+        }
+      ],
+      "verification_note": "There are 12 tickets and 5(8)+7(5)=75."
+    },
+    {
+      "stable_key": "n7-10-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Model a two-digit number",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A two-digit number has digit sum 11 and is 27 greater than its reversal. Find it."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Let x be the tens digit and y the units digit."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use x+y=11 and 9x-9y=27."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Then x-y=3, so x=7 and y=4; the number is 74."
+            }
+          ]
+        }
+      ],
+      "verification_note": "74-47=27 and 7+4=11."
+    },
+    {
+      "stable_key": "n7-10-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Two counts total 10 and differ by 4. Find the larger count."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "7",
+        "canonical_latex": "7",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "The equations x+y=10 and x-y=4 give 2x=14, so x=7."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-10-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

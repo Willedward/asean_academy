@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "course_key": "g3-sec2-math",
+  "unit_key": "g3-sec2-n7",
+  "status": "draft",
+  "mastery_policy_key": "n7-default-v1",
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-10-15T16:00:00+08:00",
+    "authored_by": "ASEAN Academy content team with OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  },
+  "stable_key": "n7-lesson-06",
+  "position": 2,
+  "title": "Linear inequalities and number-line solutions",
+  "summary": "Solve linear inequalities accurately, reverse the sign when required and represent endpoints and direction on a number line.",
+  "outcomes": [
+    "7.6"
+  ],
+  "prerequisite_lessons": [
+    "n7-lesson-05"
+  ],
+  "estimated_minutes": 55,
+  "objectives": [
+    "Solve one-step and multi-step linear inequalities.",
+    "Explain when and why the inequality sign reverses.",
+    "Draw open and closed endpoints and shade the correct direction on a number line."
+  ],
+  "sections": [
+    {
+      "stable_key": "n7-06-explanation-1",
+      "position": 1,
+      "type": "explanation",
+      "title": "Solve as a linked comparison",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Most steps used for equations also work for inequalities: simplify both sides, collect variable terms and isolate the variable. Addition and subtraction preserve order. Multiplication or division by a positive number also preserves order."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n7-lesson-06-diagram"
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-06-explanation-2",
+      "position": 2,
+      "type": "explanation",
+      "title": "Reverse when multiplying or dividing by a negative",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "If 2<5, multiplying by -1 gives -2>-5. The order reverses because points reflect across zero. Therefore dividing -3x>12 by -3 produces x<-4. Write the reversed sign during the division step rather than trying to repair it later."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-06-explanation-3",
+      "position": 3,
+      "type": "explanation",
+      "title": "Represent the complete solution set",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Use an open circle for < or > because the boundary is excluded. Use a filled circle for ≤ or ≥ because the boundary is included. Shade left for values smaller than the boundary and right for larger values. Test one shaded value in the original inequality to catch direction errors."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-06-example-1",
+      "position": 4,
+      "type": "worked_example",
+      "title": "Solve and draw",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 3x+2≤14 and describe its number-line graph."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 2: 3x≤12."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by 3: x≤4."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Place a filled circle at 4 and shade left."
+            }
+          ]
+        }
+      ],
+      "verification_note": "The test value x=0 gives 2≤14, so the shaded side is correct."
+    },
+    {
+      "stable_key": "n7-06-example-2",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Handle a negative coefficient",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Solve 7-2x>15."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract 7: -2x>8."
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Divide by -2 and reverse the sign."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The solution is x<-4."
+            }
+          ]
+        }
+      ],
+      "verification_note": "Testing x=-5 gives 17>15, while x=0 does not work."
+    },
+    {
+      "stable_key": "n7-06-recall",
+      "position": 6,
+      "type": "active_recall",
+      "title": "Check your understanding",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "For 2x-1<7, the solution is x<k. Find k."
+        }
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "feedback": [
+        {
+          "type": "text",
+          "text": "Add 1 and divide by 2 to obtain x<4."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-06-summary",
+      "position": 7,
+      "type": "summary",
+      "title": "Lesson checklist",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+        },
+        {
+          "type": "text",
+          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_key": "n7-lesson-06-diagram",
+      "kind": "number_line",
+      "format": "svg",
+      "path": "assets/n7-lesson-06-number-line.svg",
+      "alt_text": "A number line showing an open circle at three and shading to the left for x less than three.",
+      "generation_spec": {
+        "renderer": "nextscholar-chart-svg-v1",
+        "diagram_kind": "inequality_number_line",
+        "lesson_key": "n7-lesson-06"
+      },
+      "sha256": "6fdd3063ff64391ece70555c9ab8425fff42e642a4f17445280f97611b1537b8",
+      "width": 960,
+      "height": 460
+    }
+  ]
+}
