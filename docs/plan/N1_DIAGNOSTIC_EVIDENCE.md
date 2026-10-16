@@ -67,13 +67,12 @@ The pilot integration coverage proves refresh/resume, idempotent create/save, de
 The versioned 38+38 source allocation is now tracked in
 [FULL_SYLLABUS_DIAGNOSTIC_PLAN.md](FULL_SYLLABUS_DIAGNOSTIC_PLAN.md). Production activation still needs:
 
-1. diagnostic-bank authoring support for the 19 reserved version-2 banks;
-2. 38 baseline and 38 matched endline questions authored against the tracked slots;
-3. comparable wording, values and solution paths across forms without duplicates;
-4. marks, two authored hint stages and fully worked solutions, even though help stays hidden in diagnostics;
-5. topic-group scoring and deterministic lesson recommendations;
-6. mathematics and editorial approval for every item and form;
-7. hosted Google-authenticated baseline resume/submit and endline-comparison testing; and
-8. final responsive and accessibility acceptance during B4.
+1. 38 baseline and 38 matched endline questions authored in the 19 planned version-2 banks;
+2. comparable wording, values and solution paths across forms without duplicates;
+3. marks, two authored hint stages and fully worked solutions, even though help stays hidden in diagnostics;
+4. topic-group scoring and deterministic lesson recommendations;
+5. mathematics and editorial approval for every item and form;
+6. hosted Google-authenticated baseline resume/submit and endline-comparison testing; and
+7. final responsive and accessibility acceptance during B4.
 
 Until these gates pass, no learner can accidentally begin an empty, draft or N1-only assessment and receive a misleading full-syllabus result.

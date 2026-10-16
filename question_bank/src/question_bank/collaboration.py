@@ -433,24 +433,29 @@ def check_pull_request(
         ownership_issues = [Issue("error", "authoring_ownership_error", str(bank_root), str(exc))]
     report.issues.extend(ownership_issues)
     report.changed_batches = sorted(batches)
-    if len(batches) > 1:
-        report.issues.append(
-            Issue(
-                "error",
-                "multiple_batches_changed",
-                "pull_request",
-                "An authoring pull request must change exactly one batch",
-            )
-        )
     try:
         manifest_paths = _manifest_paths(bank_root)
     except (OSError, ValueError, ValidationError) as exc:
         manifest_paths = {}
         report.issues.append(Issue("error", "invalid_manifest_index", str(bank_root), str(exc)))
+    planning_only = bool(batches) and not question_batches and all(
+        batch_id in manifest_paths
+        and load_manifest(manifest_paths[batch_id]).status == "planned"
+        for batch_id in batches
+    )
+    if len(batches) > 1 and not planning_only:
+        report.issues.append(
+            Issue(
+                "error",
+                "multiple_batches_changed",
+                "pull_request",
+                "An authored-content pull request must change exactly one batch",
+            )
+        )
     for batch_id in sorted(batches):
         manifest = load_manifest(manifest_paths[batch_id])
         claim = registry.active_claim(batch_id) if registry else None
-        if claim is None:
+        if claim is None and not planning_only:
             report.issues.append(
                 Issue(
                     "error",
@@ -459,7 +464,7 @@ def check_pull_request(
                     f"Claim {batch_id} before changing its authored files",
                 )
             )
-        elif claim.branch != head_branch:
+        elif claim is not None and claim.branch != head_branch:
             report.issues.append(
                 Issue(
                     "error",

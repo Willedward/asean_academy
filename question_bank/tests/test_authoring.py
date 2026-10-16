@@ -161,14 +161,17 @@ def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
     )
 
     assert report.valid
-    assert report.blueprint_count == 19
-    assert len(report.batch_reports) == 75
+    assert report.blueprint_count == 38
+    assert report.learning_blueprint_count == 19
+    assert report.diagnostic_blueprint_count == 19
+    assert len(report.batch_reports) == 94
     assert {batch.manifest.expected_question_count for batch in report.batch_reports} == {
+        4,
         21,
         22,
         26,
     }
-    assert sum(batch.manifest.expected_question_count for batch in report.batch_reports) == 1_936
+    assert sum(batch.manifest.expected_question_count for batch in report.batch_reports) == 2_012
     assert report.question_count >= 66
     authored_question_paths = (
         repository_root / "backend_resources/question_bank/g3_math"
@@ -211,6 +214,7 @@ def test_runner_reports_complete_when_final_secondary_2_batch_is_authored(
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         school_level="secondary_2",
         topic_code="S1",
+        bank_role="learning",
     )
 
     assert next_batch == {

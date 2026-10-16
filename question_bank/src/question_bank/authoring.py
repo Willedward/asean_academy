@@ -34,7 +34,7 @@ from .validation import Issue, validate_catalogue
 
 BATCH_SCHEMA_VERSION = "1.0.0"
 HOUSE_RULES_SCHEMA_VERSION = "1.0.0"
-BATCH_ID_PATTERN = r"^g3-sec[12]-[ngs][0-9]+-b[0-9]{3}$"
+BATCH_ID_PATTERN = r"^g3-sec[12]-[ngs][0-9]+(?:-diagnostic)?-b[0-9]{3}$"
 DEFAULT_DIFFICULTY_DISTRIBUTION = {"1": 21, "2": 31, "3": 31, "4": 16, "5": 5}
 DEFAULT_STYLE_REFERENCES = [
     "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
@@ -55,7 +55,7 @@ class GeneratorMetadata(Model):
 class SourceReference(Model):
     path: str = Field(min_length=1)
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    role: Literal["syllabus", "style", "house_rules", "other"]
+    role: Literal["syllabus", "style", "house_rules", "diagnostic_plan", "other"]
 
 
 class BatchAllocation(Model):
@@ -73,6 +73,7 @@ class QuestionBatchManifest(Model):
     schema_version: Literal["1.0.0"] = BATCH_SCHEMA_VERSION
     batch_id: str = Field(pattern=BATCH_ID_PATTERN)
     bank_key: str = Field(pattern=r"^g3-sec[12]-[ngs][0-9]+-v[0-9]+$")
+    bank_role: Literal["learning", "diagnostic"] = "learning"
     curriculum_version: str = Field(pattern=r"^[a-z0-9_]+$")
     school_level: Literal["secondary_1", "secondary_2"]
     topic_code: str = Field(pattern=r"^[NGS][0-9]+$")
@@ -83,7 +84,7 @@ class QuestionBatchManifest(Model):
     generator: GeneratorMetadata
     source_references: list[SourceReference] = Field(min_length=1)
     allocation: list[BatchAllocation] = Field(min_length=1)
-    expected_question_count: int = Field(ge=20, le=30)
+    expected_question_count: int = Field(ge=4, le=30)
     question_keys: list[str] = Field(default_factory=list)
     review: ReviewState = Field(default_factory=ReviewState)
 
@@ -92,8 +93,17 @@ class QuestionBatchManifest(Model):
         expected_prefix = f"g3-sec{self.school_level[-1]}-{self.topic_code.lower()}"
         if not self.bank_key.startswith(f"{expected_prefix}-v"):
             raise ValueError("Batch bank_key must match school_level and topic_code")
-        if not self.batch_id.startswith(f"{expected_prefix}-b"):
-            raise ValueError("batch_id must match school_level and topic_code")
+        expected_batch_prefix = (
+            f"{expected_prefix}-diagnostic-b"
+            if self.bank_role == "diagnostic"
+            else f"{expected_prefix}-b"
+        )
+        if not self.batch_id.startswith(expected_batch_prefix):
+            raise ValueError("batch_id must match school_level, topic_code and bank_role")
+        if self.bank_role == "diagnostic" and self.expected_question_count != 4:
+            raise ValueError("A diagnostic batch must contain exactly four questions")
+        if self.bank_role == "learning" and not 20 <= self.expected_question_count <= 30:
+            raise ValueError("A learning batch must contain 20–30 questions")
         cells = [(item.outcome_code, item.difficulty) for item in self.allocation]
         if len(cells) != len(set(cells)):
             raise ValueError("Batch allocation cells must be unique")
@@ -177,6 +187,8 @@ class DuplicateMatch:
 @dataclass
 class PipelineValidationReport:
     blueprint_count: int = 0
+    learning_blueprint_count: int = 0
+    diagnostic_blueprint_count: int = 0
     batch_reports: list[BatchValidationReport] = field(default_factory=list)
     question_count: int = 0
     duplicate_matches: list[DuplicateMatch] = field(default_factory=list)
@@ -198,6 +210,8 @@ class PipelineValidationReport:
         return {
             "valid": self.valid,
             "blueprint_count": self.blueprint_count,
+            "learning_blueprint_count": self.learning_blueprint_count,
+            "diagnostic_blueprint_count": self.diagnostic_blueprint_count,
             "batch_count": len(self.batch_reports),
             "question_count": self.question_count,
             "duplicate_count": len(self.duplicate_matches),
@@ -449,6 +463,10 @@ def plan_blueprint_batches(
     existing = sorted(batch_root.glob("*.json"))
     if existing:
         return existing
+    if blueprint.bank_role == "diagnostic":
+        raise ValueError(
+            "Diagnostic banks must be planned from the tracked diagnostic source plan"
+        )
     existing_questions = [
         Question.model_validate_json(path.read_text())
         for path in sorted((bank_root / "questions").glob("*.json"))
@@ -509,6 +527,7 @@ def plan_blueprint_batches(
                 f"{blueprint.topic.code.lower()}-b{index:03d}"
             ),
             bank_key=blueprint.bank_key,
+            bank_role=blueprint.bank_role,
             curriculum_version=blueprint.curriculum_version,
             school_level=blueprint.school_level,
             topic_code=blueprint.topic.code,
@@ -601,6 +620,14 @@ def validate_batch(
     report.manifest = manifest
     if manifest.bank_key != blueprint.bank_key:
         _issue(report, "error", "batch_bank_mismatch", manifest_path, blueprint.bank_key)
+    if manifest.bank_role != blueprint.bank_role:
+        _issue(
+            report,
+            "error",
+            "batch_bank_role_mismatch",
+            manifest_path,
+            f"Manifest is {manifest.bank_role}, blueprint is {blueprint.bank_role}",
+        )
     if manifest.curriculum_version != blueprint.curriculum_version:
         _issue(
             report,
@@ -640,6 +667,75 @@ def validate_batch(
             _issue(report, "error", "missing_source_reference", source, reference.path)
         elif _checksum(source) != reference.sha256:
             _issue(report, "error", "source_checksum", source, reference.path)
+    if manifest.bank_role == "diagnostic":
+        plan_references = [
+            reference
+            for reference in manifest.source_references
+            if reference.role == "diagnostic_plan"
+        ]
+        if len(plan_references) != 1:
+            _issue(
+                report,
+                "error",
+                "diagnostic_plan_reference",
+                manifest_path,
+                "A diagnostic batch requires exactly one diagnostic_plan source reference",
+            )
+        else:
+            try:
+                from .diagnostic_plan import DiagnosticPlan
+
+                plan = DiagnosticPlan.model_validate_json(
+                    (repository_root / plan_references[0].path).read_text()
+                )
+                slots = [
+                    slot
+                    for form in plan.forms
+                    for slot in form.items
+                    if slot.bank_key == manifest.bank_key
+                ]
+                expected_keys = [slot.stable_key for slot in slots]
+                expected_allocation = Counter(
+                    (slot.outcome_code, slot.difficulty) for slot in slots
+                )
+                actual_allocation = Counter(
+                    {
+                        (item.outcome_code, item.difficulty): item.count
+                        for item in manifest.allocation
+                    }
+                )
+                if len(slots) != 4:
+                    _issue(
+                        report,
+                        "error",
+                        "diagnostic_plan_bank_size",
+                        manifest_path,
+                        f"{manifest.bank_key} has {len(slots)} plan slots, expected 4",
+                    )
+                if manifest.question_keys != expected_keys:
+                    _issue(
+                        report,
+                        "error",
+                        "diagnostic_plan_question_keys",
+                        manifest_path,
+                        f"Reserved {manifest.question_keys}, expected {expected_keys}",
+                    )
+                if actual_allocation != expected_allocation:
+                    _issue(
+                        report,
+                        "error",
+                        "diagnostic_plan_allocation",
+                        manifest_path,
+                        f"Allocated {dict(actual_allocation)}, expected {dict(expected_allocation)}",
+                    )
+            except (OSError, ValueError, ValidationError) as exc:
+                _issue(
+                    report,
+                    "error",
+                    "invalid_diagnostic_plan_reference",
+                    manifest_path,
+                    str(exc),
+                )
     expected_difficulties = Counter()
     for item in manifest.allocation:
         expected_difficulties[item.difficulty] += item.count
@@ -790,6 +886,14 @@ def validate_authoring_pipeline(
     report = PipelineValidationReport()
     catalogue_report = validate_catalogue(bank_catalogue_root, syllabus_path)
     report.blueprint_count = len(catalogue_report.banks)
+    report.learning_blueprint_count = sum(
+        bank.blueprint is not None and bank.blueprint.bank_role == "learning"
+        for bank in catalogue_report.banks
+    )
+    report.diagnostic_blueprint_count = sum(
+        bank.blueprint is not None and bank.blueprint.bank_role == "diagnostic"
+        for bank in catalogue_report.banks
+    )
     report.question_count = len(catalogue_report.questions)
     report.issues.extend(catalogue_report.errors)
     expected_groups = (
@@ -797,13 +901,31 @@ def validate_authoring_pipeline(
         if catalogue_report.syllabus
         else 0
     )
-    if report.blueprint_count != expected_groups:
+    learning_groups = {
+        (bank.blueprint.school_level, bank.blueprint.topic.code)
+        for bank in catalogue_report.banks
+        if bank.blueprint is not None and bank.blueprint.bank_role == "learning"
+    }
+    diagnostic_groups = {
+        (bank.blueprint.school_level, bank.blueprint.topic.code)
+        for bank in catalogue_report.banks
+        if bank.blueprint is not None and bank.blueprint.bank_role == "diagnostic"
+    }
+    if len(learning_groups) != expected_groups:
         _issue(
             report,
             "error",
-            "blueprint_coverage",
+            "learning_blueprint_coverage",
             bank_catalogue_root,
-            f"Found {report.blueprint_count} blueprints, expected {expected_groups}",
+            f"Found {len(learning_groups)} learning blueprints, expected {expected_groups}",
+        )
+    if diagnostic_groups and len(diagnostic_groups) != expected_groups:
+        _issue(
+            report,
+            "error",
+            "diagnostic_blueprint_coverage",
+            bank_catalogue_root,
+            f"Found {len(diagnostic_groups)} diagnostic blueprints, expected 0 or {expected_groups}",
         )
     batch_ids: set[str] = set()
     authored_keys = {

@@ -107,6 +107,7 @@
             "syllabus",
             "style",
             "house_rules",
+            "diagnostic_plan",
             "other"
           ],
           "title": "Role",
@@ -131,13 +132,22 @@
       "type": "string"
     },
     "batch_id": {
-      "pattern": "^g3-sec[12]-[ngs][0-9]+-b[0-9]{3}$",
+      "pattern": "^g3-sec[12]-[ngs][0-9]+(?:-diagnostic)?-b[0-9]{3}$",
       "title": "Batch Id",
       "type": "string"
     },
     "bank_key": {
       "pattern": "^g3-sec[12]-[ngs][0-9]+-v[0-9]+$",
       "title": "Bank Key",
+      "type": "string"
+    },
+    "bank_role": {
+      "default": "learning",
+      "enum": [
+        "learning",
+        "diagnostic"
+      ],
+      "title": "Bank Role",
       "type": "string"
     },
     "curriculum_version": {
@@ -195,7 +205,7 @@
     },
     "expected_question_count": {
       "maximum": 30,
-      "minimum": 20,
+      "minimum": 4,
       "title": "Expected Question Count",
       "type": "integer"
     },

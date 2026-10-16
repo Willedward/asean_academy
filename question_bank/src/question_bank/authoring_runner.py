@@ -10,6 +10,7 @@ from pathlib import Path
 from .authoring import HouseRules, load_manifest, validate_batch
 from .catalogue import load_catalogue
 from .collaboration import load_claim_registry
+from .diagnostic_plan import DiagnosticPlan
 from .difficulty import DIFFICULTY_DEFINITIONS
 from .models import Question
 
@@ -20,7 +21,57 @@ def _write_json(path: Path, payload) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
 
 
-def _question_slots(manifest, outcomes_by_code: dict[str, str]) -> list[dict]:
+def _diagnostic_usage(manifest, repository_root: Path) -> dict[str, dict]:
+    if manifest.bank_role != "diagnostic":
+        return {}
+    references = [
+        reference
+        for reference in manifest.source_references
+        if reference.role == "diagnostic_plan"
+    ]
+    if len(references) != 1:
+        raise ValueError("A diagnostic work order requires one diagnostic_plan reference")
+    plan = DiagnosticPlan.model_validate_json(
+        (repository_root / references[0].path).read_text()
+    )
+    return {
+        slot.stable_key: {
+            "purpose": form.purpose,
+            "form_key": form.stable_key,
+            "form_position": slot.position,
+            "primary_outcome": slot.outcome_code,
+            "difficulty": slot.difficulty,
+        }
+        for form in plan.forms
+        for slot in form.items
+        if slot.bank_key == manifest.bank_key
+    }
+
+
+def _question_slots(
+    manifest, outcomes_by_code: dict[str, str], diagnostic_usage: dict[str, dict]
+) -> list[dict]:
+    if diagnostic_usage:
+        return [
+            {
+                "stable_key": key,
+                "primary_outcome": diagnostic_usage[key]["primary_outcome"],
+                "outcome_description": outcomes_by_code[
+                    diagnostic_usage[key]["primary_outcome"]
+                ],
+                "difficulty": diagnostic_usage[key]["difficulty"],
+                "difficulty_definition": DIFFICULTY_DEFINITIONS[
+                    str(diagnostic_usage[key]["difficulty"])
+                ],
+                "diagnostic_usage": {
+                    field: value
+                    for field, value in diagnostic_usage[key].items()
+                    if field not in {"primary_outcome", "difficulty"}
+                },
+            }
+            for key in manifest.question_keys
+        ]
+
     keys_by_difficulty: dict[int, list[str]] = defaultdict(list)
     for key in manifest.question_keys:
         keys_by_difficulty[int(key.split("-l", 1)[1].split("-", 1)[0])].append(key)
@@ -38,15 +89,14 @@ def _question_slots(manifest, outcomes_by_code: dict[str, str]) -> list[dict]:
                 f"{len(outcomes)} questions"
             )
         for key, outcome in zip(keys, outcomes, strict=True):
-            slots.append(
-                {
-                    "stable_key": key,
-                    "primary_outcome": outcome,
-                    "outcome_description": outcomes_by_code[outcome],
-                    "difficulty": difficulty,
-                    "difficulty_definition": DIFFICULTY_DEFINITIONS[str(difficulty)],
-                }
-            )
+            slot = {
+                "stable_key": key,
+                "primary_outcome": outcome,
+                "outcome_description": outcomes_by_code[outcome],
+                "difficulty": difficulty,
+                "difficulty_definition": DIFFICULTY_DEFINITIONS[str(difficulty)],
+            }
+            slots.append(slot)
     return slots
 
 
@@ -102,7 +152,8 @@ def create_authoring_work_order(
     if actual_checksum != house_rules_reference.sha256:
         raise ValueError("House-rules checksum no longer matches the batch manifest")
     house_rules = HouseRules.model_validate_json(house_rules_path.read_text())
-    slots = _question_slots(manifest, outcomes_by_code)
+    diagnostic_usage = _diagnostic_usage(manifest, repository_root)
+    slots = _question_slots(manifest, outcomes_by_code, diagnostic_usage)
 
     output.mkdir(parents=True, exist_ok=True)
     work_order = {
@@ -110,6 +161,7 @@ def create_authoring_work_order(
         "batch_id": manifest.batch_id,
         "manifest_path": str(manifest_path.resolve().relative_to(repository_root.resolve())),
         "bank_key": manifest.bank_key,
+        "bank_role": manifest.bank_role,
         "curriculum_version": manifest.curriculum_version,
         "school_level": manifest.school_level,
         "topic": {"code": topic.code, "title": topic.title},
@@ -132,6 +184,7 @@ def create_authoring_work_order(
             "hints_per_part": 2,
             "answers_must_pass_deterministic_checker": True,
             "human_review_required": ["mathematics", "editorial"],
+            "learning_question_reuse_allowed": manifest.bank_role != "diagnostic",
         },
         "question_json_schema": Question.model_json_schema(),
     }
@@ -143,12 +196,23 @@ def create_authoring_work_order(
         f"difficulty {slot['difficulty']} — {slot['difficulty_definition']}"
         for slot in slots
     )
+    content_kind = "diagnostic" if manifest.bank_role == "diagnostic" else "learning"
+    diagnostic_instruction = (
+        "Baseline and endline items must assess the assigned skill at comparable difficulty "
+        "while using distinct wording, values and solution paths. Do not reuse any learning "
+        "question. Author both hints and the complete worked solution even though diagnostic "
+        "learners will not see help during the assessment."
+        if manifest.bank_role == "diagnostic"
+        else ""
+    )
     prompt = f"""# Question authoring work order: {manifest.batch_id}
 
 Create exactly {manifest.expected_question_count} original Singapore Secondary Mathematics
-questions for **{topic.code} · {topic.title}**. Read `work-order.json` as the authoritative
+{content_kind} questions for **{topic.code} · {topic.title}**. Read `work-order.json` as the authoritative
 contract and return only one JSON object with a `questions` array of complete Question
 objects that validate against `question_json_schema`.
+
+{diagnostic_instruction}
 
 Every question must use its reserved key, outcome and difficulty below. Include complete
 stems, parts, deterministic response contracts, two staged hints per part, fully marked
@@ -184,6 +248,7 @@ def next_authoring_batch(
     syllabus_path: Path,
     school_level: str | None = None,
     topic_code: str | None = None,
+    bank_role: str | None = None,
 ) -> dict:
     """Return the next unclaimed planned batch and exact claim/branch instructions."""
 
@@ -197,6 +262,8 @@ def next_authoring_batch(
         if school_level is not None and manifest.school_level != school_level:
             continue
         if topic_code is not None and manifest.topic_code != topic_code.upper():
+            continue
+        if bank_role is not None and manifest.bank_role != bank_role:
             continue
         if manifest.status == "planned" and manifest.batch_id not in active:
             planned.append((path, manifest))
@@ -219,6 +286,7 @@ def next_authoring_batch(
         "status": "ready",
         "remaining_unclaimed_planned_batches": len(planned),
         "batch_id": manifest.batch_id,
+        "bank_role": manifest.bank_role,
         "manifest": str(path),
         "branch": branch,
         "claim_command": (
