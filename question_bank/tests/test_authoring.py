@@ -187,7 +187,7 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_1/n1/v1/batches"
-        / "g3-sec1-n1-b001.json"
+        / "g3-sec1-n1-b002.json"
     )
     create_authoring_work_order(
         manifest,
@@ -220,7 +220,7 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
     )
 
     assert result["status"] == "validated"
-    assert result["question_count"] == 22
+    assert result["question_count"] == 21
     assert [attempt["valid"] for attempt in result["attempts"]] == [False, True]
     assert "Correction request" in calls[1][0]
     assert calls[0][1]["required"] == ["questions"]
@@ -231,7 +231,7 @@ def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_
     manifest = (
         repository_root
         / "backend_resources/question_bank/g3_math/secondary_1/n1/v1/batches"
-        / "g3-sec1-n1-b001.json"
+        / "g3-sec1-n1-b002.json"
     )
     create_authoring_work_order(
         manifest,

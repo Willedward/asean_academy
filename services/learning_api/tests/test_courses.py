@@ -82,7 +82,7 @@ def test_draft_lesson_returns_authored_sections_without_private_recall_answer():
     assert lesson["practice"] == {
         "lesson_key": "n1-lesson-01",
         "mode": "guided_practice",
-        "question_count": 3,
+            "question_count": 5,
         "available": False,
         "development_available": True,
         "unavailable_reason": "content_not_reviewed",
@@ -392,7 +392,7 @@ def test_review_catalogue_exposes_all_authored_questions_and_batch_membership():
         (REPOSITORY_ROOT / "backend_resources/question_bank/g3_math").glob("**/questions/*.json")
     )
 
-    assert len(catalogue.questions) == 976
+    assert len(catalogue.questions) == 998
     assert len(catalogue.review_questions) == len(authored_paths)
     assert catalogue.review_question_batches["n2-l1-001"] == "g3-sec1-n2-b001"
     assert catalogue.review_question_batches["n2-l1-007"] == "g3-sec1-n2-b002"
