@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l3-015",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.4",
+  "title": "Calculate with standard-form values",
+  "difficulty": 3,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Keep all digits until the final answer."
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Calculate [(4.86×10^7)(3.2×10^-4)]/(7.5×10^2). Give your answer correct to 4 significant figures."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_sf",
+        "canonical_answer": "20.74",
+        "canonical_latex": "20.74",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": 4,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Handle the numerical factors and powers of ten carefully."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The unrounded quotient is 20.736, whose fifth significant digit is 6."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "(4.86×10^7)(3.2×10^-4)=15552"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "15552/750=20.736, so the answer is 20.74"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-16T02:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

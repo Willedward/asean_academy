@@ -69,7 +69,7 @@ def test_session_creation_is_idempotent_and_resumable(tmp_path):
     assert first.status_code == 201
     assert replay.status_code == 201
     assert first.json() == replay.json()
-    assert first.json()["question_count"] == 3
+    assert first.json()["question_count"] == 5
     assert first.json()["development_drafts"] is True
 
     current = request(
@@ -102,7 +102,7 @@ def test_lesson_practice_uses_only_configured_pool_in_order(tmp_path):
     }
     observed = []
 
-    for number in range(1, 4):
+    for number in range(1, 6):
         current = request(
             app,
             "GET",
@@ -135,6 +135,8 @@ def test_lesson_practice_uses_only_configured_pool_in_order(tmp_path):
         ("n1-l1-01", "guided"),
         ("n1-l2-03", "independent"),
         ("n1-l3-02", "challenge"),
+        ("n1-l2-016", "independent"),
+        ("n1-l3-011", "challenge"),
     ]
 
 

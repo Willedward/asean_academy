@@ -104,7 +104,7 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
         kind="question",
         source_status=None,
         review_state=None,
-        search="n1-l1-01",
+        search="Prime factorisation of 360",
         limit=20,
         offset=0,
     )

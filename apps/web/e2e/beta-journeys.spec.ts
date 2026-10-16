@@ -270,7 +270,7 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByRole("heading", { name: "Content review and publication" }),
     ).toBeVisible();
-    await page.getByLabel("Search").fill("n1-l1-01");
+    await page.getByLabel("Search").fill("Prime factorisation of 360");
     await page.getByRole("button", { name: "Apply filters" }).click();
     await expect(
       page.getByRole("heading", { name: "Prime factorisation of 360" }),
