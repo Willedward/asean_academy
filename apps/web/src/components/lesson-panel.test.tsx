@@ -30,7 +30,7 @@ describe("LessonPanel", () => {
     const session: PracticeSessionResponse = {
       session_id: "69284c2d-018f-4ddb-8935-51918af14954",
       status: "active",
-      question_count: 7,
+      question_count: 9,
       lesson_key: "n1-lesson-01",
       mode: "guided_practice",
       development_drafts: true,
@@ -96,7 +96,7 @@ describe("LessonPanel", () => {
     fireEvent.click(button);
 
     await waitFor(() =>
-      expect(startSession).toHaveBeenCalledWith("n1-lesson-01", 7),
+      expect(startSession).toHaveBeenCalledWith("n1-lesson-01", 9),
     );
     expect(navigation.push).toHaveBeenCalledWith(
       "/practice/69284c2d-018f-4ddb-8935-51918af14954",

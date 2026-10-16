@@ -30,9 +30,9 @@ Catalogue validation succeeds and reports:
 - 19 of 19 level-specific topic groups;
 - 87 syllabus outcomes;
 - nineteen authored topic-level banks;
-- 1,912 authored questions: the 40-question Secondary 1 N1 calibration bank plus eighteen complete 104-question banks; all complete banks except approved Secondary 1 N2 remain review-gated.
+- 1,976 authored questions: nineteen complete 104-question banks; all banks except approved Secondary 1 N2 remain review-gated.
 
-The 104-question N2 bank matches its complete blueprint distribution. The remaining catalogue warnings describe the intentionally partial 40-question N1 blueprint.
+Every bank, including the completed 104-question N1 bank, matches its blueprint distribution without catalogue warnings.
 
 Publication validation remains deliberately blocked by the draft bank/questions and incomplete course content.
 

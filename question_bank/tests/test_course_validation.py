@@ -22,7 +22,7 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert report.course.stable_key == "g3-sec1-math"
     assert len(report.lessons) == 52
     assert len(report.pools.pools) == 72
-    assert report.as_dict()["allocated_question_count"] == 1019
+    assert report.as_dict()["allocated_question_count"] == 1040
     assert report.warnings == []
 
 
@@ -309,8 +309,8 @@ def test_all_questions_are_allocated_once(repository_root, course_bank_root):
         item.question_key for pool in report.pools.pools for item in pool.items
     ]
 
-    assert len(allocated) == 1019
-    assert len(set(allocated)) == 1019
+    assert len(allocated) == 1040
+    assert len(set(allocated)) == 1040
 
 
 def test_lesson_required_practice_must_match_its_pool(

@@ -117,6 +117,42 @@ def _generated_response_for(work_order):
     return {"questions": questions}
 
 
+def _planned_manifest_fixture(repository_root, tmp_path):
+    """Copy an authored manifest into an isolated repository as a planned batch."""
+    source_bank = (
+        repository_root
+        / "backend_resources/question_bank/g3_math/secondary_1/n1/v1"
+    )
+    payload = json.loads(
+        (source_bank / "batches/g3-sec1-n1-b003.json").read_text()
+    )
+    payload["status"] = "planned"
+    payload["generator"] = {
+        "provider": "unassigned",
+        "model": "unassigned",
+        "generator_version": "unassigned",
+        "prompt_version": payload["generator"]["prompt_version"],
+    }
+
+    isolated_root = tmp_path / "repository"
+    isolated_bank = (
+        isolated_root
+        / "backend_resources/question_bank/g3_math/secondary_1/n1/v1"
+    )
+    (isolated_bank / "batches").mkdir(parents=True)
+    shutil.copy(source_bank / "blueprint.json", isolated_bank / "blueprint.json")
+    manifest = isolated_bank / "batches/g3-sec1-n1-b003.json"
+    manifest.write_text(json.dumps(payload, indent=2) + "\n")
+
+    for reference in payload["source_references"]:
+        source = repository_root / reference["path"]
+        target = isolated_root / reference["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to(source)
+
+    return isolated_root, manifest
+
+
 def test_repository_authoring_plan_covers_all_topic_groups(repository_root):
     report = validate_authoring_pipeline(
         repository_root / "backend_resources/question_bank/g3_math",
@@ -184,21 +220,18 @@ def test_runner_reports_complete_when_final_secondary_2_batch_is_authored(
 
 
 def test_executor_repairs_and_validates_complete_planned_work_order(repository_root, tmp_path):
-    manifest = (
-        repository_root
-        / "backend_resources/question_bank/g3_math/secondary_1/n1/v1/batches"
-        / "g3-sec1-n1-b003.json"
-    )
+    isolated_root, manifest = _planned_manifest_fixture(repository_root, tmp_path)
+    output = tmp_path / "output"
     create_authoring_work_order(
         manifest,
-        tmp_path,
-        repository_root=repository_root,
-        syllabus_path=repository_root
+        output,
+        repository_root=isolated_root,
+        syllabus_path=isolated_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
-        house_rules_path=repository_root
+        house_rules_path=isolated_root
         / "backend_resources/question_bank/authoring/house-rules-v1.json",
     )
-    work_order = json.loads((tmp_path / "work-order.json").read_text())
+    work_order = json.loads((output / "work-order.json").read_text())
     valid_response = _generated_response_for(work_order)
     calls = []
 
@@ -209,9 +242,9 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
         return valid_response
 
     result = execute_authoring_work_order(
-        tmp_path / "work-order.json",
+        output / "work-order.json",
         provider,
-        repository_root=repository_root,
+        repository_root=isolated_root,
         provider="test",
         model="deterministic-fixture",
         authored_by="Test pipeline",
@@ -228,29 +261,26 @@ def test_executor_repairs_and_validates_complete_planned_work_order(repository_r
 
 
 def test_executor_rejects_wrong_slot_order_without_writing(repository_root, tmp_path):
-    manifest = (
-        repository_root
-        / "backend_resources/question_bank/g3_math/secondary_1/n1/v1/batches"
-        / "g3-sec1-n1-b003.json"
-    )
+    isolated_root, manifest = _planned_manifest_fixture(repository_root, tmp_path)
+    output = tmp_path / "output"
     create_authoring_work_order(
         manifest,
-        tmp_path,
-        repository_root=repository_root,
-        syllabus_path=repository_root
+        output,
+        repository_root=isolated_root,
+        syllabus_path=isolated_root
         / "backend_resources/syllabi/g3_math/v1/catalogue.json",
-        house_rules_path=repository_root
+        house_rules_path=isolated_root
         / "backend_resources/question_bank/authoring/house-rules-v1.json",
     )
-    work_order = json.loads((tmp_path / "work-order.json").read_text())
+    work_order = json.loads((output / "work-order.json").read_text())
     response = _generated_response_for(work_order)
     response["questions"][0]["stable_key"] = "g2-l1-999"
 
     with pytest.raises(AuthoringExecutionError, match="exact stable keys"):
         execute_authoring_work_order(
-            tmp_path / "work-order.json",
+            output / "work-order.json",
             lambda _prompt, _schema: response,
-            repository_root=repository_root,
+            repository_root=isolated_root,
             provider="test",
             model="deterministic-fixture",
             authored_by="Test pipeline",
@@ -528,16 +558,7 @@ def test_pull_request_check_exports_claimed_ready_batch(repository_root, tmp_pat
 def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository_root, tmp_path):
     from question_bank.collaboration import check_pull_request
 
-    manifest_paths = sorted(
-        (repository_root / "backend_resources/question_bank/g3_math").glob(
-            "**/batches/*.json"
-        )
-    )
-    manifest_path = next(
-        path
-        for path in manifest_paths
-        if json.loads(path.read_text())["status"] == "planned"
-    )
+    isolated_root, manifest_path = _planned_manifest_fixture(repository_root, tmp_path)
     manifest = json.loads(manifest_path.read_text())
     batch_id = manifest["batch_id"]
     claimed_branch = f"questions/{batch_id}-william"
@@ -564,11 +585,12 @@ def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository
     )
 
     report = check_pull_request(
-        changed_files=[question_path.relative_to(repository_root).as_posix()],
+        changed_files=[question_path.relative_to(isolated_root).as_posix()],
         head_branch="questions/wrong-branch",
-        repository_root=repository_root,
-        bank_root=repository_root / "backend_resources/question_bank/g3_math",
-        syllabus_path=repository_root / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        repository_root=isolated_root,
+        bank_root=isolated_root / "backend_resources/question_bank/g3_math",
+        syllabus_path=isolated_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
         registry_path=registry_path,
         output=tmp_path / "evidence",
     )
