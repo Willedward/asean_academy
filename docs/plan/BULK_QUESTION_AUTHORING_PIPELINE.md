@@ -6,8 +6,8 @@ The pipeline is the controlled workflow around authored question JSON. A JSON Sc
 
 ```mermaid
 flowchart LR
-    S[Syllabus catalogue] --> B[19 bank blueprints]
-    H[Versioned house rules] --> M[20–30 question batch manifests]
+    S[Syllabus catalogue] --> B[19 learning + 19 diagnostic blueprints]
+    H[Versioned house rules] --> M[20–30 learning or 4-question diagnostic manifests]
     P[Style references] --> M
     B --> M
     M --> A[Codex, API model, or human author]
@@ -28,7 +28,7 @@ backend_resources/question_bank/
   authoring/house-rules-v1.json
   schema/question-batch-manifest-v1.schema.json
   schema/question-house-rules-v1.schema.json
-  g3_math/<school_level>/<topic>/v1/
+  g3_math/<school_level>/<topic>/<v1-learning-or-v2-diagnostic>/
     blueprint.json
     batches/<batch-id>.json
     questions/<stable-key>.json
@@ -41,7 +41,9 @@ The Secondary 1 N2 calibration bank is complete and approved. Secondary 1 N3 thr
 and every Secondary 2 topic group each contain all 104 planned questions, complete lesson notes and pool
 allocations, and remain gated for Mathematics and editorial review. Secondary 1 N1 also contains its
 complete 104-question draft bank and deterministic lesson, checkpoint and reserve allocations. The
-repository therefore contains 1,976 authored questions across all 19 topic-level banks.
+repository therefore contains 1,976 authored learning questions across all 19 topic-level
+banks. A separate version-2 diagnostic bank for every topic group reserves 76 unwritten
+questions: two baseline and two endline items per group.
 
 ## Commands
 
@@ -52,6 +54,15 @@ uv run --project question_bank question-bank authoring-schema
 uv run --project question_bank question-bank authoring-blueprints
 uv run --project question_bank question-bank authoring-plan
 uv run --project question_bank question-bank authoring-validate
+```
+
+Create or verify the diagnostic blueprints and exact four-question manifests from the tracked
+38+38 source plan:
+
+```bash
+uv run --project question_bank question-bank diagnostic-authoring-plan
+uv run --project question_bank question-bank authoring-next \
+  --owner YOUR_GITHUB_USERNAME --bank-role diagnostic
 ```
 
 Select the next unclaimed planned batch and package its exact generation contract:
@@ -106,7 +117,7 @@ The shared deployment and contribution workflow is documented in
 ## Batch lifecycle
 
 1. `planned`: exact outcome/difficulty allocation and stable keys exist; generator fields may be `unassigned`.
-2. `draft`: all 20–30 question keys exist and concrete provider, model, generator version, and prompt version are recorded.
+2. `draft`: all allocated keys exist—20–30 for learning or exactly four for diagnostic—and concrete provider, model, generator version, and prompt version are recorded.
 3. `ready_for_review`: automated validation succeeds and the packet is exported.
 4. `changes_requested`: reviewer corrections are required.
 5. `approved`: mathematics and editorial decisions are both approved.
@@ -117,7 +128,8 @@ A batch cannot move beyond `planned` with missing question keys or placeholder g
 
 The authoring validator checks:
 
-- complete blueprint coverage of all 19 syllabus topic groups;
+- complete learning blueprint coverage of all 19 syllabus topic groups and, when diagnostics are present, diagnostic coverage of the same 19 groups;
+- exact diagnostic keys and allocations against the checksum-tracked 38+38 plan;
 - exact aggregate batch coverage of every blueprint outcome and difficulty cell;
 - unique batch IDs and exclusive question ownership;
 - source-reference checksums;

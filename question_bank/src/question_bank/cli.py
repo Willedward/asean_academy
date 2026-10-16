@@ -34,6 +34,7 @@ from .course_preview import serve_course
 from .course_registry import validate_course_registry
 from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
+from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
 from .practice import PracticeEngine
 from .practice_web import serve_practice
@@ -251,6 +252,9 @@ def parser():
         "--school-level", choices=("secondary_1", "secondary_2")
     )
     authoring_next.add_argument("--topic")
+    authoring_next.add_argument(
+        "--bank-role", choices=("learning", "diagnostic")
+    )
     authoring_work_order = commands.add_parser(
         "authoring-work-order",
         help="Package one planned batch as a deterministic model work order",
@@ -299,11 +303,37 @@ def parser():
         "plan", type=Path, nargs="?", default=DEFAULT_DIAGNOSTIC_PLAN
     )
     diagnostic_plan_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    diagnostic_authoring_plan = commands.add_parser(
+        "diagnostic-authoring-plan",
+        help="Create 19 isolated four-question diagnostic banks and manifests",
+    )
+    diagnostic_authoring_plan.add_argument(
+        "--plan", type=Path, default=DEFAULT_DIAGNOSTIC_PLAN
+    )
+    diagnostic_authoring_plan.add_argument(
+        "--banks", type=Path, default=DEFAULT_BANK_CATALOGUE
+    )
+    diagnostic_authoring_plan.add_argument(
+        "--syllabus", type=Path, default=DEFAULT_SYLLABUS
+    )
+    diagnostic_authoring_plan.add_argument(
+        "--house-rules", type=Path, default=DEFAULT_HOUSE_RULES
+    )
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "diagnostic-authoring-plan":
+        result = plan_diagnostic_authoring_banks(
+            args.plan,
+            args.banks,
+            REPOSITORY_ROOT,
+            args.syllabus,
+            args.house_rules,
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
     if args.command == "diagnostic-plan-create":
         plan = write_diagnostic_plan(args.syllabus, args.output)
         print(
@@ -345,6 +375,7 @@ def main(argv=None):
             syllabus_path=args.syllabus,
             school_level=args.school_level,
             topic_code=args.topic,
+            bank_role=args.bank_role,
         )
         print(json.dumps(result, indent=2))
         return 0

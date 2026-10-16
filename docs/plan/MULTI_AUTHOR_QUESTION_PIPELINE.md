@@ -5,7 +5,7 @@
 
 ## Purpose
 
-This milestone lets multiple people and Codex sessions author the approximately 2,000
+This milestone lets multiple people and Codex sessions author the learning and diagnostic
 question inventory without silently editing the same batch. Git remains the coordination
 and content source of truth. Every question pull request proves batch ownership, runs the
 complete 19-bank validator, scans duplicates, and publishes a reviewer packet as a CI
@@ -41,6 +41,10 @@ contains:
 The contract permits only one active claim per batch and only one active batch per
 branch. Released records stay in the file as coordination history. The registry is
 validated against all current manifests in local checks and CI.
+
+Learning and diagnostic batches have distinct identities. For example,
+`g3-sec1-n1-b001` is learning content while `g3-sec1-n1-diagnostic-b001` is the isolated
+four-question diagnostic allocation. Both use the same exclusive-claim workflow.
 
 ## Claim workflow
 
@@ -105,7 +109,11 @@ The checker rejects:
 - incomplete expected allocations;
 - invalid canonical or accepted answers;
 - missing or checksum-mismatched sources and assets; and
-- exact duplicates anywhere in the 19-bank catalogue.
+- exact duplicates anywhere in the combined learning and diagnostic catalogue.
+
+A planning-only pull request may add several empty `planned` manifests without claims. It may
+not add question files, and every diagnostic manifest must match the tracked diagnostic plan.
+Once question authoring begins, the one-claimed-batch-per-pull-request rule applies.
 
 Near-duplicate templates remain warnings in the CI summary so a reviewer can decide
 whether similar procedural questions are educationally justified.

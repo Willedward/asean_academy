@@ -1,6 +1,6 @@
 # Full-syllabus Mathematics diagnostic source plan
 
-**Status (16 October 2026):** deterministic authoring contract complete; the 76 dedicated questions and both human approvals remain outstanding. Learner activation remains fail-closed.
+**Status (16 October 2026):** deterministic source and four-question authoring contracts complete; the 76 dedicated questions and both human approvals remain outstanding. Learner activation remains fail-closed.
 
 ## What is now fixed
 
@@ -23,6 +23,15 @@ uv run --project question_bank question-bank diagnostic-plan-validate
 
 This milestone uses no model or paid API. Codex can author the reserved questions offline in later batches. Every question must still pass deterministic answer checking, duplicate detection, Mathematics review and editorial review before either form can be published.
 
+The command below materialises or verifies one isolated version-2 bank and one four-question
+manifest for every topic group. It is idempotent and refuses drift from the tracked form plan:
+
+```bash
+uv run --project question_bank question-bank diagnostic-authoring-plan
+uv run --project question_bank question-bank authoring-next \
+  --owner YOUR_GITHUB_USERNAME --bank-role diagnostic
+```
+
 ## How the diagnostic will drive a study plan
 
 The submitted assessment is marked by the existing deterministic checker. The production scoring revision should aggregate the two items for each `topic_group_key`, rank topic groups by percentage, and map the lowest groups to their course units and lessons. That ordered list becomes the learner's initial study plan. Lesson completion, practice evidence and checkpoint results can then move or remove recommendations.
@@ -31,11 +40,10 @@ This recommendation path is ordinary application logic. It does not need an LLM 
 
 ## Remaining activation order
 
-1. Extend the 20–30-item authoring pipeline to support four-item diagnostic banks while preserving individual claims and reviewer packets.
-2. Author the 76 reserved questions in the version-2 diagnostic banks.
-3. Add topic-group aggregation and deterministic lesson recommendations to diagnostic results.
-4. Complete Mathematics and editorial approval for every item and both forms.
-5. Import and publish the two immutable forms only when their questions are reviewed and isolated from all learning pools.
-6. Run authenticated hosted baseline, resume, submit, recommendation and endline-comparison journeys.
+1. Author the 76 reserved questions in the 19 version-2 diagnostic banks.
+2. Add topic-group aggregation and deterministic lesson recommendations to diagnostic results.
+3. Complete Mathematics and editorial approval for every item and both forms.
+4. Import and publish the two immutable forms only when their questions are reviewed and isolated from all learning pools.
+5. Run authenticated hosted baseline, resume, submit, recommendation and endline-comparison journeys.
 
 Until step 5, `/diagnostics` continues returning `content_pending`; the new source plan alone cannot expose draft questions to learners.

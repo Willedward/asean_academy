@@ -90,12 +90,26 @@ uv run --project question_bank question-bank authoring-plan
 uv run --project question_bank question-bank authoring-validate
 ```
 
-A planned manifest contains an exact outcome/difficulty allocation of 20–30 questions and
+A learning manifest contains an exact outcome/difficulty allocation of 20–30 questions and
 reserves every stable question key. Claim it through the registry before changing its source.
 On the exact claimed branch, replace the manifest's `unassigned` generator fields with the
 actual provider/model, generator version, and prompt version, then change its status to `draft`.
 Validation executes every canonical and accepted answer and checks the batch distribution and
 assets.
+
+Diagnostic authoring uses the same claims, work orders, deterministic checks, duplicate scan
+and reviewer packets. The tracked 38+38 diagnostic plan creates 19 isolated version-2 banks,
+each with one four-question manifest containing two baseline and two endline items:
+
+```bash
+uv run --project question_bank question-bank diagnostic-authoring-plan
+uv run --project question_bank question-bank authoring-next \
+  --owner YOUR_GITHUB_USERNAME --bank-role diagnostic
+```
+
+The four-question exception applies only when both the manifest and blueprint declare the
+`diagnostic` role and their keys and allocations exactly match the checksum-tracked diagnostic
+plan. Ordinary learning batches remain restricted to 20–30 questions.
 
 Before editing a manifest or its reserved questions, register the owner and exact target branch:
 

@@ -60,7 +60,7 @@ audit trail clearly identifies each reviewer.
 
 ## Collaboration workflow
 
-1. Claim exactly one planned 20–30-question manifest per branch.
+1. Claim exactly one planned manifest per branch: 20–30 questions for learning or four for diagnostics.
 2. Record concrete generator and prompt provenance in that manifest.
 3. Author only the stable keys allocated by the manifest.
 4. Run `question-bank authoring-validate` and the question-bank tests.
