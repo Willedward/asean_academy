@@ -13,7 +13,7 @@ def test_authored_n1_pilot_is_a_valid_partial_draft(bank_root):
     report = validate_bank(bank_root)
 
     assert report.valid
-    assert len(report.questions) == 62
+    assert len(report.questions) == 83
     assert {question.difficulty for question in report.questions} == {1, 2, 3, 4, 5}
     assert not report.errors
     assert {issue.code for issue in report.warnings} == {
@@ -26,7 +26,7 @@ def test_unreviewed_draft_cannot_be_published(bank_root):
     report = validate_bank(bank_root, publish=True)
 
     assert not report.valid
-    assert len([issue for issue in report.errors if issue.code == "review_required"]) == 62
+    assert len([issue for issue in report.errors if issue.code == "review_required"]) == 83
 
 
 def test_changed_assets_use_a_revisioned_storage_path():

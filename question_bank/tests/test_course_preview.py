@@ -12,7 +12,7 @@ def test_course_preview_renders_course_map_without_answers(repository_root, cour
 
     assert "ASEAN Scholarship Mathematics — Level 1" in page
     assert "Primes and prime factorisation" in page
-    assert "998" in page
+    assert "1019" in page
     assert "Ratios involving rational numbers" in page
     assert "Expressing one quantity as a percentage of another" in page
     assert "Concepts of average rate, speed, constant speed and average speed" in page

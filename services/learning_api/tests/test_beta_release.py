@@ -20,7 +20,7 @@ def test_current_secondary_1_catalogue_is_reported_as_blocked_without_mutating_i
     by_id = {check.check_id: check for check in checks}
 
     assert snapshot["topics"] == 10
-    assert snapshot["questions"] == 998
+    assert snapshot["questions"] == 1019
     assert len(snapshot["course_content_sha256"]) == 64
     assert not by_id["source.full_syllabus"].passed
     assert not by_id["source.question_volume"].passed
@@ -132,4 +132,4 @@ def test_draft_only_review_result_does_not_count_as_complete_approval(monkeypatc
     by_id = {check.check_id: check for check in checks}
 
     assert not by_id["database.human_approvals"].passed
-    assert by_id["database.human_approvals"].details["expected_items"] == 1051
+    assert by_id["database.human_approvals"].details["expected_items"] == 1072
