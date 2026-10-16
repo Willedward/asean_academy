@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l4-904",
+  "bank_key": "g3-sec1-n1-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.4",
+  "title": "Use an unrounded cube-root value",
+  "difficulty": 4,
+  "calculator_allowed": true,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "The positive number q satisfies the following equation."
+    },
+    {
+      "type": "display_math",
+      "latex": "q^3=186"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Without rounding q, calculate the following value. Give your answer correct to 3 significant figures."
+        },
+        {
+          "type": "display_math",
+          "latex": "\\frac{q^2-5.7}{2q+1.3}"
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "1.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_sf",
+        "canonical_answer": "2.11",
+        "canonical_latex": "2.11",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": 3,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the cube-root function to obtain q, and keep the complete calculator value."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Substitute the unrounded cube root of 186 into both the numerator and denominator before rounding the final quotient."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "q=\\sqrt[3]{186}=5.708267473\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{q^2-5.7}{2q+1.3}=\\frac{(\\sqrt[3]{186})^2-5.7}{2\\sqrt[3]{186}+1.3}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{q^2-5.7}{2q+1.3}=2.114122884\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Correct to 3 significant figures, the value is 2.11."
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-16T04:07:04.480894Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

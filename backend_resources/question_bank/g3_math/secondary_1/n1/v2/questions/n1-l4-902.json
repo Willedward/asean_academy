@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l4-902",
+  "bank_key": "g3-sec1-n1-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.2",
+  "title": "Least perfect square with a given HCF",
+  "difficulty": 4,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "N is a positive perfect square greater than 180. The highest common factor of N and 180 is 36."
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the least possible value of N."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "1.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "324",
+        "canonical_latex": "324",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Write 180 and 36 as products of prime factors, then use the HCF condition to constrain the prime factors of N."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "N can be written as 36m², where m is not divisible by 5. Find the least m for which 36m² is greater than 180."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "180=2^2\\times3^2\\times5,\\qquad36=2^2\\times3^2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Because N is a perfect square and its HCF with 180 is 36, write N=36m², where m is not divisible by 5."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "36m^2>180\\implies m^2>5"
+            },
+            {
+              "type": "text",
+              "text": "The least possible integer value of m is 3."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "N=36\\times3^2=324"
+            },
+            {
+              "type": "text",
+              "text": "Indeed, 324 is a perfect square and HCF(324, 180)=36."
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-16T04:07:04.480894Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
