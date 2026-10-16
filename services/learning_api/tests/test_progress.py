@@ -95,7 +95,7 @@ def test_learning_home_resumes_active_practice(tmp_path):
     assert home.json()["next_action"] == {
         "type": "resume_practice",
         "title": "Resume Primes and prime factorisation",
-        "description": "Continue question 1 of 5.",
+        "description": "Continue question 1 of 7.",
         "href": f"/practice/{session['session_id']}",
         "lesson_key": "n1-lesson-01",
         "unit_key": None,
@@ -115,7 +115,7 @@ def test_successful_practice_records_proficiency_and_next_lesson(tmp_path):
         for question in validate_bank(BANK_ROOT).questions
     }
 
-    for number in range(1, 6):
+    for number in range(1, 8):
         answer_current_correctly(
             app,
             session["session_id"],
