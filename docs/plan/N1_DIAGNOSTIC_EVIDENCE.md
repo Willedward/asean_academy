@@ -64,13 +64,14 @@ The pilot integration coverage proves refresh/resume, idempotent create/save, de
 
 ## Content and platform handoff
 
-Production activation needs:
+The versioned 38+38 source allocation is now tracked in
+[FULL_SYLLABUS_DIAGNOSTIC_PLAN.md](FULL_SYLLABUS_DIAGNOSTIC_PLAN.md). Production activation still needs:
 
-1. a versioned catalogue of all 19 level-specific topic groups and outcome codes;
-2. a generalized diagnostic bank/import contract rather than the N1-specific pilot naming;
-3. 38 baseline and 38 matched endline items, with two items per level-specific topic group on each form;
-4. comparable difficulty across forms without duplicated wording, values or solution paths;
-5. marks, two authored hint stages and fully worked solutions, even though help stays hidden in diagnostics;
+1. diagnostic-bank authoring support for the 19 reserved version-2 banks;
+2. 38 baseline and 38 matched endline questions authored against the tracked slots;
+3. comparable wording, values and solution paths across forms without duplicates;
+4. marks, two authored hint stages and fully worked solutions, even though help stays hidden in diagnostics;
+5. topic-group scoring and deterministic lesson recommendations;
 6. mathematics and editorial approval for every item and form;
 7. hosted Google-authenticated baseline resume/submit and endline-comparison testing; and
 8. final responsive and accessibility acceptance during B4.

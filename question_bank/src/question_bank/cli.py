@@ -34,6 +34,7 @@ from .course_preview import serve_course
 from .course_registry import validate_course_registry
 from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
+from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
 from .practice import PracticeEngine
 from .practice_web import serve_practice
 from .preview import serve
@@ -60,6 +61,10 @@ DEFAULT_HOUSE_RULES = (
 DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/schema"
 DEFAULT_CLAIMS = (
     REPOSITORY_ROOT / "backend_resources/question_bank/authoring/batch-claims-v1.json"
+)
+DEFAULT_DIAGNOSTIC_PLAN = (
+    REPOSITORY_ROOT
+    / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
 )
 
 
@@ -278,11 +283,60 @@ def parser():
     authoring_execute.add_argument("--review-output", type=Path)
     authoring_execute.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
     authoring_execute.add_argument("--dry-run", action="store_true")
+    diagnostic_plan_create = commands.add_parser(
+        "diagnostic-plan-create",
+        help="Create the deterministic 38+38 full-syllabus diagnostic plan",
+    )
+    diagnostic_plan_create.add_argument(
+        "output", type=Path, nargs="?", default=DEFAULT_DIAGNOSTIC_PLAN
+    )
+    diagnostic_plan_create.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    diagnostic_plan_validate = commands.add_parser(
+        "diagnostic-plan-validate",
+        help="Validate diagnostic coverage, isolation and matched form difficulty",
+    )
+    diagnostic_plan_validate.add_argument(
+        "plan", type=Path, nargs="?", default=DEFAULT_DIAGNOSTIC_PLAN
+    )
+    diagnostic_plan_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "diagnostic-plan-create":
+        plan = write_diagnostic_plan(args.syllabus, args.output)
+        print(
+            json.dumps(
+                {
+                    "status": "complete",
+                    "plan_key": plan.plan_key,
+                    "forms": len(plan.forms),
+                    "questions": sum(len(form.items) for form in plan.forms),
+                    "output": str(args.output),
+                },
+                indent=2,
+            )
+        )
+        return 0
+    if args.command == "diagnostic-plan-validate":
+        plan, issues = validate_diagnostic_plan(args.plan, args.syllabus)
+        errors = [issue for issue in issues if issue.severity == "error"]
+        print(
+            json.dumps(
+                {
+                    "valid": plan is not None and not errors,
+                    "plan_key": plan.plan_key if plan else None,
+                    "forms": len(plan.forms) if plan else 0,
+                    "questions": sum(len(form.items) for form in plan.forms) if plan else 0,
+                    "error_count": len(errors),
+                    "warning_count": len(issues) - len(errors),
+                    "issues": [asdict(issue) for issue in issues],
+                },
+                indent=2,
+            )
+        )
+        return 0 if plan is not None and not errors else 1
     if args.command == "authoring-next":
         result = next_authoring_batch(
             args.banks,
