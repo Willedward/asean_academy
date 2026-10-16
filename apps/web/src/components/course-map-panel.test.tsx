@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { courseMapFixture } from "@/lib/api/course";
 
 import { CourseMapPanel } from "./course-map-panel";
+
+afterEach(cleanup);
 
 describe("CourseMapPanel", () => {
   it("shows every draft N1 through N3 lesson without claiming availability", async () => {
