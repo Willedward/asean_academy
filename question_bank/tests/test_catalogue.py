@@ -116,7 +116,7 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
     authored_bank_count = sum(
         1
         for questions in (repository_root / "backend_resources/question_bank/g3_math").glob(
-            "**/questions"
+            "**/v1/questions"
         )
         if any(questions.glob("*.json"))
     )
