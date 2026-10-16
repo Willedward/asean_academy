@@ -153,12 +153,16 @@ def test_reviews_are_separated_safe_append_only_and_invalidate_old_release_reque
         offset=0,
         unit_key="g3-sec1-n2",
     )
-    assert n2_unit["total"] == 107
+    assert n2_unit["total"] == len(n2_unit["items"])
     assert {entry["content_kind"] for entry in n2_unit["items"]} == {
         "lesson",
         "question",
     }
     assert {entry["unit_key"] for entry in n2_unit["items"]} == {"g3-sec1-n2"}
+    assert {
+        "g3-sec1-n2-b001",
+        "g3-sec1-n2-diagnostic-b001",
+    }.issubset(n2_unit["batch_ids"])
 
     bulk_items = n2_batch["items"][:3]
     preview_body = BulkContentReviewPreviewRequest(
