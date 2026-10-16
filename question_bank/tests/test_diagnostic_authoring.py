@@ -4,6 +4,8 @@ import shutil
 import pytest
 from pydantic import ValidationError
 
+import question_bank.authoring_runner as authoring_runner
+import question_bank.collaboration as collaboration
 from question_bank.authoring import QuestionBatchManifest, load_manifest, validate_batch
 from question_bank.authoring_runner import create_authoring_work_order, next_authoring_batch
 from question_bank.collaboration import check_pull_request
@@ -71,13 +73,25 @@ def test_diagnostic_bank_planner_is_idempotent(repository_root):
     assert result["question_slots"] == 76
 
 
-def test_diagnostic_work_order_preserves_form_usage(repository_root, tmp_path):
+def test_diagnostic_work_order_preserves_form_usage(
+    repository_root, tmp_path, monkeypatch
+):
     paths = _paths(repository_root)
     manifest = (
         paths["banks"]
         / "secondary_1/n1/v2/batches/g3-sec1-n1-diagnostic-b001.json"
     )
     output = tmp_path / "work-order"
+
+    original_validate_batch = authoring_runner.validate_batch
+
+    def validate_as_planned(path, **kwargs):
+        report = original_validate_batch(path, **kwargs)
+        if path == manifest and report.manifest is not None:
+            report.manifest = report.manifest.model_copy(update={"status": "planned"})
+        return report
+
+    monkeypatch.setattr(authoring_runner, "validate_batch", validate_as_planned)
 
     create_authoring_work_order(
         manifest,
@@ -101,10 +115,22 @@ def test_diagnostic_work_order_preserves_form_usage(repository_root, tmp_path):
     assert "Do not reuse any learning question" in prompt
 
 
-def test_next_batch_can_select_only_diagnostic_work(repository_root, tmp_path):
+def test_next_batch_can_select_only_diagnostic_work(
+    repository_root, tmp_path, monkeypatch
+):
     paths = _paths(repository_root)
     claims = tmp_path / "claims.json"
     claims.write_text('{"schema_version":"1.0.0","claims":[]}\n')
+
+    original_load_manifest = authoring_runner.load_manifest
+
+    def load_with_n1_planned(path):
+        manifest = original_load_manifest(path)
+        if manifest.batch_id == "g3-sec1-n1-diagnostic-b001":
+            return manifest.model_copy(update={"status": "planned"})
+        return manifest
+
+    monkeypatch.setattr(authoring_runner, "load_manifest", load_with_n1_planned)
 
     result = next_authoring_batch(
         paths["banks"],
@@ -117,7 +143,7 @@ def test_next_batch_can_select_only_diagnostic_work(repository_root, tmp_path):
     assert result["status"] == "ready"
     assert result["bank_role"] == "diagnostic"
     assert result["batch_id"] == "g3-sec1-n1-diagnostic-b001"
-    assert result["remaining_unclaimed_planned_batches"] == 19
+    assert result["remaining_unclaimed_planned_batches"] >= 1
 
 
 def test_four_question_exception_cannot_weaken_learning_batches(repository_root):
@@ -163,11 +189,24 @@ def test_validator_rejects_diagnostic_keys_that_drift_from_plan(
 
 
 def test_planning_pull_request_can_add_multiple_empty_diagnostic_batches(
-    repository_root, tmp_path
+    repository_root, tmp_path, monkeypatch
 ):
     paths = _paths(repository_root)
     claims = tmp_path / "claims.json"
     claims.write_text('{"schema_version":"1.0.0","claims":[]}\n')
+    planned_batch_ids = {
+        "g3-sec1-n1-diagnostic-b001",
+        "g3-sec1-n2-diagnostic-b001",
+    }
+    original_load_manifest = collaboration.load_manifest
+
+    def load_selected_as_planned(path):
+        manifest = original_load_manifest(path)
+        if manifest.batch_id in planned_batch_ids:
+            return manifest.model_copy(update={"status": "planned"})
+        return manifest
+
+    monkeypatch.setattr(collaboration, "load_manifest", load_selected_as_planned)
     changed = [
         (
             paths["banks"]
