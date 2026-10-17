@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g1-l3-903",
+  "bank_key": "g3-sec1-g1-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G1",
+  "primary_outcome": "1.3",
+  "title": "Co-interior and vertically opposite angles",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "AB is parallel to CD. A transversal crosses both lines, as shown. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-903-parallel-lines"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The angles (5x - 11)° and (3x + 15)° are co-interior angles. Angle y° is vertically opposite the (3x + 15)° angle. Find y."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "1.3",
+      "secondary_outcomes": [
+        "1.2"
+      ],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "81",
+        "canonical_latex": "81",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Co-interior angles between parallel lines total 180°."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Solve (5x - 11) + (3x + 15) = 180, then use the vertical-opposite relationship at the lower intersection."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "(5x-11)+(3x+15)=180"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "8x+4=180,\\quad x=22"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "y=3(22)+15=81"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g1-l3-903-parallel-lines",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-903-parallel-lines.svg",
+      "alt_text": "Parallel lines AB and CD cut by a transversal, with co-interior angles labelled 5x minus 11 degrees and 3x plus 15 degrees and a vertically opposite angle labelled y degrees.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "parallel_lines_transversal",
+        "question_key": "g1-l3-903",
+        "not_to_scale": true,
+        "parallel_lines": [
+          "AB",
+          "CD"
+        ],
+        "relationships": [
+          "co-interior angles",
+          "vertically opposite angles"
+        ]
+      },
+      "sha256": "84b3c208dc53158f242388687e6c0728712c925d229127a72200c49aae3f9394",
+      "width": 940,
+      "height": 520
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T04:36:42.882454Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

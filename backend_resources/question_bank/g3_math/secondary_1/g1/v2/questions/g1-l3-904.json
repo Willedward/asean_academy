@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g1-l3-904",
+  "bank_key": "g3-sec1-g1-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G1",
+  "primary_outcome": "1.4",
+  "title": "Base angle in a regular octagon",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "ABCDEFGH is a regular octagon with centre O. Adjacent vertices A and B are joined to O, as shown."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-904-regular-octagon"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find angle OAB in degrees."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "1.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "67.5",
+        "canonical_latex": "67.5",
+        "accepted_answers": [
+          "135/2"
+        ],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The eight equal central angles total 360°, and OA equals OB because both are radii."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Angle AOB is 45°. The other two angles in isosceles triangle AOB are equal and share the remaining 135°."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\angle AOB=360\\div8=45"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "OA=OB,\\quad \\angle OAB=\\angle OBA"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\angle OAB=(180-45)\\div2=67.5"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g1-l3-904-regular-octagon",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-904-regular-octagon.svg",
+      "alt_text": "Regular octagon with centre O and adjacent vertices A and B joined to O, forming an isosceles triangle with central angle 45 degrees.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "regular_octagon_central_triangle",
+        "question_key": "g1-l3-904",
+        "not_to_scale": true,
+        "polygon_sides": 8,
+        "central_angle_degrees": 45,
+        "equal_sides": [
+          "OA",
+          "OB"
+        ]
+      },
+      "sha256": "3a351f0ca99a805ead52eae3d5b8774a150a9f7aa75d9109f5a9bf27d464e85f",
+      "width": 940,
+      "height": 520
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T04:36:42.882454Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
