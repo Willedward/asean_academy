@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-l3-904",
+  "bank_key": "g3-sec1-n6-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N6",
+  "primary_outcome": "6.4",
+  "title": "Equation from graph intercepts",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "The diagram shows a straight-line graph with its intercepts marked."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n6-l3-904-linear-graph"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Write y as an expression in x for this graph."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "6.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "-2*x+6",
+        "canonical_latex": "-2x+6",
+        "variables": [
+          "x"
+        ],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {}
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the two marked intercepts to calculate the gradient."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The graph passes through (0, 6) and (3, 0). Use y = ax + b."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "a=\\frac{0-6}{3-0}=-2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "b=6"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "y=-2x+6"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "n6-l3-904-linear-graph",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-l3-904-linear-graph.svg",
+      "alt_text": "Decreasing straight-line graph crossing the y-axis at 6 and the x-axis at 3.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "linear_graph_intercepts",
+        "question_key": "n6-l3-904",
+        "rule": "y=-2x+6",
+        "intercepts": [
+          [
+            0,
+            6
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "sha256": "b8301f03bb3ac5794e68b802bfee061ab2d2323c1b2c031db49d2becc14708b3",
+      "width": 720,
+      "height": 520
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T03:51:12.662628Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
