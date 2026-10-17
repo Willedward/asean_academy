@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l3-902",
+  "bank_key": "g3-sec1-g5-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G5",
+  "primary_outcome": "5.2",
+  "title": "Area after a trapezium cut-out",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A rectangular sign measuring 22 cm by 14 cm has a trapezium cut out of it. The cut-out has parallel sides 6 cm and 10 cm and perpendicular height 4 cm. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-902-composite-cutout"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the remaining area of the sign in cm². Enter the numerical value only."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "5.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "276",
+        "canonical_latex": "276",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the area of the outer rectangle and the area of the trapezium separately."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract one half times (6 + 10) times 4 from 22 times 14."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area of rectangle}=22\\times14=308\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "B",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area of cut-out}=\\frac12(6+10)(4)=32\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Remaining area}=308-32=276\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g5-l3-902-composite-cutout",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-902-composite-cutout.svg",
+      "alt_text": "A 22 centimetre by 14 centimetre rectangle with a trapezium cut-out whose parallel sides are 6 centimetres and 10 centimetres and whose perpendicular height is 4 centimetres.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "rectangle_with_trapezium_cutout",
+        "question_key": "g5-l3-902",
+        "not_to_scale": true,
+        "relationships": [
+          "outer rectangle 22 centimetres by 14 centimetres",
+          "inner trapezium is removed",
+          "trapezium parallel sides 6 centimetres and 10 centimetres",
+          "trapezium perpendicular height 4 centimetres"
+        ]
+      },
+      "sha256": "47c4947c8692111a8414f8ab6e2118aca71b99a48d41238e01ee5e6d3c7fd851",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T12:48:42.122021Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
