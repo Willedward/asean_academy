@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n6-l3-901",
+  "bank_key": "g3-sec1-n6-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N6",
+  "primary_outcome": "6.1",
+  "title": "Midpoint followed by a translation",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "The diagram shows points A and B on a Cartesian grid."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n6-l3-901-coordinate-diagram"
+    },
+    {
+      "type": "text",
+      "text": "M is the midpoint of AB. Point M is translated 5 units to the right and 1 unit down to point N."
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the sum of the x-coordinate and y-coordinate of N."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "6.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Read A and B from the grid, then average their corresponding coordinates to find M."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "A is (-5, 4) and B is (3, -2), so first find their midpoint before applying the translation."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "M=\\left(\\frac{-5+3}{2},\\frac{4+(-2)}{2}\\right)=(-1,1)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "N=(-1+5,1-1)=(4,0)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "4+0=4"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "n6-l3-901-coordinate-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-l3-901-coordinate-diagram.svg",
+      "alt_text": "Cartesian grid showing point A at negative 5 comma 4 and point B at 3 comma negative 2.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "cartesian_points",
+        "question_key": "n6-l3-901",
+        "x_range": [
+          -6,
+          8
+        ],
+        "y_range": [
+          -5,
+          5
+        ],
+        "points": {
+          "A": [
+            -5,
+            4
+          ],
+          "B": [
+            3,
+            -2
+          ]
+        }
+      },
+      "sha256": "c1698ea94fa04ebaf8a939e105c991007707f8c86d9518b628045e7996a36735",
+      "width": 720,
+      "height": 520
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T03:51:12.662628Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
