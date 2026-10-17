@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l2-901",
+  "bank_key": "g3-sec1-g5-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G5",
+  "primary_outcome": "5.1",
+  "title": "Equal shares of a trapezium",
+  "difficulty": 2,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A trapezium is divided into two pieces of equal area. Its parallel sides are 9 cm and 17 cm, and its perpendicular height is 8 cm. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l2-901-trapezium"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the area of each piece in cm². Enter the numerical value only."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "5.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "52",
+        "canonical_latex": "52",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "First find the area of the whole trapezium using its two parallel sides and perpendicular height."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use one half times (9 + 17) times 8, then divide the result by 2 because the pieces have equal area."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area of trapezium}=\\frac12(9+17)(8)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area of trapezium}=104\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area of each piece}=104\\div2=52\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g5-l2-901-trapezium",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l2-901-trapezium.svg",
+      "alt_text": "A trapezium with parallel sides 9 centimetres and 17 centimetres and perpendicular height 8 centimetres, divided into two equal-area pieces.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "trapezium_dimensions",
+        "question_key": "g5-l2-901",
+        "not_to_scale": true,
+        "relationships": [
+          "parallel sides 9 centimetres and 17 centimetres",
+          "perpendicular height 8 centimetres",
+          "two pieces of equal area"
+        ]
+      },
+      "sha256": "c06b161755021099f24b79b65eee4b061bd63653c1e12e071b853f5511b8e028",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T12:48:42.122021Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

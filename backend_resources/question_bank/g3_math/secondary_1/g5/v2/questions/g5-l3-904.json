@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g5-l3-904",
+  "bank_key": "g3-sec1-g5-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G5",
+  "primary_outcome": "5.4",
+  "title": "Mosaic area in square metres",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A mosaic is made from 24 equal tiles. Each tile has area 250 cm²."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-904-tile-grid"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the total area of the mosaic in m². Enter the numerical value only."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "5.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "0.6",
+        "canonical_latex": "0.6",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "First multiply the number of tiles by the area of one tile."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "After finding the area in cm², use 1 m² = 10 000 cm²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "24\\times250=6000\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "6000\\div10000=0.6\\text{ m}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [
+    {
+      "asset_key": "g5-l3-904-tile-grid",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-904-tile-grid.svg",
+      "alt_text": "A grid of 24 equal tiles, with one tile highlighted and labelled as having area 250 square centimetres.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "rectangular_tile_grid",
+        "question_key": "g5-l3-904",
+        "not_to_scale": false,
+        "relationships": [
+          "24 equal tiles",
+          "each tile has area 250 square centimetres"
+        ]
+      },
+      "sha256": "3bf6bbbeb74d098e102f4f51f44463c68754becd32b14393d2bb3a63ef0bec69",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T12:48:42.122021Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
