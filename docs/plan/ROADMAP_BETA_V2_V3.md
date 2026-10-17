@@ -31,7 +31,8 @@ Rules and priorities in `plan.md` and `PLAN_V2.md` still apply unless this docum
 
 ## 2. Beta (December 2026)
 
-**Goal:** Prove that students learn from the course, come back, and trust the content. No payments, no mentors, no gamification.
+**Goal:** Prove that students learn Mathematics and English from the course, come back,
+and trust the content. No payments, no mentors and no gamification.
 
 **Exit criteria:** everything in the December definition of done in `plan.md` section 16, plus: each beta student has a diagnostic score at the start and at the end of the beta, so improvement can be measured.
 
@@ -62,10 +63,12 @@ Rules and priorities in `plan.md` and `PLAN_V2.md` still apply unless this docum
 
 | ID | Feature | What it does | Source | Status |
 |---|---|---|---|---|
-| B-14 | Grammar and vocabulary practice | Objective questions with instant marking and a reason for each answer. | STU-014 | Designed |
-| B-15 | Essay writing and AI feedback | Autosaved editor, submit, feedback against the rubric, labelled as an AI estimate. | STU-015 to STU-018 | Designed |
+| B-14 | Grammar, vocabulary, editing and reading practice | Objective questions with deterministic marking, passage-linked formats and an authored reason for each answer. | STU-014, `LAYER_1_ENGLISH_SCOPE.md` | Layer 1; UI designed, domain/content not started |
+| B-15 | Essay writing and AI feedback | Autosaved editor, immutable submission and feedback against a versioned rubric, labelled as an AI estimate. | STU-015 to STU-018, `LAYER_1_ENGLISH_SCOPE.md` | Layer 1; UI designed, domain/evaluation not started |
 
-If English is not ready by December, move B-14 and B-15 to the first V2 release rather than delaying the beta.
+English is part of the Layer 1 Beta release gate. Its bounded scope, architecture,
+source-scarcity policy and acceptance criteria are defined in
+[LAYER_1_ENGLISH_SCOPE.md](LAYER_1_ENGLISH_SCOPE.md).
 
 ### 2.4 Admin and operations
 
@@ -132,7 +135,7 @@ If English is not ready by December, move B-14 and B-15 to the first V2 release 
 | V2-17 | **Study planner, first version** | Builds a weekly plan from the test date and diagnostic result using simple rules. See section 5.9. | New | Not started |
 | V2-18 | **Gamification, light** | XP for daily tasks, streaks and a weekly goal. No leaderboard yet. See section 5.8. | New, plan.md 13 | Designed |
 | V2-19 | Interview prep library | Common questions, example answers, recorded tips from former scholars. | Memory, plan.md 2 | Not started |
-| V2-20 | Units after N1 | More maths units and English units, following the same lesson format. | PLAN_V2 3 | Not started |
+| V2-20 | Additional course units | Mathematics and English units beyond the reviewed Layer 1 catalogue, following the same lesson format. | PLAN_V2 3 | Not started |
 
 ### 3.4 Mentors and parents, simple version
 
@@ -360,6 +363,7 @@ Gamification should reward learning habits, not guessing fast.
 | `plan.md` 4.3 | Every student sees the full solution after Give up | From V2, free users see full solutions X times a week, then the answer only. Beta unchanged. |
 | `plan.md` 12.1 | No student-facing token balance | Keep this: show counts only for essay reviews and mentor sessions, never an AI credit balance |
 | `plan.md` 13 | Leaderboards and XP deferred | XP, streaks and weekly goals in V2; leaderboards in V3 |
+| Previous Beta scope | English could move to V2 if unfinished | English objective learning and controlled essay feedback are required for Layer 1; XP, streaks, leaderboards and the personalised study planner remain Layer 2 |
 | `plan.md` 13 | Parent dashboards deferred | Parent score report and weekly email in V2; full parent dashboard in V3 |
 | `plan.md` 6.1 | Onboarding goes straight to the first chapter | Onboarding adds the diagnostic test before the first lesson |
 | `STU-019` / `PLAN_V2` retry queue | Gave-up questions reappear later | Retries follow the spaced schedule in section 5.6 |
@@ -374,7 +378,5 @@ Gamification should reward learning habits, not guessing fast.
 3. Countdown pricing: pro-rated price, or a flat price with the countdown shown only for urgency.
 4. Exact prices, to be tested with beta parents.
 5. Video host for lesson videos.
-6. Whether the diagnostic includes English in the beta, or Maths only.
-7. Parent contact: collected at onboarding (with consent) or only when the student shares the report.
-8. Which mascot to use (drafts on the design canvas).
-9. Whether English (B-14, B-15) is ready for December or moves to V2.
+6. Parent contact: collected at onboarding (with consent) or only when the student shares the report.
+7. Which mascot to use (drafts on the design canvas).

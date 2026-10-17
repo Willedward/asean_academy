@@ -1,6 +1,8 @@
 # B5 content release and controlled pilot
 
-**Engineering status: release controls implemented on 30 September 2026; the Beta remains blocked by content and hosted evidence.**
+**Engineering status: Mathematics release controls were implemented on 30 September
+2026; the Beta remains blocked by content, the Layer 1 English extension and hosted
+evidence.**
 
 B5 turns the implemented application into a release that can be offered to real invited students. It is deliberately fail-closed: a healthy build or a successful local login does not mean that the content, staging environment or operating team is ready.
 
@@ -23,17 +25,30 @@ It writes JSON for machines and Markdown for humans. Both artifacts omit student
 
 The manual **Beta release readiness** GitHub workflow adds protected staging checks. It verifies the deployed SHA, API readiness, web authentication gate and public Supabase Google provider; runs a 200-request bounded load smoke; restores the staging database into an empty isolated database and compares critical-table hashes; runs the content/database release gate; and retains all evidence for 90 days.
 
+The 18 October 2026 scope decision moves English into Layer 1. The implemented gate is
+still Mathematics-specific and must be extended to bind the English course, objective
+question banks, baseline/endline forms, essay rubrics, prompt-policy revisions and
+provider evaluation evidence. See
+[LAYER_1_ENGLISH_SCOPE.md](LAYER_1_ENGLISH_SCOPE.md).
+
 ## Current evidence and blockers
 
-The current authored source contains every Secondary 1 and Secondary 2 unit in the supplied syllabus. Secondary 1 N2 is reviewed; the other complete units remain behind draft review gates:
+The current Mathematics source contains every Secondary 1 and Secondary 2 unit in the
+supplied syllabus. Secondary 1 N2 is reviewed; the other complete units remain behind
+draft review gates. English currently has UI designs but no production domain or
+reviewed content:
 
 | Requirement                        |                         Current source |                              B5 minimum | State   |
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
 | Topic groups                       |                                     19 |                                      19 | Pass    |
-| Questions                          |                                  1,912 |                                   1,900 | Pass    |
-| Diagnostic items                   |              No published source forms | 76, split into two disjoint forms of 38 | Blocked |
+| Mathematics learning questions     |                                  1,976 |                                   1,900 | Pass    |
+| Mathematics diagnostic items       |                      36 authored drafts | 76, split into two disjoint forms of 38 | Blocked |
 | Lessons                            |                                     87 |  All authored and planned Beta lessons | Pass    |
 | Lessons meeting the note-depth gate |                                     87 |                   All authored lessons | Pass    |
+| English production contracts       |                                      0 | Objective, passage, diagnostic and essay contracts | Blocked |
+| English reviewed course content    |                                      0 | All strands in the approved Layer 1 blueprint | Blocked |
+| English diagnostic forms           |                                      0 | Two disjoint reviewed objective forms | Blocked |
+| Essay calibration evidence         |                                      0 | Human-scored anchors and passing provider evaluation | Blocked |
 | Published course/lessons/questions |                        0 complete sets |           All student-visible revisions | Blocked |
 | Local pool inventory               | 1,044 practice, 393 checkpoint, 475 reserve |        Complete and non-overlapping | Pass    |
 
@@ -117,8 +132,10 @@ The command writes `beta-release-evidence.json` and `beta-release-evidence.md`. 
    editorial review before publication.
 5. Record Mathematics and editorial decisions in the admin review workflow; publish through an audited lifecycle request.
 6. Import exact revisions into staging and rerun the gate until source, hashes, reviews and diagnostic isolation pass.
-7. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.
-8. Run founder alpha, then 3–5 friendly users, then the 10–30 cohort. Do not skip a phase because automation is available.
+7. Complete the Layer 1 English E0–E6 sequence: blueprint, contracts, objective pipeline,
+   learner journey, essay workflow, reviewed content/calibration and hosted release evidence.
+8. Complete hosted OAuth, authenticated E2E, keyboard/focus/contrast/mobile, rate-limit/load, restore and owner checks.
+9. Run founder alpha, then 3–5 friendly users, then the 10–30 cohort. Do not skip a phase because automation is available.
 
 ## Pre-Beta hosted operations checklist
 

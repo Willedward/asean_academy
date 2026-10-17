@@ -24,9 +24,12 @@ The authoring and runtime contracts now use a shared Level 1–5 rubric. Existin
 
 ## 1. Feasibility decision
 
-A **full Secondary 1–2 Mathematics invitation beta for 10–30 students is technically feasible in
-December 2026** if the team freezes the scope described below and validates a real
-hosted staging deployment early.
+A **full Secondary 1–2 Mathematics plus bounded English invitation beta for 10–30
+students is technically feasible** if the team freezes the scope described below,
+assigns a separate English content/review lane and validates a real hosted staging
+deployment early. Adding English makes its domain, content and essay-evaluation gates
+part of the critical path; implementation throughput alone does not replace those human
+and hosted checks.
 
 Codex makes a larger December Beta technically plausible because backend, tests, API
 contracts, migrations and integration work can move in parallel. It does not remove the
@@ -37,20 +40,23 @@ many independent dependencies on one critical path.
 
 The recommended release split is:
 
-- **December Beta core:** invitation access, a full Sec 1–2 Mathematics readiness diagnostic, reviewed
-  notes, guided practice, spaced retry, unit checkpoint, progress, question reporting,
-  essential admin operations, responsive NextScholar frontend and production safety.
+- **Layer 1 Beta core:** invitation access; Mathematics and English diagnostics; reviewed
+  Mathematics and English lessons; guided practice, spaced retry, checkpoints, progress,
+  question reporting; controlled essay feedback; essential admin operations; the
+  responsive NextScholar frontend; and production safety.
 - **December Beta stretch:** all seven videos and an expiring parent-share link. Neither
   blocks a learning beta when reviewed notes/transcripts and internal score reporting
   are available.
-- **Move to V2:** English grammar, essay AI, self-service content editors, Sec 3 content,
-  open signup, payments, parent delivery, tutor and gamification.
+- **Move to Layer 2/V2:** experience points, streaks, leaderboards, the personalised
+  study planner, self-service content editors, Sec 3 content, open signup, payments,
+  parent delivery and broader tutor commercialisation.
 - **Build behind a flag when capacity allows:** the provider-neutral tutor and usage
   ledger. It is useful engineering work before V2, but it is not a Beta release gate.
 
-January 2027 is plausible for a **reduced public paid release** only if the December
-beta starts early and V2 is limited to open signup, Sec 1 Maths, entitlements,
-payments, a grounded tutor and basic parent email. The full V2 list should be shipped
+January 2027 is plausible for a **reduced public paid release** only if the invitation
+Beta starts early and V2 is limited to open signup, the reviewed Layer 1 Mathematics
+and English catalogue, entitlements, payments, a grounded tutor and basic parent email.
+The full V2 list should be shipped
 incrementally through the first 2027 application cycle rather than tied to one January
 date.
 
@@ -62,16 +68,17 @@ have been measured.
 The updated Beta features are not being rejected. They are split by confidence and can
 all remain visible in the roadmap:
 
-- **Commit to the controlled Beta:** B-01–B-07, B-09–B-13, B-16–B-18, B-21–B-25 and
-  B-27–B-29, subject to their review, hosted and accessibility gates.
+- **Commit to the controlled Beta:** B-01–B-07, B-09–B-18, B-21–B-25 and B-27–B-29,
+  subject to their review, hosted and accessibility gates. B-14/B-15 follow the bounded
+  contract in [LAYER_1_ENGLISH_SCOPE.md](LAYER_1_ENGLISH_SCOPE.md).
 - **Include when the parallel owner finishes:** B-08 videos and B-26 final brand assets.
   Reviewed notes keep the learning flow usable if video production finishes later.
 - **Run behind a disabled flag or separate pilot:** a narrow grounded tutor can be built
   early, but it should not receive real student data or become a Beta promise until its
   evaluation and quota controls pass.
-- **Keep out of the December launch gate:** B-14/B-15 English, browser-based lesson/course
-  editors, payments, public signup, Sec 3 content and gamification. These require new
-  reviewed content, policy or provider operations beyond writing code.
+- **Keep out of the Layer 1 launch gate:** browser-based lesson/course editors, payments,
+  public signup, Sec 3 content, experience points, streaks, leaderboards and the
+  personalised study planner.
 
 Codex changes implementation throughput, so this plan should be re-estimated after each
 milestone instead of using the original calendar estimate mechanically. Scope only moves
@@ -109,6 +116,8 @@ The current blockers are product completion rather than basic infrastructure:
 - the course-map UI still labels the checkpoint as pending despite backend support;
 - retry evidence exists, but due-date spacing and variant selection do not;
 - diagnostic persistence/API/UI are implemented as an N1 pilot slice, but the 19-topic catalogue and 76 production diagnostic items remain unauthored and unpublished;
+- the English UI kit exists, but production English contracts, APIs, reviewed content,
+  diagnostic forms and essay-evaluation evidence remain unimplemented;
 - question reports and account deletion are implemented locally, but still need hosted
   rehearsal and final B4 frontend integration.
 
@@ -126,7 +135,7 @@ content or final design has been approved.
 | B-01 | Implemented; hosted journey still needs verification                            | Deploy staging, test expiry/revocation/email matching with real Google accounts                                                   |
 | B-02 | Implemented; external OAuth configuration remains                               | Verify callback, refresh, sign-out and private-window login in staging                                                            |
 | B-03 | Partial                                                                         | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3               |
-| B-04 | Technical implementation complete; production forms content-pending             | Generalise the syllabus/bank contract and author/review/import 76 isolated matched items, then verify baseline/endline in staging |
+| B-04 | Mathematics implementation complete; production forms content-pending; English extension unimplemented | Author/review/import the 76 Mathematics items, add disjoint objective-English forms, then verify both subjects in staging          |
 | B-05 | Authenticated learner result and admin comparison implemented                   | Validate final design; private share link/PDF remains stretch                                                                     |
 | B-06 | Implemented technical shell                                                     | Integrate final responsive design and reviewed content states                                                                     |
 | B-07 | Versioned lesson infrastructure implemented; content incomplete                 | Author and review all seven lesson notes and active-recall sections                                                               |
@@ -136,8 +145,8 @@ content or final design has been approved.
 | B-11 | Backend checkpoint/mastery implemented; learner UI says pending                 | Review pool, expose start/resume/results UI and run failure/retake/pass journey                                                   |
 | B-12 | Implemented technical page                                                      | Add due dates, diagnostic comparison and final responsive design                                                                  |
 | B-13 | Implemented locally; final UI/hosted workflow remain                            | Validate learner submission and admin resolution in staging/B4                                                                    |
-| B-14 | No production domain/API                                                        | Move to V2 unless a separate owner and reviewed English bank are ready                                                            |
-| B-15 | No production domain/API or AI evaluation                                       | Move to V2; do not make open-ended AI feedback a Beta dependency                                                                  |
+| B-14 | UI kit exists; no production English domain/API or reviewed bank                | Implement the Layer 1 objective-English contracts, content pipeline, course, diagnostics and authenticated journeys              |
+| B-15 | UI kit exists; no production essay domain/API or AI evaluation                  | Implement versioned rubrics, immutable submissions, idempotent marking, quotas and a human-scored release evaluation             |
 | B-16 | Admin navigation and pages implemented                                          | Apply final design and verify role-specific navigation                                                                            |
 | B-17 | Implemented                                                                     | Verify hosted creation/revocation/audit and invitation secret handling                                                            |
 | B-18 | Review API, safe preview, UI and lifecycle audit implemented                    | Use it on real content; reconcile the roadmap's “3 reviews” with the implemented Maths/editorial plus academic publication rule   |
@@ -165,7 +174,9 @@ path.
 - **Measurement:** use two matched 38-question forms with two items for each of the 19 topic groups per form. Therefore 76 separate reviewed diagnostic items are required. Do not reuse practice/checkpoint questions or the identical form at the end.
 - **Report:** authenticated learner results and administrator comparison are required.
   An expiring parent link or PDF is stretch work.
-- **English:** defer B-14 and B-15 to V2.
+- **English:** B-14 and B-15 are required Layer 1 scope under
+  [LAYER_1_ENGLISH_SCOPE.md](LAYER_1_ENGLISH_SCOPE.md). The English diagnostic remains
+  objective; essay feedback is a controlled, quota-bound learner feature.
 - **Videos:** ship them when ready, but reviewed notes and transcripts are the reliable
   learning fallback. The video host must not block the first technical pilot.
 - **Authoring:** Git JSON/Markdown plus the existing review/publication gate remains the
@@ -188,6 +199,9 @@ path.
 6. Staging passes authenticated E2E, database restore, rate-limit and bounded load checks.
 7. The final frontend passes keyboard, focus, contrast, mobile and slow/error-state checks.
 8. Account deletion, incident response, rollback and restore procedures have named owners.
+9. A learner can complete the reviewed English objective journey and its matched
+   baseline/endline diagnostic, and can submit an essay for rubric-bound feedback without
+   exposing another learner's writing or consuming the allowance twice.
 9. No real student data is sent to a free-tier AI provider.
 
 ## 5. Beta engineering milestones
@@ -382,7 +396,7 @@ content revision and cohort list.
 | Frontend            | NextScholar tokens/components and screens against fixtures/OpenAPI                                           | Yes                                         |
 | Mathematics content | Generalized 19-topic bank, approximately 1,976 first-target items, 76 diagnostic items, notes and pool audit | Yes                                         |
 | Video               | Host experiment, captions, transcripts, posters                                                              | Only if the team makes all videos mandatory |
-| English             | Taxonomy, question/essay format and rubric research                                                          | No; V2                                      |
+| English             | Blueprint, objective domain, content, diagnostics, essay workflow, evaluation and UI integration             | Yes; Layer 1                                |
 | AI tutor            | Provider interface, quotas and synthetic evaluation behind a flag                                            | No; V2                                      |
 | Operations          | Staging credentials, tester invitations, privacy/consent text, support owner                                 | Yes                                         |
 
@@ -464,14 +478,16 @@ Live-provider acceptance still requires a configured server-side provider key.
 - Add light XP/streaks only after the core evidence events are stable; do not award XP for
   raw correctness or speed.
 
-### V2.4 — Parent communication and English
+### V2.4 — Parent communication and English expansion
 
 - Use a transactional email provider first; add WhatsApp only with consent, templates,
   delivery-state handling and an explicit business case.
 - Generate weekly summaries from aggregate progress, never raw answers.
-- Create English objective-question contracts separately from Mathematics answer specs.
-- Build essay submission/versioning, rubric evaluation, AI disclosure, human escalation,
-  quotas and an evaluation set before selling essay feedback.
+- Extend the Layer 1 English catalogue, writing prompts, rubric evidence and provider
+  evaluation after observing the invitation Beta.
+- Keep English objective-question contracts separate from Mathematics answer specs.
+- Preserve essay submission/versioning, AI disclosure, human escalation and quota
+  guarantees when adding paid allowances.
 - Treat Sec 3 and further units primarily as reviewed content programmes on the existing
   platform, with schema changes only when real content proves they are needed.
 
