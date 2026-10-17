@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g1-l3-901",
+  "bank_key": "g3-sec1-g1-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "G1",
+  "primary_outcome": "1.1",
+  "title": "Reflex angle from an algebraic relationship",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "The diagram shows the smaller and reflex angles formed by rays OA and OB. It is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-901-reflex-angle"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The smaller angle is x° and the reflex angle is (2x + 60)°. Find the reflex angle in degrees."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "1.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "260",
+        "canonical_latex": "260",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The smaller angle and the reflex angle make one complete turn."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Set up x + (2x + 60) = 360, then use the value of x in the reflex-angle expression."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x+(2x+60)=360"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "3x=300,\\quad x=100"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "2(100)+60=260"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g1-l3-901-reflex-angle",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-901-reflex-angle.svg",
+      "alt_text": "Two rays OA and OB form a smaller angle labelled x degrees and a reflex angle labelled 2x plus 60 degrees.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "smaller_and_reflex_angles",
+        "question_key": "g1-l3-901",
+        "not_to_scale": true,
+        "labels": {
+          "smaller_angle": "x degrees",
+          "reflex_angle": "2x plus 60 degrees"
+        }
+      },
+      "sha256": "15cc54d837b54d6ac8e82dca726b8a79e05f386e285b9426675e5ae2d8c9e496",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-17T04:36:42.882454Z",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
