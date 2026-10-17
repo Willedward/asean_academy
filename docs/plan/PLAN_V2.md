@@ -666,7 +666,9 @@ English should reuse the common course, lesson, practice, mastery, and progress 
 - Clear labelling as AI-generated feedback.
 - Resubmission creates a new submission instead of overwriting the first.
 
-Essay marking is independent from the first N1 vertical slice and should not delay it.
+Essay marking remains independent from the first Mathematics vertical slice, but it is
+part of the Layer 1 English Beta gate. See
+[LAYER_1_ENGLISH_SCOPE.md](LAYER_1_ENGLISH_SCOPE.md) for the bounded release contract.
 
 ### 7.15 Jobs and worker control service
 
@@ -1472,7 +1474,7 @@ The stages below prioritise a complete N1 course before OCR scale or a general t
 - Locked answers are not exposed in tests.
 - Course remains fully usable with tutor disabled.
 
-### Stage 9 — English course services
+### Stage 9 — Layer 1 English course services
 
 **Estimated effort:** 35–60 hours
 
@@ -1563,13 +1565,13 @@ Completing these tasks produces a reviewable course vertical slice before commit
 - Secure data isolation.
 - Error monitoring and backups.
 - Mobile-accessible primary flow.
+- Reviewed English objective course and disjoint objective diagnostic forms.
+- Autosaved essay drafts, immutable submissions and evaluated rubric-based feedback.
 
 ### P1 — valuable after N1 works end to end
 
 - Grounded AI tutor.
 - OCR-to-review workflow in the production admin.
-- English objective course.
-- Essay writing and feedback.
 - Teacher/founder cohort analytics.
 - Study reminders and streaks that do not distort learning goals.
 
