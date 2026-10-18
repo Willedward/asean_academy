@@ -1,6 +1,6 @@
 # Full-syllabus Mathematics diagnostic source plan
 
-**Status (16 October 2026):** deterministic source and four-question authoring contracts complete; the 76 dedicated questions and both human approvals remain outstanding. Learner activation remains fail-closed.
+**Status (18 October 2026):** all 76 dedicated questions are authored across 19 four-question diagnostic banks. Aggregate validation reports zero errors, warnings or duplicate matches, and the deterministic 38+38 plan validates. Mathematics and editorial approvals remain outstanding, so learner activation remains fail-closed.
 
 ## What is now fixed
 
@@ -21,7 +21,7 @@ uv run --project question_bank question-bank diagnostic-plan-create
 uv run --project question_bank question-bank diagnostic-plan-validate
 ```
 
-This milestone uses no model or paid API. Codex can author the reserved questions offline in later batches. Every question must still pass deterministic answer checking, duplicate detection, Mathematics review and editorial review before either form can be published.
+This milestone used no paid model API. Codex authored the reserved questions through the repository workflow. Every question passes deterministic answer checking and duplicate detection, but Mathematics review and editorial review are still required before either form can be published.
 
 The command below materialises or verifies one isolated version-2 bank and one four-question
 manifest for every topic group. It is idempotent and refuses drift from the tracked form plan:
@@ -40,7 +40,7 @@ This recommendation path is ordinary application logic. It does not need an LLM 
 
 ## Remaining activation order
 
-1. Author the 76 reserved questions in the 19 version-2 diagnostic banks.
+1. ~~Author the 76 reserved questions in the 19 version-2 diagnostic banks.~~ Completed 18 October 2026.
 2. Add topic-group aggregation and deterministic lesson recommendations to diagnostic results.
 3. Complete Mathematics and editorial approval for every item and both forms.
 4. Import and publish the two immutable forms only when their questions are reviewed and isolated from all learning pools.
