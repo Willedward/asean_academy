@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g2-l4-954",
+  "bank_key": "g3-sec2-g2-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G2",
+  "primary_outcome": "2.4",
+  "title": "Area after a reduction",
+  "difficulty": 4,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A display panel with area 48 cm² is reduced with linear scale factor 3/4. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l4-954-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the area of the reduced panel in cm². Enter the numerical value only."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "2.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "27",
+        "canonical_latex": "27",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Area changes by the square of the linear scale factor."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply 48 by (3/4)²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Area scale factor}=\\left(\\frac34\\right)^2=\\frac9{16}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "48\\left(\\frac9{16}\\right)=27\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [
+    {
+      "asset_key": "g2-l4-954-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l4-954-diagram.svg",
+      "alt_text": "A display panel and its reduction with original area 48 cm² and linear scale factor 3/4.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "diagnostic_geometry",
+        "question_key": "g2-l4-954",
+        "not_to_scale": true,
+        "relationships": [
+          "A display panel and its reduction with original area 48 cm² and linear scale factor 3/4."
+        ]
+      },
+      "sha256": "b40534d4eaa4f5a1ef4d8036a79faf047110b97049220021e31ad22d43cb1e5b",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-18T16:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}

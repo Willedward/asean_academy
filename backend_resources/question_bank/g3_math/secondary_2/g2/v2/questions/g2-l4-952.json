@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g2-l4-952",
+  "bank_key": "g3-sec2-g2-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G2",
+  "primary_outcome": "2.2",
+  "title": "Area of a smaller similar banner",
+  "difficulty": 4,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "Two rectangular banners are similar. Corresponding widths are 12 cm for the smaller banner and 18 cm for the larger banner. The larger banner has area 405 cm². The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l4-952-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the area of the smaller banner in cm². Enter the numerical value only."
+        }
+      ],
+      "marks": 4,
+      "primary_outcome": "2.2",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "180",
+        "canonical_latex": "180",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Find the linear scale factor from the smaller banner to the larger banner."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The area scale factor is (18/12)²."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "k=\\frac{18}{12}=\\frac32,\\qquad k^2=\\frac94"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Smaller area}=405\\div\\frac94=180\\text{ cm}^2"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 4,
+  "assets": [
+    {
+      "asset_key": "g2-l4-952-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l4-952-diagram.svg",
+      "alt_text": "Two similar rectangular banners with corresponding widths 12 cm and 18 cm; the larger area is 405 cm².",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "diagnostic_geometry",
+        "question_key": "g2-l4-952",
+        "not_to_scale": true,
+        "relationships": [
+          "Two similar rectangular banners with corresponding widths 12 cm and 18 cm; the larger area is 405 cm²."
+        ]
+      },
+      "sha256": "c6583d12685912096b2bdb06f30529725bd45ecc404460448fbfc274368d9bf8",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-18T16:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
