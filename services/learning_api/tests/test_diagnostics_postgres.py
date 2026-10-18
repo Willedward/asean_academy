@@ -207,6 +207,21 @@ def test_diagnostic_is_refresh_safe_scored_immutable_and_resettable():
     assert result["band"] == "on_track"
     assert result["strengths"] == ["1.2"]
     assert result["priorities"] == ["1.1"]
+    assert result["recommendation_policy_version"] == "topic-readiness-v1"
+    assert result["topic_scores"] == [
+        {
+            "topic_group_key": "g3-sec1-n1",
+            "school_level": "secondary_1",
+            "topic_code": "N1",
+            "title": "Numbers and their operations",
+            "score": 1.0,
+            "max_score": 2.0,
+            "percentage": 50.0,
+            "outcome_codes": ["1.1", "1.2"],
+        }
+    ]
+    assert result["recommendations"][0]["lesson_key"] == "n1-lesson-01"
+    assert result["recommendations"][0]["rank"] == 1
     assert repository.submit(learner_id, str(session["session_id"])) == result
     assert repository.next(learner_id)["status"] == "baseline_complete"
 

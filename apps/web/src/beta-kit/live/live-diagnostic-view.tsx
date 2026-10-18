@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Check,
   CheckCircle2,
   ClipboardCheck,
@@ -28,6 +29,7 @@ import {
   Eyebrow,
   H1,
   H2,
+  H3,
   Muted,
   ProgressBar,
   Stat,
@@ -464,6 +466,15 @@ export function LiveDiagnosticResult({
     return <LiveDiagnosticLoading label="Calculating readiness evidence" />;
   }
 
+  const recommendations = result.recommendations;
+  const start = recommendations[0];
+  const strengths = result.topic_scores
+    .filter((topic) => topic.percentage >= 80)
+    .sort((left, right) => right.percentage - left.percentage)
+    .slice(0, 3);
+  const levelLabel = (schoolLevel: "secondary_1" | "secondary_2") =>
+    schoolLevel === "secondary_1" ? "Level 1" : "Level 2";
+
   return (
     <article className="flex flex-col gap-5 lg:gap-6">
       <Card className="gap-5 p-6 lg:p-8" tone="brand">
@@ -491,57 +502,166 @@ export function LiveDiagnosticResult({
         </div>
       </Card>
 
-      <section className="flex flex-col gap-4" aria-labelledby="outcomes-title">
+      <section
+        className="flex flex-col gap-4"
+        aria-labelledby="recommendations-title"
+      >
         <div className="flex items-center gap-3">
-          <Target size={22} className="text-ns-amber-text" aria-hidden />
+          <BookOpen size={22} className="text-ns-amber-text" aria-hidden />
           <h2
-            id="outcomes-title"
+            id="recommendations-title"
             className="m-0 text-xl leading-7 font-semibold"
           >
-            Evidence by syllabus outcome
+            Your recommended learning path
           </h2>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {result.outcome_scores.map((outcome) => (
-            <Card key={outcome.outcome_code} shadow={false}>
-              <ProgressBar
-                label={`Outcome ${outcome.outcome_code}`}
-                value={`${outcome.percentage}%`}
-                pct={outcome.percentage}
-                fill="success"
-              />
-              <Muted>
-                {outcome.score} of {outcome.max_score} weighted marks
-              </Muted>
-            </Card>
-          ))}
-        </div>
+        {start ? (
+          <Card tone="amber" className="gap-5 p-5 lg:p-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <Tag tone="amber" icon={Target}>
+                START HERE
+              </Tag>
+              <span className="text-[13px] font-semibold text-ns-muted">
+                {levelLabel(start.school_level)} · {start.topic_code} ·{" "}
+                {start.topic_title}
+              </span>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <H2>{start.lesson_title}</H2>
+              <Muted>{start.reason}</Muted>
+            </div>
+            <ProgressBar
+              label={`${start.topic_title} readiness`}
+              value={`${start.percentage}%`}
+              pct={start.percentage}
+              fill="amber"
+            />
+            <div>
+              <Button
+                variant="primary"
+                iconRight={ArrowRight}
+                href={`/lessons/${start.lesson_key}`}
+              >
+                Start recommended lesson
+              </Button>
+            </div>
+          </Card>
+        ) : (
+          <Card tone="sunken" shadow={false}>
+            <H2>Continue from your course map</H2>
+            <Muted>
+              Lesson recommendations will appear after the reviewed course
+              content is published.
+            </Muted>
+          </Card>
+        )}
+        {recommendations.length > 1 ? (
+          <div className="grid gap-3 md:grid-cols-2">
+            {recommendations.slice(1).map((recommendation) => (
+              <Card
+                key={recommendation.topic_group_key}
+                shadow={false}
+                className="gap-3"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-ns-brand-soft text-[13px] font-extrabold text-ns-ink">
+                    {recommendation.rank}
+                  </span>
+                  <span className="text-xs font-bold text-ns-muted">
+                    {levelLabel(recommendation.school_level)} ·{" "}
+                    {recommendation.topic_code}
+                  </span>
+                </div>
+                <H3>{recommendation.lesson_title}</H3>
+                <Muted>
+                  {recommendation.topic_title} · {recommendation.percentage}%
+                  readiness
+                </Muted>
+                <Button href={`/lessons/${recommendation.lesson_key}`}>
+                  Open lesson
+                </Button>
+              </Card>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
         <Card tone="success" shadow={false}>
           <Eyebrow>STRENGTHS TO KEEP USING</Eyebrow>
           <H2>What is working</H2>
-          <Muted>
-            {result.strengths.length
-              ? result.strengths.map((code) => `Outcome ${code}`).join(", ")
-              : "Your course practice will build these as you progress."}
-          </Muted>
+          {strengths.length ? (
+            <div className="flex flex-col gap-2">
+              {strengths.map((topic) => (
+                <div
+                  key={topic.topic_group_key}
+                  className="flex items-center justify-between gap-3 text-sm"
+                >
+                  <span className="font-semibold">
+                    {topic.topic_code} · {topic.title}
+                  </span>
+                  <span className="font-bold tabular-nums text-ns-success">
+                    {topic.percentage}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Muted>
+              Your course practice will build these as you progress.
+            </Muted>
+          )}
         </Card>
         <Card tone="amber" shadow={false}>
-          <Eyebrow>FOCUS NEXT</Eyebrow>
-          <H2>What to work on</H2>
+          <Eyebrow>HOW THIS PLAN WAS CHOSEN</Eyebrow>
+          <H2>Clear and consistent</H2>
           <Muted>
-            {result.priorities.length
-              ? result.priorities.map((code) => `Outcome ${code}`).join(", ")
-              : "Continue through the course and keep your current momentum."}
+            Your topic scores are ranked from lowest to highest. Within each
+            topic, the plan starts with the lesson tied to the tested skill that
+            needs the most practice. No paid AI call is used.
           </Muted>
         </Card>
       </section>
 
+      <section className="flex flex-col gap-4" aria-labelledby="topics-title">
+        <div className="flex items-center gap-3">
+          <Target size={22} className="text-ns-amber-text" aria-hidden />
+          <h2 id="topics-title" className="m-0 text-xl leading-7 font-semibold">
+            Readiness by topic
+          </h2>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {result.topic_scores.map((topic) => (
+            <Card key={topic.topic_group_key} shadow={false} className="gap-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs font-bold text-ns-muted">
+                    {levelLabel(topic.school_level)} · {topic.topic_code}
+                  </span>
+                  <H3>{topic.title}</H3>
+                </div>
+                <span className="text-sm font-black tabular-nums">
+                  {topic.percentage}%
+                </span>
+              </div>
+              <ProgressBar
+                label={`${topic.score} of ${topic.max_score} weighted marks`}
+                value=""
+                pct={topic.percentage}
+                fill={topic.percentage >= 80 ? "success" : "amber"}
+              />
+            </Card>
+          ))}
+        </div>
+      </section>
+
       <div className="flex flex-wrap gap-3">
-        <Button variant="primary" iconRight={ArrowRight} href="/learn">
-          Continue to your course
+        <Button
+          variant="primary"
+          iconRight={ArrowRight}
+          href={start ? `/lessons/${start.lesson_key}` : "/learn"}
+        >
+          {start ? "Start my learning plan" : "Continue to your course"}
         </Button>
         <Button href="/diagnostics">Readiness overview</Button>
       </div>

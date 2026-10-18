@@ -370,6 +370,17 @@
             "title": "Purpose",
             "type": "string"
           },
+          "recommendation_policy_version": {
+            "title": "Recommendation Policy Version",
+            "type": "string"
+          },
+          "recommendations": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticStudyRecommendation"
+            },
+            "title": "Recommendations",
+            "type": "array"
+          },
           "reset_at": {
             "anyOf": [
               {
@@ -421,6 +432,13 @@
             "format": "date-time",
             "title": "Submitted At",
             "type": "string"
+          },
+          "topic_scores": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticTopicScore"
+            },
+            "title": "Topic Scores",
+            "type": "array"
           }
         },
         "required": [
@@ -434,6 +452,9 @@
           "band",
           "band_policy_version",
           "outcome_scores",
+          "topic_scores",
+          "recommendations",
+          "recommendation_policy_version",
           "strengths",
           "priorities",
           "submitted_at",
@@ -3806,6 +3827,17 @@
             "title": "Purpose",
             "type": "string"
           },
+          "recommendation_policy_version": {
+            "title": "Recommendation Policy Version",
+            "type": "string"
+          },
+          "recommendations": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticStudyRecommendation"
+            },
+            "title": "Recommendations",
+            "type": "array"
+          },
           "score": {
             "title": "Score",
             "type": "number"
@@ -3826,6 +3858,13 @@
             "format": "date-time",
             "title": "Submitted At",
             "type": "string"
+          },
+          "topic_scores": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticTopicScore"
+            },
+            "title": "Topic Scores",
+            "type": "array"
           }
         },
         "required": [
@@ -3839,6 +3878,9 @@
           "band",
           "band_policy_version",
           "outcome_scores",
+          "topic_scores",
+          "recommendations",
+          "recommendation_policy_version",
           "strengths",
           "priorities",
           "submitted_at"
@@ -3928,6 +3970,142 @@
           "items"
         ],
         "title": "DiagnosticSessionResponse",
+        "type": "object"
+      },
+      "DiagnosticStudyRecommendation": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "lesson_title": {
+            "title": "Lesson Title",
+            "type": "string"
+          },
+          "max_score": {
+            "title": "Max Score",
+            "type": "number"
+          },
+          "percentage": {
+            "title": "Percentage",
+            "type": "number"
+          },
+          "rank": {
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Rank",
+            "type": "integer"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "school_level": {
+            "enum": [
+              "secondary_1",
+              "secondary_2"
+            ],
+            "title": "School Level",
+            "type": "string"
+          },
+          "score": {
+            "title": "Score",
+            "type": "number"
+          },
+          "topic_code": {
+            "title": "Topic Code",
+            "type": "string"
+          },
+          "topic_group_key": {
+            "title": "Topic Group Key",
+            "type": "string"
+          },
+          "topic_title": {
+            "title": "Topic Title",
+            "type": "string"
+          },
+          "unit_key": {
+            "title": "Unit Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rank",
+          "topic_group_key",
+          "school_level",
+          "topic_code",
+          "topic_title",
+          "score",
+          "max_score",
+          "percentage",
+          "course_key",
+          "unit_key",
+          "lesson_key",
+          "lesson_title",
+          "reason"
+        ],
+        "title": "DiagnosticStudyRecommendation",
+        "type": "object"
+      },
+      "DiagnosticTopicScore": {
+        "additionalProperties": false,
+        "properties": {
+          "max_score": {
+            "title": "Max Score",
+            "type": "number"
+          },
+          "outcome_codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outcome Codes",
+            "type": "array"
+          },
+          "percentage": {
+            "title": "Percentage",
+            "type": "number"
+          },
+          "school_level": {
+            "enum": [
+              "secondary_1",
+              "secondary_2"
+            ],
+            "title": "School Level",
+            "type": "string"
+          },
+          "score": {
+            "title": "Score",
+            "type": "number"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_code": {
+            "title": "Topic Code",
+            "type": "string"
+          },
+          "topic_group_key": {
+            "title": "Topic Group Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_group_key",
+          "school_level",
+          "topic_code",
+          "title",
+          "score",
+          "max_score",
+          "percentage",
+          "outcome_codes"
+        ],
+        "title": "DiagnosticTopicScore",
         "type": "object"
       },
       "DisplayMathBlock": {

@@ -74,8 +74,39 @@ const result: DiagnosticResult = {
   percentage: 50,
   band: "on_track",
   band_policy_version: "n1-readiness-v1",
+  recommendation_policy_version: "topic-readiness-v1",
   outcome_scores: [
     { outcome_code: "1.1", score: 1, max_score: 2, percentage: 50 },
+  ],
+  topic_scores: [
+    {
+      topic_group_key: "g3-sec1-n1",
+      school_level: "secondary_1",
+      topic_code: "N1",
+      title: "Numbers and their operations",
+      score: 1,
+      max_score: 2,
+      percentage: 50,
+      outcome_codes: ["1.1"],
+    },
+  ],
+  recommendations: [
+    {
+      rank: 1,
+      topic_group_key: "g3-sec1-n1",
+      school_level: "secondary_1",
+      topic_code: "N1",
+      topic_title: "Numbers and their operations",
+      score: 1,
+      max_score: 2,
+      percentage: 50,
+      course_key: "g3-sec1-math",
+      unit_key: "g3-sec1-n1",
+      lesson_key: "n1-lesson-01",
+      lesson_title: "Primes and prime factorisation",
+      reason:
+        "Practise this next to turn partial understanding into reliable marks.",
+    },
   ],
   strengths: [],
   priorities: ["1.1"],
@@ -256,10 +287,15 @@ describe("diagnostic learner flow", () => {
     expect(
       await screen.findByRole("heading", { name: "On track" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Outcome 1.1").length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText("Numbers and their operations").length,
+    ).toBeGreaterThan(0);
     expect(
       screen.getByText(/learning evidence to guide your next steps/i),
     ).toBeInTheDocument();
     expect(screen.queryByText(/xp|streak/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Start recommended lesson" }),
+    ).toHaveAttribute("href", "/lessons/n1-lesson-01");
   });
 });

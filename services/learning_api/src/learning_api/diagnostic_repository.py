@@ -15,6 +15,11 @@ from psycopg.types.json import Jsonb
 from question_bank.checking import check_answer
 from question_bank.models import AlgebraicResponse, NumericResponse
 
+from .diagnostic_recommendations import (
+    RECOMMENDATION_POLICY_VERSION,
+    build_topic_results,
+)
+
 BAND_POLICY_VERSION = "n1-readiness-v1"
 
 
@@ -56,6 +61,61 @@ class PostgresDiagnosticRepository:
             prepare_threshold=None,
             row_factory=dict_row,
         )
+
+    @staticmethod
+    def _scoring_rows(connection, session_id: str) -> list[dict]:
+        return connection.execute(
+            """
+            select outcomes.code as outcome_code,
+                   outcomes.position as outcome_position,
+                   outcomes.school_level::text as school_level,
+                   topics.code as topic_code,
+                   topics.title as topic_title,
+                   responses.score,
+                   responses.max_score,
+                   mapping.course_key,
+                   mapping.unit_key,
+                   mapping.unit_position,
+                   mapping.lesson_key,
+                   mapping.lesson_title,
+                   mapping.lesson_position
+            from diagnostic_responses responses
+            join diagnostic_form_items items on items.id = responses.form_item_id
+            join syllabus_outcomes outcomes on outcomes.id = items.outcome_id
+            join syllabus_topics topics on topics.id = outcomes.topic_id
+            left join lateral (
+                select courses.course_key,
+                       units.unit_key,
+                       unit_versions.position as unit_position,
+                       lessons.lesson_key,
+                       lesson_versions.title as lesson_title,
+                       assignments.position as lesson_position
+                from courses
+                join course_units units
+                  on units.course_id = courses.id and units.topic_id = topics.id
+                join course_versions
+                  on course_versions.course_id = courses.id and course_versions.is_current
+                join unit_versions
+                  on unit_versions.unit_id = units.id
+                 and unit_versions.course_version_id = course_versions.id
+                join unit_version_lessons assignments
+                  on assignments.unit_version_id = unit_versions.id
+                join lesson_versions
+                  on lesson_versions.id = assignments.lesson_version_id
+                 and lesson_versions.is_current
+                join course_lessons lessons on lessons.id = lesson_versions.lesson_id
+                join lesson_outcomes
+                  on lesson_outcomes.lesson_version_id = lesson_versions.id
+                 and lesson_outcomes.outcome_id = outcomes.id
+                where courses.school_level = outcomes.school_level
+                order by assignments.position, lessons.lesson_key
+                limit 1
+            ) mapping on true
+            where responses.session_id = %s
+            order by outcomes.school_level, topics.position, outcomes.position
+            """,
+            (session_id,),
+        ).fetchall()
 
     @staticmethod
     def _set_identity(connection, learner_id: str) -> None:
@@ -636,17 +696,7 @@ class PostgresDiagnosticRepository:
                     "Answer every question before submitting the readiness check.",
                     409,
                 )
-            rows = connection.execute(
-                """
-                select outcomes.code as outcome_code, responses.score, responses.max_score
-                from diagnostic_responses responses
-                join diagnostic_form_items items on items.id = responses.form_item_id
-                join syllabus_outcomes outcomes on outcomes.id = items.outcome_id
-                where responses.session_id = %s
-                order by outcomes.code
-                """,
-                (session_id,),
-            ).fetchall()
+            rows = self._scoring_rows(connection, session_id)
             outcomes: dict[str, dict[str, float]] = {}
             total_score = Decimal("0")
             total_max = Decimal("0")
@@ -664,6 +714,7 @@ class PostgresDiagnosticRepository:
                     bucket["score"] * 100 / bucket["max_score"], 2
                 )
             percentage = round(float(total_score * 100 / total_max), 2)
+            topic_scores, recommendations = build_topic_results(rows)
             form = connection.execute(
                 "select * from diagnostic_forms where id = %s", (session["form_id"],)
             ).fetchone()
@@ -671,8 +722,9 @@ class PostgresDiagnosticRepository:
                 """
                 insert into diagnostic_results (
                     session_id, student_id, form_id, purpose, score, max_score,
-                    percentage, band, outcome_scores, band_policy_version
-                ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    percentage, band, outcome_scores, band_policy_version,
+                    topic_scores, study_recommendations, recommendation_policy_version
+                ) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """,
                 (
                     session_id,
@@ -685,6 +737,9 @@ class PostgresDiagnosticRepository:
                     band_for(percentage),
                     Jsonb(outcomes),
                     form["band_policy_version"],
+                    Jsonb(topic_scores),
+                    Jsonb(recommendations),
+                    RECOMMENDATION_POLICY_VERSION,
                 ),
             )
             connection.execute(
@@ -731,6 +786,12 @@ class PostgresDiagnosticRepository:
             for item in sorted(scores, key=lambda item: (item["percentage"], item["outcome_code"]))[:3]
             if item["percentage"] < 80
         ]
+        topic_scores = row["topic_scores"]
+        recommendations = row["study_recommendations"]
+        if not topic_scores:
+            topic_scores, recommendations = build_topic_results(
+                PostgresDiagnosticRepository._scoring_rows(connection, session_id)
+            )
         return {
             "session_id": row["session_id"],
             "purpose": row["purpose"],
@@ -742,6 +803,9 @@ class PostgresDiagnosticRepository:
             "band": row["band"],
             "band_policy_version": row["band_policy_version"],
             "outcome_scores": scores,
+            "topic_scores": topic_scores,
+            "recommendations": recommendations,
+            "recommendation_policy_version": row["recommendation_policy_version"],
             "strengths": strengths,
             "priorities": priorities,
             "submitted_at": row["submitted_at"],

@@ -1371,6 +1371,10 @@ export interface components {
              * @enum {string}
              */
             purpose: "baseline" | "endline";
+            /** Recommendation Policy Version */
+            recommendation_policy_version: string;
+            /** Recommendations */
+            recommendations: components["schemas"]["DiagnosticStudyRecommendation"][];
             /** Reset At */
             reset_at?: string | null;
             /** Reset Reason */
@@ -1394,6 +1398,8 @@ export interface components {
              * Format: date-time
              */
             submitted_at: string;
+            /** Topic Scores */
+            topic_scores: components["schemas"]["DiagnosticTopicScore"][];
         };
         /** AdminDifficultyPerformanceResponse */
         AdminDifficultyPerformanceResponse: {
@@ -2664,6 +2670,10 @@ export interface components {
              * @enum {string}
              */
             purpose: "baseline" | "endline";
+            /** Recommendation Policy Version */
+            recommendation_policy_version: string;
+            /** Recommendations */
+            recommendations: components["schemas"]["DiagnosticStudyRecommendation"][];
             /** Score */
             score: number;
             /**
@@ -2678,6 +2688,8 @@ export interface components {
              * Format: date-time
              */
             submitted_at: string;
+            /** Topic Scores */
+            topic_scores: components["schemas"]["DiagnosticTopicScore"][];
         };
         /** DiagnosticSessionResponse */
         DiagnosticSessionResponse: {
@@ -2715,6 +2727,60 @@ export interface components {
             submitted_at?: string | null;
             /** Title */
             title: string;
+        };
+        /** DiagnosticStudyRecommendation */
+        DiagnosticStudyRecommendation: {
+            /** Course Key */
+            course_key: string;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Title */
+            lesson_title: string;
+            /** Max Score */
+            max_score: number;
+            /** Percentage */
+            percentage: number;
+            /** Rank */
+            rank: number;
+            /** Reason */
+            reason: string;
+            /**
+             * School Level
+             * @enum {string}
+             */
+            school_level: "secondary_1" | "secondary_2";
+            /** Score */
+            score: number;
+            /** Topic Code */
+            topic_code: string;
+            /** Topic Group Key */
+            topic_group_key: string;
+            /** Topic Title */
+            topic_title: string;
+            /** Unit Key */
+            unit_key: string;
+        };
+        /** DiagnosticTopicScore */
+        DiagnosticTopicScore: {
+            /** Max Score */
+            max_score: number;
+            /** Outcome Codes */
+            outcome_codes: string[];
+            /** Percentage */
+            percentage: number;
+            /**
+             * School Level
+             * @enum {string}
+             */
+            school_level: "secondary_1" | "secondary_2";
+            /** Score */
+            score: number;
+            /** Title */
+            title: string;
+            /** Topic Code */
+            topic_code: string;
+            /** Topic Group Key */
+            topic_group_key: string;
         };
         /** DisplayMathBlock */
         DisplayMathBlock: {

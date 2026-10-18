@@ -83,6 +83,7 @@ export function DiagnosticResultPanel({
         Calculating your readiness evidence…
       </div>
     );
+  const start = result.recommendations[0];
   return (
     <div className="space-y-7">
       <header className="rounded-3xl bg-teal-900 p-8 text-white">
@@ -97,26 +98,42 @@ export function DiagnosticResultPanel({
           predicted scholarship result.
         </p>
       </header>
+      {start ? (
+        <section className="rounded-3xl border border-amber-200 bg-amber-50 p-6">
+          <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-800">
+            Start here · {start.topic_code} {start.topic_title}
+          </p>
+          <h2 className="m-0 text-2xl font-black">{start.lesson_title}</h2>
+          <p className="mt-2 text-slate-700">{start.reason}</p>
+          <Button asChild>
+            <Link href={`/lessons/${start.lesson_key}`}>
+              Start recommended lesson
+            </Link>
+          </Button>
+        </section>
+      ) : null}
       <section>
-        <h2 className="text-2xl font-black">Results by syllabus outcome</h2>
+        <h2 className="text-2xl font-black">Readiness by topic</h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          {result.outcome_scores.map((outcome) => (
+          {result.topic_scores.map((topic) => (
             <div
               className="rounded-2xl border border-slate-200 bg-white p-5"
-              key={outcome.outcome_code}
+              key={topic.topic_group_key}
             >
               <div className="flex items-center justify-between gap-3">
-                <strong>Outcome {outcome.outcome_code}</strong>
-                <span>{outcome.percentage}%</span>
+                <strong>
+                  {topic.topic_code} · {topic.title}
+                </strong>
+                <span>{topic.percentage}%</span>
               </div>
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-200">
                 <div
                   className="h-full bg-teal-600"
-                  style={{ width: `${outcome.percentage}%` }}
+                  style={{ width: `${topic.percentage}%` }}
                 />
               </div>
               <p className="mb-0 text-sm text-slate-500">
-                {outcome.score} of {outcome.max_score} weighted marks
+                {topic.score} of {topic.max_score} weighted marks
               </p>
             </div>
           ))}
@@ -142,7 +159,9 @@ export function DiagnosticResultPanel({
       </section>
       <div className="flex flex-wrap gap-3">
         <Button asChild>
-          <Link href="/learn">Continue to your course</Link>
+          <Link href={start ? `/lessons/${start.lesson_key}` : "/learn"}>
+            {start ? "Start my learning plan" : "Continue to your course"}
+          </Link>
         </Button>
         <Button asChild variant="outline">
           <Link href="/diagnostics">Readiness overview</Link>

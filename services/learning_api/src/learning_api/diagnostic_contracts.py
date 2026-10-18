@@ -93,6 +93,33 @@ class DiagnosticOutcomeScore(ApiModel):
     percentage: float
 
 
+class DiagnosticTopicScore(ApiModel):
+    topic_group_key: str
+    school_level: Literal["secondary_1", "secondary_2"]
+    topic_code: str
+    title: str
+    score: float
+    max_score: float
+    percentage: float
+    outcome_codes: list[str]
+
+
+class DiagnosticStudyRecommendation(ApiModel):
+    rank: int = Field(ge=1, le=3)
+    topic_group_key: str
+    school_level: Literal["secondary_1", "secondary_2"]
+    topic_code: str
+    topic_title: str
+    score: float
+    max_score: float
+    percentage: float
+    course_key: str
+    unit_key: str
+    lesson_key: str
+    lesson_title: str
+    reason: str
+
+
 class DiagnosticResultResponse(ApiModel):
     session_id: UUID
     purpose: DiagnosticPurpose
@@ -104,6 +131,9 @@ class DiagnosticResultResponse(ApiModel):
     band: Literal["getting_started", "on_track", "ahead"]
     band_policy_version: str
     outcome_scores: list[DiagnosticOutcomeScore]
+    topic_scores: list[DiagnosticTopicScore]
+    recommendations: list[DiagnosticStudyRecommendation]
+    recommendation_policy_version: str
     strengths: list[str]
     priorities: list[str]
     submitted_at: datetime
