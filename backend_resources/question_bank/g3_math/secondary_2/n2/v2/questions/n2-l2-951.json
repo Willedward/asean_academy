@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n2-l2-951",
+  "bank_key": "g3-sec2-n2-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "N2",
+  "primary_outcome": "2.4",
+  "title": "Trail distance from a map",
+  "difficulty": 2,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A hiking map has scale 1 : 50 000. A trail measures 7.6 cm on the map."
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the actual trail length in kilometres. Enter the numerical value only."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "2.4",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "3.8",
+        "canonical_latex": "3.8",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Multiply the map length by 50 000 to obtain centimetres."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert 380 000 cm to kilometres by dividing by 100 000."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "7.6\\times50\\,000=380\\,000\\text{ cm}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "380\\,000\\text{ cm}=3.8\\text{ km}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-18T16:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
