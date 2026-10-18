@@ -4,6 +4,8 @@
 **Product phase:** Layer 1 invitation Beta  
 **Audience:** Secondary-school students in Indonesia and Southeast Asia preparing for the ASEAN Scholarship selection process
 
+**Curriculum:** [LAYER_1_ENGLISH_CURRICULUM.md](./LAYER_1_ENGLISH_CURRICULUM.md)
+
 ## Decision
 
 Layer 1 includes both Mathematics and English as the academic product. English is a
