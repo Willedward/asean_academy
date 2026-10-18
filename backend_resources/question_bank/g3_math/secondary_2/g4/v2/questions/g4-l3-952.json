@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "g4-l3-952",
+  "bank_key": "g3-sec2-g4-v2",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_2",
+  "topic_code": "G4",
+  "primary_outcome": "4.1",
+  "title": "Diagonal of a display",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [
+    {
+      "type": "text",
+      "text": "A rectangular display is 35 cm wide and 12 cm high. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g4-l3-952-diagram"
+    }
+  ],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Find the length of its diagonal in centimetres. Enter the numerical value only."
+        }
+      ],
+      "marks": 3,
+      "primary_outcome": "4.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "37",
+        "canonical_latex": "37",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "The diagonal is the hypotenuse of a right-angled triangle."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Calculate √(35² + 12²)."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d^2=35^2+12^2=1225+144=1369"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{1369}=37\\text{ cm}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 3,
+  "assets": [
+    {
+      "asset_key": "g4-l3-952-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g4-l3-952-diagram.svg",
+      "alt_text": "A 35 cm by 12 cm rectangle with its diagonal marked.",
+      "generation_spec": {
+        "renderer": "hand-authored-svg-v1",
+        "diagram_kind": "diagnostic_geometry",
+        "question_key": "g4-l3-952",
+        "not_to_scale": true,
+        "relationships": [
+          "A 35 cm by 12 cm rectangle with its diagonal marked."
+        ]
+      },
+      "sha256": "a026e46d78d321cbdb5c60fbfceb86d9bf4637b372ee199179cb62779f98ca05",
+      "width": 940,
+      "height": 500
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+      "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+      "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+      "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+    ],
+    "created_at": "2026-10-18T16:00:00+08:00",
+    "authored_by": "OpenAI Codex",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "Awaiting Mathematics and editorial review."
+  }
+}
