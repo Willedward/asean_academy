@@ -9,6 +9,7 @@ type DiagnosticResult = components["schemas"]["DiagnosticResultResponse"];
 const base: DiagnosticResult = {
   band: "on_track",
   band_policy_version: "v1",
+  recommendation_policy_version: "topic-readiness-v1",
   form_key: "n1-diagnostic",
   form_revision: 1,
   max_score: 8,
@@ -21,6 +22,8 @@ const base: DiagnosticResult = {
     { outcome_code: "1.1", score: 4, max_score: 4, percentage: 100 },
     { outcome_code: "1.5", score: 1, max_score: 4, percentage: 25 },
   ],
+  topic_scores: [],
+  recommendations: [],
   strengths: ["1.1"],
   priorities: ["1.5"],
 };

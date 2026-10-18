@@ -1,6 +1,6 @@
 # Full-syllabus Mathematics diagnostic source plan
 
-**Status (18 October 2026):** all 76 dedicated questions are authored across 19 four-question diagnostic banks. Aggregate validation reports zero errors, warnings or duplicate matches, and the deterministic 38+38 plan validates. Mathematics and editorial approvals remain outstanding, so learner activation remains fail-closed.
+**Status (18 October 2026):** all 76 dedicated questions are authored across 19 four-question diagnostic banks. Aggregate validation reports zero errors, warnings or duplicate matches, and the deterministic 38+38 plan validates. Topic scoring, deterministic lesson recommendations and the learner result interface are implemented. Mathematics and editorial approvals remain outstanding, so learner activation remains fail-closed.
 
 ## What is now fixed
 
@@ -34,14 +34,14 @@ uv run --project question_bank question-bank authoring-next \
 
 ## How the diagnostic will drive a study plan
 
-The submitted assessment is marked by the existing deterministic checker. The production scoring revision should aggregate the two items for each `topic_group_key`, rank topic groups by percentage, and map the lowest groups to their course units and lessons. That ordered list becomes the learner's initial study plan. Lesson completion, practice evidence and checkpoint results can then move or remove recommendations.
+The submitted assessment is marked by the existing deterministic checker. The result service aggregates the two items for each `topic_group_key`, ranks topic groups by percentage, and selects the lesson attached to the weakest tested outcome inside each of the three lowest-scoring topics. Repeated outcome codes remain separate because school level and topic identity are part of the score key. The ordered recommendations are stored with the immutable diagnostic result under policy `topic-readiness-v1` and shown in the learner result interface. Lesson completion, practice evidence and checkpoint results can later move or remove recommendations.
 
 This recommendation path is ordinary application logic. It does not need an LLM call. A language model may later explain a recommendation in friendlier prose, but it must not select the official priority, change the score or unlock content.
 
 ## Remaining activation order
 
 1. ~~Author the 76 reserved questions in the 19 version-2 diagnostic banks.~~ Completed 18 October 2026.
-2. Add topic-group aggregation and deterministic lesson recommendations to diagnostic results.
+2. ~~Add topic-group aggregation, deterministic lesson recommendations and the themed result interface.~~ Completed 18 October 2026.
 3. Complete Mathematics and editorial approval for every item and both forms.
 4. Import and publish the two immutable forms only when their questions are reviewed and isolated from all learning pools.
 5. Run authenticated hosted baseline, resume, submit, recommendation and endline-comparison journeys.
