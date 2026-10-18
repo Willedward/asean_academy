@@ -115,7 +115,7 @@ The current blockers are product completion rather than basic infrastructure:
 - a real hosted staging environment has not passed the manual Google sign-in journey;
 - the course-map UI still labels the checkpoint as pending despite backend support;
 - retry evidence exists, but due-date spacing and variant selection do not;
-- diagnostic persistence/API/UI are implemented as an N1 pilot slice, but the 19-topic catalogue and 76 production diagnostic items remain unauthored and unpublished;
+- diagnostic persistence/API/UI are implemented, and all 76 production diagnostic items are authored across the 19-topic catalogue; Mathematics/editorial review, import, publication and hosted acceptance remain;
 - the English UI kit exists, but production English contracts, APIs, reviewed content,
   diagnostic forms and essay-evaluation evidence remain unimplemented;
 - question reports and account deletion are implemented locally, but still need hosted
@@ -135,7 +135,7 @@ content or final design has been approved.
 | B-01 | Implemented; hosted journey still needs verification                            | Deploy staging, test expiry/revocation/email matching with real Google accounts                                                   |
 | B-02 | Implemented; external OAuth configuration remains                               | Verify callback, refresh, sign-out and private-window login in staging                                                            |
 | B-03 | Partial                                                                         | Invitations currently choose the course. Keep invitation-assigned Sec 1 for Beta; defer student selection and Sec 3               |
-| B-04 | Mathematics implementation complete; production forms content-pending; English extension unimplemented | Author/review/import the 76 Mathematics items, add disjoint objective-English forms, then verify both subjects in staging          |
+| B-04 | Mathematics implementation and 76 draft diagnostic items complete; production forms review-pending; English extension unimplemented | Review/import the 76 Mathematics items, add disjoint objective-English forms, then verify both subjects in staging                 |
 | B-05 | Authenticated learner result and admin comparison implemented                   | Validate final design; private share link/PDF remains stretch                                                                     |
 | B-06 | Implemented technical shell                                                     | Integrate final responsive design and reviewed content states                                                                     |
 | B-07 | Versioned lesson infrastructure implemented; content incomplete                 | Author and review all seven lesson notes and active-recall sections                                                               |

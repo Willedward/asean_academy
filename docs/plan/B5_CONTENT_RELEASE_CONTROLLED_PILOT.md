@@ -42,7 +42,7 @@ reviewed content:
 | ---------------------------------- | -------------------------------------: | --------------------------------------: | ------- |
 | Topic groups                       |                                     19 |                                      19 | Pass    |
 | Mathematics learning questions     |                                  1,976 |                                   1,900 | Pass    |
-| Mathematics diagnostic items       |                      36 authored drafts | 76, split into two disjoint forms of 38 | Blocked |
+| Mathematics diagnostic items       |                      76 authored drafts | 76, split into two disjoint forms of 38 | Authored; review blocked |
 | Lessons                            |                                     87 |  All authored and planned Beta lessons | Pass    |
 | Lessons meeting the note-depth gate |                                     87 |                   All authored lessons | Pass    |
 | English production contracts       |                                      0 | Objective, passage, diagnostic and essay contracts | Blocked |

@@ -42,8 +42,8 @@ and every Secondary 2 topic group each contain all 104 planned questions, comple
 allocations, and remain gated for Mathematics and editorial review. Secondary 1 N1 also contains its
 complete 104-question draft bank and deterministic lesson, checkpoint and reserve allocations. The
 repository therefore contains 1,976 authored learning questions across all 19 topic-level
-banks. A separate version-2 diagnostic bank for every topic group reserves 76 unwritten
-questions: two baseline and two endline items per group.
+banks. The separate version-2 diagnostic banks contain all 76 authored draft questions:
+two baseline and two endline items per group. Both human review decisions remain required.
 
 ## Commands
 
