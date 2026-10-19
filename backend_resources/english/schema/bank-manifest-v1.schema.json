@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "bank_key": {
+      "pattern": "^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$",
+      "title": "Bank Key",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "const": "asean_scholarship_english_v1_draft",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "expected_question_count": {
+      "minimum": 1,
+      "title": "Expected Question Count",
+      "type": "integer"
+    },
+    "outcome_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Outcome Codes",
+      "type": "array"
+    },
+    "pool_distribution": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Pool Distribution",
+      "type": "object"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "bank_key",
+    "revision",
+    "title",
+    "curriculum_version",
+    "status",
+    "expected_question_count",
+    "outcome_codes",
+    "pool_distribution",
+    "source_refs"
+  ],
+  "title": "EnglishBankManifest",
+  "type": "object"
+}

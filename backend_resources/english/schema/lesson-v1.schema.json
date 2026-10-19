@@ -1,0 +1,215 @@
+{
+  "$defs": {
+    "EnglishProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authoring_method": {
+          "const": "original_authored",
+          "title": "Authoring Method",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "authored_by": {
+          "minLength": 1,
+          "title": "Authored By",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Notes"
+        }
+      },
+      "required": [
+        "authoring_method",
+        "source_refs",
+        "created_at",
+        "authored_by"
+      ],
+      "title": "EnglishProvenance",
+      "type": "object"
+    },
+    "LessonSection": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "section_type": {
+          "enum": [
+            "retrieval_warmup",
+            "explicit_model",
+            "worked_analysis",
+            "guided_practice",
+            "independent_application",
+            "error_classification",
+            "exit_ticket"
+          ],
+          "title": "Section Type",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "content": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Content",
+          "type": "array"
+        },
+        "question_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Question Keys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "position",
+        "section_type",
+        "title",
+        "content"
+      ],
+      "title": "LessonSection",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "stable_key": {
+      "pattern": "^e[0-9]+-lesson-[0-9]{2}$",
+      "title": "Stable Key",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "const": "asean_scholarship_english_v1_draft",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "lesson_code": {
+      "pattern": "^E[0-9]+\\.[0-9]+$",
+      "title": "Lesson Code",
+      "type": "string"
+    },
+    "outcome_code": {
+      "pattern": "^(EX|EV|EG|EB|EO|ER|EW)[0-9]+\\.[0-9]+$",
+      "title": "Outcome Code",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "estimated_minutes": {
+      "maximum": 35,
+      "minimum": 25,
+      "title": "Estimated Minutes",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/LessonSection"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Sections",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/EnglishProvenance"
+    }
+  },
+  "required": [
+    "revision",
+    "stable_key",
+    "curriculum_version",
+    "lesson_code",
+    "outcome_code",
+    "title",
+    "summary",
+    "estimated_minutes",
+    "status",
+    "sections",
+    "provenance"
+  ],
+  "title": "EnglishLesson",
+  "type": "object"
+}

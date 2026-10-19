@@ -1,0 +1,470 @@
+{
+  "$defs": {
+    "ChoiceOption": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[A-H]$",
+          "title": "Key",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "text"
+      ],
+      "title": "ChoiceOption",
+      "type": "object"
+    },
+    "EnglishProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authoring_method": {
+          "const": "original_authored",
+          "title": "Authoring Method",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "authored_by": {
+          "minLength": 1,
+          "title": "Authored By",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Notes"
+        }
+      },
+      "required": [
+        "authoring_method",
+        "source_refs",
+        "created_at",
+        "authored_by"
+      ],
+      "title": "EnglishProvenance",
+      "type": "object"
+    },
+    "EnglishQuestionPart": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "prompt": {
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "response": {
+          "discriminator": {
+            "mapping": {
+              "multiple_response": "#/$defs/MultipleResponse",
+              "short_text": "#/$defs/ShortTextResponse",
+              "single_choice": "#/$defs/SingleChoiceResponse"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SingleChoiceResponse"
+            },
+            {
+              "$ref": "#/$defs/MultipleResponse"
+            },
+            {
+              "$ref": "#/$defs/ShortTextResponse"
+            }
+          ],
+          "title": "Response"
+        },
+        "hint": {
+          "minLength": 1,
+          "title": "Hint",
+          "type": "string"
+        },
+        "correct_explanation": {
+          "minLength": 1,
+          "title": "Correct Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "position",
+        "prompt",
+        "response",
+        "hint",
+        "correct_explanation"
+      ],
+      "title": "EnglishQuestionPart",
+      "type": "object"
+    },
+    "MultipleResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "multiple_response",
+          "title": "Type",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "$ref": "#/$defs/ChoiceOption"
+          },
+          "maxItems": 8,
+          "minItems": 2,
+          "title": "Options",
+          "type": "array"
+        },
+        "correct_keys": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Correct Keys",
+          "type": "array"
+        },
+        "choice_rationales": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Choice Rationales",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "options",
+        "correct_keys",
+        "choice_rationales"
+      ],
+      "title": "MultipleResponse",
+      "type": "object"
+    },
+    "PassageReference": {
+      "additionalProperties": false,
+      "properties": {
+        "stable_key": {
+          "pattern": "^english-passage-[a-z0-9-]+$",
+          "title": "Stable Key",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stable_key",
+        "revision",
+        "content_sha256"
+      ],
+      "title": "PassageReference",
+      "type": "object"
+    },
+    "ShortTextResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "short_text",
+          "title": "Type",
+          "type": "string"
+        },
+        "canonical_answer": {
+          "minLength": 1,
+          "title": "Canonical Answer",
+          "type": "string"
+        },
+        "accepted_alternatives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Alternatives",
+          "type": "array"
+        },
+        "normalisation": {
+          "$ref": "#/$defs/TextNormalisation"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "canonical_answer",
+        "rationale"
+      ],
+      "title": "ShortTextResponse",
+      "type": "object"
+    },
+    "SingleChoiceResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "single_choice",
+          "title": "Type",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "$ref": "#/$defs/ChoiceOption"
+          },
+          "maxItems": 8,
+          "minItems": 2,
+          "title": "Options",
+          "type": "array"
+        },
+        "correct_key": {
+          "pattern": "^[A-H]$",
+          "title": "Correct Key",
+          "type": "string"
+        },
+        "choice_rationales": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Choice Rationales",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "options",
+        "correct_key",
+        "choice_rationales"
+      ],
+      "title": "SingleChoiceResponse",
+      "type": "object"
+    },
+    "TextNormalisation": {
+      "additionalProperties": false,
+      "properties": {
+        "unicode_form": {
+          "const": "NFKC",
+          "default": "NFKC",
+          "title": "Unicode Form",
+          "type": "string"
+        },
+        "collapse_whitespace": {
+          "default": true,
+          "title": "Collapse Whitespace",
+          "type": "boolean"
+        },
+        "case_sensitive": {
+          "default": false,
+          "title": "Case Sensitive",
+          "type": "boolean"
+        },
+        "strip_terminal_punctuation": {
+          "default": false,
+          "title": "Strip Terminal Punctuation",
+          "type": "boolean"
+        }
+      },
+      "title": "TextNormalisation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "stable_key": {
+      "pattern": "^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$",
+      "title": "Stable Key",
+      "type": "string"
+    },
+    "bank_key": {
+      "pattern": "^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$",
+      "title": "Bank Key",
+      "type": "string"
+    },
+    "curriculum_version": {
+      "const": "asean_scholarship_english_v1_draft",
+      "title": "Curriculum Version",
+      "type": "string"
+    },
+    "audience_band": {
+      "const": "secondary_school",
+      "title": "Audience Band",
+      "type": "string"
+    },
+    "outcome_code": {
+      "pattern": "^(EX|EV|EG|EB|EO|ER|EW)[0-9]+\\.[0-9]+$",
+      "title": "Outcome Code",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "difficulty": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Difficulty",
+      "type": "integer"
+    },
+    "question_type": {
+      "enum": [
+        "vocabulary_in_context",
+        "grammar_usage",
+        "banked_cloze",
+        "open_cloze",
+        "reading_comprehension",
+        "editing"
+      ],
+      "title": "Question Type",
+      "type": "string"
+    },
+    "exposure_pool": {
+      "enum": [
+        "lesson_example",
+        "guided_practice",
+        "independent_practice",
+        "exit_ticket",
+        "retry_review",
+        "module_checkpoint",
+        "baseline_diagnostic",
+        "endline_diagnostic",
+        "full_mock",
+        "protected_reserve"
+      ],
+      "title": "Exposure Pool",
+      "type": "string"
+    },
+    "feedback_timing": {
+      "enum": [
+        "after_item",
+        "after_group"
+      ],
+      "title": "Feedback Timing",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "passage_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PassageReference"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "instructions": {
+      "minLength": 1,
+      "title": "Instructions",
+      "type": "string"
+    },
+    "parts": {
+      "items": {
+        "$ref": "#/$defs/EnglishQuestionPart"
+      },
+      "minItems": 1,
+      "title": "Parts",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/EnglishProvenance"
+    }
+  },
+  "required": [
+    "revision",
+    "stable_key",
+    "bank_key",
+    "curriculum_version",
+    "audience_band",
+    "outcome_code",
+    "title",
+    "difficulty",
+    "question_type",
+    "exposure_pool",
+    "feedback_timing",
+    "status",
+    "instructions",
+    "parts",
+    "provenance"
+  ],
+  "title": "EnglishObjectiveQuestion",
+  "type": "object"
+}

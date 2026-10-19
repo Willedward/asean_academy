@@ -36,6 +36,7 @@ from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
+from .english_validation import validate_english_foundation, write_english_schemas
 from .practice import PracticeEngine
 from .practice_web import serve_practice
 from .preview import serve
@@ -67,6 +68,8 @@ DEFAULT_DIAGNOSTIC_PLAN = (
     REPOSITORY_ROOT
     / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
 )
+DEFAULT_ENGLISH_FOUNDATION = REPOSITORY_ROOT / "backend_resources/english/v1"
+DEFAULT_ENGLISH_SCHEMA = REPOSITORY_ROOT / "backend_resources/english/schema"
 
 
 def parser():
@@ -319,11 +322,35 @@ def parser():
     diagnostic_authoring_plan.add_argument(
         "--house-rules", type=Path, default=DEFAULT_HOUSE_RULES
     )
+    english_validate = commands.add_parser(
+        "english-foundation-validate",
+        help="Validate the English curriculum, sources, lessons, passages and objective banks",
+    )
+    english_validate.add_argument(
+        "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION
+    )
+    english_validate.add_argument(
+        "--publish", action="store_true", help="Require reviewed learner-visible content"
+    )
+    english_schema = commands.add_parser(
+        "english-schema", help="Generate JSON Schemas for English source contracts"
+    )
+    english_schema.add_argument(
+        "output", type=Path, nargs="?", default=DEFAULT_ENGLISH_SCHEMA
+    )
     return root
 
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "english-foundation-validate":
+        report = validate_english_foundation(args.root, publish=args.publish)
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0 if report.valid else 1
+    if args.command == "english-schema":
+        write_english_schemas(args.output)
+        print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
+        return 0
     if args.command == "diagnostic-authoring-plan":
         result = plan_diagnostic_authoring_banks(
             args.plan,
