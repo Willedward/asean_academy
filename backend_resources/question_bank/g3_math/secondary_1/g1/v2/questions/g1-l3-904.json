@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-904",
   "bank_key": "g3-sec1-g1-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -110,10 +110,10 @@
       "asset_key": "g1-l3-904-regular-octagon",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-904-regular-octagon.svg",
-      "alt_text": "Regular octagon with centre O and adjacent vertices A and B joined to O, forming an isosceles triangle with central angle 45 degrees.",
+      "path": "assets/g1-l3-904-regular-octagon-r2.svg",
+      "alt_text": "Regular octagon with centre O and adjacent vertices A and B joined to O, forming an isosceles triangle at the centre.",
       "generation_spec": {
-        "renderer": "hand-authored-svg-v1",
+        "renderer": "nextscholar-geometry-svg-v2",
         "diagram_kind": "regular_octagon_central_triangle",
         "question_key": "g1-l3-904",
         "not_to_scale": true,
@@ -122,9 +122,26 @@
         "equal_sides": [
           "OA",
           "OB"
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "central-angle",
+            "center": [470, 275],
+            "radius": 52,
+            "start_ray_point": [408.77, 127.18],
+            "end_ray_point": [531.23, 127.18],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "forbidden_visible_labels": [
+          "45°",
+          "45 degrees",
+          "67.5°",
+          "67.5 degrees"
         ]
       },
-      "sha256": "3a351f0ca99a805ead52eae3d5b8774a150a9f7aa75d9109f5a9bf27d464e85f",
+      "sha256": "6001a0262309400b99dc6eea52cf836a82aefd30b8cc590ff76ec1f347fbbfe0",
       "width": 940,
       "height": 520
     }
