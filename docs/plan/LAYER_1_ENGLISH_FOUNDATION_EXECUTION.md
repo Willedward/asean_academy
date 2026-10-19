@@ -96,7 +96,7 @@ sections.
 | E1c | Generated JSON Schemas and cross-file validator | Implemented |
 | E1d | Database migration for English outcomes, passage revisions and objective question revisions | Implemented; not applied to hosted Supabase |
 | E1 pilot | Original E1.1 lesson and six vocabulary-in-context items | Authored as draft; human review pending |
-| E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Not started |
+| E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3 | Authenticated English home, lesson, practice, retry, checkpoint, progress and diagnostic APIs/UI | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -129,6 +129,10 @@ Run the foundation checks from `question_bank/`:
 ```bash
 uv run question-bank english-schema
 uv run question-bank english-foundation-validate
+uv run question-bank english-authoring-validate
+uv run question-bank english-authoring-export \
+  ../backend_resources/english/v1/authoring/batches/english-ev-b001.json \
+  ../build/reviewer-english/english-ev-b001
 uv run pytest tests/test_english_foundation.py
 ```
 
@@ -137,12 +141,13 @@ must fail that gate because it is deliberately still draft content.
 
 ## Remaining execution order
 
-### 1. Finish E2: reviewable content pipeline
+### 1. Deploy and use E2: reviewable content pipeline
 
-Extend the existing batch-claim workflow with English manifests, semantic duplicate
-checks, passage-level review, review notes attached to a question or passage, and bulk
-approval that writes an immutable decision per included revision. Build an importer that
-accepts only a clean validation report.
+The source implementation now includes exclusive English batch claims, deterministic
+exact and near-template duplicate checks, protected reviewer packet exports, passage-level
+review, correction notes, subject-aware English and editorial decisions, consolidated
+batch review and an importer that refuses an invalid snapshot. Apply migrations 028–029
+and deploy this branch before expecting these items in the hosted administrator queue.
 
 ### 2. Deliver the first vertical slice
 
@@ -179,7 +184,7 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone after this foundation is **E2 English content pipeline and
-administrator review integration**. It unlocks parallel authoring and review, gives the
-user a place to flag passage or question problems, and prevents high-volume English work
-from repeating the slow item-by-item process previously used for Mathematics.
+The next technical milestone is **E3 first authenticated English learner vertical
+slice**: expose E1.1 in the English module map, serve its approved lesson/question
+revisions, persist deterministic attempts, record the error category, and route a failed
+exit ticket into retry. Content can continue in parallel through the E2 review queue.

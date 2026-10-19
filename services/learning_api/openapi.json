@@ -1625,6 +1625,7 @@
           "dimension": {
             "enum": [
               "mathematics",
+              "english",
               "editorial"
             ],
             "title": "Dimension",
@@ -1717,6 +1718,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -1863,6 +1867,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -2010,6 +2017,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -2029,6 +2039,16 @@
             "title": "Difficulty"
           },
           "editorial_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContentReviewSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "english_review": {
             "anyOf": [
               {
                 "$ref": "#/components/schemas/ContentReviewSummary"
@@ -2148,6 +2168,7 @@
           "source_status",
           "review_state",
           "mathematics_review",
+          "english_review",
           "editorial_review",
           "lifecycle_request",
           "blockers",
@@ -2213,6 +2234,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -2234,6 +2258,7 @@
           "dimension": {
             "enum": [
               "mathematics",
+              "english",
               "editorial"
             ],
             "title": "Dimension",
@@ -2315,6 +2340,7 @@
           "dimension": {
             "enum": [
               "mathematics",
+              "english",
               "editorial"
             ],
             "title": "Dimension",
@@ -2369,6 +2395,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -2444,6 +2473,9 @@
               "course",
               "lesson",
               "question",
+              "english_lesson",
+              "english_passage",
+              "english_question",
               "tutor_grounding"
             ],
             "title": "Content Kind",
@@ -5987,6 +6019,7 @@
           "dimension": {
             "enum": [
               "mathematics",
+              "english",
               "editorial"
             ],
             "title": "Dimension",
@@ -7847,6 +7880,9 @@
                     "course",
                     "lesson",
                     "question",
+                    "english_lesson",
+                    "english_passage",
+                    "english_question",
                     "tutor_grounding"
                   ],
                   "type": "string"
@@ -8361,6 +8397,9 @@
                     "course",
                     "lesson",
                     "question",
+                    "english_lesson",
+                    "english_passage",
+                    "english_question",
                     "tutor_grounding"
                   ],
                   "type": "string"
@@ -8575,6 +8614,9 @@
                 "course",
                 "lesson",
                 "question",
+                "english_lesson",
+                "english_passage",
+                "english_question",
                 "tutor_grounding"
               ],
               "title": "Kind",
@@ -8728,6 +8770,9 @@
                 "course",
                 "lesson",
                 "question",
+                "english_lesson",
+                "english_passage",
+                "english_question",
                 "tutor_grounding"
               ],
               "title": "Kind",
@@ -8871,6 +8916,9 @@
                 "course",
                 "lesson",
                 "question",
+                "english_lesson",
+                "english_passage",
+                "english_question",
                 "tutor_grounding"
               ],
               "title": "Kind",
@@ -9014,6 +9062,9 @@
                 "course",
                 "lesson",
                 "question",
+                "english_lesson",
+                "english_passage",
+                "english_question",
                 "tutor_grounding"
               ],
               "title": "Kind",

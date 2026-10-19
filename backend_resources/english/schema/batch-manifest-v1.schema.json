@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "EnglishBatchReviewState": {
+      "additionalProperties": false,
+      "properties": {
+        "english": {
+          "default": "pending",
+          "enum": [
+            "pending",
+            "approved",
+            "changes_requested"
+          ],
+          "title": "English",
+          "type": "string"
+        },
+        "editorial": {
+          "default": "pending",
+          "enum": [
+            "pending",
+            "approved",
+            "changes_requested"
+          ],
+          "title": "Editorial",
+          "type": "string"
+        }
+      },
+      "title": "EnglishBatchReviewState",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "batch_id": {
+      "pattern": "^english-(ev|eg|eb|eo|er|ex)-b[0-9]{3}$",
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "bank_key": {
+      "pattern": "^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$",
+      "title": "Bank Key",
+      "type": "string"
+    },
+    "module_code": {
+      "pattern": "^E[0-9]+$",
+      "title": "Module Code",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "draft",
+        "ready_for_review",
+        "changes_requested",
+        "approved"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "expected_question_count": {
+      "maximum": 30,
+      "minimum": 1,
+      "title": "Expected Question Count",
+      "type": "integer"
+    },
+    "question_keys": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Question Keys",
+      "type": "array"
+    },
+    "review": {
+      "$ref": "#/$defs/EnglishBatchReviewState"
+    }
+  },
+  "required": [
+    "batch_id",
+    "bank_key",
+    "module_code",
+    "status",
+    "expected_question_count",
+    "question_keys"
+  ],
+  "title": "EnglishBatchManifest",
+  "type": "object"
+}

@@ -1834,7 +1834,7 @@ export interface components {
              * Dimension
              * @enum {string}
              */
-            dimension: "mathematics" | "editorial";
+            dimension: "mathematics" | "english" | "editorial";
             /** Notes */
             notes: string;
             /**
@@ -1867,7 +1867,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /** Review Fingerprint */
             review_fingerprint: string;
             /** Source Content Sha256 */
@@ -1920,7 +1920,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -1992,10 +1992,11 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /** Difficulty */
             difficulty?: number | null;
             editorial_review: components["schemas"]["ContentReviewSummary"] | null;
+            english_review: components["schemas"]["ContentReviewSummary"] | null;
             lifecycle_request: components["schemas"]["ContentLifecycleSummary"] | null;
             mathematics_review: components["schemas"]["ContentReviewSummary"] | null;
             /** Outcome Code */
@@ -2046,7 +2047,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -2061,7 +2062,7 @@ export interface components {
              * Dimension
              * @enum {string}
              */
-            dimension: "mathematics" | "editorial";
+            dimension: "mathematics" | "english" | "editorial";
             /** Notes */
             notes: string;
             /**
@@ -2103,7 +2104,7 @@ export interface components {
              * Dimension
              * @enum {string}
              */
-            dimension: "mathematics" | "editorial";
+            dimension: "mathematics" | "english" | "editorial";
             /** Notes */
             notes: string;
             /** Reviewer Email */
@@ -2124,7 +2125,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /** Review Content */
             review_content: {
                 [key: string]: unknown;
@@ -2155,7 +2156,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
             /** Public Content */
             public_content: {
                 [key: string]: unknown;
@@ -3502,7 +3503,7 @@ export interface components {
              * Dimension
              * @enum {string}
              */
-            dimension: "mathematics" | "editorial";
+            dimension: "mathematics" | "english" | "editorial";
             /** Notes */
             notes: string;
             /** Review Fingerprint */
@@ -4335,7 +4336,7 @@ export interface operations {
     listContentReviewQueue: {
         parameters: {
             query?: {
-                kind?: ("course" | "lesson" | "question" | "tutor_grounding") | null;
+                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding") | null;
                 source_status?: string | null;
                 review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
                 search?: string | null;
@@ -4655,7 +4656,7 @@ export interface operations {
     exportContentReviewCorrections: {
         parameters: {
             query?: {
-                kind?: ("course" | "lesson" | "question" | "tutor_grounding") | null;
+                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding") | null;
                 search?: string | null;
                 batch_id?: string | null;
                 unit_key?: string | null;
@@ -4765,7 +4766,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -4873,7 +4874,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -4977,7 +4978,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -5081,7 +5082,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;

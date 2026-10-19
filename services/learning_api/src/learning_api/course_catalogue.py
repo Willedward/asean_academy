@@ -9,6 +9,8 @@ from question_bank.authoring import load_manifest
 from question_bank.course_models import ActiveRecallSection
 from question_bank.course_registry import validate_course_registry
 from question_bank.course_validation import validate_course
+from question_bank.english_authoring import question_batch_map, validate_english_authoring
+from question_bank.english_validation import validate_english_foundation
 from question_bank.validation import validate_catalogue
 
 from .course_contracts import (
@@ -28,6 +30,7 @@ COURSE_CATALOGUE_ROOT = Path("backend_resources/courses/g3_math")
 BANK_ROOT = Path("backend_resources/question_bank/g3_math")
 COURSE_REGISTRY_PATH = Path("backend_resources/courses/g3_math/v1/registry.json")
 SYLLABUS_PATH = Path("backend_resources/syllabi/g3_math/v1/catalogue.json")
+ENGLISH_ROOT = Path("backend_resources/english/v1")
 
 
 class CatalogueError(RuntimeError):
@@ -138,6 +141,30 @@ class CourseCatalogue:
                 if question_key in authored_keys:
                     batches[question_key] = manifest.batch_id
         return batches
+
+    @cached_property
+    def english_review_report(self):
+        """Return valid English drafts for the protected administrator review queue."""
+        report = validate_english_foundation(self.repository_root / ENGLISH_ROOT)
+        if not report.valid:
+            raise CatalogueError(
+                "english_review_content_invalid",
+                "The authored English foundation failed validation and cannot be reviewed.",
+                503,
+            )
+        return report
+
+    @cached_property
+    def english_review_question_batches(self) -> dict[str, str]:
+        root = self.repository_root / ENGLISH_ROOT
+        report = validate_english_authoring(root)
+        if not report.valid:
+            raise CatalogueError(
+                "english_authoring_invalid",
+                "English batches or duplicate checks failed and cannot be reviewed.",
+                503,
+            )
+        return question_batch_map(root)
 
     def course_registry(self) -> CourseRegistryResponse:
         registry = self.registry_report.registry

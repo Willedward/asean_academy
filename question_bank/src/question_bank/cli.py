@@ -36,6 +36,13 @@ from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
+from .english_authoring import (
+    claim_english_batch,
+    export_english_reviewer_batch,
+    release_english_batch,
+    validate_english_authoring,
+)
+from .english_repository import EnglishObjectiveImporter
 from .english_validation import validate_english_foundation, write_english_schemas
 from .practice import PracticeEngine
 from .practice_web import serve_practice
@@ -70,6 +77,7 @@ DEFAULT_DIAGNOSTIC_PLAN = (
 )
 DEFAULT_ENGLISH_FOUNDATION = REPOSITORY_ROOT / "backend_resources/english/v1"
 DEFAULT_ENGLISH_SCHEMA = REPOSITORY_ROOT / "backend_resources/english/schema"
+DEFAULT_ENGLISH_CLAIMS = DEFAULT_ENGLISH_FOUNDATION / "authoring/claims.json"
 
 
 def parser():
@@ -338,6 +346,46 @@ def parser():
     english_schema.add_argument(
         "output", type=Path, nargs="?", default=DEFAULT_ENGLISH_SCHEMA
     )
+    english_authoring_validate = commands.add_parser(
+        "english-authoring-validate",
+        help="Validate English batches, assignments and cross-bank prompt duplicates",
+    )
+    english_authoring_validate.add_argument(
+        "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION
+    )
+    english_authoring_validate.add_argument(
+        "--near-duplicate-threshold", type=float, default=0.9
+    )
+    english_export = commands.add_parser(
+        "english-authoring-export", help="Export a protected English reviewer packet"
+    )
+    english_export.add_argument("batch", type=Path)
+    english_export.add_argument("output", type=Path)
+    english_export.add_argument("--root", type=Path, default=DEFAULT_ENGLISH_FOUNDATION)
+    english_claim = commands.add_parser(
+        "english-authoring-claim", help="Claim one English batch for a branch"
+    )
+    english_claim.add_argument("batch_id")
+    english_claim.add_argument("--owner", required=True)
+    english_claim.add_argument("--branch", required=True)
+    english_claim.add_argument("--root", type=Path, default=DEFAULT_ENGLISH_FOUNDATION)
+    english_claim.add_argument("--claims", type=Path, default=DEFAULT_ENGLISH_CLAIMS)
+    english_release = commands.add_parser(
+        "english-authoring-release", help="Release an active English batch claim"
+    )
+    english_release.add_argument("batch_id")
+    english_release.add_argument("--owner", required=True)
+    english_release.add_argument("--claims", type=Path, default=DEFAULT_ENGLISH_CLAIMS)
+    english_importer = commands.add_parser(
+        "english-import-db",
+        help="Import a validation-clean English objective snapshot into PostgreSQL",
+    )
+    english_importer.add_argument(
+        "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION
+    )
+    english_importer.add_argument(
+        "--publish", action="store_true", help="Require reviewed publication-ready content"
+    )
     return root
 
 
@@ -350,6 +398,58 @@ def main(argv=None):
     if args.command == "english-schema":
         write_english_schemas(args.output)
         print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
+        return 0
+    if args.command == "english-authoring-validate":
+        report = validate_english_authoring(
+            args.root, near_duplicate_threshold=args.near_duplicate_threshold
+        )
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0 if report.valid else 1
+    if args.command == "english-authoring-export":
+        result = export_english_reviewer_batch(args.root, args.batch, args.output)
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "english-authoring-claim":
+        result = claim_english_batch(
+            args.claims,
+            args.root,
+            batch_id=args.batch_id,
+            owner=args.owner,
+            branch=args.branch,
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "english-authoring-release":
+        result = release_english_batch(
+            args.claims, batch_id=args.batch_id, owner=args.owner
+        )
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "english-import-db":
+        foundation = validate_english_foundation(args.root, publish=args.publish)
+        authoring = validate_english_authoring(args.root)
+        if not foundation.valid or not authoring.valid:
+            print(
+                json.dumps(
+                    {
+                        "valid": False,
+                        "foundation": foundation.as_dict(),
+                        "authoring": authoring.as_dict(),
+                    },
+                    indent=2,
+                )
+            )
+            return 1
+        database_url = os.environ.get("DATABASE_URL")
+        if not database_url:
+            raise SystemExit("Set DATABASE_URL before running english-import-db")
+        try:
+            import psycopg
+        except ImportError as exc:
+            raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
+        with psycopg.connect(database_url, prepare_threshold=None) as connection:
+            result = EnglishObjectiveImporter(connection).import_all(foundation)
+        print(json.dumps({"status": "complete", "result": result}, indent=2))
         return 0
     if args.command == "diagnostic-authoring-plan":
         result = plan_diagnostic_authoring_banks(

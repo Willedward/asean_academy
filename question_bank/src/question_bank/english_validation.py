@@ -264,6 +264,8 @@ def validate_english_foundation(
 
 
 def write_english_schemas(output: Path):
+    from .english_authoring import EnglishBatchClaimRegistry, EnglishBatchManifest
+
     output.mkdir(parents=True, exist_ok=True)
     schemas = {
         "catalogue-v1.schema.json": EnglishCurriculumCatalogue,
@@ -272,6 +274,8 @@ def write_english_schemas(output: Path):
         "objective-question-v1.schema.json": EnglishObjectiveQuestion,
         "bank-manifest-v1.schema.json": EnglishBankManifest,
         "lesson-v1.schema.json": EnglishLesson,
+        "batch-manifest-v1.schema.json": EnglishBatchManifest,
+        "batch-claims-v1.schema.json": EnglishBatchClaimRegistry,
     }
     for filename, model in schemas.items():
         path = output / filename

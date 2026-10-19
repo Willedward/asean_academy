@@ -50,5 +50,22 @@
       "match": "drop constraint math_answer_specs_check",
       "reason": "A named response-mode constraint that adds exact_ratio is created and validated before the original constraint is removed; every previously allowed response and comparison mode remains valid."
     }
+  ],
+  "202610190029_english_content_review.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_review_records_item_kind_check",
+      "reason": "The item-kind constraint is recreated in the same transaction with English lesson, passage and question kinds added; every previously allowed kind remains valid."
+    },
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_review_records_dimension_check",
+      "reason": "The review-dimension constraint is recreated in the same transaction with English added; Mathematics and editorial records remain valid."
+    },
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_lifecycle_requests_item_kind_check",
+      "reason": "The lifecycle item-kind constraint is recreated in the same transaction with English lesson, passage and question kinds added; every previously allowed kind remains valid."
+    }
   ]
 }
