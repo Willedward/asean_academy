@@ -220,6 +220,10 @@ solutions, calculator permission, provenance and any referenced asset metadata. 
 Singapore/British English, metric units and SGD where money is needed. Do not copy wording
 from source papers. Do not mark content reviewed or published. Set `assets` to an empty
 array unless matching checksum-tracked asset files have already been prepared in the bank.
+For geometry SVGs, calculate angle-arc endpoints from the same centre and rays used by the
+diagram; declare every arc in `generation_spec.angle_markers`. Keep labels clear of rays and
+arcs. Declare answer or intermediate values that learners must derive in
+`forbidden_visible_labels`, and do not expose those values in visible SVG text or alt text.
 
 ## Reserved slots
 

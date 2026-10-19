@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   MathContent,
@@ -154,7 +154,59 @@ function canonicalAnswer(response: ReviewResponse) {
   );
 }
 
-function ReviewerPreview({ preview }: { preview: ContentPreview }) {
+function DiagramReviewReferences({
+  assets,
+  onComment,
+}: {
+  assets: ContentAsset[];
+  onComment?: (assetKey: string) => void;
+}) {
+  if (!assets.length) return null;
+  return (
+    <aside className="space-y-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+      <div>
+        <p className="m-0 font-bold">Diagram feedback references</p>
+        <p className="mb-0 text-sm text-slate-700">
+          Diagram feedback remains part of the immutable review note. Identify
+          the asset key so the correction export can route the comment to the
+          exact SVG.
+        </p>
+      </div>
+      <ul className="space-y-2">
+        {assets.map((asset) => (
+          <li
+            className="flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-white p-3"
+            key={asset.asset_key}
+          >
+            <span>
+              <code>{asset.asset_key}</code>
+              <span className="block text-xs text-slate-600">
+                {asset.alt_text}
+              </span>
+            </span>
+            {onComment ? (
+              <Button
+                onClick={() => onComment(asset.asset_key)}
+                type="button"
+                variant="outline"
+              >
+                Comment on diagram
+              </Button>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
+}
+
+function ReviewerPreview({
+  preview,
+  onDiagramComment,
+}: {
+  preview: ContentPreview;
+  onDiagramComment?: (assetKey: string) => void;
+}) {
   const content = preview.review_content;
   if (preview.content_kind === "question") {
     const question = content as unknown as ReviewQuestion;
@@ -175,6 +227,10 @@ function ReviewerPreview({ preview }: { preview: ContentPreview }) {
             kind="question"
             stableKey={question.stable_key}
             value={question.stem}
+          />
+          <DiagramReviewReferences
+            assets={question.assets ?? []}
+            onComment={onDiagramComment}
           />
         </div>
         {question.parts.map((part) => (
@@ -744,6 +800,7 @@ function ItemActions({
     "approved",
   );
   const [notes, setNotes] = useState("");
+  const notesRef = useRef<HTMLTextAreaElement>(null);
   const [reason, setReason] = useState("");
   const [confirmAction, setConfirmAction] = useState<
     "publish" | "retire" | null
@@ -844,12 +901,13 @@ function ItemActions({
         </label>
         <label>
           Review notes
-          <input
+          <textarea
             aria-label={`Review notes for ${item.stable_key}`}
-            className="mt-1 w-full rounded-lg border bg-white p-2"
+            className="mt-1 min-h-20 w-full rounded-lg border bg-white p-2"
             maxLength={2000}
             onChange={(event) => setNotes(event.target.value)}
             placeholder="Record what you checked"
+            ref={notesRef}
             value={notes}
           />
         </label>
@@ -924,7 +982,21 @@ function ItemActions({
           {error}
         </p>
       ) : null}
-      {preview ? <ReviewerPreview preview={preview} /> : null}
+      {preview ? (
+        <ReviewerPreview
+          onDiagramComment={(assetKey) => {
+            const prefix = `Diagram ${assetKey}: `;
+            setDecision("changes_requested");
+            setNotes((current) =>
+              current.includes(prefix)
+                ? current
+                : `${current.trimEnd()}${current.trim() ? "\n" : ""}${prefix}`,
+            );
+            notesRef.current?.focus();
+          }}
+          preview={preview}
+        />
+      ) : null}
     </div>
   );
 }
@@ -1141,8 +1213,8 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
       </form>
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
         <span>
-          Correction export contains exact stable keys, revisions, fingerprints and
-          the latest Mathematics or editorial notes for Codex.
+          Correction export contains exact stable keys, revisions, fingerprints
+          and the latest Mathematics or editorial notes for Codex.
         </span>
         <Button asChild variant="outline">
           <a href={correctionsHref} rel="noreferrer" target="_blank">

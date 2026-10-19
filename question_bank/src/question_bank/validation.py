@@ -11,7 +11,7 @@ from pydantic import ValidationError
 
 from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_catalogue
 from .difficulty import DIFFICULTY_KEYS
-from .geometry_validation import angle_diagram_issues, revisioned_asset_path_issues
+from .geometry_validation import geometry_diagram_issues, revisioned_asset_path_issues
 from .models import Question
 
 
@@ -163,7 +163,9 @@ def _validate_assets(bank_root: Path, question: Question, report: ValidationRepo
             )
         for code, message in revisioned_asset_path_issues(asset.path, question.revision):
             _issue(report, "error", code, path, message)
-        for code, message in angle_diagram_issues(path, asset.generation_spec):
+        for code, message in geometry_diagram_issues(
+            path, asset.generation_spec, asset.alt_text
+        ):
             _issue(report, "error", code, path, message)
 
 

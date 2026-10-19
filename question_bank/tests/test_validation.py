@@ -4,7 +4,10 @@ import shutil
 
 from jsonschema import Draft202012Validator
 
-from question_bank.geometry_validation import revisioned_asset_path_issues
+from question_bank.geometry_validation import (
+    geometry_diagram_issues,
+    revisioned_asset_path_issues,
+)
 from question_bank.models import Question
 from question_bank.validation import validate_bank
 
@@ -34,6 +37,57 @@ def test_changed_assets_use_a_revisioned_storage_path():
             "asset_revision_path",
             "Revision 3 assets require an -r3 filename before the extension.",
         )
+    ]
+
+
+def test_declared_angle_marker_must_touch_both_rays(tmp_path):
+    svg_path = tmp_path / "angle.svg"
+    svg_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<path data-angle-marker="target" d="M 10 0 A 10 10 0 0 1 0 10"/>'
+        "</svg>"
+    )
+    spec = {
+        "angle_markers": [
+            {
+                "marker_key": "target",
+                "center": [0, 0],
+                "radius": 10,
+                "start_ray_point": [20, 0],
+                "end_ray_point": [0, 20],
+                "large_arc": 0,
+                "sweep": 1,
+            }
+        ]
+    }
+
+    assert geometry_diagram_issues(svg_path, spec) == []
+
+    svg_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg">'
+        '<path data-angle-marker="target" d="M 10 0 A 10 10 0 0 1 4 10"/>'
+        "</svg>"
+    )
+
+    assert {
+        code for code, _ in geometry_diagram_issues(svg_path, spec)
+    } == {"geometry_angle_marker_end", "geometry_angle_marker_radius"}
+
+
+def test_withheld_geometry_values_cannot_appear_in_svg_or_alt_text(tmp_path):
+    svg_path = tmp_path / "answer-leak.svg"
+    svg_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><text>45°</text></svg>'
+    )
+    spec = {"forbidden_visible_labels": ["45°", "45 degrees"]}
+
+    issues = geometry_diagram_issues(
+        svg_path, spec, "An octagon showing a central angle of 45 degrees."
+    )
+
+    assert [code for code, _ in issues] == [
+        "geometry_answer_leak",
+        "geometry_answer_leak",
     ]
 
 

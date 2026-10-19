@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-903",
   "bank_key": "g3-sec1-g1-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -110,10 +110,10 @@
       "asset_key": "g1-l3-903-parallel-lines",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-903-parallel-lines.svg",
+      "path": "assets/g1-l3-903-parallel-lines-r2.svg",
       "alt_text": "Parallel lines AB and CD cut by a transversal, with co-interior angles labelled 5x minus 11 degrees and 3x plus 15 degrees and a vertically opposite angle labelled y degrees.",
       "generation_spec": {
-        "renderer": "hand-authored-svg-v1",
+        "renderer": "nextscholar-geometry-svg-v2",
         "diagram_kind": "parallel_lines_transversal",
         "question_key": "g1-l3-903",
         "not_to_scale": true,
@@ -124,9 +124,44 @@
         "relationships": [
           "co-interior angles",
           "vertically opposite angles"
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "upper-co-interior",
+            "center": [526.04, 170],
+            "radius": 55,
+            "start_ray_point": [790, 170],
+            "end_ray_point": [472, 455],
+            "large_arc": 0,
+            "sweep": 1
+          },
+          {
+            "marker_key": "lower-co-interior",
+            "center": [488.12, 370],
+            "radius": 55,
+            "start_ray_point": [545, 70],
+            "end_ray_point": [790, 370],
+            "large_arc": 0,
+            "sweep": 1
+          },
+          {
+            "marker_key": "vertical-opposite",
+            "center": [488.12, 370],
+            "radius": 55,
+            "start_ray_point": [472, 455],
+            "end_ray_point": [160, 370],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "forbidden_visible_labels": [
+          "22°",
+          "22 degrees",
+          "81°",
+          "81 degrees"
         ]
       },
-      "sha256": "84b3c208dc53158f242388687e6c0728712c925d229127a72200c49aae3f9394",
+      "sha256": "563c7bb50da9bad1d857270b5aa7cdfece8e091153e2b15846a2030d7446cb29",
       "width": 940,
       "height": 520
     }

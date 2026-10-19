@@ -52,8 +52,15 @@ const preview: ContentPreview = {
   review_fingerprint: item.review_fingerprint,
   batch_id: "g3-sec1-n2-b001",
   review_content: {
+    stable_key: item.stable_key,
     title: item.title,
-    stem: [],
+    stem: [{ type: "asset_ref", asset_key: "n2-l1-001-diagram" }],
+    assets: [
+      {
+        asset_key: "n2-l1-001-diagram",
+        alt_text: "A ratio diagram for reviewer inspection.",
+      },
+    ],
     difficulty: 1,
     primary_outcome: "2.1",
     total_marks: 2,
@@ -191,6 +198,33 @@ describe("ContentReviewPanel", () => {
         decision: "approved",
       });
     });
+  });
+
+  it("routes diagram feedback into a changes-requested review note", async () => {
+    const fetcher = vi.fn(async (url: string) => {
+      if (url.includes("/review-preview"))
+        return new Response(JSON.stringify(preview));
+      return new Response(JSON.stringify(queue));
+    });
+    vi.stubGlobal("fetch", fetcher);
+
+    render(<ContentReviewPanel academic />);
+    await screen.findByText("Simplifying a ratio");
+    fireEvent.click(
+      screen.getByRole("button", { name: "Open reviewer preview" }),
+    );
+
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Comment on diagram" }),
+    );
+
+    expect(screen.getByLabelText("Decision for n2-l1-001")).toHaveValue(
+      "changes_requested",
+    );
+    expect(screen.getByLabelText("Review notes for n2-l1-001")).toHaveValue(
+      "Diagram n2-l1-001-diagram: ",
+    );
+    expect(screen.getByLabelText("Review notes for n2-l1-001")).toHaveFocus();
   });
 
   it("filters the queue by authoring batch and shows batch approval progress", async () => {

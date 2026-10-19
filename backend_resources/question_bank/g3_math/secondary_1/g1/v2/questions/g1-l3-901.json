@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-901",
   "bank_key": "g3-sec1-g1-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,19 +108,45 @@
       "asset_key": "g1-l3-901-reflex-angle",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-901-reflex-angle.svg",
+      "path": "assets/g1-l3-901-reflex-angle-r2.svg",
       "alt_text": "Two rays OA and OB form a smaller angle labelled x degrees and a reflex angle labelled 2x plus 60 degrees.",
       "generation_spec": {
-        "renderer": "hand-authored-svg-v1",
+        "renderer": "nextscholar-geometry-svg-v2",
         "diagram_kind": "smaller_and_reflex_angles",
         "question_key": "g1-l3-901",
         "not_to_scale": true,
         "labels": {
           "smaller_angle": "x degrees",
           "reflex_angle": "2x plus 60 degrees"
-        }
+        },
+        "angle_markers": [
+          {
+            "marker_key": "smaller-angle",
+            "center": [470, 285],
+            "radius": 82,
+            "start_ray_point": [735, 285],
+            "end_ray_point": [433, 75],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "reflex-angle",
+            "center": [470, 285],
+            "radius": 128,
+            "start_ray_point": [433, 75],
+            "end_ray_point": [735, 285],
+            "large_arc": 1,
+            "sweep": 0
+          }
+        ],
+        "forbidden_visible_labels": [
+          "100°",
+          "100 degrees",
+          "260°",
+          "260 degrees"
+        ]
       },
-      "sha256": "15cc54d837b54d6ac8e82dca726b8a79e05f386e285b9426675e5ae2d8c9e496",
+      "sha256": "2465d41eebd38d7ccf7bfea7be25868a9733f8ea305c0ae97d6106fc4d06bf8f",
       "width": 940,
       "height": 500
     }
