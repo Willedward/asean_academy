@@ -5,13 +5,12 @@ import { useEffect, useState } from "react";
 
 const RETRY_SECONDS = 10;
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
+type ReconnectPageProps = {
   error: Error & { digest?: string };
-  reset: () => void;
-}) {
+  reloadPage: () => void;
+};
+
+export function ReconnectPage({ error, reloadPage }: ReconnectPageProps) {
   const [seconds, setSeconds] = useState(RETRY_SECONDS);
 
   useEffect(() => {
@@ -19,12 +18,12 @@ export default function ErrorPage({
       () => setSeconds((value) => Math.max(0, value - 1)),
       1_000,
     );
-    const retry = window.setTimeout(reset, RETRY_SECONDS * 1_000);
+    const retry = window.setTimeout(reloadPage, RETRY_SECONDS * 1_000);
     return () => {
       window.clearInterval(interval);
       window.clearTimeout(retry);
     };
-  }, [error.digest, reset]);
+  }, [error.digest, reloadPage]);
 
   return (
     <main className="mx-auto flex min-h-screen max-w-xl flex-col justify-center px-5">
@@ -40,7 +39,7 @@ export default function ErrorPage({
         <Button
           onClick={() => {
             setSeconds(RETRY_SECONDS);
-            reset();
+            reloadPage();
           }}
         >
           Try now
@@ -52,5 +51,16 @@ export default function ErrorPage({
         </p>
       ) : null}
     </main>
+  );
+}
+
+export default function ErrorPage({
+  error,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  return (
+    <ReconnectPage error={error} reloadPage={() => window.location.reload()} />
   );
 }
