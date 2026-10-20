@@ -7,7 +7,9 @@ export default async function EnglishPracticePage({
   params,
 }: PageProps<"/english/practice/[sessionId]">) {
   const { sessionId } = await params;
-  const learner = await requireEnrolledLearner();
+  const learner = await requireEnrolledLearner(
+    `/english/practice/${encodeURIComponent(sessionId)}`,
+  );
   if (!learner) return null;
 
   return (

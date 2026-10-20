@@ -12,8 +12,8 @@ import { hasActiveEnrolment } from "./learner-state";
 import { requireVerifiedSession } from "./session";
 
 export const requireEnrolledLearner = cache(
-  async function requireEnrolledLearner() {
-    const session = await requireVerifiedSession("/learn");
+  async function requireEnrolledLearner(nextPath = "/learn") {
+    const session = await requireVerifiedSession(nextPath);
     if (!session) return null;
 
     let learner;

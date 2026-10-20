@@ -9,7 +9,7 @@ import {
 } from "@/lib/server/learning-api";
 
 export default async function EnglishPage() {
-  const learner = await requireEnrolledLearner();
+  const learner = await requireEnrolledLearner("/english");
   const session = await getVerifiedSession();
   if (!learner || !session) return null;
 
