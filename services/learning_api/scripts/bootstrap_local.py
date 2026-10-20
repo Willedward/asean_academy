@@ -10,6 +10,7 @@ from pathlib import Path
 import psycopg
 from question_bank.catalogue_repository import CatalogueImporter
 from question_bank.course_repository import CourseImporter
+from question_bank.english_repository import EnglishObjectiveImporter
 from run_dev import REPOSITORY_ROOT, _configure_environment
 
 from learning_api.config import Settings
@@ -50,6 +51,7 @@ def lock(connection):
 def bootstrap(database_url: str, *, apply: bool) -> dict:
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
     report = catalogue.report
+    english_report = catalogue.english_learner_report
     questions = catalogue.questions
     directory = REPOSITORY_ROOT / "supabase/migrations"
     allowlist = json.loads((REPOSITORY_ROOT / "scripts/migration_safety_allowlist.json").read_text())
@@ -79,6 +81,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
                     lock(connection)
                     import_question_catalogue(connection, report)
                     CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
+                    EnglishObjectiveImporter(connection).import_all(english_report)
                     check_content(connection, catalogue)
                 print("Content import preview passed; transaction rolled back.")
             return {"applied": False, "pending_migrations": len(pending)}
@@ -105,9 +108,10 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             lock(connection)
             import_question_catalogue(connection, report)
             CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
+            english_result = EnglishObjectiveImporter(connection).import_all(english_report)
             result = check_content(connection, catalogue)
         print("Imported and verified content. Enrolments and credentials were not changed.")
-        return result
+        return {**result, "english": english_result}
 
 
 def main():
