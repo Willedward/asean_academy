@@ -1,0 +1,170 @@
+{
+  "$defs": {
+    "SourceRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "source_key": {
+          "pattern": "^[a-z0-9][a-z0-9-]+$",
+          "title": "Source Key",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "evidence_kind": {
+          "enum": [
+            "official_administration_guide",
+            "candidate_report",
+            "independent_preparation_summary",
+            "research_guidance"
+          ],
+          "title": "Evidence Kind",
+          "type": "string"
+        },
+        "authority": {
+          "enum": [
+            "official",
+            "candidate_reported",
+            "research",
+            "inferred"
+          ],
+          "title": "Authority",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        },
+        "test_year": {
+          "anyOf": [
+            {
+              "maximum": 2100,
+              "minimum": 2000,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Test Year"
+        },
+        "entry_level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entry Level"
+        },
+        "country": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Country"
+        },
+        "city": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "City"
+        },
+        "supports": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Supports",
+          "type": "array"
+        },
+        "limitations": {
+          "minLength": 1,
+          "title": "Limitations",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_key",
+        "title",
+        "evidence_kind",
+        "authority",
+        "supports",
+        "limitations"
+      ],
+      "title": "SourceRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "inventory_key": {
+      "const": "asean-scholarship-english-evidence-v1",
+      "title": "Inventory Key",
+      "type": "string"
+    },
+    "evidence_boundary": {
+      "minLength": 1,
+      "title": "Evidence Boundary",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRecord"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "inventory_key",
+    "evidence_boundary",
+    "sources"
+  ],
+  "title": "SourceInventory",
+  "type": "object"
+}

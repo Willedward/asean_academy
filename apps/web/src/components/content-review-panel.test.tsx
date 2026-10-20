@@ -30,6 +30,7 @@ const item: ContentItem = {
   unit_key: "g3-sec1-n2",
   review_state: "approved",
   mathematics_review: null,
+  english_review: null,
   editorial_review: null,
   lifecycle_request: null,
   blockers: [],
@@ -437,5 +438,84 @@ describe("ContentReviewPanel", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText("3:5")).toBeInTheDocument();
     expect(screen.getByText("Source references")).toBeInTheDocument();
+  });
+
+  it("reviews an English batch with English and editorial dimensions", async () => {
+    const englishItem: ContentItem = {
+      ...item,
+      content_kind: "english_question",
+      stable_key: "ev-l1-001",
+      title: "Definition clue: treacherous",
+      outcome_code: "EV1.1",
+      batch_id: "english-ev-b001",
+      unit_key: "english-e1",
+      mathematics_review: null,
+      english_review: null,
+    };
+    const englishQueue: ContentQueue = {
+      ...queue,
+      items: [englishItem],
+      batch_ids: ["english-ev-b001"],
+      unit_keys: ["english-e1"],
+    };
+    const englishPreview: ContentPreview = {
+      content_kind: "english_question",
+      stable_key: englishItem.stable_key,
+      revision: 1,
+      review_fingerprint: englishItem.review_fingerprint,
+      batch_id: "english-ev-b001",
+      review_content: {
+        stable_key: "ev-l1-001",
+        title: englishItem.title,
+        outcome_code: "EV1.1",
+        difficulty: 1,
+        question_type: "vocabulary_in_context",
+        exposure_pool: "guided_practice",
+        instructions: "Choose the meaning that best fits the sentence.",
+        parts: [
+          {
+            position: 1,
+            prompt: "The path was treacherous—dangerous and unstable.",
+            hint: "Read the definition after the dash.",
+            correct_explanation: "The sentence directly defines the word.",
+            response: {
+              type: "single_choice",
+              options: [
+                { key: "A", text: "safe" },
+                { key: "B", text: "hazardous" },
+              ],
+              correct_key: "B",
+              choice_rationales: {
+                A: "The warning shows that the path was not safe.",
+                B: "Dangerous and unstable means hazardous.",
+              },
+            },
+          },
+        ],
+      },
+    };
+    const fetcher = vi.fn(async (url: string) => {
+      if (url.includes("/review-preview")) {
+        return new Response(JSON.stringify(englishPreview));
+      }
+      return new Response(JSON.stringify(englishQueue));
+    });
+    vi.stubGlobal("fetch", fetcher);
+
+    render(<ContentReviewPanel academic />);
+    await screen.findByText(englishItem.title);
+    expect(screen.getByLabelText("Review area for ev-l1-001")).toHaveValue(
+      "english",
+    );
+    expect(screen.getByRole("option", { name: "English" })).toBeInTheDocument();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Open reviewer preview" }),
+    );
+    expect(await screen.findByText("Approved answer")).toBeInTheDocument();
+    expect(screen.getByText("hazardous")).toBeInTheDocument();
+    expect(
+      screen.getByText("The sentence directly defines the word."),
+    ).toBeInTheDocument();
   });
 });

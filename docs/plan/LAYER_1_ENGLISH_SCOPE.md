@@ -6,6 +6,11 @@
 
 **Curriculum:** [LAYER_1_ENGLISH_CURRICULUM.md](./LAYER_1_ENGLISH_CURRICULUM.md)
 
+**Implementation status:** The E0 blueprint and the first E1 source-contract milestone
+are implemented on `feature/english-layer1-foundation`. See
+[LAYER_1_ENGLISH_FOUNDATION_EXECUTION.md](./LAYER_1_ENGLISH_FOUNDATION_EXECUTION.md) for
+the executable files, completed work and remaining release sequence.
+
 ## Decision
 
 Layer 1 includes both Mathematics and English as the academic product. English is a

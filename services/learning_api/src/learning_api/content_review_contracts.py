@@ -10,8 +10,16 @@ from pydantic import Field
 
 from .contracts import ApiModel
 
-ContentKind = Literal["course", "lesson", "question", "tutor_grounding"]
-ReviewDimension = Literal["mathematics", "editorial"]
+ContentKind = Literal[
+    "course",
+    "lesson",
+    "question",
+    "english_lesson",
+    "english_passage",
+    "english_question",
+    "tutor_grounding",
+]
+ReviewDimension = Literal["mathematics", "english", "editorial"]
 ReviewDecision = Literal["approved", "changes_requested"]
 LifecycleAction = Literal["publish", "retire"]
 ReviewState = Literal[
@@ -60,6 +68,7 @@ class ContentReviewItemResponse(ApiModel):
     unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     review_state: ReviewState
     mathematics_review: ContentReviewSummary | None
+    english_review: ContentReviewSummary | None
     editorial_review: ContentReviewSummary | None
     lifecycle_request: ContentLifecycleSummary | None
     blockers: list[str]

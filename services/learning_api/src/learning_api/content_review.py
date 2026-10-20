@@ -4,12 +4,18 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 from psycopg.types.json import Jsonb
 from question_bank.course_repository import course_content_hash, lesson_content_hash
+from question_bank.english_models import (
+    EnglishLesson,
+    EnglishObjectiveQuestion,
+    EnglishPassage,
+)
 from question_bank.practice import public_question
 from question_bank.repository import content_hash
 
@@ -67,6 +73,78 @@ def review_fingerprint(*models: Any) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+def _english_source_hash(model: Any) -> str:
+    payload = model.model_dump(mode="json")
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewItem]:
+    report = catalogue.english_review_report
+    batch_by_question = catalogue.english_review_question_batches
+    items = []
+    for lesson in report.lessons:
+        module_code = lesson.lesson_code.split(".", 1)[0].lower()
+        items.append(
+            CatalogueReviewItem(
+                kind="english_lesson",
+                stable_key=lesson.stable_key,
+                revision=lesson.revision,
+                source_hash=_english_source_hash(lesson),
+                fingerprint=review_fingerprint(lesson),
+                title=lesson.title,
+                source_status=lesson.status,
+                model=lesson,
+                position=int(lesson.lesson_code.split(".", 1)[1]),
+                unit_key=f"english-{module_code}",
+            )
+        )
+    for question in report.questions:
+        batch_id = batch_by_question.get(question.stable_key)
+        module_number = re.search(r"[0-9]+", question.outcome_code)
+        unit_key = f"english-e{module_number.group(0)}" if module_number else "english"
+        items.append(
+            CatalogueReviewItem(
+                kind="english_question",
+                stable_key=question.stable_key,
+                revision=question.revision,
+                source_hash=_english_source_hash(question),
+                fingerprint=review_fingerprint(question),
+                title=question.title,
+                source_status=question.status,
+                model=question,
+                difficulty=question.difficulty,
+                outcome_code=question.outcome_code,
+                batch_id=batch_id,
+                unit_key=unit_key,
+            )
+        )
+    passage_batches: dict[str, set[str]] = {}
+    for question in report.questions:
+        if question.passage_ref is None:
+            continue
+        passage_batches.setdefault(question.passage_ref.stable_key, set()).add(
+            batch_by_question.get(question.stable_key, "")
+        )
+    for passage in report.passages:
+        batches = {value for value in passage_batches.get(passage.stable_key, set()) if value}
+        items.append(
+            CatalogueReviewItem(
+                kind="english_passage",
+                stable_key=passage.stable_key,
+                revision=passage.revision,
+                source_hash=_english_source_hash(passage),
+                fingerprint=review_fingerprint(passage),
+                title=passage.title,
+                source_status=passage.status,
+                model=passage,
+                batch_id=next(iter(batches)) if len(batches) == 1 else None,
+                unit_key="english-passages",
+            )
+        )
+    return items
+
+
 def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewItem]:
     items = []
     for report in catalogue.reports.values():
@@ -118,6 +196,7 @@ def catalogue_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIt
         for question in catalogue.review_questions
     )
     items.extend(_tutor_grounding_review_items(catalogue.repository_root))
+    items.extend(_english_review_items(catalogue))
     return items
 
 
@@ -282,9 +361,12 @@ def _lifecycle_summary(row: dict | None) -> dict | None:
 def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -> dict:
     base = (item.kind, item.stable_key, item.fingerprint)
     mathematics = reviews.get((*base, "mathematics"))
+    english = reviews.get((*base, "english"))
     editorial = reviews.get((*base, "editorial"))
     latest_request = lifecycle.get(base)
-    decisions = [row["decision"] for row in (mathematics, editorial) if row]
+    subject_dimension = "english" if item.kind.startswith("english_") else "mathematics"
+    subject_review = english if subject_dimension == "english" else mathematics
+    decisions = [row["decision"] for row in (subject_review, editorial) if row]
     all_approved = len(decisions) == 2 and all(value == "approved" for value in decisions)
     active_request = latest_request
     if latest_request and latest_request["action"] == "publish":
@@ -292,16 +374,17 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
             active_request = None
         else:
             latest_review_at = max(
-                row["created_at"] for row in (mathematics, editorial) if row is not None
+                row["created_at"] for row in (subject_review, editorial) if row is not None
             )
             if latest_request["created_at"] < latest_review_at:
                 active_request = None
     blockers = []
-    if mathematics is None or mathematics["decision"] != "approved":
-        blockers.append("Mathematics approval is required.")
+    if subject_review is None or subject_review["decision"] != "approved":
+        subject_label = "English" if subject_dimension == "english" else "Mathematics"
+        blockers.append(f"{subject_label} approval is required.")
     if editorial is None or editorial["decision"] != "approved":
         blockers.append("Editorial approval is required.")
-    if item.kind == "lesson" and not item.model.sections:
+    if item.kind in {"lesson", "english_lesson"} and not item.model.sections:
         blockers.append("The lesson has no learning sections.")
     if item.source_status == "retired":
         blockers.append("Retired content cannot be published again without a new revision.")
@@ -338,6 +421,7 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
         "unit_key": item.unit_key,
         "review_state": state,
         "mathematics_review": _review_summary(mathematics),
+        "english_review": _review_summary(english),
         "editorial_review": _review_summary(editorial),
         "lifecycle_request": _lifecycle_summary(active_request),
         "blockers": blockers,
@@ -392,7 +476,15 @@ def list_review_queue(
             for item in items
             if query in item["stable_key"].casefold() or query in item["title"].casefold()
         ]
-    priority = {"course": 0, "lesson": 1, "question": 2, "tutor_grounding": 3}
+    priority = {
+        "course": 0,
+        "lesson": 1,
+        "question": 2,
+        "english_lesson": 3,
+        "english_passage": 4,
+        "english_question": 5,
+        "tutor_grounding": 6,
+    }
     items.sort(
         key=lambda item: (
             priority[item["content_kind"]],
@@ -418,7 +510,63 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
             "Tutor calibration grounding is available only in the protected reviewer preview.",
             409,
         )
-    if kind == "question":
+    if kind == "english_question":
+        question: EnglishObjectiveQuestion = item.model
+        parts = []
+        for part in question.parts:
+            response = part.response
+            public_response = {"type": response.type}
+            if response.type in {"single_choice", "multiple_response"}:
+                public_response["options"] = [
+                    option.model_dump(mode="json") for option in response.options
+                ]
+            parts.append(
+                {
+                    "position": part.position,
+                    "prompt": part.prompt,
+                    "response": public_response,
+                }
+            )
+        content = {
+            "stable_key": question.stable_key,
+            "revision": question.revision,
+            "title": question.title,
+            "difficulty": question.difficulty,
+            "question_type": question.question_type,
+            "instructions": question.instructions,
+            "parts": parts,
+        }
+    elif kind == "english_lesson":
+        lesson: EnglishLesson = item.model
+        content = {
+            "stable_key": lesson.stable_key,
+            "revision": lesson.revision,
+            "lesson_code": lesson.lesson_code,
+            "title": lesson.title,
+            "summary": lesson.summary,
+            "estimated_minutes": lesson.estimated_minutes,
+            "sections": [
+                {
+                    "position": section.position,
+                    "section_type": section.section_type,
+                    "title": section.title,
+                    "content": section.content,
+                    "question_keys": section.question_keys,
+                }
+                for section in lesson.sections
+            ],
+        }
+    elif kind == "english_passage":
+        passage: EnglishPassage = item.model
+        content = {
+            "stable_key": passage.stable_key,
+            "revision": passage.revision,
+            "title": passage.title,
+            "text_type": passage.text_type,
+            "paragraphs": passage.paragraphs,
+            "attribution": passage.attribution,
+        }
+    elif kind == "question":
         content = public_question(item.model)
     elif kind == "lesson":
         lesson = item.model
@@ -432,7 +580,7 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
             "sections": [public_lesson_section(section) for section in lesson.sections],
             "assets": [asset.model_dump(mode="json") for asset in lesson.assets],
         }
-    else:
+    elif kind == "course":
         course = item.model
         content = {
             "stable_key": course.stable_key,
@@ -443,6 +591,12 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
             "subject": course.subject,
             "units": [unit.model_dump(mode="json") for unit in course.units],
         }
+    else:
+        raise BetaOperationsError(
+            "content_preview_unavailable",
+            "This content item does not have a learner preview.",
+            409,
+        )
     return {
         "content_kind": item.kind,
         "stable_key": item.stable_key,
@@ -511,14 +665,28 @@ def bulk_reviewer_preview(catalogue: CourseCatalogue, body) -> dict:
     }
 
 
-def record_bulk_reviews(repository, catalogue, administrator, body, request_id):
-    items = _bulk_targets(catalogue, body)
-    if body.dimension == "mathematics" and administrator.role != "academic_admin":
+def _assert_review_dimension(item, administrator, dimension):
+    required = "english" if item.kind.startswith("english_") else "mathematics"
+    if dimension != "editorial" and dimension != required:
+        label = "English" if required == "english" else "Mathematics"
+        raise BetaOperationsError(
+            "content_review_dimension_mismatch",
+            f"This item requires {label} or editorial review.",
+            422,
+        )
+    if dimension == required and administrator.role != "academic_admin":
+        label = "English" if required == "english" else "Mathematics"
         raise BetaOperationsError(
             "academic_review_required",
-            "Only an academic administrator can record Mathematics review.",
+            f"Only an academic administrator can record {label} review.",
             403,
         )
+
+
+def record_bulk_reviews(repository, catalogue, administrator, body, request_id):
+    items = _bulk_targets(catalogue, body)
+    for item in items:
+        _assert_review_dimension(item, administrator, body.dimension)
     with repository._connect() as connection:
         for item in items:
             connection.execute(
@@ -595,12 +763,7 @@ def record_bulk_reviews(repository, catalogue, administrator, body, request_id):
 def record_review(repository, catalogue, administrator, kind, stable_key, body, request_id):
     item = _item(catalogue, kind, stable_key)
     _assert_expected(item, body)
-    if body.dimension == "mathematics" and administrator.role != "academic_admin":
-        raise BetaOperationsError(
-            "academic_review_required",
-            "Only an academic administrator can record Mathematics review.",
-            403,
-        )
+    _assert_review_dimension(item, administrator, body.dimension)
     with repository._connect() as connection:
         connection.execute(
             "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
@@ -755,8 +918,12 @@ def verify_release_workflow(connection, catalogue: CourseCatalogue) -> dict:
             continue
         checked += 1
         serialized = _serialize_item(item, reviews, lifecycle)
-        if serialized["mathematics_review"] is None or serialized["mathematics_review"]["decision"] != "approved":
-            failures.append(f"{item.kind}:{item.stable_key} lacks Mathematics approval")
+        subject = "english" if item.kind.startswith("english_") else "mathematics"
+        subject_review = serialized[f"{subject}_review"]
+        if subject_review is None or subject_review["decision"] != "approved":
+            failures.append(
+                f"{item.kind}:{item.stable_key} lacks {subject.title()} approval"
+            )
         if serialized["editorial_review"] is None or serialized["editorial_review"]["decision"] != "approved":
             failures.append(f"{item.kind}:{item.stable_key} lacks editorial approval")
         if item.source_status in {"published", "retired"}:

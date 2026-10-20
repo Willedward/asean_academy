@@ -128,6 +128,65 @@ type ReviewTutorGrounding = {
   source_references: { path: string; role: string }[];
   sections_by_outcome: Record<string, GroundingSection[]>;
 };
+type ReviewEnglishQuestion = {
+  stable_key: string;
+  title: string;
+  outcome_code: string;
+  difficulty: number;
+  question_type: string;
+  exposure_pool: string;
+  instructions: string;
+  parts: {
+    position: number;
+    prompt: string;
+    hint: string;
+    correct_explanation: string;
+    response: {
+      type: string;
+      options?: { key: string; text: string }[];
+      correct_key?: string;
+      correct_keys?: string[];
+      canonical_answer?: string;
+      accepted_alternatives?: string[];
+      choice_rationales?: Record<string, string>;
+    };
+  }[];
+};
+type ReviewEnglishLesson = {
+  stable_key: string;
+  lesson_code: string;
+  outcome_code: string;
+  title: string;
+  summary: string;
+  estimated_minutes: number;
+  sections: {
+    position: number;
+    section_type: string;
+    title: string;
+    content: string[];
+    question_keys: string[];
+  }[];
+};
+type ReviewEnglishPassage = {
+  stable_key: string;
+  revision: number;
+  title: string;
+  text_type: string;
+  paragraphs: string[];
+  attribution: string;
+  content_sha256: string;
+};
+type ReviewDimension = "mathematics" | "english" | "editorial";
+
+function academicDimension(item: Pick<ContentItem, "content_kind">) {
+  return item.content_kind.startsWith("english_") ? "english" : "mathematics";
+}
+
+function dimensionReview(item: ContentItem, dimension: ReviewDimension) {
+  if (dimension === "english") return item.english_review;
+  if (dimension === "mathematics") return item.mathematics_review;
+  return item.editorial_review;
+}
 
 function GroundingBlocks({ value }: { value?: GroundingBlock[] }) {
   const blocks = (value ?? []).flatMap<ContentBlock>((block) => {
@@ -208,6 +267,116 @@ function ReviewerPreview({
   onDiagramComment?: (assetKey: string) => void;
 }) {
   const content = preview.review_content;
+  if (preview.content_kind === "english_question") {
+    const question = content as unknown as ReviewEnglishQuestion;
+    return (
+      <article className="space-y-5 rounded-2xl border border-teal-200 bg-teal-50/40 p-5">
+        <div>
+          <p className="m-0 text-sm font-semibold uppercase text-teal-700">
+            English reviewer preview · Difficulty {question.difficulty} ·
+            Outcome {question.outcome_code} · {label(question.exposure_pool)}
+          </p>
+          <h3 className="mt-1 text-xl font-bold">{question.title}</h3>
+          <p>{question.instructions}</p>
+          {preview.batch_id ? (
+            <p className="text-sm text-slate-600">Batch {preview.batch_id}</p>
+          ) : null}
+        </div>
+        {question.parts.map((part) => (
+          <section className="space-y-4 border-t pt-4" key={part.position}>
+            <p className="font-medium">{part.prompt}</p>
+            {part.response.options?.length ? (
+              <ol className="space-y-2">
+                {part.response.options.map((option) => (
+                  <li
+                    className="rounded-lg border bg-white p-3"
+                    key={option.key}
+                  >
+                    <strong>{option.key}.</strong> {option.text}
+                    {part.response.choice_rationales?.[option.key] ? (
+                      <p className="mb-0 mt-1 text-sm text-slate-600">
+                        {part.response.choice_rationales[option.key]}
+                      </p>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="m-0 font-bold">Approved answer</p>
+              <code>
+                {part.response.correct_key ??
+                  part.response.correct_keys?.join(", ") ??
+                  part.response.canonical_answer}
+              </code>
+              {part.response.accepted_alternatives?.length ? (
+                <p className="mb-0 text-sm">
+                  Alternatives: {part.response.accepted_alternatives.join(", ")}
+                </p>
+              ) : null}
+            </div>
+            <p>
+              <strong>Hint:</strong> {part.hint}
+            </p>
+            <p>
+              <strong>Explanation:</strong> {part.correct_explanation}
+            </p>
+          </section>
+        ))}
+      </article>
+    );
+  }
+  if (preview.content_kind === "english_lesson") {
+    const lesson = content as unknown as ReviewEnglishLesson;
+    return (
+      <article className="space-y-5 rounded-2xl border bg-slate-50 p-5">
+        <p className="m-0 text-sm font-semibold uppercase text-teal-700">
+          {lesson.lesson_code} · {lesson.outcome_code} ·{" "}
+          {lesson.estimated_minutes} minutes
+        </p>
+        <h3 className="text-xl font-bold">{lesson.title}</h3>
+        <p>{lesson.summary}</p>
+        {lesson.sections.map((section) => (
+          <section
+            className="rounded-xl border bg-white p-4"
+            key={section.position}
+          >
+            <p className="m-0 text-xs font-semibold uppercase text-teal-700">
+              {section.position}. {label(section.section_type)}
+            </p>
+            <h4 className="font-bold">{section.title}</h4>
+            {section.content.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.question_keys.length ? (
+              <p className="mb-0 text-sm text-slate-600">
+                Questions: {section.question_keys.join(", ")}
+              </p>
+            ) : null}
+          </section>
+        ))}
+      </article>
+    );
+  }
+  if (preview.content_kind === "english_passage") {
+    const passage = content as unknown as ReviewEnglishPassage;
+    return (
+      <article className="space-y-4 rounded-2xl border bg-slate-50 p-5">
+        <p className="m-0 text-sm font-semibold uppercase text-teal-700">
+          English passage · {label(passage.text_type)} · revision{" "}
+          {passage.revision}
+        </p>
+        <h3 className="text-xl font-bold">{passage.title}</h3>
+        {passage.paragraphs.map((paragraph, index) => (
+          <p key={`${index}-${paragraph}`}>{paragraph}</p>
+        ))}
+        <p className="text-sm text-slate-600">{passage.attribution}</p>
+        <p className="break-all text-xs text-slate-500">
+          SHA-256: {passage.content_sha256}
+        </p>
+      </article>
+    );
+  }
   if (preview.content_kind === "question") {
     const question = content as unknown as ReviewQuestion;
     return (
@@ -429,13 +598,11 @@ function ReviewerPreview({
 }
 
 function ReviewSummary({ item }: { item: ContentItem }) {
+  const subject = academicDimension(item);
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      {(["mathematics", "editorial"] as const).map((dimension) => {
-        const review =
-          dimension === "mathematics"
-            ? item.mathematics_review
-            : item.editorial_review;
+      {([subject, "editorial"] as ReviewDimension[]).map((dimension) => {
+        const review = dimensionReview(item, dimension);
         return (
           <div className="rounded-xl border p-3" key={dimension}>
             <p className="m-0 font-bold capitalize">{dimension}</p>
@@ -485,11 +652,16 @@ function BulkReviewSession({
   scope: "batch" | "unit";
   scopeKey: string;
 }) {
+  const subjectDimension: ReviewDimension = items.some((item) =>
+    item.content_kind.startsWith("english_"),
+  )
+    ? "english"
+    : "mathematics";
   const [selected, setSelected] = useState<Set<string>>(
     () => new Set(items.map(itemIdentity)),
   );
-  const [dimension, setDimension] = useState<"mathematics" | "editorial">(
-    academic ? "mathematics" : "editorial",
+  const [dimension, setDimension] = useState<ReviewDimension>(
+    academic ? subjectDimension : "editorial",
   );
   const [decision, setDecision] = useState<"approved" | "changes_requested">(
     "approved",
@@ -525,10 +697,7 @@ function BulkReviewSession({
       new Set(
         items
           .filter((item) => {
-            const review =
-              dimension === "mathematics"
-                ? item.mathematics_review
-                : item.editorial_review;
+            const review = dimensionReview(item, dimension);
             return review?.decision !== "approved";
           })
           .map(itemIdentity),
@@ -657,9 +826,9 @@ function BulkReviewSession({
             <span>
               <span className="block font-semibold">{item.title}</span>
               <span className="text-xs text-slate-600">
-                {item.content_kind} · {item.stable_key} · math{" "}
-                {item.mathematics_review?.decision
-                  ? label(item.mathematics_review.decision)
+                {item.content_kind} · {item.stable_key} · {subjectDimension}{" "}
+                {dimensionReview(item, subjectDimension)?.decision
+                  ? label(dimensionReview(item, subjectDimension)!.decision)
                   : "awaiting"}
                 {" · editorial "}
                 {item.editorial_review?.decision
@@ -683,8 +852,8 @@ function BulkReviewSession({
             }}
             value={dimension}
           >
-            <option disabled={!academic} value="mathematics">
-              Mathematics
+            <option disabled={!academic} value={subjectDimension}>
+              {subjectDimension === "english" ? "English" : "Mathematics"}
             </option>
             <option value="editorial">Editorial</option>
           </select>
@@ -792,9 +961,10 @@ function ItemActions({
   item: ContentItem;
   onChanged: () => void;
 }) {
+  const subjectDimension = academicDimension(item);
   const [preview, setPreview] = useState<ContentPreview>();
-  const [dimension, setDimension] = useState<"mathematics" | "editorial">(
-    academic ? "mathematics" : "editorial",
+  const [dimension, setDimension] = useState<ReviewDimension>(
+    academic ? subjectDimension : "editorial",
   );
   const [decision, setDecision] = useState<"approved" | "changes_requested">(
     "approved",
@@ -879,8 +1049,8 @@ function ItemActions({
             }
             value={dimension}
           >
-            <option disabled={!academic} value="mathematics">
-              Mathematics
+            <option disabled={!academic} value={subjectDimension}>
+              {subjectDimension === "english" ? "English" : "Mathematics"}
             </option>
             <option value="editorial">Editorial</option>
           </select>
@@ -1062,9 +1232,10 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     : applied.unit
       ? ({ scope: "unit", key: applied.unit } as const)
       : undefined;
-  const mathematicsApproved =
+  const subjectApproved =
     data?.items.filter(
-      (item) => item.mathematics_review?.decision === "approved",
+      (item) =>
+        dimensionReview(item, academicDimension(item))?.decision === "approved",
     ).length ?? 0;
   const editorialApproved =
     data?.items.filter((item) => item.editorial_review?.decision === "approved")
@@ -1072,22 +1243,23 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   const fullyApproved =
     data?.items.filter(
       (item) =>
-        item.mathematics_review?.decision === "approved" &&
-        item.editorial_review?.decision === "approved",
+        dimensionReview(item, academicDimension(item))?.decision ===
+          "approved" && item.editorial_review?.decision === "approved",
     ).length ?? 0;
   const changesRequested =
     data?.items.filter(
       (item) =>
-        item.mathematics_review?.decision === "changes_requested" ||
+        dimensionReview(item, academicDimension(item))?.decision ===
+          "changes_requested" ||
         item.editorial_review?.decision === "changes_requested",
     ).length ?? 0;
 
   return (
     <div className="space-y-6">
       <p>
-        Review questions and AI tutor grounding directly from their Git-authored
-        sources. Protected previews include answers, hints, worked solutions and
-        calibration explanations; decisions remain append-only and tied to the
+        Review Mathematics and English content directly from Git-authored
+        sources. Protected previews include answers, explanations, passages and
+        tutor calibration material; decisions remain append-only and tied to the
         exact content hash.
       </p>
       <form
@@ -1110,7 +1282,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
                 ...filters,
                 batch: event.target.value,
                 unit: event.target.value ? "" : filters.unit,
-                kind: event.target.value ? "question" : filters.kind,
+                kind: event.target.value ? "" : filters.kind,
               })
             }
           >
@@ -1158,6 +1330,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             <option value="course">Course</option>
             <option value="lesson">Lesson</option>
             <option value="question">Question</option>
+            <option value="english_lesson">English lesson</option>
+            <option value="english_passage">English passage</option>
+            <option value="english_question">English question</option>
             <option value="tutor_grounding">Tutor grounding</option>
           </select>
         </label>
@@ -1214,7 +1389,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
         <span>
           Correction export contains exact stable keys, revisions, fingerprints
-          and the latest Mathematics or editorial notes for Codex.
+          and the latest subject or editorial notes for Codex.
         </span>
         <Button asChild variant="outline">
           <a href={correctionsHref} rel="noreferrer" target="_blank">
@@ -1228,9 +1403,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
           data-testid="scope-progress"
         >
           <strong>{activeScope.key}</strong> · {data.total} matched items ·{" "}
-          {mathematicsApproved} Mathematics approved · {editorialApproved}{" "}
-          editorial approved · {fullyApproved} fully approved ·{" "}
-          {changesRequested} with changes requested.
+          {subjectApproved} subject approved · {editorialApproved} editorial
+          approved · {fullyApproved} fully approved · {changesRequested} with
+          changes requested.
         </div>
       ) : null}
       {!data ? (
