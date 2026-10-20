@@ -1851,6 +1851,26 @@
         "title": "CheckpointProgressResponse",
         "type": "object"
       },
+      "ClassifyEnglishErrorRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "enum": [
+              "unknown_meaning",
+              "missed_clue",
+              "option_trap",
+              "tone_mismatch"
+            ],
+            "title": "Category",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category"
+        ],
+        "title": "ClassifyEnglishErrorRequest",
+        "type": "object"
+      },
       "ContentLifecycleRequestResponse": {
         "additionalProperties": false,
         "properties": {
@@ -3014,6 +3034,30 @@
         "title": "CreateDiagnosticSessionRequest",
         "type": "object"
       },
+      "CreateEnglishPracticeSessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "lesson_key": {
+            "pattern": "^e[0-9]+-lesson-[0-9]{2}$",
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "mode": {
+            "default": "guided_practice",
+            "enum": [
+              "guided_practice",
+              "retry_review"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_key"
+        ],
+        "title": "CreateEnglishPracticeSessionRequest",
+        "type": "object"
+      },
       "CreateInvitationRequest": {
         "additionalProperties": false,
         "properties": {
@@ -4159,6 +4203,880 @@
           "latex"
         ],
         "title": "DisplayMathBlock",
+        "type": "object"
+      },
+      "EnglishAttemptPartResult": {
+        "additionalProperties": false,
+        "properties": {
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "feedback": {
+            "title": "Feedback",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "correct",
+          "error",
+          "feedback"
+        ],
+        "title": "EnglishAttemptPartResult",
+        "type": "object"
+      },
+      "EnglishAttemptResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_id": {
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "attempt_number": {
+            "title": "Attempt Number",
+            "type": "integer"
+          },
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "lesson_state": {
+            "enum": [
+              "not_started",
+              "in_progress",
+              "practice_completed",
+              "proficient"
+            ],
+            "title": "Lesson State",
+            "type": "string"
+          },
+          "needs_error_classification": {
+            "title": "Needs Error Classification",
+            "type": "boolean"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishAttemptPartResult"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "question_finished": {
+            "const": true,
+            "default": true,
+            "title": "Question Finished",
+            "type": "boolean"
+          },
+          "retry_queued": {
+            "title": "Retry Queued",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "attempt_number",
+          "correct",
+          "parts",
+          "retry_queued",
+          "needs_error_classification",
+          "lesson_state"
+        ],
+        "title": "EnglishAttemptResponse",
+        "type": "object"
+      },
+      "EnglishChoiceOptionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "text"
+        ],
+        "title": "EnglishChoiceOptionResponse",
+        "type": "object"
+      },
+      "EnglishCourseMapResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "development_preview": {
+            "title": "Development Preview",
+            "type": "boolean"
+          },
+          "modules": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishModuleMap"
+            },
+            "title": "Modules",
+            "type": "array"
+          },
+          "revision": {
+            "default": 1,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "const": "asean-scholarship-english",
+            "default": "asean-scholarship-english",
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "subject": {
+            "const": "English",
+            "default": "English",
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "content_status",
+          "development_preview",
+          "modules"
+        ],
+        "title": "EnglishCourseMapResponse",
+        "type": "object"
+      },
+      "EnglishErrorClassificationResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_id": {
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "unknown_meaning",
+              "missed_clue",
+              "option_trap",
+              "tone_mismatch"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "recorded": {
+            "default": true,
+            "title": "Recorded",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "category"
+        ],
+        "title": "EnglishErrorClassificationResponse",
+        "type": "object"
+      },
+      "EnglishHintResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "parts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "question_key": {
+            "title": "Question Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_key",
+          "parts"
+        ],
+        "title": "EnglishHintResponse",
+        "type": "object"
+      },
+      "EnglishLessonMap": {
+        "additionalProperties": false,
+        "properties": {
+          "authored": {
+            "title": "Authored",
+            "type": "boolean"
+          },
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "content_status": {
+            "enum": [
+              "planned",
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "href": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Href"
+          },
+          "lesson_code": {
+            "title": "Lesson Code",
+            "type": "string"
+          },
+          "outcome": {
+            "title": "Outcome",
+            "type": "string"
+          },
+          "outcome_code": {
+            "title": "Outcome Code",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "progress_state": {
+            "default": "not_started",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "practice_completed",
+              "proficient"
+            ],
+            "title": "Progress State",
+            "type": "string"
+          },
+          "retry_question_count": {
+            "default": 0,
+            "title": "Retry Question Count",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "lesson_code",
+          "position",
+          "title",
+          "outcome_code",
+          "outcome",
+          "content_status",
+          "authored",
+          "available",
+          "href"
+        ],
+        "title": "EnglishLessonMap",
+        "type": "object"
+      },
+      "EnglishLessonProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "correct_count": {
+            "title": "Correct Count",
+            "type": "integer"
+          },
+          "incorrect_count": {
+            "title": "Incorrect Count",
+            "type": "integer"
+          },
+          "last_session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Session Id"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "lesson_revision": {
+            "title": "Lesson Revision",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "retry_question_count": {
+            "title": "Retry Question Count",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "not_started",
+              "in_progress",
+              "practice_completed",
+              "proficient"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "lesson_revision",
+          "state",
+          "question_count",
+          "resolved_count",
+          "correct_count",
+          "incorrect_count",
+          "retry_question_count",
+          "last_session_id",
+          "updated_at"
+        ],
+        "title": "EnglishLessonProgressResponse",
+        "type": "object"
+      },
+      "EnglishLessonResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Content Status",
+            "type": "string"
+          },
+          "development_preview": {
+            "title": "Development Preview",
+            "type": "boolean"
+          },
+          "estimated_minutes": {
+            "title": "Estimated Minutes",
+            "type": "integer"
+          },
+          "lesson_code": {
+            "title": "Lesson Code",
+            "type": "string"
+          },
+          "outcome_code": {
+            "title": "Outcome Code",
+            "type": "string"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/EnglishPracticeEntry"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishLessonSectionResponse"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "lesson_code",
+          "outcome_code",
+          "title",
+          "summary",
+          "estimated_minutes",
+          "content_status",
+          "development_preview",
+          "sections",
+          "practice"
+        ],
+        "title": "EnglishLessonResponse",
+        "type": "object"
+      },
+      "EnglishLessonSectionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Content",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "section_type": {
+            "enum": [
+              "retrieval_warmup",
+              "explicit_model",
+              "worked_analysis",
+              "guided_practice",
+              "independent_application",
+              "error_classification",
+              "exit_ticket"
+            ],
+            "title": "Section Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "section_type",
+          "title",
+          "content",
+          "question_count"
+        ],
+        "title": "EnglishLessonSectionResponse",
+        "type": "object"
+      },
+      "EnglishModuleMap": {
+        "additionalProperties": false,
+        "properties": {
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishLessonMap"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "module_code": {
+            "title": "Module Code",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "purpose": {
+            "title": "Purpose",
+            "type": "string"
+          },
+          "stage": {
+            "enum": [
+              "orientation",
+              "toolkit",
+              "paper_application",
+              "composition"
+            ],
+            "title": "Stage",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "module_code",
+          "position",
+          "stage",
+          "title",
+          "purpose",
+          "lessons"
+        ],
+        "title": "EnglishModuleMap",
+        "type": "object"
+      },
+      "EnglishNextQuestionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishPublicQuestionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "session": {
+            "$ref": "#/components/schemas/EnglishPracticeSessionResponse"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "session"
+        ],
+        "title": "EnglishNextQuestionResponse",
+        "type": "object"
+      },
+      "EnglishPassageResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attribution": {
+            "title": "Attribution",
+            "type": "string"
+          },
+          "paragraphs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Paragraphs",
+            "type": "array"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "text_type": {
+            "title": "Text Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "title",
+          "text_type",
+          "paragraphs",
+          "attribution"
+        ],
+        "title": "EnglishPassageResponse",
+        "type": "object"
+      },
+      "EnglishPracticeEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "development_available": {
+            "default": false,
+            "title": "Development Available",
+            "type": "boolean"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "question_count": {
+            "maximum": 40.0,
+            "minimum": 1.0,
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "retry_question_count": {
+            "default": 0,
+            "title": "Retry Question Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "question_count",
+          "available"
+        ],
+        "title": "EnglishPracticeEntry",
+        "type": "object"
+      },
+      "EnglishPracticeSessionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "assigned_count": {
+            "title": "Assigned Count",
+            "type": "integer"
+          },
+          "correct_count": {
+            "title": "Correct Count",
+            "type": "integer"
+          },
+          "development_drafts": {
+            "title": "Development Drafts",
+            "type": "boolean"
+          },
+          "incorrect_count": {
+            "title": "Incorrect Count",
+            "type": "integer"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "lesson_revision": {
+            "title": "Lesson Revision",
+            "type": "integer"
+          },
+          "mode": {
+            "enum": [
+              "guided_practice",
+              "retry_review"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "status",
+          "lesson_key",
+          "lesson_revision",
+          "mode",
+          "question_count",
+          "assigned_count",
+          "resolved_count",
+          "correct_count",
+          "incorrect_count",
+          "development_drafts"
+        ],
+        "title": "EnglishPracticeSessionResponse",
+        "type": "object"
+      },
+      "EnglishProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "learner_id": {
+            "title": "Learner Id",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishLessonProgressResponse"
+            },
+            "title": "Lessons",
+            "type": "array"
+          }
+        },
+        "required": [
+          "learner_id",
+          "lessons"
+        ],
+        "title": "EnglishProgressResponse",
+        "type": "object"
+      },
+      "EnglishPublicQuestionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "difficulty": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Difficulty",
+            "type": "integer"
+          },
+          "exposure_pool": {
+            "title": "Exposure Pool",
+            "type": "string"
+          },
+          "instructions": {
+            "title": "Instructions",
+            "type": "string"
+          },
+          "outcome_code": {
+            "title": "Outcome Code",
+            "type": "string"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishQuestionPartResponse"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "passage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishPassageResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "question_type": {
+            "title": "Question Type",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stable_key",
+          "revision",
+          "title",
+          "difficulty",
+          "outcome_code",
+          "question_type",
+          "exposure_pool",
+          "instructions",
+          "parts"
+        ],
+        "title": "EnglishPublicQuestionResponse",
+        "type": "object"
+      },
+      "EnglishQuestionPartResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishChoiceOptionResponse"
+            },
+            "title": "Options",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "prompt": {
+            "title": "Prompt",
+            "type": "string"
+          },
+          "response_type": {
+            "enum": [
+              "single_choice",
+              "multiple_response",
+              "short_text"
+            ],
+            "title": "Response Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "prompt",
+          "response_type",
+          "options"
+        ],
+        "title": "EnglishQuestionPartResponse",
         "type": "object"
       },
       "EnrolmentResponse": {
@@ -6360,6 +7278,54 @@
           "answers"
         ],
         "title": "SubmitAttemptRequest",
+        "type": "object"
+      },
+      "SubmitEnglishAttemptRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "maxLength": 1000,
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            "maxProperties": 20,
+            "minProperties": 1,
+            "title": "Answers",
+            "type": "object"
+          },
+          "question_key": {
+            "pattern": "^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$",
+            "title": "Question Key",
+            "type": "string"
+          },
+          "question_revision": {
+            "minimum": 1.0,
+            "title": "Question Revision",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "question_key",
+          "question_revision",
+          "answers"
+        ],
+        "title": "SubmitEnglishAttemptRequest",
         "type": "object"
       },
       "SummarySection": {
@@ -14687,6 +15653,1176 @@
         "summary": "Submit a complete diagnostic and create immutable score evidence",
         "tags": [
           "diagnostics"
+        ]
+      }
+    },
+    "/api/v1/english/attempts": {
+      "post": {
+        "operationId": "submitEnglishAttempt",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitEnglishAttemptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishAttemptResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Submit an English response for deterministic marking",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/attempts/{attempt_id}/error-classification": {
+      "post": {
+        "operationId": "classifyEnglishAttemptError",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClassifyEnglishErrorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishErrorClassificationResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record one immutable learner error category for an incorrect attempt",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/course-map": {
+      "get": {
+        "operationId": "getEnglishCourseMap",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishCourseMapResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the authenticated learner's English module map",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/lessons/{lesson_key}": {
+      "get": {
+        "operationId": "getEnglishLesson",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_key",
+            "required": true,
+            "schema": {
+              "pattern": "^e[0-9]+-lesson-[0-9]{2}$",
+              "title": "Lesson Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishLessonResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get one learner-safe English lesson revision",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/practice-sessions": {
+      "post": {
+        "operationId": "createEnglishPracticeSession",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishPracticeSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishPracticeSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Start or resume an idempotent English objective-practice session",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/practice-sessions/{session_id}": {
+      "get": {
+        "operationId": "getEnglishPracticeSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishPracticeSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Resume an owned English objective-practice session",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/practice-sessions/{session_id}/next": {
+      "get": {
+        "operationId": "getNextEnglishQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishNextQuestionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the next learner-safe English question",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/practice-sessions/{session_id}/questions/{question_key}/hint": {
+      "post": {
+        "operationId": "revealEnglishHint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "question_key",
+            "required": true,
+            "schema": {
+              "pattern": "^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$",
+              "title": "Question Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishHintResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Reveal the authored hint for the current English question",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/progress": {
+      "get": {
+        "operationId": "getEnglishProgress",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishProgressResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get authenticated objective-English lesson progress and retry counts",
+        "tags": [
+          "english"
         ]
       }
     },

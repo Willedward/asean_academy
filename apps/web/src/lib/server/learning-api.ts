@@ -3,6 +3,10 @@ import "server-only";
 import type { CourseMapResponse } from "@/lib/api/course";
 import type { CurrentLearnerResponse } from "@/lib/api/identity";
 import type {
+  EnglishCourseMapResponse,
+  EnglishLessonResponse,
+} from "@/lib/api/english";
+import type {
   LearningHomeResponse,
   ProgressResponse,
 } from "@/lib/api/progress";
@@ -102,4 +106,20 @@ export async function getServerProgress(
   session: VerifiedSession,
 ): Promise<ProgressResponse> {
   return getServerJson(session, "/api/v1/progress");
+}
+
+export async function getServerEnglishCourseMap(
+  session: VerifiedSession,
+): Promise<EnglishCourseMapResponse> {
+  return getServerJson(session, "/api/v1/english/course-map");
+}
+
+export async function getServerEnglishLesson(
+  session: VerifiedSession,
+  lessonKey: string,
+): Promise<EnglishLessonResponse> {
+  return getServerJson(
+    session,
+    `/api/v1/english/lessons/${encodeURIComponent(lessonKey)}`,
+  );
 }

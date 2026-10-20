@@ -1,0 +1,142 @@
+import type { components } from "./schema";
+import { createApiClient } from "./client";
+import { apiErrorMessage } from "./errors";
+
+export type EnglishCourseMapResponse = components["schemas"]["EnglishCourseMapResponse"];
+export type EnglishLessonResponse = components["schemas"]["EnglishLessonResponse"];
+export type EnglishPracticeSessionResponse = components["schemas"]["EnglishPracticeSessionResponse"];
+export type EnglishNextQuestionResponse = components["schemas"]["EnglishNextQuestionResponse"];
+export type EnglishAttemptResponse = components["schemas"]["EnglishAttemptResponse"];
+export type EnglishHintResponse = components["schemas"]["EnglishHintResponse"];
+export type EnglishProgressResponse = components["schemas"]["EnglishProgressResponse"];
+export type EnglishErrorCategory = components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
+export type EnglishAnswers = Record<string, string | string[]>;
+
+function idempotencyKey(): string {
+  return crypto.randomUUID();
+}
+
+function fixtureGuard(): void {
+  if (process.env.NEXT_PUBLIC_USE_API_FIXTURES === "true") {
+    throw new Error("English learning requires the local learning API.");
+  }
+}
+
+export async function getEnglishCourseMap(
+  accessToken?: string,
+): Promise<EnglishCourseMapResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).GET(
+    "/api/v1/english/course-map",
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function getEnglishLesson(
+  lessonKey: string,
+  accessToken?: string,
+): Promise<EnglishLessonResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).GET(
+    "/api/v1/english/lessons/{lesson_key}",
+    { params: { path: { lesson_key: lessonKey } } },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function createEnglishPracticeSession(
+  lessonKey: string,
+  mode: "guided_practice" | "retry_review" = "guided_practice",
+  accessToken?: string,
+): Promise<EnglishPracticeSessionResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).POST(
+    "/api/v1/english/practice-sessions",
+    {
+      params: { header: { "Idempotency-Key": idempotencyKey() } },
+      body: { lesson_key: lessonKey, mode },
+    },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function getNextEnglishQuestion(
+  sessionId: string,
+  accessToken?: string,
+): Promise<EnglishNextQuestionResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).GET(
+    "/api/v1/english/practice-sessions/{session_id}/next",
+    { params: { path: { session_id: sessionId } } },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function submitEnglishAttempt(
+  sessionId: string,
+  questionKey: string,
+  questionRevision: number,
+  answers: EnglishAnswers,
+  accessToken?: string,
+): Promise<EnglishAttemptResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).POST(
+    "/api/v1/english/attempts",
+    {
+      params: { header: { "Idempotency-Key": idempotencyKey() } },
+      body: {
+        session_id: sessionId,
+        question_key: questionKey,
+        question_revision: questionRevision,
+        answers,
+      },
+    },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function classifyEnglishError(
+  attemptId: string,
+  category: EnglishErrorCategory,
+  accessToken?: string,
+): Promise<void> {
+  fixtureGuard();
+  const { error, response } = await createApiClient(accessToken).POST(
+    "/api/v1/english/attempts/{attempt_id}/error-classification",
+    {
+      params: { path: { attempt_id: attemptId } },
+      body: { category },
+    },
+  );
+  if (error) throw new Error(apiErrorMessage(error, response.status));
+}
+
+export async function revealEnglishHint(
+  sessionId: string,
+  questionKey: string,
+  accessToken?: string,
+): Promise<EnglishHintResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).POST(
+    "/api/v1/english/practice-sessions/{session_id}/questions/{question_key}/hint",
+    { params: { path: { session_id: sessionId, question_key: questionKey } } },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function getEnglishProgress(
+  accessToken?: string,
+): Promise<EnglishProgressResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient(accessToken).GET(
+    "/api/v1/english/progress",
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}

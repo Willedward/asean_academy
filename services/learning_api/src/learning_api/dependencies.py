@@ -25,6 +25,11 @@ from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
 from .conventions import current_request_id
 from .diagnostic_repository import PostgresDiagnosticRepository
+from .english_learning_repository import (
+    InMemoryEnglishLearningRepository,
+    PostgresEnglishLearningRepository,
+)
+from .english_learning_service import EnglishLearningService
 from .identity import AuthenticatedLearner, AuthenticationError
 from .identity_repository import IdentityError, PostgresIdentityRepository
 from .practice_service import PracticeService
@@ -335,6 +340,36 @@ def practice_service(
 
 
 PracticeServiceDependency = Annotated[PracticeService, Depends(practice_service)]
+
+
+def english_learning_repository(request: Request):
+    repository = getattr(request.app.state, "english_learning_repository", None)
+    if repository is None:
+        settings = request.app.state.settings
+        repository = (
+            PostgresEnglishLearningRepository(settings.database_url)
+            if settings.database_url
+            else InMemoryEnglishLearningRepository()
+        )
+        request.app.state.english_learning_repository = repository
+    return repository
+
+
+def english_learning_service(
+    request: Request,
+    learner: EnrolledLearnerDependency,
+) -> EnglishLearningService:
+    return EnglishLearningService(
+        request.app.state.course_catalogue,
+        english_learning_repository(request),
+        learner.learner_id,
+        allow_drafts=request.app.state.settings.allow_draft_content,
+    )
+
+
+EnglishLearningServiceDependency = Annotated[
+    EnglishLearningService, Depends(english_learning_service)
+]
 
 
 def tutor_repository(request: Request):

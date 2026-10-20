@@ -41,6 +41,7 @@ from .routers.content_assets import router as content_assets_router
 from .routers.content_review import router as content_review_router
 from .routers.courses import router as courses_router
 from .routers.diagnostics import router as diagnostics_router
+from .routers.english import router as english_router
 from .routers.identity import router as identity_router
 from .routers.practice import router as practice_router
 from .routers.progress import router as progress_router
@@ -412,6 +413,7 @@ def create_app(
     application.include_router(content_review_router)
     application.include_router(content_assets_router)
     application.include_router(courses_router)
+    application.include_router(english_router)
     application.include_router(diagnostics_router)
     application.include_router(practice_router)
     application.include_router(progress_router)
