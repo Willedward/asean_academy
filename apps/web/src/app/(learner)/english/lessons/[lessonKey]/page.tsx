@@ -9,7 +9,9 @@ export default async function EnglishLessonPage({
   params,
 }: PageProps<"/english/lessons/[lessonKey]">) {
   const { lessonKey } = await params;
-  const learner = await requireEnrolledLearner();
+  const learner = await requireEnrolledLearner(
+    `/english/lessons/${encodeURIComponent(lessonKey)}`,
+  );
   const session = await getVerifiedSession();
   if (!learner || !session) return null;
   const lesson = await getServerEnglishLesson(session, lessonKey);

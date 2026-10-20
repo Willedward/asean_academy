@@ -87,6 +87,13 @@ async function attachScreenshot(page: Page, testInfo: TestInfo, name: string) {
 }
 
 test.describe.serial("authenticated beta journeys", () => {
+  test("English deep links preserve their destination through sign-in", async ({
+    page,
+  }) => {
+    await page.goto("/english");
+    await expect(page).toHaveURL(/\/login\?next=%2Fenglish$/);
+  });
+
   test("student onboarding, lesson progress, practice feedback and session persistence", async ({
     page,
   }) => {
