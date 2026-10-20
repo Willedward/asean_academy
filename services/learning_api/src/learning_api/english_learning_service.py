@@ -34,15 +34,12 @@ class EnglishLearningService:
         self.report = catalogue.english_learner_report
         self.questions = {question.stable_key: question for question in self.report.questions}
         self.passages = {
-            (passage.stable_key, passage.revision): passage
-            for passage in self.report.passages
+            (passage.stable_key, passage.revision): passage for passage in self.report.passages
         }
         self.lessons = {lesson.stable_key: lesson for lesson in self.report.lessons}
 
     def _visible(self, status: str) -> bool:
-        return status == "published" or (
-            self.allow_drafts and status in {"draft", "reviewed"}
-        )
+        return status == "published" or (self.allow_drafts and status in {"draft", "reviewed"})
 
     def _assert_curriculum_visible(self) -> None:
         catalogue = self.report.catalogue
@@ -79,9 +76,7 @@ class EnglishLearningService:
         catalogue = self.report.catalogue
         assert catalogue is not None
         authored = self.lessons
-        progress = {
-            item["lesson_key"]: item for item in self.repository.progress(self.learner_id)
-        }
+        progress = {item["lesson_key"]: item for item in self.repository.progress(self.learner_id)}
         modules = []
         for module in catalogue.modules:
             lessons = []
@@ -101,9 +96,7 @@ class EnglishLearningService:
                         "authored": lesson is not None,
                         "available": is_visible,
                         "href": (
-                            f"/english/lessons/{lesson_ref.stable_key}"
-                            if is_visible
-                            else None
+                            f"/english/lessons/{lesson_ref.stable_key}" if is_visible else None
                         ),
                         "progress_state": (
                             item_progress["state"] if item_progress else "not_started"
@@ -139,9 +132,7 @@ class EnglishLearningService:
 
     def lesson(self, lesson_key: str) -> dict:
         lesson = self._lesson(lesson_key)
-        question_keys = [
-            key for section in lesson.sections for key in section.question_keys
-        ]
+        question_keys = [key for section in lesson.sections for key in section.question_keys]
         visible_questions = [
             key
             for key in question_keys
@@ -196,9 +187,7 @@ class EnglishLearningService:
         active = self.repository.active_session(self.learner_id, lesson_key, mode)
         if active:
             return active
-        ordered_keys = [
-            key for section in lesson.sections for key in section.question_keys
-        ]
+        ordered_keys = [key for section in lesson.sections for key in section.question_keys]
         if mode == "retry_review":
             due = set(self.repository.retry_keys(self.learner_id, lesson_key))
             ordered_keys = [key for key in ordered_keys if key in due]
@@ -249,9 +238,7 @@ class EnglishLearningService:
     def _public_question(self, question) -> dict:
         passage = None
         if question.passage_ref is not None:
-            source = self.passages[
-                (question.passage_ref.stable_key, question.passage_ref.revision)
-            ]
+            source = self.passages[(question.passage_ref.stable_key, question.passage_ref.revision)]
             passage = {
                 "stable_key": source.stable_key,
                 "revision": source.revision,
@@ -260,6 +247,15 @@ class EnglishLearningService:
                 "paragraphs": source.paragraphs,
                 "attribution": source.attribution,
             }
+        word_bank = None
+        if question.question_type == "banked_cloze":
+            first = question.parts[0].response
+            assert isinstance(first, SingleChoiceResponse)
+            word_bank = [option.model_dump(mode="json") for option in first.options]
+        parts = [self._public_part(part) for part in question.parts]
+        if word_bank is not None:
+            for part in parts:
+                part["options"] = []
         return {
             "stable_key": question.stable_key,
             "revision": question.revision,
@@ -270,7 +266,8 @@ class EnglishLearningService:
             "exposure_pool": question.exposure_pool,
             "instructions": question.instructions,
             "passage": passage,
-            "parts": [self._public_part(part) for part in question.parts],
+            "word_bank": word_bank,
+            "parts": parts,
         }
 
     def next_question(self, session_id: str) -> dict:
@@ -279,9 +276,7 @@ class EnglishLearningService:
         session = self.repository.session(self.learner_id, session_id)
         if assignment is None:
             return {"status": "completed", "session": session}
-        question = self._question(
-            assignment["question_key"], assignment["question_revision"]
-        )
+        question = self._question(assignment["question_key"], assignment["question_revision"])
         return {
             "status": "active",
             "session": session,
@@ -310,9 +305,7 @@ class EnglishLearningService:
         answers: dict[str, str | list[str]],
         idempotency_key: str,
     ) -> dict:
-        replay = self.repository.attempt_by_idempotency(
-            self.learner_id, idempotency_key
-        )
+        replay = self.repository.attempt_by_idempotency(self.learner_id, idempotency_key)
         if replay is not None:
             return replay
         assignment = self.repository.next_assignment(self.learner_id, session_id)
@@ -336,6 +329,17 @@ class EnglishLearningService:
                 "english_answers_incomplete",
                 "Supply one answer for every part of the English question.",
             )
+        if question.question_type == "banked_cloze":
+            selected = [
+                value.strip().upper()
+                for value in answers.values()
+                if isinstance(value, str) and value.strip()
+            ]
+            if len(selected) != len(question.parts) or len(selected) != len(set(selected)):
+                raise EnglishLearningError(
+                    "english_banked_cloze_word_reused",
+                    "Use each word-bank choice at most once.",
+                )
         parts = []
         for part in question.parts:
             submission = answers[str(part.position)]
@@ -380,9 +384,7 @@ class EnglishLearningService:
         )
 
     def classify_error(self, attempt_id: str, category: str) -> dict:
-        return self.repository.record_classification(
-            self.learner_id, attempt_id, category
-        )
+        return self.repository.record_classification(self.learner_id, attempt_id, category)
 
     def hint(self, session_id: str, question_key: str) -> dict:
         assignment = self.repository.next_assignment(self.learner_id, session_id)

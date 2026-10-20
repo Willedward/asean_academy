@@ -5026,6 +5026,20 @@
           "title": {
             "title": "Title",
             "type": "string"
+          },
+          "word_bank": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/EnglishChoiceOptionResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Word Bank"
           }
         },
         "required": [

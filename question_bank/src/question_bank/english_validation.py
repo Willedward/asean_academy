@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -109,17 +110,28 @@ def _validate_short_text_determinism(question, path, report):
             )
 
 
-def validate_english_foundation(
-    root: Path, *, publish: bool = False
-) -> EnglishFoundationReport:
+def _validate_banked_cloze_markers(question, passage, path, report):
+    if question.question_type != "banked_cloze" or passage is None:
+        return
+    markers = re.findall(r"\{\{([1-9][0-9]*)\}\}", "\n".join(passage.paragraphs))
+    expected = [str(part.position) for part in question.parts]
+    if markers != expected:
+        _issue(
+            report,
+            "error",
+            "banked_cloze_gap_markers",
+            path,
+            f"Passage gap markers must appear once in order: {expected}; found {markers}",
+        )
+
+
+def validate_english_foundation(root: Path, *, publish: bool = False) -> EnglishFoundationReport:
     root = root.resolve()
     report = EnglishFoundationReport()
     report.catalogue = _load(
         root / "catalogue.json", EnglishCurriculumCatalogue, report, "invalid_catalogue"
     )
-    report.sources = _load(
-        root / "sources.json", SourceInventory, report, "invalid_sources"
-    )
+    report.sources = _load(root / "sources.json", SourceInventory, report, "invalid_sources")
     if report.catalogue is None or report.sources is None:
         return report
 
@@ -134,9 +146,7 @@ def validate_english_foundation(
             f"Unknown source references: {sorted(unknown_catalogue_sources)}",
         )
 
-    passage_rows = _load_directory(
-        root, "passages", EnglishPassage, report, "invalid_passage"
-    )
+    passage_rows = _load_directory(root, "passages", EnglishPassage, report, "invalid_passage")
     passage_by_key = {}
     for path, passage in passage_rows:
         if path.stem != passage.stable_key:
@@ -203,6 +213,7 @@ def validate_english_foundation(
                 _issue(report, "error", "missing_passage_revision", path, ref.stable_key)
             elif passage.content_sha256 != ref.content_sha256:
                 _issue(report, "error", "passage_pin_checksum", path, ref.stable_key)
+            _validate_banked_cloze_markers(question, passage, path, report)
         _validate_short_text_determinism(question, path, report)
         if publish and question.status not in {"reviewed", "published"}:
             _issue(report, "error", "question_review_required", path, question.stable_key)
@@ -239,9 +250,7 @@ def validate_english_foundation(
                 bank_key,
             )
 
-    lesson_rows = _load_directory(
-        root, "lessons", EnglishLesson, report, "invalid_lesson"
-    )
+    lesson_rows = _load_directory(root, "lessons", EnglishLesson, report, "invalid_lesson")
     for path, lesson in lesson_rows:
         if path.stem != lesson.stable_key:
             _issue(report, "error", "lesson_filename", path, lesson.stable_key)

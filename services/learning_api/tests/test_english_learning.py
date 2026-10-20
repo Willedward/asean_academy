@@ -182,3 +182,90 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
     after_retry = request(app, "GET", "/api/v1/english/progress").json()["lessons"][0]
     assert after_retry["state"] == "proficient"
     assert after_retry["retry_question_count"] == 0
+
+
+def test_e3_1_banked_cloze_exposes_one_bank_and_marks_the_whole_passage():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/practice-sessions",
+        headers={"Idempotency-Key": "e3-guided"},
+        json={"lesson_key": "e3-lesson-01", "mode": "guided_practice"},
+    )
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 1
+    session_id = created.json()["session_id"]
+    current = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    )
+    assert current.status_code == 200, current.text
+    question = current.json()["question"]
+
+    assert question["stable_key"] == "eb-l1-001"
+    assert question["question_type"] == "banked_cloze"
+    assert len(question["word_bank"]) == 12
+    assert len(question["parts"]) == 8
+    assert all(not part["options"] for part in question["parts"])
+    assert "{{1}}" in question["passage"]["paragraphs"][0]
+    encoded = json.dumps(question)
+    assert "correct_key" not in encoded
+    assert "choice_rationales" not in encoded
+
+    incomplete = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e3-incomplete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {"1": "C"},
+        },
+    )
+    assert incomplete.status_code == 400
+    assert incomplete.json()["error"]["code"] == "english_answers_incomplete"
+
+    reused = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e3-reused"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {str(index): "C" for index in range(1, 9)},
+        },
+    )
+    assert reused.status_code == 400
+    assert reused.json()["error"]["code"] == "english_banked_cloze_word_reused"
+
+    completed = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e3-complete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {
+                "1": "C",
+                "2": "E",
+                "3": "D",
+                "4": "L",
+                "5": "A",
+                "6": "I",
+                "7": "G",
+                "8": "F",
+            },
+        },
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["correct"] is True
+    assert completed.json()["lesson_state"] == "proficient"
+    assert [part["correct"] for part in completed.json()["parts"]] == [True] * 8

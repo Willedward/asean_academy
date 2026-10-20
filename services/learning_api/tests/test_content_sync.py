@@ -34,12 +34,27 @@ class Rows:
 def imported(catalogue):
     report = catalogue.report
     return [
-        ("course", report.course.stable_key, report.course.revision,
-         course_content_hash(report.course, report.lessons, report.pools), report.course.status),
-        *[("lesson", lesson.stable_key, lesson.revision, lesson_content_hash(lesson), lesson.status)
-          for lesson in report.lessons],
-        *[("question", q.stable_key, q.revision, content_hash(q), q.status)
-          for q in catalogue.questions],
+        (
+            "course",
+            report.course.stable_key,
+            report.course.revision,
+            course_content_hash(report.course, report.lessons, report.pools),
+            report.course.status,
+        ),
+        *[
+            (
+                "lesson",
+                lesson.stable_key,
+                lesson.revision,
+                lesson_content_hash(lesson),
+                lesson.status,
+            )
+            for lesson in report.lessons
+        ],
+        *[
+            ("question", q.stable_key, q.revision, content_hash(q), q.status)
+            for q in catalogue.questions
+        ],
     ]
 
 
@@ -88,7 +103,7 @@ def test_same_revision_with_changed_hash_or_publication_status_is_rejected():
 def test_missing_english_revision_blocks_readiness():
     catalogue = CourseCatalogue(ROOT, allow_drafts=True)
     stored = database(catalogue)
-    stored.english_questions = stored.english_questions[1:]
+    stored.english_questions = [row for row in stored.english_questions if row[0] != "ev-l1-001"]
 
     with pytest.raises(ContentSyncError, match="english_question:ev-l1-001:r1"):
         check_content(stored, catalogue)

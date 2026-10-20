@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type {
@@ -38,7 +44,8 @@ const current: EnglishNextQuestionResponse = {
     parts: [
       {
         position: 1,
-        prompt: "The path was treacherous—dangerous and unstable after the rain.",
+        prompt:
+          "The path was treacherous—dangerous and unstable after the rain.",
         response_type: "single_choice",
         options: [
           { key: "A", text: "narrow" },
@@ -60,7 +67,8 @@ const incorrect: EnglishAttemptResponse = {
       position: 1,
       correct: false,
       error: null,
-      feedback: "Narrow is possible in general, but the sentence defines the word as dangerous.",
+      feedback:
+        "Narrow is possible in general, but the sentence defines the word as dangerous.",
     },
   ],
   question_finished: true,
@@ -116,5 +124,138 @@ describe("EnglishPracticePlayer", () => {
     expect(screen.getByText("Reflection saved")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Continue" })).toBeEnabled();
     expect(screen.queryByText(/\bXP\b/i)).not.toBeInTheDocument();
+  });
+
+  it("fills a shared word bank with keyboard-native controls and reveals feedback as one group", async () => {
+    const banked: EnglishNextQuestionResponse = {
+      status: "active",
+      session: {
+        ...current.session,
+        lesson_key: "e3-lesson-01",
+        question_count: 1,
+        assigned_count: 1,
+      },
+      position: 1,
+      question: {
+        stable_key: "eb-l1-001",
+        revision: 1,
+        title: "Restore the afternoon broadcast",
+        difficulty: 2,
+        outcome_code: "EB3.1",
+        question_type: "banked_cloze",
+        exposure_pool: "exit_ticket",
+        instructions:
+          "Choose one word for each gap. Each word can be used once.",
+        passage: {
+          stable_key: "english-passage-afternoon-broadcast",
+          revision: 1,
+          title: "The afternoon broadcast",
+          text_type: "narrative",
+          paragraphs: [
+            "The studio was {{1}} while rain {{2}} against the windows.",
+          ],
+          attribution: "Original NextScholar passage.",
+        },
+        word_bank: [
+          { key: "A", text: "anxious" },
+          { key: "C", text: "deserted" },
+          { key: "E", text: "hammered" },
+          { key: "F", text: "relieved" },
+        ],
+        parts: [
+          {
+            position: 1,
+            prompt: "Gap 1",
+            response_type: "single_choice",
+            options: [
+              { key: "A", text: "anxious" },
+              { key: "C", text: "deserted" },
+              { key: "E", text: "hammered" },
+              { key: "F", text: "relieved" },
+            ],
+          },
+          {
+            position: 2,
+            prompt: "Gap 2",
+            response_type: "single_choice",
+            options: [
+              { key: "A", text: "anxious" },
+              { key: "C", text: "deserted" },
+              { key: "E", text: "hammered" },
+              { key: "F", text: "relieved" },
+            ],
+          },
+        ],
+      },
+    };
+    const groupedResult: EnglishAttemptResponse = {
+      attempt_id: "a99591e5-1f20-4a45-a453-31995fc99b61",
+      attempt_number: 1,
+      correct: true,
+      parts: [
+        {
+          position: 1,
+          correct: true,
+          error: null,
+          feedback: "Deserted describes the empty studio.",
+        },
+        {
+          position: 2,
+          correct: true,
+          error: null,
+          feedback: "Hammered describes the forceful rain.",
+        },
+      ],
+      question_finished: true,
+      retry_queued: false,
+      needs_error_classification: false,
+      lesson_state: "proficient",
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => banked),
+      submitAttempt: vi.fn(async () => groupedResult),
+      revealHint: vi.fn(async () => ({
+        question_key: "eb-l1-001",
+        parts: ["Hint 1", "Hint 2"],
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer sessionId={banked.session.session_id} api={api} />,
+    );
+
+    const gap1 = await screen.findByRole("combobox", { name: "Gap 1" });
+    const gap2 = screen.getByRole("combobox", { name: "Gap 2" });
+    expect(screen.getByRole("button", { name: "Check answer" })).toBeDisabled();
+
+    fireEvent.change(gap1, { target: { value: "C" } });
+    expect(screen.getByText("deserted · gap 1")).toBeInTheDocument();
+    fireEvent.change(gap2, { target: { value: "C" } });
+    expect(gap1).toHaveValue("");
+    expect(screen.getByText("deserted · gap 2")).toBeInTheDocument();
+
+    fireEvent.change(gap1, { target: { value: "C" } });
+    fireEvent.change(gap2, { target: { value: "E" } });
+    expect(
+      screen.queryByText("Deserted describes the empty studio."),
+    ).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    await waitFor(() =>
+      expect(api.submitAttempt).toHaveBeenCalledWith(
+        banked.session.session_id,
+        "eb-l1-001",
+        1,
+        { "1": "C", "2": "E" },
+      ),
+    );
+    expect(await screen.findByText("Passage feedback")).toBeInTheDocument();
+    expect(
+      screen.getByText("Deserted describes the empty studio."),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Hammered describes the forceful rain."),
+    ).toBeInTheDocument();
   });
 });

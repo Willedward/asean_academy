@@ -52,7 +52,11 @@ const defaultApi: EnglishPracticeApi = {
   classifyError: classifyEnglishError,
 };
 
-const ERROR_OPTIONS: { key: EnglishErrorCategory; label: string; detail: string }[] = [
+const ERROR_OPTIONS: {
+  key: EnglishErrorCategory;
+  label: string;
+  detail: string;
+}[] = [
   {
     key: "unknown_meaning",
     label: "I did not know the word",
@@ -86,11 +90,14 @@ export function EnglishPracticePlayer({
   sessionId: string;
   api?: EnglishPracticeApi;
 }) {
-  const [current, setCurrent] = useState<EnglishNextQuestionResponse | null>(null);
+  const [current, setCurrent] = useState<EnglishNextQuestionResponse | null>(
+    null,
+  );
   const [answers, setAnswers] = useState<EnglishAnswers>({});
   const [attempt, setAttempt] = useState<EnglishAttemptResponse | null>(null);
   const [hint, setHint] = useState<EnglishHintResponse | null>(null);
-  const [classification, setClassification] = useState<EnglishErrorCategory | null>(null);
+  const [classification, setClassification] =
+    useState<EnglishErrorCategory | null>(null);
   const [classificationSaved, setClassificationSaved] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -107,7 +114,11 @@ export function EnglishPracticePlayer({
       setClassificationSaved(false);
       setError(null);
     } catch (caught: unknown) {
-      setError(caught instanceof Error ? caught.message : "English practice could not be loaded.");
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "English practice could not be loaded.",
+      );
     } finally {
       setBusy(false);
     }
@@ -122,7 +133,11 @@ export function EnglishPracticePlayer({
       })
       .catch((caught: unknown) => {
         if (active)
-          setError(caught instanceof Error ? caught.message : "English practice could not be loaded.");
+          setError(
+            caught instanceof Error
+              ? caught.message
+              : "English practice could not be loaded.",
+          );
       });
     return () => {
       active = false;
@@ -131,7 +146,12 @@ export function EnglishPracticePlayer({
 
   const question = current?.question;
   const allAnswersPresent = useMemo(
-    () => Boolean(question?.parts.every((part) => answerPresent(answers[String(part.position)]))),
+    () =>
+      Boolean(
+        question?.parts.every((part) =>
+          answerPresent(answers[String(part.position)]),
+        ),
+      ),
     [answers, question],
   );
 
@@ -149,7 +169,11 @@ export function EnglishPracticePlayer({
       );
       setError(null);
     } catch (caught: unknown) {
-      setError(caught instanceof Error ? caught.message : "Your answer could not be checked.");
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Your answer could not be checked.",
+      );
     } finally {
       setBusy(false);
     }
@@ -162,7 +186,11 @@ export function EnglishPracticePlayer({
       setHint(await api.revealHint(sessionId, question.stable_key));
       setError(null);
     } catch (caught: unknown) {
-      setError(caught instanceof Error ? caught.message : "The hint could not be opened.");
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "The hint could not be opened.",
+      );
     } finally {
       setBusy(false);
     }
@@ -176,7 +204,11 @@ export function EnglishPracticePlayer({
       setClassificationSaved(true);
       setError(null);
     } catch (caught: unknown) {
-      setError(caught instanceof Error ? caught.message : "The reflection could not be saved.");
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "The reflection could not be saved.",
+      );
     } finally {
       setBusy(false);
     }
@@ -184,6 +216,18 @@ export function EnglishPracticePlayer({
 
   function setSingle(position: number, value: string) {
     setAnswers((existing) => ({ ...existing, [String(position)]: value }));
+  }
+
+  function setBankedChoice(position: number, value: string) {
+    setAnswers((existing) => {
+      const next = { ...existing };
+      for (const [key, answer] of Object.entries(next)) {
+        if (key !== String(position) && answer === value) delete next[key];
+      }
+      if (value) next[String(position)] = value;
+      else delete next[String(position)];
+      return next;
+    });
   }
 
   function toggleMultiple(position: number, value: string) {
@@ -203,17 +247,25 @@ export function EnglishPracticePlayer({
     return (
       <div role="alert">
         <Card className="items-start gap-4">
-        <Tag tone="danger" icon={AlertTriangle}>Practice unavailable</Tag>
-        <H2>We could not load this English practice session.</H2>
-        <Muted>{error}</Muted>
-        <Button icon={RefreshCw} onClick={() => void loadQuestion()}>Try again</Button>
+          <Tag tone="danger" icon={AlertTriangle}>
+            Practice unavailable
+          </Tag>
+          <H2>We could not load this English practice session.</H2>
+          <Muted>{error}</Muted>
+          <Button icon={RefreshCw} onClick={() => void loadQuestion()}>
+            Try again
+          </Button>
         </Card>
       </div>
     );
   }
 
   if (!current) {
-    return <Card className="animate-pulse"><Muted>Loading English practice…</Muted></Card>;
+    return (
+      <Card className="animate-pulse">
+        <Muted>Loading English practice…</Muted>
+      </Card>
+    );
   }
 
   if (current.status === "completed" || !question) {
@@ -223,7 +275,8 @@ export function EnglishPracticePlayer({
         <CheckCircle2 size={48} className="text-ns-success" aria-hidden />
         <Eyebrow>PRACTICE COMPLETE</Eyebrow>
         <H1>
-          {current.session.correct_count} of {current.session.question_count} correct
+          {current.session.correct_count} of {current.session.question_count}{" "}
+          correct
         </H1>
         <Muted className="max-w-xl text-base leading-7">
           {retryNeeded
@@ -231,8 +284,12 @@ export function EnglishPracticePlayer({
             : "You completed this English objective-practice session."}
         </Muted>
         <div className="flex flex-wrap justify-center gap-3">
-          <Button variant="primary" href="/english">View English course</Button>
-          <Button href={`/english/lessons/${current.session.lesson_key}`}>Return to lesson</Button>
+          <Button variant="primary" href="/english">
+            View English course
+          </Button>
+          <Button href={`/english/lessons/${current.session.lesson_key}`}>
+            Return to lesson
+          </Button>
         </div>
       </Card>
     );
@@ -240,6 +297,67 @@ export function EnglishPracticePlayer({
 
   const position = current.position ?? current.session.resolved_count + 1;
   const canContinue = Boolean(attempt?.correct || classificationSaved);
+  const isBankedCloze =
+    question.question_type === "banked_cloze" && Boolean(question.passage);
+  const wordBank = question.word_bank ?? question.parts[0]?.options ?? [];
+  const usedWords = new Map<string, number>();
+  for (const part of question.parts) {
+    const answer = answers[String(part.position)];
+    if (typeof answer === "string" && answer)
+      usedWords.set(answer, part.position);
+  }
+
+  function renderBankedParagraph(paragraph: string, paragraphIndex: number) {
+    const fragments = paragraph.split(/(\{\{[1-9][0-9]*\}\})/g);
+    return (
+      <p key={paragraphIndex} className="m-0 text-[16px] leading-[3.25rem]">
+        {fragments.map((fragment, fragmentIndex) => {
+          const marker = fragment.match(/^\{\{([1-9][0-9]*)\}\}$/);
+          if (!marker)
+            return (
+              <span key={`${paragraphIndex}-${fragmentIndex}`}>{fragment}</span>
+            );
+          const gap = Number(marker[1]);
+          const selected = answers[String(gap)];
+          const result = attempt?.parts.find((item) => item.position === gap);
+          return (
+            <span
+              className={cn(
+                "mx-1 inline-flex rounded-xl border-2 align-middle",
+                result?.correct && "border-ns-success",
+                result && !result.correct && "border-ns-danger",
+                !result && "border-ns-line-strong",
+              )}
+              key={`${paragraphIndex}-gap-${gap}`}
+            >
+              <label className="sr-only" htmlFor={`banked-gap-${gap}`}>
+                Gap {gap}
+              </label>
+              <select
+                id={`banked-gap-${gap}`}
+                aria-label={`Gap ${gap}`}
+                aria-invalid={result ? !result.correct : undefined}
+                value={typeof selected === "string" ? selected : ""}
+                disabled={Boolean(attempt)}
+                onChange={(event) => setBankedChoice(gap, event.target.value)}
+                className={cn(
+                  "h-10 min-w-32 rounded-[10px] border-0 bg-ns-raised px-3 text-[15px] font-semibold text-ns-ink",
+                  focusRing,
+                )}
+              >
+                <option value="">Gap {gap}</option>
+                {wordBank.map((option) => (
+                  <option key={option.key} value={option.key}>
+                    {option.text}
+                  </option>
+                ))}
+              </select>
+            </span>
+          );
+        })}
+      </p>
+    );
+  }
 
   return (
     <article className="flex flex-col gap-5 lg:gap-6">
@@ -254,9 +372,13 @@ export function EnglishPracticePlayer({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <Eyebrow>
-              {current.session.mode === "retry_review" ? "RETRY REVIEW" : "ENGLISH PRACTICE"}
+              {current.session.mode === "retry_review"
+                ? "RETRY REVIEW"
+                : "ENGLISH PRACTICE"}
             </Eyebrow>
-            <H1>Question {position} of {current.session.question_count}</H1>
+            <H1>
+              Question {position} of {current.session.question_count}
+            </H1>
           </div>
           <div className="flex gap-2">
             <Tag>Difficulty {question.difficulty}</Tag>
@@ -279,11 +401,61 @@ export function EnglishPracticePlayer({
 
       {question.passage ? (
         <Card tone="sunken" className="gap-4">
-          <Eyebrow>{question.passage.text_type.toUpperCase()}</Eyebrow>
-          <H2>{question.passage.title}</H2>
-          {question.passage.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="m-0 text-[16px] leading-7">{paragraph}</p>
-          ))}
+          <Eyebrow>
+            {isBankedCloze
+              ? "BANKED STORY CLOZE"
+              : question.passage.text_type.toUpperCase()}
+          </Eyebrow>
+          <H2>{isBankedCloze ? question.title : question.passage.title}</H2>
+          {isBankedCloze ? (
+            <>
+              <p className="m-0 text-[16px] leading-7">
+                {question.instructions}
+              </p>
+              <section
+                aria-labelledby="word-bank-heading"
+                className="rounded-xl border border-ns-line bg-ns-raised p-4"
+              >
+                <h3
+                  id="word-bank-heading"
+                  className="m-0 text-sm font-bold uppercase tracking-wide text-ns-muted"
+                >
+                  Word bank · {wordBank.length} words for{" "}
+                  {question.parts.length} gaps
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {wordBank.map((option) => {
+                    const usedAt = usedWords.get(option.key);
+                    return (
+                      <span
+                        key={option.key}
+                        className={cn(
+                          "rounded-full border px-3 py-1.5 text-sm font-semibold",
+                          usedAt
+                            ? "border-ns-ink bg-ns-brand-soft text-ns-ink"
+                            : "border-ns-line-strong bg-ns-raised text-ns-muted",
+                        )}
+                      >
+                        {option.text}
+                        {usedAt ? ` · gap ${usedAt}` : ""}
+                      </span>
+                    );
+                  })}
+                </div>
+              </section>
+              <Divider />
+              <h3 className="m-0 text-lg font-bold">
+                {question.passage.title}
+              </h3>
+              {question.passage.paragraphs.map(renderBankedParagraph)}
+            </>
+          ) : (
+            question.passage.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="m-0 text-[16px] leading-7">
+                {paragraph}
+              </p>
+            ))
+          )}
           {question.passage.attribution ? (
             <Muted className="text-xs">{question.passage.attribution}</Muted>
           ) : null}
@@ -291,78 +463,144 @@ export function EnglishPracticePlayer({
       ) : null}
 
       <Card className="gap-4">
-        <H2>{question.title}</H2>
-        <p className="m-0 text-[16px] leading-7">{question.instructions}</p>
-        <Divider />
-        {question.parts.map((part) => {
-          const key = String(part.position);
-          const selected = answers[key];
-          const result = attempt?.parts.find((item) => item.position === part.position);
-          return (
-            <fieldset key={part.position} className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0">
-              <legend className="mb-2 text-[16px] font-semibold leading-6">{part.prompt}</legend>
-              {part.response_type === "short_text" ? (
-                <input
-                  value={typeof selected === "string" ? selected : ""}
-                  onChange={(event) => setSingle(part.position, event.target.value)}
-                  disabled={Boolean(attempt)}
-                  maxLength={1000}
-                  className={cn(
-                    "h-12 rounded-xl border border-ns-line-strong bg-ns-raised px-4 text-base",
-                    focusRing,
+        {isBankedCloze ? (
+          <>
+            <H2>{attempt ? "Passage feedback" : "Complete every gap"}</H2>
+            {!attempt ? (
+              <Muted>
+                {Object.keys(answers).length} of {question.parts.length} gaps
+                answered. You can clear or change any answer before checking the
+                whole passage.
+              </Muted>
+            ) : null}
+            {hint ? (
+              <Callout tone="amber" icon={Lightbulb}>
+                <strong>Gap hints</strong>
+                <ol className="m-0 space-y-1 pl-5">
+                  {hint.parts.map((partHint, index) => (
+                    <li key={index}>{partHint}</li>
+                  ))}
+                </ol>
+              </Callout>
+            ) : null}
+            {attempt ? (
+              <ol
+                className="m-0 grid gap-3 p-0 sm:grid-cols-2"
+                aria-label="Passage feedback"
+              >
+                {attempt.parts.map((result) => (
+                  <li className="list-none" key={result.position}>
+                    <Callout
+                      tone={result.correct ? "success" : "amber"}
+                      icon={result.correct ? CheckCircle2 : AlertTriangle}
+                    >
+                      <strong>
+                        Gap {result.position}:{" "}
+                        {result.correct ? "Correct" : "Review the clue"}
+                      </strong>
+                      <span>{result.feedback}</span>
+                    </Callout>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+          </>
+        ) : (
+          <>
+            <H2>{question.title}</H2>
+            <p className="m-0 text-[16px] leading-7">{question.instructions}</p>
+            <Divider />
+            {question.parts.map((part) => {
+              const key = String(part.position);
+              const selected = answers[key];
+              const result = attempt?.parts.find(
+                (item) => item.position === part.position,
+              );
+              return (
+                <fieldset
+                  key={part.position}
+                  className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
+                >
+                  <legend className="mb-2 text-[16px] font-semibold leading-6">
+                    {part.prompt}
+                  </legend>
+                  {part.response_type === "short_text" ? (
+                    <input
+                      value={typeof selected === "string" ? selected : ""}
+                      onChange={(event) =>
+                        setSingle(part.position, event.target.value)
+                      }
+                      disabled={Boolean(attempt)}
+                      maxLength={1000}
+                      className={cn(
+                        "h-12 rounded-xl border border-ns-line-strong bg-ns-raised px-4 text-base",
+                        focusRing,
+                      )}
+                      aria-label={`Answer for part ${part.position}`}
+                    />
+                  ) : (
+                    <div className="grid gap-2">
+                      {part.options.map((option) => {
+                        const checked = Array.isArray(selected)
+                          ? selected.includes(option.key)
+                          : selected === option.key;
+                        return (
+                          <label
+                            key={option.key}
+                            className={cn(
+                              "flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-[15px] leading-6",
+                              checked
+                                ? "border-ns-ink bg-ns-brand-soft"
+                                : "border-ns-line bg-ns-raised hover:bg-ns-sunken",
+                              attempt && "cursor-default",
+                            )}
+                          >
+                            <input
+                              type={
+                                part.response_type === "single_choice"
+                                  ? "radio"
+                                  : "checkbox"
+                              }
+                              name={`part-${part.position}`}
+                              value={option.key}
+                              checked={checked}
+                              disabled={Boolean(attempt)}
+                              onChange={() =>
+                                part.response_type === "single_choice"
+                                  ? setSingle(part.position, option.key)
+                                  : toggleMultiple(part.position, option.key)
+                              }
+                              className="mt-1"
+                            />
+                            <span>
+                              <strong>{option.key}.</strong> {option.text}
+                            </span>
+                          </label>
+                        );
+                      })}
+                    </div>
                   )}
-                  aria-label={`Answer for part ${part.position}`}
-                />
-              ) : (
-                <div className="grid gap-2">
-                  {part.options.map((option) => {
-                    const checked = Array.isArray(selected)
-                      ? selected.includes(option.key)
-                      : selected === option.key;
-                    return (
-                      <label
-                        key={option.key}
-                        className={cn(
-                          "flex cursor-pointer items-start gap-3 rounded-xl border p-3 text-[15px] leading-6",
-                          checked
-                            ? "border-ns-ink bg-ns-brand-soft"
-                            : "border-ns-line bg-ns-raised hover:bg-ns-sunken",
-                          attempt && "cursor-default",
-                        )}
-                      >
-                        <input
-                          type={part.response_type === "single_choice" ? "radio" : "checkbox"}
-                          name={`part-${part.position}`}
-                          value={option.key}
-                          checked={checked}
-                          disabled={Boolean(attempt)}
-                          onChange={() =>
-                            part.response_type === "single_choice"
-                              ? setSingle(part.position, option.key)
-                              : toggleMultiple(part.position, option.key)
-                          }
-                          className="mt-1"
-                        />
-                        <span><strong>{option.key}.</strong> {option.text}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              )}
-              {hint?.parts[part.position - 1] ? (
-                <Callout tone="amber" icon={Lightbulb}>
-                  <span>{hint.parts[part.position - 1]}</span>
-                </Callout>
-              ) : null}
-              {result ? (
-                <Callout tone={result.correct ? "success" : "amber"} icon={result.correct ? CheckCircle2 : AlertTriangle}>
-                  <strong>{result.correct ? "Correct" : "Check the evidence"}</strong>
-                  <span>{result.feedback}</span>
-                </Callout>
-              ) : null}
-            </fieldset>
-          );
-        })}
+                  {hint?.parts[part.position - 1] ? (
+                    <Callout tone="amber" icon={Lightbulb}>
+                      <span>{hint.parts[part.position - 1]}</span>
+                    </Callout>
+                  ) : null}
+                  {result ? (
+                    <Callout
+                      tone={result.correct ? "success" : "amber"}
+                      icon={result.correct ? CheckCircle2 : AlertTriangle}
+                    >
+                      <strong>
+                        {result.correct ? "Correct" : "Check the evidence"}
+                      </strong>
+                      <span>{result.feedback}</span>
+                    </Callout>
+                  ) : null}
+                </fieldset>
+              );
+            })}
+          </>
+        )}
       </Card>
 
       {attempt?.needs_error_classification ? (
@@ -371,7 +609,9 @@ export function EnglishPracticePlayer({
             <Eyebrow>ONE-MINUTE REFLECTION</Eyebrow>
             <H2>What caused this mistake?</H2>
           </div>
-          <Muted>Choose the closest reason. This makes later review more useful.</Muted>
+          <Muted>
+            Choose the closest reason. This makes later review more useful.
+          </Muted>
           <div className="grid gap-2 sm:grid-cols-2">
             {ERROR_OPTIONS.map((option) => (
               <label
@@ -393,15 +633,22 @@ export function EnglishPracticePlayer({
                 />
                 <span>
                   <strong className="block text-sm">{option.label}</strong>
-                  <span className="block text-xs leading-5 text-ns-muted">{option.detail}</span>
+                  <span className="block text-xs leading-5 text-ns-muted">
+                    {option.detail}
+                  </span>
                 </span>
               </label>
             ))}
           </div>
           {classificationSaved ? (
-            <Tag tone="success" icon={CheckCircle2}>Reflection saved</Tag>
+            <Tag tone="success" icon={CheckCircle2}>
+              Reflection saved
+            </Tag>
           ) : (
-            <Button disabled={!classification || busy} onClick={() => void saveClassification()}>
+            <Button
+              disabled={!classification || busy}
+              onClick={() => void saveClassification()}
+            >
               Save reflection
             </Button>
           )}
@@ -415,12 +662,20 @@ export function EnglishPracticePlayer({
       ) : null}
 
       {error ? (
-        <Callout tone="amber" icon={AlertTriangle}><span>{error}</span></Callout>
+        <Callout tone="amber" icon={AlertTriangle}>
+          <span>{error}</span>
+        </Callout>
       ) : null}
 
       <div className="flex flex-wrap justify-end gap-3">
         {!attempt && !hint ? (
-          <Button icon={Lightbulb} disabled={busy} onClick={() => void openHint()}>Show hint</Button>
+          <Button
+            icon={Lightbulb}
+            disabled={busy}
+            onClick={() => void openHint()}
+          >
+            Show hint
+          </Button>
         ) : null}
         {!attempt ? (
           <Button
