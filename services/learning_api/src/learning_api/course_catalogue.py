@@ -155,6 +155,18 @@ class CourseCatalogue:
         return report
 
     @cached_property
+    def english_learner_report(self):
+        """Return validated English sources for learner-safe service adapters."""
+        report = validate_english_foundation(self.repository_root / ENGLISH_ROOT)
+        if not report.valid or report.catalogue is None:
+            raise CatalogueError(
+                "english_course_invalid",
+                "The authored English course failed validation and is unavailable.",
+                503,
+            )
+        return report
+
+    @cached_property
     def english_review_question_batches(self) -> dict[str, str]:
         root = self.repository_root / ENGLISH_ROOT
         report = validate_english_authoring(root)

@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   ArrowRight,
   BookOpen,
+  BookOpenText,
   Clock3,
   RotateCcw,
 } from "lucide-react";
@@ -29,6 +30,7 @@ import {
   Tag,
 } from "../components/ui";
 import type { UnitSummary } from "../types";
+import { SubjectSwitch } from "../screens/english";
 import { CoreLearningShell, type CoreLearner } from "./core-learning-shell";
 
 type NextActionType = LearningHomeResponse["next_action"]["type"];
@@ -98,6 +100,10 @@ export function CoreLearningDashboard({
   return (
     <CoreLearningShell active="learn" learner={learner} courseHref={courseHref}>
       {course.development_preview ? <PreviewNotice /> : null}
+      <SubjectSwitch
+        active="maths"
+        links={{ maths: courseHref, english: "/english" }}
+      />
       <section className="grid gap-4 lg:grid-cols-[1fr_250px] lg:items-center">
         <div className="flex flex-col gap-2">
           <Eyebrow>YOUR LEARNING PATH</Eyebrow>
@@ -143,6 +149,24 @@ export function CoreLearningDashboard({
             </span>
           ) : null}
         </div>
+      </Card>
+
+      <Card className="gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex min-w-0 items-start gap-3">
+          <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-ns-brand-soft">
+            <BookOpenText size={21} aria-hidden />
+          </span>
+          <div>
+            <Eyebrow>ENGLISH · LAYER 1</Eyebrow>
+            <H3>Build vocabulary, grammar, reading and writing skills</H3>
+            <Muted className="mt-1">
+              Begin with the first context-clues lesson and its objective practice.
+            </Muted>
+          </div>
+        </div>
+        <Button href="/english" iconRight={ArrowRight}>
+          View English
+        </Button>
       </Card>
 
       {firstUnit ? (
@@ -204,6 +228,10 @@ export function CoreCourseMapScreen({
       courseHref={courseHref}
     >
       {course.development_preview ? <PreviewNotice /> : null}
+      <SubjectSwitch
+        active="maths"
+        links={{ maths: courseHref, english: "/english" }}
+      />
       <section className="flex flex-col gap-2">
         <Eyebrow>
           {course.school_level.toUpperCase()} · {course.subject.toUpperCase()}

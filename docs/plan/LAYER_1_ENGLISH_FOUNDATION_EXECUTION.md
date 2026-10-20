@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 19 October 2026  
+**Updated:** 20 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-layer1-foundation`
+**Implementation branch:** `feature/english-e3-vertical-slice`
 
 ## Product boundary
 
@@ -97,14 +97,16 @@ sections.
 | E1d | Database migration for English outcomes, passage revisions and objective question revisions | Implemented; not applied to hosted Supabase |
 | E1 pilot | Original E1.1 lesson and six vocabulary-in-context items | Authored as draft; human review pending |
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
-| E3 | Authenticated English home, lesson, practice, retry, checkpoint, progress and diagnostic APIs/UI | Not started |
+| E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
+| E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
 
-The existing English screens in `apps/web/src/beta-kit/screens/english.tsx` remain UI
-prototypes. They are useful design references but are not yet connected to these source
-contracts or production APIs.
+The English design kit remains the visual reference. The authenticated learner routes at
+`/english`, `/english/lessons/[lessonKey]` and `/english/practice/[sessionId]` now connect
+the E1.1 source contracts to production-shaped APIs. Draft content still fails closed
+when the development content flag is disabled.
 
 ## Implemented repository contract
 
@@ -146,14 +148,15 @@ must fail that gate because it is deliberately still draft content.
 The source implementation now includes exclusive English batch claims, deterministic
 exact and near-template duplicate checks, protected reviewer packet exports, passage-level
 review, correction notes, subject-aware English and editorial decisions, consolidated
-batch review and an importer that refuses an invalid snapshot. Apply migrations 028–029
+batch review and an importer that refuses an invalid snapshot. Apply migrations 028–030
 and deploy this branch before expecting these items in the hosted administrator queue.
 
 ### 2. Deliver the first vertical slice
 
-Have an English educator review the E0 blueprint and E1.1 pilot. Import the approved
-revision, connect the English home to E1.1, persist attempts, classify errors and route a
-failed exit ticket into retry. This proves the complete source-to-learner path before
+Have an English educator review the E0 blueprint and E1.1 pilot, then import the approved
+revision. The code path from English home to E1.1, deterministic attempts, error
+classification, progress and failed-exit-ticket retry is implemented. Apply migrations,
+import the approved revision and verify the authenticated hosted journey before
 high-volume authoring.
 
 ### 3. Add passage formats
@@ -184,7 +187,8 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone is **E3 first authenticated English learner vertical
-slice**: expose E1.1 in the English module map, serve its approved lesson/question
-revisions, persist deterministic attempts, record the error category, and route a failed
-exit ticket into retry. Content can continue in parallel through the E2 review queue.
+The next technical milestone is **hosted E3a verification and the first passage-format
+slice**: review and import E1.1, apply migrations 028–030, deploy the exact Git revision,
+verify one authenticated learner through exit-ticket retry, then implement E3.1 banked
+cloze with passage-level feedback. Content can continue in parallel through the E2
+review queue.

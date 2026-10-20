@@ -842,6 +842,159 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/english/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit an English response for deterministic marking */
+        post: operations["submitEnglishAttempt"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/attempts/{attempt_id}/error-classification": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record one immutable learner error category for an incorrect attempt */
+        post: operations["classifyEnglishAttemptError"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/course-map": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the authenticated learner's English module map */
+        get: operations["getEnglishCourseMap"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/lessons/{lesson_key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one learner-safe English lesson revision */
+        get: operations["getEnglishLesson"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/practice-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start or resume an idempotent English objective-practice session */
+        post: operations["createEnglishPracticeSession"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/practice-sessions/{session_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Resume an owned English objective-practice session */
+        get: operations["getEnglishPracticeSession"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/practice-sessions/{session_id}/next": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the next learner-safe English question */
+        get: operations["getNextEnglishQuestion"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/practice-sessions/{session_id}/questions/{question_key}/hint": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reveal the authored hint for the current English question */
+        post: operations["revealEnglishHint"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get authenticated objective-English lesson progress and retry counts */
+        get: operations["getEnglishProgress"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -1909,6 +2062,14 @@ export interface components {
             /** Unit Key */
             unit_key: string;
         };
+        /** ClassifyEnglishErrorRequest */
+        ClassifyEnglishErrorRequest: {
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch";
+        };
         /** ContentLifecycleRequestResponse */
         ContentLifecycleRequestResponse: {
             /**
@@ -2355,6 +2516,17 @@ export interface components {
             /** Expected Purpose */
             expected_purpose?: ("baseline" | "endline") | null;
         };
+        /** CreateEnglishPracticeSessionRequest */
+        CreateEnglishPracticeSessionRequest: {
+            /** Lesson Key */
+            lesson_key: string;
+            /**
+             * Mode
+             * @default guided_practice
+             * @enum {string}
+             */
+            mode: "guided_practice" | "retry_review";
+        };
         /** CreateInvitationRequest */
         CreateInvitationRequest: {
             /**
@@ -2792,6 +2964,349 @@ export interface components {
              * @enum {string}
              */
             type: "display_math";
+        };
+        /** EnglishAttemptPartResult */
+        EnglishAttemptPartResult: {
+            /** Correct */
+            correct: boolean;
+            /** Error */
+            error: string | null;
+            /** Feedback */
+            feedback: string;
+            /** Position */
+            position: number;
+        };
+        /** EnglishAttemptResponse */
+        EnglishAttemptResponse: {
+            /** Attempt Id */
+            attempt_id: string;
+            /** Attempt Number */
+            attempt_number: number;
+            /** Correct */
+            correct: boolean;
+            /**
+             * Lesson State
+             * @enum {string}
+             */
+            lesson_state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            /** Needs Error Classification */
+            needs_error_classification: boolean;
+            /** Parts */
+            parts: components["schemas"]["EnglishAttemptPartResult"][];
+            /**
+             * Question Finished
+             * @default true
+             * @constant
+             */
+            question_finished: true;
+            /** Retry Queued */
+            retry_queued: boolean;
+        };
+        /** EnglishChoiceOptionResponse */
+        EnglishChoiceOptionResponse: {
+            /** Key */
+            key: string;
+            /** Text */
+            text: string;
+        };
+        /** EnglishCourseMapResponse */
+        EnglishCourseMapResponse: {
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "draft" | "reviewed" | "published" | "retired";
+            /** Description */
+            description: string;
+            /** Development Preview */
+            development_preview: boolean;
+            /** Modules */
+            modules: components["schemas"]["EnglishModuleMap"][];
+            /**
+             * Revision
+             * @default 1
+             */
+            revision: number;
+            /**
+             * Stable Key
+             * @default asean-scholarship-english
+             * @constant
+             */
+            stable_key: "asean-scholarship-english";
+            /**
+             * Subject
+             * @default English
+             * @constant
+             */
+            subject: "English";
+            /** Title */
+            title: string;
+        };
+        /** EnglishErrorClassificationResponse */
+        EnglishErrorClassificationResponse: {
+            /** Attempt Id */
+            attempt_id: string;
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch";
+            /**
+             * Recorded
+             * @default true
+             */
+            recorded: boolean;
+        };
+        /** EnglishHintResponse */
+        EnglishHintResponse: {
+            /** Parts */
+            parts: string[];
+            /** Question Key */
+            question_key: string;
+        };
+        /** EnglishLessonMap */
+        EnglishLessonMap: {
+            /** Authored */
+            authored: boolean;
+            /** Available */
+            available: boolean;
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "planned" | "draft" | "reviewed" | "published" | "retired";
+            /** Href */
+            href: string | null;
+            /** Lesson Code */
+            lesson_code: string;
+            /** Outcome */
+            outcome: string;
+            /** Outcome Code */
+            outcome_code: string;
+            /** Position */
+            position: number;
+            /**
+             * Progress State
+             * @default not_started
+             * @enum {string}
+             */
+            progress_state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            /**
+             * Retry Question Count
+             * @default 0
+             */
+            retry_question_count: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+        };
+        /** EnglishLessonProgressResponse */
+        EnglishLessonProgressResponse: {
+            /** Correct Count */
+            correct_count: number;
+            /** Incorrect Count */
+            incorrect_count: number;
+            /** Last Session Id */
+            last_session_id: string | null;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Revision */
+            lesson_revision: number;
+            /** Question Count */
+            question_count: number;
+            /** Resolved Count */
+            resolved_count: number;
+            /** Retry Question Count */
+            retry_question_count: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            /** Updated At */
+            updated_at: string;
+        };
+        /** EnglishLessonResponse */
+        EnglishLessonResponse: {
+            /**
+             * Content Status
+             * @enum {string}
+             */
+            content_status: "draft" | "reviewed" | "published" | "retired";
+            /** Development Preview */
+            development_preview: boolean;
+            /** Estimated Minutes */
+            estimated_minutes: number;
+            /** Lesson Code */
+            lesson_code: string;
+            /** Outcome Code */
+            outcome_code: string;
+            practice: components["schemas"]["EnglishPracticeEntry"];
+            /** Revision */
+            revision: number;
+            /** Sections */
+            sections: components["schemas"]["EnglishLessonSectionResponse"][];
+            /** Stable Key */
+            stable_key: string;
+            /** Summary */
+            summary: string;
+            /** Title */
+            title: string;
+        };
+        /** EnglishLessonSectionResponse */
+        EnglishLessonSectionResponse: {
+            /** Content */
+            content: string[];
+            /** Position */
+            position: number;
+            /** Question Count */
+            question_count: number;
+            /**
+             * Section Type
+             * @enum {string}
+             */
+            section_type: "retrieval_warmup" | "explicit_model" | "worked_analysis" | "guided_practice" | "independent_application" | "error_classification" | "exit_ticket";
+            /** Title */
+            title: string;
+        };
+        /** EnglishModuleMap */
+        EnglishModuleMap: {
+            /** Lessons */
+            lessons: components["schemas"]["EnglishLessonMap"][];
+            /** Module Code */
+            module_code: string;
+            /** Position */
+            position: number;
+            /** Purpose */
+            purpose: string;
+            /**
+             * Stage
+             * @enum {string}
+             */
+            stage: "orientation" | "toolkit" | "paper_application" | "composition";
+            /** Title */
+            title: string;
+        };
+        /** EnglishNextQuestionResponse */
+        EnglishNextQuestionResponse: {
+            /** Position */
+            position?: number | null;
+            question?: components["schemas"]["EnglishPublicQuestionResponse"] | null;
+            session: components["schemas"]["EnglishPracticeSessionResponse"];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "completed";
+        };
+        /** EnglishPassageResponse */
+        EnglishPassageResponse: {
+            /** Attribution */
+            attribution: string;
+            /** Paragraphs */
+            paragraphs: string[];
+            /** Revision */
+            revision: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Text Type */
+            text_type: string;
+            /** Title */
+            title: string;
+        };
+        /** EnglishPracticeEntry */
+        EnglishPracticeEntry: {
+            /** Available */
+            available: boolean;
+            /**
+             * Development Available
+             * @default false
+             */
+            development_available: boolean;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Question Count */
+            question_count: number;
+            /**
+             * Retry Question Count
+             * @default 0
+             */
+            retry_question_count: number;
+        };
+        /** EnglishPracticeSessionResponse */
+        EnglishPracticeSessionResponse: {
+            /** Assigned Count */
+            assigned_count: number;
+            /** Correct Count */
+            correct_count: number;
+            /** Development Drafts */
+            development_drafts: boolean;
+            /** Incorrect Count */
+            incorrect_count: number;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Lesson Revision */
+            lesson_revision: number;
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "guided_practice" | "retry_review";
+            /** Question Count */
+            question_count: number;
+            /** Resolved Count */
+            resolved_count: number;
+            /** Session Id */
+            session_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "completed";
+        };
+        /** EnglishProgressResponse */
+        EnglishProgressResponse: {
+            /** Learner Id */
+            learner_id: string;
+            /** Lessons */
+            lessons: components["schemas"]["EnglishLessonProgressResponse"][];
+        };
+        /** EnglishPublicQuestionResponse */
+        EnglishPublicQuestionResponse: {
+            /** Difficulty */
+            difficulty: number;
+            /** Exposure Pool */
+            exposure_pool: string;
+            /** Instructions */
+            instructions: string;
+            /** Outcome Code */
+            outcome_code: string;
+            /** Parts */
+            parts: components["schemas"]["EnglishQuestionPartResponse"][];
+            passage?: components["schemas"]["EnglishPassageResponse"] | null;
+            /** Question Type */
+            question_type: string;
+            /** Revision */
+            revision: number;
+            /** Stable Key */
+            stable_key: string;
+            /** Title */
+            title: string;
+        };
+        /** EnglishQuestionPartResponse */
+        EnglishQuestionPartResponse: {
+            /** Options */
+            options: components["schemas"]["EnglishChoiceOptionResponse"][];
+            /** Position */
+            position: number;
+            /** Prompt */
+            prompt: string;
+            /**
+             * Response Type
+             * @enum {string}
+             */
+            response_type: "single_choice" | "multiple_response" | "short_text";
         };
         /** EnrolmentResponse */
         EnrolmentResponse: {
@@ -3628,6 +4143,19 @@ export interface components {
             /** Answers */
             answers: {
                 [key: string]: string;
+            };
+            /** Question Key */
+            question_key: string;
+            /** Question Revision */
+            question_revision: number;
+            /** Session Id */
+            session_id: string;
+        };
+        /** SubmitEnglishAttemptRequest */
+        SubmitEnglishAttemptRequest: {
+            /** Answers */
+            answers: {
+                [key: string]: string | string[];
             };
             /** Question Key */
             question_key: string;
@@ -9277,6 +9805,942 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DiagnosticResultResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    submitEnglishAttempt: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubmitEnglishAttemptRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishAttemptResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    classifyEnglishAttemptError: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ClassifyEnglishErrorRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishErrorClassificationResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishCourseMap: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishCourseMapResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishLesson: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishLessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    createEnglishPracticeSession: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEnglishPracticeSessionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishPracticeSessionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishPracticeSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishPracticeSessionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getNextEnglishQuestion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishNextQuestionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    revealEnglishHint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+                question_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishHintResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishProgress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishProgressResponse"];
                 };
             };
             /** @description Bad Request */

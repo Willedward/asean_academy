@@ -169,6 +169,7 @@ jobs:
       - run: uv sync --project services/learning_api --locked
       - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
+      - run: uv run --project services/learning_api --locked question-bank english-import-db
       - name: Run database integration tests (including bootstrap)
         run: uv run --project services/learning_api --locked pytest services/learning_api/tests -m postgres
         env:
@@ -222,6 +223,7 @@ jobs:
           DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
+          DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank english-import-db
           uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
       - run: pnpm --filter @asean-academy/web exec playwright install --with-deps chromium
       - run: pnpm test:e2e
