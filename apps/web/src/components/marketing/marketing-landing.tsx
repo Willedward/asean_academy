@@ -10,9 +10,12 @@ import {
   Languages,
   LockKeyhole,
   MessageCircleQuestion,
+  Quote,
   Route,
   Sparkles,
   Target,
+  UserRound,
+  UsersRound,
 } from "lucide-react";
 
 import { Hornbill } from "@/beta-kit/components/hornbill";
@@ -63,6 +66,27 @@ const STEPS = [
     number: "04",
     title: "Return with a purpose",
     body: "Your course view keeps the next lesson, unresolved retry and progress evidence together.",
+  },
+] as const;
+
+const TESTIMONIAL_SLOTS = [
+  {
+    icon: UserRound,
+    audience: "Student experience",
+    placeholder:
+      "Reserved for a consented student quote after the private beta interviews.",
+  },
+  {
+    icon: UsersRound,
+    audience: "Parent perspective",
+    placeholder:
+      "Reserved for an approved parent quote about clarity, confidence or study habits.",
+  },
+  {
+    icon: Quote,
+    audience: "Learning evidence",
+    placeholder:
+      "Reserved for a verified outcome or educator observation with its source and context.",
   },
 ] as const;
 
@@ -204,8 +228,10 @@ function ProductPreview() {
 
 export function MarketingLanding({
   signInHref = "/login",
+  registerHref = "/register",
 }: {
   signInHref?: string;
+  registerHref?: string;
 }) {
   return (
     <div className="ns-root min-h-screen overflow-x-hidden bg-ns-surface font-ns text-ns-ink">
@@ -272,6 +298,15 @@ export function MarketingLanding({
                 "text-sm font-semibold no-underline hover:text-ns-amber-text",
                 focusRing,
               )}
+              href="#testimonials"
+            >
+              Testimonials
+            </a>
+            <a
+              className={cn(
+                "text-sm font-semibold no-underline hover:text-ns-amber-text",
+                focusRing,
+              )}
               href="#faq"
             >
               FAQ
@@ -287,12 +322,12 @@ export function MarketingLanding({
               Sign in
             </Button>
             <Button
-              href={signInHref}
+              href={registerHref}
               variant="primary"
               size="sm"
               iconRight={ArrowRight}
             >
-              Join the beta
+              Register
             </Button>
           </div>
         </div>
@@ -319,12 +354,12 @@ export function MarketingLanding({
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button
-                  href={signInHref}
+                  href={registerHref}
                   variant="primary"
                   iconRight={ArrowRight}
                   className="h-12 px-7 text-base"
                 >
-                  Start with an invitation
+                  Register for access
                 </Button>
                 <Button
                   href="#how-it-works"
@@ -555,11 +590,11 @@ export function MarketingLanding({
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button
-                  href={signInHref}
+                  href={registerHref}
                   variant="primary"
                   iconRight={ArrowRight}
                 >
-                  Use your invitation
+                  Register for access
                 </Button>
                 <Button href="#faq" variant="secondary">
                   Read common questions
@@ -576,6 +611,46 @@ export function MarketingLanding({
                 className="size-64 sm:size-72"
               />
             </div>
+          </div>
+        </section>
+
+        <section
+          id="testimonials"
+          className="scroll-mt-24 border-y border-ns-line bg-white px-5 py-20 lg:px-8 lg:py-28"
+        >
+          <div className="mx-auto w-full max-w-[1280px]">
+            <SectionHeading
+              eyebrow="Testimonials"
+              title="A ready home for real beta stories."
+              body="These cards define the final testimonial layout. They intentionally remain placeholders until a student, parent or educator has approved an attributable quote for publication."
+              centered
+            />
+            <div className="mt-12 grid gap-4 lg:grid-cols-3">
+              {TESTIMONIAL_SLOTS.map(
+                ({ icon: Icon, audience, placeholder }) => (
+                  <article
+                    className="flex min-h-64 flex-col rounded-3xl border border-dashed border-ns-line bg-ns-surface p-6"
+                    key={audience}
+                  >
+                    <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-ns-brand-soft text-ns-ink">
+                      <Icon size={21} aria-hidden />
+                    </span>
+                    <p className="mt-6 mb-2 text-xs font-extrabold tracking-[0.12em] text-ns-success uppercase">
+                      Evidence placeholder
+                    </p>
+                    <h3 className="m-0 text-xl font-bold">{audience}</h3>
+                    <p className="mt-3 mb-0 leading-7 text-ns-muted">
+                      {placeholder}
+                    </p>
+                  </article>
+                ),
+              )}
+            </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-ns-muted">
+              No public testimonial has been approved yet. Publish only quotes
+              with recorded consent, accurate attribution and enough context to
+              describe the speaker&apos;s experience accurately.
+            </p>
           </div>
         </section>
 
@@ -611,16 +686,16 @@ export function MarketingLanding({
               Continue from lesson to practice in one place.
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-ns-muted">
-              Pricing and general registration remain intentionally absent from
-              this template until those product decisions are approved.
+              Public account creation and pricing remain intentionally absent
+              until those product decisions are approved.
             </p>
             <Button
-              href={signInHref}
+              href={registerHref}
               variant="primary"
               iconRight={ArrowRight}
               className="mt-7 h-12 px-7 text-base"
             >
-              Sign in to NextScholar
+              Register for access
             </Button>
           </div>
         </section>
@@ -641,6 +716,12 @@ export function MarketingLanding({
             </a>
             <a className={cn("hover:text-white", focusRing)} href="#subjects">
               Subjects
+            </a>
+            <a
+              className={cn("hover:text-white", focusRing)}
+              href="#testimonials"
+            >
+              Testimonials
             </a>
             <a className={cn("hover:text-white", focusRing)} href="#faq">
               FAQ
