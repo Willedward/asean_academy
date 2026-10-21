@@ -8,13 +8,9 @@ from pydantic import Field, StringConstraints
 
 from .contracts import ApiModel
 
-EnglishLessonState = Literal[
-    "not_started", "in_progress", "practice_completed", "proficient"
-]
+EnglishLessonState = Literal["not_started", "in_progress", "practice_completed", "proficient"]
 EnglishPracticeMode = Literal["guided_practice", "retry_review"]
-EnglishErrorCategory = Literal[
-    "unknown_meaning", "missed_clue", "option_trap", "tone_mismatch"
-]
+EnglishErrorCategory = Literal["unknown_meaning", "missed_clue", "option_trap", "tone_mismatch"]
 
 
 class EnglishLessonMap(ApiModel):
@@ -140,6 +136,7 @@ class EnglishPublicQuestionResponse(ApiModel):
     exposure_pool: str
     instructions: str
     passage: EnglishPassageResponse | None = None
+    word_bank: list[EnglishChoiceOptionResponse] | None = None
     parts: list[EnglishQuestionPartResponse]
 
 
@@ -211,4 +208,3 @@ class EnglishProgressResponse(ApiModel):
 class EnglishHintResponse(ApiModel):
     question_key: str
     parts: list[str]
-

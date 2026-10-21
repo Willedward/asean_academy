@@ -27,12 +27,18 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
 
     assert {(item.kind, item.stable_key) for item in english_items} >= {
         ("english_lesson", "e1-lesson-01"),
+        ("english_lesson", "e3-lesson-01"),
+        ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-neighbourhood-garden"),
+        ("english_question", "eb-l1-001"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
     assert question.batch_id == "english-ev-b001"
     assert question.unit_key == "english-e1"
+    banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
+    assert banked.batch_id == "english-eb-b001"
+    assert banked.unit_key == "english-e3"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):
@@ -65,11 +71,7 @@ def test_english_review_requires_english_and_editorial_dimensions(catalogue):
 
 
 def test_english_queue_uses_english_approval_as_its_subject_gate(catalogue):
-    item = next(
-        item
-        for item in catalogue_review_items(catalogue)
-        if item.kind == "english_lesson"
-    )
+    item = next(item for item in catalogue_review_items(catalogue) if item.kind == "english_lesson")
     empty = _serialize_item(item, {}, {})
 
     assert empty["mathematics_review"] is None

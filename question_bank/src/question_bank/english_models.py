@@ -94,9 +94,7 @@ class CurriculumModule(EnglishModel):
 
     @model_validator(mode="after")
     def lessons_are_ordered(self):
-        if [lesson.position for lesson in self.lessons] != list(
-            range(1, len(self.lessons) + 1)
-        ):
+        if [lesson.position for lesson in self.lessons] != list(range(1, len(self.lessons) + 1)):
             raise ValueError("Lesson positions must be consecutive from 1")
         for lesson in self.lessons:
             if not lesson.lesson_code.startswith(f"{self.module_code}."):
@@ -130,9 +128,7 @@ class EnglishCurriculumCatalogue(EnglishModel):
     def catalogue_is_complete_and_unique(self):
         if [module.position for module in self.modules] != list(range(10)):
             raise ValueError("The v1 catalogue must contain ordered modules E0 through E9")
-        if [module.module_code for module in self.modules] != [
-            f"E{index}" for index in range(10)
-        ]:
+        if [module.module_code for module in self.modules] != [f"E{index}" for index in range(10)]:
             raise ValueError("The v1 catalogue must contain modules E0 through E9")
         lessons = [lesson for module in self.modules for lesson in module.lessons]
         if len(lessons) != 51:
@@ -144,18 +140,10 @@ class EnglishCurriculumCatalogue(EnglishModel):
         return self
 
     def outcome_codes(self) -> set[str]:
-        return {
-            lesson.outcome_code
-            for module in self.modules
-            for lesson in module.lessons
-        }
+        return {lesson.outcome_code for module in self.modules for lesson in module.lessons}
 
     def lesson_keys(self) -> set[str]:
-        return {
-            lesson.stable_key
-            for module in self.modules
-            for lesson in module.lessons
-        }
+        return {lesson.stable_key for module in self.modules for lesson in module.lessons}
 
 
 class EnglishPassage(EnglishModel):
@@ -190,9 +178,10 @@ def passage_content_hash(passage: EnglishPassage | dict) -> str:
             "attribution": passage.attribution,
         }
     else:
-        payload = {key: passage[key] for key in (
-            "stable_key", "revision", "title", "text_type", "paragraphs", "attribution"
-        )}
+        payload = {
+            key: passage[key]
+            for key in ("stable_key", "revision", "title", "text_type", "paragraphs", "attribution")
+        }
     canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
@@ -204,14 +193,14 @@ class PassageReference(EnglishModel):
 
 
 class ChoiceOption(EnglishModel):
-    key: str = Field(pattern=r"^[A-H]$")
+    key: str = Field(pattern=r"^[A-T]$")
     text: str = Field(min_length=1)
 
 
 class SingleChoiceResponse(EnglishModel):
     type: Literal["single_choice"]
-    options: list[ChoiceOption] = Field(min_length=2, max_length=8)
-    correct_key: str = Field(pattern=r"^[A-H]$")
+    options: list[ChoiceOption] = Field(min_length=2, max_length=20)
+    correct_key: str = Field(pattern=r"^[A-T]$")
     choice_rationales: dict[str, str]
 
     @model_validator(mode="after")
@@ -230,7 +219,7 @@ class SingleChoiceResponse(EnglishModel):
 
 class MultipleResponse(EnglishModel):
     type: Literal["multiple_response"]
-    options: list[ChoiceOption] = Field(min_length=2, max_length=8)
+    options: list[ChoiceOption] = Field(min_length=2, max_length=20)
     correct_keys: list[str] = Field(min_length=1)
     choice_rationales: dict[str, str]
 
@@ -331,6 +320,22 @@ class EnglishObjectiveQuestion(EnglishModel):
             raise ValueError("Passage and cloze questions must pin a passage revision")
         if self.question_type in passage_types and self.feedback_timing != "after_group":
             raise ValueError("Passage groups reveal feedback only after the complete group")
+        if self.question_type == "banked_cloze":
+            if len(self.parts) < 2:
+                raise ValueError("Banked cloze questions require at least two gaps")
+            if not all(isinstance(part.response, SingleChoiceResponse) for part in self.parts):
+                raise ValueError("Every banked cloze gap must use a single-choice response")
+            option_banks = [
+                [(option.key, option.text) for option in part.response.options]
+                for part in self.parts
+            ]
+            if any(bank != option_banks[0] for bank in option_banks[1:]):
+                raise ValueError("Every banked cloze gap must use the same word bank")
+            if len(option_banks[0]) <= len(self.parts):
+                raise ValueError("A banked cloze requires more words than gaps")
+            correct_keys = [part.response.correct_key for part in self.parts]
+            if len(correct_keys) != len(set(correct_keys)):
+                raise ValueError("Each banked cloze word may fill only one gap")
         if self.status in {"reviewed", "published"} and self.provenance.reviewed_at is None:
             raise ValueError("Reviewed and published questions require review provenance")
         return self
@@ -406,9 +411,7 @@ class EnglishLesson(EnglishModel):
             raise ValueError("Lesson section positions must be consecutive from 1")
         if [section.section_type for section in self.sections] != required:
             raise ValueError("Lesson must follow the complete learn-apply-retrieve anatomy")
-        question_keys = [
-            key for section in self.sections for key in section.question_keys
-        ]
+        question_keys = [key for section in self.sections for key in section.question_keys]
         if len(question_keys) != len(set(question_keys)):
             raise ValueError("A question cannot appear twice in one lesson")
         return self

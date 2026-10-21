@@ -32,8 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 1
-    assert len(report.questions) == 6
+    assert len(report.lessons) == 2
+    assert len(report.passages) == 2
+    assert len(report.questions) == 7
     assert not report.issues
 
 
@@ -44,8 +45,14 @@ def test_every_english_source_matches_its_generated_schema(repository_root, engl
         (schema_root / "source-inventory-v1.schema.json", [english_root / "sources.json"]),
         (schema_root / "passage-v1.schema.json", list((english_root / "passages").glob("*.json"))),
         (schema_root / "lesson-v1.schema.json", list((english_root / "lessons").glob("*.json"))),
-        (schema_root / "bank-manifest-v1.schema.json", list((english_root / "banks").glob("*.json"))),
-        (schema_root / "objective-question-v1.schema.json", list((english_root / "questions").glob("*.json"))),
+        (
+            schema_root / "bank-manifest-v1.schema.json",
+            list((english_root / "banks").glob("*.json")),
+        ),
+        (
+            schema_root / "objective-question-v1.schema.json",
+            list((english_root / "questions").glob("*.json")),
+        ),
     ]
     for schema_path, sources in cases:
         schema = json.loads(schema_path.read_text())
@@ -95,6 +102,31 @@ def test_passage_groups_cannot_reveal_feedback_one_item_at_a_time(english_root):
         EnglishObjectiveQuestion.model_validate(payload)
 
 
+def test_e3_banked_cloze_has_one_shared_bank_and_exact_marking(english_root):
+    payload = json.loads((english_root / "questions/eb-l1-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "banked_cloze"
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 8
+    assert len(question.parts[0].response.options) == 12
+    assert all(
+        part.response.options == question.parts[0].response.options for part in question.parts
+    )
+    assert [part.response.correct_key for part in question.parts] == [
+        "C",
+        "E",
+        "D",
+        "L",
+        "A",
+        "I",
+        "G",
+        "F",
+    ]
+    assert check_english_answer(question.parts[0].response, "C")["correct"]
+    assert not check_english_answer(question.parts[0].response, "A")["correct"]
+
+
 def test_draft_pilot_is_not_publishable_before_human_review(english_root):
     report = validate_english_foundation(english_root, publish=True)
 
@@ -111,8 +143,11 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
     report = validate_english_authoring(english_root)
 
     assert report.valid
-    assert [batch.batch_id for batch in report.batches] == ["english-ev-b001"]
-    assert len(report.questions) == 6
+    assert [batch.batch_id for batch in report.batches] == [
+        "english-eb-b001",
+        "english-ev-b001",
+    ]
+    assert len(report.questions) == 7
     assert not report.duplicates
 
 
@@ -132,9 +167,7 @@ def test_english_duplicate_scan_catches_exact_and_template_variants(english_root
     assert detect_english_duplicates([first, variant], near_threshold=0.8)
 
 
-def test_english_reviewer_export_and_claims_are_reviewable(
-    english_root, tmp_path
-):
+def test_english_reviewer_export_and_claims_are_reviewable(english_root, tmp_path):
     batch = english_root / "authoring/batches/english-ev-b001.json"
     output = tmp_path / "review"
     result = export_english_reviewer_batch(english_root, batch, output)
@@ -167,10 +200,22 @@ def test_english_reviewer_export_and_claims_are_reviewable(
             owner="friend",
             branch="content/friend-english",
         )
-    released = release_english_batch(
-        claims, batch_id="english-ev-b001", owner="william"
-    )
+    released = release_english_batch(claims, batch_id="english-ev-b001", owner="william")
     assert released["status"] == "released"
+
+
+def test_banked_cloze_reviewer_export_includes_passage_and_one_shared_bank(english_root, tmp_path):
+    batch = english_root / "authoring/batches/english-eb-b001.json"
+    output = tmp_path / "banked-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "The afternoon broadcast" in page
+    assert "Shared word bank" in page
+    assert page.count("<strong>C.</strong> deserted") == 1
+    assert "{{1}}" in page
 
 
 def test_english_question_hash_excludes_review_workflow_metadata(english_root):
@@ -179,6 +224,4 @@ def test_english_question_hash_excludes_review_workflow_metadata(english_root):
     )
     reviewed = question.model_copy(update={"status": "reviewed"})
 
-    assert english_question_content_hash(reviewed) == english_question_content_hash(
-        question
-    )
+    assert english_question_content_hash(reviewed) == english_question_content_hash(question)

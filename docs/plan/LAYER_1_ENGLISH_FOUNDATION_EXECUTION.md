@@ -98,6 +98,7 @@ sections.
 | E1 pilot | Original E1.1 lesson and six vocabulary-in-context items | Authored as draft; human review pending |
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
+| E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -161,9 +162,10 @@ high-volume authoring.
 
 ### 3. Add passage formats
 
-Author E3.1 and E5.1 pilot lessons to exercise selectable word banks, keyboard-accessible
-gaps, passage navigation, group feedback and passage checksum pins. Then implement E2
-grammar and E4 open-cloze response patterns.
+E3.1 now exercises a selectable shared word bank, keyboard-accessible gaps, whole-passage
+submission, group feedback and passage checksum pins. Author the E5.1 reading pilot next
+to add passage navigation, vocabulary-in-context references and grouped comprehension.
+Then implement E2 grammar and E4 open-cloze response patterns.
 
 ### 4. Build the objective diagnostic
 
@@ -187,8 +189,8 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone is **hosted E3a verification and the first passage-format
-slice**: review and import E1.1, apply migrations 028–030, deploy the exact Git revision,
-verify one authenticated learner through exit-ticket retry, then implement E3.1 banked
-cloze with passage-level feedback. Content can continue in parallel through the E2
-review queue.
+The next technical milestone is the **E5.1 reading-comprehension passage slice**. Build
+one original passage group with navigation, reference-word questions, synonym-in-context
+questions and comprehension items, then verify the E1.1 and E3.1 draft journeys together
+on hosted review. Human English and editorial approval remains a separate publication
+gate for every lesson, passage and question revision.

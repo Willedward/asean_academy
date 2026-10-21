@@ -1,4 +1,5 @@
 """Exercise the real bootstrap against a separate, disposable PostgreSQL database."""
+
 import importlib.util
 import os
 import sys
@@ -12,7 +13,9 @@ from psycopg.conninfo import make_conninfo
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "services/learning_api/scripts"))
-spec = importlib.util.spec_from_file_location("bootstrap_local", ROOT / "services/learning_api/scripts/bootstrap_local.py")
+spec = importlib.util.spec_from_file_location(
+    "bootstrap_local", ROOT / "services/learning_api/scripts/bootstrap_local.py"
+)
 bootstrap_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bootstrap_module)
 
@@ -28,17 +31,24 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
     target = make_conninfo(url, dbname=name)
     try:
         # The same minimal Supabase Auth stand-in used by migration CI.
-        helper = (ROOT / "scripts/validate_migrations.sh").read_text().split("<<'SQL'\n", 1)[1].split("\nSQL", 1)[0]
+        helper = (
+            (ROOT / "scripts/validate_migrations.sh")
+            .read_text()
+            .split("<<'SQL'\n", 1)[1]
+            .split("\nSQL", 1)[0]
+        )
         with psycopg.connect(target) as c:
             c.execute(helper)
         preview = bootstrap_module.bootstrap(target, apply=False)
-        assert preview["pending_migrations"] == len(list((ROOT / "supabase/migrations").glob("*.sql")))
+        assert preview["pending_migrations"] == len(
+            list((ROOT / "supabase/migrations").glob("*.sql"))
+        )
         with psycopg.connect(target) as c:
             assert c.execute("select to_regclass('public.profiles')").fetchone()[0] is None
         result = bootstrap_module.bootstrap(target, apply=True)
         assert result["questions"] == 1040
-        assert result["english_questions"] == 6
-        assert result["english_passages"] == 1
+        assert result["english_questions"] == 7
+        assert result["english_passages"] == 2
         assert result["english"]["outcome_count"] == 51
         assert result["status"] == "current"
         assert bootstrap_module.bootstrap(target, apply=False)["pending_migrations"] == 0
@@ -46,10 +56,15 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         with psycopg.connect(target) as c:
             assert c.execute("select count(*) from profiles").fetchone()[0] == 0
             assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1040
-            assert c.execute("select count(*) from english_objective_question_versions").fetchone()[0] == 6
-            assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 1
+            assert (
+                c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
+                == 7
+            )
+            assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 2
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0
-            c.execute("insert into supabase_migrations.schema_migrations(version) values ('299999999999')")
+            c.execute(
+                "insert into supabase_migrations.schema_migrations(version) values ('299999999999')"
+            )
         with pytest.raises(ValueError, match="absent from this branch"):
             bootstrap_module.bootstrap(target, apply=True)
     finally:

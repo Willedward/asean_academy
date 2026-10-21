@@ -136,6 +136,11 @@ type ReviewEnglishQuestion = {
   question_type: string;
   exposure_pool: string;
   instructions: string;
+  passage_ref?: {
+    stable_key: string;
+    revision: number;
+    content_sha256: string;
+  } | null;
   parts: {
     position: number;
     prompt: string;
@@ -269,6 +274,10 @@ function ReviewerPreview({
   const content = preview.review_content;
   if (preview.content_kind === "english_question") {
     const question = content as unknown as ReviewEnglishQuestion;
+    const bankedCloze = question.question_type === "banked_cloze";
+    const sharedWordBank = bankedCloze
+      ? (question.parts[0]?.response.options ?? [])
+      : [];
     return (
       <article className="space-y-5 rounded-2xl border border-teal-200 bg-teal-50/40 p-5">
         <div>
@@ -281,11 +290,33 @@ function ReviewerPreview({
           {preview.batch_id ? (
             <p className="text-sm text-slate-600">Batch {preview.batch_id}</p>
           ) : null}
+          {question.passage_ref ? (
+            <p className="break-all text-sm text-slate-600">
+              Passage {question.passage_ref.stable_key} · revision{" "}
+              {question.passage_ref.revision} · SHA-256{" "}
+              {question.passage_ref.content_sha256}
+            </p>
+          ) : null}
         </div>
+        {bankedCloze ? (
+          <section className="rounded-xl border bg-white p-4">
+            <p className="m-0 font-bold">Shared word bank</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {sharedWordBank.map((option) => (
+                <span
+                  className="rounded-full border px-3 py-1 text-sm"
+                  key={option.key}
+                >
+                  <strong>{option.key}.</strong> {option.text}
+                </span>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {question.parts.map((part) => (
           <section className="space-y-4 border-t pt-4" key={part.position}>
             <p className="font-medium">{part.prompt}</p>
-            {part.response.options?.length ? (
+            {!bankedCloze && part.response.options?.length ? (
               <ol className="space-y-2">
                 {part.response.options.map((option) => (
                   <li

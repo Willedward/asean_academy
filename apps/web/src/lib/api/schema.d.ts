@@ -3293,6 +3293,8 @@ export interface components {
             stable_key: string;
             /** Title */
             title: string;
+            /** Word Bank */
+            word_bank?: components["schemas"]["EnglishChoiceOptionResponse"][] | null;
         };
         /** EnglishQuestionPartResponse */
         EnglishQuestionPartResponse: {

@@ -4,7 +4,7 @@
       "additionalProperties": false,
       "properties": {
         "key": {
-          "pattern": "^[A-H]$",
+          "pattern": "^[A-T]$",
           "title": "Key",
           "type": "string"
         },
@@ -162,7 +162,7 @@
           "items": {
             "$ref": "#/$defs/ChoiceOption"
           },
-          "maxItems": 8,
+          "maxItems": 20,
           "minItems": 2,
           "title": "Options",
           "type": "array"
@@ -268,13 +268,13 @@
           "items": {
             "$ref": "#/$defs/ChoiceOption"
           },
-          "maxItems": 8,
+          "maxItems": 20,
           "minItems": 2,
           "title": "Options",
           "type": "array"
         },
         "correct_key": {
-          "pattern": "^[A-H]$",
+          "pattern": "^[A-T]$",
           "title": "Correct Key",
           "type": "string"
         },

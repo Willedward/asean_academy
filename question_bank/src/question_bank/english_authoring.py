@@ -32,9 +32,7 @@ class EnglishBatchManifest(EnglishModel):
     batch_id: str = Field(pattern=ENGLISH_BATCH_PATTERN)
     bank_key: str = Field(pattern=r"^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$")
     module_code: str = Field(pattern=r"^E[0-9]+$")
-    status: Literal[
-        "planned", "draft", "ready_for_review", "changes_requested", "approved"
-    ]
+    status: Literal["planned", "draft", "ready_for_review", "changes_requested", "approved"]
     expected_question_count: int = Field(ge=1, le=30)
     question_keys: list[str] = Field(min_length=1, max_length=30)
     review: EnglishBatchReviewState = Field(default_factory=EnglishBatchReviewState)
@@ -157,9 +155,7 @@ def detect_english_duplicates(
             second_exact = _normalise_prompt(_question_prompt(second))
             if first_exact == second_exact:
                 matches.append(
-                    EnglishDuplicateMatch(
-                        "exact_prompt", first.stable_key, second.stable_key, 1.0
-                    )
+                    EnglishDuplicateMatch("exact_prompt", first.stable_key, second.stable_key, 1.0)
                 )
                 continue
             second_template = _normalise_prompt(_question_prompt(second), template=True)
@@ -269,14 +265,13 @@ def _part_answer(part) -> str:
     return response.canonical_answer
 
 
-def export_english_reviewer_batch(
-    root: Path, batch_path: Path, output: Path
-) -> dict[str, object]:
+def export_english_reviewer_batch(root: Path, batch_path: Path, output: Path) -> dict[str, object]:
     foundation = validate_english_foundation(root)
     if not foundation.valid:
         raise ValueError("English foundation must validate before reviewer export")
     batch = load_english_batch(batch_path)
     questions = {question.stable_key: question for question in foundation.questions}
+    passages = {(passage.stable_key, passage.revision): passage for passage in foundation.passages}
     selected = [questions[key] for key in batch.question_keys]
     output.mkdir(parents=True, exist_ok=True)
 
@@ -291,6 +286,14 @@ def export_english_reviewer_batch(
     rows = []
     cards = []
     for question in selected:
+        passage = (
+            passages[(question.passage_ref.stable_key, question.passage_ref.revision)]
+            if question.passage_ref is not None
+            else None
+        )
+        bank = (
+            question.parts[0].response.options if question.question_type == "banked_cloze" else []
+        )
         markdown.extend(
             [
                 "",
@@ -298,6 +301,16 @@ def export_english_reviewer_batch(
                 "",
                 f"Outcome {question.outcome_code} · Difficulty {question.difficulty} · {question.exposure_pool}",
                 "",
+                *(
+                    [f"**Passage: {passage.title}**", "", *passage.paragraphs, ""]
+                    if passage is not None
+                    else []
+                ),
+                *(
+                    ["**Shared word bank:** " + ", ".join(option.text for option in bank), ""]
+                    if bank
+                    else []
+                ),
                 *[part.prompt for part in question.parts],
                 "",
                 f"**Answer:** {_answer_summary(question)}",
@@ -318,7 +331,7 @@ def export_english_reviewer_batch(
         part_html = []
         for part in question.parts:
             response = part.response.model_dump(mode="json")
-            options = response.get("options", [])
+            options = [] if bank else response.get("options", [])
             option_html = "".join(
                 f"<li><strong>{html.escape(option['key'])}.</strong> {html.escape(option['text'])}</li>"
                 for option in options
@@ -328,11 +341,27 @@ def export_english_reviewer_batch(
                 f"<p class='answer'><strong>Answer:</strong> {html.escape(_part_answer(part))}</p>"
                 f"<p><strong>Explanation:</strong> {html.escape(part.correct_explanation)}</p></section>"
             )
+        passage_html = ""
+        if passage is not None:
+            paragraphs = "".join(
+                f"<p>{html.escape(paragraph)}</p>" for paragraph in passage.paragraphs
+            )
+            passage_html = (
+                f"<section class='passage'><h3>{html.escape(passage.title)}</h3>"
+                f"{paragraphs}</section>"
+            )
+        bank_html = ""
+        if bank:
+            choices = "".join(
+                f"<li><strong>{html.escape(option.key)}.</strong> {html.escape(option.text)}</li>"
+                for option in bank
+            )
+            bank_html = f"<section><h3>Shared word bank</h3><ol>{choices}</ol></section>"
         cards.append(
             f"<article><p class='meta'>{html.escape(question.stable_key)} · Outcome "
             f"{html.escape(question.outcome_code)} · Difficulty {question.difficulty} · "
             f"{html.escape(question.exposure_pool)}</p><h2>{html.escape(question.title)}</h2>"
-            f"{''.join(part_html)}</article>"
+            f"{passage_html}{bank_html}{''.join(part_html)}</article>"
         )
 
     (output / "review.md").write_text("\n".join(markdown) + "\n")
@@ -344,7 +373,7 @@ def export_english_reviewer_batch(
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <title>{html.escape(batch.batch_id)} English reviewer packet</title>
 <style>body{{font:16px/1.55 system-ui;max-width:960px;margin:auto;padding:32px;background:#f7faf9;color:#123f40}}article{{background:white;border:1px solid #cbdedb;border-radius:18px;padding:24px;margin:24px 0}}.meta{{color:#087f75;font-weight:700}}.answer{{background:#fef3c7;padding:12px;border-radius:10px}}li{{margin:.5rem 0}}</style>
-</head><body><h1>{html.escape(batch.batch_id)}</h1><p>Protected English and editorial reviewer packet.</p>{''.join(cards)}</body></html>"""
+</head><body><h1>{html.escape(batch.batch_id)}</h1><p>Protected English and editorial reviewer packet.</p>{"".join(cards)}</body></html>"""
     (output / "index.html").write_text(page)
     digest = hashlib.sha256((output / "index.html").read_bytes()).hexdigest()
     return {
@@ -399,7 +428,11 @@ def release_english_batch(
 ) -> dict:
     registry = load_english_claims(registry_path)
     claim = next(
-        (claim for claim in reversed(registry.claims) if claim.batch_id == batch_id and claim.active),
+        (
+            claim
+            for claim in reversed(registry.claims)
+            if claim.batch_id == batch_id and claim.active
+        ),
         None,
     )
     if claim is None:
