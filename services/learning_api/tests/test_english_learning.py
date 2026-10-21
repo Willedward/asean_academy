@@ -33,17 +33,23 @@ def request(app, method: str, path: str, **kwargs):
     return asyncio.run(send())
 
 
-def create_session(app, key: str, *, mode: str = "guided_practice"):
+def create_session(
+    app,
+    key: str,
+    *,
+    mode: str = "guided_practice",
+    lesson_key: str = "e1-lesson-01",
+):
     return request(
         app,
         "POST",
         "/api/v1/english/practice-sessions",
         headers={"Idempotency-Key": key},
-        json={"lesson_key": "e1-lesson-01", "mode": mode},
+        json={"lesson_key": lesson_key, "mode": mode},
     )
 
 
-def submit(app, session_id: str, question: dict, answer: str, key: str):
+def submit(app, session_id: str, question: dict, answer: str | list[str], key: str):
     return request(
         app,
         "POST",
@@ -182,6 +188,88 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
     after_retry = request(app, "GET", "/api/v1/english/progress").json()["lessons"][0]
     assert after_retry["state"] == "proficient"
     assert after_retry["retry_question_count"] == 0
+
+
+def test_e2_1_grammar_journey_marks_boundaries_and_agreement_deterministically():
+    app = application()
+    lesson = request(app, "GET", "/api/v1/english/lessons/e2-lesson-01")
+
+    assert lesson.status_code == 200, lesson.text
+    assert lesson.json()["lesson_code"] == "E2.1"
+    assert lesson.json()["outcome_code"] == "EG2.1"
+    assert len(lesson.json()["sections"]) == 7
+    assert lesson.json()["practice"] == {
+        "lesson_key": "e2-lesson-01",
+        "question_count": 6,
+        "available": False,
+        "development_available": True,
+        "retry_question_count": 0,
+    }
+
+    created = create_session(app, "e2-guided", lesson_key="e2-lesson-01")
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 6
+    session_id = created.json()["session_id"]
+    answers: list[str | list[str]] = ["B", "A", "B", "C", ["B", "A"], "A"]
+    expected_types = [
+        "grammar_usage",
+        "editing",
+        "editing",
+        "grammar_usage",
+        "grammar_usage",
+        "editing",
+    ]
+
+    for number, (answer, expected_type) in enumerate(zip(answers, expected_types, strict=True), 1):
+        current = request(
+            app,
+            "GET",
+            f"/api/v1/english/practice-sessions/{session_id}/next",
+        )
+        assert current.status_code == 200, current.text
+        question = current.json()["question"]
+        assert question["stable_key"] == f"eg-l1-{number:03d}"
+        assert question["question_type"] == expected_type
+        assert question["passage"] is None
+        encoded = json.dumps(question)
+        assert "correct_key" not in encoded
+        assert "correct_keys" not in encoded
+        assert "choice_rationales" not in encoded
+
+        answered = submit(app, session_id, question, answer, f"e2-correct-{number}")
+        assert answered.status_code == 200, answered.text
+        assert answered.json()["correct"] is True
+
+    completed = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["status"] == "completed"
+    assert completed.json()["session"]["correct_count"] == 6
+
+
+def test_grammar_error_categories_are_accepted_for_incorrect_e2_attempts():
+    app = application()
+    created = create_session(app, "e2-error", lesson_key="e2-lesson-01")
+    session_id = created.json()["session_id"]
+    question = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    ).json()["question"]
+    wrong = submit(app, session_id, question, "A", "e2-wrong")
+
+    assert wrong.status_code == 200, wrong.text
+    classified = request(
+        app,
+        "POST",
+        f"/api/v1/english/attempts/{wrong.json()['attempt_id']}/error-classification",
+        json={"category": "clause_structure"},
+    )
+    assert classified.status_code == 200, classified.text
+    assert classified.json()["category"] == "clause_structure"
 
 
 def test_e3_1_banked_cloze_exposes_one_bank_and_marks_the_whole_passage():

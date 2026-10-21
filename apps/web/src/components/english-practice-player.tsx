@@ -52,11 +52,13 @@ const defaultApi: EnglishPracticeApi = {
   classifyError: classifyEnglishError,
 };
 
-const ERROR_OPTIONS: {
+type EnglishErrorOption = {
   key: EnglishErrorCategory;
   label: string;
   detail: string;
-}[] = [
+};
+
+const LANGUAGE_ERROR_OPTIONS: EnglishErrorOption[] = [
   {
     key: "unknown_meaning",
     label: "I did not know the word",
@@ -76,6 +78,29 @@ const ERROR_OPTIONS: {
     key: "tone_mismatch",
     label: "I misread the tone",
     detail: "My answer did not match the writer's attitude or context.",
+  },
+];
+
+const GRAMMAR_ERROR_OPTIONS: EnglishErrorOption[] = [
+  {
+    key: "clause_structure",
+    label: "I misidentified the clauses",
+    detail: "I treated a dependent clause or phrase as a complete message.",
+  },
+  {
+    key: "boundary_choice",
+    label: "I chose the wrong boundary",
+    detail: "I joined or separated the clauses incorrectly.",
+  },
+  {
+    key: "agreement_control",
+    label: "I missed the agreement",
+    detail: "I did not match the finite verb to its head subject.",
+  },
+  {
+    key: "option_trap",
+    label: "I chose a tempting edit",
+    detail: "The edit sounded smooth but left an error or changed the meaning.",
   },
 ];
 
@@ -147,6 +172,11 @@ export function EnglishPracticePlayer({
   }, [api, sessionId]);
 
   const question = current?.question;
+  const errorOptions =
+    question?.question_type === "grammar_usage" ||
+    question?.question_type === "editing"
+      ? GRAMMAR_ERROR_OPTIONS
+      : LANGUAGE_ERROR_OPTIONS;
   const allAnswersPresent = useMemo(
     () =>
       Boolean(
@@ -717,7 +747,7 @@ export function EnglishPracticePlayer({
             Choose the closest reason. This makes later review more useful.
           </Muted>
           <div className="grid gap-2 sm:grid-cols-2">
-            {ERROR_OPTIONS.map((option) => (
+            {errorOptions.map((option) => (
               <label
                 key={option.key}
                 className={cn(

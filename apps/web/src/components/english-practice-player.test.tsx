@@ -126,6 +126,69 @@ describe("EnglishPracticePlayer", () => {
     expect(screen.queryByText(/\bXP\b/i)).not.toBeInTheDocument();
   });
 
+  it("offers grammar-specific reflection categories for editing questions", async () => {
+    const grammar: EnglishNextQuestionResponse = {
+      ...current,
+      session: {
+        ...current.session,
+        lesson_key: "e2-lesson-01",
+      },
+      question: {
+        ...current.question!,
+        stable_key: "eg-l1-001",
+        outcome_code: "EG2.1",
+        question_type: "editing",
+        title: "Repair a sentence boundary",
+      },
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => grammar),
+      submitAttempt: vi.fn(async () => incorrect),
+      revealHint: vi.fn(async () => ({
+        question_key: "eg-l1-001",
+        parts: ["Identify each independent clause first."],
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer
+        sessionId={grammar.session.session_id}
+        api={api}
+      />,
+    );
+
+    fireEvent.click(await screen.findByRole("radio", { name: /A\. narrow/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    expect(
+      await screen.findByRole("radio", {
+        name: /I misidentified the clauses/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I chose the wrong boundary/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed the agreement/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("radio", { name: /I did not know the word/i }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(
+      screen.getByRole("radio", { name: /I chose the wrong boundary/i }),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Save reflection" }));
+
+    await waitFor(() =>
+      expect(api.classifyError).toHaveBeenCalledWith(
+        incorrect.attempt_id,
+        "boundary_choice",
+      ),
+    );
+  });
+
   it("fills a shared word bank with keyboard-native controls and reveals feedback as one group", async () => {
     const banked: EnglishNextQuestionResponse = {
       status: "active",

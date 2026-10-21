@@ -2068,7 +2068,7 @@ export interface components {
              * Category
              * @enum {string}
              */
-            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch";
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control";
         };
         /** ContentLifecycleRequestResponse */
         ContentLifecycleRequestResponse: {
@@ -3050,7 +3050,7 @@ export interface components {
              * Category
              * @enum {string}
              */
-            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch";
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control";
             /**
              * Recorded
              * @default true

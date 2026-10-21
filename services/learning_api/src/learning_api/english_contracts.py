@@ -10,7 +10,15 @@ from .contracts import ApiModel
 
 EnglishLessonState = Literal["not_started", "in_progress", "practice_completed", "proficient"]
 EnglishPracticeMode = Literal["guided_practice", "retry_review"]
-EnglishErrorCategory = Literal["unknown_meaning", "missed_clue", "option_trap", "tone_mismatch"]
+EnglishErrorCategory = Literal[
+    "unknown_meaning",
+    "missed_clue",
+    "option_trap",
+    "tone_mismatch",
+    "clause_structure",
+    "boundary_choice",
+    "agreement_control",
+]
 
 
 class EnglishLessonMap(ApiModel):

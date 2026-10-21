@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 3
+    assert len(report.lessons) == 4
     assert len(report.passages) == 3
-    assert len(report.questions) == 8
+    assert len(report.questions) == 14
     assert not report.issues
 
 
@@ -150,6 +150,37 @@ def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(englis
     assert not check_english_answer(question.parts[5].response, ["A", "B"])["correct"]
 
 
+def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
+    keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/{key}.json").read_text()
+        )
+        for key in keys
+    ]
+
+    assert [question.exposure_pool for question in questions] == [
+        "guided_practice",
+        "guided_practice",
+        "independent_practice",
+        "independent_practice",
+        "independent_practice",
+        "exit_ticket",
+    ]
+    assert [question.question_type for question in questions] == [
+        "grammar_usage",
+        "editing",
+        "editing",
+        "grammar_usage",
+        "grammar_usage",
+        "editing",
+    ]
+    assert check_english_answer(questions[0].parts[0].response, "B")["correct"]
+    assert check_english_answer(questions[4].parts[0].response, ["B", "A"])["correct"]
+    assert not check_english_answer(questions[4].parts[0].response, ["A"])["correct"]
+    assert check_english_answer(questions[5].parts[0].response, "A")["correct"]
+
+
 def test_draft_pilot_is_not_publishable_before_human_review(english_root):
     report = validate_english_foundation(english_root, publish=True)
 
@@ -168,10 +199,11 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
     assert report.valid
     assert [batch.batch_id for batch in report.batches] == [
         "english-eb-b001",
+        "english-eg-b001",
         "english-er-b001",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 8
+    assert len(report.questions) == 14
     assert not report.duplicates
 
 
