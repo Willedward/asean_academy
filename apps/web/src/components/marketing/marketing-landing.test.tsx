@@ -4,8 +4,13 @@ import { describe, expect, it } from "vitest";
 import { MarketingLanding } from "./marketing-landing";
 
 describe("MarketingLanding", () => {
-  it("connects public product information to the existing invitation sign-in flow", () => {
-    render(<MarketingLanding signInHref="/login?next=%2Flearn" />);
+  it("connects public product information to registration and sign-in", () => {
+    render(
+      <MarketingLanding
+        signInHref="/login?next=%2Flearn"
+        registerHref="/register"
+      />,
+    );
 
     expect(
       screen.getByRole("heading", {
@@ -15,13 +20,17 @@ describe("MarketingLanding", () => {
     expect(
       screen.getByRole("navigation", { name: "Marketing" }),
     ).toBeInTheDocument();
-    const callsToAction = screen.getAllByRole("link", {
-      name: /join the beta|start with an invitation|use your invitation|sign in to nextscholar/i,
+    const registrationCallsToAction = screen.getAllByRole("link", {
+      name: /register/i,
     });
-    expect(callsToAction).toHaveLength(4);
-    for (const link of callsToAction) {
-      expect(link).toHaveAttribute("href", "/login?next=%2Flearn");
+    expect(registrationCallsToAction).toHaveLength(4);
+    for (const link of registrationCallsToAction) {
+      expect(link).toHaveAttribute("href", "/register");
     }
+    expect(screen.getByRole("link", { name: "Sign in" })).toHaveAttribute(
+      "href",
+      "/login?next=%2Flearn",
+    );
     expect(
       screen.getByText("Mathematics and English in Layer 1"),
     ).toBeInTheDocument();
@@ -31,5 +40,10 @@ describe("MarketingLanding", () => {
     expect(
       screen.queryByText(/guaranteed|raise.*grade|improve.*score/i),
     ).not.toBeInTheDocument();
+    expect(
+      screen.getByText("No public testimonial has been approved yet.", {
+        exact: false,
+      }),
+    ).toBeInTheDocument();
   });
 });

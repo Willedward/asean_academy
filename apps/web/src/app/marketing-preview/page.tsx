@@ -9,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function MarketingPreviewPage() {
-  return <MarketingLanding signInHref="/login?next=%2Flearn" />;
+  return (
+    <MarketingLanding
+      registerHref="/register"
+      signInHref="/login?next=%2Flearn"
+    />
+  );
 }
