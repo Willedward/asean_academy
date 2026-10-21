@@ -269,3 +269,66 @@ def test_e3_1_banked_cloze_exposes_one_bank_and_marks_the_whole_passage():
     assert completed.json()["correct"] is True
     assert completed.json()["lesson_state"] == "proficient"
     assert [part["correct"] for part in completed.json()["parts"]] == [True] * 8
+
+
+def test_e5_1_reading_group_is_learner_safe_and_marks_mixed_responses():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/practice-sessions",
+        headers={"Idempotency-Key": "e5-guided"},
+        json={"lesson_key": "e5-lesson-01", "mode": "guided_practice"},
+    )
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 1
+    session_id = created.json()["session_id"]
+
+    current = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    )
+    assert current.status_code == 200, current.text
+    question = current.json()["question"]
+    assert question["stable_key"] == "er-l1-001"
+    assert question["question_type"] == "reading_comprehension"
+    assert question["word_bank"] is None
+    assert len(question["passage"]["paragraphs"]) == 4
+    assert [part["response_type"] for part in question["parts"]] == [
+        "single_choice",
+        "single_choice",
+        "short_text",
+        "short_text",
+        "single_choice",
+        "multiple_response",
+    ]
+    encoded = json.dumps(question)
+    assert "correct_key" not in encoded
+    assert "correct_keys" not in encoded
+    assert "canonical_answer" not in encoded
+    assert "rationale" not in encoded
+
+    completed = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e5-complete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {
+                "1": "B",
+                "2": "B",
+                "3": "Retain.",
+                "4": "the rain garden absorbed the pooled water within a few hours.",
+                "5": "A",
+                "6": ["D", "A"],
+            },
+        },
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["correct"] is True
+    assert completed.json()["lesson_state"] == "proficient"
+    assert [part["correct"] for part in completed.json()["parts"]] == [True] * 6

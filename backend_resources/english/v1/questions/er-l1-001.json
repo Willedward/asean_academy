@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l1-001",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.1",
+  "title": "Map the courtyard project",
+  "difficulty": 2,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "exit_ticket",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-courtyard-rain-garden",
+    "revision": 1,
+    "content_sha256": "aba50aa57e443455756fd7076bb978c469d0fe8057a584401e48e05d23a1c457"
+  },
+  "instructions": "Read the complete passage and build a short paragraph map. Answer all six questions, returning to the named paragraph for evidence. Feedback appears after the whole group is submitted.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "Which statement best expresses the main idea of the passage?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "The school needed a larger canteen for science lessons."
+          },
+          {
+            "key": "B",
+            "text": "A student-led investigation helped turn a problem courtyard into a useful rain garden."
+          },
+          {
+            "key": "C",
+            "text": "Native plants can survive every kind of tropical storm."
+          },
+          {
+            "key": "D",
+            "text": "Concrete courtyards should always be removed from schools."
+          }
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "The canteen is mentioned only as a location for two later beds, not as the passage's central concern.",
+          "B": "This choice includes the original problem, the students' evidence-based action and the useful result.",
+          "C": "The passage describes one project and does not claim that native plants survive every storm.",
+          "D": "The passage explains one improvement and never argues that all concrete courtyards must be removed."
+        }
+      },
+      "hint": "Choose the option that covers the problem, the action and the outcome across all four paragraphs.",
+      "correct_explanation": "The whole passage develops from a courtyard problem through the science club's investigation to a useful rain-garden result."
+    },
+    {
+      "position": 2,
+      "prompt": "Which passage map best describes how the four paragraphs develop?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "Two designs are compared, one is rejected, and a new design is advertised."
+          },
+          {
+            "key": "B",
+            "text": "A problem is introduced, a response is planned, evidence is observed, and wider effects are reported."
+          },
+          {
+            "key": "C",
+            "text": "A school's complete history is retold from its founding to the present day."
+          },
+          {
+            "key": "D",
+            "text": "Instructions are given for building a rain garden step by step."
+          }
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "The passage does not compare two complete designs or advertise a product.",
+          "B": "Each phrase matches the purpose of paragraphs 1, 2, 3 and 4 in order.",
+          "C": "Only the courtyard project is described; the school's broader history is absent.",
+          "D": "The passage reports a project but does not provide construction instructions."
+        }
+      },
+      "hint": "Give each paragraph a short job label, then compare the four labels with each option.",
+      "correct_explanation": "The paragraph jobs form a problem → plan → evidence → wider impact sequence."
+    },
+    {
+      "position": 3,
+      "prompt": "Which single word in paragraph 2 means “hold and keep”?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "retain",
+        "accepted_alternatives": [],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "In paragraph 2, “retain” means to hold and keep some rainwater around the plants' roots."
+      },
+      "hint": "Look near the explanation of what the planting beds do with rainwater.",
+      "correct_explanation": "The word is “retain”, which means to hold and keep."
+    },
+    {
+      "position": 4,
+      "prompt": "In paragraph 3, what does “This result” refer to?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "the soil absorbed the pooled water within a few hours",
+        "accepted_alternatives": [
+          "the rain garden absorbed the pooled water within a few hours",
+          "the garden absorbed the water within a few hours",
+          "the soil absorbed the water within a few hours"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "The phrase points back to the immediately preceding observation that the pooled storm water was absorbed within a few hours."
+      },
+      "hint": "Read the sentence immediately before “This result” and state the observed event.",
+      "correct_explanation": "It refers to the soil absorbing the pooled storm water within a few hours."
+    },
+    {
+      "position": 5,
+      "prompt": "Why can we reasonably infer that teachers began holding short lessons in the courtyard?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "The courtyard had become cooler and useful for people."
+          },
+          {
+            "key": "B",
+            "text": "The science club required every teacher to collect data."
+          },
+          {
+            "key": "C",
+            "text": "The classrooms had all been damaged by storms."
+          },
+          {
+            "key": "D",
+            "text": "The butterflies could teach students about every subject."
+          }
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Paragraph 4 directly links lessons with the cooler courtyard and concludes that the space remained useful to people.",
+          "B": "The passage says students record changes; it does not describe a requirement imposed on teachers.",
+          "C": "No classroom damage is stated or implied.",
+          "D": "Butterflies are one benefit of the planting, but the passage does not say they support every lesson."
+        }
+      },
+      "hint": "Combine the detail about where lessons occur with the final description of the courtyard.",
+      "correct_explanation": "The cooler, usable courtyard had become a suitable place for short lessons."
+    },
+    {
+      "position": 6,
+      "prompt": "Select the two observations that show the project worked and made the courtyard more useful.",
+      "response": {
+        "type": "multiple_response",
+        "options": [
+          {
+            "key": "A",
+            "text": "A strong storm filled the beds without flooding the walkway."
+          },
+          {
+            "key": "B",
+            "text": "The science club measured temperatures before proposing a solution."
+          },
+          {
+            "key": "C",
+            "text": "Students used to cross the courtyard quickly."
+          },
+          {
+            "key": "D",
+            "text": "Teachers later held short lessons in the cooler courtyard."
+          },
+          {
+            "key": "E",
+            "text": "The proposed beds would contain soil and native plants."
+          }
+        ],
+        "correct_keys": [
+          "A",
+          "D"
+        ],
+        "choice_rationales": {
+          "A": "This is observed evidence that the rain garden managed storm water while keeping the walkway usable.",
+          "B": "This describes the investigation method before the garden was tested, not a result.",
+          "C": "This describes the courtyard before the improvement.",
+          "D": "This later use shows that the courtyard became cooler and useful for learning.",
+          "E": "This is a design feature in the proposal, not evidence of the completed project's effect."
+        }
+      },
+      "hint": "Choose one observed storm-water result and one later example of people using the improved space.",
+      "correct_explanation": "The unflooded walkway shows successful rain management, and the lessons show that people could use the cooler courtyard."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-21T00:00:00+08:00",
+    "authored_by": "Codex English E5.1 milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
+

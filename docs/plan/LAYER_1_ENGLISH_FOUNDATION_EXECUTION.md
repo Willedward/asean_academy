@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 20 October 2026
+**Updated:** 21 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e3-vertical-slice`
+**Implementation branch:** `feature/english-e5-reading-comprehension`
 
 ## Product boundary
 
@@ -99,6 +99,7 @@ sections.
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
+| E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -162,10 +163,11 @@ high-volume authoring.
 
 ### 3. Add passage formats
 
-E3.1 now exercises a selectable shared word bank, keyboard-accessible gaps, whole-passage
-submission, group feedback and passage checksum pins. Author the E5.1 reading pilot next
-to add passage navigation, vocabulary-in-context references and grouped comprehension.
-Then implement E2 grammar and E4 open-cloze response patterns.
+E3.1 exercises a selectable shared word bank, keyboard-accessible gaps, whole-passage
+submission, group feedback and passage checksum pins. E5.1 adds a complete original
+informational passage, paragraph navigation, a passage map and grouped main-idea,
+structure, synonym-in-context, reference, inference and evidence questions. Implement
+E2 grammar and editing next, followed by E4 open-cloze response patterns.
 
 ### 4. Build the objective diagnostic
 
@@ -189,8 +191,8 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone is the **E5.1 reading-comprehension passage slice**. Build
-one original passage group with navigation, reference-word questions, synonym-in-context
-questions and comprehension items, then verify the E1.1 and E3.1 draft journeys together
-on hosted review. Human English and editorial approval remains a separate publication
-gate for every lesson, passage and question revision.
+The next technical milestone is the **E2.1 grammar-and-editing vertical slice**. Build one
+complete lesson and deterministic item group around sentence boundaries and agreement,
+using the same protected review and draft-only learner path. Verify E1.1, E3.1 and E5.1
+together on hosted review before scaling authoring. Human English and editorial approval
+remains a separate publication gate for every lesson, passage and question revision.
