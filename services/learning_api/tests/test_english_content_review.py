@@ -28,9 +28,12 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     assert {(item.kind, item.stable_key) for item in english_items} >= {
         ("english_lesson", "e1-lesson-01"),
         ("english_lesson", "e3-lesson-01"),
+        ("english_lesson", "e5-lesson-01"),
         ("english_passage", "english-passage-afternoon-broadcast"),
+        ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
         ("english_question", "eb-l1-001"),
+        ("english_question", "er-l1-001"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
@@ -39,6 +42,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
     assert banked.batch_id == "english-eb-b001"
     assert banked.unit_key == "english-e3"
+    reading = next(item for item in english_items if item.stable_key == "er-l1-001")
+    assert reading.batch_id == "english-er-b001"
+    assert reading.unit_key == "english-e5"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):

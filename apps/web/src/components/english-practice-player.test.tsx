@@ -258,4 +258,99 @@ describe("EnglishPracticePlayer", () => {
       screen.getByText("Hammered describes the forceful rain."),
     ).toBeInTheDocument();
   });
+
+  it("keeps every reading paragraph visible while keyboard navigation highlights one paragraph", async () => {
+    const reading: EnglishNextQuestionResponse = {
+      status: "active",
+      session: {
+        ...current.session,
+        lesson_key: "e5-lesson-01",
+        question_count: 1,
+        assigned_count: 1,
+      },
+      position: 1,
+      question: {
+        stable_key: "er-l1-001",
+        revision: 1,
+        title: "Map the courtyard project",
+        difficulty: 2,
+        outcome_code: "ER5.1",
+        question_type: "reading_comprehension",
+        exposure_pool: "exit_ticket",
+        instructions: "Read the complete passage and answer every question.",
+        passage: {
+          stable_key: "english-passage-courtyard-rain-garden",
+          revision: 1,
+          title: "A second life for the school courtyard",
+          text_type: "informational",
+          paragraphs: [
+            "The courtyard was hot after lunch.",
+            "Students planned a rain garden.",
+            "The garden absorbed pooled water.",
+          ],
+          attribution: "Original NextScholar passage.",
+        },
+        word_bank: null,
+        parts: [
+          {
+            position: 1,
+            prompt: "Which statement gives the main idea?",
+            response_type: "single_choice",
+            options: [
+              { key: "A", text: "The courtyard stayed empty." },
+              { key: "B", text: "Students improved the courtyard." },
+            ],
+          },
+        ],
+      },
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => reading),
+      submitAttempt: vi.fn(async () => incorrect),
+      revealHint: vi.fn(async () => ({
+        question_key: "er-l1-001",
+        parts: ["Map each paragraph first."],
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer
+        sessionId={reading.session.session_id}
+        api={api}
+      />,
+    );
+
+    expect(
+      await screen.findByRole("navigation", {
+        name: "Passage paragraph navigation",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Go to paragraph 1" }),
+    ).toHaveAttribute("aria-current", "true");
+    expect(
+      screen.getByRole("button", { name: "Previous paragraph" }),
+    ).toBeDisabled();
+    expect(screen.getByRole("region", { name: "Paragraph 1" })).toBeVisible();
+    expect(screen.getByRole("region", { name: "Paragraph 2" })).toBeVisible();
+    expect(screen.getByRole("region", { name: "Paragraph 3" })).toBeVisible();
+
+    fireEvent.click(screen.getByRole("button", { name: "Go to paragraph 2" }));
+
+    expect(
+      screen.getByRole("button", { name: "Go to paragraph 2" }),
+    ).toHaveAttribute("aria-current", "true");
+    expect(
+      screen.getByText(
+        "Paragraph 2 of 3 is highlighted. All paragraphs remain visible.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Previous paragraph" }),
+    ).toBeEnabled();
+    expect(
+      screen.getByRole("button", { name: "Next paragraph" }),
+    ).toBeEnabled();
+  });
 });

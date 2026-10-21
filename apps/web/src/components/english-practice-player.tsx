@@ -99,6 +99,7 @@ export function EnglishPracticePlayer({
   const [classification, setClassification] =
     useState<EnglishErrorCategory | null>(null);
   const [classificationSaved, setClassificationSaved] = useState(false);
+  const [activePassageParagraph, setActivePassageParagraph] = useState(1);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -112,6 +113,7 @@ export function EnglishPracticePlayer({
       setHint(null);
       setClassification(null);
       setClassificationSaved(false);
+      setActivePassageParagraph(1);
       setError(null);
     } catch (caught: unknown) {
       setError(
@@ -243,6 +245,15 @@ export function EnglishPracticePlayer({
     });
   }
 
+  function goToPassageParagraph(paragraph: number) {
+    setActivePassageParagraph(paragraph);
+    const target = document.getElementById(
+      `passage-${question?.stable_key}-paragraph-${paragraph}`,
+    );
+    target?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+    target?.focus({ preventScroll: true });
+  }
+
   if (error && !current) {
     return (
       <div role="alert">
@@ -299,6 +310,9 @@ export function EnglishPracticePlayer({
   const canContinue = Boolean(attempt?.correct || classificationSaved);
   const isBankedCloze =
     question.question_type === "banked_cloze" && Boolean(question.passage);
+  const isReadingComprehension =
+    question.question_type === "reading_comprehension" &&
+    Boolean(question.passage);
   const wordBank = question.word_bank ?? question.parts[0]?.options ?? [];
   const usedWords = new Map<string, number>();
   for (const part of question.parts) {
@@ -407,6 +421,74 @@ export function EnglishPracticePlayer({
               : question.passage.text_type.toUpperCase()}
           </Eyebrow>
           <H2>{isBankedCloze ? question.title : question.passage.title}</H2>
+          {isReadingComprehension ? (
+            <nav
+              aria-label="Passage paragraph navigation"
+              className="rounded-xl border border-ns-line bg-ns-raised p-4"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  disabled={activePassageParagraph === 1}
+                  onClick={() =>
+                    goToPassageParagraph(activePassageParagraph - 1)
+                  }
+                  className={cn(
+                    "rounded-lg border border-ns-line-strong px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40",
+                    focusRing,
+                  )}
+                >
+                  Previous paragraph
+                </button>
+                {question.passage.paragraphs.map((_, index) => {
+                  const paragraph = index + 1;
+                  return (
+                    <button
+                      type="button"
+                      key={paragraph}
+                      aria-current={
+                        activePassageParagraph === paragraph
+                          ? "true"
+                          : undefined
+                      }
+                      onClick={() => goToPassageParagraph(paragraph)}
+                      className={cn(
+                        "size-10 rounded-full border text-sm font-bold",
+                        activePassageParagraph === paragraph
+                          ? "border-ns-ink bg-ns-ink text-white"
+                          : "border-ns-line-strong bg-white text-ns-ink",
+                        focusRing,
+                      )}
+                      aria-label={`Go to paragraph ${paragraph}`}
+                    >
+                      {paragraph}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  disabled={
+                    activePassageParagraph ===
+                    question.passage.paragraphs.length
+                  }
+                  onClick={() =>
+                    goToPassageParagraph(activePassageParagraph + 1)
+                  }
+                  className={cn(
+                    "rounded-lg border border-ns-line-strong px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40",
+                    focusRing,
+                  )}
+                >
+                  Next paragraph
+                </button>
+              </div>
+              <p className="mb-0 mt-3 text-sm text-ns-muted" aria-live="polite">
+                Paragraph {activePassageParagraph} of{" "}
+                {question.passage.paragraphs.length} is highlighted. All
+                paragraphs remain visible.
+              </p>
+            </nav>
+          ) : null}
           {isBankedCloze ? (
             <>
               <p className="m-0 text-[16px] leading-7">
@@ -449,6 +531,28 @@ export function EnglishPracticePlayer({
               </h3>
               {question.passage.paragraphs.map(renderBankedParagraph)}
             </>
+          ) : isReadingComprehension ? (
+            question.passage.paragraphs.map((paragraph, index) => {
+              const paragraphNumber = index + 1;
+              return (
+                <section
+                  id={`passage-${question.stable_key}-paragraph-${paragraphNumber}`}
+                  key={paragraphNumber}
+                  tabIndex={-1}
+                  aria-label={`Paragraph ${paragraphNumber}`}
+                  className={cn(
+                    "rounded-xl border px-4 py-3 transition-colors",
+                    activePassageParagraph === paragraphNumber
+                      ? "border-ns-ink bg-ns-brand-soft"
+                      : "border-transparent",
+                    focusRing,
+                  )}
+                >
+                  <Eyebrow>PARAGRAPH {paragraphNumber}</Eyebrow>
+                  <p className="mb-0 mt-2 text-[16px] leading-7">{paragraph}</p>
+                </section>
+              );
+            })
           ) : (
             question.passage.paragraphs.map((paragraph) => (
               <p key={paragraph} className="m-0 text-[16px] leading-7">

@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 2
-    assert len(report.passages) == 2
-    assert len(report.questions) == 7
+    assert len(report.lessons) == 3
+    assert len(report.passages) == 3
+    assert len(report.questions) == 8
     assert not report.issues
 
 
@@ -127,6 +127,29 @@ def test_e3_banked_cloze_has_one_shared_bank_and_exact_marking(english_root):
     assert not check_english_answer(question.parts[0].response, "A")["correct"]
 
 
+def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(english_root):
+    payload = json.loads((english_root / "questions/er-l1-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "reading_comprehension"
+    assert question.feedback_timing == "after_group"
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "single_choice",
+        "short_text",
+        "short_text",
+        "single_choice",
+        "multiple_response",
+    ]
+    assert check_english_answer(question.parts[2].response, "Retain.")["correct"]
+    assert check_english_answer(
+        question.parts[3].response,
+        "The rain garden absorbed the pooled water within a few hours.",
+    )["correct"]
+    assert check_english_answer(question.parts[5].response, ["D", "A"])["correct"]
+    assert not check_english_answer(question.parts[5].response, ["A", "B"])["correct"]
+
+
 def test_draft_pilot_is_not_publishable_before_human_review(english_root):
     report = validate_english_foundation(english_root, publish=True)
 
@@ -145,9 +168,10 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
     assert report.valid
     assert [batch.batch_id for batch in report.batches] == [
         "english-eb-b001",
+        "english-er-b001",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 7
+    assert len(report.questions) == 8
     assert not report.duplicates
 
 
@@ -216,6 +240,20 @@ def test_banked_cloze_reviewer_export_includes_passage_and_one_shared_bank(engli
     assert "Shared word bank" in page
     assert page.count("<strong>C.</strong> deserted") == 1
     assert "{{1}}" in page
+
+
+def test_reading_reviewer_export_includes_complete_passage_and_answers(english_root, tmp_path):
+    batch = english_root / "authoring/batches/english-er-b001.json"
+    output = tmp_path / "reading-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "A second life for the school courtyard" in page
+    assert "Then a strong storm filled the shallow beds" in page
+    assert "retain" in page
+    assert "the soil absorbed the pooled water within a few hours" in page
 
 
 def test_english_question_hash_excludes_review_workflow_metadata(english_root):
