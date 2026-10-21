@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e5-reading-comprehension`
+**Implementation branch:** `feature/english-e2-grammar-editing`
 
 ## Product boundary
 
@@ -99,6 +99,7 @@ sections.
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
+| E2.1 pilot | Original sentence-boundary lesson, deterministic clause and editing items, grammar-specific error reflection and exit-ticket retry | Implemented as draft; English and editorial review pending |
 | E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
@@ -166,8 +167,9 @@ high-volume authoring.
 E3.1 exercises a selectable shared word bank, keyboard-accessible gaps, whole-passage
 submission, group feedback and passage checksum pins. E5.1 adds a complete original
 informational passage, paragraph navigation, a passage map and grouped main-idea,
-structure, synonym-in-context, reference, inference and evidence questions. Implement
-E2 grammar and editing next, followed by E4 open-cloze response patterns.
+structure, synonym-in-context, reference, inference and evidence questions. E2.1 adds
+sentence-boundary modelling, deterministic clause and editing questions, and
+grammar-specific error reflection. Implement E4.1 open-cloze response patterns next.
 
 ### 4. Build the objective diagnostic
 
@@ -191,8 +193,9 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone is the **E2.1 grammar-and-editing vertical slice**. Build one
-complete lesson and deterministic item group around sentence boundaries and agreement,
-using the same protected review and draft-only learner path. Verify E1.1, E3.1 and E5.1
-together on hosted review before scaling authoring. Human English and editorial approval
-remains a separate publication gate for every lesson, passage and question revision.
+The next technical milestone is the **E4.1 open-cloze vertical slice**. Build one complete
+lesson and original passage group that requires learners to supply exact words without a
+word bank, while retaining deterministic marking, approved alternatives, delayed group
+feedback and passage revision pins. Verify E1.1, E2.1, E3.1 and E5.1 together on hosted
+review before scaling authoring. Human English and editorial approval remains a separate
+publication gate for every lesson, passage and question revision.
