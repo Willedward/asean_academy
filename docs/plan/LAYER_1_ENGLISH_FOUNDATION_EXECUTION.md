@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 21 October 2026
+**Updated:** 22 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e2-grammar-editing`
+**Implementation branch:** `feature/english-e4-form-agreement`
 
 ## Product boundary
 
@@ -101,6 +101,8 @@ sections.
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
 | E2.1 pilot | Original sentence-boundary lesson, deterministic clause and editing items, grammar-specific error reflection and exit-ticket retry | Implemented as draft; English and editorial review pending |
 | E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
+| E4.1 pilot | Original eight-gap function-word open cloze, inline entry, delayed feedback and reviewed alternatives | Implemented and hosted as draft; English and editorial review pending |
+| E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented as draft; hosted deployment and human review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -172,7 +174,10 @@ sentence-boundary modelling, deterministic clause and editing questions, and
 grammar-specific error reflection. E4.1 adds inline, keyboard-accessible open-cloze gaps,
 exact reviewed short-text answers, explicit accepted alternatives, delayed group feedback,
 passage revision pins and open-cloze-specific error reflection. Its hosted release requires
-schema revision 202610220032.
+schema revision 202610220032. E4.2 reuses that interaction for controlled transformations:
+learners identify an anchor word, locate the grammatical controller and supply the exact
+tense, number, agreement, comparison, derived or reflexive form. It adds no paid model call
+and requires no schema change beyond the deployed E4.1 revision.
 
 ### 4. Build the objective diagnostic
 
@@ -196,10 +201,10 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone after E4.1 is the **hosted five-slice review gate**. Verify
-E1.1, E2.1, E3.1, E4.1 and E5.1 together on the exact deployed Git revision, confirm the
-administrator queue exposes every lesson, passage and batch, and collect English and
-editorial corrections without publishing drafts. After that gate, implement **E4.2 form
-and agreement gaps** using the established open-cloze interaction. Human English and
-editorial approval remains a separate publication gate for every lesson, passage and
-question revision.
+The hosted five-slice review gate for E1.1, E2.1, E3.1, E4.1 and E5.1 is complete on
+integration revision `f81d0ae5dcf929bd2b94b588506d7ba46f0aa4e9`. E4.2 form and
+agreement gaps is now the active implementation milestone. After E4.2 is deployed and
+visible in both learner preview and administrator review, continue to **E4.3 collocation
+and lexical gaps** using an original passage and the same exact, delayed-feedback contract.
+Human English and editorial approval remains a separate publication gate for every lesson,
+passage and question revision.
