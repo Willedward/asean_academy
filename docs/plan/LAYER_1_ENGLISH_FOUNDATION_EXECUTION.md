@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e4-form-agreement`
+**Implementation branch:** `feature/english-e4-lexical-collocation`
 
 ## Product boundary
 
@@ -102,7 +102,8 @@ sections.
 | E2.1 pilot | Original sentence-boundary lesson, deterministic clause and editing items, grammar-specific error reflection and exit-ticket retry | Implemented as draft; English and editorial review pending |
 | E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
 | E4.1 pilot | Original eight-gap function-word open cloze, inline entry, delayed feedback and reviewed alternatives | Implemented and hosted as draft; English and editorial review pending |
-| E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented as draft; hosted deployment and human review pending |
+| E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented and hosted as draft; English and editorial review pending |
+| E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented as draft; hosted deployment and human review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -178,6 +179,10 @@ schema revision 202610220032. E4.2 reuses that interaction for controlled transf
 learners identify an anchor word, locate the grammatical controller and supply the exact
 tense, number, agreement, comparison, derived or reflexive form. It adds no paid model call
 and requires no schema change beyond the deployed E4.1 revision.
+E4.3 reuses the same learner and reviewer interaction for lexical retrieval. Learners read
+the full word frame, state the intended meaning, check paragraph cohesion and then test
+whether the completed expression is natural. Marking remains deterministic: only the
+canonical completion and explicitly listed equivalents receive credit.
 
 ### 4. Build the objective diagnostic
 
@@ -201,10 +206,10 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The hosted five-slice review gate for E1.1, E2.1, E3.1, E4.1 and E5.1 is complete on
-integration revision `f81d0ae5dcf929bd2b94b588506d7ba46f0aa4e9`. E4.2 form and
-agreement gaps is now the active implementation milestone. After E4.2 is deployed and
-visible in both learner preview and administrator review, continue to **E4.3 collocation
-and lexical gaps** using an original passage and the same exact, delayed-feedback contract.
-Human English and editorial approval remains a separate publication gate for every lesson,
-passage and question revision.
+The hosted review gate now includes E1.1, E2.1, E3.1, E4.1, E4.2 and E5.1 on integration
+revision `57899a0701f8b981ff154aff10a0ef3b6f5dd944`. E4.3 collocation and lexical gaps
+is the active implementation milestone. After E4.3 is deployed and visible in both learner
+preview and administrator review, continue to **E4.4 cohesion across sentences** using an
+original passage that requires evidence beyond the immediate sentence. Human English and
+editorial approval remains a separate publication gate for every lesson, passage and
+question revision.
