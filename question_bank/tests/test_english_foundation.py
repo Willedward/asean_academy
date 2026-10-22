@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 8
-    assert len(report.passages) == 7
-    assert len(report.questions) == 18
+    assert len(report.lessons) == 9
+    assert len(report.passages) == 8
+    assert len(report.questions) == 19
     assert not report.issues
 
 
@@ -222,6 +222,30 @@ def test_e4_cohesion_cloze_requires_cross_sentence_links(english_root):
     assert not check_english_answer(question.parts[4].response, "they")["correct"]
 
 
+def test_e4_timed_checkpoint_integrates_all_open_cloze_evidence(english_root):
+    payload = json.loads((english_root / "questions/eo-l5-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "open_cloze"
+    assert question.feedback_timing == "after_group"
+    assert question.exposure_pool == "exit_ticket"
+    assert question.outcome_code == "EO4.5"
+    assert question.difficulty == 5
+    assert [part.response.canonical_answer for part in question.parts] == [
+        "into",
+        "but",
+        "with",
+        "loose",
+        "than",
+        "again",
+        "unless",
+        "had",
+    ]
+    assert check_english_answer(question.parts[1].response, "YET")["correct"]
+    assert check_english_answer(question.parts[6].response, "unless")["correct"]
+    assert not check_english_answer(question.parts[6].response, "if")["correct"]
+
+
 def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(english_root):
     payload = json.loads((english_root / "questions/er-l1-001.json").read_text())
     question = EnglishObjectiveQuestion.model_validate(payload)
@@ -299,10 +323,11 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-eo-b002",
         "english-eo-b003",
         "english-eo-b004",
+        "english-eo-b005",
         "english-er-b001",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 18
+    assert len(report.questions) == 19
     assert not report.duplicates
 
 
@@ -436,6 +461,23 @@ def test_cohesion_cloze_reviewer_export_includes_cross_sentence_evidence(
     assert "<strong>Answer:</strong> Farid" in page
     assert "<strong>Answer:</strong> again" in page
     assert "Instead" in page
+
+
+def test_timed_cloze_reviewer_export_includes_checkpoint_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-eo-b005.json"
+    output = tmp_path / "timed-cloze-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "The hillside water survey" in page
+    assert "{{8}}" in page
+    assert "<strong>Answer:</strong> into" in page
+    assert "<strong>Answer:</strong> unless" in page
+    assert "yet" in page
 
 
 def test_reading_reviewer_export_includes_complete_passage_and_answers(english_root, tmp_path):

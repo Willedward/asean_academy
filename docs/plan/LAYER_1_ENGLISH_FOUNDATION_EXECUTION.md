@@ -188,6 +188,11 @@ E4.4 makes paragraph-level evidence the assessed construct. Learners follow name
 pronouns and demonstratives, identify contrast, and reconstruct sequence or repeated
 actions before completing each gap. Its original repair-café passage includes eight gaps,
 delays feedback until the complete group is submitted and uses only deterministic marking.
+E4.5 closes the module with an eight-minute, difficulty-5 checkpoint. Learners use a
+complete-passage first pass, a targeted second pass and a final read while integrating
+function words, fixed expressions, lexical fit, tense sequence and cross-paragraph cohesion.
+The platform records the complete deterministic attempt; the eight-minute target is a
+self-managed practice routine until the later full-mock timing milestone.
 
 ### 4. Build the objective diagnostic
 
@@ -211,10 +216,9 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The hosted review gate now includes E1.1, E2.1, E3.1, E4.1–E4.3 and E5.1 on integration
-revision `49b929806a966f12679d21c40a527b5c6664217e`. E4.4 cohesion across sentences is
-the active implementation milestone, using an original passage whose gaps require evidence
-beyond the immediate sentence. After E4.4 is deployed and visible in both learner preview
-and administrator review, continue to **E4.5 timed open cloze** with a complete-passage
-first pass, second pass and final-read routine. Human English and editorial approval remains
-a separate publication gate for every lesson, passage and question revision.
+E4.1–E4.5 now form a complete open-cloze learning sequence in the integration programme.
+E4.5 is the active hosted-review candidate: deploy its exact integration merge, verify the
+learner lesson and module-checkpoint journey, and confirm `eo-l5-001` appears once in the
+administrator queue with protected answers. Then continue to **E5.2 track reference chains**,
+building on the existing E5.1 passage-map vertical slice. Human English and editorial approval
+remains a separate publication gate for every lesson, passage and question revision.
