@@ -336,6 +336,11 @@ class EnglishObjectiveQuestion(EnglishModel):
             correct_keys = [part.response.correct_key for part in self.parts]
             if len(correct_keys) != len(set(correct_keys)):
                 raise ValueError("Each banked cloze word may fill only one gap")
+        if self.question_type == "open_cloze":
+            if len(self.parts) < 2:
+                raise ValueError("Open cloze questions require at least two gaps")
+            if not all(isinstance(part.response, ShortTextResponse) for part in self.parts):
+                raise ValueError("Every open cloze gap must use a short-text response")
         if self.status in {"reviewed", "published"} and self.provenance.reviewed_at is None:
             raise ValueError("Reviewed and published questions require review provenance")
         return self

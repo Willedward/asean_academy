@@ -104,6 +104,30 @@ const GRAMMAR_ERROR_OPTIONS: EnglishErrorOption[] = [
   },
 ];
 
+const OPEN_CLOZE_ERROR_OPTIONS: EnglishErrorOption[] = [
+  {
+    key: "gap_role",
+    label: "I misidentified the gap role",
+    detail: "I chose the wrong kind of function word for the structure.",
+  },
+  {
+    key: "local_grammar",
+    label: "I missed the local grammar",
+    detail: "I knew the word type but missed the construction around the gap.",
+  },
+  {
+    key: "cohesion_clue",
+    label: "I missed a cohesion clue",
+    detail: "I overlooked reference, time or logic elsewhere in the passage.",
+  },
+  {
+    key: "entry_accuracy",
+    label: "I entered the word inaccurately",
+    detail:
+      "I knew the answer but used an unapproved form or made a typing error.",
+  },
+];
+
 function answerPresent(answer: string | string[] | undefined): boolean {
   return Array.isArray(answer) ? answer.length > 0 : Boolean(answer?.trim());
 }
@@ -173,10 +197,12 @@ export function EnglishPracticePlayer({
 
   const question = current?.question;
   const errorOptions =
-    question?.question_type === "grammar_usage" ||
-    question?.question_type === "editing"
-      ? GRAMMAR_ERROR_OPTIONS
-      : LANGUAGE_ERROR_OPTIONS;
+    question?.question_type === "open_cloze"
+      ? OPEN_CLOZE_ERROR_OPTIONS
+      : question?.question_type === "grammar_usage" ||
+          question?.question_type === "editing"
+        ? GRAMMAR_ERROR_OPTIONS
+        : LANGUAGE_ERROR_OPTIONS;
   const allAnswersPresent = useMemo(
     () =>
       Boolean(
@@ -340,6 +366,9 @@ export function EnglishPracticePlayer({
   const canContinue = Boolean(attempt?.correct || classificationSaved);
   const isBankedCloze =
     question.question_type === "banked_cloze" && Boolean(question.passage);
+  const isOpenCloze =
+    question.question_type === "open_cloze" && Boolean(question.passage);
+  const isCloze = isBankedCloze || isOpenCloze;
   const isReadingComprehension =
     question.question_type === "reading_comprehension" &&
     Boolean(question.passage);
@@ -403,6 +432,55 @@ export function EnglishPracticePlayer({
     );
   }
 
+  function renderOpenClozeParagraph(paragraph: string, paragraphIndex: number) {
+    const fragments = paragraph.split(/(\{\{[1-9][0-9]*\}\})/g);
+    return (
+      <p key={paragraphIndex} className="m-0 text-[16px] leading-[3.5rem]">
+        {fragments.map((fragment, fragmentIndex) => {
+          const marker = fragment.match(/^\{\{([1-9][0-9]*)\}\}$/);
+          if (!marker)
+            return (
+              <span key={`${paragraphIndex}-${fragmentIndex}`}>{fragment}</span>
+            );
+          const gap = Number(marker[1]);
+          const selected = answers[String(gap)];
+          const result = attempt?.parts.find((item) => item.position === gap);
+          return (
+            <span
+              className={cn(
+                "mx-1 inline-flex rounded-xl border-2 align-middle",
+                result?.correct && "border-ns-success",
+                result && !result.correct && "border-ns-danger",
+                !result && "border-ns-line-strong",
+              )}
+              key={`${paragraphIndex}-gap-${gap}`}
+            >
+              <label className="sr-only" htmlFor={`open-gap-${gap}`}>
+                Gap {gap}
+              </label>
+              <input
+                id={`open-gap-${gap}`}
+                aria-label={`Gap ${gap}`}
+                aria-invalid={result ? !result.correct : undefined}
+                autoComplete="off"
+                spellCheck={false}
+                maxLength={32}
+                value={typeof selected === "string" ? selected : ""}
+                disabled={Boolean(attempt)}
+                onChange={(event) => setSingle(gap, event.target.value)}
+                placeholder={String(gap)}
+                className={cn(
+                  "h-10 w-28 rounded-[10px] border-0 bg-ns-raised px-3 text-center text-[15px] font-semibold text-ns-ink",
+                  focusRing,
+                )}
+              />
+            </span>
+          );
+        })}
+      </p>
+    );
+  }
+
   return (
     <article className="flex flex-col gap-5 lg:gap-6">
       <Link
@@ -448,9 +526,11 @@ export function EnglishPracticePlayer({
           <Eyebrow>
             {isBankedCloze
               ? "BANKED STORY CLOZE"
-              : question.passage.text_type.toUpperCase()}
+              : isOpenCloze
+                ? "OPEN CLOZE"
+                : question.passage.text_type.toUpperCase()}
           </Eyebrow>
-          <H2>{isBankedCloze ? question.title : question.passage.title}</H2>
+          <H2>{isCloze ? question.title : question.passage.title}</H2>
           {isReadingComprehension ? (
             <nav
               aria-label="Passage paragraph navigation"
@@ -561,6 +641,17 @@ export function EnglishPracticePlayer({
               </h3>
               {question.passage.paragraphs.map(renderBankedParagraph)}
             </>
+          ) : isOpenCloze ? (
+            <>
+              <p className="m-0 text-[16px] leading-7">
+                {question.instructions}
+              </p>
+              <Divider />
+              <h3 className="m-0 text-lg font-bold">
+                {question.passage.title}
+              </h3>
+              {question.passage.paragraphs.map(renderOpenClozeParagraph)}
+            </>
           ) : isReadingComprehension ? (
             question.passage.paragraphs.map((paragraph, index) => {
               const paragraphNumber = index + 1;
@@ -597,7 +688,7 @@ export function EnglishPracticePlayer({
       ) : null}
 
       <Card className="gap-4">
-        {isBankedCloze ? (
+        {isCloze ? (
           <>
             <H2>{attempt ? "Passage feedback" : "Complete every gap"}</H2>
             {!attempt ? (

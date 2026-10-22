@@ -28,11 +28,14 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     assert {(item.kind, item.stable_key) for item in english_items} >= {
         ("english_lesson", "e1-lesson-01"),
         ("english_lesson", "e3-lesson-01"),
+        ("english_lesson", "e4-lesson-01"),
         ("english_lesson", "e5-lesson-01"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
+        ("english_passage", "english-passage-workshop-box"),
         ("english_question", "eb-l1-001"),
+        ("english_question", "eo-l1-001"),
         ("english_question", "er-l1-001"),
         ("english_question", "ev-l1-001"),
     }
@@ -42,6 +45,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
     assert banked.batch_id == "english-eb-b001"
     assert banked.unit_key == "english-e3"
+    open_cloze = next(item for item in english_items if item.stable_key == "eo-l1-001")
+    assert open_cloze.batch_id == "english-eo-b001"
+    assert open_cloze.unit_key == "english-e4"
     reading = next(item for item in english_items if item.stable_key == "er-l1-001")
     assert reading.batch_id == "english-er-b001"
     assert reading.unit_key == "english-e5"
@@ -57,6 +63,15 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     assert "choice_rationales" not in str(public["public_content"])
     assert "correct_explanation" not in str(public["public_content"])
     assert public["public_content"]["parts"][0]["response"]["options"]
+
+    protected_open = reviewer_preview(catalogue, "english_question", "eo-l1-001")
+    public_open = student_preview(catalogue, "english_question", "eo-l1-001")
+    assert protected_open["review_content"]["parts"][0]["response"][
+        "canonical_answer"
+    ] == "an"
+    assert "canonical_answer" not in str(public_open["public_content"])
+    assert "accepted_alternatives" not in str(public_open["public_content"])
+    assert "rationale" not in str(public_open["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):

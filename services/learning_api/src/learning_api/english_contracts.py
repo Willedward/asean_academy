@@ -18,6 +18,10 @@ EnglishErrorCategory = Literal[
     "clause_structure",
     "boundary_choice",
     "agreement_control",
+    "gap_role",
+    "local_grammar",
+    "cohesion_clue",
+    "entry_accuracy",
 ]
 
 

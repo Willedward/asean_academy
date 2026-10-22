@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 4
-    assert len(report.passages) == 3
-    assert len(report.questions) == 14
+    assert len(report.lessons) == 5
+    assert len(report.passages) == 4
+    assert len(report.questions) == 15
     assert not report.issues
 
 
@@ -127,6 +127,30 @@ def test_e3_banked_cloze_has_one_shared_bank_and_exact_marking(english_root):
     assert not check_english_answer(question.parts[0].response, "A")["correct"]
 
 
+def test_e4_open_cloze_uses_exact_reviewed_words_and_delayed_feedback(english_root):
+    payload = json.loads((english_root / "questions/eo-l1-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "open_cloze"
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 8
+    assert all(part.response.type == "short_text" for part in question.parts)
+    assert [part.response.canonical_answer for part in question.parts] == [
+        "an",
+        "it",
+        "had",
+        "with",
+        "although",
+        "which",
+        "until",
+        "they",
+    ]
+    assert check_english_answer(question.parts[0].response, "AN")["correct"]
+    assert check_english_answer(question.parts[4].response, "though")["correct"]
+    assert check_english_answer(question.parts[6].response, "till")["correct"]
+    assert not check_english_answer(question.parts[5].response, "that")["correct"]
+
+
 def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(english_root):
     payload = json.loads((english_root / "questions/er-l1-001.json").read_text())
     question = EnglishObjectiveQuestion.model_validate(payload)
@@ -200,10 +224,11 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
     assert [batch.batch_id for batch in report.batches] == [
         "english-eb-b001",
         "english-eg-b001",
+        "english-eo-b001",
         "english-er-b001",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 14
+    assert len(report.questions) == 15
     assert not report.duplicates
 
 
@@ -272,6 +297,23 @@ def test_banked_cloze_reviewer_export_includes_passage_and_one_shared_bank(engli
     assert "Shared word bank" in page
     assert page.count("<strong>C.</strong> deserted") == 1
     assert "{{1}}" in page
+
+
+def test_open_cloze_reviewer_export_includes_passage_and_approved_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-eo-b001.json"
+    output = tmp_path / "open-cloze-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "The workshop box" in page
+    assert "Shared word bank" not in page
+    assert "{{1}}" in page
+    assert "<strong>Answer:</strong> although" in page
+    assert "<strong>Answer:</strong> until" in page
 
 
 def test_reading_reviewer_export_includes_complete_passage_and_answers(english_root, tmp_path):

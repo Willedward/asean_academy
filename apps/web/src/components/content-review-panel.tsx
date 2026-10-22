@@ -154,6 +154,7 @@ type ReviewEnglishQuestion = {
       canonical_answer?: string;
       accepted_alternatives?: string[];
       choice_rationales?: Record<string, string>;
+      rationale?: string;
     };
   }[];
 };
@@ -343,6 +344,11 @@ function ReviewerPreview({
               {part.response.accepted_alternatives?.length ? (
                 <p className="mb-0 text-sm">
                   Alternatives: {part.response.accepted_alternatives.join(", ")}
+                </p>
+              ) : null}
+              {part.response.rationale ? (
+                <p className="mb-0 text-sm">
+                  Rationale: {part.response.rationale}
                 </p>
               ) : null}
             </div>

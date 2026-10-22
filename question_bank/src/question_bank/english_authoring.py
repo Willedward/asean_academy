@@ -262,6 +262,9 @@ def _part_answer(part) -> str:
         return response.correct_key
     if response.type == "multiple_response":
         return ", ".join(response.correct_keys)
+    if response.accepted_alternatives:
+        alternatives = ", ".join(response.accepted_alternatives)
+        return f"{response.canonical_answer} (also accepted: {alternatives})"
     return response.canonical_answer
 
 
