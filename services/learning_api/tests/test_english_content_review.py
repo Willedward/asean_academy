@@ -31,6 +31,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e4-lesson-01"),
         ("english_lesson", "e4-lesson-02"),
         ("english_lesson", "e4-lesson-03"),
+        ("english_lesson", "e4-lesson-04"),
         ("english_lesson", "e5-lesson-01"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
@@ -38,10 +39,12 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_passage", "english-passage-workshop-box"),
         ("english_passage", "english-passage-rooftop-garden-record"),
         ("english_passage", "english-passage-rehearsal-rescue"),
+        ("english_passage", "english-passage-repair-cafe-record"),
         ("english_question", "eb-l1-001"),
         ("english_question", "eo-l1-001"),
         ("english_question", "eo-l2-001"),
         ("english_question", "eo-l3-001"),
+        ("english_question", "eo-l4-001"),
         ("english_question", "er-l1-001"),
         ("english_question", "ev-l1-001"),
     }
@@ -60,6 +63,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     lexical_cloze = next(item for item in english_items if item.stable_key == "eo-l3-001")
     assert lexical_cloze.batch_id == "english-eo-b003"
     assert lexical_cloze.unit_key == "english-e4"
+    cohesion_cloze = next(item for item in english_items if item.stable_key == "eo-l4-001")
+    assert cohesion_cloze.batch_id == "english-eo-b004"
+    assert cohesion_cloze.unit_key == "english-e4"
     reading = next(item for item in english_items if item.stable_key == "er-l1-001")
     assert reading.batch_id == "english-er-b001"
     assert reading.unit_key == "english-e5"
@@ -100,6 +106,14 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     ] == "notice"
     assert "canonical_answer" not in str(public_lexical["public_content"])
     assert "accepted_alternatives" not in str(public_lexical["public_content"])
+
+    protected_cohesion = reviewer_preview(catalogue, "english_question", "eo-l4-001")
+    public_cohesion = student_preview(catalogue, "english_question", "eo-l4-001")
+    assert protected_cohesion["review_content"]["parts"][0]["response"][
+        "canonical_answer"
+    ] == "Farid"
+    assert "canonical_answer" not in str(public_cohesion["public_content"])
+    assert "accepted_alternatives" not in str(public_cohesion["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):
