@@ -322,6 +322,130 @@ describe("EnglishPracticePlayer", () => {
     ).toBeInTheDocument();
   });
 
+  it("fills open-cloze gaps inside the passage and offers gap-specific reflection", async () => {
+    const openCloze: EnglishNextQuestionResponse = {
+      status: "active",
+      session: {
+        ...current.session,
+        lesson_key: "e4-lesson-01",
+        question_count: 1,
+        assigned_count: 1,
+      },
+      position: 1,
+      question: {
+        stable_key: "eo-l1-001",
+        revision: 1,
+        title: "Restore the workshop discovery",
+        difficulty: 3,
+        outcome_code: "EO4.1",
+        question_type: "open_cloze",
+        exposure_pool: "exit_ticket",
+        instructions: "Enter exactly one word in each gap.",
+        passage: {
+          stable_key: "english-passage-workshop-box",
+          revision: 1,
+          title: "The workshop box",
+          text_type: "narrative",
+          paragraphs: [
+            "The guide placed {{1}} unopened box on the table and asked us not to touch {{2}}.",
+          ],
+          attribution: "Original NextScholar passage.",
+        },
+        word_bank: null,
+        parts: [
+          {
+            position: 1,
+            prompt: "Gap 1",
+            response_type: "short_text",
+            options: [],
+          },
+          {
+            position: 2,
+            prompt: "Gap 2",
+            response_type: "short_text",
+            options: [],
+          },
+        ],
+      },
+    };
+    const groupedResult: EnglishAttemptResponse = {
+      attempt_id: "a99591e5-1f20-4a45-a453-31995fc99b62",
+      attempt_number: 1,
+      correct: false,
+      parts: [
+        {
+          position: 1,
+          correct: true,
+          error: null,
+          feedback: "Use an before the vowel sound.",
+        },
+        {
+          position: 2,
+          correct: false,
+          error: null,
+          feedback: "Use the singular object pronoun it.",
+        },
+      ],
+      question_finished: true,
+      retry_queued: true,
+      needs_error_classification: true,
+      lesson_state: "in_progress",
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => openCloze),
+      submitAttempt: vi.fn(async () => groupedResult),
+      revealHint: vi.fn(async () => ({
+        question_key: "eo-l1-001",
+        parts: ["Article hint", "Pronoun hint"],
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer
+        sessionId={openCloze.session.session_id}
+        api={api}
+      />,
+    );
+
+    const gap1 = await screen.findByRole("textbox", { name: "Gap 1" });
+    const gap2 = screen.getByRole("textbox", { name: "Gap 2" });
+    expect(screen.getByText("OPEN CLOZE")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Check answer" })).toBeDisabled();
+
+    fireEvent.change(gap1, { target: { value: "an" } });
+    fireEvent.change(gap2, { target: { value: "them" } });
+    expect(
+      screen.queryByText("Use the singular object pronoun it."),
+    ).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    await waitFor(() =>
+      expect(api.submitAttempt).toHaveBeenCalledWith(
+        openCloze.session.session_id,
+        "eo-l1-001",
+        1,
+        { "1": "an", "2": "them" },
+      ),
+    );
+    expect(await screen.findByText("Passage feedback")).toBeInTheDocument();
+    expect(
+      screen.getByText("Use the singular object pronoun it."),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I misidentified the gap role/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed the local grammar/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed a cohesion clue/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("radio", { name: /I chose a tempting option/i }),
+    ).not.toBeInTheDocument();
+  });
+
   it("keeps every reading paragraph visible while keyboard navigation highlights one paragraph", async () => {
     const reading: EnglishNextQuestionResponse = {
       status: "active",

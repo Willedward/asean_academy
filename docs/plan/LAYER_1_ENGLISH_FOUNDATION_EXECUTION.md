@@ -169,7 +169,10 @@ submission, group feedback and passage checksum pins. E5.1 adds a complete origi
 informational passage, paragraph navigation, a passage map and grouped main-idea,
 structure, synonym-in-context, reference, inference and evidence questions. E2.1 adds
 sentence-boundary modelling, deterministic clause and editing questions, and
-grammar-specific error reflection. Implement E4.1 open-cloze response patterns next.
+grammar-specific error reflection. E4.1 adds inline, keyboard-accessible open-cloze gaps,
+exact reviewed short-text answers, explicit accepted alternatives, delayed group feedback,
+passage revision pins and open-cloze-specific error reflection. Its hosted release requires
+schema revision 202610220032.
 
 ### 4. Build the objective diagnostic
 
@@ -193,9 +196,10 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The next technical milestone is the **E4.1 open-cloze vertical slice**. Build one complete
-lesson and original passage group that requires learners to supply exact words without a
-word bank, while retaining deterministic marking, approved alternatives, delayed group
-feedback and passage revision pins. Verify E1.1, E2.1, E3.1 and E5.1 together on hosted
-review before scaling authoring. Human English and editorial approval remains a separate
-publication gate for every lesson, passage and question revision.
+The next technical milestone after E4.1 is the **hosted five-slice review gate**. Verify
+E1.1, E2.1, E3.1, E4.1 and E5.1 together on the exact deployed Git revision, confirm the
+administrator queue exposes every lesson, passage and batch, and collect English and
+editorial corrections without publishing drafts. After that gate, implement **E4.2 form
+and agreement gaps** using the established open-cloze interaction. Human English and
+editorial approval remains a separate publication gate for every lesson, passage and
+question revision.

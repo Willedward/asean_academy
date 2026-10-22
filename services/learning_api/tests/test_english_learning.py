@@ -359,6 +359,79 @@ def test_e3_1_banked_cloze_exposes_one_bank_and_marks_the_whole_passage():
     assert [part["correct"] for part in completed.json()["parts"]] == [True] * 8
 
 
+def test_e4_1_open_cloze_accepts_only_reviewed_words_and_marks_as_one_group():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/practice-sessions",
+        headers={"Idempotency-Key": "e4-guided"},
+        json={"lesson_key": "e4-lesson-01", "mode": "guided_practice"},
+    )
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 1
+    session_id = created.json()["session_id"]
+    current = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    )
+    assert current.status_code == 200, current.text
+    question = current.json()["question"]
+
+    assert question["stable_key"] == "eo-l1-001"
+    assert question["question_type"] == "open_cloze"
+    assert question["word_bank"] is None
+    assert len(question["parts"]) == 8
+    assert [part["response_type"] for part in question["parts"]] == ["short_text"] * 8
+    assert "{{1}}" in question["passage"]["paragraphs"][0]
+    encoded = json.dumps(question)
+    assert "canonical_answer" not in encoded
+    assert "accepted_alternatives" not in encoded
+    assert "rationale" not in encoded
+
+    incomplete = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e4-incomplete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {"1": "an"},
+        },
+    )
+    assert incomplete.status_code == 400
+    assert incomplete.json()["error"]["code"] == "english_answers_incomplete"
+
+    completed = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e4-complete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {
+                "1": "AN",
+                "2": "it",
+                "3": "had",
+                "4": "with",
+                "5": "though",
+                "6": "which",
+                "7": "till",
+                "8": "they",
+            },
+        },
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["correct"] is True
+    assert completed.json()["lesson_state"] == "proficient"
+    assert [part["correct"] for part in completed.json()["parts"]] == [True] * 8
+
+
 def test_e5_1_reading_group_is_learner_safe_and_marks_mixed_responses():
     app = application()
     created = request(

@@ -110,16 +110,21 @@ def _validate_short_text_determinism(question, path, report):
             )
 
 
-def _validate_banked_cloze_markers(question, passage, path, report):
-    if question.question_type != "banked_cloze" or passage is None:
+def _validate_cloze_markers(question, passage, path, report):
+    if question.question_type not in {"banked_cloze", "open_cloze"} or passage is None:
         return
     markers = re.findall(r"\{\{([1-9][0-9]*)\}\}", "\n".join(passage.paragraphs))
     expected = [str(part.position) for part in question.parts]
     if markers != expected:
+        issue_code = (
+            "banked_cloze_gap_markers"
+            if question.question_type == "banked_cloze"
+            else "open_cloze_gap_markers"
+        )
         _issue(
             report,
             "error",
-            "banked_cloze_gap_markers",
+            issue_code,
             path,
             f"Passage gap markers must appear once in order: {expected}; found {markers}",
         )
@@ -213,7 +218,7 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
                 _issue(report, "error", "missing_passage_revision", path, ref.stable_key)
             elif passage.content_sha256 != ref.content_sha256:
                 _issue(report, "error", "passage_pin_checksum", path, ref.stable_key)
-            _validate_banked_cloze_markers(question, passage, path, report)
+            _validate_cloze_markers(question, passage, path, report)
         _validate_short_text_determinism(question, path, report)
         if publish and question.status not in {"reviewed", "published"}:
             _issue(report, "error", "question_review_required", path, question.stable_key)
