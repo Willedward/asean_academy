@@ -206,6 +206,13 @@ replacements, then substitute a candidate into the original sentence. Its origin
 river-town archive passage assesses direct contextual meaning, exact word retrieval and
 synonym replacements across adjective, verb and multiple-response formats. All six
 responses use deterministic marking and reveal feedback only after the complete group.
+E5.4 teaches a `Locate -> Link -> Prove` routine for retrieving stated evidence without
+adding an inference. Learners parse the question target, locate the relevant sentence,
+preserve the actor, action, cause, quantity and limitation, then check that their answer is
+fully supported. Its original school heat-mapping report assesses purpose, controlled
+procedures, an explicit cause, an approved proposal, and the distinction between a measured
+result and an unproven causal claim. The six-part group uses deterministic marking and keeps
+answers protected until submission.
 
 ### 4. Build the objective diagnostic
 
@@ -230,10 +237,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme, and E5.1–E5.2 provide the first reading-comprehension progression. E5.3 is the
+programme, and E5.1–E5.3 provide the first reading-comprehension progression. E5.4 is the
 active review candidate: validate and merge its exact revision, deploy it to hosted review,
-verify the learner lesson and grouped contextual-vocabulary journey, and confirm
-`er-l3-001` appears once in the administrator queue with protected answers and the pinned
-passage checksum. Then continue to **E5.4 retrieve stated evidence**.
+verify the learner lesson and grouped stated-evidence journey, and confirm `er-l4-001`
+appears once in the administrator queue with protected answers and the pinned passage
+checksum. Then continue to **E5.5 make bounded inferences**.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.

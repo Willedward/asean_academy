@@ -36,6 +36,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e5-lesson-01"),
         ("english_lesson", "e5-lesson-02"),
         ("english_lesson", "e5-lesson-03"),
+        ("english_lesson", "e5-lesson-04"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -46,6 +47,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_passage", "english-passage-hillside-water-survey"),
         ("english_passage", "english-passage-mangrove-nursery-experiment"),
         ("english_passage", "english-passage-river-town-radio-archive"),
+        ("english_passage", "english-passage-cooler-school-route"),
         ("english_question", "eb-l1-001"),
         ("english_question", "eo-l1-001"),
         ("english_question", "eo-l2-001"),
@@ -55,6 +57,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "er-l1-001"),
         ("english_question", "er-l2-001"),
         ("english_question", "er-l3-001"),
+        ("english_question", "er-l4-001"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
@@ -87,6 +90,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     contextual = next(item for item in english_items if item.stable_key == "er-l3-001")
     assert contextual.batch_id == "english-er-b003"
     assert contextual.unit_key == "english-e5"
+    stated = next(item for item in english_items if item.stable_key == "er-l4-001")
+    assert stated.batch_id == "english-er-b004"
+    assert stated.unit_key == "english-e5"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):
@@ -159,6 +165,26 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     ] == "corroborated"
     assert "canonical_answer" not in str(public_contextual["public_content"])
     assert "choice_rationales" not in str(public_contextual["public_content"])
+
+    protected_stated = reviewer_preview(catalogue, "english_question", "er-l4-001")
+    public_stated = student_preview(catalogue, "english_question", "er-l4-001")
+    assert protected_stated["review_content"]["parts"][0]["response"]["correct_key"] == "A"
+    assert protected_stated["review_content"]["parts"][1]["response"][
+        "canonical_answer"
+    ] == "one metre above the ground"
+    assert protected_stated["review_content"]["parts"][3]["response"]["correct_keys"] == [
+        "A",
+        "D",
+    ]
+    assert protected_stated["review_content"]["parts"][4]["response"][
+        "canonical_answer"
+    ] == "a six-week trial of shade sails at the main gate"
+    assert protected_stated["review_content"]["parts"][5]["response"]["correct_key"] == "A"
+    assert "correct_key" not in str(public_stated["public_content"])
+    assert "correct_keys" not in str(public_stated["public_content"])
+    assert "canonical_answer" not in str(public_stated["public_content"])
+    assert "choice_rationales" not in str(public_stated["public_content"])
+    assert "rationale" not in str(public_stated["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):

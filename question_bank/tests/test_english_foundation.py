@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 11
-    assert len(report.passages) == 10
-    assert len(report.questions) == 21
+    assert len(report.lessons) == 12
+    assert len(report.passages) == 11
+    assert len(report.questions) == 22
     assert not report.issues
 
 
@@ -319,6 +319,33 @@ def test_e5_context_synonym_group_preserves_meaning_and_word_class(english_root)
     assert not check_english_answer(question.parts[5].response, ["A", "E"])["correct"]
 
 
+def test_e5_stated_evidence_group_locates_and_preserves_explicit_details(english_root):
+    payload = json.loads((english_root / "questions/er-l4-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "reading_comprehension"
+    assert question.feedback_timing == "after_group"
+    assert question.outcome_code == "ER5.4"
+    assert question.difficulty == 4
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "short_text",
+        "single_choice",
+        "multiple_response",
+        "short_text",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, "A")["correct"]
+    assert check_english_answer(question.parts[1].response, "1 metre above ground.")["correct"]
+    assert check_english_answer(question.parts[2].response, "C")["correct"]
+    assert check_english_answer(question.parts[3].response, ["D", "A"])["correct"]
+    assert check_english_answer(
+        question.parts[4].response, "Shade sails at the main gate."
+    )["correct"]
+    assert check_english_answer(question.parts[5].response, "A")["correct"]
+    assert not check_english_answer(question.parts[5].response, "B")["correct"]
+
+
 def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
     questions = [
@@ -377,9 +404,10 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-er-b001",
         "english-er-b002",
         "english-er-b003",
+        "english-er-b004",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 21
+    assert len(report.questions) == 22
     assert not report.duplicates
 
 
@@ -562,6 +590,25 @@ def test_context_synonym_reviewer_export_includes_passage_pin_and_all_answers(
     assert "<strong>Answer:</strong> cryptic" in page
     assert "<strong>Answer:</strong> corroborated" in page
     assert "<strong>Answer:</strong> A, D" in page
+
+
+def test_stated_evidence_reviewer_export_includes_passage_pin_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-er-b004.json"
+    output = tmp_path / "stated-evidence-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "A cooler route to school" in page
+    assert "wet surfaces become temporarily cooler" in page
+    assert "<strong>Answer:</strong> A" in page
+    assert "<strong>Answer:</strong> one metre above the ground" in page
+    assert "<strong>Answer:</strong> C" in page
+    assert "<strong>Answer:</strong> A, D" in page
+    assert "a six-week trial of shade sails at the main gate" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
