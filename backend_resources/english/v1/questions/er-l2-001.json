@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l2-001",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.2",
+  "title": "Trace the mangrove nursery references",
+  "difficulty": 3,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "exit_ticket",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-mangrove-nursery-experiment",
+    "revision": 1,
+    "content_sha256": "f67fd3c1fb9affc3f732fd0a1b7ee6fa7ffe5996136af0c4e9c96ae1d43d4436"
+  },
+  "instructions": "Read the complete passage. For each reference expression, locate its anchor, test agreement and meaning, and substitute the anchor into the sentence. Answer all six questions before viewing feedback.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "In paragraph 2, who does “They” refer to?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "Lila and Bimo"
+          },
+          {
+            "key": "B",
+            "text": "the air and water temperatures"
+          },
+          {
+            "key": "C",
+            "text": "the new leaf pairs"
+          },
+          {
+            "key": "D",
+            "text": "Dr Arun and the school"
+          }
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Lila and Bimo are the two people carrying out the measurements and therefore the people able to send them.",
+          "B": "The temperatures are part of the measurements being sent; they cannot perform the action of sending.",
+          "C": "The leaf pairs are counted data, not the people who contact Dr Arun.",
+          "D": "Dr Arun receives the measurements, and the school is not paired with him as the sender."
+        }
+      },
+      "hint": "Look for the nearest plural people who can perform the action of sending measurements.",
+      "correct_explanation": "“They” refers to the two student coordinators, Lila and Bimo."
+    },
+    {
+      "position": 2,
+      "prompt": "In paragraph 2, who does “He” refer to?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "Dr Arun",
+        "accepted_alternatives": [
+          "Dr Arun, the coastal ecologist",
+          "the coastal ecologist"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "Dr Arun is the singular male expert introduced immediately before the pronoun and is the person qualified to explain the effect of the trays."
+      },
+      "hint": "Match the singular male pronoun with the named person who receives the measurements.",
+      "correct_explanation": "“He” refers to Dr Arun, the coastal ecologist."
+    },
+    {
+      "position": 3,
+      "prompt": "In paragraph 3, what does “This change” refer to?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "moving half the trays to a covered walkway while leaving the others beside the sports shed",
+        "accepted_alternatives": [
+          "the club moved half the trays to a covered walkway and left the others beside the sports shed",
+          "moving half the trays to the covered walkway"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "The demonstrative phrase points to the complete action in the preceding sentence: relocating half the trays while retaining a comparison at the original site."
+      },
+      "hint": "A demonstrative plus a general noun often refers to a whole earlier action, not one object.",
+      "correct_explanation": "It refers to moving half the trays to the covered walkway while leaving the remaining trays beside the sports shed."
+    },
+    {
+      "position": 4,
+      "prompt": "Which row correctly resolves both “that difficulty” and “The device” in paragraph 3?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "Difficulty: the walkway had no nearby tap; device: the trolley fitted with two water containers"
+          },
+          {
+            "key": "B",
+            "text": "Difficulty: the black trays absorbed heat; device: the covered walkway"
+          },
+          {
+            "key": "C",
+            "text": "Difficulty: students crossed busy corridors; device: an open bucket"
+          },
+          {
+            "key": "D",
+            "text": "Difficulty: half the trays remained outside; device: the sports shed"
+          }
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "The preceding clause names the missing tap as the new difficulty, and the next sentence describes the trolley that is then called the device.",
+          "B": "The hot trays motivated the wider experiment, but “that difficulty” points to the newly stated lack of a tap; the walkway is a location, not the device.",
+          "C": "The device prevents students from carrying open buckets; those details do not identify the earlier difficulty and device.",
+          "D": "Neither the retained trays nor the sports shed is the problem-solution pair described by these expressions."
+        }
+      },
+      "hint": "Resolve each expression separately, then choose the row in which both links are accurate.",
+      "correct_explanation": "The difficulty is the absence of a nearby tap, and the device is Bimo's trolley fitted with two water containers."
+    },
+    {
+      "position": 5,
+      "prompt": "In paragraph 5, what does “them” in “a later storm damaged very few of them” refer to?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "the old mangrove roots"
+          },
+          {
+            "key": "B",
+            "text": "the students at school"
+          },
+          {
+            "key": "C",
+            "text": "the estuary seedlings"
+          },
+          {
+            "key": "D",
+            "text": "the new leaf pairs"
+          }
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "The old roots provide shelter, but the sentence compares and reports damage to seedlings.",
+          "B": "The passage does not discuss storm damage to students.",
+          "C": "The sentence first names the estuary seedlings and then continues that same plural reference with “them”.",
+          "D": "Leaf pairs are a growth measure from earlier paragraphs, not the plants exposed to the later storm."
+        }
+      },
+      "hint": "Substitute each plural option into the sentence and keep the one that preserves the comparison with seedlings at school.",
+      "correct_explanation": "“Them” refers to the estuary seedlings, which the later storm damaged only slightly."
+    },
+    {
+      "position": 6,
+      "prompt": "Select the two statements that correctly trace a reference expression to its full referent.",
+      "response": {
+        "type": "multiple_response",
+        "options": [
+          {
+            "key": "A",
+            "text": "“these measurements” refers to the recorded temperatures, salinity and leaf-pair counts."
+          },
+          {
+            "key": "B",
+            "text": "“The first group” refers to the sixty seedlings kept in the school nursery."
+          },
+          {
+            "key": "C",
+            "text": "“the second” refers to the sixty seedlings transferred to the estuary."
+          },
+          {
+            "key": "D",
+            "text": "“That finding” refers to the observation that a later storm damaged very few estuary seedlings."
+          },
+          {
+            "key": "E",
+            "text": "“The device” refers to the shallow black trays that absorbed heat."
+          }
+        ],
+        "correct_keys": [
+          "A",
+          "D"
+        ],
+        "choice_rationales": {
+          "A": "The demonstrative phrase gathers the three kinds of data collected by Lila and Bimo in the preceding sentence.",
+          "B": "The first group is the sixty seedlings transferred to the estuary, not those retained at school.",
+          "C": "The second group remains at school as the comparison group.",
+          "D": "The phrase points to the complete preceding result about the later storm causing little damage to the estuary seedlings.",
+          "E": "The device is the trolley fitted with water containers; the black trays are discussed as a source of heat."
+        }
+      },
+      "hint": "Check every option independently. Both the expression and the complete referent must match the passage.",
+      "correct_explanation": "“These measurements” gathers all three kinds of recorded data, and “That finding” names the later storm-survival result."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-23T00:00:00+08:00",
+    "authored_by": "Codex English E5.2 milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
