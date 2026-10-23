@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l4-001",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.4",
+  "title": "Retrieve evidence from the school heat-mapping report",
+  "difficulty": 4,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "exit_ticket",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-cooler-school-route",
+    "revision": 1,
+    "content_sha256": "5adb85b1709a114bf56e527b5d34a8841c31da4747a55a621a5341666fbb53b6"
+  },
+  "instructions": "Read the complete passage. For each question, locate the relevant statement, link it to the exact target and choose or write the answer that preserves every required fact and limitation. Answer all six questions before viewing feedback.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "According to paragraph 1, why did the students begin the heat-mapping project?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "To compare conditions along the route and find where shade could improve the walk"},
+          {"key": "B", "text": "To persuade every student to walk from the bus stop instead of taking a car"},
+          {"key": "C", "text": "To replace the tree-lined lane with a shorter route beside the sports field"},
+          {"key": "D", "text": "To measure how quickly students completed the 600-metre walk"}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "This accurately paraphrases both stated purposes in the final sentence of paragraph 1.",
+          "B": "The passage does not mention cars or an attempt to change every student's travel method.",
+          "C": "The tree-lined lane is used as a comparison point, not marked for replacement.",
+          "D": "The distance is stated, but walking speed was not the project's target."
+        }
+      },
+      "hint": "Use the purpose clause beginning “to compare” in the final sentence of paragraph 1.",
+      "correct_explanation": "The students wanted to compare conditions along the route and identify locations where shade could make walking more comfortable."
+    },
+    {
+      "position": 2,
+      "prompt": "At what height did the teams hold the sensor?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "one metre above the ground",
+        "accepted_alternatives": [
+          "one metre above ground",
+          "1 metre above the ground",
+          "1 metre above ground"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "Paragraph 2 states the fixed sensor height directly."
+      },
+      "hint": "Find the measurement procedure after the three daily times in paragraph 2.",
+      "correct_explanation": "The sensor was held one metre above the ground."
+    },
+    {
+      "position": 3,
+      "prompt": "Why were rain days excluded from the measurements?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "Rain made the electronic sensor permanently inaccurate"},
+          {"key": "B", "text": "Students were not permitted to enter the school during rain"},
+          {"key": "C", "text": "Wet surfaces would be temporarily cooler and distort the comparison"},
+          {"key": "D", "text": "Rain caused more pedestrians to choose the tree-lined lane"}
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "The passage describes a temporary effect on surface temperature, not permanent sensor damage.",
+          "B": "No such school rule is stated.",
+          "C": "This preserves the explicit cause given at the end of paragraph 2.",
+          "D": "Route choice in rain is not given as the reason for excluding the readings."
+        }
+      },
+      "hint": "Keep both the temporary cooling effect and its effect on the comparison.",
+      "correct_explanation": "Wet surfaces become temporarily cooler, so including rain days would distort the temperature comparison."
+    },
+    {
+      "position": 4,
+      "prompt": "Select the two procedures that the teams used to make their temperature readings comparable.",
+      "response": {
+        "type": "multiple_response",
+        "options": [
+          {"key": "A", "text": "They measured the same three fixed points at the same three times."},
+          {"key": "B", "text": "They asked every pedestrian to explain why they chose a route."},
+          {"key": "C", "text": "They changed sensors at each location to avoid repeated use."},
+          {"key": "D", "text": "They used the same sensor at a fixed height and for a fixed duration."},
+          {"key": "E", "text": "They included wet and dry surfaces in one combined average."}
+        ],
+        "correct_keys": ["A", "D"],
+        "choice_rationales": {
+          "A": "Paragraph 2 identifies three fixed points and three repeated measurement times.",
+          "B": "Paragraph 3 explicitly says the students did not ask pedestrians why they chose a route.",
+          "C": "The teams used the same sensor rather than changing equipment.",
+          "D": "The sensor was consistently held one metre above ground for thirty seconds.",
+          "E": "Rain days were excluded so wet surfaces would not distort the comparison."
+        }
+      },
+      "hint": "Choose only procedures explicitly repeated or kept constant in paragraph 2.",
+      "correct_explanation": "The teams repeated measurements at the same fixed points and times, and they kept the sensor, height and duration constant."
+    },
+    {
+      "position": 5,
+      "prompt": "Which proposal did the town council approve for an immediate trial?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "a six-week trial of shade sails at the main gate",
+        "accepted_alternatives": [
+          "shade sails at the main gate",
+          "a trial of shade sails at the main gate",
+          "the six-week shade-sail trial at the main gate"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "Paragraph 4 distinguishes the approved shade-sail trial from the postponed tree planting and deferred refill point."
+      },
+      "hint": "Separate the approved proposal from the two proposals that were postponed or deferred.",
+      "correct_explanation": "The council approved a six-week trial of shade sails at the main gate."
+    },
+    {
+      "position": 6,
+      "prompt": "Which option most accurately paraphrases the trial result and the report's limitation?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The sails reduced the average midday surface temperature beneath them by five degrees Celsius, but the study could not prove that this caused more people to use the entrance."},
+          {"key": "B", "text": "The sails reduced air temperature across the whole 600-metre route and therefore caused every student to use the main gate."},
+          {"key": "C", "text": "Pedestrian numbers increased before the sails were installed, so the students concluded that temperature had no effect."},
+          {"key": "D", "text": "The council proved that the bus-stop relocation caused both the cooler surface and the increase in pedestrians."}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "This preserves the measured five-degree surface difference and the stated inability to establish causation.",
+          "B": "The measurement concerned the surface beneath the sails, and the report did not claim that every student changed route or that causation was proved.",
+          "C": "The increase occurred during the trial, and the report did not conclude that temperature had no effect.",
+          "D": "The relocation was a competing change, not a proven cause of either result."
+        }
+      },
+      "hint": "Keep the measurement type, the five-degree average and the words “could not prove”.",
+      "correct_explanation": "The surface under the sails averaged five degrees Celsius cooler, while other changes meant the project could not prove that cooling caused the increased use."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-23T00:00:00+08:00",
+    "authored_by": "Codex English E5.4 milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
