@@ -200,6 +200,12 @@ candidate anchors for number, person and meaning, and substitute the selected an
 into the sentence. Its original mangrove-nursery passage assesses pronouns, demonstratives,
 descriptive phrases and labels that continue across paragraph boundaries. All six responses
 are marked together with exact choices or explicitly reviewed short-text alternatives.
+E5.3 teaches learners to infer one precise word sense from the sentence frame and wider
+paragraph, identify the word's grammatical role, compare the strength and tone of possible
+replacements, then substitute a candidate into the original sentence. Its original
+river-town archive passage assesses direct contextual meaning, exact word retrieval and
+synonym replacements across adjective, verb and multiple-response formats. All six
+responses use deterministic marking and reveal feedback only after the complete group.
 
 ### 4. Build the objective diagnostic
 
@@ -224,9 +230,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme. E5.2 is the active review candidate: validate and merge its exact revision,
-deploy it to hosted review, verify the learner lesson and grouped-comprehension journey,
-and confirm `er-l2-001` appears once in the administrator queue with protected answers and
-the pinned passage checksum. Then continue to **E5.3 meaning and synonym in context**.
+programme, and E5.1–E5.2 provide the first reading-comprehension progression. E5.3 is the
+active review candidate: validate and merge its exact revision, deploy it to hosted review,
+verify the learner lesson and grouped contextual-vocabulary journey, and confirm
+`er-l3-001` appears once in the administrator queue with protected answers and the pinned
+passage checksum. Then continue to **E5.4 retrieve stated evidence**.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.

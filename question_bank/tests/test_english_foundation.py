@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 10
-    assert len(report.passages) == 9
-    assert len(report.questions) == 20
+    assert len(report.lessons) == 11
+    assert len(report.passages) == 10
+    assert len(report.questions) == 21
     assert not report.issues
 
 
@@ -295,6 +295,30 @@ def test_e5_reference_chain_group_resolves_people_events_and_labels_exactly(engl
     assert not check_english_answer(question.parts[4].response, "A")["correct"]
 
 
+def test_e5_context_synonym_group_preserves_meaning_and_word_class(english_root):
+    payload = json.loads((english_root / "questions/er-l3-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "reading_comprehension"
+    assert question.feedback_timing == "after_group"
+    assert question.outcome_code == "ER5.3"
+    assert question.difficulty == 4
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "short_text",
+        "single_choice",
+        "single_choice",
+        "short_text",
+        "multiple_response",
+    ]
+    assert check_english_answer(question.parts[0].response, "B")["correct"]
+    assert check_english_answer(question.parts[1].response, "Cryptic.")["correct"]
+    assert check_english_answer(question.parts[2].response, "A")["correct"]
+    assert check_english_answer(question.parts[4].response, "CORROBORATED")["correct"]
+    assert check_english_answer(question.parts[5].response, ["D", "A"])["correct"]
+    assert not check_english_answer(question.parts[5].response, ["A", "E"])["correct"]
+
+
 def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
     questions = [
@@ -352,9 +376,10 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-eo-b005",
         "english-er-b001",
         "english-er-b002",
+        "english-er-b003",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 20
+    assert len(report.questions) == 21
     assert not report.duplicates
 
 
@@ -519,6 +544,24 @@ def test_reading_reviewer_export_includes_complete_passage_and_answers(english_r
     assert "Then a strong storm filled the shallow beds" in page
     assert "retain" in page
     assert "the soil absorbed the pooled water within a few hours" in page
+
+
+def test_context_synonym_reviewer_export_includes_passage_pin_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-er-b003.json"
+    output = tmp_path / "context-synonym-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "Voices from the river town" in page
+    assert "Some labels were cryptic" in page
+    assert "<strong>Answer:</strong> B" in page
+    assert "<strong>Answer:</strong> cryptic" in page
+    assert "<strong>Answer:</strong> corroborated" in page
+    assert "<strong>Answer:</strong> A, D" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(

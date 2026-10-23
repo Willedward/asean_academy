@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l3-001",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.3",
+  "title": "Interpret the river-town archive vocabulary",
+  "difficulty": 4,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "exit_ticket",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-river-town-radio-archive",
+    "revision": 1,
+    "content_sha256": "af58d41709656b8ba6bb0f41f369b21979858b94386f0a3cf5c3f734aa0edc74"
+  },
+  "instructions": "Read the complete passage. For each target word, use its sentence frame and surrounding evidence, predict a precise meaning, then test the replacement in the original sentence. Answer all six questions before viewing feedback.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "In paragraph 1, what does “fragile” most nearly mean?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "rarely used"},
+          {"key": "B", "text": "easily damaged"},
+          {"key": "C", "text": "difficult to carry"},
+          {"key": "D", "text": "valuable to collectors"}
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "The age of the tapes does not define fragile; the following cause explains their physical vulnerability.",
+          "B": "The clause about heat and moisture causing further damage directly supports this meaning.",
+          "C": "The box may be moved, but the passage focuses on the tapes being vulnerable to damage.",
+          "D": "The recordings may have historical value, but fragile describes their condition rather than their price."
+        }
+      },
+      "hint": "Use the explanation introduced by “because” in the same sentence.",
+      "correct_explanation": "“Fragile” means easily damaged; the passage immediately explains that heat and moisture could harm the tapes."
+    },
+    {
+      "position": 2,
+      "prompt": "Which single word in paragraph 2 means “difficult to understand without more information”?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "cryptic",
+        "accepted_alternatives": [],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "The incomplete label is described as cryptic because it lacks the date and speaker name needed for a clear interpretation."
+      },
+      "hint": "Find the adjective followed by an example of a label that lacks identifying details.",
+      "correct_explanation": "The word is “cryptic”, meaning difficult to understand because necessary information is missing."
+    },
+    {
+      "position": 3,
+      "prompt": "Which word best replaces “meticulous” in paragraph 3 without changing the meaning or grammar?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "careful"},
+          {"key": "B", "text": "carefully"},
+          {"key": "C", "text": "speedy"},
+          {"key": "D", "text": "ordinary"}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Careful preserves both the precise, thorough meaning and the adjective role before process.",
+          "B": "Carefully is an adverb and cannot directly replace the adjective in “a meticulous process”.",
+          "C": "The detailed steps emphasise accuracy rather than speed.",
+          "D": "Ordinary does not express the attention to detail shown by the logged procedure."
+        }
+      },
+      "hint": "The replacement must describe process and fit after “a” and before the noun.",
+      "correct_explanation": "“Careful” preserves the meaning of close attention to detail and remains an adjective in the sentence frame."
+    },
+    {
+      "position": 4,
+      "prompt": "In paragraph 4, the students treated their first transcripts as “tentative rather than final”. What does “tentative” mean here?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "written very slowly"},
+          {"key": "B", "text": "kept completely secret"},
+          {"key": "C", "text": "provisional and open to correction"},
+          {"key": "D", "text": "confirmed by every listener"}
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "The passage describes uncertainty in the words, not the students' writing speed.",
+          "B": "Residents are later invited to listen, so the transcripts are not secret.",
+          "C": "The contrast with final and the bracketed uncertain words show that the transcripts may be revised.",
+          "D": "Later evidence is needed precisely because the first transcripts are not yet confirmed."
+        }
+      },
+      "hint": "Use the direct contrast with “final” and the treatment of uncertain words.",
+      "correct_explanation": "“Tentative” means provisional and subject to revision when stronger evidence becomes available."
+    },
+    {
+      "position": 5,
+      "prompt": "Which single word in paragraph 4 means “supported with additional independent evidence”?",
+      "response": {
+        "type": "short_text",
+        "canonical_answer": "corroborated",
+        "accepted_alternatives": [],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "Several residents independently identify the same speaker, and those separate accounts support the students' earlier identification."
+      },
+      "hint": "Look for the verb immediately followed by an explanation about providing additional support.",
+      "correct_explanation": "The word is “corroborated”, meaning confirmed or supported with further independent evidence."
+    },
+    {
+      "position": 6,
+      "prompt": "Select the two replacements that preserve both the contextual meaning and the grammatical role of the original word.",
+      "response": {
+        "type": "multiple_response",
+        "options": [
+          {"key": "A", "text": "“cryptic labels” → “puzzling labels”"},
+          {"key": "B", "text": "“a meticulous process” → “a meticulously process”"},
+          {"key": "C", "text": "“accounts corroborated the identification” → “accounts doubted the identification”"},
+          {"key": "D", "text": "“made the collection more accessible” → “made the collection more available”"},
+          {"key": "E", "text": "“it preserved records” → “it preservation records”"}
+        ],
+        "correct_keys": ["A", "D"],
+        "choice_rationales": {
+          "A": "Puzzling is an adjective and preserves the sense that the labels are difficult to understand.",
+          "B": "Meticulously is an adverb, so it cannot replace an adjective before process.",
+          "C": "Doubted reverses the meaning of corroborated instead of preserving it.",
+          "D": "Available remains an adjective after more and preserves the idea that visitors can reach and use the collection.",
+          "E": "Preservation is a noun and makes the verb position ungrammatical."
+        }
+      },
+      "hint": "Test every replacement inside its sentence. Check word class and meaning separately.",
+      "correct_explanation": "“Puzzling” and “available” preserve the intended meanings and remain adjectives in their original sentence frames."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-23T00:00:00+08:00",
+    "authored_by": "Codex English E5.3 milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
