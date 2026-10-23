@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 22 October 2026
+**Updated:** 23 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e4-cross-sentence-cohesion`
+**Implementation branch:** `feature/english-e5-reference-chains`
 
 ## Product boundary
 
@@ -101,10 +101,12 @@ sections.
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
 | E2.1 pilot | Original sentence-boundary lesson, deterministic clause and editing items, grammar-specific error reflection and exit-ticket retry | Implemented as draft; English and editorial review pending |
 | E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
+| E5.2 pilot | Original informational passage and grouped pronoun, demonstrative, descriptive-phrase and cross-paragraph reference-chain questions | Implemented as draft; English and editorial review pending |
 | E4.1 pilot | Original eight-gap function-word open cloze, inline entry, delayed feedback and reviewed alternatives | Implemented and hosted as draft; English and editorial review pending |
 | E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented and hosted as draft; English and editorial review pending |
 | E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented and hosted as draft; English and editorial review pending |
-| E4.4 pilot | Original cross-sentence open cloze covering reference chains, contrast, sequence and repeated actions | Implemented as draft; hosted deployment and human review pending |
+| E4.4 pilot | Original cross-sentence open cloze covering reference chains, contrast, sequence and repeated actions | Implemented and hosted as draft; English and editorial review pending |
+| E4.5 pilot | Original timed open-cloze checkpoint integrating grammatical, lexical and cohesion evidence | Implemented and hosted as draft; English and editorial review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -193,6 +195,11 @@ complete-passage first pass, a targeted second pass and a final read while integ
 function words, fixed expressions, lexical fit, tense sequence and cross-paragraph cohesion.
 The platform records the complete deterministic attempt; the eight-minute target is a
 self-managed practice routine until the later full-mock timing milestone.
+E5.2 builds directly on the E5.1 passage map. Learners locate a reference expression, match
+candidate anchors for number, person and meaning, and substitute the selected anchor back
+into the sentence. Its original mangrove-nursery passage assesses pronouns, demonstratives,
+descriptive phrases and labels that continue across paragraph boundaries. All six responses
+are marked together with exact choices or explicitly reviewed short-text alternatives.
 
 ### 4. Build the objective diagnostic
 
@@ -216,9 +223,10 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-E4.1–E4.5 now form a complete open-cloze learning sequence in the integration programme.
-E4.5 is the active hosted-review candidate: deploy its exact integration merge, verify the
-learner lesson and module-checkpoint journey, and confirm `eo-l5-001` appears once in the
-administrator queue with protected answers. Then continue to **E5.2 track reference chains**,
-building on the existing E5.1 passage-map vertical slice. Human English and editorial approval
-remains a separate publication gate for every lesson, passage and question revision.
+E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
+programme. E5.2 is the active review candidate: validate and merge its exact revision,
+deploy it to hosted review, verify the learner lesson and grouped-comprehension journey,
+and confirm `er-l2-001` appears once in the administrator queue with protected answers and
+the pinned passage checksum. Then continue to **E5.3 meaning and synonym in context**.
+Human English and editorial approval remains a separate publication gate for every lesson,
+passage and question revision.

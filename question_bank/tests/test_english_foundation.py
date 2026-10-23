@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 9
-    assert len(report.passages) == 8
-    assert len(report.questions) == 19
+    assert len(report.lessons) == 10
+    assert len(report.passages) == 9
+    assert len(report.questions) == 20
     assert not report.issues
 
 
@@ -269,6 +269,32 @@ def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(englis
     assert not check_english_answer(question.parts[5].response, ["A", "B"])["correct"]
 
 
+def test_e5_reference_chain_group_resolves_people_events_and_labels_exactly(english_root):
+    payload = json.loads((english_root / "questions/er-l2-001.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "reading_comprehension"
+    assert question.feedback_timing == "after_group"
+    assert question.outcome_code == "ER5.2"
+    assert question.difficulty == 3
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "short_text",
+        "short_text",
+        "single_choice",
+        "single_choice",
+        "multiple_response",
+    ]
+    assert check_english_answer(question.parts[0].response, "A")["correct"]
+    assert check_english_answer(question.parts[1].response, "The coastal ecologist.")["correct"]
+    assert check_english_answer(
+        question.parts[2].response,
+        "The club moved half the trays to a covered walkway and left the others beside the sports shed.",
+    )["correct"]
+    assert check_english_answer(question.parts[5].response, ["D", "A"])["correct"]
+    assert not check_english_answer(question.parts[4].response, "A")["correct"]
+
+
 def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
     questions = [
@@ -325,9 +351,10 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-eo-b004",
         "english-eo-b005",
         "english-er-b001",
+        "english-er-b002",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 19
+    assert len(report.questions) == 20
     assert not report.duplicates
 
 
@@ -492,6 +519,23 @@ def test_reading_reviewer_export_includes_complete_passage_and_answers(english_r
     assert "Then a strong storm filled the shallow beds" in page
     assert "retain" in page
     assert "the soil absorbed the pooled water within a few hours" in page
+
+
+def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-er-b002.json"
+    output = tmp_path / "reference-chain-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "The mangrove nursery experiment" in page
+    assert "a later storm damaged very few of them" in page
+    assert "Dr Arun" in page
+    assert "moving half the trays to a covered walkway" in page
+    assert "A, D" in page
 
 
 def test_english_question_hash_excludes_review_workflow_metadata(english_root):

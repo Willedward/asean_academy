@@ -34,6 +34,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e4-lesson-04"),
         ("english_lesson", "e4-lesson-05"),
         ("english_lesson", "e5-lesson-01"),
+        ("english_lesson", "e5-lesson-02"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -42,6 +43,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_passage", "english-passage-rehearsal-rescue"),
         ("english_passage", "english-passage-repair-cafe-record"),
         ("english_passage", "english-passage-hillside-water-survey"),
+        ("english_passage", "english-passage-mangrove-nursery-experiment"),
         ("english_question", "eb-l1-001"),
         ("english_question", "eo-l1-001"),
         ("english_question", "eo-l2-001"),
@@ -49,6 +51,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "eo-l4-001"),
         ("english_question", "eo-l5-001"),
         ("english_question", "er-l1-001"),
+        ("english_question", "er-l2-001"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
@@ -75,6 +78,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     reading = next(item for item in english_items if item.stable_key == "er-l1-001")
     assert reading.batch_id == "english-er-b001"
     assert reading.unit_key == "english-e5"
+    reference = next(item for item in english_items if item.stable_key == "er-l2-001")
+    assert reference.batch_id == "english-er-b002"
+    assert reference.unit_key == "english-e5"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):
@@ -128,6 +134,14 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     ] == "into"
     assert "canonical_answer" not in str(public_timed["public_content"])
     assert "accepted_alternatives" not in str(public_timed["public_content"])
+
+    protected_reference = reviewer_preview(catalogue, "english_question", "er-l2-001")
+    public_reference = student_preview(catalogue, "english_question", "er-l2-001")
+    assert protected_reference["review_content"]["parts"][1]["response"][
+        "canonical_answer"
+    ] == "Dr Arun"
+    assert "canonical_answer" not in str(public_reference["public_content"])
+    assert "choice_rationales" not in str(public_reference["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):
