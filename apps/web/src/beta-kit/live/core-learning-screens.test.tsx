@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 
 import { courseMapFixture } from "@/lib/api/course";
 import type {
@@ -11,6 +11,8 @@ import {
   CoreCourseMapScreen,
   CoreLearningDashboard,
 } from "./core-learning-screens";
+
+afterEach(cleanup);
 
 const learner = {
   displayName: "William",
