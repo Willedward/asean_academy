@@ -213,6 +213,13 @@ fully supported. Its original school heat-mapping report assesses purpose, contr
 procedures, an explicit cause, an approved proposal, and the distinction between a measured
 result and an unproven causal claim. The six-part group uses deterministic marking and keeps
 answers protected until submission.
+E5.5 teaches a `Claim -> Clues -> Limit` routine for combining textual evidence without
+importing an outside assumption. Learners connect at least two clues, run removal and
+strength tests, distinguish association from causation, and preserve the observed population,
+place and period. Its original reusable-container trial assesses combined interventions,
+operational intent, limits on market-wide claims, useful comparison data and the most
+proportionate overall conclusion. All six responses are deterministic multiple-choice or
+multiple-response items with grouped feedback.
 
 ### 4. Build the objective diagnostic
 
@@ -237,10 +244,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme, and E5.1–E5.3 provide the first reading-comprehension progression. E5.4 is the
+programme, and E5.1–E5.4 provide the first reading-comprehension progression. E5.5 is the
 active review candidate: validate and merge its exact revision, deploy it to hosted review,
-verify the learner lesson and grouped stated-evidence journey, and confirm `er-l4-001`
+verify the learner lesson and grouped bounded-inference journey, and confirm `er-l5-001`
 appears once in the administrator queue with protected answers and the pinned passage
-checksum. Then continue to **E5.5 make bounded inferences**.
+checksum. Then continue to **E5.6 purpose, tone and main idea**.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.

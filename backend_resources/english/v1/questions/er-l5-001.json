@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l5-001",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.5",
+  "title": "Draw bounded inferences from the container-return report",
+  "difficulty": 4,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "exit_ticket",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-container-return-experiment",
+    "revision": 1,
+    "content_sha256": "97be42b801c62cc14b6a64c27555b87909dc1fc63df87f7837f5524226498d7d"
+  },
+  "instructions": "Read the complete passage. For each question, connect the relevant clues and choose the smallest conclusion that the evidence supports. Preserve uncertainty, scope and alternative explanations. Answer all six questions before viewing feedback.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "Which inference about the higher return rate after the first Friday is best supported?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The picture signs alone caused every customer to return a container."},
+          {"key": "B", "text": "Moving the collection point and adding picture signs likely made returns easier, but their separate effects are unknown."},
+          {"key": "C", "text": "The bus service became more frequent and gave customers extra time to return containers."},
+          {"key": "D", "text": "Customers returned containers only because the deposit was increased after the first night."}
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "The rate rose after two changes were introduced together, so the report cannot attribute the increase to the signs alone or claim that every customer returned a container.",
+          "B": "This connects the location and sign changes to the later improvement while preserving the report's causal limitation.",
+          "C": "The passage locates the collection point beside the bus exit but gives no change in bus frequency.",
+          "D": "The passage does not state that the deposit changed."
+        }
+      },
+      "hint": "Use the result and the final sentence of paragraph 2 together.",
+      "correct_explanation": "The combined changes were followed by a higher return rate, so they may have made returns easier, but the evidence cannot separate their effects."
+    },
+    {
+      "position": 2,
+      "prompt": "Why can the report not determine whether the new location or the picture signs contributed more to the improved return rate?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The volunteers stopped counting returned containers after the first Friday."},
+          {"key": "B", "text": "The collection point was moved only after the four-week experiment had ended."},
+          {"key": "C", "text": "Both changes began before the second Friday and were not tested separately."},
+          {"key": "D", "text": "Customers were not told that the containers could be returned."}
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "The passage reports return rates for the next three Fridays, so counting continued.",
+          "B": "The move occurred before the second Friday, within the trial.",
+          "C": "Introducing both changes at the same time prevents the records from isolating the contribution of either one.",
+          "D": "The signs and return process show that customers were informed."
+        }
+      },
+      "hint": "Ask whether either change was observed while the other stayed constant.",
+      "correct_explanation": "The association changed the location and signs together, so there was no separate comparison that could isolate either effect."
+    },
+    {
+      "position": 3,
+      "prompt": "What is the most reasonable inference about the washing and spare-set arrangements?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "They were designed to keep washing outside trading hours and address concern about slower service."},
+          {"key": "B", "text": "They proved that waiting times would remain unchanged during every future market event."},
+          {"key": "C", "text": "They allowed each vendor to wash containers while continuing to take orders."},
+          {"key": "D", "text": "They were introduced because the community kitchen refused to operate after closing time."}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Washing after closing and delivering a clean set before opening directly address the stated worry about delaying orders.",
+          "B": "The observations excluded the unusually crowded festival night and cannot prove what will happen at every event.",
+          "C": "Volunteers, not vendors serving orders, took containers to the community kitchen after the market closed.",
+          "D": "The kitchen was used after closing; no refusal is mentioned."
+        }
+      },
+      "hint": "Connect the vendors' concern with when washing and delivery occurred.",
+      "correct_explanation": "The process separated washing from service hours, which was a practical way to address vendors' concern about delays."
+    },
+    {
+      "position": 4,
+      "prompt": "Select the two conclusions that are justified by paragraph 4.",
+      "response": {
+        "type": "multiple_response",
+        "options": [
+          {"key": "A", "text": "The participating stalls relied less on disposable bowls by the fourth Friday."},
+          {"key": "B", "text": "The trial proved that total waste fell across every stall in the market."},
+          {"key": "C", "text": "Rain caused customers to prefer reusable containers."},
+          {"key": "D", "text": "Visitor numbers, weather and non-participating stalls limit any market-wide waste conclusion."},
+          {"key": "E", "text": "The lighter bins show that reusable containers were the only reason waste changed."}
+        ],
+        "correct_keys": ["A", "D"],
+        "choice_rationales": {
+          "A": "The passage directly compares the six stalls' later disposable-bowl purchases with their purchases before the trial.",
+          "B": "Other stalls kept using disposable packaging, and changing visitor numbers made total-market comparison unreliable.",
+          "C": "Rain and lower attendance are possible influences on waste weight, but the passage does not connect rain to container preference.",
+          "D": "These three limits are stated across paragraph 4 and prevent a whole-market causal claim.",
+          "E": "The report identifies other changes and does not establish a single cause for the lighter bins."
+        }
+      },
+      "hint": "Choose one conclusion about the observed six stalls and one about the limits of extending that result.",
+      "correct_explanation": "The six stalls bought fewer disposable bowls, but weather, attendance and continued disposable use elsewhere prevent a whole-market conclusion."
+    },
+    {
+      "position": 5,
+      "prompt": "Which additional comparison would best help the association judge whether waste fell independently of changing visitor numbers?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "Compare the colour of the reusable containers with the colour of disposable bowls."},
+          {"key": "B", "text": "Ask participating vendors whether they personally prefer rainy or dry evenings."},
+          {"key": "C", "text": "Compare waste per visitor or per meal sold across trial and comparable non-trial evenings."},
+          {"key": "D", "text": "Count how many buses pass the market without recording visitors or waste."}
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "Container colour does not control for differences in attendance.",
+          "B": "Vendor weather preferences do not measure waste relative to market activity.",
+          "C": "A per-visitor or per-meal comparison accounts for busier and quieter evenings and creates a more meaningful baseline.",
+          "D": "Bus counts alone do not connect market attendance with the amount of waste generated."
+        }
+      },
+      "hint": "Choose evidence that puts waste on the same attendance basis across evenings.",
+      "correct_explanation": "Waste per visitor or meal sold would allow fairer comparison when the number of market visitors changes."
+    },
+    {
+      "position": 6,
+      "prompt": "Which conclusion best represents the report as a whole?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The early results are promising, but a longer trial with better controls is needed before claiming a permanent market-wide benefit."},
+          {"key": "B", "text": "The four-Friday trial proved that reusable containers will eliminate all market waste without affecting service."},
+          {"key": "C", "text": "The experiment failed because the council did not immediately fund a permanent washing station."},
+          {"key": "D", "text": "The return-rate improvement is irrelevant because two evenings were rainy."}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "This balances the improved return rate, reduced disposable purchases and observed service time with the study's scope and comparison limits.",
+          "B": "The report makes no claim about eliminating all waste and does not cover every event or stall.",
+          "C": "The association extended the trial and the council remained open to funding after more evidence, which indicates caution rather than failure.",
+          "D": "Rain limits the waste comparison but does not erase the other observations."
+        }
+      },
+      "hint": "Keep both the encouraging observations and the reason the association extended data collection.",
+      "correct_explanation": "The trial produced useful early evidence, while its short duration, limited stalls and changing conditions justify further testing before a broad claim."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-24T00:00:00+08:00",
+    "authored_by": "Codex English E5.5 milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
