@@ -220,6 +220,13 @@ place and period. Its original reusable-container trial assesses combined interv
 operational intent, limits on market-wide claims, useful comparison data and the most
 proportionate overall conclusion. All six responses are deterministic multiple-choice or
 multiple-response items with grouped feedback.
+E5.6 separates the main idea, writer's purpose and tone through a `Topic -> Message -> Job ->
+Attitude` routine. Learners test a main idea against whole-passage coverage and emphasis,
+identify purpose through the work the writer performs, and support tone with clusters of
+evaluative and qualifying language. Its original library quiet-hour report balances rising
+participation with examination timing, survey selection and inclusion concerns. Six grouped,
+deterministically marked questions assess the central message, evaluative purpose, cautious
+tone, the role of an observed detail, supporting evidence and the function of the conclusion.
 
 ### 4. Build the objective diagnostic
 
@@ -244,10 +251,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme, and E5.1–E5.4 provide the first reading-comprehension progression. E5.5 is the
+programme, and E5.1–E5.5 provide the first reading-comprehension progression. E5.6 is the
 active review candidate: validate and merge its exact revision, deploy it to hosted review,
-verify the learner lesson and grouped bounded-inference journey, and confirm `er-l5-001`
+verify the learner lesson and grouped purpose-tone-main-idea journey, and confirm `er-l5-002`
 appears once in the administrator queue with protected answers and the pinned passage
-checksum. Then continue to **E5.6 purpose, tone and main idea**.
+checksum. Then continue to **E5.7 two-passage pacing**.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.

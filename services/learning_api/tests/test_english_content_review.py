@@ -38,6 +38,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e5-lesson-03"),
         ("english_lesson", "e5-lesson-04"),
         ("english_lesson", "e5-lesson-05"),
+        ("english_lesson", "e5-lesson-06"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -50,6 +51,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_passage", "english-passage-river-town-radio-archive"),
         ("english_passage", "english-passage-cooler-school-route"),
         ("english_passage", "english-passage-container-return-experiment"),
+        ("english_passage", "english-passage-library-quiet-hour"),
         ("english_question", "eb-l1-001"),
         ("english_question", "eo-l1-001"),
         ("english_question", "eo-l2-001"),
@@ -61,6 +63,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "er-l3-001"),
         ("english_question", "er-l4-001"),
         ("english_question", "er-l5-001"),
+        ("english_question", "er-l5-002"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
@@ -99,6 +102,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     inferred = next(item for item in english_items if item.stable_key == "er-l5-001")
     assert inferred.batch_id == "english-er-b005"
     assert inferred.unit_key == "english-e5"
+    purpose_tone = next(item for item in english_items if item.stable_key == "er-l5-002")
+    assert purpose_tone.batch_id == "english-er-b006"
+    assert purpose_tone.unit_key == "english-e5"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):
@@ -207,6 +213,22 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     assert "correct_keys" not in str(public_inferred["public_content"])
     assert "choice_rationales" not in str(public_inferred["public_content"])
     assert "correct_explanation" not in str(public_inferred["public_content"])
+
+    protected_purpose = reviewer_preview(catalogue, "english_question", "er-l5-002")
+    public_purpose = student_preview(catalogue, "english_question", "er-l5-002")
+    assert protected_purpose["review_content"]["parts"][0]["response"]["correct_key"] == "A"
+    assert protected_purpose["review_content"]["parts"][1]["response"]["correct_key"] == "C"
+    assert protected_purpose["review_content"]["parts"][2]["response"]["correct_key"] == "B"
+    assert protected_purpose["review_content"]["parts"][3]["response"]["correct_key"] == "B"
+    assert protected_purpose["review_content"]["parts"][4]["response"]["correct_keys"] == [
+        "A",
+        "C",
+    ]
+    assert protected_purpose["review_content"]["parts"][5]["response"]["correct_key"] == "D"
+    assert "correct_key" not in str(public_purpose["public_content"])
+    assert "correct_keys" not in str(public_purpose["public_content"])
+    assert "choice_rationales" not in str(public_purpose["public_content"])
+    assert "correct_explanation" not in str(public_purpose["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):
