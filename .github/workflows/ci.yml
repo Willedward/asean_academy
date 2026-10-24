@@ -16,7 +16,7 @@ concurrency:
 jobs:
   web:
     name: Web contract, lint, test and build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -60,7 +60,7 @@ jobs:
 
   python:
     name: Learning API and question domain
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -103,7 +103,7 @@ jobs:
     # Each authoring PR is validated before it enters this named integration branch.
     # The integration PR intentionally combines those already-validated batches.
     if: github.event_name == 'pull_request' && github.head_ref != 'feature/bulk-question-authoring-pipeline'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -141,7 +141,7 @@ jobs:
 
   migrations:
     name: PostgreSQL migrations and integration tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:16
@@ -185,7 +185,7 @@ jobs:
 
   authenticated-e2e:
     name: Authenticated beta browser journeys
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:16
