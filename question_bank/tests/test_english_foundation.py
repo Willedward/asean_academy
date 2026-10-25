@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 14
-    assert len(report.passages) == 13
-    assert len(report.questions) == 24
+    assert len(report.lessons) == 15
+    assert len(report.passages) == 14
+    assert len(report.questions) == 25
     assert not report.issues
 
 
@@ -396,6 +396,25 @@ def test_e5_purpose_tone_and_main_idea_group_marks_distinct_reading_tasks(englis
     assert not check_english_answer(question.parts[0].response, "C")["correct"]
 
 
+def test_e5_two_passage_group_integrates_reading_skills_and_exact_marking(english_root):
+    payload = json.loads((english_root / "questions/er-l5-003.json").read_text())
+    question = EnglishObjectiveQuestion.model_validate(payload)
+
+    assert question.question_type == "reading_comprehension"
+    assert question.feedback_timing == "after_group"
+    assert question.outcome_code == "ER5.7"
+    assert question.difficulty == 5
+    assert len(question.parts) == 8
+    assert all(part.response.type == "single_choice" for part in question.parts)
+    assert [
+        check_english_answer(part.response, answer)["correct"]
+        for part, answer in zip(
+            question.parts, ["A", "B", "B", "A", "B", "B", "A", "C"], strict=True
+        )
+    ] == [True] * 8
+    assert not check_english_answer(question.parts[7].response, "A")["correct"]
+
+
 def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
     questions = [
@@ -457,9 +476,10 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-er-b004",
         "english-er-b005",
         "english-er-b006",
+        "english-er-b007",
         "english-ev-b001",
     ]
-    assert len(report.questions) == 24
+    assert len(report.questions) == 25
     assert not report.duplicates
 
 
@@ -699,6 +719,26 @@ def test_purpose_tone_reviewer_export_includes_passage_pin_and_all_answers(
     assert "<strong>Answer:</strong> B" in page
     assert "<strong>Answer:</strong> A, C" in page
     assert "states the next evidence to collect" in page
+
+
+def test_two_passage_reviewer_export_includes_both_texts_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-er-b007.json"
+    output = tmp_path / "two-passage-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "PASSAGE A — A map made of sound" in page
+    assert "PASSAGE B — The bell at dusk" in page
+    assert page.count("<strong>Answer:</strong>") == 8
+    assert "<strong>Answer:</strong> A" in page
+    assert "<strong>Answer:</strong> B" in page
+    assert "<strong>Answer:</strong> C" in page
+    assert "one source of evidence" in page
+    assert "people, surroundings and shared responses" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(

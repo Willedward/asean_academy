@@ -39,6 +39,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e5-lesson-04"),
         ("english_lesson", "e5-lesson-05"),
         ("english_lesson", "e5-lesson-06"),
+        ("english_lesson", "e5-lesson-07"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -52,6 +53,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_passage", "english-passage-cooler-school-route"),
         ("english_passage", "english-passage-container-return-experiment"),
         ("english_passage", "english-passage-library-quiet-hour"),
+        ("english_passage", "english-passage-harbour-voices-pair"),
         ("english_question", "eb-l1-001"),
         ("english_question", "eo-l1-001"),
         ("english_question", "eo-l2-001"),
@@ -64,6 +66,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "er-l4-001"),
         ("english_question", "er-l5-001"),
         ("english_question", "er-l5-002"),
+        ("english_question", "er-l5-003"),
         ("english_question", "ev-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
@@ -105,6 +108,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     purpose_tone = next(item for item in english_items if item.stable_key == "er-l5-002")
     assert purpose_tone.batch_id == "english-er-b006"
     assert purpose_tone.unit_key == "english-e5"
+    paced_pair = next(item for item in english_items if item.stable_key == "er-l5-003")
+    assert paced_pair.batch_id == "english-er-b007"
+    assert paced_pair.unit_key == "english-e5"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):
@@ -229,6 +235,16 @@ def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(
     assert "correct_keys" not in str(public_purpose["public_content"])
     assert "choice_rationales" not in str(public_purpose["public_content"])
     assert "correct_explanation" not in str(public_purpose["public_content"])
+
+    protected_pair = reviewer_preview(catalogue, "english_question", "er-l5-003")
+    public_pair = student_preview(catalogue, "english_question", "er-l5-003")
+    assert [
+        part["response"]["correct_key"]
+        for part in protected_pair["review_content"]["parts"]
+    ] == ["A", "B", "B", "A", "B", "B", "A", "C"]
+    assert "correct_key" not in str(public_pair["public_content"])
+    assert "choice_rationales" not in str(public_pair["public_content"])
+    assert "correct_explanation" not in str(public_pair["public_content"])
 
 
 def test_english_review_requires_english_and_editorial_dimensions(catalogue):
