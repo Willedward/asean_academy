@@ -128,6 +128,29 @@ const OPEN_CLOZE_ERROR_OPTIONS: EnglishErrorOption[] = [
   },
 ];
 
+const COMPOSITION_PLANNING_ERROR_OPTIONS: EnglishErrorOption[] = [
+  {
+    key: "task_topic",
+    label: "I widened or changed the topic",
+    detail: "I planned for a related subject instead of the prompt’s exact focus.",
+  },
+  {
+    key: "command_word",
+    label: "I missed the command",
+    detail: "I planned to list, narrate or argue when the prompt required another job.",
+  },
+  {
+    key: "audience_scope",
+    label: "I missed the audience or scope",
+    detail: "I overlooked the intended reader, form or a limit in the task.",
+  },
+  {
+    key: "evidence_plan",
+    label: "I missed the required example",
+    detail: "My plan did not include the personal application or specific support requested.",
+  },
+];
+
 function answerPresent(answer: string | string[] | undefined): boolean {
   return Array.isArray(answer) ? answer.length > 0 : Boolean(answer?.trim());
 }
@@ -197,7 +220,9 @@ export function EnglishPracticePlayer({
 
   const question = current?.question;
   const errorOptions =
-    question?.question_type === "open_cloze"
+    question?.question_type === "composition_planning"
+      ? COMPOSITION_PLANNING_ERROR_OPTIONS
+      : question?.question_type === "open_cloze"
       ? OPEN_CLOZE_ERROR_OPTIONS
       : question?.question_type === "grammar_usage" ||
           question?.question_type === "editing"

@@ -2068,7 +2068,7 @@ export interface components {
              * Category
              * @enum {string}
              */
-            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control" | "gap_role" | "local_grammar" | "cohesion_clue" | "entry_accuracy";
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control" | "gap_role" | "local_grammar" | "cohesion_clue" | "entry_accuracy" | "task_topic" | "command_word" | "audience_scope" | "evidence_plan";
         };
         /** ContentLifecycleRequestResponse */
         ContentLifecycleRequestResponse: {
@@ -3050,7 +3050,7 @@ export interface components {
              * Category
              * @enum {string}
              */
-            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control" | "gap_role" | "local_grammar" | "cohesion_clue" | "entry_accuracy";
+            category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control" | "gap_role" | "local_grammar" | "cohesion_clue" | "entry_accuracy" | "task_topic" | "command_word" | "audience_scope" | "evidence_plan";
             /**
              * Recorded
              * @default true

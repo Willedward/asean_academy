@@ -304,6 +304,8 @@ def export_english_reviewer_batch(root: Path, batch_path: Path, output: Path) ->
                 "",
                 f"Outcome {question.outcome_code} · Difficulty {question.difficulty} · {question.exposure_pool}",
                 "",
+                f"**Instructions:** {question.instructions}",
+                "",
                 *(
                     [f"**Passage: {passage.title}**", "", *passage.paragraphs, ""]
                     if passage is not None
@@ -364,6 +366,7 @@ def export_english_reviewer_batch(root: Path, batch_path: Path, output: Path) ->
             f"<article><p class='meta'>{html.escape(question.stable_key)} · Outcome "
             f"{html.escape(question.outcome_code)} · Difficulty {question.difficulty} · "
             f"{html.escape(question.exposure_pool)}</p><h2>{html.escape(question.title)}</h2>"
+            f"<p><strong>Instructions:</strong> {html.escape(question.instructions)}</p>"
             f"{passage_html}{bank_html}{''.join(part_html)}</article>"
         )
 
