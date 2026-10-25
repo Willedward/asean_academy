@@ -22,6 +22,10 @@ EnglishErrorCategory = Literal[
     "local_grammar",
     "cohesion_clue",
     "entry_accuracy",
+    "task_topic",
+    "command_word",
+    "audience_scope",
+    "evidence_plan",
 ]
 
 

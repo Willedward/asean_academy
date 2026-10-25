@@ -189,6 +189,67 @@ describe("EnglishPracticePlayer", () => {
     );
   });
 
+  it("offers task-analysis reflection categories for composition planning", async () => {
+    const composition: EnglishNextQuestionResponse = {
+      ...current,
+      session: {
+        ...current.session,
+        lesson_key: "e6-lesson-01",
+      },
+      question: {
+        ...current.question!,
+        stable_key: "ex-l1-001",
+        outcome_code: "EW6.1",
+        question_type: "composition_planning",
+        title: "Decode a composition task",
+      },
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => composition),
+      submitAttempt: vi.fn(async () => incorrect),
+      revealHint: vi.fn(async () => ({
+        question_key: "ex-l1-001",
+        parts: ["Separate the topic from the command."],
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer
+        sessionId={composition.session.session_id}
+        api={api}
+      />,
+    );
+
+    fireEvent.click(await screen.findByRole("radio", { name: /A\. narrow/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    expect(
+      await screen.findByRole("radio", { name: /I widened or changed the topic/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed the command/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed the audience or scope/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I missed the required example/i }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(
+      screen.getByRole("radio", { name: /I missed the command/i }),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Save reflection" }));
+
+    await waitFor(() =>
+      expect(api.classifyError).toHaveBeenCalledWith(
+        incorrect.attempt_id,
+        "command_word",
+      ),
+    );
+  });
+
   it("fills a shared word bank with keyboard-native controls and reveals feedback as one group", async () => {
     const banked: EnglishNextQuestionResponse = {
       status: "active",

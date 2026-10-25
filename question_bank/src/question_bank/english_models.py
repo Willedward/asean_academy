@@ -290,6 +290,7 @@ class EnglishObjectiveQuestion(EnglishModel):
         "open_cloze",
         "reading_comprehension",
         "editing",
+        "composition_planning",
     ]
     exposure_pool: Literal[
         "lesson_example",

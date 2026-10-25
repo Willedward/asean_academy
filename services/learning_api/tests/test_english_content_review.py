@@ -40,6 +40,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e5-lesson-05"),
         ("english_lesson", "e5-lesson-06"),
         ("english_lesson", "e5-lesson-07"),
+        ("english_lesson", "e6-lesson-01"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -68,6 +69,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "er-l5-002"),
         ("english_question", "er-l5-003"),
         ("english_question", "ev-l1-001"),
+        ("english_question", "ex-l1-001"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
     assert question.batch_id == "english-ev-b001"
@@ -111,6 +113,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     paced_pair = next(item for item in english_items if item.stable_key == "er-l5-003")
     assert paced_pair.batch_id == "english-er-b007"
     assert paced_pair.unit_key == "english-e5"
+    composition = next(item for item in english_items if item.stable_key == "ex-l1-001")
+    assert composition.batch_id == "english-ex-b001"
+    assert composition.unit_key == "english-e6"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):

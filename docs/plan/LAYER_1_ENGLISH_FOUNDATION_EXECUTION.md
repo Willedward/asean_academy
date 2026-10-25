@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 23 October 2026
+**Updated:** 25 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e5-reference-chains`
+**Implementation branch:** `feature/english-e61-decode-task`
 
 ## Product boundary
 
@@ -102,6 +102,7 @@ sections.
 | E2.1 pilot | Original sentence-boundary lesson, deterministic clause and editing items, grammar-specific error reflection and exit-ticket retry | Implemented as draft; English and editorial review pending |
 | E5.1 pilot | Original informational passage, paragraph map, passage navigation and grouped main-idea, structure, synonym, reference, inference and evidence questions | Implemented as draft; English and editorial review pending |
 | E5.2 pilot | Original informational passage and grouped pronoun, demonstrative, descriptive-phrase and cross-paragraph reference-chain questions | Implemented as draft; English and editorial review pending |
+| E6.1 pilot | Prompt decoding through topic, command, audience, scope and personal-application analysis, with composition-specific error reflection | Implemented as draft; English and editorial review pending |
 | E4.1 pilot | Original eight-gap function-word open cloze, inline entry, delayed feedback and reviewed alternatives | Implemented and hosted as draft; English and editorial review pending |
 | E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented and hosted as draft; English and editorial review pending |
 | E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented and hosted as draft; English and editorial review pending |
@@ -234,6 +235,13 @@ training target rather than an official exam allocation. Original informational 
 harbour texts supply four questions each, integrating comparison control, contextual meaning,
 main idea, bounded inference, attitude change, detail function and tone. All eight responses
 are deterministic and reveal feedback only after the complete two-passage group.
+E6.1 begins the composition sequence without requiring an essay-marking provider. Learners
+apply a `Topic -> Command -> Audience -> Scope -> Personal application` check to an original
+practice prompt, distinguish requirements from optional choices and write a one-sentence
+task contract before planning. Its six-part exit ticket is marked deterministically as one
+group. Composition-specific reflection records topic drift, command loss, audience or scope
+errors, and missing evidence plans. This milestone does not yet create or score an essay;
+draft autosave, immutable submission and calibrated feedback remain behind later gates.
 
 ### 4. Build the objective diagnostic
 
@@ -257,11 +265,11 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme, and E5.1–E5.6 provide the reading-comprehension progression. E5.7 is the active
-review candidate: validate and merge its exact revision, deploy it to hosted review, verify
-the learner lesson and grouped two-passage journey, and confirm `er-l5-003`
-appears once in the administrator queue with protected answers and the pinned passage
-checksum. Then begin **E6.1 decode the composition task**.
+E4.1–E4.5 form the complete hosted open-cloze learning sequence and E5.1–E5.7 complete
+the first reading-comprehension progression. E6.1 is the active review candidate: apply
+migration `202610250033`, import its exact draft revision, verify the authenticated learner
+lesson and six-part task-analysis journey, and confirm `ex-l1-001` appears once in the
+administrator queue with its answers protected from the learner response. Then begin
+**E6.2 generate usable ideas** using the decoded task contract as its input boundary.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.
