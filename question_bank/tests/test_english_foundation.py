@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 17
+    assert len(report.lessons) == 18
     assert len(report.passages) == 14
-    assert len(report.questions) == 27
+    assert len(report.questions) == 28
     assert not report.issues
 
 
@@ -81,6 +81,29 @@ def test_e6_idea_generation_is_relevant_specific_and_honest(english_root):
     assert check_english_answer(question.parts[2].response, ["C", "A", "B"])["correct"]
     assert check_english_answer(question.parts[4].response, "C")["correct"]
     assert not check_english_answer(question.parts[4].response, "A")["correct"]
+
+
+def test_e6_selection_preserves_one_focus_and_reader_need_order(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l3-001.json").read_text()
+    )
+
+    assert question.question_type == "composition_planning"
+    assert question.outcome_code == "EW6.3"
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, ["C", "A"])["correct"]
+    assert not check_english_answer(question.parts[0].response, ["A", "B"])["correct"]
+    assert check_english_answer(question.parts[3].response, "B")["correct"]
+    assert check_english_answer(question.parts[5].response, "A")["correct"]
 
 
 def test_every_english_source_matches_its_generated_schema(repository_root, english_root):
@@ -525,8 +548,9 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ev-b001",
         "english-ex-b001",
         "english-ex-b002",
+        "english-ex-b003",
     ]
-    assert len(report.questions) == 27
+    assert len(report.questions) == 28
     assert not report.duplicates
 
 
@@ -819,6 +843,22 @@ def test_idea_generation_reviewer_export_contains_contract_and_all_answers(
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, B, C" in page
     assert "credible future use" in page
+
+
+def test_choose_and_order_reviewer_export_contains_sequence_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b003.json"
+    output = tmp_path / "choose-order-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "breaking a large problem into smaller parts" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, C" in page
+    assert "Method, plan, complication and reflection" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
