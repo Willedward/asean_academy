@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e61-decode-task`
+**Implementation branch:** `feature/english-e62-usable-ideas`
 
 ## Product boundary
 
@@ -242,6 +242,12 @@ task contract before planning. Its six-part exit ticket is marked deterministica
 group. Composition-specific reflection records topic drift, command loss, audience or scope
 errors, and missing evidence plans. This milestone does not yet create or score an essay;
 draft autosave, immutable submission and calibrated feedback remain behind later gates.
+E6.2 turns the decoded task contract into a usable idea pool. Learners search experience,
+observation, school learning and honestly signalled plausible scenarios, then develop each
+candidate with an `Idea -> Situation -> Action -> Result or learning` frame. The lesson keeps
+generation separate from later selection and ordering, rejects topic drift and vague claims,
+and explicitly prevents invented events from being presented as true memories. Its six-part
+exit ticket remains deterministic and groups feedback until every response is submitted.
 
 ### 4. Build the objective diagnostic
 
@@ -266,10 +272,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence and E5.1–E5.7 complete
-the first reading-comprehension progression. E6.1 is the active review candidate: apply
-migration `202610250033`, import its exact draft revision, verify the authenticated learner
-lesson and six-part task-analysis journey, and confirm `ex-l1-001` appears once in the
-administrator queue with its answers protected from the learner response. Then begin
-**E6.2 generate usable ideas** using the decoded task contract as its input boundary.
+the first reading-comprehension progression. E6.1 and E6.2 are active review candidates:
+apply migration `202610250033`, import their exact draft revisions, verify both authenticated
+learner journeys, and confirm `ex-l1-001` and `ex-l2-001` each appear once in the administrator
+queue with answers protected from learner responses. Then begin **E6.3 choose and order**,
+using the E6.2 idea pool to select a small set of relevant, developable ideas and arrange them.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.
