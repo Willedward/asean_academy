@@ -227,6 +227,13 @@ evaluative and qualifying language. Its original library quiet-hour report balan
 participation with examination timing, survey selection and inclusion concerns. Six grouped,
 deterministically marked questions assess the central message, evaluative purpose, cautious
 tone, the role of an observed detail, supporting evidence and the function of the conclusion.
+E5.7 completes the reading module with a `Survey -> Solve -> Park -> Return` routine across
+two passages. Its eighteen-minute rehearsal target reserves one minute for route planning,
+seven minutes per passage and a three-minute return-and-check buffer; this is explicitly a
+training target rather than an official exam allocation. Original informational and reflective
+harbour texts supply four questions each, integrating comparison control, contextual meaning,
+main idea, bounded inference, attitude change, detail function and tone. All eight responses
+are deterministic and reveal feedback only after the complete two-passage group.
 
 ### 4. Build the objective diagnostic
 
@@ -251,10 +258,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 now form a complete hosted open-cloze learning sequence in the integration
-programme, and E5.1–E5.5 provide the first reading-comprehension progression. E5.6 is the
-active review candidate: validate and merge its exact revision, deploy it to hosted review,
-verify the learner lesson and grouped purpose-tone-main-idea journey, and confirm `er-l5-002`
+programme, and E5.1–E5.6 provide the reading-comprehension progression. E5.7 is the active
+review candidate: validate and merge its exact revision, deploy it to hosted review, verify
+the learner lesson and grouped two-passage journey, and confirm `er-l5-003`
 appears once in the administrator queue with protected answers and the pinned passage
-checksum. Then continue to **E5.7 two-passage pacing**.
+checksum. Then begin **E6.1 decode the composition task**.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.
