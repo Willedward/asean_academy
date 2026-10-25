@@ -1,10 +1,10 @@
 # Layer 1 English foundation execution
 
-**Updated:** 25 October 2026
+**Updated:** 26 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e63-choose-order`
+**Implementation branch:** `feature/english-e64-control-focus`
 
 ## Product boundary
 
@@ -253,6 +253,11 @@ one central school-learned skill, combine overlapping candidates, assign each re
 a distinct job and order the result by what the reader needs first. Its worked sequence uses
 two connected moments from one charity-sale example to replace shallow list planning with
 depth. Six grouped, deterministic questions assess selection, overlap, sequence and focus.
+E6.4 converts the selected sequence into one central response. Learners name the transferred
+school learning, its different application and the insight their evidence will demonstrate;
+assign each paragraph a distinct job; and run a link-back check against the focus. Thread-word
+variation maintains unity without mechanical repetition. Six grouped deterministic questions
+assess the focus statement, paragraph contributions, detail drift and unsupported overclaiming.
 
 ### 4. Build the objective diagnostic
 
@@ -277,10 +282,10 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence and E5.1–E5.7 complete
-the first reading-comprehension progression. E6.1–E6.3 are active review candidates: apply
-migration `202610250033`, import their exact draft revisions, verify all three authenticated
-learner journeys, and confirm `ex-l1-001` through `ex-l3-001` each appear once in the
-administrator queue with answers protected from learner responses. Then begin **E6.4 control
-the focus**, turning the selected idea chain into a consistent controlling position.
+the first reading-comprehension progression. E6.1–E6.4 are active review candidates: apply
+migration `202610250033`, import their exact draft revisions, verify all four authenticated
+learner journeys, and confirm `ex-l1-001` through `ex-l4-001` each appear once in the
+administrator queue with answers protected from learner responses. Then begin **E6.5 plan in
+five minutes**, turning the focus map into a compact introduction–body–conclusion plan.
 Human English and editorial approval remains a separate publication gate for every lesson,
 passage and question revision.
