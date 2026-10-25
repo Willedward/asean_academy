@@ -58,7 +58,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1040
             assert (
                 c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
-                == 26
+                == 27
             )
             assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 14
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0
