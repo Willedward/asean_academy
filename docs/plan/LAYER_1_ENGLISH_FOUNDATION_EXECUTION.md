@@ -310,11 +310,11 @@ evidence bound to the Git SHA.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
-progression. E7.1–E7.4 are the first paragraph-development and response-framing review
-candidates. Apply migration `202610250033`, import the exact draft revisions, verify the
-authenticated E6 and E7 learner journeys, and confirm `ex-l1-001` through `ex-l5-001` and
-`ex-l1-002` through `ex-l4-002` each appear once in the administrator queue with answers
-protected from learner responses. Then begin **E7.5 read like a writer**, teaching learners
-to analyse an original model and transfer one structural move without copying its surface
-language. Human English and editorial approval remains a separate publication gate for every
-lesson, passage and question revision.
+progression, while E7.1–E7.5 complete the first paragraph-development, response-framing and
+model-transfer sequence. Apply migration `202610250033`, import the exact draft revisions,
+verify the authenticated E6 and E7 learner journeys, and confirm `ex-l1-001` through
+`ex-l5-001` and `ex-l1-002` through `ex-l5-002` each appear once in the administrator queue
+with answers protected from learner responses. Then begin **E8.1 precise vocabulary**,
+teaching learners to replace vague or repetitive words with accurate choices that fit meaning
+and register. Human English and editorial approval remains a separate publication gate for
+every lesson, passage and question revision.
