@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e71-paragraph-purpose`
+**Implementation branch:** `feature/english-e72-develop-specifics`
 
 ## Product boundary
 
@@ -272,6 +272,13 @@ short reverse outline to expose repetition, mixed purposes and purposeless detai
 examples continue the E6 charity-sale route so that the instructional change—from planning to
 draft control—is visible. Six grouped deterministic questions assess purpose, evidence
 selection, boundaries, narrative function and reverse-outline repair.
+E7.2 develops those controlled paragraph jobs through a specificity ladder: assertion,
+specific evidence, consequence and significance. Learners distinguish purposeful examples,
+actions and observations from decorative detail; explain the local effect and its link to the
+controlling insight; and select narrative details that change action or tension. The lesson also
+rejects invented measurements and unsupported statistics as false precision. Six grouped,
+deterministic questions assess relevant evidence chains, explanation, selective narrative
+detail and honest specificity.
 
 ### 4. Build the objective diagnostic
 
@@ -297,10 +304,10 @@ evidence bound to the Git SHA.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
-progression. E7.1 is the first paragraph-development review candidate. Apply migration
-`202610250033`, import the exact draft revisions, verify the authenticated E6 and E7.1 learner
-journeys, and confirm `ex-l1-001` through `ex-l5-001` plus `ex-l1-002` each appear once in the
-administrator queue with answers protected from learner responses. Then begin **E7.2 develop
-with specifics**, teaching learners to explain significance through precise examples, actions,
-observations and consequences. Human English and editorial approval remains a separate
-publication gate for every lesson, passage and question revision.
+progression. E7.1–E7.2 are the first paragraph-development review candidates. Apply migration
+`202610250033`, import the exact draft revisions, verify the authenticated E6 and E7 learner
+journeys, and confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` and `ex-l2-002` each appear
+once in the administrator queue with answers protected from learner responses. Then begin
+**E7.3 cohesion without formula**, teaching reference, logical sequence and selective
+transitions rather than repetitive stock phrases. Human English and editorial approval remains
+a separate publication gate for every lesson, passage and question revision.
