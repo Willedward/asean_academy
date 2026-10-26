@@ -301,6 +301,13 @@ actions, strengthen load-bearing nouns and verbs, retain useful repetition for c
 reject thesaurus drift, inflated formality and unsupported absolutes. Its original reading-room
 editing task supplies verified notes so all six grouped deterministic questions can distinguish
 genuine precision from invented detail or exaggerated impact.
+E8.2 builds sentence variety on clause control rather than decorative pattern changes. Learners
+distinguish independent and dependent clauses, use coordination, subordination and relative
+clauses according to the relationship between ideas, and create emphasis with deliberately
+placed short sentences. A four-pass check catches fragments, run-ons or comma splices,
+misleading connectors, agreement drift, unclear reference and overloaded sentences. Its
+original media-club editing task uses six grouped deterministic questions to assess controlled
+combination without changing the verified evidence.
 
 ### 4. Build the objective diagnostic
 
@@ -327,11 +334,11 @@ evidence bound to the Git SHA.
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
 progression and E7.1–E7.5 complete the first paragraph-development, response-framing and
-model-transfer sequence. E8.1 now begins the language-control sequence with precise,
-evidence-bounded vocabulary. Apply migration `202610250033`, import the exact draft revisions,
-verify the authenticated E6–E8.1 learner journeys, and confirm `ex-l1-001` through
-`ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003` each appear once in the
-administrator queue with answers protected from learner responses. Then begin **E8.2 sentence
-variety with control**, teaching learners to combine and vary sentences without introducing
-fragments, agreement errors or unclear reference. Human English and editorial approval remains
-a separate publication gate for every lesson, passage and question revision.
+model-transfer sequence. E8.1–E8.2 now begin the language-control sequence with precise,
+evidence-bounded vocabulary and purposeful sentence variety. Apply migration `202610250033`,
+import the exact draft revisions, verify the authenticated E6–E8.2 learner journeys, and
+confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003`
+through `ex-l2-003` each appear once in the administrator queue with answers protected from
+learner responses. Then begin **E8.3 show relationships**, teaching learners to express cause,
+contrast, qualification, sequence and consequence explicitly. Human English and editorial
+approval remains a separate publication gate for every lesson, passage and question revision.
