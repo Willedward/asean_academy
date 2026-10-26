@@ -50,6 +50,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e7-lesson-03"),
         ("english_lesson", "e7-lesson-04"),
         ("english_lesson", "e7-lesson-05"),
+        ("english_lesson", "e8-lesson-01"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -88,6 +89,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "ex-l3-002"),
         ("english_question", "ex-l4-002"),
         ("english_question", "ex-l5-002"),
+        ("english_question", "ex-l1-003"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
     assert question.batch_id == "english-ev-b001"
@@ -173,6 +175,11 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     transfer = next(item for item in english_items if item.stable_key == "ex-l5-002")
     assert transfer.batch_id == "english-ex-b010"
     assert transfer.unit_key == "english-e7"
+    precise_vocabulary = next(
+        item for item in english_items if item.stable_key == "ex-l1-003"
+    )
+    assert precise_vocabulary.batch_id == "english-ex-b011"
+    assert precise_vocabulary.unit_key == "english-e8"
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):

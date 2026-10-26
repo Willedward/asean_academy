@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 25
+    assert len(report.lessons) == 26
     assert len(report.passages) == 14
-    assert len(report.questions) == 35
+    assert len(report.questions) == 36
     assert not report.issues
 
 
@@ -300,6 +300,37 @@ def test_e7_read_like_a_writer_transfers_structure_without_surface_copying(engli
     assert check_english_answer(question.parts[2].response, "D")["correct"]
     assert check_english_answer(question.parts[3].response, "B")["correct"]
     assert check_english_answer(question.parts[4].response, "A")["correct"]
+    assert check_english_answer(question.parts[5].response, "C")["correct"]
+
+
+def test_e8_precise_vocabulary_aligns_wording_with_meaning_and_evidence(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l1-003.json").read_text()
+    )
+
+    assert question.question_type == "editing"
+    assert question.outcome_code == "EW8.1"
+    assert question.difficulty == 4
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, ["E", "A", "C"])[
+        "correct"
+    ]
+    assert not check_english_answer(question.parts[0].response, ["A", "B", "C"])[
+        "correct"
+    ]
+    assert check_english_answer(question.parts[1].response, "B")["correct"]
+    assert check_english_answer(question.parts[2].response, "C")["correct"]
+    assert check_english_answer(question.parts[3].response, "A")["correct"]
+    assert check_english_answer(question.parts[4].response, "B")["correct"]
     assert check_english_answer(question.parts[5].response, "C")["correct"]
 
 
@@ -753,8 +784,9 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b008",
         "english-ex-b009",
         "english-ex-b010",
+        "english-ex-b011",
     ]
-    assert len(report.questions) == 35
+    assert len(report.questions) == 36
     assert not report.duplicates
 
 
@@ -1180,6 +1212,23 @@ def test_read_like_a_writer_reviewer_export_contains_model_and_transfer(
     assert "<strong>Answer:</strong> A, B, C" in page
     assert "records sentence functions and relationships" in page
     assert "fully grounded in the food-waste context" in page
+
+
+def test_precise_vocabulary_reviewer_export_contains_notes_and_evidence_limits(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b011.json"
+    output = tmp_path / "precise-vocabulary-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "returned books were sometimes left unsorted" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, C, E" in page
+    assert "Controlled repetition supports cohesion" in page
+    assert "the intended register and the evidence available" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
