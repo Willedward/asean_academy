@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e72-develop-specifics`
+**Implementation branch:** `feature/english-e73-cohesion`
 
 ## Product boundary
 
@@ -279,6 +279,12 @@ controlling insight; and select narrative details that change action or tension.
 rejects invented measurements and unsupported statistics as false precision. Six grouped,
 deterministic questions assess relevant evidence chains, explanation, selective narrative
 detail and honest specificity.
+E7.3 connects those developed ideas without a rigid linking-word formula. Learners move from
+given information to new information, maintain unmistakable reference chains, choose a
+chronological, causal, problem-response or general-to-specific route, and select transitions
+only when they reveal the real relationship. Thread words preserve the controlling concept
+without synonym drift. Six grouped, deterministic questions assess ordering, reference,
+cause-and-consequence language, connector repair and missing logical steps.
 
 ### 4. Build the objective diagnostic
 
@@ -304,10 +310,11 @@ evidence bound to the Git SHA.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
-progression. E7.1–E7.2 are the first paragraph-development review candidates. Apply migration
+progression. E7.1–E7.3 are the first paragraph-development review candidates. Apply migration
 `202610250033`, import the exact draft revisions, verify the authenticated E6 and E7 learner
-journeys, and confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` and `ex-l2-002` each appear
-once in the administrator queue with answers protected from learner responses. Then begin
-**E7.3 cohesion without formula**, teaching reference, logical sequence and selective
-transitions rather than repetitive stock phrases. Human English and editorial approval remains
-a separate publication gate for every lesson, passage and question revision.
+journeys, and confirm `ex-l1-001` through `ex-l5-001` and `ex-l1-002` through `ex-l3-002`
+each appear once in the administrator queue with answers protected from learner responses.
+Then begin **E7.4 introductions and endings**, teaching learners to open directly, establish
+direction and resolve the response rather than repeating it mechanically. Human English and
+editorial approval remains a separate publication gate for every lesson, passage and question
+revision.
