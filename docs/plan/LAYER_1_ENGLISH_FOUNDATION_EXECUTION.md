@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e65-five-minute-plan`
+**Implementation branch:** `feature/english-e71-paragraph-purpose`
 
 ## Product boundary
 
@@ -265,6 +265,13 @@ relationship transitions and audit coverage. Its worked plan carries the charity
 from initial organisation through a rain disruption to a bounded future transfer. Six grouped,
 deterministic questions assess the routine, compact notes, paragraph development, conclusion
 job and final plan audit without requiring an essay-marking provider.
+E7.1 begins paragraph development by turning each plan job into one paragraph promise.
+Learners organise explanatory paragraphs through purpose, evidence and meaning; recognise
+dominant narrative functions; place boundaries where the controlling job changes; and apply a
+short reverse outline to expose repetition, mixed purposes and purposeless detail. Its worked
+examples continue the E6 charity-sale route so that the instructional change—from planning to
+draft control—is visible. Six grouped deterministic questions assess purpose, evidence
+selection, boundaries, narrative function and reverse-outline repair.
 
 ### 4. Build the objective diagnostic
 
@@ -290,9 +297,10 @@ evidence bound to the Git SHA.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
-progression. Apply migration `202610250033`, import their exact draft revisions, verify all five
-authenticated E6 learner journeys, and confirm `ex-l1-001` through `ex-l5-001` each appear once
-in the administrator queue with answers protected from learner responses. Then begin **E7.1
-paragraph purpose**, teaching learners to give every paragraph one controlling point or
-narrative function. Human English and editorial approval remains a separate publication gate
-for every lesson, passage and question revision.
+progression. E7.1 is the first paragraph-development review candidate. Apply migration
+`202610250033`, import the exact draft revisions, verify the authenticated E6 and E7.1 learner
+journeys, and confirm `ex-l1-001` through `ex-l5-001` plus `ex-l1-002` each appear once in the
+administrator queue with answers protected from learner responses. Then begin **E7.2 develop
+with specifics**, teaching learners to explain significance through precise examples, actions,
+observations and consequences. Human English and editorial approval remains a separate
+publication gate for every lesson, passage and question revision.
