@@ -1,6 +1,6 @@
 # Layer 1 English foundation execution
 
-**Updated:** 26 October 2026
+**Updated:** 27 October 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
@@ -315,6 +315,12 @@ cannot travel. Learners also check the grammar and punctuation required by claus
 noun-phrase markers and sentence connectors. Its original water-refill pilot supplies bounded
 observations for six grouped deterministic questions that reject decorative linking phrases,
 doubled markers and unsupported long-term causation.
+E8.4 establishes a four-pass editing ladder: task and focus, organisation, development, then
+sentence control and conventions. Learners compare a draft with the prompt contract, reverse-
+outline paragraph jobs, repair evidence and explanation, remove irrelevant material and only
+then correct grammar, spelling and punctuation. Its original basil-seedling response supplies
+bounded notes for six grouped deterministic questions that distinguish higher-order revision
+from surface correction and reject an unsupported universal conclusion.
 
 ### 4. Build the objective diagnostic
 
@@ -341,13 +347,14 @@ evidence bound to the Git SHA.
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
 progression and E7.1–E7.5 complete the first paragraph-development, response-framing and
-model-transfer sequence. E8.1–E8.3 now begin the language-control sequence with precise,
-evidence-bounded vocabulary, purposeful sentence variety and explicit logical relationships.
+model-transfer sequence. E8.1–E8.4 now build the language-control sequence with precise,
+evidence-bounded vocabulary, purposeful sentence variety, explicit logical relationships and
+a meaning-first editing order.
 Apply migration `202610250033`, import the exact draft revisions, verify the authenticated
-E6–E8.3 learner journeys, and
+E6–E8.4 learner journeys, and
 confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003`
-through `ex-l3-003` each appear once in the administrator queue with answers protected from
-learner responses. Then begin **E8.4 edit by priority**, teaching learners to check task
-fulfilment and organisation before grammar, spelling and punctuation. Human English and
+through `ex-l4-003` each appear once in the administrator queue with answers protected from
+learner responses. Then begin **E8.5 personal error log**, teaching learners to identify two
+recurring error patterns and apply a short correction routine. Human English and
 editorial approval remains a separate publication gate for every lesson, passage and question
 revision.
