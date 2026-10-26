@@ -4,7 +4,7 @@
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
-**Implementation branch:** `feature/english-e64-control-focus`
+**Implementation branch:** `feature/english-e65-five-minute-plan`
 
 ## Product boundary
 
@@ -258,6 +258,13 @@ school learning, its different application and the insight their evidence will d
 assign each paragraph a distinct job; and run a link-back check against the focus. Thread-word
 variation maintains unity without mechanical repetition. Six grouped deterministic questions
 assess the focus statement, paragraph contributions, detail drift and unsupported overclaiming.
+E6.5 completes the planning sequence with a five-minute rehearsal routine. The target is
+explicitly instructional rather than an official exam allocation: learners check the task and
+focus, plan two evidence-bearing body jobs, sketch the introduction and conclusion, add
+relationship transitions and audit coverage. Its worked plan carries the charity-sale example
+from initial organisation through a rain disruption to a bounded future transfer. Six grouped,
+deterministic questions assess the routine, compact notes, paragraph development, conclusion
+job and final plan audit without requiring an essay-marking provider.
 
 ### 4. Build the objective diagnostic
 
@@ -281,11 +288,11 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-E4.1–E4.5 form the complete hosted open-cloze learning sequence and E5.1–E5.7 complete
-the first reading-comprehension progression. E6.1–E6.4 are active review candidates: apply
-migration `202610250033`, import their exact draft revisions, verify all four authenticated
-learner journeys, and confirm `ex-l1-001` through `ex-l4-001` each appear once in the
-administrator queue with answers protected from learner responses. Then begin **E6.5 plan in
-five minutes**, turning the focus map into a compact introduction–body–conclusion plan.
-Human English and editorial approval remains a separate publication gate for every lesson,
-passage and question revision.
+E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
+first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
+progression. Apply migration `202610250033`, import their exact draft revisions, verify all five
+authenticated E6 learner journeys, and confirm `ex-l1-001` through `ex-l5-001` each appear once
+in the administrator queue with answers protected from learner responses. Then begin **E7.1
+paragraph purpose**, teaching learners to give every paragraph one controlling point or
+narrative function. Human English and editorial approval remains a separate publication gate
+for every lesson, passage and question revision.

@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 19
+    assert len(report.lessons) == 20
     assert len(report.passages) == 14
-    assert len(report.questions) == 29
+    assert len(report.questions) == 30
     assert not report.issues
 
 
@@ -127,6 +127,32 @@ def test_e6_controlling_focus_unites_paragraph_jobs_without_overclaim(english_ro
     assert check_english_answer(question.parts[1].response, ["C", "A", "B"])["correct"]
     assert not check_english_answer(question.parts[1].response, ["A", "B", "D"])["correct"]
     assert check_english_answer(question.parts[4].response, "C")["correct"]
+    assert check_english_answer(question.parts[5].response, "A")["correct"]
+
+
+def test_e6_five_minute_plan_builds_and_audits_a_complete_route(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l5-001.json").read_text()
+    )
+
+    assert question.question_type == "composition_planning"
+    assert question.outcome_code == "EW6.5"
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, "B")["correct"]
+    assert check_english_answer(question.parts[1].response, ["C", "A", "B"])["correct"]
+    assert not check_english_answer(question.parts[1].response, ["A", "B", "D"])[
+        "correct"
+    ]
+    assert check_english_answer(question.parts[3].response, "C")["correct"]
     assert check_english_answer(question.parts[5].response, "A")["correct"]
 
 
@@ -574,8 +600,9 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b002",
         "english-ex-b003",
         "english-ex-b004",
+        "english-ex-b005",
     ]
-    assert len(report.questions) == 29
+    assert len(report.questions) == 30
     assert not report.duplicates
 
 
@@ -900,6 +927,22 @@ def test_controlling_focus_reviewer_export_contains_focus_map_and_all_answers(
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, B, C" in page
     assert "one claim, two non-overlapping contributions" in page
+
+
+def test_five_minute_plan_reviewer_export_contains_route_and_all_answers(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b005.json"
+    output = tmp_path / "five-minute-plan-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "five-minute routine is a practice target" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, B, C" in page
+    assert "task and focus through two developing body jobs" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
