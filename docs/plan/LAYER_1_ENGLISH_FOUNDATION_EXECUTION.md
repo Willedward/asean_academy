@@ -321,6 +321,12 @@ outline paragraph jobs, repair evidence and explanation, remove irrelevant mater
 then correct grammar, spelling and punctuation. Its original basil-seedling response supplies
 bounded notes for six grouped deterministic questions that distinguish higher-order revision
 from surface correction and reject an unsupported universal conclusion.
+E8.5 closes the language-control sequence with a personal error log grounded in dated attempt
+evidence. Learners distinguish a one-off slip from a recurring pattern, select two priorities by
+recurrence, impact and actionability, and apply a `Notice -> Name -> Correct -> Check -> Retest`
+routine. Its original eight-entry review record supplies six grouped deterministic questions on
+precise pattern labels, clause-boundary and evidence-scope checks, fresh transfer tasks and the
+evidence required before a pattern can be retired.
 
 ### 4. Build the objective diagnostic
 
@@ -347,14 +353,15 @@ evidence bound to the Git SHA.
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
 progression and E7.1–E7.5 complete the first paragraph-development, response-framing and
-model-transfer sequence. E8.1–E8.4 now build the language-control sequence with precise,
+model-transfer sequence. E8.1–E8.5 now complete the language-control sequence with precise,
 evidence-bounded vocabulary, purposeful sentence variety, explicit logical relationships and
-a meaning-first editing order.
+a meaning-first editing order followed by a two-pattern correction-and-retest routine.
 Apply migration `202610250033`, import the exact draft revisions, verify the authenticated
-E6–E8.4 learner journeys, and
+E6–E8.5 learner journeys, and
 confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003`
-through `ex-l4-003` each appear once in the administrator queue with answers protected from
-learner responses. Then begin **E8.5 personal error log**, teaching learners to identify two
-recurring error patterns and apply a short correction routine. Human English and
+through `ex-l5-003` each appear once in the administrator queue with answers protected from
+learner responses. Then begin **E9.1 reflective and personal expository writing**, teaching
+learners to connect experience or school learning to a focused insight, explanation or
+application. Human English and
 editorial approval remains a separate publication gate for every lesson, passage and question
 revision.

@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 29
+    assert len(report.lessons) == 30
     assert len(report.passages) == 14
-    assert len(report.questions) == 39
+    assert len(report.questions) == 40
     assert not report.issues
 
 
@@ -424,6 +424,37 @@ def test_e8_editing_priority_protects_task_before_surface_corrections(english_ro
     assert not check_english_answer(question.parts[4].response, ["A", "C"])[
         "correct"
     ]
+    assert check_english_answer(question.parts[5].response, "B")["correct"]
+
+
+def test_e8_personal_error_log_selects_recurring_actionable_patterns(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l5-003.json").read_text()
+    )
+
+    assert question.question_type == "editing"
+    assert question.outcome_code == "EW8.5"
+    assert question.difficulty == 4
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, ["E", "A", "C"])[
+        "correct"
+    ]
+    assert not check_english_answer(question.parts[0].response, ["A", "C", "D"])[
+        "correct"
+    ]
+    assert check_english_answer(question.parts[1].response, "B")["correct"]
+    assert check_english_answer(question.parts[2].response, "A")["correct"]
+    assert check_english_answer(question.parts[3].response, "B")["correct"]
+    assert check_english_answer(question.parts[4].response, "B")["correct"]
     assert check_english_answer(question.parts[5].response, "B")["correct"]
 
 
@@ -881,8 +912,9 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b012",
         "english-ex-b013",
         "english-ex-b014",
+        "english-ex-b015",
     ]
-    assert len(report.questions) == 39
+    assert len(report.questions) == 40
     assert not report.duplicates
 
 
@@ -1376,6 +1408,23 @@ def test_edit_by_priority_reviewer_export_contains_the_full_editing_ladder(
     assert "<strong>Answer:</strong> C, D" in page
     assert "task, organisation and evidence-scope repairs come earlier" in page
     assert "task, organisation, development, sentence control and conventions" in page
+
+
+def test_personal_error_log_reviewer_export_contains_patterns_and_retest_plan(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b015.json"
+    output = tmp_path / "personal-error-log-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "eight dated review entries" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, C, E" in page
+    assert "complete clauses with only a comma" in page
+    assert "requires successful transfer before retirement" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
