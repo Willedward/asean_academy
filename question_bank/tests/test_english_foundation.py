@@ -32,9 +32,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 24
+    assert len(report.lessons) == 25
     assert len(report.passages) == 14
-    assert len(report.questions) == 34
+    assert len(report.questions) == 35
     assert not report.issues
 
 
@@ -270,6 +270,37 @@ def test_e7_introductions_and_endings_frame_and_resolve_the_response(english_roo
     assert check_english_answer(question.parts[3].response, "B")["correct"]
     assert check_english_answer(question.parts[4].response, "D")["correct"]
     assert check_english_answer(question.parts[5].response, "B")["correct"]
+
+
+def test_e7_read_like_a_writer_transfers_structure_without_surface_copying(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l5-002.json").read_text()
+    )
+
+    assert question.question_type == "composition_planning"
+    assert question.outcome_code == "EW7.5"
+    assert question.difficulty == 4
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, "B")["correct"]
+    assert check_english_answer(question.parts[1].response, ["C", "A", "B"])[
+        "correct"
+    ]
+    assert not check_english_answer(question.parts[1].response, ["A", "D", "E"])[
+        "correct"
+    ]
+    assert check_english_answer(question.parts[2].response, "D")["correct"]
+    assert check_english_answer(question.parts[3].response, "B")["correct"]
+    assert check_english_answer(question.parts[4].response, "A")["correct"]
+    assert check_english_answer(question.parts[5].response, "C")["correct"]
 
 
 def test_every_english_source_matches_its_generated_schema(repository_root, english_root):
@@ -721,8 +752,9 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b007",
         "english-ex-b008",
         "english-ex-b009",
+        "english-ex-b010",
     ]
-    assert len(report.questions) == 34
+    assert len(report.questions) == 35
     assert not report.duplicates
 
 
@@ -1131,6 +1163,23 @@ def test_introductions_and_endings_reviewer_export_contains_framing_and_closure(
     assert "<strong>Answer:</strong> A, B, C" in page
     assert "provides immediate orientation and a focused route" in page
     assert "creates closure by moving from a genuine opening question" in page
+
+
+def test_read_like_a_writer_reviewer_export_contains_model_and_transfer(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b010.json"
+    output = tmp_path / "read-like-a-writer-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "At first, the repair-café volunteers" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, B, C" in page
+    assert "records sentence functions and relationships" in page
+    assert "fully grounded in the food-waste context" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(
