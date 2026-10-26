@@ -285,6 +285,22 @@ chronological, causal, problem-response or general-to-specific route, and select
 only when they reveal the real relationship. Thread words preserve the controlling concept
 without synonym drift. Six grouped, deterministic questions assess ordering, reference,
 cause-and-consequence language, connector repair and missing logical steps.
+E7.4 frames the response with direct introductions and resolving conclusions. Learners use
+the prompt as a contract, establish a focused route without a memorised hook, and finish by
+showing what the developed evidence means rather than repeating the opening mechanically.
+Six grouped deterministic questions assess orientation, scope, focus, proportionate insight
+and genuine closure.
+E7.5 teaches learners to read an original model for craft rather than copy its surface. A
+reverse outline reduces the paragraph to functional moves, separates reusable structure from
+topic-specific nouns and evidence, and adapts the causal sequence to a food-waste project.
+Six grouped deterministic questions distinguish transfer from noun substitution, borrowed
+evidence, structural mismatch and unsupported improvement.
+E8.1 begins accurate and effective essay language with a four-part vocabulary check: meaning,
+natural word partnership, register and evidence. Learners move from vague labels to observable
+actions, strengthen load-bearing nouns and verbs, retain useful repetition for cohesion, and
+reject thesaurus drift, inflated formality and unsupported absolutes. Its original reading-room
+editing task supplies verified notes so all six grouped deterministic questions can distinguish
+genuine precision from invented detail or exaggerated impact.
 
 ### 4. Build the objective diagnostic
 
@@ -309,12 +325,13 @@ evidence bound to the Git SHA.
 ## Immediate next milestone
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
-first reading-comprehension progression and E6.1–E6.5 complete the first composition-planning
-progression, while E7.1–E7.5 complete the first paragraph-development, response-framing and
-model-transfer sequence. Apply migration `202610250033`, import the exact draft revisions,
-verify the authenticated E6 and E7 learner journeys, and confirm `ex-l1-001` through
-`ex-l5-001` and `ex-l1-002` through `ex-l5-002` each appear once in the administrator queue
-with answers protected from learner responses. Then begin **E8.1 precise vocabulary**,
-teaching learners to replace vague or repetitive words with accurate choices that fit meaning
-and register. Human English and editorial approval remains a separate publication gate for
-every lesson, passage and question revision.
+first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
+progression and E7.1–E7.5 complete the first paragraph-development, response-framing and
+model-transfer sequence. E8.1 now begins the language-control sequence with precise,
+evidence-bounded vocabulary. Apply migration `202610250033`, import the exact draft revisions,
+verify the authenticated E6–E8.1 learner journeys, and confirm `ex-l1-001` through
+`ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003` each appear once in the
+administrator queue with answers protected from learner responses. Then begin **E8.2 sentence
+variety with control**, teaching learners to combine and vary sentences without introducing
+fragments, agreement errors or unclear reference. Human English and editorial approval remains
+a separate publication gate for every lesson, passage and question revision.
