@@ -4267,12 +4267,22 @@
             "title": "Correct",
             "type": "boolean"
           },
+          "correct_parts": {
+            "minimum": 0.0,
+            "title": "Correct Parts",
+            "type": "integer"
+          },
+          "hint_used": {
+            "title": "Hint Used",
+            "type": "boolean"
+          },
           "lesson_state": {
             "enum": [
               "not_started",
               "in_progress",
               "practice_completed",
-              "proficient"
+              "proficient",
+              "mastered"
             ],
             "title": "Lesson State",
             "type": "string"
@@ -4297,12 +4307,32 @@
           "retry_queued": {
             "title": "Retry Queued",
             "type": "boolean"
+          },
+          "score": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score",
+            "type": "number"
+          },
+          "threshold_met": {
+            "title": "Threshold Met",
+            "type": "boolean"
+          },
+          "total_parts": {
+            "minimum": 1.0,
+            "title": "Total Parts",
+            "type": "integer"
           }
         },
         "required": [
           "attempt_id",
           "attempt_number",
           "correct",
+          "correct_parts",
+          "total_parts",
+          "score",
+          "threshold_met",
+          "hint_used",
           "parts",
           "retry_queued",
           "needs_error_classification",
@@ -4351,6 +4381,9 @@
             "title": "Development Preview",
             "type": "boolean"
           },
+          "exam_profile": {
+            "$ref": "#/components/schemas/EnglishExamProfileResponse"
+          },
           "modules": {
             "items": {
               "$ref": "#/components/schemas/EnglishModuleMap"
@@ -4385,6 +4418,7 @@
           "description",
           "content_status",
           "development_preview",
+          "exam_profile",
           "modules"
         ],
         "title": "EnglishCourseMapResponse",
@@ -4431,9 +4465,177 @@
         "title": "EnglishErrorClassificationResponse",
         "type": "object"
       },
+      "EnglishExamProfilePartResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "configurable_fields": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Configurable Fields",
+            "type": "array"
+          },
+          "part_key": {
+            "title": "Part Key",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "reported_format": {
+            "title": "Reported Format",
+            "type": "string"
+          },
+          "reported_word_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reported Word Count"
+          },
+          "task_type": {
+            "title": "Task Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "word_count_status": {
+            "enum": [
+              "not_applicable",
+              "guidance",
+              "strict"
+            ],
+            "title": "Word Count Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "part_key",
+          "title",
+          "task_type",
+          "reported_format",
+          "reported_word_count",
+          "word_count_status",
+          "configurable_fields"
+        ],
+        "title": "EnglishExamProfilePartResponse",
+        "type": "object"
+      },
+      "EnglishExamProfileResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "effective_from": {
+            "title": "Effective From",
+            "type": "string"
+          },
+          "entry_level": {
+            "const": "secondary_1_entry",
+            "title": "Entry Level",
+            "type": "string"
+          },
+          "evidence_boundary": {
+            "title": "Evidence Boundary",
+            "type": "string"
+          },
+          "excluded_task_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Excluded Task Types",
+            "type": "array"
+          },
+          "profile_key": {
+            "title": "Profile Key",
+            "type": "string"
+          },
+          "review_due": {
+            "title": "Review Due",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishExamProfileSectionResponse"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "reported",
+              "corroborated",
+              "official"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile_key",
+          "status",
+          "evidence_boundary",
+          "entry_level",
+          "effective_from",
+          "review_due",
+          "sections",
+          "excluded_task_types"
+        ],
+        "title": "EnglishExamProfileResponse",
+        "type": "object"
+      },
+      "EnglishExamProfileSectionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishExamProfilePartResponse"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "reported_minutes": {
+            "title": "Reported Minutes",
+            "type": "integer"
+          },
+          "section_key": {
+            "title": "Section Key",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "section_key",
+          "title",
+          "reported_minutes",
+          "parts"
+        ],
+        "title": "EnglishExamProfileSectionResponse",
+        "type": "object"
+      },
       "EnglishHintResponse": {
         "additionalProperties": false,
         "properties": {
+          "hint_used": {
+            "const": true,
+            "default": true,
+            "title": "Hint Used",
+            "type": "boolean"
+          },
           "parts": {
             "items": {
               "type": "string"
@@ -4508,7 +4710,8 @@
               "not_started",
               "in_progress",
               "practice_completed",
-              "proficient"
+              "proficient",
+              "mastered"
             ],
             "title": "Progress State",
             "type": "string"
@@ -4517,6 +4720,18 @@
             "default": 0,
             "title": "Retry Question Count",
             "type": "integer"
+          },
+          "route_tags": {
+            "items": {
+              "enum": [
+                "full",
+                "core",
+                "sprint"
+              ],
+              "type": "string"
+            },
+            "title": "Route Tags",
+            "type": "array"
           },
           "stable_key": {
             "title": "Stable Key",
@@ -4534,6 +4749,7 @@
           "title",
           "outcome_code",
           "outcome",
+          "route_tags",
           "content_status",
           "authored",
           "available",
@@ -4589,7 +4805,8 @@
               "not_started",
               "in_progress",
               "practice_completed",
-              "proficient"
+              "proficient",
+              "mastered"
             ],
             "title": "State",
             "type": "string"
@@ -4916,6 +5133,10 @@
             "title": "Development Drafts",
             "type": "boolean"
           },
+          "exam_profile_key": {
+            "title": "Exam Profile Key",
+            "type": "string"
+          },
           "incorrect_count": {
             "title": "Incorrect Count",
             "type": "integer"
@@ -4960,6 +5181,7 @@
         "required": [
           "session_id",
           "status",
+          "exam_profile_key",
           "lesson_key",
           "lesson_revision",
           "mode",

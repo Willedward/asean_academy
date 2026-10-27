@@ -31,6 +31,7 @@ const STATE_LABEL = {
   in_progress: "In progress",
   practice_completed: "Review due",
   proficient: "Proficient",
+  mastered: "Mastered",
 } as const;
 
 export function EnglishCourseScreen({
@@ -45,7 +46,9 @@ export function EnglishCourseScreen({
   const lessons = course.modules.flatMap((module) => module.lessons);
   const available = lessons.filter((lesson) => lesson.available).length;
   const proficient = lessons.filter(
-    (lesson) => lesson.progress_state === "proficient",
+    (lesson) =>
+      lesson.progress_state === "proficient" ||
+      lesson.progress_state === "mastered",
   ).length;
 
   return (
@@ -122,7 +125,8 @@ export function EnglishCourseScreen({
             <div className="flex flex-col gap-2">
               {module.lessons.map((lesson) => {
                 const Icon = lesson.available
-                  ? lesson.progress_state === "proficient"
+                  ? lesson.progress_state === "proficient" ||
+                    lesson.progress_state === "mastered"
                     ? CheckCircle2
                     : BookOpenText
                   : lesson.authored
@@ -153,7 +157,8 @@ export function EnglishCourseScreen({
                     ) : (
                       <Tag
                         tone={
-                          lesson.progress_state === "proficient"
+                          lesson.progress_state === "proficient" ||
+                          lesson.progress_state === "mastered"
                             ? "success"
                             : lesson.available
                               ? "brand"
