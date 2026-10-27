@@ -34,7 +34,20 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 31
     assert len(report.passages) == 14
-    assert len(report.questions) == 41
+    assert len(report.questions) == 42
+    assert report.exam_profile is not None
+    assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
+    assert set(report.exam_profile.excluded_task_types) == {
+        "editing_section",
+        "own_words_short_answer",
+    }
+    assert len(report.forms) == 3
+    assert {form.status for form in report.forms} == {"planned"}
+    assert all(
+        lesson.route_tags == ["full"]
+        for module in report.catalogue.modules
+        for lesson in module.lessons
+    )
     assert not report.issues
 
 
@@ -494,6 +507,14 @@ def test_every_english_source_matches_its_generated_schema(repository_root, engl
     cases = [
         (schema_root / "catalogue-v1.schema.json", [english_root / "catalogue.json"]),
         (schema_root / "source-inventory-v1.schema.json", [english_root / "sources.json"]),
+        (
+            schema_root / "exam-profile-v1.schema.json",
+            list((english_root / "exam_profiles").glob("*.json")),
+        ),
+        (
+            schema_root / "assessment-form-v1.schema.json",
+            list((english_root / "forms").glob("*.json")),
+        ),
         (schema_root / "passage-v1.schema.json", list((english_root / "passages").glob("*.json"))),
         (schema_root / "lesson-v1.schema.json", list((english_root / "lessons").glob("*.json"))),
         (
@@ -929,6 +950,7 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-er-b006",
         "english-er-b007",
         "english-ev-b001",
+        "english-ev-b002",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -946,7 +968,7 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b015",
         "english-ex-b016",
     ]
-    assert len(report.questions) == 41
+    assert len(report.questions) == 42
     assert not report.duplicates
 
 

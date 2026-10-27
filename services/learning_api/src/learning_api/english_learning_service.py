@@ -75,6 +75,8 @@ class EnglishLearningService:
         self._assert_curriculum_visible()
         catalogue = self.report.catalogue
         assert catalogue is not None
+        exam_profile = self.report.exam_profile
+        assert exam_profile is not None
         authored = self.lessons
         progress = {item["lesson_key"]: item for item in self.repository.progress(self.learner_id)}
         modules = []
@@ -92,6 +94,7 @@ class EnglishLearningService:
                         "title": lesson_ref.title,
                         "outcome_code": lesson_ref.outcome_code,
                         "outcome": lesson_ref.outcome,
+                        "route_tags": lesson_ref.route_tags,
                         "content_status": lesson.status if lesson else "planned",
                         "authored": lesson is not None,
                         "available": is_visible,
@@ -127,6 +130,16 @@ class EnglishLearningService:
             "subject": "English",
             "content_status": catalogue.status,
             "development_preview": catalogue.status != "published",
+            "exam_profile": {
+                "profile_key": exam_profile.profile_key,
+                "status": exam_profile.status,
+                "evidence_boundary": exam_profile.evidence_boundary,
+                "entry_level": exam_profile.entry_level,
+                "effective_from": exam_profile.effective_from.isoformat(),
+                "review_due": exam_profile.review_due.isoformat(),
+                "sections": [section.model_dump(mode="json") for section in exam_profile.sections],
+                "excluded_task_types": exam_profile.excluded_task_types,
+            },
             "modules": modules,
         }
 
@@ -188,15 +201,34 @@ class EnglishLearningService:
         if active:
             return active
         ordered_keys = [key for section in lesson.sections for key in section.question_keys]
+        retry_source_by_key: dict[str, str | None] = {key: None for key in ordered_keys}
         if mode == "retry_review":
             due = set(self.repository.retry_keys(self.learner_id, lesson_key))
-            ordered_keys = [key for key in ordered_keys if key in due]
-            if not ordered_keys:
+            if not due:
                 raise EnglishLearningError(
                     "english_retry_queue_empty",
                     "This English lesson has no exit-ticket questions to retry.",
                     409,
                 )
+            parallel = [
+                question
+                for question in self.report.questions
+                if question.parallel_form_of in due
+                and question.exposure_pool == "retry_review"
+                and self._visible(question.status)
+            ]
+            covered = {question.parallel_form_of for question in parallel}
+            missing = sorted(due - covered)
+            if missing:
+                raise EnglishLearningError(
+                    "english_parallel_retry_unavailable",
+                    "A fresh parallel retry is not available for: " + ", ".join(missing),
+                    409,
+                )
+            ordered_keys = [question.stable_key for question in parallel]
+            retry_source_by_key = {
+                question.stable_key: question.parallel_form_of for question in parallel
+            }
         questions = [self._question(key) for key in ordered_keys]
         if not questions:
             raise EnglishLearningError(
@@ -206,11 +238,17 @@ class EnglishLearningService:
             )
         return self.repository.create_session(
             self.learner_id,
+            exam_profile_key=self.report.exam_profile.profile_key,
             lesson_key=lesson.stable_key,
             lesson_revision=lesson.revision,
             mode=mode,
             questions=[
-                (question.stable_key, question.revision, question.exposure_pool)
+                (
+                    question.stable_key,
+                    question.revision,
+                    question.exposure_pool,
+                    retry_source_by_key[question.stable_key],
+                )
                 for question in questions
             ],
             idempotency_key=idempotency_key,
@@ -357,13 +395,23 @@ class EnglishLearningService:
                     ),
                 }
             )
-        correct = all(part["correct"] for part in parts)
-        retry_queued = not correct and question.exposure_pool == "exit_ticket"
+        correct_parts = sum(part["correct"] for part in parts)
+        total_parts = len(parts)
+        score = correct_parts / total_parts
+        hint_used = bool(assignment.get("hint_used", False))
+        threshold_met = score >= 0.75 and not hint_used
+        correct = correct_parts == total_parts
+        retry_queued = not threshold_met and question.exposure_pool == "exit_ticket"
         attempt_id = str(uuid4())
         response = {
             "attempt_id": attempt_id,
             "attempt_number": 1,
             "correct": correct,
+            "correct_parts": correct_parts,
+            "total_parts": total_parts,
+            "score": score,
+            "threshold_met": threshold_met,
+            "hint_used": hint_used,
             "parts": parts,
             "question_finished": True,
             "retry_queued": retry_queued,
@@ -380,6 +428,9 @@ class EnglishLearningService:
             answers=answers,
             response=response,
             correct=correct,
+            correct_parts=correct_parts,
+            total_parts=total_parts,
+            threshold_met=threshold_met,
             retry_queued=retry_queued,
         )
 
@@ -395,9 +446,11 @@ class EnglishLearningService:
                 409,
             )
         question = self._question(question_key, assignment["question_revision"])
+        self.repository.record_hint(self.learner_id, session_id, question_key)
         return {
             "question_key": question_key,
             "parts": [part.hint for part in question.parts],
+            "hint_used": True,
         }
 
     def progress(self) -> dict:

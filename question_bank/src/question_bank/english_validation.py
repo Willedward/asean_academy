@@ -11,8 +11,10 @@ from pydantic import ValidationError
 
 from .english_checking import normalise_text
 from .english_models import (
+    EnglishAssessmentForm,
     EnglishBankManifest,
     EnglishCurriculumCatalogue,
+    EnglishExamProfile,
     EnglishLesson,
     EnglishObjectiveQuestion,
     EnglishPassage,
@@ -33,11 +35,13 @@ class EnglishIssue:
 @dataclass
 class EnglishFoundationReport:
     catalogue: EnglishCurriculumCatalogue | None = None
+    exam_profile: EnglishExamProfile | None = None
     sources: SourceInventory | None = None
     passages: list[EnglishPassage] = field(default_factory=list)
     lessons: list[EnglishLesson] = field(default_factory=list)
     manifests: list[EnglishBankManifest] = field(default_factory=list)
     questions: list[EnglishObjectiveQuestion] = field(default_factory=list)
+    forms: list[EnglishAssessmentForm] = field(default_factory=list)
     issues: list[EnglishIssue] = field(default_factory=list)
 
     @property
@@ -56,6 +60,7 @@ class EnglishFoundationReport:
         return {
             "valid": self.valid,
             "curriculum_version": self.catalogue.version_key if self.catalogue else None,
+            "exam_profile_key": self.exam_profile.profile_key if self.exam_profile else None,
             "module_count": len(self.catalogue.modules) if self.catalogue else 0,
             "curriculum_lesson_count": (
                 sum(len(module.lessons) for module in self.catalogue.modules)
@@ -66,6 +71,7 @@ class EnglishFoundationReport:
             "passage_count": len(self.passages),
             "bank_count": len(self.manifests),
             "question_count": len(self.questions),
+            "form_count": len(self.forms),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
             "issues": [asdict(issue) for issue in self.issues],
@@ -140,6 +146,11 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
     if report.catalogue is None or report.sources is None:
         return report
 
+    profile_path = root / "exam_profiles" / f"{report.catalogue.exam_profile_key}.json"
+    report.exam_profile = _load(profile_path, EnglishExamProfile, report, "invalid_exam_profile")
+    if report.exam_profile is None:
+        return report
+
     source_keys = {source.source_key for source in report.sources.sources}
     unknown_catalogue_sources = set(report.catalogue.source_refs) - source_keys
     if unknown_catalogue_sources:
@@ -149,6 +160,15 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
             "unknown_catalogue_source",
             root / "catalogue.json",
             f"Unknown source references: {sorted(unknown_catalogue_sources)}",
+        )
+    unknown_profile_sources = set(report.exam_profile.source_refs) - source_keys
+    if unknown_profile_sources:
+        _issue(
+            report,
+            "error",
+            "unknown_exam_profile_source",
+            profile_path,
+            f"Unknown source references: {sorted(unknown_profile_sources)}",
         )
 
     passage_rows = _load_directory(root, "passages", EnglishPassage, report, "invalid_passage")
@@ -224,6 +244,101 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
             _issue(report, "error", "question_review_required", path, question.stable_key)
         report.questions.append(question)
 
+    retry_sources: dict[str, list[EnglishObjectiveQuestion]] = {}
+    for question in report.questions:
+        if question.parallel_form_of is None:
+            continue
+        source = question_by_key.get(question.parallel_form_of)
+        if source is None:
+            _issue(
+                report,
+                "error",
+                "missing_parallel_source",
+                root / "questions" / f"{question.stable_key}.json",
+                question.parallel_form_of,
+            )
+            continue
+        if source.exposure_pool != "exit_ticket":
+            _issue(
+                report,
+                "error",
+                "parallel_source_not_exit_ticket",
+                root / "questions" / f"{question.stable_key}.json",
+                question.parallel_form_of,
+            )
+        if source.outcome_code != question.outcome_code:
+            _issue(
+                report,
+                "error",
+                "parallel_outcome_mismatch",
+                root / "questions" / f"{question.stable_key}.json",
+                f"{question.outcome_code} does not match {source.outcome_code}",
+            )
+        if source.question_type != question.question_type:
+            _issue(
+                report,
+                "error",
+                "parallel_question_type_mismatch",
+                root / "questions" / f"{question.stable_key}.json",
+                f"{question.question_type} does not match {source.question_type}",
+            )
+        retry_sources.setdefault(question.parallel_form_of, []).append(question)
+    for source_key, retries in retry_sources.items():
+        if len(retries) > 1:
+            _issue(
+                report,
+                "error",
+                "duplicate_parallel_retry",
+                root / "questions",
+                f"{source_key} has parallel forms {[item.stable_key for item in retries]}",
+            )
+
+    form_rows = _load_directory(
+        root, "forms", EnglishAssessmentForm, report, "invalid_assessment_form"
+    )
+    form_by_key = {}
+    for path, form in form_rows:
+        if path.stem != form.form_key:
+            _issue(report, "error", "assessment_form_filename", path, form.form_key)
+        if form.form_key in form_by_key:
+            _issue(report, "error", "duplicate_assessment_form", path, form.form_key)
+        form_by_key[form.form_key] = form
+        if form.profile_key != report.exam_profile.profile_key:
+            _issue(report, "error", "assessment_form_profile", path, form.profile_key)
+        missing_questions = set(form.question_keys) - set(question_by_key)
+        if missing_questions:
+            _issue(
+                report,
+                "error",
+                "missing_assessment_form_question",
+                path,
+                str(sorted(missing_questions)),
+            )
+        unknown = set(form.source_refs) - source_keys
+        if unknown:
+            _issue(report, "error", "unknown_assessment_form_source", path, str(sorted(unknown)))
+        report.forms.append(form)
+    for path, form in form_rows:
+        if form.paired_form_key is None:
+            continue
+        paired = form_by_key.get(form.paired_form_key)
+        if paired is None:
+            _issue(
+                report,
+                "error",
+                "missing_paired_assessment_form",
+                path,
+                form.paired_form_key,
+            )
+        elif paired.paired_form_key != form.form_key:
+            _issue(
+                report,
+                "error",
+                "asymmetric_paired_assessment_form",
+                path,
+                f"{form.form_key} pairs with {form.paired_form_key}, but the reverse link is absent",
+            )
+
     for bank_key, manifest in manifest_by_key.items():
         questions = [question for question in report.questions if question.bank_key == bank_key]
         if len(questions) != manifest.expected_question_count:
@@ -283,11 +398,13 @@ def write_english_schemas(output: Path):
     output.mkdir(parents=True, exist_ok=True)
     schemas = {
         "catalogue-v1.schema.json": EnglishCurriculumCatalogue,
+        "exam-profile-v1.schema.json": EnglishExamProfile,
         "source-inventory-v1.schema.json": SourceInventory,
         "passage-v1.schema.json": EnglishPassage,
         "objective-question-v1.schema.json": EnglishObjectiveQuestion,
         "bank-manifest-v1.schema.json": EnglishBankManifest,
         "lesson-v1.schema.json": EnglishLesson,
+        "assessment-form-v1.schema.json": EnglishAssessmentForm,
         "batch-manifest-v1.schema.json": EnglishBatchManifest,
         "batch-claims-v1.schema.json": EnglishBatchClaimRegistry,
     }

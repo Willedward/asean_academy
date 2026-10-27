@@ -14,7 +14,12 @@ def _digest(payload) -> str:
 
 
 def english_question_content_hash(question: EnglishObjectiveQuestion) -> str:
-    return _digest(question.model_dump(mode="json", exclude={"status", "provenance"}))
+    payload = question.model_dump(
+        mode="json", exclude={"status", "provenance", "parallel_form_of"}
+    )
+    if question.parallel_form_of is not None:
+        payload["parallel_form_of"] = question.parallel_form_of
+    return _digest(payload)
 
 
 def english_passage_revision_hash(passage: EnglishPassage) -> str:
@@ -318,9 +323,7 @@ class EnglishObjectiveImporter:
         with self.connection.transaction():
             with self.connection.cursor() as cursor:
                 curriculum_id = self._curriculum(cursor, report.catalogue)
-                outcome_ids = self._modules_and_outcomes(
-                    cursor, curriculum_id, report.catalogue
-                )
+                outcome_ids = self._modules_and_outcomes(cursor, curriculum_id, report.catalogue)
                 passage_ids = {
                     (passage.stable_key, passage.revision): self._passage(cursor, passage)
                     for passage in report.passages

@@ -1,10 +1,30 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 27 October 2026  
-**Status:** proposed V3 for founder and English-educator approval  
+**Status:** approved direction; V3-A foundation implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
-**Does not replace yet:** the executable English catalogue or historical content revisions
+**Integrated with:** the executable English catalogue without rewriting historical lesson or
+question revisions
+
+## Implementation status
+
+V3-A now provides:
+
+- a source-controlled reported exam profile with explicit evidence limits;
+- explicit exclusion of an editing paper section and scored own-words short answers;
+- Full-route metadata on all 51 stable lessons, while Core and Sprint membership remains
+  intentionally unassigned pending outcome review;
+- planned, protected 20-part baseline, matched endline and reserve-form contracts;
+- part-level 75% proficiency scoring and persisted hint use;
+- the checkpoint-ready `mastered` progress state;
+- explicit parallel-form validation and one functional E1.1 parallel retry proving the
+  end-to-end mechanism; and
+- unchanged existing lesson and question revisions, with the retry form added as a new 42nd
+  draft question.
+
+The planned forms do not yet contain assessment questions and cannot be served to learners.
+Core/Sprint selection, remaining parallel forms and checkpoint content belong to V3-B.
 
 ## 1. V3 decision
 
