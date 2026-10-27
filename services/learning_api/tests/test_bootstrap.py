@@ -47,7 +47,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             assert c.execute("select to_regclass('public.profiles')").fetchone()[0] is None
         result = bootstrap_module.bootstrap(target, apply=True)
         assert result["questions"] == 1040
-        assert result["english_questions"] == 40
+        assert result["english_questions"] == 41
         assert result["english_passages"] == 14
         assert result["english"]["outcome_count"] == 51
         assert result["status"] == "current"
@@ -58,7 +58,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1040
             assert (
                 c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
-                == 40
+                == 41
             )
             assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 14
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0

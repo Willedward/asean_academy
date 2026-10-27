@@ -327,6 +327,12 @@ recurrence, impact and actionability, and apply a `Notice -> Name -> Correct -> 
 routine. Its original eight-entry review record supplies six grouped deterministic questions on
 precise pattern labels, clause-boundary and evidence-scope checks, fresh transfer tasks and the
 evidence required before a pattern can be retired.
+E9.1 begins the essay-form sequence with reflective and personal expository writing. Learners
+distinguish reflection from event recount and generic moralising, then build an
+`experience -> insight -> transfer` chain from bounded, truthful evidence. Its original basil
+experiment and prospective book-drive record supplies six grouped deterministic questions on
+controlling focus, relevant evidence, the reflective hinge, credible conditional transfer,
+thoughtful limitation and whole-response structure.
 
 ### 4. Build the objective diagnostic
 
@@ -356,12 +362,14 @@ progression and E7.1–E7.5 complete the first paragraph-development, response-f
 model-transfer sequence. E8.1–E8.5 now complete the language-control sequence with precise,
 evidence-bounded vocabulary, purposeful sentence variety, explicit logical relationships and
 a meaning-first editing order followed by a two-pattern correction-and-retest routine.
+E9.1 now opens the final composition sequence with a complete experience–insight–transfer
+lesson and protected deterministic exit ticket.
 Apply migration `202610250033`, import the exact draft revisions, verify the authenticated
-E6–E8.5 learner journeys, and
+E6–E9.1 learner journeys, and
 confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003`
-through `ex-l5-003` each appear once in the administrator queue with answers protected from
-learner responses. Then begin **E9.1 reflective and personal expository writing**, teaching
-learners to connect experience or school learning to a focused insight, explanation or
-application. Human English and
+through `ex-l5-003`, plus `ex-l1-004`, each appear once in the administrator queue with answers
+protected from learner responses. Then begin **E9.2 narrative writing**, teaching learners to
+shape setting, conflict, purposeful detail, turning point and resolution without assuming that
+every reported test sitting offers a narrative prompt. Human English and
 editorial approval remains a separate publication gate for every lesson, passage and question
 revision.
