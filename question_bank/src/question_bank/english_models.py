@@ -18,6 +18,10 @@ QUESTION_KEY_PATTERN = r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$"
 BANK_KEY_PATTERN = r"^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$"
 PASSAGE_KEY_PATTERN = r"^english-passage-[a-z0-9-]+$"
 EXAM_PROFILE_KEY_PATTERN = r"^asean-english-[a-z0-9-]+-v[0-9]+$"
+ROUTE_TAG_ORDER = ("full", "core", "sprint")
+ROUTE_SIZE_BOUNDS = {"core": (28, 32), "sprint": (14, 16)}
+REQUIRED_ROUTE_MODULES = {f"E{index}" for index in range(10)}
+REQUIRED_ROUTE_ANCHORS = {"E0.1", "E0.2", "E9.5"}
 
 
 class EnglishModel(BaseModel):
@@ -91,6 +95,9 @@ class CurriculumLesson(EnglishModel):
             raise ValueError("Every English lesson must remain available on the Full route")
         if len(self.route_tags) != len(set(self.route_tags)):
             raise ValueError("Lesson route tags must be unique")
+        canonical = [route for route in ROUTE_TAG_ORDER if route in self.route_tags]
+        if self.route_tags != canonical:
+            raise ValueError("Lesson route tags must use full, core, sprint order")
         return self
 
 
@@ -224,12 +231,57 @@ class EnglishCurriculumCatalogue(EnglishModel):
             raise ValueError("The v1 catalogue must contain modules E0 through E9")
         lessons = [lesson for module in self.modules for lesson in module.lessons]
         if len(lessons) != 51:
-            raise ValueError("The v1 catalogue must contain exactly 51 core lessons")
+            raise ValueError("The v1 catalogue must contain exactly 51 curriculum lessons")
         for attr in ("lesson_code", "stable_key", "outcome_code"):
             values = [getattr(lesson, attr) for lesson in lessons]
             if len(values) != len(set(values)):
                 raise ValueError(f"Curriculum {attr} values must be unique")
+
+        route_codes = {
+            route: {lesson.lesson_code for lesson in lessons if route in lesson.route_tags}
+            for route in ROUTE_TAG_ORDER
+        }
+        if len(route_codes["full"]) != len(lessons):
+            raise ValueError("The Full route must contain all 51 curriculum lessons")
+        if not route_codes["sprint"] <= route_codes["core"]:
+            raise ValueError("Every Sprint lesson must also belong to the Core route")
+
+        for route, (minimum, maximum) in ROUTE_SIZE_BOUNDS.items():
+            count = len(route_codes[route])
+            if not minimum <= count <= maximum:
+                raise ValueError(
+                    f"The {route.title()} route must contain {minimum} to {maximum} lessons; "
+                    f"found {count}"
+                )
+            modules = {code.split(".", maxsplit=1)[0] for code in route_codes[route]}
+            if modules != REQUIRED_ROUTE_MODULES:
+                missing = sorted(REQUIRED_ROUTE_MODULES - modules)
+                raise ValueError(
+                    f"The {route.title()} route must cover modules E0 through E9; missing {missing}"
+                )
+            if not REQUIRED_ROUTE_ANCHORS <= route_codes[route]:
+                missing = sorted(REQUIRED_ROUTE_ANCHORS - route_codes[route])
+                raise ValueError(
+                    f"The {route.title()} route is missing required orientation, baseline or "
+                    f"timed-simulation anchors: {missing}"
+                )
         return self
+
+    def route_lesson_codes(self, route: Literal["full", "core", "sprint"]) -> list[str]:
+        return [
+            lesson.lesson_code
+            for module in self.modules
+            for lesson in module.lessons
+            if route in lesson.route_tags
+        ]
+
+    def route_lesson_keys(self, route: Literal["full", "core", "sprint"]) -> list[str]:
+        return [
+            lesson.stable_key
+            for module in self.modules
+            for lesson in module.lessons
+            if route in lesson.route_tags
+        ]
 
     def outcome_codes(self) -> set[str]:
         return {lesson.outcome_code for module in self.modules for lesson in module.lessons}

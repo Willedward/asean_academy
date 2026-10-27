@@ -57,6 +57,12 @@ class EnglishFoundationReport:
         return not self.errors
 
     def as_dict(self):
+        routes = ("full", "core", "sprint")
+        authored_keys = {lesson.stable_key for lesson in self.lessons}
+        route_keys = {
+            route: self.catalogue.route_lesson_keys(route) if self.catalogue else []
+            for route in routes
+        }
         return {
             "valid": self.valid,
             "curriculum_version": self.catalogue.version_key if self.catalogue else None,
@@ -68,6 +74,23 @@ class EnglishFoundationReport:
                 else 0
             ),
             "authored_lesson_count": len(self.lessons),
+            "route_lesson_counts": {route: len(route_keys[route]) for route in routes},
+            "route_authored_lesson_counts": {
+                route: len(set(route_keys[route]) & authored_keys) for route in routes
+            },
+            "route_unauthored_lesson_codes": {
+                route: (
+                    [
+                        lesson.lesson_code
+                        for module in self.catalogue.modules
+                        for lesson in module.lessons
+                        if route in lesson.route_tags and lesson.stable_key not in authored_keys
+                    ]
+                    if self.catalogue
+                    else []
+                )
+                for route in routes
+            },
             "passage_count": len(self.passages),
             "bank_count": len(self.manifests),
             "question_count": len(self.questions),

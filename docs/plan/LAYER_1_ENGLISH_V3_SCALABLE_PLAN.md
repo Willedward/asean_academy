@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 27 October 2026  
-**Status:** approved direction; V3-A foundation implemented for technical review
+**Status:** V3-A merged; V3-B fixed route blueprint implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -23,8 +23,17 @@ V3-A now provides:
 - unchanged existing lesson and question revisions, with the retry form added as a new 42nd
   draft question.
 
+The first V3-B milestone now additionally provides:
+
+- fixed 32-lesson Core and 16-lesson Sprint routes, with Sprint a strict Core subset;
+- coverage of E0 through E9 plus required orientation, baseline and timed-simulation anchors;
+- automated route-size, subset, coverage and exact-membership regression checks; and
+- route readiness reporting showing 20 of 32 Core and 11 of 16 Sprint lessons authored.
+
 The planned forms do not yet contain assessment questions and cannot be served to learners.
-Core/Sprint selection, remaining parallel forms and checkpoint content belong to V3-B.
+Remaining lesson gaps, parallel forms, assessment items and checkpoint content belong to the
+next V3-B increments. Exact route membership and rationale are recorded in
+`docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
 
 ## 1. V3 decision
 
@@ -145,10 +154,10 @@ open.
 | Core | 12–27 weeks | Approximately 28–32 lessons |
 | Sprint | Fewer than 12 weeks | Approximately 14–16 lessons |
 
-Exact Core and Sprint membership must be approved after an outcome-level review. A validator
-must count the route tags and ensure every enabled exam part, composition planning and at least
-one timed simulation are represented. V3 deliberately does not publish an incorrect fixed
-count before those tags are checked.
+Exact Core and Sprint membership is fixed in the V3-B route blueprint after an outcome-level
+review. The validator counts route tags, requires Sprint to remain a Core subset and ensures
+both routes cover E0 through E9, the baseline and the timed simulation. Changes must update the
+catalogue, blueprint and regression evidence together.
 
 ## 6. Lesson, exit-ticket and retry rules
 
@@ -376,19 +385,20 @@ review or safeguarding owner is unavailable.
 
 1. Confirm that the five-part profile in section 1 is the Beta target.
 2. Confirm that editing and scored own-words answers are excluded until new evidence appears.
-3. Approve Full/Core/Sprint as fixed lesson subsets, with exact tags decided separately.
+3. Full/Core/Sprint are approved as fixed lesson subsets; exact tags are now implemented in
+   the V3-B route blueprint.
 4. Set the essay-feedback allowance and provider-cost ceiling.
 5. Name one qualified English educator for the bounded calibration and high-risk review.
 6. Name the safeguarding contact and approve the retention policy.
 7. Set the actual Beta date; V3 uses sequence rather than the expired V2 November calendar.
 
-## 16. Immediate next milestone after approval
+## 16. Current next milestone
 
-Implement **V3-A foundation correctness** before authoring more E9 lessons:
+Complete **V3-B Sprint release breadth** before expanding optional Full-route lessons:
 
-1. add the versioned exam-profile proposal and route-tag schema;
-2. preserve the existing 51-lesson catalogue and all current stable keys;
-3. correct exit-ticket threshold, hint and parallel-retry behaviour with tests;
-4. define the baseline and form contracts for only the supported task types; and
-5. generate a migration and hosted evidence plan without publishing any unreviewed content.
+1. author the five missing Sprint lessons: E0.1, E0.2, E1.6, E2.2 and E9.5;
+2. add an exit ticket and distinct parallel retry form for every Sprint lesson;
+3. populate the protected 20-part baseline from a disjoint assessment pool;
+4. add checkpoint manifests and activate the checkpoint-to-`mastered` journey; and
+5. generate consolidated reviewer evidence without publishing unapproved content.
 
