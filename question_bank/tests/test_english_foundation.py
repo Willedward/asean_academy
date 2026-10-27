@@ -13,6 +13,7 @@ from question_bank.english_authoring import (
 )
 from question_bank.english_checking import check_english_answer, normalise_text
 from question_bank.english_models import (
+    EnglishCurriculumCatalogue,
     EnglishObjectiveQuestion,
     ShortTextResponse,
     TextNormalisation,
@@ -43,12 +44,80 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     }
     assert len(report.forms) == 3
     assert {form.status for form in report.forms} == {"planned"}
-    assert all(
-        lesson.route_tags == ["full"]
-        for module in report.catalogue.modules
-        for lesson in module.lessons
-    )
+    assert report.catalogue.route_lesson_codes("core") == [
+        "E0.1",
+        "E0.2",
+        "E1.1",
+        "E1.2",
+        "E1.4",
+        "E1.5",
+        "E1.6",
+        "E2.1",
+        "E2.2",
+        "E2.3",
+        "E2.6",
+        "E3.1",
+        "E3.2",
+        "E3.4",
+        "E4.1",
+        "E4.2",
+        "E4.4",
+        "E4.5",
+        "E5.1",
+        "E5.2",
+        "E5.3",
+        "E5.5",
+        "E5.6",
+        "E5.7",
+        "E6.1",
+        "E6.2",
+        "E6.5",
+        "E7.1",
+        "E7.2",
+        "E8.4",
+        "E9.1",
+        "E9.5",
+    ]
+    assert report.catalogue.route_lesson_codes("sprint") == [
+        "E0.1",
+        "E0.2",
+        "E1.1",
+        "E1.6",
+        "E2.2",
+        "E3.1",
+        "E4.1",
+        "E4.5",
+        "E5.2",
+        "E5.3",
+        "E5.7",
+        "E6.1",
+        "E6.5",
+        "E7.2",
+        "E8.4",
+        "E9.5",
+    ]
+    summary = report.as_dict()
+    assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
+    assert summary["route_authored_lesson_counts"] == {
+        "full": 31,
+        "core": 20,
+        "sprint": 11,
+    }
     assert not report.issues
+
+
+def test_english_routes_reject_sprint_lessons_outside_core(english_root):
+    payload = json.loads((english_root / "catalogue.json").read_text())
+    e1_3 = next(
+        lesson
+        for module in payload["modules"]
+        for lesson in module["lessons"]
+        if lesson["lesson_code"] == "E1.3"
+    )
+    e1_3["route_tags"] = ["full", "sprint"]
+
+    with pytest.raises(ValidationError, match="Sprint lesson must also belong to the Core"):
+        EnglishCurriculumCatalogue.model_validate(payload)
 
 
 def test_e6_task_analysis_preserves_every_prompt_requirement(english_root):

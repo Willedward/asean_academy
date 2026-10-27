@@ -100,7 +100,7 @@ def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
             "Use definitions, examples, contrast, cause and tone around a word to test a "
             "possible meaning."
         ),
-        "route_tags": ["full"],
+        "route_tags": ["full", "core", "sprint"],
         "content_status": "draft",
         "authored": True,
         "available": True,
