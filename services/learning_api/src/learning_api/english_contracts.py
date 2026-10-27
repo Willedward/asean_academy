@@ -8,7 +8,9 @@ from pydantic import Field, StringConstraints
 
 from .contracts import ApiModel
 
-EnglishLessonState = Literal["not_started", "in_progress", "practice_completed", "proficient"]
+EnglishLessonState = Literal[
+    "not_started", "in_progress", "practice_completed", "proficient", "mastered"
+]
 EnglishPracticeMode = Literal["guided_practice", "retry_review"]
 EnglishErrorCategory = Literal[
     "unknown_meaning",
@@ -36,6 +38,7 @@ class EnglishLessonMap(ApiModel):
     title: str
     outcome_code: str
     outcome: str
+    route_tags: list[Literal["full", "core", "sprint"]]
     content_status: Literal["planned", "draft", "reviewed", "published", "retired"]
     authored: bool
     available: bool
@@ -53,6 +56,36 @@ class EnglishModuleMap(ApiModel):
     lessons: list[EnglishLessonMap]
 
 
+class EnglishExamProfilePartResponse(ApiModel):
+    position: int
+    part_key: str
+    title: str
+    task_type: str
+    reported_format: str
+    reported_word_count: int | None
+    word_count_status: Literal["not_applicable", "guidance", "strict"]
+    configurable_fields: list[str]
+
+
+class EnglishExamProfileSectionResponse(ApiModel):
+    position: int
+    section_key: str
+    title: str
+    reported_minutes: int
+    parts: list[EnglishExamProfilePartResponse]
+
+
+class EnglishExamProfileResponse(ApiModel):
+    profile_key: str
+    status: Literal["reported", "corroborated", "official"]
+    evidence_boundary: str
+    entry_level: Literal["secondary_1_entry"]
+    effective_from: str
+    review_due: str
+    sections: list[EnglishExamProfileSectionResponse]
+    excluded_task_types: list[str]
+
+
 class EnglishCourseMapResponse(ApiModel):
     stable_key: Literal["asean-scholarship-english"] = "asean-scholarship-english"
     revision: int = 1
@@ -61,6 +94,7 @@ class EnglishCourseMapResponse(ApiModel):
     subject: Literal["English"] = "English"
     content_status: Literal["draft", "reviewed", "published", "retired"]
     development_preview: bool
+    exam_profile: EnglishExamProfileResponse
     modules: list[EnglishModuleMap]
 
 
@@ -110,6 +144,7 @@ class CreateEnglishPracticeSessionRequest(ApiModel):
 class EnglishPracticeSessionResponse(ApiModel):
     session_id: str
     status: Literal["active", "completed"]
+    exam_profile_key: str
     lesson_key: str
     lesson_revision: int
     mode: EnglishPracticeMode
@@ -186,6 +221,11 @@ class EnglishAttemptResponse(ApiModel):
     attempt_id: str
     attempt_number: int
     correct: bool
+    correct_parts: int = Field(ge=0)
+    total_parts: int = Field(ge=1)
+    score: float = Field(ge=0, le=1)
+    threshold_met: bool
+    hint_used: bool
     parts: list[EnglishAttemptPartResult]
     question_finished: Literal[True] = True
     retry_queued: bool
@@ -224,3 +264,4 @@ class EnglishProgressResponse(ApiModel):
 class EnglishHintResponse(ApiModel):
     question_key: str
     parts: list[str]
+    hint_used: Literal[True] = True

@@ -1,0 +1,132 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "form_key": {
+      "pattern": "^english-(baseline|endline|endline-reserve|checkpoint|mock)-[a-z0-9-]+-v[0-9]+$",
+      "title": "Form Key",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "form_type": {
+      "enum": [
+        "baseline",
+        "endline",
+        "endline_reserve",
+        "checkpoint",
+        "mock"
+      ],
+      "title": "Form Type",
+      "type": "string"
+    },
+    "profile_key": {
+      "pattern": "^asean-english-[a-z0-9-]+-v[0-9]+$",
+      "title": "Profile Key",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "protected": {
+      "default": true,
+      "title": "Protected",
+      "type": "boolean"
+    },
+    "tutoring_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Tutoring Enabled",
+      "type": "boolean"
+    },
+    "feedback_timing": {
+      "const": "after_form",
+      "default": "after_form",
+      "title": "Feedback Timing",
+      "type": "string"
+    },
+    "expected_scored_part_count": {
+      "maximum": 200,
+      "minimum": 1,
+      "title": "Expected Scored Part Count",
+      "type": "integer"
+    },
+    "task_part_distribution": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "propertyNames": {
+        "enum": [
+          "vocabulary_in_context",
+          "banked_cloze",
+          "open_cloze",
+          "reading_comprehension"
+        ]
+      },
+      "title": "Task Part Distribution",
+      "type": "object"
+    },
+    "question_keys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Question Keys",
+      "type": "array"
+    },
+    "paired_form_key": {
+      "anyOf": [
+        {
+          "pattern": "^english-(baseline|endline|endline-reserve|checkpoint|mock)-[a-z0-9-]+-v[0-9]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Paired Form Key"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "form_key",
+    "revision",
+    "form_type",
+    "profile_key",
+    "title",
+    "status",
+    "expected_scored_part_count",
+    "task_part_distribution",
+    "source_refs"
+  ],
+  "title": "EnglishAssessmentForm",
+  "type": "object"
+}

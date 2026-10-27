@@ -33,6 +33,18 @@
           "minLength": 1,
           "title": "Outcome",
           "type": "string"
+        },
+        "route_tags": {
+          "items": {
+            "enum": [
+              "full",
+              "core",
+              "sprint"
+            ],
+            "type": "string"
+          },
+          "title": "Route Tags",
+          "type": "array"
         }
       },
       "required": [
@@ -198,6 +210,11 @@
       "title": "Source Refs",
       "type": "array"
     },
+    "exam_profile_key": {
+      "pattern": "^asean-english-[a-z0-9-]+-v[0-9]+$",
+      "title": "Exam Profile Key",
+      "type": "string"
+    },
     "exam_blueprint": {
       "items": {
         "$ref": "#/$defs/ExamPart"
@@ -222,6 +239,7 @@
     "status",
     "evidence_boundary",
     "source_refs",
+    "exam_profile_key",
     "exam_blueprint",
     "modules"
   ],

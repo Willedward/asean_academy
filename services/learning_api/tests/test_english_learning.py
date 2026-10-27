@@ -79,6 +79,11 @@ def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
 
     assert course.status_code == 200, course.text
     assert len(course.json()["modules"]) == 10
+    assert course.json()["exam_profile"]["profile_key"] == ("asean-english-sec1-id-reported-v1")
+    assert course.json()["exam_profile"]["excluded_task_types"] == [
+        "editing_section",
+        "own_words_short_answer",
+    ]
     first = next(
         lesson
         for module in course.json()["modules"]
@@ -95,6 +100,7 @@ def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
             "Use definitions, examples, contrast, cause and tone around a word to test a "
             "possible meaning."
         ),
+        "route_tags": ["full"],
         "content_status": "draft",
         "authored": True,
         "available": True,
@@ -120,6 +126,7 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
 
     assert created.status_code == 201, created.text
     assert created.json() == replay.json()
+    assert created.json()["exam_profile_key"] == "asean-english-sec1-id-reported-v1"
     assert created.json()["question_count"] == 6
     assert created.json()["development_drafts"] is True
     session_id = created.json()["session_id"]
@@ -178,7 +185,8 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
         "GET",
         f"/api/v1/english/practice-sessions/{retry_id}/next",
     ).json()["question"]
-    assert retry_question["stable_key"] == "ev-l1-006"
+    assert retry_question["stable_key"] == "ev-l1-007"
+    assert retry_question["stable_key"] != exit_ticket["stable_key"]
 
     corrected = submit(app, retry_id, retry_question, "A", "e1-corrected-exit")
     assert corrected.status_code == 200, corrected.text
@@ -188,6 +196,41 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
     after_retry = request(app, "GET", "/api/v1/english/progress").json()["lessons"][0]
     assert after_retry["state"] == "proficient"
     assert after_retry["retry_question_count"] == 0
+
+
+def test_hint_use_is_recorded_and_prevents_exit_ticket_proficiency():
+    app = application()
+    created = create_session(app, "e1-hint-guided")
+    session_id = created.json()["session_id"]
+    for number, answer in enumerate(["B", "A", "A", "A", "A"], 1):
+        question = request(
+            app,
+            "GET",
+            f"/api/v1/english/practice-sessions/{session_id}/next",
+        ).json()["question"]
+        answered = submit(app, session_id, question, answer, f"e1-hint-lead-{number}")
+        assert answered.status_code == 200, answered.text
+
+    exit_ticket = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    ).json()["question"]
+    hint = request(
+        app,
+        "POST",
+        f"/api/v1/english/practice-sessions/{session_id}/questions/{exit_ticket['stable_key']}/hint",
+    )
+    assert hint.status_code == 200, hint.text
+    assert hint.json()["hint_used"] is True
+
+    answered = submit(app, session_id, exit_ticket, "A", "e1-hinted-exit")
+    assert answered.status_code == 200, answered.text
+    assert answered.json()["correct"] is True
+    assert answered.json()["hint_used"] is True
+    assert answered.json()["threshold_met"] is False
+    assert answered.json()["retry_queued"] is True
+    assert answered.json()["lesson_state"] == "practice_completed"
 
 
 def test_e2_1_grammar_journey_marks_boundaries_and_agreement_deterministically():
@@ -357,6 +400,46 @@ def test_e3_1_banked_cloze_exposes_one_bank_and_marks_the_whole_passage():
     assert completed.json()["correct"] is True
     assert completed.json()["lesson_state"] == "proficient"
     assert [part["correct"] for part in completed.json()["parts"]] == [True] * 8
+
+
+def test_exit_ticket_uses_part_score_and_accepts_exactly_seventy_five_percent():
+    app = application()
+    created = create_session(app, "e3-threshold", lesson_key="e3-lesson-01")
+    session_id = created.json()["session_id"]
+    question = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    ).json()["question"]
+    completed = request(
+        app,
+        "POST",
+        "/api/v1/english/attempts",
+        headers={"Idempotency-Key": "e3-threshold-complete"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {
+                "1": "B",
+                "2": "H",
+                "3": "D",
+                "4": "L",
+                "5": "A",
+                "6": "I",
+                "7": "G",
+                "8": "F",
+            },
+        },
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["correct"] is False
+    assert completed.json()["correct_parts"] == 6
+    assert completed.json()["total_parts"] == 8
+    assert completed.json()["score"] == 0.75
+    assert completed.json()["threshold_met"] is True
+    assert completed.json()["retry_queued"] is False
+    assert completed.json()["lesson_state"] == "proficient"
 
 
 def test_e4_1_open_cloze_accepts_only_reviewed_words_and_marks_as_one_group():

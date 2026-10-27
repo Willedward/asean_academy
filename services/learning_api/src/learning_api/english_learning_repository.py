@@ -28,10 +28,11 @@ class EnglishLearningRepository(Protocol):
         self,
         learner_id: str,
         *,
+        exam_profile_key: str,
         lesson_key: str,
         lesson_revision: int,
         mode: str,
-        questions: list[tuple[str, int, str]],
+        questions: list[tuple[str, int, str, str | None]],
         idempotency_key: str,
         development_drafts: bool,
     ) -> dict: ...
@@ -50,11 +51,13 @@ class EnglishLearningRepository(Protocol):
         answers: dict,
         response: dict,
         correct: bool,
+        correct_parts: int,
+        total_parts: int,
+        threshold_met: bool,
         retry_queued: bool,
     ) -> dict: ...
-    def record_classification(
-        self, learner_id: str, attempt_id: str, category: str
-    ) -> dict: ...
+    def record_hint(self, learner_id: str, session_id: str, question_key: str) -> None: ...
+    def record_classification(self, learner_id: str, attempt_id: str, category: str) -> dict: ...
     def retry_keys(self, learner_id: str, lesson_key: str) -> list[str]: ...
     def retry_count(self, learner_id: str, lesson_key: str) -> int: ...
     def progress(self, learner_id: str) -> list[dict]: ...
@@ -88,6 +91,7 @@ class InMemoryEnglishLearningRepository:
             for key in (
                 "session_id",
                 "status",
+                "exam_profile_key",
                 "lesson_key",
                 "lesson_revision",
                 "mode",
@@ -119,10 +123,11 @@ class InMemoryEnglishLearningRepository:
         self,
         learner_id: str,
         *,
+        exam_profile_key: str,
         lesson_key: str,
         lesson_revision: int,
         mode: str,
-        questions: list[tuple[str, int, str]],
+        questions: list[tuple[str, int, str, str | None]],
         idempotency_key: str,
         development_drafts: bool,
     ) -> dict:
@@ -139,6 +144,7 @@ class InMemoryEnglishLearningRepository:
             "session_id": session_id,
             "learner_id": learner_id,
             "status": "active",
+            "exam_profile_key": exam_profile_key,
             "lesson_key": lesson_key,
             "lesson_revision": lesson_revision,
             "mode": mode,
@@ -153,9 +159,15 @@ class InMemoryEnglishLearningRepository:
                 "question_key": question_key,
                 "question_revision": revision,
                 "exposure_pool": exposure_pool,
+                "retry_source_key": retry_source_key,
                 "status": "pending",
+                "correct_parts": 0,
+                "total_parts": 0,
+                "hint_used": False,
             }
-            for position, (question_key, revision, exposure_pool) in enumerate(questions, 1)
+            for position, (question_key, revision, exposure_pool, retry_source_key) in enumerate(
+                questions, 1
+            )
         ]
         self.session_keys[key] = session_id
         progress_key = (learner_id, lesson_key)
@@ -197,22 +209,25 @@ class InMemoryEnglishLearningRepository:
         resolved = sum(item["status"] != "pending" for item in assignments)
         correct = sum(item["status"] == "correct" for item in assignments)
         incorrect = sum(item["status"] == "incorrect" for item in assignments)
-        exit_correct = any(
-            item["exposure_pool"] == "exit_ticket" and item["status"] == "correct"
-            for item in assignments
+        qualifying = (
+            assignments
+            if session["mode"] == "retry_review"
+            else [item for item in assignments if item["exposure_pool"] == "exit_ticket"]
         )
-        if session["mode"] == "retry_review" and correct:
-            state = "proficient"
-        elif resolved < len(assignments):
+        correct_parts = sum(item["correct_parts"] for item in qualifying)
+        total_parts = sum(item["total_parts"] for item in qualifying)
+        hint_used = any(item["hint_used"] for item in qualifying)
+        threshold_met = total_parts > 0 and correct_parts / total_parts >= 0.75 and not hint_used
+        if resolved < len(assignments):
             state = "in_progress"
-        elif exit_correct:
+        elif threshold_met:
             state = "proficient"
         else:
             state = "practice_completed"
         progress_key = (learner_id, session["lesson_key"])
         previous = self.lesson_progress.get(progress_key)
-        if previous and previous["state"] == "proficient":
-            state = "proficient"
+        if previous and previous["state"] in {"proficient", "mastered"}:
+            state = previous["state"]
         self.lesson_progress[progress_key] = {
             "lesson_key": session["lesson_key"],
             "lesson_revision": session["lesson_revision"],
@@ -239,6 +254,9 @@ class InMemoryEnglishLearningRepository:
         answers: dict,
         response: dict,
         correct: bool,
+        correct_parts: int,
+        total_parts: int,
+        threshold_met: bool,
         retry_queued: bool,
     ) -> dict:
         replay = self.attempt_by_idempotency(learner_id, idempotency_key)
@@ -261,12 +279,13 @@ class InMemoryEnglishLearningRepository:
                 409,
             )
         attempt_number = 1 + sum(
-            attempt["learner_id"] == learner_id
-            and attempt["question_key"] == question_key
+            attempt["learner_id"] == learner_id and attempt["question_key"] == question_key
             for attempt in self.attempts.values()
         )
         response = dict(response, attempt_number=attempt_number)
         assignment["status"] = "correct" if correct else "incorrect"
+        assignment["correct_parts"] = correct_parts
+        assignment["total_parts"] = total_parts
         if retry_queued:
             self.retries[(learner_id, question_key)] = {
                 "lesson_key": session["lesson_key"],
@@ -275,8 +294,8 @@ class InMemoryEnglishLearningRepository:
                 "state": "queued",
                 "queued_at": _now(),
             }
-        if session["mode"] == "retry_review" and correct:
-            retry = self.retries.get((learner_id, question_key))
+        if session["mode"] == "retry_review" and threshold_met:
+            retry = self.retries.get((learner_id, assignment["retry_source_key"]))
             if retry:
                 retry["state"] = "resolved"
         if all(item["status"] != "pending" for item in self.assignments[session_id]):
@@ -296,9 +315,25 @@ class InMemoryEnglishLearningRepository:
         self.attempt_keys[(learner_id, idempotency_key)] = attempt_id
         return dict(response)
 
-    def record_classification(
-        self, learner_id: str, attempt_id: str, category: str
-    ) -> dict:
+    def record_hint(self, learner_id: str, session_id: str, question_key: str) -> None:
+        self._owned(learner_id, session_id)
+        assignment = next(
+            (
+                item
+                for item in self.assignments[session_id]
+                if item["question_key"] == question_key and item["status"] == "pending"
+            ),
+            None,
+        )
+        if assignment is None:
+            raise EnglishLearningError(
+                "english_question_not_pending",
+                "The English question is not awaiting an answer in this session.",
+                409,
+            )
+        assignment["hint_used"] = True
+
+    def record_classification(self, learner_id: str, attempt_id: str, category: str) -> dict:
         attempt = self.attempts.get(attempt_id)
         if attempt is None or attempt["learner_id"] != learner_id:
             raise EnglishLearningError(
@@ -351,9 +386,7 @@ class PostgresEnglishLearningRepository:
 
     @staticmethod
     def _set_identity(connection, learner_id: str) -> None:
-        connection.execute(
-            "select set_config('request.jwt.claim.sub', %s, true)", (learner_id,)
-        )
+        connection.execute("select set_config('request.jwt.claim.sub', %s, true)", (learner_id,))
 
     @staticmethod
     def _summary(connection, session: dict) -> dict:
@@ -370,6 +403,7 @@ class PostgresEnglishLearningRepository:
         return {
             "session_id": str(session["id"]),
             "status": session["status"],
+            "exam_profile_key": session["exam_profile_key"],
             "lesson_key": session["lesson_key"],
             "lesson_revision": session["lesson_revision"],
             "mode": session["mode"],
@@ -411,10 +445,11 @@ class PostgresEnglishLearningRepository:
         self,
         learner_id: str,
         *,
+        exam_profile_key: str,
         lesson_key: str,
         lesson_revision: int,
         mode: str,
-        questions: list[tuple[str, int, str]],
+        questions: list[tuple[str, int, str, str | None]],
         idempotency_key: str,
         development_drafts: bool,
     ) -> dict:
@@ -455,12 +490,13 @@ class PostgresEnglishLearningRepository:
             session = connection.execute(
                 """
                 insert into english_practice_sessions (
-                    student_id, lesson_key, lesson_revision, mode,
+                    student_id, exam_profile_key, lesson_key, lesson_revision, mode,
                     requested_question_count, development_drafts
-                ) values (%s, %s, %s, %s, %s, %s) returning *
+                ) values (%s, %s, %s, %s, %s, %s, %s) returning *
                 """,
                 (
                     learner_id,
+                    exam_profile_key,
                     lesson_key,
                     lesson_revision,
                     mode,
@@ -468,7 +504,12 @@ class PostgresEnglishLearningRepository:
                     development_drafts,
                 ),
             ).fetchone()
-            for position, (question_key, revision, _exposure) in enumerate(questions, 1):
+            for position, (
+                question_key,
+                revision,
+                _exposure,
+                retry_source_key,
+            ) in enumerate(questions, 1):
                 question = connection.execute(
                     """
                     select versions.id from english_objective_questions questions
@@ -484,13 +525,27 @@ class PostgresEnglishLearningRepository:
                         "The assigned English question revision has not been imported.",
                         503,
                     )
+                retry_source_id = None
+                if retry_source_key is not None:
+                    retry_source = connection.execute(
+                        "select id from english_objective_questions where stable_key=%s",
+                        (retry_source_key,),
+                    ).fetchone()
+                    if retry_source is None:
+                        raise EnglishLearningError(
+                            "english_parallel_retry_source_not_imported",
+                            "The source question for this parallel retry has not been imported.",
+                            503,
+                        )
+                    retry_source_id = retry_source["id"]
                 connection.execute(
                     """
                     insert into english_session_questions (
-                        practice_session_id, question_version_id, position
-                    ) values (%s, %s, %s)
+                        practice_session_id, question_version_id, position,
+                        retry_source_question_id
+                    ) values (%s, %s, %s, %s)
                     """,
-                    (session["id"], question["id"], position),
+                    (session["id"], question["id"], position, retry_source_id),
                 )
             connection.execute(
                 """
@@ -508,8 +563,8 @@ class PostgresEnglishLearningRepository:
                 ) values (%s, %s, %s, 'in_progress', %s, %s)
                 on conflict (student_id, lesson_key) do update set
                     lesson_revision=excluded.lesson_revision,
-                    state=case when english_lesson_progress.state='proficient'
-                               then 'proficient'::english_lesson_progress_state
+                    state=case when english_lesson_progress.state in ('proficient','mastered')
+                               then english_lesson_progress.state
                                else 'in_progress'::english_lesson_progress_state end,
                     question_count=excluded.question_count,
                     last_practice_session_id=excluded.last_practice_session_id,
@@ -532,11 +587,15 @@ class PostgresEnglishLearningRepository:
                 """
                 select assigned.position, questions.stable_key as question_key,
                        versions.revision as question_revision,
-                       questions.exposure_pool::text as exposure_pool
+                       questions.exposure_pool::text as exposure_pool,
+                       assigned.hint_used,
+                       retry_source.stable_key as retry_source_key
                 from english_session_questions assigned
                 join english_objective_question_versions versions
                   on versions.id=assigned.question_version_id
                 join english_objective_questions questions on questions.id=versions.question_id
+                left join english_objective_questions retry_source
+                  on retry_source.id=assigned.retry_source_question_id
                 where assigned.practice_session_id=%s and assigned.status='pending'
                 order by assigned.position limit 1
                 """,
@@ -565,14 +624,21 @@ class PostgresEnglishLearningRepository:
             return row["result"] if row else None
 
     def _sync_progress(self, connection, learner_id: str, session: dict) -> str:
+        qualifying_clause = (
+            "true" if session["mode"] == "retry_review" else "questions.exposure_pool='exit_ticket'"
+        )
         counts = connection.execute(
-            """
+            f"""
             select count(*)::integer as question_count,
                    count(*) filter (where assigned.status <> 'pending')::integer as resolved_count,
                    count(*) filter (where assigned.status = 'correct')::integer as correct_count,
                    count(*) filter (where assigned.status = 'incorrect')::integer as incorrect_count,
-                   bool_or(questions.exposure_pool='exit_ticket' and assigned.status='correct')
-                       as exit_correct
+                   coalesce(sum(assigned.correct_parts) filter (where {qualifying_clause}), 0)::integer
+                       as qualifying_correct_parts,
+                   coalesce(sum(assigned.total_parts) filter (where {qualifying_clause}), 0)::integer
+                       as qualifying_total_parts,
+                   coalesce(bool_or(assigned.hint_used) filter (where {qualifying_clause}), false)
+                       as qualifying_hint_used
             from english_session_questions assigned
             join english_objective_question_versions versions
               on versions.id=assigned.question_version_id
@@ -581,11 +647,14 @@ class PostgresEnglishLearningRepository:
             """,
             (session["id"],),
         ).fetchone()
-        if session["mode"] == "retry_review" and counts["correct_count"]:
-            state = "proficient"
-        elif counts["resolved_count"] < counts["question_count"]:
+        threshold_met = (
+            counts["qualifying_total_parts"] > 0
+            and counts["qualifying_correct_parts"] / counts["qualifying_total_parts"] >= 0.75
+            and not counts["qualifying_hint_used"]
+        )
+        if counts["resolved_count"] < counts["question_count"]:
             state = "in_progress"
-        elif counts["exit_correct"]:
+        elif threshold_met:
             state = "proficient"
         else:
             state = "practice_completed"
@@ -596,8 +665,8 @@ class PostgresEnglishLearningRepository:
             """,
             (learner_id, session["lesson_key"]),
         ).fetchone()
-        if current and current["state"] == "proficient":
-            state = "proficient"
+        if current and current["state"] in {"proficient", "mastered"}:
+            state = current["state"]
         connection.execute(
             """
             insert into english_lesson_progress (
@@ -613,7 +682,7 @@ class PostgresEnglishLearningRepository:
                 incorrect_count=excluded.incorrect_count,
                 last_practice_session_id=excluded.last_practice_session_id,
                 updated_at=now(),
-                completed_at=case when excluded.state in ('practice_completed','proficient')
+                completed_at=case when excluded.state in ('practice_completed','proficient','mastered')
                                   then coalesce(english_lesson_progress.completed_at, now())
                                   else null end
             """,
@@ -643,6 +712,9 @@ class PostgresEnglishLearningRepository:
         answers: dict,
         response: dict,
         correct: bool,
+        correct_parts: int,
+        total_parts: int,
+        threshold_met: bool,
         retry_queued: bool,
     ) -> dict:
         with self._connect() as connection, connection.transaction():
@@ -663,8 +735,9 @@ class PostgresEnglishLearningRepository:
             session = self._owned(connection, learner_id, session_id, lock=True)
             assigned = connection.execute(
                 """
-                select assigned.id, assigned.status, questions.exposure_pool::text,
-                       questions.id as question_id
+                select assigned.id, assigned.status, assigned.hint_used,
+                       assigned.retry_source_question_id,
+                       questions.exposure_pool::text, questions.id as question_id
                 from english_session_questions assigned
                 join english_objective_question_versions versions
                   on versions.id=assigned.question_version_id
@@ -697,9 +770,15 @@ class PostgresEnglishLearningRepository:
             connection.execute(
                 """
                 update english_session_questions
-                set status=%s, resolved_at=now() where id=%s
+                set status=%s, correct_parts=%s, total_parts=%s, resolved_at=now()
+                where id=%s
                 """,
-                ("correct" if correct else "incorrect", assigned["id"]),
+                (
+                    "correct" if correct else "incorrect",
+                    correct_parts,
+                    total_parts,
+                    assigned["id"],
+                ),
             )
             pending = connection.execute(
                 """
@@ -757,19 +836,47 @@ class PostgresEnglishLearningRepository:
                         attempt_id,
                     ),
                 )
-            if session["mode"] == "retry_review" and correct:
+            if (
+                session["mode"] == "retry_review"
+                and threshold_met
+                and assigned["retry_source_question_id"] is not None
+            ):
                 connection.execute(
                     """
                     update english_retry_queue set state='resolved', resolved_at=now()
                     where student_id=%s and question_id=%s
                     """,
-                    (learner_id, assigned["question_id"]),
+                    (learner_id, assigned["retry_source_question_id"]),
                 )
             return response
 
-    def record_classification(
-        self, learner_id: str, attempt_id: str, category: str
-    ) -> dict:
+    def record_hint(self, learner_id: str, session_id: str, question_key: str) -> None:
+        with self._connect() as connection, connection.transaction():
+            self._set_identity(connection, learner_id)
+            session = self._owned(connection, learner_id, session_id, lock=True)
+            updated = connection.execute(
+                """
+                update english_session_questions assigned
+                set hint_used=true, hint_revealed_at=coalesce(hint_revealed_at, now())
+                from english_objective_question_versions versions,
+                     english_objective_questions questions
+                where assigned.practice_session_id=%s
+                  and assigned.question_version_id=versions.id
+                  and versions.question_id=questions.id
+                  and questions.stable_key=%s
+                  and assigned.status='pending'
+                returning assigned.id
+                """,
+                (session["id"], question_key),
+            ).fetchone()
+            if updated is None:
+                raise EnglishLearningError(
+                    "english_question_not_pending",
+                    "The English question is not awaiting an answer in this session.",
+                    409,
+                )
+
+    def record_classification(self, learner_id: str, attempt_id: str, category: str) -> dict:
         with self._connect() as connection, connection.transaction():
             self._set_identity(connection, learner_id)
             attempt = connection.execute(

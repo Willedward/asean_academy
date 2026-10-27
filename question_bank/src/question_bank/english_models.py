@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import date, datetime
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -17,6 +17,7 @@ LESSON_KEY_PATTERN = r"^e[0-9]+-lesson-[0-9]{2}$"
 QUESTION_KEY_PATTERN = r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$"
 BANK_KEY_PATTERN = r"^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$"
 PASSAGE_KEY_PATTERN = r"^english-passage-[a-z0-9-]+$"
+EXAM_PROFILE_KEY_PATTERN = r"^asean-english-[a-z0-9-]+-v[0-9]+$"
 
 
 class EnglishModel(BaseModel):
@@ -82,6 +83,15 @@ class CurriculumLesson(EnglishModel):
     title: str = Field(min_length=1, max_length=120)
     outcome_code: str = Field(pattern=OUTCOME_CODE_PATTERN)
     outcome: str = Field(min_length=1)
+    route_tags: list[Literal["full", "core", "sprint"]] = Field(default_factory=lambda: ["full"])
+
+    @model_validator(mode="after")
+    def routes_are_explicit_and_unique(self):
+        if "full" not in self.route_tags:
+            raise ValueError("Every English lesson must remain available on the Full route")
+        if len(self.route_tags) != len(set(self.route_tags)):
+            raise ValueError("Lesson route tags must be unique")
+        return self
 
 
 class CurriculumModule(EnglishModel):
@@ -113,6 +123,87 @@ class ExamPart(EnglishModel):
     configurable_fields: list[str]
 
 
+class EnglishExamProfilePart(EnglishModel):
+    position: int = Field(ge=1)
+    part_key: str = Field(pattern=r"^section-[12]-part-[1-4]$")
+    title: str = Field(min_length=1)
+    task_type: Literal[
+        "vocabulary_in_context",
+        "banked_cloze",
+        "open_cloze",
+        "reading_comprehension",
+        "composition",
+    ]
+    reported_format: str = Field(min_length=1)
+    reported_word_count: int | None = Field(default=None, ge=1, le=2000)
+    word_count_status: Literal["not_applicable", "guidance", "strict"] = "not_applicable"
+    configurable_fields: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def word_count_evidence_is_consistent(self):
+        if (self.reported_word_count is None) != (self.word_count_status == "not_applicable"):
+            raise ValueError("Word-count value and evidence status must be supplied together")
+        return self
+
+
+class EnglishExamProfileSection(EnglishModel):
+    position: int = Field(ge=1, le=2)
+    section_key: Literal["section-1", "section-2"]
+    title: str = Field(min_length=1)
+    reported_minutes: int = Field(ge=1, le=180)
+    parts: list[EnglishExamProfilePart] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def parts_are_ordered_and_scoped(self):
+        if [part.position for part in self.parts] != list(range(1, len(self.parts) + 1)):
+            raise ValueError("Exam-profile part positions must be consecutive from 1")
+        if any(not part.part_key.startswith(f"{self.section_key}-part-") for part in self.parts):
+            raise ValueError("Exam-profile parts must belong to their section")
+        return self
+
+
+class EnglishExamProfile(EnglishModel):
+    schema_version: Literal["1.0.0"] = ENGLISH_SCHEMA_VERSION
+    profile_key: str = Field(pattern=EXAM_PROFILE_KEY_PATTERN)
+    title: str = Field(min_length=1)
+    status: Literal["reported", "corroborated", "official"]
+    evidence_boundary: str = Field(min_length=1)
+    source_refs: list[str] = Field(min_length=1)
+    audience: str = Field(min_length=1)
+    entry_level: Literal["secondary_1_entry"]
+    effective_from: date
+    review_due: date
+    sections: list[EnglishExamProfileSection] = Field(min_length=2, max_length=2)
+    excluded_task_types: list[Literal["editing_section", "own_words_short_answer"]]
+
+    @model_validator(mode="after")
+    def profile_is_complete_and_unique(self):
+        if self.review_due <= self.effective_from:
+            raise ValueError("Exam-profile review_due must follow effective_from")
+        if [section.position for section in self.sections] != [1, 2]:
+            raise ValueError("The reported profile must contain ordered Sections 1 and 2")
+        if [section.section_key for section in self.sections] != ["section-1", "section-2"]:
+            raise ValueError("The reported profile must contain Sections 1 and 2")
+        part_keys = [part.part_key for section in self.sections for part in section.parts]
+        if len(part_keys) != len(set(part_keys)):
+            raise ValueError("Exam-profile part keys must be unique")
+        task_types = [part.task_type for section in self.sections for part in section.parts]
+        required = {
+            "vocabulary_in_context",
+            "banked_cloze",
+            "open_cloze",
+            "reading_comprehension",
+            "composition",
+        }
+        if set(task_types) != required:
+            raise ValueError("The reported profile must contain only the five supported task types")
+        if set(self.excluded_task_types) != {"editing_section", "own_words_short_answer"}:
+            raise ValueError(
+                "The V3 profile must explicitly exclude unsupported recalled task types"
+            )
+        return self
+
+
 class EnglishCurriculumCatalogue(EnglishModel):
     schema_version: Literal["1.0.0"] = ENGLISH_SCHEMA_VERSION
     version_key: Literal["asean_scholarship_english_v1_draft"]
@@ -121,6 +212,7 @@ class EnglishCurriculumCatalogue(EnglishModel):
     status: Literal["draft", "reviewed", "published", "retired"]
     evidence_boundary: str = Field(min_length=1)
     source_refs: list[str] = Field(min_length=1)
+    exam_profile_key: str = Field(pattern=EXAM_PROFILE_KEY_PATTERN)
     exam_blueprint: list[ExamPart] = Field(min_length=1)
     modules: list[CurriculumModule] = Field(min_length=1)
 
@@ -144,6 +236,56 @@ class EnglishCurriculumCatalogue(EnglishModel):
 
     def lesson_keys(self) -> set[str]:
         return {lesson.stable_key for module in self.modules for lesson in module.lessons}
+
+
+class EnglishAssessmentForm(EnglishModel):
+    schema_version: Literal["1.0.0"] = ENGLISH_SCHEMA_VERSION
+    form_key: str = Field(
+        pattern=r"^english-(baseline|endline|endline-reserve|checkpoint|mock)-[a-z0-9-]+-v[0-9]+$"
+    )
+    revision: int = Field(ge=1)
+    form_type: Literal["baseline", "endline", "endline_reserve", "checkpoint", "mock"]
+    profile_key: str = Field(pattern=EXAM_PROFILE_KEY_PATTERN)
+    title: str = Field(min_length=1)
+    status: Literal["planned", "draft", "reviewed", "published", "retired"]
+    protected: bool = True
+    tutoring_enabled: Literal[False] = False
+    feedback_timing: Literal["after_form"] = "after_form"
+    expected_scored_part_count: int = Field(ge=1, le=200)
+    task_part_distribution: dict[
+        Literal[
+            "vocabulary_in_context",
+            "banked_cloze",
+            "open_cloze",
+            "reading_comprehension",
+        ],
+        int,
+    ]
+    question_keys: list[str] = Field(default_factory=list)
+    paired_form_key: str | None = Field(
+        default=None,
+        pattern=r"^english-(baseline|endline|endline-reserve|checkpoint|mock)-[a-z0-9-]+-v[0-9]+$",
+    )
+    source_refs: list[str] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def form_is_consistent(self):
+        expected_prefix = f"english-{self.form_type.replace('_', '-')}-"
+        if not self.form_key.startswith(expected_prefix):
+            raise ValueError("Assessment-form key must match form_type")
+        if any(count < 0 for count in self.task_part_distribution.values()):
+            raise ValueError("Assessment-form task counts cannot be negative")
+        if sum(self.task_part_distribution.values()) != self.expected_scored_part_count:
+            raise ValueError(
+                "Assessment-form task distribution must equal expected_scored_part_count"
+            )
+        if len(self.question_keys) != len(set(self.question_keys)):
+            raise ValueError("Assessment-form question keys must be unique")
+        if self.status != "planned" and not self.question_keys:
+            raise ValueError("Authored assessment forms must pin at least one question")
+        if self.paired_form_key == self.form_key:
+            raise ValueError("An assessment form cannot pair with itself")
+        return self
 
 
 class EnglishPassage(EnglishModel):
@@ -306,6 +448,7 @@ class EnglishObjectiveQuestion(EnglishModel):
     ]
     feedback_timing: Literal["after_item", "after_group"]
     status: Literal["draft", "reviewed", "published", "retired"]
+    parallel_form_of: str | None = Field(default=None, pattern=QUESTION_KEY_PATTERN)
     passage_ref: PassageReference | None = None
     instructions: str = Field(min_length=1)
     parts: list[EnglishQuestionPart] = Field(min_length=1)
@@ -344,6 +487,12 @@ class EnglishObjectiveQuestion(EnglishModel):
                 raise ValueError("Every open cloze gap must use a short-text response")
         if self.status in {"reviewed", "published"} and self.provenance.reviewed_at is None:
             raise ValueError("Reviewed and published questions require review provenance")
+        if self.exposure_pool == "retry_review" and self.parallel_form_of is None:
+            raise ValueError("Retry-review questions must identify their parallel source form")
+        if self.exposure_pool != "retry_review" and self.parallel_form_of is not None:
+            raise ValueError("Only retry-review questions may identify a parallel source form")
+        if self.parallel_form_of == self.stable_key:
+            raise ValueError("A retry question cannot be its own parallel source form")
         return self
 
 

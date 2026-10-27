@@ -1,0 +1,223 @@
+{
+  "$defs": {
+    "EnglishExamProfilePart": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "part_key": {
+          "pattern": "^section-[12]-part-[1-4]$",
+          "title": "Part Key",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "task_type": {
+          "enum": [
+            "vocabulary_in_context",
+            "banked_cloze",
+            "open_cloze",
+            "reading_comprehension",
+            "composition"
+          ],
+          "title": "Task Type",
+          "type": "string"
+        },
+        "reported_format": {
+          "minLength": 1,
+          "title": "Reported Format",
+          "type": "string"
+        },
+        "reported_word_count": {
+          "anyOf": [
+            {
+              "maximum": 2000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reported Word Count"
+        },
+        "word_count_status": {
+          "default": "not_applicable",
+          "enum": [
+            "not_applicable",
+            "guidance",
+            "strict"
+          ],
+          "title": "Word Count Status",
+          "type": "string"
+        },
+        "configurable_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Configurable Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "position",
+        "part_key",
+        "title",
+        "task_type",
+        "reported_format"
+      ],
+      "title": "EnglishExamProfilePart",
+      "type": "object"
+    },
+    "EnglishExamProfileSection": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "section_key": {
+          "enum": [
+            "section-1",
+            "section-2"
+          ],
+          "title": "Section Key",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "reported_minutes": {
+          "maximum": 180,
+          "minimum": 1,
+          "title": "Reported Minutes",
+          "type": "integer"
+        },
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/EnglishExamProfilePart"
+          },
+          "minItems": 1,
+          "title": "Parts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "position",
+        "section_key",
+        "title",
+        "reported_minutes",
+        "parts"
+      ],
+      "title": "EnglishExamProfileSection",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "profile_key": {
+      "pattern": "^asean-english-[a-z0-9-]+-v[0-9]+$",
+      "title": "Profile Key",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "reported",
+        "corroborated",
+        "official"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "evidence_boundary": {
+      "minLength": 1,
+      "title": "Evidence Boundary",
+      "type": "string"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "audience": {
+      "minLength": 1,
+      "title": "Audience",
+      "type": "string"
+    },
+    "entry_level": {
+      "const": "secondary_1_entry",
+      "title": "Entry Level",
+      "type": "string"
+    },
+    "effective_from": {
+      "format": "date",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "review_due": {
+      "format": "date",
+      "title": "Review Due",
+      "type": "string"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/EnglishExamProfileSection"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Sections",
+      "type": "array"
+    },
+    "excluded_task_types": {
+      "items": {
+        "enum": [
+          "editing_section",
+          "own_words_short_answer"
+        ],
+        "type": "string"
+      },
+      "title": "Excluded Task Types",
+      "type": "array"
+    }
+  },
+  "required": [
+    "profile_key",
+    "title",
+    "status",
+    "evidence_boundary",
+    "source_refs",
+    "audience",
+    "entry_level",
+    "effective_from",
+    "review_due",
+    "sections",
+    "excluded_task_types"
+  ],
+  "title": "EnglishExamProfile",
+  "type": "object"
+}

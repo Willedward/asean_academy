@@ -421,6 +421,19 @@
       "title": "Status",
       "type": "string"
     },
+    "parallel_form_of": {
+      "anyOf": [
+        {
+          "pattern": "^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parallel Form Of"
+    },
     "passage_ref": {
       "anyOf": [
         {

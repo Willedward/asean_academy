@@ -2984,11 +2984,15 @@ export interface components {
             attempt_number: number;
             /** Correct */
             correct: boolean;
+            /** Correct Parts */
+            correct_parts: number;
+            /** Hint Used */
+            hint_used: boolean;
             /**
              * Lesson State
              * @enum {string}
              */
-            lesson_state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            lesson_state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
             /** Needs Error Classification */
             needs_error_classification: boolean;
             /** Parts */
@@ -3001,6 +3005,12 @@ export interface components {
             question_finished: true;
             /** Retry Queued */
             retry_queued: boolean;
+            /** Score */
+            score: number;
+            /** Threshold Met */
+            threshold_met: boolean;
+            /** Total Parts */
+            total_parts: number;
         };
         /** EnglishChoiceOptionResponse */
         EnglishChoiceOptionResponse: {
@@ -3020,6 +3030,7 @@ export interface components {
             description: string;
             /** Development Preview */
             development_preview: boolean;
+            exam_profile: components["schemas"]["EnglishExamProfileResponse"];
             /** Modules */
             modules: components["schemas"]["EnglishModuleMap"][];
             /**
@@ -3057,8 +3068,74 @@ export interface components {
              */
             recorded: boolean;
         };
+        /** EnglishExamProfilePartResponse */
+        EnglishExamProfilePartResponse: {
+            /** Configurable Fields */
+            configurable_fields: string[];
+            /** Part Key */
+            part_key: string;
+            /** Position */
+            position: number;
+            /** Reported Format */
+            reported_format: string;
+            /** Reported Word Count */
+            reported_word_count: number | null;
+            /** Task Type */
+            task_type: string;
+            /** Title */
+            title: string;
+            /**
+             * Word Count Status
+             * @enum {string}
+             */
+            word_count_status: "not_applicable" | "guidance" | "strict";
+        };
+        /** EnglishExamProfileResponse */
+        EnglishExamProfileResponse: {
+            /** Effective From */
+            effective_from: string;
+            /**
+             * Entry Level
+             * @constant
+             */
+            entry_level: "secondary_1_entry";
+            /** Evidence Boundary */
+            evidence_boundary: string;
+            /** Excluded Task Types */
+            excluded_task_types: string[];
+            /** Profile Key */
+            profile_key: string;
+            /** Review Due */
+            review_due: string;
+            /** Sections */
+            sections: components["schemas"]["EnglishExamProfileSectionResponse"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "reported" | "corroborated" | "official";
+        };
+        /** EnglishExamProfileSectionResponse */
+        EnglishExamProfileSectionResponse: {
+            /** Parts */
+            parts: components["schemas"]["EnglishExamProfilePartResponse"][];
+            /** Position */
+            position: number;
+            /** Reported Minutes */
+            reported_minutes: number;
+            /** Section Key */
+            section_key: string;
+            /** Title */
+            title: string;
+        };
         /** EnglishHintResponse */
         EnglishHintResponse: {
+            /**
+             * Hint Used
+             * @default true
+             * @constant
+             */
+            hint_used: true;
             /** Parts */
             parts: string[];
             /** Question Key */
@@ -3090,12 +3167,14 @@ export interface components {
              * @default not_started
              * @enum {string}
              */
-            progress_state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            progress_state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
             /**
              * Retry Question Count
              * @default 0
              */
             retry_question_count: number;
+            /** Route Tags */
+            route_tags: ("full" | "core" | "sprint")[];
             /** Stable Key */
             stable_key: string;
             /** Title */
@@ -3123,7 +3202,7 @@ export interface components {
              * State
              * @enum {string}
              */
-            state: "not_started" | "in_progress" | "practice_completed" | "proficient";
+            state: "not_started" | "in_progress" | "practice_completed" | "proficient" | "mastered";
             /** Updated At */
             updated_at: string;
         };
@@ -3242,6 +3321,8 @@ export interface components {
             correct_count: number;
             /** Development Drafts */
             development_drafts: boolean;
+            /** Exam Profile Key */
+            exam_profile_key: string;
             /** Incorrect Count */
             incorrect_count: number;
             /** Lesson Key */

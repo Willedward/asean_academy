@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0.0",
+  "profile_key": "asean-english-sec1-id-reported-v1",
+  "title": "Reported ASEAN Scholarship English selection-test profile",
+  "status": "reported",
+  "evidence_boundary": "This versioned preparation profile records one recent candidate account supplied by the product owner. It is not an official test specification; counts, marks, passage lengths and prompt details remain configurable until corroborated.",
+  "source_refs": [
+    "moe-asean-scholarships-applicant-guide",
+    "candidate-report-2026-english-format"
+  ],
+  "audience": "Secondary-school applicants from Indonesia and Southeast Asia preparing for the ASEAN Scholarship selection test.",
+  "entry_level": "secondary_1_entry",
+  "effective_from": "2026-10-27",
+  "review_due": "2027-01-31",
+  "sections": [
+    {
+      "position": 1,
+      "section_key": "section-1",
+      "title": "Language use and comprehension",
+      "reported_minutes": 90,
+      "parts": [
+        {
+          "position": 1,
+          "part_key": "section-1-part-1",
+          "title": "Sentence vocabulary in context",
+          "task_type": "vocabulary_in_context",
+          "reported_format": "Choose the word whose meaning best completes or fits a sentence.",
+          "configurable_fields": ["question count", "marks", "option count"]
+        },
+        {
+          "position": 2,
+          "part_key": "section-1-part-2",
+          "title": "Banked story cloze",
+          "task_type": "banked_cloze",
+          "reported_format": "Fill passage gaps from a word bank containing more choices than gaps.",
+          "configurable_fields": ["gap count", "distractor count", "passage length", "marks"]
+        },
+        {
+          "position": 3,
+          "part_key": "section-1-part-3",
+          "title": "Open cloze",
+          "task_type": "open_cloze",
+          "reported_format": "Fill passage gaps without a supplied word bank.",
+          "configurable_fields": ["gap count", "accepted variants", "passage length", "marks"]
+        },
+        {
+          "position": 4,
+          "part_key": "section-1-part-4",
+          "title": "Reading comprehension",
+          "task_type": "reading_comprehension",
+          "reported_format": "Answer questions across two passages, including meaning, reference and multiple-choice comprehension.",
+          "configurable_fields": ["question count", "marks", "passage genres", "passage lengths"]
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "section_key": "section-2",
+      "title": "Composition",
+      "reported_minutes": 30,
+      "parts": [
+        {
+          "position": 1,
+          "part_key": "section-2-part-1",
+          "title": "Timed composition",
+          "task_type": "composition",
+          "reported_format": "Write one composition, reported at approximately 300 words.",
+          "reported_word_count": 300,
+          "word_count_status": "guidance",
+          "configurable_fields": ["prompt count", "prompt genres", "marking rubric", "word-limit wording"]
+        }
+      ]
+    }
+  ],
+  "excluded_task_types": [
+    "editing_section",
+    "own_words_short_answer"
+  ]
+}

@@ -29,6 +29,7 @@ const current: EnglishNextQuestionResponse = {
     correct_count: 0,
     incorrect_count: 0,
     development_drafts: true,
+    exam_profile_key: "asean-english-sec1-id-reported-v1",
   },
   position: 1,
   question: {
@@ -62,6 +63,11 @@ const incorrect: EnglishAttemptResponse = {
   attempt_id: "77a055b2-f447-4f1a-a174-01763a433154",
   attempt_number: 1,
   correct: false,
+  correct_parts: 0,
+  total_parts: 1,
+  score: 0,
+  threshold_met: false,
+  hint_used: false,
   parts: [
     {
       position: 1,
@@ -89,6 +95,7 @@ describe("EnglishPracticePlayer", () => {
           ({
             question_key: "ev-l1-001",
             parts: ["Look for words after the dash."],
+            hint_used: true,
           }) as EnglishHintResponse,
       ),
       classifyError: vi.fn(async () => undefined),
@@ -147,6 +154,7 @@ describe("EnglishPracticePlayer", () => {
       revealHint: vi.fn(async () => ({
         question_key: "eg-l1-001",
         parts: ["Identify each independent clause first."],
+        hint_used: true as const,
       })),
       classifyError: vi.fn(async () => undefined),
     };
@@ -210,6 +218,7 @@ describe("EnglishPracticePlayer", () => {
       revealHint: vi.fn(async () => ({
         question_key: "ex-l1-001",
         parts: ["Separate the topic from the command."],
+        hint_used: true as const,
       })),
       classifyError: vi.fn(async () => undefined),
     };
@@ -316,6 +325,11 @@ describe("EnglishPracticePlayer", () => {
       attempt_id: "a99591e5-1f20-4a45-a453-31995fc99b61",
       attempt_number: 1,
       correct: true,
+      correct_parts: 2,
+      total_parts: 2,
+      score: 1,
+      threshold_met: true,
+      hint_used: false,
       parts: [
         {
           position: 1,
@@ -341,6 +355,7 @@ describe("EnglishPracticePlayer", () => {
       revealHint: vi.fn(async () => ({
         question_key: "eb-l1-001",
         parts: ["Hint 1", "Hint 2"],
+        hint_used: true as const,
       })),
       classifyError: vi.fn(async () => undefined),
     };
@@ -433,6 +448,11 @@ describe("EnglishPracticePlayer", () => {
       attempt_id: "a99591e5-1f20-4a45-a453-31995fc99b62",
       attempt_number: 1,
       correct: false,
+      correct_parts: 1,
+      total_parts: 2,
+      score: 0.5,
+      threshold_met: false,
+      hint_used: false,
       parts: [
         {
           position: 1,
@@ -458,6 +478,7 @@ describe("EnglishPracticePlayer", () => {
       revealHint: vi.fn(async () => ({
         question_key: "eo-l1-001",
         parts: ["Article hint", "Pronoun hint"],
+        hint_used: true as const,
       })),
       classifyError: vi.fn(async () => undefined),
     };
@@ -558,6 +579,7 @@ describe("EnglishPracticePlayer", () => {
       revealHint: vi.fn(async () => ({
         question_key: "er-l1-001",
         parts: ["Map each paragraph first."],
+        hint_used: true as const,
       })),
       classifyError: vi.fn(async () => undefined),
     };
