@@ -35,14 +35,14 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 36
     assert len(report.passages) == 29
-    assert len(report.questions) == 74
+    assert len(report.questions) == 76
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
     }
-    assert len(report.forms) == 3
+    assert len(report.forms) == 5
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
@@ -136,7 +136,9 @@ def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(eng
     }
     selected_keys = set()
 
-    for form in report.forms:
+    measurement_forms = [form for form in report.forms if form.form_type != "checkpoint"]
+    assert len(measurement_forms) == 3
+    for form in measurement_forms:
         question_keys, exposure_pool = expected[form.form_type]
         selected = [questions[key] for key in form.question_keys]
         assert form.status == "draft"
@@ -153,6 +155,41 @@ def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(eng
         selected_keys.update(form.question_keys)
 
     assert len(selected_keys) == 12
+
+
+def test_e1_checkpoint_forms_have_reciprocal_disjoint_mastery_scope(english_root):
+    report = validate_english_foundation(english_root)
+    questions = {question.stable_key: question for question in report.questions}
+    forms = sorted(
+        (form for form in report.forms if form.form_type == "checkpoint"),
+        key=lambda form: form.form_key,
+    )
+
+    assert [form.form_key for form in forms] == [
+        "english-checkpoint-e1-vocabulary-a-v1",
+        "english-checkpoint-e1-vocabulary-b-v1",
+    ]
+    assert forms[0].paired_form_key == forms[1].form_key
+    assert forms[1].paired_form_key == forms[0].form_key
+    assert forms[0].module_code == forms[1].module_code == "E1"
+    assert forms[0].mastery_lesson_keys == forms[1].mastery_lesson_keys == [
+        "e1-lesson-01",
+        "e1-lesson-06",
+    ]
+    assert forms[0].task_part_distribution == forms[1].task_part_distribution == {
+        "vocabulary_in_context": 5
+    }
+    assert set(forms[0].question_keys).isdisjoint(forms[1].question_keys)
+    for form in forms:
+        selected = [questions[key] for key in form.question_keys]
+        assert form.status == "draft"
+        assert form.protected
+        assert not form.tutoring_enabled
+        assert form.feedback_timing == "after_form"
+        assert sum(len(question.parts) for question in selected) == 5
+        assert {question.exposure_pool for question in selected} == {
+            "module_checkpoint"
+        }
 
 
 def test_v3b_sprint_lessons_have_five_decision_exit_and_parallel_forms(english_root):
@@ -1116,6 +1153,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b004",
         "english-ev-b005",
         "english-ev-b006",
+        "english-ev-b007",
+        "english-ev-b008",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -1137,7 +1176,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b019",
         "english-ex-b020",
     ]
-    assert len(report.questions) == 74
+    assert len(report.questions) == 76
     assert not report.duplicates
 
 

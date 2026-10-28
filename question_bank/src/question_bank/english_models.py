@@ -318,6 +318,8 @@ class EnglishAssessmentForm(EnglishModel):
         default=None,
         pattern=r"^english-(baseline|endline|endline-reserve|checkpoint|mock)-[a-z0-9-]+-v[0-9]+$",
     )
+    module_code: str | None = Field(default=None, pattern=r"^E(?:0|[1-9][0-9]*)$")
+    mastery_lesson_keys: list[str] = Field(default_factory=list)
     source_refs: list[str] = Field(min_length=1)
 
     @model_validator(mode="after")
@@ -337,6 +339,20 @@ class EnglishAssessmentForm(EnglishModel):
             raise ValueError("Authored assessment forms must pin at least one question")
         if self.paired_form_key == self.form_key:
             raise ValueError("An assessment form cannot pair with itself")
+        if self.form_type == "checkpoint":
+            if self.module_code is None:
+                raise ValueError("Checkpoint forms must identify their module")
+            if not self.mastery_lesson_keys:
+                raise ValueError("Checkpoint forms must identify their mastery lessons")
+            if len(self.mastery_lesson_keys) != len(set(self.mastery_lesson_keys)):
+                raise ValueError("Checkpoint mastery lesson keys must be unique")
+            if any(
+                re.fullmatch(r"^e[0-9]+-lesson-[0-9]{2}$", key) is None
+                for key in self.mastery_lesson_keys
+            ):
+                raise ValueError("Checkpoint mastery lesson keys must use English lesson keys")
+        elif self.module_code is not None or self.mastery_lesson_keys:
+            raise ValueError("Only checkpoint forms may define a mastery scope")
         return self
 
 
