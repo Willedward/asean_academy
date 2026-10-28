@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 27 October 2026  
-**Status:** fixed technical blueprint; content remains draft until review and release  
+**Status:** fixed technical blueprint; Sprint breadth authored in draft; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -72,25 +72,28 @@ must update both the source catalogue and its evidence.
 
 | Route | Selected | Authored | Still requiring lessons |
 | --- | ---: | ---: | --- |
-| Full | 51 | 31 | 20 |
-| Core | 32 | 20 | 12 |
-| Sprint | 16 | 11 | 5 |
+| Full | 51 | 36 | 15 |
+| Core | 32 | 25 | 7 |
+| Sprint | 16 | 16 | 0 |
 
-The five missing Sprint lessons are E0.1, E0.2, E1.6, E2.2 and E9.5. The additional Core
-gaps are E1.2, E1.4, E1.5, E2.3, E2.6, E3.2 and E3.4.
+The five former Sprint gaps—E0.1, E0.2, E1.6, E2.2 and E9.5—now have complete seven-section
+lesson drafts, five-decision exit tickets and distinct five-decision retry forms. The remaining
+Core gaps are E1.2, E1.4, E1.5, E2.3, E2.6, E3.2 and E3.4.
 
 Authored does not mean publishable. Every released lesson still needs its reviewed exit
 ticket, distinct parallel retry form and the normal immutable academic/editorial approvals.
+All 16 Sprint lessons now reference an exit ticket. Six currently have a parallel retry form;
+the other ten require one before the Sprint route can pass the release gate.
 
 ## 6. Next execution milestone
 
-Complete **Sprint release breadth first**:
+Complete **Sprint assessment coverage and protected measurement**:
 
-1. author the five missing Sprint lessons without changing their stable keys;
-2. ensure every Sprint lesson has an exit ticket and a distinct parallel retry form;
-3. assemble the protected 20-part baseline from disjoint assessment items;
-4. add checkpoint manifests for the represented modules; and
-5. generate consolidated reviewer evidence before enabling learner routing.
+1. author distinct parallel retry forms for the ten Sprint lessons that still lack them;
+2. assemble the protected 20-part baseline from disjoint assessment items;
+3. add checkpoint manifests for the represented modules;
+4. generate consolidated reviewer evidence for the 16-lesson route; and
+5. collect immutable English/editorial approvals before enabling learner routing.
 
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core

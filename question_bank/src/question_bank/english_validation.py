@@ -63,6 +63,29 @@ class EnglishFoundationReport:
             route: self.catalogue.route_lesson_keys(route) if self.catalogue else []
             for route in routes
         }
+        lesson_by_key = {lesson.stable_key: lesson for lesson in self.lessons}
+        exit_ticket_keys = {
+            question.stable_key
+            for question in self.questions
+            if question.exposure_pool == "exit_ticket"
+        }
+        parallel_source_keys = {
+            question.parallel_form_of
+            for question in self.questions
+            if question.exposure_pool == "retry_review"
+            and question.parallel_form_of is not None
+        }
+
+        def lesson_references(lesson_key):
+            lesson = lesson_by_key.get(lesson_key)
+            if lesson is None:
+                return set()
+            return {
+                question_key
+                for section in lesson.sections
+                for question_key in section.question_keys
+            }
+
         return {
             "valid": self.valid,
             "curriculum_version": self.catalogue.version_key if self.catalogue else None,
@@ -77,6 +100,20 @@ class EnglishFoundationReport:
             "route_lesson_counts": {route: len(route_keys[route]) for route in routes},
             "route_authored_lesson_counts": {
                 route: len(set(route_keys[route]) & authored_keys) for route in routes
+            },
+            "route_exit_ticket_lesson_counts": {
+                route: sum(
+                    bool(lesson_references(lesson_key) & exit_ticket_keys)
+                    for lesson_key in route_keys[route]
+                )
+                for route in routes
+            },
+            "route_parallel_retry_lesson_counts": {
+                route: sum(
+                    bool(lesson_references(lesson_key) & parallel_source_keys)
+                    for lesson_key in route_keys[route]
+                )
+                for route in routes
             },
             "route_unauthored_lesson_codes": {
                 route: (

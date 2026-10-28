@@ -259,6 +259,57 @@ describe("EnglishPracticePlayer", () => {
     );
   });
 
+  it("offers exam-strategy reflection categories for readiness questions", async () => {
+    const strategy: EnglishNextQuestionResponse = {
+      ...current,
+      session: { ...current.session, lesson_key: "e0-lesson-01" },
+      question: {
+        ...current.question!,
+        stable_key: "ex-l1-005",
+        outcome_code: "EX0.1",
+        question_type: "exam_strategy",
+        title: "Use the reported English paper profile",
+      },
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => strategy),
+      submitAttempt: vi.fn(async () => incorrect),
+      revealHint: vi.fn(async () => ({
+        question_key: "ex-l1-005",
+        parts: ["Keep the two section clocks separate."],
+        hint_used: true as const,
+      })),
+      classifyError: vi.fn(async () => undefined),
+    };
+
+    render(
+      <EnglishPracticePlayer
+        sessionId={strategy.session.session_id}
+        api={api}
+      />,
+    );
+    fireEvent.click(await screen.findByRole("radio", { name: /A\. narrow/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    expect(
+      await screen.findByRole("radio", { name: /I mixed up the paper format/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: /I missed an instruction/i })).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: /My timing plan was unsafe/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /I broke the independent conditions/i }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("radio", { name: /My timing plan was unsafe/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Save reflection" }));
+    await waitFor(() =>
+      expect(api.classifyError).toHaveBeenCalledWith(
+        incorrect.attempt_id,
+        "timing_control",
+      ),
+    );
+  });
+
   it("fills a shared word bank with keyboard-native controls and reveals feedback as one group", async () => {
     const banked: EnglishNextQuestionResponse = {
       status: "active",

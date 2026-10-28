@@ -28,7 +28,13 @@ The first V3-B milestone now additionally provides:
 - fixed 32-lesson Core and 16-lesson Sprint routes, with Sprint a strict Core subset;
 - coverage of E0 through E9 plus required orientation, baseline and timed-simulation anchors;
 - automated route-size, subset, coverage and exact-membership regression checks; and
-- route readiness reporting showing 20 of 32 Core and 11 of 16 Sprint lessons authored.
+- route readiness reporting that distinguishes lesson, exit-ticket and parallel-retry coverage.
+
+The Sprint-breadth increment now authors all five former gaps (E0.1, E0.2, E1.6, E2.2 and
+E9.5) with complete lesson anatomy, five-decision exit tickets and distinct retry forms. The
+current totals are 36 authored Full lessons, 25 authored Core lessons and all 16 Sprint
+lessons. All Sprint lessons have exit tickets; six have parallel retries, so release remains
+blocked on the other ten retries and protected measurement forms.
 
 The planned forms do not yet contain assessment questions and cannot be served to learners.
 Remaining lesson gaps, parallel forms, assessment items and checkpoint content belong to the
@@ -246,6 +252,44 @@ Target human review effort:
 These are capacity limits, not promises that unsafe or ambiguous content may bypass review.
 If the high-risk queue exceeds capacity, publish less content rather than weaken the gate.
 
+### 8.1 Practice-bank scale and learner loop
+
+The six questions currently visible in a pilot lesson prove delivery, marking, hint and retry
+behaviour; they are not the final amount of practice. Production practice is bank-backed and
+separate from the short lesson sequence:
+
+1. learn one explicit method in the lesson;
+2. complete a five-decision exit ticket;
+3. receive a fresh retry form only when the threshold is missed;
+4. enter targeted mixed practice drawing unseen items from the relevant skill bank; and
+5. revisit the skill through spaced mixed sets and later checkpoint forms.
+
+Count practice in **decisions**, not only JSON question records. A banked-cloze record may
+contain 10–15 independently marked gaps, while a reading record contains a passage and several
+questions that must remain grouped. The proposed targets are:
+
+| Strand | Release A minimum | Mature bank target |
+| --- | ---: | ---: |
+| Sentence vocabulary in context | 100 decisions | 250–300 decisions |
+| Banked cloze | 20 passages / at least 200 gaps | 50–70 passages / 600–900 gaps |
+| Open cloze | 20 passages / at least 200 gaps | 50–70 passages / 600–900 gaps |
+| Reading comprehension | 24 passages / at least 150 questions | 60–80 passages / 450–650 questions |
+| Grammar and sentence control | 120 decisions | 250–300 decisions |
+| Composition planning and editing | 60 decision groups plus 30 prompts | 150–200 groups plus 100–150 prompts |
+
+These are staged inventory targets, not a requirement to author 200–300 questions for every
+lesson or to delay Beta until the mature bank exists. Every prompt still passes schema,
+duplicate, answer-leak and batched review gates. Protected baseline, endline and mock items are
+disjoint from ordinary practice and never used as unlimited drills.
+
+Reading is essential but should be directed. The learner experience should include a
+10–20-minute reading habit three to five days per week, using age-appropriate articles, short
+stories and expository texts. Each reading session asks for a brief gist, one evidence-backed
+inference, two words inferred from context and one sentence explaining the writer's choice.
+The product may store completion and reflections without copying third-party texts. This habit
+builds background knowledge and language exposure, while the question bank teaches the exact
+exam operations and provides measurable practice.
+
 ## 9. Scalable essay feedback
 
 ### 9.1 Default learner path
@@ -394,11 +438,12 @@ review or safeguarding owner is unavailable.
 
 ## 16. Current next milestone
 
-Complete **V3-B Sprint release breadth** before expanding optional Full-route lessons:
+Complete **V3-B Sprint assessment coverage and protected measurement** before expanding
+optional Full-route lessons:
 
-1. author the five missing Sprint lessons: E0.1, E0.2, E1.6, E2.2 and E9.5;
-2. add an exit ticket and distinct parallel retry form for every Sprint lesson;
-3. populate the protected 20-part baseline from a disjoint assessment pool;
-4. add checkpoint manifests and activate the checkpoint-to-`mastered` journey; and
-5. generate consolidated reviewer evidence without publishing unapproved content.
+1. add a distinct parallel retry form to each of the ten Sprint lessons still lacking one;
+2. populate the protected 20-part baseline from a disjoint assessment pool;
+3. add checkpoint manifests and activate the checkpoint-to-`mastered` journey;
+4. generate consolidated reviewer evidence for all 16 Sprint lessons; and
+5. keep every item draft-only until the existing English and editorial approval gates pass.
 
