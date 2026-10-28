@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement complete; E1 checkpoint learner journey implemented for technical review
+**Status:** V3-A merged; V3-B protected measurement complete; E0–E1 checkpoint learner journeys implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -46,8 +46,10 @@ All three protected measurement forms are now draft and structurally complete, b
 served to learners until the existing review and release gates pass. Remaining lesson gaps and
 checkpoint content belong to the next V3-B increments. The E1 checkpoint vertical slice adds
 two reciprocal five-part forms, two disjoint `module_checkpoint` groups and explicit mastery
-scope for E1.1 and E1.6. This brings the draft foundation to 76 question records. The E1 forms
-now run through persisted checkpoint sessions with prerequisite locking, no hints or early
+scope for E1.1 and E1.6. The E0 checkpoint adds four fresh exam-strategy groups across two
+reciprocal forms and scopes mastery to E0.1 and E0.2. This brings the draft foundation to 80
+question records. The E0–E1 forms now run through persisted checkpoint sessions with
+prerequisite locking, no hints or early
 feedback, deterministic part scoring, form-B retry and an atomic checkpoint-to-`mastered`
 transition. They remain draft-gated and therefore unavailable in production until academic
 and editorial approval and publication. Exact route membership and rationale are recorded in
@@ -453,8 +455,8 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint checkpoints and review evidence** before expanding
 optional Full-route lessons:
 
-1. repeat the primary/retry checkpoint manifests across E0 and E2–E9 using the proven E1
-   persistence and mastery journey;
+1. repeat the primary/retry checkpoint manifests across E2–E9 using the proven E0–E1
+   persistence, multi-question sequencing and mastery journey;
 2. expose checkpoint readiness, attempt and pass status in learner/admin progress views;
 3. generate consolidated reviewer evidence and collect English/editorial approvals;
 4. run the protected baseline/endline and checkpoint journey in hosted staging; and

@@ -307,9 +307,12 @@ class EnglishAssessmentForm(EnglishModel):
     task_part_distribution: dict[
         Literal[
             "vocabulary_in_context",
+            "grammar_usage",
             "banked_cloze",
             "open_cloze",
             "reading_comprehension",
+            "composition_planning",
+            "exam_strategy",
         ],
         int,
     ]

@@ -35,14 +35,14 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 36
     assert len(report.passages) == 29
-    assert len(report.questions) == 76
+    assert len(report.questions) == 80
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
     }
-    assert len(report.forms) == 5
+    assert len(report.forms) == 7
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
@@ -161,7 +161,11 @@ def test_e1_checkpoint_forms_have_reciprocal_disjoint_mastery_scope(english_root
     report = validate_english_foundation(english_root)
     questions = {question.stable_key: question for question in report.questions}
     forms = sorted(
-        (form for form in report.forms if form.form_type == "checkpoint"),
+        (
+            form
+            for form in report.forms
+            if form.form_type == "checkpoint" and form.module_code == "E1"
+        ),
         key=lambda form: form.form_key,
     )
 
@@ -186,6 +190,46 @@ def test_e1_checkpoint_forms_have_reciprocal_disjoint_mastery_scope(english_root
         assert form.protected
         assert not form.tutoring_enabled
         assert form.feedback_timing == "after_form"
+        assert sum(len(question.parts) for question in selected) == 5
+        assert {question.exposure_pool for question in selected} == {
+            "module_checkpoint"
+        }
+
+
+def test_e0_checkpoint_forms_sample_both_orientation_outcomes(english_root):
+    report = validate_english_foundation(english_root)
+    questions = {question.stable_key: question for question in report.questions}
+    forms = sorted(
+        (
+            form
+            for form in report.forms
+            if form.form_type == "checkpoint" and form.module_code == "E0"
+        ),
+        key=lambda form: form.form_key,
+    )
+
+    assert [form.form_key for form in forms] == [
+        "english-checkpoint-e0-orientation-a-v1",
+        "english-checkpoint-e0-orientation-b-v1",
+    ]
+    assert forms[0].paired_form_key == forms[1].form_key
+    assert forms[1].paired_form_key == forms[0].form_key
+    assert forms[0].mastery_lesson_keys == forms[1].mastery_lesson_keys == [
+        "e0-lesson-01",
+        "e0-lesson-02",
+    ]
+    assert forms[0].task_part_distribution == forms[1].task_part_distribution == {
+        "exam_strategy": 5
+    }
+    assert set(forms[0].question_keys).isdisjoint(forms[1].question_keys)
+    for form in forms:
+        selected = [questions[key] for key in form.question_keys]
+        assert form.status == "draft"
+        assert form.protected
+        assert not form.tutoring_enabled
+        assert form.feedback_timing == "after_form"
+        assert [question.outcome_code for question in selected] == ["EX0.1", "EX0.2"]
+        assert [len(question.parts) for question in selected] == [3, 2]
         assert sum(len(question.parts) for question in selected) == 5
         assert {question.exposure_pool for question in selected} == {
             "module_checkpoint"
@@ -1175,8 +1219,10 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b018",
         "english-ex-b019",
         "english-ex-b020",
+            "english-ex-b021",
+            "english-ex-b022",
     ]
-    assert len(report.questions) == 76
+    assert len(report.questions) == 80
     assert not report.duplicates
 
 
