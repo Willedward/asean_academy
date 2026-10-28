@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
-**Prepared:** 27 October 2026  
-**Status:** V3-A merged; V3-B fixed route blueprint implemented for technical review
+**Prepared:** 28 October 2026
+**Status:** V3-A merged; V3-B Sprint breadth and protected baseline implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -34,13 +34,16 @@ The Sprint-breadth increment now authors all five former gaps (E0.1, E0.2, E1.6,
 E9.5) with complete lesson anatomy, five-decision exit tickets and distinct retry forms. The
 current totals are 36 authored Full lessons, 25 authored Core lessons and all 16 Sprint
 lessons. All Sprint lessons now have exit tickets and distinct parallel retries. The retry
-increment adds ten question groups and six fresh passage assets, bringing the draft foundation
-to 62 question records and 20 passages. Release remains blocked on protected measurement
-forms, checkpoints and human approvals.
+increment adds ten question groups and six fresh passage assets. The protected-baseline
+increment then adds four disjoint assessment groups and three passages, bringing the draft
+foundation to 66 question records and 23 passages. The baseline contains exactly 20 scored
+parts—five each for vocabulary, banked cloze, open cloze and reading—and withholds feedback
+until the form ends. Release remains blocked on matched endline/reserve forms, checkpoints
+and human approvals.
 
-The planned forms do not yet contain assessment questions and cannot be served to learners.
-Remaining lesson gaps, parallel forms, assessment items and checkpoint content belong to the
-next V3-B increments. Exact route membership and rationale are recorded in
+The baseline form is now draft and structurally complete; the endline and reserve forms remain
+planned and cannot yet be served to learners. Remaining lesson gaps, protected forms and
+checkpoint content belong to the next V3-B increments. Exact route membership and rationale are recorded in
 `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
 
 ## 1. V3 decision
@@ -440,11 +443,11 @@ review or safeguarding owner is unavailable.
 
 ## 16. Current next milestone
 
-Complete **V3-B Sprint protected measurement and checkpoints** before expanding
+Complete the remaining **V3-B Sprint protected measurement and checkpoints** before expanding
 optional Full-route lessons:
 
-1. populate the protected 20-part baseline from a disjoint assessment pool;
-2. author matched endline and reserve forms against the same blueprint;
+1. author matched endline and reserve forms against the active 20-part baseline blueprint;
+2. preserve disjoint item ownership across every protected form;
 3. add checkpoint manifests and activate the checkpoint-to-`mastered` journey;
 4. generate consolidated reviewer evidence for all 16 Sprint lessons; and
 5. keep every item draft-only until the existing English and editorial approval gates pass.

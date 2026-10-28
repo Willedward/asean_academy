@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "er-l5-005",
+  "bank_key": "english-er-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "ER5.7",
+  "title": "Baseline reading comprehension",
+  "difficulty": 4,
+  "question_type": "reading_comprehension",
+  "exposure_pool": "baseline_diagnostic",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": {
+    "stable_key": "english-passage-baseline-cooling-roofs",
+    "revision": 1,
+    "content_sha256": "7017d4f32674d1fbef9b0efb93fe95f10c72b277e95eaa91a8c577964b147b94"
+  },
+  "instructions": "Read the passage and answer all five questions without hints or feedback.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "Why did the students swap the thermometers between huts?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "To make the afternoon readings warmer"
+          },
+          {
+            "key": "B",
+            "text": "To prevent a fixed instrument difference being mistaken for a roof-colour effect"
+          },
+          {
+            "key": "C",
+            "text": "To measure roof colour directly"
+          },
+          {
+            "key": "D",
+            "text": "To reduce the number of readings"
+          }
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "Swapping cannot control weather.",
+          "B": "The final paragraph states this control.",
+          "C": "Thermometers measure temperature.",
+          "D": "They still used both instruments."
+        }
+      },
+      "hint": "Protected baseline: no hint is available.",
+      "correct_explanation": "Swapping reduces instrument bias in the comparison."
+    },
+    {
+      "position": 2,
+      "prompt": "In the final paragraph, what does “Their method” refer to?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "Asking the principal to choose a roof colour"},
+          {"key": "B", "text": "Using similar huts, repeated timed readings and controls such as swapped thermometers"},
+          {"key": "C", "text": "Painting every school building white"},
+          {"key": "D", "text": "Comparing the huts only on cloudy afternoons"}
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "The principal asks about one control but does not define the method.",
+          "B": "These linked design choices form the investigation method described throughout the passage.",
+          "C": "The team tested two huts and did not repaint school buildings.",
+          "D": "The readings covered ten days and several conditions."
+        }
+      },
+      "hint": "Protected baseline: no hint is available.",
+      "correct_explanation": "Their method is the controlled, repeated comparison used to separate roof colour from other differences."
+    },
+    {
+      "position": 3,
+      "prompt": "What does “promising” most nearly mean in paragraph 3?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "showing useful potential but not yet conclusive"
+          },
+          {
+            "key": "B",
+            "text": "guaranteed to work everywhere"
+          },
+          {
+            "key": "C",
+            "text": "too expensive to continue"
+          },
+          {
+            "key": "D",
+            "text": "unexpectedly dangerous"
+          }
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Most readings favour white, but exceptions remain.",
+          "B": "The students reject this claim.",
+          "C": "Cost is absent.",
+          "D": "No danger is described."
+        }
+      },
+      "hint": "Protected baseline: no hint is available.",
+      "correct_explanation": "Promising signals encouraging but limited evidence."
+    },
+    {
+      "position": 4,
+      "prompt": "Which statement best expresses the main idea?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "Dark roofs are always hotter than white roofs"
+          },
+          {
+            "key": "B",
+            "text": "Cloudy weather makes experiments impossible"
+          },
+          {
+            "key": "C",
+            "text": "School huts are identical to real classrooms"
+          },
+          {
+            "key": "D",
+            "text": "Careful controls and repeated measurements make a limited comparison more trustworthy"
+          }
+        ],
+        "correct_key": "D",
+        "choice_rationales": {
+          "A": "The passage avoids an absolute claim.",
+          "B": "Cloudy observations remain useful.",
+          "C": "The limitation says otherwise.",
+          "D": "This joins the method, result and caution."
+        }
+      },
+      "hint": "Protected baseline: no hint is available.",
+      "correct_explanation": "The investigation demonstrates how design quality supports a bounded conclusion."
+    },
+    {
+      "position": 5,
+      "prompt": "Which inference is best supported?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "The team expected every reading to be identical"
+          },
+          {
+            "key": "B",
+            "text": "The students valued a cautious conclusion more than an exaggerated result"
+          },
+          {
+            "key": "C",
+            "text": "The principal planned to repaint every classroom immediately"
+          },
+          {
+            "key": "D",
+            "text": "The dark roof was cooler on every cloudy day"
+          }
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "They were testing a possible difference.",
+          "B": "They explicitly avoided claiming the roof always worked.",
+          "C": "No action is reported.",
+          "D": "Only two cloudy afternoons are described as similar."
+        }
+      },
+      "hint": "Protected baseline: no hint is available.",
+      "correct_explanation": "Their language and method show commitment to evidence boundaries."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
+    "created_at": "2026-10-28T00:00:00+08:00",
+    "authored_by": "Codex English V3-B protected baseline milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}

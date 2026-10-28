@@ -357,6 +357,14 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
         root, "forms", EnglishAssessmentForm, report, "invalid_assessment_form"
     )
     form_by_key = {}
+    protected_form_question_owner = {}
+    expected_form_pools = {
+        "baseline": "baseline_diagnostic",
+        "endline": "endline_diagnostic",
+        "endline_reserve": "protected_reserve",
+        "checkpoint": "module_checkpoint",
+        "mock": "full_mock",
+    }
     for path, form in form_rows:
         if path.stem != form.form_key:
             _issue(report, "error", "assessment_form_filename", path, form.form_key)
@@ -374,6 +382,60 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
                 path,
                 str(sorted(missing_questions)),
             )
+        elif form.status != "planned":
+            selected = [question_by_key[key] for key in form.question_keys]
+            actual_distribution = {
+                task_type: sum(
+                    len(question.parts)
+                    for question in selected
+                    if question.question_type == task_type
+                )
+                for task_type in form.task_part_distribution
+            }
+            if actual_distribution != form.task_part_distribution:
+                _issue(
+                    report,
+                    "error",
+                    "assessment_form_distribution",
+                    path,
+                    f"Found {actual_distribution}, expected {form.task_part_distribution}",
+                )
+            actual_total = sum(len(question.parts) for question in selected)
+            if actual_total != form.expected_scored_part_count:
+                _issue(
+                    report,
+                    "error",
+                    "assessment_form_part_count",
+                    path,
+                    f"Found {actual_total}, expected {form.expected_scored_part_count}",
+                )
+            expected_pool = expected_form_pools[form.form_type]
+            wrong_pools = {
+                question.stable_key: question.exposure_pool
+                for question in selected
+                if question.exposure_pool != expected_pool
+            }
+            if wrong_pools:
+                _issue(
+                    report,
+                    "error",
+                    "assessment_form_exposure_pool",
+                    path,
+                    f"Expected {expected_pool}; found {wrong_pools}",
+                )
+            if form.protected:
+                for question in selected:
+                    owner = protected_form_question_owner.get(question.stable_key)
+                    if owner is not None:
+                        _issue(
+                            report,
+                            "error",
+                            "assessment_form_question_reuse",
+                            path,
+                            f"{question.stable_key} is already pinned by {owner}",
+                        )
+                    else:
+                        protected_form_question_owner[question.stable_key] = form.form_key
         unknown = set(form.source_refs) - source_keys
         if unknown:
             _issue(report, "error", "unknown_assessment_form_source", path, str(sorted(unknown)))
