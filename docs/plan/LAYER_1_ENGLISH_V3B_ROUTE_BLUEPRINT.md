@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
-**Prepared:** 27 October 2026  
-**Status:** fixed technical blueprint; Sprint breadth authored in draft; review and release pending
+**Prepared:** 28 October 2026
+**Status:** fixed technical blueprint; Sprint breadth and protected baseline authored in draft; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -84,15 +84,19 @@ Authored does not mean publishable. Every released lesson still needs its review
 ticket, distinct parallel retry form and the normal immutable academic/editorial approvals.
 All 16 Sprint lessons now reference an exit ticket and have a distinct parallel retry form.
 The retry increment adds ten question groups and six fresh passage assets without exposing
-protected diagnostic or mock content. Publication remains blocked on protected forms and the
-normal immutable review approvals.
+protected diagnostic or mock content. A separate protected-measurement increment now adds a
+draft 20-part baseline: five vocabulary decisions, five banked-cloze gaps, five open-cloze
+gaps and five reading decisions. Its four question groups and three passages are isolated in
+the `baseline_diagnostic` pool, tutoring is disabled and feedback is withheld until the form
+ends. Publication remains blocked on the matched endline/reserve, checkpoints and the normal
+immutable review approvals.
 
 ## 6. Next execution milestone
 
-Complete **Sprint protected measurement and checkpoints**:
+Complete the remaining **Sprint protected measurement and checkpoints**:
 
-1. assemble the protected 20-part baseline from disjoint assessment items;
-2. author matched endline and reserve forms against the same blueprint;
+1. author matched endline and reserve forms against the now-active baseline blueprint;
+2. enforce disjoint item ownership across all protected forms;
 3. add checkpoint manifests for the represented modules;
 4. generate consolidated reviewer evidence for the 16-lesson route; and
 5. collect immutable English/editorial approvals before enabling learner routing.
