@@ -64,6 +64,49 @@ def submit(app, session_id: str, question: dict, answer: str | list[str], key: s
     )
 
 
+def seed_e1_checkpoint_prerequisites(app):
+    request(app, "GET", "/api/v1/english/progress")
+    repository = app.state.english_learning_repository
+    for lesson_key in ("e1-lesson-01", "e1-lesson-06"):
+        repository.lesson_progress[("english-development-learner", lesson_key)] = {
+            "lesson_key": lesson_key,
+            "lesson_revision": 1,
+            "state": "proficient",
+            "question_count": 1,
+            "resolved_count": 1,
+            "correct_count": 1,
+            "incorrect_count": 0,
+            "retry_question_count": 0,
+            "last_session_id": None,
+            "updated_at": "2026-10-28T00:00:00+00:00",
+        }
+
+
+def create_checkpoint(app, key: str):
+    return request(
+        app,
+        "POST",
+        "/api/v1/english/checkpoint-sessions",
+        headers={"Idempotency-Key": key},
+        json={"module_code": "E1"},
+    )
+
+
+def submit_checkpoint(app, session_id: str, question: dict, answers: dict, key: str):
+    return request(
+        app,
+        "POST",
+        "/api/v1/english/checkpoint-attempts",
+        headers={"Idempotency-Key": key},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": answers,
+        },
+    )
+
+
 def test_draft_english_foundation_is_hidden_without_preview_flag():
     response = request(application(allow_drafts=False), "GET", "/api/v1/english/course-map")
 
@@ -117,6 +160,159 @@ def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
         "development_available": True,
         "retry_question_count": 0,
     }
+
+
+def test_e1_checkpoint_is_locked_until_every_scoped_lesson_is_proficient():
+    app = application()
+
+    locked = create_checkpoint(app, "e1-checkpoint-locked")
+
+    assert locked.status_code == 409, locked.text
+    assert locked.json()["error"]["code"] == "english_checkpoint_locked"
+    assert "e1-lesson-01" in locked.json()["error"]["message"]
+    assert "e1-lesson-06" in locked.json()["error"]["message"]
+
+
+def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery():
+    app = application()
+    seed_e1_checkpoint_prerequisites(app)
+
+    created = create_checkpoint(app, "e1-checkpoint-pass")
+    replay = create_checkpoint(app, "e1-checkpoint-pass")
+    assert created.status_code == 201, created.text
+    assert replay.json() == created.json()
+    assert created.json()["form_key"] == "english-checkpoint-e1-vocabulary-a-v1"
+    assert created.json()["mastery_lesson_keys"] == ["e1-lesson-01", "e1-lesson-06"]
+    session_id = created.json()["session_id"]
+
+    current = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    )
+    assert current.status_code == 200, current.text
+    question = current.json()["question"]
+    encoded = json.dumps(question)
+    assert question["stable_key"] == "ev-l5-006"
+    assert question["exposure_pool"] == "module_checkpoint"
+    assert "correct_key" not in encoded
+    assert "correct_explanation" not in encoded
+    assert "rationale" not in encoded
+
+    hint = request(
+        app,
+        "POST",
+        f"/api/v1/english/practice-sessions/{session_id}/questions/{question['stable_key']}/hint",
+    )
+    assert hint.status_code == 404
+
+    answered = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        "e1-checkpoint-pass-attempt",
+    )
+    replayed = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        "e1-checkpoint-pass-attempt",
+    )
+    assert answered.status_code == 200, answered.text
+    assert replayed.json() == answered.json()
+    assert answered.json()["checkpoint_completed"] is True
+    assert answered.json()["session"]["score"] == 0.8
+    assert answered.json()["session"]["passed"] is True
+    assert "parts" not in answered.json()
+
+    progress = request(app, "GET", "/api/v1/english/progress").json()["lessons"]
+    by_key = {item["lesson_key"]: item for item in progress}
+    assert by_key["e1-lesson-01"]["state"] == "mastered"
+    assert by_key["e1-lesson-06"]["state"] == "mastered"
+
+    repeated = create_checkpoint(app, "e1-checkpoint-after-pass")
+    assert repeated.status_code == 409
+    assert repeated.json()["error"]["code"] == "english_checkpoint_already_passed"
+
+
+def test_failed_e1_checkpoint_preserves_proficiency_and_retake_uses_form_b():
+    app = application()
+    seed_e1_checkpoint_prerequisites(app)
+
+    first = create_checkpoint(app, "e1-checkpoint-fail")
+    session_id = first.json()["session_id"]
+    question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    failed = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {"1": "D", "2": "D", "3": "D", "4": "D", "5": "D"},
+        "e1-checkpoint-failed-attempt",
+    )
+    assert failed.status_code == 200, failed.text
+    assert failed.json()["session"]["score"] == 0
+    assert failed.json()["session"]["passed"] is False
+    progress = request(app, "GET", "/api/v1/english/progress").json()["lessons"]
+    assert {item["state"] for item in progress} == {"proficient"}
+
+    retake = create_checkpoint(app, "e1-checkpoint-retake")
+    assert retake.status_code == 201, retake.text
+    assert retake.json()["form_key"] == "english-checkpoint-e1-vocabulary-b-v1"
+    retry_id = retake.json()["session_id"]
+    retry_question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{retry_id}/next"
+    ).json()["question"]
+    assert retry_question["stable_key"] == "ev-l5-007"
+    assert retry_question["stable_key"] != question["stable_key"]
+
+    passed = submit_checkpoint(
+        app,
+        retry_id,
+        retry_question,
+        {str(position): "A" for position in range(1, 6)},
+        "e1-checkpoint-retake-attempt",
+    )
+    assert passed.status_code == 200, passed.text
+    assert passed.json()["session"]["score"] == 1
+    assert passed.json()["session"]["passed"] is True
+
+
+def test_e1_checkpoint_does_not_partially_complete_if_proficiency_changes():
+    app = application()
+    seed_e1_checkpoint_prerequisites(app)
+
+    created = create_checkpoint(app, "e1-checkpoint-prerequisite-race")
+    session_id = created.json()["session_id"]
+    question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    repository = app.state.english_learning_repository
+    repository.lesson_progress[("english-development-learner", "e1-lesson-06")][
+        "state"
+    ] = "started"
+
+    rejected = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {str(position): "A" for position in range(1, 6)},
+        "e1-checkpoint-prerequisite-race-attempt",
+    )
+
+    assert rejected.status_code == 409, rejected.text
+    assert rejected.json()["error"]["code"] == "english_checkpoint_prerequisites_changed"
+    session = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}"
+    ).json()
+    assert session["status"] == "active"
+    assert session["resolved_count"] == 0
+    assert session["score"] is None
+    pending = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()
+    assert pending["question"]["stable_key"] == question["stable_key"]
 
 
 def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticket():

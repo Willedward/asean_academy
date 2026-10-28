@@ -145,6 +145,10 @@ class CreateEnglishPracticeSessionRequest(ApiModel):
     mode: EnglishPracticeMode = "guided_practice"
 
 
+class CreateEnglishCheckpointSessionRequest(ApiModel):
+    module_code: str = Field(pattern=r"^E(?:0|[1-9][0-9]*)$")
+
+
 class EnglishPracticeSessionResponse(ApiModel):
     session_id: str
     status: Literal["active", "completed"]
@@ -157,6 +161,24 @@ class EnglishPracticeSessionResponse(ApiModel):
     resolved_count: int
     correct_count: int
     incorrect_count: int
+    development_drafts: bool
+
+
+class EnglishCheckpointSessionResponse(ApiModel):
+    session_id: str
+    status: Literal["active", "completed"]
+    exam_profile_key: str
+    form_key: str
+    form_revision: int
+    module_code: str
+    mastery_lesson_keys: list[str]
+    question_count: int
+    assigned_count: int
+    resolved_count: int
+    correct_parts: int
+    total_parts: int
+    score: float | None
+    passed: bool | None
     development_drafts: bool
 
 
@@ -202,6 +224,13 @@ class EnglishNextQuestionResponse(ApiModel):
     question: EnglishPublicQuestionResponse | None = None
 
 
+class EnglishCheckpointNextQuestionResponse(ApiModel):
+    status: Literal["active", "completed"]
+    session: EnglishCheckpointSessionResponse
+    position: int | None = None
+    question: EnglishPublicQuestionResponse | None = None
+
+
 EnglishAnswerText = Annotated[str, StringConstraints(max_length=1000)]
 
 
@@ -212,6 +241,22 @@ class SubmitEnglishAttemptRequest(ApiModel):
     answers: dict[str, EnglishAnswerText | list[EnglishAnswerText]] = Field(
         min_length=1, max_length=20
     )
+
+
+class SubmitEnglishCheckpointAttemptRequest(ApiModel):
+    session_id: str
+    question_key: str = Field(pattern=r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$")
+    question_revision: int = Field(ge=1)
+    answers: dict[str, EnglishAnswerText | list[EnglishAnswerText]] = Field(
+        min_length=1, max_length=20
+    )
+
+
+class EnglishCheckpointAttemptResponse(ApiModel):
+    attempt_id: str
+    accepted: Literal[True] = True
+    checkpoint_completed: bool
+    session: EnglishCheckpointSessionResponse
 
 
 class EnglishAttemptPartResult(ApiModel):

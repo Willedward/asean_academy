@@ -3049,6 +3049,21 @@
         "title": "CreateDiagnosticSessionRequest",
         "type": "object"
       },
+      "CreateEnglishCheckpointSessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "module_code": {
+            "pattern": "^E(?:0|[1-9][0-9]*)$",
+            "title": "Module Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "module_code"
+        ],
+        "title": "CreateEnglishCheckpointSessionRequest",
+        "type": "object"
+      },
       "CreateEnglishPracticeSessionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -4343,6 +4358,183 @@
           "lesson_state"
         ],
         "title": "EnglishAttemptResponse",
+        "type": "object"
+      },
+      "EnglishCheckpointAttemptResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted": {
+            "const": true,
+            "default": true,
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "attempt_id": {
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "checkpoint_completed": {
+            "title": "Checkpoint Completed",
+            "type": "boolean"
+          },
+          "session": {
+            "$ref": "#/components/schemas/EnglishCheckpointSessionResponse"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "checkpoint_completed",
+          "session"
+        ],
+        "title": "EnglishCheckpointAttemptResponse",
+        "type": "object"
+      },
+      "EnglishCheckpointNextQuestionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishPublicQuestionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "session": {
+            "$ref": "#/components/schemas/EnglishCheckpointSessionResponse"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "session"
+        ],
+        "title": "EnglishCheckpointNextQuestionResponse",
+        "type": "object"
+      },
+      "EnglishCheckpointSessionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "assigned_count": {
+            "title": "Assigned Count",
+            "type": "integer"
+          },
+          "correct_parts": {
+            "title": "Correct Parts",
+            "type": "integer"
+          },
+          "development_drafts": {
+            "title": "Development Drafts",
+            "type": "boolean"
+          },
+          "exam_profile_key": {
+            "title": "Exam Profile Key",
+            "type": "string"
+          },
+          "form_key": {
+            "title": "Form Key",
+            "type": "string"
+          },
+          "form_revision": {
+            "title": "Form Revision",
+            "type": "integer"
+          },
+          "mastery_lesson_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Mastery Lesson Keys",
+            "type": "array"
+          },
+          "module_code": {
+            "title": "Module Code",
+            "type": "string"
+          },
+          "passed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passed"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_parts": {
+            "title": "Total Parts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "session_id",
+          "status",
+          "exam_profile_key",
+          "form_key",
+          "form_revision",
+          "module_code",
+          "mastery_lesson_keys",
+          "question_count",
+          "assigned_count",
+          "resolved_count",
+          "correct_parts",
+          "total_parts",
+          "score",
+          "passed",
+          "development_drafts"
+        ],
+        "title": "EnglishCheckpointSessionResponse",
         "type": "object"
       },
       "EnglishChoiceOptionResponse": {
@@ -7592,6 +7784,54 @@
           "answers"
         ],
         "title": "SubmitEnglishAttemptRequest",
+        "type": "object"
+      },
+      "SubmitEnglishCheckpointAttemptRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "maxLength": 1000,
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            "maxProperties": 20,
+            "minProperties": 1,
+            "title": "Answers",
+            "type": "object"
+          },
+          "question_key": {
+            "pattern": "^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$",
+            "title": "Question Key",
+            "type": "string"
+          },
+          "question_revision": {
+            "minimum": 1.0,
+            "title": "Question Revision",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "question_key",
+          "question_revision",
+          "answers"
+        ],
+        "title": "SubmitEnglishCheckpointAttemptRequest",
         "type": "object"
       },
       "SummarySection": {
@@ -16194,6 +16434,540 @@
           }
         ],
         "summary": "Record one immutable learner error category for an incorrect attempt",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/checkpoint-attempts": {
+      "post": {
+        "operationId": "submitEnglishCheckpointAttempt",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitEnglishCheckpointAttemptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishCheckpointAttemptResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Submit a protected English checkpoint response without early feedback",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/checkpoint-sessions": {
+      "post": {
+        "operationId": "createEnglishCheckpointSession",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishCheckpointSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishCheckpointSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Start or resume an idempotent protected English module checkpoint",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/checkpoint-sessions/{session_id}": {
+      "get": {
+        "operationId": "getEnglishCheckpointSession",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishCheckpointSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Resume an owned English module checkpoint",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/checkpoint-sessions/{session_id}/next": {
+      "get": {
+        "operationId": "getNextEnglishCheckpointQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishCheckpointNextQuestionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the next learner-safe protected checkpoint question",
         "tags": [
           "english"
         ]

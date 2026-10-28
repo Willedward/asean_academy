@@ -77,6 +77,122 @@ def _request(app, method: str, path: str, token: str, **kwargs):
 
 
 @pytest.mark.postgres
+def test_postgres_english_e1_checkpoint_persists_and_records_mastery_atomically():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    email = f"{learner_id}@example.test"
+    invitation_code = secrets.token_urlsafe(32)
+    with psycopg.connect(database_url) as connection:
+        _seed_learner(connection, learner_id, email, invitation_code)
+
+    app = create_app(
+        Settings(
+            environment="test",
+            cors_origins=("http://localhost:3000",),
+            log_level="INFO",
+            repository_root=REPOSITORY_ROOT,
+            allow_draft_content=True,
+            development_learner_id=None,
+            database_url=database_url,
+            rate_limits_enabled=False,
+        ),
+        token_verifier=StaticTokenVerifier(
+            {
+                "english-checkpoint-learner": AuthenticatedLearner(
+                    learner_id, "authenticated", email
+                )
+            }
+        ),
+    )
+    accepted = _request(
+        app,
+        "POST",
+        "/api/v1/onboarding/accept-invitation",
+        "english-checkpoint-learner",
+        json={"invitation_code": invitation_code, "display_name": "English learner"},
+    )
+    assert accepted.status_code == 200, accepted.text
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            """
+            insert into english_lesson_progress (
+                student_id, lesson_key, lesson_revision, state, question_count,
+                resolved_count, correct_count, incorrect_count
+            ) values
+                (%s, 'e1-lesson-01', 1, 'proficient', 1, 1, 1, 0),
+                (%s, 'e1-lesson-06', 1, 'proficient', 1, 1, 1, 0)
+            """,
+            (learner_id, learner_id),
+        )
+
+    created = _request(
+        app,
+        "POST",
+        "/api/v1/english/checkpoint-sessions",
+        "english-checkpoint-learner",
+        headers={"Idempotency-Key": "postgres-english-e1-checkpoint"},
+        json={"module_code": "E1"},
+    )
+    assert created.status_code == 201, created.text
+    session_id = created.json()["session_id"]
+    assert created.json()["form_key"] == "english-checkpoint-e1-vocabulary-a-v1"
+    current = _request(
+        app,
+        "GET",
+        f"/api/v1/english/checkpoint-sessions/{session_id}/next",
+        "english-checkpoint-learner",
+    )
+    assert current.status_code == 200, current.text
+    question = current.json()["question"]
+    answered = _request(
+        app,
+        "POST",
+        "/api/v1/english/checkpoint-attempts",
+        "english-checkpoint-learner",
+        headers={"Idempotency-Key": "postgres-english-e1-answer"},
+        json={
+            "session_id": session_id,
+            "question_key": question["stable_key"],
+            "question_revision": question["revision"],
+            "answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        },
+    )
+    assert answered.status_code == 200, answered.text
+    assert answered.json()["session"]["score"] == 0.8
+    assert answered.json()["session"]["passed"] is True
+    with psycopg.connect(database_url) as connection:
+        checkpoint = connection.execute(
+            """
+            select status::text, score, passed, mastery_lesson_keys
+            from english_checkpoint_sessions where id=%s
+            """,
+            (session_id,),
+        ).fetchone()
+        assert checkpoint[0] == "completed"
+        assert float(checkpoint[1]) == 0.8
+        assert checkpoint[2] is True
+        assert checkpoint[3] == ["e1-lesson-01", "e1-lesson-06"]
+        states = connection.execute(
+            """
+            select lesson_key, state::text from english_lesson_progress
+            where student_id=%s and lesson_key=any(%s)
+            order by lesson_key
+            """,
+            (learner_id, ["e1-lesson-01", "e1-lesson-06"]),
+        ).fetchall()
+        assert states == [
+            ("e1-lesson-01", "mastered"),
+            ("e1-lesson-06", "mastered"),
+        ]
+        with pytest.raises(psycopg.errors.RaiseException):
+            connection.execute(
+                "update english_checkpoint_attempts set correct_parts=0 where student_id=%s",
+                (learner_id,),
+            )
+        connection.rollback()
+
+
+@pytest.mark.postgres
 def test_authenticated_postgres_practice_is_idempotent_immutable_and_isolated():
     database_url = _database_url()
     learner_a = str(uuid4())

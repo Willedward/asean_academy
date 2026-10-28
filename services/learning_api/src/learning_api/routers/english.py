@@ -16,8 +16,12 @@ from ..dependencies import (
 )
 from ..english_contracts import (
     ClassifyEnglishErrorRequest,
+    CreateEnglishCheckpointSessionRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
+    EnglishCheckpointAttemptResponse,
+    EnglishCheckpointNextQuestionResponse,
+    EnglishCheckpointSessionResponse,
     EnglishCourseMapResponse,
     EnglishErrorClassificationResponse,
     EnglishHintResponse,
@@ -26,6 +30,7 @@ from ..english_contracts import (
     EnglishPracticeSessionResponse,
     EnglishProgressResponse,
     SubmitEnglishAttemptRequest,
+    SubmitEnglishCheckpointAttemptRequest,
 )
 from ..english_learning_repository import EnglishLearningError
 
@@ -89,6 +94,76 @@ async def create_session(
         lambda: service.create_session(
             lesson_key=body.lesson_key,
             mode=body.mode,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.post(
+    "/checkpoint-sessions",
+    operation_id="createEnglishCheckpointSession",
+    response_model=EnglishCheckpointSessionResponse,
+    status_code=201,
+    summary="Start or resume an idempotent protected English module checkpoint",
+)
+async def create_checkpoint_session(
+    body: CreateEnglishCheckpointSessionRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishLearningServiceDependency,
+    _rate_limit: PracticeSessionRateLimitDependency,
+) -> EnglishCheckpointSessionResponse:
+    return _safe(
+        lambda: service.create_checkpoint_session(
+            module_code=body.module_code,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/checkpoint-sessions/{session_id}",
+    operation_id="getEnglishCheckpointSession",
+    response_model=EnglishCheckpointSessionResponse,
+    summary="Resume an owned English module checkpoint",
+)
+async def checkpoint_session(
+    session_id: UUID,
+    service: EnglishLearningServiceDependency,
+) -> EnglishCheckpointSessionResponse:
+    return _safe(lambda: service.checkpoint_session(str(session_id)))
+
+
+@router.get(
+    "/checkpoint-sessions/{session_id}/next",
+    operation_id="getNextEnglishCheckpointQuestion",
+    response_model=EnglishCheckpointNextQuestionResponse,
+    summary="Get the next learner-safe protected checkpoint question",
+)
+async def next_checkpoint_question(
+    session_id: UUID,
+    service: EnglishLearningServiceDependency,
+) -> EnglishCheckpointNextQuestionResponse:
+    return _safe(lambda: service.next_checkpoint_question(str(session_id)))
+
+
+@router.post(
+    "/checkpoint-attempts",
+    operation_id="submitEnglishCheckpointAttempt",
+    response_model=EnglishCheckpointAttemptResponse,
+    summary="Submit a protected English checkpoint response without early feedback",
+)
+async def submit_checkpoint_attempt(
+    body: SubmitEnglishCheckpointAttemptRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishLearningServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishCheckpointAttemptResponse:
+    return _safe(
+        lambda: service.submit_checkpoint_attempt(
+            session_id=body.session_id,
+            question_key=body.question_key,
+            question_revision=body.question_revision,
+            answers=body.answers,
             idempotency_key=idempotency_key,
         )
     )

@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement complete; E1 checkpoint contract authored; review and release pending
+**Status:** fixed technical blueprint; protected measurement complete; E1 checkpoint journey implemented; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -91,20 +91,24 @@ gaps and five reading decisions. Matched endline and reserve forms now repeat th
 `endline_diagnostic` and `protected_reserve` pools. Across all three protected forms, tutoring
 is disabled and feedback is withheld until the form ends. The first checkpoint slice now
 adds reciprocal E1 vocabulary forms with five fresh decisions each and an explicit mastery
-scope covering Sprint lessons E1.1 and E1.6. These manifests are structurally ready but are
-not learner-runnable until checkpoint session persistence and mastery transitions are wired.
-Publication remains blocked on the remaining checkpoints and the normal immutable review
-approvals.
+scope covering Sprint lessons E1.1 and E1.6. The E1 vertical slice now has persisted,
+idempotent checkpoint sessions; prerequisite locking; learner-safe delivery without hints or
+answer feedback; deterministic 75% scoring; reciprocal form-B retry after failure; and an
+atomic transition from `proficient` to `mastered` for both scoped lessons after a pass.
+PostgreSQL persistence, evidence immutability and the prerequisite race guard are covered by
+integration tests. Publication remains blocked on the remaining checkpoint contracts and the
+normal immutable review approvals.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint checkpoints and review evidence**:
 
-1. implement checkpoint sessions and persistence against the validated E1 form contract;
-2. activate and test the checkpoint-to-`mastered` journey for E1.1 and E1.6;
-3. repeat the primary/retry manifest pattern for E0 and E2–E9;
-4. generate consolidated reviewer evidence for the 16-lesson route and protected forms; and
-5. collect immutable approvals before enabling learner routing.
+1. repeat the primary/retry manifest pattern for E0 and E2–E9 using the proven E1 journey;
+2. add consolidated checkpoint progress visibility to the learner and administrator views;
+3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
+4. collect immutable English and editorial approvals; and
+5. enable learner routing only after the release gate confirms that every referenced revision
+   is approved and published.
 
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core
