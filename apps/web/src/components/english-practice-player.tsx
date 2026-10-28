@@ -151,6 +151,29 @@ const COMPOSITION_PLANNING_ERROR_OPTIONS: EnglishErrorOption[] = [
   },
 ];
 
+const EXAM_STRATEGY_ERROR_OPTIONS: EnglishErrorOption[] = [
+  {
+    key: "paper_format",
+    label: "I mixed up the paper format",
+    detail: "I confused a section, task type or reported time limit.",
+  },
+  {
+    key: "instruction_control",
+    label: "I missed an instruction",
+    detail: "I overlooked what the task required before choosing a response.",
+  },
+  {
+    key: "timing_control",
+    label: "My timing plan was unsafe",
+    detail: "I left too little time for a required section or final check.",
+  },
+  {
+    key: "independent_conditions",
+    label: "I broke the independent conditions",
+    detail: "I used help, feedback or answer checking before the attempt ended.",
+  },
+];
+
 function answerPresent(answer: string | string[] | undefined): boolean {
   return Array.isArray(answer) ? answer.length > 0 : Boolean(answer?.trim());
 }
@@ -220,7 +243,9 @@ export function EnglishPracticePlayer({
 
   const question = current?.question;
   const errorOptions =
-    question?.question_type === "composition_planning"
+    question?.question_type === "exam_strategy"
+      ? EXAM_STRATEGY_ERROR_OPTIONS
+      : question?.question_type === "composition_planning"
       ? COMPOSITION_PLANNING_ERROR_OPTIONS
       : question?.question_type === "open_cloze"
       ? OPEN_CLOZE_ERROR_OPTIONS

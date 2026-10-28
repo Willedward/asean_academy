@@ -33,9 +33,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 31
+    assert len(report.lessons) == 36
     assert len(report.passages) == 14
-    assert len(report.questions) == 42
+    assert len(report.questions) == 52
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -99,11 +99,52 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 31,
-        "core": 20,
-        "sprint": 11,
+        "full": 36,
+        "core": 25,
+        "sprint": 16,
     }
+    assert summary["route_exit_ticket_lesson_counts"] == {
+        "full": 36,
+        "core": 25,
+        "sprint": 16,
+    }
+    assert summary["route_parallel_retry_lesson_counts"] == {
+        "full": 6,
+        "core": 6,
+        "sprint": 6,
+    }
+    assert summary["route_unauthored_lesson_codes"]["sprint"] == []
     assert not report.issues
+
+
+def test_v3b_sprint_lessons_have_five_decision_exit_and_parallel_forms(english_root):
+    report = validate_english_foundation(english_root)
+    lessons = {lesson.lesson_code: lesson for lesson in report.lessons}
+    questions = {question.stable_key: question for question in report.questions}
+    pairs = {
+        "E0.1": ("ex-l1-005", "ex-l1-006", "exam_strategy"),
+        "E0.2": ("ex-l2-004", "ex-l2-005", "exam_strategy"),
+        "E1.6": ("ev-l5-001", "ev-l5-002", "vocabulary_in_context"),
+        "E2.2": ("eg-l2-001", "eg-l2-002", "grammar_usage"),
+        "E9.5": ("ex-l5-004", "ex-l5-005", "exam_strategy"),
+    }
+    for lesson_code, (exit_key, retry_key, question_type) in pairs.items():
+        lesson = lessons[lesson_code]
+        exit_question = questions[exit_key]
+        retry_question = questions[retry_key]
+        assert lesson.sections[-1].question_keys == [exit_key]
+        assert exit_question.exposure_pool == "exit_ticket"
+        assert exit_question.question_type == question_type
+        assert exit_question.feedback_timing == "after_group"
+        assert len(exit_question.parts) == 5
+        assert retry_question.exposure_pool == "retry_review"
+        assert retry_question.parallel_form_of == exit_key
+        assert retry_question.outcome_code == exit_question.outcome_code
+        assert retry_question.question_type == exit_question.question_type
+        assert len(retry_question.parts) == 5
+        assert {part.prompt for part in retry_question.parts}.isdisjoint(
+            part.prompt for part in exit_question.parts
+        )
 
 
 def test_english_routes_reject_sprint_lessons_outside_core(english_root):
@@ -999,13 +1040,14 @@ def test_draft_pilot_is_not_publishable_before_human_review(english_root):
     }
 
 
-def test_english_pilot_has_one_complete_reviewable_batch(english_root):
+def test_english_pilot_has_complete_reviewable_batches(english_root):
     report = validate_english_authoring(english_root)
 
     assert report.valid
     assert [batch.batch_id for batch in report.batches] == [
         "english-eb-b001",
         "english-eg-b001",
+        "english-eg-b002",
         "english-eo-b001",
         "english-eo-b002",
         "english-eo-b003",
@@ -1020,6 +1062,7 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-er-b007",
         "english-ev-b001",
         "english-ev-b002",
+        "english-ev-b003",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -1036,8 +1079,11 @@ def test_english_pilot_has_one_complete_reviewable_batch(english_root):
         "english-ex-b014",
         "english-ex-b015",
         "english-ex-b016",
+        "english-ex-b017",
+        "english-ex-b018",
+        "english-ex-b019",
     ]
-    assert len(report.questions) == 42
+    assert len(report.questions) == 52
     assert not report.duplicates
 
 

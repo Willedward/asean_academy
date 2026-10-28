@@ -28,6 +28,10 @@ EnglishErrorCategory = Literal[
     "command_word",
     "audience_scope",
     "evidence_plan",
+        "paper_format",
+        "instruction_control",
+        "timing_control",
+        "independent_conditions",
 ]
 
 
