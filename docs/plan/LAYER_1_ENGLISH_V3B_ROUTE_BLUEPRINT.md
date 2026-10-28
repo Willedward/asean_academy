@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; Sprint breadth and protected baseline authored in draft; review and release pending
+**Status:** fixed technical blueprint; Sprint breadth and all protected measurement forms authored in draft; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -86,20 +86,21 @@ All 16 Sprint lessons now reference an exit ticket and have a distinct parallel 
 The retry increment adds ten question groups and six fresh passage assets without exposing
 protected diagnostic or mock content. A separate protected-measurement increment now adds a
 draft 20-part baseline: five vocabulary decisions, five banked-cloze gaps, five open-cloze
-gaps and five reading decisions. Its four question groups and three passages are isolated in
-the `baseline_diagnostic` pool, tutoring is disabled and feedback is withheld until the form
-ends. Publication remains blocked on the matched endline/reserve, checkpoints and the normal
-immutable review approvals.
+gaps and five reading decisions. Matched endline and reserve forms now repeat that exact
+5–5–5–5 blueprint with disjoint question groups and fresh passages in the
+`endline_diagnostic` and `protected_reserve` pools. Across all three protected forms, tutoring
+is disabled and feedback is withheld until the form ends. Publication remains blocked on
+checkpoints and the normal immutable review approvals.
 
 ## 6. Next execution milestone
 
-Complete the remaining **Sprint protected measurement and checkpoints**:
+Complete the remaining **Sprint checkpoints and review evidence**:
 
-1. author matched endline and reserve forms against the now-active baseline blueprint;
-2. enforce disjoint item ownership across all protected forms;
-3. add checkpoint manifests for the represented modules;
-4. generate consolidated reviewer evidence for the 16-lesson route; and
-5. collect immutable English/editorial approvals before enabling learner routing.
+1. add checkpoint manifests for the represented modules;
+2. activate and test the checkpoint-to-`mastered` journey;
+3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
+4. collect immutable English/editorial approvals; and
+5. enable learner routing only after every release gate passes.
 
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core
