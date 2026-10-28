@@ -82,15 +82,17 @@ Core gaps are E1.2, E1.4, E1.5, E2.3, E2.6, E3.2 and E3.4.
 
 Authored does not mean publishable. Every released lesson still needs its reviewed exit
 ticket, distinct parallel retry form and the normal immutable academic/editorial approvals.
-All 16 Sprint lessons now reference an exit ticket. Six currently have a parallel retry form;
-the other ten require one before the Sprint route can pass the release gate.
+All 16 Sprint lessons now reference an exit ticket and have a distinct parallel retry form.
+The retry increment adds ten question groups and six fresh passage assets without exposing
+protected diagnostic or mock content. Publication remains blocked on protected forms and the
+normal immutable review approvals.
 
 ## 6. Next execution milestone
 
-Complete **Sprint assessment coverage and protected measurement**:
+Complete **Sprint protected measurement and checkpoints**:
 
-1. author distinct parallel retry forms for the ten Sprint lessons that still lack them;
-2. assemble the protected 20-part baseline from disjoint assessment items;
+1. assemble the protected 20-part baseline from disjoint assessment items;
+2. author matched endline and reserve forms against the same blueprint;
 3. add checkpoint manifests for the represented modules;
 4. generate consolidated reviewer evidence for the 16-lesson route; and
 5. collect immutable English/editorial approvals before enabling learner routing.

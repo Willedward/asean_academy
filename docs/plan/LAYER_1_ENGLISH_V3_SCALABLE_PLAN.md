@@ -33,8 +33,10 @@ The first V3-B milestone now additionally provides:
 The Sprint-breadth increment now authors all five former gaps (E0.1, E0.2, E1.6, E2.2 and
 E9.5) with complete lesson anatomy, five-decision exit tickets and distinct retry forms. The
 current totals are 36 authored Full lessons, 25 authored Core lessons and all 16 Sprint
-lessons. All Sprint lessons have exit tickets; six have parallel retries, so release remains
-blocked on the other ten retries and protected measurement forms.
+lessons. All Sprint lessons now have exit tickets and distinct parallel retries. The retry
+increment adds ten question groups and six fresh passage assets, bringing the draft foundation
+to 62 question records and 20 passages. Release remains blocked on protected measurement
+forms, checkpoints and human approvals.
 
 The planned forms do not yet contain assessment questions and cannot be served to learners.
 Remaining lesson gaps, parallel forms, assessment items and checkpoint content belong to the
@@ -438,11 +440,11 @@ review or safeguarding owner is unavailable.
 
 ## 16. Current next milestone
 
-Complete **V3-B Sprint assessment coverage and protected measurement** before expanding
+Complete **V3-B Sprint protected measurement and checkpoints** before expanding
 optional Full-route lessons:
 
-1. add a distinct parallel retry form to each of the ten Sprint lessons still lacking one;
-2. populate the protected 20-part baseline from a disjoint assessment pool;
+1. populate the protected 20-part baseline from a disjoint assessment pool;
+2. author matched endline and reserve forms against the same blueprint;
 3. add checkpoint manifests and activate the checkpoint-to-`mastered` journey;
 4. generate consolidated reviewer evidence for all 16 Sprint lessons; and
 5. keep every item draft-only until the existing English and editorial approval gates pass.
