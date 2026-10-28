@@ -34,8 +34,8 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 36
-    assert len(report.passages) == 23
-    assert len(report.questions) == 66
+    assert len(report.passages) == 29
+    assert len(report.questions) == 74
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -43,7 +43,7 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
         "own_words_short_answer",
     }
     assert len(report.forms) == 3
-    assert {form.status for form in report.forms} == {"planned", "draft"}
+    assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
         "E0.2",
@@ -117,29 +117,42 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert not report.issues
 
 
-def test_protected_english_baseline_pins_exactly_twenty_disjoint_parts(english_root):
+def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(english_root):
     report = validate_english_foundation(english_root)
-    baseline = next(form for form in report.forms if form.form_type == "baseline")
     questions = {question.stable_key: question for question in report.questions}
-    selected = [questions[key] for key in baseline.question_keys]
-
-    assert baseline.status == "draft"
-    assert baseline.protected
-    assert not baseline.tutoring_enabled
-    assert baseline.feedback_timing == "after_form"
-    assert baseline.question_keys == [
-        "ev-l5-003",
-        "eb-l1-003",
-        "eo-l5-003",
-        "er-l5-005",
-    ]
-    assert sum(len(question.parts) for question in selected) == 20
-    assert {
-        question.question_type: len(question.parts) for question in selected
-    } == baseline.task_part_distribution
-    assert {question.exposure_pool for question in selected} == {
-        "baseline_diagnostic"
+    expected = {
+        "baseline": (
+            ["ev-l5-003", "eb-l1-003", "eo-l5-003", "er-l5-005"],
+            "baseline_diagnostic",
+        ),
+        "endline": (
+            ["ev-l5-004", "eb-l1-004", "eo-l5-004", "er-l5-006"],
+            "endline_diagnostic",
+        ),
+        "endline_reserve": (
+            ["ev-l5-005", "eb-l1-005", "eo-l5-005", "er-l5-007"],
+            "protected_reserve",
+        ),
     }
+    selected_keys = set()
+
+    for form in report.forms:
+        question_keys, exposure_pool = expected[form.form_type]
+        selected = [questions[key] for key in form.question_keys]
+        assert form.status == "draft"
+        assert form.protected
+        assert not form.tutoring_enabled
+        assert form.feedback_timing == "after_form"
+        assert form.question_keys == question_keys
+        assert sum(len(question.parts) for question in selected) == 20
+        assert {
+            question.question_type: len(question.parts) for question in selected
+        } == form.task_part_distribution
+        assert {question.exposure_pool for question in selected} == {exposure_pool}
+        assert selected_keys.isdisjoint(form.question_keys)
+        selected_keys.update(form.question_keys)
+
+    assert len(selected_keys) == 12
 
 
 def test_v3b_sprint_lessons_have_five_decision_exit_and_parallel_forms(english_root):
@@ -1073,6 +1086,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eb-b001",
         "english-eb-b002",
         "english-eb-b003",
+        "english-eb-b004",
+        "english-eb-b005",
         "english-eg-b001",
         "english-eg-b002",
         "english-eo-b001",
@@ -1082,6 +1097,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eo-b005",
         "english-eo-b006",
         "english-eo-b007",
+        "english-eo-b008",
+        "english-eo-b009",
         "english-er-b001",
         "english-er-b002",
         "english-er-b003",
@@ -1091,10 +1108,14 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-er-b007",
         "english-er-b008",
         "english-er-b009",
+        "english-er-b010",
+        "english-er-b011",
         "english-ev-b001",
         "english-ev-b002",
         "english-ev-b003",
         "english-ev-b004",
+        "english-ev-b005",
+        "english-ev-b006",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -1116,7 +1137,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b019",
         "english-ex-b020",
     ]
-    assert len(report.questions) == 66
+    assert len(report.questions) == 74
     assert not report.duplicates
 
 
