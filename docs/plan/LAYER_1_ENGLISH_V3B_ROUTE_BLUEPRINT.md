@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement complete; E1 checkpoint journey implemented; review and release pending
+**Status:** fixed technical blueprint; protected measurement complete; E0–E1 checkpoint journeys implemented; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -96,14 +96,16 @@ idempotent checkpoint sessions; prerequisite locking; learner-safe delivery with
 answer feedback; deterministic 75% scoring; reciprocal form-B retry after failure; and an
 atomic transition from `proficient` to `mastered` for both scoped lessons after a pass.
 PostgreSQL persistence, evidence immutability and the prerequisite race guard are covered by
-integration tests. Publication remains blocked on the remaining checkpoint contracts and the
-normal immutable review approvals.
+integration tests. The E0 checkpoint adds reciprocal two-group forms that sample both paper
+knowledge and baseline integrity, proving that protected sessions sequence multiple question
+groups without leaking interim correctness. Publication remains blocked on the remaining
+checkpoint contracts and the normal immutable review approvals.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint checkpoints and review evidence**:
 
-1. repeat the primary/retry manifest pattern for E0 and E2–E9 using the proven E1 journey;
+1. repeat the primary/retry manifest pattern for E2–E9 using the proven E0–E1 journey;
 2. add consolidated checkpoint progress visibility to the learner and administrator views;
 3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
 4. collect immutable English and editorial approvals; and
