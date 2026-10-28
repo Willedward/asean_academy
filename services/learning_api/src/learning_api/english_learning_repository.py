@@ -61,6 +61,39 @@ class EnglishLearningRepository(Protocol):
     def retry_keys(self, learner_id: str, lesson_key: str) -> list[str]: ...
     def retry_count(self, learner_id: str, lesson_key: str) -> int: ...
     def progress(self, learner_id: str) -> list[dict]: ...
+    def active_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None: ...
+    def latest_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None: ...
+    def create_checkpoint_session(
+        self,
+        learner_id: str,
+        *,
+        exam_profile_key: str,
+        form_key: str,
+        form_revision: int,
+        module_code: str,
+        mastery_lesson_keys: list[str],
+        questions: list[tuple[str, int]],
+        idempotency_key: str,
+        development_drafts: bool,
+    ) -> dict: ...
+    def checkpoint_session(self, learner_id: str, session_id: str) -> dict: ...
+    def next_checkpoint_assignment(self, learner_id: str, session_id: str) -> dict | None: ...
+    def checkpoint_attempt_by_idempotency(
+        self, learner_id: str, idempotency_key: str
+    ) -> dict | None: ...
+    def record_checkpoint_attempt(
+        self,
+        learner_id: str,
+        *,
+        session_id: str,
+        question_key: str,
+        question_revision: int,
+        attempt_id: str,
+        idempotency_key: str,
+        answers: dict,
+        correct_parts: int,
+        total_parts: int,
+    ) -> dict: ...
 
 
 class InMemoryEnglishLearningRepository:
@@ -75,6 +108,11 @@ class InMemoryEnglishLearningRepository:
         self.classifications: dict[str, str] = {}
         self.retries: dict[tuple[str, str], dict] = {}
         self.lesson_progress: dict[tuple[str, str], dict] = {}
+        self.checkpoint_sessions: dict[str, dict] = {}
+        self.checkpoint_assignments: dict[str, list[dict]] = {}
+        self.checkpoint_attempts: dict[str, dict] = {}
+        self.checkpoint_attempt_keys: dict[tuple[str, str], str] = {}
+        self.checkpoint_session_keys: dict[tuple[str, str], str] = {}
 
     def _owned(self, learner_id: str, session_id: str) -> dict:
         session = self.sessions.get(session_id)
@@ -373,6 +411,231 @@ class InMemoryEnglishLearningRepository:
             for (student, _), value in self.lesson_progress.items()
             if student == learner_id
         ]
+
+    def _checkpoint_owned(self, learner_id: str, session_id: str) -> dict:
+        session = self.checkpoint_sessions.get(session_id)
+        if session is None or session["learner_id"] != learner_id:
+            raise EnglishLearningError(
+                "english_checkpoint_session_not_found",
+                "The English checkpoint session was not found.",
+                404,
+            )
+        return session
+
+    def _checkpoint_summary(self, session: dict) -> dict:
+        assignments = self.checkpoint_assignments[session["session_id"]]
+        return {
+            "session_id": session["session_id"],
+            "status": session["status"],
+            "exam_profile_key": session["exam_profile_key"],
+            "form_key": session["form_key"],
+            "form_revision": session["form_revision"],
+            "module_code": session["module_code"],
+            "mastery_lesson_keys": list(session["mastery_lesson_keys"]),
+            "question_count": session["question_count"],
+            "assigned_count": len(assignments),
+            "resolved_count": sum(item["status"] != "pending" for item in assignments),
+            "correct_parts": sum(item["correct_parts"] for item in assignments),
+            "total_parts": sum(item["total_parts"] for item in assignments),
+            "score": session.get("score"),
+            "passed": session.get("passed"),
+            "development_drafts": session["development_drafts"],
+        }
+
+    def active_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None:
+        found = next(
+            (
+                session
+                for session in reversed(list(self.checkpoint_sessions.values()))
+                if session["learner_id"] == learner_id
+                and session["module_code"] == module_code
+                and session["status"] == "active"
+            ),
+            None,
+        )
+        return self._checkpoint_summary(found) if found else None
+
+    def latest_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None:
+        found = next(
+            (
+                session
+                for session in reversed(list(self.checkpoint_sessions.values()))
+                if session["learner_id"] == learner_id
+                and session["module_code"] == module_code
+            ),
+            None,
+        )
+        return self._checkpoint_summary(found) if found else None
+
+    def create_checkpoint_session(
+        self,
+        learner_id: str,
+        *,
+        exam_profile_key: str,
+        form_key: str,
+        form_revision: int,
+        module_code: str,
+        mastery_lesson_keys: list[str],
+        questions: list[tuple[str, int]],
+        idempotency_key: str,
+        development_drafts: bool,
+    ) -> dict:
+        key = (learner_id, idempotency_key)
+        existing_id = self.checkpoint_session_keys.get(key)
+        if existing_id:
+            return self._checkpoint_summary(self.checkpoint_sessions[existing_id])
+        active = self.active_checkpoint_session(learner_id, module_code)
+        if active:
+            self.checkpoint_session_keys[key] = active["session_id"]
+            return active
+        session_id = str(uuid4())
+        session = {
+            "session_id": session_id,
+            "learner_id": learner_id,
+            "status": "active",
+            "exam_profile_key": exam_profile_key,
+            "form_key": form_key,
+            "form_revision": form_revision,
+            "module_code": module_code,
+            "mastery_lesson_keys": list(mastery_lesson_keys),
+            "question_count": len(questions),
+            "development_drafts": development_drafts,
+            "score": None,
+            "passed": None,
+            "created_at": _now(),
+        }
+        self.checkpoint_sessions[session_id] = session
+        self.checkpoint_assignments[session_id] = [
+            {
+                "position": position,
+                "question_key": question_key,
+                "question_revision": revision,
+                "status": "pending",
+                "correct_parts": 0,
+                "total_parts": 0,
+            }
+            for position, (question_key, revision) in enumerate(questions, 1)
+        ]
+        self.checkpoint_session_keys[key] = session_id
+        return self._checkpoint_summary(session)
+
+    def checkpoint_session(self, learner_id: str, session_id: str) -> dict:
+        return self._checkpoint_summary(self._checkpoint_owned(learner_id, session_id))
+
+    def next_checkpoint_assignment(self, learner_id: str, session_id: str) -> dict | None:
+        self._checkpoint_owned(learner_id, session_id)
+        return next(
+            (
+                dict(item)
+                for item in self.checkpoint_assignments[session_id]
+                if item["status"] == "pending"
+            ),
+            None,
+        )
+
+    def checkpoint_attempt_by_idempotency(
+        self, learner_id: str, idempotency_key: str
+    ) -> dict | None:
+        attempt_id = self.checkpoint_attempt_keys.get((learner_id, idempotency_key))
+        return dict(self.checkpoint_attempts[attempt_id]) if attempt_id else None
+
+    def record_checkpoint_attempt(
+        self,
+        learner_id: str,
+        *,
+        session_id: str,
+        question_key: str,
+        question_revision: int,
+        attempt_id: str,
+        idempotency_key: str,
+        answers: dict,
+        correct_parts: int,
+        total_parts: int,
+    ) -> dict:
+        replay = self.checkpoint_attempt_by_idempotency(learner_id, idempotency_key)
+        if replay is not None:
+            return replay
+        session = self._checkpoint_owned(learner_id, session_id)
+        assignment = next(
+            (
+                item
+                for item in self.checkpoint_assignments[session_id]
+                if item["question_key"] == question_key
+                and item["question_revision"] == question_revision
+            ),
+            None,
+        )
+        if assignment is None or assignment["status"] != "pending":
+            raise EnglishLearningError(
+                "english_checkpoint_question_not_pending",
+                "The English checkpoint question is not awaiting an answer.",
+                409,
+            )
+        unresolved_after_attempt = sum(
+            1
+            for item in self.checkpoint_assignments[session_id]
+            if item["status"] == "pending" and item is not assignment
+        )
+        if unresolved_after_attempt == 0:
+            projected_correct = correct_parts + sum(
+                item["correct_parts"]
+                for item in self.checkpoint_assignments[session_id]
+                if item is not assignment
+            )
+            projected_total = total_parts + sum(
+                item["total_parts"]
+                for item in self.checkpoint_assignments[session_id]
+                if item is not assignment
+            )
+            projected_pass = (
+                projected_correct / projected_total if projected_total else 0.0
+            ) >= 0.75
+            if projected_pass:
+                eligible_lessons = {
+                    lesson_key
+                    for lesson_key in session["mastery_lesson_keys"]
+                    if (
+                        progress := self.lesson_progress.get((learner_id, lesson_key))
+                    )
+                    and progress["state"] in {"proficient", "mastered"}
+                }
+                if eligible_lessons != set(session["mastery_lesson_keys"]):
+                    raise EnglishLearningError(
+                        "english_checkpoint_prerequisites_changed",
+                        "Every scoped lesson must remain proficient before mastery is recorded.",
+                        409,
+                    )
+        assignment["correct_parts"] = correct_parts
+        assignment["total_parts"] = total_parts
+        assignment["status"] = "correct" if correct_parts == total_parts else "incorrect"
+        pending = any(
+            item["status"] == "pending" for item in self.checkpoint_assignments[session_id]
+        )
+        if not pending:
+            correct_total = sum(
+                item["correct_parts"] for item in self.checkpoint_assignments[session_id]
+            )
+            part_total = sum(
+                item["total_parts"] for item in self.checkpoint_assignments[session_id]
+            )
+            session["status"] = "completed"
+            session["score"] = correct_total / part_total if part_total else 0.0
+            session["passed"] = session["score"] >= 0.75
+            session["completed_at"] = _now()
+            if session["passed"]:
+                for lesson_key in session["mastery_lesson_keys"]:
+                    progress = self.lesson_progress[(learner_id, lesson_key)]
+                    progress["state"] = "mastered"
+                    progress["updated_at"] = _now()
+        response = {
+            "attempt_id": attempt_id,
+            "accepted": True,
+            "checkpoint_completed": session["status"] == "completed",
+            "session": self._checkpoint_summary(session),
+        }
+        self.checkpoint_attempts[attempt_id] = response
+        self.checkpoint_attempt_keys[(learner_id, idempotency_key)] = attempt_id
+        return response
 
 
 class PostgresEnglishLearningRepository:
@@ -958,3 +1221,373 @@ class PostgresEnglishLearningRepository:
                 (learner_id,),
             ).fetchall()
             return [dict(row) for row in rows]
+
+    @staticmethod
+    def _checkpoint_summary_postgres(connection, session: dict) -> dict:
+        counts = connection.execute(
+            """
+            select count(*)::integer as assigned_count,
+                   count(*) filter (where status <> 'pending')::integer as resolved_count,
+                   coalesce(sum(correct_parts), 0)::integer as correct_parts,
+                   coalesce(sum(total_parts), 0)::integer as total_parts
+            from english_checkpoint_session_questions
+            where checkpoint_session_id=%s
+            """,
+            (session["id"],),
+        ).fetchone()
+        return {
+            "session_id": str(session["id"]),
+            "status": session["status"],
+            "exam_profile_key": session["exam_profile_key"],
+            "form_key": session["form_key"],
+            "form_revision": session["form_revision"],
+            "module_code": session["module_code"],
+            "mastery_lesson_keys": list(session["mastery_lesson_keys"]),
+            "question_count": session["requested_question_count"],
+            "assigned_count": counts["assigned_count"],
+            "resolved_count": counts["resolved_count"],
+            "correct_parts": counts["correct_parts"],
+            "total_parts": counts["total_parts"],
+            "score": float(session["score"]) if session["score"] is not None else None,
+            "passed": session["passed"],
+            "development_drafts": session["development_drafts"],
+        }
+
+    @staticmethod
+    def _checkpoint_owned_postgres(
+        connection, learner_id: str, session_id: str, *, lock: bool = False
+    ):
+        suffix = " for update" if lock else ""
+        session = connection.execute(
+            "select * from english_checkpoint_sessions where id=%s and student_id=%s" + suffix,
+            (session_id, learner_id),
+        ).fetchone()
+        if session is None:
+            raise EnglishLearningError(
+                "english_checkpoint_session_not_found",
+                "The English checkpoint session was not found.",
+                404,
+            )
+        return session
+
+    def active_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            session = connection.execute(
+                """
+                select * from english_checkpoint_sessions
+                where student_id=%s and module_code=%s and status='active'
+                order by created_at desc limit 1
+                """,
+                (learner_id, module_code),
+            ).fetchone()
+            return self._checkpoint_summary_postgres(connection, session) if session else None
+
+    def latest_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            session = connection.execute(
+                """
+                select * from english_checkpoint_sessions
+                where student_id=%s and module_code=%s
+                order by created_at desc limit 1
+                """,
+                (learner_id, module_code),
+            ).fetchone()
+            return self._checkpoint_summary_postgres(connection, session) if session else None
+
+    def create_checkpoint_session(
+        self,
+        learner_id: str,
+        *,
+        exam_profile_key: str,
+        form_key: str,
+        form_revision: int,
+        module_code: str,
+        mastery_lesson_keys: list[str],
+        questions: list[tuple[str, int]],
+        idempotency_key: str,
+        development_drafts: bool,
+    ) -> dict:
+        with self._connect() as connection, connection.transaction():
+            self._set_identity(connection, learner_id)
+            connection.execute(
+                "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                (f"english-checkpoint:{learner_id}:{module_code}",),
+            )
+            existing = connection.execute(
+                """
+                select sessions.* from english_checkpoint_session_idempotency_keys keys
+                join english_checkpoint_sessions sessions
+                  on sessions.id=keys.checkpoint_session_id
+                where keys.student_id=%s and keys.idempotency_key=%s
+                """,
+                (learner_id, idempotency_key),
+            ).fetchone()
+            if existing:
+                return self._checkpoint_summary_postgres(connection, existing)
+            active = connection.execute(
+                """
+                select * from english_checkpoint_sessions
+                where student_id=%s and module_code=%s and status='active'
+                order by created_at desc limit 1
+                """,
+                (learner_id, module_code),
+            ).fetchone()
+            if active:
+                connection.execute(
+                    """
+                    insert into english_checkpoint_session_idempotency_keys
+                        (student_id, idempotency_key, checkpoint_session_id)
+                    values (%s, %s, %s)
+                    """,
+                    (learner_id, idempotency_key, active["id"]),
+                )
+                return self._checkpoint_summary_postgres(connection, active)
+            session = connection.execute(
+                """
+                insert into english_checkpoint_sessions (
+                    student_id, exam_profile_key, form_key, form_revision, module_code,
+                    mastery_lesson_keys, requested_question_count, development_drafts
+                ) values (%s, %s, %s, %s, %s, %s, %s, %s) returning *
+                """,
+                (
+                    learner_id,
+                    exam_profile_key,
+                    form_key,
+                    form_revision,
+                    module_code,
+                    mastery_lesson_keys,
+                    len(questions),
+                    development_drafts,
+                ),
+            ).fetchone()
+            for position, (question_key, revision) in enumerate(questions, 1):
+                question = connection.execute(
+                    """
+                    select versions.id from english_objective_questions questions
+                    join english_objective_question_versions versions
+                      on versions.question_id=questions.id
+                    where questions.stable_key=%s and versions.revision=%s
+                    """,
+                    (question_key, revision),
+                ).fetchone()
+                if question is None:
+                    raise EnglishLearningError(
+                        "english_question_revision_not_imported",
+                        "The assigned English checkpoint revision has not been imported.",
+                        503,
+                    )
+                connection.execute(
+                    """
+                    insert into english_checkpoint_session_questions (
+                        checkpoint_session_id, question_version_id, position
+                    ) values (%s, %s, %s)
+                    """,
+                    (session["id"], question["id"], position),
+                )
+            connection.execute(
+                """
+                insert into english_checkpoint_session_idempotency_keys
+                    (student_id, idempotency_key, checkpoint_session_id)
+                values (%s, %s, %s)
+                """,
+                (learner_id, idempotency_key, session["id"]),
+            )
+            return self._checkpoint_summary_postgres(connection, session)
+
+    def checkpoint_session(self, learner_id: str, session_id: str) -> dict:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            session = self._checkpoint_owned_postgres(connection, learner_id, session_id)
+            return self._checkpoint_summary_postgres(connection, session)
+
+    def next_checkpoint_assignment(self, learner_id: str, session_id: str) -> dict | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            session = self._checkpoint_owned_postgres(connection, learner_id, session_id)
+            row = connection.execute(
+                """
+                select assigned.position, questions.stable_key as question_key,
+                       versions.revision as question_revision
+                from english_checkpoint_session_questions assigned
+                join english_objective_question_versions versions
+                  on versions.id=assigned.question_version_id
+                join english_objective_questions questions on questions.id=versions.question_id
+                where assigned.checkpoint_session_id=%s and assigned.status='pending'
+                order by assigned.position limit 1
+                """,
+                (session["id"],),
+            ).fetchone()
+            return dict(row) if row else None
+
+    def checkpoint_attempt_by_idempotency(
+        self, learner_id: str, idempotency_key: str
+    ) -> dict | None:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            row = connection.execute(
+                """
+                select attempts.id as attempt_id, sessions.* from english_checkpoint_attempts attempts
+                join english_checkpoint_session_questions assigned
+                  on assigned.id=attempts.checkpoint_session_question_id
+                join english_checkpoint_sessions sessions
+                  on sessions.id=assigned.checkpoint_session_id
+                where attempts.student_id=%s and attempts.idempotency_key=%s
+                """,
+                (learner_id, idempotency_key),
+            ).fetchone()
+            if row is None:
+                return None
+            return {
+                "attempt_id": str(row["attempt_id"]),
+                "accepted": True,
+                "checkpoint_completed": row["status"] == "completed",
+                "session": self._checkpoint_summary_postgres(connection, row),
+            }
+
+    def record_checkpoint_attempt(
+        self,
+        learner_id: str,
+        *,
+        session_id: str,
+        question_key: str,
+        question_revision: int,
+        attempt_id: str,
+        idempotency_key: str,
+        answers: dict,
+        correct_parts: int,
+        total_parts: int,
+    ) -> dict:
+        with self._connect() as connection, connection.transaction():
+            self._set_identity(connection, learner_id)
+            connection.execute(
+                "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                (f"english-checkpoint-attempt:{learner_id}:{idempotency_key}",),
+            )
+            replay = connection.execute(
+                """
+                select attempts.id as attempt_id, sessions.* from english_checkpoint_attempts attempts
+                join english_checkpoint_session_questions assigned
+                  on assigned.id=attempts.checkpoint_session_question_id
+                join english_checkpoint_sessions sessions
+                  on sessions.id=assigned.checkpoint_session_id
+                where attempts.student_id=%s and attempts.idempotency_key=%s
+                """,
+                (learner_id, idempotency_key),
+            ).fetchone()
+            if replay:
+                return {
+                    "attempt_id": str(replay["attempt_id"]),
+                    "accepted": True,
+                    "checkpoint_completed": replay["status"] == "completed",
+                    "session": self._checkpoint_summary_postgres(connection, replay),
+                }
+            session = self._checkpoint_owned_postgres(
+                connection, learner_id, session_id, lock=True
+            )
+            if session["status"] != "active":
+                raise EnglishLearningError(
+                    "english_checkpoint_completed", "This checkpoint is complete.", 409
+                )
+            assigned = connection.execute(
+                """
+                select assigned.id, assigned.status
+                from english_checkpoint_session_questions assigned
+                join english_objective_question_versions versions
+                  on versions.id=assigned.question_version_id
+                join english_objective_questions questions on questions.id=versions.question_id
+                where assigned.checkpoint_session_id=%s and questions.stable_key=%s
+                  and versions.revision=%s
+                for update of assigned
+                """,
+                (session["id"], question_key, question_revision),
+            ).fetchone()
+            if assigned is None or assigned["status"] != "pending":
+                raise EnglishLearningError(
+                    "english_checkpoint_question_not_pending",
+                    "The English checkpoint question is not awaiting an answer.",
+                    409,
+                )
+            connection.execute(
+                """
+                update english_checkpoint_session_questions
+                set status=%s, correct_parts=%s, total_parts=%s, resolved_at=now()
+                where id=%s
+                """,
+                (
+                    "correct" if correct_parts == total_parts else "incorrect",
+                    correct_parts,
+                    total_parts,
+                    assigned["id"],
+                ),
+            )
+            connection.execute(
+                """
+                insert into english_checkpoint_attempts (
+                    id, student_id, checkpoint_session_question_id, idempotency_key,
+                    answers, correct_parts, total_parts
+                ) values (%s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    attempt_id,
+                    learner_id,
+                    assigned["id"],
+                    idempotency_key,
+                    Jsonb(answers),
+                    correct_parts,
+                    total_parts,
+                ),
+            )
+            totals = connection.execute(
+                """
+                select count(*) filter (where status='pending')::integer as pending,
+                       coalesce(sum(correct_parts), 0)::integer as correct_parts,
+                       coalesce(sum(total_parts), 0)::integer as total_parts
+                from english_checkpoint_session_questions
+                where checkpoint_session_id=%s
+                """,
+                (session["id"],),
+            ).fetchone()
+            if totals["pending"] == 0:
+                score = (
+                    totals["correct_parts"] / totals["total_parts"]
+                    if totals["total_parts"]
+                    else 0.0
+                )
+                passed = score >= 0.75
+                session = connection.execute(
+                    """
+                    update english_checkpoint_sessions
+                    set status='completed', score=%s, passed=%s, completed_at=now()
+                    where id=%s returning *
+                    """,
+                    (score, passed, session["id"]),
+                ).fetchone()
+                if passed:
+                    updated = connection.execute(
+                        """
+                        update english_lesson_progress
+                        set state='mastered', updated_at=now(),
+                            completed_at=coalesce(completed_at, now())
+                        where student_id=%s and lesson_key=any(%s)
+                          and state in ('proficient','mastered')
+                        returning lesson_key
+                        """,
+                        (learner_id, session["mastery_lesson_keys"]),
+                    ).fetchall()
+                    if {row["lesson_key"] for row in updated} != set(
+                        session["mastery_lesson_keys"]
+                    ):
+                        raise EnglishLearningError(
+                            "english_checkpoint_prerequisites_changed",
+                            "Every scoped lesson must remain proficient before mastery is recorded.",
+                            409,
+                        )
+            response = {
+                "attempt_id": attempt_id,
+                "accepted": True,
+                "checkpoint_completed": session["status"] == "completed",
+                "session": self._checkpoint_summary_postgres(connection, session),
+            }
+            return response

@@ -37,6 +37,7 @@ class EnglishLearningService:
             (passage.stable_key, passage.revision): passage for passage in self.report.passages
         }
         self.lessons = {lesson.stable_key: lesson for lesson in self.report.lessons}
+        self.forms = {form.form_key: form for form in self.report.forms}
 
     def _visible(self, status: str) -> bool:
         return status == "published" or (self.allow_drafts and status in {"draft", "reviewed"})
@@ -257,6 +258,154 @@ class EnglishLearningService:
 
     def session(self, session_id: str) -> dict:
         return self.repository.session(self.learner_id, session_id)
+
+    def create_checkpoint_session(
+        self, *, module_code: str, idempotency_key: str
+    ) -> dict:
+        if not 1 <= len(idempotency_key) <= 200:
+            raise EnglishLearningError(
+                "invalid_idempotency_key", "Supply a non-empty idempotency key."
+            )
+        forms = sorted(
+            (
+                form
+                for form in self.report.forms
+                if form.form_type == "checkpoint"
+                and form.module_code == module_code
+                and self._visible(form.status)
+            ),
+            key=lambda form: form.form_key,
+        )
+        if not forms:
+            raise EnglishLearningError(
+                "english_checkpoint_not_found",
+                "No English checkpoint is available for this module.",
+                404,
+            )
+        active = self.repository.active_checkpoint_session(self.learner_id, module_code)
+        if active:
+            return active
+        progress = {
+            item["lesson_key"]: item for item in self.repository.progress(self.learner_id)
+        }
+        mastery_keys = forms[0].mastery_lesson_keys
+        missing = [
+            key
+            for key in mastery_keys
+            if key not in progress or progress[key]["state"] not in {"proficient", "mastered"}
+        ]
+        if missing:
+            raise EnglishLearningError(
+                "english_checkpoint_locked",
+                "Every scoped lesson must be proficient before the checkpoint: "
+                + ", ".join(missing),
+                409,
+            )
+        if all(progress[key]["state"] == "mastered" for key in mastery_keys):
+            raise EnglishLearningError(
+                "english_checkpoint_already_passed",
+                "This English module checkpoint has already been passed.",
+                409,
+            )
+        latest = self.repository.latest_checkpoint_session(self.learner_id, module_code)
+        selected = forms[0]
+        if latest is not None and latest["passed"] is False:
+            latest_form = self.forms[latest["form_key"]]
+            selected = self.forms[latest_form.paired_form_key]
+        questions = [self._question(key) for key in selected.question_keys]
+        return self.repository.create_checkpoint_session(
+            self.learner_id,
+            exam_profile_key=self.report.exam_profile.profile_key,
+            form_key=selected.form_key,
+            form_revision=selected.revision,
+            module_code=module_code,
+            mastery_lesson_keys=selected.mastery_lesson_keys,
+            questions=[(question.stable_key, question.revision) for question in questions],
+            idempotency_key=idempotency_key,
+            development_drafts=(
+                selected.status != "published"
+                or any(question.status != "published" for question in questions)
+            ),
+        )
+
+    def checkpoint_session(self, session_id: str) -> dict:
+        return self.repository.checkpoint_session(self.learner_id, session_id)
+
+    def next_checkpoint_question(self, session_id: str) -> dict:
+        session = self.repository.checkpoint_session(self.learner_id, session_id)
+        assignment = self.repository.next_checkpoint_assignment(self.learner_id, session_id)
+        session = self.repository.checkpoint_session(self.learner_id, session_id)
+        if assignment is None:
+            return {"status": "completed", "session": session}
+        question = self._question(assignment["question_key"], assignment["question_revision"])
+        return {
+            "status": "active",
+            "session": session,
+            "position": assignment["position"],
+            "question": self._public_question(question),
+        }
+
+    def submit_checkpoint_attempt(
+        self,
+        *,
+        session_id: str,
+        question_key: str,
+        question_revision: int,
+        answers: dict[str, str | list[str]],
+        idempotency_key: str,
+    ) -> dict:
+        replay = self.repository.checkpoint_attempt_by_idempotency(
+            self.learner_id, idempotency_key
+        )
+        if replay is not None:
+            return replay
+        assignment = self.repository.next_checkpoint_assignment(self.learner_id, session_id)
+        if assignment is None:
+            raise EnglishLearningError(
+                "english_checkpoint_completed", "This checkpoint is complete.", 409
+            )
+        if (
+            assignment["question_key"] != question_key
+            or assignment["question_revision"] != question_revision
+        ):
+            raise EnglishLearningError(
+                "english_checkpoint_question_not_pending",
+                "Answer the currently assigned checkpoint question.",
+                409,
+            )
+        question = self._question(question_key, question_revision)
+        expected = {str(part.position) for part in question.parts}
+        if set(answers) != expected:
+            raise EnglishLearningError(
+                "english_answers_incomplete",
+                "Supply one answer for every part of the English question.",
+            )
+        if question.question_type == "banked_cloze":
+            selected = [
+                value.strip().upper()
+                for value in answers.values()
+                if isinstance(value, str) and value.strip()
+            ]
+            if len(selected) != len(question.parts) or len(selected) != len(set(selected)):
+                raise EnglishLearningError(
+                    "english_banked_cloze_word_reused",
+                    "Use each word-bank choice at most once.",
+                )
+        correct_parts = sum(
+            bool(check_english_answer(part.response, answers[str(part.position)])["correct"])
+            for part in question.parts
+        )
+        return self.repository.record_checkpoint_attempt(
+            self.learner_id,
+            session_id=session_id,
+            question_key=question_key,
+            question_revision=question_revision,
+            attempt_id=str(uuid4()),
+            idempotency_key=idempotency_key,
+            answers=answers,
+            correct_parts=correct_parts,
+            total_parts=len(question.parts),
+        )
 
     @staticmethod
     def _public_part(part) -> dict:
