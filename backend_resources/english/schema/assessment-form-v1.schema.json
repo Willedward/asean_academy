@@ -107,6 +107,26 @@
       "default": null,
       "title": "Paired Form Key"
     },
+    "module_code": {
+      "anyOf": [
+        {
+          "pattern": "^E(?:0|[1-9][0-9]*)$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Module Code"
+    },
+    "mastery_lesson_keys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Mastery Lesson Keys",
+      "type": "array"
+    },
     "source_refs": {
       "items": {
         "type": "string"

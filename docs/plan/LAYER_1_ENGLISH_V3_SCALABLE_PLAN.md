@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B Sprint breadth and protected measurement implemented for technical review
+**Status:** V3-A merged; V3-B protected measurement complete; E1 checkpoint contract implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -44,7 +44,11 @@ approvals.
 
 All three protected measurement forms are now draft and structurally complete, but cannot be
 served to learners until the existing review and release gates pass. Remaining lesson gaps and
-checkpoint content belong to the next V3-B increments. Exact route membership and rationale are recorded in
+checkpoint content belong to the next V3-B increments. The E1 checkpoint vertical slice adds
+two reciprocal five-part forms, two disjoint `module_checkpoint` groups and explicit mastery
+scope for E1.1 and E1.6. This brings the draft foundation to 76 question records. The forms are
+not yet learner-runnable: session persistence and the checkpoint-to-`mastered` transition are
+the next engineering increment. Exact route membership and rationale are recorded in
 `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
 
 ## 1. V3 decision
@@ -447,9 +451,9 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint checkpoints and review evidence** before expanding
 optional Full-route lessons:
 
-1. add checkpoint manifests and activate the checkpoint-to-`mastered` journey;
-2. generate consolidated reviewer evidence for all 16 Sprint lessons and three protected forms;
-3. collect the existing English and editorial approvals;
-4. retain the disjoint baseline/endline/reserve ownership enforced by validation; and
+1. implement English checkpoint sessions and persistence using the validated E1 contract;
+2. test E1 checkpoint success moving E1.1 and E1.6 from `proficient` to `mastered`;
+3. repeat the primary/retry checkpoint manifests across E0 and E2–E9;
+4. generate consolidated reviewer evidence and collect English/editorial approvals; and
 5. keep every item draft-only until the release gates pass.
 

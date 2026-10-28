@@ -373,6 +373,34 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
         form_by_key[form.form_key] = form
         if form.profile_key != report.exam_profile.profile_key:
             _issue(report, "error", "assessment_form_profile", path, form.profile_key)
+        if form.form_type == "checkpoint":
+            module = next(
+                (
+                    candidate
+                    for candidate in report.catalogue.modules
+                    if candidate.module_code == form.module_code
+                ),
+                None,
+            )
+            if module is None:
+                _issue(
+                    report,
+                    "error",
+                    "assessment_form_module",
+                    path,
+                    str(form.module_code),
+                )
+            else:
+                module_lesson_keys = {lesson.stable_key for lesson in module.lessons}
+                wrong_mastery_keys = set(form.mastery_lesson_keys) - module_lesson_keys
+                if wrong_mastery_keys:
+                    _issue(
+                        report,
+                        "error",
+                        "assessment_form_mastery_scope",
+                        path,
+                        str(sorted(wrong_mastery_keys)),
+                    )
         missing_questions = set(form.question_keys) - set(question_by_key)
         if missing_questions:
             _issue(
@@ -459,6 +487,19 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
                 "asymmetric_paired_assessment_form",
                 path,
                 f"{form.form_key} pairs with {form.paired_form_key}, but the reverse link is absent",
+            )
+        elif form.form_type == "checkpoint" and (
+            paired.form_type != "checkpoint"
+            or paired.module_code != form.module_code
+            or paired.mastery_lesson_keys != form.mastery_lesson_keys
+            or paired.task_part_distribution != form.task_part_distribution
+        ):
+            _issue(
+                report,
+                "error",
+                "checkpoint_pair_scope_mismatch",
+                path,
+                f"{form.form_key} and {paired.form_key} must share module, mastery and distribution",
             )
 
     for bank_key, manifest in manifest_by_key.items():
