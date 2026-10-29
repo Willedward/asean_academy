@@ -131,12 +131,20 @@ The deterministic Sprint reviewer export now pins all 16 lessons, 16 parallel re
 reciprocal checkpoint forms, 65 unique question groups and 20 referenced passages. The packet
 contains exact revision fingerprints plus separate pending English and editorial decision
 columns, and pull-request CI uploads the same protected evidence as an artifact.
+The protected administrator queue now exposes the same records under route key
+`english-sprint-route-v3b-review`. That route resolves to exactly 121 independently
+fingerprinted review records: 16 lessons, 20 checkpoint forms, 65 question groups and
+20 passages. Reviewers can exclude individual records, preview protected answers and form
+composition, and append separate English and editorial decisions. Correction exports retain
+the exact rejected fingerprint, and no review action changes learner publication state.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint review and release evidence**:
 
-1. collect immutable English and editorial approvals against the pinned Sprint evidence;
+1. apply migration `202610290036_english_checkpoint_form_review.sql`, deploy the protected
+   route session, and collect immutable English and editorial approvals against its 121
+   pinned records;
 2. correct and re-export any excluded items without approving changed fingerprints;
 3. run the protected baseline/endline and checkpoint journey in hosted staging; and
 4. enable learner routing only after the release gate confirms that every referenced revision

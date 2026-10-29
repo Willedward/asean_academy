@@ -28,6 +28,7 @@ const item: ContentItem = {
   position: null,
   batch_id: "g3-sec1-n2-b001",
   unit_key: "g3-sec1-n2",
+  route_keys: [],
   review_state: "approved",
   mathematics_review: null,
   english_review: null,
@@ -42,6 +43,7 @@ const queue: ContentQueue = {
   items: [item],
   batch_ids: ["g3-sec1-n2-b001"],
   unit_keys: ["g3-sec1-n2"],
+  route_keys: [],
   total: 1,
   limit: 25,
   offset: 0,
@@ -517,5 +519,96 @@ describe("ContentReviewPanel", () => {
     expect(
       screen.getByText("The sentence directly defines the word."),
     ).toBeInTheDocument();
+  });
+
+  it("opens the complete English Sprint route as one immutable review session", async () => {
+    const routeKey = "english-sprint-route-v3b-review";
+    const checkpointItem: ContentItem = {
+      ...item,
+      content_kind: "english_checkpoint_form",
+      stable_key: "english-checkpoint-e0-a-v1",
+      title: "E0 checkpoint A",
+      batch_id: null,
+      unit_key: "english-e0",
+      route_keys: [routeKey],
+      review_state: "unreviewed",
+      mathematics_review: null,
+      english_review: null,
+      editorial_review: null,
+      blockers: [
+        "English approval is required.",
+        "Editorial approval is required.",
+      ],
+      can_request_publication: false,
+    };
+    const routeQueue: ContentQueue = {
+      items: [checkpointItem],
+      batch_ids: [],
+      unit_keys: ["english-e0"],
+      route_keys: [routeKey],
+      total: 1,
+      limit: 250,
+      offset: 0,
+    };
+    const checkpointPreview: ContentPreview = {
+      content_kind: "english_checkpoint_form",
+      stable_key: checkpointItem.stable_key,
+      revision: 1,
+      review_fingerprint: checkpointItem.review_fingerprint,
+      batch_id: null,
+      review_content: {
+        form_key: checkpointItem.stable_key,
+        revision: 1,
+        form_type: "checkpoint",
+        title: checkpointItem.title,
+        status: "draft",
+        expected_scored_part_count: 6,
+        task_part_distribution: { exam_strategy: 6 },
+        question_keys: ["ex-l1-001"],
+        paired_form_key: "english-checkpoint-e0-b-v1",
+        module_code: "E0",
+        mastery_lesson_keys: ["e0-lesson-01"],
+      },
+    };
+    const fetcher = vi.fn(async (url: string, init?: RequestInit) => {
+      if (url.includes("bulk-review-preview")) {
+        return new Response(
+          JSON.stringify({
+            scope: "route",
+            scope_key: routeKey,
+            items: [checkpointPreview],
+          }),
+        );
+      }
+      void init;
+      return new Response(JSON.stringify(routeQueue));
+    });
+    vi.stubGlobal("fetch", fetcher);
+
+    render(<ContentReviewPanel academic />);
+    await screen.findByText(checkpointItem.title);
+    fireEvent.change(screen.getByLabelText("Learning route"), {
+      target: { value: routeKey },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Apply filters" }));
+
+    await screen.findByText(`Review ${routeKey} as one consolidated packet`);
+    expect(screen.getByTestId("scope-progress")).toHaveTextContent(
+      "1 matched items",
+    );
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Open consolidated reviewer preview",
+      }),
+    );
+    expect(await screen.findByText("Protected question order")).toBeInTheDocument();
+    const previewCall = fetcher.mock.calls.find(([url]) =>
+      String(url).includes("bulk-review-preview"),
+    );
+    expect(JSON.parse(String(previewCall?.[1]?.body))).toMatchObject({
+      scope: "route",
+      scope_key: routeKey,
+      targets: [{ content_kind: "english_checkpoint_form" }],
+    });
   });
 });

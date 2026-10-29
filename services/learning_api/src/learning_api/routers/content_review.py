@@ -59,6 +59,7 @@ async def review_queue(
     search: str | None = Query(default=None, min_length=1, max_length=100),
     batch_id: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
     unit_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
+    route_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
     limit: int = Query(default=25, ge=1, le=250),
     offset: int = Query(default=0, ge=0),
 ) -> ContentReviewQueueResponse:
@@ -75,6 +76,7 @@ async def review_queue(
             offset=offset,
             batch_id=batch_id,
             unit_key=unit_key,
+            route_key=route_key,
         )
     )
 
@@ -93,6 +95,7 @@ async def correction_queue(
     search: str | None = Query(default=None, min_length=1, max_length=100),
     batch_id: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
     unit_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
+    route_key: str | None = Query(default=None, pattern=r"^[a-z0-9-]+$"),
     limit: int = Query(default=250, ge=1, le=250),
     offset: int = Query(default=0, ge=0),
 ) -> ContentReviewQueueResponse:
@@ -110,6 +113,7 @@ async def correction_queue(
             offset=offset,
             batch_id=batch_id,
             unit_key=unit_key,
+            route_key=route_key,
         )
     )
 
@@ -118,7 +122,7 @@ async def correction_queue(
     "/bulk-review-preview",
     operation_id="previewBulkContentForReview",
     response_model=BulkContentReviewerPreviewResponse,
-    summary="Preview an exact batch or unit selection in one review session",
+    summary="Preview an exact batch, unit or route selection in one review session",
 )
 async def preview_bulk_content_for_review(
     body: BulkContentReviewPreviewRequest,

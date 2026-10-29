@@ -81,7 +81,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Preview an exact batch or unit selection in one review session */
+        /** Preview an exact batch, unit or route selection in one review session */
         post: operations["previewBulkContentForReview"];
         delete?: never;
         options?: never;
@@ -2088,7 +2088,7 @@ export interface components {
              * Scope
              * @enum {string}
              */
-            scope: "batch" | "unit";
+            scope: "batch" | "unit" | "route";
             /** Scope Key */
             scope_key: string;
             /** Targets */
@@ -2117,7 +2117,7 @@ export interface components {
              * Scope
              * @enum {string}
              */
-            scope: "batch" | "unit";
+            scope: "batch" | "unit" | "route";
             /** Scope Key */
             scope_key: string;
             /** Targets */
@@ -2133,7 +2133,7 @@ export interface components {
              * Scope
              * @enum {string}
              */
-            scope: "batch" | "unit";
+            scope: "batch" | "unit" | "route";
             /** Scope Key */
             scope_key: string;
         };
@@ -2143,7 +2143,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /** Review Fingerprint */
             review_fingerprint: string;
             /** Source Content Sha256 */
@@ -2161,7 +2161,7 @@ export interface components {
              * Scope
              * @enum {string}
              */
-            scope: "batch" | "unit";
+            scope: "batch" | "unit" | "route";
             /** Scope Key */
             scope_key: string;
         };
@@ -2204,7 +2204,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -2276,7 +2276,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /** Difficulty */
             difficulty?: number | null;
             editorial_review: components["schemas"]["ContentReviewSummary"] | null;
@@ -2296,6 +2296,8 @@ export interface components {
             review_state: "unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired";
             /** Revision */
             revision: number;
+            /** Route Keys */
+            route_keys?: string[];
             /** Source Content Sha256 */
             source_content_sha256: string;
             /**
@@ -2320,6 +2322,8 @@ export interface components {
             limit: number;
             /** Offset */
             offset: number;
+            /** Route Keys */
+            route_keys: string[];
             /** Total */
             total: number;
             /** Unit Keys */
@@ -2331,7 +2335,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /**
              * Created At
              * Format: date-time
@@ -2409,7 +2413,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /** Review Content */
             review_content: {
                 [key: string]: unknown;
@@ -2440,7 +2444,7 @@ export interface components {
              * Content Kind
              * @enum {string}
              */
-            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
             /** Public Content */
             public_content: {
                 [key: string]: unknown;
@@ -5182,12 +5186,13 @@ export interface operations {
     listContentReviewQueue: {
         parameters: {
             query?: {
-                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding") | null;
+                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding") | null;
                 source_status?: string | null;
                 review_state?: ("unreviewed" | "partially_approved" | "approved" | "changes_requested" | "publication_requested" | "retirement_requested" | "published" | "retired") | null;
                 search?: string | null;
                 batch_id?: string | null;
                 unit_key?: string | null;
+                route_key?: string | null;
                 limit?: number;
                 offset?: number;
             };
@@ -5502,10 +5507,11 @@ export interface operations {
     exportContentReviewCorrections: {
         parameters: {
             query?: {
-                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding") | null;
+                kind?: ("course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding") | null;
                 search?: string | null;
                 batch_id?: string | null;
                 unit_key?: string | null;
+                route_key?: string | null;
                 limit?: number;
                 offset?: number;
             };
@@ -5612,7 +5618,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -5720,7 +5726,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -5824,7 +5830,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;
@@ -5928,7 +5934,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                kind: "course" | "lesson" | "question" | "english_lesson" | "english_passage" | "english_question" | "tutor_grounding";
+                kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
                 stable_key: string;
             };
             cookie?: never;

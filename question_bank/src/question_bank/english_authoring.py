@@ -16,8 +16,18 @@ from typing import Literal
 
 from pydantic import Field, ValidationError, model_validator
 
-from .english_models import EnglishModel, EnglishObjectiveQuestion
-from .english_validation import EnglishIssue, validate_english_foundation
+from .english_models import (
+    EnglishAssessmentForm,
+    EnglishLesson,
+    EnglishModel,
+    EnglishObjectiveQuestion,
+    EnglishPassage,
+)
+from .english_validation import (
+    EnglishFoundationReport,
+    EnglishIssue,
+    validate_english_foundation,
+)
 
 ENGLISH_BATCH_PATTERN = r"^english-(ev|eg|eb|eo|er|ex)-b[0-9]{3}$"
 
@@ -94,6 +104,17 @@ class EnglishDuplicateMatch:
     first_key: str
     second_key: str
     similarity: float
+
+
+@dataclass(frozen=True)
+class EnglishRouteReviewSelection:
+    """Exact authored records referenced by one protected English route packet."""
+
+    lessons: tuple[EnglishLesson, ...]
+    forms: tuple[EnglishAssessmentForm, ...]
+    questions: tuple[EnglishObjectiveQuestion, ...]
+    passages: tuple[EnglishPassage, ...]
+    parallel_retry_keys: frozenset[str]
 
 
 @dataclass
@@ -390,8 +411,31 @@ def export_english_reviewer_batch(root: Path, batch_path: Path, output: Path) ->
     }
 
 
-def _review_fingerprint(value) -> str:
-    payload = value.model_dump(mode="json")
+def _without_review_workflow_metadata(value):
+    if isinstance(value, list):
+        return [_without_review_workflow_metadata(item) for item in value]
+    if not isinstance(value, dict):
+        return value
+    ignored = {
+        "revision",
+        "status",
+        "review",
+        "reviewed_at",
+        "reviewed_by",
+        "review_notes",
+    }
+    return {
+        key: _without_review_workflow_metadata(item)
+        for key, item in value.items()
+        if key not in ignored
+    }
+
+
+def english_review_fingerprint(value) -> str:
+    """Hash learner-visible English semantics while excluding workflow metadata."""
+
+    payload = value.model_dump(mode="json") if hasattr(value, "model_dump") else value
+    payload = _without_review_workflow_metadata(payload)
     encoded = json.dumps(
         payload,
         ensure_ascii=False,
@@ -464,15 +508,13 @@ def _route_question_html(question, passages) -> str:
     )
 
 
-def export_english_route_reviewer_packet(
-    root: Path,
-    output: Path,
+def english_route_review_selection(
+    foundation: EnglishFoundationReport,
     *,
     route: Literal["full", "core", "sprint"] = "sprint",
-) -> dict[str, object]:
-    """Export one deterministic route packet without changing review or publication state."""
+) -> EnglishRouteReviewSelection:
+    """Resolve and validate the exact records included in one route review session."""
 
-    foundation = validate_english_foundation(root)
     if not foundation.valid or foundation.catalogue is None:
         raise ValueError("English foundation must validate before route reviewer export")
 
@@ -482,16 +524,18 @@ def export_english_route_reviewer_packet(
     missing_lessons = sorted(set(route_keys) - set(lessons_by_key))
     if missing_lessons:
         raise ValueError(f"The {route} route has unauthored lessons: {missing_lessons}")
-    lessons = [lessons_by_key[key] for key in route_keys]
+    lessons = tuple(lessons_by_key[key] for key in route_keys)
     route_key_set = set(route_keys)
-    forms = sorted(
-        (
-            form
-            for form in foundation.forms
-            if form.form_type == "checkpoint"
-            and set(form.mastery_lesson_keys) <= route_key_set
-        ),
-        key=lambda form: (int(form.module_code[1:]), form.form_key),
+    forms = tuple(
+        sorted(
+            (
+                form
+                for form in foundation.forms
+                if form.form_type == "checkpoint"
+                and set(form.mastery_lesson_keys) <= route_key_set
+            ),
+            key=lambda form: (int(form.module_code[1:]), form.form_key),
+        )
     )
     form_modules = [form.module_code for form in forms]
     if len(forms) != 20 or any(form_modules.count(f"E{index}") != 2 for index in range(10)):
@@ -500,12 +544,12 @@ def export_english_route_reviewer_packet(
     lesson_question_keys = {
         key for lesson in lessons for section in lesson.sections for key in section.question_keys
     }
-    parallel_retry_keys = {
+    parallel_retry_keys = frozenset(
         question.stable_key
         for question in foundation.questions
         if question.exposure_pool == "retry_review"
         and question.parallel_form_of in lesson_question_keys
-    }
+    )
     if len(parallel_retry_keys) != len(route_keys):
         raise ValueError(
             f"The {route} route requires one parallel retry for every lesson; "
@@ -521,7 +565,7 @@ def export_english_route_reviewer_packet(
     missing_questions = sorted(set(selected_question_keys) - set(questions_by_key))
     if missing_questions:
         raise ValueError(f"The route reviewer packet has missing questions: {missing_questions}")
-    questions = [questions_by_key[key] for key in selected_question_keys]
+    questions = tuple(questions_by_key[key] for key in selected_question_keys)
     passages_by_key = {
         (passage.stable_key, passage.revision): passage
         for passage in foundation.passages
@@ -533,7 +577,36 @@ def export_english_route_reviewer_packet(
             if question.passage_ref is not None
         }
     )
-    passages = [passages_by_key[key] for key in passage_keys]
+    passages = tuple(passages_by_key[key] for key in passage_keys)
+    return EnglishRouteReviewSelection(
+        lessons=lessons,
+        forms=forms,
+        questions=questions,
+        passages=passages,
+        parallel_retry_keys=parallel_retry_keys,
+    )
+
+
+def export_english_route_reviewer_packet(
+    root: Path,
+    output: Path,
+    *,
+    route: Literal["full", "core", "sprint"] = "sprint",
+) -> dict[str, object]:
+    """Export one deterministic route packet without changing review or publication state."""
+
+    foundation = validate_english_foundation(root)
+    selection = english_route_review_selection(foundation, route=route)
+    catalogue = foundation.catalogue
+    lessons = selection.lessons
+    forms = selection.forms
+    questions = selection.questions
+    passages = selection.passages
+    parallel_retry_keys = selection.parallel_retry_keys
+    passages_by_key = {
+        (passage.stable_key, passage.revision): passage
+        for passage in foundation.passages
+    }
 
     output.mkdir(parents=True, exist_ok=True)
     lesson_manifest = [
@@ -542,7 +615,7 @@ def export_english_route_reviewer_packet(
             "lesson_code": lesson.lesson_code,
             "revision": lesson.revision,
             "status": lesson.status,
-            "fingerprint": _review_fingerprint(lesson),
+            "fingerprint": english_review_fingerprint(lesson),
         }
         for lesson in lessons
     ]
@@ -553,7 +626,7 @@ def export_english_route_reviewer_packet(
             "module_code": form.module_code,
             "status": form.status,
             "paired_form_key": form.paired_form_key,
-            "fingerprint": _review_fingerprint(form),
+            "fingerprint": english_review_fingerprint(form),
         }
         for form in forms
     ]
@@ -563,7 +636,7 @@ def export_english_route_reviewer_packet(
             "revision": question.revision,
             "status": question.status,
             "exposure_pool": question.exposure_pool,
-            "fingerprint": _review_fingerprint(question),
+            "fingerprint": english_review_fingerprint(question),
         }
         for question in questions
     ]
@@ -573,7 +646,7 @@ def export_english_route_reviewer_packet(
             "revision": passage.revision,
             "status": passage.status,
             "content_sha256": passage.content_sha256,
-            "fingerprint": passage.content_sha256,
+            "fingerprint": english_review_fingerprint(passage),
         }
         for passage in passages
     ]

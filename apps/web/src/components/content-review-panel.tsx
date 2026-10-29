@@ -182,6 +182,19 @@ type ReviewEnglishPassage = {
   attribution: string;
   content_sha256: string;
 };
+type ReviewEnglishCheckpointForm = {
+  form_key: string;
+  revision: number;
+  form_type: string;
+  title: string;
+  status: string;
+  expected_scored_part_count: number;
+  task_part_distribution: Record<string, number>;
+  question_keys: string[];
+  paired_form_key?: string | null;
+  module_code?: string | null;
+  mastery_lesson_keys: string[];
+};
 type ReviewDimension = "mathematics" | "english" | "editorial";
 
 function academicDimension(item: Pick<ContentItem, "content_kind">) {
@@ -392,6 +405,43 @@ function ReviewerPreview({
             ) : null}
           </section>
         ))}
+      </article>
+    );
+  }
+  if (preview.content_kind === "english_checkpoint_form") {
+    const form = content as unknown as ReviewEnglishCheckpointForm;
+    return (
+      <article className="space-y-5 rounded-2xl border border-teal-200 bg-teal-50/40 p-5">
+        <div>
+          <p className="m-0 text-sm font-semibold uppercase text-teal-700">
+            English checkpoint form · {form.module_code} · revision {form.revision}
+          </p>
+          <h3 className="mt-1 text-xl font-bold">{form.title}</h3>
+          <p>
+            {form.expected_scored_part_count} scored parts · paired with{" "}
+            <code>{form.paired_form_key}</code>
+          </p>
+        </div>
+        <section className="rounded-xl border bg-white p-4">
+          <h4 className="mt-0 font-bold">Mastery scope</h4>
+          <p>{form.mastery_lesson_keys.join(", ")}</p>
+          <h4 className="font-bold">Task distribution</h4>
+          <ul className="list-disc pl-5">
+            {Object.entries(form.task_part_distribution).map(([task, count]) => (
+              <li key={task}>
+                {label(task)}: {count}
+              </li>
+            ))}
+          </ul>
+          <h4 className="font-bold">Protected question order</h4>
+          <ol className="list-decimal pl-5">
+            {form.question_keys.map((key) => (
+              <li key={key}>
+                <code>{key}</code>
+              </li>
+            ))}
+          </ol>
+        </section>
       </article>
     );
   }
@@ -686,7 +736,7 @@ function BulkReviewSession({
   academic: boolean;
   items: ContentItem[];
   onChanged: () => void;
-  scope: "batch" | "unit";
+  scope: "batch" | "unit" | "route";
   scopeKey: string;
 }) {
   const subjectDimension: ReviewDimension = items.some((item) =>
@@ -1215,6 +1265,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     state: "",
     batch: "",
     unit: "",
+    route: "",
     search: "",
   };
   const [filters, setFilters] = useState(initialFilters);
@@ -1224,8 +1275,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   const [data, setData] = useState<ContentQueue>();
   const [batchIds, setBatchIds] = useState<string[]>([]);
   const [unitKeys, setUnitKeys] = useState<string[]>([]);
+  const [routeKeys, setRouteKeys] = useState<string[]>([]);
   const [error, setError] = useState<string>();
-  const pageSize = applied.batch || applied.unit ? 250 : 25;
+  const pageSize = applied.batch || applied.unit || applied.route ? 250 : 25;
   const query = new URLSearchParams({
     limit: String(pageSize),
     offset: String(offset),
@@ -1235,12 +1287,14 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   if (applied.state) query.set("review_state", applied.state);
   if (applied.batch) query.set("batch_id", applied.batch);
   if (applied.unit) query.set("unit_key", applied.unit);
+  if (applied.route) query.set("route_key", applied.route);
   if (applied.search) query.set("search", applied.search);
   const path = `content?${query}`;
   const correctionQuery = new URLSearchParams({ limit: "250", offset: "0" });
   if (applied.kind) correctionQuery.set("kind", applied.kind);
   if (applied.batch) correctionQuery.set("batch_id", applied.batch);
   if (applied.unit) correctionQuery.set("unit_key", applied.unit);
+  if (applied.route) correctionQuery.set("route_key", applied.route);
   if (applied.search) correctionQuery.set("search", applied.search);
   const correctionsHref = `/api/v1/admin/content/corrections?${correctionQuery}`;
 
@@ -1252,6 +1306,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
           setData(value);
           setBatchIds(value.batch_ids);
           setUnitKeys(value.unit_keys);
+          setRouteKeys(value.route_keys);
           setError(undefined);
         }
       },
@@ -1268,7 +1323,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     ? ({ scope: "batch", key: applied.batch } as const)
     : applied.unit
       ? ({ scope: "unit", key: applied.unit } as const)
-      : undefined;
+      : applied.route
+        ? ({ scope: "route", key: applied.route } as const)
+        : undefined;
   const subjectApproved =
     data?.items.filter(
       (item) =>
@@ -1300,7 +1357,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
         exact content hash.
       </p>
       <form
-        className="grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-6"
+        className="grid gap-3 rounded-2xl border bg-white p-4 md:grid-cols-7"
         onSubmit={(event) => {
           event.preventDefault();
           setOffset(0);
@@ -1319,6 +1376,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
                 ...filters,
                 batch: event.target.value,
                 unit: event.target.value ? "" : filters.unit,
+                route: event.target.value ? "" : filters.route,
                 kind: event.target.value ? "" : filters.kind,
               })
             }
@@ -1342,6 +1400,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
                 ...filters,
                 unit: event.target.value,
                 batch: event.target.value ? "" : filters.batch,
+                route: event.target.value ? "" : filters.route,
                 kind: event.target.value ? "" : filters.kind,
               })
             }
@@ -1350,6 +1409,30 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             {unitKeys.map((unitKey) => (
               <option key={unitKey} value={unitKey}>
                 {unitKey}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Route
+          <select
+            aria-label="Learning route"
+            className="mt-1 block w-full rounded-lg border p-2"
+            value={filters.route}
+            onChange={(event) =>
+              setFilters({
+                ...filters,
+                route: event.target.value,
+                batch: event.target.value ? "" : filters.batch,
+                unit: event.target.value ? "" : filters.unit,
+                kind: event.target.value ? "" : filters.kind,
+              })
+            }
+          >
+            <option value="">All routes</option>
+            {routeKeys.map((routeKey) => (
+              <option key={routeKey} value={routeKey}>
+                {routeKey}
               </option>
             ))}
           </select>
@@ -1368,6 +1451,9 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             <option value="lesson">Lesson</option>
             <option value="question">Question</option>
             <option value="english_lesson">English lesson</option>
+            <option value="english_checkpoint_form">
+              English checkpoint form
+            </option>
             <option value="english_passage">English passage</option>
             <option value="english_question">English question</option>
             <option value="tutor_grounding">Tutor grounding</option>
@@ -1419,7 +1505,7 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
             }
           />
         </label>
-        <Button className="md:col-start-6" type="submit">
+        <Button className="md:col-start-7" type="submit">
           Apply filters
         </Button>
       </form>
