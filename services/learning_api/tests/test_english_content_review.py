@@ -1,14 +1,21 @@
+import json
 from pathlib import Path
 
 import pytest
+from question_bank.english_authoring import export_english_route_reviewer_packet
 
 from learning_api.admin_repository import BetaOperationsError
 from learning_api.content_review import (
     _assert_review_dimension,
     _serialize_item,
+    bulk_reviewer_preview,
     catalogue_review_items,
     reviewer_preview,
     student_preview,
+)
+from learning_api.content_review_contracts import (
+    BulkContentReviewPreviewRequest,
+    BulkContentReviewTarget,
 )
 from learning_api.course_catalogue import CourseCatalogue
 from learning_api.identity import AuthenticatedLearner
@@ -211,6 +218,103 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     reflective = next(item for item in english_items if item.stable_key == "ex-l1-004")
     assert reflective.batch_id == "english-ex-b016"
     assert reflective.unit_key == "english-e9"
+
+
+def test_sprint_route_contains_the_exact_121_fingerprinted_review_records(
+    catalogue, tmp_path
+):
+    items = catalogue_review_items(catalogue)
+    route_key = "english-sprint-route-v3b-review"
+    sprint = [item for item in items if route_key in item.route_keys]
+
+    assert len(sprint) == 121
+    assert {
+        kind: sum(item.kind == kind for item in sprint)
+        for kind in {
+            "english_lesson",
+            "english_checkpoint_form",
+            "english_question",
+            "english_passage",
+        }
+    } == {
+        "english_lesson": 16,
+        "english_checkpoint_form": 20,
+        "english_question": 65,
+        "english_passage": 20,
+    }
+    checkpoint = next(
+        item
+        for item in sprint
+        if item.kind == "english_checkpoint_form" and item.model.module_code == "E0"
+    )
+    assert checkpoint.unit_key == "english-e0"
+    assert checkpoint.source_status == "draft"
+    assert len(checkpoint.fingerprint) == 64
+
+    targets = [
+        BulkContentReviewTarget(
+            content_kind=item.kind,
+            stable_key=item.stable_key,
+            source_revision=item.revision,
+            source_content_sha256=item.source_hash,
+            review_fingerprint=item.fingerprint,
+        )
+        for item in sprint
+    ]
+    preview = bulk_reviewer_preview(
+        catalogue,
+        BulkContentReviewPreviewRequest(
+            scope="route",
+            scope_key=route_key,
+            targets=targets,
+        ),
+    )
+    assert preview["scope"] == "route"
+    assert len(preview["items"]) == 121
+
+    output = tmp_path / "sprint-review"
+    export_english_route_reviewer_packet(
+        REPOSITORY_ROOT / "backend_resources/english/v1",
+        output,
+        route="sprint",
+    )
+    manifest = json.loads((output / "manifest.json").read_text())
+    packet_fingerprints = {
+        **{
+            ("english_lesson", item["stable_key"]): item["fingerprint"]
+            for item in manifest["lessons"]
+        },
+        **{
+            ("english_checkpoint_form", item["form_key"]): item["fingerprint"]
+            for item in manifest["checkpoint_forms"]
+        },
+        **{
+            ("english_question", item["stable_key"]): item["fingerprint"]
+            for item in manifest["questions"]
+        },
+        **{
+            ("english_passage", item["stable_key"]): item["fingerprint"]
+            for item in manifest["passages"]
+        },
+    }
+    assert packet_fingerprints == {
+        (item.kind, item.stable_key): item.fingerprint for item in sprint
+    }
+
+
+def test_checkpoint_form_has_protected_and_student_safe_previews(catalogue):
+    form = next(
+        item
+        for item in catalogue_review_items(catalogue)
+        if item.kind == "english_checkpoint_form"
+    )
+    protected = reviewer_preview(catalogue, form.kind, form.stable_key)
+    public = student_preview(catalogue, form.kind, form.stable_key)
+
+    assert protected["review_content"]["question_keys"]
+    assert protected["review_content"]["paired_form_key"]
+    assert "question_keys" not in public["public_content"]
+    assert public["public_content"]["expected_scored_part_count"] > 0
 
 
 def test_english_reviewer_preview_contains_answers_but_student_preview_does_not(catalogue):

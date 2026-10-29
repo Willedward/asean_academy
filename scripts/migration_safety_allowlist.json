@@ -67,5 +67,17 @@
       "match": "drop constraint if exists content_lifecycle_requests_item_kind_check",
       "reason": "The lifecycle item-kind constraint is recreated in the same transaction with English lesson, passage and question kinds added; every previously allowed kind remains valid."
     }
+  ],
+  "202610290036_english_checkpoint_form_review.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_review_records_item_kind_check",
+      "reason": "The review item-kind constraint is recreated in the same transaction with english_checkpoint_form added; every previously allowed kind remains valid."
+    },
+    {
+      "category": "drop_object",
+      "match": "drop constraint if exists content_lifecycle_requests_item_kind_check",
+      "reason": "The lifecycle item-kind constraint is recreated in the same transaction with english_checkpoint_form added; every previously allowed kind remains valid."
+    }
   ]
 }

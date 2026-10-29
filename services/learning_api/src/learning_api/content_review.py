@@ -11,7 +11,12 @@ from typing import Any
 
 from psycopg.types.json import Jsonb
 from question_bank.course_repository import course_content_hash, lesson_content_hash
+from question_bank.english_authoring import (
+    english_review_fingerprint,
+    english_route_review_selection,
+)
 from question_bank.english_models import (
+    EnglishAssessmentForm,
     EnglishLesson,
     EnglishObjectiveQuestion,
     EnglishPassage,
@@ -23,6 +28,7 @@ from .admin_repository import BetaOperationsError
 from .course_catalogue import CourseCatalogue, public_lesson_section
 
 TUTOR_GROUNDING_ROOT = Path("backend_resources/tutor_evaluations")
+ENGLISH_SPRINT_ROUTE_KEY = "english-sprint-route-v3b-review"
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,6 +46,7 @@ class CatalogueReviewItem:
     position: int | None = None
     batch_id: str | None = None
     unit_key: str | None = None
+    route_keys: tuple[str, ...] = ()
 
 
 def _without_workflow_metadata(value):
@@ -82,6 +89,11 @@ def _english_source_hash(model: Any) -> str:
 def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewItem]:
     report = catalogue.english_review_report
     batch_by_question = catalogue.english_review_question_batches
+    sprint = english_route_review_selection(report, route="sprint")
+    sprint_lesson_keys = {lesson.stable_key for lesson in sprint.lessons}
+    sprint_question_keys = {question.stable_key for question in sprint.questions}
+    sprint_passage_keys = {passage.stable_key for passage in sprint.passages}
+    sprint_route = (ENGLISH_SPRINT_ROUTE_KEY,)
     items = []
     for lesson in report.lessons:
         module_code = lesson.lesson_code.split(".", 1)[0].lower()
@@ -91,12 +103,28 @@ def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIte
                 stable_key=lesson.stable_key,
                 revision=lesson.revision,
                 source_hash=_english_source_hash(lesson),
-                fingerprint=review_fingerprint(lesson),
+                fingerprint=english_review_fingerprint(lesson),
                 title=lesson.title,
                 source_status=lesson.status,
                 model=lesson,
                 position=int(lesson.lesson_code.split(".", 1)[1]),
                 unit_key=f"english-{module_code}",
+                route_keys=(sprint_route if lesson.stable_key in sprint_lesson_keys else ()),
+            )
+        )
+    for form in sprint.forms:
+        items.append(
+            CatalogueReviewItem(
+                kind="english_checkpoint_form",
+                stable_key=form.form_key,
+                revision=form.revision,
+                source_hash=_english_source_hash(form),
+                fingerprint=english_review_fingerprint(form),
+                title=form.title,
+                source_status=form.status,
+                model=form,
+                unit_key=f"english-{form.module_code.lower()}",
+                route_keys=sprint_route,
             )
         )
     for question in report.questions:
@@ -109,7 +137,7 @@ def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIte
                 stable_key=question.stable_key,
                 revision=question.revision,
                 source_hash=_english_source_hash(question),
-                fingerprint=review_fingerprint(question),
+                fingerprint=english_review_fingerprint(question),
                 title=question.title,
                 source_status=question.status,
                 model=question,
@@ -117,6 +145,9 @@ def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIte
                 outcome_code=question.outcome_code,
                 batch_id=batch_id,
                 unit_key=unit_key,
+                route_keys=(
+                    sprint_route if question.stable_key in sprint_question_keys else ()
+                ),
             )
         )
     passage_batches: dict[str, set[str]] = {}
@@ -134,12 +165,15 @@ def _english_review_items(catalogue: CourseCatalogue) -> list[CatalogueReviewIte
                 stable_key=passage.stable_key,
                 revision=passage.revision,
                 source_hash=_english_source_hash(passage),
-                fingerprint=review_fingerprint(passage),
+                fingerprint=english_review_fingerprint(passage),
                 title=passage.title,
                 source_status=passage.status,
                 model=passage,
                 batch_id=next(iter(batches)) if len(batches) == 1 else None,
                 unit_key="english-passages",
+                route_keys=(
+                    sprint_route if passage.stable_key in sprint_passage_keys else ()
+                ),
             )
         )
     return items
@@ -419,6 +453,7 @@ def _serialize_item(item: CatalogueReviewItem, reviews: dict, lifecycle: dict) -
         "position": item.position,
         "batch_id": item.batch_id,
         "unit_key": item.unit_key,
+        "route_keys": list(item.route_keys),
         "review_state": state,
         "mathematics_review": _review_summary(mathematics),
         "english_review": _review_summary(english),
@@ -446,6 +481,7 @@ def list_review_queue(
     offset: int,
     batch_id: str | None = None,
     unit_key: str | None = None,
+    route_key: str | None = None,
 ) -> dict:
     with repository._connect() as connection:
         reviews, lifecycle = _snapshot(connection)
@@ -459,6 +495,7 @@ def list_review_queue(
     unit_keys = sorted(
         {item["unit_key"] for item in items if item["unit_key"] is not None}
     )
+    route_keys = sorted({key for item in items for key in item["route_keys"]})
     if kind:
         items = [item for item in items if item["content_kind"] == kind]
     if source_status:
@@ -469,6 +506,8 @@ def list_review_queue(
         items = [item for item in items if item["batch_id"] == batch_id]
     if unit_key:
         items = [item for item in items if item["unit_key"] == unit_key]
+    if route_key:
+        items = [item for item in items if route_key in item["route_keys"]]
     if search:
         query = search.strip().casefold()
         items = [
@@ -481,9 +520,10 @@ def list_review_queue(
         "lesson": 1,
         "question": 2,
         "english_lesson": 3,
-        "english_passage": 4,
-        "english_question": 5,
-        "tutor_grounding": 6,
+        "english_checkpoint_form": 4,
+        "english_passage": 5,
+        "english_question": 6,
+        "tutor_grounding": 7,
     }
     items.sort(
         key=lambda item: (
@@ -496,6 +536,7 @@ def list_review_queue(
         "items": items[offset : offset + limit],
         "batch_ids": batch_ids,
         "unit_keys": unit_keys,
+        "route_keys": route_keys,
         "total": len(items),
         "limit": limit,
         "offset": offset,
@@ -555,6 +596,19 @@ def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> d
                 }
                 for section in lesson.sections
             ],
+        }
+    elif kind == "english_checkpoint_form":
+        form: EnglishAssessmentForm = item.model
+        content = {
+            "form_key": form.form_key,
+            "revision": form.revision,
+            "form_type": form.form_type,
+            "title": form.title,
+            "expected_scored_part_count": form.expected_scored_part_count,
+            "task_part_distribution": form.task_part_distribution,
+            "paired_form_key": form.paired_form_key,
+            "module_code": form.module_code,
+            "mastery_lesson_keys": form.mastery_lesson_keys,
         }
     elif kind == "english_passage":
         passage: EnglishPassage = item.model
@@ -645,11 +699,16 @@ def _bulk_targets(catalogue: CourseCatalogue, body) -> list[CatalogueReviewItem]
                 "content_not_found", "A selected content item was not found.", 404
             )
         _assert_expected(item, target)
-        actual_scope = item.batch_id if body.scope == "batch" else item.unit_key
-        if actual_scope != body.scope_key:
+        if body.scope == "batch":
+            in_scope = item.batch_id == body.scope_key
+        elif body.scope == "unit":
+            in_scope = item.unit_key == body.scope_key
+        else:
+            in_scope = body.scope_key in item.route_keys
+        if not in_scope:
             raise BetaOperationsError(
                 "bulk_review_scope_mismatch",
-                "Every selected item must belong to the requested batch or unit.",
+                "Every selected item must belong to the requested batch, unit or route.",
                 422,
             )
         items.append(item)

@@ -485,7 +485,9 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:
 
-1. collect English and editorial decisions against the pinned Sprint fingerprints;
+1. deploy the protected `english-sprint-route-v3b-review` session and collect English and
+   editorial decisions against its 121 pinned lesson, checkpoint-form, question and passage
+   fingerprints;
 2. correct and re-export excluded items, then complete the immutable approvals;
 3. run the protected baseline/endline and checkpoint journey in hosted staging;
 4. confirm the Sprint release manifest contains only approved immutable revisions; and

@@ -155,6 +155,14 @@ The consolidated route export pins all 16 Sprint lessons, their parallel retries
 checkpoint forms for every E0–E9 module. It writes exact fingerprints and separate pending
 English/editorial decision columns without changing any content state.
 
+The administrator content-review page exposes the identical scope as
+`english-sprint-route-v3b-review`. Selecting it opens one consolidated 121-record session:
+16 lessons, 20 checkpoint forms, 65 question groups and 20 passages. Every selected record
+receives its own append-only English or editorial decision; excluded records remain pending
+and appear in the fingerprint-bound correction export after changes are requested. Apply
+migration `202610290036_english_checkpoint_form_review.sql` before using this scope in hosted
+staging. Approving the route does not publish it.
+
 Use `--publish` only when checking a human-reviewed release candidate. The current pilot
 must fail that gate because it is deliberately still draft content.
 
@@ -165,7 +173,8 @@ must fail that gate because it is deliberately still draft content.
 The source implementation now includes exclusive English batch claims, deterministic
 exact and near-template duplicate checks, protected reviewer packet exports, passage-level
 review, correction notes, subject-aware English and editorial decisions, consolidated
-batch review and an importer that refuses an invalid snapshot. Apply migrations 028–030
+batch/unit/route review and an importer that refuses an invalid snapshot. Apply migrations
+028–030 and 036,
 and deploy this branch before expecting these items in the hosted administrator queue.
 
 ### 2. Deliver the first vertical slice

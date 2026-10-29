@@ -326,6 +326,7 @@ def test_content_admin_can_export_a_scoped_correction_queue(monkeypatch):
             "items": [],
             "batch_ids": [],
             "unit_keys": ["g3-sec1-g1"],
+            "route_keys": [],
             "total": 0,
             "limit": filters["limit"],
             "offset": filters["offset"],
@@ -352,6 +353,15 @@ def test_content_admin_can_export_a_scoped_correction_queue(monkeypatch):
     assert observed["review_state"] == "changes_requested"
     assert observed["unit_key"] == "g3-sec1-g1"
     assert observed["limit"] == 250
+
+    route_export = request(
+        app,
+        "GET",
+        "/api/v1/admin/content/corrections?route_key=english-sprint-route-v3b-review",
+        "admin-token",
+    )
+    assert route_export.status_code == 200, route_export.text
+    assert observed["route_key"] == "english-sprint-route-v3b-review"
 
 
 def test_admin_review_remains_available_when_learner_drafts_are_disabled():

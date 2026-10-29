@@ -1709,7 +1709,8 @@
           "scope": {
             "enum": [
               "batch",
-              "unit"
+              "unit",
+              "route"
             ],
             "title": "Scope",
             "type": "string"
@@ -1771,7 +1772,8 @@
           "scope": {
             "enum": [
               "batch",
-              "unit"
+              "unit",
+              "route"
             ],
             "title": "Scope",
             "type": "string"
@@ -1822,7 +1824,8 @@
           "scope": {
             "enum": [
               "batch",
-              "unit"
+              "unit",
+              "route"
             ],
             "title": "Scope",
             "type": "string"
@@ -1850,6 +1853,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -1902,7 +1906,8 @@
           "scope": {
             "enum": [
               "batch",
-              "unit"
+              "unit",
+              "route"
             ],
             "title": "Scope",
             "type": "string"
@@ -2034,6 +2039,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -2184,6 +2190,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -2289,6 +2296,13 @@
             "title": "Revision",
             "type": "integer"
           },
+          "route_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Route Keys",
+            "type": "array"
+          },
           "source_content_sha256": {
             "title": "Source Content Sha256",
             "type": "string"
@@ -2369,6 +2383,13 @@
             "title": "Offset",
             "type": "integer"
           },
+          "route_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Route Keys",
+            "type": "array"
+          },
           "total": {
             "title": "Total",
             "type": "integer"
@@ -2385,6 +2406,7 @@
           "items",
           "batch_ids",
           "unit_keys",
+          "route_keys",
           "total",
           "limit",
           "offset"
@@ -2401,6 +2423,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -2562,6 +2585,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -2640,6 +2664,7 @@
               "lesson",
               "question",
               "english_lesson",
+              "english_checkpoint_form",
               "english_passage",
               "english_question",
               "tutor_grounding"
@@ -9586,6 +9611,7 @@
                     "lesson",
                     "question",
                     "english_lesson",
+                    "english_checkpoint_form",
                     "english_passage",
                     "english_question",
                     "tutor_grounding"
@@ -9692,6 +9718,23 @@
                 }
               ],
               "title": "Unit Key"
+            }
+          },
+          {
+            "in": "query",
+            "name": "route_key",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^[a-z0-9-]+$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Route Key"
             }
           },
           {
@@ -9952,7 +9995,7 @@
             "HTTPBearer": []
           }
         ],
-        "summary": "Preview an exact batch or unit selection in one review session",
+        "summary": "Preview an exact batch, unit or route selection in one review session",
         "tags": [
           "admin",
           "content-review"
@@ -10103,6 +10146,7 @@
                     "lesson",
                     "question",
                     "english_lesson",
+                    "english_checkpoint_form",
                     "english_passage",
                     "english_question",
                     "tutor_grounding"
@@ -10166,6 +10210,23 @@
                 }
               ],
               "title": "Unit Key"
+            }
+          },
+          {
+            "in": "query",
+            "name": "route_key",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^[a-z0-9-]+$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Route Key"
             }
           },
           {
@@ -10320,6 +10381,7 @@
                 "lesson",
                 "question",
                 "english_lesson",
+                "english_checkpoint_form",
                 "english_passage",
                 "english_question",
                 "tutor_grounding"
@@ -10476,6 +10538,7 @@
                 "lesson",
                 "question",
                 "english_lesson",
+                "english_checkpoint_form",
                 "english_passage",
                 "english_question",
                 "tutor_grounding"
@@ -10622,6 +10685,7 @@
                 "lesson",
                 "question",
                 "english_lesson",
+                "english_checkpoint_form",
                 "english_passage",
                 "english_question",
                 "tutor_grounding"
@@ -10768,6 +10832,7 @@
                 "lesson",
                 "question",
                 "english_lesson",
+                "english_checkpoint_form",
                 "english_passage",
                 "english_question",
                 "tutor_grounding"

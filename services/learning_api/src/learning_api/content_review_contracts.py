@@ -15,6 +15,7 @@ ContentKind = Literal[
     "lesson",
     "question",
     "english_lesson",
+    "english_checkpoint_form",
     "english_passage",
     "english_question",
     "tutor_grounding",
@@ -66,6 +67,7 @@ class ContentReviewItemResponse(ApiModel):
     position: int | None = Field(default=None, ge=1)
     batch_id: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
+    route_keys: list[str] = Field(default_factory=list)
     review_state: ReviewState
     mathematics_review: ContentReviewSummary | None
     english_review: ContentReviewSummary | None
@@ -80,6 +82,7 @@ class ContentReviewQueueResponse(ApiModel):
     items: list[ContentReviewItemResponse]
     batch_ids: list[str]
     unit_keys: list[str]
+    route_keys: list[str]
     total: int
     limit: int
     offset: int
@@ -103,7 +106,7 @@ class BulkContentReviewTarget(ApiModel):
 
 
 class BulkContentReviewPreviewRequest(ApiModel):
-    scope: Literal["batch", "unit"]
+    scope: Literal["batch", "unit", "route"]
     scope_key: str = Field(pattern=r"^[a-z0-9-]+$")
     targets: list[BulkContentReviewTarget] = Field(min_length=1, max_length=250)
 
@@ -125,7 +128,7 @@ class ContentReviewRecordResponse(ContentReviewSummary):
 
 
 class BulkContentReviewResponse(ApiModel):
-    scope: Literal["batch", "unit"]
+    scope: Literal["batch", "unit", "route"]
     scope_key: str
     recorded_count: int = Field(ge=1, le=250)
     records: list[ContentReviewRecordResponse]
@@ -166,6 +169,6 @@ class ContentReviewerPreviewResponse(ApiModel):
 
 
 class BulkContentReviewerPreviewResponse(ApiModel):
-    scope: Literal["batch", "unit"]
+    scope: Literal["batch", "unit", "route"]
     scope_key: str
     items: list[ContentReviewerPreviewResponse]
