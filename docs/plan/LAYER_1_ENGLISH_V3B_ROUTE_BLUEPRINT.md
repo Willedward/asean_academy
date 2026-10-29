@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement, E0–E9 Sprint checkpoint journeys and checkpoint progress visibility structurally complete; review and release pending
+**Status:** fixed technical blueprint; Sprint content, protected measurement, checkpoints, progress visibility and consolidated reviewer evidence structurally complete; human review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -127,13 +127,17 @@ Learner progress now exposes readiness, attempt count, the active session and la
 every E0–E9 checkpoint. Administrator student detail exposes English lesson evidence and the
 latest checkpoint result per attempted module without exposing submitted answers. Publication
 remains blocked on the normal immutable review approvals.
+The deterministic Sprint reviewer export now pins all 16 lessons, 16 parallel retries, 20
+reciprocal checkpoint forms, 65 unique question groups and 20 referenced passages. The packet
+contains exact revision fingerprints plus separate pending English and editorial decision
+columns, and pull-request CI uploads the same protected evidence as an artifact.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint review and release evidence**:
 
-1. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
-2. collect immutable English and editorial approvals;
+1. collect immutable English and editorial approvals against the pinned Sprint evidence;
+2. correct and re-export any excluded items without approving changed fingerprints;
 3. run the protected baseline/endline and checkpoint journey in hosted staging; and
 4. enable learner routing only after the release gate confirms that every referenced revision
    is approved and published.

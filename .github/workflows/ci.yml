@@ -130,6 +130,14 @@ jobs:
           status=$?
           cat build/authoring-pr-review/summary.md >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
+      - name: Export consolidated English Sprint reviewer evidence
+        run: |
+          uv run --project question_bank --locked question-bank \
+            english-route-review-export \
+            build/authoring-pr-review/english-sprint-route-v3b \
+            --route sprint
+          cat build/authoring-pr-review/english-sprint-route-v3b/review.md \
+            >> "$GITHUB_STEP_SUMMARY"
       - name: Upload question reviewer packets and validation evidence
         if: always()
         uses: actions/upload-artifact@v4

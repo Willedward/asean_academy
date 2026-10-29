@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement, E0–E9 Sprint checkpoints and checkpoint progress visibility structurally complete for technical review
+**Status:** V3-A merged; V3-B Sprint content, protected measurement, checkpoints, progress visibility and consolidated reviewer evidence structurally complete for human review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -80,6 +80,10 @@ not score a whole composition automatically.
 Consolidated checkpoint progress now exposes locked, available, in-progress and passed states,
 attempt counts and latest scores to learners. Administrator student detail shows English lesson
 evidence and the latest checkpoint attempt per module without exposing learner answers.
+The consolidated Sprint reviewer export pins 16 lessons, 16 parallel retries, 20 reciprocal
+checkpoint forms, 65 unique question groups and 20 passages. It produces deterministic HTML,
+JSON, Markdown and CSV evidence and is uploaded by pull-request CI without changing content
+status or recording an approval.
 
 ## 1. V3 decision
 
@@ -481,8 +485,9 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:
 
-1. generate consolidated reviewer evidence and collect English/editorial approvals;
-2. run the protected baseline/endline and checkpoint journey in hosted staging;
-3. confirm the Sprint release manifest contains only approved immutable revisions; and
-4. keep every item draft-only until the release gates pass.
+1. collect English and editorial decisions against the pinned Sprint fingerprints;
+2. correct and re-export excluded items, then complete the immutable approvals;
+3. run the protected baseline/endline and checkpoint journey in hosted staging;
+4. confirm the Sprint release manifest contains only approved immutable revisions; and
+5. keep every item draft-only until the release gates pass.
 

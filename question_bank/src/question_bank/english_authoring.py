@@ -390,6 +390,342 @@ def export_english_reviewer_batch(root: Path, batch_path: Path, output: Path) ->
     }
 
 
+def _review_fingerprint(value) -> str:
+    payload = value.model_dump(mode="json")
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _route_question_html(question, passages) -> str:
+    passage = (
+        passages[(question.passage_ref.stable_key, question.passage_ref.revision)]
+        if question.passage_ref is not None
+        else None
+    )
+    shared_bank = (
+        question.parts[0].response.options
+        if question.question_type == "banked_cloze"
+        else []
+    )
+    passage_html = ""
+    if passage is not None:
+        paragraphs = "".join(
+            f"<p>{html.escape(paragraph)}</p>" for paragraph in passage.paragraphs
+        )
+        passage_html = (
+            f"<section class='passage'><h4>{html.escape(passage.title)}</h4>"
+            f"{paragraphs}<p class='small'>{html.escape(passage.attribution)}</p></section>"
+        )
+    bank_html = ""
+    if shared_bank:
+        choices = "".join(
+            f"<li><strong>{html.escape(option.key)}.</strong> "
+            f"{html.escape(option.text)}</li>"
+            for option in shared_bank
+        )
+        bank_html = f"<section><h4>Shared word bank</h4><ol>{choices}</ol></section>"
+    part_html = []
+    for part in question.parts:
+        response = part.response.model_dump(mode="json")
+        options = [] if shared_bank else response.get("options", [])
+        option_html = "".join(
+            f"<li><strong>{html.escape(option['key'])}.</strong> "
+            f"{html.escape(option['text'])}</li>"
+            for option in options
+        )
+        rationales = response.get("choice_rationales", {})
+        rationale_html = "".join(
+            f"<li><strong>{html.escape(key)}:</strong> {html.escape(value)}</li>"
+            for key, value in sorted(rationales.items())
+        )
+        part_html.append(
+            f"<section class='part'><p><strong>Part {part.position}.</strong> "
+            f"{html.escape(part.prompt)}</p><ol>{option_html}</ol>"
+            f"<p class='answer'><strong>Answer:</strong> "
+            f"{html.escape(_part_answer(part))}</p>"
+            f"<p><strong>Explanation:</strong> "
+            f"{html.escape(part.correct_explanation)}</p>"
+            f"{f'<details><summary>Option rationales</summary><ul>{rationale_html}</ul></details>' if rationale_html else ''}"
+            "</section>"
+        )
+    return (
+        f"<article class='question' id='question-{html.escape(question.stable_key)}'>"
+        f"<p class='meta'>{html.escape(question.stable_key)} · revision {question.revision} · "
+        f"Outcome {html.escape(question.outcome_code)} · Difficulty {question.difficulty} · "
+        f"{html.escape(question.exposure_pool)}</p>"
+        f"<h3>{html.escape(question.title)}</h3>"
+        f"<p><strong>Instructions:</strong> {html.escape(question.instructions)}</p>"
+        f"{passage_html}{bank_html}{''.join(part_html)}</article>"
+    )
+
+
+def export_english_route_reviewer_packet(
+    root: Path,
+    output: Path,
+    *,
+    route: Literal["full", "core", "sprint"] = "sprint",
+) -> dict[str, object]:
+    """Export one deterministic route packet without changing review or publication state."""
+
+    foundation = validate_english_foundation(root)
+    if not foundation.valid or foundation.catalogue is None:
+        raise ValueError("English foundation must validate before route reviewer export")
+
+    catalogue = foundation.catalogue
+    route_keys = catalogue.route_lesson_keys(route)
+    lessons_by_key = {lesson.stable_key: lesson for lesson in foundation.lessons}
+    missing_lessons = sorted(set(route_keys) - set(lessons_by_key))
+    if missing_lessons:
+        raise ValueError(f"The {route} route has unauthored lessons: {missing_lessons}")
+    lessons = [lessons_by_key[key] for key in route_keys]
+    route_key_set = set(route_keys)
+    forms = sorted(
+        (
+            form
+            for form in foundation.forms
+            if form.form_type == "checkpoint"
+            and set(form.mastery_lesson_keys) <= route_key_set
+        ),
+        key=lambda form: (int(form.module_code[1:]), form.form_key),
+    )
+    form_modules = [form.module_code for form in forms]
+    if len(forms) != 20 or any(form_modules.count(f"E{index}") != 2 for index in range(10)):
+        raise ValueError("The route reviewer packet requires two checkpoints for every E0–E9 module")
+
+    lesson_question_keys = {
+        key for lesson in lessons for section in lesson.sections for key in section.question_keys
+    }
+    parallel_retry_keys = {
+        question.stable_key
+        for question in foundation.questions
+        if question.exposure_pool == "retry_review"
+        and question.parallel_form_of in lesson_question_keys
+    }
+    if len(parallel_retry_keys) != len(route_keys):
+        raise ValueError(
+            f"The {route} route requires one parallel retry for every lesson; "
+            f"found {len(parallel_retry_keys)} for {len(route_keys)} lessons"
+        )
+    form_question_keys = {key for form in forms for key in form.question_keys}
+    selected_question_keys = sorted(
+        lesson_question_keys | parallel_retry_keys | form_question_keys
+    )
+    questions_by_key = {
+        question.stable_key: question for question in foundation.questions
+    }
+    missing_questions = sorted(set(selected_question_keys) - set(questions_by_key))
+    if missing_questions:
+        raise ValueError(f"The route reviewer packet has missing questions: {missing_questions}")
+    questions = [questions_by_key[key] for key in selected_question_keys]
+    passages_by_key = {
+        (passage.stable_key, passage.revision): passage
+        for passage in foundation.passages
+    }
+    passage_keys = sorted(
+        {
+            (question.passage_ref.stable_key, question.passage_ref.revision)
+            for question in questions
+            if question.passage_ref is not None
+        }
+    )
+    passages = [passages_by_key[key] for key in passage_keys]
+
+    output.mkdir(parents=True, exist_ok=True)
+    lesson_manifest = [
+        {
+            "stable_key": lesson.stable_key,
+            "lesson_code": lesson.lesson_code,
+            "revision": lesson.revision,
+            "status": lesson.status,
+            "fingerprint": _review_fingerprint(lesson),
+        }
+        for lesson in lessons
+    ]
+    form_manifest = [
+        {
+            "form_key": form.form_key,
+            "revision": form.revision,
+            "module_code": form.module_code,
+            "status": form.status,
+            "paired_form_key": form.paired_form_key,
+            "fingerprint": _review_fingerprint(form),
+        }
+        for form in forms
+    ]
+    question_manifest = [
+        {
+            "stable_key": question.stable_key,
+            "revision": question.revision,
+            "status": question.status,
+            "exposure_pool": question.exposure_pool,
+            "fingerprint": _review_fingerprint(question),
+        }
+        for question in questions
+    ]
+    passage_manifest = [
+        {
+            "stable_key": passage.stable_key,
+            "revision": passage.revision,
+            "status": passage.status,
+            "content_sha256": passage.content_sha256,
+            "fingerprint": passage.content_sha256,
+        }
+        for passage in passages
+    ]
+    manifest = {
+        "schema_version": "1.0.0",
+        "packet_key": f"english-{route}-route-v3b-review",
+        "curriculum_version": catalogue.version_key,
+        "route": route,
+        "lesson_count": len(lessons),
+        "checkpoint_form_count": len(forms),
+        "parallel_retry_count": len(parallel_retry_keys),
+        "question_count": len(questions),
+        "passage_count": len(passages),
+        "lessons": lesson_manifest,
+        "checkpoint_forms": form_manifest,
+        "questions": question_manifest,
+        "passages": passage_manifest,
+    }
+    (output / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n"
+    )
+
+    rows = []
+    for item_type, items, key_field in (
+        ("lesson", lesson_manifest, "stable_key"),
+        ("checkpoint_form", form_manifest, "form_key"),
+        ("question", question_manifest, "stable_key"),
+        ("passage", passage_manifest, "stable_key"),
+    ):
+        for item in items:
+            rows.append(
+                {
+                    "item_type": item_type,
+                    "stable_key": item[key_field],
+                    "revision": item["revision"],
+                    "status": item["status"],
+                    "fingerprint": item["fingerprint"],
+                    "english_decision": "pending",
+                    "editorial_decision": "pending",
+                    "notes": "",
+                }
+            )
+    with (output / "review.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    markdown = [
+        f"# English {route.title()} route consolidated reviewer packet",
+        "",
+        "This packet is protected reviewer evidence. It does not publish content.",
+        "",
+        f"- Lessons: {len(lessons)}",
+        f"- Reciprocal checkpoint forms: {len(forms)}",
+        f"- Parallel lesson retries: {len(parallel_retry_keys)}",
+        f"- Unique referenced question groups: {len(questions)}",
+        f"- Referenced passages: {len(passages)}",
+        "- English decision: `pending`",
+        "- Editorial decision: `pending`",
+        "",
+        "## Review order",
+        "",
+        "1. Review the 16 lesson explanations and examples.",
+        "2. Review the A/B checkpoint pairing, mastery scope and scored-part counts.",
+        "3. Review every protected answer, explanation and option rationale.",
+        "4. Record exclusions or corrections in `review.csv` against the pinned fingerprint.",
+        "",
+        "## Lessons",
+        "",
+        *[
+            f"- {lesson.lesson_code} · {lesson.title} · `{lesson.stable_key}` revision {lesson.revision}"
+            for lesson in lessons
+        ],
+        "",
+        "## Checkpoint forms",
+        "",
+        *[
+            f"- {form.module_code} · `{form.form_key}` · {form.expected_scored_part_count} scored parts · pair `{form.paired_form_key}`"
+            for form in forms
+        ],
+    ]
+    (output / "review.md").write_text("\n".join(markdown) + "\n")
+
+    lesson_cards = []
+    for lesson in lessons:
+        sections = []
+        for section in lesson.sections:
+            content = "".join(f"<p>{html.escape(item)}</p>" for item in section.content)
+            refs = "".join(
+                f"<li><a href='#question-{html.escape(key)}'>{html.escape(key)}</a></li>"
+                for key in section.question_keys
+            )
+            sections.append(
+                f"<section><h4>{section.position}. {html.escape(section.title)}</h4>"
+                f"{content}{f'<p><strong>Question references</strong></p><ul>{refs}</ul>' if refs else ''}</section>"
+            )
+        lesson_cards.append(
+            f"<article class='lesson' id='lesson-{html.escape(lesson.stable_key)}'>"
+            f"<p class='meta'>{html.escape(lesson.lesson_code)} · Outcome "
+            f"{html.escape(lesson.outcome_code)} · revision {lesson.revision} · "
+            f"{html.escape(lesson.status)}</p><h3>{html.escape(lesson.title)}</h3>"
+            f"<p>{html.escape(lesson.summary)}</p>{''.join(sections)}</article>"
+        )
+    form_cards = []
+    for form in forms:
+        question_links = "".join(
+            f"<li><a href='#question-{html.escape(key)}'>{html.escape(key)}</a></li>"
+            for key in form.question_keys
+        )
+        mastery = ", ".join(form.mastery_lesson_keys)
+        distribution = ", ".join(
+            f"{key.replace('_', ' ')}: {value}"
+            for key, value in form.task_part_distribution.items()
+        )
+        form_cards.append(
+            f"<article class='form' id='form-{html.escape(form.form_key)}'>"
+            f"<p class='meta'>{html.escape(form.module_code)} · revision {form.revision} · "
+            f"{html.escape(form.status)}</p><h3>{html.escape(form.title)}</h3>"
+            f"<p><strong>Pair:</strong> {html.escape(form.paired_form_key or 'none')}</p>"
+            f"<p><strong>Mastery scope:</strong> {html.escape(mastery)}</p>"
+        f"<p><strong>Scored parts:</strong> {form.expected_scored_part_count} "
+            f"({html.escape(distribution)})</p><ul>{question_links}</ul></article>"
+        )
+    question_cards = [
+        _route_question_html(question, passages_by_key) for question in questions
+    ]
+    lesson_nav = "".join(
+        f"<li><a href='#lesson-{html.escape(lesson.stable_key)}'>"
+        f"{html.escape(lesson.lesson_code)} · {html.escape(lesson.title)}</a></li>"
+        for lesson in lessons
+    )
+    page = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>English {html.escape(route.title())} route reviewer packet</title>
+<style>body{{font:16px/1.55 system-ui;max-width:1120px;margin:auto;padding:32px;background:#f7faf9;color:#123f40}}article{{background:white;border:1px solid #cbdedb;border-radius:18px;padding:24px;margin:24px 0}}h1,h2,h3,h4{{line-height:1.2}}.summary{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}}.summary div{{background:#e8f3f1;border-radius:12px;padding:16px}}.meta{{color:#087f75;font-weight:700}}.answer{{background:#fef3c7;padding:12px;border-radius:10px}}.passage{{border-left:4px solid #087f75;padding-left:16px}}.part{{border-top:1px solid #dbe8e6;padding-top:12px}}.small{{font-size:.875rem;color:#526d6d}}li{{margin:.4rem 0}}a{{color:#066a63}}@media(max-width:700px){{body{{padding:16px}}.summary{{grid-template-columns:1fr 1fr}}}}</style>
+</head><body><p class="meta">PROTECTED REVIEWER EVIDENCE · DRAFT ONLY</p><h1>English {html.escape(route.title())} route</h1><p>Review the exact pinned lesson, form, question and passage revisions below. Recording a decision does not publish the content.</p><div class="summary"><div><strong>{len(lessons)}</strong><br>lessons</div><div><strong>{len(forms)}</strong><br>checkpoint forms</div><div><strong>{len(parallel_retry_keys)}</strong><br>parallel retries</div><div><strong>{len(questions)}</strong><br>question groups</div></div><p class="small">Referenced passages: {len(passages)}</p><h2>Contents</h2><ol>{lesson_nav}</ol><h2>1. {html.escape(route.title())} lessons</h2>{''.join(lesson_cards)}<h2>2. Protected checkpoint forms</h2>{''.join(form_cards)}<h2>3. Referenced questions and answers</h2>{''.join(question_cards)}</body></html>"""
+    (output / "index.html").write_text(page)
+    preview_sha256 = hashlib.sha256((output / "index.html").read_bytes()).hexdigest()
+    return {
+        "packet_key": manifest["packet_key"],
+        "route": route,
+        "lesson_count": len(lessons),
+        "checkpoint_form_count": len(forms),
+        "parallel_retry_count": len(parallel_retry_keys),
+        "question_count": len(questions),
+        "passage_count": len(passages),
+        "review_item_count": len(rows),
+        "output": str(output),
+        "preview_sha256": preview_sha256,
+    }
+
+
 def claim_english_batch(
     registry_path: Path,
     root: Path,

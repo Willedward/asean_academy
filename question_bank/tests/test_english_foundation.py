@@ -8,6 +8,7 @@ from question_bank.english_authoring import (
     claim_english_batch,
     detect_english_duplicates,
     export_english_reviewer_batch,
+    export_english_route_reviewer_packet,
     release_english_batch,
     validate_english_authoring,
 )
@@ -1757,6 +1758,67 @@ def test_english_reviewer_export_and_claims_are_reviewable(english_root, tmp_pat
         )
     released = release_english_batch(claims, batch_id="english-ev-b001", owner="william")
     assert released["status"] == "released"
+
+
+def test_sprint_route_reviewer_export_pins_complete_review_evidence(
+    english_root, tmp_path
+):
+    output = tmp_path / "sprint-review"
+    result = export_english_route_reviewer_packet(english_root, output)
+
+    assert result["packet_key"] == "english-sprint-route-v3b-review"
+    assert result["lesson_count"] == 16
+    assert result["checkpoint_form_count"] == 20
+    assert result["parallel_retry_count"] == 16
+    assert result["question_count"] == 65
+    assert result["review_item_count"] == 121
+    assert {path.name for path in output.iterdir()} == {
+        "index.html",
+        "manifest.json",
+        "review.csv",
+        "review.md",
+    }
+
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert manifest["route"] == "sprint"
+    assert manifest["parallel_retry_count"] == 16
+    assert [lesson["lesson_code"] for lesson in manifest["lessons"]] == [
+        "E0.1",
+        "E0.2",
+        "E1.1",
+        "E1.6",
+        "E2.2",
+        "E3.1",
+        "E4.1",
+        "E4.5",
+        "E5.2",
+        "E5.3",
+        "E5.7",
+        "E6.1",
+        "E6.5",
+        "E7.2",
+        "E8.4",
+        "E9.5",
+    ]
+    assert {
+        form["module_code"] for form in manifest["checkpoint_forms"]
+    } == {f"E{index}" for index in range(10)}
+    assert all(len(item["fingerprint"]) == 64 for item in manifest["lessons"])
+    assert all(
+        len(item["fingerprint"]) == 64 for item in manifest["checkpoint_forms"]
+    )
+    assert all(len(item["fingerprint"]) == 64 for item in manifest["questions"])
+    assert all(len(item["fingerprint"]) == 64 for item in manifest["passages"])
+
+    page = (output / "index.html").read_text()
+    assert "PROTECTED REVIEWER EVIDENCE · DRAFT ONLY" in page
+    assert "E9 full-simulation readiness checkpoint form A" in page
+    assert "<strong>Answer:</strong>" in page
+    assert "Option rationales" in page
+    second = export_english_route_reviewer_packet(
+        english_root, tmp_path / "sprint-review-copy"
+    )
+    assert second["preview_sha256"] == result["preview_sha256"]
 
 
 def test_banked_cloze_reviewer_export_includes_passage_and_one_shared_bank(english_root, tmp_path):
