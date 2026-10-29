@@ -259,9 +259,7 @@ class EnglishLearningService:
     def session(self, session_id: str) -> dict:
         return self.repository.session(self.learner_id, session_id)
 
-    def create_checkpoint_session(
-        self, *, module_code: str, idempotency_key: str
-    ) -> dict:
+    def create_checkpoint_session(self, *, module_code: str, idempotency_key: str) -> dict:
         if not 1 <= len(idempotency_key) <= 200:
             raise EnglishLearningError(
                 "invalid_idempotency_key", "Supply a non-empty idempotency key."
@@ -285,9 +283,7 @@ class EnglishLearningService:
         active = self.repository.active_checkpoint_session(self.learner_id, module_code)
         if active:
             return active
-        progress = {
-            item["lesson_key"]: item for item in self.repository.progress(self.learner_id)
-        }
+        progress = {item["lesson_key"]: item for item in self.repository.progress(self.learner_id)}
         mastery_keys = forms[0].mastery_lesson_keys
         missing = [
             key
@@ -354,9 +350,7 @@ class EnglishLearningService:
         answers: dict[str, str | list[str]],
         idempotency_key: str,
     ) -> dict:
-        replay = self.repository.checkpoint_attempt_by_idempotency(
-            self.learner_id, idempotency_key
-        )
+        replay = self.repository.checkpoint_attempt_by_idempotency(self.learner_id, idempotency_key)
         if replay is not None:
             return replay
         assignment = self.repository.next_checkpoint_assignment(self.learner_id, session_id)
@@ -603,7 +597,68 @@ class EnglishLearningService:
         }
 
     def progress(self) -> dict:
+        lesson_progress = self.repository.progress(self.learner_id)
+        lessons_by_key = {item["lesson_key"]: item for item in lesson_progress}
+        checkpoint_history = self.repository.checkpoint_history(self.learner_id)
+        history_by_module: dict[str, list[dict]] = {}
+        for session in checkpoint_history:
+            history_by_module.setdefault(session["module_code"], []).append(session)
+
+        catalogue = self.report.catalogue
+        module_titles = (
+            {module.module_code: module.title for module in catalogue.modules}
+            if catalogue is not None
+            else {}
+        )
+        forms_by_module: dict[str, list] = {}
+        for form in self.report.forms:
+            if form.form_type == "checkpoint" and self._visible(form.status):
+                forms_by_module.setdefault(form.module_code, []).append(form)
+
+        checkpoints = []
+        for module_code, forms in sorted(
+            forms_by_module.items(),
+            key=lambda item: int(item[0][1:]),
+        ):
+            canonical = min(forms, key=lambda form: form.form_key)
+            sessions = history_by_module.get(module_code, [])
+            latest = sessions[0] if sessions else None
+            passed = next(
+                (session for session in sessions if session["passed"] is True),
+                None,
+            )
+            prerequisites_met = all(
+                lessons_by_key.get(lesson_key, {}).get("state") in {"proficient", "mastered"}
+                for lesson_key in canonical.mastery_lesson_keys
+            )
+            if latest is not None and latest["status"] == "active":
+                state = "in_progress"
+            elif passed is not None:
+                state = "passed"
+            elif prerequisites_met:
+                state = "available"
+            else:
+                state = "locked"
+            checkpoints.append(
+                {
+                    "module_code": module_code,
+                    "module_title": module_titles.get(module_code, module_code),
+                    "state": state,
+                    "mastery_lesson_keys": canonical.mastery_lesson_keys,
+                    "question_count": len(canonical.question_keys),
+                    "passing_percentage": 75,
+                    "attempt_count": len(sessions),
+                    "last_session_id": latest["session_id"] if latest else None,
+                    "last_form_key": latest["form_key"] if latest else None,
+                    "last_percentage": (
+                        round(latest["score"] * 100, 2)
+                        if latest is not None and latest["score"] is not None
+                        else None
+                    ),
+                }
+            )
         return {
             "learner_id": self.learner_id,
-            "lessons": self.repository.progress(self.learner_id),
+            "lessons": lesson_progress,
+            "checkpoints": checkpoints,
         }

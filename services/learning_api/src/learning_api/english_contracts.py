@@ -28,10 +28,10 @@ EnglishErrorCategory = Literal[
     "command_word",
     "audience_scope",
     "evidence_plan",
-        "paper_format",
-        "instruction_control",
-        "timing_control",
-        "independent_conditions",
+    "paper_format",
+    "instruction_control",
+    "timing_control",
+    "independent_conditions",
 ]
 
 
@@ -305,9 +305,23 @@ class EnglishLessonProgressResponse(ApiModel):
     updated_at: str
 
 
+class EnglishCheckpointProgressResponse(ApiModel):
+    module_code: str = Field(pattern=r"^E(?:0|[1-9][0-9]*)$")
+    module_title: str
+    state: Literal["locked", "available", "in_progress", "passed"]
+    mastery_lesson_keys: list[str]
+    question_count: int = Field(ge=1)
+    passing_percentage: Literal[75] = 75
+    attempt_count: int = Field(ge=0)
+    last_session_id: str | None
+    last_form_key: str | None
+    last_percentage: float | None = Field(default=None, ge=0, le=100)
+
+
 class EnglishProgressResponse(ApiModel):
     learner_id: str
     lessons: list[EnglishLessonProgressResponse]
+    checkpoints: list[EnglishCheckpointProgressResponse]
 
 
 class EnglishHintResponse(ApiModel):

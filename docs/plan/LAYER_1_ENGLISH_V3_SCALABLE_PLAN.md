@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement and E0–E9 Sprint checkpoint journeys structurally complete for technical review
+**Status:** V3-A merged; V3-B protected measurement, E0–E9 Sprint checkpoints and checkpoint progress visibility structurally complete for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -77,6 +77,9 @@ mastery to Sprint lesson E9.5 and brings the foundation to 102 question records,
 and 23 forms. All 16 Sprint lessons now have authored lessons, exit tickets, parallel retries
 and a module checkpoint journey. This final checkpoint is not the protected full mock and does
 not score a whole composition automatically.
+Consolidated checkpoint progress now exposes locked, available, in-progress and passed states,
+attempt counts and latest scores to learners. Administrator student detail shows English lesson
+evidence and the latest checkpoint attempt per module without exposing learner answers.
 
 ## 1. V3 decision
 
@@ -478,8 +481,8 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:
 
-1. expose checkpoint readiness, attempt and pass status in learner/admin progress views;
-2. generate consolidated reviewer evidence and collect English/editorial approvals;
-3. run the protected baseline/endline and checkpoint journey in hosted staging; and
+1. generate consolidated reviewer evidence and collect English/editorial approvals;
+2. run the protected baseline/endline and checkpoint journey in hosted staging;
+3. confirm the Sprint release manifest contains only approved immutable revisions; and
 4. keep every item draft-only until the release gates pass.
 

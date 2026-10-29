@@ -1633,6 +1633,57 @@ export interface components {
             /** Difficulty */
             difficulty: number;
         };
+        /** AdminEnglishCheckpointProgressResponse */
+        AdminEnglishCheckpointProgressResponse: {
+            /** Attempt Count */
+            attempt_count: number;
+            /** Last Form Key */
+            last_form_key: string;
+            /** Last Percentage */
+            last_percentage?: number | null;
+            /**
+             * Last Session Id
+             * Format: uuid
+             */
+            last_session_id: string;
+            /** Module Code */
+            module_code: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "in_progress" | "passed" | "not_passed";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** AdminEnglishLessonProgressResponse */
+        AdminEnglishLessonProgressResponse: {
+            /** Correct Count */
+            correct_count: number;
+            /** Incorrect Count */
+            incorrect_count: number;
+            /** Lesson Key */
+            lesson_key: string;
+            /** Question Count */
+            question_count: number;
+            /** Resolved Count */
+            resolved_count: number;
+            /** Retry Question Count */
+            retry_question_count: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "in_progress" | "practice_completed" | "proficient" | "mastered";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
         /** AdminEnrolmentResponse */
         AdminEnrolmentResponse: {
             /** Course Key */
@@ -1798,6 +1849,10 @@ export interface components {
         AdminStudentDetailResponse: {
             /** Difficulty Performance */
             difficulty_performance: components["schemas"]["AdminDifficultyPerformanceResponse"][];
+            /** English Checkpoints */
+            english_checkpoints: components["schemas"]["AdminEnglishCheckpointProgressResponse"][];
+            /** English Lessons */
+            english_lessons: components["schemas"]["AdminEnglishLessonProgressResponse"][];
             /** Lessons */
             lessons: components["schemas"]["AdminLessonProgressResponse"][];
             student: components["schemas"]["AdminStudentSummaryResponse"];
@@ -3111,6 +3166,36 @@ export interface components {
              */
             status: "active" | "completed";
         };
+        /** EnglishCheckpointProgressResponse */
+        EnglishCheckpointProgressResponse: {
+            /** Attempt Count */
+            attempt_count: number;
+            /** Last Form Key */
+            last_form_key: string | null;
+            /** Last Percentage */
+            last_percentage?: number | null;
+            /** Last Session Id */
+            last_session_id: string | null;
+            /** Mastery Lesson Keys */
+            mastery_lesson_keys: string[];
+            /** Module Code */
+            module_code: string;
+            /** Module Title */
+            module_title: string;
+            /**
+             * Passing Percentage
+             * @default 75
+             * @constant
+             */
+            passing_percentage: 75;
+            /** Question Count */
+            question_count: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "locked" | "available" | "in_progress" | "passed";
+        };
         /** EnglishCheckpointSessionResponse */
         EnglishCheckpointSessionResponse: {
             /** Assigned Count */
@@ -3483,6 +3568,8 @@ export interface components {
         };
         /** EnglishProgressResponse */
         EnglishProgressResponse: {
+            /** Checkpoints */
+            checkpoints: components["schemas"]["EnglishCheckpointProgressResponse"][];
             /** Learner Id */
             learner_id: string;
             /** Lessons */

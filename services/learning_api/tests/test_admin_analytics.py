@@ -92,6 +92,29 @@ class FakeAdminAnalyticsRepository:
                     "accuracy_percentage": 80,
                 }
             ],
+            "english_lessons": [
+                {
+                    "lesson_key": "e1-lesson-01",
+                    "state": "proficient",
+                    "question_count": 6,
+                    "resolved_count": 6,
+                    "correct_count": 5,
+                    "incorrect_count": 1,
+                    "retry_question_count": 1,
+                    "updated_at": NOW,
+                }
+            ],
+            "english_checkpoints": [
+                {
+                    "module_code": "E1",
+                    "state": "not_passed",
+                    "attempt_count": 1,
+                    "last_session_id": UUID("00000000-0000-4000-8000-000000000023"),
+                    "last_form_key": "english-checkpoint-e1-vocabulary-a-v1",
+                    "last_percentage": 60,
+                    "updated_at": NOW,
+                }
+            ],
         }
 
     def overview(self):

@@ -10,7 +10,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import type { EnglishCourseMapResponse } from "@/lib/api/english";
+import type {
+  EnglishCourseMapResponse,
+  EnglishProgressResponse,
+} from "@/lib/api/english";
 
 import { SubjectSwitch } from "../screens/english";
 import {
@@ -34,13 +37,22 @@ const STATE_LABEL = {
   mastered: "Mastered",
 } as const;
 
+const CHECKPOINT_LABEL = {
+  locked: "Locked",
+  available: "Ready",
+  in_progress: "In progress",
+  passed: "Passed",
+} as const;
+
 export function EnglishCourseScreen({
   learner,
   course,
+  progress,
   mathsHref,
 }: {
   learner: CoreLearner;
   course: EnglishCourseMapResponse;
+  progress: EnglishProgressResponse;
   mathsHref: string;
 }) {
   const lessons = course.modules.flatMap((module) => module.lessons);
@@ -74,7 +86,9 @@ export function EnglishCourseScreen({
         <Muted className="max-w-3xl">{course.description}</Muted>
         <div className="mt-1 flex flex-wrap gap-2">
           <Tag tone="brand">Revision {course.revision}</Tag>
-          <Tag tone={course.content_status === "published" ? "success" : "amber"}>
+          <Tag
+            tone={course.content_status === "published" ? "success" : "amber"}
+          >
             {course.content_status}
           </Tag>
           <Tag>{available} lessons available</Tag>
@@ -91,7 +105,11 @@ export function EnglishCourseScreen({
             <ProgressBar
               label="Lesson proficiency"
               value={`${proficient} / ${lessons.length}`}
-              pct={lessons.length ? Math.round((100 * proficient) / lessons.length) : 0}
+              pct={
+                lessons.length
+                  ? Math.round((100 * proficient) / lessons.length)
+                  : 0
+              }
               fill="success"
             />
           </div>
@@ -106,6 +124,9 @@ export function EnglishCourseScreen({
         const moduleAvailable = module.lessons.filter(
           (lesson) => lesson.available,
         ).length;
+        const checkpoint = progress.checkpoints.find(
+          (item) => item.module_code === module.module_code,
+        );
         return (
           <Card key={module.module_code} className="gap-4 p-4 lg:p-6">
             <div className="flex items-start gap-3">
@@ -113,7 +134,9 @@ export function EnglishCourseScreen({
                 {module.position}
               </span>
               <div className="min-w-0 grow">
-                <Eyebrow>{module.module_code} · {module.stage.replaceAll("_", " ")}</Eyebrow>
+                <Eyebrow>
+                  {module.module_code} · {module.stage.replaceAll("_", " ")}
+                </Eyebrow>
                 <H2>{module.title}</H2>
                 <Muted className="mt-1">{module.purpose}</Muted>
               </div>
@@ -170,7 +193,9 @@ export function EnglishCourseScreen({
                           : "Coming later"}
                       </Tag>
                     )}
-                    {lesson.available ? <ArrowRight size={18} aria-hidden /> : null}
+                    {lesson.available ? (
+                      <ArrowRight size={18} aria-hidden />
+                    ) : null}
                   </>
                 );
                 return lesson.href ? (
@@ -191,6 +216,40 @@ export function EnglishCourseScreen({
                 );
               })}
             </div>
+            {checkpoint ? (
+              <>
+                <Divider />
+                <div className="flex flex-col gap-3 rounded-xl bg-ns-sunken p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <Eyebrow>MODULE CHECKPOINT</Eyebrow>
+                    <p className="font-semibold text-ns-ink">
+                      {checkpoint.question_count}-question protected checkpoint
+                    </p>
+                    <Muted className="mt-1">
+                      Pass at {checkpoint.passing_percentage}%.
+                      {checkpoint.attempt_count
+                        ? ` ${checkpoint.attempt_count} ${checkpoint.attempt_count === 1 ? "attempt" : "attempts"} recorded.`
+                        : " No attempts yet."}
+                      {checkpoint.last_percentage == null
+                        ? ""
+                        : ` Latest score: ${checkpoint.last_percentage}%.`}
+                    </Muted>
+                  </div>
+                  <Tag
+                    tone={
+                      checkpoint.state === "passed"
+                        ? "success"
+                        : checkpoint.state === "available" ||
+                            checkpoint.state === "in_progress"
+                          ? "brand"
+                          : "neutral"
+                    }
+                  >
+                    {CHECKPOINT_LABEL[checkpoint.state]}
+                  </Tag>
+                </div>
+              </>
+            ) : null}
           </Card>
         );
       })}
@@ -213,7 +272,9 @@ export function EnglishLessonHeader({
 }) {
   return (
     <section className="flex flex-col gap-2">
-      <Eyebrow>{code} · OUTCOME {outcome}</Eyebrow>
+      <Eyebrow>
+        {code} · OUTCOME {outcome}
+      </Eyebrow>
       <H1>{title}</H1>
       <Muted className="max-w-3xl text-base leading-7">{summary}</Muted>
       <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-ns-muted">

@@ -494,6 +494,121 @@
         "title": "AdminDifficultyPerformanceResponse",
         "type": "object"
       },
+      "AdminEnglishCheckpointProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_count": {
+            "title": "Attempt Count",
+            "type": "integer"
+          },
+          "last_form_key": {
+            "title": "Last Form Key",
+            "type": "string"
+          },
+          "last_percentage": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Percentage"
+          },
+          "last_session_id": {
+            "format": "uuid",
+            "title": "Last Session Id",
+            "type": "string"
+          },
+          "module_code": {
+            "title": "Module Code",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "in_progress",
+              "passed",
+              "not_passed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "module_code",
+          "state",
+          "attempt_count",
+          "last_session_id",
+          "last_form_key",
+          "updated_at"
+        ],
+        "title": "AdminEnglishCheckpointProgressResponse",
+        "type": "object"
+      },
+      "AdminEnglishLessonProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "correct_count": {
+            "title": "Correct Count",
+            "type": "integer"
+          },
+          "incorrect_count": {
+            "title": "Incorrect Count",
+            "type": "integer"
+          },
+          "lesson_key": {
+            "title": "Lesson Key",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "resolved_count": {
+            "title": "Resolved Count",
+            "type": "integer"
+          },
+          "retry_question_count": {
+            "title": "Retry Question Count",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "in_progress",
+              "practice_completed",
+              "proficient",
+              "mastered"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_key",
+          "state",
+          "question_count",
+          "resolved_count",
+          "correct_count",
+          "incorrect_count",
+          "retry_question_count",
+          "updated_at"
+        ],
+        "title": "AdminEnglishLessonProgressResponse",
+        "type": "object"
+      },
       "AdminEnrolmentResponse": {
         "additionalProperties": false,
         "properties": {
@@ -904,6 +1019,20 @@
             "title": "Difficulty Performance",
             "type": "array"
           },
+          "english_checkpoints": {
+            "items": {
+              "$ref": "#/components/schemas/AdminEnglishCheckpointProgressResponse"
+            },
+            "title": "English Checkpoints",
+            "type": "array"
+          },
+          "english_lessons": {
+            "items": {
+              "$ref": "#/components/schemas/AdminEnglishLessonProgressResponse"
+            },
+            "title": "English Lessons",
+            "type": "array"
+          },
           "lessons": {
             "items": {
               "$ref": "#/components/schemas/AdminLessonProgressResponse"
@@ -918,7 +1047,9 @@
         "required": [
           "student",
           "lessons",
-          "difficulty_performance"
+          "difficulty_performance",
+          "english_lessons",
+          "english_checkpoints"
         ],
         "title": "AdminStudentDetailResponse",
         "type": "object"
@@ -4432,6 +4563,100 @@
         "title": "EnglishCheckpointNextQuestionResponse",
         "type": "object"
       },
+      "EnglishCheckpointProgressResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_count": {
+            "minimum": 0.0,
+            "title": "Attempt Count",
+            "type": "integer"
+          },
+          "last_form_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Form Key"
+          },
+          "last_percentage": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Percentage"
+          },
+          "last_session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Session Id"
+          },
+          "mastery_lesson_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Mastery Lesson Keys",
+            "type": "array"
+          },
+          "module_code": {
+            "pattern": "^E(?:0|[1-9][0-9]*)$",
+            "title": "Module Code",
+            "type": "string"
+          },
+          "module_title": {
+            "title": "Module Title",
+            "type": "string"
+          },
+          "passing_percentage": {
+            "const": 75,
+            "default": 75,
+            "title": "Passing Percentage",
+            "type": "integer"
+          },
+          "question_count": {
+            "minimum": 1.0,
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "locked",
+              "available",
+              "in_progress",
+              "passed"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "module_code",
+          "module_title",
+          "state",
+          "mastery_lesson_keys",
+          "question_count",
+          "attempt_count",
+          "last_session_id",
+          "last_form_key"
+        ],
+        "title": "EnglishCheckpointProgressResponse",
+        "type": "object"
+      },
       "EnglishCheckpointSessionResponse": {
         "additionalProperties": false,
         "properties": {
@@ -5398,6 +5623,13 @@
       "EnglishProgressResponse": {
         "additionalProperties": false,
         "properties": {
+          "checkpoints": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishCheckpointProgressResponse"
+            },
+            "title": "Checkpoints",
+            "type": "array"
+          },
           "learner_id": {
             "title": "Learner Id",
             "type": "string"
@@ -5412,7 +5644,8 @@
         },
         "required": [
           "learner_id",
-          "lessons"
+          "lessons",
+          "checkpoints"
         ],
         "title": "EnglishProgressResponse",
         "type": "object"

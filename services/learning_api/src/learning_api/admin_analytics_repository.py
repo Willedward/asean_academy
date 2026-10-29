@@ -221,10 +221,64 @@ class PostgresAdminAnalyticsRepository:
                 """,
                 (learner_id,),
             ).fetchall()
+            english_lessons = connection.execute(
+                """
+                select progress.lesson_key, progress.state::text as state,
+                       progress.question_count, progress.resolved_count,
+                       progress.correct_count, progress.incorrect_count,
+                       count(retry.question_id) filter (
+                           where retry.state = 'queued'
+                       )::integer as retry_question_count,
+                       progress.updated_at
+                from english_lesson_progress progress
+                left join english_retry_queue retry
+                  on retry.student_id = progress.student_id
+                 and retry.lesson_key = progress.lesson_key
+                where progress.student_id = %s
+                group by progress.student_id, progress.lesson_key
+                order by progress.updated_at, progress.lesson_key
+                """,
+                (learner_id,),
+            ).fetchall()
+            english_checkpoints = connection.execute(
+                """
+                with ranked as (
+                    select sessions.*,
+                           count(*) over (
+                               partition by sessions.module_code
+                           )::integer as attempt_count,
+                           row_number() over (
+                               partition by sessions.module_code
+                               order by sessions.created_at desc
+                           ) as recency
+                    from english_checkpoint_sessions sessions
+                    where sessions.student_id = %s
+                )
+                select module_code,
+                       case
+                           when status = 'active' then 'in_progress'
+                           when passed then 'passed'
+                           else 'not_passed'
+                       end as state,
+                       attempt_count,
+                       id as last_session_id,
+                       form_key as last_form_key,
+                       case when score is null then null
+                            else round(100.0 * score, 2)::float
+                       end as last_percentage,
+                       coalesce(completed_at, created_at) as updated_at
+                from ranked
+                where recency = 1
+                order by substring(module_code from 2)::integer
+                """,
+                (learner_id,),
+            ).fetchall()
         return {
             "student": self._serialize_student(dict(row)),
             "lessons": [dict(item) for item in lessons],
             "difficulty_performance": [dict(item) for item in difficulty],
+            "english_lessons": [dict(item) for item in english_lessons],
+            "english_checkpoints": [dict(item) for item in english_checkpoints],
         }
 
     def overview(self) -> dict:
@@ -404,22 +458,31 @@ class PostgresAdminAnalyticsRepository:
     def list_users(self, *, search, limit, offset):
         pattern = f"%{search or ''}%"
         with self._connect() as connection:
-            users = connection.execute("""
+            users = connection.execute(
+                """
                 select id as learner_id, email, display_name, role::text, updated_at
                 from profiles where email ilike %s or coalesce(display_name, '') ilike %s
                 order by email, id limit %s offset %s
-            """, (pattern, pattern, limit, offset)).fetchall()
-            total = connection.execute("""
+            """,
+                (pattern, pattern, limit, offset),
+            ).fetchall()
+            total = connection.execute(
+                """
                 select count(*) as total from profiles
                 where email ilike %s or coalesce(display_name, '') ilike %s
-            """, (pattern, pattern)).fetchone()["total"]
+            """,
+                (pattern, pattern),
+            ).fetchone()["total"]
             for user in users:
-                user["enrolments"] = connection.execute("""
+                user["enrolments"] = connection.execute(
+                    """
                     select c.course_key, v.revision as course_revision, e.status::text
                     from course_enrolments e join courses c on c.id=e.course_id
                     join course_versions v on v.id=e.course_version_id
                     where e.student_id=%s order by c.course_key
-                """, (user["learner_id"],)).fetchall()
+                """,
+                    (user["learner_id"],),
+                ).fetchall()
         return {"users": users, "total": total, "limit": limit, "offset": offset}
 
     def change_role(

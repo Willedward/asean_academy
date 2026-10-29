@@ -62,10 +62,33 @@ class AdminDifficultyPerformanceResponse(ApiModel):
     accuracy_percentage: float
 
 
+class AdminEnglishLessonProgressResponse(ApiModel):
+    lesson_key: str
+    state: Literal["in_progress", "practice_completed", "proficient", "mastered"]
+    question_count: int
+    resolved_count: int
+    correct_count: int
+    incorrect_count: int
+    retry_question_count: int
+    updated_at: datetime
+
+
+class AdminEnglishCheckpointProgressResponse(ApiModel):
+    module_code: str
+    state: Literal["in_progress", "passed", "not_passed"]
+    attempt_count: int
+    last_session_id: UUID
+    last_form_key: str
+    last_percentage: float | None = Field(default=None, ge=0, le=100)
+    updated_at: datetime
+
+
 class AdminStudentDetailResponse(ApiModel):
     student: AdminStudentSummaryResponse
     lessons: list[AdminLessonProgressResponse]
     difficulty_performance: list[AdminDifficultyPerformanceResponse]
+    english_lessons: list[AdminEnglishLessonProgressResponse]
+    english_checkpoints: list[AdminEnglishCheckpointProgressResponse]
 
 
 class AdminAnalyticsOverviewResponse(ApiModel):

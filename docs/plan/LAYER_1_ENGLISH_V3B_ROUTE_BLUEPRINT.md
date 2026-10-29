@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement and E0–E9 Sprint checkpoint journeys structurally complete; review and release pending
+**Status:** fixed technical blueprint; protected measurement, E0–E9 Sprint checkpoint journeys and checkpoint progress visibility structurally complete; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -123,16 +123,18 @@ The E9 checkpoint completes Sprint checkpoint coverage with reciprocal five-deci
 simulation-readiness forms scoped to E9.5. It measures separate clocks, whole-paper coverage,
 composition pacing, interruption integrity and post-run interpretation. It remains a readiness
 checkpoint and is explicitly not the protected full mock.
-Publication remains blocked on the remaining checkpoint contracts and the normal immutable
-review approvals.
+Learner progress now exposes readiness, attempt count, the active session and latest score for
+every E0–E9 checkpoint. Administrator student detail exposes English lesson evidence and the
+latest checkpoint result per attempted module without exposing submitted answers. Publication
+remains blocked on the normal immutable review approvals.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint review and release evidence**:
 
-1. add consolidated checkpoint progress visibility to the learner and administrator views;
-2. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
-3. collect immutable English and editorial approvals; and
+1. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
+2. collect immutable English and editorial approvals;
+3. run the protected baseline/endline and checkpoint journey in hosted staging; and
 4. enable learner routing only after the release gate confirms that every referenced revision
    is approved and published.
 
