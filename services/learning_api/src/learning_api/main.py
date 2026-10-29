@@ -308,6 +308,28 @@ def create_app(
                                 where table_schema = 'public'
                                   and table_name = 'content_review_records'
                             ) and exists (
+                                select 1
+                                from pg_constraint constraints
+                                join pg_class tables on tables.oid = constraints.conrelid
+                                join pg_namespace schemas on schemas.oid = tables.relnamespace
+                                where schemas.nspname = 'public'
+                                  and tables.relname = 'content_review_records'
+                                  and constraints.conname =
+                                      'content_review_records_item_kind_check'
+                                  and pg_get_constraintdef(constraints.oid)
+                                      like '%english_checkpoint_form%'
+                            ) and exists (
+                                select 1
+                                from pg_constraint constraints
+                                join pg_class tables on tables.oid = constraints.conrelid
+                                join pg_namespace schemas on schemas.oid = tables.relnamespace
+                                where schemas.nspname = 'public'
+                                  and tables.relname = 'content_lifecycle_requests'
+                                  and constraints.conname =
+                                      'content_lifecycle_requests_item_kind_check'
+                                  and pg_get_constraintdef(constraints.oid)
+                                      like '%english_checkpoint_form%'
+                            ) and exists (
                                 select 1 from pg_enum e join pg_type t on t.oid=e.enumtypid
                                 where t.typname='beta_audit_event_type'
                                 and e.enumlabel='content_retirement_requested'
