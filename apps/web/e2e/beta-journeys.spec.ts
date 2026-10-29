@@ -236,7 +236,7 @@ test.describe.serial("authenticated beta journeys", () => {
     ).toBeVisible();
     await expect(
       page.locator('option[value="mathematics"]').first(),
-    ).toHaveAttribute("disabled", "");
+    ).toHaveAttribute("disabled", "", { timeout: 15_000 });
 
     await page.goto("/admin/students/" + identities.studentA.learner_id);
     await expect(

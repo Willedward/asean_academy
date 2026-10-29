@@ -404,6 +404,113 @@ def test_failed_e3_checkpoint_retake_uses_a_fresh_passage_on_form_b():
     assert retry_question["passage"]["stable_key"] != question["passage"]["stable_key"]
 
 
+def test_e4_checkpoint_sequences_two_open_cloze_passages_without_answer_leak():
+    app = application()
+    seed_checkpoint_prerequisites(app, "e4-lesson-01", "e4-lesson-05")
+
+    created = create_checkpoint(app, "e4-checkpoint-pass", module_code="E4")
+    assert created.status_code == 201, created.text
+    assert created.json()["form_key"] == "english-checkpoint-e4-open-cloze-a-v1"
+    assert created.json()["mastery_lesson_keys"] == [
+        "e4-lesson-01",
+        "e4-lesson-05",
+    ]
+    session_id = created.json()["session_id"]
+
+    first = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    assert first["stable_key"] == "eo-l1-003"
+    assert first["word_bank"] is None
+    assert len(first["parts"]) == 3
+    assert "canonical_answer" not in json.dumps(first)
+    first_attempt = submit_checkpoint(
+        app,
+        session_id,
+        first,
+        {"1": "A", "2": "who", "3": "till"},
+        "e4-checkpoint-first-group",
+    )
+    assert first_attempt.status_code == 200, first_attempt.text
+    assert first_attempt.json()["checkpoint_completed"] is False
+    assert first_attempt.json()["session"]["score"] is None
+    assert "parts" not in first_attempt.json()
+
+    second = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    assert second["stable_key"] == "eo-l5-006"
+    assert len(second["parts"]) == 2
+    assert "canonical_answer" not in json.dumps(second)
+    completed = submit_checkpoint(
+        app,
+        session_id,
+        second,
+        {"1": "again", "2": "unless"},
+        "e4-checkpoint-second-group",
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["checkpoint_completed"] is True
+    assert completed.json()["session"]["score"] == 1
+    assert completed.json()["session"]["passed"] is True
+
+    progress = request(app, "GET", "/api/v1/english/progress").json()["lessons"]
+    by_key = {item["lesson_key"]: item for item in progress}
+    assert by_key["e4-lesson-01"]["state"] == "mastered"
+    assert by_key["e4-lesson-05"]["state"] == "mastered"
+
+
+def test_failed_e4_checkpoint_retake_uses_two_disjoint_form_b_passages():
+    app = application()
+    seed_checkpoint_prerequisites(app, "e4-lesson-01", "e4-lesson-05")
+
+    created = create_checkpoint(app, "e4-checkpoint-fail", module_code="E4")
+    session_id = created.json()["session_id"]
+    first = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    first_attempt = submit_checkpoint(
+        app,
+        session_id,
+        first,
+        {"1": "wrong", "2": "wrong", "3": "wrong"},
+        "e4-checkpoint-fail-first",
+    )
+    assert first_attempt.status_code == 200, first_attempt.text
+    assert first_attempt.json()["checkpoint_completed"] is False
+
+    second = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    failed = submit_checkpoint(
+        app,
+        session_id,
+        second,
+        {"1": "wrong", "2": "wrong"},
+        "e4-checkpoint-fail-second",
+    )
+    assert failed.status_code == 200, failed.text
+    assert failed.json()["session"]["score"] == 0
+    assert failed.json()["session"]["passed"] is False
+
+    retake = create_checkpoint(app, "e4-checkpoint-retake", module_code="E4")
+    assert retake.status_code == 201, retake.text
+    assert retake.json()["form_key"] == "english-checkpoint-e4-open-cloze-b-v1"
+    retry_id = retake.json()["session_id"]
+    retry_question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{retry_id}/next"
+    ).json()["question"]
+    assert retry_question["stable_key"] == "eo-l1-004"
+    assert retry_question["passage"]["stable_key"] == (
+        "english-passage-checkpoint-museum-parcel"
+    )
+    assert retry_question["stable_key"] not in {first["stable_key"], second["stable_key"]}
+    assert retry_question["passage"]["stable_key"] not in {
+        first["passage"]["stable_key"],
+        second["passage"]["stable_key"],
+    }
+
+
 def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery():
     app = application()
     seed_e1_checkpoint_prerequisites(app)

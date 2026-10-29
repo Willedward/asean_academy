@@ -34,15 +34,15 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 36
-    assert len(report.passages) == 31
-    assert len(report.questions) == 84
+    assert len(report.passages) == 35
+    assert len(report.questions) == 88
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
     }
-    assert len(report.forms) == 11
+    assert len(report.forms) == 13
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
@@ -309,6 +309,47 @@ def test_e3_checkpoint_forms_are_disjoint_complete_banked_cloze_passages(english
         assert {question.difficulty for question in selected} == {4}
         assert all(question.passage_ref is not None for question in selected)
         assert sum(len(question.parts) for question in selected) == 5
+        assert {question.exposure_pool for question in selected} == {
+            "module_checkpoint"
+        }
+
+
+def test_e4_checkpoint_forms_cover_function_words_and_timed_open_cloze(english_root):
+    report = validate_english_foundation(english_root)
+    questions = {question.stable_key: question for question in report.questions}
+    forms = sorted(
+        (
+            form
+            for form in report.forms
+            if form.form_type == "checkpoint" and form.module_code == "E4"
+        ),
+        key=lambda form: form.form_key,
+    )
+
+    assert [form.form_key for form in forms] == [
+        "english-checkpoint-e4-open-cloze-a-v1",
+        "english-checkpoint-e4-open-cloze-b-v1",
+    ]
+    assert forms[0].paired_form_key == forms[1].form_key
+    assert forms[1].paired_form_key == forms[0].form_key
+    assert forms[0].mastery_lesson_keys == forms[1].mastery_lesson_keys == [
+        "e4-lesson-01",
+        "e4-lesson-05",
+    ]
+    assert forms[0].task_part_distribution == forms[1].task_part_distribution == {
+        "open_cloze": 5
+    }
+    assert set(forms[0].question_keys).isdisjoint(forms[1].question_keys)
+    for form in forms:
+        selected = [questions[key] for key in form.question_keys]
+        assert form.status == "draft"
+        assert form.protected
+        assert not form.tutoring_enabled
+        assert form.feedback_timing == "after_form"
+        assert [question.outcome_code for question in selected] == ["EO4.1", "EO4.5"]
+        assert [question.difficulty for question in selected] == [4, 5]
+        assert [len(question.parts) for question in selected] == [3, 2]
+        assert all(question.passage_ref is not None for question in selected)
         assert {question.exposure_pool for question in selected} == {
             "module_checkpoint"
         }
@@ -1262,6 +1303,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eo-b007",
         "english-eo-b008",
         "english-eo-b009",
+        "english-eo-b010",
+        "english-eo-b011",
         "english-er-b001",
         "english-er-b002",
         "english-er-b003",
@@ -1304,7 +1347,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
             "english-ex-b021",
             "english-ex-b022",
     ]
-    assert len(report.questions) == 84
+    assert len(report.questions) == 88
     assert not report.duplicates
 
 
