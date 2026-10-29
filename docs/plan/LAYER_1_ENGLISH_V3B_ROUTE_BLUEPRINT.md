@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement complete; E0–E8 checkpoint journeys implemented; review and release pending
+**Status:** fixed technical blueprint; protected measurement and E0–E9 Sprint checkpoint journeys structurally complete; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -119,18 +119,21 @@ The E8 checkpoint adds reciprocal five-decision composition self-editing forms s
 Sprint lesson E8.4. It measures revision priority from task fulfilment through organisation,
 development and sentence control; it does not introduce the excluded standalone editing-paper
 task type into the reported exam blueprint.
+The E9 checkpoint completes Sprint checkpoint coverage with reciprocal five-decision
+simulation-readiness forms scoped to E9.5. It measures separate clocks, whole-paper coverage,
+composition pacing, interruption integrity and post-run interpretation. It remains a readiness
+checkpoint and is explicitly not the protected full mock.
 Publication remains blocked on the remaining checkpoint contracts and the normal immutable
 review approvals.
 
 ## 6. Next execution milestone
 
-Complete the remaining **Sprint checkpoints and review evidence**:
+Complete the remaining **Sprint review and release evidence**:
 
-1. complete E9 using the proven E0–E8 primary/retry journey;
-2. add consolidated checkpoint progress visibility to the learner and administrator views;
-3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
-4. collect immutable English and editorial approvals; and
-5. enable learner routing only after the release gate confirms that every referenced revision
+1. add consolidated checkpoint progress visibility to the learner and administrator views;
+2. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
+3. collect immutable English and editorial approvals; and
+4. enable learner routing only after the release gate confirms that every referenced revision
    is approved and published.
 
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
