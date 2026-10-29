@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "eg-l2-003",
+  "bank_key": "english-eg-v1",
+  "curriculum_version": "asean_scholarship_english_v1_draft",
+  "audience_band": "secondary_school",
+  "outcome_code": "EG2.2",
+  "title": "E2 agreement and reference checkpoint form A",
+  "difficulty": 4,
+  "question_type": "grammar_usage",
+  "exposure_pool": "module_checkpoint",
+  "feedback_timing": "after_group",
+  "status": "draft",
+  "passage_ref": null,
+  "instructions": "Choose the only sentence with controlled agreement or unambiguous reference. Complete all five before submitting.",
+  "parts": [
+    {
+      "position": 1,
+      "prompt": "Which sentence correctly controls agreement despite the interrupting phrase?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The set of emergency instructions are beside the door."},
+          {"key": "B", "text": "The set of emergency instructions is beside the door."},
+          {"key": "C", "text": "The set of emergency instructions have been beside the door."},
+          {"key": "D", "text": "The set of emergency instructions remain beside the door."}
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "Instructions is inside an of-phrase and does not control the verb.",
+          "B": "The singular head noun set correctly takes is.",
+          "C": "Have follows the nearby plural noun rather than the head subject.",
+          "D": "Remain is plural and does not agree with set."
+        }
+      },
+      "hint": "Protected checkpoint: no hint is available.",
+      "correct_explanation": "Remove the of-phrase: the set is beside the door."
+    },
+    {
+      "position": 2,
+      "prompt": "Complete the sentence: ‘One of the solar lamps ___ a damaged switch.’",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "have"},
+          {"key": "B", "text": "were having"},
+          {"key": "C", "text": "are having"},
+          {"key": "D", "text": "has"}
+        ],
+        "correct_key": "D",
+        "choice_rationales": {
+          "A": "Lamps is not the head subject.",
+          "B": "The plural auxiliary does not agree with one.",
+          "C": "The plural auxiliary follows the nearby noun incorrectly.",
+          "D": "The singular head one takes has."
+        }
+      },
+      "hint": "Protected checkpoint: no hint is available.",
+      "correct_explanation": "One is the grammatical controller, so the verb must be singular."
+    },
+    {
+      "position": 3,
+      "prompt": "Which sentence correctly treats two distinct people as a compound subject?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The curator and her assistant are checking the labels."},
+          {"key": "B", "text": "The curator and her assistant is checking the labels."},
+          {"key": "C", "text": "The curator and her assistant checks the labels."},
+          {"key": "D", "text": "The curator and her assistant has checked the labels separately yesterday."}
+        ],
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "Two distinct subjects joined by and take plural agreement.",
+          "B": "Is is singular.",
+          "C": "Checks is singular.",
+          "D": "Has is singular and the time phrase conflicts with the construction."
+        }
+      },
+      "hint": "Protected checkpoint: no hint is available.",
+      "correct_explanation": "The curator and the assistant are two people, so are is required."
+    },
+    {
+      "position": 4,
+      "prompt": "Aisha lent her calculator to Nur, and Nur discovered a loose key. Which revision makes the discoverer and object unambiguous?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "When Aisha lent it to Nur, she discovered that it was loose."},
+          {"key": "B", "text": "Aisha lent her calculator to Nur because she found her key loose."},
+          {"key": "C", "text": "After Aisha lent Nur the calculator, Nur discovered that one of the calculator's keys was loose."},
+          {"key": "D", "text": "After she lent it to her, she discovered its loose key."}
+        ],
+        "correct_key": "C",
+        "choice_rationales": {
+          "A": "She could refer to Aisha or Nur, and it has competing referents.",
+          "B": "She and her do not identify the intended person or object clearly.",
+          "C": "Both the discoverer and the damaged object are explicitly named.",
+          "D": "Every personal pronoun is ambiguous."
+        }
+      },
+      "hint": "Protected checkpoint: no hint is available.",
+      "correct_explanation": "Repeating the relevant names and noun phrase prevents competing antecedents."
+    },
+    {
+      "position": 5,
+      "prompt": "A storm damaged the notice, not the gate. Which sentence communicates that meaning most clearly?",
+      "response": {
+        "type": "single_choice",
+        "options": [
+          {"key": "A", "text": "The notice was attached to the gate when it was damaged."},
+          {"key": "B", "text": "The storm damaged the notice that had been attached to the gate."},
+          {"key": "C", "text": "It damaged it beside it."},
+          {"key": "D", "text": "The gate held the notice before it happened to it."}
+        ],
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "It could refer to the notice or the gate.",
+          "B": "The verb directly names the notice as the damaged object.",
+          "C": "The pronouns have no stable antecedents.",
+          "D": "Both uses of it are unclear."
+        }
+      },
+      "hint": "Protected checkpoint: no hint is available.",
+      "correct_explanation": "Placing notice directly after damaged removes the reference ambiguity."
+    }
+  ],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "source_refs": ["candidate-report-2026-english-format", "ies-secondary-writing-guide", "nextscholar-english-curriculum-design-v1"],
+    "created_at": "2026-10-29T00:00:00+08:00",
+    "authored_by": "Codex English V3-B E2 checkpoint milestone",
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": null
+  }
+}
