@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement complete; E0–E7 checkpoint learner journeys implemented for technical review
+**Status:** V3-A merged; V3-B protected measurement complete; E0–E8 checkpoint learner journeys implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -68,6 +68,10 @@ question records and 37 passages. The E0–E7 forms remain draft-gated and there
 unavailable in production until academic
 and editorial approval and publication. Exact route membership and rationale are recorded in
 `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
+The E8 checkpoint adds two reciprocal five-decision composition self-editing groups, scopes
+mastery to Sprint lesson E8.4 and brings the foundation to 100 question records and 37
+passages. These decisions train revision priority inside composition and do not claim that the
+reported exam contains a separate editing section.
 
 ## 1. V3 decision
 
@@ -469,7 +473,7 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint checkpoints and review evidence** before expanding
 optional Full-route lessons:
 
-1. repeat the primary/retry checkpoint manifests across E8–E9 using the proven E0–E7
+1. complete the E9 checkpoint manifest using the proven E0–E8
    persistence, multi-question sequencing and mastery journey;
 2. expose checkpoint readiness, attempt and pass status in learner/admin progress views;
 3. generate consolidated reviewer evidence and collect English/editorial approvals;

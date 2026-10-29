@@ -35,14 +35,14 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 36
     assert len(report.passages) == 37
-    assert len(report.questions) == 98
+    assert len(report.questions) == 100
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
     }
-    assert len(report.forms) == 19
+    assert len(report.forms) == 21
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
@@ -484,6 +484,46 @@ def test_e7_checkpoint_forms_develop_relevant_honest_evidence_chains(english_roo
         assert {question.outcome_code for question in selected} == {"EW7.2"}
         assert {question.difficulty for question in selected} == {4}
         assert [len(question.parts) for question in selected] == [3, 2]
+        assert {question.exposure_pool for question in selected} == {
+            "module_checkpoint"
+        }
+
+
+def test_e8_checkpoint_forms_prioritise_composition_revision_without_new_task_type(
+    english_root,
+):
+    report = validate_english_foundation(english_root)
+    questions = {question.stable_key: question for question in report.questions}
+    forms = sorted(
+        (
+            form
+            for form in report.forms
+            if form.form_type == "checkpoint" and form.module_code == "E8"
+        ),
+        key=lambda form: form.form_key,
+    )
+    assert [form.form_key for form in forms] == [
+        "english-checkpoint-e8-revision-a-v1",
+        "english-checkpoint-e8-revision-b-v1",
+    ]
+    assert forms[0].paired_form_key == forms[1].form_key
+    assert forms[1].paired_form_key == forms[0].form_key
+    assert forms[0].mastery_lesson_keys == forms[1].mastery_lesson_keys == [
+        "e8-lesson-04"
+    ]
+    assert forms[0].task_part_distribution == forms[1].task_part_distribution == {
+        "composition_planning": 5
+    }
+    assert set(forms[0].question_keys).isdisjoint(forms[1].question_keys)
+    for form in forms:
+        selected = [questions[key] for key in form.question_keys]
+        assert form.status == "draft"
+        assert form.protected
+        assert not form.tutoring_enabled
+        assert form.feedback_timing == "after_form"
+        assert {question.outcome_code for question in selected} == {"EW8.4"}
+        assert {question.difficulty for question in selected} == {4}
+        assert sum(len(question.parts) for question in selected) == 5
         assert {question.exposure_pool for question in selected} == {
             "module_checkpoint"
         }
@@ -1455,6 +1495,26 @@ def test_e7_checkpoint_groups_mark_evidence_and_relevance_exactly(english_root):
     assert not check_english_answer(form_b.parts[0].response, ["A"])["correct"]
 
 
+def test_e8_checkpoint_groups_mark_revision_priority_exactly(english_root):
+    expected = {
+        "ex-l4-005": ["A", "B", "C", "A", "D"],
+        "ex-l4-006": ["B", "A", "C", "B", "A"],
+    }
+    for question_key, answers in expected.items():
+        question = EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/{question_key}.json").read_text()
+        )
+        assert question.question_type == "composition_planning"
+        assert question.exposure_pool == "module_checkpoint"
+        assert question.feedback_timing == "after_group"
+        assert question.outcome_code == "EW8.4"
+        assert [
+            check_english_answer(part.response, answer)["correct"]
+            for part, answer in zip(question.parts, answers, strict=True)
+        ] == [True] * 5
+        assert "composition self-editing" in question.instructions
+
+
 def test_e2_grammar_pilot_covers_boundaries_and_agreement_exactly(english_root):
     keys = [f"eg-l1-{number:03d}" for number in range(1, 7)]
     questions = [
@@ -1576,8 +1636,10 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b028",
         "english-ex-b029",
         "english-ex-b030",
+        "english-ex-b031",
+        "english-ex-b032",
     ]
-    assert len(report.questions) == 98
+    assert len(report.questions) == 100
     assert not report.duplicates
 
 
