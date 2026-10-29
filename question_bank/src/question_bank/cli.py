@@ -39,6 +39,7 @@ from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
 from .english_authoring import (
     claim_english_batch,
     export_english_reviewer_batch,
+    export_english_route_reviewer_packet,
     release_english_batch,
     validate_english_authoring,
 )
@@ -362,6 +363,17 @@ def parser():
     english_export.add_argument("batch", type=Path)
     english_export.add_argument("output", type=Path)
     english_export.add_argument("--root", type=Path, default=DEFAULT_ENGLISH_FOUNDATION)
+    english_route_export = commands.add_parser(
+        "english-route-review-export",
+        help="Export one consolidated protected English route reviewer packet",
+    )
+    english_route_export.add_argument("output", type=Path)
+    english_route_export.add_argument(
+        "--route", choices=("full", "core", "sprint"), default="sprint"
+    )
+    english_route_export.add_argument(
+        "--root", type=Path, default=DEFAULT_ENGLISH_FOUNDATION
+    )
     english_claim = commands.add_parser(
         "english-authoring-claim", help="Claim one English batch for a branch"
     )
@@ -407,6 +419,14 @@ def main(argv=None):
         return 0 if report.valid else 1
     if args.command == "english-authoring-export":
         result = export_english_reviewer_batch(args.root, args.batch, args.output)
+        print(json.dumps({"status": "complete", **result}, indent=2))
+        return 0
+    if args.command == "english-route-review-export":
+        result = export_english_route_reviewer_packet(
+            args.root,
+            args.output,
+            route=args.route,
+        )
         print(json.dumps({"status": "complete", **result}, indent=2))
         return 0
     if args.command == "english-authoring-claim":

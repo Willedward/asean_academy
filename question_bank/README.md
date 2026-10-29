@@ -176,3 +176,19 @@ repair attempts. A valid run writes all question files, advances the manifest di
 `planned` to `ready_for_review`, exports the reviewer packet, and records an execution report.
 Writes are rolled back if validation or export fails. It never records Mathematics or editorial
 approval.
+
+## English Sprint reviewer evidence
+
+Generate one protected packet covering the complete 16-lesson Sprint route, its parallel
+retries and all reciprocal E0–E9 checkpoints:
+
+```bash
+uv run --project question_bank question-bank english-route-review-export \
+  build/reviewer-english/english-sprint-route-v3b \
+  --route sprint
+```
+
+The export writes deterministic HTML, JSON, Markdown and CSV evidence. The CSV starts with
+separate pending English and editorial decisions for every lesson, checkpoint form, question
+and passage. Exporting evidence never changes review or publication state. Pull-request CI
+also uploads this packet as part of the question reviewer artifact.

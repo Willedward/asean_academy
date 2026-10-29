@@ -145,8 +145,15 @@ uv run question-bank english-authoring-validate
 uv run question-bank english-authoring-export \
   ../backend_resources/english/v1/authoring/batches/english-ev-b001.json \
   ../build/reviewer-english/english-ev-b001
+uv run question-bank english-route-review-export \
+  ../build/reviewer-english/english-sprint-route-v3b \
+  --route sprint
 uv run pytest tests/test_english_foundation.py
 ```
+
+The consolidated route export pins all 16 Sprint lessons, their parallel retries and both
+checkpoint forms for every E0–E9 module. It writes exact fingerprints and separate pending
+English/editorial decision columns without changing any content state.
 
 Use `--publish` only when checking a human-reviewed release candidate. The current pilot
 must fail that gate because it is deliberately still draft content.
