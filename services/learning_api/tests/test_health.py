@@ -36,7 +36,7 @@ def test_health_uses_versioned_contract_and_request_id():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202610270034",
+            "required_schema_revision": "202610290036",
         },
         "dependencies": {
             "course_content": "versioned_catalogue",
@@ -100,7 +100,7 @@ def test_readiness_uses_local_dependencies_without_postgres():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202610270034",
+            "required_schema_revision": "202610290036",
         },
         "dependencies": {"database": "local", "schema_status": "local", "content_status": "local"},
     }
@@ -133,6 +133,36 @@ def test_readiness_reports_content_and_connection_failures(monkeypatch):
         assert response.json()["error"]["code"] == code
         assert response.json()["error"]["request_id"] == "content-test"
         assert "private" not in response.text
+
+
+def test_readiness_requires_checkpoint_form_review_constraints(monkeypatch):
+    from unittest.mock import MagicMock
+
+    from learning_api import main
+
+    connection = MagicMock()
+    execute = connection.__enter__.return_value.execute
+    execute.return_value.fetchone.return_value = {"schema_ready": False}
+    monkeypatch.setattr(main.psycopg, "connect", lambda *args, **kwargs: connection)
+    configured = create_app(
+        Settings(
+            environment="test",
+            cors_origins=("http://localhost:3000",),
+            log_level="INFO",
+            database_url="postgresql://unused",
+        )
+    )
+
+    async def request():
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=configured), base_url="http://test"
+        ) as client:
+            return await client.get("/api/v1/ready")
+
+    response = asyncio.run(request())
+    assert response.status_code == 503
+    assert response.json()["error"]["code"] == "database_schema_outdated"
+    assert "english_checkpoint_form" in execute.call_args.args[0]
 
 
 def test_startup_refuses_unsynchronized_content(monkeypatch):

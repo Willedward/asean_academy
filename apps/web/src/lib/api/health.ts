@@ -13,7 +13,7 @@ const healthFixture: HealthResponse = {
   release: {
     sha: "fixture",
     deployment_id: null,
-    required_schema_revision: "202610030019",
+    required_schema_revision: "202610290036",
   },
   dependencies: {
     course_content: "versioned_catalogue",
