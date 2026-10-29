@@ -177,6 +177,65 @@ def test_e1_checkpoint_is_locked_until_every_scoped_lesson_is_proficient():
     assert "e1-lesson-06" in locked.json()["error"]["message"]
 
 
+def test_progress_exposes_checkpoint_readiness_attempts_and_latest_score():
+    app = application()
+
+    initial = request(app, "GET", "/api/v1/english/progress")
+    assert initial.status_code == 200, initial.text
+    checkpoints = initial.json()["checkpoints"]
+    assert [item["module_code"] for item in checkpoints] == [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+    ]
+    e0 = checkpoints[0]
+    assert e0 == {
+        "module_code": "E0",
+        "module_title": "Orientation, baseline and error language",
+        "state": "locked",
+        "mastery_lesson_keys": ["e0-lesson-01", "e0-lesson-02"],
+        "question_count": 2,
+        "passing_percentage": 75,
+        "attempt_count": 0,
+        "last_session_id": None,
+        "last_form_key": None,
+        "last_percentage": None,
+    }
+
+    seed_checkpoint_prerequisites(app, "e0-lesson-01", "e0-lesson-02")
+    available = request(app, "GET", "/api/v1/english/progress").json()["checkpoints"][0]
+    assert available["state"] == "available"
+
+    created = create_checkpoint(app, "progress-checkpoint", module_code="E0")
+    session_id = created.json()["session_id"]
+    active = request(app, "GET", "/api/v1/english/progress").json()["checkpoints"][0]
+    assert active["state"] == "in_progress"
+    assert active["attempt_count"] == 1
+    assert active["last_session_id"] == session_id
+
+    for position, key in enumerate(("progress-first", "progress-second"), 1):
+        question = request(
+            app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+        ).json()["question"]
+        wrong = {str(part["position"]): "A" for part in question["parts"]}
+        submitted = submit_checkpoint(app, session_id, question, wrong, key)
+        assert submitted.status_code == 200, submitted.text
+        assert submitted.json()["checkpoint_completed"] is (position == 2)
+
+    failed = request(app, "GET", "/api/v1/english/progress").json()["checkpoints"][0]
+    assert failed["state"] == "available"
+    assert failed["attempt_count"] == 1
+    assert failed["last_form_key"] == "english-checkpoint-e0-orientation-a-v1"
+    assert failed["last_percentage"] == 20
+
+
 def test_e0_checkpoint_sequences_both_outcomes_without_early_feedback():
     app = application()
     seed_checkpoint_prerequisites(app, "e0-lesson-01", "e0-lesson-02")
@@ -187,9 +246,9 @@ def test_e0_checkpoint_sequences_both_outcomes_without_early_feedback():
     assert created.json()["mastery_lesson_keys"] == ["e0-lesson-01", "e0-lesson-02"]
     session_id = created.json()["session_id"]
 
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert first["stable_key"] == "ex-l1-008"
     first_attempt = submit_checkpoint(
         app,
@@ -204,9 +263,9 @@ def test_e0_checkpoint_sequences_both_outcomes_without_early_feedback():
     assert first_attempt.json()["session"]["resolved_count"] == 1
     assert "parts" not in first_attempt.json()
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert second["stable_key"] == "ex-l2-007"
     completed = submit_checkpoint(
         app,
@@ -220,10 +279,18 @@ def test_e0_checkpoint_sequences_both_outcomes_without_early_feedback():
     assert completed.json()["session"]["score"] == 1
     assert completed.json()["session"]["passed"] is True
 
-    progress = request(app, "GET", "/api/v1/english/progress").json()["lessons"]
+    progress_response = request(app, "GET", "/api/v1/english/progress").json()
+    progress = progress_response["lessons"]
     by_key = {item["lesson_key"]: item for item in progress}
     assert by_key["e0-lesson-01"]["state"] == "mastered"
     assert by_key["e0-lesson-02"]["state"] == "mastered"
+    e0_checkpoint = next(
+        item
+        for item in progress_response["checkpoints"]
+        if item["module_code"] == "E0"
+    )
+    assert e0_checkpoint["state"] == "passed"
+    assert e0_checkpoint["last_percentage"] == 100
 
 
 def test_failed_e0_checkpoint_retake_uses_disjoint_form_b():
@@ -232,9 +299,9 @@ def test_failed_e0_checkpoint_retake_uses_disjoint_form_b():
 
     created = create_checkpoint(app, "e0-checkpoint-fail", module_code="E0")
     session_id = created.json()["session_id"]
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     submit_checkpoint(
         app,
         session_id,
@@ -242,9 +309,9 @@ def test_failed_e0_checkpoint_retake_uses_disjoint_form_b():
         {"1": "A", "2": "A", "3": "A"},
         "e0-checkpoint-fail-first",
     )
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -276,9 +343,9 @@ def test_e2_checkpoint_passes_and_records_sprint_grammar_mastery():
     assert created.json()["form_key"] == "english-checkpoint-e2-grammar-a-v1"
     assert created.json()["mastery_lesson_keys"] == ["e2-lesson-02"]
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert question["stable_key"] == "eg-l2-003"
     assert question["difficulty"] == 4
     assert "correct_key" not in json.dumps(question)
@@ -307,9 +374,9 @@ def test_failed_e2_checkpoint_retake_uses_disjoint_form_b():
 
     created = create_checkpoint(app, "e2-checkpoint-fail", module_code="E2")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -341,9 +408,9 @@ def test_e3_checkpoint_passes_with_a_learner_safe_complete_passage():
     assert created.json()["form_key"] == "english-checkpoint-e3-banked-cloze-a-v1"
     assert created.json()["mastery_lesson_keys"] == ["e3-lesson-01"]
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert question["stable_key"] == "eb-l1-006"
     assert question["difficulty"] == 4
     assert len(question["passage"]["paragraphs"]) == 3
@@ -375,9 +442,9 @@ def test_failed_e3_checkpoint_retake_uses_a_fresh_passage_on_form_b():
 
     created = create_checkpoint(app, "e3-checkpoint-fail", module_code="E3")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -397,9 +464,7 @@ def test_failed_e3_checkpoint_retake_uses_a_fresh_passage_on_form_b():
         app, "GET", f"/api/v1/english/checkpoint-sessions/{retry_id}/next"
     ).json()["question"]
     assert retry_question["stable_key"] == "eb-l1-007"
-    assert retry_question["passage"]["stable_key"] == (
-        "english-passage-checkpoint-missing-recipe"
-    )
+    assert retry_question["passage"]["stable_key"] == ("english-passage-checkpoint-missing-recipe")
     assert retry_question["stable_key"] != question["stable_key"]
     assert retry_question["passage"]["stable_key"] != question["passage"]["stable_key"]
 
@@ -417,9 +482,9 @@ def test_e4_checkpoint_sequences_two_open_cloze_passages_without_answer_leak():
     ]
     session_id = created.json()["session_id"]
 
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert first["stable_key"] == "eo-l1-003"
     assert first["word_bank"] is None
     assert len(first["parts"]) == 3
@@ -436,9 +501,9 @@ def test_e4_checkpoint_sequences_two_open_cloze_passages_without_answer_leak():
     assert first_attempt.json()["session"]["score"] is None
     assert "parts" not in first_attempt.json()
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert second["stable_key"] == "eo-l5-006"
     assert len(second["parts"]) == 2
     assert "canonical_answer" not in json.dumps(second)
@@ -466,9 +531,9 @@ def test_failed_e4_checkpoint_retake_uses_two_disjoint_form_b_passages():
 
     created = create_checkpoint(app, "e4-checkpoint-fail", module_code="E4")
     session_id = created.json()["session_id"]
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     first_attempt = submit_checkpoint(
         app,
         session_id,
@@ -479,9 +544,9 @@ def test_failed_e4_checkpoint_retake_uses_two_disjoint_form_b_passages():
     assert first_attempt.status_code == 200, first_attempt.text
     assert first_attempt.json()["checkpoint_completed"] is False
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -501,9 +566,7 @@ def test_failed_e4_checkpoint_retake_uses_two_disjoint_form_b_passages():
         app, "GET", f"/api/v1/english/checkpoint-sessions/{retry_id}/next"
     ).json()["question"]
     assert retry_question["stable_key"] == "eo-l1-004"
-    assert retry_question["passage"]["stable_key"] == (
-        "english-passage-checkpoint-museum-parcel"
-    )
+    assert retry_question["passage"]["stable_key"] == ("english-passage-checkpoint-museum-parcel")
     assert retry_question["stable_key"] not in {first["stable_key"], second["stable_key"]}
     assert retry_question["passage"]["stable_key"] not in {
         first["passage"]["stable_key"],
@@ -513,9 +576,7 @@ def test_failed_e4_checkpoint_retake_uses_two_disjoint_form_b_passages():
 
 def test_e5_checkpoint_delivers_a_safe_paired_passage_and_records_three_masteries():
     app = application()
-    seed_checkpoint_prerequisites(
-        app, "e5-lesson-02", "e5-lesson-03", "e5-lesson-07"
-    )
+    seed_checkpoint_prerequisites(app, "e5-lesson-02", "e5-lesson-03", "e5-lesson-07")
 
     created = create_checkpoint(app, "e5-checkpoint-pass", module_code="E5")
     assert created.status_code == 201, created.text
@@ -527,13 +588,11 @@ def test_e5_checkpoint_delivers_a_safe_paired_passage_and_records_three_masterie
     ]
     session_id = created.json()["session_id"]
 
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert question["stable_key"] == "er-l5-008"
-    assert question["passage"]["stable_key"] == (
-        "english-passage-checkpoint-rain-routes-pair"
-    )
+    assert question["passage"]["stable_key"] == ("english-passage-checkpoint-rain-routes-pair")
     assert len(question["parts"]) == 5
     assert "PASSAGE A" in question["passage"]["paragraphs"][0]
     assert "PASSAGE B" in question["passage"]["paragraphs"][4]
@@ -562,15 +621,13 @@ def test_e5_checkpoint_delivers_a_safe_paired_passage_and_records_three_masterie
 
 def test_failed_e5_checkpoint_retake_uses_a_disjoint_paired_passage():
     app = application()
-    seed_checkpoint_prerequisites(
-        app, "e5-lesson-02", "e5-lesson-03", "e5-lesson-07"
-    )
+    seed_checkpoint_prerequisites(app, "e5-lesson-02", "e5-lesson-03", "e5-lesson-07")
 
     created = create_checkpoint(app, "e5-checkpoint-fail", module_code="E5")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -594,9 +651,7 @@ def test_failed_e5_checkpoint_retake_uses_a_disjoint_paired_passage():
         "english-passage-checkpoint-night-journeys-pair"
     )
     assert retry_question["stable_key"] != question["stable_key"]
-    assert retry_question["passage"]["stable_key"] != question["passage"][
-        "stable_key"
-    ]
+    assert retry_question["passage"]["stable_key"] != question["passage"]["stable_key"]
 
 
 def test_e6_checkpoint_sequences_task_decoding_and_planning_without_answer_leak():
@@ -612,9 +667,9 @@ def test_e6_checkpoint_sequences_task_decoding_and_planning_without_answer_leak(
     ]
     session_id = created.json()["session_id"]
 
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert first["stable_key"] == "ex-l1-010"
     assert len(first["parts"]) == 3
     encoded = json.dumps(first)
@@ -633,9 +688,9 @@ def test_e6_checkpoint_sequences_task_decoding_and_planning_without_answer_leak(
     assert first_attempt.json()["session"]["score"] is None
     assert "parts" not in first_attempt.json()
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert second["stable_key"] == "ex-l5-007"
     assert len(second["parts"]) == 2
     completed = submit_checkpoint(
@@ -662,9 +717,9 @@ def test_failed_e6_checkpoint_retake_uses_two_disjoint_form_b_groups():
 
     created = create_checkpoint(app, "e6-checkpoint-fail", module_code="E6")
     session_id = created.json()["session_id"]
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     first_attempt = submit_checkpoint(
         app,
         session_id,
@@ -675,9 +730,9 @@ def test_failed_e6_checkpoint_retake_uses_two_disjoint_form_b_groups():
     assert first_attempt.status_code == 200, first_attempt.text
     assert first_attempt.json()["checkpoint_completed"] is False
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -734,9 +789,9 @@ def test_e7_checkpoint_sequences_evidence_and_relevance_without_answer_leak():
     assert created.json()["mastery_lesson_keys"] == ["e7-lesson-02"]
     session_id = created.json()["session_id"]
 
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert first["stable_key"] == "ex-l2-009"
     assert len(first["parts"]) == 3
     encoded = json.dumps(first)
@@ -754,9 +809,9 @@ def test_e7_checkpoint_sequences_evidence_and_relevance_without_answer_leak():
     assert first_attempt.json()["checkpoint_completed"] is False
     assert first_attempt.json()["session"]["score"] is None
 
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert second["stable_key"] == "ex-l2-010"
     completed = submit_checkpoint(
         app,
@@ -781,9 +836,9 @@ def test_failed_e7_checkpoint_retake_uses_two_disjoint_form_b_groups():
 
     created = create_checkpoint(app, "e7-checkpoint-fail", module_code="E7")
     session_id = created.json()["session_id"]
-    first = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    first = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     first_attempt = submit_checkpoint(
         app,
         session_id,
@@ -793,9 +848,9 @@ def test_failed_e7_checkpoint_retake_uses_two_disjoint_form_b_groups():
     )
     assert first_attempt.status_code == 200, first_attempt.text
     assert first_attempt.json()["checkpoint_completed"] is False
-    second = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    second = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -850,9 +905,9 @@ def test_e8_checkpoint_is_learner_safe_and_records_revision_mastery():
     assert created.json()["form_key"] == "english-checkpoint-e8-revision-a-v1"
     assert created.json()["mastery_lesson_keys"] == ["e8-lesson-04"]
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert question["stable_key"] == "ex-l4-005"
     encoded = json.dumps(question)
     assert "correct_key" not in encoded
@@ -878,9 +933,9 @@ def test_failed_e8_checkpoint_retake_uses_disjoint_form_b():
     seed_checkpoint_prerequisites(app, "e8-lesson-04")
     created = create_checkpoint(app, "e8-checkpoint-fail", module_code="E8")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -911,9 +966,9 @@ def test_e9_checkpoint_is_readiness_only_and_records_simulation_mastery():
     assert created.json()["form_key"] == "english-checkpoint-e9-simulation-a-v1"
     assert created.json()["mastery_lesson_keys"] == ["e9-lesson-05"]
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     assert question["stable_key"] == "ex-l5-009"
     assert question["question_type"] == "exam_strategy"
     encoded = json.dumps(question)
@@ -940,9 +995,9 @@ def test_failed_e9_checkpoint_retake_uses_disjoint_form_b():
     seed_checkpoint_prerequisites(app, "e9-lesson-05")
     created = create_checkpoint(app, "e9-checkpoint-fail", module_code="E9")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -977,9 +1032,7 @@ def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery
     assert created.json()["mastery_lesson_keys"] == ["e1-lesson-01", "e1-lesson-06"]
     session_id = created.json()["session_id"]
 
-    current = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    )
+    current = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next")
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     encoded = json.dumps(question)
@@ -1033,9 +1086,9 @@ def test_failed_e1_checkpoint_preserves_proficiency_and_retake_uses_form_b():
 
     first = create_checkpoint(app, "e1-checkpoint-fail")
     session_id = first.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     failed = submit_checkpoint(
         app,
         session_id,
@@ -1077,13 +1130,11 @@ def test_e1_checkpoint_does_not_partially_complete_if_proficiency_changes():
 
     created = create_checkpoint(app, "e1-checkpoint-prerequisite-race")
     session_id = created.json()["session_id"]
-    question = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()["question"]
+    question = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()[
+        "question"
+    ]
     repository = app.state.english_learning_repository
-    repository.lesson_progress[("english-development-learner", "e1-lesson-06")][
-        "state"
-    ] = "started"
+    repository.lesson_progress[("english-development-learner", "e1-lesson-06")]["state"] = "started"
 
     rejected = submit_checkpoint(
         app,
@@ -1095,15 +1146,11 @@ def test_e1_checkpoint_does_not_partially_complete_if_proficiency_changes():
 
     assert rejected.status_code == 409, rejected.text
     assert rejected.json()["error"]["code"] == "english_checkpoint_prerequisites_changed"
-    session = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}"
-    ).json()
+    session = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}").json()
     assert session["status"] == "active"
     assert session["resolved_count"] == 0
     assert session["score"] is None
-    pending = request(
-        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
-    ).json()
+    pending = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next").json()
     assert pending["question"]["stable_key"] == question["stable_key"]
 
 

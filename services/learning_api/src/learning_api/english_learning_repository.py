@@ -63,6 +63,7 @@ class EnglishLearningRepository(Protocol):
     def progress(self, learner_id: str) -> list[dict]: ...
     def active_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None: ...
     def latest_checkpoint_session(self, learner_id: str, module_code: str) -> dict | None: ...
+    def checkpoint_history(self, learner_id: str) -> list[dict]: ...
     def create_checkpoint_session(
         self,
         learner_id: str,
@@ -460,12 +461,18 @@ class InMemoryEnglishLearningRepository:
             (
                 session
                 for session in reversed(list(self.checkpoint_sessions.values()))
-                if session["learner_id"] == learner_id
-                and session["module_code"] == module_code
+                if session["learner_id"] == learner_id and session["module_code"] == module_code
             ),
             None,
         )
         return self._checkpoint_summary(found) if found else None
+
+    def checkpoint_history(self, learner_id: str) -> list[dict]:
+        return [
+            self._checkpoint_summary(session)
+            for session in reversed(list(self.checkpoint_sessions.values()))
+            if session["learner_id"] == learner_id
+        ]
 
     def create_checkpoint_session(
         self,
@@ -594,9 +601,7 @@ class InMemoryEnglishLearningRepository:
                 eligible_lessons = {
                     lesson_key
                     for lesson_key in session["mastery_lesson_keys"]
-                    if (
-                        progress := self.lesson_progress.get((learner_id, lesson_key))
-                    )
+                    if (progress := self.lesson_progress.get((learner_id, lesson_key)))
                     and progress["state"] in {"proficient", "mastered"}
                 }
                 if eligible_lessons != set(session["mastery_lesson_keys"]):
@@ -1296,6 +1301,19 @@ class PostgresEnglishLearningRepository:
             ).fetchone()
             return self._checkpoint_summary_postgres(connection, session) if session else None
 
+    def checkpoint_history(self, learner_id: str) -> list[dict]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            sessions = connection.execute(
+                """
+                select * from english_checkpoint_sessions
+                where student_id=%s
+                order by created_at desc
+                """,
+                (learner_id,),
+            ).fetchall()
+            return [self._checkpoint_summary_postgres(connection, session) for session in sessions]
+
     def create_checkpoint_session(
         self,
         learner_id: str,
@@ -1483,9 +1501,7 @@ class PostgresEnglishLearningRepository:
                     "checkpoint_completed": replay["status"] == "completed",
                     "session": self._checkpoint_summary_postgres(connection, replay),
                 }
-            session = self._checkpoint_owned_postgres(
-                connection, learner_id, session_id, lock=True
-            )
+            session = self._checkpoint_owned_postgres(connection, learner_id, session_id, lock=True)
             if session["status"] != "active":
                 raise EnglishLearningError(
                     "english_checkpoint_completed", "This checkpoint is complete.", 409

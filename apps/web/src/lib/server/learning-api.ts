@@ -5,6 +5,7 @@ import type { CurrentLearnerResponse } from "@/lib/api/identity";
 import type {
   EnglishCourseMapResponse,
   EnglishLessonResponse,
+  EnglishProgressResponse,
 } from "@/lib/api/english";
 import type {
   LearningHomeResponse,
@@ -112,6 +113,12 @@ export async function getServerEnglishCourseMap(
   session: VerifiedSession,
 ): Promise<EnglishCourseMapResponse> {
   return getServerJson(session, "/api/v1/english/course-map");
+}
+
+export async function getServerEnglishProgress(
+  session: VerifiedSession,
+): Promise<EnglishProgressResponse> {
+  return getServerJson(session, "/api/v1/english/progress");
 }
 
 export async function getServerEnglishLesson(

@@ -365,6 +365,64 @@ export function StudentPanel({
           ))}
         </Table>
       )}
+      <h3 className="text-xl font-bold">English lesson progress</h3>
+      {!data.english_lessons.length ? (
+        <p>No English lesson progress yet.</p>
+      ) : (
+        <Table
+          headers={[
+            "Lesson",
+            "State",
+            "Resolved",
+            "Correct",
+            "Retries",
+            "Updated",
+          ]}
+        >
+          {data.english_lessons.map((lesson) => (
+            <tr key={lesson.lesson_key}>
+              <td>{lesson.lesson_key.toUpperCase().replaceAll("-", " ")}</td>
+              <td>{pretty(lesson.state)}</td>
+              <td>
+                {lesson.resolved_count}/{lesson.question_count}
+              </td>
+              <td>{lesson.correct_count}</td>
+              <td>{lesson.retry_question_count}</td>
+              <td>{date(lesson.updated_at)}</td>
+            </tr>
+          ))}
+        </Table>
+      )}
+      <h3 className="text-xl font-bold">English module checkpoints</h3>
+      {!data.english_checkpoints.length ? (
+        <p>No English checkpoint attempts yet.</p>
+      ) : (
+        <Table
+          headers={[
+            "Module",
+            "State",
+            "Attempts",
+            "Latest score",
+            "Latest form",
+            "Updated",
+          ]}
+        >
+          {data.english_checkpoints.map((checkpoint) => (
+            <tr key={checkpoint.module_code}>
+              <td>{checkpoint.module_code}</td>
+              <td>{pretty(checkpoint.state)}</td>
+              <td>{checkpoint.attempt_count}</td>
+              <td>
+                {checkpoint.last_percentage == null
+                  ? "In progress"
+                  : `${checkpoint.last_percentage}%`}
+              </td>
+              <td>{checkpoint.last_form_key}</td>
+              <td>{date(checkpoint.updated_at)}</td>
+            </tr>
+          ))}
+        </Table>
+      )}
       <h3 className="text-xl font-bold">Performance by difficulty</h3>
       {!data.difficulty_performance.length ? (
         <p>No attempts yet.</p>

@@ -7,6 +7,7 @@ import {
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  StudentPanel,
   UsersPanel,
   QuestionsPanel,
   OperationsPanel,
@@ -27,6 +28,81 @@ const user = {
 };
 
 describe("administrator dashboard", () => {
+  it("shows English lesson and checkpoint evidence on student detail", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async (url: string) =>
+          new Response(
+            JSON.stringify(
+              url.includes("diagnostics")
+                ? {
+                    learner_id: user.learner_id,
+                    history: [],
+                    baseline: null,
+                    endline: null,
+                  }
+                : {
+                    student: {
+                      ...user,
+                      target_track: "g3-sec1-math",
+                      enrolment_status: "active",
+                      course_keys: ["g3-sec1-math"],
+                      enrolled_at: "2026-10-01T00:00:00Z",
+                      last_activity_at: "2026-10-29T00:00:00Z",
+                      lessons_started: 0,
+                      lessons_proficient: 0,
+                      lessons_mastered: 0,
+                      practice_sessions: 0,
+                      attempts: 0,
+                      correct_attempts: 0,
+                      accuracy_percentage: 0,
+                      retry_question_count: 0,
+                    },
+                    lessons: [],
+                    difficulty_performance: [],
+                    english_lessons: [
+                      {
+                        lesson_key: "e1-lesson-01",
+                        state: "proficient",
+                        question_count: 6,
+                        resolved_count: 6,
+                        correct_count: 5,
+                        incorrect_count: 1,
+                        retry_question_count: 1,
+                        updated_at: "2026-10-29T00:00:00Z",
+                      },
+                    ],
+                    english_checkpoints: [
+                      {
+                        module_code: "E1",
+                        state: "not_passed",
+                        attempt_count: 2,
+                        last_session_id: "00000000-0000-4000-8000-000000000023",
+                        last_form_key: "english-checkpoint-e1-vocabulary-b-v1",
+                        last_percentage: 60,
+                        updated_at: "2026-10-29T00:00:00Z",
+                      },
+                    ],
+                  },
+            ),
+          ),
+      ),
+    );
+
+    render(<StudentPanel learnerId={user.learner_id} />);
+
+    expect(
+      await screen.findByRole("heading", { name: "English lesson progress" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("E1 LESSON 01")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "English module checkpoints" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("not passed")).toBeInTheDocument();
+    expect(screen.getByText("60%")).toBeInTheDocument();
+  });
+
   it("requires an explicit confirmation before changing a role", async () => {
     const fetcher = vi
       .fn()
