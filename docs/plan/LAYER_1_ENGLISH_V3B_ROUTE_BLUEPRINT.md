@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement complete; E0–E6 checkpoint journeys implemented; review and release pending
+**Status:** fixed technical blueprint; protected measurement complete; E0–E7 checkpoint journeys implemented; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -111,6 +111,10 @@ The E6 checkpoint adds reciprocal two-group forms built around distinct original
 prompts. Each form measures three prompt-decoding decisions and two compact-planning
 decisions, with mastery scoped to Sprint lessons E6.1 and E6.5. It evaluates planning
 judgement without asking an automated system to score a whole essay.
+The E7 checkpoint adds reciprocal two-group forms that measure a complete paragraph evidence
+chain: bounded assertion, relevant action or observation, consequence, significance and
+honest limitation. Mastery is scoped to Sprint lesson E7.2, and both forms reject decorative
+detail and invented precision.
 Publication remains blocked on the remaining checkpoint contracts and the normal immutable
 review approvals.
 
@@ -118,7 +122,7 @@ review approvals.
 
 Complete the remaining **Sprint checkpoints and review evidence**:
 
-1. repeat the primary/retry manifest pattern for E7–E9 using the proven E0–E6 journey;
+1. repeat the primary/retry manifest pattern for E8–E9 using the proven E0–E7 journey;
 2. add consolidated checkpoint progress visibility to the learner and administrator views;
 3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
 4. collect immutable English and editorial approvals; and

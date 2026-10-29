@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement complete; E0–E6 checkpoint learner journeys implemented for technical review
+**Status:** V3-A merged; V3-B protected measurement complete; E0–E7 checkpoint learner journeys implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -62,7 +62,10 @@ form sequences three task-decoding decisions for E6.1 and two five-minute planni
 for E6.5, bringing the draft foundation to 94 question records and 37 passages. The E0–E6
 forms run through persisted checkpoint sessions with prerequisite locking, no hints or
 early feedback, deterministic part scoring, form-B retry and an atomic checkpoint-to-`mastered`
-transition. They remain draft-gated and therefore unavailable in production until academic
+transition. The E7 checkpoint contributes four fresh paragraph-development groups across two
+reciprocal forms, scopes mastery to Sprint lesson E7.2 and brings the draft foundation to 98
+question records and 37 passages. The E0–E7 forms remain draft-gated and therefore
+unavailable in production until academic
 and editorial approval and publication. Exact route membership and rationale are recorded in
 `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
 
@@ -466,7 +469,7 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint checkpoints and review evidence** before expanding
 optional Full-route lessons:
 
-1. repeat the primary/retry checkpoint manifests across E7–E9 using the proven E0–E6
+1. repeat the primary/retry checkpoint manifests across E8–E9 using the proven E0–E7
    persistence, multi-question sequencing and mastery journey;
 2. expose checkpoint readiness, attempt and pass status in learner/admin progress views;
 3. generate consolidated reviewer evidence and collect English/editorial approvals;
