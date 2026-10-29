@@ -1,7 +1,7 @@
 # Layer 1 English V3: exam-aligned and scalable plan
 
 **Prepared:** 28 October 2026
-**Status:** V3-A merged; V3-B protected measurement complete; E0–E3 checkpoint learner journeys implemented for technical review
+**Status:** V3-A merged; V3-B protected measurement complete; E0–E4 checkpoint learner journeys implemented for technical review
 **Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
@@ -52,9 +52,11 @@ question records. The E2 checkpoint contributes two fresh difficulty-4 grammar g
 scopes mastery to Sprint lesson E2.2, bringing the draft foundation to 82 question records.
 The E3 checkpoint adds two fresh difficulty-4 banked-cloze groups and two complete narrative
 passages, scopes mastery to Sprint lesson E3.1 and brings the draft foundation to 84 question
-records and 31 passages. The E0–E3 forms now run through persisted checkpoint sessions with
-prerequisite locking, no hints or early
-feedback, deterministic part scoring, form-B retry and an atomic checkpoint-to-`mastered`
+records and 31 passages. The E4 checkpoint contributes four fresh open-cloze groups across
+four complete passages, scopes mastery to Sprint lessons E4.1 and E4.5 and brings the draft
+foundation to 88 question records and 35 passages. The E0–E4 forms run through persisted
+checkpoint sessions with prerequisite locking, no hints or early feedback, deterministic part
+scoring, form-B retry and an atomic checkpoint-to-`mastered`
 transition. They remain draft-gated and therefore unavailable in production until academic
 and editorial approval and publication. Exact route membership and rationale are recorded in
 `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`.
@@ -459,7 +461,7 @@ review or safeguarding owner is unavailable.
 Complete the remaining **V3-B Sprint checkpoints and review evidence** before expanding
 optional Full-route lessons:
 
-1. repeat the primary/retry checkpoint manifests across E4–E9 using the proven E0–E3
+1. repeat the primary/retry checkpoint manifests across E5–E9 using the proven E0–E4
    persistence, multi-question sequencing and mastery journey;
 2. expose checkpoint readiness, attempt and pass status in learner/admin progress views;
 3. generate consolidated reviewer evidence and collect English/editorial approvals;
