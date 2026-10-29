@@ -842,6 +842,67 @@ def test_failed_e7_checkpoint_retake_uses_two_disjoint_form_b_groups():
     assert retry_completed.json()["session"]["passed"] is True
 
 
+def test_e8_checkpoint_is_learner_safe_and_records_revision_mastery():
+    app = application()
+    seed_checkpoint_prerequisites(app, "e8-lesson-04")
+    created = create_checkpoint(app, "e8-checkpoint-pass", module_code="E8")
+    assert created.status_code == 201, created.text
+    assert created.json()["form_key"] == "english-checkpoint-e8-revision-a-v1"
+    assert created.json()["mastery_lesson_keys"] == ["e8-lesson-04"]
+    session_id = created.json()["session_id"]
+    question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    assert question["stable_key"] == "ex-l4-005"
+    encoded = json.dumps(question)
+    assert "correct_key" not in encoded
+    assert "choice_rationales" not in encoded
+    completed = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {"1": "A", "2": "B", "3": "C", "4": "A", "5": "D"},
+        "e8-checkpoint-pass-attempt",
+    )
+    assert completed.status_code == 200, completed.text
+    assert completed.json()["checkpoint_completed"] is True
+    assert completed.json()["session"]["score"] == 1
+    assert completed.json()["session"]["passed"] is True
+    progress = request(app, "GET", "/api/v1/english/progress").json()["lessons"]
+    by_key = {item["lesson_key"]: item for item in progress}
+    assert by_key["e8-lesson-04"]["state"] == "mastered"
+
+
+def test_failed_e8_checkpoint_retake_uses_disjoint_form_b():
+    app = application()
+    seed_checkpoint_prerequisites(app, "e8-lesson-04")
+    created = create_checkpoint(app, "e8-checkpoint-fail", module_code="E8")
+    session_id = created.json()["session_id"]
+    question = request(
+        app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next"
+    ).json()["question"]
+    failed = submit_checkpoint(
+        app,
+        session_id,
+        question,
+        {"1": "D", "2": "D", "3": "D", "4": "D", "5": "C"},
+        "e8-checkpoint-fail-attempt",
+    )
+    assert failed.status_code == 200, failed.text
+    assert failed.json()["session"]["score"] == 0
+    assert failed.json()["session"]["passed"] is False
+    retake = create_checkpoint(app, "e8-checkpoint-retake", module_code="E8")
+    assert retake.status_code == 201, retake.text
+    assert retake.json()["form_key"] == "english-checkpoint-e8-revision-b-v1"
+    retry_question = request(
+        app,
+        "GET",
+        f"/api/v1/english/checkpoint-sessions/{retake.json()['session_id']}/next",
+    ).json()["question"]
+    assert retry_question["stable_key"] == "ex-l4-006"
+    assert retry_question["stable_key"] != question["stable_key"]
+
+
 def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery():
     app = application()
     seed_e1_checkpoint_prerequisites(app)
