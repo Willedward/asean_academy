@@ -1,7 +1,7 @@
 # Layer 1 English V3-B route blueprint
 
 **Prepared:** 28 October 2026
-**Status:** fixed technical blueprint; protected measurement complete; E0–E2 checkpoint journeys implemented; review and release pending
+**Status:** fixed technical blueprint; protected measurement complete; E0–E3 checkpoint journeys implemented; review and release pending
 **Exam profile:** `asean-english-sec1-id-reported-v1`
 
 ## 1. Decision
@@ -100,14 +100,16 @@ integration tests. The E0 checkpoint adds reciprocal two-group forms that sample
 knowledge and baseline integrity, proving that protected sessions sequence multiple question
 groups without leaking interim correctness. The E2 checkpoint adds reciprocal five-decision
 grammar forms scoped to Sprint lesson E2.2, with difficulty-4 agreement and reference transfer
-rather than reused exit-ticket sentences. Publication remains blocked on the remaining
+rather than reused exit-ticket sentences. The E3 checkpoint adds reciprocal five-gap banked
+cloze forms, each built around a fresh complete narrative passage, and scopes mastery to Sprint
+lesson E3.1. Publication remains blocked on the remaining
 checkpoint contracts and the normal immutable review approvals.
 
 ## 6. Next execution milestone
 
 Complete the remaining **Sprint checkpoints and review evidence**:
 
-1. repeat the primary/retry manifest pattern for E3–E9 using the proven E0–E2 journey;
+1. repeat the primary/retry manifest pattern for E4–E9 using the proven E0–E3 journey;
 2. add consolidated checkpoint progress visibility to the learner and administrator views;
 3. generate consolidated reviewer evidence for the 16-lesson route and protected forms;
 4. collect immutable English and editorial approvals; and
