@@ -11,6 +11,7 @@ import type {
   ContentItem,
   ContentPreview,
   ContentQueue,
+  RouteReleaseManifest,
 } from "@/lib/api/admin-dashboard";
 
 import { ContentReviewPanel } from "./content-review-panel";
@@ -570,6 +571,26 @@ describe("ContentReviewPanel", () => {
         mastery_lesson_keys: ["e0-lesson-01"],
       },
     };
+    const releaseManifest: RouteReleaseManifest = {
+      route_key: routeKey,
+      status: "review_pending",
+      release_ready: false,
+      expected_item_count: 121,
+      item_counts: {
+        english_lesson: 16,
+        english_checkpoint_form: 20,
+        english_question: 65,
+        english_passage: 20,
+      },
+      approved_revision_count: 0,
+      published_revision_count: 0,
+      publication_request_count: 0,
+      blocked_item_count: 121,
+      route_fingerprint: "c".repeat(64),
+      release_manifest_sha256: "d".repeat(64),
+      approved_revisions: [],
+      blockers: [],
+    };
     const fetcher = vi.fn(async (url: string, init?: RequestInit) => {
       if (url.includes("bulk-review-preview")) {
         return new Response(
@@ -579,6 +600,9 @@ describe("ContentReviewPanel", () => {
             items: [checkpointPreview],
           }),
         );
+      }
+      if (url.includes("release-manifest")) {
+        return new Response(JSON.stringify(releaseManifest));
       }
       void init;
       return new Response(JSON.stringify(routeQueue));
@@ -595,6 +619,12 @@ describe("ContentReviewPanel", () => {
     await screen.findByText(`Review ${routeKey} as one consolidated packet`);
     expect(screen.getByTestId("scope-progress")).toHaveTextContent(
       "1 matched items",
+    );
+    expect(await screen.findByTestId("route-release-manifest")).toHaveTextContent(
+      "0/121 revisions dual-approved",
+    );
+    expect(screen.getByTestId("route-release-manifest")).toHaveTextContent(
+      "Learner routing remains disabled",
     );
     fireEvent.click(
       screen.getByRole("button", {

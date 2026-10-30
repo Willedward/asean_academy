@@ -29,6 +29,12 @@ from .course_catalogue import CourseCatalogue, public_lesson_section
 
 TUTOR_GROUNDING_ROOT = Path("backend_resources/tutor_evaluations")
 ENGLISH_SPRINT_ROUTE_KEY = "english-sprint-route-v3b-review"
+ENGLISH_SPRINT_EXPECTED_COUNTS = {
+    "english_lesson": 16,
+    "english_checkpoint_form": 20,
+    "english_question": 65,
+    "english_passage": 20,
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -541,6 +547,171 @@ def list_review_queue(
         "limit": limit,
         "offset": offset,
     }
+
+
+def _canonical_sha256(value: Any) -> str:
+    encoded = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        default=str,
+    ).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def build_route_release_manifest(
+    catalogue: CourseCatalogue,
+    reviews: dict,
+    lifecycle: dict,
+    *,
+    route_key: str,
+) -> dict:
+    """Build fail-closed release evidence for one fixed review route.
+
+    The release list contains only revisions with both required human approvals.
+    Learner release remains blocked until every pinned item is also published and
+    retains an active publication request for the same review fingerprint.
+    """
+    if route_key != ENGLISH_SPRINT_ROUTE_KEY:
+        raise BetaOperationsError(
+            "content_release_route_not_found",
+            "The requested content release route was not found.",
+            404,
+        )
+    items = sorted(
+        (
+            item
+            for item in catalogue_review_items(catalogue)
+            if route_key in item.route_keys
+        ),
+        key=lambda item: (item.kind, item.stable_key),
+    )
+    item_counts = {
+        kind: sum(item.kind == kind for item in items)
+        for kind in ENGLISH_SPRINT_EXPECTED_COUNTS
+    }
+    if item_counts != ENGLISH_SPRINT_EXPECTED_COUNTS:
+        raise BetaOperationsError(
+            "content_release_route_drift",
+            "The deployed English Sprint route no longer matches its fixed release scope.",
+            503,
+        )
+
+    route_rows = [
+        {
+            "content_kind": item.kind,
+            "stable_key": item.stable_key,
+            "revision": item.revision,
+            "source_content_sha256": item.source_hash,
+            "review_fingerprint": item.fingerprint,
+        }
+        for item in items
+    ]
+    approved_revisions = []
+    blockers = []
+    published_revision_count = 0
+    publication_request_count = 0
+    for item in items:
+        serialized = _serialize_item(item, reviews, lifecycle)
+        english_review = serialized["english_review"]
+        editorial_review = serialized["editorial_review"]
+        reasons = []
+        if english_review is None:
+            reasons.append("english_approval_missing")
+        elif english_review["decision"] != "approved":
+            reasons.append("english_changes_requested")
+        if editorial_review is None:
+            reasons.append("editorial_approval_missing")
+        elif editorial_review["decision"] != "approved":
+            reasons.append("editorial_changes_requested")
+
+        review_approved = not any(
+            reason.startswith(("english_", "editorial_")) for reason in reasons
+        )
+        if review_approved:
+            approved_revisions.append(
+                {
+                    "content_kind": item.kind,
+                    "stable_key": item.stable_key,
+                    "revision": item.revision,
+                    "source_content_sha256": item.source_hash,
+                    "review_fingerprint": item.fingerprint,
+                    "source_status": item.source_status,
+                    "english_review": english_review,
+                    "editorial_review": editorial_review,
+                    "lifecycle_request": serialized["lifecycle_request"],
+                }
+            )
+
+        if item.source_status == "published":
+            published_revision_count += 1
+        else:
+            reasons.append("source_not_published")
+        request = serialized["lifecycle_request"]
+        if request is not None and request["action"] == "publish":
+            publication_request_count += 1
+        else:
+            reasons.append("publication_request_missing")
+        if reasons:
+            blockers.append(
+                {
+                    "content_kind": item.kind,
+                    "stable_key": item.stable_key,
+                    "revision": item.revision,
+                    "review_fingerprint": item.fingerprint,
+                    "reasons": reasons,
+                }
+            )
+
+    expected_item_count = sum(ENGLISH_SPRINT_EXPECTED_COUNTS.values())
+    approved_revision_count = len(approved_revisions)
+    release_ready = not blockers and approved_revision_count == expected_item_count
+    if approved_revision_count < expected_item_count:
+        status = "review_pending"
+    elif release_ready:
+        status = "ready"
+    else:
+        status = "publication_pending"
+    approval_rows = [
+        {
+            "content_kind": row["content_kind"],
+            "stable_key": row["stable_key"],
+            "revision": row["revision"],
+            "source_content_sha256": row["source_content_sha256"],
+            "review_fingerprint": row["review_fingerprint"],
+            "english_reviewer_id": row["english_review"]["reviewer_id"],
+            "english_reviewed_at": row["english_review"]["created_at"],
+            "editorial_reviewer_id": row["editorial_review"]["reviewer_id"],
+            "editorial_reviewed_at": row["editorial_review"]["created_at"],
+        }
+        for row in approved_revisions
+    ]
+    return {
+        "route_key": route_key,
+        "status": status,
+        "release_ready": release_ready,
+        "expected_item_count": expected_item_count,
+        "item_counts": item_counts,
+        "approved_revision_count": approved_revision_count,
+        "published_revision_count": published_revision_count,
+        "publication_request_count": publication_request_count,
+        "blocked_item_count": len(blockers),
+        "route_fingerprint": _canonical_sha256(route_rows),
+        "release_manifest_sha256": _canonical_sha256(approval_rows),
+        "approved_revisions": approved_revisions,
+        "blockers": blockers,
+    }
+
+
+def route_release_manifest(repository, catalogue: CourseCatalogue, *, route_key: str) -> dict:
+    with repository._connect() as connection:
+        reviews, lifecycle = _snapshot(connection)
+    return build_route_release_manifest(
+        catalogue,
+        reviews,
+        lifecycle,
+        route_key=route_key,
+    )
 
 
 def student_preview(catalogue: CourseCatalogue, kind: str, stable_key: str) -> dict:

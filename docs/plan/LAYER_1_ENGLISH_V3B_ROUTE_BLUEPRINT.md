@@ -137,6 +137,12 @@ fingerprinted review records: 16 lessons, 20 checkpoint forms, 65 question group
 20 passages. Reviewers can exclude individual records, preview protected answers and form
 composition, and append separate English and editorial decisions. Correction exports retain
 the exact rejected fingerprint, and no review action changes learner publication state.
+The administrator route view also exposes a deterministic, fail-closed release manifest.
+It hashes the complete 121-record route, lists only revisions with both English and
+editorial approval in its approved set, and reports separate review, publication-status
+and lifecycle-request blockers. The gate cannot become `ready` until all 121 pinned
+revisions are dual-approved, published and backed by an active publication request for the
+same review fingerprint. Viewing the manifest never publishes content or enables routing.
 
 ## 6. Next execution milestone
 
@@ -147,8 +153,8 @@ Complete the remaining **Sprint review and release evidence**:
    pinned records;
 2. correct and re-export any excluded items without approving changed fingerprints;
 3. run the protected baseline/endline and checkpoint journey in hosted staging; and
-4. enable learner routing only after the release gate confirms that every referenced revision
-   is approved and published.
+4. enable learner routing only after the route manifest reports `ready`, confirming that
+   every referenced revision is approved, publication-requested and published.
 
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core

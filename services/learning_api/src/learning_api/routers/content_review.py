@@ -13,6 +13,7 @@ from ..content_review import (
     record_review,
     request_lifecycle,
     reviewer_preview,
+    route_release_manifest,
     student_preview,
 )
 from ..content_review_contracts import (
@@ -29,6 +30,7 @@ from ..content_review_contracts import (
     CreateLifecycleRequest,
     RecordContentReviewRequest,
     ReviewState,
+    RouteReleaseManifestResponse,
 )
 from ..conventions import current_request_id
 from ..dependencies import (
@@ -113,6 +115,28 @@ async def correction_queue(
             offset=offset,
             batch_id=batch_id,
             unit_key=unit_key,
+            route_key=route_key,
+        )
+    )
+
+
+@router.get(
+    "/release-manifest",
+    operation_id="getContentRouteReleaseManifest",
+    response_model=RouteReleaseManifestResponse,
+    summary="Build fail-closed release evidence for a fixed content route",
+)
+async def release_manifest(
+    request: Request,
+    administrator: AdminLearnerDependency,
+    repository: AdminAnalyticsRepositoryDependency,
+    route_key: str = Query(pattern=r"^[a-z0-9-]+$"),
+) -> RouteReleaseManifestResponse:
+    del administrator
+    return _safe(
+        lambda: route_release_manifest(
+            repository,
+            request.app.state.course_catalogue,
             route_key=route_key,
         )
     )

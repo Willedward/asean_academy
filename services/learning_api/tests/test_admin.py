@@ -364,6 +364,55 @@ def test_content_admin_can_export_a_scoped_correction_queue(monkeypatch):
     assert observed["route_key"] == "english-sprint-route-v3b-review"
 
 
+def test_content_admin_can_inspect_fail_closed_route_release_evidence(monkeypatch):
+    app, _ = application()
+    app.dependency_overrides[admin_analytics_repository] = lambda: object()
+    observed = {}
+
+    def release_manifest(repository, catalogue, *, route_key):
+        del repository, catalogue
+        observed["route_key"] = route_key
+        return {
+            "route_key": route_key,
+            "status": "review_pending",
+            "release_ready": False,
+            "expected_item_count": 121,
+            "item_counts": {
+                "english_lesson": 16,
+                "english_checkpoint_form": 20,
+                "english_question": 65,
+                "english_passage": 20,
+            },
+            "approved_revision_count": 0,
+            "published_revision_count": 0,
+            "publication_request_count": 0,
+            "blocked_item_count": 121,
+            "route_fingerprint": "a" * 64,
+            "release_manifest_sha256": "b" * 64,
+            "approved_revisions": [],
+            "blockers": [],
+        }
+
+    monkeypatch.setattr(
+        content_review_router,
+        "route_release_manifest",
+        release_manifest,
+    )
+    path = (
+        "/api/v1/admin/content/release-manifest"
+        "?route_key=english-sprint-route-v3b-review"
+    )
+
+    forbidden = request(app, "GET", path, "student-token")
+    response = request(app, "GET", path, "admin-token")
+
+    assert forbidden.status_code == 403
+    assert response.status_code == 200, response.text
+    assert response.json()["status"] == "review_pending"
+    assert response.json()["expected_item_count"] == 121
+    assert observed["route_key"] == "english-sprint-route-v3b-review"
+
+
 def test_admin_review_remains_available_when_learner_drafts_are_disabled():
     app, _ = application(allow_drafts=False)
 

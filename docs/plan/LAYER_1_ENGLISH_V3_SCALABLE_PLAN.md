@@ -493,3 +493,9 @@ optional Full-route lessons:
 4. confirm the Sprint release manifest contains only approved immutable revisions; and
 5. keep every item draft-only until the release gates pass.
 
+The release-manifest mechanism is now implemented in the protected administrator route view.
+It pins the fixed 121-record Sprint scope, exposes review and publication progress without
+revealing answers, and remains `review_pending` until human decisions are recorded. It then
+remains `publication_pending` until every approved revision is publication-requested and
+published; only that complete state can report `ready`.
+
