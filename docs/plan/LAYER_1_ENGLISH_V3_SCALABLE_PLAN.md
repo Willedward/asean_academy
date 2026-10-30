@@ -482,6 +482,12 @@ review or safeguarding owner is unavailable.
 
 ## 16. Current next milestone
 
+Technical implementation identifiers use `ENG-Tx.y`; curriculum lesson identifiers remain
+`E0.1` through `E9.5`. **ENG-T3.1** now supplies the versioned prompt/rubric source and
+database contract. It remains draft-only and does not enable AI marking. The next technical
+increment is **ENG-T3.2 — owned essay drafts with refresh-safe autosave**, while the review
+and release evidence below continues independently.
+
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:
 
@@ -500,10 +506,11 @@ revealing answers, and remains `review_pending` until human decisions are record
 remains `publication_pending` until every approved revision is publication-requested and
 published; only that complete state can report `ready`.
 
-The objective diagnostic runtime is also implemented locally. It uses the four-group,
+The objective diagnostic runtime is implemented and deployed in preview. It uses the four-group,
 20-part baseline and matched endline contracts, keeps group correctness hidden until form
 completion, reports task-level skill evidence rather than an official scholarship score and
-keeps the endline locked until all fixed Sprint lessons are mastered. Hosted migration and
-authenticated staging acceptance remain outstanding; no draft content was approved or
-published by this implementation.
+keeps the endline locked until all fixed Sprint lessons are mastered. Migration
+`202610300037` and the protected hosted routes were accepted against release
+`aa07c9c9399e1940573f757590ae71c58e1e2624`; no draft content was approved or published by
+that deployment.
 

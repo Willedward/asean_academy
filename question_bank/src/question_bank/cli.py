@@ -390,7 +390,7 @@ def parser():
     english_release.add_argument("--claims", type=Path, default=DEFAULT_ENGLISH_CLAIMS)
     english_importer = commands.add_parser(
         "english-import-db",
-        help="Import a validation-clean English objective snapshot into PostgreSQL",
+        help="Import a validation-clean English snapshot into PostgreSQL",
     )
     english_importer.add_argument(
         "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION

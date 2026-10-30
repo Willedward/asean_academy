@@ -97,6 +97,60 @@ def _english_answers(question_key: str) -> dict:
 
 
 @pytest.mark.postgres
+def test_postgres_english_essay_contracts_pin_exact_immutable_revisions():
+    with psycopg.connect(_database_url()) as connection:
+        row = connection.execute(
+            """
+            select
+                prompts.stable_key,
+                prompt_versions.revision,
+                prompt_versions.prompt_family,
+                prompt_versions.time_limit_minutes,
+                prompt_versions.time_limit_evidence,
+                prompt_versions.word_count_guidance,
+                prompt_versions.word_count_status,
+                rubrics.stable_key,
+                rubric_versions.revision,
+                rubric_versions.official_score_claim,
+                jsonb_array_length(rubric_versions.criteria)
+            from english_essay_prompt_versions prompt_versions
+            join english_essay_prompts prompts on prompts.id = prompt_versions.prompt_id
+            join english_essay_rubric_versions rubric_versions
+              on rubric_versions.id = prompt_versions.rubric_version_id
+            join english_essay_rubrics rubrics on rubrics.id = rubric_versions.rubric_id
+            where prompt_versions.is_current and rubric_versions.is_current
+            """
+        ).fetchone()
+
+        assert row == (
+            "english-essay-prompt-school-learning-transfer-v1",
+            1,
+            "reflective_personal_expository",
+            30,
+            "candidate_reported",
+            300,
+            "guidance",
+            "english-essay-rubric-instructional-v1",
+            1,
+            False,
+            4,
+        )
+
+        with pytest.raises(
+            psycopg.errors.RaiseException,
+            match="create a new revision",
+        ):
+            with connection.transaction():
+                connection.execute(
+                    """
+                    update english_essay_prompt_versions
+                    set prompt_text = 'Mutated in place'
+                    where is_current
+                    """
+                )
+
+
+@pytest.mark.postgres
 def test_postgres_english_baseline_is_protected_idempotent_and_immutable():
     database_url = _database_url()
     learner_id = str(uuid4())

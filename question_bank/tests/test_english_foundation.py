@@ -15,6 +15,8 @@ from question_bank.english_authoring import (
 from question_bank.english_checking import check_english_answer, normalise_text
 from question_bank.english_models import (
     EnglishCurriculumCatalogue,
+    EnglishEssayPrompt,
+    EnglishEssayRubric,
     EnglishObjectiveQuestion,
     ShortTextResponse,
     TextNormalisation,
@@ -44,6 +46,8 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
         "own_words_short_answer",
     }
     assert len(report.forms) == 23
+    assert len(report.essay_rubrics) == 1
+    assert len(report.essay_prompts) == 1
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
@@ -1079,6 +1083,14 @@ def test_every_english_source_matches_its_generated_schema(repository_root, engl
             schema_root / "assessment-form-v1.schema.json",
             list((english_root / "forms").glob("*.json")),
         ),
+        (
+            schema_root / "essay-rubric-v1.schema.json",
+            list((english_root / "rubrics").glob("*.json")),
+        ),
+        (
+            schema_root / "essay-prompt-v1.schema.json",
+            list((english_root / "prompts").glob("*.json")),
+        ),
         (schema_root / "passage-v1.schema.json", list((english_root / "passages").glob("*.json"))),
         (schema_root / "lesson-v1.schema.json", list((english_root / "lessons").glob("*.json"))),
         (
@@ -1096,6 +1108,59 @@ def test_every_english_source_matches_its_generated_schema(repository_root, engl
         validator = Draft202012Validator(schema)
         for source in sources:
             assert not list(validator.iter_errors(json.loads(source.read_text())))
+
+
+def test_essay_prompt_pins_an_instructional_non_official_rubric(english_root):
+    rubric = EnglishEssayRubric.model_validate(
+        json.loads(
+            (
+                english_root
+                / "rubrics/english-essay-rubric-instructional-v1-v1.json"
+            ).read_text()
+        )
+    )
+    prompt = EnglishEssayPrompt.model_validate(
+        json.loads(
+            (
+                english_root
+                / "prompts/english-essay-prompt-school-learning-transfer-v1-v1.json"
+            ).read_text()
+        )
+    )
+
+    assert rubric.official_score_claim is False
+    assert [criterion.criterion_key for criterion in rubric.criteria] == [
+        "task_fulfilment",
+        "organisation_cohesion",
+        "development_evidence",
+        "language_control",
+    ]
+    assert sum(criterion.weight_percent for criterion in rubric.criteria) == 100
+    assert all([band.level for band in criterion.bands] == [1, 2, 3, 4, 5] for criterion in rubric.criteria)
+    assert (prompt.rubric_key, prompt.rubric_revision) == (
+        rubric.stable_key,
+        rubric.revision,
+    )
+    assert prompt.time_limit_minutes == 30
+    assert prompt.time_limit_evidence == "candidate_reported"
+    assert prompt.word_count_guidance == 300
+    assert prompt.word_count_status == "guidance"
+
+
+def test_essay_contracts_reject_official_claims_and_invalid_weights(english_root):
+    payload = json.loads(
+        (
+            english_root / "rubrics/english-essay-rubric-instructional-v1-v1.json"
+        ).read_text()
+    )
+    payload["official_score_claim"] = True
+    with pytest.raises(ValidationError):
+        EnglishEssayRubric.model_validate(payload)
+
+    payload["official_score_claim"] = False
+    payload["criteria"][0]["weight_percent"] = 20
+    with pytest.raises(ValidationError, match="total 100 percent"):
+        EnglishEssayRubric.model_validate(payload)
 
 
 def test_choice_marking_is_exact_and_does_not_call_a_model(english_root):
@@ -1615,6 +1680,8 @@ def test_draft_pilot_is_not_publishable_before_human_review(english_root):
     codes = {issue.code for issue in report.errors}
     assert codes == {
         "bank_review_required",
+        "essay_prompt_review_required",
+        "essay_rubric_review_required",
         "lesson_review_required",
         "question_review_required",
     }

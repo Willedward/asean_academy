@@ -1,0 +1,215 @@
+{
+  "$defs": {
+    "EnglishProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "authoring_method": {
+          "const": "original_authored",
+          "title": "Authoring Method",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "authored_by": {
+          "minLength": 1,
+          "title": "Authored By",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "review_notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Notes"
+        }
+      },
+      "required": [
+        "authoring_method",
+        "source_refs",
+        "created_at",
+        "authored_by"
+      ],
+      "title": "EnglishProvenance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stable_key": {
+      "pattern": "^english-essay-prompt-[a-z0-9-]+$",
+      "title": "Stable Key",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "exam_profile_key": {
+      "pattern": "^asean-english-[a-z0-9-]+-v[0-9]+$",
+      "title": "Exam Profile Key",
+      "type": "string"
+    },
+    "rubric_key": {
+      "pattern": "^english-essay-rubric-[a-z0-9-]+$",
+      "title": "Rubric Key",
+      "type": "string"
+    },
+    "rubric_revision": {
+      "minimum": 1,
+      "title": "Rubric Revision",
+      "type": "integer"
+    },
+    "title": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "prompt_family": {
+      "enum": [
+        "reflective_personal_expository",
+        "narrative",
+        "opinion_discursive",
+        "general_expository"
+      ],
+      "title": "Prompt Family",
+      "type": "string"
+    },
+    "prompt_text": {
+      "minLength": 1,
+      "title": "Prompt Text",
+      "type": "string"
+    },
+    "instructions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Instructions",
+      "type": "array"
+    },
+    "time_limit_minutes": {
+      "maximum": 120,
+      "minimum": 10,
+      "title": "Time Limit Minutes",
+      "type": "integer"
+    },
+    "time_limit_evidence": {
+      "enum": [
+        "official",
+        "candidate_reported",
+        "inferred"
+      ],
+      "title": "Time Limit Evidence",
+      "type": "string"
+    },
+    "word_count_guidance": {
+      "anyOf": [
+        {
+          "maximum": 2000,
+          "minimum": 50,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Word Count Guidance"
+    },
+    "word_count_status": {
+      "default": "not_stated",
+      "enum": [
+        "not_stated",
+        "guidance",
+        "strict"
+      ],
+      "title": "Word Count Status",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published",
+        "retired"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/EnglishProvenance"
+    }
+  },
+  "required": [
+    "stable_key",
+    "revision",
+    "exam_profile_key",
+    "rubric_key",
+    "rubric_revision",
+    "title",
+    "prompt_family",
+    "prompt_text",
+    "instructions",
+    "time_limit_minutes",
+    "time_limit_evidence",
+    "status",
+    "content_sha256",
+    "provenance"
+  ],
+  "title": "EnglishEssayPrompt",
+  "type": "object"
+}
