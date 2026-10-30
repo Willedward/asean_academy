@@ -19,6 +19,7 @@ import {
   type ContentQueue,
   type LifecycleInput,
   type ReviewInput,
+  type RouteReleaseManifest,
 } from "@/lib/api/admin-dashboard";
 import { ApiRequestError } from "@/lib/api/errors";
 
@@ -1276,6 +1277,12 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
   const [batchIds, setBatchIds] = useState<string[]>([]);
   const [unitKeys, setUnitKeys] = useState<string[]>([]);
   const [routeKeys, setRouteKeys] = useState<string[]>([]);
+  const [releaseManifest, setReleaseManifest] =
+    useState<RouteReleaseManifest>();
+  const [releaseManifestError, setReleaseManifestError] = useState<{
+    routeKey: string;
+    message: string;
+  }>();
   const [error, setError] = useState<string>();
   const pageSize = applied.batch || applied.unit || applied.route ? 250 : 25;
   const query = new URLSearchParams({
@@ -1319,6 +1326,34 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
     };
   }, [path, revision]);
 
+  useEffect(() => {
+    if (!applied.route) return;
+    let active = true;
+    const routeKey = applied.route;
+    const releaseQuery = new URLSearchParams({ route_key: routeKey });
+    void adminRequest<RouteReleaseManifest>(
+      `content/release-manifest?${releaseQuery}`,
+    ).then(
+      (value) => {
+        if (active) {
+          setReleaseManifest(value);
+          setReleaseManifestError(undefined);
+        }
+      },
+      (caught: unknown) => {
+        if (active) {
+          setReleaseManifestError({
+            routeKey,
+            message: errorMessage(caught),
+          });
+        }
+      },
+    );
+    return () => {
+      active = false;
+    };
+  }, [applied.route, revision]);
+
   const activeScope = applied.batch
     ? ({ scope: "batch", key: applied.batch } as const)
     : applied.unit
@@ -1347,6 +1382,12 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
           "changes_requested" ||
         item.editorial_review?.decision === "changes_requested",
     ).length ?? 0;
+  const activeReleaseManifest =
+    releaseManifest?.route_key === applied.route ? releaseManifest : undefined;
+  const activeReleaseManifestError =
+    releaseManifestError?.routeKey === applied.route
+      ? releaseManifestError.message
+      : undefined;
 
   return (
     <div className="space-y-6">
@@ -1530,6 +1571,47 @@ export function ContentReviewPanel({ academic }: { academic: boolean }) {
           approved · {fullyApproved} fully approved · {changesRequested} with
           changes requested.
         </div>
+      ) : null}
+      {applied.route ? (
+        activeReleaseManifest ? (
+          <div
+            className={`rounded-2xl border p-4 ${
+              activeReleaseManifest.release_ready
+                ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+                : "border-amber-300 bg-amber-50 text-amber-950"
+            }`}
+            data-testid="route-release-manifest"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <strong>English Sprint release gate</strong>
+              <span className="rounded-full bg-white/70 px-3 py-1 text-sm capitalize">
+                {label(activeReleaseManifest.status)}
+              </span>
+            </div>
+            <p className="mb-0 mt-2 text-sm">
+              {activeReleaseManifest.approved_revision_count}/
+              {activeReleaseManifest.expected_item_count} revisions dual-approved ·{" "}
+              {activeReleaseManifest.published_revision_count} published ·{" "}
+              {activeReleaseManifest.publication_request_count} publication requests ·{" "}
+              {activeReleaseManifest.blocked_item_count} blocked.
+            </p>
+            <p className="mb-0 mt-2 text-sm">
+              {activeReleaseManifest.release_ready
+                ? "Every pinned revision passed the review and publication gate."
+                : "Learner routing remains disabled. This evidence does not publish content."}
+            </p>
+            <p className="mb-0 mt-2 break-all font-mono text-xs">
+              Route fingerprint: {activeReleaseManifest.route_fingerprint}
+            </p>
+          </div>
+        ) : (
+          <div
+            className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"
+            role={activeReleaseManifestError ? "alert" : "status"}
+          >
+            {activeReleaseManifestError ?? "Loading route release evidence…"}
+          </div>
+        )
       ) : null}
       {!data ? (
         <div className="status-card" role={error ? "alert" : "status"}>

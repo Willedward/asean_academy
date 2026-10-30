@@ -7805,6 +7805,229 @@
         "title": "ResolveQuestionReportRequest",
         "type": "object"
       },
+      "RouteReleaseBlocker": {
+        "additionalProperties": false,
+        "properties": {
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question",
+              "english_lesson",
+              "english_checkpoint_form",
+              "english_passage",
+              "english_question",
+              "tutor_grounding"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Reasons",
+            "type": "array"
+          },
+          "review_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "revision": {
+            "minimum": 1.0,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_kind",
+          "stable_key",
+          "revision",
+          "review_fingerprint",
+          "reasons"
+        ],
+        "title": "RouteReleaseBlocker",
+        "type": "object"
+      },
+      "RouteReleaseManifestResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "approved_revision_count": {
+            "minimum": 0.0,
+            "title": "Approved Revision Count",
+            "type": "integer"
+          },
+          "approved_revisions": {
+            "items": {
+              "$ref": "#/components/schemas/RouteReleaseRevision"
+            },
+            "title": "Approved Revisions",
+            "type": "array"
+          },
+          "blocked_item_count": {
+            "minimum": 0.0,
+            "title": "Blocked Item Count",
+            "type": "integer"
+          },
+          "blockers": {
+            "items": {
+              "$ref": "#/components/schemas/RouteReleaseBlocker"
+            },
+            "title": "Blockers",
+            "type": "array"
+          },
+          "expected_item_count": {
+            "minimum": 1.0,
+            "title": "Expected Item Count",
+            "type": "integer"
+          },
+          "item_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Item Counts",
+            "type": "object"
+          },
+          "publication_request_count": {
+            "minimum": 0.0,
+            "title": "Publication Request Count",
+            "type": "integer"
+          },
+          "published_revision_count": {
+            "minimum": 0.0,
+            "title": "Published Revision Count",
+            "type": "integer"
+          },
+          "release_manifest_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Release Manifest Sha256",
+            "type": "string"
+          },
+          "release_ready": {
+            "title": "Release Ready",
+            "type": "boolean"
+          },
+          "route_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Route Fingerprint",
+            "type": "string"
+          },
+          "route_key": {
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Route Key",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "review_pending",
+              "publication_pending",
+              "ready"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "route_key",
+          "status",
+          "release_ready",
+          "expected_item_count",
+          "item_counts",
+          "approved_revision_count",
+          "published_revision_count",
+          "publication_request_count",
+          "blocked_item_count",
+          "route_fingerprint",
+          "release_manifest_sha256",
+          "approved_revisions",
+          "blockers"
+        ],
+        "title": "RouteReleaseManifestResponse",
+        "type": "object"
+      },
+      "RouteReleaseRevision": {
+        "additionalProperties": false,
+        "properties": {
+          "content_kind": {
+            "enum": [
+              "course",
+              "lesson",
+              "question",
+              "english_lesson",
+              "english_checkpoint_form",
+              "english_passage",
+              "english_question",
+              "tutor_grounding"
+            ],
+            "title": "Content Kind",
+            "type": "string"
+          },
+          "editorial_review": {
+            "$ref": "#/components/schemas/ContentReviewSummary"
+          },
+          "english_review": {
+            "$ref": "#/components/schemas/ContentReviewSummary"
+          },
+          "lifecycle_request": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContentLifecycleSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "review_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Review Fingerprint",
+            "type": "string"
+          },
+          "revision": {
+            "minimum": 1.0,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_content_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Source Content Sha256",
+            "type": "string"
+          },
+          "source_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "published",
+              "retired"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "stable_key": {
+            "title": "Stable Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_kind",
+          "stable_key",
+          "revision",
+          "source_content_sha256",
+          "review_fingerprint",
+          "source_status",
+          "english_review",
+          "editorial_review",
+          "lifecycle_request"
+        ],
+        "title": "RouteReleaseRevision",
+        "type": "object"
+      },
       "SaveDiagnosticResponse": {
         "additionalProperties": false,
         "properties": {
@@ -10361,6 +10584,135 @@
           }
         ],
         "summary": "Export the current requested corrections for repository authoring",
+        "tags": [
+          "admin",
+          "content-review"
+        ]
+      }
+    },
+    "/api/v1/admin/content/release-manifest": {
+      "get": {
+        "operationId": "getContentRouteReleaseManifest",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "route_key",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-z0-9-]+$",
+              "title": "Route Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteReleaseManifestResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Build fail-closed release evidence for a fixed content route",
         "tags": [
           "admin",
           "content-review"

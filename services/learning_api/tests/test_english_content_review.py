@@ -1,5 +1,8 @@
 import json
+from dataclasses import replace
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from uuid import uuid4
 
 import pytest
 from question_bank.english_authoring import export_english_route_reviewer_packet
@@ -8,6 +11,7 @@ from learning_api.admin_repository import BetaOperationsError
 from learning_api.content_review import (
     _assert_review_dimension,
     _serialize_item,
+    build_route_release_manifest,
     bulk_reviewer_preview,
     catalogue_review_items,
     reviewer_preview,
@@ -478,3 +482,139 @@ def test_english_queue_uses_english_approval_as_its_subject_gate(catalogue):
         "English approval is required.",
         "Editorial approval is required.",
     ]
+
+
+def test_sprint_release_manifest_fails_closed_until_every_revision_is_approved(
+    catalogue,
+):
+    manifest = build_route_release_manifest(
+        catalogue,
+        {},
+        {},
+        route_key="english-sprint-route-v3b-review",
+    )
+
+    assert manifest["status"] == "review_pending"
+    assert not manifest["release_ready"]
+    assert manifest["expected_item_count"] == 121
+    assert manifest["item_counts"] == {
+        "english_lesson": 16,
+        "english_checkpoint_form": 20,
+        "english_question": 65,
+        "english_passage": 20,
+    }
+    assert manifest["approved_revision_count"] == 0
+    assert manifest["published_revision_count"] == 0
+    assert manifest["publication_request_count"] == 0
+    assert manifest["blocked_item_count"] == 121
+    assert manifest["approved_revisions"] == []
+    assert len(manifest["route_fingerprint"]) == 64
+    assert len(manifest["release_manifest_sha256"]) == 64
+    assert set(manifest["blockers"][0]["reasons"]) == {
+        "english_approval_missing",
+        "editorial_approval_missing",
+        "source_not_published",
+        "publication_request_missing",
+    }
+
+
+def _approved_sprint_reviews(catalogue):
+    reviewer_id = uuid4()
+    reviewed_at = datetime(2026, 10, 30, 8, 0, tzinfo=UTC)
+    reviews = {}
+    sprint_items = [
+        item
+        for item in catalogue_review_items(catalogue)
+        if "english-sprint-route-v3b-review" in item.route_keys
+    ]
+    for item in sprint_items:
+        for dimension, role in (
+            ("english", "academic_admin"),
+            ("editorial", "content_admin"),
+        ):
+            reviews[(item.kind, item.stable_key, item.fingerprint, dimension)] = {
+                "dimension": dimension,
+                "decision": "approved",
+                "reviewer_id": reviewer_id,
+                "reviewer_email": "reviewer@example.test",
+                "reviewer_role": role,
+                "notes": "The pinned revision passed the required review dimension.",
+                "created_at": reviewed_at,
+            }
+    return sprint_items, reviews, reviewer_id, reviewed_at
+
+
+def test_sprint_release_manifest_contains_only_dual_approved_revisions(catalogue):
+    _, reviews, _, _ = _approved_sprint_reviews(catalogue)
+
+    manifest = build_route_release_manifest(
+        catalogue,
+        reviews,
+        {},
+        route_key="english-sprint-route-v3b-review",
+    )
+
+    assert manifest["status"] == "publication_pending"
+    assert not manifest["release_ready"]
+    assert manifest["approved_revision_count"] == 121
+    assert len(manifest["approved_revisions"]) == 121
+    assert all(
+        row["english_review"]["decision"] == "approved"
+        and row["editorial_review"]["decision"] == "approved"
+        for row in manifest["approved_revisions"]
+    )
+    assert all(
+        set(row["reasons"])
+        == {"source_not_published", "publication_request_missing"}
+        for row in manifest["blockers"]
+    )
+
+
+def test_sprint_release_manifest_becomes_ready_only_after_publication(
+    catalogue,
+    monkeypatch,
+):
+    sprint_items, reviews, reviewer_id, reviewed_at = _approved_sprint_reviews(
+        catalogue
+    )
+    published = [replace(item, source_status="published") for item in sprint_items]
+    monkeypatch.setattr(
+        "learning_api.content_review.catalogue_review_items",
+        lambda ignored: published,
+    )
+    lifecycle = {
+        (item.kind, item.stable_key, item.fingerprint): {
+            "lifecycle_request_id": uuid4(),
+            "action": "publish",
+            "requested_by": reviewer_id,
+            "requester_email": "reviewer@example.test",
+            "reason": "The dual-approved revision is ready for controlled release.",
+            "created_at": reviewed_at + timedelta(minutes=1),
+        }
+        for item in published
+    }
+
+    manifest = build_route_release_manifest(
+        catalogue,
+        reviews,
+        lifecycle,
+        route_key="english-sprint-route-v3b-review",
+    )
+
+    assert manifest["status"] == "ready"
+    assert manifest["release_ready"]
+    assert manifest["approved_revision_count"] == 121
+    assert manifest["published_revision_count"] == 121
+    assert manifest["publication_request_count"] == 121
+    assert manifest["blocked_item_count"] == 0
+    assert manifest["blockers"] == []
+
+
+def test_sprint_release_manifest_rejects_unknown_routes(catalogue):
+    with pytest.raises(BetaOperationsError, match="route was not found"):
+        build_route_release_manifest(
+            catalogue,
+            {},
+            {},
+            route_key="english-unknown-route",
+        )

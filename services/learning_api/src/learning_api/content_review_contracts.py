@@ -88,6 +88,42 @@ class ContentReviewQueueResponse(ApiModel):
     offset: int
 
 
+class RouteReleaseRevision(ApiModel):
+    content_kind: ContentKind
+    stable_key: str
+    revision: int = Field(ge=1)
+    source_content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    review_fingerprint: str = Field(pattern=r"^[0-9a-f]{64}$")
+    source_status: Literal["draft", "reviewed", "published", "retired"]
+    english_review: ContentReviewSummary
+    editorial_review: ContentReviewSummary
+    lifecycle_request: ContentLifecycleSummary | None
+
+
+class RouteReleaseBlocker(ApiModel):
+    content_kind: ContentKind
+    stable_key: str
+    revision: int = Field(ge=1)
+    review_fingerprint: str = Field(pattern=r"^[0-9a-f]{64}$")
+    reasons: list[str] = Field(min_length=1)
+
+
+class RouteReleaseManifestResponse(ApiModel):
+    route_key: str = Field(pattern=r"^[a-z0-9-]+$")
+    status: Literal["review_pending", "publication_pending", "ready"]
+    release_ready: bool
+    expected_item_count: int = Field(ge=1)
+    item_counts: dict[str, int]
+    approved_revision_count: int = Field(ge=0)
+    published_revision_count: int = Field(ge=0)
+    publication_request_count: int = Field(ge=0)
+    blocked_item_count: int = Field(ge=0)
+    route_fingerprint: str = Field(pattern=r"^[0-9a-f]{64}$")
+    release_manifest_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    approved_revisions: list[RouteReleaseRevision]
+    blockers: list[RouteReleaseBlocker]
+
+
 class RecordContentReviewRequest(ApiModel):
     source_revision: int = Field(ge=1)
     source_content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")

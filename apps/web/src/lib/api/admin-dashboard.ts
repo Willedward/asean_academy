@@ -33,6 +33,8 @@ export type BulkReviewPreview =
 export type BulkReviewInput = components["schemas"]["BulkContentReviewRequest"];
 export type BulkReviewResponse =
   components["schemas"]["BulkContentReviewResponse"];
+export type RouteReleaseManifest =
+  components["schemas"]["RouteReleaseManifestResponse"];
 
 const INVALID_RESPONSE_MESSAGE =
   "The learning service timed out or restarted. Please try again.";

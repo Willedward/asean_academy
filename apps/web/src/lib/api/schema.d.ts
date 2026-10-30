@@ -126,6 +126,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/content/release-manifest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Build fail-closed release evidence for a fixed content route */
+        get: operations["getContentRouteReleaseManifest"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/content/{kind}/{stable_key}/lifecycle-requests": {
         parameters: {
             query?: never;
@@ -4385,6 +4402,80 @@ export interface components {
              */
             status: "in_review" | "resolved" | "dismissed";
         };
+        /** RouteReleaseBlocker */
+        RouteReleaseBlocker: {
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
+            /** Reasons */
+            reasons: string[];
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Revision */
+            revision: number;
+            /** Stable Key */
+            stable_key: string;
+        };
+        /** RouteReleaseManifestResponse */
+        RouteReleaseManifestResponse: {
+            /** Approved Revision Count */
+            approved_revision_count: number;
+            /** Approved Revisions */
+            approved_revisions: components["schemas"]["RouteReleaseRevision"][];
+            /** Blocked Item Count */
+            blocked_item_count: number;
+            /** Blockers */
+            blockers: components["schemas"]["RouteReleaseBlocker"][];
+            /** Expected Item Count */
+            expected_item_count: number;
+            /** Item Counts */
+            item_counts: {
+                [key: string]: number;
+            };
+            /** Publication Request Count */
+            publication_request_count: number;
+            /** Published Revision Count */
+            published_revision_count: number;
+            /** Release Manifest Sha256 */
+            release_manifest_sha256: string;
+            /** Release Ready */
+            release_ready: boolean;
+            /** Route Fingerprint */
+            route_fingerprint: string;
+            /** Route Key */
+            route_key: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "review_pending" | "publication_pending" | "ready";
+        };
+        /** RouteReleaseRevision */
+        RouteReleaseRevision: {
+            /**
+             * Content Kind
+             * @enum {string}
+             */
+            content_kind: "course" | "lesson" | "question" | "english_lesson" | "english_checkpoint_form" | "english_passage" | "english_question" | "tutor_grounding";
+            editorial_review: components["schemas"]["ContentReviewSummary"];
+            english_review: components["schemas"]["ContentReviewSummary"];
+            lifecycle_request: components["schemas"]["ContentLifecycleSummary"] | null;
+            /** Review Fingerprint */
+            review_fingerprint: string;
+            /** Revision */
+            revision: number;
+            /** Source Content Sha256 */
+            source_content_sha256: string;
+            /**
+             * Source Status
+             * @enum {string}
+             */
+            source_status: "draft" | "reviewed" | "published" | "retired";
+            /** Stable Key */
+            stable_key: string;
+        };
         /** SaveDiagnosticResponse */
         SaveDiagnosticResponse: {
             /** Position */
@@ -5528,6 +5619,109 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ContentReviewQueueResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getContentRouteReleaseManifest: {
+        parameters: {
+            query: {
+                route_key: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RouteReleaseManifestResponse"];
                 };
             };
             /** @description Bad Request */
