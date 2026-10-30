@@ -229,7 +229,9 @@ test.describe.serial("authenticated beta journeys", () => {
     );
     await page.getByRole("textbox", { name: "Your essay" }).fill(essay);
     expect((await remoteSave).status()).toBe(200);
-    await expect(page.getByRole("status")).toContainText("Saved remotely");
+    await expect(page.locator("#essay-draft-status")).toContainText(
+      "Saved remotely",
+    );
 
     await page.reload();
     await expect(page.getByRole("textbox", { name: "Your essay" })).toHaveValue(
