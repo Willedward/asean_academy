@@ -483,10 +483,12 @@ review or safeguarding owner is unavailable.
 ## 16. Current next milestone
 
 Technical implementation identifiers use `ENG-Tx.y`; curriculum lesson identifiers remain
-`E0.1` through `E9.5`. **ENG-T3.1** now supplies the versioned prompt/rubric source and
-database contract. It remains draft-only and does not enable AI marking. The next technical
-increment is **ENG-T3.2 — owned essay drafts with refresh-safe autosave**, while the review
-and release evidence below continues independently.
+`E0.1` through `E9.5`. **ENG-T3.1** supplies the versioned prompt/rubric source and database
+contract. **ENG-T3.2** now adds owned essay drafts with local recovery, revision-safe remote
+autosave and a learner editor. Both remain draft-only and do not enable submission or AI
+marking. The next technical increment is **ENG-T3.3 — deterministic pre-submit checks and
+immutable essay submission revisions**, while the review and release evidence below
+continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

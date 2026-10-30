@@ -163,6 +163,102 @@ def test_draft_english_foundation_is_hidden_without_preview_flag():
     assert response.json()["error"]["code"] == "english_course_not_found"
 
 
+def test_essay_prompt_is_hidden_without_preview_flag():
+    response = request(
+        application(allow_drafts=False), "GET", "/api/v1/english/essay-prompts/current"
+    )
+
+    assert response.status_code == 404
+    assert response.json()["error"]["code"] == "essay_prompt_not_found"
+
+
+def test_owned_essay_draft_is_idempotent_refresh_safe_and_conflict_protected():
+    app = application()
+    prompt = request(app, "GET", "/api/v1/english/essay-prompts/current")
+    assert prompt.status_code == 200, prompt.text
+    assert prompt.json()["stable_key"] == "english-essay-prompt-school-learning-transfer-v1"
+    assert prompt.json()["time_limit_evidence"] == "candidate_reported"
+    assert prompt.json()["word_count_status"] == "guidance"
+    assert prompt.json()["development_preview"] is True
+
+    stale_prompt = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": "essay-draft-stale-prompt"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 99,
+        },
+    )
+    assert stale_prompt.status_code == 409
+    assert stale_prompt.json()["error"]["code"] == "essay_prompt_changed"
+
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": "essay-draft-create"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 1,
+        },
+    )
+    assert created.status_code == 201, created.text
+    draft = created.json()
+    assert draft["body"] == ""
+    assert draft["word_count"] == 0
+    assert draft["edit_revision"] == 1
+    assert draft["submission_available"] is False
+    assert draft["ai_feedback_available"] is False
+
+    repeated = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": "essay-draft-create"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 1,
+        },
+    )
+    assert repeated.status_code == 201, repeated.text
+    assert repeated.json()["draft_id"] == draft["draft_id"]
+
+    content = "I learned to plan carefully. I now use that skill beyond school."
+    saved = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft['draft_id']}",
+        json={"body": content, "expected_edit_revision": 1},
+    )
+    assert saved.status_code == 200, saved.text
+    assert saved.json()["body"] == content
+    assert saved.json()["word_count"] == 12
+    assert saved.json()["edit_revision"] == 2
+
+    restored = request(
+        app, "GET", f"/api/v1/english/essay-drafts/{draft['draft_id']}"
+    )
+    assert restored.status_code == 200, restored.text
+    assert restored.json() == saved.json()
+
+    stale = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft['draft_id']}",
+        json={"body": "A stale tab must not overwrite this.", "expected_edit_revision": 1},
+    )
+    assert stale.status_code == 409
+    assert stale.json()["error"]["code"] == "essay_draft_conflict"
+    assert "body" not in json.dumps(stale.json())
+
+    after_conflict = request(
+        app, "GET", f"/api/v1/english/essay-drafts/{draft['draft_id']}"
+    )
+    assert after_conflict.json()["body"] == content
+
+
 def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():
     app = application()
 

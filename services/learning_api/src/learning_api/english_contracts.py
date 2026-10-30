@@ -107,6 +107,48 @@ class EnglishCourseMapResponse(ApiModel):
     modules: list[EnglishModuleMap]
 
 
+class EnglishEssayPromptResponse(ApiModel):
+    stable_key: str = Field(pattern=r"^english-essay-prompt-[a-z0-9-]+$")
+    revision: int = Field(ge=1)
+    title: str
+    prompt_family: Literal[
+        "reflective_personal_expository",
+        "narrative",
+        "opinion_discursive",
+        "general_expository",
+    ]
+    prompt_text: str
+    instructions: list[str]
+    time_limit_minutes: int = Field(ge=10, le=120)
+    time_limit_evidence: Literal["official", "candidate_reported", "inferred"]
+    word_count_guidance: int | None = Field(default=None, ge=50, le=2000)
+    word_count_status: Literal["not_stated", "guidance", "strict"]
+    content_status: Literal["draft", "reviewed", "published", "retired"]
+    development_preview: bool
+
+
+class EnglishEssayDraftResponse(ApiModel):
+    draft_id: str
+    prompt: EnglishEssayPromptResponse
+    body: str
+    word_count: int = Field(ge=0)
+    edit_revision: int = Field(ge=1)
+    created_at: datetime
+    updated_at: datetime
+    submission_available: Literal[False] = False
+    ai_feedback_available: Literal[False] = False
+
+
+class CreateEnglishEssayDraftRequest(ApiModel):
+    prompt_key: str = Field(pattern=r"^english-essay-prompt-[a-z0-9-]+$")
+    prompt_revision: int = Field(ge=1)
+
+
+class UpdateEnglishEssayDraftRequest(ApiModel):
+    body: Annotated[str, StringConstraints(max_length=20000)]
+    expected_edit_revision: int = Field(ge=1)
+
+
 class EnglishLessonSectionResponse(ApiModel):
     position: int
     section_type: Literal[

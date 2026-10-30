@@ -110,7 +110,15 @@ sections.
 | E4.5 pilot | Original timed open-cloze checkpoint integrating grammatical, lexical and cohesion evidence | Implemented and hosted as draft; English and editorial review pending |
 | E3b | English checkpoints and objective baseline/endline diagnostics | Implemented and deployed in preview with protected routing, deterministic scoring and learner UI; release remains draft-only |
 | ENG-T3.1 | Versioned essay prompts, instructional rubrics and immutable database revisions | Implemented as draft; English/editorial review pending |
-| ENG-T3.2–T3.10 | Essay drafts, submissions, self-review, fixture jobs, quotas, feedback, reports, calibration and admin evidence | Not started |
+| ENG-T3.2 | Owned essay drafts, live word count, device recovery and revision-safe remote autosave | Implemented as draft; submission and AI feedback disabled |
+| ENG-T3.3 | Deterministic pre-submit checks and immutable essay submission revisions | Not started |
+| ENG-T3.4 | Learner self-review against the pinned instructional rubric | Not started |
+| ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Not started |
+| ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Not started |
+| ENG-T3.7 | Evidence-linked structured feedback with provider validation | Not started |
+| ENG-T3.8 | Essay version history, feedback report and usefulness rating | Not started |
+| ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Not started |
+| ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
 
@@ -378,13 +386,20 @@ evidence bound to the Git SHA.
 
 ## Immediate next milestone
 
-The technical milestone sequence now uses `ENG-Tx.y` identifiers so it cannot be confused
-with curriculum lesson identifiers such as `E8.1`. **ENG-T3.1** is implemented: the source
-foundation contains a checksum-pinned original prompt and a four-criterion instructional
-rubric, the rubric explicitly refuses any official-score claim, and migration
-`202610300038` stores immutable prompt/rubric revisions. The next independently executable
-engineering milestone is **ENG-T3.2 — essay draft creation and autosave**. It must pin the
-exact prompt revision but must not create an immutable submission or call a live model yet.
+The technical milestone sequence uses `ENG-Tx.y` identifiers so it cannot be confused with
+curriculum lesson identifiers such as `E8.1`. **ENG-T3.1** supplies the checksum-pinned
+original prompt and instructional rubric. **ENG-T3.2** now supplies learner-owned mutable
+drafts pinned to an exact prompt revision, optimistic edit revisions, immediate local-device
+recovery, debounced remote autosave and an authenticated editor at
+`/english/essays/[draftId]`. Migration `202610300039` stores the drafts without granting
+learner write access outside the API. Stale tabs receive a conflict rather than silently
+overwriting newer work. Essay bodies remain out of application logs, submission remains
+unavailable, and no model provider is called.
+
+The next independently executable engineering milestone is **ENG-T3.3 — deterministic
+pre-submit checks and immutable essay submission revisions**. It must snapshot the exact
+draft, prompt and rubric revisions; require an explicit learner action; and remain entirely
+independent of live AI marking.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

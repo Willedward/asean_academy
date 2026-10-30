@@ -30,6 +30,11 @@ from .english_diagnostic_repository import (
     PostgresEnglishDiagnosticRepository,
 )
 from .english_diagnostic_service import EnglishDiagnosticService
+from .english_essay_repository import (
+    InMemoryEnglishEssayRepository,
+    PostgresEnglishEssayRepository,
+)
+from .english_essay_service import EnglishEssayService
 from .english_learning_repository import (
     InMemoryEnglishLearningRepository,
     PostgresEnglishLearningRepository,
@@ -370,6 +375,36 @@ def english_learning_service(
 
 EnglishLearningServiceDependency = Annotated[
     EnglishLearningService, Depends(english_learning_service)
+]
+
+
+def english_essay_repository(request: Request):
+    repository = getattr(request.app.state, "english_essay_repository", None)
+    if repository is None:
+        settings = request.app.state.settings
+        repository = (
+            PostgresEnglishEssayRepository(settings.database_url)
+            if settings.database_url
+            else InMemoryEnglishEssayRepository()
+        )
+        request.app.state.english_essay_repository = repository
+    return repository
+
+
+def english_essay_service(
+    request: Request,
+    learner: EnrolledLearnerDependency,
+) -> EnglishEssayService:
+    return EnglishEssayService(
+        request.app.state.settings.repository_root,
+        english_essay_repository(request),
+        learner.learner_id,
+        allow_drafts=request.app.state.settings.allow_draft_content,
+    )
+
+
+EnglishEssayServiceDependency = Annotated[
+    EnglishEssayService, Depends(english_essay_service)
 ]
 
 

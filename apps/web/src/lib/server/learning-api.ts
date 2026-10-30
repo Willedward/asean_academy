@@ -4,6 +4,8 @@ import type { CourseMapResponse } from "@/lib/api/course";
 import type { CurrentLearnerResponse } from "@/lib/api/identity";
 import type {
   EnglishCourseMapResponse,
+  EnglishEssayDraftResponse,
+  EnglishEssayPromptResponse,
   EnglishLessonResponse,
   EnglishProgressResponse,
 } from "@/lib/api/english";
@@ -119,6 +121,31 @@ export async function getServerEnglishProgress(
   session: VerifiedSession,
 ): Promise<EnglishProgressResponse> {
   return getServerJson(session, "/api/v1/english/progress");
+}
+
+export async function getServerCurrentEnglishEssayPrompt(
+  session: VerifiedSession,
+): Promise<EnglishEssayPromptResponse | null> {
+  try {
+    return await getServerJson(session, "/api/v1/english/essay-prompts/current");
+  } catch (error) {
+    if (
+      error instanceof ServerLearningApiError &&
+      error.code === "essay_prompt_not_found"
+    )
+      return null;
+    throw error;
+  }
+}
+
+export async function getServerEnglishEssayDraft(
+  session: VerifiedSession,
+  draftId: string,
+): Promise<EnglishEssayDraftResponse> {
+  return getServerJson(
+    session,
+    `/api/v1/english/essay-drafts/${encodeURIComponent(draftId)}`,
+  );
 }
 
 export async function getServerEnglishLesson(

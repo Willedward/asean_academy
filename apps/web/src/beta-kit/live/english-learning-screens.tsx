@@ -12,9 +12,11 @@ import Link from "next/link";
 
 import type {
   EnglishCourseMapResponse,
+  EnglishEssayPromptResponse,
   EnglishProgressResponse,
 } from "@/lib/api/english";
 import { EnglishDiagnosticCard } from "@/components/english-diagnostic-card";
+import { EnglishEssayDraftCard } from "@/components/english-essay-draft-card";
 
 import { SubjectSwitch } from "../screens/english";
 import {
@@ -49,11 +51,13 @@ export function EnglishCourseScreen({
   learner,
   course,
   progress,
+  essayPrompt = null,
   mathsHref,
 }: {
   learner: CoreLearner;
   course: EnglishCourseMapResponse;
   progress: EnglishProgressResponse;
+  essayPrompt?: EnglishEssayPromptResponse | null;
   mathsHref: string;
 }) {
   const lessons = course.modules.flatMap((module) => module.lessons);
@@ -122,6 +126,8 @@ export function EnglishCourseScreen({
       </Card>
 
       <EnglishDiagnosticCard />
+
+      {essayPrompt ? <EnglishEssayDraftCard prompt={essayPrompt} /> : null}
 
       {course.modules.map((module) => {
         const moduleAvailable = module.lessons.filter(
