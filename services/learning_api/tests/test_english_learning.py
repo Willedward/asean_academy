@@ -209,7 +209,7 @@ def test_owned_essay_draft_is_idempotent_refresh_safe_and_conflict_protected():
     assert draft["body"] == ""
     assert draft["word_count"] == 0
     assert draft["edit_revision"] == 1
-    assert draft["submission_available"] is False
+    assert draft["submission_available"] is True
     assert draft["ai_feedback_available"] is False
 
     repeated = request(
@@ -257,6 +257,159 @@ def test_owned_essay_draft_is_idempotent_refresh_safe_and_conflict_protected():
         app, "GET", f"/api/v1/english/essay-drafts/{draft['draft_id']}"
     )
     assert after_conflict.json()["body"] == content
+
+
+def test_essay_pre_submit_checks_and_immutable_submission_revisions():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": "essay-submission-draft"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 1,
+        },
+    )
+    assert created.status_code == 201, created.text
+    draft_id = created.json()["draft_id"]
+
+    empty_checks = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-drafts/{draft_id}/pre-submit",
+        json={"expected_edit_revision": 1},
+    )
+    assert empty_checks.status_code == 200, empty_checks.text
+    assert empty_checks.json()["can_submit"] is False
+    assert any(
+        check["check_key"] == "content_present" and check["status"] == "block"
+        for check in empty_checks.json()["checks"]
+    )
+
+    content = "I learned to plan carefully.\n\nI now use that skill beyond school."
+    saved = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft_id}",
+        json={"body": content, "expected_edit_revision": 1},
+    )
+    assert saved.status_code == 200, saved.text
+    assert saved.json()["edit_revision"] == 2
+
+    stale_checks = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-drafts/{draft_id}/pre-submit",
+        json={"expected_edit_revision": 1},
+    )
+    assert stale_checks.status_code == 409
+    assert stale_checks.json()["error"]["code"] == "essay_draft_conflict"
+
+    checks = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-drafts/{draft_id}/pre-submit",
+        json={"expected_edit_revision": 2},
+    )
+    assert checks.status_code == 200, checks.text
+    preview = checks.json()
+    assert preview["can_submit"] is True
+    assert preview["word_count"] == 12
+    assert preview["paragraph_count"] == 2
+    assert preview["prompt_revision"] == 1
+    assert preview["rubric_key"] == "english-essay-rubric-instructional-v1"
+    assert preview["rubric_revision"] == 1
+    assert preview["continuous_timing_observed"] is False
+
+    not_confirmed = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "essay-submission-one"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": 2,
+            "confirmed": False,
+        },
+    )
+    assert not_confirmed.status_code == 422
+
+    submitted = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "essay-submission-one"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": 2,
+            "confirmed": True,
+        },
+    )
+    assert submitted.status_code == 201, submitted.text
+    first = submitted.json()
+    assert first["body"] == content
+    assert first["draft_edit_revision"] == 2
+    assert first["submission_revision"] == 1
+    assert first["immutable"] is True
+    assert first["ai_feedback_available"] is False
+    assert first["official_score_available"] is False
+
+    repeated = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "essay-submission-one"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": 2,
+            "confirmed": True,
+        },
+    )
+    assert repeated.status_code == 201, repeated.text
+    assert repeated.json()["submission_id"] == first["submission_id"]
+
+    duplicate_revision = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "essay-submission-duplicate-revision"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": 2,
+            "confirmed": True,
+        },
+    )
+    assert duplicate_revision.status_code == 409
+    assert duplicate_revision.json()["error"]["code"] == (
+        "essay_revision_already_submitted"
+    )
+
+    revised_content = content + " The second revision adds a concrete example."
+    revised = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft_id}",
+        json={"body": revised_content, "expected_edit_revision": 2},
+    )
+    assert revised.status_code == 200, revised.text
+    second = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "essay-submission-two"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": 3,
+            "confirmed": True,
+        },
+    )
+    assert second.status_code == 201, second.text
+    assert second.json()["submission_revision"] == 2
+    assert second.json()["body"] == revised_content
+    assert app.state.english_essay_repository.submissions[first["submission_id"]][
+        "body"
+    ] == content
 
 
 def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():

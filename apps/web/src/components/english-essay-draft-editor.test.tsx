@@ -1,12 +1,18 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { EnglishEssayDraftResponse } from "@/lib/api/english";
+import type {
+  EnglishEssayDraftResponse,
+  EnglishEssayPreSubmitResponse,
+  EnglishEssaySubmissionResponse,
+} from "@/lib/api/english";
 
 import { countEssayWords, EnglishEssayDraftEditor } from "./english-essay-draft-editor";
 
 const updateDraft = vi.fn();
 const getDraft = vi.fn();
+const preSubmitDraft = vi.fn();
+const createSubmission = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   EnglishEssayDraftApiError: class EnglishEssayDraftApiError extends Error {
@@ -19,6 +25,9 @@ vi.mock("@/lib/api/english", () => ({
   },
   updateEnglishEssayDraft: (...args: unknown[]) => updateDraft(...args),
   getEnglishEssayDraft: (...args: unknown[]) => getDraft(...args),
+  preSubmitEnglishEssayDraft: (...args: unknown[]) => preSubmitDraft(...args),
+  createEnglishEssaySubmission: (...args: unknown[]) =>
+    createSubmission(...args),
 }));
 
 const initialDraft: EnglishEssayDraftResponse = {
@@ -28,7 +37,7 @@ const initialDraft: EnglishEssayDraftResponse = {
   edit_revision: 1,
   created_at: "2026-10-30T01:00:00Z",
   updated_at: "2026-10-30T01:00:00Z",
-  submission_available: false,
+  submission_available: true,
   ai_feedback_available: false,
   prompt: {
     stable_key: "english-essay-prompt-school-learning-transfer-v1",
@@ -51,6 +60,8 @@ beforeEach(() => {
   window.localStorage.clear();
   updateDraft.mockReset();
   getDraft.mockReset();
+  preSubmitDraft.mockReset();
+  createSubmission.mockReset();
 });
 
 afterEach(cleanup);
@@ -104,6 +115,87 @@ describe("EnglishEssayDraftEditor", () => {
 
     expect(await screen.findByDisplayValue("My recovered local paragraph.")).toBeInTheDocument();
     expect(screen.getByText(/Backed up on this device|Saving/)).toBeInTheDocument();
+  });
+
+  it("requires deterministic review and explicit confirmation before creating a permanent snapshot", async () => {
+    const body = "Planning helps me beyond school.\n\nI use it before every team project.";
+    const readyDraft = {
+      ...initialDraft,
+      body,
+      word_count: 12,
+      edit_revision: 2,
+    };
+    const preSubmit: EnglishEssayPreSubmitResponse = {
+      draft_id: readyDraft.draft_id,
+      edit_revision: 2,
+      prompt_key: readyDraft.prompt.stable_key,
+      prompt_revision: 1,
+      rubric_key: "english-essay-rubric-instructional-v1",
+      rubric_revision: 1,
+      word_count: 12,
+      paragraph_count: 2,
+      body_sha256: "a".repeat(64),
+      prompt_time_limit_minutes: 30,
+      time_limit_evidence: "candidate_reported",
+      continuous_timing_observed: false,
+      can_submit: true,
+      checks: [
+        {
+          check_key: "revision_snapshot",
+          status: "pass",
+          message: "The saved draft revision is ready to snapshot.",
+        },
+      ],
+    };
+    const submitted: EnglishEssaySubmissionResponse = {
+      submission_id: "dfdb118f-b09d-4baf-a7e0-64f582729351",
+      draft_id: readyDraft.draft_id,
+      prompt_key: readyDraft.prompt.stable_key,
+      prompt_revision: 1,
+      rubric_key: preSubmit.rubric_key,
+      rubric_revision: 1,
+      draft_edit_revision: 2,
+      submission_revision: 1,
+      body,
+      body_sha256: preSubmit.body_sha256,
+      word_count: 12,
+      paragraph_count: 2,
+      deterministic_checks: preSubmit.checks,
+      draft_created_at: readyDraft.created_at,
+      draft_updated_at: readyDraft.updated_at,
+      draft_age_seconds: 120,
+      submitted_at: "2026-10-30T01:02:00Z",
+      immutable: true,
+      ai_feedback_available: false,
+      official_score_available: false,
+    };
+    preSubmitDraft.mockResolvedValue(preSubmit);
+    createSubmission.mockResolvedValue(submitted);
+
+    render(<EnglishEssayDraftEditor initialDraft={readyDraft} />);
+    fireEvent.click(screen.getByRole("button", { name: "Review before submitting" }));
+
+    expect(
+      await screen.findByText("The saved draft revision is ready to snapshot."),
+    ).toBeInTheDocument();
+    const submitButton = screen.getByRole("button", {
+      name: "Submit saved revision",
+    });
+    expect(submitButton).toBeDisabled();
+    fireEvent.click(
+      screen.getByRole("checkbox", {
+        name: /I understand that this creates a permanent snapshot/,
+      }),
+    );
+    expect(submitButton).toBeEnabled();
+    fireEvent.click(submitButton);
+
+    expect(
+      await screen.findByText("Submission revision 1 is saved permanently."),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/No AI feedback or official score was generated/)).toBeInTheDocument();
+    expect(preSubmitDraft).toHaveBeenCalledWith(readyDraft.draft_id, 2);
+    expect(createSubmission).toHaveBeenCalledWith(readyDraft.draft_id, 2);
   });
 });
 

@@ -27,6 +27,10 @@ export type EnglishEssayPromptResponse =
   components["schemas"]["EnglishEssayPromptResponse"];
 export type EnglishEssayDraftResponse =
   components["schemas"]["EnglishEssayDraftResponse"];
+export type EnglishEssayPreSubmitResponse =
+  components["schemas"]["EnglishEssayPreSubmitResponse"];
+export type EnglishEssaySubmissionResponse =
+  components["schemas"]["EnglishEssaySubmissionResponse"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -102,6 +106,54 @@ export async function updateEnglishEssayDraft(
     {
       params: { path: { draft_id: draftId } },
       body: { body, expected_edit_revision: expectedEditRevision },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function preSubmitEnglishEssayDraft(
+  draftId: string,
+  expectedEditRevision: number,
+): Promise<EnglishEssayPreSubmitResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-drafts/{draft_id}/pre-submit",
+    {
+      params: { path: { draft_id: draftId } },
+      body: { expected_edit_revision: expectedEditRevision },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function createEnglishEssaySubmission(
+  draftId: string,
+  expectedEditRevision: number,
+): Promise<EnglishEssaySubmissionResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-submissions",
+    {
+      params: {
+        header: {
+          "Idempotency-Key": `english-essay-submission:${draftId}:r${expectedEditRevision}`,
+        },
+      },
+      body: {
+        draft_id: draftId,
+        expected_edit_revision: expectedEditRevision,
+        confirmed: true,
+      },
     },
   );
   if (error || !data)
