@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import secrets
 from concurrent.futures import ThreadPoolExecutor
@@ -76,6 +77,131 @@ def _request(app, method: str, path: str, token: str, **kwargs):
     return asyncio.run(send())
 
 
+def _english_answers(question_key: str) -> dict:
+    source = json.loads(
+        (
+            REPOSITORY_ROOT / "backend_resources/english/v1/questions" / f"{question_key}.json"
+        ).read_text()
+    )
+    answers = {}
+    for part in source["parts"]:
+        response = part["response"]
+        if response["type"] == "single_choice":
+            answer = response["correct_key"]
+        elif response["type"] == "multiple_response":
+            answer = response["correct_keys"]
+        else:
+            answer = response["canonical_answer"]
+        answers[str(part["position"])] = answer
+    return answers
+
+
+@pytest.mark.postgres
+def test_postgres_english_baseline_is_protected_idempotent_and_immutable():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    email = f"{learner_id}@example.test"
+    invitation_code = secrets.token_urlsafe(32)
+    with psycopg.connect(database_url) as connection:
+        _seed_learner(connection, learner_id, email, invitation_code)
+
+    app = create_app(
+        Settings(
+            environment="test",
+            cors_origins=("http://localhost:3000",),
+            log_level="INFO",
+            repository_root=REPOSITORY_ROOT,
+            allow_draft_content=True,
+            development_learner_id=None,
+            database_url=database_url,
+            rate_limits_enabled=False,
+        ),
+        token_verifier=StaticTokenVerifier(
+            {"english-diagnostic-learner": AuthenticatedLearner(learner_id, "authenticated", email)}
+        ),
+    )
+    accepted = _request(
+        app,
+        "POST",
+        "/api/v1/onboarding/accept-invitation",
+        "english-diagnostic-learner",
+        json={"invitation_code": invitation_code, "display_name": "English diagnostic learner"},
+    )
+    assert accepted.status_code == 200, accepted.text
+
+    created = _request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        "english-diagnostic-learner",
+        headers={"Idempotency-Key": "postgres-english-baseline"},
+        json={"expected_purpose": "baseline"},
+    )
+    assert created.status_code == 201, created.text
+    session_id = created.json()["session_id"]
+    replay = _request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        "english-diagnostic-learner",
+        headers={"Idempotency-Key": "postgres-english-baseline"},
+        json={"expected_purpose": "baseline"},
+    )
+    assert replay.status_code == 201, replay.text
+    assert replay.json()["session_id"] == session_id
+
+    expected_questions = ["ev-l5-003", "eb-l1-003", "eo-l5-003", "er-l5-005"]
+    for position, expected_key in enumerate(expected_questions, 1):
+        current = _request(
+            app,
+            "GET",
+            f"/api/v1/english/diagnostic-sessions/{session_id}/next",
+            "english-diagnostic-learner",
+        )
+        assert current.status_code == 200, current.text
+        question = current.json()["question"]
+        assert question["stable_key"] == expected_key
+        assert "correct_key" not in json.dumps(question)
+        answered = _request(
+            app,
+            "POST",
+            "/api/v1/english/diagnostic-attempts",
+            "english-diagnostic-learner",
+            headers={"Idempotency-Key": f"postgres-english-baseline-{position}"},
+            json={
+                "session_id": session_id,
+                "question_key": question["stable_key"],
+                "question_revision": question["revision"],
+                "answers": _english_answers(question["stable_key"]),
+            },
+        )
+        assert answered.status_code == 200, answered.text
+        if position < len(expected_questions):
+            assert answered.json()["session"]["score"] is None
+            assert answered.json()["session"]["correct_parts"] == 0
+
+    assert answered.json()["diagnostic_completed"] is True
+    assert answered.json()["session"]["score"] == 1
+    assert answered.json()["session"]["total_parts"] == 20
+    with psycopg.connect(database_url) as connection:
+        row = connection.execute(
+            """
+            select status::text, score, expected_part_count
+            from english_diagnostic_sessions where id=%s
+            """,
+            (session_id,),
+        ).fetchone()
+        assert row[0] == "completed"
+        assert float(row[1]) == 1
+        assert row[2] == 20
+        with pytest.raises(psycopg.errors.RaiseException):
+            connection.execute(
+                "update english_diagnostic_attempts set correct_parts=0 where student_id=%s",
+                (learner_id,),
+            )
+        connection.rollback()
+
+
 @pytest.mark.postgres
 def test_postgres_english_e1_checkpoint_persists_and_records_mastery_atomically():
     database_url = _database_url()
@@ -97,11 +223,7 @@ def test_postgres_english_e1_checkpoint_persists_and_records_mastery_atomically(
             rate_limits_enabled=False,
         ),
         token_verifier=StaticTokenVerifier(
-            {
-                "english-checkpoint-learner": AuthenticatedLearner(
-                    learner_id, "authenticated", email
-                )
-            }
+            {"english-checkpoint-learner": AuthenticatedLearner(learner_id, "authenticated", email)}
         ),
     )
     accepted = _request(
@@ -316,9 +438,7 @@ def test_authenticated_postgres_practice_is_idempotent_immutable_and_isolated():
         assert count == 1
     with psycopg.connect(database_url) as connection:
         connection.execute("set local role authenticated")
-        connection.execute(
-            "select set_config('request.jwt.claim.sub', %s, true)", (learner_b,)
-        )
+        connection.execute("select set_config('request.jwt.claim.sub', %s, true)", (learner_b,))
         visible = connection.execute(
             "select count(*) from practice_sessions where id = %s",
             (first.json()["session_id"],),
@@ -326,9 +446,7 @@ def test_authenticated_postgres_practice_is_idempotent_immutable_and_isolated():
         assert visible == 0
     with psycopg.connect(database_url) as connection:
         connection.execute("set local role authenticated")
-        connection.execute(
-            "select set_config('request.jwt.claim.sub', %s, true)", (learner_a,)
-        )
+        connection.execute("select set_config('request.jwt.claim.sub', %s, true)", (learner_a,))
         with pytest.raises(psycopg.errors.InsufficientPrivilege):
             connection.execute(
                 "update learner_lesson_progress set state = 'mastered' where student_id = %s",
@@ -354,9 +472,7 @@ def test_concurrent_session_creation_replays_one_postgres_session():
     questions = validate_bank(BANK_ROOT).questions
 
     def create(idempotency_key: str):
-        engine = PostgresPracticeEngine(
-            database_url, questions, learner_id, allow_drafts=True
-        )
+        engine = PostgresPracticeEngine(database_url, questions, learner_id, allow_drafts=True)
         return engine.create_session(
             question_count=1,
             ordered_question_keys=["n1-l1-01"],
@@ -365,9 +481,7 @@ def test_concurrent_session_creation_replays_one_postgres_session():
         )
 
     with ThreadPoolExecutor(max_workers=2) as executor:
-        first, second = list(
-            executor.map(create, ["concurrent-create-a", "concurrent-create-b"])
-        )
+        first, second = list(executor.map(create, ["concurrent-create-a", "concurrent-create-b"]))
 
     assert first["session_id"] == second["session_id"]
     with psycopg.connect(database_url) as connection:
@@ -409,10 +523,7 @@ def test_beta_operations_are_admin_authorized_audited_and_immutable():
     assert len(created["invitation_code"]) >= 16
 
     listed = repository.list_invitations(status="active", limit=200, offset=0)
-    assert any(
-        item["invitation_id"] == created["invitation_id"]
-        for item in listed["invitations"]
-    )
+    assert any(item["invitation_id"] == created["invitation_id"] for item in listed["invitations"])
     events = repository.audit_events(limit=200)["events"]
     assert any(
         event["request_id"] == "postgres-admin-create"
@@ -507,9 +618,7 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
         "stages": {key: "checkpoint" for key in checkpoint_keys},
         "selection_reason": "configured_checkpoint_pool",
     }
-    engine = PostgresPracticeEngine(
-        database_url, questions, learner_id, allow_drafts=True
-    )
+    engine = PostgresPracticeEngine(database_url, questions, learner_id, allow_drafts=True)
     created = engine.create_session(
         question_count=8,
         ordered_question_keys=checkpoint_keys,
@@ -608,10 +717,13 @@ def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolate
         )
 
     with psycopg.connect(database_url) as connection:
-        connection.execute("""
+        connection.execute(
+            """
             insert into course_enrolments(student_id, course_id, course_version_id)
             select %s, course_id, id from course_versions where is_current
-        """, (learner_id,))
+        """,
+            (learner_id,),
+        )
     repository = PostgresProgressRepository(database_url)
     repository.start_lesson(learner_id, "n1-lesson-01", 2)
     repository.set_section_completion(
@@ -622,9 +734,7 @@ def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolate
         True,
     )
 
-    assert repository.completed_section_keys(learner_id, "n1-lesson-01", 2) == [
-        "prime-numbers"
-    ]
+    assert repository.completed_section_keys(learner_id, "n1-lesson-01", 2) == ["prime-numbers"]
     assert repository.completed_section_keys(learner_id, "n1-lesson-01", 1) == []
     assert repository.completed_section_keys(other_learner_id, "n1-lesson-01", 2) == []
 
