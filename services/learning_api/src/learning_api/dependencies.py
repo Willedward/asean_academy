@@ -25,6 +25,11 @@ from .admin_analytics_repository import PostgresAdminAnalyticsRepository
 from .admin_repository import PostgresBetaOperationsRepository
 from .conventions import current_request_id
 from .diagnostic_repository import PostgresDiagnosticRepository
+from .english_diagnostic_repository import (
+    InMemoryEnglishDiagnosticRepository,
+    PostgresEnglishDiagnosticRepository,
+)
+from .english_diagnostic_service import EnglishDiagnosticService
 from .english_learning_repository import (
     InMemoryEnglishLearningRepository,
     PostgresEnglishLearningRepository,
@@ -109,9 +114,7 @@ def identity_repository(request: Request) -> PostgresIdentityRepository:
     return repository
 
 
-IdentityRepositoryDependency = Annotated[
-    PostgresIdentityRepository, Depends(identity_repository)
-]
+IdentityRepositoryDependency = Annotated[PostgresIdentityRepository, Depends(identity_repository)]
 
 
 def beta_operations_repository(request: Request) -> PostgresBetaOperationsRepository:
@@ -260,9 +263,7 @@ def academic_admin_learner(
     return administrator
 
 
-AcademicAdminLearnerDependency = Annotated[
-    AuthenticatedLearner, Depends(academic_admin_learner)
-]
+AcademicAdminLearnerDependency = Annotated[AuthenticatedLearner, Depends(academic_admin_learner)]
 
 
 def enrolled_learner(
@@ -372,6 +373,31 @@ EnglishLearningServiceDependency = Annotated[
 ]
 
 
+def english_diagnostic_repository(request: Request):
+    repository = getattr(request.app.state, "english_diagnostic_repository", None)
+    if repository is None:
+        settings = request.app.state.settings
+        repository = (
+            PostgresEnglishDiagnosticRepository(settings.database_url)
+            if settings.database_url
+            else InMemoryEnglishDiagnosticRepository()
+        )
+        request.app.state.english_diagnostic_repository = repository
+    return repository
+
+
+def english_diagnostic_service(
+    request: Request,
+    learning: EnglishLearningServiceDependency,
+) -> EnglishDiagnosticService:
+    return EnglishDiagnosticService(learning, english_diagnostic_repository(request))
+
+
+EnglishDiagnosticServiceDependency = Annotated[
+    EnglishDiagnosticService, Depends(english_diagnostic_service)
+]
+
+
 def tutor_repository(request: Request):
     settings = request.app.state.settings
     repository = getattr(request.app.state, "tutor_repository", None)
@@ -388,9 +414,7 @@ def tutor_repository(request: Request):
             settings.database_url,
             # Disposable browser tests exercise the real tutor path against the
             # reviewed draft fixtures without weakening hosted grounding rules.
-            allow_draft_grounding=(
-                settings.environment == "test" and settings.allow_draft_content
-            ),
+            allow_draft_grounding=(settings.environment == "test" and settings.allow_draft_content),
         )
         request.app.state.tutor_repository = repository
     return repository
@@ -415,9 +439,7 @@ def tutor_service(
     repository = tutor_repository(request)
     provider = getattr(request.app.state, "tutor_provider", None)
     if provider is None:
-        economy_input_price, economy_output_price = _tutor_prices(
-            settings, settings.tutor_provider
-        )
+        economy_input_price, economy_output_price = _tutor_prices(settings, settings.tutor_provider)
         provider = provider_for(
             settings.tutor_provider,
             environment=settings.environment,
@@ -431,9 +453,7 @@ def tutor_service(
             output_cost_per_million_micros_sgd=economy_output_price,
         )
         request.app.state.tutor_provider = provider
-    economy_input_price, economy_output_price = _tutor_prices(
-        settings, settings.tutor_provider
-    )
+    economy_input_price, economy_output_price = _tutor_prices(settings, settings.tutor_provider)
     economy_target = TutorModelTarget(
         tier="economy",
         provider_name=settings.tutor_provider,
@@ -445,17 +465,14 @@ def tutor_service(
     premium_provider = None
     premium_target = None
     routing_policy_enabled = (
-        settings.tutor_hybrid_routing_enabled
-        or settings.tutor_hybrid_routing_shadow_enabled
+        settings.tutor_hybrid_routing_enabled or settings.tutor_hybrid_routing_shadow_enabled
     )
     if routing_policy_enabled:
         premium_input_price, premium_output_price = _tutor_prices(
             settings, settings.tutor_premium_provider
         )
         if settings.tutor_hybrid_routing_enabled:
-            premium_provider = getattr(
-                request.app.state, "tutor_premium_provider", None
-            )
+            premium_provider = getattr(request.app.state, "tutor_premium_provider", None)
         if settings.tutor_hybrid_routing_enabled and premium_provider is None:
             premium_provider = provider_for(
                 settings.tutor_premium_provider,
@@ -500,9 +517,7 @@ def tutor_service(
             economy=economy_target,
             premium=premium_target,
             premium_threshold=settings.tutor_premium_threshold,
-            max_premium_turns_per_session=(
-                settings.tutor_max_premium_turns_per_session
-            ),
+            max_premium_turns_per_session=(settings.tutor_max_premium_turns_per_session),
         )
     )
     return TutorService(
@@ -516,9 +531,7 @@ def tutor_service(
             daily_messages=settings.tutor_daily_message_limit,
             daily_tokens=settings.tutor_daily_token_limit,
             monthly_cost_micros_sgd=settings.tutor_monthly_cost_limit_micros_sgd,
-            academy_monthly_cost_micros_sgd=(
-                settings.tutor_academy_monthly_cost_limit_micros_sgd
-            ),
+            academy_monthly_cost_micros_sgd=(settings.tutor_academy_monthly_cost_limit_micros_sgd),
             max_input_tokens=settings.tutor_max_input_tokens,
             max_output_tokens=settings.tutor_max_output_tokens,
             max_turn_cost_micros_sgd=settings.tutor_max_turn_cost_micros_sgd,

@@ -9,6 +9,7 @@ from fastapi import APIRouter, Header, HTTPException, Path
 
 from ..course_catalogue import CatalogueError
 from ..dependencies import (
+    EnglishDiagnosticServiceDependency,
     EnglishLearningServiceDependency,
     PracticeAttemptRateLimitDependency,
     PracticeSessionRateLimitDependency,
@@ -17,12 +18,17 @@ from ..dependencies import (
 from ..english_contracts import (
     ClassifyEnglishErrorRequest,
     CreateEnglishCheckpointSessionRequest,
+    CreateEnglishDiagnosticSessionRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
     EnglishCheckpointAttemptResponse,
     EnglishCheckpointNextQuestionResponse,
     EnglishCheckpointSessionResponse,
     EnglishCourseMapResponse,
+    EnglishDiagnosticAttemptResponse,
+    EnglishDiagnosticNextQuestionResponse,
+    EnglishDiagnosticNextResponse,
+    EnglishDiagnosticSessionResponse,
     EnglishErrorClassificationResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
@@ -31,14 +37,13 @@ from ..english_contracts import (
     EnglishProgressResponse,
     SubmitEnglishAttemptRequest,
     SubmitEnglishCheckpointAttemptRequest,
+    SubmitEnglishDiagnosticAttemptRequest,
 )
 from ..english_learning_repository import EnglishLearningError
 
 router = APIRouter(prefix="/api/v1/english", tags=["english"])
 
-IdempotencyHeader = Annotated[
-    str, Header(alias="Idempotency-Key", min_length=1, max_length=200)
-]
+IdempotencyHeader = Annotated[str, Header(alias="Idempotency-Key", min_length=1, max_length=200)]
 
 
 def _safe(call):
@@ -62,6 +67,101 @@ async def course_map(
     service: EnglishLearningServiceDependency,
 ) -> EnglishCourseMapResponse:
     return _safe(service.course_map)
+
+
+@router.get(
+    "/diagnostics/next",
+    operation_id="getNextEnglishDiagnostic",
+    response_model=EnglishDiagnosticNextResponse,
+    summary="Get the server-owned next English baseline or endline action",
+)
+async def next_diagnostic(
+    service: EnglishDiagnosticServiceDependency,
+) -> EnglishDiagnosticNextResponse:
+    return _safe(service.next)
+
+
+@router.post(
+    "/diagnostic-sessions",
+    operation_id="createEnglishDiagnosticSession",
+    response_model=EnglishDiagnosticSessionResponse,
+    status_code=201,
+    summary="Start or resume the eligible protected English diagnostic",
+)
+async def create_diagnostic_session(
+    body: CreateEnglishDiagnosticSessionRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishDiagnosticServiceDependency,
+    _rate_limit: PracticeSessionRateLimitDependency,
+) -> EnglishDiagnosticSessionResponse:
+    return _safe(
+        lambda: service.create_session(
+            expected_purpose=body.expected_purpose,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/diagnostic-sessions/{session_id}",
+    operation_id="getEnglishDiagnosticSession",
+    response_model=EnglishDiagnosticSessionResponse,
+    summary="Resume an owned protected English diagnostic",
+)
+async def diagnostic_session(
+    session_id: UUID,
+    service: EnglishDiagnosticServiceDependency,
+) -> EnglishDiagnosticSessionResponse:
+    return _safe(lambda: service.session(str(session_id)))
+
+
+@router.get(
+    "/diagnostic-sessions/{session_id}/next",
+    operation_id="getNextEnglishDiagnosticQuestion",
+    response_model=EnglishDiagnosticNextQuestionResponse,
+    summary="Get the next learner-safe English diagnostic question group",
+)
+async def next_diagnostic_question(
+    session_id: UUID,
+    service: EnglishDiagnosticServiceDependency,
+) -> EnglishDiagnosticNextQuestionResponse:
+    return _safe(lambda: service.next_question(str(session_id)))
+
+
+@router.post(
+    "/diagnostic-attempts",
+    operation_id="submitEnglishDiagnosticAttempt",
+    response_model=EnglishDiagnosticAttemptResponse,
+    summary="Submit an English diagnostic group without early correctness feedback",
+)
+async def submit_diagnostic_attempt(
+    body: SubmitEnglishDiagnosticAttemptRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishDiagnosticServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishDiagnosticAttemptResponse:
+    return _safe(
+        lambda: service.submit_attempt(
+            session_id=body.session_id,
+            question_key=body.question_key,
+            question_revision=body.question_revision,
+            answers=body.answers,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/diagnostic-sessions/{session_id}/result",
+    operation_id="getEnglishDiagnosticResult",
+    response_model=EnglishDiagnosticSessionResponse,
+    summary="Get a completed English diagnostic skill profile",
+)
+async def diagnostic_result(
+    session_id: UUID,
+    service: EnglishDiagnosticServiceDependency,
+) -> EnglishDiagnosticSessionResponse:
+    return _safe(lambda: service.result(str(session_id)))
 
 
 @router.get(
@@ -203,9 +303,7 @@ async def next_question(
 )
 async def hint(
     session_id: UUID,
-    question_key: Annotated[
-        str, Path(pattern=r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$")
-    ],
+    question_key: Annotated[str, Path(pattern=r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$")],
     service: EnglishLearningServiceDependency,
     _rate_limit: PracticeSupportRateLimitDependency,
 ) -> EnglishHintResponse:

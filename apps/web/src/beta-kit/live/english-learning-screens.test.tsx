@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type {
   EnglishCourseMapResponse,
@@ -7,6 +7,10 @@ import type {
 } from "@/lib/api/english";
 
 import { EnglishCourseScreen } from "./english-learning-screens";
+
+vi.mock("@/components/english-diagnostic-card", () => ({
+  EnglishDiagnosticCard: () => <div>English diagnostic</div>,
+}));
 
 afterEach(cleanup);
 

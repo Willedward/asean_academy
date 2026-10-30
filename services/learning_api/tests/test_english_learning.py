@@ -111,11 +111,189 @@ def submit_checkpoint(app, session_id: str, question: dict, answers: dict, key: 
     )
 
 
+def diagnostic_answers(question_key: str) -> dict:
+    source = json.loads(
+        (
+            REPOSITORY_ROOT / "backend_resources/english/v1/questions" / f"{question_key}.json"
+        ).read_text()
+    )
+    answers = {}
+    for part in source["parts"]:
+        response = part["response"]
+        if response["type"] == "single_choice":
+            answer = response["correct_key"]
+        elif response["type"] == "multiple_response":
+            answer = response["correct_keys"]
+        else:
+            answer = response["canonical_answer"]
+        answers[str(part["position"])] = answer
+    return answers
+
+
+def complete_diagnostic(app, session_id: str, key_prefix: str):
+    attempts = []
+    while True:
+        next_response = request(
+            app, "GET", f"/api/v1/english/diagnostic-sessions/{session_id}/next"
+        )
+        assert next_response.status_code == 200, next_response.text
+        if next_response.json()["status"] == "completed":
+            return attempts
+        question = next_response.json()["question"]
+        attempt = request(
+            app,
+            "POST",
+            "/api/v1/english/diagnostic-attempts",
+            headers={"Idempotency-Key": f"{key_prefix}-{len(attempts) + 1}"},
+            json={
+                "session_id": session_id,
+                "question_key": question["stable_key"],
+                "question_revision": question["revision"],
+                "answers": diagnostic_answers(question["stable_key"]),
+            },
+        )
+        assert attempt.status_code == 200, attempt.text
+        attempts.append((question, attempt.json()))
+
+
 def test_draft_english_foundation_is_hidden_without_preview_flag():
     response = request(application(allow_drafts=False), "GET", "/api/v1/english/course-map")
 
     assert response.status_code == 404
     assert response.json()["error"]["code"] == "english_course_not_found"
+
+
+def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():
+    app = application()
+
+    next_action = request(app, "GET", "/api/v1/english/diagnostics/next")
+    assert next_action.status_code == 200, next_action.text
+    assert next_action.json() == {
+        "status": "start",
+        "purpose": "baseline",
+        "session_id": None,
+        "result_session_id": None,
+        "title": "English Core baseline form A",
+        "message": (
+            "Complete 20 objective parts independently. Feedback remains hidden until the "
+            "full form is complete."
+        ),
+        "estimated_minutes": 25,
+        "question_count": 4,
+    }
+
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        headers={"Idempotency-Key": "english-baseline-create"},
+        json={"expected_purpose": "baseline"},
+    )
+    assert created.status_code == 201, created.text
+    body = created.json()
+    assert body["form_key"] == "english-baseline-sec1-id-v1"
+    assert body["expected_part_count"] == 20
+    assert body["score"] is None
+    assert body["task_scores"] == []
+
+    attempts = complete_diagnostic(app, body["session_id"], "english-baseline-answer")
+    assert [question["stable_key"] for question, _ in attempts] == [
+        "ev-l5-003",
+        "eb-l1-003",
+        "eo-l5-003",
+        "er-l5-005",
+    ]
+    for question, attempt in attempts[:-1]:
+        encoded = json.dumps(question)
+        assert "correct_key" not in encoded
+        assert "correct_keys" not in encoded
+        assert "canonical_answer" not in encoded
+        assert attempt["diagnostic_completed"] is False
+        assert attempt["session"]["score"] is None
+        assert attempt["session"]["correct_parts"] == 0
+        assert attempt["session"]["total_parts"] == 0
+        assert "correct" not in attempt
+
+    final = attempts[-1][1]
+    assert final["diagnostic_completed"] is True
+    assert final["session"]["correct_parts"] == 20
+    assert final["session"]["total_parts"] == 20
+    assert final["session"]["percentage"] == 100
+    assert final["session"]["band"] == "secure"
+    assert len(final["session"]["task_scores"]) == 4
+    assert all(score["percentage"] == 100 for score in final["session"]["task_scores"])
+
+    result = request(
+        app,
+        "GET",
+        f"/api/v1/english/diagnostic-sessions/{body['session_id']}/result",
+    )
+    assert result.status_code == 200, result.text
+    assert result.json()["percentage"] == 100
+    assert {score["recommended_lesson_key"] for score in result.json()["task_scores"]} == {
+        "e1-lesson-01",
+        "e3-lesson-01",
+        "e4-lesson-01",
+        "e5-lesson-01",
+    }
+
+    after = request(app, "GET", "/api/v1/english/diagnostics/next")
+    assert after.status_code == 200, after.text
+    assert after.json()["status"] == "baseline_complete"
+    assert after.json()["result_session_id"] == body["session_id"]
+
+
+def test_english_endline_unlocks_only_after_sprint_mastery_and_uses_disjoint_form():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        headers={"Idempotency-Key": "english-baseline-before-endline"},
+        json={"expected_purpose": "baseline"},
+    ).json()
+    baseline_questions = {
+        question["stable_key"]
+        for question, _ in complete_diagnostic(
+            app, created["session_id"], "english-baseline-before-endline-answer"
+        )
+    }
+
+    course = request(app, "GET", "/api/v1/english/course-map").json()
+    sprint_lessons = {
+        lesson["stable_key"]
+        for module in course["modules"]
+        for lesson in module["lessons"]
+        if "sprint" in lesson["route_tags"]
+    }
+    seed_checkpoint_prerequisites(app, *sorted(sprint_lessons))
+    repository = app.state.english_learning_repository
+    for lesson_key in sprint_lessons:
+        repository.lesson_progress[("english-development-learner", lesson_key)]["state"] = (
+            "mastered"
+        )
+
+    next_action = request(app, "GET", "/api/v1/english/diagnostics/next")
+    assert next_action.status_code == 200, next_action.text
+    assert next_action.json()["status"] == "start"
+    assert next_action.json()["purpose"] == "endline"
+
+    endline = request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        headers={"Idempotency-Key": "english-endline-create"},
+        json={"expected_purpose": "endline"},
+    )
+    assert endline.status_code == 201, endline.text
+    assert endline.json()["form_key"] == "english-endline-sec1-id-v1"
+    first = request(
+        app,
+        "GET",
+        f"/api/v1/english/diagnostic-sessions/{endline.json()['session_id']}/next",
+    ).json()["question"]
+    assert first["stable_key"] == "ev-l5-004"
+    assert first["stable_key"] not in baseline_questions
 
 
 def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
@@ -285,9 +463,7 @@ def test_e0_checkpoint_sequences_both_outcomes_without_early_feedback():
     assert by_key["e0-lesson-01"]["state"] == "mastered"
     assert by_key["e0-lesson-02"]["state"] == "mastered"
     e0_checkpoint = next(
-        item
-        for item in progress_response["checkpoints"]
-        if item["module_code"] == "E0"
+        item for item in progress_response["checkpoints"] if item["module_code"] == "E0"
     )
     assert e0_checkpoint["state"] == "passed"
     assert e0_checkpoint["last_percentage"] == 100

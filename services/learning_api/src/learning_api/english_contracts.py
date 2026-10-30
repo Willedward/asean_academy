@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Annotated, Literal
 
 from pydantic import Field, StringConstraints
@@ -12,6 +13,10 @@ EnglishLessonState = Literal[
     "not_started", "in_progress", "practice_completed", "proficient", "mastered"
 ]
 EnglishPracticeMode = Literal["guided_practice", "retry_review"]
+EnglishDiagnosticPurpose = Literal["baseline", "endline"]
+EnglishDiagnosticTaskType = Literal[
+    "vocabulary_in_context", "banked_cloze", "open_cloze", "reading_comprehension"
+]
 EnglishErrorCategory = Literal[
     "unknown_meaning",
     "missed_clue",
@@ -149,6 +154,10 @@ class CreateEnglishCheckpointSessionRequest(ApiModel):
     module_code: str = Field(pattern=r"^E(?:0|[1-9][0-9]*)$")
 
 
+class CreateEnglishDiagnosticSessionRequest(ApiModel):
+    expected_purpose: EnglishDiagnosticPurpose | None = None
+
+
 class EnglishPracticeSessionResponse(ApiModel):
     session_id: str
     status: Literal["active", "completed"]
@@ -180,6 +189,48 @@ class EnglishCheckpointSessionResponse(ApiModel):
     score: float | None
     passed: bool | None
     development_drafts: bool
+
+
+class EnglishDiagnosticTaskScoreResponse(ApiModel):
+    task_type: EnglishDiagnosticTaskType
+    correct_parts: int = Field(ge=0)
+    total_parts: int = Field(ge=1)
+    percentage: float = Field(ge=0, le=100)
+    recommended_lesson_key: str
+    recommended_lesson_title: str
+
+
+class EnglishDiagnosticSessionResponse(ApiModel):
+    session_id: str
+    status: Literal["active", "completed"]
+    purpose: EnglishDiagnosticPurpose
+    exam_profile_key: str
+    form_key: str
+    form_revision: int
+    title: str
+    question_count: int = Field(ge=1)
+    expected_part_count: int = Field(ge=1)
+    resolved_count: int = Field(ge=0)
+    correct_parts: int = Field(ge=0)
+    total_parts: int = Field(ge=0)
+    score: float | None = Field(default=None, ge=0, le=1)
+    percentage: float | None = Field(default=None, ge=0, le=100)
+    band: Literal["foundation", "developing", "secure"] | None = None
+    task_scores: list[EnglishDiagnosticTaskScoreResponse]
+    development_drafts: bool
+    started_at: datetime
+    completed_at: datetime | None = None
+
+
+class EnglishDiagnosticNextResponse(ApiModel):
+    status: Literal["content_pending", "start", "resume", "baseline_complete", "completed"]
+    purpose: EnglishDiagnosticPurpose | None = None
+    session_id: str | None = None
+    result_session_id: str | None = None
+    title: str
+    message: str
+    estimated_minutes: int | None = None
+    question_count: int | None = None
 
 
 class EnglishChoiceOptionResponse(ApiModel):
@@ -231,6 +282,13 @@ class EnglishCheckpointNextQuestionResponse(ApiModel):
     question: EnglishPublicQuestionResponse | None = None
 
 
+class EnglishDiagnosticNextQuestionResponse(ApiModel):
+    status: Literal["active", "completed"]
+    session: EnglishDiagnosticSessionResponse
+    position: int | None = None
+    question: EnglishPublicQuestionResponse | None = None
+
+
 EnglishAnswerText = Annotated[str, StringConstraints(max_length=1000)]
 
 
@@ -252,11 +310,22 @@ class SubmitEnglishCheckpointAttemptRequest(ApiModel):
     )
 
 
+class SubmitEnglishDiagnosticAttemptRequest(SubmitEnglishCheckpointAttemptRequest):
+    pass
+
+
 class EnglishCheckpointAttemptResponse(ApiModel):
     attempt_id: str
     accepted: Literal[True] = True
     checkpoint_completed: bool
     session: EnglishCheckpointSessionResponse
+
+
+class EnglishDiagnosticAttemptResponse(ApiModel):
+    attempt_id: str
+    accepted: Literal[True] = True
+    diagnostic_completed: bool
+    session: EnglishDiagnosticSessionResponse
 
 
 class EnglishAttemptPartResult(ApiModel):

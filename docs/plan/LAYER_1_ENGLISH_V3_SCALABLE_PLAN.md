@@ -489,7 +489,8 @@ optional Full-route lessons:
    editorial decisions against its 121 pinned lesson, checkpoint-form, question and passage
    fingerprints;
 2. correct and re-export excluded items, then complete the immutable approvals;
-3. run the protected baseline/endline and checkpoint journey in hosted staging;
+3. deploy migration `202610300037`, then run the implemented protected baseline/endline and
+   checkpoint learner journey in hosted staging;
 4. confirm the Sprint release manifest contains only approved immutable revisions; and
 5. keep every item draft-only until the release gates pass.
 
@@ -498,4 +499,11 @@ It pins the fixed 121-record Sprint scope, exposes review and publication progre
 revealing answers, and remains `review_pending` until human decisions are recorded. It then
 remains `publication_pending` until every approved revision is publication-requested and
 published; only that complete state can report `ready`.
+
+The objective diagnostic runtime is also implemented locally. It uses the four-group,
+20-part baseline and matched endline contracts, keeps group correctness hidden until form
+completion, reports task-level skill evidence rather than an official scholarship score and
+keeps the endline locked until all fixed Sprint lessons are mastered. Hosted migration and
+authenticated staging acceptance remain outstanding; no draft content was approved or
+published by this implementation.
 

@@ -14,6 +14,7 @@ import type {
   EnglishCourseMapResponse,
   EnglishProgressResponse,
 } from "@/lib/api/english";
+import { EnglishDiagnosticCard } from "@/components/english-diagnostic-card";
 
 import { SubjectSwitch } from "../screens/english";
 import {
@@ -119,6 +120,8 @@ export function EnglishCourseScreen({
           comprehension and timed composition.
         </Muted>
       </Card>
+
+      <EnglishDiagnosticCard />
 
       {course.modules.map((module) => {
         const moduleAvailable = module.lessons.filter(

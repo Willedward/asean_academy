@@ -108,15 +108,18 @@ sections.
 | E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented and hosted as draft; English and editorial review pending |
 | E4.4 pilot | Original cross-sentence open cloze covering reference chains, contrast, sequence and repeated actions | Implemented and hosted as draft; English and editorial review pending |
 | E4.5 pilot | Original timed open-cloze checkpoint integrating grammatical, lexical and cohesion evidence | Implemented and hosted as draft; English and editorial review pending |
-| E3b | English checkpoints and objective baseline/endline diagnostics | Not started |
+| E3b | English checkpoints and objective baseline/endline diagnostics | Implemented locally with protected routing, deterministic scoring and learner UI; hosted migration/journey pending |
 | E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
 
 The English design kit remains the visual reference. The authenticated learner routes at
-`/english`, `/english/lessons/[lessonKey]` and `/english/practice/[sessionId]` now connect
-the E1.1 source contracts to production-shaped APIs. Draft content still fails closed
-when the development content flag is disabled.
+`/english`, `/english/lessons/[lessonKey]`, `/english/practice/[sessionId]` and
+`/english/diagnostics/[sessionId]` now connect the source contracts to production-shaped
+APIs. The protected diagnostic pins four disjoint question groups and 20 scored parts,
+withholds correctness until completion, records immutable evidence and unlocks the matched
+endline only after the Sprint route is mastered. Draft content still fails closed when the
+development content flag is disabled.
 
 ## Implemented repository contract
 
@@ -128,6 +131,7 @@ The foundation root is `backend_resources/english/v1`:
 - `lessons/` contains versioned lesson sources;
 - `passages/` contains immutable checksum-bound passage revisions;
 - `banks/` defines counts, outcomes and exposure-pool distributions; and
+- `forms/` pins the disjoint baseline, endline, reserve, checkpoint and mock contracts; and
 - `questions/` contains versioned objective questions with deterministic response specs.
 
 The Pydantic contracts, marking and validation live in:
@@ -160,8 +164,9 @@ The administrator content-review page exposes the identical scope as
 16 lessons, 20 checkpoint forms, 65 question groups and 20 passages. Every selected record
 receives its own append-only English or editorial decision; excluded records remain pending
 and appear in the fingerprint-bound correction export after changes are requested. Apply
-migration `202610290036_english_checkpoint_form_review.sql` before using this scope in hosted
-staging. Approving the route does not publish it.
+migrations `202610290036_english_checkpoint_form_review.sql` and
+`202610300037_english_diagnostic_sessions.sql` before using this scope and the protected
+diagnostic in hosted staging. Approving the route does not publish it.
 
 Use `--publish` only when checking a human-reviewed release candidate. The current pilot
 must fail that gate because it is deliberately still draft content.
@@ -174,7 +179,7 @@ The source implementation now includes exclusive English batch claims, determini
 exact and near-template duplicate checks, protected reviewer packet exports, passage-level
 review, correction notes, subject-aware English and editorial decisions, consolidated
 batch/unit/route review and an importer that refuses an invalid snapshot. Apply migrations
-028–030 and 036,
+028–030, 036 and 037,
 and deploy this branch before expecting these items in the hosted administrator queue.
 
 ### 2. Deliver the first vertical slice
