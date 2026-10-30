@@ -14,12 +14,16 @@ from .english_models import (
     EnglishAssessmentForm,
     EnglishBankManifest,
     EnglishCurriculumCatalogue,
+    EnglishEssayPrompt,
+    EnglishEssayRubric,
     EnglishExamProfile,
     EnglishLesson,
     EnglishObjectiveQuestion,
     EnglishPassage,
     ShortTextResponse,
     SourceInventory,
+    essay_prompt_content_hash,
+    essay_rubric_content_hash,
     passage_content_hash,
 )
 
@@ -42,6 +46,8 @@ class EnglishFoundationReport:
     manifests: list[EnglishBankManifest] = field(default_factory=list)
     questions: list[EnglishObjectiveQuestion] = field(default_factory=list)
     forms: list[EnglishAssessmentForm] = field(default_factory=list)
+    essay_rubrics: list[EnglishEssayRubric] = field(default_factory=list)
+    essay_prompts: list[EnglishEssayPrompt] = field(default_factory=list)
     issues: list[EnglishIssue] = field(default_factory=list)
 
     @property
@@ -97,6 +103,8 @@ class EnglishFoundationReport:
                 else 0
             ),
             "authored_lesson_count": len(self.lessons),
+            "essay_rubric_count": len(self.essay_rubrics),
+            "essay_prompt_count": len(self.essay_prompts),
             "route_lesson_counts": {route: len(route_keys[route]) for route in routes},
             "route_authored_lesson_counts": {
                 route: len(set(route_keys[route]) & authored_keys) for route in routes
@@ -230,6 +238,82 @@ def validate_english_foundation(root: Path, *, publish: bool = False) -> English
             profile_path,
             f"Unknown source references: {sorted(unknown_profile_sources)}",
         )
+
+    rubric_rows = _load_directory(
+        root, "rubrics", EnglishEssayRubric, report, "invalid_essay_rubric"
+    )
+    rubric_by_revision = {}
+    for path, rubric in rubric_rows:
+        if path.stem != f"{rubric.stable_key}-v{rubric.revision}":
+            _issue(
+                report,
+                "error",
+                "essay_rubric_filename",
+                path,
+                f"Expected {rubric.stable_key}-v{rubric.revision}.json",
+            )
+        key = (rubric.stable_key, rubric.revision)
+        if key in rubric_by_revision:
+            _issue(report, "error", "duplicate_essay_rubric_revision", path, str(key))
+        rubric_by_revision[key] = rubric
+        if rubric.exam_profile_key != report.exam_profile.profile_key:
+            _issue(report, "error", "essay_rubric_profile", path, rubric.exam_profile_key)
+        actual_hash = essay_rubric_content_hash(rubric)
+        if actual_hash != rubric.content_sha256:
+            _issue(
+                report,
+                "error",
+                "essay_rubric_checksum",
+                path,
+                f"Expected {rubric.content_sha256}, found {actual_hash}",
+            )
+        unknown = set(rubric.provenance.source_refs) - source_keys
+        if unknown:
+            _issue(report, "error", "unknown_essay_rubric_source", path, str(sorted(unknown)))
+        if publish and rubric.status not in {"reviewed", "published"}:
+            _issue(report, "error", "essay_rubric_review_required", path, rubric.stable_key)
+        report.essay_rubrics.append(rubric)
+
+    prompt_rows = _load_directory(
+        root, "prompts", EnglishEssayPrompt, report, "invalid_essay_prompt"
+    )
+    prompt_by_revision = {}
+    for path, prompt in prompt_rows:
+        if path.stem != f"{prompt.stable_key}-v{prompt.revision}":
+            _issue(
+                report,
+                "error",
+                "essay_prompt_filename",
+                path,
+                f"Expected {prompt.stable_key}-v{prompt.revision}.json",
+            )
+        key = (prompt.stable_key, prompt.revision)
+        if key in prompt_by_revision:
+            _issue(report, "error", "duplicate_essay_prompt_revision", path, str(key))
+        prompt_by_revision[key] = prompt
+        if prompt.exam_profile_key != report.exam_profile.profile_key:
+            _issue(report, "error", "essay_prompt_profile", path, prompt.exam_profile_key)
+        rubric_key = (prompt.rubric_key, prompt.rubric_revision)
+        rubric = rubric_by_revision.get(rubric_key)
+        if rubric is None:
+            _issue(report, "error", "missing_essay_prompt_rubric", path, str(rubric_key))
+        elif rubric.exam_profile_key != prompt.exam_profile_key:
+            _issue(report, "error", "essay_prompt_rubric_profile", path, str(rubric_key))
+        actual_hash = essay_prompt_content_hash(prompt)
+        if actual_hash != prompt.content_sha256:
+            _issue(
+                report,
+                "error",
+                "essay_prompt_checksum",
+                path,
+                f"Expected {prompt.content_sha256}, found {actual_hash}",
+            )
+        unknown = set(prompt.provenance.source_refs) - source_keys
+        if unknown:
+            _issue(report, "error", "unknown_essay_prompt_source", path, str(sorted(unknown)))
+        if publish and prompt.status not in {"reviewed", "published"}:
+            _issue(report, "error", "essay_prompt_review_required", path, prompt.stable_key)
+        report.essay_prompts.append(prompt)
 
     passage_rows = _load_directory(root, "passages", EnglishPassage, report, "invalid_passage")
     passage_by_key = {}
@@ -568,6 +652,8 @@ def write_english_schemas(output: Path):
         "bank-manifest-v1.schema.json": EnglishBankManifest,
         "lesson-v1.schema.json": EnglishLesson,
         "assessment-form-v1.schema.json": EnglishAssessmentForm,
+        "essay-rubric-v1.schema.json": EnglishEssayRubric,
+        "essay-prompt-v1.schema.json": EnglishEssayPrompt,
         "batch-manifest-v1.schema.json": EnglishBatchManifest,
         "batch-claims-v1.schema.json": EnglishBatchClaimRegistry,
     }

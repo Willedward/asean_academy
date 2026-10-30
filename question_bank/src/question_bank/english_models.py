@@ -18,6 +18,8 @@ QUESTION_KEY_PATTERN = r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$"
 BANK_KEY_PATTERN = r"^english-(ev|eg|eb|eo|er|ex)-v[0-9]+$"
 PASSAGE_KEY_PATTERN = r"^english-passage-[a-z0-9-]+$"
 EXAM_PROFILE_KEY_PATTERN = r"^asean-english-[a-z0-9-]+-v[0-9]+$"
+ESSAY_PROMPT_KEY_PATTERN = r"^english-essay-prompt-[a-z0-9-]+$"
+ESSAY_RUBRIC_KEY_PATTERN = r"^english-essay-rubric-[a-z0-9-]+$"
 ROUTE_TAG_ORDER = ("full", "core", "sprint")
 ROUTE_SIZE_BOUNDS = {"core": (28, 32), "sprint": (14, 16)}
 REQUIRED_ROUTE_MODULES = {f"E{index}" for index in range(10)}
@@ -209,6 +211,123 @@ class EnglishExamProfile(EnglishModel):
                 "The V3 profile must explicitly exclude unsupported recalled task types"
             )
         return self
+
+
+class EssayPerformanceBand(EnglishModel):
+    level: int = Field(ge=1, le=5)
+    label: str = Field(min_length=1, max_length=40)
+    descriptor: str = Field(min_length=1)
+
+
+class EssayRubricCriterion(EnglishModel):
+    criterion_key: str = Field(pattern=r"^[a-z][a-z0-9_]+$")
+    title: str = Field(min_length=1, max_length=80)
+    description: str = Field(min_length=1)
+    weight_percent: int = Field(ge=5, le=60)
+    bands: list[EssayPerformanceBand] = Field(min_length=5, max_length=5)
+
+    @model_validator(mode="after")
+    def bands_cover_the_complete_scale(self):
+        if [band.level for band in self.bands] != [1, 2, 3, 4, 5]:
+            raise ValueError("Essay criterion bands must be ordered from level 1 to level 5")
+        return self
+
+
+class EnglishEssayRubric(EnglishModel):
+    schema_version: Literal["1.0.0"] = ENGLISH_SCHEMA_VERSION
+    stable_key: str = Field(pattern=ESSAY_RUBRIC_KEY_PATTERN)
+    revision: int = Field(ge=1)
+    exam_profile_key: str = Field(pattern=EXAM_PROFILE_KEY_PATTERN)
+    title: str = Field(min_length=1, max_length=120)
+    purpose: str = Field(min_length=1)
+    status: Literal["draft", "reviewed", "published", "retired"]
+    official_score_claim: Literal[False] = False
+    scale_min: Literal[1] = 1
+    scale_max: Literal[5] = 5
+    criteria: list[EssayRubricCriterion] = Field(min_length=3, max_length=6)
+    learner_disclaimer: str = Field(min_length=1)
+    content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    provenance: EnglishProvenance
+
+    @model_validator(mode="after")
+    def rubric_is_bounded_and_weighted(self):
+        keys = [criterion.criterion_key for criterion in self.criteria]
+        if len(keys) != len(set(keys)):
+            raise ValueError("Essay rubric criterion keys must be unique")
+        if sum(criterion.weight_percent for criterion in self.criteria) != 100:
+            raise ValueError("Essay rubric criterion weights must total 100 percent")
+        if self.status in {"reviewed", "published"} and self.provenance.reviewed_at is None:
+            raise ValueError("Reviewed and published essay rubrics require review provenance")
+        return self
+
+
+class EnglishEssayPrompt(EnglishModel):
+    schema_version: Literal["1.0.0"] = ENGLISH_SCHEMA_VERSION
+    stable_key: str = Field(pattern=ESSAY_PROMPT_KEY_PATTERN)
+    revision: int = Field(ge=1)
+    exam_profile_key: str = Field(pattern=EXAM_PROFILE_KEY_PATTERN)
+    rubric_key: str = Field(pattern=ESSAY_RUBRIC_KEY_PATTERN)
+    rubric_revision: int = Field(ge=1)
+    title: str = Field(min_length=1, max_length=120)
+    prompt_family: Literal[
+        "reflective_personal_expository",
+        "narrative",
+        "opinion_discursive",
+        "general_expository",
+    ]
+    prompt_text: str = Field(min_length=1)
+    instructions: list[str] = Field(min_length=1)
+    time_limit_minutes: int = Field(ge=10, le=120)
+    time_limit_evidence: Literal["official", "candidate_reported", "inferred"]
+    word_count_guidance: int | None = Field(default=None, ge=50, le=2000)
+    word_count_status: Literal["not_stated", "guidance", "strict"] = "not_stated"
+    status: Literal["draft", "reviewed", "published", "retired"]
+    content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    provenance: EnglishProvenance
+
+    @model_validator(mode="after")
+    def prompt_is_evidence_bounded(self):
+        if len(set(self.instructions)) != len(self.instructions):
+            raise ValueError("Essay prompt instructions must be unique")
+        if any(not instruction.strip() for instruction in self.instructions):
+            raise ValueError("Essay prompt instructions cannot be blank")
+        if (self.word_count_guidance is None) != (self.word_count_status == "not_stated"):
+            raise ValueError("Essay word-count guidance and status must be supplied together")
+        if self.status in {"reviewed", "published"} and self.provenance.reviewed_at is None:
+            raise ValueError("Reviewed and published essay prompts require review provenance")
+        return self
+
+
+def essay_rubric_content_hash(rubric: EnglishEssayRubric | dict) -> str:
+    payload = (
+        rubric.model_dump(
+            mode="json", exclude={"status", "content_sha256", "provenance"}
+        )
+        if isinstance(rubric, EnglishEssayRubric)
+        else {
+            key: value
+            for key, value in rubric.items()
+            if key not in {"status", "content_sha256", "provenance"}
+        }
+    )
+    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def essay_prompt_content_hash(prompt: EnglishEssayPrompt | dict) -> str:
+    payload = (
+        prompt.model_dump(
+            mode="json", exclude={"status", "content_sha256", "provenance"}
+        )
+        if isinstance(prompt, EnglishEssayPrompt)
+        else {
+            key: value
+            for key, value in prompt.items()
+            if key not in {"status", "content_sha256", "provenance"}
+        }
+    )
+    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 class EnglishCurriculumCatalogue(EnglishModel):

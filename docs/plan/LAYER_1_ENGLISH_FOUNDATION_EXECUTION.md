@@ -108,8 +108,9 @@ sections.
 | E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented and hosted as draft; English and editorial review pending |
 | E4.4 pilot | Original cross-sentence open cloze covering reference chains, contrast, sequence and repeated actions | Implemented and hosted as draft; English and editorial review pending |
 | E4.5 pilot | Original timed open-cloze checkpoint integrating grammatical, lexical and cohesion evidence | Implemented and hosted as draft; English and editorial review pending |
-| E3b | English checkpoints and objective baseline/endline diagnostics | Implemented locally with protected routing, deterministic scoring and learner UI; hosted migration/journey pending |
-| E4 | Essay drafts, submissions, rubric jobs, quotas, feedback, reports and admin evidence | Not started |
+| E3b | English checkpoints and objective baseline/endline diagnostics | Implemented and deployed in preview with protected routing, deterministic scoring and learner UI; release remains draft-only |
+| ENG-T3.1 | Versioned essay prompts, instructional rubrics and immutable database revisions | Implemented as draft; English/editorial review pending |
+| ENG-T3.2–T3.10 | Essay drafts, submissions, self-review, fixture jobs, quotas, feedback, reports, calibration and admin evidence | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
 
@@ -376,6 +377,14 @@ rate limits, privacy checks, recovery states, exact revision imports and deploym
 evidence bound to the Git SHA.
 
 ## Immediate next milestone
+
+The technical milestone sequence now uses `ENG-Tx.y` identifiers so it cannot be confused
+with curriculum lesson identifiers such as `E8.1`. **ENG-T3.1** is implemented: the source
+foundation contains a checksum-pinned original prompt and a four-criterion instructional
+rubric, the rubric explicitly refuses any official-score claim, and migration
+`202610300038` stores immutable prompt/rubric revisions. The next independently executable
+engineering milestone is **ENG-T3.2 — essay draft creation and autosave**. It must pin the
+exact prompt revision but must not create an immutable submission or call a live model yet.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

@@ -1,4 +1,4 @@
-"""Transactional PostgreSQL import for validated objective English sources."""
+"""Transactional PostgreSQL import for validated English source contracts."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ def english_passage_revision_hash(passage: EnglishPassage) -> str:
 
 
 class EnglishObjectiveImporter:
-    """Import one validation-clean English objective snapshot atomically."""
+    """Import one validation-clean English snapshot atomically."""
 
     def __init__(self, connection):
         self.connection = connection
@@ -117,6 +117,173 @@ class EnglishObjectiveImporter:
                 )
                 outcome_ids[lesson.outcome_code] = cursor.fetchone()[0]
         return outcome_ids
+
+    @staticmethod
+    def _essay_rubric(cursor, rubric):
+        cursor.execute(
+            """
+            insert into english_essay_rubrics (stable_key)
+            values (%s)
+            on conflict (stable_key) do update set stable_key = excluded.stable_key
+            returning id
+            """,
+            (rubric.stable_key,),
+        )
+        rubric_id = cursor.fetchone()[0]
+        cursor.execute(
+            """
+            select id, content_sha256 from english_essay_rubric_versions
+            where rubric_id = %s and revision = %s
+            """,
+            (rubric_id, rubric.revision),
+        )
+        existing = cursor.fetchone()
+        if existing and existing[1] != rubric.content_sha256:
+            raise ValueError(
+                f"Essay rubric {rubric.stable_key} revision {rubric.revision} changed; "
+                "increment its revision"
+            )
+        cursor.execute(
+            "update english_essay_rubric_versions set is_current = false where rubric_id = %s",
+            (rubric_id,),
+        )
+        provenance = json.dumps(rubric.provenance.model_dump(mode="json"))
+        if existing:
+            cursor.execute(
+                """
+                update english_essay_rubric_versions set
+                    status = %s, provenance = %s::jsonb, reviewed_at = %s,
+                    review_notes = %s, is_current = true
+                where id = %s
+                """,
+                (
+                    rubric.status,
+                    provenance,
+                    rubric.provenance.reviewed_at,
+                    rubric.provenance.review_notes,
+                    existing[0],
+                ),
+            )
+            return existing[0]
+        cursor.execute(
+            """
+            insert into english_essay_rubric_versions (
+                rubric_id, revision, schema_version, exam_profile_key, title,
+                purpose, status, official_score_claim, scale_min, scale_max,
+                criteria, learner_disclaimer, content_sha256, provenance,
+                is_current, authored_at, reviewed_at, review_notes
+            ) values (
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                %s::jsonb, %s, %s, %s::jsonb, true, %s, %s, %s
+            )
+            returning id
+            """,
+            (
+                rubric_id,
+                rubric.revision,
+                rubric.schema_version,
+                rubric.exam_profile_key,
+                rubric.title,
+                rubric.purpose,
+                rubric.status,
+                rubric.official_score_claim,
+                rubric.scale_min,
+                rubric.scale_max,
+                json.dumps([criterion.model_dump(mode="json") for criterion in rubric.criteria]),
+                rubric.learner_disclaimer,
+                rubric.content_sha256,
+                provenance,
+                rubric.provenance.created_at,
+                rubric.provenance.reviewed_at,
+                rubric.provenance.review_notes,
+            ),
+        )
+        return cursor.fetchone()[0]
+
+    @staticmethod
+    def _essay_prompt(cursor, prompt, rubric_version_id):
+        cursor.execute(
+            """
+            insert into english_essay_prompts (stable_key)
+            values (%s)
+            on conflict (stable_key) do update set stable_key = excluded.stable_key
+            returning id
+            """,
+            (prompt.stable_key,),
+        )
+        prompt_id = cursor.fetchone()[0]
+        cursor.execute(
+            """
+            select id, content_sha256 from english_essay_prompt_versions
+            where prompt_id = %s and revision = %s
+            """,
+            (prompt_id, prompt.revision),
+        )
+        existing = cursor.fetchone()
+        if existing and existing[1] != prompt.content_sha256:
+            raise ValueError(
+                f"Essay prompt {prompt.stable_key} revision {prompt.revision} changed; "
+                "increment its revision"
+            )
+        cursor.execute(
+            "update english_essay_prompt_versions set is_current = false where prompt_id = %s",
+            (prompt_id,),
+        )
+        provenance = json.dumps(prompt.provenance.model_dump(mode="json"))
+        if existing:
+            cursor.execute(
+                """
+                update english_essay_prompt_versions set
+                    status = %s, provenance = %s::jsonb, reviewed_at = %s,
+                    review_notes = %s, is_current = true
+                where id = %s
+                """,
+                (
+                    prompt.status,
+                    provenance,
+                    prompt.provenance.reviewed_at,
+                    prompt.provenance.review_notes,
+                    existing[0],
+                ),
+            )
+            return existing[0]
+        cursor.execute(
+            """
+            insert into english_essay_prompt_versions (
+                prompt_id, rubric_version_id, revision, schema_version,
+                exam_profile_key, title, prompt_family, prompt_text, instructions,
+                time_limit_minutes, time_limit_evidence, word_count_guidance,
+                word_count_status, status, content_sha256, provenance, is_current,
+                authored_at, reviewed_at, review_notes
+            ) values (
+                %s, %s, %s, %s, %s, %s, %s, %s, %s::jsonb, %s,
+                %s, %s, %s, %s, %s, %s::jsonb, true, %s, %s, %s
+            )
+            returning id
+            """,
+            (
+                prompt_id,
+                rubric_version_id,
+                prompt.revision,
+                prompt.schema_version,
+                prompt.exam_profile_key,
+                prompt.title,
+                prompt.prompt_family,
+                prompt.prompt_text,
+                json.dumps(prompt.instructions),
+                prompt.time_limit_minutes,
+                prompt.time_limit_evidence,
+                prompt.word_count_guidance,
+                prompt.word_count_status,
+                prompt.status,
+                prompt.content_sha256,
+                provenance,
+                prompt.provenance.created_at,
+                prompt.provenance.reviewed_at,
+                prompt.provenance.review_notes,
+            ),
+        )
+        return cursor.fetchone()[0]
 
     @staticmethod
     def _passage(cursor, passage):
@@ -324,6 +491,18 @@ class EnglishObjectiveImporter:
             with self.connection.cursor() as cursor:
                 curriculum_id = self._curriculum(cursor, report.catalogue)
                 outcome_ids = self._modules_and_outcomes(cursor, curriculum_id, report.catalogue)
+                rubric_ids = {
+                    (rubric.stable_key, rubric.revision): self._essay_rubric(cursor, rubric)
+                    for rubric in report.essay_rubrics
+                }
+                prompt_ids = [
+                    self._essay_prompt(
+                        cursor,
+                        prompt,
+                        rubric_ids[(prompt.rubric_key, prompt.rubric_revision)],
+                    )
+                    for prompt in report.essay_prompts
+                ]
                 passage_ids = {
                     (passage.stable_key, passage.revision): self._passage(cursor, passage)
                     for passage in report.passages
@@ -352,6 +531,8 @@ class EnglishObjectiveImporter:
             "curriculum_version": report.catalogue.version_key,
             "module_count": len(report.catalogue.modules),
             "outcome_count": len(outcome_ids),
+            "essay_rubric_count": len(rubric_ids),
+            "essay_prompt_count": len(prompt_ids),
             "passage_count": len(passage_ids),
             "bank_count": len(bank_ids),
             "question_count": len(version_ids),
