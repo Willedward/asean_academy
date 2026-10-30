@@ -215,7 +215,7 @@ test.describe.serial("authenticated beta journeys", () => {
     await authenticate(page, identities.studentA);
     await page.goto("/english");
     await expect(
-      page.getByRole("heading", { name: "What school taught me beyond the classroom" }),
+      page.getByRole("heading", { name: "Using school learning beyond the classroom" }),
     ).toBeVisible();
     await page.getByRole("button", { name: "Write or resume" }).click();
     await page.waitForURL(/\/english\/essays\/[0-9a-f-]+$/);
