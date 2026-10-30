@@ -1,13 +1,25 @@
 "use client";
 
-import { AlertTriangle, Check, CloudOff, RefreshCw } from "lucide-react";
+import {
+  AlertTriangle,
+  Check,
+  CheckCircle2,
+  CloudOff,
+  Info,
+  LockKeyhole,
+  RefreshCw,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button, Callout, Card, Divider, Eyebrow, H1, H2, Muted, Tag } from "@/beta-kit/components/ui";
 import {
+  createEnglishEssaySubmission,
   EnglishEssayDraftApiError,
   getEnglishEssayDraft,
   type EnglishEssayDraftResponse,
+  type EnglishEssayPreSubmitResponse,
+  type EnglishEssaySubmissionResponse,
+  preSubmitEnglishEssayDraft,
   updateEnglishEssayDraft,
 } from "@/lib/api/english";
 
@@ -47,6 +59,13 @@ export function EnglishEssayDraftEditor({
   const [saveState, setSaveState] = useState<SaveState>("saved");
   const [hydrated, setHydrated] = useState(false);
   const [retryNonce, setRetryNonce] = useState(0);
+  const [preSubmit, setPreSubmit] =
+    useState<EnglishEssayPreSubmitResponse | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
+  const [submission, setSubmission] =
+    useState<EnglishEssaySubmissionResponse | null>(null);
+  const [submissionBusy, setSubmissionBusy] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const bodyRef = useRef(body);
   const savingRef = useRef(false);
 
@@ -160,8 +179,56 @@ export function EnglishEssayDraftEditor({
       setUpdatedAt(latest.updated_at);
       window.localStorage.removeItem(backupKey(initialDraft.draft_id));
       setSaveState("saved");
+      setPreSubmit(null);
+      setConfirmed(false);
+      setSubmissionError(null);
     } catch {
       setSaveState("offline");
+    }
+  }
+
+  async function reviewForSubmission() {
+    setSubmissionBusy(true);
+    setSubmissionError(null);
+    setConfirmed(false);
+    try {
+      const reviewed = await preSubmitEnglishEssayDraft(
+        initialDraft.draft_id,
+        editRevision,
+      );
+      setPreSubmit(reviewed);
+    } catch (caught) {
+      setPreSubmit(null);
+      setSubmissionError(
+        caught instanceof EnglishEssayDraftApiError && caught.status === 409
+          ? "The saved draft changed before review. Load the latest saved copy and try again."
+          : "The pre-submission checks could not be completed. Try again.",
+      );
+    } finally {
+      setSubmissionBusy(false);
+    }
+  }
+
+  async function submitSnapshot() {
+    if (!preSubmit?.can_submit || !confirmed) return;
+    setSubmissionBusy(true);
+    setSubmissionError(null);
+    try {
+      const created = await createEnglishEssaySubmission(
+        initialDraft.draft_id,
+        preSubmit.edit_revision,
+      );
+      setSubmission(created);
+      setPreSubmit(null);
+      setConfirmed(false);
+    } catch (caught) {
+      setSubmissionError(
+        caught instanceof EnglishEssayDraftApiError && caught.status === 409
+          ? "This saved revision changed or was already submitted. Save a new revision before submitting again."
+          : "The permanent snapshot could not be created. Your saved draft is unchanged; try again.",
+      );
+    } finally {
+      setSubmissionBusy(false);
     }
   }
 
@@ -198,7 +265,8 @@ export function EnglishEssayDraftEditor({
         <div className="flex flex-wrap gap-2">
           <Tag>{initialDraft.prompt.time_limit_minutes} minutes</Tag>
           {guidance ? <Tag>About {guidance} words</Tag> : null}
-          <Tag tone="amber">Submission disabled</Tag>
+          <Tag>Submission available</Tag>
+          <Tag tone="amber">AI marking unavailable</Tag>
         </div>
       </section>
       <div className="grid items-start gap-5 lg:grid-cols-[360px_minmax(0,1fr)]">
@@ -229,6 +297,9 @@ export function EnglishEssayDraftEditor({
             onChange={(event) => {
               setBody(event.target.value);
               if (saveState !== "conflict") setSaveState("local");
+              setPreSubmit(null);
+              setConfirmed(false);
+              setSubmissionError(null);
             }}
             maxLength={20000}
             spellCheck
@@ -275,6 +346,132 @@ export function EnglishEssayDraftEditor({
           </Muted>
         </Card>
       </div>
+      <section aria-label="Essay submission">
+        <Card className="gap-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex flex-col gap-1">
+            <Eyebrow>SUBMIT A PERMANENT SNAPSHOT</Eyebrow>
+            <H2>Review your saved revision before submitting</H2>
+            <Muted>
+              Submission preserves the exact essay, prompt and instructional
+              rubric revisions. It does not request AI feedback or create an
+              official score.
+            </Muted>
+          </div>
+          <LockKeyhole className="text-ns-brand" aria-hidden />
+        </div>
+        <Button
+          variant="primary"
+          onClick={() => void reviewForSubmission()}
+          disabled={
+            submissionBusy ||
+            saveState !== "saved" ||
+            body !== lastServerBody
+          }
+        >
+          {submissionBusy && !preSubmit
+            ? "Checking saved revision…"
+            : "Review before submitting"}
+        </Button>
+        {saveState !== "saved" || body !== lastServerBody ? (
+          <Muted className="text-sm">
+            Wait for the latest changes to be saved remotely before reviewing.
+          </Muted>
+        ) : null}
+        {submissionError ? (
+          <Callout tone="amber" icon={AlertTriangle}>
+            <strong>Submission was not completed.</strong>
+            <span>{submissionError}</span>
+          </Callout>
+        ) : null}
+        {preSubmit ? (
+          <div
+            className="flex flex-col gap-4"
+            role="region"
+            aria-label="Pre-submission checks"
+          >
+            <Divider />
+            <div className="flex flex-wrap gap-2">
+              <Tag>{preSubmit.word_count} words</Tag>
+              <Tag>{preSubmit.paragraph_count} paragraphs</Tag>
+              <Tag>Draft revision {preSubmit.edit_revision}</Tag>
+              <Tag>
+                Prompt r{preSubmit.prompt_revision} · Rubric r
+                {preSubmit.rubric_revision}
+              </Tag>
+            </div>
+            <ul className="m-0 flex list-none flex-col gap-2 p-0">
+              {preSubmit.checks.map((check) => {
+                const CheckIcon =
+                  check.status === "pass"
+                    ? CheckCircle2
+                    : check.status === "info"
+                      ? Info
+                      : AlertTriangle;
+                const tone =
+                  check.status === "block"
+                    ? "border-red-200 bg-red-50 text-red-800"
+                    : check.status === "warning"
+                      ? "border-amber-200 bg-amber-50 text-amber-900"
+                      : "border-ns-line bg-ns-raised text-ns-ink";
+                return (
+                  <li
+                    key={check.check_key}
+                    className={`flex items-start gap-2 rounded-xl border p-3 text-sm leading-6 ${tone}`}
+                  >
+                    <CheckIcon size={18} className="mt-0.5 shrink-0" aria-hidden />
+                    <span>{check.message}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            {preSubmit.can_submit ? (
+              <>
+                <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ns-line-strong bg-ns-surface p-4 text-sm leading-6 text-ns-ink">
+                  <input
+                    type="checkbox"
+                    checked={confirmed}
+                    onChange={(event) => setConfirmed(event.target.checked)}
+                    className="mt-1 size-4 accent-ns-brand"
+                  />
+                  <span>
+                    I understand that this creates a permanent snapshot of
+                    saved draft revision {preSubmit.edit_revision}. I can keep
+                    editing afterward and submit a later revision separately.
+                  </span>
+                </label>
+                <Button
+                  variant="primary"
+                  onClick={() => void submitSnapshot()}
+                  disabled={!confirmed || submissionBusy}
+                >
+                  {submissionBusy ? "Submitting snapshot…" : "Submit saved revision"}
+                </Button>
+              </>
+            ) : (
+              <Muted>
+                Resolve the blocking checks, save the draft, then run the
+                review again.
+              </Muted>
+            )}
+          </div>
+        ) : null}
+        {submission ? (
+          <Callout tone="success" icon={CheckCircle2}>
+            <strong>
+              Submission revision {submission.submission_revision} is saved permanently.
+            </strong>
+            <span>
+              Draft revision {submission.draft_edit_revision} · {submission.word_count} words · Submitted {savedLabel(submission.submitted_at)}
+            </span>
+            <span>
+              No AI feedback or official score was generated. You may continue
+              editing this draft and submit a later revision.
+            </span>
+          </Callout>
+        ) : null}
+        </Card>
+      </section>
     </div>
   );
 }

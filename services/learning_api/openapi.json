@@ -3263,6 +3263,33 @@
         "title": "CreateEnglishEssayDraftRequest",
         "type": "object"
       },
+      "CreateEnglishEssaySubmissionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "confirmed": {
+            "const": true,
+            "title": "Confirmed",
+            "type": "boolean"
+          },
+          "draft_id": {
+            "format": "uuid",
+            "title": "Draft Id",
+            "type": "string"
+          },
+          "expected_edit_revision": {
+            "minimum": 1.0,
+            "title": "Expected Edit Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "draft_id",
+          "expected_edit_revision",
+          "confirmed"
+        ],
+        "title": "CreateEnglishEssaySubmissionRequest",
+        "type": "object"
+      },
       "CreateEnglishPracticeSessionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -5355,8 +5382,7 @@
             "$ref": "#/components/schemas/EnglishEssayPromptResponse"
           },
           "submission_available": {
-            "const": false,
-            "default": false,
+            "default": true,
             "title": "Submission Available",
             "type": "boolean"
           },
@@ -5381,6 +5407,132 @@
           "updated_at"
         ],
         "title": "EnglishEssayDraftResponse",
+        "type": "object"
+      },
+      "EnglishEssayPreSubmitCheckResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "check_key": {
+            "title": "Check Key",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "warning",
+              "block",
+              "info"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "check_key",
+          "status",
+          "message"
+        ],
+        "title": "EnglishEssayPreSubmitCheckResponse",
+        "type": "object"
+      },
+      "EnglishEssayPreSubmitResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "body_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Body Sha256",
+            "type": "string"
+          },
+          "can_submit": {
+            "title": "Can Submit",
+            "type": "boolean"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayPreSubmitCheckResponse"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "continuous_timing_observed": {
+            "const": false,
+            "default": false,
+            "title": "Continuous Timing Observed",
+            "type": "boolean"
+          },
+          "draft_id": {
+            "title": "Draft Id",
+            "type": "string"
+          },
+          "edit_revision": {
+            "minimum": 1.0,
+            "title": "Edit Revision",
+            "type": "integer"
+          },
+          "paragraph_count": {
+            "minimum": 0.0,
+            "title": "Paragraph Count",
+            "type": "integer"
+          },
+          "prompt_key": {
+            "title": "Prompt Key",
+            "type": "string"
+          },
+          "prompt_revision": {
+            "minimum": 1.0,
+            "title": "Prompt Revision",
+            "type": "integer"
+          },
+          "prompt_time_limit_minutes": {
+            "maximum": 120.0,
+            "minimum": 10.0,
+            "title": "Prompt Time Limit Minutes",
+            "type": "integer"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "time_limit_evidence": {
+            "enum": [
+              "official",
+              "candidate_reported",
+              "inferred"
+            ],
+            "title": "Time Limit Evidence",
+            "type": "string"
+          },
+          "word_count": {
+            "minimum": 0.0,
+            "title": "Word Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "draft_id",
+          "edit_revision",
+          "prompt_key",
+          "prompt_revision",
+          "rubric_key",
+          "rubric_revision",
+          "word_count",
+          "paragraph_count",
+          "body_sha256",
+          "prompt_time_limit_minutes",
+          "time_limit_evidence",
+          "checks",
+          "can_submit"
+        ],
+        "title": "EnglishEssayPreSubmitResponse",
         "type": "object"
       },
       "EnglishEssayPromptResponse": {
@@ -5487,6 +5639,132 @@
           "development_preview"
         ],
         "title": "EnglishEssayPromptResponse",
+        "type": "object"
+      },
+      "EnglishEssaySubmissionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "ai_feedback_available": {
+            "const": false,
+            "default": false,
+            "title": "Ai Feedback Available",
+            "type": "boolean"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "body_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Body Sha256",
+            "type": "string"
+          },
+          "deterministic_checks": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayPreSubmitCheckResponse"
+            },
+            "title": "Deterministic Checks",
+            "type": "array"
+          },
+          "draft_age_seconds": {
+            "minimum": 0.0,
+            "title": "Draft Age Seconds",
+            "type": "integer"
+          },
+          "draft_created_at": {
+            "format": "date-time",
+            "title": "Draft Created At",
+            "type": "string"
+          },
+          "draft_edit_revision": {
+            "minimum": 1.0,
+            "title": "Draft Edit Revision",
+            "type": "integer"
+          },
+          "draft_id": {
+            "title": "Draft Id",
+            "type": "string"
+          },
+          "draft_updated_at": {
+            "format": "date-time",
+            "title": "Draft Updated At",
+            "type": "string"
+          },
+          "immutable": {
+            "const": true,
+            "default": true,
+            "title": "Immutable",
+            "type": "boolean"
+          },
+          "official_score_available": {
+            "const": false,
+            "default": false,
+            "title": "Official Score Available",
+            "type": "boolean"
+          },
+          "paragraph_count": {
+            "exclusiveMinimum": 0.0,
+            "title": "Paragraph Count",
+            "type": "integer"
+          },
+          "prompt_key": {
+            "title": "Prompt Key",
+            "type": "string"
+          },
+          "prompt_revision": {
+            "minimum": 1.0,
+            "title": "Prompt Revision",
+            "type": "integer"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          },
+          "submission_revision": {
+            "minimum": 1.0,
+            "title": "Submission Revision",
+            "type": "integer"
+          },
+          "submitted_at": {
+            "format": "date-time",
+            "title": "Submitted At",
+            "type": "string"
+          },
+          "word_count": {
+            "exclusiveMinimum": 0.0,
+            "title": "Word Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "submission_id",
+          "draft_id",
+          "prompt_key",
+          "prompt_revision",
+          "rubric_key",
+          "rubric_revision",
+          "draft_edit_revision",
+          "submission_revision",
+          "body",
+          "body_sha256",
+          "word_count",
+          "paragraph_count",
+          "deterministic_checks",
+          "draft_created_at",
+          "draft_updated_at",
+          "draft_age_seconds",
+          "submitted_at"
+        ],
+        "title": "EnglishEssaySubmissionResponse",
         "type": "object"
       },
       "EnglishExamProfilePartResponse": {
@@ -7636,6 +7914,21 @@
           "development_drafts"
         ],
         "title": "PracticeSessionSummary",
+        "type": "object"
+      },
+      "PreSubmitEnglishEssayRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_edit_revision": {
+            "minimum": 1.0,
+            "title": "Expected Edit Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected_edit_revision"
+        ],
+        "title": "PreSubmitEnglishEssayRequest",
         "type": "object"
       },
       "ProfileResponse": {
@@ -19563,6 +19856,144 @@
         ]
       }
     },
+    "/api/v1/english/essay-drafts/{draft_id}/pre-submit": {
+      "post": {
+        "operationId": "preSubmitEnglishEssayDraft",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "draft_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Draft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreSubmitEnglishEssayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayPreSubmitResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Run deterministic checks against one exact remotely saved draft revision",
+        "tags": [
+          "english"
+        ]
+      }
+    },
     "/api/v1/english/essay-prompts/current": {
       "get": {
         "operationId": "getCurrentEnglishEssayPrompt",
@@ -19674,6 +20105,145 @@
           }
         ],
         "summary": "Get the current learner-safe English essay prompt revision",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions": {
+      "post": {
+        "operationId": "createEnglishEssaySubmission",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishEssaySubmissionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssaySubmissionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create an immutable essay snapshot after explicit learner confirmation",
         "tags": [
           "english"
         ]

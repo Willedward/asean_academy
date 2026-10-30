@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import Annotated, Literal
+from uuid import UUID
 
 from pydantic import Field, StringConstraints
 
@@ -135,7 +136,7 @@ class EnglishEssayDraftResponse(ApiModel):
     edit_revision: int = Field(ge=1)
     created_at: datetime
     updated_at: datetime
-    submission_available: Literal[False] = False
+    submission_available: bool = True
     ai_feedback_available: Literal[False] = False
 
 
@@ -147,6 +148,62 @@ class CreateEnglishEssayDraftRequest(ApiModel):
 class UpdateEnglishEssayDraftRequest(ApiModel):
     body: Annotated[str, StringConstraints(max_length=20000)]
     expected_edit_revision: int = Field(ge=1)
+
+
+class PreSubmitEnglishEssayRequest(ApiModel):
+    expected_edit_revision: int = Field(ge=1)
+
+
+class EnglishEssayPreSubmitCheckResponse(ApiModel):
+    check_key: str
+    status: Literal["pass", "warning", "block", "info"]
+    message: str
+
+
+class EnglishEssayPreSubmitResponse(ApiModel):
+    draft_id: str
+    edit_revision: int = Field(ge=1)
+    prompt_key: str
+    prompt_revision: int = Field(ge=1)
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    word_count: int = Field(ge=0)
+    paragraph_count: int = Field(ge=0)
+    body_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    prompt_time_limit_minutes: int = Field(ge=10, le=120)
+    time_limit_evidence: Literal["official", "candidate_reported", "inferred"]
+    continuous_timing_observed: Literal[False] = False
+    checks: list[EnglishEssayPreSubmitCheckResponse]
+    can_submit: bool
+
+
+class CreateEnglishEssaySubmissionRequest(ApiModel):
+    draft_id: UUID
+    expected_edit_revision: int = Field(ge=1)
+    confirmed: Literal[True]
+
+
+class EnglishEssaySubmissionResponse(ApiModel):
+    submission_id: str
+    draft_id: str
+    prompt_key: str
+    prompt_revision: int = Field(ge=1)
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    draft_edit_revision: int = Field(ge=1)
+    submission_revision: int = Field(ge=1)
+    body: str
+    body_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    word_count: int = Field(gt=0)
+    paragraph_count: int = Field(gt=0)
+    deterministic_checks: list[EnglishEssayPreSubmitCheckResponse]
+    draft_created_at: datetime
+    draft_updated_at: datetime
+    draft_age_seconds: int = Field(ge=0)
+    submitted_at: datetime
+    immutable: Literal[True] = True
+    ai_feedback_available: Literal[False] = False
+    official_score_available: Literal[False] = False
 
 
 class EnglishLessonSectionResponse(ApiModel):

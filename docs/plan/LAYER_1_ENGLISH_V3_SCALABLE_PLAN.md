@@ -484,11 +484,12 @@ review or safeguarding owner is unavailable.
 
 Technical implementation identifiers use `ENG-Tx.y`; curriculum lesson identifiers remain
 `E0.1` through `E9.5`. **ENG-T3.1** supplies the versioned prompt/rubric source and database
-contract. **ENG-T3.2** now adds owned essay drafts with local recovery, revision-safe remote
-autosave and a learner editor. Both remain draft-only and do not enable submission or AI
-marking. The next technical increment is **ENG-T3.3 — deterministic pre-submit checks and
-immutable essay submission revisions**, while the review and release evidence below
-continues independently.
+contract. **ENG-T3.2** adds owned essay drafts with local recovery, revision-safe remote
+autosave and a learner editor. **ENG-T3.3** adds deterministic pre-submit checks, explicit
+learner confirmation and immutable submission revisions pinned to the exact draft, prompt and
+instructional rubric. Both remain draft-only; submission creates no AI feedback or official
+score. The next technical increment is **ENG-T3.4 — learner self-review against the pinned
+instructional rubric**, while the review and release evidence below continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

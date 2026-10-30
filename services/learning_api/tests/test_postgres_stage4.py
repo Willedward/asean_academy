@@ -24,6 +24,7 @@ from learning_api.english_essay_repository import (
     EnglishEssayError,
     PostgresEnglishEssayRepository,
 )
+from learning_api.english_essay_service import EnglishEssayService
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.identity_repository import invitation_digest
 from learning_api.main import create_app
@@ -218,6 +219,109 @@ def test_postgres_english_essay_draft_is_owned_revision_pinned_and_conflict_safe
                 connection.execute(
                     "update english_essay_drafts set student_id = %s where id = %s",
                     (other_learner_id, created["draft_id"]),
+                )
+
+
+@pytest.mark.postgres
+def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    other_learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s), (%s, %s)",
+            (
+                learner_id,
+                f"{learner_id}@example.test",
+                other_learner_id,
+                f"{other_learner_id}@example.test",
+            ),
+        )
+    repository = PostgresEnglishEssayRepository(database_url)
+    service = EnglishEssayService(
+        REPOSITORY_ROOT, repository, learner_id, allow_drafts=True
+    )
+    prompt = service.current_prompt()
+    draft = service.create_or_resume(
+        prompt_key=prompt.stable_key,
+        prompt_revision=prompt.revision,
+        idempotency_key="postgres-submission-draft",
+    )
+    first_body = "I learned to plan carefully.\n\nI apply that process beyond school."
+    saved = service.update(
+        draft.draft_id, body=first_body, expected_edit_revision=1
+    )
+    checks = service.pre_submit(
+        draft.draft_id, expected_edit_revision=saved.edit_revision
+    )
+    assert checks.can_submit is True
+    assert checks.rubric_key == "english-essay-rubric-instructional-v1"
+    first = service.submit(
+        draft.draft_id,
+        expected_edit_revision=saved.edit_revision,
+        idempotency_key="postgres-submission-one",
+    )
+    repeated = service.submit(
+        draft.draft_id,
+        expected_edit_revision=saved.edit_revision,
+        idempotency_key="postgres-submission-one",
+    )
+    assert repeated.submission_id == first.submission_id
+    assert first.submission_revision == 1
+    assert first.body == first_body
+    assert first.ai_feedback_available is False
+
+    with pytest.raises(EnglishEssayError, match="already submitted"):
+        service.submit(
+            draft.draft_id,
+            expected_edit_revision=saved.edit_revision,
+            idempotency_key="postgres-submission-duplicate",
+        )
+    with pytest.raises(EnglishEssayError, match="not found"):
+        EnglishEssayService(
+            REPOSITORY_ROOT, repository, other_learner_id, allow_drafts=True
+        ).pre_submit(draft.draft_id, expected_edit_revision=saved.edit_revision)
+
+    second_body = first_body + " I also test the result and adjust my plan."
+    revised = service.update(
+        draft.draft_id,
+        body=second_body,
+        expected_edit_revision=saved.edit_revision,
+    )
+    second = service.submit(
+        draft.draft_id,
+        expected_edit_revision=revised.edit_revision,
+        idempotency_key="postgres-submission-two",
+    )
+    assert second.submission_revision == 2
+    assert second.body == second_body
+
+    with psycopg.connect(database_url) as connection:
+        rows = connection.execute(
+            """
+            select submission_revision, body, prompt_version_id, rubric_version_id
+              from english_essay_submissions
+             where draft_id = %s order by submission_revision
+            """,
+            (draft.draft_id,),
+        ).fetchall()
+        assert [(row[0], row[1]) for row in rows] == [
+            (1, first_body),
+            (2, second_body),
+        ]
+        assert rows[0][2] == rows[1][2]
+        assert rows[0][3] == rows[1][3]
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    "update english_essay_submissions set body = 'changed' where id = %s",
+                    (first.submission_id,),
+                )
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    "delete from english_essay_submissions where id = %s",
+                    (first.submission_id,),
                 )
 
 

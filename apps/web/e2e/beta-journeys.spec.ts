@@ -238,6 +238,36 @@ test.describe.serial("authenticated beta journeys", () => {
       essay,
     );
     await expect(page.getByText("13 words", { exact: true })).toBeVisible();
+
+    const preSubmit = page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" &&
+        response.url().includes("/pre-submit"),
+    );
+    await page.getByRole("button", { name: "Review before submitting" }).click();
+    expect((await preSubmit).status()).toBe(200);
+    await expect(
+      page.getByRole("region", { name: "Pre-submission checks" }),
+    ).toContainText("Prompt revision 1 and instructional rubric revision 1");
+
+    await page
+      .getByRole("checkbox", {
+        name: /I understand that this creates a permanent snapshot/,
+      })
+      .check();
+    const permanentSubmission = page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" &&
+        response.url().endsWith("/api/v1/english/essay-submissions"),
+    );
+    await page.getByRole("button", { name: "Submit saved revision" }).click();
+    expect((await permanentSubmission).status()).toBe(201);
+    await expect(
+      page.getByText("Submission revision 1 is saved permanently."),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/No AI feedback or official score was generated/),
+    ).toBeVisible();
   });
 
   test("a second student cannot see the first student's progress", async ({

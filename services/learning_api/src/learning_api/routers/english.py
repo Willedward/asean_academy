@@ -21,6 +21,7 @@ from ..english_contracts import (
     CreateEnglishCheckpointSessionRequest,
     CreateEnglishDiagnosticSessionRequest,
     CreateEnglishEssayDraftRequest,
+    CreateEnglishEssaySubmissionRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
     EnglishCheckpointAttemptResponse,
@@ -33,12 +34,15 @@ from ..english_contracts import (
     EnglishDiagnosticSessionResponse,
     EnglishErrorClassificationResponse,
     EnglishEssayDraftResponse,
+    EnglishEssayPreSubmitResponse,
     EnglishEssayPromptResponse,
+    EnglishEssaySubmissionResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
     EnglishNextQuestionResponse,
     EnglishPracticeSessionResponse,
     EnglishProgressResponse,
+    PreSubmitEnglishEssayRequest,
     SubmitEnglishAttemptRequest,
     SubmitEnglishCheckpointAttemptRequest,
     SubmitEnglishDiagnosticAttemptRequest,
@@ -127,6 +131,47 @@ async def update_essay_draft(
             str(draft_id),
             body=body.body,
             expected_edit_revision=body.expected_edit_revision,
+        )
+    )
+
+
+@router.post(
+    "/essay-drafts/{draft_id}/pre-submit",
+    operation_id="preSubmitEnglishEssayDraft",
+    response_model=EnglishEssayPreSubmitResponse,
+    summary="Run deterministic checks against one exact remotely saved draft revision",
+)
+async def pre_submit_essay_draft(
+    draft_id: UUID,
+    body: PreSubmitEnglishEssayRequest,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssayPreSubmitResponse:
+    return _safe(
+        lambda: service.pre_submit(
+            str(draft_id), expected_edit_revision=body.expected_edit_revision
+        )
+    )
+
+
+@router.post(
+    "/essay-submissions",
+    operation_id="createEnglishEssaySubmission",
+    response_model=EnglishEssaySubmissionResponse,
+    status_code=201,
+    summary="Create an immutable essay snapshot after explicit learner confirmation",
+)
+async def create_essay_submission(
+    body: CreateEnglishEssaySubmissionRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssaySubmissionResponse:
+    return _safe(
+        lambda: service.submit(
+            str(body.draft_id),
+            expected_edit_revision=body.expected_edit_revision,
+            idempotency_key=idempotency_key,
         )
     )
 
