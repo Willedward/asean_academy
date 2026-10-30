@@ -10,6 +10,7 @@ from fastapi import APIRouter, Header, HTTPException, Path
 from ..course_catalogue import CatalogueError
 from ..dependencies import (
     EnglishDiagnosticServiceDependency,
+    EnglishEssayServiceDependency,
     EnglishLearningServiceDependency,
     PracticeAttemptRateLimitDependency,
     PracticeSessionRateLimitDependency,
@@ -19,6 +20,7 @@ from ..english_contracts import (
     ClassifyEnglishErrorRequest,
     CreateEnglishCheckpointSessionRequest,
     CreateEnglishDiagnosticSessionRequest,
+    CreateEnglishEssayDraftRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
     EnglishCheckpointAttemptResponse,
@@ -30,6 +32,8 @@ from ..english_contracts import (
     EnglishDiagnosticNextResponse,
     EnglishDiagnosticSessionResponse,
     EnglishErrorClassificationResponse,
+    EnglishEssayDraftResponse,
+    EnglishEssayPromptResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
     EnglishNextQuestionResponse,
@@ -38,7 +42,9 @@ from ..english_contracts import (
     SubmitEnglishAttemptRequest,
     SubmitEnglishCheckpointAttemptRequest,
     SubmitEnglishDiagnosticAttemptRequest,
+    UpdateEnglishEssayDraftRequest,
 )
+from ..english_essay_repository import EnglishEssayError
 from ..english_learning_repository import EnglishLearningError
 
 router = APIRouter(prefix="/api/v1/english", tags=["english"])
@@ -49,12 +55,80 @@ IdempotencyHeader = Annotated[str, Header(alias="Idempotency-Key", min_length=1,
 def _safe(call):
     try:
         return call()
-    except (EnglishLearningError, CatalogueError) as exc:
+    except (EnglishLearningError, EnglishEssayError, CatalogueError) as exc:
         status_code = getattr(exc, "status", getattr(exc, "status_code", 400))
         raise HTTPException(
             status_code=status_code,
             detail={"code": exc.code, "message": str(exc)},
         ) from exc
+
+
+@router.get(
+    "/essay-prompts/current",
+    operation_id="getCurrentEnglishEssayPrompt",
+    response_model=EnglishEssayPromptResponse,
+    summary="Get the current learner-safe English essay prompt revision",
+)
+async def current_essay_prompt(
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayPromptResponse:
+    return _safe(service.current_prompt)
+
+
+@router.post(
+    "/essay-drafts",
+    operation_id="createEnglishEssayDraft",
+    response_model=EnglishEssayDraftResponse,
+    status_code=201,
+    summary="Create or resume an owned essay draft pinned to the current prompt revision",
+)
+async def create_essay_draft(
+    body: CreateEnglishEssayDraftRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeSessionRateLimitDependency,
+) -> EnglishEssayDraftResponse:
+    return _safe(
+        lambda: service.create_or_resume(
+            prompt_key=body.prompt_key,
+            prompt_revision=body.prompt_revision,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/essay-drafts/{draft_id}",
+    operation_id="getEnglishEssayDraft",
+    response_model=EnglishEssayDraftResponse,
+    summary="Resume an owned mutable English essay draft",
+)
+async def essay_draft(
+    draft_id: UUID,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayDraftResponse:
+    return _safe(lambda: service.get(str(draft_id)))
+
+
+@router.patch(
+    "/essay-drafts/{draft_id}",
+    operation_id="updateEnglishEssayDraft",
+    response_model=EnglishEssayDraftResponse,
+    summary="Autosave an owned essay draft with optimistic concurrency",
+)
+async def update_essay_draft(
+    draft_id: UUID,
+    body: UpdateEnglishEssayDraftRequest,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssayDraftResponse:
+    return _safe(
+        lambda: service.update(
+            str(draft_id),
+            body=body.body,
+            expected_edit_revision=body.expected_edit_revision,
+        )
+    )
 
 
 @router.get(

@@ -5,6 +5,7 @@ import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { getVerifiedSession } from "@/lib/auth/session";
 import {
   getServerEnglishCourseMap,
+  getServerCurrentEnglishEssayPrompt,
   getServerEnglishProgress,
   ServerLearningApiError,
 } from "@/lib/server/learning-api";
@@ -24,9 +25,20 @@ export default async function EnglishPage() {
   const result = await Promise.all([
     getServerEnglishCourseMap(session),
     getServerEnglishProgress(session),
+    getServerCurrentEnglishEssayPrompt(session),
   ])
-    .then(([course, progress]) => ({ course, progress, error: null }))
-    .catch((error: unknown) => ({ course: null, progress: null, error }));
+    .then(([course, progress, essayPrompt]) => ({
+      course,
+      progress,
+      essayPrompt,
+      error: null,
+    }))
+    .catch((error: unknown) => ({
+      course: null,
+      progress: null,
+      essayPrompt: null,
+      error,
+    }));
   if (result.error) {
     if (!(result.error instanceof ServerLearningApiError)) throw result.error;
     return (
@@ -45,6 +57,7 @@ export default async function EnglishPage() {
       learner={presentationLearner}
       course={result.course}
       progress={result.progress}
+      essayPrompt={result.essayPrompt}
       mathsHref={mathsHref}
     />
   );

@@ -23,6 +23,10 @@ export type EnglishDiagnosticNextQuestionResponse =
   components["schemas"]["EnglishDiagnosticNextQuestionResponse"];
 export type EnglishDiagnosticAttemptResponse =
   components["schemas"]["EnglishDiagnosticAttemptResponse"];
+export type EnglishEssayPromptResponse =
+  components["schemas"]["EnglishEssayPromptResponse"];
+export type EnglishEssayDraftResponse =
+  components["schemas"]["EnglishEssayDraftResponse"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -35,6 +39,77 @@ function fixtureGuard(): void {
   if (process.env.NEXT_PUBLIC_USE_API_FIXTURES === "true") {
     throw new Error("English learning requires the local learning API.");
   }
+}
+
+export class EnglishEssayDraftApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+    this.name = "EnglishEssayDraftApiError";
+  }
+}
+
+export async function createEnglishEssayDraft(
+  promptKey: string,
+  promptRevision: number,
+): Promise<EnglishEssayDraftResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-drafts",
+    {
+      params: {
+        header: {
+          "Idempotency-Key": `english-essay-draft:${promptKey}:r${promptRevision}`,
+        },
+      },
+      body: { prompt_key: promptKey, prompt_revision: promptRevision },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssayDraft(
+  draftId: string,
+): Promise<EnglishEssayDraftResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-drafts/{draft_id}",
+    { params: { path: { draft_id: draftId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function updateEnglishEssayDraft(
+  draftId: string,
+  body: string,
+  expectedEditRevision: number,
+): Promise<EnglishEssayDraftResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().PATCH(
+    "/api/v1/english/essay-drafts/{draft_id}",
+    {
+      params: { path: { draft_id: draftId } },
+      body: { body, expected_edit_revision: expectedEditRevision },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
 }
 
 export async function getEnglishCourseMap(

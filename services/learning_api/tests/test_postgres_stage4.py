@@ -20,6 +20,10 @@ from question_bank.validation import validate_bank
 from learning_api.admin_contracts import CreateInvitationRequest
 from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
+from learning_api.english_essay_repository import (
+    EnglishEssayError,
+    PostgresEnglishEssayRepository,
+)
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.identity_repository import invitation_digest
 from learning_api.main import create_app
@@ -147,6 +151,73 @@ def test_postgres_english_essay_contracts_pin_exact_immutable_revisions():
                     set prompt_text = 'Mutated in place'
                     where is_current
                     """
+                )
+
+
+@pytest.mark.postgres
+def test_postgres_english_essay_draft_is_owned_revision_pinned_and_conflict_safe():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    other_learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s), (%s, %s)",
+            (
+                learner_id,
+                f"{learner_id}@example.test",
+                other_learner_id,
+                f"{other_learner_id}@example.test",
+            ),
+        )
+    prompt = {
+        "stable_key": "english-essay-prompt-school-learning-transfer-v1",
+        "revision": 1,
+    }
+    repository = PostgresEnglishEssayRepository(database_url)
+
+    created = repository.create_or_resume(
+        learner_id, prompt=prompt, idempotency_key="essay-draft-postgres"
+    )
+    repeated = repository.create_or_resume(
+        learner_id, prompt=prompt, idempotency_key="essay-draft-postgres"
+    )
+    assert repeated["draft_id"] == created["draft_id"]
+    assert created["edit_revision"] == 1
+
+    saved = repository.update(
+        learner_id,
+        str(created["draft_id"]),
+        body="A private learner draft.",
+        word_count=4,
+        expected_edit_revision=1,
+    )
+    assert saved["edit_revision"] == 2
+    assert repository.get(learner_id, str(created["draft_id"]))["body"] == (
+        "A private learner draft."
+    )
+
+    with pytest.raises(EnglishEssayError, match="another tab") as conflict:
+        repository.update(
+            learner_id,
+            str(created["draft_id"]),
+            body="Stale overwrite",
+            word_count=2,
+            expected_edit_revision=1,
+        )
+    assert conflict.value.status == 409
+
+    with pytest.raises(EnglishEssayError, match="not found"):
+        repository.get(other_learner_id, str(created["draft_id"]))
+
+    with psycopg.connect(database_url) as connection:
+        with pytest.raises(
+            psycopg.errors.RaiseException,
+            match="ownership and prompt revision are immutable",
+        ):
+            with connection.transaction():
+                connection.execute(
+                    "update english_essay_drafts set student_id = %s where id = %s",
+                    (other_learner_id, created["draft_id"]),
                 )
 
 

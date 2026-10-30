@@ -209,6 +209,37 @@ test.describe.serial("authenticated beta journeys", () => {
     ).toContainText("Solutions revealed");
   });
 
+  test("an English essay working draft autosaves and survives a reload", async ({
+    page,
+  }) => {
+    await authenticate(page, identities.studentA);
+    await page.goto("/english");
+    await expect(
+      page.getByRole("heading", { name: "Using school learning beyond the classroom" }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Write or resume" }).click();
+    await page.waitForURL(/\/english\/essays\/[0-9a-f-]+$/);
+
+    const essay =
+      "A lesson in teamwork taught me to listen carefully before choosing a solution.";
+    const remoteSave = page.waitForResponse(
+      (response) =>
+        response.request().method() === "PATCH" &&
+        response.url().includes("/api/v1/english/essay-drafts/"),
+    );
+    await page.getByRole("textbox", { name: "Your essay" }).fill(essay);
+    expect((await remoteSave).status()).toBe(200);
+    await expect(page.locator("#essay-draft-status")).toContainText(
+      "Saved remotely",
+    );
+
+    await page.reload();
+    await expect(page.getByRole("textbox", { name: "Your essay" })).toHaveValue(
+      essay,
+    );
+    await expect(page.getByText("13 words", { exact: true })).toBeVisible();
+  });
+
   test("a second student cannot see the first student's progress", async ({
     page,
   }) => {
