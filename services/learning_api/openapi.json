@@ -5441,6 +5441,61 @@
         "title": "EnglishEssayDraftResponse",
         "type": "object"
       },
+      "EnglishEssayFeedbackAllowanceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "availability": {
+            "enum": [
+              "available",
+              "provider_not_released",
+              "allowance_exhausted",
+              "cost_ceiling_reached",
+              "academy_circuit_breaker"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "fixture_feedback_consumes_allowance": {
+            "const": false,
+            "default": false,
+            "title": "Fixture Feedback Consumes Allowance",
+            "type": "boolean"
+          },
+          "learner_notice": {
+            "default": "Development fixture feedback is free and does not use the future live-feedback allowance.",
+            "title": "Learner Notice",
+            "type": "string"
+          },
+          "live_feedback_available": {
+            "title": "Live Feedback Available",
+            "type": "boolean"
+          },
+          "monthly_feedback_limit": {
+            "minimum": 1.0,
+            "title": "Monthly Feedback Limit",
+            "type": "integer"
+          },
+          "monthly_feedback_remaining": {
+            "minimum": 0.0,
+            "title": "Monthly Feedback Remaining",
+            "type": "integer"
+          },
+          "resets_at": {
+            "format": "date-time",
+            "title": "Resets At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "live_feedback_available",
+          "availability",
+          "monthly_feedback_limit",
+          "monthly_feedback_remaining",
+          "resets_at"
+        ],
+        "title": "EnglishEssayFeedbackAllowanceResponse",
+        "type": "object"
+      },
       "EnglishEssayLatestSubmissionResponse": {
         "additionalProperties": false,
         "properties": {
@@ -20748,6 +20803,122 @@
           }
         ],
         "summary": "Run deterministic checks against one exact remotely saved draft revision",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-feedback/allowance": {
+      "get": {
+        "operationId": "getEnglishEssayFeedbackAllowance",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayFeedbackAllowanceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the learner-safe live essay-feedback allowance state",
         "tags": [
           "english"
         ]

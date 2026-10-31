@@ -21,7 +21,9 @@ import {
 } from "@/beta-kit/components/ui";
 import {
   createEnglishEssayMarkingJob,
+  getEnglishEssayFeedbackAllowance,
   getEnglishEssayMarkingWorkspace,
+  type EnglishEssayFeedbackAllowanceResponse,
   type EnglishEssayMarkingWorkspaceResponse,
 } from "@/lib/api/english";
 
@@ -34,6 +36,8 @@ export function EnglishEssayMarking({
 }) {
   const [workspace, setWorkspace] =
     useState<EnglishEssayMarkingWorkspaceResponse | null>(null);
+  const [allowance, setAllowance] =
+    useState<EnglishEssayFeedbackAllowanceResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [requesting, setRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,13 +47,19 @@ export function EnglishEssayMarking({
 
     async function load() {
       try {
-        const next = await getEnglishEssayMarkingWorkspace(submissionId);
+        const [markingResult, allowanceResult] = await Promise.allSettled([
+          getEnglishEssayMarkingWorkspace(submissionId),
+          getEnglishEssayFeedbackAllowance(),
+        ]);
         if (!active) return;
-        setWorkspace(next);
-        setError(null);
-      } catch {
-        if (active) {
+        if (markingResult.status === "fulfilled") {
+          setWorkspace(markingResult.value);
+          setError(null);
+        } else {
           setError("Fixture feedback status could not be loaded. Try again.");
+        }
+        if (allowanceResult.status === "fulfilled") {
+          setAllowance(allowanceResult.value);
         }
       } finally {
         if (active) setLoading(false);
@@ -221,6 +231,15 @@ export function EnglishEssayMarking({
             This deterministic fixture exercises the full queue and feedback UI.
             It makes no paid API call and does not give an official score.
           </Muted>
+          {allowance ? (
+            <Muted>
+              {allowance.learner_notice} Live feedback status:{" "}
+              {allowance.availability === "provider_not_released"
+                ? "not released yet"
+                : `${allowance.monthly_feedback_remaining} of ${allowance.monthly_feedback_limit} reviews available`}
+              .
+            </Muted>
+          ) : null}
         </div>
       </div>
       {error ? (

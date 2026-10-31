@@ -10,6 +10,7 @@ from fastapi import APIRouter, BackgroundTasks, Header, HTTPException, Path
 from ..course_catalogue import CatalogueError
 from ..dependencies import (
     EnglishDiagnosticServiceDependency,
+    EnglishEssayFeedbackAllowanceServiceDependency,
     EnglishEssayServiceDependency,
     EnglishLearningServiceDependency,
     PracticeAttemptRateLimitDependency,
@@ -35,6 +36,7 @@ from ..english_contracts import (
     EnglishDiagnosticSessionResponse,
     EnglishErrorClassificationResponse,
     EnglishEssayDraftResponse,
+    EnglishEssayFeedbackAllowanceResponse,
     EnglishEssayLatestSubmissionResponse,
     EnglishEssayMarkingWorkspaceResponse,
     EnglishEssayPreSubmitResponse,
@@ -279,6 +281,18 @@ async def essay_marking_workspace(
             workspace.job.job_id,
         )
     return workspace
+
+
+@router.get(
+    "/essay-feedback/allowance",
+    operation_id="getEnglishEssayFeedbackAllowance",
+    response_model=EnglishEssayFeedbackAllowanceResponse,
+    summary="Get the learner-safe live essay-feedback allowance state",
+)
+async def essay_feedback_allowance(
+    service: EnglishEssayFeedbackAllowanceServiceDependency,
+) -> EnglishEssayFeedbackAllowanceResponse:
+    return _safe(service.current)
 
 
 @router.get(

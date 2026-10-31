@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202610310042"
+REQUIRED_SCHEMA_REVISION = "202611010043"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -99,6 +99,11 @@ class Settings:
     tutor_gemini_output_cost_per_million_micros_sgd: int = 0
     tutor_openai_input_cost_per_million_micros_sgd: int = 0
     tutor_openai_output_cost_per_million_micros_sgd: int = 0
+    english_essay_feedback_enabled: bool = False
+    english_essay_monthly_feedback_limit: int = 4
+    english_essay_monthly_cost_limit_micros_sgd: int = 4_000_000
+    english_essay_academy_monthly_cost_limit_micros_sgd: int = 500_000_000
+    english_essay_max_feedback_cost_micros_sgd: int = 1_000_000
 
     @classmethod
     def from_environment(cls) -> Settings:
@@ -296,6 +301,24 @@ class Settings:
             tutor_openai_output_cost_per_million_micros_sgd=_non_negative_integer(
                 "ASEAN_ACADEMY_TUTOR_OPENAI_OUTPUT_COST_PER_MILLION_MICROS_SGD", 0
             ),
+            english_essay_feedback_enabled=_boolean(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_FEEDBACK_ENABLED", False
+            ),
+            english_essay_monthly_feedback_limit=_positive_integer(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_MONTHLY_FEEDBACK_LIMIT", 4
+            ),
+            english_essay_monthly_cost_limit_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_MONTHLY_COST_LIMIT_MICROS_SGD",
+                4_000_000,
+            ),
+            english_essay_academy_monthly_cost_limit_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_ACADEMY_MONTHLY_COST_LIMIT_MICROS_SGD",
+                500_000_000,
+            ),
+            english_essay_max_feedback_cost_micros_sgd=_positive_integer(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_MAX_FEEDBACK_COST_MICROS_SGD",
+                1_000_000,
+            ),
         )
         if environment in {"preview", "production"}:
             if not settings.supabase_url:
@@ -435,4 +458,18 @@ class Settings:
             or not settings.tutor_routing_policy_version
         ):
             raise RuntimeError("Tutor policy, prompt, and routing versions must not be empty")
+        if (
+            settings.english_essay_max_feedback_cost_micros_sgd
+            > settings.english_essay_monthly_cost_limit_micros_sgd
+        ):
+            raise RuntimeError(
+                "The essay-feedback request ceiling must not exceed the learner monthly ceiling"
+            )
+        if (
+            settings.english_essay_monthly_cost_limit_micros_sgd
+            > settings.english_essay_academy_monthly_cost_limit_micros_sgd
+        ):
+            raise RuntimeError(
+                "The learner essay-feedback ceiling must not exceed the academy ceiling"
+            )
         return settings

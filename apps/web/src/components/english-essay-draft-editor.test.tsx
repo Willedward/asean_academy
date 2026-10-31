@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type {
@@ -7,7 +13,10 @@ import type {
   EnglishEssaySubmissionResponse,
 } from "@/lib/api/english";
 
-import { countEssayWords, EnglishEssayDraftEditor } from "./english-essay-draft-editor";
+import {
+  countEssayWords,
+  EnglishEssayDraftEditor,
+} from "./english-essay-draft-editor";
 
 const updateDraft = vi.fn();
 const getDraft = vi.fn();
@@ -16,6 +25,9 @@ const createSubmission = vi.fn();
 const getLatestSubmission = vi.fn();
 const getSelfReviewWorkspace = vi.fn();
 const createSelfReview = vi.fn();
+const getMarking = vi.fn();
+const createMarking = vi.fn();
+const getAllowance = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   EnglishEssayDraftApiError: class EnglishEssayDraftApiError extends Error {
@@ -37,6 +49,10 @@ vi.mock("@/lib/api/english", () => ({
     getSelfReviewWorkspace(...args),
   createEnglishEssaySelfReview: (...args: unknown[]) =>
     createSelfReview(...args),
+  getEnglishEssayMarkingWorkspace: (...args: unknown[]) => getMarking(...args),
+  createEnglishEssayMarkingJob: (...args: unknown[]) => createMarking(...args),
+  getEnglishEssayFeedbackAllowance: (...args: unknown[]) =>
+    getAllowance(...args),
 }));
 
 const initialDraft: EnglishEssayDraftResponse = {
@@ -75,6 +91,25 @@ beforeEach(() => {
   getLatestSubmission.mockResolvedValue({ submission: null });
   getSelfReviewWorkspace.mockReset();
   createSelfReview.mockReset();
+  getMarking.mockReset();
+  createMarking.mockReset();
+  getAllowance.mockReset();
+  getMarking.mockResolvedValue({
+    submission_id: "dfdb118f-b09d-4baf-a7e0-64f582729351",
+    job: null,
+    feedback: null,
+    learner_disclaimer: "Development fixture only.",
+  });
+  getAllowance.mockResolvedValue({
+    live_feedback_available: false,
+    availability: "provider_not_released",
+    monthly_feedback_limit: 4,
+    monthly_feedback_remaining: 0,
+    resets_at: "2026-12-01T00:00:00Z",
+    fixture_feedback_consumes_allowance: false,
+    learner_notice:
+      "Development fixture feedback is free and does not use the future live-feedback allowance.",
+  });
 });
 
 afterEach(cleanup);
@@ -95,9 +130,11 @@ describe("EnglishEssayDraftEditor", () => {
     });
 
     await waitFor(() =>
-      expect(window.localStorage.getItem(`nextscholar:english-essay-draft:${initialDraft.draft_id}`)).toContain(
-        "Planning helps me outside school.",
-      ),
+      expect(
+        window.localStorage.getItem(
+          `nextscholar:english-essay-draft:${initialDraft.draft_id}`,
+        ),
+      ).toContain("Planning helps me outside school."),
     );
     expect(screen.getByText("5 words")).toBeInTheDocument();
     await waitFor(
@@ -110,7 +147,11 @@ describe("EnglishEssayDraftEditor", () => {
       { timeout: 2000 },
     );
     expect(await screen.findByText("Saved remotely")).toBeInTheDocument();
-    expect(window.localStorage.getItem(`nextscholar:english-essay-draft:${initialDraft.draft_id}`)).toBeNull();
+    expect(
+      window.localStorage.getItem(
+        `nextscholar:english-essay-draft:${initialDraft.draft_id}`,
+      ),
+    ).toBeNull();
   });
 
   it("restores an unsent device backup after refresh without claiming it was remotely saved", async () => {
@@ -126,12 +167,17 @@ describe("EnglishEssayDraftEditor", () => {
 
     render(<EnglishEssayDraftEditor initialDraft={initialDraft} />);
 
-    expect(await screen.findByDisplayValue("My recovered local paragraph.")).toBeInTheDocument();
-    expect(screen.getByText(/Backed up on this device|Saving/)).toBeInTheDocument();
+    expect(
+      await screen.findByDisplayValue("My recovered local paragraph."),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Backed up on this device|Saving/),
+    ).toBeInTheDocument();
   });
 
   it("requires deterministic review and explicit confirmation before creating a permanent snapshot", async () => {
-    const body = "Planning helps me beyond school.\n\nI use it before every team project.";
+    const body =
+      "Planning helps me beyond school.\n\nI use it before every team project.";
     const readyDraft = {
       ...initialDraft,
       body,
@@ -197,7 +243,9 @@ describe("EnglishEssayDraftEditor", () => {
     });
 
     render(<EnglishEssayDraftEditor initialDraft={readyDraft} />);
-    fireEvent.click(screen.getByRole("button", { name: "Review before submitting" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Review before submitting" }),
+    );
 
     expect(
       await screen.findByText("The saved draft revision is ready to snapshot."),
@@ -217,7 +265,9 @@ describe("EnglishEssayDraftEditor", () => {
     expect(
       await screen.findByText("Submission revision 1 is saved permanently."),
     ).toBeInTheDocument();
-    expect(screen.getByText(/No AI feedback or official score was generated/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/No AI feedback or official score was generated/),
+    ).toBeInTheDocument();
     expect(preSubmitDraft).toHaveBeenCalledWith(readyDraft.draft_id, 2);
     expect(createSubmission).toHaveBeenCalledWith(readyDraft.draft_id, 2);
   });
@@ -273,6 +323,7 @@ describe("EnglishEssayDraftEditor", () => {
 });
 
 it("uses the same bounded English word-token rule as the API", () => {
-  expect(countEssayWords("I can't ignore evidence-based planning—it works."))
-    .toBe(7);
+  expect(
+    countEssayWords("I can't ignore evidence-based planning—it works."),
+  ).toBe(7);
 });

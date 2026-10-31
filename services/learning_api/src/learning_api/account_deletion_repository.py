@@ -91,6 +91,15 @@ class PostgresAccountDeletionRepository:
                  where student_id = %(learner_id)s)::integer as tutor_usage_events,
                 (select count(*) from tutor_route_decisions
                  where student_id = %(learner_id)s)::integer as tutor_route_decisions,
+                (select count(*) from english_essay_feedback_monthly_usage
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_feedback_monthly_usage,
+                (select count(*) from english_essay_feedback_reservations
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_feedback_reservations,
+                (select count(*) from english_essay_feedback_usage_events
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_feedback_usage_events,
                 (select count(*) from beta_audit_events
                  where actor_user_id = %(learner_id)s
                     or target_user_id = %(learner_id)s)::integer
