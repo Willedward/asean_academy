@@ -340,6 +340,24 @@ class EnglishEssayMarkingWorkspaceResponse(ApiModel):
     )
 
 
+class EnglishEssayFeedbackAllowanceResponse(ApiModel):
+    live_feedback_available: bool
+    availability: Literal[
+        "available",
+        "provider_not_released",
+        "allowance_exhausted",
+        "cost_ceiling_reached",
+        "academy_circuit_breaker",
+    ]
+    monthly_feedback_limit: int = Field(ge=1)
+    monthly_feedback_remaining: int = Field(ge=0)
+    resets_at: datetime
+    fixture_feedback_consumes_allowance: Literal[False] = False
+    learner_notice: str = (
+        "Development fixture feedback is free and does not use the future live-feedback allowance."
+    )
+
+
 class EnglishLessonSectionResponse(ApiModel):
     position: int
     section_type: Literal[

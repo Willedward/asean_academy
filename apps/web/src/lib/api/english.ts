@@ -43,6 +43,8 @@ export type EnglishEssayMarkingWorkspaceResponse =
   components["schemas"]["EnglishEssayMarkingWorkspaceResponse"];
 export type EnglishEssayMarkingFeedbackResponse =
   components["schemas"]["EnglishEssayMarkingFeedbackResponse"];
+export type EnglishEssayFeedbackAllowanceResponse =
+  components["schemas"]["EnglishEssayFeedbackAllowanceResponse"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -268,6 +270,19 @@ export async function getEnglishEssayMarkingWorkspace(
   const { data, error, response } = await createApiClient().GET(
     "/api/v1/english/essay-submissions/{submission_id}/marking",
     { params: { path: { submission_id: submissionId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssayFeedbackAllowance(): Promise<EnglishEssayFeedbackAllowanceResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-feedback/allowance",
   );
   if (error || !data)
     throw new EnglishEssayDraftApiError(

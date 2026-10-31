@@ -21,6 +21,12 @@ from learning_api.admin_contracts import CreateInvitationRequest
 from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
 from learning_api.english_contracts import EnglishEssaySelfReviewCriterionRequest
+from learning_api.english_essay_allowance import (
+    EssayFeedbackActual,
+    EssayFeedbackLimits,
+    EssayFeedbackQuote,
+    PostgresEssayFeedbackAllowanceRepository,
+)
 from learning_api.english_essay_marking import process_essay_marking_job
 from learning_api.english_essay_repository import (
     EnglishEssayError,
@@ -300,6 +306,19 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
     assert self_review.ai_feedback_available is False
     assert len(self_review.criterion_reflections) == 4
 
+    allowance_repository = PostgresEssayFeedbackAllowanceRepository(database_url)
+    allowance_limits = EssayFeedbackLimits(
+        enabled=True,
+        monthly_feedback=2,
+        monthly_cost_micros_sgd=2_000,
+        academy_monthly_cost_micros_sgd=4_000,
+        max_feedback_cost_micros_sgd=1_000,
+    )
+    allowance_before_fixture = allowance_repository.allowance(
+        learner_id, allowance_limits
+    )
+    assert allowance_before_fixture.monthly_feedback_remaining == 2
+
     queued_marking = service.enqueue_marking_job(
         first.submission_id,
         idempotency_key="postgres-fixture-marking-one",
@@ -321,6 +340,77 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
     assert marking.feedback.ai_feedback_available is False
     assert marking.feedback.official_score_available is False
     assert len(marking.feedback.criterion_feedback) == 4
+    assert (
+        allowance_repository.allowance(learner_id, allowance_limits)
+        == allowance_before_fixture
+    )
+
+    reservation = allowance_repository.reserve(
+        learner_id,
+        first.submission_id,
+        quote=EssayFeedbackQuote(max_cost_micros_sgd=1_000),
+        limits=allowance_limits,
+        idempotency_key="postgres-live-feedback-one",
+        request_id="postgres-reserve-one",
+        provider_name="future-provider",
+        model_name="future-model",
+        policy_version="english-essay-feedback-v1",
+    )
+    repeated_reservation = allowance_repository.reserve(
+        learner_id,
+        first.submission_id,
+        quote=EssayFeedbackQuote(max_cost_micros_sgd=1_000),
+        limits=allowance_limits,
+        idempotency_key="postgres-live-feedback-one",
+        request_id="postgres-reserve-one-repeat",
+        provider_name="future-provider",
+        model_name="future-model",
+        policy_version="english-essay-feedback-v1",
+    )
+    assert repeated_reservation.reservation_id == reservation.reservation_id
+    committed_allowance = allowance_repository.commit(
+        reservation,
+        EssayFeedbackActual(cost_micros_sgd=700),
+        allowance_limits,
+        request_id="postgres-commit-one",
+    )
+    assert committed_allowance.monthly_feedback_remaining == 1
+
+    released_reservation = allowance_repository.reserve(
+        learner_id,
+        first.submission_id,
+        quote=EssayFeedbackQuote(max_cost_micros_sgd=1_000),
+        limits=allowance_limits,
+        idempotency_key="postgres-live-feedback-two",
+        request_id="postgres-reserve-two",
+        provider_name="future-provider",
+        model_name="future-model",
+        policy_version="english-essay-feedback-v1",
+    )
+    released_allowance = allowance_repository.release(
+        released_reservation,
+        allowance_limits,
+        request_id="postgres-release-two",
+        reason="provider_unavailable",
+    )
+    assert released_allowance.monthly_feedback_remaining == 1
+
+    with psycopg.connect(database_url) as connection:
+        events = connection.execute(
+            """
+            select event_type
+              from english_essay_feedback_usage_events
+             where student_id=%s
+             order by created_at, id
+            """,
+            (learner_id,),
+        ).fetchall()
+        assert [row[0] for row in events] == [
+            "reserved",
+            "committed",
+            "reserved",
+            "released",
+        ]
 
     with pytest.raises(EnglishEssayError, match="already has"):
         service.create_self_review(

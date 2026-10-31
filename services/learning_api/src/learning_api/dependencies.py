@@ -30,6 +30,12 @@ from .english_diagnostic_repository import (
     PostgresEnglishDiagnosticRepository,
 )
 from .english_diagnostic_service import EnglishDiagnosticService
+from .english_essay_allowance import (
+    EssayFeedbackLimits,
+    InMemoryEssayFeedbackAllowanceRepository,
+    PostgresEssayFeedbackAllowanceRepository,
+)
+from .english_essay_allowance_service import EnglishEssayFeedbackAllowanceService
 from .english_essay_repository import (
     InMemoryEnglishEssayRepository,
     PostgresEnglishEssayRepository,
@@ -405,6 +411,53 @@ def english_essay_service(
 
 EnglishEssayServiceDependency = Annotated[
     EnglishEssayService, Depends(english_essay_service)
+]
+
+
+def english_essay_feedback_allowance_repository(request: Request):
+    repository = getattr(
+        request.app.state, "english_essay_feedback_allowance_repository", None
+    )
+    if repository is None:
+        settings = request.app.state.settings
+        repository = (
+            PostgresEssayFeedbackAllowanceRepository(settings.database_url)
+            if settings.database_url
+            else InMemoryEssayFeedbackAllowanceRepository(
+                english_essay_repository(request)
+            )
+        )
+        request.app.state.english_essay_feedback_allowance_repository = repository
+    return repository
+
+
+def english_essay_feedback_allowance_service(
+    request: Request,
+    learner: EnrolledLearnerDependency,
+) -> EnglishEssayFeedbackAllowanceService:
+    settings = request.app.state.settings
+    return EnglishEssayFeedbackAllowanceService(
+        english_essay_feedback_allowance_repository(request),
+        learner.learner_id,
+        EssayFeedbackLimits(
+            enabled=settings.english_essay_feedback_enabled,
+            monthly_feedback=settings.english_essay_monthly_feedback_limit,
+            monthly_cost_micros_sgd=(
+                settings.english_essay_monthly_cost_limit_micros_sgd
+            ),
+            academy_monthly_cost_micros_sgd=(
+                settings.english_essay_academy_monthly_cost_limit_micros_sgd
+            ),
+            max_feedback_cost_micros_sgd=(
+                settings.english_essay_max_feedback_cost_micros_sgd
+            ),
+        ),
+    )
+
+
+EnglishEssayFeedbackAllowanceServiceDependency = Annotated[
+    EnglishEssayFeedbackAllowanceService,
+    Depends(english_essay_feedback_allowance_service),
 ]
 
 

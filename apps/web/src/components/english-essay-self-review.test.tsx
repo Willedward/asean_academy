@@ -13,6 +13,7 @@ const getWorkspace = vi.fn();
 const createReview = vi.fn();
 const getMarking = vi.fn();
 const createMarking = vi.fn();
+const getAllowance = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   getEnglishEssaySelfReviewWorkspace: (...args: unknown[]) =>
@@ -20,6 +21,8 @@ vi.mock("@/lib/api/english", () => ({
   createEnglishEssaySelfReview: (...args: unknown[]) => createReview(...args),
   getEnglishEssayMarkingWorkspace: (...args: unknown[]) => getMarking(...args),
   createEnglishEssayMarkingJob: (...args: unknown[]) => createMarking(...args),
+  getEnglishEssayFeedbackAllowance: (...args: unknown[]) =>
+    getAllowance(...args),
 }));
 
 const submission: EnglishEssaySubmissionResponse = {
@@ -84,12 +87,23 @@ beforeEach(() => {
   createReview.mockReset();
   getMarking.mockReset();
   createMarking.mockReset();
+  getAllowance.mockReset();
   getWorkspace.mockResolvedValue(workspace);
   getMarking.mockResolvedValue({
     submission_id: submission.submission_id,
     job: null,
     feedback: null,
     learner_disclaimer: "Development fixture only.",
+  });
+  getAllowance.mockResolvedValue({
+    live_feedback_available: false,
+    availability: "provider_not_released",
+    monthly_feedback_limit: 4,
+    monthly_feedback_remaining: 0,
+    resets_at: "2026-12-01T00:00:00Z",
+    fixture_feedback_consumes_allowance: false,
+    learner_notice:
+      "Development fixture feedback is free and does not use the future live-feedback allowance.",
   });
 });
 

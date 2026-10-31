@@ -7,10 +7,13 @@ import { EnglishEssayMarking } from "./english-essay-marking";
 
 const getMarking = vi.fn();
 const createMarking = vi.fn();
+const getAllowance = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   getEnglishEssayMarkingWorkspace: (...args: unknown[]) => getMarking(...args),
   createEnglishEssayMarkingJob: (...args: unknown[]) => createMarking(...args),
+  getEnglishEssayFeedbackAllowance: (...args: unknown[]) =>
+    getAllowance(...args),
 }));
 
 const submissionId = "dfdb118f-b09d-4baf-a7e0-64f582729351";
@@ -68,10 +71,22 @@ const complete: EnglishEssayMarkingWorkspaceResponse = {
     official_score_available: false,
   },
 };
+const allowance = {
+  live_feedback_available: false,
+  availability: "provider_not_released" as const,
+  monthly_feedback_limit: 4,
+  monthly_feedback_remaining: 0,
+  resets_at: "2026-12-01T00:00:00Z",
+  fixture_feedback_consumes_allowance: false as const,
+  learner_notice:
+    "Development fixture feedback is free and does not use the future live-feedback allowance.",
+};
 
 beforeEach(() => {
   getMarking.mockReset();
   createMarking.mockReset();
+  getAllowance.mockReset();
+  getAllowance.mockResolvedValue(allowance);
 });
 
 afterEach(cleanup);
@@ -89,6 +104,9 @@ describe("EnglishEssayMarking", () => {
       name: "Generate fixture feedback",
     });
     expect(screen.getByText(/makes no paid API call/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/does not use the future live-feedback allowance/),
+    ).toBeInTheDocument();
     fireEvent.click(button);
 
     expect(

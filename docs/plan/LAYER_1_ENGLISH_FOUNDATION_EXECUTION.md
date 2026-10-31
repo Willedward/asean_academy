@@ -114,7 +114,7 @@ sections.
 | ENG-T3.3 | Deterministic pre-submit checks and immutable essay submission revisions | Implemented as draft; AI feedback and official scoring disabled |
 | ENG-T3.4 | Learner self-review against the pinned instructional rubric | Implemented as draft; learner-authored, immutable and score-free |
 | ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Implemented as draft; deterministic fixture only, no external provider |
-| ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Not started |
+| ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Implemented as draft; live provider remains disabled |
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Not started |
 | ENG-T3.8 | Essay version history, feedback report and usefulness rating | Not started |
 | ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Not started |
@@ -425,10 +425,23 @@ rubric revision. The hosted API can opportunistically dispatch queued work after
 while the durable row remains recoverable across process restarts. The fixture is explicitly
 not live AI marking, contains no score and makes no network or paid-provider call.
 
-The next independently executable engineering milestone is **ENG-T3.6 — server-owned essay
-feedback allowance and cost ceiling**. It should add an auditable reservation/commit/release
-lifecycle and fail-closed learner allowance before any external provider is considered;
-fixture jobs must remain zero-cost and must not consume that allowance.
+**ENG-T3.6** now adds migration `202611010043`, a server-owned monthly feedback allowance,
+learner and academy cost ceilings, and an atomic reservation/commit/release lifecycle. Every
+future paid request must reserve one review and its maximum cost before a provider can run;
+provider usage above the reservation is rejected, failures release the reservation, and an
+append-only event records each transition without essay content. Advisory locks protect the
+learner and academy boundaries from concurrent overspend, idempotency prevents duplicate
+reservations and the learner API exposes only review availability and reset time—not model
+tokens or provider cost. The release flag remains off by default, so the boundary fails closed.
+The deterministic fixture queue bypasses the ledger entirely and is verified not to consume an
+allowance or make a paid call. The default four-review allowance and cost values are
+configuration placeholders for staging, not a final subscription promise.
+
+The next independently executable engineering milestone is **ENG-T3.7 — evidence-linked
+structured feedback with provider validation**. It must consume the ENG-T3.6 reservation only
+after schema validation, verify every quoted evidence span against the immutable submission,
+release reservations on provider or validation failure, and keep the live-provider release flag
+off until calibration succeeds.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

@@ -648,6 +648,23 @@ def test_essay_fixture_marking_job_is_async_idempotent_and_score_free():
     app = application()
     submission_id = _completed_essay_self_review(app, "fixture-marking")
 
+    allowance_before = request(
+        app, "GET", "/api/v1/english/essay-feedback/allowance"
+    )
+    assert allowance_before.status_code == 200
+    assert allowance_before.json() == {
+        "live_feedback_available": False,
+        "availability": "provider_not_released",
+        "monthly_feedback_limit": 4,
+        "monthly_feedback_remaining": 0,
+        "resets_at": allowance_before.json()["resets_at"],
+        "fixture_feedback_consumes_allowance": False,
+        "learner_notice": (
+            "Development fixture feedback is free and does not use the future "
+            "live-feedback allowance."
+        ),
+    }
+
     empty = request(
         app,
         "GET",
@@ -694,6 +711,10 @@ def test_essay_fixture_marking_job_is_async_idempotent_and_score_free():
     assert repeated.json()["feedback"]["feedback_id"] == result["feedback"][
         "feedback_id"
     ]
+    allowance_after = request(
+        app, "GET", "/api/v1/english/essay-feedback/allowance"
+    )
+    assert allowance_after.json() == allowance_before.json()
 
 
 def test_essay_fixture_marking_worker_retries_then_stops_permanently():
