@@ -123,10 +123,16 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByRole("heading", { name: "Primes and prime factorisation" }),
     ).toBeVisible();
+    const completionSaved = page.waitForResponse(
+      (response) =>
+        response.request().method() === "PUT" &&
+        response.url().endsWith("/completion"),
+    );
     await page
       .getByRole("button", { name: "Mark section complete" })
       .first()
       .click();
+    expect((await completionSaved).status()).toBe(200);
     await expect(
       page.getByRole("button", { name: "Mark section incomplete" }),
     ).toBeVisible();
