@@ -27,6 +27,8 @@ import {
   getEnglishEssaySelfReviewWorkspace,
 } from "@/lib/api/english";
 
+import { EnglishEssayMarking } from "./english-essay-marking";
+
 type ReflectionDraft = {
   selectedBandLevel: number | null;
   evidenceNote: string;
@@ -130,8 +132,8 @@ function SubmittedEssayCard({
         <Tag>Submission {workspace.submission.submission_revision}</Tag>
       </div>
       <Muted>
-        This is the permanent snapshot you are reviewing, not your current editable
-        draft.
+        This is the permanent snapshot you are reviewing, not your current
+        editable draft.
       </Muted>
       <Divider />
       <p className="m-0 whitespace-pre-wrap text-[15px] leading-7 text-ns-ink">
@@ -200,7 +202,10 @@ export function EnglishEssaySelfReview({
         aria-label="Completed essay self-review"
       >
         <SubmittedEssayCard workspace={workspace} />
-        {completedReview(completed, completed.completed_at)}
+        <div className="flex flex-col gap-4">
+          {completedReview(completed, completed.completed_at)}
+          <EnglishEssayMarking submissionId={submission.submission_id} />
+        </div>
       </div>
     );
   }

@@ -39,6 +39,10 @@ export type EnglishEssaySelfReviewResponse =
   components["schemas"]["EnglishEssaySelfReviewResponse"];
 export type EnglishEssaySelfReviewCriterionRequest =
   components["schemas"]["EnglishEssaySelfReviewCriterionRequest"];
+export type EnglishEssayMarkingWorkspaceResponse =
+  components["schemas"]["EnglishEssayMarkingWorkspaceResponse"];
+export type EnglishEssayMarkingFeedbackResponse =
+  components["schemas"]["EnglishEssayMarkingFeedbackResponse"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -225,6 +229,45 @@ export async function createEnglishEssaySelfReview(
         disclaimer_acknowledged: true,
       },
     },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function createEnglishEssayMarkingJob(
+  submissionId: string,
+): Promise<EnglishEssayMarkingWorkspaceResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-submissions/{submission_id}/marking-jobs",
+    {
+      params: {
+        path: { submission_id: submissionId },
+        header: {
+          "Idempotency-Key": `english-essay-marking:${submissionId}`,
+        },
+      },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssayMarkingWorkspace(
+  submissionId: string,
+): Promise<EnglishEssayMarkingWorkspaceResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-submissions/{submission_id}/marking",
+    { params: { path: { submission_id: submissionId } } },
   );
   if (error || !data)
     throw new EnglishEssayDraftApiError(

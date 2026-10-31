@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Header, HTTPException, Path
+from fastapi import APIRouter, BackgroundTasks, Header, HTTPException, Path
 
 from ..course_catalogue import CatalogueError
 from ..dependencies import (
@@ -36,6 +36,7 @@ from ..english_contracts import (
     EnglishErrorClassificationResponse,
     EnglishEssayDraftResponse,
     EnglishEssayLatestSubmissionResponse,
+    EnglishEssayMarkingWorkspaceResponse,
     EnglishEssayPreSubmitResponse,
     EnglishEssayPromptResponse,
     EnglishEssaySelfReviewResponse,
@@ -52,6 +53,7 @@ from ..english_contracts import (
     SubmitEnglishDiagnosticAttemptRequest,
     UpdateEnglishEssayDraftRequest,
 )
+from ..english_essay_marking import process_essay_marking_job
 from ..english_essay_repository import EnglishEssayError
 from ..english_learning_repository import EnglishLearningError
 
@@ -228,6 +230,55 @@ async def create_essay_self_review(
             idempotency_key=idempotency_key,
         )
     )
+
+
+@router.post(
+    "/essay-submissions/{submission_id}/marking-jobs",
+    operation_id="createEnglishEssayMarkingJob",
+    response_model=EnglishEssayMarkingWorkspaceResponse,
+    status_code=202,
+    summary="Queue deterministic fixture feedback without a live provider call",
+)
+async def create_essay_marking_job(
+    submission_id: UUID,
+    background_tasks: BackgroundTasks,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssayMarkingWorkspaceResponse:
+    workspace = _safe(
+        lambda: service.enqueue_marking_job(
+            str(submission_id), idempotency_key=idempotency_key
+        )
+    )
+    if workspace.job and workspace.job.status in {"queued", "retryable_failed"}:
+        background_tasks.add_task(
+            process_essay_marking_job,
+            service.repository,
+            workspace.job.job_id,
+        )
+    return workspace
+
+
+@router.get(
+    "/essay-submissions/{submission_id}/marking",
+    operation_id="getEnglishEssayMarkingWorkspace",
+    response_model=EnglishEssayMarkingWorkspaceResponse,
+    summary="Get durable fixture-marking job and feedback state",
+)
+async def essay_marking_workspace(
+    submission_id: UUID,
+    background_tasks: BackgroundTasks,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayMarkingWorkspaceResponse:
+    workspace = _safe(lambda: service.marking_workspace(str(submission_id)))
+    if workspace.job and workspace.job.status in {"queued", "retryable_failed"}:
+        background_tasks.add_task(
+            process_essay_marking_job,
+            service.repository,
+            workspace.job.job_id,
+        )
+    return workspace
 
 
 @router.get(

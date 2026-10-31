@@ -11,11 +11,15 @@ import { EnglishEssaySelfReview } from "./english-essay-self-review";
 
 const getWorkspace = vi.fn();
 const createReview = vi.fn();
+const getMarking = vi.fn();
+const createMarking = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   getEnglishEssaySelfReviewWorkspace: (...args: unknown[]) =>
     getWorkspace(...args),
   createEnglishEssaySelfReview: (...args: unknown[]) => createReview(...args),
+  getEnglishEssayMarkingWorkspace: (...args: unknown[]) => getMarking(...args),
+  createEnglishEssayMarkingJob: (...args: unknown[]) => createMarking(...args),
 }));
 
 const submission: EnglishEssaySubmissionResponse = {
@@ -78,7 +82,15 @@ const workspace: EnglishEssaySelfReviewWorkspaceResponse = {
 beforeEach(() => {
   getWorkspace.mockReset();
   createReview.mockReset();
+  getMarking.mockReset();
+  createMarking.mockReset();
   getWorkspace.mockResolvedValue(workspace);
+  getMarking.mockResolvedValue({
+    submission_id: submission.submission_id,
+    job: null,
+    feedback: null,
+    learner_disclaimer: "Development fixture only.",
+  });
 });
 
 afterEach(cleanup);

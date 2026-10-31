@@ -5,6 +5,8 @@ from pathlib import Path
 import httpx
 
 from learning_api.config import Settings
+from learning_api.english_essay_marking import process_essay_marking_job
+from learning_api.english_essay_service import EnglishEssayService
 from learning_api.main import create_app
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -576,6 +578,160 @@ def test_essay_self_review_covers_the_pinned_rubric_without_creating_a_score():
     assert restored.json()["self_review"]["overall_reflection"] == (
         "My next revision needs more precise support."
     )
+
+
+def _completed_essay_self_review(app, key: str) -> str:
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": f"{key}-draft"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 1,
+        },
+    )
+    draft_id = created.json()["draft_id"]
+    saved = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft_id}",
+        json={
+            "body": (
+                "Planning a group project taught me to listen before choosing a solution.\n\n"
+                "I now use that process when my family makes travel plans."
+            ),
+            "expected_edit_revision": 1,
+        },
+    )
+    submitted = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": f"{key}-submission"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": saved.json()["edit_revision"],
+            "confirmed": True,
+        },
+    )
+    submission_id = submitted.json()["submission_id"]
+    workspace = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+    ).json()
+    completed = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": f"{key}-self-review"},
+        json={
+            "criterion_reflections": [
+                {
+                    "criterion_key": criterion["criterion_key"],
+                    "selected_band_level": 3,
+                    "evidence_note": f"Evidence for {criterion['title']}.",
+                    "improvement_action": f"Improve {criterion['title']}.",
+                }
+                for criterion in workspace["criteria"]
+            ],
+            "overall_reflection": "Keep the clear focus and add precise detail.",
+            "disclaimer_acknowledged": True,
+        },
+    )
+    assert completed.status_code == 201, completed.text
+    return submission_id
+
+
+def test_essay_fixture_marking_job_is_async_idempotent_and_score_free():
+    app = application()
+    submission_id = _completed_essay_self_review(app, "fixture-marking")
+
+    empty = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/marking",
+    )
+    assert empty.status_code == 200
+    assert empty.json()["job"] is None
+
+    queued = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/marking-jobs",
+        headers={"Idempotency-Key": "fixture-marking-job"},
+    )
+    assert queued.status_code == 202, queued.text
+    assert queued.json()["job"]["status"] == "queued"
+    assert queued.json()["job"]["external_provider_used"] is False
+
+    restored = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/marking",
+    )
+    assert restored.status_code == 200, restored.text
+    result = restored.json()
+    assert result["job"]["status"] == "succeeded"
+    assert result["job"]["attempt_count"] == 1
+    assert result["feedback"]["fixture_version"] == "english-essay-fixture-v1"
+    assert result["feedback"]["fixture_generated"] is True
+    assert result["feedback"]["ai_feedback_available"] is False
+    assert result["feedback"]["official_score_available"] is False
+    assert "score" not in result["feedback"]
+    assert len(result["feedback"]["criterion_feedback"]) == 4
+    assert "not a live AI marker" in result["feedback"]["learner_disclaimer"]
+
+    repeated = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/marking-jobs",
+        headers={"Idempotency-Key": "fixture-marking-job"},
+    )
+    assert repeated.status_code == 202
+    assert repeated.json()["job"]["job_id"] == result["job"]["job_id"]
+    assert repeated.json()["feedback"]["feedback_id"] == result["feedback"][
+        "feedback_id"
+    ]
+
+
+def test_essay_fixture_marking_worker_retries_then_stops_permanently():
+    app = application()
+    submission_id = _completed_essay_self_review(app, "fixture-failure")
+    service = EnglishEssayService(
+        REPOSITORY_ROOT,
+        app.state.english_essay_repository,
+        "english-development-learner",
+        allow_drafts=True,
+    )
+    queued = service.enqueue_marking_job(
+        submission_id, idempotency_key="fixture-failure-job"
+    )
+    job_id = queued.job.job_id
+
+    class FailingMarker:
+        def mark(self, job):
+            raise RuntimeError(f"fixture failed for {job['job_id']}")
+
+    for expected_attempt in range(1, 4):
+        assert (
+            process_essay_marking_job(
+                service.repository,
+                job_id,
+                marker=FailingMarker(),
+                worker_id="test-worker",
+                retry_delay_seconds=0,
+            )
+            is False
+        )
+        state = service.marking_workspace(submission_id)
+        assert state.job.attempt_count == expected_attempt
+        assert state.feedback is None
+        assert state.job.status == (
+            "permanent_failed" if expected_attempt == 3 else "retryable_failed"
+        )
+    assert process_essay_marking_job(service.repository, job_id) is False
 
 
 def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():
