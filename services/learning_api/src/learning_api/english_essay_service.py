@@ -10,8 +10,14 @@ from pathlib import Path
 
 from .english_contracts import (
     EnglishEssayDraftResponse,
+    EnglishEssayLatestSubmissionResponse,
     EnglishEssayPreSubmitResponse,
     EnglishEssayPromptResponse,
+    EnglishEssayRubricCriterionResponse,
+    EnglishEssaySelfReviewCriterionRequest,
+    EnglishEssaySelfReviewCriterionResponse,
+    EnglishEssaySelfReviewResponse,
+    EnglishEssaySelfReviewWorkspaceResponse,
     EnglishEssaySubmissionResponse,
 )
 from .english_essay_repository import EnglishEssayError
@@ -249,6 +255,165 @@ class EnglishEssayService:
             idempotency_key=idempotency_key,
             evaluate=self._evaluate,
         )
+        return self._submission_response(row)
+
+    def latest_submission(
+        self, draft_id: str
+    ) -> EnglishEssayLatestSubmissionResponse:
+        row = self.repository.latest_submission(self.learner_id, draft_id)
+        return EnglishEssayLatestSubmissionResponse(
+            submission=self._submission_response(row) if row else None
+        )
+
+    def self_review_workspace(
+        self, submission_id: str
+    ) -> EnglishEssaySelfReviewWorkspaceResponse:
+        submission_row = self.repository.get_submission(
+            self.learner_id, submission_id
+        )
+        self._assert_pinned_rubric(submission_row)
+        review_row = self.repository.get_self_review(
+            self.learner_id, submission_id
+        )
+        return EnglishEssaySelfReviewWorkspaceResponse(
+            submission=self._submission_response(submission_row),
+            rubric_title=self.rubric["title"],
+            rubric_purpose=self.rubric["purpose"],
+            rubric_key=self.rubric["stable_key"],
+            rubric_revision=self.rubric["revision"],
+            learner_disclaimer=self.rubric["learner_disclaimer"],
+            criteria=[
+                EnglishEssayRubricCriterionResponse(**criterion)
+                for criterion in self.rubric["criteria"]
+            ],
+            self_review=(
+                self._self_review_response(review_row) if review_row else None
+            ),
+        )
+
+    def create_self_review(
+        self,
+        submission_id: str,
+        *,
+        criterion_reflections: list[EnglishEssaySelfReviewCriterionRequest],
+        overall_reflection: str,
+        idempotency_key: str,
+    ) -> EnglishEssaySelfReviewResponse:
+        submission_row = self.repository.get_submission(
+            self.learner_id, submission_id
+        )
+        self._assert_pinned_rubric(submission_row)
+        criteria = {
+            criterion["criterion_key"]: criterion
+            for criterion in self.rubric["criteria"]
+        }
+        provided = [reflection.criterion_key for reflection in criterion_reflections]
+        if len(set(provided)) != len(provided) or set(provided) != set(criteria):
+            raise EnglishEssayError(
+                "essay_self_review_incomplete",
+                "Complete every pinned rubric criterion exactly once.",
+                422,
+            )
+        normalized = []
+        by_key = {
+            reflection.criterion_key: reflection
+            for reflection in criterion_reflections
+        }
+        for criterion in self.rubric["criteria"]:
+            reflection = by_key[criterion["criterion_key"]]
+            valid_levels = {band["level"] for band in criterion["bands"]}
+            if reflection.selected_band_level not in valid_levels:
+                raise EnglishEssayError(
+                    "essay_self_review_band_invalid",
+                    "Choose a descriptor from the pinned instructional rubric.",
+                    422,
+                )
+            evidence_note = reflection.evidence_note.strip()
+            improvement_action = reflection.improvement_action.strip()
+            if not evidence_note or not improvement_action:
+                raise EnglishEssayError(
+                    "essay_self_review_incomplete",
+                    "Add an evidence note and improvement action for every criterion.",
+                    422,
+                )
+            normalized.append(
+                {
+                    "criterion_key": reflection.criterion_key,
+                    "selected_band_level": reflection.selected_band_level,
+                    "evidence_note": evidence_note,
+                    "improvement_action": improvement_action,
+                }
+            )
+        overall = overall_reflection.strip()
+        if not overall:
+            raise EnglishEssayError(
+                "essay_self_review_incomplete",
+                "Add an overall reflection before completing the self-review.",
+                422,
+            )
+        row = self.repository.create_self_review(
+            self.learner_id,
+            submission_id,
+            rubric_key=self.rubric["stable_key"],
+            rubric_revision=self.rubric["revision"],
+            criterion_reflections=normalized,
+            overall_reflection=overall,
+            idempotency_key=idempotency_key,
+        )
+        return self._self_review_response(row)
+
+    def _assert_pinned_rubric(self, submission_row: dict) -> None:
+        if (
+            submission_row["rubric_key"] != self.rubric["stable_key"]
+            or submission_row["rubric_revision"] != self.rubric["revision"]
+        ):
+            raise EnglishEssayError(
+                "essay_rubric_revision_unavailable",
+                "The exact instructional rubric for this submission is unavailable.",
+                503,
+            )
+        if self.rubric["status"] != "published" and not self.allow_drafts:
+            raise EnglishEssayError(
+                "essay_submission_not_found", "Essay submission not found.", 404
+            )
+
+    def _self_review_response(self, row: dict) -> EnglishEssaySelfReviewResponse:
+        criteria = {
+            criterion["criterion_key"]: criterion
+            for criterion in self.rubric["criteria"]
+        }
+        enriched = []
+        for reflection in row["criterion_reflections"]:
+            criterion = criteria[reflection["criterion_key"]]
+            band = next(
+                item
+                for item in criterion["bands"]
+                if item["level"] == reflection["selected_band_level"]
+            )
+            enriched.append(
+                EnglishEssaySelfReviewCriterionResponse(
+                    criterion_key=reflection["criterion_key"],
+                    criterion_title=criterion["title"],
+                    selected_band_level=reflection["selected_band_level"],
+                    selected_band_label=band["label"],
+                    selected_band_descriptor=band["descriptor"],
+                    evidence_note=reflection["evidence_note"],
+                    improvement_action=reflection["improvement_action"],
+                )
+            )
+        return EnglishEssaySelfReviewResponse(
+            self_review_id=str(row["self_review_id"]),
+            submission_id=str(row["submission_id"]),
+            rubric_key=row["rubric_key"],
+            rubric_revision=row["rubric_revision"],
+            criterion_reflections=enriched,
+            overall_reflection=row["overall_reflection"],
+            disclaimer_acknowledged=row["disclaimer_acknowledged"],
+            completed_at=row["completed_at"],
+        )
+
+    @staticmethod
+    def _submission_response(row: dict) -> EnglishEssaySubmissionResponse:
         public_row = {
             field: row[field]
             for field in EnglishEssaySubmissionResponse.model_fields

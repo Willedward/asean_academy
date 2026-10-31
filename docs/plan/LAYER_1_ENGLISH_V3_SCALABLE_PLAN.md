@@ -487,9 +487,12 @@ Technical implementation identifiers use `ENG-Tx.y`; curriculum lesson identifie
 contract. **ENG-T3.2** adds owned essay drafts with local recovery, revision-safe remote
 autosave and a learner editor. **ENG-T3.3** adds deterministic pre-submit checks, explicit
 learner confirmation and immutable submission revisions pinned to the exact draft, prompt and
-instructional rubric. Both remain draft-only; submission creates no AI feedback or official
-score. The next technical increment is **ENG-T3.4 — learner self-review against the pinned
-instructional rubric**, while the review and release evidence below continues independently.
+instructional rubric. **ENG-T3.4** adds one immutable, learner-authored self-review per
+submission: every pinned criterion requires a chosen descriptor, essay evidence and a concrete
+next action, with no calculated score or provider call. All remain draft-only and create no AI
+feedback or official score. The next technical increment is **ENG-T3.5 — asynchronous fixture
+marking jobs with no live provider calls**, while the review and release evidence below
+continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

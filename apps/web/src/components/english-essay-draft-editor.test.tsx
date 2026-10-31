@@ -13,6 +13,9 @@ const updateDraft = vi.fn();
 const getDraft = vi.fn();
 const preSubmitDraft = vi.fn();
 const createSubmission = vi.fn();
+const getLatestSubmission = vi.fn();
+const getSelfReviewWorkspace = vi.fn();
+const createSelfReview = vi.fn();
 
 vi.mock("@/lib/api/english", () => ({
   EnglishEssayDraftApiError: class EnglishEssayDraftApiError extends Error {
@@ -28,6 +31,12 @@ vi.mock("@/lib/api/english", () => ({
   preSubmitEnglishEssayDraft: (...args: unknown[]) => preSubmitDraft(...args),
   createEnglishEssaySubmission: (...args: unknown[]) =>
     createSubmission(...args),
+  getLatestEnglishEssaySubmission: (...args: unknown[]) =>
+    getLatestSubmission(...args),
+  getEnglishEssaySelfReviewWorkspace: (...args: unknown[]) =>
+    getSelfReviewWorkspace(...args),
+  createEnglishEssaySelfReview: (...args: unknown[]) =>
+    createSelfReview(...args),
 }));
 
 const initialDraft: EnglishEssayDraftResponse = {
@@ -62,6 +71,10 @@ beforeEach(() => {
   getDraft.mockReset();
   preSubmitDraft.mockReset();
   createSubmission.mockReset();
+  getLatestSubmission.mockReset();
+  getLatestSubmission.mockResolvedValue({ submission: null });
+  getSelfReviewWorkspace.mockReset();
+  createSelfReview.mockReset();
 });
 
 afterEach(cleanup);
@@ -171,6 +184,17 @@ describe("EnglishEssayDraftEditor", () => {
     };
     preSubmitDraft.mockResolvedValue(preSubmit);
     createSubmission.mockResolvedValue(submitted);
+    getSelfReviewWorkspace.mockResolvedValue({
+      submission: submitted,
+      rubric_title: "NextScholar instructional composition rubric",
+      rubric_purpose: "Formative reflection only.",
+      rubric_key: submitted.rubric_key,
+      rubric_revision: 1,
+      learner_disclaimer:
+        "This is not an official ASEAN Scholarship score or prediction.",
+      criteria: [],
+      self_review: null,
+    });
 
     render(<EnglishEssayDraftEditor initialDraft={readyDraft} />);
     fireEvent.click(screen.getByRole("button", { name: "Review before submitting" }));
@@ -196,6 +220,55 @@ describe("EnglishEssayDraftEditor", () => {
     expect(screen.getByText(/No AI feedback or official score was generated/)).toBeInTheDocument();
     expect(preSubmitDraft).toHaveBeenCalledWith(readyDraft.draft_id, 2);
     expect(createSubmission).toHaveBeenCalledWith(readyDraft.draft_id, 2);
+  });
+
+  it("restores the latest immutable submission and self-review workspace after reload", async () => {
+    const submitted: EnglishEssaySubmissionResponse = {
+      submission_id: "dfdb118f-b09d-4baf-a7e0-64f582729351",
+      draft_id: initialDraft.draft_id,
+      prompt_key: initialDraft.prompt.stable_key,
+      prompt_revision: 1,
+      rubric_key: "english-essay-rubric-instructional-v1",
+      rubric_revision: 1,
+      draft_edit_revision: 1,
+      submission_revision: 1,
+      body: "Planning helps me beyond school.",
+      body_sha256: "a".repeat(64),
+      word_count: 5,
+      paragraph_count: 1,
+      deterministic_checks: [],
+      draft_created_at: initialDraft.created_at,
+      draft_updated_at: initialDraft.updated_at,
+      draft_age_seconds: 120,
+      submitted_at: "2026-10-30T01:02:00Z",
+      immutable: true,
+      ai_feedback_available: false,
+      official_score_available: false,
+    };
+    getLatestSubmission.mockResolvedValue({ submission: submitted });
+    getSelfReviewWorkspace.mockResolvedValue({
+      submission: submitted,
+      rubric_title: "NextScholar instructional composition rubric",
+      rubric_purpose: "Formative reflection only.",
+      rubric_key: submitted.rubric_key,
+      rubric_revision: 1,
+      learner_disclaimer:
+        "This is not an official ASEAN Scholarship score or prediction.",
+      criteria: [],
+      self_review: null,
+    });
+
+    render(<EnglishEssayDraftEditor initialDraft={initialDraft} />);
+
+    expect(
+      await screen.findByText("Submission revision 1 is saved permanently."),
+    ).toBeInTheDocument();
+    expect(await screen.findByText("Submitted essay")).toBeInTheDocument();
+    expect(screen.getByText(submitted.body)).toBeInTheDocument();
+    expect(getLatestSubmission).toHaveBeenCalledWith(initialDraft.draft_id);
+    expect(getSelfReviewWorkspace).toHaveBeenCalledWith(
+      submitted.submission_id,
+    );
   });
 });
 

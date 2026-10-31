@@ -31,6 +31,14 @@ export type EnglishEssayPreSubmitResponse =
   components["schemas"]["EnglishEssayPreSubmitResponse"];
 export type EnglishEssaySubmissionResponse =
   components["schemas"]["EnglishEssaySubmissionResponse"];
+export type EnglishEssayLatestSubmissionResponse =
+  components["schemas"]["EnglishEssayLatestSubmissionResponse"];
+export type EnglishEssaySelfReviewWorkspaceResponse =
+  components["schemas"]["EnglishEssaySelfReviewWorkspaceResponse"];
+export type EnglishEssaySelfReviewResponse =
+  components["schemas"]["EnglishEssaySelfReviewResponse"];
+export type EnglishEssaySelfReviewCriterionRequest =
+  components["schemas"]["EnglishEssaySelfReviewCriterionRequest"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -153,6 +161,68 @@ export async function createEnglishEssaySubmission(
         draft_id: draftId,
         expected_edit_revision: expectedEditRevision,
         confirmed: true,
+      },
+    },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getLatestEnglishEssaySubmission(
+  draftId: string,
+): Promise<EnglishEssayLatestSubmissionResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-drafts/{draft_id}/latest-submission",
+    { params: { path: { draft_id: draftId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssaySelfReviewWorkspace(
+  submissionId: string,
+): Promise<EnglishEssaySelfReviewWorkspaceResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-submissions/{submission_id}/self-review",
+    { params: { path: { submission_id: submissionId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function createEnglishEssaySelfReview(
+  submissionId: string,
+  criterionReflections: EnglishEssaySelfReviewCriterionRequest[],
+  overallReflection: string,
+): Promise<EnglishEssaySelfReviewResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-submissions/{submission_id}/self-review",
+    {
+      params: {
+        path: { submission_id: submissionId },
+        header: {
+          "Idempotency-Key": `english-essay-self-review:${submissionId}`,
+        },
+      },
+      body: {
+        criterion_reflections: criterionReflections,
+        overall_reflection: overallReflection,
+        disclaimer_acknowledged: true,
       },
     },
   );

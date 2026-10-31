@@ -1,4 +1,4 @@
-"""Owned persistence for mutable essay drafts and immutable submissions."""
+"""Owned persistence for essay drafts, submissions and learner self-reviews."""
 
 from __future__ import annotations
 
@@ -31,6 +31,8 @@ class InMemoryEnglishEssayRepository:
         self.idempotency: dict[tuple[str, str], str] = {}
         self.submissions: dict[str, dict] = {}
         self.submission_idempotency: dict[tuple[str, str], str] = {}
+        self.self_reviews: dict[str, dict] = {}
+        self.self_review_idempotency: dict[tuple[str, str], str] = {}
         self._lock = Lock()
 
     def create_or_resume(
@@ -194,6 +196,99 @@ class InMemoryEnglishEssayRepository:
             self.submissions[submission_id] = submission
             self.submission_idempotency[(learner_id, idempotency_key)] = submission_id
             return dict(submission)
+
+    def get_submission(self, learner_id: str, submission_id: str) -> dict:
+        submission = self.submissions.get(submission_id)
+        if submission is None or submission["learner_id"] != learner_id:
+            raise EnglishEssayError(
+                "essay_submission_not_found", "Essay submission not found.", 404
+            )
+        return dict(submission)
+
+    def latest_submission(self, learner_id: str, draft_id: str) -> dict | None:
+        self.get(learner_id, draft_id)
+        owned = [
+            submission
+            for submission in self.submissions.values()
+            if submission["learner_id"] == learner_id
+            and submission["draft_id"] == draft_id
+        ]
+        if not owned:
+            return None
+        return dict(max(owned, key=lambda row: row["submission_revision"]))
+
+    def get_self_review(self, learner_id: str, submission_id: str) -> dict | None:
+        self.get_submission(learner_id, submission_id)
+        review = next(
+            (
+                row
+                for row in self.self_reviews.values()
+                if row["submission_id"] == submission_id
+                and row["learner_id"] == learner_id
+            ),
+            None,
+        )
+        return dict(review) if review else None
+
+    def create_self_review(
+        self,
+        learner_id: str,
+        submission_id: str,
+        *,
+        rubric_key: str,
+        rubric_revision: int,
+        criterion_reflections: list[dict],
+        overall_reflection: str,
+        idempotency_key: str,
+    ) -> dict:
+        with self._lock:
+            submission = self.get_submission(learner_id, submission_id)
+            prior_id = self.self_review_idempotency.get(
+                (learner_id, idempotency_key)
+            )
+            if prior_id:
+                prior = self.self_reviews[prior_id]
+                if prior["submission_id"] != submission_id:
+                    raise EnglishEssayError(
+                        "idempotency_conflict",
+                        "That idempotency key was already used for another essay self-review.",
+                        409,
+                    )
+                return dict(prior)
+            if self.get_self_review(learner_id, submission_id):
+                raise EnglishEssayError(
+                    "essay_self_review_already_completed",
+                    "This submission already has a completed self-review.",
+                    409,
+                )
+            if (
+                submission["rubric_key"] != rubric_key
+                or submission["rubric_revision"] != rubric_revision
+            ):
+                raise EnglishEssayError(
+                    "essay_rubric_changed",
+                    "The self-review rubric does not match the submitted essay.",
+                    409,
+                )
+            self_review_id = str(uuid4())
+            review = {
+                "self_review_id": self_review_id,
+                "learner_id": learner_id,
+                "submission_id": submission_id,
+                "rubric_key": rubric_key,
+                "rubric_revision": rubric_revision,
+                "criterion_reflections": json.loads(
+                    json.dumps(criterion_reflections)
+                ),
+                "overall_reflection": overall_reflection,
+                "disclaimer_acknowledged": True,
+                "completed_at": _now(),
+            }
+            self.self_reviews[self_review_id] = review
+            self.self_review_idempotency[(learner_id, idempotency_key)] = (
+                self_review_id
+            )
+            return dict(review)
 
 
 class PostgresEnglishEssayRepository:
@@ -590,4 +685,182 @@ class PostgresEnglishEssayRepository:
             )
             return self._submission_by_id(
                 connection, learner_id, str(submission["id"])
+            )
+
+    def get_submission(self, learner_id: str, submission_id: str) -> dict:
+        with self._connect() as connection:
+            return self._submission_by_id(connection, learner_id, submission_id)
+
+    def latest_submission(self, learner_id: str, draft_id: str) -> dict | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                select submissions.id::text as submission_id
+                  from english_essay_submissions submissions
+                  join english_essay_drafts drafts on drafts.id = submissions.draft_id
+                 where submissions.draft_id = %s and drafts.student_id = %s
+                 order by submissions.submission_revision desc
+                 limit 1
+                """,
+                (draft_id, learner_id),
+            ).fetchone()
+            if row:
+                return self._submission_by_id(
+                    connection, learner_id, row["submission_id"]
+                )
+            owned_draft = connection.execute(
+                "select 1 from english_essay_drafts where id = %s and student_id = %s",
+                (draft_id, learner_id),
+            ).fetchone()
+            if not owned_draft:
+                raise EnglishEssayError(
+                    "essay_draft_not_found", "Essay draft not found.", 404
+                )
+            return None
+
+    @staticmethod
+    def _self_review_by_id(
+        connection, learner_id: str, self_review_id: str
+    ) -> dict:
+        row = connection.execute(
+            """
+            select reviews.id::text as self_review_id,
+                   reviews.submission_id::text as submission_id,
+                   rubrics.stable_key as rubric_key,
+                   rubric_versions.revision as rubric_revision,
+                   reviews.criterion_reflections, reviews.overall_reflection,
+                   reviews.disclaimer_acknowledged, reviews.completed_at
+              from english_essay_self_reviews reviews
+              join english_essay_rubric_versions rubric_versions
+                on rubric_versions.id = reviews.rubric_version_id
+              join english_essay_rubrics rubrics
+                on rubrics.id = rubric_versions.rubric_id
+             where reviews.id = %s and reviews.student_id = %s
+            """,
+            (self_review_id, learner_id),
+        ).fetchone()
+        if not row:
+            raise EnglishEssayError(
+                "essay_self_review_not_found", "Essay self-review not found.", 404
+            )
+        return dict(row)
+
+    def get_self_review(self, learner_id: str, submission_id: str) -> dict | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                select reviews.id::text as self_review_id
+                  from english_essay_self_reviews reviews
+                 where reviews.submission_id = %s and reviews.student_id = %s
+                """,
+                (submission_id, learner_id),
+            ).fetchone()
+            if row:
+                return self._self_review_by_id(
+                    connection, learner_id, row["self_review_id"]
+                )
+            self._submission_by_id(connection, learner_id, submission_id)
+            return None
+
+    def create_self_review(
+        self,
+        learner_id: str,
+        submission_id: str,
+        *,
+        rubric_key: str,
+        rubric_revision: int,
+        criterion_reflections: list[dict],
+        overall_reflection: str,
+        idempotency_key: str,
+    ) -> dict:
+        with self._connect() as connection, connection.transaction():
+            connection.execute(
+                "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                (f"english-essay-self-review:{learner_id}:{idempotency_key}",),
+            )
+            prior = connection.execute(
+                """
+                select self_review_id
+                  from english_essay_self_review_idempotency_keys
+                 where student_id = %s and idempotency_key = %s
+                """,
+                (learner_id, idempotency_key),
+            ).fetchone()
+            if prior:
+                result = self._self_review_by_id(
+                    connection, learner_id, str(prior["self_review_id"])
+                )
+                if result["submission_id"] != submission_id:
+                    raise EnglishEssayError(
+                        "idempotency_conflict",
+                        "That idempotency key was already used for another essay self-review.",
+                        409,
+                    )
+                return result
+
+            submission = connection.execute(
+                """
+                select submissions.id, submissions.rubric_version_id,
+                       rubrics.stable_key as rubric_key,
+                       rubric_versions.revision as rubric_revision
+                  from english_essay_submissions submissions
+                  join english_essay_rubric_versions rubric_versions
+                    on rubric_versions.id = submissions.rubric_version_id
+                  join english_essay_rubrics rubrics
+                    on rubrics.id = rubric_versions.rubric_id
+                 where submissions.id = %s and submissions.student_id = %s
+                 for update of submissions
+                """,
+                (submission_id, learner_id),
+            ).fetchone()
+            if not submission:
+                raise EnglishEssayError(
+                    "essay_submission_not_found", "Essay submission not found.", 404
+                )
+            if (
+                submission["rubric_key"] != rubric_key
+                or submission["rubric_revision"] != rubric_revision
+            ):
+                raise EnglishEssayError(
+                    "essay_rubric_changed",
+                    "The self-review rubric does not match the submitted essay.",
+                    409,
+                )
+            existing = connection.execute(
+                "select id from english_essay_self_reviews where submission_id = %s",
+                (submission_id,),
+            ).fetchone()
+            if existing:
+                raise EnglishEssayError(
+                    "essay_self_review_already_completed",
+                    "This submission already has a completed self-review.",
+                    409,
+                )
+            created = connection.execute(
+                """
+                insert into english_essay_self_reviews(
+                    student_id, submission_id, rubric_version_id,
+                    criterion_reflections, overall_reflection,
+                    disclaimer_acknowledged
+                ) values (%s, %s, %s, %s::jsonb, %s, true)
+                returning id
+                """,
+                (
+                    learner_id,
+                    submission_id,
+                    submission["rubric_version_id"],
+                    json.dumps(criterion_reflections),
+                    overall_reflection,
+                ),
+            ).fetchone()
+            connection.execute(
+                """
+                insert into english_essay_self_review_idempotency_keys(
+                    student_id, idempotency_key, self_review_id
+                ) values (%s, %s, %s)
+                """,
+                (learner_id, idempotency_key, created["id"]),
+            )
+            return self._self_review_by_id(
+                connection, learner_id, str(created["id"])
             )

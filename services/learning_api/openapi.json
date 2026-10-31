@@ -3263,6 +3263,38 @@
         "title": "CreateEnglishEssayDraftRequest",
         "type": "object"
       },
+      "CreateEnglishEssaySelfReviewRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_reflections": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssaySelfReviewCriterionRequest"
+            },
+            "maxItems": 6,
+            "minItems": 3,
+            "title": "Criterion Reflections",
+            "type": "array"
+          },
+          "disclaimer_acknowledged": {
+            "const": true,
+            "title": "Disclaimer Acknowledged",
+            "type": "boolean"
+          },
+          "overall_reflection": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Overall Reflection",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterion_reflections",
+          "overall_reflection",
+          "disclaimer_acknowledged"
+        ],
+        "title": "CreateEnglishEssaySelfReviewRequest",
+        "type": "object"
+      },
       "CreateEnglishEssaySubmissionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -5409,6 +5441,23 @@
         "title": "EnglishEssayDraftResponse",
         "type": "object"
       },
+      "EnglishEssayLatestSubmissionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "submission": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssaySubmissionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "EnglishEssayLatestSubmissionResponse",
+        "type": "object"
+      },
       "EnglishEssayPreSubmitCheckResponse": {
         "additionalProperties": false,
         "properties": {
@@ -5639,6 +5688,290 @@
           "development_preview"
         ],
         "title": "EnglishEssayPromptResponse",
+        "type": "object"
+      },
+      "EnglishEssayRubricBandResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "descriptor": {
+            "title": "Descriptor",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "level": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Level",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "level",
+          "label",
+          "descriptor"
+        ],
+        "title": "EnglishEssayRubricBandResponse",
+        "type": "object"
+      },
+      "EnglishEssayRubricCriterionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "bands": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayRubricBandResponse"
+            },
+            "title": "Bands",
+            "type": "array"
+          },
+          "criterion_key": {
+            "pattern": "^[a-z][a-z0-9_]+$",
+            "title": "Criterion Key",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "weight_percent": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Weight Percent",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "criterion_key",
+          "title",
+          "description",
+          "weight_percent",
+          "bands"
+        ],
+        "title": "EnglishEssayRubricCriterionResponse",
+        "type": "object"
+      },
+      "EnglishEssaySelfReviewCriterionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_key": {
+            "pattern": "^[a-z][a-z0-9_]+$",
+            "title": "Criterion Key",
+            "type": "string"
+          },
+          "evidence_note": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Evidence Note",
+            "type": "string"
+          },
+          "improvement_action": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Improvement Action",
+            "type": "string"
+          },
+          "selected_band_level": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Selected Band Level",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "criterion_key",
+          "selected_band_level",
+          "evidence_note",
+          "improvement_action"
+        ],
+        "title": "EnglishEssaySelfReviewCriterionRequest",
+        "type": "object"
+      },
+      "EnglishEssaySelfReviewCriterionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_key": {
+            "title": "Criterion Key",
+            "type": "string"
+          },
+          "criterion_title": {
+            "title": "Criterion Title",
+            "type": "string"
+          },
+          "evidence_note": {
+            "title": "Evidence Note",
+            "type": "string"
+          },
+          "improvement_action": {
+            "title": "Improvement Action",
+            "type": "string"
+          },
+          "selected_band_descriptor": {
+            "title": "Selected Band Descriptor",
+            "type": "string"
+          },
+          "selected_band_label": {
+            "title": "Selected Band Label",
+            "type": "string"
+          },
+          "selected_band_level": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Selected Band Level",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "criterion_key",
+          "criterion_title",
+          "selected_band_level",
+          "selected_band_label",
+          "selected_band_descriptor",
+          "evidence_note",
+          "improvement_action"
+        ],
+        "title": "EnglishEssaySelfReviewCriterionResponse",
+        "type": "object"
+      },
+      "EnglishEssaySelfReviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "ai_feedback_available": {
+            "const": false,
+            "default": false,
+            "title": "Ai Feedback Available",
+            "type": "boolean"
+          },
+          "completed_at": {
+            "format": "date-time",
+            "title": "Completed At",
+            "type": "string"
+          },
+          "criterion_reflections": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssaySelfReviewCriterionResponse"
+            },
+            "title": "Criterion Reflections",
+            "type": "array"
+          },
+          "disclaimer_acknowledged": {
+            "const": true,
+            "title": "Disclaimer Acknowledged",
+            "type": "boolean"
+          },
+          "immutable": {
+            "const": true,
+            "default": true,
+            "title": "Immutable",
+            "type": "boolean"
+          },
+          "learner_authored": {
+            "const": true,
+            "default": true,
+            "title": "Learner Authored",
+            "type": "boolean"
+          },
+          "official_score_available": {
+            "const": false,
+            "default": false,
+            "title": "Official Score Available",
+            "type": "boolean"
+          },
+          "overall_reflection": {
+            "title": "Overall Reflection",
+            "type": "string"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "self_review_id": {
+            "title": "Self Review Id",
+            "type": "string"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "self_review_id",
+          "submission_id",
+          "rubric_key",
+          "rubric_revision",
+          "criterion_reflections",
+          "overall_reflection",
+          "disclaimer_acknowledged",
+          "completed_at"
+        ],
+        "title": "EnglishEssaySelfReviewResponse",
+        "type": "object"
+      },
+      "EnglishEssaySelfReviewWorkspaceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayRubricCriterionResponse"
+            },
+            "title": "Criteria",
+            "type": "array"
+          },
+          "learner_disclaimer": {
+            "title": "Learner Disclaimer",
+            "type": "string"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_purpose": {
+            "title": "Rubric Purpose",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "rubric_title": {
+            "title": "Rubric Title",
+            "type": "string"
+          },
+          "self_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssaySelfReviewResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "submission": {
+            "$ref": "#/components/schemas/EnglishEssaySubmissionResponse"
+          }
+        },
+        "required": [
+          "submission",
+          "rubric_title",
+          "rubric_purpose",
+          "rubric_key",
+          "rubric_revision",
+          "learner_disclaimer",
+          "criteria"
+        ],
+        "title": "EnglishEssaySelfReviewWorkspaceResponse",
         "type": "object"
       },
       "EnglishEssaySubmissionResponse": {
@@ -19856,6 +20189,134 @@
         ]
       }
     },
+    "/api/v1/english/essay-drafts/{draft_id}/latest-submission": {
+      "get": {
+        "operationId": "getLatestEnglishEssaySubmission",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "draft_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Draft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayLatestSubmissionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the latest immutable submission for an owned essay draft",
+        "tags": [
+          "english"
+        ]
+      }
+    },
     "/api/v1/english/essay-drafts/{draft_id}/pre-submit": {
       "post": {
         "operationId": "preSubmitEnglishEssayDraft",
@@ -20244,6 +20705,281 @@
           }
         ],
         "summary": "Create an immutable essay snapshot after explicit learner confirmation",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions/{submission_id}/self-review": {
+      "get": {
+        "operationId": "getEnglishEssaySelfReviewWorkspace",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssaySelfReviewWorkspaceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the pinned instructional rubric and learner self-review state",
+        "tags": [
+          "english"
+        ]
+      },
+      "post": {
+        "operationId": "createEnglishEssaySelfReview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishEssaySelfReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssaySelfReviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Complete an immutable learner-authored review against the pinned rubric",
         "tags": [
           "english"
         ]

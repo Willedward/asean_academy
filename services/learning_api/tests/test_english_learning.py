@@ -412,6 +412,172 @@ def test_essay_pre_submit_checks_and_immutable_submission_revisions():
     ] == content
 
 
+def test_essay_self_review_covers_the_pinned_rubric_without_creating_a_score():
+    app = application()
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-drafts",
+        headers={"Idempotency-Key": "self-review-draft"},
+        json={
+            "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
+            "prompt_revision": 1,
+        },
+    )
+    draft_id = created.json()["draft_id"]
+    before_submission = request(
+        app, "GET", f"/api/v1/english/essay-drafts/{draft_id}/latest-submission"
+    )
+    assert before_submission.status_code == 200
+    assert before_submission.json() == {"submission": None}
+
+    saved = request(
+        app,
+        "PATCH",
+        f"/api/v1/english/essay-drafts/{draft_id}",
+        json={
+            "body": (
+                "Planning a group project taught me to listen before choosing a solution.\n\n"
+                "I now use that process when my family makes travel plans."
+            ),
+            "expected_edit_revision": 1,
+        },
+    )
+    submitted = request(
+        app,
+        "POST",
+        "/api/v1/english/essay-submissions",
+        headers={"Idempotency-Key": "self-review-submission"},
+        json={
+            "draft_id": draft_id,
+            "expected_edit_revision": saved.json()["edit_revision"],
+            "confirmed": True,
+        },
+    )
+    assert submitted.status_code == 201, submitted.text
+    submission_id = submitted.json()["submission_id"]
+
+    latest = request(
+        app, "GET", f"/api/v1/english/essay-drafts/{draft_id}/latest-submission"
+    )
+    assert latest.status_code == 200, latest.text
+    assert latest.json()["submission"]["submission_id"] == submission_id
+
+    workspace = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+    )
+    assert workspace.status_code == 200, workspace.text
+    review_workspace = workspace.json()
+    assert review_workspace["rubric_revision"] == 1
+    assert len(review_workspace["criteria"]) == 4
+    assert review_workspace["self_review"] is None
+    assert "not an official ASEAN Scholarship score" in review_workspace[
+        "learner_disclaimer"
+    ]
+
+    reflections = [
+        {
+            "criterion_key": criterion["criterion_key"],
+            "selected_band_level": 3,
+            "evidence_note": f"I can see evidence for {criterion['title']} in my response.",
+            "improvement_action": f"I will strengthen {criterion['title'].lower()} next.",
+        }
+        for criterion in review_workspace["criteria"]
+    ]
+    incomplete = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": "self-review-incomplete"},
+        json={
+            "criterion_reflections": reflections[:-1],
+            "overall_reflection": "My next revision needs more precise support.",
+            "disclaimer_acknowledged": True,
+        },
+    )
+    assert incomplete.status_code == 422
+    assert incomplete.json()["error"]["code"] == "essay_self_review_incomplete"
+
+    not_acknowledged = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": "self-review-not-acknowledged"},
+        json={
+            "criterion_reflections": reflections,
+            "overall_reflection": "My next revision needs more precise support.",
+            "disclaimer_acknowledged": False,
+        },
+    )
+    assert not_acknowledged.status_code == 422
+
+    completed = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": "self-review-complete"},
+        json={
+            "criterion_reflections": reflections,
+            "overall_reflection": "My next revision needs more precise support.",
+            "disclaimer_acknowledged": True,
+        },
+    )
+    assert completed.status_code == 201, completed.text
+    review = completed.json()
+    assert review["immutable"] is True
+    assert review["learner_authored"] is True
+    assert review["ai_feedback_available"] is False
+    assert review["official_score_available"] is False
+    assert "score" not in review
+    assert len(review["criterion_reflections"]) == 4
+    assert review["criterion_reflections"][0]["selected_band_label"] == "Developing"
+
+    repeated = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": "self-review-complete"},
+        json={
+            "criterion_reflections": reflections,
+            "overall_reflection": "My next revision needs more precise support.",
+            "disclaimer_acknowledged": True,
+        },
+    )
+    assert repeated.status_code == 201
+    assert repeated.json()["self_review_id"] == review["self_review_id"]
+
+    duplicate = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+        headers={"Idempotency-Key": "self-review-duplicate"},
+        json={
+            "criterion_reflections": reflections,
+            "overall_reflection": "A changed reflection must not replace the first one.",
+            "disclaimer_acknowledged": True,
+        },
+    )
+    assert duplicate.status_code == 409
+    assert duplicate.json()["error"]["code"] == (
+        "essay_self_review_already_completed"
+    )
+
+    restored = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/self-review",
+    )
+    assert restored.status_code == 200
+    assert restored.json()["self_review"]["self_review_id"] == review[
+        "self_review_id"
+    ]
+    assert restored.json()["self_review"]["overall_reflection"] == (
+        "My next revision needs more precise support."
+    )
+
+
 def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():
     app = application()
 

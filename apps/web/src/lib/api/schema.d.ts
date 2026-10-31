@@ -1115,6 +1115,23 @@ export interface paths {
         patch: operations["updateEnglishEssayDraft"];
         trace?: never;
     };
+    "/api/v1/english/essay-drafts/{draft_id}/latest-submission": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the latest immutable submission for an owned essay draft */
+        get: operations["getLatestEnglishEssaySubmission"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/english/essay-drafts/{draft_id}/pre-submit": {
         parameters: {
             query?: never;
@@ -1160,6 +1177,24 @@ export interface paths {
         put?: never;
         /** Create an immutable essay snapshot after explicit learner confirmation */
         post: operations["createEnglishEssaySubmission"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/essay-submissions/{submission_id}/self-review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the pinned instructional rubric and learner self-review state */
+        get: operations["getEnglishEssaySelfReviewWorkspace"];
+        put?: never;
+        /** Complete an immutable learner-authored review against the pinned rubric */
+        post: operations["createEnglishEssaySelfReview"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2865,6 +2900,18 @@ export interface components {
             /** Prompt Revision */
             prompt_revision: number;
         };
+        /** CreateEnglishEssaySelfReviewRequest */
+        CreateEnglishEssaySelfReviewRequest: {
+            /** Criterion Reflections */
+            criterion_reflections: components["schemas"]["EnglishEssaySelfReviewCriterionRequest"][];
+            /**
+             * Disclaimer Acknowledged
+             * @constant
+             */
+            disclaimer_acknowledged: true;
+            /** Overall Reflection */
+            overall_reflection: string;
+        };
         /** CreateEnglishEssaySubmissionRequest */
         CreateEnglishEssaySubmissionRequest: {
             /**
@@ -3673,6 +3720,10 @@ export interface components {
             /** Word Count */
             word_count: number;
         };
+        /** EnglishEssayLatestSubmissionResponse */
+        EnglishEssayLatestSubmissionResponse: {
+            submission?: components["schemas"]["EnglishEssaySubmissionResponse"] | null;
+        };
         /** EnglishEssayPreSubmitCheckResponse */
         EnglishEssayPreSubmitCheckResponse: {
             /** Check Key */
@@ -3761,6 +3812,122 @@ export interface components {
              * @enum {string}
              */
             word_count_status: "not_stated" | "guidance" | "strict";
+        };
+        /** EnglishEssayRubricBandResponse */
+        EnglishEssayRubricBandResponse: {
+            /** Descriptor */
+            descriptor: string;
+            /** Label */
+            label: string;
+            /** Level */
+            level: number;
+        };
+        /** EnglishEssayRubricCriterionResponse */
+        EnglishEssayRubricCriterionResponse: {
+            /** Bands */
+            bands: components["schemas"]["EnglishEssayRubricBandResponse"][];
+            /** Criterion Key */
+            criterion_key: string;
+            /** Description */
+            description: string;
+            /** Title */
+            title: string;
+            /** Weight Percent */
+            weight_percent: number;
+        };
+        /** EnglishEssaySelfReviewCriterionRequest */
+        EnglishEssaySelfReviewCriterionRequest: {
+            /** Criterion Key */
+            criterion_key: string;
+            /** Evidence Note */
+            evidence_note: string;
+            /** Improvement Action */
+            improvement_action: string;
+            /** Selected Band Level */
+            selected_band_level: number;
+        };
+        /** EnglishEssaySelfReviewCriterionResponse */
+        EnglishEssaySelfReviewCriterionResponse: {
+            /** Criterion Key */
+            criterion_key: string;
+            /** Criterion Title */
+            criterion_title: string;
+            /** Evidence Note */
+            evidence_note: string;
+            /** Improvement Action */
+            improvement_action: string;
+            /** Selected Band Descriptor */
+            selected_band_descriptor: string;
+            /** Selected Band Label */
+            selected_band_label: string;
+            /** Selected Band Level */
+            selected_band_level: number;
+        };
+        /** EnglishEssaySelfReviewResponse */
+        EnglishEssaySelfReviewResponse: {
+            /**
+             * Ai Feedback Available
+             * @default false
+             * @constant
+             */
+            ai_feedback_available: false;
+            /**
+             * Completed At
+             * Format: date-time
+             */
+            completed_at: string;
+            /** Criterion Reflections */
+            criterion_reflections: components["schemas"]["EnglishEssaySelfReviewCriterionResponse"][];
+            /**
+             * Disclaimer Acknowledged
+             * @constant
+             */
+            disclaimer_acknowledged: true;
+            /**
+             * Immutable
+             * @default true
+             * @constant
+             */
+            immutable: true;
+            /**
+             * Learner Authored
+             * @default true
+             * @constant
+             */
+            learner_authored: true;
+            /**
+             * Official Score Available
+             * @default false
+             * @constant
+             */
+            official_score_available: false;
+            /** Overall Reflection */
+            overall_reflection: string;
+            /** Rubric Key */
+            rubric_key: string;
+            /** Rubric Revision */
+            rubric_revision: number;
+            /** Self Review Id */
+            self_review_id: string;
+            /** Submission Id */
+            submission_id: string;
+        };
+        /** EnglishEssaySelfReviewWorkspaceResponse */
+        EnglishEssaySelfReviewWorkspaceResponse: {
+            /** Criteria */
+            criteria: components["schemas"]["EnglishEssayRubricCriterionResponse"][];
+            /** Learner Disclaimer */
+            learner_disclaimer: string;
+            /** Rubric Key */
+            rubric_key: string;
+            /** Rubric Purpose */
+            rubric_purpose: string;
+            /** Rubric Revision */
+            rubric_revision: number;
+            /** Rubric Title */
+            rubric_title: string;
+            self_review?: components["schemas"]["EnglishEssaySelfReviewResponse"] | null;
+            submission: components["schemas"]["EnglishEssaySubmissionResponse"];
         };
         /** EnglishEssaySubmissionResponse */
         EnglishEssaySubmissionResponse: {
@@ -12626,6 +12793,109 @@ export interface operations {
             };
         };
     };
+    getLatestEnglishEssaySubmission: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayLatestSubmissionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     preSubmitEnglishEssayDraft: {
         parameters: {
             query?: never;
@@ -12856,6 +13126,218 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EnglishEssaySubmissionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishEssaySelfReviewWorkspace: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssaySelfReviewWorkspaceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    createEnglishEssaySelfReview: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEnglishEssaySelfReviewRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssaySelfReviewResponse"];
                 };
             };
             /** @description Bad Request */

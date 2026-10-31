@@ -21,6 +21,7 @@ from ..english_contracts import (
     CreateEnglishCheckpointSessionRequest,
     CreateEnglishDiagnosticSessionRequest,
     CreateEnglishEssayDraftRequest,
+    CreateEnglishEssaySelfReviewRequest,
     CreateEnglishEssaySubmissionRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
@@ -34,8 +35,11 @@ from ..english_contracts import (
     EnglishDiagnosticSessionResponse,
     EnglishErrorClassificationResponse,
     EnglishEssayDraftResponse,
+    EnglishEssayLatestSubmissionResponse,
     EnglishEssayPreSubmitResponse,
     EnglishEssayPromptResponse,
+    EnglishEssaySelfReviewResponse,
+    EnglishEssaySelfReviewWorkspaceResponse,
     EnglishEssaySubmissionResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
@@ -171,6 +175,56 @@ async def create_essay_submission(
         lambda: service.submit(
             str(body.draft_id),
             expected_edit_revision=body.expected_edit_revision,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/essay-drafts/{draft_id}/latest-submission",
+    operation_id="getLatestEnglishEssaySubmission",
+    response_model=EnglishEssayLatestSubmissionResponse,
+    summary="Get the latest immutable submission for an owned essay draft",
+)
+async def latest_essay_submission(
+    draft_id: UUID,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayLatestSubmissionResponse:
+    return _safe(lambda: service.latest_submission(str(draft_id)))
+
+
+@router.get(
+    "/essay-submissions/{submission_id}/self-review",
+    operation_id="getEnglishEssaySelfReviewWorkspace",
+    response_model=EnglishEssaySelfReviewWorkspaceResponse,
+    summary="Get the pinned instructional rubric and learner self-review state",
+)
+async def essay_self_review_workspace(
+    submission_id: UUID,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssaySelfReviewWorkspaceResponse:
+    return _safe(lambda: service.self_review_workspace(str(submission_id)))
+
+
+@router.post(
+    "/essay-submissions/{submission_id}/self-review",
+    operation_id="createEnglishEssaySelfReview",
+    response_model=EnglishEssaySelfReviewResponse,
+    status_code=201,
+    summary="Complete an immutable learner-authored review against the pinned rubric",
+)
+async def create_essay_self_review(
+    submission_id: UUID,
+    body: CreateEnglishEssaySelfReviewRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssaySelfReviewResponse:
+    return _safe(
+        lambda: service.create_self_review(
+            str(submission_id),
+            criterion_reflections=body.criterion_reflections,
+            overall_reflection=body.overall_reflection,
             idempotency_key=idempotency_key,
         )
     )

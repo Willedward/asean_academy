@@ -20,6 +20,7 @@ from question_bank.validation import validate_bank
 from learning_api.admin_contracts import CreateInvitationRequest
 from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
+from learning_api.english_contracts import EnglishEssaySelfReviewCriterionRequest
 from learning_api.english_essay_repository import (
     EnglishEssayError,
     PostgresEnglishEssayRepository,
@@ -271,6 +272,45 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
     assert first.body == first_body
     assert first.ai_feedback_available is False
 
+    workspace = service.self_review_workspace(first.submission_id)
+    reflections = [
+        EnglishEssaySelfReviewCriterionRequest(
+            criterion_key=criterion.criterion_key,
+            selected_band_level=3,
+            evidence_note=f"Evidence noted for {criterion.title}.",
+            improvement_action=f"Strengthen {criterion.title.lower()}.",
+        )
+        for criterion in workspace.criteria
+    ]
+    self_review = service.create_self_review(
+        first.submission_id,
+        criterion_reflections=reflections,
+        overall_reflection="I will develop a more specific example next time.",
+        idempotency_key="postgres-self-review-one",
+    )
+    repeated_review = service.create_self_review(
+        first.submission_id,
+        criterion_reflections=reflections,
+        overall_reflection="I will develop a more specific example next time.",
+        idempotency_key="postgres-self-review-one",
+    )
+    assert repeated_review.self_review_id == self_review.self_review_id
+    assert self_review.official_score_available is False
+    assert self_review.ai_feedback_available is False
+    assert len(self_review.criterion_reflections) == 4
+
+    with pytest.raises(EnglishEssayError, match="already has"):
+        service.create_self_review(
+            first.submission_id,
+            criterion_reflections=reflections,
+            overall_reflection="This must not replace the first review.",
+            idempotency_key="postgres-self-review-duplicate",
+        )
+    with pytest.raises(EnglishEssayError, match="not found"):
+        EnglishEssayService(
+            REPOSITORY_ROOT, repository, other_learner_id, allow_drafts=True
+        ).self_review_workspace(first.submission_id)
+
     with pytest.raises(EnglishEssayError, match="already submitted"):
         service.submit(
             draft.draft_id,
@@ -322,6 +362,22 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
                 connection.execute(
                     "delete from english_essay_submissions where id = %s",
                     (first.submission_id,),
+                )
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    """
+                    update english_essay_self_reviews
+                       set overall_reflection = 'changed'
+                     where id = %s
+                    """,
+                    (self_review.self_review_id,),
+                )
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    "delete from english_essay_self_reviews where id = %s",
+                    (self_review.self_review_id,),
                 )
 
 
