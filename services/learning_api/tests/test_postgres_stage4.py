@@ -21,6 +21,7 @@ from learning_api.admin_contracts import CreateInvitationRequest
 from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
 from learning_api.english_contracts import EnglishEssaySelfReviewCriterionRequest
+from learning_api.english_essay_marking import process_essay_marking_job
 from learning_api.english_essay_repository import (
     EnglishEssayError,
     PostgresEnglishEssayRepository,
@@ -299,6 +300,28 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
     assert self_review.ai_feedback_available is False
     assert len(self_review.criterion_reflections) == 4
 
+    queued_marking = service.enqueue_marking_job(
+        first.submission_id,
+        idempotency_key="postgres-fixture-marking-one",
+    )
+    assert queued_marking.job.status == "queued"
+    repeated_marking = service.enqueue_marking_job(
+        first.submission_id,
+        idempotency_key="postgres-fixture-marking-one",
+    )
+    assert repeated_marking.job.job_id == queued_marking.job.job_id
+    assert process_essay_marking_job(
+        repository,
+        queued_marking.job.job_id,
+        worker_id="postgres-test-worker",
+    )
+    marking = service.marking_workspace(first.submission_id)
+    assert marking.job.status == "succeeded"
+    assert marking.feedback.fixture_version == "english-essay-fixture-v1"
+    assert marking.feedback.ai_feedback_available is False
+    assert marking.feedback.official_score_available is False
+    assert len(marking.feedback.criterion_feedback) == 4
+
     with pytest.raises(EnglishEssayError, match="already has"):
         service.create_self_review(
             first.submission_id,
@@ -378,6 +401,16 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
                 connection.execute(
                     "delete from english_essay_self_reviews where id = %s",
                     (self_review.self_review_id,),
+                )
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    """
+                    update english_essay_marking_feedback
+                       set overall_summary = 'changed'
+                     where id = %s
+                    """,
+                    (marking.feedback.feedback_id,),
                 )
 
 

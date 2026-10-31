@@ -11,6 +11,9 @@ from pathlib import Path
 from .english_contracts import (
     EnglishEssayDraftResponse,
     EnglishEssayLatestSubmissionResponse,
+    EnglishEssayMarkingFeedbackResponse,
+    EnglishEssayMarkingJobResponse,
+    EnglishEssayMarkingWorkspaceResponse,
     EnglishEssayPreSubmitResponse,
     EnglishEssayPromptResponse,
     EnglishEssayRubricCriterionResponse,
@@ -361,6 +364,63 @@ class EnglishEssayService:
             idempotency_key=idempotency_key,
         )
         return self._self_review_response(row)
+
+    def enqueue_marking_job(
+        self, submission_id: str, *, idempotency_key: str
+    ) -> EnglishEssayMarkingWorkspaceResponse:
+        submission_row = self.repository.get_submission(
+            self.learner_id, submission_id
+        )
+        self._assert_pinned_rubric(submission_row)
+        self.repository.enqueue_marking_job(
+            self.learner_id,
+            submission_id,
+            rubric_key=self.rubric["stable_key"],
+            rubric_revision=self.rubric["revision"],
+            rubric_criteria=self.rubric["criteria"],
+            idempotency_key=idempotency_key,
+        )
+        return self.marking_workspace(submission_id)
+
+    def marking_workspace(
+        self, submission_id: str
+    ) -> EnglishEssayMarkingWorkspaceResponse:
+        submission_row = self.repository.get_submission(
+            self.learner_id, submission_id
+        )
+        self._assert_pinned_rubric(submission_row)
+        row = self.repository.get_marking_workspace(
+            self.learner_id, submission_id
+        )
+        return EnglishEssayMarkingWorkspaceResponse(
+            submission_id=submission_id,
+            job=(self._marking_job_response(row["job"]) if row["job"] else None),
+            feedback=(
+                self._marking_feedback_response(row["feedback"])
+                if row["feedback"]
+                else None
+            ),
+        )
+
+    @staticmethod
+    def _marking_job_response(row: dict) -> EnglishEssayMarkingJobResponse:
+        public_row = {
+            field: row[field]
+            for field in EnglishEssayMarkingJobResponse.model_fields
+            if field in row
+        }
+        return EnglishEssayMarkingJobResponse(**public_row)
+
+    @staticmethod
+    def _marking_feedback_response(
+        row: dict,
+    ) -> EnglishEssayMarkingFeedbackResponse:
+        public_row = {
+            field: row[field]
+            for field in EnglishEssayMarkingFeedbackResponse.model_fields
+            if field in row
+        }
+        return EnglishEssayMarkingFeedbackResponse(**public_row)
 
     def _assert_pinned_rubric(self, submission_row: dict) -> None:
         if (

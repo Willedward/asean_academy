@@ -221,7 +221,9 @@ test.describe.serial("authenticated beta journeys", () => {
     await authenticate(page, identities.studentA);
     await page.goto("/english");
     await expect(
-      page.getByRole("heading", { name: "Using school learning beyond the classroom" }),
+      page.getByRole("heading", {
+        name: "Using school learning beyond the classroom",
+      }),
     ).toBeVisible();
     await page.getByRole("button", { name: "Write or resume" }).click();
     await page.waitForURL(/\/english\/essays\/[0-9a-f-]+$/);
@@ -250,7 +252,9 @@ test.describe.serial("authenticated beta journeys", () => {
         response.request().method() === "POST" &&
         response.url().includes("/pre-submit"),
     );
-    await page.getByRole("button", { name: "Review before submitting" }).click();
+    await page
+      .getByRole("button", { name: "Review before submitting" })
+      .click();
     expect((await preSubmit).status()).toBe(200);
     await expect(
       page.getByRole("region", { name: "Pre-submission checks" }),
@@ -325,6 +329,22 @@ test.describe.serial("authenticated beta journeys", () => {
       ),
     ).toBeVisible();
 
+    const fixtureJob = page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" &&
+        response.url().endsWith("/marking-jobs"),
+    );
+    await page
+      .getByRole("button", { name: "Generate fixture feedback" })
+      .click();
+    expect((await fixtureJob).status()).toBe(202);
+    const fixtureFeedback = page.getByRole("region", {
+      name: "Fixture essay feedback",
+    });
+    await expect(fixtureFeedback).toContainText("Structured revision feedback");
+    await expect(fixtureFeedback).toContainText("This is not live AI marking.");
+    await expect(fixtureFeedback).toContainText("Task fulfilment and focus");
+
     await page.reload();
     await expect(
       page.getByText("Your self-review is saved permanently."),
@@ -332,6 +352,9 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByLabel("Essay submission").getByText(essay, { exact: true }),
     ).toBeVisible();
+    await expect(
+      page.getByRole("region", { name: "Fixture essay feedback" }),
+    ).toContainText("Fixture complete");
   });
 
   test("a second student cannot see the first student's progress", async ({
@@ -410,7 +433,9 @@ test.describe.serial("authenticated beta journeys", () => {
     await page.getByRole("button", { name: "Open reviewer preview" }).click();
     await expect(page.getByText("Canonical answer")).toBeVisible();
     await expect(page.getByText("Authored hints")).toBeVisible();
-    await expect(page.getByText("Worked solution", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Worked solution", { exact: true }),
+    ).toBeVisible();
     await page.goto("/admin/users");
     await expect(
       page.getByRole("heading", { name: "Users, roles and course revisions" }),

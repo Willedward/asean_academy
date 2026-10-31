@@ -279,6 +279,67 @@ class EnglishEssaySelfReviewWorkspaceResponse(ApiModel):
     self_review: EnglishEssaySelfReviewResponse | None = None
 
 
+class EnglishEssayMarkingCriterionFeedbackResponse(ApiModel):
+    criterion_key: str
+    criterion_title: str
+    observed_evidence: str
+    what_works: str
+    next_step: str
+
+
+class EnglishEssayMarkingFeedbackResponse(ApiModel):
+    feedback_id: str
+    job_id: str
+    submission_id: str
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    fixture_version: str
+    criterion_feedback: list[EnglishEssayMarkingCriterionFeedbackResponse]
+    overall_summary: str
+    strengths: list[str] = Field(min_length=1)
+    priorities: list[str] = Field(min_length=1)
+    learner_disclaimer: str
+    created_at: datetime
+    immutable: Literal[True] = True
+    fixture_generated: Literal[True] = True
+    ai_feedback_available: Literal[False] = False
+    official_score_available: Literal[False] = False
+
+
+class EnglishEssayMarkingJobResponse(ApiModel):
+    job_id: str
+    submission_id: str
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    mode: Literal["deterministic_fixture"]
+    status: Literal[
+        "queued",
+        "processing",
+        "retryable_failed",
+        "succeeded",
+        "permanent_failed",
+    ]
+    attempt_count: int = Field(ge=0)
+    max_attempts: int = Field(ge=1, le=5)
+    run_after: datetime
+    last_error_code: str | None = None
+    last_error_message: str | None = None
+    created_at: datetime
+    updated_at: datetime
+    completed_at: datetime | None = None
+    external_provider_used: Literal[False] = False
+
+
+class EnglishEssayMarkingWorkspaceResponse(ApiModel):
+    submission_id: str
+    job: EnglishEssayMarkingJobResponse | None = None
+    feedback: EnglishEssayMarkingFeedbackResponse | None = None
+    learner_disclaimer: str = (
+        "This is deterministic development-fixture feedback, not live AI marking, "
+        "an official ASEAN Scholarship score or a score prediction."
+    )
+
+
 class EnglishLessonSectionResponse(ApiModel):
     position: int
     section_type: Literal[

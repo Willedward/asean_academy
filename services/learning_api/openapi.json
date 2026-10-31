@@ -5458,6 +5458,304 @@
         "title": "EnglishEssayLatestSubmissionResponse",
         "type": "object"
       },
+      "EnglishEssayMarkingCriterionFeedbackResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_key": {
+            "title": "Criterion Key",
+            "type": "string"
+          },
+          "criterion_title": {
+            "title": "Criterion Title",
+            "type": "string"
+          },
+          "next_step": {
+            "title": "Next Step",
+            "type": "string"
+          },
+          "observed_evidence": {
+            "title": "Observed Evidence",
+            "type": "string"
+          },
+          "what_works": {
+            "title": "What Works",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterion_key",
+          "criterion_title",
+          "observed_evidence",
+          "what_works",
+          "next_step"
+        ],
+        "title": "EnglishEssayMarkingCriterionFeedbackResponse",
+        "type": "object"
+      },
+      "EnglishEssayMarkingFeedbackResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "ai_feedback_available": {
+            "const": false,
+            "default": false,
+            "title": "Ai Feedback Available",
+            "type": "boolean"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "criterion_feedback": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayMarkingCriterionFeedbackResponse"
+            },
+            "title": "Criterion Feedback",
+            "type": "array"
+          },
+          "feedback_id": {
+            "title": "Feedback Id",
+            "type": "string"
+          },
+          "fixture_generated": {
+            "const": true,
+            "default": true,
+            "title": "Fixture Generated",
+            "type": "boolean"
+          },
+          "fixture_version": {
+            "title": "Fixture Version",
+            "type": "string"
+          },
+          "immutable": {
+            "const": true,
+            "default": true,
+            "title": "Immutable",
+            "type": "boolean"
+          },
+          "job_id": {
+            "title": "Job Id",
+            "type": "string"
+          },
+          "learner_disclaimer": {
+            "title": "Learner Disclaimer",
+            "type": "string"
+          },
+          "official_score_available": {
+            "const": false,
+            "default": false,
+            "title": "Official Score Available",
+            "type": "boolean"
+          },
+          "overall_summary": {
+            "title": "Overall Summary",
+            "type": "string"
+          },
+          "priorities": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Priorities",
+            "type": "array"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Strengths",
+            "type": "array"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "feedback_id",
+          "job_id",
+          "submission_id",
+          "rubric_key",
+          "rubric_revision",
+          "fixture_version",
+          "criterion_feedback",
+          "overall_summary",
+          "strengths",
+          "priorities",
+          "learner_disclaimer",
+          "created_at"
+        ],
+        "title": "EnglishEssayMarkingFeedbackResponse",
+        "type": "object"
+      },
+      "EnglishEssayMarkingJobResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_count": {
+            "minimum": 0.0,
+            "title": "Attempt Count",
+            "type": "integer"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "external_provider_used": {
+            "const": false,
+            "default": false,
+            "title": "External Provider Used",
+            "type": "boolean"
+          },
+          "job_id": {
+            "title": "Job Id",
+            "type": "string"
+          },
+          "last_error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error Code"
+          },
+          "last_error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error Message"
+          },
+          "max_attempts": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Max Attempts",
+            "type": "integer"
+          },
+          "mode": {
+            "const": "deterministic_fixture",
+            "title": "Mode",
+            "type": "string"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "run_after": {
+            "format": "date-time",
+            "title": "Run After",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "processing",
+              "retryable_failed",
+              "succeeded",
+              "permanent_failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id",
+          "submission_id",
+          "rubric_key",
+          "rubric_revision",
+          "mode",
+          "status",
+          "attempt_count",
+          "max_attempts",
+          "run_after",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "EnglishEssayMarkingJobResponse",
+        "type": "object"
+      },
+      "EnglishEssayMarkingWorkspaceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "feedback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssayMarkingFeedbackResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "job": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssayMarkingJobResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "learner_disclaimer": {
+            "default": "This is deterministic development-fixture feedback, not live AI marking, an official ASEAN Scholarship score or a score prediction.",
+            "title": "Learner Disclaimer",
+            "type": "string"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "submission_id"
+        ],
+        "title": "EnglishEssayMarkingWorkspaceResponse",
+        "type": "object"
+      },
       "EnglishEssayPreSubmitCheckResponse": {
         "additionalProperties": false,
         "properties": {
@@ -20705,6 +21003,273 @@
           }
         ],
         "summary": "Create an immutable essay snapshot after explicit learner confirmation",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions/{submission_id}/marking": {
+      "get": {
+        "operationId": "getEnglishEssayMarkingWorkspace",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayMarkingWorkspaceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get durable fixture-marking job and feedback state",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions/{submission_id}/marking-jobs": {
+      "post": {
+        "operationId": "createEnglishEssayMarkingJob",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayMarkingWorkspaceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Queue deterministic fixture feedback without a live provider call",
         "tags": [
           "english"
         ]

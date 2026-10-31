@@ -489,10 +489,12 @@ autosave and a learner editor. **ENG-T3.3** adds deterministic pre-submit checks
 learner confirmation and immutable submission revisions pinned to the exact draft, prompt and
 instructional rubric. **ENG-T3.4** adds one immutable, learner-authored self-review per
 submission: every pinned criterion requires a chosen descriptor, essay evidence and a concrete
-next action, with no calculated score or provider call. All remain draft-only and create no AI
-feedback or official score. The next technical increment is **ENG-T3.5 — asynchronous fixture
-marking jobs with no live provider calls**, while the review and release evidence below
-continues independently.
+next action, with no calculated score or provider call. **ENG-T3.5** adds an owner-bound,
+idempotent and lease-protected asynchronous queue plus immutable deterministic fixture
+feedback. It proves retry, stale-lease recovery and permanent-failure behaviour without any
+network, model or paid-provider call. All remain draft-only and create no official score. The
+next technical increment is **ENG-T3.6 — server-owned essay feedback allowance and cost
+ceiling**, while the review and release evidence below continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

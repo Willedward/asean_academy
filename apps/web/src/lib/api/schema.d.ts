@@ -1183,6 +1183,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/english/essay-submissions/{submission_id}/marking": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get durable fixture-marking job and feedback state */
+        get: operations["getEnglishEssayMarkingWorkspace"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/essay-submissions/{submission_id}/marking-jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Queue deterministic fixture feedback without a live provider call */
+        post: operations["createEnglishEssayMarkingJob"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/english/essay-submissions/{submission_id}/self-review": {
         parameters: {
             query?: never;
@@ -3723,6 +3757,137 @@ export interface components {
         /** EnglishEssayLatestSubmissionResponse */
         EnglishEssayLatestSubmissionResponse: {
             submission?: components["schemas"]["EnglishEssaySubmissionResponse"] | null;
+        };
+        /** EnglishEssayMarkingCriterionFeedbackResponse */
+        EnglishEssayMarkingCriterionFeedbackResponse: {
+            /** Criterion Key */
+            criterion_key: string;
+            /** Criterion Title */
+            criterion_title: string;
+            /** Next Step */
+            next_step: string;
+            /** Observed Evidence */
+            observed_evidence: string;
+            /** What Works */
+            what_works: string;
+        };
+        /** EnglishEssayMarkingFeedbackResponse */
+        EnglishEssayMarkingFeedbackResponse: {
+            /**
+             * Ai Feedback Available
+             * @default false
+             * @constant
+             */
+            ai_feedback_available: false;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Criterion Feedback */
+            criterion_feedback: components["schemas"]["EnglishEssayMarkingCriterionFeedbackResponse"][];
+            /** Feedback Id */
+            feedback_id: string;
+            /**
+             * Fixture Generated
+             * @default true
+             * @constant
+             */
+            fixture_generated: true;
+            /** Fixture Version */
+            fixture_version: string;
+            /**
+             * Immutable
+             * @default true
+             * @constant
+             */
+            immutable: true;
+            /** Job Id */
+            job_id: string;
+            /** Learner Disclaimer */
+            learner_disclaimer: string;
+            /**
+             * Official Score Available
+             * @default false
+             * @constant
+             */
+            official_score_available: false;
+            /** Overall Summary */
+            overall_summary: string;
+            /** Priorities */
+            priorities: string[];
+            /** Rubric Key */
+            rubric_key: string;
+            /** Rubric Revision */
+            rubric_revision: number;
+            /** Strengths */
+            strengths: string[];
+            /** Submission Id */
+            submission_id: string;
+        };
+        /** EnglishEssayMarkingJobResponse */
+        EnglishEssayMarkingJobResponse: {
+            /** Attempt Count */
+            attempt_count: number;
+            /** Completed At */
+            completed_at?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * External Provider Used
+             * @default false
+             * @constant
+             */
+            external_provider_used: false;
+            /** Job Id */
+            job_id: string;
+            /** Last Error Code */
+            last_error_code?: string | null;
+            /** Last Error Message */
+            last_error_message?: string | null;
+            /** Max Attempts */
+            max_attempts: number;
+            /**
+             * Mode
+             * @constant
+             */
+            mode: "deterministic_fixture";
+            /** Rubric Key */
+            rubric_key: string;
+            /** Rubric Revision */
+            rubric_revision: number;
+            /**
+             * Run After
+             * Format: date-time
+             */
+            run_after: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "queued" | "processing" | "retryable_failed" | "succeeded" | "permanent_failed";
+            /** Submission Id */
+            submission_id: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** EnglishEssayMarkingWorkspaceResponse */
+        EnglishEssayMarkingWorkspaceResponse: {
+            feedback?: components["schemas"]["EnglishEssayMarkingFeedbackResponse"] | null;
+            job?: components["schemas"]["EnglishEssayMarkingJobResponse"] | null;
+            /**
+             * Learner Disclaimer
+             * @default This is deterministic development-fixture feedback, not live AI marking, an official ASEAN Scholarship score or a score prediction.
+             */
+            learner_disclaimer: string;
+            /** Submission Id */
+            submission_id: string;
         };
         /** EnglishEssayPreSubmitCheckResponse */
         EnglishEssayPreSubmitCheckResponse: {
@@ -13126,6 +13291,214 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EnglishEssaySubmissionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishEssayMarkingWorkspace: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayMarkingWorkspaceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    createEnglishEssayMarkingJob: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayMarkingWorkspaceResponse"];
                 };
             };
             /** @description Bad Request */

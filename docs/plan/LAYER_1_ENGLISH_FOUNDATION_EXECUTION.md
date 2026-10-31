@@ -113,7 +113,7 @@ sections.
 | ENG-T3.2 | Owned essay drafts, live word count, device recovery and revision-safe remote autosave | Implemented as draft |
 | ENG-T3.3 | Deterministic pre-submit checks and immutable essay submission revisions | Implemented as draft; AI feedback and official scoring disabled |
 | ENG-T3.4 | Learner self-review against the pinned instructional rubric | Implemented as draft; learner-authored, immutable and score-free |
-| ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Not started |
+| ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Implemented as draft; deterministic fixture only, no external provider |
 | ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Not started |
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Not started |
 | ENG-T3.8 | Essay version history, feedback report and usefulness rating | Not started |
@@ -414,10 +414,21 @@ allows a later submission revision to have its own review. The learner can resto
 exact submitted essay and completed review after reload. No aggregate mark is calculated, the
 essay snapshot is never changed, and no model provider is called.
 
-The next independently executable engineering milestone is **ENG-T3.5 — asynchronous fixture
-marking jobs with no live provider calls**. It should prove queue ownership, retries,
-idempotency, failure recovery and structured feedback persistence using deterministic local
-fixtures before any paid or external essay-marking provider is enabled.
+**ENG-T3.5** now adds migration `202610310042`, a durable owner-bound marking queue and
+immutable structured fixture feedback. A learner can request feedback only after completing
+the self-review for that exact submission. The API returns the queued job before processing,
+then a lease-token worker claims it outside the request response, writes criterion-level
+evidence, strengths and next steps, and restores the result after reload. Idempotency prevents
+duplicate jobs, stale leases can be reclaimed, failures back off and stop permanently after
+three attempts, and the database pins every job and feedback record to the submission's exact
+rubric revision. The hosted API can opportunistically dispatch queued work after POST or GET,
+while the durable row remains recoverable across process restarts. The fixture is explicitly
+not live AI marking, contains no score and makes no network or paid-provider call.
+
+The next independently executable engineering milestone is **ENG-T3.6 — server-owned essay
+feedback allowance and cost ceiling**. It should add an auditable reservation/commit/release
+lifecycle and fail-closed learner allowance before any external provider is considered;
+fixture jobs must remain zero-cost and must not consume that allowance.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
