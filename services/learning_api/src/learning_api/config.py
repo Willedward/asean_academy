@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202610300040"
+REQUIRED_SCHEMA_REVISION = "202610310041"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:

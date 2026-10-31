@@ -112,7 +112,7 @@ sections.
 | ENG-T3.1 | Versioned essay prompts, instructional rubrics and immutable database revisions | Implemented as draft; English/editorial review pending |
 | ENG-T3.2 | Owned essay drafts, live word count, device recovery and revision-safe remote autosave | Implemented as draft |
 | ENG-T3.3 | Deterministic pre-submit checks and immutable essay submission revisions | Implemented as draft; AI feedback and official scoring disabled |
-| ENG-T3.4 | Learner self-review against the pinned instructional rubric | Not started |
+| ENG-T3.4 | Learner self-review against the pinned instructional rubric | Implemented as draft; learner-authored, immutable and score-free |
 | ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Not started |
 | ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Not started |
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Not started |
@@ -404,10 +404,20 @@ structure and revision integrity only, continuous writing time is explicitly not
 essay bodies remain out of application logs, and no model provider or official score is
 involved.
 
-The next independently executable engineering milestone is **ENG-T3.4 — learner self-review
-against the pinned instructional rubric**. It should attach learner-owned reflection evidence
-to a submitted revision without changing that immutable submission and must remain independent
-of live AI marking.
+**ENG-T3.4** now adds migration `202610310041` and a learner self-review workspace bound to
+one exact immutable essay submission and its pinned instructional-rubric revision. For every
+rubric criterion, the learner selects the closest descriptor, cites evidence from the submitted
+essay and records one specific improvement action, then writes an overall reflection and
+acknowledges that this is not an official ASEAN Scholarship score or prediction. The API checks
+that every pinned criterion is covered, stores only one immutable review per submission and
+allows a later submission revision to have its own review. The learner can restore both the
+exact submitted essay and completed review after reload. No aggregate mark is calculated, the
+essay snapshot is never changed, and no model provider is called.
+
+The next independently executable engineering milestone is **ENG-T3.5 — asynchronous fixture
+marking jobs with no live provider calls**. It should prove queue ownership, retries,
+idempotency, failure recovery and structured feedback persistence using deterministic local
+fixtures before any paid or external essay-marking provider is enabled.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

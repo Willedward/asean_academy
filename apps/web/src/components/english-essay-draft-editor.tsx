@@ -12,10 +12,12 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import { Button, Callout, Card, Divider, Eyebrow, H1, H2, Muted, Tag } from "@/beta-kit/components/ui";
+import { EnglishEssaySelfReview } from "@/components/english-essay-self-review";
 import {
   createEnglishEssaySubmission,
   EnglishEssayDraftApiError,
   getEnglishEssayDraft,
+  getLatestEnglishEssaySubmission,
   type EnglishEssayDraftResponse,
   type EnglishEssayPreSubmitResponse,
   type EnglishEssaySubmissionResponse,
@@ -68,6 +70,19 @@ export function EnglishEssayDraftEditor({
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const bodyRef = useRef(body);
   const savingRef = useRef(false);
+
+  useEffect(() => {
+    let active = true;
+    void getLatestEnglishEssaySubmission(initialDraft.draft_id).then(
+      (latest) => {
+        if (active && latest.submission) setSubmission(latest.submission);
+      },
+      () => undefined,
+    );
+    return () => {
+      active = false;
+    };
+  }, [initialDraft.draft_id]);
 
   useEffect(() => {
     bodyRef.current = body;
@@ -457,18 +472,35 @@ export function EnglishEssayDraftEditor({
           </div>
         ) : null}
         {submission ? (
-          <Callout tone="success" icon={CheckCircle2}>
-            <strong>
-              Submission revision {submission.submission_revision} is saved permanently.
-            </strong>
-            <span>
-              Draft revision {submission.draft_edit_revision} · {submission.word_count} words · Submitted {savedLabel(submission.submitted_at)}
-            </span>
-            <span>
-              No AI feedback or official score was generated. You may continue
-              editing this draft and submit a later revision.
-            </span>
-          </Callout>
+          <>
+            <Callout tone="success" icon={CheckCircle2}>
+              <strong>
+                Submission revision {submission.submission_revision} is saved permanently.
+              </strong>
+              <span>
+                Draft revision {submission.draft_edit_revision} · {submission.word_count} words · Submitted {savedLabel(submission.submitted_at)}
+              </span>
+              <span>
+                No AI feedback or official score was generated. You may continue
+                editing this draft and submit a later revision.
+              </span>
+            </Callout>
+            <Divider />
+            <div className="flex flex-col gap-1">
+              <Eyebrow>LEARNER SELF-REVIEW</Eyebrow>
+              <H2>
+                Review submission {submission.submission_revision} against its pinned rubric
+              </H2>
+              <Muted>
+                Your choices and notes are reflective evidence, not marks. They do not
+                change the submitted essay.
+              </Muted>
+            </div>
+            <EnglishEssaySelfReview
+              key={submission.submission_id}
+              submission={submission}
+            />
+          </>
         ) : null}
         </Card>
       </section>

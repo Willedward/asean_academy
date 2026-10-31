@@ -206,6 +206,79 @@ class EnglishEssaySubmissionResponse(ApiModel):
     official_score_available: Literal[False] = False
 
 
+class EnglishEssayLatestSubmissionResponse(ApiModel):
+    submission: EnglishEssaySubmissionResponse | None = None
+
+
+class EnglishEssayRubricBandResponse(ApiModel):
+    level: int = Field(ge=1, le=5)
+    label: str
+    descriptor: str
+
+
+class EnglishEssayRubricCriterionResponse(ApiModel):
+    criterion_key: str = Field(pattern=r"^[a-z][a-z0-9_]+$")
+    title: str
+    description: str
+    weight_percent: int = Field(ge=1, le=100)
+    bands: list[EnglishEssayRubricBandResponse]
+
+
+class EnglishEssaySelfReviewCriterionRequest(ApiModel):
+    criterion_key: str = Field(pattern=r"^[a-z][a-z0-9_]+$")
+    selected_band_level: int = Field(ge=1, le=5)
+    evidence_note: Annotated[str, StringConstraints(min_length=1, max_length=1000)]
+    improvement_action: Annotated[
+        str, StringConstraints(min_length=1, max_length=1000)
+    ]
+
+
+class CreateEnglishEssaySelfReviewRequest(ApiModel):
+    criterion_reflections: list[EnglishEssaySelfReviewCriterionRequest] = Field(
+        min_length=3, max_length=6
+    )
+    overall_reflection: Annotated[
+        str, StringConstraints(min_length=1, max_length=2000)
+    ]
+    disclaimer_acknowledged: Literal[True]
+
+
+class EnglishEssaySelfReviewCriterionResponse(ApiModel):
+    criterion_key: str
+    criterion_title: str
+    selected_band_level: int = Field(ge=1, le=5)
+    selected_band_label: str
+    selected_band_descriptor: str
+    evidence_note: str
+    improvement_action: str
+
+
+class EnglishEssaySelfReviewResponse(ApiModel):
+    self_review_id: str
+    submission_id: str
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    criterion_reflections: list[EnglishEssaySelfReviewCriterionResponse]
+    overall_reflection: str
+    disclaimer_acknowledged: Literal[True]
+    completed_at: datetime
+    immutable: Literal[True] = True
+    learner_authored: Literal[True] = True
+    ai_feedback_available: Literal[False] = False
+    official_score_available: Literal[False] = False
+
+
+class EnglishEssaySelfReviewWorkspaceResponse(ApiModel):
+    submission: EnglishEssaySubmissionResponse
+    rubric_title: str
+    rubric_purpose: str
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    learner_disclaimer: str
+    criteria: list[EnglishEssayRubricCriterionResponse]
+    self_review: EnglishEssaySelfReviewResponse | None = None
+
+
 class EnglishLessonSectionResponse(ApiModel):
     position: int
     section_type: Literal[

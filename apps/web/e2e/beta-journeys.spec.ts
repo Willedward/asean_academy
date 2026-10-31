@@ -268,6 +268,62 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByText(/No AI feedback or official score was generated/),
     ).toBeVisible();
+
+    const selfReview = page.getByRole("region", {
+      name: "Essay self-review form",
+    });
+    await expect(selfReview.getByText("Submitted essay")).toBeVisible();
+    await expect(selfReview).toContainText(essay);
+    const developingDescriptors = await selfReview
+      .locator('input[type="radio"][value="3"]')
+      .all();
+    expect(developingDescriptors).toHaveLength(4);
+    for (const descriptor of developingDescriptors) await descriptor.check();
+    const evidenceFields = await selfReview
+      .getByLabel("Evidence from this essay")
+      .all();
+    const actionFields = await selfReview
+      .getByLabel("One specific improvement action")
+      .all();
+    expect(evidenceFields).toHaveLength(4);
+    expect(actionFields).toHaveLength(4);
+    for (const [index, field] of evidenceFields.entries()) {
+      await field.fill(`Evidence from criterion ${index + 1}.`);
+    }
+    for (const [index, field] of actionFields.entries()) {
+      await field.fill(`Improve criterion ${index + 1} in my next response.`);
+    }
+    await selfReview
+      .getByLabel("Overall reflection")
+      .fill("Keep the clear focus and add a more specific supporting example.");
+    await selfReview
+      .getByRole("checkbox", {
+        name: /not an official ASEAN Scholarship score or prediction/,
+      })
+      .check();
+    const permanentSelfReview = page.waitForResponse(
+      (response) =>
+        response.request().method() === "POST" &&
+        response.url().endsWith("/self-review"),
+    );
+    await selfReview
+      .getByRole("button", { name: "Complete self-review" })
+      .click();
+    expect((await permanentSelfReview).status()).toBe(201);
+    await expect(
+      page.getByText("Your self-review is saved permanently."),
+    ).toBeVisible();
+    await expect(
+      page.getByText(
+        /learner-authored and contains no AI feedback or official score/,
+      ),
+    ).toBeVisible();
+
+    await page.reload();
+    await expect(
+      page.getByText("Your self-review is saved permanently."),
+    ).toBeVisible();
+    await expect(page.getByText(essay)).toBeVisible();
   });
 
   test("a second student cannot see the first student's progress", async ({
