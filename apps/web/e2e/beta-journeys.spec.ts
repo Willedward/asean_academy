@@ -323,7 +323,9 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByText("Your self-review is saved permanently."),
     ).toBeVisible();
-    await expect(page.getByText(essay)).toBeVisible();
+    await expect(
+      page.getByLabel("Essay submission").getByText(essay, { exact: true }),
+    ).toBeVisible();
   });
 
   test("a second student cannot see the first student's progress", async ({
