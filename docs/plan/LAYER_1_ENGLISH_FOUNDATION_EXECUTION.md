@@ -115,7 +115,7 @@ sections.
 | ENG-T3.4 | Learner self-review against the pinned instructional rubric | Implemented as draft; learner-authored, immutable and score-free |
 | ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Implemented as draft; deterministic fixture only, no external provider |
 | ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Implemented as draft; live provider remains disabled |
-| ENG-T3.7 | Evidence-linked structured feedback with provider validation | Not started |
+| ENG-T3.7 | Evidence-linked structured feedback with provider validation | Implemented as a disabled provider-neutral candidate path; calibration and live provider release pending |
 | ENG-T3.8 | Essay version history, feedback report and usefulness rating | Not started |
 | ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Not started |
 | ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Not started |
@@ -437,11 +437,20 @@ The deterministic fixture queue bypasses the ledger entirely and is verified not
 allowance or make a paid call. The default four-review allowance and cost values are
 configuration placeholders for staging, not a final subscription promise.
 
-The next independently executable engineering milestone is **ENG-T3.7 — evidence-linked
-structured feedback with provider validation**. It must consume the ENG-T3.6 reservation only
-after schema validation, verify every quoted evidence span against the immutable submission,
-release reservations on provider or validation failure, and keep the live-provider release flag
+**ENG-T3.7** now adds migration `202611010044`, a strict provider-output schema and a
+disabled provider-candidate lifecycle with no network adapter. Every criterion must cover the
+exact pinned rubric once, every quoted evidence span must match its zero-based offsets in the
+immutable submission, and generated text that claims an official score or admission outcome is
+rejected. Successful validation stores immutable structured feedback and commits the learner and
+academy allowance in the same PostgreSQL transaction. Provider, schema, rubric, evidence or cost
+failure permanently fails that candidate and releases its reservation in the same transaction.
+The learner still has no route that can invoke a paid provider and the live release flag remains
 off until calibration succeeds.
+
+The next independently executable engineering milestone is **ENG-T3.8 — essay version history,
+feedback report and usefulness rating**. It should expose learner-safe revision and feedback
+history without provider cost/token details, render evidence-linked feedback against the exact
+submission, and record one auditable usefulness response without allowing feedback mutation.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
