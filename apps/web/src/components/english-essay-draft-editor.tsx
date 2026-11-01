@@ -11,7 +11,18 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { Button, Callout, Card, Divider, Eyebrow, H1, H2, Muted, Tag } from "@/beta-kit/components/ui";
+import {
+  Button,
+  Callout,
+  Card,
+  Divider,
+  Eyebrow,
+  H1,
+  H2,
+  Muted,
+  Tag,
+} from "@/beta-kit/components/ui";
+import { EnglishEssayFeedbackReport } from "@/components/english-essay-feedback-report";
 import { EnglishEssaySelfReview } from "@/components/english-essay-self-review";
 import {
   createEnglishEssaySubmission,
@@ -95,7 +106,9 @@ export function EnglishEssayDraftEditor({
     : 0;
 
   useEffect(() => {
-    const encoded = window.localStorage.getItem(backupKey(initialDraft.draft_id));
+    const encoded = window.localStorage.getItem(
+      backupKey(initialDraft.draft_id),
+    );
     if (encoded) {
       try {
         const backup = JSON.parse(encoded) as LocalBackup;
@@ -123,14 +136,11 @@ export function EnglishEssayDraftEditor({
       baseEditRevision: editRevision,
       savedAt: new Date().toISOString(),
     };
-    window.localStorage.setItem(backupKey(initialDraft.draft_id), JSON.stringify(backup));
-  }, [
-    body,
-    editRevision,
-    hydrated,
-    initialDraft.draft_id,
-    lastServerBody,
-  ]);
+    window.localStorage.setItem(
+      backupKey(initialDraft.draft_id),
+      JSON.stringify(backup),
+    );
+  }, [body, editRevision, hydrated, initialDraft.draft_id, lastServerBody]);
 
   useEffect(() => {
     if (
@@ -249,10 +259,22 @@ export function EnglishEssayDraftEditor({
 
   const status = {
     saved: { icon: Check, text: "Saved remotely", tone: "text-ns-muted" },
-    local: { icon: Check, text: "Backed up on this device", tone: "text-ns-muted" },
+    local: {
+      icon: Check,
+      text: "Backed up on this device",
+      tone: "text-ns-muted",
+    },
     saving: { icon: RefreshCw, text: "Saving…", tone: "text-ns-muted" },
-    offline: { icon: CloudOff, text: "Saved on this device; remote save failed", tone: "text-amber-800" },
-    conflict: { icon: AlertTriangle, text: "Another tab saved a newer version", tone: "text-red-700" },
+    offline: {
+      icon: CloudOff,
+      text: "Saved on this device; remote save failed",
+      tone: "text-amber-800",
+    },
+    conflict: {
+      icon: AlertTriangle,
+      text: "Another tab saved a newer version",
+      tone: "text-red-700",
+    },
   }[saveState];
   const StatusIcon = status.icon;
 
@@ -261,7 +283,9 @@ export function EnglishEssayDraftEditor({
       {initialDraft.prompt.development_preview ? (
         <Callout tone="amber" icon={AlertTriangle}>
           <strong>Development preview</strong>
-          <span>This prompt still requires English and editorial approval.</span>
+          <span>
+            This prompt still requires English and editorial approval.
+          </span>
         </Callout>
       ) : null}
       {saveState === "conflict" ? (
@@ -271,7 +295,9 @@ export function EnglishEssayDraftEditor({
             A newer remote revision exists. Copy your current text if needed,
             then load the latest saved copy before continuing.
           </span>
-          <Button onClick={() => void loadServerCopy()}>Load latest saved copy</Button>
+          <Button onClick={() => void loadServerCopy()}>
+            Load latest saved copy
+          </Button>
         </Callout>
       ) : null}
       <section className="flex flex-col gap-2">
@@ -299,7 +325,8 @@ export function EnglishEssayDraftEditor({
           <Divider />
           <Muted className="text-sm">
             The 30-minute timing and word count are preparation guidance based
-            on currently reported test information, not an official scoring rule.
+            on currently reported test information, not an official scoring
+            rule.
           </Muted>
         </Card>
         <Card className="gap-3">
@@ -322,10 +349,15 @@ export function EnglishEssayDraftEditor({
             className="h-[520px] w-full resize-y rounded-xl border-[1.5px] border-ns-line-strong bg-ns-raised p-4 text-[17px] leading-7 text-ns-ink focus:border-ns-brand focus:outline-none focus:ring-2 focus:ring-ns-brand/20"
           />
           <div className="flex flex-wrap items-center gap-3">
-            <span id="essay-draft-count" className="text-sm font-semibold tabular-nums">
+            <span
+              id="essay-draft-count"
+              className="text-sm font-semibold tabular-nums"
+            >
               {localWordCount} words
             </span>
-            {guidance ? <Muted className="text-sm">Guidance: about {guidance}</Muted> : null}
+            {guidance ? (
+              <Muted className="text-sm">Guidance: about {guidance}</Muted>
+            ) : null}
             <span
               id="essay-draft-status"
               role="status"
@@ -343,7 +375,10 @@ export function EnglishEssayDraftEditor({
               aria-valuemax={100}
               className="h-1.5 overflow-hidden rounded-full bg-ns-line"
             >
-              <div className="h-full rounded-full bg-ns-amber" style={{ width: `${progress}%` }} />
+              <div
+                className="h-full rounded-full bg-ns-amber"
+                style={{ width: `${progress}%` }}
+              />
             </div>
           ) : null}
           {saveState === "offline" ? (
@@ -357,153 +392,169 @@ export function EnglishEssayDraftEditor({
             </Button>
           ) : null}
           <Muted className="text-xs">
-            Remote edit revision {editRevision} · Last remote save {savedLabel(updatedAt)}
+            Remote edit revision {editRevision} · Last remote save{" "}
+            {savedLabel(updatedAt)}
           </Muted>
         </Card>
       </div>
       <section aria-label="Essay submission">
         <Card className="gap-4">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="flex flex-col gap-1">
-            <Eyebrow>SUBMIT A PERMANENT SNAPSHOT</Eyebrow>
-            <H2>Review your saved revision before submitting</H2>
-            <Muted>
-              Submission preserves the exact essay, prompt and instructional
-              rubric revisions. It does not request AI feedback or create an
-              official score.
-            </Muted>
-          </div>
-          <LockKeyhole className="text-ns-brand" aria-hidden />
-        </div>
-        <Button
-          variant="primary"
-          onClick={() => void reviewForSubmission()}
-          disabled={
-            submissionBusy ||
-            saveState !== "saved" ||
-            body !== lastServerBody
-          }
-        >
-          {submissionBusy && !preSubmit
-            ? "Checking saved revision…"
-            : "Review before submitting"}
-        </Button>
-        {saveState !== "saved" || body !== lastServerBody ? (
-          <Muted className="text-sm">
-            Wait for the latest changes to be saved remotely before reviewing.
-          </Muted>
-        ) : null}
-        {submissionError ? (
-          <Callout tone="amber" icon={AlertTriangle}>
-            <strong>Submission was not completed.</strong>
-            <span>{submissionError}</span>
-          </Callout>
-        ) : null}
-        {preSubmit ? (
-          <div
-            className="flex flex-col gap-4"
-            role="region"
-            aria-label="Pre-submission checks"
-          >
-            <Divider />
-            <div className="flex flex-wrap gap-2">
-              <Tag>{preSubmit.word_count} words</Tag>
-              <Tag>{preSubmit.paragraph_count} paragraphs</Tag>
-              <Tag>Draft revision {preSubmit.edit_revision}</Tag>
-              <Tag>
-                Prompt r{preSubmit.prompt_revision} · Rubric r
-                {preSubmit.rubric_revision}
-              </Tag>
-            </div>
-            <ul className="m-0 flex list-none flex-col gap-2 p-0">
-              {preSubmit.checks.map((check) => {
-                const CheckIcon =
-                  check.status === "pass"
-                    ? CheckCircle2
-                    : check.status === "info"
-                      ? Info
-                      : AlertTriangle;
-                const tone =
-                  check.status === "block"
-                    ? "border-red-200 bg-red-50 text-red-800"
-                    : check.status === "warning"
-                      ? "border-amber-200 bg-amber-50 text-amber-900"
-                      : "border-ns-line bg-ns-raised text-ns-ink";
-                return (
-                  <li
-                    key={check.check_key}
-                    className={`flex items-start gap-2 rounded-xl border p-3 text-sm leading-6 ${tone}`}
-                  >
-                    <CheckIcon size={18} className="mt-0.5 shrink-0" aria-hidden />
-                    <span>{check.message}</span>
-                  </li>
-                );
-              })}
-            </ul>
-            {preSubmit.can_submit ? (
-              <>
-                <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ns-line-strong bg-ns-surface p-4 text-sm leading-6 text-ns-ink">
-                  <input
-                    type="checkbox"
-                    checked={confirmed}
-                    onChange={(event) => setConfirmed(event.target.checked)}
-                    className="mt-1 size-4 accent-ns-brand"
-                  />
-                  <span>
-                    I understand that this creates a permanent snapshot of
-                    saved draft revision {preSubmit.edit_revision}. I can keep
-                    editing afterward and submit a later revision separately.
-                  </span>
-                </label>
-                <Button
-                  variant="primary"
-                  onClick={() => void submitSnapshot()}
-                  disabled={!confirmed || submissionBusy}
-                >
-                  {submissionBusy ? "Submitting snapshot…" : "Submit saved revision"}
-                </Button>
-              </>
-            ) : (
-              <Muted>
-                Resolve the blocking checks, save the draft, then run the
-                review again.
-              </Muted>
-            )}
-          </div>
-        ) : null}
-        {submission ? (
-          <>
-            <Callout tone="success" icon={CheckCircle2}>
-              <strong>
-                Submission revision {submission.submission_revision} is saved permanently.
-              </strong>
-              <span>
-                Draft revision {submission.draft_edit_revision} · {submission.word_count} words · Submitted {savedLabel(submission.submitted_at)}
-              </span>
-              <span>
-                No AI feedback or official score was generated. You may continue
-                editing this draft and submit a later revision.
-              </span>
-            </Callout>
-            <Divider />
+          <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="flex flex-col gap-1">
-              <Eyebrow>LEARNER SELF-REVIEW</Eyebrow>
-              <H2>
-                Review submission {submission.submission_revision} against its pinned rubric
-              </H2>
+              <Eyebrow>SUBMIT A PERMANENT SNAPSHOT</Eyebrow>
+              <H2>Review your saved revision before submitting</H2>
               <Muted>
-                Your choices and notes are reflective evidence, not marks. They do not
-                change the submitted essay.
+                Submission preserves the exact essay, prompt and instructional
+                rubric revisions. It does not request AI feedback or create an
+                official score.
               </Muted>
             </div>
-            <EnglishEssaySelfReview
-              key={submission.submission_id}
-              submission={submission}
-            />
-          </>
-        ) : null}
+            <LockKeyhole className="text-ns-brand" aria-hidden />
+          </div>
+          <Button
+            variant="primary"
+            onClick={() => void reviewForSubmission()}
+            disabled={
+              submissionBusy || saveState !== "saved" || body !== lastServerBody
+            }
+          >
+            {submissionBusy && !preSubmit
+              ? "Checking saved revision…"
+              : "Review before submitting"}
+          </Button>
+          {saveState !== "saved" || body !== lastServerBody ? (
+            <Muted className="text-sm">
+              Wait for the latest changes to be saved remotely before reviewing.
+            </Muted>
+          ) : null}
+          {submissionError ? (
+            <Callout tone="amber" icon={AlertTriangle}>
+              <strong>Submission was not completed.</strong>
+              <span>{submissionError}</span>
+            </Callout>
+          ) : null}
+          {preSubmit ? (
+            <div
+              className="flex flex-col gap-4"
+              role="region"
+              aria-label="Pre-submission checks"
+            >
+              <Divider />
+              <div className="flex flex-wrap gap-2">
+                <Tag>{preSubmit.word_count} words</Tag>
+                <Tag>{preSubmit.paragraph_count} paragraphs</Tag>
+                <Tag>Draft revision {preSubmit.edit_revision}</Tag>
+                <Tag>
+                  Prompt r{preSubmit.prompt_revision} · Rubric r
+                  {preSubmit.rubric_revision}
+                </Tag>
+              </div>
+              <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                {preSubmit.checks.map((check) => {
+                  const CheckIcon =
+                    check.status === "pass"
+                      ? CheckCircle2
+                      : check.status === "info"
+                        ? Info
+                        : AlertTriangle;
+                  const tone =
+                    check.status === "block"
+                      ? "border-red-200 bg-red-50 text-red-800"
+                      : check.status === "warning"
+                        ? "border-amber-200 bg-amber-50 text-amber-900"
+                        : "border-ns-line bg-ns-raised text-ns-ink";
+                  return (
+                    <li
+                      key={check.check_key}
+                      className={`flex items-start gap-2 rounded-xl border p-3 text-sm leading-6 ${tone}`}
+                    >
+                      <CheckIcon
+                        size={18}
+                        className="mt-0.5 shrink-0"
+                        aria-hidden
+                      />
+                      <span>{check.message}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              {preSubmit.can_submit ? (
+                <>
+                  <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ns-line-strong bg-ns-surface p-4 text-sm leading-6 text-ns-ink">
+                    <input
+                      type="checkbox"
+                      checked={confirmed}
+                      onChange={(event) => setConfirmed(event.target.checked)}
+                      className="mt-1 size-4 accent-ns-brand"
+                    />
+                    <span>
+                      I understand that this creates a permanent snapshot of
+                      saved draft revision {preSubmit.edit_revision}. I can keep
+                      editing afterward and submit a later revision separately.
+                    </span>
+                  </label>
+                  <Button
+                    variant="primary"
+                    onClick={() => void submitSnapshot()}
+                    disabled={!confirmed || submissionBusy}
+                  >
+                    {submissionBusy
+                      ? "Submitting snapshot…"
+                      : "Submit saved revision"}
+                  </Button>
+                </>
+              ) : (
+                <Muted>
+                  Resolve the blocking checks, save the draft, then run the
+                  review again.
+                </Muted>
+              )}
+            </div>
+          ) : null}
+          {submission ? (
+            <>
+              <Callout tone="success" icon={CheckCircle2}>
+                <strong>
+                  Submission revision {submission.submission_revision} is saved
+                  permanently.
+                </strong>
+                <span>
+                  Draft revision {submission.draft_edit_revision} ·{" "}
+                  {submission.word_count} words · Submitted{" "}
+                  {savedLabel(submission.submitted_at)}
+                </span>
+                <span>
+                  No AI feedback or official score was generated. You may
+                  continue editing this draft and submit a later revision.
+                </span>
+              </Callout>
+              <Divider />
+              <div className="flex flex-col gap-1">
+                <Eyebrow>LEARNER SELF-REVIEW</Eyebrow>
+                <H2>
+                  Review submission {submission.submission_revision} against its
+                  pinned rubric
+                </H2>
+                <Muted>
+                  Your choices and notes are reflective evidence, not marks.
+                  They do not change the submitted essay.
+                </Muted>
+              </div>
+              <EnglishEssaySelfReview
+                key={submission.submission_id}
+                submission={submission}
+              />
+            </>
+          ) : null}
         </Card>
       </section>
+      {submission ? (
+        <EnglishEssayFeedbackReport
+          key={`feedback-${submission.submission_id}`}
+          draftId={initialDraft.draft_id}
+          currentSubmissionId={submission.submission_id}
+        />
+      ) : null}
     </div>
   );
 }

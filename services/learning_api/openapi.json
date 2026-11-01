@@ -3322,6 +3322,52 @@
         "title": "CreateEnglishEssaySubmissionRequest",
         "type": "object"
       },
+      "CreateEnglishEssayUsefulnessRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "feedback_id": {
+            "format": "uuid",
+            "title": "Feedback Id",
+            "type": "string"
+          },
+          "feedback_source": {
+            "enum": [
+              "development_fixture",
+              "validated_ai"
+            ],
+            "title": "Feedback Source",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "rating": {
+            "enum": [
+              "helpful",
+              "partly_helpful",
+              "not_helpful"
+            ],
+            "title": "Rating",
+            "type": "string"
+          }
+        },
+        "required": [
+          "feedback_id",
+          "feedback_source",
+          "rating"
+        ],
+        "title": "CreateEnglishEssayUsefulnessRequest",
+        "type": "object"
+      },
       "CreateEnglishPracticeSessionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -5441,6 +5487,32 @@
         "title": "EnglishEssayDraftResponse",
         "type": "object"
       },
+      "EnglishEssayEvidenceSpanResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "end": {
+            "exclusiveMinimum": 0.0,
+            "title": "End",
+            "type": "integer"
+          },
+          "quote": {
+            "title": "Quote",
+            "type": "string"
+          },
+          "start": {
+            "minimum": 0.0,
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "quote",
+          "start",
+          "end"
+        ],
+        "title": "EnglishEssayEvidenceSpanResponse",
+        "type": "object"
+      },
       "EnglishEssayFeedbackAllowanceResponse": {
         "additionalProperties": false,
         "properties": {
@@ -5494,6 +5566,281 @@
           "resets_at"
         ],
         "title": "EnglishEssayFeedbackAllowanceResponse",
+        "type": "object"
+      },
+      "EnglishEssayFeedbackCriterionReportResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_key": {
+            "title": "Criterion Key",
+            "type": "string"
+          },
+          "criterion_title": {
+            "title": "Criterion Title",
+            "type": "string"
+          },
+          "evidence_spans": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayEvidenceSpanResponse"
+            },
+            "title": "Evidence Spans",
+            "type": "array"
+          },
+          "next_step": {
+            "title": "Next Step",
+            "type": "string"
+          },
+          "observed_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed Evidence"
+          },
+          "preparation_level": {
+            "anyOf": [
+              {
+                "maximum": 5.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preparation Level"
+          },
+          "what_works": {
+            "title": "What Works",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterion_key",
+          "criterion_title",
+          "what_works",
+          "next_step"
+        ],
+        "title": "EnglishEssayFeedbackCriterionReportResponse",
+        "type": "object"
+      },
+      "EnglishEssayFeedbackReportDetailResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "criterion_feedback": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssayFeedbackCriterionReportResponse"
+            },
+            "title": "Criterion Feedback",
+            "type": "array"
+          },
+          "feedback_id": {
+            "title": "Feedback Id",
+            "type": "string"
+          },
+          "feedback_source": {
+            "enum": [
+              "development_fixture",
+              "validated_ai"
+            ],
+            "title": "Feedback Source",
+            "type": "string"
+          },
+          "immutable": {
+            "const": true,
+            "default": true,
+            "title": "Immutable",
+            "type": "boolean"
+          },
+          "learner_disclaimer": {
+            "title": "Learner Disclaimer",
+            "type": "string"
+          },
+          "official_score_available": {
+            "const": false,
+            "default": false,
+            "title": "Official Score Available",
+            "type": "boolean"
+          },
+          "overall_summary": {
+            "title": "Overall Summary",
+            "type": "string"
+          },
+          "preparation_estimate": {
+            "anyOf": [
+              {
+                "enum": [
+                  "limited",
+                  "emerging",
+                  "developing",
+                  "secure",
+                  "strong"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preparation Estimate"
+          },
+          "priorities": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Priorities",
+            "type": "array"
+          },
+          "revision_task": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision Task"
+          },
+          "rubric_key": {
+            "title": "Rubric Key",
+            "type": "string"
+          },
+          "rubric_revision": {
+            "minimum": 1.0,
+            "title": "Rubric Revision",
+            "type": "integer"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Strengths",
+            "type": "array"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          },
+          "transfer_goal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transfer Goal"
+          }
+        },
+        "required": [
+          "feedback_id",
+          "submission_id",
+          "rubric_key",
+          "rubric_revision",
+          "feedback_source",
+          "criterion_feedback",
+          "overall_summary",
+          "strengths",
+          "priorities",
+          "learner_disclaimer",
+          "created_at"
+        ],
+        "title": "EnglishEssayFeedbackReportDetailResponse",
+        "type": "object"
+      },
+      "EnglishEssayFeedbackReportResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "exact_submission_notice": {
+            "default": "Feedback is pinned to this immutable essay submission and does not change later drafts.",
+            "title": "Exact Submission Notice",
+            "type": "string"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssayFeedbackReportDetailResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "submission": {
+            "$ref": "#/components/schemas/EnglishEssaySubmissionResponse"
+          },
+          "usefulness_response": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EnglishEssayUsefulnessResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "submission"
+        ],
+        "title": "EnglishEssayFeedbackReportResponse",
+        "type": "object"
+      },
+      "EnglishEssayHistoryResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "current_draft_edit_revision": {
+            "minimum": 1.0,
+            "title": "Current Draft Edit Revision",
+            "type": "integer"
+          },
+          "draft_id": {
+            "title": "Draft Id",
+            "type": "string"
+          },
+          "prompt_key": {
+            "title": "Prompt Key",
+            "type": "string"
+          },
+          "prompt_revision": {
+            "minimum": 1.0,
+            "title": "Prompt Revision",
+            "type": "integer"
+          },
+          "prompt_title": {
+            "title": "Prompt Title",
+            "type": "string"
+          },
+          "submissions": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishEssaySubmissionHistoryItemResponse"
+            },
+            "title": "Submissions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "draft_id",
+          "prompt_key",
+          "prompt_revision",
+          "prompt_title",
+          "current_draft_edit_revision",
+          "submissions"
+        ],
+        "title": "EnglishEssayHistoryResponse",
         "type": "object"
       },
       "EnglishEssayLatestSubmissionResponse": {
@@ -6327,6 +6674,104 @@
         "title": "EnglishEssaySelfReviewWorkspaceResponse",
         "type": "object"
       },
+      "EnglishEssaySubmissionHistoryItemResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "draft_edit_revision": {
+            "minimum": 1.0,
+            "title": "Draft Edit Revision",
+            "type": "integer"
+          },
+          "feedback_created_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback Created At"
+          },
+          "feedback_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback Id"
+          },
+          "feedback_source": {
+            "anyOf": [
+              {
+                "enum": [
+                  "development_fixture",
+                  "validated_ai"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback Source"
+          },
+          "paragraph_count": {
+            "exclusiveMinimum": 0.0,
+            "title": "Paragraph Count",
+            "type": "integer"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          },
+          "submission_revision": {
+            "minimum": 1.0,
+            "title": "Submission Revision",
+            "type": "integer"
+          },
+          "submitted_at": {
+            "format": "date-time",
+            "title": "Submitted At",
+            "type": "string"
+          },
+          "usefulness_rating": {
+            "anyOf": [
+              {
+                "enum": [
+                  "helpful",
+                  "partly_helpful",
+                  "not_helpful"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usefulness Rating"
+          },
+          "word_count": {
+            "exclusiveMinimum": 0.0,
+            "title": "Word Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "submission_id",
+          "submission_revision",
+          "draft_edit_revision",
+          "word_count",
+          "paragraph_count",
+          "submitted_at"
+        ],
+        "title": "EnglishEssaySubmissionHistoryItemResponse",
+        "type": "object"
+      },
       "EnglishEssaySubmissionResponse": {
         "additionalProperties": false,
         "properties": {
@@ -6451,6 +6896,72 @@
           "submitted_at"
         ],
         "title": "EnglishEssaySubmissionResponse",
+        "type": "object"
+      },
+      "EnglishEssayUsefulnessResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "feedback_id": {
+            "title": "Feedback Id",
+            "type": "string"
+          },
+          "feedback_source": {
+            "enum": [
+              "development_fixture",
+              "validated_ai"
+            ],
+            "title": "Feedback Source",
+            "type": "string"
+          },
+          "immutable": {
+            "const": true,
+            "default": true,
+            "title": "Immutable",
+            "type": "boolean"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "rating": {
+            "enum": [
+              "helpful",
+              "partly_helpful",
+              "not_helpful"
+            ],
+            "title": "Rating",
+            "type": "string"
+          },
+          "submission_id": {
+            "title": "Submission Id",
+            "type": "string"
+          },
+          "usefulness_id": {
+            "title": "Usefulness Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "usefulness_id",
+          "submission_id",
+          "feedback_id",
+          "feedback_source",
+          "rating",
+          "created_at"
+        ],
+        "title": "EnglishEssayUsefulnessResponse",
         "type": "object"
       },
       "EnglishExamProfilePartResponse": {
@@ -20542,6 +21053,134 @@
         ]
       }
     },
+    "/api/v1/english/essay-drafts/{draft_id}/history": {
+      "get": {
+        "operationId": "getEnglishEssayHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "draft_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Draft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayHistoryResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get owned immutable essay revisions and learner-safe feedback status",
+        "tags": [
+          "english"
+        ]
+      }
+    },
     "/api/v1/english/essay-drafts/{draft_id}/latest-submission": {
       "get": {
         "operationId": "getLatestEnglishEssaySubmission",
@@ -21174,6 +21813,283 @@
           }
         ],
         "summary": "Create an immutable essay snapshot after explicit learner confirmation",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-report": {
+      "get": {
+        "operationId": "getEnglishEssayFeedbackReport",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayFeedbackReportResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get learner-safe feedback pinned to an immutable essay submission",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness": {
+      "post": {
+        "operationId": "createEnglishEssayFeedbackUsefulness",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "submission_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Submission Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishEssayUsefulnessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishEssayUsefulnessResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record one immutable usefulness response for exact essay feedback",
         "tags": [
           "english"
         ]

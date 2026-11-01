@@ -358,6 +358,100 @@ class EnglishEssayFeedbackAllowanceResponse(ApiModel):
     )
 
 
+EnglishEssayFeedbackSource = Literal["development_fixture", "validated_ai"]
+EnglishEssayUsefulnessRating = Literal["helpful", "partly_helpful", "not_helpful"]
+
+
+class EnglishEssayEvidenceSpanResponse(ApiModel):
+    quote: str
+    start: int = Field(ge=0)
+    end: int = Field(gt=0)
+
+
+class EnglishEssayFeedbackCriterionReportResponse(ApiModel):
+    criterion_key: str
+    criterion_title: str
+    preparation_level: int | None = Field(default=None, ge=1, le=5)
+    evidence_spans: list[EnglishEssayEvidenceSpanResponse] = Field(
+        default_factory=list
+    )
+    observed_evidence: str | None = None
+    what_works: str
+    next_step: str
+
+
+class EnglishEssayUsefulnessResponse(ApiModel):
+    usefulness_id: str
+    submission_id: str
+    feedback_id: str
+    feedback_source: EnglishEssayFeedbackSource
+    rating: EnglishEssayUsefulnessRating
+    note: str | None = None
+    created_at: datetime
+    immutable: Literal[True] = True
+
+
+class CreateEnglishEssayUsefulnessRequest(ApiModel):
+    feedback_id: UUID
+    feedback_source: EnglishEssayFeedbackSource
+    rating: EnglishEssayUsefulnessRating
+    note: Annotated[
+        str | None, StringConstraints(strip_whitespace=True, max_length=1000)
+    ] = None
+
+
+class EnglishEssayFeedbackReportDetailResponse(ApiModel):
+    feedback_id: str
+    submission_id: str
+    rubric_key: str
+    rubric_revision: int = Field(ge=1)
+    feedback_source: EnglishEssayFeedbackSource
+    preparation_estimate: Literal[
+        "limited", "emerging", "developing", "secure", "strong"
+    ] | None = None
+    criterion_feedback: list[EnglishEssayFeedbackCriterionReportResponse]
+    overall_summary: str
+    strengths: list[str] = Field(min_length=1)
+    priorities: list[str] = Field(min_length=1)
+    revision_task: str | None = None
+    transfer_goal: str | None = None
+    learner_disclaimer: str
+    created_at: datetime
+    immutable: Literal[True] = True
+    official_score_available: Literal[False] = False
+
+
+class EnglishEssayFeedbackReportResponse(ApiModel):
+    submission: EnglishEssaySubmissionResponse
+    feedback: EnglishEssayFeedbackReportDetailResponse | None = None
+    usefulness_response: EnglishEssayUsefulnessResponse | None = None
+    exact_submission_notice: str = (
+        "Feedback is pinned to this immutable essay submission and does not change later drafts."
+    )
+
+
+class EnglishEssaySubmissionHistoryItemResponse(ApiModel):
+    submission_id: str
+    submission_revision: int = Field(ge=1)
+    draft_edit_revision: int = Field(ge=1)
+    word_count: int = Field(gt=0)
+    paragraph_count: int = Field(gt=0)
+    submitted_at: datetime
+    feedback_id: str | None = None
+    feedback_source: EnglishEssayFeedbackSource | None = None
+    feedback_created_at: datetime | None = None
+    usefulness_rating: EnglishEssayUsefulnessRating | None = None
+
+
+class EnglishEssayHistoryResponse(ApiModel):
+    draft_id: str
+    prompt_key: str
+    prompt_revision: int = Field(ge=1)
+    prompt_title: str
+    current_draft_edit_revision: int = Field(ge=1)
+    submissions: list[EnglishEssaySubmissionHistoryItemResponse]
+
+
 class EnglishLessonSectionResponse(ApiModel):
     position: int
     section_type: Literal[

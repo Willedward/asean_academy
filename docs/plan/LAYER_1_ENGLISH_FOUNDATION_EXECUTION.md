@@ -116,7 +116,7 @@ sections.
 | ENG-T3.5 | Asynchronous fixture marking jobs with no live provider calls | Implemented as draft; deterministic fixture only, no external provider |
 | ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Implemented as draft; live provider remains disabled |
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Implemented as a disabled provider-neutral candidate path; calibration and live provider release pending |
-| ENG-T3.8 | Essay version history, feedback report and usefulness rating | Not started |
+| ENG-T3.8 | Essay version history, feedback report and usefulness rating | Implemented as draft; exact-submission report and immutable usefulness response |
 | ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Not started |
 | ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
@@ -447,10 +447,18 @@ failure permanently fails that candidate and releases its reservation in the sam
 The learner still has no route that can invoke a paid provider and the live release flag remains
 off until calibration succeeds.
 
-The next independently executable engineering milestone is **ENG-T3.8 — essay version history,
-feedback report and usefulness rating**. It should expose learner-safe revision and feedback
-history without provider cost/token details, render evidence-linked feedback against the exact
-submission, and record one auditable usefulness response without allowing feedback mutation.
+**ENG-T3.8** now adds migration `202611010045`, owner-safe submission history, and a
+learner feedback report pinned to the exact immutable essay and rubric revision. Validated AI
+feedback renders exact quote-and-offset evidence; the deterministic fixture remains visibly
+labelled. The learner surface exposes neither provider/model metadata nor token or cost data,
+and it never presents preparation estimates as official scores. Each feedback record accepts
+one immutable helpful, partly-helpful or not-helpful response with an optional bounded note.
+
+The next independently executable engineering milestone is **ENG-T3.9 — human-anchor
+calibration and provider quality/safety gate**. It must compare the disabled provider candidate
+against qualified educator anchors, define pass/fail thresholds for evidence fidelity,
+instructional usefulness and safety, and keep live learner invocation disabled until the gate
+passes.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

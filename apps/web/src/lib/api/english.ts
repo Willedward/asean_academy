@@ -45,6 +45,14 @@ export type EnglishEssayMarkingFeedbackResponse =
   components["schemas"]["EnglishEssayMarkingFeedbackResponse"];
 export type EnglishEssayFeedbackAllowanceResponse =
   components["schemas"]["EnglishEssayFeedbackAllowanceResponse"];
+export type EnglishEssayHistoryResponse =
+  components["schemas"]["EnglishEssayHistoryResponse"];
+export type EnglishEssayFeedbackReportResponse =
+  components["schemas"]["EnglishEssayFeedbackReportResponse"];
+export type EnglishEssayUsefulnessResponse =
+  components["schemas"]["EnglishEssayUsefulnessResponse"];
+export type EnglishEssayUsefulnessRating =
+  components["schemas"]["CreateEnglishEssayUsefulnessRequest"]["rating"];
 export type EnglishErrorCategory =
   components["schemas"]["ClassifyEnglishErrorRequest"]["category"];
 export type EnglishAnswers = Record<string, string | string[]>;
@@ -283,6 +291,71 @@ export async function getEnglishEssayFeedbackAllowance(): Promise<EnglishEssayFe
   fixtureGuard();
   const { data, error, response } = await createApiClient().GET(
     "/api/v1/english/essay-feedback/allowance",
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssayHistory(
+  draftId: string,
+): Promise<EnglishEssayHistoryResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-drafts/{draft_id}/history",
+    { params: { path: { draft_id: draftId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function getEnglishEssayFeedbackReport(
+  submissionId: string,
+): Promise<EnglishEssayFeedbackReportResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-report",
+    { params: { path: { submission_id: submissionId } } },
+  );
+  if (error || !data)
+    throw new EnglishEssayDraftApiError(
+      apiErrorMessage(error, response.status),
+      response.status,
+    );
+  return data;
+}
+
+export async function createEnglishEssayFeedbackUsefulness(
+  submissionId: string,
+  feedbackId: string,
+  feedbackSource: "development_fixture" | "validated_ai",
+  rating: EnglishEssayUsefulnessRating,
+  note: string | null,
+): Promise<EnglishEssayUsefulnessResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness",
+    {
+      params: {
+        path: { submission_id: submissionId },
+        header: {
+          "Idempotency-Key": `english-essay-feedback-usefulness:${feedbackId}`,
+        },
+      },
+      body: {
+        feedback_id: feedbackId,
+        feedback_source: feedbackSource,
+        rating,
+        note,
+      },
+    },
   );
   if (error || !data)
     throw new EnglishEssayDraftApiError(

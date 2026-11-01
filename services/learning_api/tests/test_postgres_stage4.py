@@ -436,6 +436,47 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
     committed_allowance = allowance_repository.allowance(learner_id, allowance_limits)
     assert committed_allowance.monthly_feedback_remaining == 1
 
+    report = service.feedback_report(first.submission_id)
+    assert report.submission.body == first_body
+    assert report.feedback.feedback_source == "validated_ai"
+    assert report.feedback.preparation_estimate == "developing"
+    assert report.feedback.criterion_feedback[0].evidence_spans[0].quote == evidence
+    assert report.usefulness_response is None
+    usefulness = service.create_feedback_usefulness(
+        first.submission_id,
+        feedback_id=report.feedback.feedback_id,
+        feedback_source=report.feedback.feedback_source,
+        rating="helpful",
+        note="The priorities gave me a clear revision order.",
+        idempotency_key="postgres-feedback-usefulness-one",
+    )
+    assert usefulness.rating == "helpful"
+    repeated_usefulness = service.create_feedback_usefulness(
+        first.submission_id,
+        feedback_id=report.feedback.feedback_id,
+        feedback_source=report.feedback.feedback_source,
+        rating="helpful",
+        note="The priorities gave me a clear revision order.",
+        idempotency_key="postgres-feedback-usefulness-one",
+    )
+    assert repeated_usefulness.usefulness_id == usefulness.usefulness_id
+    restored_report = service.feedback_report(first.submission_id)
+    assert restored_report.usefulness_response.rating == "helpful"
+    history = service.submission_history(draft.draft_id)
+    assert history.submissions[0].feedback_id == report.feedback.feedback_id
+    assert history.submissions[0].usefulness_rating == "helpful"
+
+    with psycopg.connect(database_url) as connection:
+        with pytest.raises(psycopg.errors.RaiseException, match="immutable"):
+            with connection.transaction():
+                connection.execute(
+                    """
+                    update english_essay_feedback_usefulness_responses
+                       set rating='not_helpful' where id=%s
+                    """,
+                    (usefulness.usefulness_id,),
+                )
+
     released_reservation = allowance_repository.reserve(
         learner_id,
         first.submission_id,

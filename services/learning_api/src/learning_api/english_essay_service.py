@@ -10,6 +10,10 @@ from pathlib import Path
 
 from .english_contracts import (
     EnglishEssayDraftResponse,
+    EnglishEssayFeedbackCriterionReportResponse,
+    EnglishEssayFeedbackReportDetailResponse,
+    EnglishEssayFeedbackReportResponse,
+    EnglishEssayHistoryResponse,
     EnglishEssayLatestSubmissionResponse,
     EnglishEssayMarkingFeedbackResponse,
     EnglishEssayMarkingJobResponse,
@@ -21,7 +25,9 @@ from .english_contracts import (
     EnglishEssaySelfReviewCriterionResponse,
     EnglishEssaySelfReviewResponse,
     EnglishEssaySelfReviewWorkspaceResponse,
+    EnglishEssaySubmissionHistoryItemResponse,
     EnglishEssaySubmissionResponse,
+    EnglishEssayUsefulnessResponse,
 )
 from .english_essay_repository import EnglishEssayError
 
@@ -400,6 +406,104 @@ class EnglishEssayService:
                 if row["feedback"]
                 else None
             ),
+        )
+
+    def submission_history(self, draft_id: str) -> EnglishEssayHistoryResponse:
+        row = self.repository.submission_history(self.learner_id, draft_id)
+        return EnglishEssayHistoryResponse(
+            draft_id=str(row["draft_id"]),
+            prompt_key=row["prompt_key"],
+            prompt_revision=row["prompt_revision"],
+            prompt_title=row["prompt_title"],
+            current_draft_edit_revision=row["current_draft_edit_revision"],
+            submissions=[
+                EnglishEssaySubmissionHistoryItemResponse(
+                    **{
+                        field: submission.get(field)
+                        for field in EnglishEssaySubmissionHistoryItemResponse.model_fields
+                    }
+                )
+                for submission in row["submissions"]
+            ],
+        )
+
+    def feedback_report(
+        self, submission_id: str
+    ) -> EnglishEssayFeedbackReportResponse:
+        row = self.repository.feedback_report(self.learner_id, submission_id)
+        self._assert_pinned_rubric(row["submission"])
+        feedback = row["feedback"]
+        return EnglishEssayFeedbackReportResponse(
+            submission=self._submission_response(row["submission"]),
+            feedback=self._feedback_report_detail(feedback) if feedback else None,
+            usefulness_response=(
+                self._usefulness_response(row["usefulness"])
+                if row["usefulness"]
+                else None
+            ),
+        )
+
+    def create_feedback_usefulness(
+        self,
+        submission_id: str,
+        *,
+        feedback_id: str,
+        feedback_source: str,
+        rating: str,
+        note: str | None,
+        idempotency_key: str,
+    ) -> EnglishEssayUsefulnessResponse:
+        row = self.repository.create_feedback_usefulness(
+            self.learner_id,
+            submission_id,
+            feedback_id=feedback_id,
+            feedback_source=feedback_source,
+            rating=rating,
+            note=note or None,
+            idempotency_key=idempotency_key,
+        )
+        return self._usefulness_response(row)
+
+    @staticmethod
+    def _usefulness_response(row: dict) -> EnglishEssayUsefulnessResponse:
+        return EnglishEssayUsefulnessResponse(
+            **{
+                field: row[field]
+                for field in EnglishEssayUsefulnessResponse.model_fields
+                if field in row
+            }
+        )
+
+    @staticmethod
+    def _feedback_report_detail(row: dict) -> EnglishEssayFeedbackReportDetailResponse:
+        criteria = []
+        for criterion in row["criterion_feedback"]:
+            criteria.append(
+                EnglishEssayFeedbackCriterionReportResponse(
+                    criterion_key=criterion["criterion_key"],
+                    criterion_title=criterion["criterion_title"],
+                    preparation_level=criterion.get("preparation_level"),
+                    evidence_spans=criterion.get("evidence_spans", []),
+                    observed_evidence=criterion.get("observed_evidence"),
+                    what_works=criterion["what_works"],
+                    next_step=criterion["next_step"],
+                )
+            )
+        return EnglishEssayFeedbackReportDetailResponse(
+            feedback_id=str(row["feedback_id"]),
+            submission_id=str(row["submission_id"]),
+            rubric_key=row["rubric_key"],
+            rubric_revision=row["rubric_revision"],
+            feedback_source=row["feedback_source"],
+            preparation_estimate=row.get("preparation_estimate"),
+            criterion_feedback=criteria,
+            overall_summary=row["overall_summary"],
+            strengths=row["strengths"],
+            priorities=row["priorities"],
+            revision_task=row.get("revision_task"),
+            transfer_goal=row.get("transfer_goal"),
+            learner_disclaimer=row["learner_disclaimer"],
+            created_at=row["created_at"],
         )
 
     @staticmethod
