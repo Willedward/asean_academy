@@ -36,7 +36,7 @@ def test_health_uses_versioned_contract_and_request_id():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202611010045",
+            "required_schema_revision": "202611010046",
         },
         "dependencies": {
             "course_content": "versioned_catalogue",
@@ -100,7 +100,7 @@ def test_readiness_uses_local_dependencies_without_postgres():
         "release": {
             "sha": "local",
             "deployment_id": None,
-            "required_schema_revision": "202611010045",
+            "required_schema_revision": "202611010046",
         },
         "dependencies": {"database": "local", "schema_status": "local", "content_status": "local"},
     }
@@ -163,6 +163,7 @@ def test_readiness_requires_checkpoint_form_review_constraints(monkeypatch):
     assert response.status_code == 503
     assert response.json()["error"]["code"] == "database_schema_outdated"
     assert "english_checkpoint_form" in execute.call_args.args[0]
+    assert "english_essay_calibration_gate_reports" in execute.call_args.args[0]
 
 
 def test_startup_refuses_unsynchronized_content(monkeypatch):

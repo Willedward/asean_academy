@@ -85,6 +85,14 @@ checkpoint forms, 65 unique question groups and 20 passages. It produces determi
 JSON, Markdown and CSV evidence and is uploaded by pull-request CI without changing content
 status or recording an approval.
 
+The ENG-T3.9 essay increment now provides the bounded calibration infrastructure described in
+section 9.2. A source-controlled policy and offline evaluator require 12–16 private educator
+anchors, the five named edge-case categories and two captured candidate runs per anchor. The
+privacy-safe aggregate report is checksum-bound and immutable under schema revision
+`202611010046`; it contains neither essay text nor provider response text and cannot release a
+live provider. Qualified educator execution and the separate ENG-T3.10 administrator/privacy
+release decision remain pending.
+
 ## 1. V3 decision
 
 V3 keeps the strongest operational ideas from V2 but removes tasks and workflows that are
@@ -501,8 +509,12 @@ rejection, transactional allowance finalisation and automatic reservation releas
 No live provider adapter or learner invocation route is released. All remain draft-only and
 create no official score. **ENG-T3.8** adds owner-safe version history, a learner report pinned
 to the immutable submission, exact evidence quotations, and one immutable usefulness response.
-It deliberately omits provider/model, token and cost metadata from learner contracts. The next
-technical increment is **ENG-T3.9 — human-anchor calibration and provider quality/safety
+It deliberately omits provider/model, token and cost metadata from learner contracts.
+**ENG-T3.9** adds a 12–16-anchor offline evaluator, fixed quality/safety/cost/latency
+thresholds, private-evidence fingerprints and immutable privacy-safe gate reports. Two runs per
+anchor bound the stability check, while the educator scores each anchor once. No provider
+client, learner invocation or live release is added. The next technical increment is
+**ENG-T3.10 — administrator evidence, privacy checks and the explicit live-provider release
 gate**, while the review and release evidence below continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
