@@ -1115,6 +1115,23 @@ export interface paths {
         patch: operations["updateEnglishEssayDraft"];
         trace?: never;
     };
+    "/api/v1/english/essay-drafts/{draft_id}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get owned immutable essay revisions and learner-safe feedback status */
+        get: operations["getEnglishEssayHistory"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/english/essay-drafts/{draft_id}/latest-submission": {
         parameters: {
             query?: never;
@@ -1194,6 +1211,40 @@ export interface paths {
         put?: never;
         /** Create an immutable essay snapshot after explicit learner confirmation */
         post: operations["createEnglishEssaySubmission"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get learner-safe feedback pinned to an immutable essay submission */
+        get: operations["getEnglishEssayFeedbackReport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record one immutable usefulness response for exact essay feedback */
+        post: operations["createEnglishEssayFeedbackUsefulness"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2978,6 +3029,26 @@ export interface components {
             /** Expected Edit Revision */
             expected_edit_revision: number;
         };
+        /** CreateEnglishEssayUsefulnessRequest */
+        CreateEnglishEssayUsefulnessRequest: {
+            /**
+             * Feedback Id
+             * Format: uuid
+             */
+            feedback_id: string;
+            /**
+             * Feedback Source
+             * @enum {string}
+             */
+            feedback_source: "development_fixture" | "validated_ai";
+            /** Note */
+            note?: string | null;
+            /**
+             * Rating
+             * @enum {string}
+             */
+            rating: "helpful" | "partly_helpful" | "not_helpful";
+        };
         /** CreateEnglishPracticeSessionRequest */
         CreateEnglishPracticeSessionRequest: {
             /** Lesson Key */
@@ -3771,6 +3842,15 @@ export interface components {
             /** Word Count */
             word_count: number;
         };
+        /** EnglishEssayEvidenceSpanResponse */
+        EnglishEssayEvidenceSpanResponse: {
+            /** End */
+            end: number;
+            /** Quote */
+            quote: string;
+            /** Start */
+            start: number;
+        };
         /** EnglishEssayFeedbackAllowanceResponse */
         EnglishEssayFeedbackAllowanceResponse: {
             /**
@@ -3800,6 +3880,98 @@ export interface components {
              * Format: date-time
              */
             resets_at: string;
+        };
+        /** EnglishEssayFeedbackCriterionReportResponse */
+        EnglishEssayFeedbackCriterionReportResponse: {
+            /** Criterion Key */
+            criterion_key: string;
+            /** Criterion Title */
+            criterion_title: string;
+            /** Evidence Spans */
+            evidence_spans?: components["schemas"]["EnglishEssayEvidenceSpanResponse"][];
+            /** Next Step */
+            next_step: string;
+            /** Observed Evidence */
+            observed_evidence?: string | null;
+            /** Preparation Level */
+            preparation_level?: number | null;
+            /** What Works */
+            what_works: string;
+        };
+        /** EnglishEssayFeedbackReportDetailResponse */
+        EnglishEssayFeedbackReportDetailResponse: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Criterion Feedback */
+            criterion_feedback: components["schemas"]["EnglishEssayFeedbackCriterionReportResponse"][];
+            /** Feedback Id */
+            feedback_id: string;
+            /**
+             * Feedback Source
+             * @enum {string}
+             */
+            feedback_source: "development_fixture" | "validated_ai";
+            /**
+             * Immutable
+             * @default true
+             * @constant
+             */
+            immutable: true;
+            /** Learner Disclaimer */
+            learner_disclaimer: string;
+            /**
+             * Official Score Available
+             * @default false
+             * @constant
+             */
+            official_score_available: false;
+            /** Overall Summary */
+            overall_summary: string;
+            /** Preparation Estimate */
+            preparation_estimate?: ("limited" | "emerging" | "developing" | "secure" | "strong") | null;
+            /** Priorities */
+            priorities: string[];
+            /** Revision Task */
+            revision_task?: string | null;
+            /** Rubric Key */
+            rubric_key: string;
+            /** Rubric Revision */
+            rubric_revision: number;
+            /** Strengths */
+            strengths: string[];
+            /** Submission Id */
+            submission_id: string;
+            /** Transfer Goal */
+            transfer_goal?: string | null;
+        };
+        /** EnglishEssayFeedbackReportResponse */
+        EnglishEssayFeedbackReportResponse: {
+            /**
+             * Exact Submission Notice
+             * @default Feedback is pinned to this immutable essay submission and does not change later drafts.
+             */
+            exact_submission_notice: string;
+            feedback?: components["schemas"]["EnglishEssayFeedbackReportDetailResponse"] | null;
+            submission: components["schemas"]["EnglishEssaySubmissionResponse"];
+            usefulness_response?: components["schemas"]["EnglishEssayUsefulnessResponse"] | null;
+        };
+        /** EnglishEssayHistoryResponse */
+        EnglishEssayHistoryResponse: {
+            /** Current Draft Edit Revision */
+            current_draft_edit_revision: number;
+            /** Draft Id */
+            draft_id: string;
+            /** Prompt Key */
+            prompt_key: string;
+            /** Prompt Revision */
+            prompt_revision: number;
+            /** Prompt Title */
+            prompt_title: string;
+            /** Submissions */
+            submissions: components["schemas"]["EnglishEssaySubmissionHistoryItemResponse"][];
         };
         /** EnglishEssayLatestSubmissionResponse */
         EnglishEssayLatestSubmissionResponse: {
@@ -4141,6 +4313,32 @@ export interface components {
             self_review?: components["schemas"]["EnglishEssaySelfReviewResponse"] | null;
             submission: components["schemas"]["EnglishEssaySubmissionResponse"];
         };
+        /** EnglishEssaySubmissionHistoryItemResponse */
+        EnglishEssaySubmissionHistoryItemResponse: {
+            /** Draft Edit Revision */
+            draft_edit_revision: number;
+            /** Feedback Created At */
+            feedback_created_at?: string | null;
+            /** Feedback Id */
+            feedback_id?: string | null;
+            /** Feedback Source */
+            feedback_source?: ("development_fixture" | "validated_ai") | null;
+            /** Paragraph Count */
+            paragraph_count: number;
+            /** Submission Id */
+            submission_id: string;
+            /** Submission Revision */
+            submission_revision: number;
+            /**
+             * Submitted At
+             * Format: date-time
+             */
+            submitted_at: string;
+            /** Usefulness Rating */
+            usefulness_rating?: ("helpful" | "partly_helpful" | "not_helpful") | null;
+            /** Word Count */
+            word_count: number;
+        };
         /** EnglishEssaySubmissionResponse */
         EnglishEssaySubmissionResponse: {
             /**
@@ -4204,6 +4402,38 @@ export interface components {
             submitted_at: string;
             /** Word Count */
             word_count: number;
+        };
+        /** EnglishEssayUsefulnessResponse */
+        EnglishEssayUsefulnessResponse: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Feedback Id */
+            feedback_id: string;
+            /**
+             * Feedback Source
+             * @enum {string}
+             */
+            feedback_source: "development_fixture" | "validated_ai";
+            /**
+             * Immutable
+             * @default true
+             * @constant
+             */
+            immutable: true;
+            /** Note */
+            note?: string | null;
+            /**
+             * Rating
+             * @enum {string}
+             */
+            rating: "helpful" | "partly_helpful" | "not_helpful";
+            /** Submission Id */
+            submission_id: string;
+            /** Usefulness Id */
+            usefulness_id: string;
         };
         /** EnglishExamProfilePartResponse */
         EnglishExamProfilePartResponse: {
@@ -13005,6 +13235,109 @@ export interface operations {
             };
         };
     };
+    getEnglishEssayHistory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayHistoryResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     getLatestEnglishEssaySubmission: {
         parameters: {
             query?: never;
@@ -13439,6 +13772,218 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EnglishEssaySubmissionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishEssayFeedbackReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayFeedbackReportResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    createEnglishEssayFeedbackUsefulness: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEnglishEssayUsefulnessRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishEssayUsefulnessResponse"];
                 };
             };
             /** @description Bad Request */

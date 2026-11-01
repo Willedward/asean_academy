@@ -499,9 +499,11 @@ does not touch it. **ENG-T3.7** adds the provider-neutral structured-output boun
 rubric coverage, immutable quote-and-offset verification, prohibited official-outcome claim
 rejection, transactional allowance finalisation and automatic reservation release on failure.
 No live provider adapter or learner invocation route is released. All remain draft-only and
-create no official score. The next technical increment is **ENG-T3.8 — essay version history,
-feedback report and usefulness rating**, while the review and release evidence below continues
-independently.
+create no official score. **ENG-T3.8** adds owner-safe version history, a learner report pinned
+to the immutable submission, exact evidence quotations, and one immutable usefulness response.
+It deliberately omits provider/model, token and cost metadata from learner contracts. The next
+technical increment is **ENG-T3.9 — human-anchor calibration and provider quality/safety
+gate**, while the review and release evidence below continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

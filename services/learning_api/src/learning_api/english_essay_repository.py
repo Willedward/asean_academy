@@ -36,6 +36,9 @@ class InMemoryEnglishEssayRepository:
         self.marking_jobs: dict[str, dict] = {}
         self.marking_job_idempotency: dict[tuple[str, str], str] = {}
         self.marking_feedback: dict[str, dict] = {}
+        self.provider_feedback: dict[str, dict] = {}
+        self.feedback_usefulness: dict[str, dict] = {}
+        self.feedback_usefulness_idempotency: dict[tuple[str, str], str] = {}
         self._lock = Lock()
 
     def create_or_resume(
@@ -219,6 +222,173 @@ class InMemoryEnglishEssayRepository:
         if not owned:
             return None
         return dict(max(owned, key=lambda row: row["submission_revision"]))
+
+    def submission_history(self, learner_id: str, draft_id: str) -> dict:
+        draft = self.get(learner_id, draft_id)
+        submissions = []
+        for submission in sorted(
+            (
+                row
+                for row in self.submissions.values()
+                if row["learner_id"] == learner_id and row["draft_id"] == draft_id
+            ),
+            key=lambda row: row["submission_revision"],
+            reverse=True,
+        ):
+            feedback = self._feedback_for_submission(learner_id, submission["submission_id"])
+            usefulness = self._usefulness_for_feedback(
+                learner_id,
+                feedback["feedback_id"] if feedback else None,
+                feedback["feedback_source"] if feedback else None,
+            )
+            submissions.append(
+                {
+                    **submission,
+                    "feedback_id": feedback["feedback_id"] if feedback else None,
+                    "feedback_source": feedback["feedback_source"] if feedback else None,
+                    "feedback_created_at": feedback["created_at"] if feedback else None,
+                    "usefulness_rating": usefulness["rating"] if usefulness else None,
+                }
+            )
+        return {
+            "draft_id": draft_id,
+            "prompt_key": draft["prompt_key"],
+            "prompt_revision": draft["prompt_revision"],
+            "prompt_title": draft["prompt"]["title"],
+            "current_draft_edit_revision": draft["edit_revision"],
+            "submissions": submissions,
+        }
+
+    def _feedback_for_submission(
+        self, learner_id: str, submission_id: str
+    ) -> dict | None:
+        provider = next(
+            (
+                row
+                for row in self.provider_feedback.values()
+                if row["learner_id"] == learner_id
+                and row["submission_id"] == submission_id
+            ),
+            None,
+        )
+        if provider:
+            return {
+                **json.loads(json.dumps(provider)),
+                "feedback_source": "validated_ai",
+            }
+        fixture = next(
+            (
+                row
+                for row in self.marking_feedback.values()
+                if row["learner_id"] == learner_id
+                and row["submission_id"] == submission_id
+            ),
+            None,
+        )
+        if fixture:
+            return {
+                **json.loads(json.dumps(fixture)),
+                "feedback_source": "development_fixture",
+            }
+        return None
+
+    def _usefulness_for_feedback(
+        self,
+        learner_id: str,
+        feedback_id: str | None,
+        feedback_source: str | None,
+    ) -> dict | None:
+        if not feedback_id or not feedback_source:
+            return None
+        response = next(
+            (
+                row
+                for row in self.feedback_usefulness.values()
+                if row["learner_id"] == learner_id
+                and row["feedback_id"] == feedback_id
+                and row["feedback_source"] == feedback_source
+            ),
+            None,
+        )
+        return dict(response) if response else None
+
+    def feedback_report(self, learner_id: str, submission_id: str) -> dict:
+        submission = self.get_submission(learner_id, submission_id)
+        feedback = self._feedback_for_submission(learner_id, submission_id)
+        usefulness = self._usefulness_for_feedback(
+            learner_id,
+            feedback["feedback_id"] if feedback else None,
+            feedback["feedback_source"] if feedback else None,
+        )
+        return {
+            "submission": submission,
+            "feedback": feedback,
+            "usefulness": usefulness,
+        }
+
+    def create_feedback_usefulness(
+        self,
+        learner_id: str,
+        submission_id: str,
+        *,
+        feedback_id: str,
+        feedback_source: str,
+        rating: str,
+        note: str | None,
+        idempotency_key: str,
+    ) -> dict:
+        with self._lock:
+            self.get_submission(learner_id, submission_id)
+            prior_id = self.feedback_usefulness_idempotency.get(
+                (learner_id, idempotency_key)
+            )
+            if prior_id:
+                prior = self.feedback_usefulness[prior_id]
+                if (
+                    prior["submission_id"] != submission_id
+                    or prior["feedback_id"] != feedback_id
+                    or prior["feedback_source"] != feedback_source
+                ):
+                    raise EnglishEssayError(
+                        "idempotency_conflict",
+                        "That idempotency key was already used for another feedback response.",
+                        409,
+                    )
+                return dict(prior)
+            feedback = self._feedback_for_submission(learner_id, submission_id)
+            if (
+                feedback is None
+                or feedback["feedback_id"] != feedback_id
+                or feedback["feedback_source"] != feedback_source
+            ):
+                raise EnglishEssayError(
+                    "essay_feedback_not_found", "Essay feedback not found.", 404
+                )
+            existing = self._usefulness_for_feedback(
+                learner_id, feedback_id, feedback_source
+            )
+            if existing:
+                raise EnglishEssayError(
+                    "essay_feedback_usefulness_already_recorded",
+                    "A usefulness response is already recorded for this feedback.",
+                    409,
+                )
+            usefulness_id = str(uuid4())
+            response = {
+                "usefulness_id": usefulness_id,
+                "learner_id": learner_id,
+                "submission_id": submission_id,
+                "feedback_id": feedback_id,
+                "feedback_source": feedback_source,
+                "rating": rating,
+                "note": note,
+                "created_at": _now(),
+            }
+            self.feedback_usefulness[usefulness_id] = response
+            self.feedback_usefulness_idempotency[(learner_id, idempotency_key)] = (
+                usefulness_id
+            )
+            return dict(response)
 
     def get_self_review(self, learner_id: str, submission_id: str) -> dict | None:
         self.get_submission(learner_id, submission_id)
@@ -950,6 +1120,251 @@ class PostgresEnglishEssayRepository:
                     "essay_draft_not_found", "Essay draft not found.", 404
                 )
             return None
+
+    @staticmethod
+    def _feedback_for_submission(
+        connection, learner_id: str, submission_id: str
+    ) -> dict | None:
+        provider = connection.execute(
+            """
+            select feedback.id::text as feedback_id,
+                   feedback.submission_id::text as submission_id,
+                   rubrics.stable_key as rubric_key,
+                   rubric_versions.revision as rubric_revision,
+                   'validated_ai'::text as feedback_source,
+                   feedback.preparation_estimate, feedback.criterion_feedback,
+                   feedback.overall_summary, feedback.strengths,
+                   feedback.priorities, feedback.revision_task,
+                   feedback.transfer_goal, feedback.learner_disclaimer,
+                   feedback.created_at
+              from english_essay_provider_feedback feedback
+              join english_essay_rubric_versions rubric_versions
+                on rubric_versions.id = feedback.rubric_version_id
+              join english_essay_rubrics rubrics
+                on rubrics.id = rubric_versions.rubric_id
+             where feedback.submission_id=%s and feedback.student_id=%s
+            """,
+            (submission_id, learner_id),
+        ).fetchone()
+        if provider:
+            return dict(provider)
+        fixture = connection.execute(
+            """
+            select feedback.id::text as feedback_id,
+                   feedback.submission_id::text as submission_id,
+                   rubrics.stable_key as rubric_key,
+                   rubric_versions.revision as rubric_revision,
+                   'development_fixture'::text as feedback_source,
+                   null::text as preparation_estimate,
+                   feedback.criterion_feedback, feedback.overall_summary,
+                   feedback.strengths, feedback.priorities,
+                   null::text as revision_task, null::text as transfer_goal,
+                   feedback.learner_disclaimer, feedback.created_at
+              from english_essay_marking_feedback feedback
+              join english_essay_rubric_versions rubric_versions
+                on rubric_versions.id = feedback.rubric_version_id
+              join english_essay_rubrics rubrics
+                on rubrics.id = rubric_versions.rubric_id
+             where feedback.submission_id=%s and feedback.student_id=%s
+            """,
+            (submission_id, learner_id),
+        ).fetchone()
+        return dict(fixture) if fixture else None
+
+    @staticmethod
+    def _usefulness_for_feedback(
+        connection,
+        learner_id: str,
+        feedback_id: str | None,
+        feedback_source: str | None,
+    ) -> dict | None:
+        if not feedback_id or not feedback_source:
+            return None
+        row = connection.execute(
+            """
+            select responses.id::text as usefulness_id,
+                   responses.submission_id::text as submission_id,
+                   coalesce(
+                       responses.provider_feedback_id::text,
+                       responses.marking_feedback_id::text
+                   ) as feedback_id,
+                   responses.feedback_source, responses.rating,
+                   responses.note, responses.created_at
+              from english_essay_feedback_usefulness_responses responses
+             where responses.student_id=%s
+               and responses.feedback_source=%s
+               and (
+                   (%s='validated_ai' and responses.provider_feedback_id=%s)
+                   or
+                   (%s='development_fixture' and responses.marking_feedback_id=%s)
+               )
+            """,
+            (
+                learner_id,
+                feedback_source,
+                feedback_source,
+                feedback_id,
+                feedback_source,
+                feedback_id,
+            ),
+        ).fetchone()
+        return dict(row) if row else None
+
+    def submission_history(self, learner_id: str, draft_id: str) -> dict:
+        draft = self.get(learner_id, draft_id)
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                select submissions.id::text as submission_id,
+                       submissions.submission_revision,
+                       submissions.draft_edit_revision,
+                       submissions.word_count, submissions.paragraph_count,
+                       submissions.submitted_at
+                  from english_essay_submissions submissions
+                 where submissions.draft_id=%s and submissions.student_id=%s
+                 order by submissions.submission_revision desc
+                """,
+                (draft_id, learner_id),
+            ).fetchall()
+            submissions = []
+            for row in rows:
+                item = dict(row)
+                feedback = self._feedback_for_submission(
+                    connection, learner_id, item["submission_id"]
+                )
+                usefulness = self._usefulness_for_feedback(
+                    connection,
+                    learner_id,
+                    feedback["feedback_id"] if feedback else None,
+                    feedback["feedback_source"] if feedback else None,
+                )
+                item.update(
+                    feedback_id=feedback["feedback_id"] if feedback else None,
+                    feedback_source=(
+                        feedback["feedback_source"] if feedback else None
+                    ),
+                    feedback_created_at=(feedback["created_at"] if feedback else None),
+                    usefulness_rating=usefulness["rating"] if usefulness else None,
+                )
+                submissions.append(item)
+        return {
+            "draft_id": draft_id,
+            "prompt_key": draft["prompt_key"],
+            "prompt_revision": draft["prompt_revision"],
+            "prompt_title": draft["prompt_title"],
+            "current_draft_edit_revision": draft["edit_revision"],
+            "submissions": submissions,
+        }
+
+    def feedback_report(self, learner_id: str, submission_id: str) -> dict:
+        with self._connect() as connection:
+            submission = self._submission_by_id(connection, learner_id, submission_id)
+            feedback = self._feedback_for_submission(
+                connection, learner_id, submission_id
+            )
+            usefulness = self._usefulness_for_feedback(
+                connection,
+                learner_id,
+                feedback["feedback_id"] if feedback else None,
+                feedback["feedback_source"] if feedback else None,
+            )
+            return {
+                "submission": submission,
+                "feedback": feedback,
+                "usefulness": usefulness,
+            }
+
+    def create_feedback_usefulness(
+        self,
+        learner_id: str,
+        submission_id: str,
+        *,
+        feedback_id: str,
+        feedback_source: str,
+        rating: str,
+        note: str | None,
+        idempotency_key: str,
+    ) -> dict:
+        with self._connect() as connection, connection.transaction():
+            connection.execute(
+                "select pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                (f"english-essay-usefulness:{learner_id}:{idempotency_key}",),
+            )
+            prior = connection.execute(
+                """
+                select id::text as usefulness_id,
+                       submission_id::text as submission_id,
+                       coalesce(provider_feedback_id::text, marking_feedback_id::text)
+                           as feedback_id,
+                       feedback_source, rating, note, created_at
+                  from english_essay_feedback_usefulness_responses
+                 where student_id=%s and idempotency_key=%s
+                """,
+                (learner_id, idempotency_key),
+            ).fetchone()
+            if prior:
+                if (
+                    str(prior["submission_id"]) != submission_id
+                    or str(prior["feedback_id"]) != feedback_id
+                    or prior["feedback_source"] != feedback_source
+                ):
+                    raise EnglishEssayError(
+                        "idempotency_conflict",
+                        "That idempotency key was already used for another feedback response.",
+                        409,
+                    )
+                return dict(prior)
+            self._submission_by_id(connection, learner_id, submission_id)
+            feedback = self._feedback_for_submission(
+                connection, learner_id, submission_id
+            )
+            if (
+                feedback is None
+                or feedback["feedback_id"] != feedback_id
+                or feedback["feedback_source"] != feedback_source
+            ):
+                raise EnglishEssayError(
+                    "essay_feedback_not_found", "Essay feedback not found.", 404
+                )
+            try:
+                created = connection.execute(
+                    """
+                    insert into english_essay_feedback_usefulness_responses(
+                        student_id, submission_id, feedback_source,
+                        provider_feedback_id, marking_feedback_id,
+                        rating, note, idempotency_key
+                    ) values (
+                        %s, %s, %s,
+                        case when %s='validated_ai' then %s::uuid end,
+                        case when %s='development_fixture' then %s::uuid end,
+                        %s, %s, %s
+                    )
+                    returning id::text as usefulness_id,
+                              submission_id::text as submission_id,
+                              coalesce(provider_feedback_id::text, marking_feedback_id::text)
+                                  as feedback_id,
+                              feedback_source, rating, note, created_at
+                    """,
+                    (
+                        learner_id,
+                        submission_id,
+                        feedback_source,
+                        feedback_source,
+                        feedback_id,
+                        feedback_source,
+                        feedback_id,
+                        rating,
+                        note,
+                        idempotency_key,
+                    ),
+                ).fetchone()
+            except psycopg.errors.UniqueViolation as exc:
+                raise EnglishEssayError(
+                    "essay_feedback_usefulness_already_recorded",
+                    "A usefulness response is already recorded for this feedback.",
+                    409,
+                ) from exc
+            return dict(created)
 
     @staticmethod
     def _self_review_by_id(

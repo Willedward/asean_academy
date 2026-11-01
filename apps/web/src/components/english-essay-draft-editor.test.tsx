@@ -55,6 +55,14 @@ vi.mock("@/lib/api/english", () => ({
     getAllowance(...args),
 }));
 
+vi.mock("@/components/english-essay-feedback-report", () => ({
+  EnglishEssayFeedbackReport: ({
+    currentSubmissionId,
+  }: {
+    currentSubmissionId: string;
+  }) => <div>Feedback history for {currentSubmissionId}</div>,
+}));
+
 const initialDraft: EnglishEssayDraftResponse = {
   draft_id: "d209255d-a66c-44a3-b6cd-381f8be70441",
   body: "",

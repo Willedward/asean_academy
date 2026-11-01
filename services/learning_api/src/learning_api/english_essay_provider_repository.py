@@ -29,7 +29,12 @@ class InMemoryEnglishEssayProviderFeedbackRepository:
         self.allowance_repository = allowance_repository
         self.limits = limits
         self.attempts: dict[str, dict] = {}
-        self.feedback: dict[str, dict] = {}
+        shared_feedback = getattr(essay_repository, "provider_feedback", None)
+        self.feedback: dict[str, dict] = (
+            shared_feedback if shared_feedback is not None else {}
+        )
+        if shared_feedback is None:
+            essay_repository.provider_feedback = self.feedback
         self._lock = Lock()
 
     def enqueue(

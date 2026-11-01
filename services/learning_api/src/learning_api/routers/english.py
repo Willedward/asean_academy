@@ -24,6 +24,7 @@ from ..english_contracts import (
     CreateEnglishEssayDraftRequest,
     CreateEnglishEssaySelfReviewRequest,
     CreateEnglishEssaySubmissionRequest,
+    CreateEnglishEssayUsefulnessRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
     EnglishCheckpointAttemptResponse,
@@ -37,6 +38,8 @@ from ..english_contracts import (
     EnglishErrorClassificationResponse,
     EnglishEssayDraftResponse,
     EnglishEssayFeedbackAllowanceResponse,
+    EnglishEssayFeedbackReportResponse,
+    EnglishEssayHistoryResponse,
     EnglishEssayLatestSubmissionResponse,
     EnglishEssayMarkingWorkspaceResponse,
     EnglishEssayPreSubmitResponse,
@@ -44,6 +47,7 @@ from ..english_contracts import (
     EnglishEssaySelfReviewResponse,
     EnglishEssaySelfReviewWorkspaceResponse,
     EnglishEssaySubmissionResponse,
+    EnglishEssayUsefulnessResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
     EnglishNextQuestionResponse,
@@ -198,6 +202,19 @@ async def latest_essay_submission(
 
 
 @router.get(
+    "/essay-drafts/{draft_id}/history",
+    operation_id="getEnglishEssayHistory",
+    response_model=EnglishEssayHistoryResponse,
+    summary="Get owned immutable essay revisions and learner-safe feedback status",
+)
+async def essay_history(
+    draft_id: UUID,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayHistoryResponse:
+    return _safe(lambda: service.submission_history(str(draft_id)))
+
+
+@router.get(
     "/essay-submissions/{submission_id}/self-review",
     operation_id="getEnglishEssaySelfReviewWorkspace",
     response_model=EnglishEssaySelfReviewWorkspaceResponse,
@@ -281,6 +298,45 @@ async def essay_marking_workspace(
             workspace.job.job_id,
         )
     return workspace
+
+
+@router.get(
+    "/essay-submissions/{submission_id}/feedback-report",
+    operation_id="getEnglishEssayFeedbackReport",
+    response_model=EnglishEssayFeedbackReportResponse,
+    summary="Get learner-safe feedback pinned to an immutable essay submission",
+)
+async def essay_feedback_report(
+    submission_id: UUID,
+    service: EnglishEssayServiceDependency,
+) -> EnglishEssayFeedbackReportResponse:
+    return _safe(lambda: service.feedback_report(str(submission_id)))
+
+
+@router.post(
+    "/essay-submissions/{submission_id}/feedback-usefulness",
+    operation_id="createEnglishEssayFeedbackUsefulness",
+    response_model=EnglishEssayUsefulnessResponse,
+    status_code=201,
+    summary="Record one immutable usefulness response for exact essay feedback",
+)
+async def create_essay_feedback_usefulness(
+    submission_id: UUID,
+    body: CreateEnglishEssayUsefulnessRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishEssayServiceDependency,
+    _rate_limit: PracticeAttemptRateLimitDependency,
+) -> EnglishEssayUsefulnessResponse:
+    return _safe(
+        lambda: service.create_feedback_usefulness(
+            str(submission_id),
+            feedback_id=str(body.feedback_id),
+            feedback_source=body.feedback_source,
+            rating=body.rating,
+            note=body.note,
+            idempotency_key=idempotency_key,
+        )
+    )
 
 
 @router.get(

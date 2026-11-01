@@ -755,6 +755,150 @@ def test_essay_fixture_marking_worker_retries_then_stops_permanently():
     assert process_essay_marking_job(service.repository, job_id) is False
 
 
+def test_essay_history_feedback_report_and_usefulness_are_revision_pinned():
+    app = application()
+    submission_id = _completed_essay_self_review(app, "feedback-report")
+    repository = app.state.english_essay_repository
+    submission = repository.submissions[submission_id]
+    quote = "Planning a group project taught me to listen before choosing a solution."
+    feedback_id = "11111111-1111-4111-8111-111111111111"
+    repository.provider_feedback[feedback_id] = {
+        "feedback_id": feedback_id,
+        "learner_id": "english-development-learner",
+        "submission_id": submission_id,
+        "rubric_key": submission["rubric_key"],
+        "rubric_revision": submission["rubric_revision"],
+        "schema_version": "english-essay-provider-feedback-v1",
+        "validation_version": "english-essay-evidence-validation-v1",
+        "preparation_estimate": "developing",
+        "criterion_feedback": [
+            {
+                "criterion_key": criterion_key,
+                "criterion_title": criterion_title,
+                "preparation_level": 3,
+                "evidence_spans": [
+                    {"quote": quote, "start": 0, "end": len(quote)}
+                ],
+                "what_works": "The response uses a relevant personal example.",
+                "next_step": "Explain one consequence of the learning experience.",
+            }
+            for criterion_key, criterion_title in (
+                ("task_fulfilment", "Task fulfilment and focus"),
+                ("organisation_cohesion", "Organisation and cohesion"),
+                ("development_evidence", "Development and evidence"),
+                ("language_control", "Language control and precision"),
+            )
+        ],
+        "overall_summary": "The response is relevant and ready for focused development.",
+        "strengths": ["A concrete example anchors the response."],
+        "priorities": [
+            "Explain why the learning mattered.",
+            "Connect the example to a broader application.",
+        ],
+        "revision_task": "Add two sentences explaining the example's consequence.",
+        "transfer_goal": "Connect each future example to the central insight.",
+        "learner_disclaimer": (
+            "This is a NextScholar AI preparation estimate based on an instructional "
+            "rubric. It is not an official ASEAN Scholarship score, result or admission "
+            "prediction."
+        ),
+        "created_at": "2026-11-01T08:00:00+00:00",
+    }
+
+    report = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/feedback-report",
+    )
+    assert report.status_code == 200, report.text
+    payload = report.json()
+    assert payload["submission"]["body"] == submission["body"]
+    assert payload["feedback"]["feedback_source"] == "validated_ai"
+    assert payload["feedback"]["criterion_feedback"][0]["evidence_spans"] == [
+        {"quote": quote, "start": 0, "end": len(quote)}
+    ]
+    assert payload["feedback"]["official_score_available"] is False
+    assert payload["usefulness_response"] is None
+    assert "provider_name" not in json.dumps(payload)
+    assert "cost" not in json.dumps(payload)
+    assert "token" not in json.dumps(payload)
+
+    usefulness = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness",
+        headers={"Idempotency-Key": f"essay-feedback-usefulness:{feedback_id}"},
+        json={
+            "feedback_id": feedback_id,
+            "feedback_source": "validated_ai",
+            "rating": "helpful",
+            "note": "The two priorities gave me a clear revision order.",
+        },
+    )
+    assert usefulness.status_code == 201, usefulness.text
+    assert usefulness.json()["rating"] == "helpful"
+    assert usefulness.json()["immutable"] is True
+
+    repeated = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness",
+        headers={"Idempotency-Key": f"essay-feedback-usefulness:{feedback_id}"},
+        json={
+            "feedback_id": feedback_id,
+            "feedback_source": "validated_ai",
+            "rating": "helpful",
+            "note": "The two priorities gave me a clear revision order.",
+        },
+    )
+    assert repeated.status_code == 201
+    assert repeated.json()["usefulness_id"] == usefulness.json()["usefulness_id"]
+
+    replacement = request(
+        app,
+        "POST",
+        f"/api/v1/english/essay-submissions/{submission_id}/feedback-usefulness",
+        headers={"Idempotency-Key": "essay-feedback-usefulness-replacement"},
+        json={
+            "feedback_id": feedback_id,
+            "feedback_source": "validated_ai",
+            "rating": "not_helpful",
+            "note": None,
+        },
+    )
+    assert replacement.status_code == 409
+    assert replacement.json()["error"]["code"] == (
+        "essay_feedback_usefulness_already_recorded"
+    )
+
+    history = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-drafts/{submission['draft_id']}/history",
+    )
+    assert history.status_code == 200, history.text
+    assert history.json()["submissions"][0] == {
+        "submission_id": submission_id,
+        "submission_revision": 1,
+        "draft_edit_revision": submission["draft_edit_revision"],
+        "word_count": submission["word_count"],
+        "paragraph_count": submission["paragraph_count"],
+        "submitted_at": submission["submitted_at"].replace("+00:00", "Z"),
+        "feedback_id": feedback_id,
+        "feedback_source": "validated_ai",
+        "feedback_created_at": "2026-11-01T08:00:00Z",
+        "usefulness_rating": "helpful",
+    }
+
+    restored = request(
+        app,
+        "GET",
+        f"/api/v1/english/essay-submissions/{submission_id}/feedback-report",
+    )
+    assert restored.json()["usefulness_response"]["rating"] == "helpful"
+    assert restored.json()["submission"]["body"] == submission["body"]
+
+
 def test_protected_english_baseline_routes_scores_and_withholds_early_feedback():
     app = application()
 
