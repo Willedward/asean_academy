@@ -495,9 +495,13 @@ feedback. It proves retry, stale-lease recovery and permanent-failure behaviour 
 network, model or paid-provider call. **ENG-T3.6** adds a configurable monthly review
 allowance, learner and academy cost ceilings, and an atomic, auditable
 reservation/commit/release ledger. It remains disabled by default and the free fixture path
-does not touch it. All remain draft-only and create no official score. The next technical
-increment is **ENG-T3.7 — evidence-linked structured feedback with provider validation**,
-while the review and release evidence below continues independently.
+does not touch it. **ENG-T3.7** adds the provider-neutral structured-output boundary: exact
+rubric coverage, immutable quote-and-offset verification, prohibited official-outcome claim
+rejection, transactional allowance finalisation and automatic reservation release on failure.
+No live provider adapter or learner invocation route is released. All remain draft-only and
+create no official score. The next technical increment is **ENG-T3.8 — essay version history,
+feedback report and usefulness rating**, while the review and release evidence below continues
+independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

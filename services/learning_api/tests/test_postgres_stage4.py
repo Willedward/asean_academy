@@ -22,12 +22,20 @@ from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
 from learning_api.english_contracts import EnglishEssaySelfReviewCriterionRequest
 from learning_api.english_essay_allowance import (
-    EssayFeedbackActual,
     EssayFeedbackLimits,
     EssayFeedbackQuote,
     PostgresEssayFeedbackAllowanceRepository,
 )
 from learning_api.english_essay_marking import process_essay_marking_job
+from learning_api.english_essay_provider_feedback import (
+    PROVIDER_FEEDBACK_DISCLAIMER,
+    PROVIDER_FEEDBACK_SCHEMA_VERSION,
+    ProviderFeedbackResult,
+    process_provider_feedback_attempt,
+)
+from learning_api.english_essay_provider_repository import (
+    PostgresEnglishEssayProviderFeedbackRepository,
+)
 from learning_api.english_essay_repository import (
     EnglishEssayError,
     PostgresEnglishEssayRepository,
@@ -368,12 +376,64 @@ def test_postgres_english_essay_submissions_are_exact_owned_immutable_revisions(
         policy_version="english-essay-feedback-v1",
     )
     assert repeated_reservation.reservation_id == reservation.reservation_id
-    committed_allowance = allowance_repository.commit(
-        reservation,
-        EssayFeedbackActual(cost_micros_sgd=700),
-        allowance_limits,
+    provider_repository = PostgresEnglishEssayProviderFeedbackRepository(database_url)
+    provider_attempt = provider_repository.enqueue(
+        learner_id,
+        first.submission_id,
+        reservation=reservation,
+        rubric_key=workspace.rubric_key,
+        rubric_revision=workspace.rubric_revision,
+        rubric_criteria=[criterion.model_dump() for criterion in workspace.criteria],
+        provider_name="future-provider",
+        model_name="future-model",
+        policy_version="english-essay-feedback-v1",
+        schema_version=PROVIDER_FEEDBACK_SCHEMA_VERSION,
+    )
+    evidence = "I learned to plan carefully."
+
+    class ValidProvider:
+        def generate(self, claimed):
+            criterion_feedback = [
+                {
+                    "criterion_key": criterion["criterion_key"],
+                    "criterion_title": criterion["title"],
+                    "preparation_level": 3,
+                    "evidence_spans": [
+                        {"quote": evidence, "start": 0, "end": len(evidence)}
+                    ],
+                    "what_works": "The response gives a relevant learning example.",
+                    "next_step": "Develop the example with one precise consequence.",
+                }
+                for criterion in claimed["rubric_criteria"]
+            ]
+            return ProviderFeedbackResult(
+                {
+                    "schema_version": PROVIDER_FEEDBACK_SCHEMA_VERSION,
+                    "rubric_key": claimed["rubric_key"],
+                    "rubric_revision": claimed["rubric_revision"],
+                    "preparation_estimate": "developing",
+                    "criterion_feedback": criterion_feedback,
+                    "overall_summary": "The response is relevant and ready for focused development.",
+                    "strengths": ["A clear personal example anchors the response."],
+                    "priorities": [
+                        "Explain why the learning mattered.",
+                        "Connect the example to a broader application.",
+                    ],
+                    "revision_task": "Add two sentences explaining the example's consequence.",
+                    "transfer_goal": "Connect each future example to the central insight.",
+                    "learner_disclaimer": PROVIDER_FEEDBACK_DISCLAIMER,
+                },
+                700,
+            )
+
+    assert process_provider_feedback_attempt(
+        provider_repository,
+        provider_attempt["attempt_id"],
+        provider=ValidProvider(),
+        worker_id="postgres-provider-test-worker",
         request_id="postgres-commit-one",
     )
+    committed_allowance = allowance_repository.allowance(learner_id, allowance_limits)
     assert committed_allowance.monthly_feedback_remaining == 1
 
     released_reservation = allowance_repository.reserve(
