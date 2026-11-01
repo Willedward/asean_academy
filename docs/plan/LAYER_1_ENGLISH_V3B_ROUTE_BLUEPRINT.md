@@ -159,3 +159,8 @@ Complete the remaining **Sprint review and release evidence**:
 Once Sprint is structurally complete, author the seven additional Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core
 and Full curriculum.
+
+The separate essay path does not change this route manifest. ENG-T3.9 calibration
+infrastructure is implemented under schema revision `202611010046`, but no live essay provider
+is released. A qualified educator must still execute the private bounded set, and ENG-T3.10
+must complete administrator evidence, privacy checks and an explicit release gate.

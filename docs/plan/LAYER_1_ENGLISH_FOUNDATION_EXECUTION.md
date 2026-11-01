@@ -1,6 +1,6 @@
 # Layer 1 English foundation execution
 
-**Updated:** 27 October 2026
+**Updated:** 2 November 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
@@ -117,7 +117,7 @@ sections.
 | ENG-T3.6 | Server-owned essay feedback allowance and cost ceiling | Implemented as draft; live provider remains disabled |
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Implemented as a disabled provider-neutral candidate path; calibration and live provider release pending |
 | ENG-T3.8 | Essay version history, feedback report and usefulness rating | Implemented as draft; exact-submission report and immutable usefulness response |
-| ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Not started |
+| ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Implemented as offline, privacy-safe infrastructure; qualified educator execution pending; live provider remains disabled |
 | ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Not started |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
@@ -454,11 +454,22 @@ labelled. The learner surface exposes neither provider/model metadata nor token 
 and it never presents preparation estimates as official scores. Each feedback record accepts
 one immutable helpful, partly-helpful or not-helpful response with an optional bounded note.
 
-The next independently executable engineering milestone is **ENG-T3.9 — human-anchor
-calibration and provider quality/safety gate**. It must compare the disabled provider candidate
-against qualified educator anchors, define pass/fail thresholds for evidence fidelity,
-instructional usefulness and safety, and keep live learner invocation disabled until the gate
-passes.
+**ENG-T3.9** now adds migration `202611010046` and a bounded, offline calibration evaluator.
+One private package must contain 12–16 essays scored once by a qualified English educator,
+including off-topic, memorised, very short, error-heavy and prompt-injection cases, plus exactly
+two already-captured candidate runs per anchor. The gate requires 100% schema and exact-evidence
+validity, at least 90% within-one-band educator agreement, no repeat movement over one band,
+at least 90% instructional usefulness, 100% age-appropriate tone and required-case recognition,
+zero false claims or safety failures, per-run cost no greater than SGD 1.00 and p95 latency no
+greater than 20 seconds. Raw essays and outputs stay outside Git; only immutable hashes and
+aggregate metrics can be stored. Even a passing record states that the live provider is not
+released, and Render explicitly keeps live essay feedback disabled.
+
+The next independently executable engineering milestone is **ENG-T3.10 — administrator
+evidence, privacy checks and explicit live-provider release gate**. It must execute the private
+calibration with a named qualified educator, expose only authorised evidence, verify consent,
+retention, deletion and provider handling, and require an explicit separate release action.
+Missing or failed evidence must continue to fail closed.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
