@@ -72,6 +72,16 @@ The initial response types are:
 
 The checker mode is separate from the input control. For example, a prime-factorisation checker verifies that every base is prime and that the product has the required value; plain numeric equivalence would incorrectly accept the original composite number. Checker-specific options live in `checker_config` and must be validated by the importer.
 
+#### What the deterministic checker accepts
+
+`question_bank/src/question_bank/checking.py` never evaluates learner text as code. Answers longer than 200 characters, more than 8 brackets deep, with powers above 20, or that expand to polynomials larger than the documented limits receive a format error.
+
+- **Numbers.** Integers, decimals, fractions (`7/4`), mixed numbers (`1 3/4`, read as 7/4), scientific notation (`4.84e4`), and digits grouped in threes with commas, spaces, thin spaces or no-break spaces (`48,400`, `48 400`). A decimal comma (`1,2`) is a format error. A trailing `%` divides by 100 unless the response is a percentage (see below).
+- **Units.** When a numeric response declares `unit`, the learner may follow the number with any `unit.accepted` spelling (`60 km/h`, `9 days`). `unit.required` is not enforced.
+- **Percentages.** A response whose `unit.canonical` is `%` stores a number of percent: `30`, `30%` and `30 percent` are all 30, and `0.3` is wrong. Until bank parts declare that unit, the checker also treats a part as a percentage when `canonical_latex` is exactly the canonical number followed by `\%`. That is the answer the learner is shown.
+- **Algebra (`symbolic_equivalence`).** The checker parses both the answer and the canonical expression into exact polynomials, or a quotient of two exact polynomials, with rational coefficients. It accepts an answer equal to the canonical (or an accepted equivalent) as a rational function. Supported notation: implicit multiplication (`3x`, `2(x+1)`, `(x+1)(x+2)`, `ab`), `*`, `×`, `·`, `/`, `÷`, `^`, `**`, superscript powers (`x²`), `()`, `[]`, `{}`, Unicode minus signs and any spacing. Each letter is one variable, and only the response's variables are allowed. A division followed by juxtaposition (`3/2a`) is ambiguous and receives a format error asking for brackets. An equals sign also receives a format error.
+- **Form.** `checker_config.form` sets the written form a `symbolic_equivalence` answer must take: `any` (the default), `expanded`, `factorised`, `factorised_completely` or `simplified_fraction`. `SYMBOLIC_FORMS` in `models.py` defines each value. Use a form whenever a prompt says expand, simplify or factorise, so that retyping the original expression is marked incorrect. [`ANSWER_CHECKER_FORM_SETTINGS.md`](ANSWER_CHECKER_FORM_SETTINGS.md) lists the setting each existing part needs.
+
 Multipart questions use one `math_question_parts` row and one answer specification per input field. Marks are awarded per part. Hint use is recorded separately from correctness and does not automatically reduce marks.
 
 ### Content and mathematics rendering
