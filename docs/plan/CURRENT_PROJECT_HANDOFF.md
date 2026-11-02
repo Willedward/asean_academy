@@ -100,6 +100,36 @@ review and publication gates pass.
 - E1.2 is Core-route but not Sprint-route content. It does not change the fixed 121-record
   Sprint review scope, existing E1 Sprint checkpoint mastery scope or any protected form.
 
+## E1.4 synonym-precision milestone
+
+- E1.4 is implemented as draft-only Core-route content with one seven-section lesson, six
+  deterministic guided/independent/exit-ticket questions and one disjoint parallel retry.
+- The lesson separates a near-synonym's core meaning, degree and attitude before requiring a
+  complete-sentence check. A familiar or dramatic option is rejected when it changes the
+  supported fact, exaggerates intensity or imports unsupported praise or criticism.
+- The new source records are `e1-lesson-04`, `ev-l4-001` through `ev-l4-007`, and review
+  batches `english-ev-b011` and `english-ev-b012`. English and editorial decisions remain
+  pending; nothing is published.
+- E1.4 is Core-route but not Sprint-route content. It does not change the fixed 121-record
+  Sprint review scope, existing E1 Sprint checkpoint mastery scope or any protected form.
+
+## Validation completed for E1.4
+
+- English foundation and authoring validation: 41 authored lessons, 119 questions, 84 review
+  batches and zero duplicate/template collisions. Full/Core/Sprint authored coverage is
+  41/27/16, with 18/18/16 disjoint parallel-retry records respectively.
+- Question-bank suite: 181 passed. Learning API suite: 277 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed across 204 generated static pages. The local Turbopack build stalled without an
+  error and was stopped; hosted CI must independently pass the configured build before merge.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 119 English questions and 37 passages,
+  and passed bootstrap preview/apply/repeat idempotency. All seven `EV1.4` questions remained
+  draft.
+- Migration safety passed. No new schema migration was required because E1.4 uses the existing
+  objective-question, learning-session and content-review contracts.
+
 ## Validation completed for E1.2
 
 - English foundation and authoring validation: 40 authored lessons, 112 questions, 82 review
@@ -186,9 +216,9 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content sequence continues with the six remaining Core-route
-gaps, beginning with **E1.4 synonym precision**, alongside the existing Sprint human review and
-publication evidence. Human
+The next independently executable content sequence continues with the five remaining Core-route
+gaps, beginning with **E1.5 collocation and register**, alongside the existing Sprint human
+review and publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.
 

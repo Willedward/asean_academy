@@ -537,10 +537,10 @@ while the review and release evidence below continues independently.
 process-compression instruction with deterministic practice. Compression uses fresh prompts,
 fades one layer of support at a time and protects completion and checking; a fast or repeated
 response is not treated as independent transfer. The next independently executable content
-sequence now includes draft-only **E1.2 word class and word family**, with a fresh parallel
-retry and deterministic sentence-slot marking. The next increment is **E1.4 synonym
-precision**, the first of six remaining Core gaps; none of these increments can bypass human
-review or publication controls.
+sequence now includes draft-only **E1.2 word class and word family** and **E1.4 synonym
+precision**, each with a fresh parallel retry and deterministic marking. The next increment is
+**E1.5 collocation and register**, the first of five remaining Core gaps; none of these
+increments can bypass human review or publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing
 optional Full-route lessons:

@@ -39,6 +39,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     assert {(item.kind, item.stable_key) for item in english_items} >= {
         ("english_lesson", "e1-lesson-01"),
         ("english_lesson", "e1-lesson-02"),
+        ("english_lesson", "e1-lesson-04"),
         ("english_lesson", "e3-lesson-01"),
         ("english_lesson", "e4-lesson-01"),
         ("english_lesson", "e4-lesson-02"),
@@ -106,6 +107,13 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "ev-l2-005"),
         ("english_question", "ev-l2-006"),
         ("english_question", "ev-l2-007"),
+        ("english_question", "ev-l4-001"),
+        ("english_question", "ev-l4-002"),
+        ("english_question", "ev-l4-003"),
+        ("english_question", "ev-l4-004"),
+        ("english_question", "ev-l4-005"),
+        ("english_question", "ev-l4-006"),
+        ("english_question", "ev-l4-007"),
         ("english_question", "ex-l1-001"),
         ("english_question", "ex-l2-001"),
         ("english_question", "ex-l3-001"),
@@ -139,6 +147,16 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     )
     assert word_family_retry.batch_id == "english-ev-b010"
     assert word_family_retry.unit_key == "english-e1"
+    synonym_precision = next(
+        item for item in english_items if item.stable_key == "ev-l4-001"
+    )
+    assert synonym_precision.batch_id == "english-ev-b011"
+    assert synonym_precision.unit_key == "english-e1"
+    synonym_retry = next(
+        item for item in english_items if item.stable_key == "ev-l4-007"
+    )
+    assert synonym_retry.batch_id == "english-ev-b012"
+    assert synonym_retry.unit_key == "english-e1"
     banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
     assert banked.batch_id == "english-eb-b001"
     assert banked.unit_key == "english-e3"
