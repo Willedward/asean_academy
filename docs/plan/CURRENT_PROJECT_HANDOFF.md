@@ -16,8 +16,7 @@ review and publication gates pass.
 
 - Integration branch: `feature/bulk-question-authoring-pipeline`.
 - ENG-T3.9 is merged there at integration commit `fd1448d` from PR #229.
-- ENG-T3.10 is implemented on `feature/english-essay-live-release-gate` in the isolated
-  worktree `/private/tmp/nextscholar-english-release-gate`.
+- ENG-T3.10 is merged there at implementation commit `33b1d412` from PR #230.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -55,6 +54,10 @@ review and publication gates pass.
   3 passed. They cover immutability, RLS grants, exact evidence coupling, consent expiry and
   account-deletion preview.
 - Migration safety check: passed.
+- PR #230 and the post-merge integration CI run passed every web, API, PostgreSQL and browser
+  gate. Render API readiness and the web API proxy reported exact implementation SHA
+  `33b1d412eaf2966cc6d2f953b2ebfa2eb2380296`, required schema `202611020047`, and current
+  database schema/content; the hosted web login returned HTTP 200.
 
 ## Immediate next milestone
 
