@@ -36,9 +36,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 37
+    assert len(report.lessons) == 38
     assert len(report.passages) == 37
-    assert len(report.questions) == 103
+    assert len(report.questions) == 104
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -104,12 +104,12 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 37,
+        "full": 38,
         "core": 25,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 37,
+        "full": 38,
         "core": 25,
         "sprint": 16,
     }
@@ -1101,6 +1101,37 @@ def test_e9_narrative_builds_an_earned_bounded_change(english_root):
     assert check_english_answer(question.parts[5].response, "A")["correct"]
 
 
+def test_e9_opinion_builds_a_qualified_evidence_bounded_position(english_root):
+    question = EnglishObjectiveQuestion.model_validate_json(
+        (english_root / "questions/ex-l3-004.json").read_text()
+    )
+
+    assert question.question_type == "composition_planning"
+    assert question.outcome_code == "EW9.3"
+    assert question.difficulty == 4
+    assert question.feedback_timing == "after_group"
+    assert len(question.parts) == 6
+    assert [part.response.type for part in question.parts] == [
+        "single_choice",
+        "multiple_response",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+        "single_choice",
+    ]
+    assert check_english_answer(question.parts[0].response, "B")["correct"]
+    assert check_english_answer(question.parts[1].response, ["C", "A", "B"])[
+        "correct"
+    ]
+    assert not check_english_answer(question.parts[1].response, ["A", "B", "D"])[
+        "correct"
+    ]
+    assert check_english_answer(question.parts[2].response, "C")["correct"]
+    assert check_english_answer(question.parts[3].response, "B")["correct"]
+    assert check_english_answer(question.parts[4].response, "C")["correct"]
+    assert check_english_answer(question.parts[5].response, "B")["correct"]
+
+
 def test_every_english_source_matches_its_generated_schema(repository_root, english_root):
     schema_root = repository_root / "backend_resources/english/schema"
     cases = [
@@ -1801,8 +1832,9 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b033",
         "english-ex-b034",
         "english-ex-b035",
+        "english-ex-b036",
     ]
-    assert len(report.questions) == 103
+    assert len(report.questions) == 104
     assert not report.duplicates
 
 
@@ -2408,6 +2440,23 @@ def test_narrative_writing_reviewer_export_contains_complete_change_route(
     assert "<strong>Answer:</strong> A, B, C" in page
     assert "preparation and agency" in page
     assert "human, specific and imperfect" in page
+
+
+def test_opinion_writing_reviewer_export_contains_qualified_reasoning_route(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ex-b036.json"
+    output = tmp_path / "opinion-writing-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 1
+    assert "Do not treat the fictional record as real-world research" in page
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "<strong>Answer:</strong> A, B, C" in page
+    assert "unsupported universal result" in page
+    assert "rather than an exaggerated or trivial alternative" in page
 
 
 def test_reference_chain_reviewer_export_includes_passage_and_full_referents(

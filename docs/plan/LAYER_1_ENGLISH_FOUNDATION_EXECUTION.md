@@ -104,6 +104,7 @@ sections.
 | E5.2 pilot | Original informational passage and grouped pronoun, demonstrative, descriptive-phrase and cross-paragraph reference-chain questions | Implemented as draft; English and editorial review pending |
 | E6.1 pilot | Prompt decoding through topic, command, audience, scope and personal-application analysis, with composition-specific error reflection | Implemented as draft; English and editorial review pending |
 | E9.2 | Narrative writing through setting, causal conflict, purposeful detail, earned turning point and bounded resolution | Implemented as draft for the Full route; English and editorial review pending |
+| E9.3 | Opinion and discursive writing through qualified position, developed reasons, fair counterargument and concession-response | Implemented as draft for the Full route; English and editorial review pending |
 | E4.1 pilot | Original eight-gap function-word open cloze, inline entry, delayed feedback and reviewed alternatives | Implemented and hosted as draft; English and editorial review pending |
 | E4.2 pilot | Original form-and-agreement open cloze covering tense, number, agreement, comparison, derivation and reflexive reference | Implemented and hosted as draft; English and editorial review pending |
 | E4.3 pilot | Original lexical open cloze covering common collocations and fixed expressions with explicitly reviewed equivalents | Implemented and hosted as draft; English and editorial review pending |
@@ -475,10 +476,10 @@ was fabricated, no provider was called and the hosted switch remains off.
 
 The next operational step is to have the named qualified educator execute the private T3.9
 package, then have the responsible privacy and safeguarding owners record real evidence through
-the T3.10 gate. Human English/editorial curriculum review continues in parallel. E9.2 now adds
-a draft-only narrative-writing lesson and deterministic exit ticket for the Full route; the
-next independently executable content milestone is E9.3 opinion and discursive writing,
-alongside Sprint review/release evidence.
+the T3.10 gate. Human English/editorial curriculum review continues in parallel. E9.2 and E9.3
+now add draft-only narrative and position-based writing lessons with deterministic exit tickets
+for the Full route; the next independently executable content milestone is E9.4 compress the
+process, alongside Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
@@ -489,12 +490,14 @@ a meaning-first editing order followed by a two-pattern correction-and-retest ro
 E9.1 now opens the final composition sequence with a complete experience–insight–transfer
 lesson and protected deterministic exit ticket.
 Apply migration `202610250033`, import the exact draft revisions, verify the authenticated
-E6–E9.2 learner journeys, and
+E6–E9.3 learner journeys, and
 confirm `ex-l1-001` through `ex-l5-001`, `ex-l1-002` through `ex-l5-002`, and `ex-l1-003`
-through `ex-l5-003`, plus `ex-l1-004` and `ex-l2-013`, each appear once in the administrator
-queue with answers protected from learner responses. **E9.2 narrative writing** now teaches
+through `ex-l5-003`, plus `ex-l1-004`, `ex-l2-013` and `ex-l3-004`, each appear once in the
+administrator queue with answers protected from learner responses. **E9.2 narrative writing** now teaches
 learners to shape setting, conflict, purposeful detail, an earned turning point and a bounded
 resolution without assuming that every reported test sitting offers a narrative prompt. Human
 English and editorial approval remains a separate publication gate for every lesson, passage
-and question revision. Continue with **E9.3 opinion and discursive writing** only as another
-draft, review-gated increment.
+and question revision. **E9.3 opinion and discursive writing** now adds a qualified-position,
+developed-reason and fair-counterargument route using an explicitly fictional planning record
+rather than invented research evidence. Continue with **E9.4 compress the process** only as
+another draft, review-gated increment.

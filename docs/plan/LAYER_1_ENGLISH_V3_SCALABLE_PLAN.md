@@ -73,9 +73,9 @@ mastery to Sprint lesson E8.4 and brings the foundation to 100 question records 
 passages. These decisions train revision priority inside composition and do not claim that the
 reported exam contains a separate editing section.
 The E9 checkpoint adds two reciprocal five-decision simulation-readiness groups and scopes
-mastery to Sprint lesson E9.5. The later Full-route E9.2 increment brings the foundation to
-103 question records, 37 passages and 23 forms. All 16 Sprint lessons now have authored
-lessons, exit tickets, parallel retries
+mastery to Sprint lesson E9.5. The later Full-route E9.2 and E9.3 increments bring the
+foundation to 104 question records, 37 passages and 23 forms. All 16 Sprint lessons now have
+authored lessons, exit tickets, parallel retries
 and a module checkpoint journey. This final checkpoint is not the protected full mock and does
 not score a whole composition automatically.
 Consolidated checkpoint progress now exposes locked, available, in-progress and passed states,
@@ -101,6 +101,12 @@ one six-decision, after-group exit ticket. It teaches prompt-form checking, a ca
 route, pressure-bearing setting, purposeful detail, an earned turning point and a bounded
 resolution. The source remains draft-only and excluded from the fixed Sprint scope until its
 own English, editorial and publication gates pass.
+
+The Full-route E9.3 increment adds an original seven-section opinion-and-discursive-writing
+lesson and one six-decision, after-group exit ticket. Its fictional policy record supports
+bounded reasoning practice but is explicitly not real-world research. The source teaches a
+qualified position, developed reasons, fair counterargument and concession-response while
+rejecting invented statistics, universal outcomes, straw-man objections and false balance.
 
 ## 1. V3 decision
 
@@ -527,9 +533,9 @@ append-only administrator privacy and release gate under schema `202611020047`. 
 activate without real qualified-human evidence, environment enablement and learner consent,
 while the review and release evidence below continues independently.
 
-**E9.2** now supplies the next Full-route content increment as draft-only narrative-writing
-instruction and deterministic practice. The next independently executable content increment is
-**E9.3 opinion and discursive writing**; neither increment can bypass human review or
+**E9.2** and **E9.3** now supply draft-only Full-route narrative and position-based writing
+instruction with deterministic practice. The next independently executable content increment
+is **E9.4 compress the process**; none of these increments can bypass human review or
 publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing

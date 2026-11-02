@@ -170,3 +170,7 @@ record real evidence, so the hosted provider remains disabled.
 The E9.2 narrative-writing lesson is a separate Full-route, draft-only content increment. It
 does not change the 16 Sprint lessons, 20 checkpoint forms or 121-record Sprint review scope;
 its lesson and exit ticket require their own English, editorial and publication evidence.
+
+The E9.3 opinion-and-discursive-writing lesson follows the same Full-route boundary. Its
+fictional policy record, lesson and exit ticket remain outside the Sprint scope and require
+their own English, editorial and publication evidence.
