@@ -2223,6 +2223,84 @@ def test_full_e1_2_word_family_journey_is_learner_safe_and_uses_fresh_retry():
     assert corrected.json()["lesson_state"] == "proficient"
 
 
+def test_full_e1_4_synonym_precision_journey_is_learner_safe_and_uses_fresh_retry():
+    app = application()
+    lesson = request(app, "GET", "/api/v1/english/lessons/e1-lesson-04")
+
+    assert lesson.status_code == 200, lesson.text
+    assert lesson.json()["lesson_code"] == "E1.4"
+    assert lesson.json()["outcome_code"] == "EV1.4"
+    assert len(lesson.json()["sections"]) == 7
+    assert lesson.json()["practice"]["question_count"] == 6
+
+    created = create_session(
+        app,
+        "e1-4-guided",
+        lesson_key="e1-lesson-04",
+    )
+    assert created.status_code == 201, created.text
+    assert created.json()["question_count"] == 6
+    session_id = created.json()["session_id"]
+
+    for number, answer in enumerate(["B", "C", "A", "B", "D"], 1):
+        current = request(
+            app,
+            "GET",
+            f"/api/v1/english/practice-sessions/{session_id}/next",
+        )
+        assert current.status_code == 200, current.text
+        question = current.json()["question"]
+        encoded = json.dumps(question)
+        assert "correct_key" not in encoded
+        assert "choice_rationales" not in encoded
+        assert "correct_explanation" not in encoded
+        answered = submit(app, session_id, question, answer, f"e1-4-correct-{number}")
+        assert answered.status_code == 200, answered.text
+        assert answered.json()["correct"] is True
+
+    exit_ticket = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{session_id}/next",
+    ).json()["question"]
+    assert exit_ticket["stable_key"] == "ev-l4-006"
+    wrong = submit(app, session_id, exit_ticket, "A", "e1-4-wrong-exit")
+    assert wrong.status_code == 200, wrong.text
+    assert wrong.json()["correct"] is False
+    assert wrong.json()["retry_queued"] is True
+    assert wrong.json()["lesson_state"] == "practice_completed"
+
+    classified = request(
+        app,
+        "POST",
+        f"/api/v1/english/attempts/{wrong.json()['attempt_id']}/error-classification",
+        json={"category": "option_trap"},
+    )
+    assert classified.status_code == 200, classified.text
+
+    retry = create_session(
+        app,
+        "e1-4-retry",
+        mode="retry_review",
+        lesson_key="e1-lesson-04",
+    )
+    assert retry.status_code == 201, retry.text
+    assert retry.json()["question_count"] == 1
+    retry_id = retry.json()["session_id"]
+    retry_question = request(
+        app,
+        "GET",
+        f"/api/v1/english/practice-sessions/{retry_id}/next",
+    ).json()["question"]
+    assert retry_question["stable_key"] == "ev-l4-007"
+    assert retry_question["stable_key"] != exit_ticket["stable_key"]
+
+    corrected = submit(app, retry_id, retry_question, "C", "e1-4-corrected-exit")
+    assert corrected.status_code == 200, corrected.text
+    assert corrected.json()["correct"] is True
+    assert corrected.json()["lesson_state"] == "proficient"
+
+
 def test_hint_use_is_recorded_and_prevents_exit_ticket_proficiency():
     app = application()
     created = create_session(app, "e1-hint-guided")
