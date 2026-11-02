@@ -72,7 +72,7 @@ must update both the source catalogue and its evidence.
 
 | Route | Selected | Authored | Still requiring lessons |
 | --- | ---: | ---: | --- |
-| Full | 51 | 36 | 15 |
+| Full | 51 | 39 | 12 |
 | Core | 32 | 25 | 7 |
 | Sprint | 16 | 16 | 0 |
 
@@ -174,3 +174,10 @@ its lesson and exit ticket require their own English, editorial and publication 
 The E9.3 opinion-and-discursive-writing lesson follows the same Full-route boundary. Its
 fictional policy record, lesson and exit ticket remain outside the Sprint scope and require
 their own English, editorial and publication evidence.
+
+The E9.4 process-compression lesson completes the authored E9 sequence as a separate
+Full-route, draft-only increment. It moves from supported 45-minute evidence through a
+reduced-support 35-minute run to a fresh 30-minute independent rehearsal without treating speed
+alone or repeated prompts as transfer. Its lesson and exit ticket remain outside the fixed
+Sprint scope and require their own English, editorial and publication evidence. The next
+content-expansion sequence is the seven remaining Core gaps, beginning with E1.2.

@@ -533,10 +533,12 @@ append-only administrator privacy and release gate under schema `202611020047`. 
 activate without real qualified-human evidence, environment enablement and learner consent,
 while the review and release evidence below continues independently.
 
-**E9.2** and **E9.3** now supply draft-only Full-route narrative and position-based writing
-instruction with deterministic practice. The next independently executable content increment
-is **E9.4 compress the process**; none of these increments can bypass human review or
-publication controls.
+**E9.2–E9.4** now supply draft-only Full-route narrative, position-based and staged
+process-compression instruction with deterministic practice. Compression uses fresh prompts,
+fades one layer of support at a time and protects completion and checking; a fast or repeated
+response is not treated as independent transfer. The next independently executable content
+sequence is the seven remaining Core gaps, beginning with **E1.2 word class and word family**;
+none of these increments can bypass human review or publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing
 optional Full-route lessons:
