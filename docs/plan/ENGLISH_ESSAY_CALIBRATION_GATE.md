@@ -2,15 +2,16 @@
 
 **Milestone:** ENG-T3.9
 **Policy:** `english-essay-calibration-policy-v1`
-**Required schema revision:** `202611010046`
+**Required schema revision:** `202611010046` (calibration); `202611020047` adds ENG-T3.10 release evidence
 
 ## Decision
 
 The provider candidate remains disabled. Calibration is an offline comparison of previously
 captured candidate outputs against 12–16 essays scored once by a qualified English educator.
 It does not create a learner provider route, spend model tokens, publish private essays or
-release live feedback. ENG-T3.10 must separately complete administrator evidence, privacy
-checks and an explicit live-provider release decision.
+release live feedback. ENG-T3.10 now provides the separate administrator evidence, privacy
+checks and explicit live-provider release mechanism described in
+`docs/plan/ENGLISH_ESSAY_LIVE_RELEASE_GATE.md`; real qualified-human evidence remains pending.
 
 The set is deliberately small and varied. Every anchor pins its exact prompt and rubric
 revision. It must include ordinary weak-to-strong responses

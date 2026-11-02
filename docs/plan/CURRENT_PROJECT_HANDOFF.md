@@ -15,14 +15,14 @@ review and publication gates pass.
 ## Git and working state
 
 - Integration branch: `feature/bulk-question-authoring-pipeline`.
-- ENG-T3.8 is merged there at integration commit `02f7173` from PR #228.
-- ENG-T3.9 is implemented on `feature/english-essay-calibration-gate` in the isolated
-  worktree `/private/tmp/nextscholar-english-calibration`.
+- ENG-T3.9 is merged there at integration commit `fd1448d` from PR #229.
+- ENG-T3.10 is implemented on `feature/english-essay-live-release-gate` in the isolated
+  worktree `/private/tmp/nextscholar-english-release-gate`.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
 
-- ENG-T3.1–T3.9: implemented as draft.
+- ENG-T3.1–T3.10: implemented as draft/fail-closed infrastructure.
 - ENG-T3.8 adds schema revision `202611010045`, owned submission history, feedback pinned to
   the exact immutable submission and rubric, exact evidence quotes, and one immutable learner
   usefulness response.
@@ -31,31 +31,41 @@ review and publication gates pass.
   explicit quality/safety/cost/latency thresholds and immutable privacy-safe aggregate gate
   reports. Raw essays and provider responses stay outside Git and the gate table.
 - A passing calibration report is evidence only: it always records
-  `live_provider_released=false`. No real educator/provider report has been fabricated or
-  recorded; that private execution and the explicit release decision remain gated.
+  `live_provider_released=false`.
+- ENG-T3.10 adds schema revision `202611020047`, an academic-admin evidence page, immutable
+  privacy/safeguarding reviews, explicit release/suspension events and append-only guardian
+  consent evidence using only an opaque SHA-256 reference.
+- Provider availability requires current exact calibration, current privacy review, explicit
+  release, environment enablement and unexpired learner consent. New evidence invalidates an
+  older release. Missing or failed evidence keeps the provider off.
+- No real educator/provider report, privacy approval, release or consent was fabricated or
+  recorded. No provider call or paid token was used. Render remains explicitly disabled.
 - The learner contract intentionally excludes provider/model names, token use and cost data.
 - Preparation estimates are formative guidance, never official scores or selection outcomes.
 - Live provider invocation and paid calls remain disabled; Render now states this explicitly.
 
-## Validation completed for ENG-T3.9
+## Validation completed for ENG-T3.10
 
-- Learning API suite: 267 passed; 21 opt-in PostgreSQL tests skipped in the non-DB run.
-- Web test suite: 148 passed; web lint, TypeScript and webpack production build passed.
-- Full PostgreSQL migration chain and validated content import through `202611010046`: passed
-  on a disposable database.
-- The existing full English essay PostgreSQL regression and the new calibration privacy,
-  idempotency and immutability test passed.
+- Learning API suite: 272 passed; 22 opt-in PostgreSQL tests skipped in the non-DB run.
+- Web test suite: 150 passed; web lint, TypeScript and webpack production build passed.
+- Full PostgreSQL migration chain and validated content import through `202611020047`: passed
+  on a fresh disposable database (revision 21, 1,040 mathematics questions, 102 English
+  questions, 37 passages).
+- Existing essay-submission regression plus calibration and release-gate PostgreSQL tests:
+  3 passed. They cover immutability, RLS grants, exact evidence coupling, consent expiry and
+  account-deletion preview.
 - Migration safety check: passed.
 
 ## Immediate next milestone
 
-**ENG-T3.10 — administrator evidence, privacy checks and explicit live-provider release
-gate.** Use a qualified English educator to execute the private ENG-T3.9 package against
-already-captured candidate outputs, store only its privacy-safe report, expose evidence to
-authorised administrators, complete consent/retention/provider/privacy checks and require a
-separate explicit release decision. Any missing or failed evidence must keep the provider off.
-Human English/editorial review of curriculum content continues in parallel and is not replaced
-by essay-feedback calibration.
+The next operational step requires people, not more provider code: a qualified English educator
+must execute the private ENG-T3.9 package against already-captured outputs, and the responsible
+privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
+paid provider until those gates pass.
+
+The next independently executable content milestone is **E9.2 narrative writing**, alongside
+the existing Sprint human review and publication evidence. Human English/editorial curriculum
+review is separate from essay-feedback calibration and is never replaced by it.
 
 ## Authoritative references
 
@@ -63,5 +73,6 @@ by essay-feedback calibration.
 - `docs/plan/LAYER_1_ENGLISH_V3_SCALABLE_PLAN.md`
 - `docs/plan/LAYER_1_ENGLISH_V3B_ROUTE_BLUEPRINT.md`
 - `docs/plan/ENGLISH_ESSAY_CALIBRATION_GATE.md`
+- `docs/plan/ENGLISH_ESSAY_LIVE_RELEASE_GATE.md`
 - `docs/plan/CONTENT_REVIEW_PUBLICATION.md`
 - `apps/web/src/beta-kit/HANDOFF.md`

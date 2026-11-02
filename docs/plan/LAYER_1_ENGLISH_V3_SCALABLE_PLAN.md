@@ -90,8 +90,10 @@ section 9.2. A source-controlled policy and offline evaluator require 12–16 pr
 anchors, the five named edge-case categories and two captured candidate runs per anchor. The
 privacy-safe aggregate report is checksum-bound and immutable under schema revision
 `202611010046`; it contains neither essay text nor provider response text and cannot release a
-live provider. Qualified educator execution and the separate ENG-T3.10 administrator/privacy
-release decision remain pending.
+live provider. ENG-T3.10 now adds the separate schema `202611020047` administrator/privacy
+release gate: current exact calibration, privacy/safeguarding review, explicit release,
+environment enablement and unexpired learner consent must all pass. Qualified educator and
+privacy-owner execution remain pending; no real approval has been fabricated.
 
 ## 1. V3 decision
 
@@ -513,9 +515,10 @@ It deliberately omits provider/model, token and cost metadata from learner contr
 **ENG-T3.9** adds a 12–16-anchor offline evaluator, fixed quality/safety/cost/latency
 thresholds, private-evidence fingerprints and immutable privacy-safe gate reports. Two runs per
 anchor bound the stability check, while the educator scores each anchor once. No provider
-client, learner invocation or live release is added. The next technical increment is
-**ENG-T3.10 — administrator evidence, privacy checks and the explicit live-provider release
-gate**, while the review and release evidence below continues independently.
+client, learner invocation or live release is added. **ENG-T3.10** adds the independent,
+append-only administrator privacy and release gate under schema `202611020047`. It still cannot
+activate without real qualified-human evidence, environment enablement and learner consent,
+while the review and release evidence below continues independently.
 
 Complete the remaining **V3-B Sprint review and release evidence** before expanding
 optional Full-route lessons:

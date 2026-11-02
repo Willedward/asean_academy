@@ -60,6 +60,29 @@ def test_postgres_disables_the_implicit_development_learner(monkeypatch):
     assert settings.development_learner_id is None
 
 
+def test_live_essay_feedback_requires_postgres_and_explicit_provider_identity(
+    monkeypatch,
+):
+    monkeypatch.setenv("ASEAN_ACADEMY_ENV", "test")
+    monkeypatch.setenv("ASEAN_ACADEMY_ENGLISH_ESSAY_FEEDBACK_ENABLED", "true")
+    monkeypatch.delenv("ASEAN_ACADEMY_DATABASE_URL", raising=False)
+    monkeypatch.delenv("DATABASE_URL", raising=False)
+
+    with pytest.raises(RuntimeError, match="explicit provider/model identity"):
+        Settings.from_environment()
+
+    monkeypatch.setenv("ASEAN_ACADEMY_DATABASE_URL", "postgresql://example.test/db")
+    with pytest.raises(RuntimeError, match="explicit provider/model identity"):
+        Settings.from_environment()
+
+    monkeypatch.setenv(
+        "ASEAN_ACADEMY_ENGLISH_ESSAY_PROVIDER_NAME", "candidate-provider"
+    )
+    monkeypatch.setenv("ASEAN_ACADEMY_ENGLISH_ESSAY_MODEL_NAME", "candidate-model")
+    settings = Settings.from_environment()
+    assert settings.english_essay_feedback_enabled is True
+
+
 def test_empty_development_learner_is_treated_as_disabled(monkeypatch):
     monkeypatch.setenv("ASEAN_ACADEMY_ENV", "development")
     monkeypatch.setenv("ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID", "")

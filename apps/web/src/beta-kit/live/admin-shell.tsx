@@ -68,6 +68,12 @@ const links: AdminLink[] = [
     academicOnly: true,
   },
   {
+    href: "/admin/essay-feedback",
+    label: "Essay feedback gate",
+    icon: ShieldCheck,
+    academicOnly: true,
+  },
+  {
     href: "/admin/operations",
     label: "System status",
     icon: Activity,

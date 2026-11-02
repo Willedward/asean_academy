@@ -118,7 +118,7 @@ sections.
 | ENG-T3.7 | Evidence-linked structured feedback with provider validation | Implemented as a disabled provider-neutral candidate path; calibration and live provider release pending |
 | ENG-T3.8 | Essay version history, feedback report and usefulness rating | Implemented as draft; exact-submission report and immutable usefulness response |
 | ENG-T3.9 | Human-anchor calibration and provider quality/safety gate | Implemented as offline, privacy-safe infrastructure; qualified educator execution pending; live provider remains disabled |
-| ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Not started |
+| ENG-T3.10 | Administrator evidence, privacy checks and live-provider release gate | Implemented as fail-closed infrastructure; qualified educator/privacy evidence and live activation pending |
 | E5 | Remaining lessons, banks, diagnostic forms, prompts, rubrics and essay anchors | Not started |
 | E6 | Hosted import, accessibility, mobile, security, live essay evaluation and strict release gate | Not started |
 
@@ -465,11 +465,18 @@ greater than 20 seconds. Raw essays and outputs stay outside Git; only immutable
 aggregate metrics can be stored. Even a passing record states that the live provider is not
 released, and Render explicitly keeps live essay feedback disabled.
 
-The next independently executable engineering milestone is **ENG-T3.10 — administrator
-evidence, privacy checks and explicit live-provider release gate**. It must execute the private
-calibration with a named qualified educator, expose only authorised evidence, verify consent,
-retention, deletion and provider handling, and require an explicit separate release action.
-Missing or failed evidence must continue to fail closed.
+**ENG-T3.10** now adds migration `202611020047`, an academic-administrator evidence surface,
+immutable privacy/safeguarding reviews, explicit release and suspension events, and append-only
+guardian-consent evidence containing only an opaque SHA-256 reference. Availability requires
+the latest exact calibration and privacy review, an exact release decision, the deployment
+switch and unexpired learner consent. New evidence invalidates old approval. No private evidence
+was fabricated, no provider was called and the hosted switch remains off.
+
+The next operational step is to have the named qualified educator execute the private T3.9
+package, then have the responsible privacy and safeguarding owners record real evidence through
+the T3.10 gate. Human English/editorial curriculum review continues in parallel; the next
+independently executable content milestone remains the E9.2 narrative-writing increment and
+Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning

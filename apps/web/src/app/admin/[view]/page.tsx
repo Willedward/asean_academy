@@ -10,6 +10,7 @@ import {
 import { requireAdministrator } from "@/lib/auth/admin";
 import { ContentReviewPanel } from "@/components/content-review-panel";
 import { TutorEvaluationPanel } from "@/components/tutor-evaluation-panel";
+import { EnglishEssayReleasePanel } from "@/components/english-essay-release-panel";
 
 export default async function AdminView({
   params,
@@ -20,7 +21,7 @@ export default async function AdminView({
   const administrator = await requireAdministrator();
   if (!administrator) return null;
   if (
-    ["users", "operations"].includes(view) &&
+    ["users", "operations", "essay-feedback"].includes(view) &&
     administrator.profile.role !== "academic_admin"
   )
     redirect("/admin");
@@ -77,6 +78,12 @@ export default async function AdminView({
       description:
         "Check the deployed release, database schema and imported content required to serve the beta.",
       content: <OperationsPanel />,
+    },
+    "essay-feedback": {
+      title: "English essay feedback release",
+      description:
+        "Inspect bounded calibration evidence, privacy and safeguarding checks, explicit release decisions, and opaque learner-consent records.",
+      content: <EnglishEssayReleasePanel />,
     },
     audit: {
       title: "Audit history",

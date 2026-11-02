@@ -36,6 +36,7 @@ function EstablishedAdminLayout({
     ...(academic
       ? ([
           ["/admin/users", "Users & roles"],
+          ["/admin/essay-feedback", "Essay feedback gate"],
           ["/admin/operations", "System status"],
         ] as [string, string][])
       : []),

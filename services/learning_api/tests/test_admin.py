@@ -14,6 +14,12 @@ from learning_api.config import Settings
 from learning_api.content_review import catalogue_review_items, record_bulk_reviews
 from learning_api.content_review_contracts import BulkContentReviewRequest
 from learning_api.dependencies import admin_analytics_repository, beta_operations_repository
+from learning_api.english_essay_calibration import (
+    CALIBRATION_EVALUATOR_VERSION,
+    CALIBRATION_POLICY_VERSION,
+    CalibrationGateReport,
+    CalibrationThresholds,
+)
 from learning_api.identity import AuthenticatedLearner, StaticTokenVerifier
 from learning_api.main import create_app
 from learning_api.routers import content_review as content_review_router
@@ -123,6 +129,8 @@ def application(*, allow_drafts: bool = True):
             repository_root=REPOSITORY_ROOT,
             allow_draft_content=allow_drafts,
             development_learner_id=None,
+            english_essay_provider_name="candidate-provider",
+            english_essay_model_name="candidate-model",
         ),
         token_verifier=StaticTokenVerifier(
             {
@@ -238,7 +246,121 @@ def test_only_academic_admin_can_view_deployment_status():
     assert response.status_code == 200
     assert response.json()["request_id"] == "operations-test"
     assert response.json()["database"]["resources"]["current_questions"] == 40
-    assert response.json()["release"]["required_schema_revision"] == "202611010046"
+    assert response.json()["release"]["required_schema_revision"] == "202611020047"
+
+
+def test_academic_admin_can_record_safe_release_evidence_but_environment_stays_off():
+    app, repository = application()
+    repository.role_for = lambda learner_id: (
+        "academic_admin" if learner_id == ADMIN_ID else "student"
+    )
+    initial = request(
+        app,
+        "GET",
+        "/api/v1/admin/english-essay-feedback/release-evidence",
+        "admin-token",
+    )
+    assert initial.status_code == 200
+    assert initial.json()["state"] == "blocked_no_calibration"
+
+    report = CalibrationGateReport(
+        policy_version=CALIBRATION_POLICY_VERSION,
+        evaluator_version=CALIBRATION_EVALUATOR_VERSION,
+        provider_name="candidate-provider",
+        model_name="candidate-model",
+        provider_policy_version="english-essay-feedback-policy-v1",
+        educator_reference="educator-ref-private-001",
+        anchor_set_sha256="a" * 64,
+        candidate_set_sha256="b" * 64,
+        anchor_count=12,
+        run_count=24,
+        schema_valid_rate=1.0,
+        evidence_fidelity_rate=1.0,
+        band_within_one_rate=1.0,
+        repeat_stability_passed=True,
+        instructional_usefulness_rate=1.0,
+        age_appropriate_tone_rate=1.0,
+        case_recognition_rate=1.0,
+        false_claim_count=0,
+        safety_failure_count=0,
+        maximum_run_cost_micros_sgd=400_000,
+        p95_latency_ms=8_000,
+        thresholds=CalibrationThresholds(),
+        failure_reasons=[],
+        passed=True,
+    )
+    calibration = request(
+        app,
+        "POST",
+        "/api/v1/admin/english-essay-feedback/calibration-reports",
+        "admin-token",
+        json=report.model_dump(mode="json"),
+    )
+    assert calibration.status_code == 201, calibration.text
+    gate_id = calibration.json()["gate_report_id"]
+
+    privacy = request(
+        app,
+        "POST",
+        "/api/v1/admin/english-essay-feedback/privacy-reviews",
+        "admin-token",
+        json={
+            "calibration_gate_report_id": gate_id,
+            "guardian_consent_process_verified": True,
+            "consent_policy_version": "english-essay-consent-v1",
+            "retention_policy_version": "english-essay-retention-v1",
+            "retention_days": 90,
+            "deletion_workflow_verified": True,
+            "raw_essay_logging_excluded": True,
+            "provider_agreement_reference": "provider-agreement-ref-private-001",
+            "regional_privacy_review_reference": "privacy-review-ref-private-001",
+            "provider_data_region": "Singapore",
+            "provider_retention_days": 0,
+            "subprocessors_reviewed": True,
+            "automated_safety_classification_verified": True,
+            "safeguarding_contact_reference": "safeguarding-ref-private-001",
+            "review_notes": "Private review evidence is held outside the application.",
+        },
+    )
+    assert privacy.status_code == 201, privacy.text
+
+    wrong_confirmation = request(
+        app,
+        "POST",
+        "/api/v1/admin/english-essay-feedback/release-decisions",
+        "admin-token",
+        json={
+            "calibration_gate_report_id": gate_id,
+            "privacy_review_id": privacy.json()["privacy_review_id"],
+            "action": "released",
+            "confirmation": "release",
+            "reason": "The bounded evidence and privacy review have passed.",
+        },
+    )
+    assert wrong_confirmation.status_code == 422
+
+    released = request(
+        app,
+        "POST",
+        "/api/v1/admin/english-essay-feedback/release-decisions",
+        "admin-token",
+        json={
+            "calibration_gate_report_id": gate_id,
+            "privacy_review_id": privacy.json()["privacy_review_id"],
+            "action": "released",
+            "confirmation": "RELEASE LIVE ENGLISH ESSAY FEEDBACK",
+            "reason": "The bounded evidence and privacy review have passed.",
+        },
+    )
+    assert released.status_code == 201, released.text
+    final = request(
+        app,
+        "GET",
+        "/api/v1/admin/english-essay-feedback/release-evidence",
+        "admin-token",
+    )
+    assert final.json()["state"] == "disabled_by_environment"
+    assert final.json()["live_provider_available"] is False
 
 
 def test_admin_invitation_contract_rejects_invalid_email():

@@ -36,6 +36,10 @@ from .english_essay_allowance import (
     PostgresEssayFeedbackAllowanceRepository,
 )
 from .english_essay_allowance_service import EnglishEssayFeedbackAllowanceService
+from .english_essay_release_repository import (
+    InMemoryEnglishEssayReleaseRepository,
+    PostgresEnglishEssayReleaseRepository,
+)
 from .english_essay_repository import (
     InMemoryEnglishEssayRepository,
     PostgresEnglishEssayRepository,
@@ -414,6 +418,24 @@ EnglishEssayServiceDependency = Annotated[
 ]
 
 
+def english_essay_release_repository(request: Request):
+    repository = getattr(request.app.state, "english_essay_release_repository", None)
+    if repository is None:
+        settings = request.app.state.settings
+        repository = (
+            PostgresEnglishEssayReleaseRepository(settings.database_url)
+            if settings.database_url
+            else InMemoryEnglishEssayReleaseRepository()
+        )
+        request.app.state.english_essay_release_repository = repository
+    return repository
+
+
+EnglishEssayReleaseRepositoryDependency = Annotated[
+    object, Depends(english_essay_release_repository)
+]
+
+
 def english_essay_feedback_allowance_repository(request: Request):
     repository = getattr(
         request.app.state, "english_essay_feedback_allowance_repository", None
@@ -436,11 +458,22 @@ def english_essay_feedback_allowance_service(
     learner: EnrolledLearnerDependency,
 ) -> EnglishEssayFeedbackAllowanceService:
     settings = request.app.state.settings
+    release_repository = english_essay_release_repository(request)
+    release = release_repository.evidence(
+        settings.english_essay_provider_name,
+        settings.english_essay_model_name,
+        settings.english_essay_provider_policy_version,
+        environment_enabled=settings.english_essay_feedback_enabled,
+    )
+    has_consent = release_repository.has_active_consent(
+        learner.learner_id,
+        settings.english_essay_consent_policy_version,
+    )
     return EnglishEssayFeedbackAllowanceService(
         english_essay_feedback_allowance_repository(request),
         learner.learner_id,
         EssayFeedbackLimits(
-            enabled=settings.english_essay_feedback_enabled,
+            enabled=release["live_provider_available"] and has_consent,
             monthly_feedback=settings.english_essay_monthly_feedback_limit,
             monthly_cost_micros_sgd=(
                 settings.english_essay_monthly_cost_limit_micros_sgd

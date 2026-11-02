@@ -68,6 +68,11 @@ const eventLabels: Record<
   account_deletion_completed: "Student account deleted",
   tutor_evaluation_run_created: "Tutor evaluation run created",
   tutor_evaluation_review_recorded: "Tutor evaluation review recorded",
+  english_essay_calibration_report_recorded: "Essay calibration report recorded",
+  english_essay_privacy_review_recorded: "Essay privacy review recorded",
+  english_essay_feedback_released: "Essay feedback released",
+  english_essay_feedback_suspended: "Essay feedback suspended",
+  english_essay_consent_recorded: "Essay processing consent recorded",
 };
 
 function formatDate(value: string): string {

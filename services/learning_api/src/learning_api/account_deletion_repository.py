@@ -100,6 +100,9 @@ class PostgresAccountDeletionRepository:
                 (select count(*) from english_essay_feedback_usage_events
                  where student_id = %(learner_id)s)::integer
                     as english_essay_feedback_usage_events,
+                (select count(*) from english_essay_processing_consent_events
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_processing_consent_events,
                 (select count(*) from beta_audit_events
                  where actor_user_id = %(learner_id)s
                     or target_user_id = %(learner_id)s)::integer
