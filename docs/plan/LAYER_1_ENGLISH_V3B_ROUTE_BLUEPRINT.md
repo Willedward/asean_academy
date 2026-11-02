@@ -72,13 +72,14 @@ must update both the source catalogue and its evidence.
 
 | Route | Selected | Authored | Still requiring lessons |
 | --- | ---: | ---: | --- |
-| Full | 51 | 39 | 12 |
-| Core | 32 | 25 | 7 |
+| Full | 51 | 40 | 11 |
+| Core | 32 | 26 | 6 |
 | Sprint | 16 | 16 | 0 |
 
 The five former Sprint gaps—E0.1, E0.2, E1.6, E2.2 and E9.5—now have complete seven-section
 lesson drafts, five-decision exit tickets and distinct five-decision retry forms. The remaining
-Core gaps are E1.2, E1.4, E1.5, E2.3, E2.6, E3.2 and E3.4.
+Core gaps are E1.4, E1.5, E2.3, E2.6, E3.2 and E3.4. E1.2 now has a complete
+seven-section lesson, six guided/independent/exit questions and one disjoint parallel retry.
 
 Authored does not mean publishable. Every released lesson still needs its reviewed exit
 ticket, distinct parallel retry form and the normal immutable academic/editorial approvals.
@@ -180,4 +181,10 @@ Full-route, draft-only increment. It moves from supported 45-minute evidence thr
 reduced-support 35-minute run to a fresh 30-minute independent rehearsal without treating speed
 alone or repeated prompts as transfer. Its lesson and exit ticket remain outside the fixed
 Sprint scope and require their own English, editorial and publication evidence. The next
-content-expansion sequence is the seven remaining Core gaps, beginning with E1.2.
+content-expansion sequence now continues with the six remaining Core gaps, beginning with E1.4.
+
+The E1.2 word-class-and-family lesson is the first completed Core-expansion increment. It
+identifies sentence slots before testing form, meaning and collocation, and its retry uses a
+fresh family rather than an exposed answer. E1.2 remains outside Sprint, so the 16 Sprint
+lessons, E1 checkpoint mastery scope and 121-record Sprint review packet are unchanged. Its
+lesson and seven questions require their own English, editorial and publication evidence.

@@ -38,6 +38,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
 
     assert {(item.kind, item.stable_key) for item in english_items} >= {
         ("english_lesson", "e1-lesson-01"),
+        ("english_lesson", "e1-lesson-02"),
         ("english_lesson", "e3-lesson-01"),
         ("english_lesson", "e4-lesson-01"),
         ("english_lesson", "e4-lesson-02"),
@@ -98,6 +99,13 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "er-l5-002"),
         ("english_question", "er-l5-003"),
         ("english_question", "ev-l1-001"),
+        ("english_question", "ev-l2-001"),
+        ("english_question", "ev-l2-002"),
+        ("english_question", "ev-l2-003"),
+        ("english_question", "ev-l2-004"),
+        ("english_question", "ev-l2-005"),
+        ("english_question", "ev-l2-006"),
+        ("english_question", "ev-l2-007"),
         ("english_question", "ex-l1-001"),
         ("english_question", "ex-l2-001"),
         ("english_question", "ex-l3-001"),
@@ -121,6 +129,16 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
     assert question.batch_id == "english-ev-b001"
     assert question.unit_key == "english-e1"
+    word_family = next(
+        item for item in english_items if item.stable_key == "ev-l2-001"
+    )
+    assert word_family.batch_id == "english-ev-b009"
+    assert word_family.unit_key == "english-e1"
+    word_family_retry = next(
+        item for item in english_items if item.stable_key == "ev-l2-007"
+    )
+    assert word_family_retry.batch_id == "english-ev-b010"
+    assert word_family_retry.unit_key == "english-e1"
     banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
     assert banked.batch_id == "english-eb-b001"
     assert banked.unit_key == "english-e3"

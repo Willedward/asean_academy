@@ -36,9 +36,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 39
+    assert len(report.lessons) == 40
     assert len(report.passages) == 37
-    assert len(report.questions) == 105
+    assert len(report.questions) == 112
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -104,18 +104,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 39,
-        "core": 25,
+        "full": 40,
+        "core": 26,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 39,
-        "core": 25,
+        "full": 40,
+        "core": 26,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 16,
-        "core": 16,
+        "full": 17,
+        "core": 17,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -199,6 +199,39 @@ def test_e1_checkpoint_forms_have_reciprocal_disjoint_mastery_scope(english_root
         assert {question.exposure_pool for question in selected} == {
             "module_checkpoint"
         }
+
+
+def test_e1_2_word_family_filters_by_slot_form_and_complete_sentence(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/ev-l2-00{number}.json").read_text()
+        )
+        for number in range(1, 8)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EV1.2"}
+    assert {question.question_type for question in questions} == {
+        "vocabulary_in_context"
+    }
+    assert [question.exposure_pool for question in questions] == [
+        "guided_practice",
+        "guided_practice",
+        "independent_practice",
+        "independent_practice",
+        "independent_practice",
+        "exit_ticket",
+        "retry_review",
+    ]
+    assert [len(question.parts) for question in questions] == [1] * 7
+    for question, answer in zip(
+        questions,
+        ["B", "B", "B", "C", "C", "B", "C"],
+        strict=True,
+    ):
+        assert check_english_answer(question.parts[0].response, answer)["correct"]
+    assert not check_english_answer(questions[5].parts[0].response, "C")["correct"]
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert questions[6].parts[0].prompt != questions[5].parts[0].prompt
 
 
 def test_e0_checkpoint_forms_sample_both_orientation_outcomes(english_root):
@@ -1828,6 +1861,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b006",
         "english-ev-b007",
         "english-ev-b008",
+        "english-ev-b009",
+        "english-ev-b010",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -1866,7 +1901,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b036",
         "english-ex-b037",
     ]
-    assert len(report.questions) == 105
+    assert len(report.questions) == 112
     assert not report.duplicates
 
 
@@ -1921,6 +1956,22 @@ def test_english_reviewer_export_and_claims_are_reviewable(english_root, tmp_pat
         )
     released = release_english_batch(claims, batch_id="english-ev-b001", owner="william")
     assert released["status"] == "released"
+
+
+def test_word_family_reviewer_export_contains_complete_form_evidence(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ev-b009.json"
+    output = tmp_path / "word-family-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 6
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "must ___ its measurements" in page
+    assert "The modal frame ‘must verify’ requires the base form" in page
+    assert "provisional means temporary or awaiting confirmation" in page
 
 
 def test_sprint_route_reviewer_export_pins_complete_review_evidence(
