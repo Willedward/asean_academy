@@ -17,6 +17,7 @@ review and publication gates pass.
 - Integration branch: `feature/bulk-question-authoring-pipeline`.
 - ENG-T3.9 is merged there at integration commit `fd1448d` from PR #229.
 - ENG-T3.10 is merged there at implementation commit `33b1d412` from PR #230.
+- E9.2-E9.4 are merged through integration commit `1c3c49f` from PR #234.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -84,6 +85,37 @@ review and publication gates pass.
 - E9.4 is Full-route only and does not change the fixed 121-record Sprint review scope or any
   protected form.
 
+## E1.2 word-class-and-family milestone
+
+- E1.2 is implemented as draft-only Core-route content with one seven-section lesson, six
+  deterministic guided/independent/exit-ticket questions and one disjoint parallel retry.
+- The lesson teaches learners to identify a noun, verb, adjective or adverb slot before choosing
+  among related forms, then confirm meaning and collocation in the complete sentence.
+- Suffixes and sentence frames are treated as evidence rather than universal rules. The retry
+  uses a fresh word family so an exposed answer is not mistaken for transfer.
+- The new source records are `e1-lesson-02`, `ev-l2-001` through `ev-l2-007`, and review
+  batches `english-ev-b009` and `english-ev-b010`. English and editorial decisions remain
+  pending; nothing is published.
+- E1.2 is Core-route but not Sprint-route content. It does not change the fixed 121-record
+  Sprint review scope, existing E1 Sprint checkpoint mastery scope or any protected form.
+
+## Validation completed for E1.2
+
+- English foundation and authoring validation: 40 authored lessons, 112 questions, 82 review
+  batches and zero duplicate/template collisions. Full/Core/Sprint authored coverage is
+  40/26/16, with 17/17/16 disjoint parallel-retry records respectively.
+- Question-bank suite: 179 passed. Learning API suite: 276 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed across 204 generated static pages. The local Turbopack build stalled without an
+  error and was stopped; hosted CI must independently pass the configured build before merge.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 112 English questions and 37 passages,
+  and passed bootstrap preview/apply/repeat idempotency. All seven `EV1.2` questions remained
+  draft.
+- Migration safety passed. No new schema migration was required because E1.2 uses the existing
+  objective-question, learning-session and content-review contracts.
+
 ## Validation completed for ENG-T3.10
 
 - Learning API suite: 272 passed; 22 opt-in PostgreSQL tests skipped in the non-DB run.
@@ -149,9 +181,9 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content sequence is the seven remaining Core-route gaps,
-beginning with **E1.2 word class and word family**, alongside the existing Sprint human review
-and publication evidence. Human
+The next independently executable content sequence continues with the six remaining Core-route
+gaps, beginning with **E1.4 synonym precision**, alongside the existing Sprint human review and
+publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.
 

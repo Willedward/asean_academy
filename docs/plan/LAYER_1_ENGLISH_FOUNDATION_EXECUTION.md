@@ -96,6 +96,7 @@ sections.
 | E1c | Generated JSON Schemas and cross-file validator | Implemented |
 | E1d | Database migration for English outcomes, passage revisions and objective question revisions | Implemented; not applied to hosted Supabase |
 | E1 pilot | Original E1.1 lesson and six vocabulary-in-context items | Authored as draft; human review pending |
+| E1.2 | Word-class and word-family decisions through sentence-slot, form, meaning and collocation checks with a fresh parallel retry | Implemented as draft for the Core route; English and editorial review pending |
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
@@ -479,8 +480,10 @@ The next operational step is to have the named qualified educator execute the pr
 package, then have the responsible privacy and safeguarding owners record real evidence through
 the T3.10 gate. Human English/editorial curriculum review continues in parallel. E9.2–E9.4
 now add draft-only narrative, position-based and process-compression lessons with deterministic
-exit tickets for the Full route. The next independently executable content sequence is the
-seven remaining Core-route gaps, beginning with E1.2, alongside Sprint review/release evidence.
+exit tickets for the Full route. E1.2 now begins Core expansion with a draft word-family lesson,
+six deterministic practice/exit questions and one disjoint retry. The next independently
+executable content sequence continues with the six remaining Core-route gaps, beginning with
+E1.4, alongside Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
@@ -502,5 +505,6 @@ and question revision. **E9.3 opinion and discursive writing** now adds a qualif
 developed-reason and fair-counterargument route using an explicitly fictional planning record
 rather than invented research evidence. **E9.4 compress the process** now fades supports across
 fresh 45-, 35- and 30-minute rehearsals without treating speed, word count or prompt repetition
-as readiness. Continue with **E1.2 word class and word family** as the first remaining Core gap;
-it must remain another draft, review-gated increment.
+as readiness. **E1.2 word class and word family** now uses sentence frames to filter related
+forms without presenting suffix patterns as universal rules. Continue with **E1.4 synonym
+precision** as the next Core gap; it must remain another draft, review-gated increment.
