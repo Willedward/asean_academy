@@ -166,3 +166,7 @@ is released. ENG-T3.10 release infrastructure is implemented under `202611020047
 current exact calibration, privacy/safeguarding evidence, explicit release, the environment
 switch and learner consent. A qualified educator and the responsible privacy owners must still
 record real evidence, so the hosted provider remains disabled.
+
+The E9.2 narrative-writing lesson is a separate Full-route, draft-only content increment. It
+does not change the 16 Sprint lessons, 20 checkpoint forms or 121-record Sprint review scope;
+its lesson and exit ticket require their own English, editorial and publication evidence.

@@ -43,6 +43,18 @@ review and publication gates pass.
 - Preparation estimates are formative guidance, never official scores or selection outcomes.
 - Live provider invocation and paid calls remain disabled; Render now states this explicitly.
 
+## E9.2 narrative-writing milestone
+
+- E9.2 is implemented as draft-only Full-route content with one seven-section lesson and one
+  six-decision deterministic composition-planning exit ticket.
+- The lesson teaches learners to confirm that a prompt permits a story, build a causal
+  situation–conflict–pressure–turning-point–resolution route, select purposeful detail and end
+  with a bounded consequence rather than a coincidence rescue or generic moral.
+- The new source records are `e9-lesson-02`, `ex-l2-013` and review batch
+  `english-ex-b035`. English and editorial decisions remain pending; nothing is published.
+- E9.2 is Full-route only. It does not change the fixed 121-record Sprint review scope or any
+  protected baseline, endline, checkpoint or mock form.
+
 ## Validation completed for ENG-T3.10
 
 - Learning API suite: 272 passed; 22 opt-in PostgreSQL tests skipped in the non-DB run.
@@ -59,6 +71,20 @@ review and publication gates pass.
   `33b1d412eaf2966cc6d2f953b2ebfa2eb2380296`, required schema `202611020047`, and current
   database schema/content; the hosted web login returned HTTP 200.
 
+## Validation completed for E9.2
+
+- English foundation and authoring validation: 37 authored lessons, 103 questions, 78 review
+  batches and zero duplicate/template collisions.
+- Question-bank suite: 173 passed. Learning API suite: 273 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 103 English questions and 37 passages,
+  and passed bootstrap preview/apply/repeat idempotency. E9.2 and `ex-l2-013` remained draft.
+- No new schema migration was required because E9.2 uses the existing composition-planning and
+  content-review contracts.
+
 ## Immediate next milestone
 
 The next operational step requires people, not more provider code: a qualified English educator
@@ -66,9 +92,10 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content milestone is **E9.2 narrative writing**, alongside
-the existing Sprint human review and publication evidence. Human English/editorial curriculum
-review is separate from essay-feedback calibration and is never replaced by it.
+The next independently executable content milestone is **E9.3 opinion and discursive
+writing**, alongside the existing Sprint human review and publication evidence. Human
+English/editorial curriculum review is separate from essay-feedback calibration and is never
+replaced by it.
 
 ## Authoritative references
 
