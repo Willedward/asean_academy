@@ -8,6 +8,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from .difficulty import DIFFICULTY_LEVELS
+from .sympy_checker import validate_symbolic_config
 
 SCHEMA_VERSION = "1.0.0"
 OUTCOME_PATTERN = r"^[0-9]+\.[0-9]+$"
@@ -110,6 +111,13 @@ class AlgebraicResponse(Model):
             raise ValueError("Variables must be unique")
         if len(set(self.accepted_equivalents)) != len(self.accepted_equivalents):
             raise ValueError("Accepted equivalents must be unique")
+        if self.comparison_mode == "symbolic_equivalence":
+            validate_symbolic_config(
+                self.canonical_expression,
+                self.variables,
+                self.domain_constraints,
+                self.checker_config,
+            )
         if self.comparison_mode == "prime_factorisation":
             if self.checker_config.get("require_prime_bases") is not True:
                 raise ValueError("Prime factorisation must require prime bases")

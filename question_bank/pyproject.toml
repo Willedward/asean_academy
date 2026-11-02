@@ -8,7 +8,10 @@ version = "0.1.0"
 description = "Validation, deterministic checking, preview and PostgreSQL import for authored question banks"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["pydantic>=2.11,<3"]
+dependencies = [
+    "pydantic>=2.11,<3",
+    "sympy>=1.13,<2",
+]
 
 [project.optional-dependencies]
 postgres = ["psycopg[binary]>=3.2,<4"]

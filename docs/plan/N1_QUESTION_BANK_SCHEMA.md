@@ -72,6 +72,13 @@ The initial response types are:
 
 The checker mode is separate from the input control. For example, a prime-factorisation checker verifies that every base is prime and that the product has the required value; plain numeric equivalence would incorrectly accept the original composite number. Checker-specific options live in `checker_config` and must be validated by the importer.
 
+`symbolic_equivalence` is implemented by `question_bank/src/question_bank/sympy_checker.py`. Learner input is read by a controlled parser, never by `eval` or `sympify`. The parser accepts numbers, the declared `variables` only, `+ - * / ^`, brackets, implicit multiplication (`3x`, `2(x+1)`, `(x+1)(x-1)`), superscript powers (`x²`) and Unicode operators (`−`, `×`, `÷`, `·`). Inputs are limited to 200 characters, whole-number powers up to 12, and a bounded size. Equivalence is screened with exact rational arithmetic at sample points that satisfy `domain_constraints` (for example `x != 3` or `2*y-4 != 0`), then confirmed by SymPy within a time limit. A leading `x =` is accepted when `x` is a declared variable that the canonical answer does not contain, as in "make x the subject". Optional form rules:
+
+- `{"form": "factorised"}`: the answer must be a product. Every bracketed sum must have integer coefficients with no common factor and must not factorise further, so `4(x+1)(x+4)` is accepted and `(2x+2)(2x+8)`, `4(x^2+5x+4)` and `4x^2+20x+16` are rejected.
+- `{"form": "simplified", "original_expression": "..."}`: the answer must not be the starting expression. The comparison ignores spacing, brackets, multiplication style and the order of terms and factors.
+
+An empty `checker_config` checks equivalence only. Validation rejects unknown keys, and canonical answers, original expressions and domain constraints that use undeclared variables.
+
 Multipart questions use one `math_question_parts` row and one answer specification per input field. Marks are awarded per part. Hint use is recorded separately from correctness and does not automatically reduce marks.
 
 ### Content and mathematics rendering

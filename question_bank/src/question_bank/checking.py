@@ -9,10 +9,9 @@ from fractions import Fraction
 from math import gcd, isqrt
 
 from .models import AlgebraicResponse, NumericResponse, Response
+from .sympy_checker import AnswerFormatError, AnswerFormError, check_symbolic_equivalence
 
-
-class AnswerFormatError(ValueError):
-    """The submitted answer could not be parsed for the configured checker."""
+__all__ = ["AnswerFormError", "AnswerFormatError", "check_answer"]
 
 
 def _fraction(value: str) -> Fraction:
@@ -155,10 +154,16 @@ def _equivalent_ratio(actual: list[Fraction], expected: list[Fraction]) -> bool:
 
 
 def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
-    if spec.comparison_mode == "symbolic_equivalence" and answer.strip() == spec.canonical_expression.strip():
-        return True
     if answer.strip() in spec.accepted_equivalents:
         return True
+    if spec.comparison_mode == "symbolic_equivalence":
+        return check_symbolic_equivalence(
+            answer,
+            canonical=spec.canonical_expression,
+            variables=spec.variables,
+            domain_constraints=spec.domain_constraints,
+            checker_config=spec.checker_config,
+        )
     if spec.comparison_mode == "prime_factorisation":
         return _prime_factor_value(answer) == int(_fraction(spec.canonical_expression))
     if spec.comparison_mode == "ordered_numeric_list":
