@@ -18,6 +18,7 @@ review and publication gates pass.
 - ENG-T3.9 is merged there at integration commit `fd1448d` from PR #229.
 - ENG-T3.10 is merged there at implementation commit `33b1d412` from PR #230.
 - E9.2-E9.4 are merged through integration commit `1c3c49f` from PR #234.
+- E1.2 is merged there at implementation commit `a382f84` from PR #235.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -108,13 +109,17 @@ review and publication gates pass.
   tests skipped in the non-DB run.
 - Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
   build passed across 204 generated static pages. The local Turbopack build stalled without an
-  error and was stopped; hosted CI must independently pass the configured build before merge.
+  error and was stopped; both PR and post-merge CI passed the configured production build.
 - A fresh disposable PostgreSQL database accepted the complete migration chain through
   `202611020047`, imported 1,040 mathematics questions, 112 English questions and 37 passages,
   and passed bootstrap preview/apply/repeat idempotency. All seven `EV1.2` questions remained
   draft.
 - Migration safety passed. No new schema migration was required because E1.2 uses the existing
   objective-question, learning-session and content-review contracts.
+- PR #235 and the exact post-merge integration CI run passed every web, API, PostgreSQL and
+  authenticated-browser gate. At milestone merge, Render API readiness and the web API proxy
+  reported integration SHA `e85b8e041d3f859886496038b43ea2f309564e96`, required schema
+  `202611020047`, and current database schema/content; the hosted root and login returned 200.
 
 ## Validation completed for ENG-T3.10
 
