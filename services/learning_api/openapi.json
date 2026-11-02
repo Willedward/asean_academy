@@ -1607,7 +1607,12 @@
               "question_report_status_changed",
               "account_deletion_completed",
               "tutor_evaluation_run_created",
-              "tutor_evaluation_review_recorded"
+              "tutor_evaluation_review_recorded",
+              "english_essay_calibration_report_recorded",
+              "english_essay_privacy_review_recorded",
+              "english_essay_feedback_released",
+              "english_essay_feedback_suspended",
+              "english_essay_consent_recorded"
             ],
             "title": "Event Type",
             "type": "string"
@@ -1925,6 +1930,274 @@
         "title": "BulkContentReviewerPreviewResponse",
         "type": "object"
       },
+      "CalibrationEvidenceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "age_appropriate_tone_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Age Appropriate Tone Rate",
+            "type": "number"
+          },
+          "anchor_count": {
+            "minimum": 0.0,
+            "title": "Anchor Count",
+            "type": "integer"
+          },
+          "anchor_set_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Anchor Set Sha256",
+            "type": "string"
+          },
+          "band_within_one_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Band Within One Rate",
+            "type": "number"
+          },
+          "candidate_set_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Candidate Set Sha256",
+            "type": "string"
+          },
+          "case_recognition_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Case Recognition Rate",
+            "type": "number"
+          },
+          "contains_private_essay_text": {
+            "const": false,
+            "default": false,
+            "title": "Contains Private Essay Text",
+            "type": "boolean"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "educator_reference": {
+            "title": "Educator Reference",
+            "type": "string"
+          },
+          "evaluator_version": {
+            "const": "english-essay-calibration-evaluator-v1",
+            "title": "Evaluator Version",
+            "type": "string"
+          },
+          "evidence_fidelity_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Evidence Fidelity Rate",
+            "type": "number"
+          },
+          "failure_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Failure Reasons",
+            "type": "array"
+          },
+          "false_claim_count": {
+            "minimum": 0.0,
+            "title": "False Claim Count",
+            "type": "integer"
+          },
+          "gate_report_id": {
+            "pattern": "^[0-9a-f-]{36}$",
+            "title": "Gate Report Id",
+            "type": "string"
+          },
+          "instructional_usefulness_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Instructional Usefulness Rate",
+            "type": "number"
+          },
+          "live_provider_released": {
+            "const": false,
+            "default": false,
+            "title": "Live Provider Released",
+            "type": "boolean"
+          },
+          "maximum_run_cost_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Maximum Run Cost Micros Sgd",
+            "type": "integer"
+          },
+          "model_name": {
+            "title": "Model Name",
+            "type": "string"
+          },
+          "p95_latency_ms": {
+            "minimum": 0.0,
+            "title": "P95 Latency Ms",
+            "type": "integer"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "policy_version": {
+            "const": "english-essay-calibration-policy-v1",
+            "title": "Policy Version",
+            "type": "string"
+          },
+          "provider_name": {
+            "title": "Provider Name",
+            "type": "string"
+          },
+          "provider_policy_version": {
+            "title": "Provider Policy Version",
+            "type": "string"
+          },
+          "repeat_stability_passed": {
+            "title": "Repeat Stability Passed",
+            "type": "boolean"
+          },
+          "run_count": {
+            "minimum": 0.0,
+            "title": "Run Count",
+            "type": "integer"
+          },
+          "safety_failure_count": {
+            "minimum": 0.0,
+            "title": "Safety Failure Count",
+            "type": "integer"
+          },
+          "schema_valid_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Schema Valid Rate",
+            "type": "number"
+          },
+          "thresholds": {
+            "$ref": "#/components/schemas/CalibrationThresholds"
+          }
+        },
+        "required": [
+          "policy_version",
+          "evaluator_version",
+          "provider_name",
+          "model_name",
+          "provider_policy_version",
+          "educator_reference",
+          "anchor_set_sha256",
+          "candidate_set_sha256",
+          "anchor_count",
+          "run_count",
+          "schema_valid_rate",
+          "evidence_fidelity_rate",
+          "band_within_one_rate",
+          "repeat_stability_passed",
+          "instructional_usefulness_rate",
+          "age_appropriate_tone_rate",
+          "case_recognition_rate",
+          "false_claim_count",
+          "safety_failure_count",
+          "maximum_run_cost_micros_sgd",
+          "p95_latency_ms",
+          "thresholds",
+          "failure_reasons",
+          "passed",
+          "gate_report_id",
+          "created_at"
+        ],
+        "title": "CalibrationEvidenceResponse",
+        "type": "object"
+      },
+      "CalibrationThresholds": {
+        "additionalProperties": false,
+        "properties": {
+          "maximum_anchors": {
+            "const": 16,
+            "default": 16,
+            "title": "Maximum Anchors",
+            "type": "integer"
+          },
+          "maximum_false_claim_count": {
+            "const": 0,
+            "default": 0,
+            "title": "Maximum False Claim Count",
+            "type": "integer"
+          },
+          "maximum_p95_latency_ms": {
+            "const": 20000,
+            "default": 20000,
+            "title": "Maximum P95 Latency Ms",
+            "type": "integer"
+          },
+          "maximum_repeat_band_drift": {
+            "const": 1,
+            "default": 1,
+            "title": "Maximum Repeat Band Drift",
+            "type": "integer"
+          },
+          "maximum_run_cost_micros_sgd": {
+            "const": 1000000,
+            "default": 1000000,
+            "title": "Maximum Run Cost Micros Sgd",
+            "type": "integer"
+          },
+          "maximum_safety_failure_count": {
+            "const": 0,
+            "default": 0,
+            "title": "Maximum Safety Failure Count",
+            "type": "integer"
+          },
+          "minimum_age_appropriate_tone_rate": {
+            "const": 1.0,
+            "default": 1.0,
+            "title": "Minimum Age Appropriate Tone Rate",
+            "type": "number"
+          },
+          "minimum_anchors": {
+            "const": 12,
+            "default": 12,
+            "title": "Minimum Anchors",
+            "type": "integer"
+          },
+          "minimum_band_within_one_rate": {
+            "const": 0.9,
+            "default": 0.9,
+            "title": "Minimum Band Within One Rate",
+            "type": "number"
+          },
+          "minimum_case_recognition_rate": {
+            "const": 1.0,
+            "default": 1.0,
+            "title": "Minimum Case Recognition Rate",
+            "type": "number"
+          },
+          "minimum_evidence_fidelity_rate": {
+            "const": 1.0,
+            "default": 1.0,
+            "title": "Minimum Evidence Fidelity Rate",
+            "type": "number"
+          },
+          "minimum_instructional_usefulness_rate": {
+            "const": 0.9,
+            "default": 0.9,
+            "title": "Minimum Instructional Usefulness Rate",
+            "type": "number"
+          },
+          "minimum_schema_valid_rate": {
+            "const": 1.0,
+            "default": 1.0,
+            "title": "Minimum Schema Valid Rate",
+            "type": "number"
+          },
+          "runs_per_anchor": {
+            "const": 2,
+            "default": 2,
+            "title": "Runs Per Anchor",
+            "type": "integer"
+          }
+        },
+        "title": "CalibrationThresholds",
+        "type": "object"
+      },
       "CheckpointProgressResponse": {
         "additionalProperties": false,
         "properties": {
@@ -2020,6 +2293,145 @@
           "category"
         ],
         "title": "ClassifyEnglishErrorRequest",
+        "type": "object"
+      },
+      "ConsentDecisionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "granted",
+              "revoked"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "consent_policy_version": {
+            "pattern": "^english-essay-consent-v[0-9]+$",
+            "title": "Consent Policy Version",
+            "type": "string"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "guardian_reference_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Guardian Reference Sha256"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "consent_policy_version",
+          "reason"
+        ],
+        "title": "ConsentDecisionRequest",
+        "type": "object"
+      },
+      "ConsentDecisionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "granted",
+              "revoked"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "actor_user_id": {
+            "format": "uuid",
+            "title": "Actor User Id",
+            "type": "string"
+          },
+          "consent_event_id": {
+            "format": "uuid",
+            "title": "Consent Event Id",
+            "type": "string"
+          },
+          "consent_policy_version": {
+            "pattern": "^english-essay-consent-v[0-9]+$",
+            "title": "Consent Policy Version",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "guardian_reference_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Guardian Reference Sha256"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "student_id": {
+            "format": "uuid",
+            "title": "Student Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "consent_policy_version",
+          "reason",
+          "consent_event_id",
+          "student_id",
+          "actor_user_id",
+          "request_id",
+          "created_at"
+        ],
+        "title": "ConsentDecisionResponse",
         "type": "object"
       },
       "ContentLifecycleRequestResponse": {
@@ -7929,6 +8341,96 @@
         "title": "ErrorEnvelope",
         "type": "object"
       },
+      "EssayFeedbackReleaseEvidenceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "blockers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Blockers",
+            "type": "array"
+          },
+          "calibration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CalibrationEvidenceResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "environment_enabled": {
+            "title": "Environment Enabled",
+            "type": "boolean"
+          },
+          "live_provider_available": {
+            "title": "Live Provider Available",
+            "type": "boolean"
+          },
+          "model_name": {
+            "title": "Model Name",
+            "type": "string"
+          },
+          "privacy_review": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PrivacyReviewResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider_name": {
+            "title": "Provider Name",
+            "type": "string"
+          },
+          "provider_policy_version": {
+            "title": "Provider Policy Version",
+            "type": "string"
+          },
+          "release_decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReleaseDecisionResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "state": {
+            "enum": [
+              "blocked_no_calibration",
+              "blocked_calibration_failed",
+              "blocked_privacy_review_missing",
+              "blocked_privacy_review_failed",
+              "ready_for_release",
+              "released",
+              "suspended",
+              "disabled_by_environment"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "state",
+          "environment_enabled",
+          "live_provider_available",
+          "provider_name",
+          "model_name",
+          "provider_policy_version",
+          "blockers",
+          "calibration",
+          "privacy_review",
+          "release_decision"
+        ],
+        "title": "EssayFeedbackReleaseEvidenceResponse",
+        "type": "object"
+      },
       "ExecuteAccountDeletionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -9128,6 +9630,236 @@
         "title": "PreSubmitEnglishEssayRequest",
         "type": "object"
       },
+      "PrivacyReviewRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "automated_safety_classification_verified": {
+            "title": "Automated Safety Classification Verified",
+            "type": "boolean"
+          },
+          "calibration_gate_report_id": {
+            "format": "uuid",
+            "title": "Calibration Gate Report Id",
+            "type": "string"
+          },
+          "consent_policy_version": {
+            "pattern": "^english-essay-consent-v[0-9]+$",
+            "title": "Consent Policy Version",
+            "type": "string"
+          },
+          "deletion_workflow_verified": {
+            "title": "Deletion Workflow Verified",
+            "type": "boolean"
+          },
+          "guardian_consent_process_verified": {
+            "title": "Guardian Consent Process Verified",
+            "type": "boolean"
+          },
+          "provider_agreement_reference": {
+            "maxLength": 120,
+            "pattern": "^provider-agreement-ref-[a-z0-9-]+$",
+            "title": "Provider Agreement Reference",
+            "type": "string"
+          },
+          "provider_data_region": {
+            "maxLength": 100,
+            "minLength": 2,
+            "title": "Provider Data Region",
+            "type": "string"
+          },
+          "provider_retention_days": {
+            "maximum": 3650.0,
+            "minimum": 0.0,
+            "title": "Provider Retention Days",
+            "type": "integer"
+          },
+          "raw_essay_logging_excluded": {
+            "title": "Raw Essay Logging Excluded",
+            "type": "boolean"
+          },
+          "regional_privacy_review_reference": {
+            "maxLength": 120,
+            "pattern": "^privacy-review-ref-[a-z0-9-]+$",
+            "title": "Regional Privacy Review Reference",
+            "type": "string"
+          },
+          "retention_days": {
+            "maximum": 3650.0,
+            "minimum": 1.0,
+            "title": "Retention Days",
+            "type": "integer"
+          },
+          "retention_policy_version": {
+            "pattern": "^english-essay-retention-v[0-9]+$",
+            "title": "Retention Policy Version",
+            "type": "string"
+          },
+          "review_notes": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Review Notes",
+            "type": "string"
+          },
+          "safeguarding_contact_reference": {
+            "maxLength": 120,
+            "pattern": "^safeguarding-ref-[a-z0-9-]+$",
+            "title": "Safeguarding Contact Reference",
+            "type": "string"
+          },
+          "subprocessors_reviewed": {
+            "title": "Subprocessors Reviewed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "calibration_gate_report_id",
+          "guardian_consent_process_verified",
+          "consent_policy_version",
+          "retention_policy_version",
+          "retention_days",
+          "deletion_workflow_verified",
+          "raw_essay_logging_excluded",
+          "provider_agreement_reference",
+          "regional_privacy_review_reference",
+          "provider_data_region",
+          "provider_retention_days",
+          "subprocessors_reviewed",
+          "automated_safety_classification_verified",
+          "safeguarding_contact_reference",
+          "review_notes"
+        ],
+        "title": "PrivacyReviewRequest",
+        "type": "object"
+      },
+      "PrivacyReviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "automated_safety_classification_verified": {
+            "title": "Automated Safety Classification Verified",
+            "type": "boolean"
+          },
+          "calibration_gate_report_id": {
+            "format": "uuid",
+            "title": "Calibration Gate Report Id",
+            "type": "string"
+          },
+          "consent_policy_version": {
+            "pattern": "^english-essay-consent-v[0-9]+$",
+            "title": "Consent Policy Version",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "deletion_workflow_verified": {
+            "title": "Deletion Workflow Verified",
+            "type": "boolean"
+          },
+          "guardian_consent_process_verified": {
+            "title": "Guardian Consent Process Verified",
+            "type": "boolean"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "privacy_review_id": {
+            "format": "uuid",
+            "title": "Privacy Review Id",
+            "type": "string"
+          },
+          "provider_agreement_reference": {
+            "maxLength": 120,
+            "pattern": "^provider-agreement-ref-[a-z0-9-]+$",
+            "title": "Provider Agreement Reference",
+            "type": "string"
+          },
+          "provider_data_region": {
+            "maxLength": 100,
+            "minLength": 2,
+            "title": "Provider Data Region",
+            "type": "string"
+          },
+          "provider_retention_days": {
+            "maximum": 3650.0,
+            "minimum": 0.0,
+            "title": "Provider Retention Days",
+            "type": "integer"
+          },
+          "raw_essay_logging_excluded": {
+            "title": "Raw Essay Logging Excluded",
+            "type": "boolean"
+          },
+          "regional_privacy_review_reference": {
+            "maxLength": 120,
+            "pattern": "^privacy-review-ref-[a-z0-9-]+$",
+            "title": "Regional Privacy Review Reference",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "retention_days": {
+            "maximum": 3650.0,
+            "minimum": 1.0,
+            "title": "Retention Days",
+            "type": "integer"
+          },
+          "retention_policy_version": {
+            "pattern": "^english-essay-retention-v[0-9]+$",
+            "title": "Retention Policy Version",
+            "type": "string"
+          },
+          "review_notes": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Review Notes",
+            "type": "string"
+          },
+          "reviewer_user_id": {
+            "format": "uuid",
+            "title": "Reviewer User Id",
+            "type": "string"
+          },
+          "safeguarding_contact_reference": {
+            "maxLength": 120,
+            "pattern": "^safeguarding-ref-[a-z0-9-]+$",
+            "title": "Safeguarding Contact Reference",
+            "type": "string"
+          },
+          "subprocessors_reviewed": {
+            "title": "Subprocessors Reviewed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "calibration_gate_report_id",
+          "guardian_consent_process_verified",
+          "consent_policy_version",
+          "retention_policy_version",
+          "retention_days",
+          "deletion_workflow_verified",
+          "raw_essay_logging_excluded",
+          "provider_agreement_reference",
+          "regional_privacy_review_reference",
+          "provider_data_region",
+          "provider_retention_days",
+          "subprocessors_reviewed",
+          "automated_safety_classification_verified",
+          "safeguarding_contact_reference",
+          "review_notes",
+          "privacy_review_id",
+          "reviewer_user_id",
+          "request_id",
+          "passed",
+          "created_at"
+        ],
+        "title": "PrivacyReviewResponse",
+        "type": "object"
+      },
       "ProfileResponse": {
         "additionalProperties": false,
         "properties": {
@@ -9703,6 +10435,172 @@
         "title": "ReadinessResponse",
         "type": "object"
       },
+      "RecordCalibrationReportRequest": {
+        "additionalProperties": false,
+        "description": "A privacy-safe report generated by the offline T3.9 evaluator.",
+        "properties": {
+          "age_appropriate_tone_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Age Appropriate Tone Rate",
+            "type": "number"
+          },
+          "anchor_count": {
+            "minimum": 0.0,
+            "title": "Anchor Count",
+            "type": "integer"
+          },
+          "anchor_set_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Anchor Set Sha256",
+            "type": "string"
+          },
+          "band_within_one_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Band Within One Rate",
+            "type": "number"
+          },
+          "candidate_set_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Candidate Set Sha256",
+            "type": "string"
+          },
+          "case_recognition_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Case Recognition Rate",
+            "type": "number"
+          },
+          "contains_private_essay_text": {
+            "const": false,
+            "default": false,
+            "title": "Contains Private Essay Text",
+            "type": "boolean"
+          },
+          "educator_reference": {
+            "title": "Educator Reference",
+            "type": "string"
+          },
+          "evaluator_version": {
+            "const": "english-essay-calibration-evaluator-v1",
+            "title": "Evaluator Version",
+            "type": "string"
+          },
+          "evidence_fidelity_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Evidence Fidelity Rate",
+            "type": "number"
+          },
+          "failure_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Failure Reasons",
+            "type": "array"
+          },
+          "false_claim_count": {
+            "minimum": 0.0,
+            "title": "False Claim Count",
+            "type": "integer"
+          },
+          "instructional_usefulness_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Instructional Usefulness Rate",
+            "type": "number"
+          },
+          "live_provider_released": {
+            "const": false,
+            "default": false,
+            "title": "Live Provider Released",
+            "type": "boolean"
+          },
+          "maximum_run_cost_micros_sgd": {
+            "minimum": 0.0,
+            "title": "Maximum Run Cost Micros Sgd",
+            "type": "integer"
+          },
+          "model_name": {
+            "title": "Model Name",
+            "type": "string"
+          },
+          "p95_latency_ms": {
+            "minimum": 0.0,
+            "title": "P95 Latency Ms",
+            "type": "integer"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "policy_version": {
+            "const": "english-essay-calibration-policy-v1",
+            "title": "Policy Version",
+            "type": "string"
+          },
+          "provider_name": {
+            "title": "Provider Name",
+            "type": "string"
+          },
+          "provider_policy_version": {
+            "title": "Provider Policy Version",
+            "type": "string"
+          },
+          "repeat_stability_passed": {
+            "title": "Repeat Stability Passed",
+            "type": "boolean"
+          },
+          "run_count": {
+            "minimum": 0.0,
+            "title": "Run Count",
+            "type": "integer"
+          },
+          "safety_failure_count": {
+            "minimum": 0.0,
+            "title": "Safety Failure Count",
+            "type": "integer"
+          },
+          "schema_valid_rate": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Schema Valid Rate",
+            "type": "number"
+          },
+          "thresholds": {
+            "$ref": "#/components/schemas/CalibrationThresholds"
+          }
+        },
+        "required": [
+          "policy_version",
+          "evaluator_version",
+          "provider_name",
+          "model_name",
+          "provider_policy_version",
+          "educator_reference",
+          "anchor_set_sha256",
+          "candidate_set_sha256",
+          "anchor_count",
+          "run_count",
+          "schema_valid_rate",
+          "evidence_fidelity_rate",
+          "band_within_one_rate",
+          "repeat_stability_passed",
+          "instructional_usefulness_rate",
+          "age_appropriate_tone_rate",
+          "case_recognition_rate",
+          "false_claim_count",
+          "safety_failure_count",
+          "maximum_run_cost_micros_sgd",
+          "p95_latency_ms",
+          "thresholds",
+          "failure_reasons",
+          "passed"
+        ],
+        "title": "RecordCalibrationReportRequest",
+        "type": "object"
+      },
       "RecordContentReviewRequest": {
         "additionalProperties": false,
         "properties": {
@@ -9754,6 +10652,108 @@
           "notes"
         ],
         "title": "RecordContentReviewRequest",
+        "type": "object"
+      },
+      "ReleaseDecisionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "released",
+              "suspended"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "calibration_gate_report_id": {
+            "format": "uuid",
+            "title": "Calibration Gate Report Id",
+            "type": "string"
+          },
+          "confirmation": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Confirmation",
+            "type": "string"
+          },
+          "privacy_review_id": {
+            "format": "uuid",
+            "title": "Privacy Review Id",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "calibration_gate_report_id",
+          "privacy_review_id",
+          "action",
+          "confirmation",
+          "reason"
+        ],
+        "title": "ReleaseDecisionRequest",
+        "type": "object"
+      },
+      "ReleaseDecisionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "released",
+              "suspended"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "actor_user_id": {
+            "format": "uuid",
+            "title": "Actor User Id",
+            "type": "string"
+          },
+          "calibration_gate_report_id": {
+            "format": "uuid",
+            "title": "Calibration Gate Report Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "privacy_review_id": {
+            "format": "uuid",
+            "title": "Privacy Review Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "release_event_id": {
+            "format": "uuid",
+            "title": "Release Event Id",
+            "type": "string"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "release_event_id",
+          "calibration_gate_report_id",
+          "privacy_review_id",
+          "actor_user_id",
+          "action",
+          "reason",
+          "request_id",
+          "created_at"
+        ],
+        "title": "ReleaseDecisionResponse",
         "type": "object"
       },
       "ReleaseMetadata": {
@@ -13460,6 +14460,500 @@
         ]
       }
     },
+    "/api/v1/admin/english-essay-feedback/calibration-reports": {
+      "post": {
+        "operationId": "recordEnglishEssayCalibrationReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordCalibrationReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalibrationEvidenceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record a privacy-safe offline calibration report",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/english-essay-feedback/privacy-reviews": {
+      "post": {
+        "operationId": "recordEnglishEssayPrivacyReview",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrivacyReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrivacyReviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record an immutable privacy and safeguarding review",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/english-essay-feedback/release-decisions": {
+      "post": {
+        "operationId": "recordEnglishEssayFeedbackReleaseDecision",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReleaseDecisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseDecisionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Explicitly release or suspend live essay feedback",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/english-essay-feedback/release-evidence": {
+      "get": {
+        "operationId": "getEnglishEssayFeedbackReleaseEvidence",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EssayFeedbackReleaseEvidenceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Inspect privacy-safe evidence and blockers for live essay feedback",
+        "tags": [
+          "admin"
+        ]
+      }
+    },
     "/api/v1/admin/invitations": {
       "get": {
         "operationId": "listBetaInvitations",
@@ -15473,6 +16967,144 @@
         "summary": "Audit and reset one exceptional diagnostic attempt",
         "tags": [
           "diagnostics",
+          "admin"
+        ]
+      }
+    },
+    "/api/v1/admin/students/{learner_id}/english-essay-consent-events": {
+      "post": {
+        "operationId": "recordEnglishEssayProcessingConsent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "learner_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Learner Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentDecisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsentDecisionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record opaque guardian consent or revocation evidence",
+        "tags": [
           "admin"
         ]
       }

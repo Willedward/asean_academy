@@ -211,6 +211,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/english-essay-feedback/calibration-reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record a privacy-safe offline calibration report */
+        post: operations["recordEnglishEssayCalibrationReport"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/english-essay-feedback/privacy-reviews": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record an immutable privacy and safeguarding review */
+        post: operations["recordEnglishEssayPrivacyReview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/english-essay-feedback/release-decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Explicitly release or suspend live essay feedback */
+        post: operations["recordEnglishEssayFeedbackReleaseDecision"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/english-essay-feedback/release-evidence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Inspect privacy-safe evidence and blockers for live essay feedback */
+        get: operations["getEnglishEssayFeedbackReleaseEvidence"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/invitations": {
         parameters: {
             query?: never;
@@ -428,6 +496,23 @@ export interface paths {
         put?: never;
         /** Audit and reset one exceptional diagnostic attempt */
         post: operations["resetAdminStudentDiagnostic"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students/{learner_id}/english-essay-consent-events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record opaque guardian consent or revocation evidence */
+        post: operations["recordEnglishEssayProcessingConsent"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2395,7 +2480,7 @@ export interface components {
              * Event Type
              * @enum {string}
              */
-            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed" | "content_review_recorded" | "content_publication_requested" | "content_retirement_requested" | "question_report_created" | "question_report_status_changed" | "account_deletion_completed" | "tutor_evaluation_run_created" | "tutor_evaluation_review_recorded";
+            event_type: "invitation_created" | "invitation_revoked" | "invitation_accepted" | "role_changed" | "course_revision_changed" | "content_review_recorded" | "content_publication_requested" | "content_retirement_requested" | "question_report_created" | "question_report_status_changed" | "account_deletion_completed" | "tutor_evaluation_run_created" | "tutor_evaluation_review_recorded" | "english_essay_calibration_report_recorded" | "english_essay_privacy_review_recorded" | "english_essay_feedback_released" | "english_essay_feedback_suspended" | "english_essay_consent_recorded";
             /** Invitation Id */
             invitation_id: string | null;
             /** Metadata */
@@ -2507,6 +2592,168 @@ export interface components {
             /** Scope Key */
             scope_key: string;
         };
+        /** CalibrationEvidenceResponse */
+        CalibrationEvidenceResponse: {
+            /** Age Appropriate Tone Rate */
+            age_appropriate_tone_rate: number;
+            /** Anchor Count */
+            anchor_count: number;
+            /** Anchor Set Sha256 */
+            anchor_set_sha256: string;
+            /** Band Within One Rate */
+            band_within_one_rate: number;
+            /** Candidate Set Sha256 */
+            candidate_set_sha256: string;
+            /** Case Recognition Rate */
+            case_recognition_rate: number;
+            /**
+             * Contains Private Essay Text
+             * @default false
+             * @constant
+             */
+            contains_private_essay_text: false;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Educator Reference */
+            educator_reference: string;
+            /**
+             * Evaluator Version
+             * @constant
+             */
+            evaluator_version: "english-essay-calibration-evaluator-v1";
+            /** Evidence Fidelity Rate */
+            evidence_fidelity_rate: number;
+            /** Failure Reasons */
+            failure_reasons: string[];
+            /** False Claim Count */
+            false_claim_count: number;
+            /** Gate Report Id */
+            gate_report_id: string;
+            /** Instructional Usefulness Rate */
+            instructional_usefulness_rate: number;
+            /**
+             * Live Provider Released
+             * @default false
+             * @constant
+             */
+            live_provider_released: false;
+            /** Maximum Run Cost Micros Sgd */
+            maximum_run_cost_micros_sgd: number;
+            /** Model Name */
+            model_name: string;
+            /** P95 Latency Ms */
+            p95_latency_ms: number;
+            /** Passed */
+            passed: boolean;
+            /**
+             * Policy Version
+             * @constant
+             */
+            policy_version: "english-essay-calibration-policy-v1";
+            /** Provider Name */
+            provider_name: string;
+            /** Provider Policy Version */
+            provider_policy_version: string;
+            /** Repeat Stability Passed */
+            repeat_stability_passed: boolean;
+            /** Run Count */
+            run_count: number;
+            /** Safety Failure Count */
+            safety_failure_count: number;
+            /** Schema Valid Rate */
+            schema_valid_rate: number;
+            thresholds: components["schemas"]["CalibrationThresholds"];
+        };
+        /** CalibrationThresholds */
+        CalibrationThresholds: {
+            /**
+             * Maximum Anchors
+             * @default 16
+             * @constant
+             */
+            maximum_anchors: 16;
+            /**
+             * Maximum False Claim Count
+             * @default 0
+             * @constant
+             */
+            maximum_false_claim_count: 0;
+            /**
+             * Maximum P95 Latency Ms
+             * @default 20000
+             * @constant
+             */
+            maximum_p95_latency_ms: 20000;
+            /**
+             * Maximum Repeat Band Drift
+             * @default 1
+             * @constant
+             */
+            maximum_repeat_band_drift: 1;
+            /**
+             * Maximum Run Cost Micros Sgd
+             * @default 1000000
+             * @constant
+             */
+            maximum_run_cost_micros_sgd: 1000000;
+            /**
+             * Maximum Safety Failure Count
+             * @default 0
+             * @constant
+             */
+            maximum_safety_failure_count: 0;
+            /**
+             * Minimum Age Appropriate Tone Rate
+             * @default 1
+             * @constant
+             */
+            minimum_age_appropriate_tone_rate: 1;
+            /**
+             * Minimum Anchors
+             * @default 12
+             * @constant
+             */
+            minimum_anchors: 12;
+            /**
+             * Minimum Band Within One Rate
+             * @default 0.9
+             * @constant
+             */
+            minimum_band_within_one_rate: 0.9;
+            /**
+             * Minimum Case Recognition Rate
+             * @default 1
+             * @constant
+             */
+            minimum_case_recognition_rate: 1;
+            /**
+             * Minimum Evidence Fidelity Rate
+             * @default 1
+             * @constant
+             */
+            minimum_evidence_fidelity_rate: 1;
+            /**
+             * Minimum Instructional Usefulness Rate
+             * @default 0.9
+             * @constant
+             */
+            minimum_instructional_usefulness_rate: 0.9;
+            /**
+             * Minimum Schema Valid Rate
+             * @default 1
+             * @constant
+             */
+            minimum_schema_valid_rate: 1;
+            /**
+             * Runs Per Anchor
+             * @default 2
+             * @constant
+             */
+            runs_per_anchor: 2;
+        };
         /** CheckpointProgressResponse */
         CheckpointProgressResponse: {
             /** Available */
@@ -2534,6 +2781,60 @@ export interface components {
              * @enum {string}
              */
             category: "unknown_meaning" | "missed_clue" | "option_trap" | "tone_mismatch" | "clause_structure" | "boundary_choice" | "agreement_control" | "gap_role" | "local_grammar" | "cohesion_clue" | "entry_accuracy" | "task_topic" | "command_word" | "audience_scope" | "evidence_plan" | "paper_format" | "instruction_control" | "timing_control" | "independent_conditions";
+        };
+        /** ConsentDecisionRequest */
+        ConsentDecisionRequest: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "granted" | "revoked";
+            /** Consent Policy Version */
+            consent_policy_version: string;
+            /** Expires At */
+            expires_at?: string | null;
+            /** Guardian Reference Sha256 */
+            guardian_reference_sha256?: string | null;
+            /** Reason */
+            reason: string;
+        };
+        /** ConsentDecisionResponse */
+        ConsentDecisionResponse: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "granted" | "revoked";
+            /**
+             * Actor User Id
+             * Format: uuid
+             */
+            actor_user_id: string;
+            /**
+             * Consent Event Id
+             * Format: uuid
+             */
+            consent_event_id: string;
+            /** Consent Policy Version */
+            consent_policy_version: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Expires At */
+            expires_at?: string | null;
+            /** Guardian Reference Sha256 */
+            guardian_reference_sha256?: string | null;
+            /** Reason */
+            reason: string;
+            /** Request Id */
+            request_id: string;
+            /**
+             * Student Id
+             * Format: uuid
+             */
+            student_id: string;
         };
         /** ContentLifecycleRequestResponse */
         ContentLifecycleRequestResponse: {
@@ -4794,6 +5095,29 @@ export interface components {
         ErrorEnvelope: {
             error: components["schemas"]["ErrorDetail"];
         };
+        /** EssayFeedbackReleaseEvidenceResponse */
+        EssayFeedbackReleaseEvidenceResponse: {
+            /** Blockers */
+            blockers: string[];
+            calibration: components["schemas"]["CalibrationEvidenceResponse"] | null;
+            /** Environment Enabled */
+            environment_enabled: boolean;
+            /** Live Provider Available */
+            live_provider_available: boolean;
+            /** Model Name */
+            model_name: string;
+            privacy_review: components["schemas"]["PrivacyReviewResponse"] | null;
+            /** Provider Name */
+            provider_name: string;
+            /** Provider Policy Version */
+            provider_policy_version: string;
+            release_decision: components["schemas"]["ReleaseDecisionResponse"] | null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "blocked_no_calibration" | "blocked_calibration_failed" | "blocked_privacy_review_missing" | "blocked_privacy_review_failed" | "ready_for_release" | "released" | "suspended" | "disabled_by_environment";
+        };
         /** ExecuteAccountDeletionRequest */
         ExecuteAccountDeletionRequest: {
             /** Confirmation Email */
@@ -5249,6 +5573,97 @@ export interface components {
             /** Expected Edit Revision */
             expected_edit_revision: number;
         };
+        /** PrivacyReviewRequest */
+        PrivacyReviewRequest: {
+            /** Automated Safety Classification Verified */
+            automated_safety_classification_verified: boolean;
+            /**
+             * Calibration Gate Report Id
+             * Format: uuid
+             */
+            calibration_gate_report_id: string;
+            /** Consent Policy Version */
+            consent_policy_version: string;
+            /** Deletion Workflow Verified */
+            deletion_workflow_verified: boolean;
+            /** Guardian Consent Process Verified */
+            guardian_consent_process_verified: boolean;
+            /** Provider Agreement Reference */
+            provider_agreement_reference: string;
+            /** Provider Data Region */
+            provider_data_region: string;
+            /** Provider Retention Days */
+            provider_retention_days: number;
+            /** Raw Essay Logging Excluded */
+            raw_essay_logging_excluded: boolean;
+            /** Regional Privacy Review Reference */
+            regional_privacy_review_reference: string;
+            /** Retention Days */
+            retention_days: number;
+            /** Retention Policy Version */
+            retention_policy_version: string;
+            /** Review Notes */
+            review_notes: string;
+            /** Safeguarding Contact Reference */
+            safeguarding_contact_reference: string;
+            /** Subprocessors Reviewed */
+            subprocessors_reviewed: boolean;
+        };
+        /** PrivacyReviewResponse */
+        PrivacyReviewResponse: {
+            /** Automated Safety Classification Verified */
+            automated_safety_classification_verified: boolean;
+            /**
+             * Calibration Gate Report Id
+             * Format: uuid
+             */
+            calibration_gate_report_id: string;
+            /** Consent Policy Version */
+            consent_policy_version: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Deletion Workflow Verified */
+            deletion_workflow_verified: boolean;
+            /** Guardian Consent Process Verified */
+            guardian_consent_process_verified: boolean;
+            /** Passed */
+            passed: boolean;
+            /**
+             * Privacy Review Id
+             * Format: uuid
+             */
+            privacy_review_id: string;
+            /** Provider Agreement Reference */
+            provider_agreement_reference: string;
+            /** Provider Data Region */
+            provider_data_region: string;
+            /** Provider Retention Days */
+            provider_retention_days: number;
+            /** Raw Essay Logging Excluded */
+            raw_essay_logging_excluded: boolean;
+            /** Regional Privacy Review Reference */
+            regional_privacy_review_reference: string;
+            /** Request Id */
+            request_id: string;
+            /** Retention Days */
+            retention_days: number;
+            /** Retention Policy Version */
+            retention_policy_version: string;
+            /** Review Notes */
+            review_notes: string;
+            /**
+             * Reviewer User Id
+             * Format: uuid
+             */
+            reviewer_user_id: string;
+            /** Safeguarding Contact Reference */
+            safeguarding_contact_reference: string;
+            /** Subprocessors Reviewed */
+            subprocessors_reviewed: boolean;
+        };
         /** ProfileResponse */
         ProfileResponse: {
             /** Display Name */
@@ -5464,6 +5879,77 @@ export interface components {
             /** Version */
             version: string;
         };
+        /**
+         * RecordCalibrationReportRequest
+         * @description A privacy-safe report generated by the offline T3.9 evaluator.
+         */
+        RecordCalibrationReportRequest: {
+            /** Age Appropriate Tone Rate */
+            age_appropriate_tone_rate: number;
+            /** Anchor Count */
+            anchor_count: number;
+            /** Anchor Set Sha256 */
+            anchor_set_sha256: string;
+            /** Band Within One Rate */
+            band_within_one_rate: number;
+            /** Candidate Set Sha256 */
+            candidate_set_sha256: string;
+            /** Case Recognition Rate */
+            case_recognition_rate: number;
+            /**
+             * Contains Private Essay Text
+             * @default false
+             * @constant
+             */
+            contains_private_essay_text: false;
+            /** Educator Reference */
+            educator_reference: string;
+            /**
+             * Evaluator Version
+             * @constant
+             */
+            evaluator_version: "english-essay-calibration-evaluator-v1";
+            /** Evidence Fidelity Rate */
+            evidence_fidelity_rate: number;
+            /** Failure Reasons */
+            failure_reasons: string[];
+            /** False Claim Count */
+            false_claim_count: number;
+            /** Instructional Usefulness Rate */
+            instructional_usefulness_rate: number;
+            /**
+             * Live Provider Released
+             * @default false
+             * @constant
+             */
+            live_provider_released: false;
+            /** Maximum Run Cost Micros Sgd */
+            maximum_run_cost_micros_sgd: number;
+            /** Model Name */
+            model_name: string;
+            /** P95 Latency Ms */
+            p95_latency_ms: number;
+            /** Passed */
+            passed: boolean;
+            /**
+             * Policy Version
+             * @constant
+             */
+            policy_version: "english-essay-calibration-policy-v1";
+            /** Provider Name */
+            provider_name: string;
+            /** Provider Policy Version */
+            provider_policy_version: string;
+            /** Repeat Stability Passed */
+            repeat_stability_passed: boolean;
+            /** Run Count */
+            run_count: number;
+            /** Safety Failure Count */
+            safety_failure_count: number;
+            /** Schema Valid Rate */
+            schema_valid_rate: number;
+            thresholds: components["schemas"]["CalibrationThresholds"];
+        };
         /** RecordContentReviewRequest */
         RecordContentReviewRequest: {
             /**
@@ -5484,6 +5970,65 @@ export interface components {
             source_content_sha256: string;
             /** Source Revision */
             source_revision: number;
+        };
+        /** ReleaseDecisionRequest */
+        ReleaseDecisionRequest: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "released" | "suspended";
+            /**
+             * Calibration Gate Report Id
+             * Format: uuid
+             */
+            calibration_gate_report_id: string;
+            /** Confirmation */
+            confirmation: string;
+            /**
+             * Privacy Review Id
+             * Format: uuid
+             */
+            privacy_review_id: string;
+            /** Reason */
+            reason: string;
+        };
+        /** ReleaseDecisionResponse */
+        ReleaseDecisionResponse: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "released" | "suspended";
+            /**
+             * Actor User Id
+             * Format: uuid
+             */
+            actor_user_id: string;
+            /**
+             * Calibration Gate Report Id
+             * Format: uuid
+             */
+            calibration_gate_report_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Privacy Review Id
+             * Format: uuid
+             */
+            privacy_review_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Release Event Id
+             * Format: uuid
+             */
+            release_event_id: string;
+            /** Request Id */
+            request_id: string;
         };
         /** ReleaseMetadata */
         ReleaseMetadata: {
@@ -7382,6 +7927,422 @@ export interface operations {
             };
         };
     };
+    recordEnglishEssayCalibrationReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordCalibrationReportRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalibrationEvidenceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    recordEnglishEssayPrivacyReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PrivacyReviewRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PrivacyReviewResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    recordEnglishEssayFeedbackReleaseDecision: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReleaseDecisionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReleaseDecisionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    getEnglishEssayFeedbackReleaseEvidence: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EssayFeedbackReleaseEvidenceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
     listBetaInvitations: {
         parameters: {
             query?: {
@@ -8857,6 +9818,113 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ResetDiagnosticResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    recordEnglishEssayProcessingConsent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                learner_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConsentDecisionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConsentDecisionResponse"];
                 };
             };
             /** @description Bad Request */

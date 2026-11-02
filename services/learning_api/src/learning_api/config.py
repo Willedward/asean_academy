@@ -8,7 +8,7 @@ from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-REQUIRED_SCHEMA_REVISION = "202611010046"
+REQUIRED_SCHEMA_REVISION = "202611020047"
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -100,6 +100,10 @@ class Settings:
     tutor_openai_input_cost_per_million_micros_sgd: int = 0
     tutor_openai_output_cost_per_million_micros_sgd: int = 0
     english_essay_feedback_enabled: bool = False
+    english_essay_provider_name: str = "disabled"
+    english_essay_model_name: str = "disabled"
+    english_essay_provider_policy_version: str = "english-essay-feedback-policy-v1"
+    english_essay_consent_policy_version: str = "english-essay-consent-v1"
     english_essay_monthly_feedback_limit: int = 4
     english_essay_monthly_cost_limit_micros_sgd: int = 4_000_000
     english_essay_academy_monthly_cost_limit_micros_sgd: int = 500_000_000
@@ -304,6 +308,20 @@ class Settings:
             english_essay_feedback_enabled=_boolean(
                 "ASEAN_ACADEMY_ENGLISH_ESSAY_FEEDBACK_ENABLED", False
             ),
+            english_essay_provider_name=os.getenv(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_PROVIDER_NAME", "disabled"
+            ).strip(),
+            english_essay_model_name=os.getenv(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_MODEL_NAME", "disabled"
+            ).strip(),
+            english_essay_provider_policy_version=os.getenv(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_PROVIDER_POLICY_VERSION",
+                "english-essay-feedback-policy-v1",
+            ).strip(),
+            english_essay_consent_policy_version=os.getenv(
+                "ASEAN_ACADEMY_ENGLISH_ESSAY_CONSENT_POLICY_VERSION",
+                "english-essay-consent-v1",
+            ).strip(),
             english_essay_monthly_feedback_limit=_positive_integer(
                 "ASEAN_ACADEMY_ENGLISH_ESSAY_MONTHLY_FEEDBACK_LIMIT", 4
             ),
@@ -346,6 +364,16 @@ class Settings:
                 raise RuntimeError(
                     "ASEAN_ACADEMY_DEVELOPMENT_LEARNER_ID must be a UUID when PostgreSQL is enabled"
                 ) from exc
+        if settings.english_essay_feedback_enabled and (
+            not settings.database_url
+            or not settings.english_essay_provider_name
+            or not settings.english_essay_model_name
+            or settings.english_essay_provider_name == "disabled"
+            or settings.english_essay_model_name == "disabled"
+        ):
+            raise RuntimeError(
+                "Live English essay feedback requires PostgreSQL and an explicit provider/model identity"
+            )
         if settings.tutor_provider not in {"disabled", "synthetic", "gemini", "openai"}:
             raise RuntimeError(
                 "ASEAN_ACADEMY_TUTOR_PROVIDER must be disabled, synthetic, gemini, or openai"

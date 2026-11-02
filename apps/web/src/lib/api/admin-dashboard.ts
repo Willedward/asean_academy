@@ -35,6 +35,21 @@ export type BulkReviewResponse =
   components["schemas"]["BulkContentReviewResponse"];
 export type RouteReleaseManifest =
   components["schemas"]["RouteReleaseManifestResponse"];
+export type EssayFeedbackReleaseEvidence =
+  components["schemas"]["EssayFeedbackReleaseEvidenceResponse"];
+export type CalibrationReportInput =
+  components["schemas"]["RecordCalibrationReportRequest"];
+export type CalibrationEvidence =
+  components["schemas"]["CalibrationEvidenceResponse"];
+export type PrivacyReviewInput = components["schemas"]["PrivacyReviewRequest"];
+export type PrivacyReview = components["schemas"]["PrivacyReviewResponse"];
+export type ReleaseDecisionInput =
+  components["schemas"]["ReleaseDecisionRequest"];
+export type ReleaseDecision =
+  components["schemas"]["ReleaseDecisionResponse"];
+export type ConsentDecisionInput =
+  components["schemas"]["ConsentDecisionRequest"];
+export type ConsentDecision = components["schemas"]["ConsentDecisionResponse"];
 
 const INVALID_RESPONSE_MESSAGE =
   "The learning service timed out or restarted. Please try again.";

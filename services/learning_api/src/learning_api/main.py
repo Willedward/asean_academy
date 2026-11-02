@@ -361,6 +361,18 @@ def create_app(
                                 select 1 from information_schema.tables
                                 where table_schema = 'public'
                                   and table_name = 'english_essay_calibration_gate_reports'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'english_essay_feedback_privacy_reviews'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'english_essay_feedback_release_events'
+                            ) and exists (
+                                select 1 from information_schema.tables
+                                where table_schema = 'public'
+                                  and table_name = 'english_essay_processing_consent_events'
                             ) as schema_ready
                         """
                     ).fetchone()

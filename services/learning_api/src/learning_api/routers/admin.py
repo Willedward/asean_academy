@@ -31,7 +31,20 @@ from ..dependencies import (
     AdminLearnerDependency,
     AdminWriteRateLimitDependency,
     BetaOperationsRepositoryDependency,
+    EnglishEssayReleaseRepositoryDependency,
 )
+from ..english_essay_release import (
+    CalibrationEvidenceResponse,
+    ConsentDecisionRequest,
+    ConsentDecisionResponse,
+    EssayFeedbackReleaseEvidenceResponse,
+    PrivacyReviewRequest,
+    PrivacyReviewResponse,
+    RecordCalibrationReportRequest,
+    ReleaseDecisionRequest,
+    ReleaseDecisionResponse,
+)
+from ..english_essay_release_repository import EnglishEssayReleaseError
 
 LOGGER = logging.getLogger("learning_api.admin")
 router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
@@ -45,6 +58,131 @@ def _safe(call):
             status_code=exc.status,
             detail={"code": exc.code, "message": str(exc)},
         ) from exc
+
+
+def _release_safe(call):
+    try:
+        return call()
+    except EnglishEssayReleaseError as exc:
+        raise HTTPException(
+            status_code=exc.status,
+            detail={"code": exc.code, "message": str(exc)},
+        ) from exc
+
+
+def _release_evidence(request: Request, repository) -> dict:
+    settings = request.app.state.settings
+    return repository.evidence(
+        settings.english_essay_provider_name,
+        settings.english_essay_model_name,
+        settings.english_essay_provider_policy_version,
+        environment_enabled=settings.english_essay_feedback_enabled,
+    )
+
+
+@router.get(
+    "/english-essay-feedback/release-evidence",
+    operation_id="getEnglishEssayFeedbackReleaseEvidence",
+    response_model=EssayFeedbackReleaseEvidenceResponse,
+    summary="Inspect privacy-safe evidence and blockers for live essay feedback",
+)
+async def english_essay_feedback_release_evidence(
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: EnglishEssayReleaseRepositoryDependency,
+) -> EssayFeedbackReleaseEvidenceResponse:
+    del administrator
+    return _release_evidence(request, repository)
+
+
+@router.post(
+    "/english-essay-feedback/calibration-reports",
+    operation_id="recordEnglishEssayCalibrationReport",
+    response_model=CalibrationEvidenceResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Record a privacy-safe offline calibration report",
+)
+async def record_english_essay_calibration_report(
+    body: RecordCalibrationReportRequest,
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: EnglishEssayReleaseRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> CalibrationEvidenceResponse:
+    return _release_safe(
+        lambda: repository.record_calibration(
+            body, administrator.learner_id, current_request_id(request)
+        )
+    )
+
+
+@router.post(
+    "/english-essay-feedback/privacy-reviews",
+    operation_id="recordEnglishEssayPrivacyReview",
+    response_model=PrivacyReviewResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Record an immutable privacy and safeguarding review",
+)
+async def record_english_essay_privacy_review(
+    body: PrivacyReviewRequest,
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: EnglishEssayReleaseRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> PrivacyReviewResponse:
+    return _release_safe(
+        lambda: repository.record_privacy_review(
+            body, administrator.learner_id, current_request_id(request)
+        )
+    )
+
+
+@router.post(
+    "/english-essay-feedback/release-decisions",
+    operation_id="recordEnglishEssayFeedbackReleaseDecision",
+    response_model=ReleaseDecisionResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Explicitly release or suspend live essay feedback",
+)
+async def record_english_essay_feedback_release_decision(
+    body: ReleaseDecisionRequest,
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: EnglishEssayReleaseRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> ReleaseDecisionResponse:
+    return _release_safe(
+        lambda: repository.record_release_decision(
+            calibration_gate_report_id=body.calibration_gate_report_id,
+            privacy_review_id=body.privacy_review_id,
+            action=body.action,
+            reason=body.reason,
+            actor_user_id=administrator.learner_id,
+            request_id=current_request_id(request),
+        )
+    )
+
+
+@router.post(
+    "/students/{learner_id}/english-essay-consent-events",
+    operation_id="recordEnglishEssayProcessingConsent",
+    response_model=ConsentDecisionResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Record opaque guardian consent or revocation evidence",
+)
+async def record_english_essay_processing_consent(
+    learner_id: UUID,
+    body: ConsentDecisionRequest,
+    request: Request,
+    administrator: AcademicAdminLearnerDependency,
+    repository: EnglishEssayReleaseRepositoryDependency,
+    _rate_limit: AdminWriteRateLimitDependency,
+) -> ConsentDecisionResponse:
+    return _release_safe(
+        lambda: repository.record_consent(
+            learner_id, body, administrator.learner_id, current_request_id(request)
+        )
+    )
 
 
 @router.get(
