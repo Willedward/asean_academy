@@ -55,6 +55,20 @@ review and publication gates pass.
 - E9.2 is Full-route only. It does not change the fixed 121-record Sprint review scope or any
   protected baseline, endline, checkpoint or mock form.
 
+## E9.3 opinion-and-discursive-writing milestone
+
+- E9.3 is implemented as draft-only Full-route content with one seven-section lesson and one
+  six-decision deterministic composition-planning exit ticket.
+- The lesson teaches precise task-form checking, a qualified defensible position, complete
+  claim–detail–explanation–significance chains, fair counterargument and concession-response.
+- The practice record is explicitly fictional and cannot be presented as research evidence.
+  Unsupported statistics, universal outcomes, straw-man objections and false balance are
+  rejected by the deterministic feedback.
+- The new source records are `e9-lesson-03`, `ex-l3-004` and review batch
+  `english-ex-b036`. English and editorial decisions remain pending; nothing is published.
+- E9.3 is Full-route only and does not change the fixed 121-record Sprint review scope or any
+  protected form.
+
 ## Validation completed for ENG-T3.10
 
 - Learning API suite: 272 passed; 22 opt-in PostgreSQL tests skipped in the non-DB run.
@@ -85,6 +99,20 @@ review and publication gates pass.
 - No new schema migration was required because E9.2 uses the existing composition-planning and
   content-review contracts.
 
+## Validation completed for E9.3
+
+- English foundation and authoring validation: 38 authored lessons, 104 questions, 79 review
+  batches and zero duplicate/template collisions.
+- Question-bank suite: 175 passed. Learning API suite: 274 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 104 English questions and 37 passages,
+  and passed bootstrap preview/apply/repeat idempotency. E9.3 and `ex-l3-004` remained draft.
+- No new schema migration was required because E9.3 uses the existing composition-planning and
+  content-review contracts.
+
 ## Immediate next milestone
 
 The next operational step requires people, not more provider code: a qualified English educator
@@ -92,8 +120,8 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content milestone is **E9.3 opinion and discursive
-writing**, alongside the existing Sprint human review and publication evidence. Human
+The next independently executable content milestone is **E9.4 compress the process**,
+alongside the existing Sprint human review and publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.
 

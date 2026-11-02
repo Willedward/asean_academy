@@ -68,6 +68,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e8-lesson-05"),
         ("english_lesson", "e9-lesson-01"),
         ("english_lesson", "e9-lesson-02"),
+        ("english_lesson", "e9-lesson-03"),
         ("english_passage", "english-passage-afternoon-broadcast"),
         ("english_passage", "english-passage-courtyard-rain-garden"),
         ("english_passage", "english-passage-neighbourhood-garden"),
@@ -113,6 +114,7 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "ex-l5-003"),
         ("english_question", "ex-l1-004"),
         ("english_question", "ex-l2-013"),
+        ("english_question", "ex-l3-004"),
     }
     question = next(item for item in english_items if item.stable_key == "ev-l1-001")
     assert question.batch_id == "english-ev-b001"
@@ -227,6 +229,9 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     narrative = next(item for item in english_items if item.stable_key == "ex-l2-013")
     assert narrative.batch_id == "english-ex-b035"
     assert narrative.unit_key == "english-e9"
+    opinion = next(item for item in english_items if item.stable_key == "ex-l3-004")
+    assert opinion.batch_id == "english-ex-b036"
+    assert opinion.unit_key == "english-e9"
 
 
 def test_sprint_route_contains_the_exact_121_fingerprinted_review_records(
