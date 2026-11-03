@@ -6,7 +6,7 @@ import asyncio
 import json
 import re
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from time import sleep
 from typing import Protocol
 from urllib.error import HTTPError, URLError
@@ -20,6 +20,14 @@ from .tutor_contracts import TutorBlock, TutorMode
 
 class TutorProviderError(RuntimeError):
     """Safe provider failure surfaced by the tutor orchestration layer."""
+
+
+class TutorProviderResponseError(TutorProviderError):
+    """The provider answered, and may have charged, but the response cannot be used."""
+
+    def __init__(self, message: str, usage: TutorProviderUsage | None = None):
+        super().__init__(message)
+        self.usage = usage
 
 
 @dataclass(frozen=True, slots=True)
@@ -197,8 +205,30 @@ def _grounding_payload(request: TutorProviderRequest) -> dict:
 
 def _grounding_prompt(request: TutorProviderRequest) -> str:
     return "Generate the next grounded tutor response from this JSON:\n" + json.dumps(
-        _grounding_payload(request), ensure_ascii=True, separators=(",", ":")
+        _grounding_payload(request), ensure_ascii=False, separators=(",", ":")
     )
+
+
+def estimated_input_tokens(request: TutorProviderRequest) -> int:
+    """A cautious estimate: three UTF-8 bytes per token also covers non-Latin scripts."""
+
+    text = _TUTOR_SYSTEM_INSTRUCTION + _grounding_prompt(request)
+    return len(text.encode("utf-8")) // 3 + 1
+
+
+def fit_request_to_input_budget(
+    request: TutorProviderRequest, max_input_tokens: int
+) -> TutorProviderRequest:
+    """Drop the oldest messages, then the last lesson sections, to fit the reservation."""
+
+    while estimated_input_tokens(request) > max_input_tokens:
+        if request.recent_messages:
+            request = replace(request, recent_messages=request.recent_messages[1:])
+        elif request.lesson_sections:
+            request = replace(request, lesson_sections=request.lesson_sections[:-1])
+        else:
+            break
+    return request
 
 
 def _default_gemini_transport(
@@ -433,7 +463,10 @@ class GeminiTutorProvider:
             json.JSONDecodeError,
             ValidationError,
         ) as exc:
-            raise TutorProviderError("The tutor provider returned an invalid response.") from exc
+            raise TutorProviderResponseError(
+                "The tutor provider returned an invalid response.",
+                self._reported_usage(raw),
+            ) from exc
         cost = self._token_cost(input_tokens, self._input_price) + self._token_cost(
             output_tokens, self._output_price
         )
@@ -447,6 +480,22 @@ class GeminiTutorProvider:
                 output_tokens=output_tokens,
                 cost_micros_sgd=cost,
             ),
+        )
+
+    def _reported_usage(self, raw: bytes) -> TutorProviderUsage | None:
+        try:
+            usage = json.loads(raw)["usageMetadata"]
+            input_tokens = int(usage["promptTokenCount"])
+            output_tokens = int(usage["candidatesTokenCount"])
+        except (KeyError, TypeError, ValueError):
+            return None
+        if input_tokens < 0 or output_tokens < 0:
+            return None
+        return TutorProviderUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_micros_sgd=self._token_cost(input_tokens, self._input_price)
+            + self._token_cost(output_tokens, self._output_price),
         )
 
     @staticmethod
@@ -530,6 +579,22 @@ class OpenAITutorProvider:
             "store": False,
         }
 
+    def _reported_usage(self, raw: bytes) -> TutorProviderUsage | None:
+        try:
+            usage = json.loads(raw)["usage"]
+            input_tokens = int(usage["input_tokens"])
+            output_tokens = int(usage["output_tokens"])
+        except (KeyError, TypeError, ValueError):
+            return None
+        if input_tokens < 0 or output_tokens < 0:
+            return None
+        return TutorProviderUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_micros_sgd=GeminiTutorProvider._token_cost(input_tokens, self._input_price)
+            + GeminiTutorProvider._token_cost(output_tokens, self._output_price),
+        )
+
     def _parse_response(self, raw: bytes) -> TutorProviderResult:
         try:
             payload = json.loads(raw)
@@ -555,7 +620,10 @@ class OpenAITutorProvider:
             json.JSONDecodeError,
             ValidationError,
         ) as exc:
-            raise TutorProviderError("The tutor provider returned an invalid response.") from exc
+            raise TutorProviderResponseError(
+                "The tutor provider returned an invalid response.",
+                self._reported_usage(raw),
+            ) from exc
         cost = GeminiTutorProvider._token_cost(
             input_tokens, self._input_price
         ) + GeminiTutorProvider._token_cost(output_tokens, self._output_price)

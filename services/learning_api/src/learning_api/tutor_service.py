@@ -6,7 +6,13 @@ import re
 from time import perf_counter
 
 from .tutor_contracts import TutorBlock, TutorMode
-from .tutor_provider import TutorProvider, TutorProviderError, TutorProviderRequest
+from .tutor_provider import (
+    TutorProvider,
+    TutorProviderError,
+    TutorProviderRequest,
+    TutorProviderResponseError,
+    fit_request_to_input_budget,
+)
 from .tutor_repository import (
     QuotaSnapshot,
     TutorError,
@@ -177,6 +183,7 @@ class TutorService:
             prompt_version=self.prompt_version,
             max_output_tokens=route_max_output_tokens,
         )
+        request = fit_request_to_input_budget(request, self.limits.max_input_tokens)
         provider = (
             self.premium_provider
             if execution.tier == "premium"
@@ -185,6 +192,23 @@ class TutorService:
         started = perf_counter()
         try:
             generated = await provider.generate(request)
+        except TutorProviderResponseError as exc:
+            self.repository.charge_failed_generation(
+                reservation,
+                exc.usage
+                and UsageActual(
+                    input_tokens=exc.usage.input_tokens,
+                    output_tokens=exc.usage.output_tokens,
+                    cost_micros_sgd=exc.usage.cost_micros_sgd,
+                ),
+                limits=self.limits,
+                request_id=request_id,
+            )
+            raise TutorError(
+                "tutor_provider_unavailable",
+                "The AI tutor is temporarily unavailable. Authored hints and worked solutions still work.",
+                503,
+            ) from exc
         except TutorProviderError as exc:
             self.repository.release(
                 reservation,
