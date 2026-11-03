@@ -387,7 +387,7 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def stem_findings(question: dict[str, Any], renderer: str, template: str) -> list[str]:
+def stem_findings(question: dict[str, Any], template: str) -> list[str]:
     """Report wording outside the diagram that the regenerated figure no longer supports."""
     findings = []
     stem = " ".join(
@@ -400,12 +400,6 @@ def stem_findings(question: dict[str, Any], renderer: str, template: str) -> lis
             "The stem calls the figure a right-triangle schematic, which states the answer of a "
             "right-angle test. Describe it as a triangle in the question text."
         )
-    if re.search(r"\blabelled\b", stem) and template == "cone_cylinder_factor":
-        findings.append(
-            "The stem says the schematic is labelled with measurements, but this item gives none; "
-            "the figure is labelled r and h only."
-        )
-    del renderer
     return findings
 
 
@@ -422,7 +416,7 @@ def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramReque
             template,
             dict(spec.get("inputs", {})),
             "generation_spec",
-            stem_findings(question, renderer, template),
+            stem_findings(question, template),
         )
     text = _prompt_text(question)
     matches = []
@@ -440,7 +434,7 @@ def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramReque
         raise UnsupportedDiagram(f"Several templates match {question.get('stable_key')}: {names}.")
     template, inputs = matches[0]
     return DiagramRequest(
-        renderer, template, inputs, "prompt", stem_findings(question, renderer, template)
+        renderer, template, inputs, "prompt", stem_findings(question, template)
     )
 
 
