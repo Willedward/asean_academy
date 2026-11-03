@@ -1077,7 +1077,7 @@ def test_beta_operations_are_admin_authorized_audited_and_immutable():
 
 
 @pytest.mark.postgres
-def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
+def test_postgres_checkpoint_records_mastery_and_replays_one_active_session(wrong_answers):
     database_url = _database_url()
     learner_id = str(uuid4())
     with psycopg.connect(database_url) as connection:
@@ -1154,8 +1154,35 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session():
     for number in range(1, 9):
         current = engine.next_question(created["session_id"])
         question_key = current["question"]["stable_key"]
+        if number == 1:
+            garbled = {
+                "session_id": created["session_id"],
+                "stable_key": question_key,
+                "revision": current["question"]["revision"],
+                "answers": {"1": "not an answer"},
+            }
+            unreadable = engine.submit_attempt(idempotency_key="postgres-checkpoint-garbled", **garbled)
+            assert unreadable["format_error"] is True
+            assert unreadable["question_finished"] is False
+            assert unreadable["solution_available"] is False
+            assert (
+                engine.submit_attempt(idempotency_key="postgres-checkpoint-garbled", **garbled)
+                == unreadable
+            )
+            with psycopg.connect(database_url) as connection:
+                recorded = connection.execute(
+                    """
+                    select count(*) from attempts
+                    join session_questions assigned on assigned.id = attempts.session_question_id
+                    where assigned.practice_session_id = %s
+                    """,
+                    (created["session_id"],),
+                ).fetchone()[0]
+            assert recorded == 0
+            reopened = engine.next_question(created["session_id"])
+            assert reopened["question"]["stable_key"] == question_key
         answers = (
-            {"1": "not an answer"}
+            wrong_answers(question_key)
             if number == 1
             else {
                 str(part["position"]): part["canonical_answer"]
@@ -1267,3 +1294,149 @@ def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolate
         False,
     )
     assert repository.completed_section_keys(learner_id, "n1-lesson-01", 2) == []
+
+
+@pytest.mark.postgres
+def test_postgres_repeated_format_errors_end_a_checkpoint_question():
+    from question_bank.practice import MAX_UNCOUNTED_FORMAT_ERRORS
+
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (learner_id, f"{learner_id}@example.test"),
+        )
+    questions = validate_bank(BANK_ROOT).questions
+    key = "n1-l1-02"
+    engine = PostgresPracticeEngine(database_url, questions, learner_id, allow_drafts=True)
+    session_id = engine.create_session(
+        question_count=1,
+        ordered_question_keys=[key],
+        context={"mode": "checkpoint", "unit_key": "n1"},
+        idempotency_key="postgres-format-limit",
+    )["session_id"]
+    revision = engine.next_question(session_id)["question"]["revision"]
+    request = {
+        "session_id": session_id,
+        "stable_key": key,
+        "revision": revision,
+        "answers": {"1": "not an answer"},
+    }
+
+    for number in range(MAX_UNCOUNTED_FORMAT_ERRORS):
+        result = engine.submit_attempt(idempotency_key=f"postgres-limit-{number}", **request)
+        assert result["format_error"] is True
+    with psycopg.connect(database_url) as connection:
+        assert connection.execute(
+            """
+            select status::text, uncounted_format_errors from session_questions
+            where practice_session_id = %s
+            """,
+            (session_id,),
+        ).fetchone() == ("pending", MAX_UNCOUNTED_FORMAT_ERRORS)
+
+    counted = engine.submit_attempt(idempotency_key="postgres-limit-counted", **request)
+    assert counted["format_error"] is False
+    assert counted["attempt_number"] == 1
+    assert counted["question_finished"] is True
+    with psycopg.connect(database_url) as connection:
+        assert connection.execute(
+            """
+            select status::text, uncounted_format_errors from session_questions
+            where practice_session_id = %s
+            """,
+            (session_id,),
+        ).fetchone() == ("incorrect", 0)
+
+
+@pytest.mark.postgres
+def test_postgres_format_errors_are_not_attempts(monkeypatch, wrong_answers):
+    from question_bank.practice import PracticeError
+
+    from learning_api import postgres_practice
+
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (learner_id, f"{learner_id}@example.test"),
+        )
+    questions = validate_bank(BANK_ROOT).questions
+    by_key = {question.stable_key: question for question in questions}
+    key = "n1-l1-02"
+    engine = PostgresPracticeEngine(database_url, questions, learner_id, allow_drafts=True)
+    session_id = engine.create_session(
+        question_count=1,
+        ordered_question_keys=[key],
+        context={"lesson_key": "n1-lesson-01", "mode": "guided_practice"},
+        idempotency_key="postgres-format-errors",
+    )["session_id"]
+    revision = engine.next_question(session_id)["question"]["revision"]
+
+    def recorded():
+        with psycopg.connect(database_url) as connection:
+            attempts = connection.execute(
+                "select count(*) from attempts where student_id = %s", (learner_id,)
+            ).fetchone()[0]
+            assignment = connection.execute(
+                """
+                select status::text, incorrect_attempts from session_questions
+                where practice_session_id = %s
+                """,
+                (session_id,),
+            ).fetchone()
+            progress = connection.execute(
+                """
+                select attempts_total, incorrect_total from question_progress
+                where student_id = %s
+                """,
+                (learner_id,),
+            ).fetchone()
+        return attempts, tuple(assignment), progress and tuple(progress)
+
+    request = {"session_id": session_id, "stable_key": key, "revision": revision}
+    garbled = engine.submit_attempt(
+        answers={"1": "not an answer"}, idempotency_key="postgres-garbled", **request
+    )
+    assert garbled["format_error"] is True
+    assert garbled["attempt_number"] == 0
+    assert garbled["question_finished"] is False
+    assert garbled["solution_available"] is False
+    assert garbled["parts"][0]["error"]
+    replay = engine.submit_attempt(
+        answers={"1": "not an answer"}, idempotency_key="postgres-garbled", **request
+    )
+    assert replay == garbled
+    engine.submit_attempt(answers={"1": ""}, idempotency_key="postgres-empty", **request)
+
+    message = "This question's answer cannot be checked automatically. Please report it."
+    monkeypatch.setattr(
+        postgres_practice,
+        "check_answer",
+        lambda response, answer: {"correct": False, "error": message},
+    )
+    canonical = {
+        str(part["position"]): part["canonical_answer"]
+        for part in solution_for(by_key[key])["parts"]
+    }
+    unconfigured = engine.submit_attempt(
+        answers=canonical, idempotency_key="postgres-unconfigured", **request
+    )
+    assert unconfigured["format_error"] is True
+    assert unconfigured["parts"][0]["error"] == message
+    monkeypatch.undo()
+
+    assert recorded() == (0, ("pending", 0), None)
+    with pytest.raises(PracticeError, match="two incorrect"):
+        engine.give_up(session_id, key)
+
+    for number in (1, 2):
+        counted = engine.submit_attempt(
+            answers=wrong_answers(key), idempotency_key=f"postgres-counted-{number}", **request
+        )
+        assert counted["format_error"] is False
+        assert counted["attempt_number"] == number
+    assert counted["solution_available"] is True
+    assert recorded() == (2, ("pending", 2), (2, 2))

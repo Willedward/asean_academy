@@ -13,7 +13,14 @@ from psycopg.types.json import Jsonb
 from question_bank.checking import check_answer
 from question_bank.difficulty import DIFFICULTY_LEVELS
 from question_bank.models import NumericResponse, Question
-from question_bank.practice import PracticeError, public_question, solution_for
+from question_bank.practice import (
+    MAX_UNCOUNTED_FORMAT_ERRORS,
+    PracticeError,
+    format_error_result,
+    has_format_error,
+    public_question,
+    solution_for,
+)
 
 from .retry_policy import transition_retry
 
@@ -630,11 +637,35 @@ class PostgresPracticeEngine:
                         "marks_available": part.marks,
                     }
                 )
+            if (
+                has_format_error(part_results)
+                and assignment["uncounted_format_errors"] < MAX_UNCOUNTED_FORMAT_ERRORS
+            ):
+                # Not an attempt: incorrect_attempts, the solution lock, checkpoint
+                # completion and progress stay unchanged. Past the limit it counts as
+                # incorrect below, so the learner cannot be stuck on this question.
+                connection.execute(
+                    """
+                    update session_questions
+                    set uncounted_format_errors = uncounted_format_errors + 1
+                    where id = %s
+                    """,
+                    (assignment["id"],),
+                )
+                return format_error_result(
+                    question,
+                    part_results,
+                    counted_attempts=attempt_number - 1,
+                    solution_available=(
+                        not checkpoint and assignment["incorrect_attempts"] >= 2
+                    ),
+                )
             correct = all(result["correct"] for result in part_results)
             incorrect_attempts = assignment["incorrect_attempts"] + (0 if correct else 1)
             result = {
                 "attempt_number": attempt_number,
                 "correct": correct,
+                "format_error": False,
                 "parts": part_results,
                 "marks_awarded": marks_awarded,
                 "marks_available": question.total_marks,
@@ -666,7 +697,8 @@ class PostgresPracticeEngine:
                 """
                 update session_questions
                 set status = %s, incorrect_attempts = %s,
-                    resolved_at = case when %s then now() else null end
+                    resolved_at = case when %s then now() else null end,
+                    uncounted_format_errors = 0
                 where id = %s
                 """,
                 (
