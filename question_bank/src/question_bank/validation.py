@@ -10,6 +10,15 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_catalogue
+from .content_lint import (
+    ContentFinding,
+    ContentLintPolicy,
+    is_content_lint_code,
+    lint_question,
+    load_policy,
+    math_duplicate_findings,
+    question_math_items,
+)
 from .difficulty import DIFFICULTY_KEYS
 from .geometry_validation import geometry_diagram_issues, revisioned_asset_path_issues
 from .models import Question
@@ -29,6 +38,7 @@ class ValidationReport:
     issues: list[Issue] = field(default_factory=list)
     blueprint: BankBlueprint | None = None
     catalogue: SyllabusCatalogue | None = None
+    question_paths: dict[str, Path] = field(default_factory=dict)
 
     @property
     def errors(self):
@@ -52,8 +62,19 @@ class ValidationReport:
             "question_count": len(self.questions),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
+            "content_lint_counts": content_lint_counts(self.issues),
             "issues": [asdict(issue) for issue in self.issues],
         }
+
+
+def content_lint_counts(issues) -> dict[str, int]:
+    """Count content-lint issues by code (both warnings and promoted errors)."""
+
+    counts: dict[str, int] = {}
+    for issue in issues:
+        if is_content_lint_code(issue.code):
+            counts[issue.code] = counts.get(issue.code, 0) + 1
+    return dict(sorted(counts.items()))
 
 
 @dataclass
@@ -112,6 +133,7 @@ class CatalogueValidationReport:
             "question_count": len(self.questions),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
+            "content_lint_counts": content_lint_counts(self.issues),
             "issues": [asdict(issue) for issue in self.issues],
             "banks": [bank.as_dict() for bank in self.banks],
         }
@@ -167,6 +189,29 @@ def _validate_assets(bank_root: Path, question: Question, report: ValidationRepo
             path, asset.generation_spec, asset.alt_text
         ):
             _issue(report, "error", code, path, message)
+
+
+def _content_policy(report) -> ContentLintPolicy:
+    try:
+        return load_policy()
+    except ValueError as exc:
+        _issue(report, "error", "content_lint_policy_invalid", "content-lint-policy", str(exc))
+        return ContentLintPolicy()
+
+
+def add_content_findings(
+    report,
+    findings: list[ContentFinding],
+    *,
+    policy: ContentLintPolicy,
+    scopes_for,
+    path_for,
+) -> None:
+    """Convert content-lint findings into issues with the policy's severity."""
+
+    for finding in findings:
+        severity = policy.severity(finding.code, scopes_for(finding))
+        _issue(report, severity, finding.code, path_for(finding), finding.render())
 
 
 def _compare_distribution(report, actual, expected, path, code, publish):
@@ -259,6 +304,7 @@ def validate_bank(
         return report
 
     blueprint = report.blueprint
+    policy = _content_policy(report)
     allowed_outcomes = _validate_blueprint_against_catalogue(bank_root, report)
     declared_outcomes = {row.code for row in blueprint.outcome_distribution}
     seen = set()
@@ -310,7 +356,25 @@ def validate_bank(
                 f"Outcomes are absent from the bank blueprint: {sorted(undeclared)}",
             )
         _validate_assets(bank_root, question, report)
+        add_content_findings(
+            report,
+            lint_question(question),
+            policy=policy,
+            scopes_for=lambda _, question=question: (question.bank_key, question.stable_key),
+            path_for=lambda _, path=path: path,
+        )
         report.questions.append(question)
+        report.question_paths[question.stable_key] = path
+
+    add_content_findings(
+        report,
+        math_duplicate_findings(
+            [item for question in report.questions for item in question_math_items(question)]
+        ),
+        policy=policy,
+        scopes_for=lambda finding: (blueprint.bank_key, finding.subject),
+        path_for=lambda finding: report.question_paths.get(finding.subject, finding.subject),
+    )
 
     difficulty = {level: 0 for level in DIFFICULTY_KEYS}
     outcome = {row.code: 0 for row in blueprint.outcome_distribution}
@@ -374,6 +438,23 @@ def _question_fingerprint(question: Question) -> str:
     return hashlib.sha256(
         json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
+
+
+def _cross_bank_math_duplicates(report: CatalogueValidationReport) -> None:
+    """Report math-identical questions in different banks (within-bank pairs come from
+    ``validate_bank``)."""
+
+    policy = _content_policy(report)
+    paths = {key: path for bank in report.banks for key, path in bank.question_paths.items()}
+    banks = {question.stable_key: question.bank_key for question in report.questions}
+    items = [item for question in report.questions for item in question_math_items(question)]
+    add_content_findings(
+        report,
+        math_duplicate_findings(items, include_pair=lambda first, second: first.group != second.group),
+        policy=policy,
+        scopes_for=lambda finding: (banks.get(finding.subject, ""), finding.subject),
+        path_for=lambda finding: paths.get(finding.subject, finding.subject),
+    )
 
 
 def validate_catalogue(
@@ -443,6 +524,8 @@ def validate_catalogue(
                     f"Matches authored content in {previous_question}",
                 )
             fingerprints[fingerprint] = question.stable_key
+
+    _cross_bank_math_duplicates(report)
 
     syllabus = report.syllabus
     missing_topics = syllabus.expected_topic_count - len(syllabus.topics)

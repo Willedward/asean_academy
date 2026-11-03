@@ -28,9 +28,10 @@ from .catalogue import (
     load_catalogue,
 )
 from .checking import check_answer
+from .content_lint import ContentLintPolicy, is_content_lint_code
 from .difficulty import DIFFICULTY_DEFINITIONS, DIFFICULTY_KEYS
 from .models import AlgebraicResponse, Model, NumericResponse, Question
-from .validation import Issue, validate_catalogue
+from .validation import Issue, content_lint_counts, validate_catalogue
 
 BATCH_SCHEMA_VERSION = "1.0.0"
 HOUSE_RULES_SCHEMA_VERSION = "1.0.0"
@@ -217,6 +218,7 @@ class PipelineValidationReport:
             "duplicate_count": len(self.duplicate_matches),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
+            "content_lint_counts": content_lint_counts(self.issues),
             "issues": [asdict(issue) for issue in self.issues],
             "duplicates": [asdict(match) for match in self.duplicate_matches],
             "batches": [batch.as_dict() for batch in self.batch_reports],
@@ -245,6 +247,7 @@ def write_authoring_schemas(output: Path) -> None:
         "question-batch-manifest-v1.schema.json": QuestionBatchManifest.model_json_schema(),
         "question-batch-claims-v1.schema.json": BatchClaimRegistry.model_json_schema(),
         "question-house-rules-v1.schema.json": HouseRules.model_json_schema(),
+        "question-content-lint-policy-v1.schema.json": ContentLintPolicy.model_json_schema(),
     }
     for filename, schema in documents.items():
         _write_json(output / filename, schema)
@@ -896,6 +899,11 @@ def validate_authoring_pipeline(
     )
     report.question_count = len(catalogue_report.questions)
     report.issues.extend(catalogue_report.errors)
+    # Content-lint findings start as warnings (see content-lint-policy-v1.json); surface them
+    # here so authors see them without failing the pipeline.
+    report.issues.extend(
+        issue for issue in catalogue_report.warnings if is_content_lint_code(issue.code)
+    )
     expected_groups = (
         catalogue_report.syllabus.expected_topic_group_count
         if catalogue_report.syllabus

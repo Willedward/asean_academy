@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-l3-911",
+  "bank_key": "g3-sec1-n1-v1",
+  "curriculum_version": "g3_math_v1_draft",
+  "school_level": "secondary_1",
+  "topic_code": "N1",
+  "primary_outcome": "1.1",
+  "title": "Fixture question",
+  "difficulty": 3,
+  "calculator_allowed": false,
+  "question_type": "structured",
+  "status": "draft",
+  "stem": [],
+  "parts": [
+    {
+      "position": 1,
+      "label": null,
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A circle has radius 3 cm. Find its area in square centimetres, correct to 1 decimal place."
+        }
+      ],
+      "marks": 2,
+      "primary_outcome": "1.1",
+      "secondary_outcomes": [],
+      "response": {
+        "type": "numeric",
+        "comparison_mode": "rounded_dp",
+        "canonical_answer": "28.3",
+        "canonical_latex": "28.3",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": 1,
+        "unit": null
+      },
+      "hints": [
+        {
+          "stage": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Use the formula for the area of a circle."
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Square the radius before multiplying by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\pi"
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=\\pi(3)^2=9\\pi\\approx28.27"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\boxed{28.3}"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
+        }
+      ]
+    }
+  ],
+  "total_marks": 2,
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_generated",
+    "style_references": [
+      "content-lint fixture"
+    ],
+    "created_at": "2026-11-01T00:00:00Z",
+    "authored_by": "content-lint-fixture"
+  }
+}

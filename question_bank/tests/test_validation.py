@@ -4,6 +4,7 @@ import shutil
 
 from jsonschema import Draft202012Validator
 
+from question_bank.content_lint import structural_warnings
 from question_bank.geometry_validation import (
     geometry_diagram_issues,
     revisioned_asset_path_issues,
@@ -19,7 +20,7 @@ def test_authored_n1_bank_is_a_valid_complete_draft(bank_root):
     assert len(report.questions) == 104
     assert {question.difficulty for question in report.questions} == {1, 2, 3, 4, 5}
     assert not report.errors
-    assert not report.warnings
+    assert not structural_warnings(report)
 
 
 def test_unreviewed_draft_cannot_be_published(bank_root):

@@ -6,6 +6,7 @@ import pytest
 from jsonschema import Draft202012Validator
 from pydantic import ValidationError
 
+from question_bank.content_lint import structural_warnings
 from question_bank.course_models import Course, Lesson, QuestionPools
 from question_bank.course_validation import (
     lesson_note_depth_shortfalls,
@@ -23,7 +24,7 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert len(report.lessons) == 52
     assert len(report.pools.pools) == 72
     assert report.as_dict()["allocated_question_count"] == 1040
-    assert report.warnings == []
+    assert structural_warnings(report) == []
 
 
 def test_integrated_secondary_1_n5_lessons_meet_the_depth_gate(repository_root):
@@ -57,7 +58,7 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
     assert len(report.lessons) == 35
     assert len(report.pools.pools) == 54
     assert report.as_dict()["allocated_question_count"] == 936
-    assert report.warnings == []
+    assert structural_warnings(report) == []
 
 
 def test_integrated_secondary_2_s2_lessons_meet_the_depth_and_asset_gates(repository_root):

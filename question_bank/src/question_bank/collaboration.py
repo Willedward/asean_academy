@@ -17,6 +17,7 @@ from .authoring import (
     load_manifest,
     validate_authoring_pipeline,
 )
+from .content_lint import CHECKS, is_content_lint_code
 from .models import Model, Question
 from .validation import Issue
 
@@ -385,9 +386,24 @@ def _summary(
                 f"`{claim.branch if claim else 'missing'}` | "
                 f"{len(questions)}/{manifest.expected_question_count} | {difficulty} | {generator} |"
             )
+    changed_keys = _changed_question_keys(report.changed_batches, manifest_paths)
+    content_warnings = [
+        issue
+        for issue in report.issues
+        if issue.severity == "warning" and is_content_lint_code(issue.code)
+    ]
+    shown = [
+        issue
+        for issue in report.issues
+        if issue not in content_warnings or PurePosixPath(issue.path).stem in changed_keys
+    ]
     lines.extend(["", "## Validation findings", ""])
-    if not report.issues:
-        lines.append("No errors or warnings.")
+    if not shown:
+        lines.append(
+            "No errors or warnings for the changed files."
+            if content_warnings
+            else "No errors or warnings."
+        )
     else:
         lines.extend(
             [
@@ -395,11 +411,48 @@ def _summary(
                 "| --- | --- | --- | --- |",
             ]
         )
-        for issue in report.issues:
+        for issue in shown:
             message = issue.message.replace("|", "\\|").replace("\n", " ")
             lines.append(f"| {issue.severity} | `{issue.code}` | `{issue.path}` | {message} |")
+    if content_warnings:
+        lines.extend(_content_guardrail_summary(content_warnings, changed_keys))
     lines.append("")
     return "\n".join(lines)
+
+
+def _changed_question_keys(
+    changed_batches: list[str], manifest_paths: dict[str, Path]
+) -> set[str]:
+    keys: set[str] = set()
+    for batch_id in changed_batches:
+        path = manifest_paths.get(batch_id)
+        if path is not None:
+            keys.update(load_manifest(path).question_keys)
+    return keys
+
+
+def _content_guardrail_summary(warnings: list[Issue], changed_keys: set[str]) -> list[str]:
+    """Aggregate content-lint warnings so catalogue-wide findings do not bury the PR's own."""
+
+    catalogue = Counter(issue.code for issue in warnings)
+    changed = Counter(
+        issue.code for issue in warnings if PurePosixPath(issue.path).stem in changed_keys
+    )
+    lines = [
+        "",
+        "## Content guardrail warnings",
+        "",
+        "These checks are warnings while existing content is cleaned up, so they do not fail "
+        "this check. Findings for the changed batch are listed above; the full list is in "
+        "`report.json`. See `docs/plan/CONTENT_LINT_GUARDRAILS.md`.",
+        "",
+        "| Check | Changed batch | Whole catalogue |",
+        "| --- | ---: | ---: |",
+    ]
+    for code in sorted(catalogue):
+        title = CHECKS[code].title if code in CHECKS else code
+        lines.append(f"| `{code}` ({title}) | {changed[code]} | {catalogue[code]} |")
+    return lines
 
 
 def check_pull_request(
