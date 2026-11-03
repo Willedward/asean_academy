@@ -26,8 +26,8 @@ review and publication gates pass.
   `d2906581` from PR #262.
 - The verified E2.3 starting baseline is integration commit `23490ca` from PR #263; hosted
   API and web reported that exact SHA with current schema/content before implementation.
-- E2.3 is implemented on `feature/english-e2-3-tense-aspect`; merge, CI and exact hosted
-  deployment evidence are pending.
+- E2.3 is merged there at implementation commit `dd1bb5b` through integration commit
+  `9ea8d059` from PR #269.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -180,7 +180,8 @@ review and publication gates pass.
   tests skipped in the non-DB run. Ruff passed for both Python projects.
 - Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
   build passed across 204 generated static pages. The local Turbopack build stalled without an
-  error and was stopped; hosted CI must independently pass the configured Turbopack build.
+  error and was stopped; both PR runs and a complete later integration run containing E2.3
+  passed the configured Turbopack build.
 - A fresh disposable PostgreSQL database accepted the complete migration chain through
   `202611020047`, imported 1,040 mathematics questions, 133 English questions and 37 passages,
   and passed repeated bootstrap idempotency. All seven `EG2.3` records remained current drafts
@@ -188,6 +189,14 @@ review and publication gates pass.
 - Migration safety passed. No new schema migration was required because E2.3 uses the existing
   objective-question, learning-session and content-review contracts. No provider call or paid
   token was used.
+- PR #269 passed every reviewer, web, API, PostgreSQL and authenticated-browser gate before
+  merge. Integration run `41614042202` at `b303254f383e6033c7151ac5773fa297ee2f88c0`,
+  which contains E2.3, then passed all four required post-merge jobs; later integration run
+  `41615226913` at `7db46c48c588db94e2cd7bb4223604cb235249b1` also passed after one
+  flaky web-test teardown rerun.
+- Render API readiness and the web proxy reported exact containing integration SHA
+  `7db46c48c588db94e2cd7bb4223604cb235249b1`, required schema `202611020047`, and
+  current database schema/content; the hosted login returned HTTP 200.
 
 ## Validation completed for E1.4
 
