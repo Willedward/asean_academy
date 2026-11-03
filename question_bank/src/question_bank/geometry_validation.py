@@ -5,8 +5,36 @@ from __future__ import annotations
 import math
 import re
 import xml.etree.ElementTree as ET
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+from .diagram_checks import (
+    LEGACY_ADVISORY_CODES,
+    DiagramContext,
+    answer_leak_locations,
+    checked_diagram_issues,
+    legacy_diagram_issues,
+    svg_accessible_text,
+    svg_visible_text,
+)
+
+# Generators whose generation_spec declares every point, segment, label and relationship.
+CHECKED_GEOMETRY_RENDERERS = frozenset(
+    {"nextscholar-right-triangle-svg-v2", "nextscholar-mensuration-svg-v2"}
+)
+# Fixed-template generators whose assets raise advisory warnings until they are regenerated.
+# Validating with strict geometry turns those warnings into errors.
+LEGACY_GEOMETRY_RENDERERS = frozenset(
+    {
+        "nextscholar-geometry-svg-v1",
+        "nextscholar-right-triangle-svg-v1",
+        "nextscholar-mensuration-svg-v1",
+    }
+)
+# Generators whose assets must no longer appear. Move a renderer here from
+# LEGACY_GEOMETRY_RENDERERS once every asset it produced has been regenerated.
+RETIRED_GEOMETRY_RENDERERS: frozenset[str] = frozenset()
 
 _NUMBER = r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)"
 _ARC_PATH = re.compile(
@@ -321,18 +349,11 @@ def _answer_leak_issues(
                 "forbidden_visible_labels must be a list of non-empty strings.",
             )
         ]
-    visible_text = " ".join(
-        "".join(node.itertext())
-        for node in root.iter()
-        if node.tag.rsplit("}", 1)[-1] == "text"
-    )
+    visible_text = svg_visible_text(root)
+    alternative = " | ".join(part for part in (alt_text, svg_accessible_text(root)) if part)
     issues: list[tuple[str, str]] = []
     for label in forbidden:
-        locations = []
-        if label.casefold() in visible_text.casefold():
-            locations.append("visible SVG text")
-        if label.casefold() in alt_text.casefold():
-            locations.append("alternative text")
+        locations = answer_leak_locations(label, visible_text, alternative)
         if locations:
             issues.append(
                 (
@@ -343,14 +364,76 @@ def _answer_leak_issues(
     return issues
 
 
+@dataclass(frozen=True)
+class GeometryFinding:
+    severity: str
+    code: str
+    message: str
+
+
+def geometry_diagram_findings(
+    path: Path,
+    generation_spec: dict[str, Any],
+    alt_text: str = "",
+    context: DiagramContext | None = None,
+    *,
+    strict: bool = False,
+) -> list[GeometryFinding]:
+    """Validate a geometry SVG and return errors and advisory warnings.
+
+    Assets from the checked renderers must satisfy every declared relationship, so their
+    findings are errors. Assets from the legacy fixed-template renderers are checked only for
+    layout, readability and answer leaks, and those findings are warnings unless ``strict``.
+    """
+    findings = [
+        GeometryFinding("error", code, message)
+        for code, message in angle_diagram_issues(path, generation_spec)
+    ]
+    root, parse_issues = _svg_root(path)
+    if root is None:
+        return findings or [GeometryFinding("error", code, message) for code, message in parse_issues]
+    findings.extend(
+        GeometryFinding("error", code, message)
+        for code, message in _angle_marker_issues(root, generation_spec)
+    )
+    findings.extend(
+        GeometryFinding("error", code, message)
+        for code, message in _answer_leak_issues(root, generation_spec, alt_text)
+    )
+    renderer = generation_spec.get("renderer")
+    if renderer in CHECKED_GEOMETRY_RENDERERS:
+        findings.extend(
+            GeometryFinding("error", code, message)
+            for code, message in checked_diagram_issues(root, generation_spec, alt_text, context)
+        )
+    elif renderer in RETIRED_GEOMETRY_RENDERERS:
+        findings.append(
+            GeometryFinding(
+                "error",
+                "geometry_retired_renderer",
+                f"Renderer {renderer} is retired; regenerate this diagram with a checked renderer.",
+            )
+        )
+    elif renderer in LEGACY_GEOMETRY_RENDERERS:
+        severity = "error" if strict else "warning"
+        findings.extend(
+            GeometryFinding(severity, code, message)
+            for code, message in legacy_diagram_issues(root, generation_spec, alt_text, context)
+        )
+    return findings
+
+
 def geometry_diagram_issues(
     path: Path, generation_spec: dict[str, Any], alt_text: str = ""
 ) -> list[tuple[str, str]]:
-    """Validate machine-checkable geometry and prevent answer leakage."""
-    issues = angle_diagram_issues(path, generation_spec)
-    root, parse_issues = _svg_root(path)
-    if root is None:
-        return issues or parse_issues
-    issues.extend(_angle_marker_issues(root, generation_spec))
-    issues.extend(_answer_leak_issues(root, generation_spec, alt_text))
-    return issues
+    """Return the blocking geometry issues (errors only) for one SVG asset."""
+    return [
+        (finding.code, finding.message)
+        for finding in geometry_diagram_findings(path, generation_spec, alt_text)
+        if finding.severity == "error"
+    ]
+
+
+def non_legacy_diagram_warnings(warnings: list[Any]) -> list[Any]:
+    """Drop the advisory warnings that legacy diagrams raise until they are regenerated."""
+    return [issue for issue in warnings if issue.code not in LEGACY_ADVISORY_CODES]

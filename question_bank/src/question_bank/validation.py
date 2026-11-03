@@ -11,8 +11,9 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_catalogue
+from .diagram_checks import DiagramContext
 from .difficulty import DIFFICULTY_KEYS
-from .geometry_validation import geometry_diagram_issues, revisioned_asset_path_issues
+from .geometry_validation import geometry_diagram_findings, revisioned_asset_path_issues
 from .models import AlgebraicResponse, Question, TextBlock
 
 SYMBOLIC_FORM_MISSING = "symbolic_form_missing"
@@ -180,7 +181,32 @@ def _load_question(path: Path, report: ValidationReport):
     return question
 
 
-def _validate_assets(bank_root: Path, question: Question, report: ValidationReport):
+def _diagram_context(question: Question) -> DiagramContext:
+    """Give the diagram checks the answers to withhold and the values the question states."""
+    answers: list[str] = []
+    stated: list[str] = []
+    for block in question.stem:
+        if getattr(block, "type", None) == "text":
+            stated.append(block.text)
+    for part in question.parts:
+        for block in part.prompt:
+            if getattr(block, "type", None) == "text":
+                stated.append(block.text)
+        response = part.response
+        canonical = getattr(response, "canonical_answer", None)
+        if isinstance(canonical, str):
+            answers.append(canonical.strip())
+    return DiagramContext(answers=tuple(answers), stated_text=" ".join(stated))
+
+
+def _validate_assets(
+    bank_root: Path,
+    question: Question,
+    report: ValidationReport,
+    *,
+    strict_geometry: bool = False,
+):
+    context = _diagram_context(question)
     for asset in question.assets:
         path = bank_root / asset.path
         if not path.is_file():
@@ -197,10 +223,10 @@ def _validate_assets(bank_root: Path, question: Question, report: ValidationRepo
             )
         for code, message in revisioned_asset_path_issues(asset.path, question.revision):
             _issue(report, "error", code, path, message)
-        for code, message in geometry_diagram_issues(
-            path, asset.generation_spec, asset.alt_text
+        for finding in geometry_diagram_findings(
+            path, asset.generation_spec, asset.alt_text, context, strict=strict_geometry
         ):
-            _issue(report, "error", code, path, message)
+            _issue(report, finding.severity, finding.code, path, finding.message)
 
 
 def _compare_distribution(report, actual, expected, path, code, publish):
@@ -278,6 +304,7 @@ def validate_bank(
     *,
     publish: bool = False,
     catalogue_path: Path | None = None,
+    strict_geometry: bool = False,
 ) -> ValidationReport:
     bank_root = bank_root.resolve()
     report = ValidationReport()
@@ -343,7 +370,7 @@ def validate_bank(
                 path,
                 f"Outcomes are absent from the bank blueprint: {sorted(undeclared)}",
             )
-        _validate_assets(bank_root, question, report)
+        _validate_assets(bank_root, question, report, strict_geometry=strict_geometry)
         for part in question.parts:
             verb = missing_symbolic_form(part.prompt, part.response)
             if verb is not None:
@@ -425,6 +452,7 @@ def validate_catalogue(
     syllabus_path: Path,
     *,
     publish: bool = False,
+    strict_geometry: bool = False,
 ) -> CatalogueValidationReport:
     bank_catalogue_root = bank_catalogue_root.resolve()
     syllabus_path = syllabus_path.resolve()
@@ -451,6 +479,7 @@ def validate_catalogue(
             path.parent,
             publish=publish,
             catalogue_path=syllabus_path,
+            strict_geometry=strict_geometry,
         )
         report.banks.append(bank_report)
         report.issues.extend(bank_report.issues)

@@ -23,6 +23,156 @@ unambiguously.
 7. Review the rendered SVG at desktop and narrow widths before requesting Mathematics and
    editorial approval.
 
+## Checked generators: right triangles and mensuration
+
+`question_bank/src/question_bank/diagrams/` replaces the two fixed-template generators that
+are not in the repository (`nextscholar-right-triangle-svg-v1` and
+`nextscholar-mensuration-svg-v1`). The replacements are `nextscholar-right-triangle-svg-v2`
+and `nextscholar-mensuration-svg-v2`. They read each question's prompt and answer key, compute
+every coordinate, and return the SVG, the alternative text and a `generation_spec`. The same
+input always gives byte-identical output.
+
+### Supported templates
+
+| Renderer | `diagram_kind` | Templates |
+| --- | --- | --- |
+| right-triangle v2 | `right_triangle` | `find_hypotenuse`, `missing_leg`, `right_angle_specification`, `tangent_adjacent`, `tangent_opposite`, `find_angle`, `converse_test`, `perimeter_verify`, `rectangle_diagonal`, `diagonal_route`, `cable_allowance`, `elevation_observer`, `two_position`; lessons `lesson_pythagoras`, `lesson_converse`, `lesson_trigonometry` |
+| mensuration v2 | `pyramid` | `rectangular_pyramid_volume`, `pyramid_base_area_volume`, `pyramid_height`, `pyramid_covering_cost`, `pyramid_volume_constraint`; lesson `lesson_pyramid` |
+| mensuration v2 | `cone`, `cone_cylinder`, `inverted_cone_liquid` | `cone_volume`, `cone_curved_area`, `cone_total_area`, `cone_cylinder_factor`, `liquid_depth`; lesson `lesson_cone` |
+| mensuration v2 | `sphere`, `hollow_sphere`, `hemisphere` | `sphere_surface_area`, `sphere_volume_radius`, `sphere_volume_diameter`, `sphere_percentage_change`, `hollow_shell`, `sphere_core_removed`, `hemisphere_curved_area`; lesson `lesson_sphere` |
+| mensuration v2 | `cone_hemisphere`, `separate_solids` | `cone_hemisphere_volume`, `cone_hemisphere_area`, `equal_volume_cone_sphere`, `recast_spheres_cones` |
+
+Templates are matched on the mathematical wording of the prompt, not on the title or the
+opening context sentence. If a reworded prompt no longer matches, store
+`generation_spec.template` and `generation_spec.inputs` on the asset. A stored v2 template
+takes precedence over the prompt. A question that matches no template is reported as
+unsupported; it is never drawn from a guess.
+
+### What the generators guarantee
+
+- **Right triangles.** The angle arc is centred on the acute vertex it describes, between that
+  vertex's two sides, and drawn at the stated size. Narrow angles get a wider arc so that the
+  label fits inside the angle. A right-angle mark appears only where the right angle is
+  given. "Is it right-angled?" items (`converse_test`) and `perimeter_verify` use one fixed,
+  clearly acute scalene triangle with no mark, so right-angled and non-right cases look
+  alike. The unknown side or angle carries its variable (`c`, `b`, `x`, `d`, `h`, `θ`), never
+  its value. Elevation items show the tower to the ground, the dashed eye-level line, the
+  observer's eye height and the full height `h`. The two-position item shows both
+  observation points, both sight lines and both angles.
+- **Mensuration.** Pyramid bases have four sides. The apex is above the centre of the base,
+  the dashed height ends at that centre with the right angle marked in the base plane, and
+  hidden edges are dashed. A given slant height is drawn from the apex to the midpoint of a
+  base edge and labelled `l`. A given diameter is drawn in full through the centre. Hollow
+  and cored spheres show a dashed concentric inner sphere. "Same base and height" items draw
+  the cone inside a cylinder. Liquid-depth items draw the cone vertex down, with the liquid
+  surface at a neutral level so the figure does not encode the depth. Recast and
+  equal-volume items draw separate solids side by side. Labels `r`, `h` and `l` sit beside
+  the segment they measure. Where there is no room, a leader joins the label to that
+  segment.
+- **Shared.** Each viewBox is 600 units wide. Labels are 24 to 26 units and notes are 22,
+  which renders at 13.1 px or more on a 390 px screen. A label is placed only where it stays
+  inside the viewBox, clear of every stroke and every other label, and nearer to its own
+  segment than to any other segment. The alternative text names the solid and every given
+  value, and leaves out the answer. A value the learner must find is drawn at a neutral size
+  whenever the drawn givens do not already fix it.
+
+### `generation_spec` contract
+
+Besides `renderer`, `diagram_kind`, `question_key` (or `lesson_key`), `outcome` and
+`not_to_scale`, the spec records:
+
+- `template` and `inputs`: the givens read from the prompt;
+- `dimensions`: the given values and units;
+- `forbidden_visible_labels`: the answer, its unrounded forms and the intermediate values the
+  learner must derive. A value equal to a stated given goes in
+  `forbidden_label_exemptions` instead, and the unknown still carries its variable;
+- `unknowns`: each target and the variable that labels it;
+- `points` and `segments` (including which segments are `hidden`), `circles`, `ellipses`,
+  `right_angles`, `angles` and `angle_markers`, `labels`, `leaders` and `dimension_lines`;
+- `relationships`: machine-checkable facts, such as `length_ratio`, `parallel`, `collinear`,
+  `vertical`, `midpoint`, `centroid`, `inside_polygon`, `polygon_sides`, `parallelogram`,
+  `on_circle`, `on_ellipse`, `hidden_circle` and `circle_ratio`;
+- `solids`, `task` and `forbid_right_angle_marker` where they apply.
+
+### Validation
+
+For assets from the two v2 renderers, `question-bank validate` and `course-validate` check
+every declaration against the SVG, and any failure is an **error**:
+
+- **Answer leaks.** Withheld labels are matched as whole tokens, so `4` does not match `45`
+  or `4.5`. They are checked in visible text, `<title>`, `<desc>` and the alternative text
+  (`geometry_answer_leak`). The question's canonical answer must be withheld or exempted
+  (`geometry_answer_not_withheld`). An unknown must be labelled with a variable
+  (`geometry_unknown_shows_value`).
+- **Declared geometry.**
+  - `geometry_segment_mismatch` and `geometry_hidden_edge` check that each segment is drawn
+    between its points, and dashed only if it is hidden.
+  - `geometry_right_angle_measure` and `geometry_right_angle_marker` check that marked right
+    angles are 90° and that each marker sits on both arms.
+  - `geometry_right_angle_marker_forbidden` rejects any right-angle mark on a right-angle
+    test.
+  - `geometry_angle_measure` and `geometry_angle_marker_vertex` check that each arc is at its
+    stated size and centred on its own acute vertex, not the right angle.
+  - `geometry_relationship` checks each declared relationship.
+  - `geometry_solid_relationship_missing` and `geometry_solid_orientation` check the solid
+    rules: a four-sided pyramid base with the apex over its centre, a full diameter, a
+    dashed inner sphere, and the cone the right way up.
+  - `geometry_dimension_line` and `geometry_label_leader` check dimension lines and leaders.
+- **Label layout.**
+  - `geometry_label_bounds`: a label extends outside the viewBox.
+  - `geometry_label_overlap`: two labels overlap.
+  - `geometry_label_collision`: a label touches a stroke.
+  - `geometry_label_detached`: a label is more than 40 units from its segment, outside its
+    angle, or nearer another segment.
+  - `geometry_text_too_small`: text renders below 12 px on a 390 px screen.
+- **Alternative text.** It must name the solid (`geometry_alt_text_solid`) and include every
+  given value shown on the diagram (`geometry_alt_text_values`).
+
+### Existing assets: warnings now, errors later
+
+Assets from `nextscholar-geometry-svg-v1`, `nextscholar-right-triangle-svg-v1` and
+`nextscholar-mensuration-svg-v1` declare no geometry, so they raise **warnings** only:
+
+- `geometry_legacy_unchecked`: no dimensions or forbidden labels are declared.
+- `geometry_answer_leak`: a canonical answer that the prompt does not state appears in the
+  SVG text.
+- `geometry_label_bounds`, `geometry_label_overlap` and `geometry_text_too_small`: the
+  label-layout checks above.
+
+None of these warnings makes a bank or course invalid. Tighten them in three steps:
+
+1. Each batch fix PR runs `question-bank validate <bank> --strict-geometry` after applying
+   its regenerated diagrams, so the batch's new assets add no warnings.
+2. When every G4 and G5 batch has been regenerated, move
+   `nextscholar-right-triangle-svg-v1` and `nextscholar-mensuration-svg-v1` from
+   `LEGACY_GEOMETRY_RENDERERS` to `RETIRED_GEOMETRY_RENDERERS` in `geometry_validation.py`.
+   Any remaining asset from either renderer then fails with `geometry_retired_renderer`.
+3. When G1, Sec 1 G5 and G2 have been regenerated with checked generators, retire
+   `nextscholar-geometry-svg-v1` the same way. Then remove the `non_legacy_diagram_warnings`
+   filter from the course and catalogue tests, so they again assert no warnings.
+
+### Regenerating a batch
+
+```bash
+cd question_bank
+uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_2/g5/v1 --batch B002 --output /tmp/g5-b002-diagrams
+uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_2/g5/v1 --batch B002 --apply
+uv run question-bank lesson-diagrams-regenerate ../backend_resources/courses/g3_math/secondary_2/g2/v1 --lesson g5-lesson-06 --apply
+```
+
+The preview writes the SVGs, `manifest.json` and `findings.md` to a directory outside the
+bank; it never changes the repository. `--apply` does five things:
+
+- validates each new SVG strictly;
+- writes it beside the old asset as `<name>-r<revision>.svg`, keeping the old file;
+- updates the asset's path, checksum, size, alternative text and `generation_spec`;
+- increments the question or lesson revision;
+- resets review provenance.
+
+A second run makes no changes. `findings.md` lists problems that belong in the question
+text, such as wrong answer keys and stems that presuppose the answer. The command never
+edits those.
+
 ## Review feedback
 
 The admin reviewer lists every diagram's immutable asset key. Select **Comment on diagram**
