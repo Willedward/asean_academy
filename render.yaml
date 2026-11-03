@@ -102,6 +102,11 @@ services:
         value: "false"
       - key: ASEAN_ACADEMY_BETA_LEARNING_UI
         value: "true"
+      - key: ASEAN_ACADEMY_ABUSE_HASH_SECRET
+        fromService:
+          type: web
+          name: nextscholar-review-api
+          envVarKey: ASEAN_ACADEMY_ABUSE_HASH_SECRET
       - key: LEARNING_API_URL
         fromService:
           type: web
