@@ -118,6 +118,16 @@ uv run --project question_bank question-bank authoring-plan
 uv run --project question_bank question-bank authoring-validate
 ```
 
+Bank, catalogue, authoring and course validation also run content guardrails. These flag
+control characters (for example a TAB left by an unescaped `\t`), floating-point noise in
+answers, math-identical questions and lesson examples, plain-text mathematics in text blocks,
+prompts with no task, hints that state the answer, and canonical answers that disagree with
+the worked solution. Every guardrail is a warning for now. The severity policy is
+`backend_resources/question_bank/authoring/content-lint-policy-v1.json`, and each report's
+JSON includes `content_lint_counts`. See
+[`docs/plan/CONTENT_LINT_GUARDRAILS.md`](../docs/plan/CONTENT_LINT_GUARDRAILS.md) for the
+rules, their known limits and how to promote a check to an error once the content is fixed.
+
 A learning manifest contains an exact outcome/difficulty allocation of 20–30 questions and
 reserves every stable question key. Claim it through the registry before changing its source.
 On the exact claimed branch, replace the manifest's `unassigned` generator fields with the

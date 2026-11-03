@@ -196,6 +196,7 @@ def test_authoring_schemas_are_valid_json_schema(repository_root):
         "question-batch-manifest-v1.schema.json",
         "question-batch-claims-v1.schema.json",
         "question-house-rules-v1.schema.json",
+        "question-content-lint-policy-v1.schema.json",
     ):
         Draft202012Validator.check_schema(json.loads((schema_root / filename).read_text()))
 

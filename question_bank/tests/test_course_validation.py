@@ -6,6 +6,7 @@ import pytest
 from jsonschema import Draft202012Validator
 from pydantic import ValidationError
 
+from question_bank.content_lint import structural_warnings
 from question_bank.course_models import Course, Lesson, QuestionPools
 from question_bank.course_validation import (
     lesson_note_depth_shortfalls,
@@ -27,7 +28,7 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert report.as_dict()["allocated_question_count"] == 1040
     assert not [
         issue
-        for issue in non_legacy_diagram_warnings(report.warnings)
+        for issue in non_legacy_diagram_warnings(structural_warnings(report))
         if issue.code != SYMBOLIC_FORM_MISSING
     ]
 
@@ -65,7 +66,7 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
     assert report.as_dict()["allocated_question_count"] == 936
     assert not [
         issue
-        for issue in non_legacy_diagram_warnings(report.warnings)
+        for issue in non_legacy_diagram_warnings(structural_warnings(report))
         if issue.code != SYMBOLIC_FORM_MISSING
     ]
 
