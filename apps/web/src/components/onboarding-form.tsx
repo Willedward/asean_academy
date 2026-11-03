@@ -15,6 +15,8 @@ import { ApiRequestError } from "@/lib/api/errors";
 type Props = {
   email: string | null;
   initialCode?: string;
+  initialDisplayName?: string;
+  redirectTo?: string;
   acceptInvitation?: (
     invitationCode: string,
     displayName: string,
@@ -25,11 +27,13 @@ type Props = {
 export function OnboardingForm({
   email,
   initialCode = "",
+  initialDisplayName = "",
+  redirectTo = "/diagnostics",
   acceptInvitation = acceptBetaInvitation,
   appearance = "established",
 }: Props) {
   const router = useRouter();
-  const [displayName, setDisplayName] = useState("");
+  const [displayName, setDisplayName] = useState(initialDisplayName);
   const [invitationCode, setInvitationCode] = useState(initialCode);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +44,7 @@ export function OnboardingForm({
     setError(null);
     try {
       await acceptInvitation(invitationCode.trim(), displayName.trim());
-      router.replace("/diagnostics");
+      router.replace(redirectTo);
       router.refresh();
     } catch (caught) {
       const suffix =

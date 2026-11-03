@@ -22,6 +22,15 @@ const learner = {
 
 const home: LearningHomeResponse = {
   learner_id: "learner-1",
+  courses: [
+    {
+      course_key: "g3-sec1-math",
+      course_revision: 21,
+      title: "ASEAN Scholarship Mathematics — Level 1",
+      school_level: "secondary_1",
+      proficiency_threshold: 70,
+    },
+  ],
   course_key: courseMapFixture.stable_key,
   lessons: [],
   checkpoints: [],
@@ -39,6 +48,15 @@ const home: LearningHomeResponse = {
 
 const progress: ProgressResponse = {
   learner_id: "learner-1",
+  courses: [
+    {
+      course_key: "g3-sec1-math",
+      course_revision: 21,
+      title: "ASEAN Scholarship Mathematics — Level 1",
+      school_level: "secondary_1",
+      proficiency_threshold: 70,
+    },
+  ],
   course_key: courseMapFixture.stable_key,
   lessons: [],
   checkpoints: [],
@@ -54,7 +72,7 @@ describe("core learning screens", () => {
       <CoreLearningDashboard
         learner={learner}
         home={home}
-        course={courseMapFixture}
+        courses={[courseMapFixture]}
       />,
     );
 

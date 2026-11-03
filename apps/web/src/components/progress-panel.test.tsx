@@ -18,6 +18,15 @@ vi.mock("next/navigation", () => ({ useRouter: () => ({ push }) }));
 
 const progressFixture: ProgressResponse = {
   learner_id: "development-learner",
+  courses: [
+    {
+      course_key: "g3-sec1-math",
+      course_revision: 21,
+      title: "ASEAN Scholarship Mathematics — Level 1",
+      school_level: "secondary_1",
+      proficiency_threshold: 70,
+    },
+  ],
   course_key: "g3-sec1-math",
   proficiency_threshold: 70,
   checkpoint_required_for_mastery: true,
@@ -25,6 +34,7 @@ const progressFixture: ProgressResponse = {
   next_retry_due_at: "2026-09-30T02:00:00Z",
   lessons: [
     {
+      course_key: "g3-sec1-math",
       lesson_key: "n1-lesson-01",
       lesson_title: "Primes and prime factorisation",
       position: 1,
@@ -43,6 +53,7 @@ const progressFixture: ProgressResponse = {
   ],
   checkpoints: [
     {
+      course_key: "g3-sec1-math",
       unit_key: "g3-sec1-n1",
       available: true,
       state: "available",

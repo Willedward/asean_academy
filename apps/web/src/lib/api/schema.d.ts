@@ -1735,7 +1735,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get authenticated learner progress across the N1 course */
+        /** Get authenticated learner progress across the learner's enrolled courses */
         get: operations["getProgress"];
         put?: never;
         post?: never;
@@ -2764,6 +2764,8 @@ export interface components {
         CheckpointProgressResponse: {
             /** Available */
             available: boolean;
+            /** Course Key */
+            course_key: string;
             /** Last Percentage */
             last_percentage?: number | null;
             /** Last Session Id */
@@ -2841,6 +2843,13 @@ export interface components {
              * Format: uuid
              */
             student_id: string;
+        };
+        /** ContentCourseStatusResponse */
+        ContentCourseStatusResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
         };
         /** ContentLifecycleRequestResponse */
         ContentLifecycleRequestResponse: {
@@ -3080,6 +3089,8 @@ export interface components {
             course_key: string;
             /** Course Revision */
             course_revision: number;
+            /** Courses */
+            courses: components["schemas"]["ContentCourseStatusResponse"][];
             /** Lessons */
             lessons: number;
             /** Questions */
@@ -5293,6 +5304,8 @@ export interface components {
             checkpoints: components["schemas"]["CheckpointProgressResponse"][];
             /** Course Key */
             course_key: string;
+            /** Courses */
+            courses: components["schemas"]["ProgressCourseResponse"][];
             /** Learner Id */
             learner_id: string;
             /** Lessons */
@@ -5320,6 +5333,8 @@ export interface components {
              * @default 0
              */
             correct_count: number;
+            /** Course Key */
+            course_key: string;
             /**
              * Eventual Correct Percentage
              * @default 0
@@ -5686,6 +5701,19 @@ export interface components {
             /** Target Track */
             target_track: string | null;
         };
+        /** ProgressCourseResponse */
+        ProgressCourseResponse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
+            /** Proficiency Threshold */
+            proficiency_threshold: number;
+            /** School Level */
+            school_level: string;
+            /** Title */
+            title: string;
+        };
         /** ProgressResponse */
         ProgressResponse: {
             /** Checkpoint Required For Mastery */
@@ -5694,6 +5722,8 @@ export interface components {
             checkpoints: components["schemas"]["CheckpointProgressResponse"][];
             /** Course Key */
             course_key: string;
+            /** Courses */
+            courses: components["schemas"]["ProgressCourseResponse"][];
             /** Learner Id */
             learner_id: string;
             /** Lessons */

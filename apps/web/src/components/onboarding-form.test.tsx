@@ -46,6 +46,34 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe("OnboardingForm", () => {
+  it("lets an enrolled learner add a course and return to learning", async () => {
+    const acceptInvitation = vi.fn(async () => accepted);
+    render(
+      <OnboardingForm
+        acceptInvitation={acceptInvitation}
+        email="student@example.test"
+        initialCode="second-invitation-code"
+        initialDisplayName="Student"
+        redirectTo="/learn"
+      />,
+    );
+
+    expect(screen.getByLabelText("Name shown in the academy")).toHaveValue(
+      "Student",
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: "Join the beta course" }),
+    );
+
+    await waitFor(() => {
+      expect(acceptInvitation).toHaveBeenCalledWith(
+        "second-invitation-code",
+        "Student",
+      );
+      expect(replace).toHaveBeenCalledWith("/learn");
+    });
+  });
+
   it("submits the invitation and enters the learner course", async () => {
     const acceptInvitation = vi.fn(async () => accepted);
     render(

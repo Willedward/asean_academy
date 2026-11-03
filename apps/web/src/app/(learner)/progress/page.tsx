@@ -3,6 +3,7 @@ import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { LearnerHeader } from "@/components/learner-header";
 import { ProgressPanel } from "@/components/progress-panel";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
+import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
 
 function EstablishedProgressPage() {
@@ -20,16 +21,13 @@ export default async function ProgressPage() {
   if (!betaLearningUiEnabled()) return <EstablishedProgressPage />;
 
   const learner = await requireEnrolledLearner();
-  const activeEnrolment = learner?.enrolments.find(
-    (enrolment) => enrolment.status === "active",
-  );
-  if (!learner || !activeEnrolment) return <EstablishedProgressPage />;
+  if (!learner || !hasActiveEnrolment(learner)) return <EstablishedProgressPage />;
 
   return (
     <CoreLearningShell
       active="progress"
       learner={coreLearnerFromProfile(learner.profile)}
-      courseHref={`/courses/${activeEnrolment.course_key}`}
+      courseHref={learnerCourseHref(learner)}
     >
       <ProgressPanel appearance="nextscholar" />
     </CoreLearningShell>

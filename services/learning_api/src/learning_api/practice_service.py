@@ -23,7 +23,7 @@ class PracticeService:
         allow_drafts: bool,
         database_url: str | None = None,
     ):
-        self.questions = catalogue.questions
+        self.questions = catalogue.all_questions
         self.catalogue = catalogue
         self.progress = progress
         self.postgres = database_url is not None
@@ -73,10 +73,11 @@ class PracticeService:
         }
 
     def _lesson_manifest(self, lesson_key: str):
+        report = self.catalogue.report_for_lesson(lesson_key)
         manifest = next(
             (
                 manifest
-                for manifest in self.catalogue.report.pools.manifests
+                for manifest in (report.pools.manifests if report is not None else [])
                 if any(
                     pool.type == "lesson_practice" and pool.lesson_key == lesson_key
                     for pool in manifest.pools
@@ -112,15 +113,13 @@ class PracticeService:
         return pool
 
     def _unit(self, unit_key: str):
-        course = self.catalogue.report.course
-        self.catalogue.course_map(course.stable_key)
-        unit = next(
-            (candidate for candidate in course.units if candidate.stable_key == unit_key),
-            None,
-        )
-        if unit is None:
+        report = self.catalogue.report_for_unit(unit_key)
+        if report is None:
             raise PracticeError("unit_not_found", "The requested unit was not found.", 404)
-        return unit
+        self.catalogue.course_map(report.course.stable_key)
+        return next(
+            candidate for candidate in report.course.units if candidate.stable_key == unit_key
+        )
 
     def create_session(
         self,
@@ -165,6 +164,7 @@ class PracticeService:
             if summary["status"] == "active":
                 return self._creation_response(summary)
 
+        course = self.catalogue.report_for_lesson(lesson_key).course
         pool = self._lesson_pool(lesson_key)
         pool_keys = [item.question_key for item in pool.items]
         if mode == "retry_review":
@@ -175,19 +175,12 @@ class PracticeService:
                 if question.bank_key == manifest.bank_key
                 and question.primary_outcome in lesson.outcomes
             ]
-            reserve_pool = next(
-                (
-                    candidate
-                    for candidate in manifest.pools
-                    if candidate.type == "adaptive_reserve"
-                ),
-                None,
-            )
-            reserve_keys = (
-                [item.question_key for item in reserve_pool.items]
-                if reserve_pool is not None
-                else []
-            )
+            reserve_keys = [
+                item.question_key
+                for candidate in manifest.pools
+                if candidate.type == "adaptive_reserve"
+                for item in candidate.items
+            ]
             if isinstance(self.engine, PostgresPracticeEngine):
                 assignments = self.engine.retry_assignments(lesson_keys, reserve_keys)
                 ordered_keys = [item["served_key"] for item in assignments]
@@ -222,8 +215,8 @@ class PracticeService:
             question_count=selected_count,
             ordered_question_keys=ordered_keys,
             context={
-                "course_key": self.catalogue.report.course.stable_key,
-                "course_revision": self.catalogue.report.course.revision,
+                "course_key": course.stable_key,
+                "course_revision": course.revision,
                 "lesson_key": lesson.stable_key,
                 "mode": mode,
                 "stages": stages,
@@ -266,10 +259,11 @@ class PracticeService:
                 "Every lesson in this unit must be proficient before the checkpoint.",
                 409,
             )
+        report = self.catalogue.report_for_unit(unit_key)
         manifest = next(
             (
                 candidate
-                for candidate in self.catalogue.report.pools.manifests
+                for candidate in report.pools.manifests
                 if candidate.unit_key == unit_key
             ),
             None,
@@ -304,8 +298,8 @@ class PracticeService:
             question_count=selected_count,
             ordered_question_keys=[item.question_key for item in pool.items],
             context={
-                "course_key": self.catalogue.report.course.stable_key,
-                "course_revision": self.catalogue.report.course.revision,
+                "course_key": report.course.stable_key,
+                "course_revision": report.course.revision,
                 "unit_key": unit.stable_key,
                 "mode": "checkpoint",
                 "stages": {item.question_key: item.stage for item in pool.items},

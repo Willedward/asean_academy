@@ -11,6 +11,7 @@ from ..dependencies import (
     LearnerProgressWriteRateLimitDependency,
     ProgressServiceDependency,
 )
+from ..practice_contracts import LESSON_KEY_PATTERN
 from ..progress_contracts import (
     ActiveRecallAttemptRequest,
     ActiveRecallAttemptResponse,
@@ -43,7 +44,7 @@ def _safe(call):
     summary="Idempotently start a lesson for the authenticated learner",
 )
 async def start_lesson(
-    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    lesson_key: Annotated[str, Path(pattern=LESSON_KEY_PATTERN)],
     service: ProgressServiceDependency,
     _rate_limit: LearnerProgressWriteRateLimitDependency,
 ) -> LessonProgressResponse:
@@ -57,7 +58,7 @@ async def start_lesson(
     summary="Get explicit section completion for the current lesson revision",
 )
 async def lesson_section_progress(
-    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    lesson_key: Annotated[str, Path(pattern=LESSON_KEY_PATTERN)],
     service: ProgressServiceDependency,
 ) -> LessonSectionProgressResponse:
     return _safe(lambda: service.section_progress(lesson_key))
@@ -71,7 +72,7 @@ async def lesson_section_progress(
 )
 async def set_lesson_section_completion(
     body: SetLessonSectionCompletionRequest,
-    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    lesson_key: Annotated[str, Path(pattern=LESSON_KEY_PATTERN)],
     section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
     service: ProgressServiceDependency,
     _rate_limit: LearnerProgressWriteRateLimitDependency,
@@ -93,7 +94,7 @@ async def set_lesson_section_completion(
 )
 async def check_lesson_active_recall(
     body: ActiveRecallAttemptRequest,
-    lesson_key: Annotated[str, Path(pattern=r"^n1-lesson-[0-9]{2}$")],
+    lesson_key: Annotated[str, Path(pattern=LESSON_KEY_PATTERN)],
     section_key: Annotated[str, Path(pattern=r"^[a-z0-9-]+$")],
     service: ProgressServiceDependency,
     _rate_limit: LearnerProgressWriteRateLimitDependency,
@@ -111,7 +112,7 @@ async def check_lesson_active_recall(
     "/progress",
     operation_id="getProgress",
     response_model=ProgressResponse,
-    summary="Get authenticated learner progress across the N1 course",
+    summary="Get authenticated learner progress across the learner's enrolled courses",
 )
 async def progress(service: ProgressServiceDependency) -> ProgressResponse:
     return _safe(service.progress)

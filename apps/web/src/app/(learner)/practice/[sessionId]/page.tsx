@@ -3,6 +3,7 @@ import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { LearnerHeader } from "@/components/learner-header";
 import { PracticePlayer } from "@/components/practice-player";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
+import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
 
 function EstablishedPracticePage({ sessionId }: { sessionId: string }) {
@@ -25,10 +26,7 @@ export default async function PracticePage({
   }
 
   const learner = await requireEnrolledLearner();
-  const activeEnrolment = learner?.enrolments.find(
-    (enrolment) => enrolment.status === "active",
-  );
-  if (!learner || !activeEnrolment) {
+  if (!learner || !hasActiveEnrolment(learner)) {
     return <EstablishedPracticePage sessionId={sessionId} />;
   }
 
@@ -36,7 +34,7 @@ export default async function PracticePage({
     <CoreLearningShell
       active="course"
       learner={coreLearnerFromProfile(learner.profile)}
-      courseHref={`/courses/${activeEnrolment.course_key}`}
+      courseHref={learnerCourseHref(learner)}
       focus
       maxWidth={920}
     >

@@ -60,6 +60,7 @@ DEFAULT_COURSE = (
     REPOSITORY_ROOT
     / "backend_resources/courses/g3_math/secondary_1/n1/v1"
 )
+DEFAULT_COURSE_CATALOGUE = REPOSITORY_ROOT / "backend_resources/courses/g3_math"
 DEFAULT_BANK_CATALOGUE = REPOSITORY_ROOT / "backend_resources/question_bank/g3_math"
 DEFAULT_COURSE_BANKS = DEFAULT_BANK_CATALOGUE
 DEFAULT_SYLLABUS = REPOSITORY_ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
@@ -156,9 +157,15 @@ def parser():
         default=REPOSITORY_ROOT / "backend_resources/courses/schema",
     )
     course_importer = commands.add_parser(
-        "course-import-db", help="Import a validated course snapshot into PostgreSQL"
+        "course-import-db",
+        help="Import validated course snapshots into PostgreSQL in one transaction",
     )
-    course_importer.add_argument("course", type=Path, nargs="?", default=DEFAULT_COURSE)
+    course_importer.add_argument(
+        "courses",
+        type=Path,
+        nargs="*",
+        help="Course snapshot directories. Defaults to every course in the catalogue.",
+    )
     course_importer.add_argument("--bank", type=Path, default=DEFAULT_COURSE_BANKS)
     course_importer.add_argument(
         "--publish", action="store_true", help="Require publication validation"
@@ -811,9 +818,16 @@ def main(argv=None):
         print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
         return 0
     if args.command == "course-import-db":
-        report = validate_course(args.course, args.bank, publish=args.publish)
-        if not report.valid:
-            print(json.dumps(report.as_dict(), indent=2))
+        course_roots = args.courses or [
+            path.parent for path in sorted(DEFAULT_COURSE_CATALOGUE.glob("**/v1/course.json"))
+        ]
+        reports = [
+            validate_course(course_root, args.bank, publish=args.publish)
+            for course_root in course_roots
+        ]
+        invalid = [report for report in reports if not report.valid]
+        if invalid or not reports:
+            print(json.dumps([report.as_dict() for report in invalid], indent=2))
             return 1
         database_url = os.environ.get("DATABASE_URL")
         if not database_url:
@@ -823,10 +837,13 @@ def main(argv=None):
         except ImportError as exc:
             raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
         with psycopg.connect(database_url, prepare_threshold=None) as connection:
-            result = CourseImporter(connection).import_all(
-                report.course, report.lessons, report.pools
-            )
-        print(json.dumps({"status": "complete", "result": result}, indent=2))
+            # One connection commits on exit, so a failure imports no course at all.
+            importer = CourseImporter(connection)
+            results = [
+                importer.import_all(report.course, report.lessons, report.pools)
+                for report in reports
+            ]
+        print(json.dumps({"status": "complete", "results": results}, indent=2))
         return 0
     report = validate_bank(args.bank, publish=args.publish)
     if not report.valid:

@@ -12,9 +12,11 @@ from .contracts import ApiModel
 PracticeMode = Literal["guided_practice", "retry_review", "checkpoint"]
 PracticeStage = Literal["guided", "independent", "challenge", "checkpoint", "adaptive"]
 
+LESSON_KEY_PATTERN = r"^[ngs][0-9]+-lesson-[0-9]{2,3}$"
+
 
 class CreatePracticeSessionRequest(ApiModel):
-    lesson_key: str | None = Field(default=None, pattern=r"^[ngs][0-9]+-lesson-[0-9]{2,3}$")
+    lesson_key: str | None = Field(default=None, pattern=LESSON_KEY_PATTERN)
     unit_key: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$")
     mode: PracticeMode = "guided_practice"
     question_count: int | None = Field(default=None, ge=1, le=20)

@@ -233,14 +233,6 @@ jobs:
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
           DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank english-import-db
-      # The Sec 3-entry journeys need g3-sec2-math. Its import currently fails
-      # (two adaptive_reserve pools in g3-sec2-g5 violate a unique constraint) and
-      # rolls back; the seed then skips the Secondary 2 invitation and the
-      # two-course journey reports expected failures. Remove continue-on-error
-      # once the import succeeds.
-      - name: Import Secondary 2 course (known failure)
-        continue-on-error: true
-        run: DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db backend_resources/courses/g3_math/secondary_2/g2/v1
       - run: uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
       - run: pnpm --filter @asean-academy/web exec playwright install --with-deps chromium
       - run: pnpm test:e2e

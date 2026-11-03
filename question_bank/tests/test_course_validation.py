@@ -52,6 +52,41 @@ def test_integrated_secondary_1_n5_lessons_meet_the_depth_gate(repository_root):
         assert lesson.assets == []
 
 
+def test_unit_may_have_several_reserve_pools_but_one_checkpoint_pool():
+    def pool(key, pool_type, question_key, stage):
+        return {
+            "stable_key": key,
+            "type": pool_type,
+            "expected_question_count": 1,
+            "items": [
+                {"position": 1, "question_key": question_key, "stage": stage, "weight": 1}
+            ],
+        }
+
+    def manifest(*pools):
+        return {
+            "schema_version": "1.0.0",
+            "course_key": "g3-sec2-math",
+            "unit_key": "g3-sec2-g5",
+            "bank_key": "g3-sec2-g5-v1",
+            "pools": list(pools),
+        }
+
+    QuestionPools.model_validate(
+        manifest(
+            pool("reserve-a", "adaptive_reserve", "g5-l1-501", "adaptive"),
+            pool("reserve-b", "adaptive_reserve", "g5-l1-502", "adaptive"),
+        )
+    )
+    with pytest.raises(ValidationError, match="only one unit_checkpoint pool"):
+        QuestionPools.model_validate(
+            manifest(
+                pool("checkpoint-a", "unit_checkpoint", "g5-l1-501", "checkpoint"),
+                pool("checkpoint-b", "unit_checkpoint", "g5-l1-502", "checkpoint"),
+            )
+        )
+
+
 def test_secondary_2_authored_course_source_is_valid(repository_root, course_bank_root):
     course_root = repository_root / "backend_resources/courses/g3_math/secondary_2/g2/v1"
     report = validate_course(course_root, course_bank_root)

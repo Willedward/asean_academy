@@ -54,7 +54,6 @@ class PostgresPracticeEngine:
         self.learner_id = str(uuid.UUID(learner_id))
         allowed = questions if allow_drafts else [q for q in questions if q.status == "published"]
         self.questions = {question.stable_key: question for question in allowed}
-        self.bank_key = questions[0].bank_key if questions else "g3-sec1-n1-v1"
         self.development_drafts = any(q.status != "published" for q in allowed)
         self.rng = rng or random.SystemRandom()
 
@@ -98,10 +97,10 @@ class PostgresPracticeEngine:
             )
         return question
 
-    def _bank_id(self, connection):
+    def _bank_id(self, connection, bank_key: str):
         row = connection.execute(
             "select id from math_question_banks where bank_key = %s",
-            (self.bank_key,),
+            (bank_key,),
         ).fetchone()
         if row is None:
             raise PracticeError(
@@ -122,7 +121,7 @@ class PostgresPracticeEngine:
               and questions.stable_key = %s
               and versions.revision = %s
             """,
-            (self.bank_key, key, revision),
+            (self._question(key).bank_key, key, revision),
         ).fetchone()
         if row is None:
             raise PracticeError(
@@ -229,6 +228,7 @@ class PostgresPracticeEngine:
             raise PracticeError(
                 "invalid_question_count", f"question_count must be between 1 and {maximum}."
             )
+        session_bank_key = eligible[0].bank_key
         scope = {
             "difficulties": difficulties,
             "outcomes": outcomes,
@@ -320,7 +320,12 @@ class PostgresPracticeEngine:
                 ) values (%s, %s, %s, %s)
                 returning *
                 """,
-                (self.learner_id, self._bank_id(connection), question_count, Jsonb(scope)),
+                (
+                    self.learner_id,
+                    self._bank_id(connection, session_bank_key),
+                    question_count,
+                    Jsonb(scope),
+                ),
             ).fetchone()
             if idempotency_key is not None:
                 connection.execute(

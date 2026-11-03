@@ -154,7 +154,7 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
     try {
       const result = await api.createInvitation({
         email: String(form.get("email") ?? "").trim(),
-        course_key: "g3-sec1-math",
+        course_key: String(form.get("course_key")),
         expires_days: Number(form.get("expires_days")),
         max_uses: Number(form.get("max_uses")),
       });
@@ -238,6 +238,14 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
               <label className="mb-2 block text-sm font-bold" htmlFor="invitation-email">Student email</label>
               <input className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" id="invitation-email" name="email" placeholder="student@example.com" required type="email" />
             </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold" htmlFor="invitation-course">Course</label>
+              <select className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3" defaultValue="g3-sec1-math" id="invitation-course" name="course_key">
+                <option value="g3-sec1-math">Secondary 1 Mathematics</option>
+                <option value="g3-sec2-math">Secondary 2 Mathematics</option>
+              </select>
+              <p className="mb-0 mt-2 text-xs text-slate-500">A Sec 3-entry learner needs one invitation for each course.</p>
+            </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-bold" htmlFor="expires-days">Expires after</label>
@@ -266,7 +274,7 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
                 Copy this now. The raw code cannot be retrieved after this screen is cleared or reloaded.
               </p>
               <div>
-                <span className="text-sm font-semibold text-slate-500">For {created.email}</span>
+                <span className="text-sm font-semibold text-slate-500">For {created.email} · {created.course_key}</span>
                 <code className="mt-2 block break-all rounded-xl bg-slate-950 p-4 text-sm text-teal-200">{created.invitation_code}</code>
               </div>
               <Button onClick={() => void copyOnboardingLink()} type="button" variant="outline">

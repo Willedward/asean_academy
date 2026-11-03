@@ -37,6 +37,7 @@ describe("LessonPanel", () => {
     };
     const startSession = vi.fn().mockResolvedValue(session);
     const progress: LessonProgressResponse = {
+      course_key: "g3-sec1-math",
       lesson_key: "n1-lesson-01",
       lesson_title: "Primes and prime factorisation",
       position: 1,
@@ -117,6 +118,7 @@ describe("LessonPanel", () => {
       development_drafts: true,
     } satisfies PracticeSessionResponse);
     const recordStart = vi.fn().mockResolvedValue({
+      course_key: "g3-sec1-math",
       lesson_key: "n1-lesson-01",
       lesson_title: lessonFixture.title,
       position: 1,
