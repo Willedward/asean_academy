@@ -28,6 +28,8 @@ describe("hosted auth navigation", () => {
     expect(safeNextPath("https://attacker.example/steal")).toBe("/onboarding");
     expect(safeNextPath("//attacker.example/steal")).toBe("/onboarding");
     expect(safeNextPath("/\\attacker.example/steal")).toBe("/onboarding");
+    expect(safeNextPath("/.//example.test/path")).toBe("/onboarding");
+    expect(safeNextPath("/a/..//example.test/path")).toBe("/onboarding");
   });
 
   it("preserves invitation links across sign-in and safe error retries", () => {

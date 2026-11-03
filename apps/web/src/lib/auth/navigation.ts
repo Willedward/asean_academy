@@ -13,6 +13,7 @@ export function safeNextPath(value: string | null | undefined): string {
   try {
     const parsed = new URL(value, "https://app.invalid");
     if (parsed.origin !== "https://app.invalid") return DEFAULT_AFTER_SIGN_IN;
+    if (parsed.pathname.startsWith("//")) return DEFAULT_AFTER_SIGN_IN;
     return `${parsed.pathname}${parsed.search}${parsed.hash}`;
   } catch {
     return DEFAULT_AFTER_SIGN_IN;
