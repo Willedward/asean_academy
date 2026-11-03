@@ -18,7 +18,6 @@ from psycopg.types.json import Jsonb
 from .admin_repository import BetaOperationsError
 from .identity import AuthenticatedLearner
 
-
 LOGGER = logging.getLogger(__name__)
 
 # Children before parents: several of these references refuse a delete while a child row
