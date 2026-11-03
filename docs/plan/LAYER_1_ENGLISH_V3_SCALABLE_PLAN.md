@@ -114,6 +114,13 @@ intended meaning, natural word partnership, audience and the complete sentence. 
 remain draft-only and leave Sprint membership, protected forms and E1 checkpoint mastery scope
 unchanged.
 
+The Core-route E2.3 increment adds an original seven-section tense-and-aspect lesson, six
+deterministic practice/exit questions and one disjoint retry. Its `Anchor -> Order -> View ->
+Verify` routine distinguishes routines, temporary actions, completed events, actions in progress,
+earlier past actions and past-to-present results from explicit timeline evidence. The records
+remain draft-only and leave Sprint membership, protected forms and E2 checkpoint mastery scope
+unchanged.
+
 ## 1. V3 decision
 
 V3 keeps the strongest operational ideas from V2 but removes tasks and workflows that are
@@ -546,8 +553,10 @@ response is not treated as independent transfer. The next independently executab
 sequence now includes draft-only **E1.2 word class and word family** and **E1.4 synonym
 precision**, each with a fresh parallel retry and deterministic marking. The next increment is
 **E1.5 collocation and register** is now implemented as the third bounded Core expansion with
-a fresh parallel retry. The next increment is **E2.3 tense and aspect**, the first of four
-remaining Core gaps; none of these increments can bypass human review or publication controls.
+a fresh parallel retry. **E2.3 tense and aspect** is now implemented as the fourth bounded Core
+expansion with a fresh parallel retry. The next increment is **E2.6 cohesion across sentences**,
+the first of three remaining Core gaps; none of these increments can bypass human review or
+publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing
 optional Full-route lessons:

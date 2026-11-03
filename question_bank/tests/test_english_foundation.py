@@ -36,9 +36,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 42
+    assert len(report.lessons) == 43
     assert len(report.passages) == 37
-    assert len(report.questions) == 126
+    assert len(report.questions) == 133
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -104,18 +104,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 42,
-        "core": 28,
+        "full": 43,
+        "core": 29,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 42,
-        "core": 28,
+        "full": 43,
+        "core": 29,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 19,
-        "core": 19,
+        "full": 20,
+        "core": 20,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -292,6 +292,37 @@ def test_e1_5_collocation_and_register_checks_partnership_and_audience(english_r
     for question, answer in zip(
         questions,
         ["C", "B", "D", "C", "C", "D", "A"],
+        strict=True,
+    ):
+        assert check_english_answer(question.parts[0].response, answer)["correct"]
+    assert not check_english_answer(questions[5].parts[0].response, "A")["correct"]
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert questions[6].parts[0].prompt != questions[5].parts[0].prompt
+
+
+def test_e2_3_tense_and_aspect_uses_timeline_evidence_and_fresh_retry(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/eg-l3-{number:03d}.json").read_text()
+        )
+        for number in range(1, 8)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EG2.3"}
+    assert {question.question_type for question in questions} == {"grammar_usage"}
+    assert [question.exposure_pool for question in questions] == [
+        "guided_practice",
+        "guided_practice",
+        "independent_practice",
+        "independent_practice",
+        "independent_practice",
+        "exit_ticket",
+        "retry_review",
+    ]
+    assert [len(question.parts) for question in questions] == [1] * 7
+    for question, answer in zip(
+        questions,
+        ["B", "D", "A", "C", "B", "D", "A"],
         strict=True,
     ):
         assert check_english_answer(question.parts[0].response, answer)["correct"]
@@ -1895,6 +1926,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eg-b002",
             "english-eg-b003",
             "english-eg-b004",
+            "english-eg-b005",
+            "english-eg-b006",
         "english-eo-b001",
         "english-eo-b002",
         "english-eo-b003",
@@ -1971,7 +2004,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b036",
         "english-ex-b037",
     ]
-    assert len(report.questions) == 126
+    assert len(report.questions) == 133
     assert not report.duplicates
 
 
@@ -2075,6 +2108,22 @@ def test_collocation_register_reviewer_export_contains_partnership_and_audience_
     assert "appropriately neutral-formal for an office email" in page
     assert "matches the personal audience" in page
     assert "Raise serious concerns" in page
+
+
+def test_tense_aspect_reviewer_export_contains_anchor_order_and_viewpoint_evidence(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-eg-b005.json"
+    output = tmp_path / "tense-aspect-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 6
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "in progress at the moment the power failed" in page
+    assert "past-to-present period" in page
+    assert "rehearsal began before Maya arrived" in page
 
 
 def test_sprint_route_reviewer_export_pins_complete_review_evidence(
