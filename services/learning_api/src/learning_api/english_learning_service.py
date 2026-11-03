@@ -469,8 +469,13 @@ class EnglishLearningService:
     def _wrong_feedback(part, submission) -> str:
         spec = part.response
         if isinstance(spec, (SingleChoiceResponse, MultipleResponse)):
+            if isinstance(spec, SingleChoiceResponse) and not isinstance(submission, str):
+                return part.hint
             keys = [submission] if isinstance(submission, str) else submission
-            rationales = [spec.choice_rationales.get(str(key).upper()) for key in keys]
+            rationales = [
+                spec.choice_rationales.get(key)
+                for key in dict.fromkeys(str(key).upper() for key in keys)
+            ]
             useful = [text for text in rationales if text]
             return " ".join(useful) if useful else part.hint
         if isinstance(spec, ShortTextResponse):

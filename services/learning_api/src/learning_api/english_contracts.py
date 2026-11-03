@@ -635,13 +635,14 @@ class EnglishDiagnosticNextQuestionResponse(ApiModel):
 
 
 EnglishAnswerText = Annotated[str, StringConstraints(max_length=1000)]
+EnglishAnswerList = Annotated[list[EnglishAnswerText], Field(max_length=20)]
 
 
 class SubmitEnglishAttemptRequest(ApiModel):
     session_id: str
     question_key: str = Field(pattern=r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$")
     question_revision: int = Field(ge=1)
-    answers: dict[str, EnglishAnswerText | list[EnglishAnswerText]] = Field(
+    answers: dict[str, EnglishAnswerText | EnglishAnswerList] = Field(
         min_length=1, max_length=20
     )
 
@@ -650,7 +651,7 @@ class SubmitEnglishCheckpointAttemptRequest(ApiModel):
     session_id: str
     question_key: str = Field(pattern=r"^(ev|eg|eb|eo|er|ex)-l[1-5]-[0-9]{3,4}$")
     question_revision: int = Field(ge=1)
-    answers: dict[str, EnglishAnswerText | list[EnglishAnswerText]] = Field(
+    answers: dict[str, EnglishAnswerText | EnglishAnswerList] = Field(
         min_length=1, max_length=20
     )
 
