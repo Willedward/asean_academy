@@ -15,6 +15,8 @@ const invitation: InvitationList["invitations"][number] = {
   email: "student@example.test",
   course_key: "g3-sec1-math",
   course_revision: 1,
+  target_track: null,
+  courses: [{ course_key: "g3-sec1-math", course_revision: 1 }],
   status: "active",
   use_count: 0,
   max_uses: 1,
@@ -81,11 +83,35 @@ describe("AdminInvitationsPanel", () => {
     expect(await screen.findByText("raw-code-visible-once")).toBeInTheDocument();
     expect(api.createInvitation).toHaveBeenCalledWith({
       email: "New.Student@Example.test",
-      course_key: "g3-sec1-math",
+      target_track: "sec3-entry",
       expires_days: 14,
       max_uses: 1,
     });
     expect(api.listInvitations).toHaveBeenCalledTimes(2);
+  });
+
+  it("shows both courses of a Sec 3-entry invitation", async () => {
+    const track = {
+      ...invitation,
+      target_track: "sec3-entry",
+      courses: [
+        { course_key: "g3-sec1-math", course_revision: 1 },
+        { course_key: "g3-sec2-math", course_revision: 2 },
+      ],
+    };
+    const api = {
+      listInvitations: vi.fn(async () => ({ invitations: [track], total: 1 })),
+      getOperationsSummary: vi.fn(async () => summary),
+      listAuditEvents: vi.fn(async () => audit),
+      createInvitation: vi.fn(async () => created),
+      revokeInvitation: vi.fn(async () => ({ ...track, status: "revoked" as const })),
+    };
+
+    render(<AdminInvitationsPanel api={api} />);
+
+    expect(
+      await screen.findByText("Sec 3-entry: g3-sec1-math · r1 + g3-sec2-math · r2"),
+    ).toBeInTheDocument();
   });
 
   it("issues an invitation for the selected course", async () => {

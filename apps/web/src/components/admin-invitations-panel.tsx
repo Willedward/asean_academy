@@ -75,6 +75,17 @@ const eventLabels: Record<
   english_essay_consent_recorded: "Essay processing consent recorded",
 };
 
+const SEC3_ENTRY_TRACK = "sec3-entry";
+
+function invitationScope(invitation: Invitation): string {
+  const courses = invitation.courses
+    .map(({ course_key, course_revision }) => `${course_key} · r${course_revision}`)
+    .join(" + ");
+  return invitation.target_track === SEC3_ENTRY_TRACK
+    ? `Sec 3-entry: ${courses}`
+    : courses;
+}
+
 function formatDate(value: string): string {
   return new Intl.DateTimeFormat("en-SG", {
     dateStyle: "medium",
@@ -151,10 +162,13 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
     setCreated(null);
     setCopied(false);
     setError(null);
+    const scope = String(form.get("invitation_scope"));
     try {
       const result = await api.createInvitation({
         email: String(form.get("email") ?? "").trim(),
-        course_key: String(form.get("course_key")),
+        ...(scope === SEC3_ENTRY_TRACK
+          ? { target_track: SEC3_ENTRY_TRACK }
+          : { course_key: scope }),
         expires_days: Number(form.get("expires_days")),
         max_uses: Number(form.get("max_uses")),
       });
@@ -240,11 +254,12 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
             </div>
             <div>
               <label className="mb-2 block text-sm font-bold" htmlFor="invitation-course">Course</label>
-              <select className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3" defaultValue="g3-sec1-math" id="invitation-course" name="course_key">
-                <option value="g3-sec1-math">Secondary 1 Mathematics</option>
-                <option value="g3-sec2-math">Secondary 2 Mathematics</option>
+              <select className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3" defaultValue={SEC3_ENTRY_TRACK} id="invitation-course" name="invitation_scope">
+                <option value={SEC3_ENTRY_TRACK}>Sec 3-entry (Secondary 1 and 2 Mathematics)</option>
+                <option value="g3-sec1-math">Secondary 1 Mathematics only</option>
+                <option value="g3-sec2-math">Secondary 2 Mathematics only</option>
               </select>
-              <p className="mb-0 mt-2 text-xs text-slate-500">A Sec 3-entry learner needs one invitation for each course.</p>
+              <p className="mb-0 mt-2 text-xs text-slate-500">Sec 3-entry enrols the student in both courses with one link.</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
@@ -274,7 +289,7 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
                 Copy this now. The raw code cannot be retrieved after this screen is cleared or reloaded.
               </p>
               <div>
-                <span className="text-sm font-semibold text-slate-500">For {created.email} · {created.course_key}</span>
+                <span className="text-sm font-semibold text-slate-500">For {created.email} · {invitationScope(created)}</span>
                 <code className="mt-2 block break-all rounded-xl bg-slate-950 p-4 text-sm text-teal-200">{created.invitation_code}</code>
               </div>
               <Button onClick={() => void copyOnboardingLink()} type="button" variant="outline">
@@ -302,7 +317,7 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
               {invitations.map((invitation) => (
                 <tr className="border-t border-slate-100" key={invitation.invitation_id}>
                   <td className="px-6 py-4 font-semibold">{invitation.email}</td>
-                  <td className="px-6 py-4 text-slate-600">{invitation.course_key} · r{invitation.course_revision}</td>
+                  <td className="px-6 py-4 text-slate-600">{invitationScope(invitation)}</td>
                   <td className="px-6 py-4"><span className={`rounded-full px-2.5 py-1 text-xs font-bold capitalize ${statusClasses[invitation.status]}`}>{invitation.status}</span></td>
                   <td className="px-6 py-4 text-slate-600">{invitation.use_count}/{invitation.max_uses}</td>
                   <td className="px-6 py-4 text-slate-600">{formatDate(invitation.expires_at)}</td>

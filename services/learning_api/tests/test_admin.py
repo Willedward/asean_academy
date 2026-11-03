@@ -38,6 +38,8 @@ class FakeBetaOperationsRepository:
             "email": "student@example.test",
             "course_key": "g3-sec1-math",
             "course_revision": 1,
+            "target_track": None,
+            "courses": [{"course_key": "g3-sec1-math", "course_revision": 1}],
             "status": "active",
             "max_uses": 1,
             "use_count": 0,
@@ -663,3 +665,14 @@ def test_content_admin_cannot_request_publication():
 
     assert response.status_code == 403
     assert response.json()["error"]["code"] == "academic_administrator_required"
+
+
+def test_invitation_chooses_one_course_or_a_whole_track():
+    assert CreateInvitationRequest(email="a@example.test").course_keys == ("g3-sec1-math",)
+    assert CreateInvitationRequest(
+        email="a@example.test", target_track="sec3-entry"
+    ).course_keys == ("g3-sec1-math", "g3-sec2-math")
+    with pytest.raises(ValueError, match="either one course or a track"):
+        CreateInvitationRequest(
+            email="a@example.test", course_key="g3-sec2-math", target_track="sec3-entry"
+        )

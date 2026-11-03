@@ -139,6 +139,140 @@ def _create_session(app, token: str, key: str, **payload):
     )
 
 
+def _administrator(connection) -> tuple[str, str]:
+    administrator_id, email = str(uuid4()), f"track-admin-{uuid4()}@example.test"
+    connection.execute("insert into auth.users (id, email) values (%s, %s)", (administrator_id, email))
+    connection.execute(
+        "insert into profiles (id, email, role) values (%s, %s, 'academic_admin')",
+        (administrator_id, email),
+    )
+    return administrator_id, email
+
+
+def _track_setup(database_url: str, invited_email: str, learner_id: str):
+    with psycopg.connect(database_url) as connection:
+        administrator_id, administrator_email = _administrator(connection)
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)", (learner_id, invited_email)
+        )
+    app = _application(
+        database_url,
+        {
+            "admin": (administrator_id, administrator_email),
+            "learner": (learner_id, invited_email),
+        },
+    )
+    created = _request(
+        app,
+        "POST",
+        "/api/v1/admin/invitations",
+        "admin",
+        json={"email": invited_email, "target_track": "sec3-entry"},
+    )
+    assert created.status_code == 201, created.text
+    return app, created.json()
+
+
+@pytest.mark.postgres
+def test_one_track_invitation_enrols_both_courses_and_counts_one_use():
+    database_url = _database_url()
+    learner_id, email = str(uuid4()), f"track-{uuid4()}@example.test"
+    app, created = _track_setup(database_url, email, learner_id)
+    assert created["target_track"] == "sec3-entry"
+    assert [course["course_key"] for course in created["courses"]] == [SEC1, SEC2]
+
+    accepted = _accept(app, "learner", created["invitation_code"])
+    assert accepted["profile"]["target_track"] == "sec3-entry"
+    assert sorted(item["course_key"] for item in accepted["enrolments"]) == [SEC1, SEC2]
+
+    # Accepting again changes nothing and does not use the invitation up further.
+    again = _accept(app, "learner", created["invitation_code"])
+    assert sorted(item["course_key"] for item in again["enrolments"]) == [SEC1, SEC2]
+
+    listed = _request(app, "GET", "/api/v1/admin/invitations?limit=100", "admin").json()
+    invitation = next(
+        item for item in listed["invitations"] if item["invitation_id"] == created["invitation_id"]
+    )
+    assert invitation["use_count"] == 1
+    assert invitation["status"] == "exhausted"
+    assert [course["course_key"] for course in invitation["courses"]] == [SEC1, SEC2]
+
+    revoked = _request(
+        app, "POST", f"/api/v1/admin/invitations/{created['invitation_id']}/revoke", "admin"
+    )
+    assert revoked.status_code == 200, revoked.text
+    assert [course["course_key"] for course in revoked.json()["courses"]] == [SEC1, SEC2]
+
+
+@pytest.mark.postgres
+def test_track_invitation_adds_the_missing_course_to_an_enrolled_learner():
+    database_url = _database_url()
+    learner_id, email = str(uuid4()), f"track-partial-{uuid4()}@example.test"
+    app, created = _track_setup(database_url, email, learner_id)
+    with psycopg.connect(database_url) as connection:
+        sec1_code = _invite(connection, email, SEC1)
+    assert _accept(app, "learner", sec1_code)["profile"]["target_track"] == SEC1
+
+    accepted = _accept(app, "learner", created["invitation_code"])
+    assert accepted["profile"]["target_track"] == "sec3-entry"
+    assert sorted(item["course_key"] for item in accepted["enrolments"]) == [SEC1, SEC2]
+
+
+@pytest.mark.postgres
+def test_track_invitation_enrols_nothing_when_a_course_needs_migration():
+    database_url = _database_url()
+    learner_id, email = str(uuid4()), f"track-pinned-{uuid4()}@example.test"
+    app, created = _track_setup(database_url, email, learner_id)
+    with psycopg.connect(database_url) as connection:
+        other_version = connection.execute(
+            """
+            insert into course_versions (
+                course_id, revision, schema_version, title, description,
+                content_sha256, provenance, authored_at
+            )
+            select versions.course_id,
+                   (
+                       select max(revision) + 1 from course_versions
+                       where course_id = versions.course_id
+                   ),
+                   versions.schema_version, versions.title, versions.description, versions.content_sha256,
+                   versions.provenance, versions.authored_at
+            from course_versions versions
+            join courses on courses.id = versions.course_id
+            where courses.course_key = %s and versions.is_current
+            returning id, course_id
+            """,
+            (SEC1,),
+        ).fetchone()
+        connection.execute(
+            "insert into profiles (id, email, role) values (%s, %s, 'student')",
+            (learner_id, email),
+        )
+        connection.execute(
+            """
+            insert into course_enrolments (student_id, course_id, course_version_id)
+            values (%s, %s, %s)
+            """,
+            (learner_id, other_version[1], other_version[0]),
+        )
+    rejected = _request(
+        app,
+        "POST",
+        "/api/v1/onboarding/accept-invitation",
+        "learner",
+        json={"invitation_code": created["invitation_code"], "display_name": "Pinned"},
+    )
+    assert rejected.status_code == 409
+    assert rejected.json()["error"]["code"] == "curriculum_migration_required"
+    with psycopg.connect(database_url) as connection:
+        assert connection.execute(
+            "select count(*) from course_enrolments where student_id = %s", (learner_id,)
+        ).fetchone()[0] == 1
+        assert connection.execute(
+            "select use_count from beta_invitations where id = %s", (created["invitation_id"],)
+        ).fetchone()[0] == 0
+
+
 @pytest.mark.postgres
 def test_both_courses_import_and_units_may_have_several_reserve_pools():
     with psycopg.connect(_database_url()) as connection:

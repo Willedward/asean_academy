@@ -7,16 +7,22 @@ from datetime import datetime
 from typing import Any, Literal
 from uuid import UUID
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 
 from .contracts import ApiModel, ReleaseMetadata
 
 InvitationStatus = Literal["active", "expired", "exhausted", "revoked"]
+InvitationTrack = Literal["sec3-entry"]
+
+TRACK_COURSES: dict[str, tuple[str, ...]] = {
+    "sec3-entry": ("g3-sec1-math", "g3-sec2-math"),
+}
 
 
 class CreateInvitationRequest(ApiModel):
     email: str = Field(min_length=5, max_length=320)
     course_key: str = Field(default="g3-sec1-math", min_length=1, max_length=80)
+    target_track: InvitationTrack | None = None
     expires_days: int = Field(default=14, ge=1, le=90)
     max_uses: int = Field(default=1, ge=1, le=100)
 
@@ -33,12 +39,29 @@ class CreateInvitationRequest(ApiModel):
     def normalize_course_key(cls, value: str) -> str:
         return value.strip()
 
+    @model_validator(mode="after")
+    def choose_course_or_track(self) -> CreateInvitationRequest:
+        if self.target_track and "course_key" in self.model_fields_set:
+            raise ValueError("Choose either one course or a track, not both.")
+        return self
+
+    @property
+    def course_keys(self) -> tuple[str, ...]:
+        return TRACK_COURSES[self.target_track] if self.target_track else (self.course_key,)
+
+
+class InvitationCourse(ApiModel):
+    course_key: str
+    course_revision: int
+
 
 class InvitationResponse(ApiModel):
     invitation_id: UUID
     email: str
     course_key: str
     course_revision: int
+    target_track: str | None
+    courses: list[InvitationCourse]
     status: InvitationStatus
     max_uses: int
     use_count: int

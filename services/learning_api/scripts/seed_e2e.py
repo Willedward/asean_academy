@@ -17,6 +17,7 @@ SEC3_TWO_COURSE_ID = "30000000-0000-4000-8000-000000000001"
 SEC3_MASTERY_ID = "30000000-0000-4000-8000-000000000002"
 SEC3_SUPPORT_ID = "30000000-0000-4000-8000-000000000003"
 SEC3_REVIEW_ID = "30000000-0000-4000-8000-000000000004"
+SEC3_ONE_INVITATION_ID = "30000000-0000-4000-8000-000000000005"
 
 ACADEMIC_ADMIN_EMAIL = "academic.e2e@example.test"
 CONTENT_ADMIN_EMAIL = "content.e2e@example.test"
@@ -26,6 +27,7 @@ SEC3_TWO_COURSE_EMAIL = "sec3.two-course.e2e@example.test"
 SEC3_MASTERY_EMAIL = "sec3.mastery.e2e@example.test"
 SEC3_SUPPORT_EMAIL = "sec3.support.e2e@example.test"
 SEC3_REVIEW_EMAIL = "sec3.review.e2e@example.test"
+SEC3_ONE_INVITATION_EMAIL = "sec3.one-invitation.e2e@example.test"
 
 STUDENT_A_CODE = "e2e-student-a-invitation-2026"
 STUDENT_B_CODE = "e2e-student-b-invitation-2026"
@@ -34,6 +36,7 @@ SEC3_TWO_COURSE_SEC2_CODE = "e2e-sec3-two-course-sec2-invitation-2026"
 SEC3_MASTERY_CODE = "e2e-sec3-mastery-invitation-2026"
 SEC3_SUPPORT_CODE = "e2e-sec3-support-invitation-2026"
 SEC3_REVIEW_CODE = "e2e-sec3-review-invitation-2026"
+SEC3_ONE_INVITATION_CODE = "e2e-sec3-one-invitation-2026"
 
 # The review learner starts with one Give up that became due an hour ago. The API
 # trusts database time and has no test clock, so a one-shot seed is the only way to
@@ -135,6 +138,32 @@ def main() -> None:
                 ACADEMIC_ADMIN_ID,
             ),
         )
+        connection.execute(
+            "insert into auth.users(id, email) values (%s, %s)",
+            (SEC3_ONE_INVITATION_ID, SEC3_ONE_INVITATION_EMAIL),
+        )
+        track_invitation = connection.execute(
+            """
+            insert into beta_invitations(
+                token_sha256, email, course_version_id, target_track, max_uses,
+                expires_at, created_by
+            ) values (%s, %s, %s, 'sec3-entry', 1, now() + interval '1 day', %s)
+            returning id
+            """,
+            (
+                _digest(SEC3_ONE_INVITATION_CODE),
+                SEC3_ONE_INVITATION_EMAIL,
+                sec1_version,
+                ACADEMIC_ADMIN_ID,
+            ),
+        ).fetchone()[0]
+        connection.execute(
+            """
+            insert into beta_invitation_additional_courses(invitation_id, course_version_id)
+            values (%s, %s)
+            """,
+            (track_invitation, sec2_version),
+        )
         seeded_review = connection.execute(
             """
             insert into question_progress(
@@ -153,7 +182,7 @@ def main() -> None:
         ).rowcount
         if seeded_review != 1:
             raise SystemExit("Import the question catalogue before seeding E2E identities.")
-    print(f"Seeded two administrators and {len(students)} invitation-only learners.")
+    print(f"Seeded two administrators and {len(students) + 1} invitation-only learners.")
 
 
 if __name__ == "__main__":

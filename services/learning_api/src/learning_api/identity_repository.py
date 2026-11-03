@@ -112,15 +112,7 @@ class PostgresIdentityRepository:
         with self._connect() as connection:
             self._set_identity(connection, learner.learner_id)
             invitation = connection.execute(
-                """
-                select invitations.*, versions.course_id, courses.course_key,
-                       versions.revision as course_revision
-                from beta_invitations invitations
-                join course_versions versions on versions.id = invitations.course_version_id
-                join courses on courses.id = versions.course_id
-                where invitations.token_sha256 = %s
-                for update of invitations
-                """,
+                "select * from beta_invitations where token_sha256 = %s for update",
                 (digest,),
             ).fetchone()
             if invitation is None:
@@ -133,21 +125,44 @@ class PostgresIdentityRepository:
                     "Sign in with the email address that received this invitation.",
                     403,
                 )
-            existing = connection.execute(
+            courses = connection.execute(
                 """
-                select * from course_enrolments
-                where student_id = %s and course_id = %s
-                for update
+                select versions.id as course_version_id, versions.course_id, courses.course_key
+                from course_versions versions
+                join courses on courses.id = versions.course_id
+                where versions.id = %s
+                   or versions.id in (
+                       select course_version_id from beta_invitation_additional_courses
+                       where invitation_id = %s
+                   )
+                order by courses.course_key
                 """,
-                (learner.learner_id, invitation["course_id"]),
-            ).fetchone()
-            if existing is not None:
-                if existing["course_version_id"] != invitation["course_version_id"]:
+                (invitation["course_version_id"], invitation["id"]),
+            ).fetchall()
+            existing = {
+                row["course_id"]: row
+                for row in connection.execute(
+                    """
+                    select course_id, course_version_id from course_enrolments
+                    where student_id = %s and course_id = any(%s)
+                    for update
+                    """,
+                    (learner.learner_id, [course["course_id"] for course in courses]),
+                ).fetchall()
+            }
+            for course in courses:
+                enrolment = existing.get(course["course_id"])
+                if (
+                    enrolment is not None
+                    and enrolment["course_version_id"] != course["course_version_id"]
+                ):
                     raise IdentityError(
                         "curriculum_migration_required",
                         "This learner is already pinned to another course revision.",
                         409,
                     )
+            new_courses = [course for course in courses if course["course_id"] not in existing]
+            if not new_courses:
                 connection.execute(
                     """
                     update profiles
@@ -174,29 +189,31 @@ class PostgresIdentityRepository:
                 on conflict (id) do update set
                     email = excluded.email,
                     display_name = excluded.display_name,
-                    target_track = coalesce(profiles.target_track, excluded.target_track),
+                    target_track = coalesce(%s, profiles.target_track, excluded.target_track),
                     updated_at = now()
                 """,
                 (
                     learner.learner_id,
                     learner.email.strip().casefold(),
                     display_name.strip(),
-                    invitation["course_key"],
+                    invitation["target_track"] or new_courses[0]["course_key"],
+                    invitation["target_track"],
                 ),
             )
-            connection.execute(
-                """
-                insert into course_enrolments (
-                    student_id, course_id, course_version_id, accepted_invitation_id
-                ) values (%s, %s, %s, %s)
-                """,
-                (
-                    learner.learner_id,
-                    invitation["course_id"],
-                    invitation["course_version_id"],
-                    invitation["id"],
-                ),
-            )
+            for course in new_courses:
+                connection.execute(
+                    """
+                    insert into course_enrolments (
+                        student_id, course_id, course_version_id, accepted_invitation_id
+                    ) values (%s, %s, %s, %s)
+                    """,
+                    (
+                        learner.learner_id,
+                        course["course_id"],
+                        course["course_version_id"],
+                        invitation["id"],
+                    ),
+                )
             connection.execute(
                 "update beta_invitations set use_count = use_count + 1 where id = %s",
                 (invitation["id"],),
@@ -213,7 +230,13 @@ class PostgresIdentityRepository:
                     invitation["id"],
                     learner.learner_id,
                     request_id,
-                    Jsonb({"course_key": invitation["course_key"]}),
+                    Jsonb(
+                        {
+                            "course_key": new_courses[0]["course_key"],
+                            "course_keys": [course["course_key"] for course in new_courses],
+                            "target_track": invitation["target_track"],
+                        }
+                    ),
                 ),
             )
             response = self._response(connection, learner)
