@@ -186,6 +186,15 @@ class TutorRepository(Protocol):
         request_id: str,
     ) -> QuotaSnapshot: ...
 
+    def charge_failed_generation(
+        self,
+        reservation: UsageReservation,
+        actual: UsageActual | None,
+        *,
+        limits: TutorLimits,
+        request_id: str,
+    ) -> None: ...
+
     def release(
         self,
         reservation: UsageReservation,
@@ -864,32 +873,64 @@ class PostgresTutorRepository:
         *,
         request_id: str,
     ) -> QuotaSnapshot:
-        if actual.total_tokens > limits.max_turn_tokens or actual.cost_micros_sgd > limits.max_turn_cost_micros_sgd:
-            self.release(reservation, request_id=request_id, reason="provider_usage_exceeded_reservation")
-            raise TutorError(
-                "tutor_provider_usage_invalid",
-                "The tutor provider reported usage outside the reserved boundary.",
-                503,
-            )
         with self._connect() as connection:
             reserved = connection.execute(
                 "select reserved_tokens, reserved_cost_micros_sgd from tutor_usage_reservations where id=%s",
                 (reservation.reservation_id,),
             ).fetchone()
-        if reserved is not None and (
-            actual.total_tokens > reserved["reserved_tokens"]
-            or actual.cost_micros_sgd > reserved["reserved_cost_micros_sgd"]
-        ):
-            self.release(
-                reservation,
-                request_id=request_id,
-                reason="provider_usage_exceeded_route_reservation",
+        if (
+            actual.total_tokens > limits.max_turn_tokens
+            or actual.cost_micros_sgd > limits.max_turn_cost_micros_sgd
+            or (
+                reserved is not None
+                and (
+                    actual.total_tokens > reserved["reserved_tokens"]
+                    or actual.cost_micros_sgd > reserved["reserved_cost_micros_sgd"]
+                )
             )
+        ):
+            # The provider has already charged for this, so it still counts.
+            self._settle(reservation, actual, limits, request_id=request_id)
             raise TutorError(
                 "tutor_provider_usage_invalid",
-                "The tutor provider reported usage outside the route reservation.",
+                "The tutor provider reported usage outside the reservation.",
                 503,
             )
+        return self._settle(reservation, actual, limits, request_id=request_id)
+
+    def charge_failed_generation(
+        self,
+        reservation: UsageReservation,
+        actual: UsageActual | None,
+        *,
+        limits: TutorLimits,
+        request_id: str,
+    ) -> None:
+        """Charge a provider response that cannot be used: reported usage or the full reservation."""
+
+        if actual is None:
+            with self._connect() as connection:
+                reserved = connection.execute(
+                    "select reserved_tokens, reserved_cost_micros_sgd from tutor_usage_reservations where id=%s",
+                    (reservation.reservation_id,),
+                ).fetchone()
+            if reserved is None:
+                raise TutorError("tutor_reservation_invalid", "Tutor usage could not be reconciled.", 503)
+            actual = UsageActual(
+                input_tokens=reserved["reserved_tokens"],
+                output_tokens=0,
+                cost_micros_sgd=reserved["reserved_cost_micros_sgd"],
+            )
+        self._settle(reservation, actual, limits, request_id=request_id)
+
+    def _settle(
+        self,
+        reservation: UsageReservation,
+        actual: UsageActual,
+        limits: TutorLimits,
+        *,
+        request_id: str,
+    ) -> QuotaSnapshot:
         with self._connect() as connection:
             row = connection.execute(
                 "select * from tutor_usage_reservations where id=%s for update",
@@ -1378,6 +1419,24 @@ class InMemoryTutorRepository:
             max(0, limits.daily_tokens-self.actual_tokens),
             max(0, limits.monthly_cost_micros_sgd-self.actual_cost),
             _next_utc_day(reservation.usage_date),
+        )
+
+    def charge_failed_generation(
+        self,
+        reservation: UsageReservation,
+        actual: UsageActual | None,
+        *,
+        limits: TutorLimits,
+        request_id: str,
+    ) -> None:
+        self.reconcile(
+            reservation,
+            actual
+            or UsageActual(
+                limits.max_input_tokens, limits.max_output_tokens, limits.max_turn_cost_micros_sgd
+            ),
+            limits,
+            request_id=request_id,
         )
 
     def release(self, reservation: UsageReservation, *, request_id: str, reason: str) -> None:

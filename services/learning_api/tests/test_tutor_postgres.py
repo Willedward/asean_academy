@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from dataclasses import replace
 from uuid import uuid4
 
 import psycopg
@@ -267,6 +268,37 @@ def test_postgres_tutor_pins_grounding_and_reconciles_reserved_usage():
             limits,
             request_id="free-provider-reconcile-test",
         )
+
+        over_limits = replace(limits, daily_messages=4, daily_tokens=1_000_000)
+
+        def monthly_cost():
+            return repository.admin_usage(reserved.usage_month)["actual_cost_micros_sgd"]
+
+        cost_before = monthly_cost()
+        over_reported = repository.reserve(
+            learner_id, session["session_id"], over_limits, request_id="over-reserve-test"
+        )
+        with pytest.raises(TutorError) as exceeded:
+            repository.reconcile(
+                over_reported,
+                UsageActual(input_tokens=90_000, output_tokens=10, cost_micros_sgd=400_000),
+                over_limits,
+                request_id="over-reconcile-test",
+            )
+        assert exceeded.value.code == "tutor_provider_usage_invalid"
+        assert monthly_cost() == cost_before + 400_000
+        unusable = repository.reserve(
+            learner_id, session["session_id"], over_limits, request_id="unusable-reserve-test"
+        )
+        repository.charge_failed_generation(
+            unusable, None, limits=over_limits, request_id="unusable-charge-test"
+        )
+        assert monthly_cost() > cost_before + 400_000
+        with pytest.raises(TutorError) as refused:
+            repository.reserve(
+                learner_id, session["session_id"], over_limits, request_id="refused-reserve-test"
+            )
+        assert refused.value.code == "tutor_quota_exceeded"
 
         repository.append_message(
             session["session_id"],

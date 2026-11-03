@@ -12,7 +12,11 @@ from learning_api.dependencies import _tutor_repository_for_request, admin_learn
 from learning_api.identity import AuthenticatedLearner
 from learning_api.main import create_app
 from learning_api.tutor_contracts import AnswerLockState, TutorBlock
-from learning_api.tutor_provider import TutorProviderResult, TutorProviderUsage
+from learning_api.tutor_provider import (
+    TutorProviderResponseError,
+    TutorProviderResult,
+    TutorProviderUsage,
+)
 from learning_api.tutor_repository import (
     InMemoryTutorRepository,
     PostgresTutorRepository,
@@ -550,3 +554,50 @@ def test_academic_admin_can_read_tutor_routing_status():
         "premium_provider": None,
         "premium_model": None,
     }
+
+
+class _UnusableProvider:
+    def __init__(self, usage=None):
+        self.usage = usage
+
+    async def generate(self, request):
+        del request
+        raise TutorProviderResponseError("The tutor provider returned an invalid response.", self.usage)
+
+
+def _send(app, session_id):
+    return request(
+        app,
+        "POST",
+        f"/api/v1/tutor/sessions/{session_id}/messages",
+        json={"message": "Give me one hint."},
+    )
+
+
+def test_unusable_provider_responses_use_the_daily_message_allowance():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo, daily_messages=2)
+    app.state.tutor_provider = _UnusableProvider()
+    session_id = create_session(app).json()["session_id"]
+
+    assert _send(app, session_id).status_code == 503
+    assert repo.actual_requests == 1
+    assert repo.actual_cost > 0
+    assert _send(app, session_id).status_code == 503
+    third = _send(app, session_id)
+
+    assert third.status_code == 429
+    assert third.json()["error"]["code"] == "tutor_quota_exceeded"
+
+
+def test_reported_usage_is_charged_for_an_unusable_response():
+    repo = InMemoryTutorRepository(grounding())
+    app = application(repo)
+    app.state.tutor_provider = _UnusableProvider(
+        TutorProviderUsage(input_tokens=70, output_tokens=30, cost_micros_sgd=500)
+    )
+    session_id = create_session(app).json()["session_id"]
+
+    assert _send(app, session_id).status_code == 503
+    assert repo.actual_tokens == 100
+    assert repo.actual_cost == 500
