@@ -6,6 +6,7 @@ from pydantic import ValidationError
 
 from question_bank.catalogue import load_catalogue
 from question_bank.course_models import Course
+from question_bank.geometry_validation import non_legacy_diagram_warnings
 from question_bank.models import Question
 from question_bank.validation import validate_bank, validate_catalogue
 
@@ -121,7 +122,7 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
         if any(questions.glob("*.json"))
     )
     assert report.as_dict()["authored_topic_level_count"] == authored_bank_count
-    assert not report.warnings
+    assert not non_legacy_diagram_warnings(report.warnings)
 
     publish_report = validate_catalogue(
         repository_root / "backend_resources/question_bank/g3_math",

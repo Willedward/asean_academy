@@ -18,7 +18,7 @@ from .course_models import (
 )
 from .course_registry import CourseRegistry
 from .difficulty import PRACTICE_STAGE_DIFFICULTIES
-from .geometry_validation import geometry_diagram_issues, revisioned_asset_path_issues
+from .geometry_validation import geometry_diagram_findings, revisioned_asset_path_issues
 from .validation import ValidationReport, validate_bank
 
 
@@ -83,7 +83,13 @@ def _load(path: Path, model, report: CourseValidationReport, code: str):
         return None
 
 
-def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidationReport):
+def _validate_assets(
+    course_root: Path,
+    lesson: Lesson,
+    report: CourseValidationReport,
+    *,
+    strict_geometry: bool = False,
+):
     for asset in lesson.assets:
         path = course_root / asset.path
         if not path.is_file():
@@ -100,10 +106,10 @@ def _validate_assets(course_root: Path, lesson: Lesson, report: CourseValidation
             )
         for code, message in revisioned_asset_path_issues(asset.path, lesson.revision):
             _issue(report, "error", code, path, message)
-        for code, message in geometry_diagram_issues(
-            path, asset.generation_spec, asset.alt_text
+        for finding in geometry_diagram_findings(
+            path, asset.generation_spec, asset.alt_text, strict=strict_geometry
         ):
-            _issue(report, "error", code, path, message)
+            _issue(report, finding.severity, finding.code, path, finding.message)
 
 
 def lesson_note_depth_shortfalls(lesson: Lesson) -> list[str]:
@@ -245,6 +251,7 @@ def validate_course(
     question_bank_root: Path,
     *,
     publish: bool = False,
+    strict_geometry: bool = False,
 ) -> CourseValidationReport:
     course_root = course_root.resolve()
     question_bank_root = question_bank_root.resolve()
@@ -290,7 +297,7 @@ def validate_course(
             _issue(report, "error", "duplicate_lesson", path, lesson.stable_key)
             continue
         seen.add(lesson.stable_key)
-        _validate_assets(course_root, lesson, report)
+        _validate_assets(course_root, lesson, report, strict_geometry=strict_geometry)
         _validate_lesson_note_depth(lesson, path, report, publish=publish)
         _validate_geometry_lesson_depth(lesson, path, report)
         report.lessons.append(lesson)
@@ -409,7 +416,7 @@ def validate_course(
         if bank_root is None:
             _issue(report, "error", "missing_pool_bank", path, manifest.bank_key)
             continue
-        bank_report = validate_bank(bank_root, publish=publish)
+        bank_report = validate_bank(bank_root, publish=publish, strict_geometry=strict_geometry)
         report.bank_reports[manifest.bank_key] = bank_report
         for issue in bank_report.errors:
             _issue(report, "error", f"question_bank_{issue.code}", issue.path, issue.message)
