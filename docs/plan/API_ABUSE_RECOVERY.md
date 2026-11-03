@@ -61,6 +61,10 @@ production. Use different values. `ASEAN_ACADEMY_TRUST_PROXY_HEADERS=true` is ap
 only when the public ingress overwrites `X-Forwarded-For`; otherwise leave it false so a
 client cannot choose its own IP-limit identity.
 
+The web service holds the same `ASEAN_ACADEMY_ABUSE_HASH_SECRET`. Its API proxy signs each
+learner's address with it, so address limits apply per learner network rather than to the
+web server. Without the secret on the web service, all proxied requests share one address.
+
 Migration `202609280011_api_abuse_controls.sql` must be applied before deploying the new
 API. `/api/v1/ready` checks both abuse-control tables and schema revision
 `202609280011` before a deployment accepts traffic.

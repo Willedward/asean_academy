@@ -1,3 +1,5 @@
+import { createHmac } from "node:crypto";
+
 import { type NextRequest, NextResponse } from "next/server";
 
 import {
@@ -22,6 +24,23 @@ const FORWARDED_RESPONSE_HEADERS = [
 const PUBLIC_PATHS = new Set(["health"]);
 
 type Context = { params: Promise<{ path: string[] }> };
+
+// The API sees this server's address, so per-address limits need the learner's own.
+function setClientAddress(request: NextRequest, headers: Headers) {
+  const secret = process.env.ASEAN_ACADEMY_ABUSE_HASH_SECRET;
+  const address = request.headers
+    .get("x-forwarded-for")
+    ?.split(",", 1)[0]
+    ?.trim();
+  if (!secret || !address) return;
+  headers.set("x-academy-client-address", address);
+  headers.set(
+    "x-academy-client-address-signature",
+    createHmac("sha256", secret)
+      .update(`client-address:${address}`)
+      .digest("hex"),
+  );
+}
 
 function learningApiBaseUrl(): string {
   return (process.env.LEARNING_API_URL ?? "http://127.0.0.1:8000").replace(
@@ -85,6 +104,7 @@ async function forward(
     const value = request.headers.get(name);
     if (value) headers.set(name, value);
   });
+  setClientAddress(request, headers);
 
   if (isAuthenticationConfigured() && !PUBLIC_PATHS.has(relativePath)) {
     const session = await getVerifiedSession();
