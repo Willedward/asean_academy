@@ -1,6 +1,6 @@
 # Current project handoff
 
-Updated: 2 November 2026 (Asia/Singapore)
+Updated: 3 November 2026 (Asia/Singapore)
 
 This is the short restart file for a new Codex or collaborator session. Read it before loading
 the larger plans; do not use the full chat transcript as project state.
@@ -19,6 +19,11 @@ review and publication gates pass.
 - ENG-T3.10 is merged there at implementation commit `33b1d412` from PR #230.
 - E9.2-E9.4 are merged through integration commit `1c3c49f` from PR #234.
 - E1.2 is merged there at implementation commit `a382f84` from PR #235.
+- E1.4 is merged there through integration commit `90379c2` from PR #237.
+- The verified E1.5 starting baseline is integration commit `fe258595` from PR #256; hosted
+  API and web reported that exact SHA with current schema/content before implementation.
+- E1.5 is merged there at implementation commit `c3e6343` through integration commit
+  `d2906581` from PR #262.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -112,6 +117,42 @@ review and publication gates pass.
   pending; nothing is published.
 - E1.4 is Core-route but not Sprint-route content. It does not change the fixed 121-record
   Sprint review scope, existing E1 Sprint checkpoint mastery scope or any protected form.
+
+## E1.5 collocation-and-register milestone
+
+- E1.5 is implemented as draft-only Core-route content with one seven-section lesson, six
+  deterministic guided/independent/exit-ticket questions and one disjoint parallel retry.
+- The lesson requires four checks: intended meaning, natural word partnership, audience and
+  complete sentence. It treats neutral language as a valid register, rejects artificial
+  formality and does not reward a familiar word when its grammatical partnership is wrong.
+- The new source records are `e1-lesson-05`, `ev-l5-008` through `ev-l5-014`, and review
+  batches `english-ev-b013` and `english-ev-b014`. English and editorial decisions remain
+  pending; nothing is published.
+- E1.5 is Core-route but not Sprint-route content. It does not change the fixed 121-record
+  Sprint review scope, E1 checkpoint mastery scope or protected `ev-l5-006`/`ev-l5-007`
+  records.
+
+## Validation completed for E1.5
+
+- English foundation and authoring validation: 42 authored lessons, 126 questions, 86 review
+  batches and zero duplicate/template collisions. Full/Core/Sprint authored coverage is
+  42/28/16, with 19/19/16 disjoint parallel-retry records respectively.
+- Question-bank suite: 183 passed. Learning API suite: 278 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run. Ruff passed for both Python projects.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed across 204 generated static pages. The local Turbopack build stalled without an
+  error and was stopped; both PR and exact post-merge CI passed the configured Turbopack build.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 126 English questions and 37 passages,
+  and passed bootstrap preview/apply/repeat idempotency. All seven `EV1.5` questions remained
+  draft and the two protected E1 checkpoint records were unchanged.
+- Migration safety passed. No new schema migration was required because E1.5 uses the existing
+  objective-question, learning-session and content-review contracts. No provider call or paid
+  token was used.
+- PR #262 and the exact post-merge integration run passed every reviewer, web, API, PostgreSQL
+  and authenticated-browser gate. At milestone merge, Render API readiness and the web proxy
+  reported integration SHA `d2906581ab37f02d82b54f68ab4e3c96c6981489`, required schema
+  `202611020047`, and current database schema/content; the hosted login returned HTTP 200.
 
 ## Validation completed for E1.4
 
@@ -216,8 +257,8 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content sequence continues with the five remaining Core-route
-gaps, beginning with **E1.5 collocation and register**, alongside the existing Sprint human
+The next independently executable content sequence continues with the four remaining Core-route
+gaps, beginning with **E2.3 tense and aspect**, alongside the existing Sprint human
 review and publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.

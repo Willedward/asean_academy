@@ -68,6 +68,19 @@ ExpressionMode = Literal[
     "exact_relation",
     "exact_ratio",
 ]
+SYMBOLIC_FORMS = ("any", "expanded", "factorised", "factorised_completely", "simplified_fraction")
+"""Values of ``checker_config["form"]`` for ``symbolic_equivalence``; ``any`` is the default.
+
+- ``any``: every equivalent expression is accepted.
+- ``expanded``: a sum of terms with like terms collected and no brackets, such as 6x^2+7x-20.
+  A written coefficient fraction must be in lowest terms (5x/4, not 10x/8).
+- ``factorised``: a product of at least two factors, at least one a bracketed sum.
+- ``factorised_completely``: factorised, every bracket primitive (integer coefficients with no
+  common factor and no common letter), no one-letter quadratic bracket with a rational root,
+  and no fewer non-constant factors than the canonical answer.
+- ``simplified_fraction``: expanded, factorised, or a single fraction N/D in lowest terms;
+  coefficient fractions are in lowest terms too (2a/3, not 6a/9).
+"""
 
 
 class NumericResponse(Model):
@@ -110,6 +123,16 @@ class AlgebraicResponse(Model):
             raise ValueError("Variables must be unique")
         if len(set(self.accepted_equivalents)) != len(self.accepted_equivalents):
             raise ValueError("Accepted equivalents must be unique")
+        if self.comparison_mode == "symbolic_equivalence":
+            unknown = sorted(set(self.checker_config) - {"form"})
+            if unknown:
+                raise ValueError(
+                    f"Symbolic equivalence checker_config supports only 'form'; found {unknown}"
+                )
+            if self.checker_config.get("form", "any") not in SYMBOLIC_FORMS:
+                raise ValueError(f"Symbolic equivalence form must be one of {list(SYMBOLIC_FORMS)}")
+        elif "form" in self.checker_config:
+            raise ValueError("Only symbolic_equivalence responses can declare a form")
         if self.comparison_mode == "prime_factorisation":
             if self.checker_config.get("require_prime_bases") is not True:
                 raise ValueError("Prime factorisation must require prime bases")

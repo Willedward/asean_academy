@@ -30,6 +30,29 @@ The serial Chromium suite covers these beta-critical journeys:
 
 The Playwright report attaches administrator screenshots at all three widths and a content-administrator phone-menu screenshot.
 
+### Sec 3-entry scholarship track
+
+The track covers Secondary 1 (**g3-sec1-math**) and Secondary 2 (**g3-sec2-math**)
+together. Four spec files each own one seeded learner, so they can run in any order
+against the one-shot database:
+
+| Spec | Journey asserted after a reload or a new sign-in |
+| --- | --- |
+| **sec3-entry-two-course-track.spec.ts** | Secondary 1 onboarding, both courses registered, Secondary 1 practice resumes; Secondary 2 enrolment, cross-course navigation, separate Secondary 2 progress and the Sec 1–2 diagnostic are expected failures |
+| **sec3-entry-checkpoint-mastery.spec.ts** | lesson and checkpoint locks refuse direct API calls; all seven N1 lessons become proficient; checkpoint support stays locked; a 50% checkpoint keeps proficiency and schedules four two-day reviews; a 100% retake masters N1 and cannot be repeated |
+| **sec3-entry-support-resume.spec.ts** | interrupted practice resumes at the same question and wrong-try count in a second browser; a simulated tutor outage and a real exhausted synthetic-tutor allowance (429 tutor_quota_exceeded) leave hints and Give up working |
+| **sec3-entry-spaced-review.spec.ts** | a due Give up is recommended, reviewed and moved to the seven-day interval, and an early review is refused |
+
+Tests marked **test.fail** describe intended behaviour that the product does not support
+yet. Playwright reports them as expected failures and flags them as soon as they start
+passing. Each marker gives its reason in the test file.
+
+The spec helpers answer questions from the authored N1 question bank by stable key,
+which they read from the session's next-question response. The review learner's seed
+includes one Give up whose review fell due an hour earlier. The API uses database time
+and has no test clock, so this is how the suite reaches a due review without waiting two
+days.
+
 These are browser/API/database integration checks. Google account selection, the
 Supabase-hosted OAuth callback and provider consent screen remain a small hosted smoke
 test because CI must not store or automate a personal Google login.
@@ -59,7 +82,10 @@ database or Supabase credential.
 
 - one academic administrator;
 - one content administrator;
-- two invitation-only learners.
+- two invitation-only learners for the original beta journeys;
+- four invitation-only Sec 3-entry learners, one per Sec 3-entry spec file. The
+  two-course learner also gets a Secondary 2 invitation when a current g3-sec2-math
+  version has been imported.
 
 It refuses remote hosts, requires a database name containing e2e, and refuses to run
 again when fixture identities are present. This guard reduces the chance of running it
@@ -94,6 +120,9 @@ export E2E_DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/asean_aca
 DATABASE_URL="$E2E_DATABASE_URL" bash scripts/validate_migrations.sh
 DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank catalogue-import-db
 DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db
+DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank english-import-db
+# Currently fails and rolls back (see the Sec 3-entry track above); keep going.
+DATABASE_URL="$E2E_DATABASE_URL" uv run --project services/learning_api --locked question-bank course-import-db backend_resources/courses/g3_math/secondary_2/g2/v1 || true
 uv run --project services/learning_api --locked python services/learning_api/scripts/seed_e2e.py
 
 corepack pnpm --filter @asean-academy/web exec playwright install chromium
@@ -111,6 +140,8 @@ corepack pnpm --filter @asean-academy/web exec playwright install-deps chromium
 
 - **apps/web/playwright.config.ts**: service orchestration, ports and failure evidence;
 - **apps/web/e2e/beta-journeys.spec.ts**: browser journeys and fixed identities;
+- **apps/web/e2e/sec3-entry-*.spec.ts** and **apps/web/e2e/support/sec3-entry.ts**:
+  Sec 3-entry track journeys, learners and the authored answer key;
 - **apps/web/src/lib/auth/e2e-config.ts**: fail-closed environment gate;
 - **apps/web/src/lib/auth/e2e-session.ts**: signed cookie/token implementation;
 - **services/learning_api/src/learning_api/identity.py**: API token verification;

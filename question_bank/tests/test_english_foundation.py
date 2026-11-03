@@ -36,9 +36,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 41
+    assert len(report.lessons) == 42
     assert len(report.passages) == 37
-    assert len(report.questions) == 119
+    assert len(report.questions) == 126
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -104,18 +104,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 41,
-        "core": 27,
+        "full": 42,
+        "core": 28,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 41,
-        "core": 27,
+        "full": 42,
+        "core": 28,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 18,
-        "core": 18,
+        "full": 19,
+        "core": 19,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -259,6 +259,39 @@ def test_e1_4_synonym_precision_preserves_core_degree_and_attitude(english_root)
     for question, answer in zip(
         questions,
         ["B", "C", "A", "B", "D", "B", "C"],
+        strict=True,
+    ):
+        assert check_english_answer(question.parts[0].response, answer)["correct"]
+    assert not check_english_answer(questions[5].parts[0].response, "A")["correct"]
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert questions[6].parts[0].prompt != questions[5].parts[0].prompt
+
+
+def test_e1_5_collocation_and_register_checks_partnership_and_audience(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/ev-l5-{number:03d}.json").read_text()
+        )
+        for number in range(8, 15)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EV1.5"}
+    assert {question.question_type for question in questions} == {
+        "vocabulary_in_context"
+    }
+    assert [question.exposure_pool for question in questions] == [
+        "guided_practice",
+        "guided_practice",
+        "independent_practice",
+        "independent_practice",
+        "independent_practice",
+        "exit_ticket",
+        "retry_review",
+    ]
+    assert [len(question.parts) for question in questions] == [1] * 7
+    for question, answer in zip(
+        questions,
+        ["C", "B", "D", "C", "C", "D", "A"],
         strict=True,
     ):
         assert check_english_answer(question.parts[0].response, answer)["correct"]
@@ -1898,6 +1931,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b010",
         "english-ev-b011",
         "english-ev-b012",
+        "english-ev-b013",
+        "english-ev-b014",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -1936,7 +1971,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b036",
         "english-ex-b037",
     ]
-    assert len(report.questions) == 119
+    assert len(report.questions) == 126
     assert not report.duplicates
 
 
@@ -2023,6 +2058,23 @@ def test_synonym_precision_reviewer_export_contains_degree_and_attitude_evidence
     assert "comfortable to touch" in page
     assert "confident core meaning and the respectful attitude" in page
     assert "responsible attitude of the account" in page
+
+
+def test_collocation_register_reviewer_export_contains_partnership_and_audience_evidence(
+    english_root, tmp_path
+):
+    batch = english_root / "authoring/batches/english-ev-b013.json"
+    output = tmp_path / "collocation-register-review"
+
+    result = export_english_reviewer_batch(english_root, batch, output)
+    page = (output / "index.html").read_text()
+
+    assert result["question_count"] == 6
+    assert page.count("<strong>Answer:</strong>") == 6
+    assert "standard word partnership" in page
+    assert "appropriately neutral-formal for an office email" in page
+    assert "matches the personal audience" in page
+    assert "Raise serious concerns" in page
 
 
 def test_sprint_route_reviewer_export_pins_complete_review_evidence(

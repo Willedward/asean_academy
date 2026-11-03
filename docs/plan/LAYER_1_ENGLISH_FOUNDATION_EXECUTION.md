@@ -1,6 +1,6 @@
 # Layer 1 English foundation execution
 
-**Updated:** 2 November 2026
+**Updated:** 3 November 2026
 **Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
 ASEAN Scholarship selection tests  
 **Curriculum status:** draft pending English educator review  
@@ -98,6 +98,7 @@ sections.
 | E1 pilot | Original E1.1 lesson and six vocabulary-in-context items | Authored as draft; human review pending |
 | E1.2 | Word-class and word-family decisions through sentence-slot, form, meaning and collocation checks with a fresh parallel retry | Implemented as draft for the Core route; English and editorial review pending |
 | E1.4 | Near-synonym precision through core meaning, degree, attitude and complete-sentence checks with a fresh parallel retry | Implemented as draft for the Core route; English and editorial review pending |
+| E1.5 | Collocation and register through meaning, natural-partnership, audience and complete-sentence checks with a fresh parallel retry | Implemented as draft for the Core route; English and editorial review pending |
 | E2 | Claims, duplicate detection, reviewer packets, bulk admin review and importer | Implemented for English objective content; hosted migration/deployment pending |
 | E3a | Authenticated English map, E1.1 lesson, deterministic practice, error reflection, exit-ticket retry and progress | Implemented; hosted migration/import/deployment and human review pending |
 | E3.1 pilot | Original banked story-cloze lesson, checksum-pinned passage, shared word bank, keyboard-accessible gaps and passage-level feedback | Implemented as draft; English and editorial review pending |
@@ -482,9 +483,10 @@ package, then have the responsible privacy and safeguarding owners record real e
 the T3.10 gate. Human English/editorial curriculum review continues in parallel. E9.2–E9.4
 now add draft-only narrative, position-based and process-compression lessons with deterministic
 exit tickets for the Full route. E1.2 begins Core expansion with a draft word-family lesson,
-and E1.4 now adds a bounded synonym-precision lesson, six deterministic practice/exit questions
-and one disjoint retry. The next independently executable content sequence continues with the
-five remaining Core-route gaps, beginning with E1.5, alongside Sprint review/release evidence.
+and E1.4 adds a bounded synonym-precision lesson. E1.5 now adds a collocation-and-register
+lesson, six deterministic practice/exit questions and one disjoint retry. The next
+independently executable content sequence continues with the four remaining Core-route gaps,
+beginning with E2.3, alongside Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
 first reading-comprehension progression, E6.1–E6.5 complete the first composition-planning
@@ -509,5 +511,7 @@ fresh 45-, 35- and 30-minute rehearsals without treating speed, word count or pr
 as readiness. **E1.2 word class and word family** uses sentence frames to filter related forms
 without presenting suffix patterns as universal rules. **E1.4 synonym precision** now tests
 core meaning, degree and attitude without rewarding unsupported exaggeration. Continue with
-**E1.5 collocation and register** as the next Core gap; it must remain another draft,
-review-gated increment.
+**E1.5 collocation and register** now uses meaning, natural partnership, audience and complete-
+sentence checks without treating greater formality as automatically better. Continue with
+**E2.3 tense and aspect** as the next Core gap; it must remain another draft, review-gated
+increment.
