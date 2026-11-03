@@ -22,8 +22,8 @@ review and publication gates pass.
 - E1.4 is merged there through integration commit `90379c2` from PR #237.
 - The verified E1.5 starting baseline is integration commit `fe258595` from PR #256; hosted
   API and web reported that exact SHA with current schema/content before implementation.
-- E1.5 is implemented on `feature/english-e1-5-collocation-register`; merge and hosted
-  verification are pending.
+- E1.5 is merged there at implementation commit `c3e6343` through integration commit
+  `d2906581` from PR #262.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -141,7 +141,7 @@ review and publication gates pass.
   tests skipped in the non-DB run. Ruff passed for both Python projects.
 - Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
   build passed across 204 generated static pages. The local Turbopack build stalled without an
-  error and was stopped; hosted CI must independently pass the configured build before merge.
+  error and was stopped; both PR and exact post-merge CI passed the configured Turbopack build.
 - A fresh disposable PostgreSQL database accepted the complete migration chain through
   `202611020047`, imported 1,040 mathematics questions, 126 English questions and 37 passages,
   and passed bootstrap preview/apply/repeat idempotency. All seven `EV1.5` questions remained
@@ -149,6 +149,10 @@ review and publication gates pass.
 - Migration safety passed. No new schema migration was required because E1.5 uses the existing
   objective-question, learning-session and content-review contracts. No provider call or paid
   token was used.
+- PR #262 and the exact post-merge integration run passed every reviewer, web, API, PostgreSQL
+  and authenticated-browser gate. At milestone merge, Render API readiness and the web proxy
+  reported integration SHA `d2906581ab37f02d82b54f68ab4e3c96c6981489`, required schema
+  `202611020047`, and current database schema/content; the hosted login returned HTTP 200.
 
 ## Validation completed for E1.4
 
