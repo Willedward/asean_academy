@@ -486,6 +486,41 @@ def test_form_setting_rejects_the_unfinished_expression(form, canonical, variabl
         assert not passes(spec, answer), (form, answer)
 
 
+UNREDUCED_COEFFICIENT_CASES = [
+    ("x/2", ["x"], ["2x/4", "(2x)/4", "(2/4)x", "2/4*x", "x*2/4"], ["x/2", "(x)/2", "(1/2)x", "0.5x"]),
+    ("2a/3", ["a"], ["6a/9", "(6a)/9", "(6/9)a"], ["2a/3", "(2a)/3", "(2/3)a"]),
+    ("5x/4-2", ["x"], ["10x/8-2", "(10x)/8-2", "(10/8)x-2"], ["5x/4-2", "(5x)/4-2", "1.25x-2"]),
+    ("3x+1", ["x"], ["6x/2+1", "(6x)/2+1", "3x/1+2/2", "1.5x/0.5+1"], ["3x+1", "1+3x"]),
+]
+
+
+@pytest.mark.parametrize("form", ["expanded", "simplified_fraction"])
+@pytest.mark.parametrize(("canonical", "variables", "unreduced", "reduced"), UNREDUCED_COEFFICIENT_CASES)
+def test_simplified_forms_reject_coefficients_not_in_lowest_terms(
+    form, canonical, variables, unreduced, reduced
+):
+    spec = symbolic(canonical, variables, form=form)
+    unconstrained = symbolic(canonical, variables)
+    for answer in unreduced:
+        assert passes(unconstrained, answer), ("must be equivalent", answer)
+        assert not passes(spec, answer), (form, answer)
+    for answer in reduced:
+        assert passes(spec, answer), (form, answer)
+
+
+@pytest.mark.parametrize("form", SYMBOLIC_FORMS)
+@pytest.mark.parametrize(
+    ("bracketed", "plain"),
+    [("(2x)/4", "2x/4"), ("(5x)/4-2", "5x/4-2"), ("(6a)/9", "6a/9"), ("(x)/2", "x/2")],
+)
+def test_bracketed_and_plain_numerators_are_checked_the_same(form, bracketed, plain):
+    for canonical, variables in (("x/2", ["x"]), ("5x/4-2", ["x"]), ("2a/3", ["a"])):
+        if set(variables) != {character for character in plain if character.isalpha()}:
+            continue
+        spec = symbolic(canonical, variables, form=form)
+        assert check_answer(spec, bracketed) == check_answer(spec, plain), (form, canonical)
+
+
 def test_form_defaults_to_any_for_backward_compatibility():
     default = symbolic("3x+12", ["x"])
     explicit = symbolic("3x+12", ["x"], form="any")

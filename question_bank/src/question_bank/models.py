@@ -73,11 +73,13 @@ SYMBOLIC_FORMS = ("any", "expanded", "factorised", "factorised_completely", "sim
 
 - ``any``: every equivalent expression is accepted.
 - ``expanded``: a sum of terms with like terms collected and no brackets, such as 6x^2+7x-20.
+  A written coefficient fraction must be in lowest terms (5x/4, not 10x/8).
 - ``factorised``: a product of at least two factors, at least one a bracketed sum.
 - ``factorised_completely``: factorised, every bracket primitive (integer coefficients with no
   common factor and no common letter), no one-letter quadratic bracket with a rational root,
   and no fewer non-constant factors than the canonical answer.
-- ``simplified_fraction``: expanded, factorised, or a single fraction N/D in lowest terms.
+- ``simplified_fraction``: expanded, factorised, or a single fraction N/D in lowest terms;
+  coefficient fractions are in lowest terms too (2a/3, not 6a/9).
 """
 
 

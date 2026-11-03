@@ -826,17 +826,44 @@ def _is_written_number(node: _Node) -> bool:
     return node.kind == "number"
 
 
+def _is_reduced_fraction(numerator: Fraction, denominator: Fraction) -> bool:
+    """Whether a written fraction uses whole numbers with no common factor (5/4, not 10/8)."""
+
+    if numerator.denominator != 1 or denominator.denominator != 1 or denominator <= 0:
+        return False
+    return gcd(numerator.numerator, denominator.numerator) == 1
+
+
+def _written_number_value(node: _Node) -> Fraction | None:
+    """The value of a bracketed number such as (-3) or (1/2), or None for (2/4)."""
+
+    node = _without_brackets(node)
+    sign = 1
+    if node.kind == "neg":
+        sign = -1
+        node = _without_brackets(node.children[0])
+    if node.kind == "number":
+        return sign * node.value
+    numerator, denominator = (_without_brackets(child).value for child in node.children)
+    if not _is_reduced_fraction(numerator, denominator):
+        return None
+    return sign * numerator / denominator
+
+
 def _monomial_term(node: _Node) -> tuple[Fraction, Monomial] | None:
-    """Read one written term such as 5x^2y, -x/4 or (1/2)ab.
+    """Read one written term such as 5x^2y, -x/4, (5x)/4 or (1/2)ab.
 
     Returns its coefficient and variable powers, or None when the term is not written
     as a single coefficient times distinct variable powers (``2*3x``, ``x*x``, ``x^0``
-    and ``(x+1)`` are not).
+    and ``(x+1)`` are not). A written coefficient fraction must be in lowest terms, so
+    ``2x/4``, ``(2x)/4`` and ``(2/4)x`` are not simplified terms. Brackets around a
+    single term do not change how it is read.
     """
 
     coefficient = Fraction(1)
-    numbers = 0
-    divisors = 0
+    numerators: list[Fraction] = []
+    divisors: list[Fraction] = []
+    bracketed_numbers = 0
     powers: dict[str, int] = {}
     pending = [node]
     while pending:
@@ -850,16 +877,20 @@ def _monomial_term(node: _Node) -> tuple[Fraction, Monomial] | None:
             divisor = _without_brackets(current.children[1])
             if divisor.kind != "number" or not divisor.value:
                 return None
-            divisors += 1
+            divisors.append(divisor.value)
             coefficient /= divisor.value
             pending.append(current.children[0])
         elif current.kind == "number":
-            numbers += 1
+            numerators.append(current.value)
             coefficient *= current.value
         elif current.kind == "group" and _is_written_number(current):
-            numbers += 1
-            numerator, _ = _evaluate(current)
-            coefficient *= numerator.get((), Fraction(0))
+            value = _written_number_value(current)
+            if value is None:
+                return None
+            bracketed_numbers += 1
+            coefficient *= value
+        elif current.kind == "group" and len(_summands(_without_brackets(current))) == 1:
+            pending.append(_without_brackets(current))
         elif current.kind == "letter" and current.name not in powers:
             powers[current.name] = 1
         elif (
@@ -871,8 +902,12 @@ def _monomial_term(node: _Node) -> tuple[Fraction, Monomial] | None:
             powers[current.children[0].name] = current.exponent
         else:
             return None
-    if numbers > 1 or divisors > 1:
+    if len(numerators) + bracketed_numbers > 1 or len(divisors) > 1:
         return None
+    if divisors:
+        numerator = numerators[0] if numerators else Fraction(1)
+        if bracketed_numbers or not _is_reduced_fraction(numerator, divisors[0]):
+            return None
     return coefficient, tuple(sorted(powers.items()))
 
 
