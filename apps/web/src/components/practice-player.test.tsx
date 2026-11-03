@@ -79,9 +79,29 @@ const current: NextQuestionResponse = {
   },
 };
 
+const unreadable: AttemptResponse = {
+  attempt_number: 0,
+  correct: false,
+  format_error: true,
+  parts: [
+    {
+      position: 1,
+      correct: false,
+      error: "Use only prime factors, multiplication, and positive powers.",
+      marks_awarded: 0,
+      marks_available: 2,
+    },
+  ],
+  marks_awarded: 0,
+  marks_available: 2,
+  question_finished: false,
+  solution_available: false,
+};
+
 const correct: AttemptResponse = {
   attempt_number: 1,
   correct: true,
+  format_error: false,
   parts: [
     {
       position: 1,
@@ -182,6 +202,7 @@ describe("PracticePlayer", () => {
     const incorrect: AttemptResponse = {
       attempt_number: 1,
       correct: false,
+      format_error: false,
       parts: [
         {
           position: 1,
@@ -301,6 +322,7 @@ describe("PracticePlayer", () => {
     const incorrect: AttemptResponse = {
       attempt_number: 1,
       correct: false,
+      format_error: false,
       parts: [
         {
           position: 1,
@@ -374,5 +396,98 @@ describe("PracticePlayer", () => {
         undefined,
       ),
     );
+  });
+
+  it("lets the learner fix an unreadable answer without counting the check", async () => {
+    const api = {
+      getNextQuestion: vi.fn(async () => current),
+      submitAttempt: vi
+        .fn<() => Promise<AttemptResponse>>()
+        .mockResolvedValueOnce(unreadable)
+        .mockResolvedValueOnce(correct),
+      revealHint: vi.fn(async () => ({ stage: 1, parts: [] }) as HintResponse),
+      giveUp: vi.fn(
+        async () => ({ status: "gave_up", solution: {} }) as GiveUpResponse,
+      ),
+    };
+
+    render(
+      <PracticePlayer
+        api={api}
+        sessionId="69284c2d-018f-4ddb-8935-51918af14954"
+      />,
+    );
+
+    fireEvent.change(await screen.findByLabelText("Final answer"), {
+      target: { value: "2^3 3^2 5" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Check final answer" }));
+
+    expect(
+      await screen.findByRole("heading", { name: "Check your answer" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/this check was not counted/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Use only prime factors, multiplication, and positive powers.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/not correct yet/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Give up and show solution" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Final answer")).toBeEnabled();
+
+    fireEvent.change(screen.getByLabelText("Final answer"), {
+      target: { value: "2^3 * 3^2 * 5" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Check final answer" }));
+    expect(
+      await screen.findByText("You earned 2 of 2 marks."),
+    ).toBeInTheDocument();
+    expect(api.submitAttempt).toHaveBeenCalledTimes(2);
+  });
+
+  it("keeps a checkpoint question open after an unreadable answer", async () => {
+    const checkpoint: NextQuestionResponse = {
+      ...current,
+      stage: "checkpoint",
+      session: { ...current.session, mode: "checkpoint", lesson_key: null },
+    };
+    const api = {
+      getNextQuestion: vi.fn(async () => checkpoint),
+      submitAttempt: vi.fn(async () => unreadable),
+      revealHint: vi.fn(async () => ({ stage: 1, parts: [] }) as HintResponse),
+      giveUp: vi.fn(
+        async () => ({ status: "gave_up", solution: {} }) as GiveUpResponse,
+      ),
+    };
+
+    render(
+      <PracticePlayer
+        appearance="nextscholar"
+        api={api}
+        sessionId="69284c2d-018f-4ddb-8935-51918af14954"
+      />,
+    );
+
+    fireEvent.change(await screen.findByLabelText(/Your answer/), {
+      target: { value: "2^3 3^2 5" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Check final answer" }));
+
+    expect(await screen.findByText("Check your answer")).toBeInTheDocument();
+    expect(screen.getByText("Check format")).toBeInTheDocument();
+    expect(screen.queryByText("Not yet")).not.toBeInTheDocument();
+    expect(screen.queryByText("Try again")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Continue" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Check final answer" }),
+    ).toBeEnabled();
+    expect(screen.getByLabelText(/Your answer/)).toBeEnabled();
   });
 });

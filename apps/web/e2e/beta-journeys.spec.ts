@@ -146,7 +146,10 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByRole("heading", { name: "Prime factorisation of 360" }),
     ).toBeVisible();
-    await page.getByRole("textbox", { name: /Your answer/ }).fill("1");
+    // A readable wrong answer: an unreadable one is not counted as an attempt.
+    await page
+      .getByRole("textbox", { name: /Your answer/ })
+      .fill("2^3 * 3^2");
     await page.getByRole("button", { name: "Check final answer" }).click();
     await expect(
       page.getByRole("status").filter({ hasText: "Try again" }),

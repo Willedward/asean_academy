@@ -202,7 +202,7 @@ def test_n2_lesson_practice_runs_a_real_draft_question_flow(tmp_path):
     ]
 
 
-def test_wrong_answers_unlock_hints_and_authored_solution(tmp_path):
+def test_wrong_answers_unlock_hints_and_authored_solution(tmp_path, wrong_answers):
     app = application(tmp_path)
     session = create_session(app, "support-flow").json()
     current = request(
@@ -238,11 +238,12 @@ def test_wrong_answers_unlock_hints_and_authored_solution(tmp_path):
                 "session_id": session["session_id"],
                 "question_key": key,
                 "question_revision": current["question"]["revision"],
-                "answers": {"1": "not an answer"},
+                "answers": wrong_answers(key),
             },
         )
         assert result.status_code == 200
         assert result.json()["correct"] is False
+        assert result.json()["format_error"] is False
 
     assert result.json()["solution_available"] is True
     solution = request(
@@ -263,3 +264,60 @@ def test_draft_practice_fails_closed_outside_preview(tmp_path):
 
     assert response.status_code == 404
     assert response.json()["error"]["code"] == "course_not_found"
+
+
+def test_format_errors_do_not_penalise_the_learner(tmp_path, wrong_answers):
+    app = application(tmp_path)
+    session = create_session(app, "format-errors").json()
+    session_id = session["session_id"]
+    current = request(app, "GET", f"/api/v1/practice-sessions/{session_id}/next").json()
+    question = current["question"]
+    key = question["stable_key"]
+    garbled = {
+        "session_id": session_id,
+        "question_key": key,
+        "question_revision": question["revision"],
+        "answers": {str(part["position"]): "not an answer" for part in question["parts"]},
+    }
+
+    for number in (1, 2, 3):
+        result = request(
+            app,
+            "POST",
+            "/api/v1/attempts",
+            headers={"Idempotency-Key": f"garbled-{number}"},
+            json=garbled,
+        )
+        assert result.status_code == 200, result.text
+        body = result.json()
+        assert body["format_error"] is True
+        assert body["correct"] is False
+        assert body["attempt_number"] == 0
+        assert body["question_finished"] is False
+        assert body["solution_available"] is False
+        assert all(part["error"] for part in body["parts"])
+
+    replay = request(
+        app, "POST", "/api/v1/attempts", headers={"Idempotency-Key": "garbled-3"}, json=garbled
+    )
+    assert replay.json() == body
+    locked = request(
+        app,
+        "POST",
+        f"/api/v1/practice-sessions/{session_id}/questions/{key}/give-up",
+    )
+    assert locked.status_code == 403
+    same = request(app, "GET", f"/api/v1/practice-sessions/{session_id}/next").json()
+    assert same["question"]["stable_key"] == key
+    assert same["attempt_count"] == 0
+
+    counted = request(
+        app,
+        "POST",
+        "/api/v1/attempts",
+        headers={"Idempotency-Key": "counted-1"},
+        json={**garbled, "answers": wrong_answers(key)},
+    )
+    assert counted.json()["format_error"] is False
+    assert counted.json()["attempt_number"] == 1
+    assert counted.json()["solution_available"] is False

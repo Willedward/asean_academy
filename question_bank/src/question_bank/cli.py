@@ -36,6 +36,7 @@ from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
+from .diagrams.regenerate import regenerate_batch, regenerate_lessons
 from .english_authoring import (
     claim_english_batch,
     export_english_reviewer_batch,
@@ -87,6 +88,11 @@ def parser():
     validate = commands.add_parser("validate", help="Validate a question-bank source directory")
     validate.add_argument("bank", type=Path, nargs="?", default=DEFAULT_BANK)
     validate.add_argument("--publish", action="store_true", help="Require a complete reviewed bank")
+    validate.add_argument(
+        "--strict-geometry",
+        action="store_true",
+        help="Treat warnings for legacy fixed-template geometry diagrams as errors",
+    )
     preview = commands.add_parser("preview", help="Serve the local reviewer preview")
     preview.add_argument("bank", type=Path, nargs="?", default=DEFAULT_BANK)
     preview.add_argument("--host", default="127.0.0.1")
@@ -117,6 +123,11 @@ def parser():
     course_validate.add_argument("--bank", type=Path, default=DEFAULT_COURSE_BANKS)
     course_validate.add_argument(
         "--publish", action="store_true", help="Require complete reviewed course content"
+    )
+    course_validate.add_argument(
+        "--strict-geometry",
+        action="store_true",
+        help="Treat warnings for legacy fixed-template geometry diagrams as errors",
     )
     course_registry_validate = commands.add_parser(
         "course-registry-validate",
@@ -161,6 +172,41 @@ def parser():
     catalogue_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
     catalogue_validate.add_argument(
         "--publish", action="store_true", help="Require a complete reviewed catalogue"
+    )
+    catalogue_validate.add_argument(
+        "--strict-geometry",
+        action="store_true",
+        help="Treat warnings for legacy fixed-template geometry diagrams as errors",
+    )
+    diagrams_regenerate = commands.add_parser(
+        "diagrams-regenerate",
+        help="Regenerate the right-triangle and mensuration diagrams of one question batch",
+    )
+    diagrams_regenerate.add_argument("bank", type=Path)
+    diagrams_regenerate.add_argument(
+        "--batch", required=True, help="Batch id, for example B001 or g3-sec2-g4-b001"
+    )
+    diagrams_regenerate.add_argument(
+        "--output", type=Path, help="Write previews, manifest.json and findings.md here"
+    )
+    diagrams_regenerate.add_argument(
+        "--apply",
+        action="store_true",
+        help="Write revisioned SVGs into the bank and update the question JSON",
+    )
+    lesson_diagrams_regenerate = commands.add_parser(
+        "lesson-diagrams-regenerate",
+        help="Regenerate the registered right-triangle and mensuration lesson diagrams",
+    )
+    lesson_diagrams_regenerate.add_argument("course", type=Path)
+    lesson_diagrams_regenerate.add_argument(
+        "--lesson", action="append", required=True, help="Lesson stable key; repeat as needed"
+    )
+    lesson_diagrams_regenerate.add_argument("--output", type=Path)
+    lesson_diagrams_regenerate.add_argument(
+        "--apply",
+        action="store_true",
+        help="Write revisioned SVGs into the course and update the lesson JSON",
     )
     catalogue_schema = commands.add_parser(
         "catalogue-schema", help="Generate syllabus and bank blueprint JSON Schemas"
@@ -678,7 +724,12 @@ def main(argv=None):
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
     if args.command == "catalogue-validate":
-        report = validate_catalogue(args.banks, args.syllabus, publish=args.publish)
+        report = validate_catalogue(
+            args.banks,
+            args.syllabus,
+            publish=args.publish,
+            strict_geometry=args.strict_geometry,
+        )
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
     if args.command == "catalogue-schema":
@@ -706,8 +757,18 @@ def main(argv=None):
             result = CatalogueImporter(connection).import_all(report.syllabus, banks)
         print(json.dumps({"status": "complete", "result": result}, indent=2))
         return 0
+    if args.command == "diagrams-regenerate":
+        result = regenerate_batch(args.bank, args.batch, output=args.output, apply=args.apply)
+        print(json.dumps(result.as_dict(), indent=2, ensure_ascii=False))
+        return 0 if result.ok else 1
+    if args.command == "lesson-diagrams-regenerate":
+        result = regenerate_lessons(args.course, args.lesson, output=args.output, apply=args.apply)
+        print(json.dumps(result.as_dict(), indent=2, ensure_ascii=False))
+        return 0 if result.ok else 1
     if args.command == "validate":
-        report = validate_bank(args.bank, publish=args.publish)
+        report = validate_bank(
+            args.bank, publish=args.publish, strict_geometry=args.strict_geometry
+        )
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
     if args.command == "preview":
@@ -730,7 +791,12 @@ def main(argv=None):
         serve_practice(engine, args.bank, args.host, args.port)
         return 0
     if args.command == "course-validate":
-        report = validate_course(args.course, args.bank, publish=args.publish)
+        report = validate_course(
+            args.course,
+            args.bank,
+            publish=args.publish,
+            strict_geometry=args.strict_geometry,
+        )
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
     if args.command == "course-preview":

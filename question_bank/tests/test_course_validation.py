@@ -13,6 +13,8 @@ from question_bank.course_validation import (
     schema_documents,
     validate_course,
 )
+from question_bank.geometry_validation import non_legacy_diagram_warnings
+from question_bank.validation import SYMBOLIC_FORM_MISSING
 
 
 def test_complete_secondary_1_course_source_is_valid(repository_root, course_bank_root):
@@ -24,7 +26,11 @@ def test_complete_secondary_1_course_source_is_valid(repository_root, course_ban
     assert len(report.lessons) == 52
     assert len(report.pools.pools) == 72
     assert report.as_dict()["allocated_question_count"] == 1040
-    assert structural_warnings(report) == []
+    assert not [
+        issue
+        for issue in non_legacy_diagram_warnings(structural_warnings(report))
+        if issue.code != SYMBOLIC_FORM_MISSING
+    ]
 
 
 def test_integrated_secondary_1_n5_lessons_meet_the_depth_gate(repository_root):
@@ -58,7 +64,11 @@ def test_secondary_2_authored_course_source_is_valid(repository_root, course_ban
     assert len(report.lessons) == 35
     assert len(report.pools.pools) == 54
     assert report.as_dict()["allocated_question_count"] == 936
-    assert structural_warnings(report) == []
+    assert not [
+        issue
+        for issue in non_legacy_diagram_warnings(structural_warnings(report))
+        if issue.code != SYMBOLIC_FORM_MISSING
+    ]
 
 
 def test_integrated_secondary_2_s2_lessons_meet_the_depth_and_asset_gates(repository_root):
