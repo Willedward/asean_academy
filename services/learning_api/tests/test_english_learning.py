@@ -4606,3 +4606,42 @@ def test_e9_4_process_compression_is_learner_safe_and_marks_exactly():
     assert completed.json()["correct"] is True
     assert completed.json()["lesson_state"] == "proficient"
     assert [part["correct"] for part in completed.json()["parts"]] == [True] * 6
+
+
+def _current_question_and_source(app, session_id: str) -> tuple[dict, dict]:
+    question = request(app, "GET", f"/api/v1/english/practice-sessions/{session_id}/next").json()[
+        "question"
+    ]
+    source = json.loads(
+        (
+            REPOSITORY_ROOT
+            / "backend_resources/english/v1/questions"
+            / f"{question['stable_key']}.json"
+        ).read_text()
+    )
+    return question, source
+
+
+def test_answer_lists_are_limited_in_size():
+    app = application()
+    session_id = create_session(app, "answer-list-size").json()["session_id"]
+    question, _ = _current_question_and_source(app, session_id)
+
+    response = submit(app, session_id, question, ["A"] * 21, "answer-list-too-long")
+
+    assert response.status_code == 422
+
+
+def test_a_list_answer_to_a_single_choice_part_gets_only_the_hint():
+    app = application()
+    session_id = create_session(app, "answer-list-shape").json()["session_id"]
+    question, source = _current_question_and_source(app, session_id)
+    part = source["parts"][0]
+    assert part["response"]["type"] == "single_choice"
+    choices = sorted(part["response"]["choice_rationales"])
+
+    response = submit(app, session_id, question, choices, "answer-list-choices")
+
+    assert response.status_code == 200, response.text
+    feedback = response.json()["parts"][0]["feedback"]
+    assert feedback == part["hint"]
