@@ -95,6 +95,8 @@ def main() -> None:
         if sec1_version is None:
             raise SystemExit("Import the current course catalogue before seeding E2E identities.")
         sec2_version = _current_course_version(connection, "g3-sec2-math")
+        if sec2_version is None:
+            raise SystemExit("Import both Mathematics courses before seeding E2E identities.")
         for user_id, email, role in identities:
             connection.execute(
                 "insert into auth.users(id, email) values (%s, %s)", (user_id, email)
@@ -119,25 +121,20 @@ def main() -> None:
                 """,
                 (_digest(invitation_code), email, sec1_version, ACADEMIC_ADMIN_ID),
             )
-        if sec2_version is None:
-            # Expected while the Secondary 2 snapshot cannot be imported into
-            # PostgreSQL. The two-course journey reports this as an expected failure.
-            print("No current g3-sec2-math course version; skipped its invitation.")
-        else:
-            connection.execute(
-                """
-                insert into beta_invitations(
-                    token_sha256, email, course_version_id, max_uses,
-                    expires_at, created_by
-                ) values (%s, %s, %s, 1, now() + interval '1 day', %s)
-                """,
-                (
-                    _digest(SEC3_TWO_COURSE_SEC2_CODE),
-                    SEC3_TWO_COURSE_EMAIL,
-                    sec2_version,
-                    ACADEMIC_ADMIN_ID,
-                ),
-            )
+        connection.execute(
+            """
+            insert into beta_invitations(
+                token_sha256, email, course_version_id, max_uses,
+                expires_at, created_by
+            ) values (%s, %s, %s, 1, now() + interval '1 day', %s)
+            """,
+            (
+                _digest(SEC3_TWO_COURSE_SEC2_CODE),
+                SEC3_TWO_COURSE_EMAIL,
+                sec2_version,
+                ACADEMIC_ADMIN_ID,
+            ),
+        )
         seeded_review = connection.execute(
             """
             insert into question_progress(

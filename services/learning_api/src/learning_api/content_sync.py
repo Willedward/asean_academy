@@ -14,15 +14,17 @@ class ContentSyncError(RuntimeError):
 
 
 def check_content(connection, catalogue: CourseCatalogue) -> dict:
-    report = catalogue.report
-    expected = {
-        ("course", report.course.stable_key, report.course.revision):
-            (course_content_hash(report.course, report.lessons, report.pools), report.course.status),
-        **{("lesson", item.stable_key, item.revision): (lesson_content_hash(item), item.status)
-           for item in report.lessons},
-        **{("question", item.stable_key, item.revision): (content_hash(item), item.status)
-           for item in catalogue.questions},
-    }
+    reports = list(catalogue.reports.values())
+    expected = {}
+    for report in reports:
+        expected.update({
+            ("course", report.course.stable_key, report.course.revision):
+                (course_content_hash(report.course, report.lessons, report.pools), report.course.status),
+            **{("lesson", item.stable_key, item.revision): (lesson_content_hash(item), item.status)
+               for item in report.lessons},
+            **{("question", item.stable_key, item.revision): (content_hash(item), item.status)
+               for item in report.questions},
+        })
     # Do not compare is_current: old and new releases can overlap during a rolling deploy.
     rows = connection.execute("""
         select 'course', c.course_key, v.revision, v.content_sha256, v.status::text
@@ -92,10 +94,15 @@ def check_content(connection, catalogue: CourseCatalogue) -> dict:
         )
     return {
         "status": "current",
-        "course_key": report.course.stable_key,
-        "course_revision": report.course.revision,
-        "lessons": len(report.lessons),
-        "questions": len(catalogue.questions),
+        # The first course, kept for single-course readers; see courses for all of them.
+        "course_key": reports[0].course.stable_key,
+        "course_revision": reports[0].course.revision,
+        "courses": [
+            {"course_key": report.course.stable_key, "course_revision": report.course.revision}
+            for report in reports
+        ],
+        "lessons": sum(len(report.lessons) for report in reports),
+        "questions": sum(len(report.questions) for report in reports),
         "english_passages": len(english.passages),
         "english_questions": len(english.questions),
     }

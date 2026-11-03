@@ -83,7 +83,10 @@ class CourseCatalogue:
 
     @cached_property
     def report(self):
-        """Return the current learner-release course for legacy practice services."""
+        """Deprecated Secondary 1 alias kept for the single-course release gate.
+
+        Learner services must use report_for_lesson, report_for_unit or reports.
+        """
         try:
             return self.reports["g3-sec1-math"]
         except KeyError as exc:
@@ -92,6 +95,30 @@ class CourseCatalogue:
                 f"The learner course source at {COURSE_ROOT} is unavailable.",
                 503,
             ) from exc
+
+    @cached_property
+    def _reports_by_lesson(self):
+        return {
+            lesson.stable_key: report
+            for report in self.reports.values()
+            for lesson in report.lessons
+        }
+
+    @cached_property
+    def _reports_by_unit(self):
+        return {
+            unit.stable_key: report
+            for report in self.reports.values()
+            for unit in report.course.units
+        }
+
+    def report_for_lesson(self, lesson_key: str):
+        """Return the course report owning a lesson, or None when the key is unknown."""
+        return self._reports_by_lesson.get(lesson_key)
+
+    def report_for_unit(self, unit_key: str):
+        """Return the course report owning a unit, or None when the key is unknown."""
+        return self._reports_by_unit.get(unit_key)
 
     @cached_property
     def registry_report(self):
@@ -109,7 +136,13 @@ class CourseCatalogue:
 
     @cached_property
     def questions(self):
+        """Deprecated Secondary 1 alias kept for the single-course release gate."""
         return self.report.questions
+
+    @cached_property
+    def all_questions(self):
+        """Return the learner questions of every course. Stable keys are globally unique."""
+        return [question for report in self.reports.values() for question in report.questions]
 
     @cached_property
     def review_catalogue_report(self):

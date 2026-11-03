@@ -2,16 +2,18 @@
  * Sec 3-entry track: one learner studies Secondary 1 (g3-sec1-math) and
  * Secondary 2 (g3-sec2-math) together.
  *
- * Only the Secondary 1 half works today. The tests marked test.fail describe
- * the intended journey and fail on purpose until the product supports it.
- * Playwright then reports them as expected failures. When one starts passing,
- * Playwright flags it, and its test.fail marker should be removed.
+ * The readiness diagnostic is still marked test.fail, because no diagnostic form
+ * is published or attached across both courses. Playwright reports it as an
+ * expected failure and flags it when it starts passing.
  */
 import { expect, test } from "@playwright/test";
 
 import {
   apiGet,
   authenticate,
+  completeGuidedPracticeCorrectly,
+  continueToNext,
+  currentQuestion,
   correctAnswers,
   learningHome,
   onboardToSec1,
@@ -33,15 +35,6 @@ type Me = {
 type Registry = {
   courses: { stable_key: string; school_level: string; available: boolean }[];
 };
-
-const SEC2_ENROLMENT_BLOCKERS =
-  "Missing capability: (1) the Secondary 2 snapshot cannot be imported into " +
-  "PostgreSQL. course-import-db fails with a unique violation on " +
-  "unit_checkpoint_pools (unit_version_id, pool_type) because unit " +
-  "g3-sec2-g5 authors two adaptive_reserve pools, which the validator " +
-  "accepts. With no g3-sec2-math course version, no Secondary 2 invitation " +
-  "can exist. (2) /onboarding redirects any learner with an active " +
-  "enrolment to /learn, so the browser cannot accept a second invitation.";
 
 async function activeCourseKeys(page: import("@playwright/test").Page) {
   const me = await apiGet<Me>(page, "/api/v1/me");
@@ -115,7 +108,6 @@ test.describe.serial("Sec 3-entry two-course track", () => {
   test("the learner accepts a Secondary 2 invitation and keeps both enrolments", async ({
     page,
   }) => {
-    test.fail(true, SEC2_ENROLMENT_BLOCKERS);
     await authenticate(page, learner);
     await page.goto(`/onboarding?code=${learner.sec2Code}`);
     await expect(page.getByLabel("Beta invitation code")).toHaveValue(
@@ -137,36 +129,23 @@ test.describe.serial("Sec 3-entry two-course track", () => {
   test("the learner moves between the Level 1 and Level 2 courses from the learning shell", async ({
     page,
   }) => {
-    test.fail(
-      true,
-      SEC2_ENROLMENT_BLOCKERS +
-        " (3) The learning shell, /learn and the checkpoint page use only the " +
-        "first active enrolment, so there is no navigation to a second course.",
-    );
     await authenticate(page, learner);
     expect(await activeCourseKeys(page)).toContain("g3-sec2-math");
     await page.goto("/learn");
+    // This can be the first visit to the course route, which next dev compiles on demand.
     await page.getByRole("link", { name: new RegExp(sec2Title) }).click();
     await expect(
       page.getByRole("heading", { level: 1, name: sec2Title }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 30_000 });
     await page.getByRole("link", { name: new RegExp(sec1Title) }).click();
     await expect(
       page.getByRole("heading", { level: 1, name: sec1Title }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 30_000 });
   });
 
   test("Secondary 2 practice is recorded separately from Secondary 1 progress", async ({
     page,
   }) => {
-    test.fail(
-      true,
-      SEC2_ENROLMENT_BLOCKERS +
-        " (4) The practice, progress and learning-home services read only the " +
-        "g3-sec1-math report (CourseCatalogue.report). Starting practice for a " +
-        "Secondary 2 lesson returns 404 lesson_not_found, and /api/v1/progress " +
-        "has no Secondary 2 course.",
-    );
     await authenticate(page, learner);
     expect(await activeCourseKeys(page)).toContain("g3-sec2-math");
 
@@ -186,5 +165,57 @@ test.describe.serial("Sec 3-entry two-course track", () => {
       (item) => item.lesson_key === "n1-lesson-01",
     );
     expect(sec1Lesson?.resolved_count).toBe(1);
+  });
+
+  test("a Secondary 2 lesson and checkpoint reach mastery and show on the progress page", async ({
+    page,
+  }) => {
+    test.setTimeout(6 * 60_000);
+    await authenticate(page, learner);
+
+    await startLessonPractice(page, "g5-lesson-06");
+    await completeGuidedPracticeCorrectly(page);
+
+    const ready = await progress(page);
+    expect(
+      ready.checkpoints.find((item) => item.unit_key === "g3-sec2-g5")?.state,
+    ).toBe("available");
+
+    const created = await page.request.post("/api/v1/practice-sessions", {
+      data: { unit_key: "g3-sec2-g5", mode: "checkpoint" },
+      headers: { "Idempotency-Key": `sec3-sec2-checkpoint-${Date.now()}` },
+    });
+    expect(created.status()).toBe(201);
+    const sessionId = (await created.json()).session_id as string;
+    await page.goto(`/checkpoints/${sessionId}`);
+    for (;;) {
+      const next = await currentQuestion(page, sessionId);
+      if (next.status === "completed" || !next.question) break;
+      await waitForQuestion(page, sessionId);
+      expect(
+        await submitAnswer(page, correctAnswers(next.question.stable_key)),
+      ).toBe(true);
+      await continueToNext(page);
+    }
+
+    const after = await progress(page);
+    expect(
+      after.checkpoints.find((item) => item.unit_key === "g3-sec2-g5")?.state,
+    ).toBe("passed");
+    expect(
+      after.lessons.find((item) => item.lesson_key === "g5-lesson-06")?.state,
+    ).toBe("mastered");
+    expect(
+      after.lessons.find((item) => item.lesson_key === "n1-lesson-01")
+        ?.resolved_count,
+    ).toBe(1);
+
+    await page.goto("/progress");
+    await expect(
+      page.getByRole("heading", { name: sec1Title }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: sec2Title }).first(),
+    ).toBeVisible();
   });
 });

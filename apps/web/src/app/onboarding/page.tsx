@@ -43,9 +43,13 @@ function EstablishedUnavailable() {
 function EstablishedOnboarding({
   email,
   initialCode,
+  initialDisplayName,
+  redirectTo,
 }: {
   email: string | null;
   initialCode: string;
+  initialDisplayName: string;
+  redirectTo: string;
 }) {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-8 sm:px-8 sm:py-12">
@@ -109,7 +113,12 @@ function EstablishedOnboarding({
           <h2 className="mt-0 text-2xl font-extrabold">
             Activate student access
           </h2>
-          <OnboardingForm email={email} initialCode={initialCode} />
+          <OnboardingForm
+            email={email}
+            initialCode={initialCode}
+            initialDisplayName={initialDisplayName}
+            redirectTo={redirectTo}
+          />
         </div>
       </section>
     </main>
@@ -174,7 +183,14 @@ export default async function OnboardingPage({
   ) {
     redirect("/admin");
   }
-  if (currentLearner && hasActiveEnrolment(currentLearner)) redirect("/learn");
+  // An enrolled learner may use an invitation link to add another course. Without a
+  // code there is nothing to accept, so onboarding is finished.
+  const addingCourse = currentLearner
+    ? hasActiveEnrolment(currentLearner)
+    : false;
+  if (addingCourse && !initialCode) redirect("/learn");
+  const initialDisplayName = currentLearner?.profile.display_name ?? "";
+  const redirectTo = addingCourse ? "/learn" : "/diagnostics";
 
   if (live) {
     return (
@@ -183,12 +199,19 @@ export default async function OnboardingPage({
           appearance="nextscholar"
           email={session.email}
           initialCode={initialCode}
+          initialDisplayName={initialDisplayName}
+          redirectTo={redirectTo}
         />
       </LiveOnboardingShell>
     );
   }
 
   return (
-    <EstablishedOnboarding email={session.email} initialCode={initialCode} />
+    <EstablishedOnboarding
+      email={session.email}
+      initialCode={initialCode}
+      initialDisplayName={initialDisplayName}
+      redirectTo={redirectTo}
+    />
   );
 }

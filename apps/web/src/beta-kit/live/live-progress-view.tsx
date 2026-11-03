@@ -8,6 +8,7 @@ import {
   RotateCcw,
   Trophy,
 } from "lucide-react";
+import { Fragment } from "react";
 
 import type { ProgressResponse } from "@/lib/api/progress";
 
@@ -227,6 +228,22 @@ export function LiveProgressView({
   const completion = progress.lessons.length
     ? Math.round((proficient / progress.lessons.length) * 100)
     : 0;
+  const multipleCourses = progress.courses.length > 1;
+  const courseGroups = progress.courses.map((course) => {
+    const lessons = progress.lessons.filter(
+      (lesson) => lesson.course_key === course.course_key,
+    );
+    return {
+      course,
+      lessons,
+      proficient: lessons.filter((lesson) =>
+        ["proficient", "mastered"].includes(lesson.state),
+      ).length,
+      checkpoints: progress.checkpoints.filter(
+        (checkpoint) => checkpoint.course_key === course.course_key,
+      ),
+    };
+  });
 
   return (
     <>
@@ -245,7 +262,10 @@ export function LiveProgressView({
       <Card className="gap-5">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <Stat value={proficient} label="Lessons proficient" />
-          <Stat value={progress.lessons.length} label="Lessons in course" />
+          <Stat
+            value={progress.lessons.length}
+            label={multipleCourses ? "Lessons across courses" : "Lessons in course"}
+          />
           <Stat
             value={progress.scheduled_retry_count}
             label="Scheduled reviews"
@@ -257,6 +277,21 @@ export function LiveProgressView({
           pct={completion}
           fill="success"
         />
+        {multipleCourses
+          ? courseGroups.map((group) => (
+              <ProgressBar
+                key={group.course.course_key}
+                label={group.course.title}
+                value={`${group.proficient} of ${group.lessons.length} lessons`}
+                pct={
+                  group.lessons.length
+                    ? Math.round((group.proficient / group.lessons.length) * 100)
+                    : 0
+                }
+                fill="success"
+              />
+            ))
+          : null}
       </Card>
 
       {progress.scheduled_retry_count > 0 ? (
@@ -279,13 +314,18 @@ export function LiveProgressView({
           <Eyebrow>LESSONS</Eyebrow>
           <H2>Lesson progress</H2>
         </div>
-        {progress.lessons.map((lesson) => (
-          <LessonCard
-            key={lesson.lesson_key}
-            lesson={lesson}
-            startingRetry={startingRetry === lesson.lesson_key}
-            onStartRetry={onStartRetry}
-          />
+        {courseGroups.map((group) => (
+          <Fragment key={group.course.course_key}>
+            {multipleCourses ? <H3>{group.course.title}</H3> : null}
+            {group.lessons.map((lesson) => (
+              <LessonCard
+                key={lesson.lesson_key}
+                lesson={lesson}
+                startingRetry={startingRetry === lesson.lesson_key}
+                onStartRetry={onStartRetry}
+              />
+            ))}
+          </Fragment>
         ))}
         {progress.lessons.length === 0 ? (
           <Card>
@@ -301,13 +341,18 @@ export function LiveProgressView({
           <Eyebrow>MASTERY</Eyebrow>
           <H2>Unit checkpoints</H2>
         </div>
-        {progress.checkpoints.map((checkpoint) => (
-          <CheckpointCard
-            key={checkpoint.unit_key}
-            checkpoint={checkpoint}
-            starting={startingCheckpoint === checkpoint.unit_key}
-            onOpen={onOpenCheckpoint}
-          />
+        {courseGroups.map((group) => (
+          <Fragment key={group.course.course_key}>
+            {multipleCourses ? <H3>{group.course.title}</H3> : null}
+            {group.checkpoints.map((checkpoint) => (
+              <CheckpointCard
+                key={checkpoint.unit_key}
+                checkpoint={checkpoint}
+                starting={startingCheckpoint === checkpoint.unit_key}
+                onOpen={onOpenCheckpoint}
+              />
+            ))}
+          </Fragment>
         ))}
         {progress.checkpoints.length === 0 ? (
           <Card>

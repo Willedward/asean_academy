@@ -84,14 +84,14 @@ function PreviewNotice() {
 export function CoreLearningDashboard({
   learner,
   home,
-  course,
+  courses,
 }: {
   learner: CoreLearner;
   home: LearningHomeResponse;
-  course: CourseMapResponse;
+  courses: CourseMapResponse[];
 }) {
-  const courseHref = `/courses/${course.stable_key}`;
-  const firstUnit = coreUnit(unitFromCourseMap(course, 0, home));
+  const onlyCourse = courses.length === 1 ? courses[0] : null;
+  const courseHref = onlyCourse ? `/courses/${onlyCourse.stable_key}` : "/learn";
   const action = home.next_action;
   const actionLabel = ACTION_LABEL[action.type];
   const actionHref =
@@ -99,7 +99,9 @@ export function CoreLearningDashboard({
 
   return (
     <CoreLearningShell active="learn" learner={learner} courseHref={courseHref}>
-      {course.development_preview ? <PreviewNotice /> : null}
+      {courses.some((course) => course.development_preview) ? (
+        <PreviewNotice />
+      ) : null}
       <SubjectSwitch
         active="maths"
         links={{ maths: courseHref, english: "/english" }}
@@ -109,8 +111,9 @@ export function CoreLearningDashboard({
           <Eyebrow>YOUR LEARNING PATH</Eyebrow>
           <H1>Welcome back, {learner.displayName}</H1>
           <Muted className="max-w-2xl">
-            Continue your {course.title} course from the next recommended
-            activity.
+            {onlyCourse
+              ? `Continue your ${onlyCourse.title} course from the next recommended activity.`
+              : "Continue your Mathematics courses from the next recommended activity."}
           </Muted>
         </div>
         <div className="hidden justify-end lg:flex">
@@ -169,37 +172,40 @@ export function CoreLearningDashboard({
         </Button>
       </Card>
 
-      {firstUnit ? (
-        <Card className="gap-4">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="flex flex-col gap-1">
-              <Eyebrow>UNIT {course.units[0]?.position}</Eyebrow>
-              <H2>{firstUnit.title}</H2>
-              <Muted>
-                {firstUnit.lessonsProficient} of {firstUnit.lessons.length}{" "}
-                lessons proficient
-              </Muted>
+      {courses.map((course) => {
+        const firstUnit = coreUnit(unitFromCourseMap(course, 0, home));
+        return firstUnit ? (
+          <Card key={course.stable_key} className="gap-4">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="flex flex-col gap-1">
+                <Eyebrow>UNIT {course.units[0]?.position}</Eyebrow>
+                <H2>{firstUnit.title}</H2>
+                <Muted>
+                  {firstUnit.lessonsProficient} of {firstUnit.lessons.length}{" "}
+                  lessons proficient
+                </Muted>
+              </div>
+              <Button href={`/courses/${course.stable_key}`} size="sm">
+                {onlyCourse ? "View full course" : `View ${course.title}`}
+              </Button>
             </div>
-            <Button href={courseHref} size="sm">
-              View full course
-            </Button>
-          </div>
-          <Divider />
-          <div className="flex flex-col gap-1">
-            {firstUnit.lessons.slice(0, 3).map((lesson) => (
-              <LessonRow key={lesson.key} lesson={lesson} compact />
-            ))}
-          </div>
-          {firstUnit.lessons.length === 0 ? (
-            <Muted>No lessons are available in this unit yet.</Muted>
-          ) : null}
-        </Card>
-      ) : (
-        <Card>
-          <H3>Course content is being prepared</H3>
-          <Muted>No units are available in this course revision yet.</Muted>
-        </Card>
-      )}
+            <Divider />
+            <div className="flex flex-col gap-1">
+              {firstUnit.lessons.slice(0, 3).map((lesson) => (
+                <LessonRow key={lesson.key} lesson={lesson} compact />
+              ))}
+            </div>
+            {firstUnit.lessons.length === 0 ? (
+              <Muted>No lessons are available in this unit yet.</Muted>
+            ) : null}
+          </Card>
+        ) : (
+          <Card key={course.stable_key}>
+            <H3>Course content is being prepared</H3>
+            <Muted>No units are available in this course revision yet.</Muted>
+          </Card>
+        );
+      })}
     </CoreLearningShell>
   );
 }
@@ -214,6 +220,9 @@ export function CoreCourseMapScreen({
   progress: ProgressResponse;
 }) {
   const courseHref = `/courses/${course.stable_key}`;
+  const otherCourses = progress.courses.filter(
+    (other) => other.course_key !== course.stable_key,
+  );
   const checkpoints = new Map(
     progress.checkpoints.map((checkpoint) => [checkpoint.unit_key, checkpoint]),
   );
@@ -238,6 +247,19 @@ export function CoreCourseMapScreen({
         </Eyebrow>
         <H1>{course.title}</H1>
         <Muted className="max-w-3xl">{course.description}</Muted>
+        {otherCourses.length > 0 ? (
+          <nav aria-label="Your other courses" className="flex flex-wrap gap-2">
+            {otherCourses.map((other) => (
+              <Button
+                key={other.course_key}
+                href={`/courses/${other.course_key}`}
+                size="sm"
+              >
+                {other.title}
+              </Button>
+            ))}
+          </nav>
+        ) : null}
         <div className="mt-1 flex flex-wrap gap-2">
           <Tag tone="brand">Revision {course.revision}</Tag>
           <Tag

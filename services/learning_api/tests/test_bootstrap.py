@@ -46,7 +46,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         with psycopg.connect(target) as c:
             assert c.execute("select to_regclass('public.profiles')").fetchone()[0] is None
         result = bootstrap_module.bootstrap(target, apply=True)
-        assert result["questions"] == 1040
+        assert result["questions"] == 1976
         assert result["english_questions"] == 133
         assert result["english_passages"] == 37
         assert result["english"]["outcome_count"] == 51
@@ -55,7 +55,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         assert bootstrap_module.bootstrap(target, apply=True) == result
         with psycopg.connect(target) as c:
             assert c.execute("select count(*) from profiles").fetchone()[0] == 0
-            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1040
+            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1976
             assert (
                 c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
                 == 133

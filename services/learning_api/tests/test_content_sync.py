@@ -32,16 +32,18 @@ class Rows:
 
 
 def imported(catalogue):
-    report = catalogue.report
-    return [
-        (
-            "course",
-            report.course.stable_key,
-            report.course.revision,
-            course_content_hash(report.course, report.lessons, report.pools),
-            report.course.status,
-        ),
-        *[
+    rows = []
+    for report in catalogue.reports.values():
+        rows.append(
+            (
+                "course",
+                report.course.stable_key,
+                report.course.revision,
+                course_content_hash(report.course, report.lessons, report.pools),
+                report.course.status,
+            )
+        )
+        rows.extend(
             (
                 "lesson",
                 lesson.stable_key,
@@ -50,12 +52,12 @@ def imported(catalogue):
                 lesson.status,
             )
             for lesson in report.lessons
-        ],
-        *[
+        )
+        rows.extend(
             ("question", q.stable_key, q.revision, content_hash(q), q.status)
-            for q in catalogue.questions
-        ],
-    ]
+            for q in report.questions
+        )
+    return rows
 
 
 def database(catalogue, rows=None):
@@ -81,7 +83,17 @@ def database(catalogue, rows=None):
 def test_exact_content_revisions_are_required_even_when_database_exists():
     catalogue = CourseCatalogue(ROOT, allow_drafts=True)
     rows = imported(catalogue)
-    assert check_content(database(catalogue, rows), catalogue)["questions"] == 1040
+    result = check_content(database(catalogue, rows), catalogue)
+    assert result["questions"] == 1976
+    assert result["lessons"] == 87
+    assert [course["course_key"] for course in result["courses"]] == [
+        "g3-sec1-math",
+        "g3-sec2-math",
+    ]
+    # A missing Secondary 2 course must block readiness like a missing Secondary 1 one.
+    without_sec2 = [row for row in rows if row[1] != "g3-sec2-math"]
+    with pytest.raises(ContentSyncError, match="course:g3-sec2-math"):
+        check_content(database(catalogue, without_sec2), catalogue)
     # A healthy database with an older lesson must not report ready.
     missing_lesson = [row for row in rows if row[1] != "n1-lesson-01"]
     with pytest.raises(ContentSyncError, match="lesson:n1-lesson-01:r2"):

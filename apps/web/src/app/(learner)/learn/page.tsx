@@ -1,4 +1,4 @@
-import { CourseMapPanel } from "@/components/course-map-panel";
+import { EnrolledCourseMaps } from "@/components/enrolled-course-maps";
 import { LearnerHeader } from "@/components/learner-header";
 import { LearningHomePanel } from "@/components/learning-home-panel";
 import {
@@ -7,6 +7,7 @@ import {
 } from "@/beta-kit/live/core-learning-screens";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
+import { activeCourseKeys, learnerCourseHref } from "@/lib/auth/learner-state";
 import { getVerifiedSession } from "@/lib/auth/session";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
 import {
@@ -21,7 +22,7 @@ function EstablishedLearningPage() {
       <LearnerHeader />
       <main className="mx-auto w-full max-w-5xl space-y-8 px-5 py-10 sm:px-8">
         <LearningHomePanel />
-        <CourseMapPanel courseKey="g3-sec1-math" />
+        <EnrolledCourseMaps />
       </main>
     </>
   );
@@ -34,19 +35,19 @@ export default async function LearnPage() {
   const session = await getVerifiedSession();
   if (!learner || !session) return <EstablishedLearningPage />;
 
-  const activeEnrolment = learner.enrolments.find(
-    (enrolment) => enrolment.status === "active",
-  );
-  if (!activeEnrolment) return <EstablishedLearningPage />;
+  const courseKeys = activeCourseKeys(learner);
+  if (courseKeys.length === 0) return <EstablishedLearningPage />;
 
   const presentationLearner = coreLearnerFromProfile(learner.profile);
-  const courseHref = `/courses/${activeEnrolment.course_key}`;
+  const courseHref = learnerCourseHref(learner);
   const result = await Promise.all([
     getServerLearningHome(session),
-    getServerCourseMap(session, activeEnrolment.course_key),
+    Promise.all(
+      courseKeys.map((courseKey) => getServerCourseMap(session, courseKey)),
+    ),
   ])
-    .then(([home, course]) => ({ home, course, error: null }))
-    .catch((error: unknown) => ({ home: null, course: null, error }));
+    .then(([home, courses]) => ({ home, courses, error: null }))
+    .catch((error: unknown) => ({ home: null, courses: null, error }));
 
   if (result.error) {
     if (result.error instanceof ServerLearningApiError) {
@@ -60,13 +61,13 @@ export default async function LearnPage() {
     }
     throw result.error;
   }
-  if (!result.home || !result.course)
+  if (!result.home || !result.courses)
     throw new Error("Learning data was not returned.");
   return (
     <CoreLearningDashboard
       learner={presentationLearner}
       home={result.home}
-      course={result.course}
+      courses={result.courses}
     />
   );
 }

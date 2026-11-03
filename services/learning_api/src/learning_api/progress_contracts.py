@@ -29,6 +29,7 @@ CheckpointState = Literal["locked", "available", "in_progress", "passed"]
 
 
 class LessonProgressResponse(ApiModel):
+    course_key: str
     lesson_key: str
     lesson_title: str
     position: int
@@ -73,6 +74,7 @@ class ActiveRecallAttemptResponse(ApiModel):
 
 
 class CheckpointProgressResponse(ApiModel):
+    course_key: str
     unit_key: str
     state: CheckpointState
     available: bool
@@ -92,9 +94,20 @@ class NextActionResponse(ApiModel):
     session_id: str | None = None
 
 
+class ProgressCourseResponse(ApiModel):
+    course_key: str
+    course_revision: int
+    title: str
+    school_level: str
+    proficiency_threshold: int
+
+
 class ProgressResponse(ApiModel):
     learner_id: str
+    # The first enrolled course. Use courses, lessons[].course_key and
+    # checkpoints[].course_key for anything specific to one course.
     course_key: str
+    courses: list[ProgressCourseResponse]
     proficiency_threshold: int
     checkpoint_required_for_mastery: bool
     scheduled_retry_count: int = 0
@@ -106,6 +119,7 @@ class ProgressResponse(ApiModel):
 class LearningHomeResponse(ApiModel):
     learner_id: str
     course_key: str
+    courses: list[ProgressCourseResponse]
     next_action: NextActionResponse
     unresolved_retry_count: int
     scheduled_retry_count: int = 0

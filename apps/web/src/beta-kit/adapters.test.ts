@@ -53,6 +53,7 @@ describe("beta kit adapters", () => {
         href: "/practice/abc",
       },
       {
+        course_key: "g3-sec1-math",
         lesson_key: "n1-lesson-02",
         lesson_title: "HCF and LCM",
         position: 2,

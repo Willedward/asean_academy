@@ -21,77 +21,90 @@ class ProgressService:
         self.repository = repository
         self.learner_id = learner_id
 
-    @property
-    def policy(self):
-        course = self.catalogue.report.course
-        return course.mastery_policies[0]
+    @staticmethod
+    def _policy(report):
+        return report.course.mastery_policies[0]
 
-    def _unit(self, unit_key: str):
-        unit = next(
-            (
-                candidate
-                for candidate in self.catalogue.report.course.units
-                if candidate.stable_key == unit_key
-            ),
-            None,
+    def _active_reports(self) -> list:
+        """Return the learner's active courses in catalogue order.
+
+        A learner with no enrolment in the catalogue is the local development learner.
+        Production routes reach this service only through the enrolled-learner check.
+        """
+        active = set(self.repository.active_course_keys(self.learner_id))
+        reports = self.catalogue.reports
+        return [report for key, report in reports.items() if key in active] or list(
+            reports.values()
         )
-        if unit is None:
+
+    def _owned_unit(self, unit_key: str):
+        report = self.catalogue.report_for_unit(unit_key)
+        if report is None:
             raise ProgressError("unit_not_found", "The requested unit was not found.", 404)
-        return unit
+        unit = next(
+            candidate for candidate in report.course.units if candidate.stable_key == unit_key
+        )
+        return report, unit
+
+    def _authored_lesson_model(self, lesson_key: str):
+        report = self.catalogue.report_for_lesson(lesson_key)
+        if report is None:
+            return None
+        return next(
+            candidate for candidate in report.lessons if candidate.stable_key == lesson_key
+        )
 
     def _retry_counts(self) -> dict[str, int]:
         unresolved = set(
             self.repository.unresolved_question_keys(self.learner_id)
         )
-        counts = {lesson.stable_key: 0 for lesson in self.catalogue.report.lessons}
-        for question in self.catalogue.questions:
-            if question.stable_key not in unresolved:
-                continue
-            manifest = next(
-                (
-                    candidate
-                    for candidate in self.catalogue.report.pools.manifests
-                    if candidate.bank_key == question.bank_key
-                ),
-                None,
-            )
-            unit = (
-                next(
+        counts = {
+            lesson.stable_key: 0
+            for report in self.catalogue.reports.values()
+            for lesson in report.lessons
+        }
+        for report in self.catalogue.reports.values():
+            for question in report.questions:
+                if question.stable_key not in unresolved:
+                    continue
+                manifest = next(
                     (
                         candidate
-                        for candidate in self.catalogue.report.course.units
-                        if candidate.stable_key == manifest.unit_key
+                        for candidate in report.pools.manifests
+                        if candidate.bank_key == question.bank_key
                     ),
                     None,
                 )
-                if manifest is not None
-                else None
-            )
-            lesson_keys = {
-                candidate.stable_key for candidate in unit.lessons
-            } if unit is not None else set()
-            lesson = next(
-                (
-                    candidate
-                    for candidate in self.catalogue.report.lessons
-                    if candidate.stable_key in lesson_keys
-                    and question.primary_outcome in candidate.outcomes
-                ),
-                None,
-            )
-            if lesson is not None:
-                counts[lesson.stable_key] += 1
+                unit = (
+                    next(
+                        (
+                            candidate
+                            for candidate in report.course.units
+                            if candidate.stable_key == manifest.unit_key
+                        ),
+                        None,
+                    )
+                    if manifest is not None
+                    else None
+                )
+                lesson_keys = {
+                    candidate.stable_key for candidate in unit.lessons
+                } if unit is not None else set()
+                lesson = next(
+                    (
+                        candidate
+                        for candidate in report.lessons
+                        if candidate.stable_key in lesson_keys
+                        and question.primary_outcome in candidate.outcomes
+                    ),
+                    None,
+                )
+                if lesson is not None:
+                    counts[lesson.stable_key] += 1
         return counts
 
     def assert_lesson_unlocked(self, lesson_key: str) -> None:
-        lesson = next(
-            (
-                candidate
-                for candidate in self.catalogue.report.lessons
-                if candidate.stable_key == lesson_key
-            ),
-            None,
-        )
+        lesson = self._authored_lesson_model(lesson_key)
         if lesson is None:
             raise ProgressError("lesson_not_found", "The requested lesson was not found.", 404)
         records = {
@@ -126,14 +139,7 @@ class ProgressService:
 
     def _authored_lesson(self, lesson_key: str):
         self.catalogue.lesson(lesson_key)
-        lesson = next(
-            (
-                candidate
-                for candidate in self.catalogue.report.lessons
-                if candidate.stable_key == lesson_key
-            ),
-            None,
-        )
+        lesson = self._authored_lesson_model(lesson_key)
         if lesson is None:
             raise ProgressError("lesson_not_found", "The requested lesson was not found.", 404)
         self.assert_lesson_unlocked(lesson_key)
@@ -287,18 +293,23 @@ class ProgressService:
 
     def sync_session(self, summary: dict):
         if summary.get("mode") == "checkpoint":
-            unit = self._unit(summary["unit_key"])
+            report, unit = self._owned_unit(summary["unit_key"])
+            policy = self._policy(report)
             return self.repository.sync_checkpoint(
                 self.learner_id,
                 summary,
                 lesson_keys=[lesson.stable_key for lesson in unit.lessons],
-                passing_percentage=self.policy.checkpoint_passing_percentage,
-                policy_key=self.policy.key,
+                passing_percentage=policy.checkpoint_passing_percentage,
+                policy_key=policy.key,
             )
+        # A session without a known lesson changes no lesson record, so the first
+        # course's policy is only a placeholder for it.
+        report = self.catalogue.report_for_lesson(summary.get("lesson_key") or "")
+        policy = self._policy(report or next(iter(self.catalogue.reports.values())))
         return self.repository.sync_session(
             self.learner_id,
             summary,
-            minimum_percentage=self.policy.minimum_eventual_correct_percentage,
+            minimum_percentage=policy.minimum_eventual_correct_percentage,
         )
 
     def _lesson_response(
@@ -310,6 +321,7 @@ class ProgressService:
         retry_question_count: int = 0,
     ) -> dict:
         return {
+            "course_key": lesson.course_key,
             "lesson_key": lesson.stable_key,
             "lesson_title": lesson.title,
             "position": lesson.position,
@@ -330,7 +342,8 @@ class ProgressService:
         }
 
     def checkpoint_status(self, unit_key: str) -> dict:
-        unit = self._unit(unit_key)
+        report, unit = self._owned_unit(unit_key)
+        policy = self._policy(report)
         records = {
             record.lesson_key: record
             for record in self.repository.lesson_progress(self.learner_id)
@@ -355,69 +368,88 @@ class ProgressService:
         else:
             state = "locked"
         return {
+            "course_key": report.course.stable_key,
             "unit_key": unit_key,
             "state": state,
             "available": available and state != "passed",
             "question_count": unit.checkpoint_question_count,
-            "passing_percentage": self.policy.checkpoint_passing_percentage,
+            "passing_percentage": policy.checkpoint_passing_percentage,
             "last_session_id": latest.session_id if latest else None,
             "last_percentage": latest.percentage if latest else None,
         }
 
-    def progress(self) -> dict:
-        report = self.catalogue.report
+    def _lesson_responses(self, reports: list) -> list[dict]:
         records = {
             record.lesson_key: record
             for record in self.repository.lesson_progress(self.learner_id)
         }
-        unit_positions = {
-            unit.stable_key: unit.position for unit in report.course.units
-        }
-        lessons = sorted(
-            report.lessons,
-            key=lambda lesson: (unit_positions[lesson.unit_key], lesson.position),
-        )
         retry_counts = self._retry_counts()
-        lesson_responses = []
-        for lesson in lessons:
-            unlocked = all(
-                records.get(key) is not None
-                and records[key].state in {"proficient", "mastered"}
-                for key in lesson.prerequisite_lessons
+        responses = []
+        for report in reports:
+            unit_positions = {
+                unit.stable_key: unit.position for unit in report.course.units
+            }
+            lessons = sorted(
+                report.lessons,
+                key=lambda lesson: (unit_positions[lesson.unit_key], lesson.position),
             )
-            lesson_responses.append(
-                self._lesson_response(
-                    lesson,
-                    records.get(lesson.stable_key),
-                    unlocked=unlocked,
-                    retry_question_count=retry_counts[lesson.stable_key],
+            for lesson in lessons:
+                unlocked = all(
+                    records.get(key) is not None
+                    and records[key].state in {"proficient", "mastered"}
+                    for key in lesson.prerequisite_lessons
                 )
-            )
+                responses.append(
+                    self._lesson_response(
+                        lesson,
+                        records.get(lesson.stable_key),
+                        unlocked=unlocked,
+                        retry_question_count=retry_counts[lesson.stable_key],
+                    )
+                )
+        return responses
+
+    def _checkpoint_responses(self, reports: list) -> list[dict]:
+        return [
+            self.checkpoint_status(unit.stable_key)
+            for report in reports
+            for unit in report.course.units
+        ]
+
+    def _course_summaries(self, reports: list) -> list[dict]:
+        return [
+            {
+                "course_key": report.course.stable_key,
+                "course_revision": report.course.revision,
+                "title": report.course.title,
+                "school_level": report.course.school_level,
+                "proficiency_threshold": (
+                    self._policy(report).minimum_eventual_correct_percentage
+                ),
+            }
+            for report in reports
+        ]
+
+    def progress(self) -> dict:
+        reports = self._active_reports()
+        first_policy = self._policy(reports[0])
         scheduled_retry_count, next_retry_due_at = self.repository.retry_schedule(
             self.learner_id
         )
         return {
             "learner_id": self.learner_id,
-            "course_key": report.course.stable_key,
-            "proficiency_threshold": self.policy.minimum_eventual_correct_percentage,
-            "checkpoint_required_for_mastery": self.policy.mastery_requires_checkpoint,
+            "course_key": reports[0].course.stable_key,
+            "courses": self._course_summaries(reports),
+            "proficiency_threshold": first_policy.minimum_eventual_correct_percentage,
+            "checkpoint_required_for_mastery": first_policy.mastery_requires_checkpoint,
             "scheduled_retry_count": scheduled_retry_count,
             "next_retry_due_at": next_retry_due_at,
-            "lessons": lesson_responses,
-            "checkpoints": [
-                self.checkpoint_status(unit.stable_key)
-                for unit in report.course.units
-            ],
+            "lessons": self._lesson_responses(reports),
+            "checkpoints": self._checkpoint_responses(reports),
         }
 
     def learning_home(self) -> dict:
         progress = self.progress()
-        unit_by_key = {
-            unit.stable_key: unit for unit in self.catalogue.report.course.units
-        }
-        lesson_by_key = {
-            lesson.stable_key: lesson for lesson in self.catalogue.report.lessons
-        }
         active = self.active_session()
         active_checkpoint = next(
             (
@@ -428,7 +460,7 @@ class ProgressService:
             None,
         )
         if active is not None:
-            lesson = lesson_by_key[active.lesson_key]
+            lesson = self._authored_lesson_model(active.lesson_key)
             action = {
                 "type": "resume_practice",
                 "title": f"Resume {lesson.title}",
@@ -442,7 +474,7 @@ class ProgressService:
                 "session_id": active.session_id,
             }
         elif active_checkpoint is not None:
-            unit = unit_by_key[active_checkpoint["unit_key"]]
+            _, unit = self._owned_unit(active_checkpoint["unit_key"])
             action = {
                 "type": "resume_checkpoint",
                 "title": f"Resume the {unit.topic_code} checkpoint",
@@ -499,7 +531,7 @@ class ProgressService:
                     "session_id": None,
                 }
             elif checkpoint is not None:
-                unit = unit_by_key[checkpoint["unit_key"]]
+                _, unit = self._owned_unit(checkpoint["unit_key"])
                 action = {
                     "type": "start_checkpoint",
                     "title": f"Start the {unit.topic_code} checkpoint",
@@ -555,6 +587,7 @@ class ProgressService:
         return {
             "learner_id": self.learner_id,
             "course_key": progress["course_key"],
+            "courses": progress["courses"],
             "next_action": action,
             "unresolved_retry_count": sum(
                 lesson["retry_question_count"] for lesson in progress["lessons"]
@@ -566,12 +599,21 @@ class ProgressService:
         }
 
     def apply_to_course_map(self, course_map: CourseMapResponse) -> CourseMapResponse:
-        if course_map.stable_key != self.catalogue.report.course.stable_key:
+        report = next(
+            (
+                candidate
+                for candidate in self._active_reports()
+                if candidate.course.stable_key == course_map.stable_key
+            ),
+            None,
+        )
+        if report is None:
             return course_map
-        progress = self.progress()
-        lesson_progress = {item["lesson_key"]: item for item in progress["lessons"]}
+        lesson_progress = {
+            item["lesson_key"]: item for item in self._lesson_responses([report])
+        }
         checkpoint_progress = {
-            item["unit_key"]: item for item in progress["checkpoints"]
+            item["unit_key"]: item for item in self._checkpoint_responses([report])
         }
         for unit in course_map.units:
             unit.checkpoint_available = checkpoint_progress[unit.stable_key]["available"]

@@ -173,6 +173,10 @@ export function ProgressPanel({
   const proficient = progress.lessons.filter((lesson) =>
     ["proficient", "mastered"].includes(lesson.state),
   ).length;
+  const courseLabel = (courseKey: string) =>
+    progress.courses.length > 1
+      ? `${progress.courses.find((course) => course.course_key === courseKey)?.title} · `
+      : "";
 
   return (
     <div className="space-y-7">
@@ -217,7 +221,7 @@ export function ProgressPanel({
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="mb-1 text-sm font-semibold text-teal-700">
-                    Lesson {lesson.position}
+                    {courseLabel(lesson.course_key)}Lesson {lesson.position}
                   </p>
                   <h2 className="m-0 text-xl font-extrabold">
                     {lesson.lesson_title}
@@ -277,6 +281,7 @@ export function ProgressPanel({
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="mb-1 text-sm font-bold uppercase tracking-wide text-teal-700">
+                  {courseLabel(checkpoint.course_key)}
                   {checkpoint.unit_key.replaceAll("-", " ")}
                 </p>
                 <h3 className="m-0 text-xl font-extrabold">

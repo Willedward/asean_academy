@@ -290,6 +290,10 @@ class QuestionPools(Model):
         keys = [pool.stable_key for pool in self.pools]
         if len(keys) != len(set(keys)):
             raise ValueError("Question-pool keys must be unique")
+        # Mirrors the partial unique index on unit_checkpoint_pools. Several adaptive_reserve
+        # pools are allowed because each pool holds at most 40 questions.
+        if sum(pool.type == "unit_checkpoint" for pool in self.pools) > 1:
+            raise ValueError("A unit may have only one unit_checkpoint pool")
         question_keys = [item.question_key for pool in self.pools for item in pool.items]
         if len(question_keys) != len(set(question_keys)):
             raise ValueError("Every question must be allocated to exactly one source pool")

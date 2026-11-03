@@ -79,5 +79,12 @@
       "match": "drop constraint if exists content_lifecycle_requests_item_kind_check",
       "reason": "The lifecycle item-kind constraint is recreated in the same transaction with english_checkpoint_form added; every previously allowed kind remains valid."
     }
+  ],
+  "202611030051_unit_multiple_adaptive_reserve_pools.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint unit_checkpoint_pools_unit_version_id_pool_type_key",
+      "reason": "Removes no data. A partial unique index in the same transaction keeps one checkpoint pool per unit; only adaptive_reserve pools may now repeat, and pool keys stay unique per unit."
+    }
   ]
 }

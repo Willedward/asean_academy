@@ -170,10 +170,16 @@ class AdminUserListResponse(ApiModel):
     offset: int
 
 
+class ContentCourseStatusResponse(ApiModel):
+    course_key: str
+    course_revision: int
+
+
 class ContentStatusResponse(ApiModel):
     status: str
     course_key: str
     course_revision: int
+    courses: list[ContentCourseStatusResponse]
     lessons: int
     questions: int
 

@@ -21,8 +21,8 @@ sys.path.insert(0, str(REPOSITORY_ROOT / "scripts"))
 from check_migration_safety import inspect_migrations  # noqa: E402
 
 
-def import_question_catalogue(connection, report):
-    bank_reports = list(report.bank_reports.values())
+def import_question_catalogue(connection, reports):
+    bank_reports = [bank for report in reports for bank in report.bank_reports.values()]
     if not bank_reports or bank_reports[0].catalogue is None:
         raise ValueError("Validated course has no syllabus catalogue")
     banks = [
@@ -34,6 +34,13 @@ def import_question_catalogue(connection, report):
         bank_reports[0].catalogue,
         banks,
     )
+
+
+def import_courses(connection, reports):
+    import_question_catalogue(connection, reports)
+    importer = CourseImporter(connection)
+    for report in reports:
+        importer.import_all(report.course, report.lessons, report.pools)
 
 
 def migration_body(path: Path) -> str:
@@ -50,9 +57,8 @@ def lock(connection):
 
 def bootstrap(database_url: str, *, apply: bool) -> dict:
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
-    report = catalogue.report
+    reports = list(catalogue.reports.values())
     english_report = catalogue.english_learner_report
-    questions = catalogue.questions
     directory = REPOSITORY_ROOT / "supabase/migrations"
     allowlist = json.loads((REPOSITORY_ROOT / "scripts/migration_safety_allowlist.json").read_text())
     _, unreviewed = inspect_migrations(directory, allowlist)
@@ -74,13 +80,16 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             if applied and any(p.name.split("_", 1)[0] < max(applied) for p in pending):
                 raise ValueError("Migration history has gaps; reconcile it before bootstrapping.")
         print("Pending migrations:", ", ".join(p.name for p in pending) or "none")
-        print(f"Validated course revision {report.course.revision}; {len(questions)} questions.")
+        for report in reports:
+            print(
+                f"Validated {report.course.stable_key} revision {report.course.revision}; "
+                f"{len(report.questions)} questions."
+            )
         if not apply:
             if not pending:
                 with connection.transaction(force_rollback=True):
                     lock(connection)
-                    import_question_catalogue(connection, report)
-                    CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
+                    import_courses(connection, reports)
                     EnglishObjectiveImporter(connection).import_all(english_report)
                     check_content(connection, catalogue)
                 print("Content import preview passed; transaction rolled back.")
@@ -106,8 +115,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             print(f"Applied {migration.name}")
         with connection.transaction():
             lock(connection)
-            import_question_catalogue(connection, report)
-            CourseImporter(connection).import_all(report.course, report.lessons, report.pools)
+            import_courses(connection, reports)
             english_result = EnglishObjectiveImporter(connection).import_all(english_report)
             result = check_content(connection, catalogue)
         print("Imported and verified content. Enrolments and credentials were not changed.")

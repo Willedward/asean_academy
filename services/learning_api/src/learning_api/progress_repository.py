@@ -152,6 +152,8 @@ class ProgressRepository(Protocol):
 
     def retry_schedule(self, learner_id: str) -> tuple[int, str | None]: ...
 
+    def active_course_keys(self, learner_id: str) -> list[str]: ...
+
 
 class SQLiteProgressRepository:
     """Local adapter; production PostgreSQL must implement the same behaviour."""
@@ -776,6 +778,10 @@ class SQLiteProgressRepository:
                     raise
                 return []
         return [row["question_key"] for row in rows]
+
+    def active_course_keys(self, learner_id: str) -> list[str]:
+        """The local SQLite learner has no enrolments; the service then uses every course."""
+        return []
 
     def retry_schedule(self, learner_id: str) -> tuple[int, str | None]:
         keys = self.unresolved_question_keys(learner_id)
@@ -1443,6 +1449,20 @@ class PostgresProgressRepository:
                 (learner_id,),
             ).fetchall()
         return [row["stable_key"] for row in rows]
+
+    def active_course_keys(self, learner_id: str) -> list[str]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            rows = connection.execute(
+                """
+                select courses.course_key
+                from course_enrolments enrolments
+                join courses on courses.id = enrolments.course_id
+                where enrolments.student_id = %s and enrolments.status = 'active'
+                """,
+                (learner_id,),
+            ).fetchall()
+        return [row["course_key"] for row in rows]
 
     def retry_schedule(self, learner_id: str) -> tuple[int, str | None]:
         with self._connect() as connection:

@@ -88,6 +88,32 @@ describe("AdminInvitationsPanel", () => {
     expect(api.listInvitations).toHaveBeenCalledTimes(2);
   });
 
+  it("issues an invitation for the selected course", async () => {
+    const api = {
+      listInvitations: vi.fn(async () => ({ invitations: [invitation], total: 1 })),
+      getOperationsSummary: vi.fn(async () => summary),
+      listAuditEvents: vi.fn(async () => audit),
+      createInvitation: vi.fn(async () => created),
+      revokeInvitation: vi.fn(async () => ({ ...invitation, status: "revoked" as const })),
+    };
+
+    render(<AdminInvitationsPanel api={api} />);
+
+    expect(await screen.findByText("student@example.test")).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("Student email"), {
+      target: { value: "new.student@example.test" },
+    });
+    fireEvent.change(screen.getByLabelText("Course"), {
+      target: { value: "g3-sec2-math" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Create invitation" }));
+
+    expect(await screen.findByText("raw-code-visible-once")).toBeInTheDocument();
+    expect(api.createInvitation).toHaveBeenCalledWith(
+      expect.objectContaining({ course_key: "g3-sec2-math" }),
+    );
+  });
+
   it("revokes an active invitation and reloads operations", async () => {
     const api = {
       listInvitations: vi.fn(async () => ({ invitations: [invitation], total: 1 })),

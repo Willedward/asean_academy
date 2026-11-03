@@ -161,22 +161,24 @@ const repositoryRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../../../..",
 );
-const sec1N1QuestionDirectory = path.join(
-  repositoryRoot,
+const questionDirectories = [
   "backend_resources/question_bank/g3_math/secondary_1/n1/v1/questions",
-);
+  "backend_resources/question_bank/g3_math/secondary_2/g5/v1/questions",
+].map((directory) => path.join(repositoryRoot, directory));
 
 let cachedKey: Map<string, AuthoredQuestion> | null = null;
 
 function authoredQuestions(): Map<string, AuthoredQuestion> {
   if (cachedKey) return cachedKey;
   cachedKey = new Map();
-  for (const file of readdirSync(sec1N1QuestionDirectory)) {
-    if (!file.endsWith(".json")) continue;
-    const question = JSON.parse(
-      readFileSync(path.join(sec1N1QuestionDirectory, file), "utf8"),
-    ) as AuthoredQuestion;
-    cachedKey.set(question.stable_key, question);
+  for (const directory of questionDirectories) {
+    for (const file of readdirSync(directory)) {
+      if (!file.endsWith(".json")) continue;
+      const question = JSON.parse(
+        readFileSync(path.join(directory, file), "utf8"),
+      ) as AuthoredQuestion;
+      cachedKey.set(question.stable_key, question);
+    }
   }
   return cachedKey;
 }
@@ -192,7 +194,7 @@ function canonicalSubmission(response: AuthoredResponse): string {
 export function authoredQuestion(questionKey: string): AuthoredQuestion {
   const question = authoredQuestions().get(questionKey);
   if (!question)
-    throw new Error(`No authored N1 answer key for question ${questionKey}.`);
+    throw new Error(`No authored answer key for question ${questionKey}.`);
   return question;
 }
 

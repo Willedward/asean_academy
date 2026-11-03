@@ -9,6 +9,15 @@ describe("LearningHomePanel", () => {
   it("links to the server-recommended active session", async () => {
     const fixture: LearningHomeResponse = {
       learner_id: "development-learner",
+      courses: [
+    {
+      course_key: "g3-sec1-math",
+      course_revision: 21,
+      title: "ASEAN Scholarship Mathematics — Level 1",
+      school_level: "secondary_1",
+      proficiency_threshold: 70,
+    },
+  ],
       course_key: "g3-sec1-math",
       unresolved_retry_count: 0,
       scheduled_retry_count: 0,
