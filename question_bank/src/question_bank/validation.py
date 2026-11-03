@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -13,7 +14,40 @@ from .catalogue import BankBlueprint, SyllabusCatalogue, load_blueprint, load_ca
 from .diagram_checks import DiagramContext
 from .difficulty import DIFFICULTY_KEYS
 from .geometry_validation import geometry_diagram_findings, revisioned_asset_path_issues
-from .models import Question
+from .models import AlgebraicResponse, Question, TextBlock
+
+SYMBOLIC_FORM_MISSING = "symbolic_form_missing"
+_FORM_TASK = re.compile(r"\b(factori[sz](?:e|ing)|expand(?:ing)?|simplif(?:y|ying))\b", re.IGNORECASE)
+_FORM_TASK_VERBS = {"factori": "factorise", "expand": "expand", "simplif": "simplify"}
+
+
+def missing_symbolic_form(prompt, response) -> str | None:
+    """The task verb when a symbolic_equivalence response asks to factorise, expand or
+    simplify but sets no ``checker_config.form``.
+
+    Without a form every equivalent expression passes, so retyping the original
+    expression is marked correct. An explicit ``"form": "any"`` records that every
+    equivalent form is acceptable and is not flagged.
+    """
+
+    if not isinstance(response, AlgebraicResponse):
+        return None
+    if response.comparison_mode != "symbolic_equivalence" or "form" in response.checker_config:
+        return None
+    for block in prompt:
+        if isinstance(block, TextBlock) and (match := _FORM_TASK.search(block.text)):
+            word = match.group(1).lower()
+            return next(verb for stem, verb in _FORM_TASK_VERBS.items() if word.startswith(stem))
+    return None
+
+
+def symbolic_form_message(location: str, verb: str) -> str:
+    return (
+        f"{location} asks the learner to {verb}, but its symbolic_equivalence response sets no "
+        "checker_config.form, so retyping the original expression is marked correct. Set a form "
+        "(see docs/plan/ANSWER_CHECKER_FORM_SETTINGS.md), or \"any\" if every equivalent form "
+        "is acceptable."
+    )
 
 
 @dataclass(frozen=True)
@@ -337,6 +371,16 @@ def validate_bank(
                 f"Outcomes are absent from the bank blueprint: {sorted(undeclared)}",
             )
         _validate_assets(bank_root, question, report, strict_geometry=strict_geometry)
+        for part in question.parts:
+            verb = missing_symbolic_form(part.prompt, part.response)
+            if verb is not None:
+                _issue(
+                    report,
+                    "error" if publish else "warning",
+                    SYMBOLIC_FORM_MISSING,
+                    path,
+                    symbolic_form_message(f"Part {part.position}", verb),
+                )
         report.questions.append(question)
 
     difficulty = {level: 0 for level in DIFFICULTY_KEYS}

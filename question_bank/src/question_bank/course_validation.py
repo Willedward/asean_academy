@@ -11,6 +11,7 @@ from pydantic import ValidationError
 
 from .catalogue import load_blueprint
 from .course_models import (
+    ActiveRecallSection,
     Course,
     Lesson,
     QuestionPoolCollection,
@@ -19,7 +20,13 @@ from .course_models import (
 from .course_registry import CourseRegistry
 from .difficulty import PRACTICE_STAGE_DIFFICULTIES
 from .geometry_validation import geometry_diagram_findings, revisioned_asset_path_issues
-from .validation import ValidationReport, validate_bank
+from .validation import (
+    SYMBOLIC_FORM_MISSING,
+    ValidationReport,
+    missing_symbolic_form,
+    symbolic_form_message,
+    validate_bank,
+)
 
 
 @dataclass(frozen=True)
@@ -168,6 +175,29 @@ def _validate_lesson_note_depth(
         )
 
 
+def _validate_symbolic_forms(
+    lesson: Lesson,
+    path: Path,
+    report: CourseValidationReport,
+    *,
+    publish: bool,
+):
+    """Flag active recall that asks to factorise, expand or simplify without a form."""
+
+    for section in lesson.sections:
+        if not isinstance(section, ActiveRecallSection):
+            continue
+        verb = missing_symbolic_form(section.prompt, section.response)
+        if verb is not None:
+            _issue(
+                report,
+                "error" if publish else "warning",
+                SYMBOLIC_FORM_MISSING,
+                path,
+                symbolic_form_message(f"Section {section.stable_key}", verb),
+            )
+
+
 def _validate_geometry_lesson_depth(lesson: Lesson, path: Path, report: CourseValidationReport):
     if not lesson.unit_key.rsplit("-", 1)[-1].startswith("g"):
         return
@@ -299,6 +329,7 @@ def validate_course(
         seen.add(lesson.stable_key)
         _validate_assets(course_root, lesson, report, strict_geometry=strict_geometry)
         _validate_lesson_note_depth(lesson, path, report, publish=publish)
+        _validate_symbolic_forms(lesson, path, report, publish=publish)
         _validate_geometry_lesson_depth(lesson, path, report)
         report.lessons.append(lesson)
 

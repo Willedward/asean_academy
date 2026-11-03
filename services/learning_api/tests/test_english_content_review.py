@@ -40,6 +40,8 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_lesson", "e1-lesson-01"),
         ("english_lesson", "e1-lesson-02"),
         ("english_lesson", "e1-lesson-04"),
+        ("english_lesson", "e1-lesson-05"),
+        ("english_lesson", "e2-lesson-03"),
         ("english_lesson", "e3-lesson-01"),
         ("english_lesson", "e4-lesson-01"),
         ("english_lesson", "e4-lesson-02"),
@@ -114,6 +116,20 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
         ("english_question", "ev-l4-005"),
         ("english_question", "ev-l4-006"),
         ("english_question", "ev-l4-007"),
+        ("english_question", "ev-l5-008"),
+        ("english_question", "ev-l5-009"),
+        ("english_question", "ev-l5-010"),
+        ("english_question", "ev-l5-011"),
+        ("english_question", "ev-l5-012"),
+        ("english_question", "ev-l5-013"),
+        ("english_question", "ev-l5-014"),
+        ("english_question", "eg-l3-001"),
+        ("english_question", "eg-l3-002"),
+        ("english_question", "eg-l3-003"),
+        ("english_question", "eg-l3-004"),
+        ("english_question", "eg-l3-005"),
+        ("english_question", "eg-l3-006"),
+        ("english_question", "eg-l3-007"),
         ("english_question", "ex-l1-001"),
         ("english_question", "ex-l2-001"),
         ("english_question", "ex-l3-001"),
@@ -157,6 +173,26 @@ def test_english_lessons_passages_and_questions_enter_admin_review(catalogue):
     )
     assert synonym_retry.batch_id == "english-ev-b012"
     assert synonym_retry.unit_key == "english-e1"
+    collocation_register = next(
+        item for item in english_items if item.stable_key == "ev-l5-008"
+    )
+    assert collocation_register.batch_id == "english-ev-b013"
+    assert collocation_register.unit_key == "english-e1"
+    collocation_retry = next(
+        item for item in english_items if item.stable_key == "ev-l5-014"
+    )
+    assert collocation_retry.batch_id == "english-ev-b014"
+    assert collocation_retry.unit_key == "english-e1"
+    tense_aspect = next(
+        item for item in english_items if item.stable_key == "eg-l3-001"
+    )
+    assert tense_aspect.batch_id == "english-eg-b005"
+    assert tense_aspect.unit_key == "english-e2"
+    tense_aspect_retry = next(
+        item for item in english_items if item.stable_key == "eg-l3-007"
+    )
+    assert tense_aspect_retry.batch_id == "english-eg-b006"
+    assert tense_aspect_retry.unit_key == "english-e2"
     banked = next(item for item in english_items if item.stable_key == "eb-l1-001")
     assert banked.batch_id == "english-eb-b001"
     assert banked.unit_key == "english-e3"

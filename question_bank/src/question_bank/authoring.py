@@ -30,7 +30,13 @@ from .catalogue import (
 from .checking import check_answer
 from .difficulty import DIFFICULTY_DEFINITIONS, DIFFICULTY_KEYS
 from .models import AlgebraicResponse, Model, NumericResponse, Question
-from .validation import Issue, validate_catalogue
+from .validation import (
+    SYMBOLIC_FORM_MISSING,
+    Issue,
+    missing_symbolic_form,
+    symbolic_form_message,
+    validate_catalogue,
+)
 
 BATCH_SCHEMA_VERSION = "1.0.0"
 HOUSE_RULES_SCHEMA_VERSION = "1.0.0"
@@ -787,6 +793,16 @@ def validate_batch(
                     "answer_checker_rejected",
                     path,
                     f"Part {position} {kind} answer {answer!r}: {result['error'] or 'incorrect'}",
+                )
+        for part in question.parts:
+            verb = missing_symbolic_form(part.prompt, part.response)
+            if verb is not None:
+                _issue(
+                    report,
+                    "error" if manifest.status == "approved" else "warning",
+                    SYMBOLIC_FORM_MISSING,
+                    path,
+                    symbolic_form_message(f"Part {part.position}", verb),
                 )
         for asset in question.assets:
             asset_path = manifest_path.parent.parent / asset.path
