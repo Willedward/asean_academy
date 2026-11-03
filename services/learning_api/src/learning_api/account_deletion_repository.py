@@ -6,15 +6,45 @@ import base64
 import hashlib
 import hmac
 import json
+import logging
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 import psycopg
+from psycopg import sql
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
 from .admin_repository import BetaOperationsError
 from .identity import AuthenticatedLearner
+
+
+LOGGER = logging.getLogger(__name__)
+
+# Children before parents: several of these references refuse a delete while a child row
+# exists, and the order of cascades from auth.users is not defined by the schema.
+ORDERED_DELETIONS = (
+    "english_retry_queue",
+    "english_error_classifications",
+    "english_objective_attempts",
+    "english_checkpoint_attempts",
+    "english_diagnostic_attempts",
+    "english_essay_feedback_usefulness_responses",
+    "english_essay_provider_feedback",
+    "english_essay_provider_feedback_attempts",
+    "english_essay_feedback_usage_events",
+    "english_essay_feedback_reservation_idempotency_keys",
+    "english_essay_feedback_reservations",
+    "english_essay_marking_feedback",
+    "english_essay_marking_job_idempotency_keys",
+    "english_essay_marking_jobs",
+    "english_essay_self_review_idempotency_keys",
+    "english_essay_self_reviews",
+    "english_essay_submission_idempotency_keys",
+    "english_essay_submissions",
+    "english_essay_draft_idempotency_keys",
+    "english_essay_drafts",
+)
 
 
 class PostgresAccountDeletionRepository:
@@ -103,6 +133,90 @@ class PostgresAccountDeletionRepository:
                 (select count(*) from english_essay_processing_consent_events
                  where student_id = %(learner_id)s)::integer
                     as english_essay_processing_consent_events,
+                (select count(*) from english_checkpoint_attempts
+                 where student_id = %(learner_id)s)::integer
+                    as english_checkpoint_attempts,
+                (select count(*) from english_checkpoint_session_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_checkpoint_session_idempotency_keys,
+                (select count(*) from english_checkpoint_sessions
+                 where student_id = %(learner_id)s)::integer
+                    as english_checkpoint_sessions,
+                (select count(*) from english_diagnostic_attempts
+                 where student_id = %(learner_id)s)::integer
+                    as english_diagnostic_attempts,
+                (select count(*) from english_diagnostic_session_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_diagnostic_session_idempotency_keys,
+                (select count(*) from english_diagnostic_sessions
+                 where student_id = %(learner_id)s)::integer
+                    as english_diagnostic_sessions,
+                (select count(*) from english_error_classifications
+                 where student_id = %(learner_id)s)::integer
+                    as english_error_classifications,
+                (select count(*) from english_essay_draft_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_draft_idempotency_keys,
+                (select count(*) from english_essay_drafts
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_drafts,
+                (select count(*) from english_essay_feedback_reservation_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_feedback_reservation_idempotency_keys,
+                (select count(*) from english_essay_feedback_usefulness_responses
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_feedback_usefulness_responses,
+                (select count(*) from english_essay_marking_feedback
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_marking_feedback,
+                (select count(*) from english_essay_marking_job_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_marking_job_idempotency_keys,
+                (select count(*) from english_essay_marking_jobs
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_marking_jobs,
+                (select count(*) from english_essay_provider_feedback
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_provider_feedback,
+                (select count(*) from english_essay_provider_feedback_attempts
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_provider_feedback_attempts,
+                (select count(*) from english_essay_self_review_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_self_review_idempotency_keys,
+                (select count(*) from english_essay_self_reviews
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_self_reviews,
+                (select count(*) from english_essay_submission_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_submission_idempotency_keys,
+                (select count(*) from english_essay_submissions
+                 where student_id = %(learner_id)s)::integer
+                    as english_essay_submissions,
+                (select count(*) from english_lesson_progress
+                 where student_id = %(learner_id)s)::integer
+                    as english_lesson_progress,
+                (select count(*) from english_objective_attempts
+                 where student_id = %(learner_id)s)::integer
+                    as english_objective_attempts,
+                (select count(*) from english_practice_session_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as english_practice_session_idempotency_keys,
+                (select count(*) from english_practice_sessions
+                 where student_id = %(learner_id)s)::integer
+                    as english_practice_sessions,
+                (select count(*) from english_retry_queue
+                 where student_id = %(learner_id)s)::integer
+                    as english_retry_queue,
+                (select count(*) from practice_session_idempotency_keys
+                 where student_id = %(learner_id)s)::integer
+                    as practice_session_idempotency_keys,
+                (select count(*) from tutor_usage_daily
+                 where student_id = %(learner_id)s)::integer
+                    as tutor_usage_daily,
+                (select count(*) from tutor_usage_monthly
+                 where student_id = %(learner_id)s)::integer
+                    as tutor_usage_monthly,
                 (select count(*) from beta_audit_events
                  where actor_user_id = %(learner_id)s
                     or target_user_id = %(learner_id)s)::integer
@@ -218,6 +332,35 @@ class PostgresAccountDeletionRepository:
         reason: str,
         request_id: str,
     ) -> dict:
+        try:
+            return self._execute(
+                administrator,
+                learner_id,
+                preview_token=preview_token,
+                confirmation_email=confirmation_email,
+                reason=reason,
+                request_id=request_id,
+            )
+        except (psycopg.errors.RaiseException, psycopg.errors.IntegrityError) as exc:
+            # The transaction rolled back, so the account and its records are unchanged.
+            LOGGER.error("account_deletion_blocked", extra={"error_type": type(exc).__name__})
+            raise BetaOperationsError(
+                "account_deletion_blocked",
+                "A database rule blocked this deletion, and nothing was deleted. "
+                "Contact engineering with the request ID.",
+                409,
+            ) from exc
+
+    def _execute(
+        self,
+        administrator: AuthenticatedLearner,
+        learner_id: UUID,
+        *,
+        preview_token: str,
+        confirmation_email: str,
+        reason: str,
+        request_id: str,
+    ) -> dict:
         if administrator.learner_id == str(learner_id):
             raise BetaOperationsError(
                 "self_deletion_forbidden",
@@ -295,6 +438,11 @@ class PostgresAccountDeletionRepository:
                 "select set_config('app.account_deletion_target', %s, true)",
                 (str(learner_id),),
             )
+            for table in ORDERED_DELETIONS:
+                connection.execute(
+                    sql.SQL("delete from {} where student_id = %s").format(sql.Identifier(table)),
+                    (learner_id,),
+                )
             deleted = connection.execute(
                 "delete from auth.users where id = %s returning id",
                 (learner_id,),
