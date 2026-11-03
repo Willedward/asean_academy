@@ -4606,3 +4606,37 @@ def test_e9_4_process_compression_is_learner_safe_and_marks_exactly():
     assert completed.json()["correct"] is True
     assert completed.json()["lesson_state"] == "proficient"
     assert [part["correct"] for part in completed.json()["parts"]] == [True] * 6
+
+
+def test_checkpoint_part_totals_stay_hidden_until_it_ends():
+    app = application()
+    seed_e1_checkpoint_prerequisites(app)
+    created = create_checkpoint(app, "hidden-totals")
+    assert created.status_code in (200, 201), created.text
+    session_id = created.json()["session_id"]
+
+    attempts = 0
+    while True:
+        current = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}/next")
+        assert current.status_code == 200, current.text
+        if current.json()["status"] == "completed":
+            break
+        assert current.json()["session"]["correct_parts"] == 0
+        assert current.json()["session"]["total_parts"] == 0
+        question = current.json()["question"]
+        attempts += 1
+        attempt = submit_checkpoint(
+            app,
+            session_id,
+            question,
+            diagnostic_answers(question["stable_key"]),
+            f"hidden-totals-{attempts}",
+        )
+        assert attempt.status_code == 200, attempt.text
+        session = attempt.json()["session"]
+        if not attempt.json()["checkpoint_completed"]:
+            assert session["correct_parts"] == 0
+            assert session["total_parts"] == 0
+
+    final = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}").json()
+    assert final["correct_parts"] == final["total_parts"] > 0

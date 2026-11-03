@@ -425,6 +425,8 @@ class InMemoryEnglishLearningRepository:
 
     def _checkpoint_summary(self, session: dict) -> dict:
         assignments = self.checkpoint_assignments[session["session_id"]]
+        # Part totals stay hidden until the checkpoint ends, as they do for diagnostics.
+        active = session["status"] == "active"
         return {
             "session_id": session["session_id"],
             "status": session["status"],
@@ -436,8 +438,8 @@ class InMemoryEnglishLearningRepository:
             "question_count": session["question_count"],
             "assigned_count": len(assignments),
             "resolved_count": sum(item["status"] != "pending" for item in assignments),
-            "correct_parts": sum(item["correct_parts"] for item in assignments),
-            "total_parts": sum(item["total_parts"] for item in assignments),
+            "correct_parts": 0 if active else sum(item["correct_parts"] for item in assignments),
+            "total_parts": 0 if active else sum(item["total_parts"] for item in assignments),
             "score": session.get("score"),
             "passed": session.get("passed"),
             "development_drafts": session["development_drafts"],
@@ -1229,6 +1231,8 @@ class PostgresEnglishLearningRepository:
 
     @staticmethod
     def _checkpoint_summary_postgres(connection, session: dict) -> dict:
+        # Part totals stay hidden until the checkpoint ends, as they do for diagnostics.
+        active = session["status"] == "active"
         counts = connection.execute(
             """
             select count(*)::integer as assigned_count,
@@ -1251,8 +1255,8 @@ class PostgresEnglishLearningRepository:
             "question_count": session["requested_question_count"],
             "assigned_count": counts["assigned_count"],
             "resolved_count": counts["resolved_count"],
-            "correct_parts": counts["correct_parts"],
-            "total_parts": counts["total_parts"],
+            "correct_parts": 0 if active else counts["correct_parts"],
+            "total_parts": 0 if active else counts["total_parts"],
             "score": float(session["score"]) if session["score"] is not None else None,
             "passed": session["passed"],
             "development_drafts": session["development_drafts"],
