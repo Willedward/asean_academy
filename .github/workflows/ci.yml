@@ -90,7 +90,7 @@ jobs:
           PY
           fi
           exit "$status"
-      - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py
+      - run: uv run --project services/learning_api pytest scripts/test_smoke_deployment.py scripts/test_deploy_workflows.py
       - run: uv sync --project question_bank --locked
       - run: uv run --project question_bank question-bank course-registry-validate
       - run: uv run --project question_bank question-bank authoring-validate
