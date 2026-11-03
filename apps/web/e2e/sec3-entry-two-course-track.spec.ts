@@ -132,14 +132,15 @@ test.describe.serial("Sec 3-entry two-course track", () => {
     await authenticate(page, learner);
     expect(await activeCourseKeys(page)).toContain("g3-sec2-math");
     await page.goto("/learn");
+    // This can be the first visit to the course route, which next dev compiles on demand.
     await page.getByRole("link", { name: new RegExp(sec2Title) }).click();
     await expect(
       page.getByRole("heading", { level: 1, name: sec2Title }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 30_000 });
     await page.getByRole("link", { name: new RegExp(sec1Title) }).click();
     await expect(
       page.getByRole("heading", { level: 1, name: sec1Title }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 30_000 });
   });
 
   test("Secondary 2 practice is recorded separately from Secondary 1 progress", async ({
