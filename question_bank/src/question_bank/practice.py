@@ -43,6 +43,10 @@ def _response_placeholder(response) -> str:
     return modes.get(response.comparison_mode, "Enter a mathematical expression")
 
 
+# Unreadable submissions allowed per question before the next one counts as incorrect.
+MAX_UNCOUNTED_FORMAT_ERRORS = 5
+
+
 def has_format_error(part_results: list[dict]) -> bool:
     """Whether any part's answer could not be read by its checker.
 
@@ -62,9 +66,10 @@ def format_error_result(
 ) -> dict:
     """The response to a submission with an answer the checker could not read.
 
-    Nothing is recorded. The submission is not an attempt, so it does not add an
-    incorrect attempt, unlock the solution, finish the question or end a checkpoint.
-    Only each unreadable part's message is returned. The other parts report no
+    The submission is not an attempt, so it does not add an incorrect attempt, unlock the
+    solution, finish the question or end a checkpoint. The engines only count it towards
+    MAX_UNCOUNTED_FORMAT_ERRORS, after which an unreadable submission counts as incorrect
+    so the learner cannot be stuck. Only each unreadable part's message is returned. The other parts report no
     correctness, so a deliberately garbled part cannot be used to test the rest for free.
     """
 
@@ -219,6 +224,7 @@ class PracticeEngine:
                     highest_hint_stage integer not null default 0 check (highest_hint_stage between 0 and 2),
                     assigned_at text not null,
                     resolved_at text,
+                    uncounted_format_errors integer not null default 0,
                     primary key (session_id, position),
                     unique (session_id, question_key)
                 );
@@ -280,6 +286,17 @@ class PracticeEngine:
                     );
                     insert into session_questions select * from session_questions_legacy;
                     drop table session_questions_legacy;
+                    """
+                )
+            session_question_columns = {
+                row["name"]
+                for row in connection.execute("pragma table_info(session_questions)")
+            }
+            if "uncounted_format_errors" not in session_question_columns:
+                connection.execute(
+                    """
+                    alter table session_questions
+                    add column uncounted_format_errors integer not null default 0
                     """
                 )
 
@@ -647,7 +664,18 @@ class PracticeEngine:
                         "marks_available": part.marks,
                     }
                 )
-            if has_format_error(part_results):
+            if (
+                has_format_error(part_results)
+                and assignment["uncounted_format_errors"] < MAX_UNCOUNTED_FORMAT_ERRORS
+            ):
+                connection.execute(
+                    """
+                    update session_questions
+                    set uncounted_format_errors = uncounted_format_errors + 1
+                    where session_id = ? and question_key = ?
+                    """,
+                    (session_id, stable_key),
+                )
                 return format_error_result(
                     question,
                     part_results,
@@ -696,7 +724,8 @@ class PracticeEngine:
             connection.execute(
                 """
                 update session_questions
-                set status = ?, incorrect_attempts = ?, resolved_at = ?
+                set status = ?, incorrect_attempts = ?, resolved_at = ?,
+                    uncounted_format_errors = 0
                 where session_id = ? and question_key = ?
                 """,
                 (

@@ -7,7 +7,12 @@ import pytest
 
 from question_bank import practice
 from question_bank.models import AlgebraicResponse, NumericResponse, Question
-from question_bank.practice import PracticeEngine, PracticeError, solution_for
+from question_bank.practice import (
+    MAX_UNCOUNTED_FORMAT_ERRORS,
+    PracticeEngine,
+    PracticeError,
+    solution_for,
+)
 from question_bank.validation import validate_bank
 
 
@@ -395,3 +400,74 @@ def test_configuration_error_is_handled_as_a_format_error(engine, monkeypatch):
     assert {part["error"] for part in result["parts"]} == {message}
     assert result["question_finished"] is False
     assert recorded_state(engine, session_id, key) == (0, ("pending", 0), None)
+
+
+def submit_garbled(engine, session_id, question, label, count):
+    return [
+        engine.submit_attempt(
+            session_id=session_id,
+            stable_key=question["stable_key"],
+            revision=question["revision"],
+            answers={str(part["position"]): "?" for part in question["parts"]},
+            idempotency_key=f"{label}-{number}",
+        )
+        for number in range(count)
+    ]
+
+
+def test_repeated_format_errors_cannot_trap_a_learner_in_a_checkpoint(engine):
+    key = next(iter(engine.questions))
+    session = engine.create_session(
+        question_count=1,
+        ordered_question_keys=[key],
+        context={"mode": "checkpoint"},
+    )
+    session_id = session["session_id"]
+    question = engine.next_question(session_id)["question"]
+
+    uncounted = submit_garbled(engine, session_id, question, "stuck", MAX_UNCOUNTED_FORMAT_ERRORS)
+    assert all(result["format_error"] for result in uncounted)
+    assert recorded_state(engine, session_id, key)[:2] == (0, ("pending", 0))
+
+    counted = submit_garbled(engine, session_id, question, "counted", 1)[0]
+    assert counted["format_error"] is False
+    assert counted["correct"] is False
+    assert counted["attempt_number"] == 1
+    assert counted["question_finished"] is True
+    assert engine.next_question(session_id)["status"] == "completed"
+
+
+def test_counted_attempt_resets_the_format_error_allowance(engine):
+    session = engine.create_session(question_count=1)
+    session_id = session["session_id"]
+    question = engine.next_question(session_id)["question"]
+    key = question["stable_key"]
+
+    submit_garbled(engine, session_id, question, "before", MAX_UNCOUNTED_FORMAT_ERRORS)
+    engine.submit_attempt(
+        session_id=session_id,
+        stable_key=key,
+        revision=question["revision"],
+        answers=wrong_answers(engine, key),
+        idempotency_key="readable-wrong",
+    )
+
+    after = submit_garbled(engine, session_id, question, "after", MAX_UNCOUNTED_FORMAT_ERRORS)
+    assert all(result["format_error"] for result in after)
+    assert recorded_state(engine, session_id, key)[:2] == (1, ("pending", 1))
+
+    counted = submit_garbled(engine, session_id, question, "last", 1)[0]
+    assert counted["format_error"] is False
+    assert counted["solution_available"] is True
+    assert engine.give_up(session_id, key)["status"] == "gave_up"
+
+
+def test_existing_local_database_gains_the_format_error_column(engine):
+    with sqlite3.connect(engine.database) as connection:
+        connection.execute("alter table session_questions drop column uncounted_format_errors")
+
+    engine._initialize()
+
+    with sqlite3.connect(engine.database) as connection:
+        columns = {row[1] for row in connection.execute("pragma table_info(session_questions)")}
+    assert "uncounted_format_errors" in columns

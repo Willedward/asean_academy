@@ -1297,6 +1297,60 @@ def test_postgres_lesson_section_completion_is_revision_pinned_and_owner_isolate
 
 
 @pytest.mark.postgres
+def test_postgres_repeated_format_errors_end_a_checkpoint_question():
+    from question_bank.practice import MAX_UNCOUNTED_FORMAT_ERRORS
+
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (learner_id, f"{learner_id}@example.test"),
+        )
+    questions = validate_bank(BANK_ROOT).questions
+    key = "n1-l1-02"
+    engine = PostgresPracticeEngine(database_url, questions, learner_id, allow_drafts=True)
+    session_id = engine.create_session(
+        question_count=1,
+        ordered_question_keys=[key],
+        context={"mode": "checkpoint", "unit_key": "n1"},
+        idempotency_key="postgres-format-limit",
+    )["session_id"]
+    revision = engine.next_question(session_id)["question"]["revision"]
+    request = {
+        "session_id": session_id,
+        "stable_key": key,
+        "revision": revision,
+        "answers": {"1": "not an answer"},
+    }
+
+    for number in range(MAX_UNCOUNTED_FORMAT_ERRORS):
+        result = engine.submit_attempt(idempotency_key=f"postgres-limit-{number}", **request)
+        assert result["format_error"] is True
+    with psycopg.connect(database_url) as connection:
+        assert connection.execute(
+            """
+            select status::text, uncounted_format_errors from session_questions
+            where practice_session_id = %s
+            """,
+            (session_id,),
+        ).fetchone() == ("pending", MAX_UNCOUNTED_FORMAT_ERRORS)
+
+    counted = engine.submit_attempt(idempotency_key="postgres-limit-counted", **request)
+    assert counted["format_error"] is False
+    assert counted["attempt_number"] == 1
+    assert counted["question_finished"] is True
+    with psycopg.connect(database_url) as connection:
+        assert connection.execute(
+            """
+            select status::text, uncounted_format_errors from session_questions
+            where practice_session_id = %s
+            """,
+            (session_id,),
+        ).fetchone() == ("incorrect", 0)
+
+
+@pytest.mark.postgres
 def test_postgres_format_errors_are_not_attempts(monkeypatch, wrong_answers):
     from question_bank.practice import PracticeError
 

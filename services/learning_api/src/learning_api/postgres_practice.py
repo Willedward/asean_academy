@@ -14,6 +14,7 @@ from question_bank.checking import check_answer
 from question_bank.difficulty import DIFFICULTY_LEVELS
 from question_bank.models import NumericResponse, Question
 from question_bank.practice import (
+    MAX_UNCOUNTED_FORMAT_ERRORS,
     PracticeError,
     format_error_result,
     has_format_error,
@@ -636,9 +637,21 @@ class PostgresPracticeEngine:
                         "marks_available": part.marks,
                     }
                 )
-            if has_format_error(part_results):
-                # Not an attempt: nothing is written, so incorrect_attempts, the
-                # solution lock, checkpoint completion and progress stay unchanged.
+            if (
+                has_format_error(part_results)
+                and assignment["uncounted_format_errors"] < MAX_UNCOUNTED_FORMAT_ERRORS
+            ):
+                # Not an attempt: incorrect_attempts, the solution lock, checkpoint
+                # completion and progress stay unchanged. Past the limit it counts as
+                # incorrect below, so the learner cannot be stuck on this question.
+                connection.execute(
+                    """
+                    update session_questions
+                    set uncounted_format_errors = uncounted_format_errors + 1
+                    where id = %s
+                    """,
+                    (assignment["id"],),
+                )
                 return format_error_result(
                     question,
                     part_results,
@@ -684,7 +697,8 @@ class PostgresPracticeEngine:
                 """
                 update session_questions
                 set status = %s, incorrect_attempts = %s,
-                    resolved_at = case when %s then now() else null end
+                    resolved_at = case when %s then now() else null end,
+                    uncounted_format_errors = 0
                 where id = %s
                 """,
                 (
