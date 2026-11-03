@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "CheckPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "default": "warning",
+          "enum": [
+            "warning",
+            "error"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "error_scopes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Error Scopes",
+          "type": "array"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "title": "CheckPolicy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Description"
+    },
+    "checks": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CheckPolicy"
+      },
+      "title": "Checks",
+      "type": "object"
+    }
+  },
+  "title": "ContentLintPolicy",
+  "type": "object"
+}

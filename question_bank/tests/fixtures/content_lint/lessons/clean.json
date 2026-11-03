@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "revision": 1,
+  "stable_key": "n1-lesson-09",
+  "course_key": "g3-sec1-math",
+  "unit_key": "sec1-n1",
+  "position": 9,
+  "status": "draft",
+  "title": "Fixture lesson",
+  "summary": "Fixture lesson for content-lint tests.",
+  "outcomes": [
+    "1.1"
+  ],
+  "prerequisite_lessons": [],
+  "estimated_minutes": 20,
+  "objectives": [
+    "Practise the fixture."
+  ],
+  "mastery_policy_key": "fixture-v1",
+  "sections": [
+    {
+      "stable_key": "fraction-of-amount",
+      "type": "explanation",
+      "title": "Fraction of an amount",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "To find a fraction of an amount, divide by the denominator and multiply by the numerator, for example "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3}{4}\\times 120=90"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "position": 1
+    },
+    {
+      "stable_key": "mean-example",
+      "type": "worked_example",
+      "title": "Estimate a mean",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "Midpoints 15, 25 and 35 have frequencies 4, 7 and 3. Estimate the mean."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{15(4)+25(7)+35(3)}{14}=\\frac{340}{14}\\approx24.3"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The estimate lies between the smallest and largest midpoints.",
+      "position": 2
+    }
+  ],
+  "assets": [],
+  "provenance": {
+    "authoring_method": "original_authored",
+    "created_at": "2026-11-01T00:00:00Z",
+    "authored_by": "content-lint-fixture"
+  }
+}

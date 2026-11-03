@@ -734,7 +734,11 @@ def _rate_limit_dependency(*policy_keys: str) -> Callable:
         for policy_key in policy_keys:
             policy = POLICIES[policy_key]
             raw_subject = (
-                client_ip(request, trust_proxy_headers=settings.trust_proxy_headers)
+                client_ip(
+                    request,
+                    trust_proxy_headers=settings.trust_proxy_headers,
+                    proxy_secret=settings.abuse_hash_secret,
+                )
                 if policy.subject_kind == "ip"
                 else learner.learner_id
             )

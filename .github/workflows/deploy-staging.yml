@@ -24,7 +24,9 @@ jobs:
     name: Verify staging candidate
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 25
     services:
@@ -79,6 +81,10 @@ jobs:
   release:
     name: Migrate, deploy and smoke staging
     needs: verify
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment: staging
@@ -179,6 +185,7 @@ jobs:
           npx -y @railway/cli@4 variable set "NEXT_PUBLIC_SUPABASE_URL=$STAGING_SUPABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
           npx -y @railway/cli@4 variable set "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
           npx -y @railway/cli@4 variable set "NEXT_PUBLIC_USE_API_FIXTURES=false" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ABUSE_HASH_SECRET=$STAGING_ABUSE_HASH_SECRET" --skip-deploys --service "$STAGING_RAILWAY_WEB_SERVICE"
           npx -y @railway/cli@4 up --ci --service "$STAGING_RAILWAY_WEB_SERVICE"
       - name: Verify hosted authentication and the complete staging application
         run: |

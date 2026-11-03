@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import io
 import json
+from dataclasses import replace
 from urllib.error import HTTPError
 
 import pytest
@@ -12,7 +13,10 @@ from learning_api.tutor_provider import (
     OpenAITutorProvider,
     TutorProviderError,
     TutorProviderRequest,
+    TutorProviderResponseError,
     _request_with_retries,
+    estimated_input_tokens,
+    fit_request_to_input_budget,
     probe_gemini_connection,
     provider_for,
 )
@@ -360,3 +364,56 @@ def test_provider_factory_keeps_synthetic_test_only_and_builds_gemini():
     )
 
     assert isinstance(openai, OpenAITutorProvider)
+
+
+def test_unusable_response_reports_the_usage_the_provider_charged():
+    def transport(url, headers, body, timeout):
+        del url, headers, body, timeout
+        return json.dumps(
+            {
+                "candidates": [{"content": {"parts": [{"text": "cut off"}]}}],
+                "usageMetadata": {"promptTokenCount": 70, "candidatesTokenCount": 30},
+            }
+        ).encode()
+
+    with pytest.raises(TutorProviderResponseError) as raised:
+        run(provider(transport).generate(tutor_request()))
+
+    assert raised.value.usage.input_tokens == 70
+    assert raised.value.usage.output_tokens == 30
+
+
+def test_unusable_response_without_usage_reports_none():
+    def transport(url, headers, body, timeout):
+        del url, headers, body, timeout
+        return b"not json"
+
+    with pytest.raises(TutorProviderResponseError) as raised:
+        run(provider(transport).generate(tutor_request()))
+
+    assert raised.value.usage is None
+
+
+def test_prompt_is_trimmed_to_the_input_budget_oldest_messages_first():
+    messages = tuple(
+        {"role": "student", "content": f"{number} " + "\u0e01" * 1200} for number in range(8)
+    )
+    sections = tuple({"section_key": f"section-{n}", "blocks": ["x" * 2000]} for n in range(4))
+    request = replace(tutor_request(), recent_messages=messages, lesson_sections=sections)
+
+    fitted = fit_request_to_input_budget(request, 5_000)
+
+    assert estimated_input_tokens(fitted) <= 5_000
+    assert fitted.recent_messages == messages[-len(fitted.recent_messages) :]
+    assert fitted.lesson_sections == sections
+    assert fitted.learner_message == request.learner_message
+
+
+def test_prompt_trimming_reaches_lesson_sections_after_messages():
+    sections = tuple({"section_key": f"section-{n}", "blocks": ["x" * 6000]} for n in range(6))
+    request = replace(tutor_request(), lesson_sections=sections)
+
+    fitted = fit_request_to_input_budget(request, 5_000)
+
+    assert estimated_input_tokens(fitted) <= 5_000
+    assert fitted.lesson_sections == sections[: len(fitted.lesson_sections)]

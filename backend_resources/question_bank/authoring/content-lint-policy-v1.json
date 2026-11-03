@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Severity policy for the content guardrails in question_bank/src/question_bank/content_lint.py. Every check starts as a warning because existing content still triggers it. To promote a check after the content is fixed, either set its severity to \"error\" (whole catalogue) or add bank keys, course keys or stable keys to error_scopes (a trailing * matches a prefix, for example \"g3-sec1-n5-*\"). See docs/plan/CONTENT_LINT_GUARDRAILS.md.",
+  "checks": {
+    "content_control_character": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Audit baseline: Sec 1 N5 (9 questions) and Sec 2 S1 (5 questions)."
+    },
+    "content_float_noise": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Audit baseline: Sec 2 S1 C-01 to C-03 and C-06 (10 questions), Sec 1 N1 C-12 (1)."
+    },
+    "content_math_duplicate": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Heuristic signature match; review each pair before rewriting."
+    },
+    "content_plain_text_math": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Plain linear equations such as 'x = 5' in prose are deliberately not flagged."
+    },
+    "content_prompt_without_question": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Audit baseline: Sec 1 N5 n5-l1-006."
+    },
+    "content_hint_reveals_answer": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Only answers stated as a result are detected; see the known limits."
+    },
+    "content_answer_solution_mismatch": {
+      "severity": "warning",
+      "error_scopes": [],
+      "notes": "Audit baseline: Sec 2 G4 C1 (g4-l2-529) and Sec 2 G5 liquid-depth items (g5-l4-507, g5-l4-514)."
+    }
+  }
+}

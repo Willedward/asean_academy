@@ -5,6 +5,7 @@ import pytest
 from pydantic import ValidationError
 
 from question_bank.catalogue import load_catalogue
+from question_bank.content_lint import structural_warnings
 from question_bank.course_models import Course
 from question_bank.geometry_validation import non_legacy_diagram_warnings
 from question_bank.models import Question
@@ -125,7 +126,7 @@ def test_catalogue_validation_reports_remaining_scope(repository_root):
     # Missing symbolic forms are tracked in docs/plan/ANSWER_CHECKER_FORM_SETTINGS.md.
     assert not [
         issue
-        for issue in non_legacy_diagram_warnings(report.warnings)
+        for issue in non_legacy_diagram_warnings(structural_warnings(report))
         if issue.code != SYMBOLIC_FORM_MISSING
     ]
 

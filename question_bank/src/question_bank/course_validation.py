@@ -10,6 +10,14 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from .catalogue import load_blueprint
+from .content_lint import (
+    ContentLintPolicy,
+    lesson_math_items,
+    lint_lesson,
+    load_policy,
+    math_duplicate_findings,
+    question_math_items,
+)
 from .course_models import (
     ActiveRecallSection,
     Course,
@@ -23,6 +31,7 @@ from .geometry_validation import geometry_diagram_findings, revisioned_asset_pat
 from .validation import (
     SYMBOLIC_FORM_MISSING,
     ValidationReport,
+    content_lint_counts,
     missing_symbolic_form,
     symbolic_form_message,
     validate_bank,
@@ -74,6 +83,7 @@ class CourseValidationReport:
             ),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
+            "content_lint_counts": content_lint_counts(self.issues),
             "issues": [asdict(issue) for issue in self.issues],
         }
 
@@ -309,6 +319,13 @@ def validate_course(
         except ValidationError as exc:
             _issue(report, "error", "invalid_question_pools", course_root, str(exc))
 
+    try:
+        policy = load_policy()
+    except ValueError as exc:
+        _issue(report, "error", "content_lint_policy_invalid", "content-lint-policy", str(exc))
+        policy = ContentLintPolicy()
+    lesson_paths: dict[str, Path] = {}
+
     lessons_dir = course_root / "lessons"
     seen = set()
     for path in sorted(lessons_dir.glob("*.json")):
@@ -331,7 +348,11 @@ def validate_course(
         _validate_lesson_note_depth(lesson, path, report, publish=publish)
         _validate_symbolic_forms(lesson, path, report, publish=publish)
         _validate_geometry_lesson_depth(lesson, path, report)
+        for finding in lint_lesson(lesson):
+            severity = policy.severity(finding.code, _lesson_scopes(lesson))
+            _issue(report, severity, finding.code, path, finding.render())
         report.lessons.append(lesson)
+        lesson_paths[lesson.stable_key] = path
 
     if report.course is None or report.pools is None:
         return report
@@ -581,6 +602,8 @@ def validate_course(
                 f"Checkpoint needs {unit.checkpoint_question_count}, pool has {checkpoint_total}",
             )
 
+    _lesson_question_duplicates(report, policy, lesson_paths)
+
     if pool_type_counts != course.question_allocation_counts:
         _issue(
             report,
@@ -590,6 +613,31 @@ def validate_course(
             f"Found {pool_type_counts}, expected {course.question_allocation_counts}",
         )
     return report
+
+
+def _lesson_scopes(lesson: Lesson) -> tuple[str, ...]:
+    return (lesson.course_key, lesson.stable_key)
+
+
+def _lesson_question_duplicates(
+    report: CourseValidationReport,
+    policy: ContentLintPolicy,
+    lesson_paths: dict[str, Path],
+) -> None:
+    """Report lesson worked examples and recall checks that repeat a bank question."""
+
+    items = [item for question in report.questions for item in question_math_items(question)]
+    items += [item for lesson in report.lessons for item in lesson_math_items(lesson)]
+    lessons = {lesson.stable_key: lesson for lesson in report.lessons}
+    findings = math_duplicate_findings(
+        items, include_pair=lambda first, second: "lesson" in {first.kind, second.kind}
+    )
+    for finding in findings:
+        lesson = lessons.get(finding.subject)
+        scopes = _lesson_scopes(lesson) if lesson else (finding.subject,)
+        severity = policy.severity(finding.code, scopes)
+        path = lesson_paths.get(finding.subject, finding.subject)
+        _issue(report, severity, finding.code, path, finding.render())
 
 
 def _load_pool_identity(path: Path) -> tuple[str, str] | None:

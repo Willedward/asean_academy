@@ -36,9 +36,12 @@ class RateLimitDecision:
         return max(1, math.ceil((self.reset_at - datetime.now(UTC)).total_seconds()))
 
 
+CLIENT_ADDRESS_HEADER = "x-academy-client-address"
+CLIENT_ADDRESS_SIGNATURE_HEADER = "x-academy-client-address-signature"
+
 POLICIES = {
     "onboarding_learner": RateLimitPolicy("onboarding_learner", 5, 15 * 60),
-    "onboarding_ip": RateLimitPolicy("onboarding_ip", 20, 15 * 60, "ip"),
+    "onboarding_ip": RateLimitPolicy("onboarding_ip", 60, 15 * 60, "ip"),
     "practice_session_write": RateLimitPolicy("practice_session_write", 30, 10 * 60),
     "practice_attempt": RateLimitPolicy("practice_attempt", 120, 10 * 60),
     "practice_support": RateLimitPolicy("practice_support", 60, 10 * 60),
@@ -69,12 +72,27 @@ def opaque_subject(secret: str, kind: str, value: str) -> str:
     ).hexdigest()
 
 
-def client_ip(request, *, trust_proxy_headers: bool) -> str:
+def client_address_signature(secret: str, address: str) -> str:
+    return opaque_subject(secret, "client-address", address)
+
+
+def client_ip(request, *, trust_proxy_headers: bool, proxy_secret: str | None = None) -> str:
     value = request.client.host if request.client else "unknown"
     if trust_proxy_headers:
         forwarded = request.headers.get("x-forwarded-for", "").split(",", 1)[0].strip()
         if forwarded:
             value = forwarded
+    # The web proxy calls this API from one address, so it signs the learner's address.
+    address = request.headers.get(CLIENT_ADDRESS_HEADER, "").strip()
+    signature = request.headers.get(CLIENT_ADDRESS_SIGNATURE_HEADER, "")
+    if (
+        proxy_secret
+        and address
+        and hmac.compare_digest(
+            signature.encode(), client_address_signature(proxy_secret, address).encode()
+        )
+    ):
+        value = address
     try:
         return str(ipaddress.ip_address(value))
     except ValueError:

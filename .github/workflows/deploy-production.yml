@@ -137,6 +137,7 @@ jobs:
       - name: Stamp and deploy the web app
         run: |
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_RELEASE_SHA=$GITHUB_SHA" --skip-deploys --service "$RAILWAY_WEB_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ABUSE_HASH_SECRET=$PRODUCTION_ABUSE_HASH_SECRET" --skip-deploys --service "$RAILWAY_WEB_SERVICE"
           npx -y @railway/cli@4 up --ci --service "$RAILWAY_WEB_SERVICE"
       - name: Verify the complete production application
         run: |
