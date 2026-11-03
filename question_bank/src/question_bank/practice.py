@@ -43,6 +43,52 @@ def _response_placeholder(response) -> str:
     return modes.get(response.comparison_mode, "Enter a mathematical expression")
 
 
+def has_format_error(part_results: list[dict]) -> bool:
+    """Whether any part's answer could not be read by its checker.
+
+    This covers malformed or empty answers and the checker's configuration error for a
+    question whose own answer cannot be checked.
+    """
+
+    return any(result["error"] for result in part_results)
+
+
+def format_error_result(
+    question: Question,
+    part_results: list[dict],
+    *,
+    counted_attempts: int,
+    solution_available: bool,
+) -> dict:
+    """The response to a submission with an answer the checker could not read.
+
+    Nothing is recorded. The submission is not an attempt, so it does not add an
+    incorrect attempt, unlock the solution, finish the question or end a checkpoint.
+    Only each unreadable part's message is returned. The other parts report no
+    correctness, so a deliberately garbled part cannot be used to test the rest for free.
+    """
+
+    return {
+        "attempt_number": counted_attempts,
+        "correct": False,
+        "format_error": True,
+        "parts": [
+            {
+                "position": result["position"],
+                "correct": False,
+                "error": result["error"],
+                "marks_awarded": 0,
+                "marks_available": result["marks_available"],
+            }
+            for result in part_results
+        ],
+        "marks_awarded": 0,
+        "marks_available": question.total_marks,
+        "question_finished": False,
+        "solution_available": solution_available,
+    }
+
+
 def public_question(question: Question) -> dict:
     """Return student-visible content without answer specifications or solutions."""
 
@@ -601,11 +647,21 @@ class PracticeEngine:
                         "marks_available": part.marks,
                     }
                 )
+            if has_format_error(part_results):
+                return format_error_result(
+                    question,
+                    part_results,
+                    counted_attempts=attempt_number - 1,
+                    solution_available=(
+                        not checkpoint and assignment["incorrect_attempts"] >= 2
+                    ),
+                )
             correct = all(result["correct"] for result in part_results)
             incorrect_attempts = assignment["incorrect_attempts"] + (0 if correct else 1)
             result = {
                 "attempt_number": attempt_number,
                 "correct": correct,
+                "format_error": False,
                 "parts": part_results,
                 "marks_awarded": marks_awarded,
                 "marks_available": question.total_marks,

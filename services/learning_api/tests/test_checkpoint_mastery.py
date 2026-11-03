@@ -114,7 +114,7 @@ def test_lesson_and_checkpoint_are_locked_until_prerequisites_are_proficient(tmp
     assert checkpoint.json()["error"]["code"] == "checkpoint_locked"
 
 
-def test_retry_review_selects_only_the_unresolved_question(tmp_path):
+def test_retry_review_selects_only_the_unresolved_question(tmp_path, wrong_answers):
     app, _ = application(tmp_path)
     first = create_lesson_session(app, "n1-lesson-01", "failed-practice", count=1)
     session_id = first.json()["session_id"]
@@ -131,7 +131,7 @@ def test_retry_review_selects_only_the_unresolved_question(tmp_path):
                 "session_id": session_id,
                 "question_key": question["stable_key"],
                 "question_revision": question["revision"],
-                "answers": {"1": "not an answer"},
+                "answers": wrong_answers(question["stable_key"]),
             },
         )
         assert wrong.status_code == 200
@@ -164,7 +164,7 @@ def test_retry_review_selects_only_the_unresolved_question(tmp_path):
     assert retry_question["stage"] == "adaptive"
 
 
-def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_path):
+def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_path, wrong_answers):
     app, database = application(tmp_path)
     for sequence, lesson_key in enumerate(LESSON_KEYS, start=1):
         complete_lesson_correctly(app, lesson_key, sequence)
@@ -205,6 +205,37 @@ def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_
     assert hint.json()["error"]["code"] == "checkpoint_support_locked"
     assert give_up.json()["error"]["code"] == "checkpoint_support_locked"
 
+    garbled_request = {
+        "session_id": checkpoint_id,
+        "question_key": first_question["stable_key"],
+        "question_revision": first_question["revision"],
+        "answers": {str(part["position"]): "not an answer" for part in first_question["parts"]},
+    }
+    garbled = request(
+        app,
+        "POST",
+        "/api/v1/attempts",
+        headers={"Idempotency-Key": "checkpoint-garbled-1"},
+        json=garbled_request,
+    )
+    assert garbled.status_code == 200
+    assert garbled.json()["format_error"] is True
+    assert garbled.json()["question_finished"] is False
+    assert garbled.json()["solution_available"] is False
+    assert garbled.json()["attempt_number"] == 0
+    replay = request(
+        app,
+        "POST",
+        "/api/v1/attempts",
+        headers={"Idempotency-Key": "checkpoint-garbled-1"},
+        json=garbled_request,
+    )
+    assert replay.json() == garbled.json()
+    still_open = request(app, "GET", f"/api/v1/practice-sessions/{checkpoint_id}/next").json()
+    assert still_open["status"] == "active"
+    assert still_open["question"]["stable_key"] == first_question["stable_key"]
+    assert still_open["session"]["resolved_count"] == 0
+
     wrong = request(
         app,
         "POST",
@@ -214,11 +245,13 @@ def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_
             "session_id": checkpoint_id,
             "question_key": first_question["stable_key"],
             "question_revision": first_question["revision"],
-            "answers": {"1": "not an answer"},
+            "answers": wrong_answers(first_question["stable_key"]),
         },
     )
     assert wrong.status_code == 200
     assert wrong.json()["correct"] is False
+    assert wrong.json()["format_error"] is False
+    assert wrong.json()["attempt_number"] == 1
     assert wrong.json()["question_finished"] is True
     assert wrong.json()["solution_available"] is False
 
@@ -284,7 +317,7 @@ def test_checkpoint_is_single_attempt_and_passing_records_immutable_mastery(tmp_
             )
 
 
-def test_failed_checkpoint_preserves_proficiency_and_allows_a_retake(tmp_path):
+def test_failed_checkpoint_preserves_proficiency_and_allows_a_retake(tmp_path, wrong_answers):
     app, _ = application(tmp_path)
     for sequence, lesson_key in enumerate(LESSON_KEYS, start=1):
         complete_lesson_correctly(app, lesson_key, sequence)
@@ -315,7 +348,7 @@ def test_failed_checkpoint_preserves_proficiency_and_allows_a_retake(tmp_path):
                 "session_id": checkpoint_id,
                 "question_key": question["stable_key"],
                 "question_revision": question["revision"],
-                "answers": {"1": "not an answer"},
+                "answers": wrong_answers(question["stable_key"]),
             },
         )
         assert wrong.status_code == 200, wrong.text

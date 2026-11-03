@@ -142,7 +142,7 @@ def test_successful_practice_records_proficiency_and_next_lesson(tmp_path):
     assert home["next_action"]["lesson_key"] == "n1-lesson-02"
 
 
-def test_give_up_requires_retry_and_retry_can_reach_proficiency(tmp_path):
+def test_give_up_requires_retry_and_retry_can_reach_proficiency(tmp_path, wrong_answers):
     app = application(tmp_path)
     session = create_session(app, "give-up-session", question_count=1).json()
     current = request(
@@ -162,7 +162,7 @@ def test_give_up_requires_retry_and_retry_can_reach_proficiency(tmp_path):
                 "session_id": session["session_id"],
                 "question_key": question["stable_key"],
                 "question_revision": question["revision"],
-                "answers": {"1": "wrong"},
+                "answers": wrong_answers(question["stable_key"]),
             },
         )
     request(

@@ -399,19 +399,27 @@ export function PracticePlayer({
       {attempt ? (
         <section
           className={`rounded-2xl border p-5 ${
-            attempt.correct
-              ? "border-emerald-200 bg-emerald-50"
-              : "border-rose-200 bg-rose-50"
+            attempt.format_error
+              ? "border-amber-200 bg-amber-50"
+              : attempt.correct
+                ? "border-emerald-200 bg-emerald-50"
+                : "border-rose-200 bg-rose-50"
           }`}
           role="status"
         >
           <h2 className="mt-0 text-xl font-extrabold">
-            {attempt.correct ? "Correct" : "Try again"}
+            {attempt.format_error
+              ? "Check your answer"
+              : attempt.correct
+                ? "Correct"
+                : "Try again"}
           </h2>
           <p className="mb-0">
-            {attempt.correct
-              ? `You earned ${attempt.marks_awarded} of ${attempt.marks_available} marks.`
-              : "That final answer is not correct yet. You can retry or open an authored hint."}
+            {attempt.format_error
+              ? "An answer could not be read, so this check was not counted. Fix the answer marked below and check again."
+              : attempt.correct
+                ? `You earned ${attempt.marks_awarded} of ${attempt.marks_available} marks.`
+                : "That final answer is not correct yet. You can retry or open an authored hint."}
           </p>
         </section>
       ) : null}

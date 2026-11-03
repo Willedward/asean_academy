@@ -222,11 +222,17 @@ export function LivePracticeView({
           const result = attempt?.parts.find(
             (candidate) => candidate.position === part.position,
           );
-          const status = result
-            ? result.correct
-              ? "correct"
-              : "wrong"
-            : "none";
+          // A format-error response counts nothing and reports no correctness, so
+          // only the unreadable parts are marked.
+          const status = !result
+            ? "none"
+            : result.error
+              ? "unreadable"
+              : attempt?.format_error
+                ? "none"
+                : result.correct
+                  ? "correct"
+                  : "wrong";
           const inputId = `answer-${part.position}`;
           return (
             <fieldset
@@ -260,14 +266,18 @@ export function LivePracticeView({
                       ? "success"
                       : status === "wrong"
                         ? "danger"
-                        : "neutral"
+                        : status === "unreadable"
+                          ? "amber"
+                          : "neutral"
                   }
                 >
                   {status === "correct"
                     ? "Correct"
                     : status === "wrong"
                       ? "Not yet"
-                      : `${part.marks} ${part.marks === 1 ? "mark" : "marks"}`}
+                      : status === "unreadable"
+                        ? "Check format"
+                        : `${part.marks} ${part.marks === 1 ? "mark" : "marks"}`}
                 </Tag>
               </div>
               <input
@@ -284,7 +294,9 @@ export function LivePracticeView({
                 value={answers[String(part.position)] ?? ""}
                 placeholder={part.input_placeholder}
                 disabled={finished}
-                aria-invalid={status === "wrong" ? true : undefined}
+                aria-invalid={
+                  status === "wrong" || status === "unreadable" ? true : undefined
+                }
                 onChange={(event) =>
                   onAnswerChange(part.position, event.target.value)
                 }
@@ -292,7 +304,7 @@ export function LivePracticeView({
                   "h-[52px] w-full rounded-lg border-[1.5px] bg-ns-raised px-4 font-ns-math text-xl text-ns-ink placeholder:text-ns-muted/80",
                   status === "correct"
                     ? "border-ns-success bg-ns-success-soft"
-                    : status === "wrong"
+                    : status === "wrong" || status === "unreadable"
                       ? "border-ns-danger"
                       : "border-ns-line-strong",
                   focusRing,
@@ -343,7 +355,15 @@ export function LivePracticeView({
         </section>
       ) : null}
 
-      {attempt ? (
+      {attempt?.format_error ? (
+        <Callout tone="amber" icon={AlertTriangle}>
+          <strong>Check your answer</strong>
+          <span>
+            An answer could not be read, so this check was not counted. Fix the
+            answer marked &ldquo;Check format&rdquo; and check again.
+          </span>
+        </Callout>
+      ) : attempt ? (
         <Callout
           tone={attempt.correct ? "success" : "danger"}
           icon={attempt.correct ? CheckCircle2 : AlertTriangle}

@@ -120,6 +120,17 @@ class AttemptPartResult(ApiModel):
 class AttemptResponse(ApiModel):
     attempt_number: int
     correct: bool
+    format_error: bool = Field(
+        default=False,
+        description=(
+            "True when at least one part could not be read: a malformed or empty answer, "
+            "or a question whose answer cannot be checked automatically. Nothing is recorded. "
+            "The submission is not an attempt, so it adds no incorrect attempt, unlocks no "
+            "solution and finishes no question or checkpoint. attempt_number is the number "
+            "of attempts counted so far. Only unreadable parts carry an error, and no part "
+            "reports correctness. The learner corrects the answer and submits again."
+        ),
+    )
     parts: list[AttemptPartResult]
     marks_awarded: int
     marks_available: int
