@@ -72,13 +72,13 @@ must update both the source catalogue and its evidence.
 
 | Route | Selected | Authored | Still requiring lessons |
 | --- | ---: | ---: | --- |
-| Full | 51 | 42 | 9 |
-| Core | 32 | 28 | 4 |
+| Full | 51 | 43 | 8 |
+| Core | 32 | 29 | 3 |
 | Sprint | 16 | 16 | 0 |
 
 The five former Sprint gaps—E0.1, E0.2, E1.6, E2.2 and E9.5—now have complete seven-section
 lesson drafts, five-decision exit tickets and distinct five-decision retry forms. The remaining
-Core gaps are E2.3, E2.6, E3.2 and E3.4. E1.2, E1.4 and E1.5 now each have a complete
+Core gaps are E2.6, E3.2 and E3.4. E1.2, E1.4, E1.5 and E2.3 now each have a complete
 seven-section lesson, six guided/independent/exit questions and one disjoint parallel retry.
 
 Authored does not mean publishable. Every released lesson still needs its reviewed exit
@@ -157,7 +157,7 @@ Complete the remaining **Sprint review and release evidence**:
 4. enable learner routing only after the route manifest reports `ready`, confirming that
    every referenced revision is approved, publication-requested and published.
 
-Once Sprint is structurally complete, author the four remaining Core gaps and repeat the
+Once Sprint is structurally complete, author the three remaining Core gaps and repeat the
 same release checks. This sequencing shortens the critical path while preserving the Core
 and Full curriculum.
 
@@ -181,7 +181,7 @@ Full-route, draft-only increment. It moves from supported 45-minute evidence thr
 reduced-support 35-minute run to a fresh 30-minute independent rehearsal without treating speed
 alone or repeated prompts as transfer. Its lesson and exit ticket remain outside the fixed
 Sprint scope and require their own English, editorial and publication evidence. The next
-content-expansion sequence now continues with the four remaining Core gaps, beginning with E2.3.
+content-expansion sequence now continues with the three remaining Core gaps, beginning with E2.6.
 
 The E1.2 word-class-and-family lesson is the first completed Core-expansion increment. It
 identifies sentence slots before testing form, meaning and collocation, and its retry uses a
@@ -201,4 +201,12 @@ checks intended meaning, natural word partnership, audience and the complete sen
 treating inflated formality as improvement. Its retry uses a different formal collocation.
 E1.5 remains outside Sprint, so the 16 Sprint lessons, protected forms, E1 checkpoint mastery
 scope and 121-record Sprint review packet are unchanged. Its lesson and seven questions require
-their own English, editorial and publication evidence. Continue with E2.3 tense and aspect.
+their own English, editorial and publication evidence.
+
+The E2.3 tense-and-aspect lesson is the fourth completed Core-expansion increment. It uses
+explicit time anchors, event order and viewpoint to distinguish habits, temporary arrangements,
+ongoing actions, completed events and results that continue to the present. Its retry uses a
+different past sequence rather than the exposed exit sentence. E2.3 remains outside Sprint, so
+the 16 Sprint lessons, protected forms, E2 checkpoint mastery scope and 121-record Sprint review
+packet are unchanged. Its lesson and seven questions require their own English, editorial and
+publication evidence. Continue with E2.6 cohesion across sentences.

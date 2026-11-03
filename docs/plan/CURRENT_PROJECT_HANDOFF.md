@@ -24,6 +24,10 @@ review and publication gates pass.
   API and web reported that exact SHA with current schema/content before implementation.
 - E1.5 is merged there at implementation commit `c3e6343` through integration commit
   `d2906581` from PR #262.
+- The verified E2.3 starting baseline is integration commit `23490ca` from PR #263; hosted
+  API and web reported that exact SHA with current schema/content before implementation.
+- E2.3 is implemented on `feature/english-e2-3-tense-aspect`; merge, CI and exact hosted
+  deployment evidence are pending.
 - Do not overwrite unrelated work in the user's main checkout.
 
 ## English essay milestones
@@ -154,6 +158,37 @@ review and publication gates pass.
   reported integration SHA `d2906581ab37f02d82b54f68ab4e3c96c6981489`, required schema
   `202611020047`, and current database schema/content; the hosted login returned HTTP 200.
 
+## E2.3 tense-and-aspect milestone
+
+- E2.3 is implemented as draft-only Core-route content with one seven-section lesson, six
+  deterministic guided/independent/exit-ticket questions and one disjoint parallel retry.
+- The lesson uses an `Anchor -> Order -> View -> Verify` routine. Learners identify the time
+  reference, order events, distinguish habit/completion/progress/continuing result, and reread
+  the complete timeline rather than mechanically matching the nearest verb.
+- The new source records are `e2-lesson-03`, `eg-l3-001` through `eg-l3-007`, and review
+  batches `english-eg-b005` and `english-eg-b006`. English and editorial decisions remain
+  pending; nothing is published.
+- E2.3 is Core-route but not Sprint-route content. It does not change the fixed 121-record
+  Sprint review scope, E2 checkpoint mastery scope or any protected form.
+
+## Validation completed for E2.3
+
+- English foundation and authoring validation: 43 authored lessons, 133 questions, 88 review
+  batches and zero duplicate/template collisions. Full/Core/Sprint authored coverage is
+  43/29/16, with 20/20/16 disjoint parallel-retry records respectively.
+- Question-bank suite: 185 passed. Learning API suite: 279 passed, with 22 opt-in PostgreSQL
+  tests skipped in the non-DB run. Ruff passed for both Python projects.
+- Web generated-contract check, lint, TypeScript and 150 tests passed; the webpack production
+  build passed across 204 generated static pages. The local Turbopack build stalled without an
+  error and was stopped; hosted CI must independently pass the configured Turbopack build.
+- A fresh disposable PostgreSQL database accepted the complete migration chain through
+  `202611020047`, imported 1,040 mathematics questions, 133 English questions and 37 passages,
+  and passed repeated bootstrap idempotency. All seven `EG2.3` records remained current drafts
+  in their intended guided, independent, exit and retry pools.
+- Migration safety passed. No new schema migration was required because E2.3 uses the existing
+  objective-question, learning-session and content-review contracts. No provider call or paid
+  token was used.
+
 ## Validation completed for E1.4
 
 - English foundation and authoring validation: 41 authored lessons, 119 questions, 84 review
@@ -257,8 +292,8 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content sequence continues with the four remaining Core-route
-gaps, beginning with **E2.3 tense and aspect**, alongside the existing Sprint human
+The next independently executable content sequence continues with the three remaining Core-route
+gaps, beginning with **E2.6 cohesion across sentences**, alongside the existing Sprint human
 review and publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.
