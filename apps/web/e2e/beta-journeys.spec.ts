@@ -261,7 +261,7 @@ test.describe.serial("authenticated beta journeys", () => {
     expect((await preSubmit).status()).toBe(200);
     await expect(
       page.getByRole("region", { name: "Pre-submission checks" }),
-    ).toContainText("Prompt revision 1 and instructional rubric revision 1");
+    ).toContainText("Prompt revision 2 and instructional rubric revision 2");
 
     await page
       .getByRole("checkbox", {
