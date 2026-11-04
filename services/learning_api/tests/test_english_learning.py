@@ -4676,3 +4676,34 @@ def test_checkpoint_part_totals_stay_hidden_until_it_ends():
 
     final = request(app, "GET", f"/api/v1/english/checkpoint-sessions/{session_id}").json()
     assert final["correct_parts"] == final["total_parts"] > 0
+
+
+def test_e2_6_logical_connections_journey_is_learner_safe_and_uses_fresh_retry():
+    app = application()
+    lesson = request(app, "GET", "/api/v1/english/lessons/e2-lesson-06")
+    assert lesson.status_code == 200, lesson.text
+    assert lesson.json()["lesson_code"] == "E2.6"
+    assert len(lesson.json()["sections"]) == 7
+    assert lesson.json()["practice"]["question_count"] == 6
+
+    created = create_session(app, "e2-6-guided", lesson_key="e2-lesson-06")
+    assert created.status_code == 201, created.text
+    session_id = created.json()["session_id"]
+    for number, answer in enumerate(["C", "A", "D", "B", "C"], 1):
+        question = request(
+            app, "GET", f"/api/v1/english/practice-sessions/{session_id}/next"
+        ).json()["question"]
+        assert "correct_key" not in json.dumps(question)
+        answered = submit(app, session_id, question, answer, f"e2-6-correct-{number}")
+        assert answered.status_code == 200, answered.text
+        assert answered.json()["correct"] is True
+
+    exit_ticket = request(
+        app, "GET", f"/api/v1/english/practice-sessions/{session_id}/next"
+    ).json()["question"]
+    assert exit_ticket["stable_key"] == "eg-l5-106"
+    wrong = submit(app, session_id, exit_ticket, "B", "e2-6-wrong-exit")
+    assert wrong.status_code == 200, wrong.text
+    assert wrong.json()["correct"] is False
+    assert wrong.json()["retry_queued"] is True
+
