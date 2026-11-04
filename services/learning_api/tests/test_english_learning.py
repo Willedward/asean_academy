@@ -1423,7 +1423,7 @@ def test_e4_checkpoint_sequences_two_open_cloze_passages_without_answer_leak():
         app,
         session_id,
         second,
-        {"1": "again", "2": "unless"},
+        {"1": "again", "2": "as"},
         "e4-checkpoint-second-group",
     )
     assert completed.status_code == 200, completed.text
@@ -3038,7 +3038,7 @@ def test_e5_1_reading_group_is_learner_safe_and_marks_mixed_responses():
         "single_choice",
         "single_choice",
         "short_text",
-        "short_text",
+        "single_choice",
         "single_choice",
         "multiple_response",
     ]
@@ -3061,7 +3061,7 @@ def test_e5_1_reading_group_is_learner_safe_and_marks_mixed_responses():
                 "1": "B",
                 "2": "B",
                 "3": "Retain.",
-                "4": "the rain garden absorbed the pooled water within a few hours.",
+                "4": "B",
                 "5": "A",
                 "6": ["D", "A"],
             },
@@ -3102,7 +3102,7 @@ def test_e5_2_reference_chain_group_is_learner_safe_and_marks_exactly():
     assert [part["response_type"] for part in question["parts"]] == [
         "single_choice",
         "short_text",
-        "short_text",
+        "single_choice",
         "single_choice",
         "single_choice",
         "multiple_response",
@@ -3126,10 +3126,7 @@ def test_e5_2_reference_chain_group_is_learner_safe_and_marks_exactly():
             "answers": {
                 "1": "A",
                 "2": "The coastal ecologist.",
-                "3": (
-                    "The club moved half the trays to a covered walkway and left the others "
-                    "beside the sports shed."
-                ),
+                "3": "A",
                 "4": "A",
                 "5": "C",
                 "6": ["D", "A"],

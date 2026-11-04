@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l5-006",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -14,19 +14,27 @@
   "status": "draft",
   "passage_ref": {
     "stable_key": "english-passage-checkpoint-library-box-count",
-    "revision": 1,
-    "content_sha256": "c134107a44b43aafe1d2449893b553268936e9f501f411773a9947bc1ed93f6f"
+    "revision": 2,
+    "content_sha256": "b41d33f3f6188bc2d03883b36486aee5b6c6954c4eef14743c13f2c9f65315db"
   },
   "instructions": "Use the timed open-cloze routine. Read both paragraphs, enter exactly one word per gap, then perform a final read before submitting.",
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: show that Niko repeated the box count recorded before departure.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "again",
-        "accepted_alternatives": [],
-        "normalisation": {"unicode_form": "NFKC", "collapse_whitespace": true, "case_sensitive": false, "strip_terminal_punctuation": false},
+        "accepted_alternatives": [
+          "twice",
+          "carefully"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
         "rationale": "The first sentence records Niko’s initial count; ‘again’ connects the later count to that earlier action."
       },
       "hint": "Protected checkpoint: no hint is available.",
@@ -34,21 +42,32 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: state the necessary condition for the groups’ digital inventory to be reliable.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
-        "canonical_answer": "unless",
-        "accepted_alternatives": [],
-        "normalisation": {"unicode_form": "NFKC", "collapse_whitespace": true, "case_sensitive": false, "strip_terminal_punctuation": false},
-        "rationale": "‘Unless’ means ‘if not’: the inventory would be unreliable if the groups did not share one numbering method."
+        "canonical_answer": "as",
+        "accepted_alternatives": [
+          "so"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
+        "rationale": "As long as sets the condition for the inventory to stay accurate."
       },
       "hint": "Protected checkpoint: no hint is available.",
-      "correct_explanation": "‘Unless’ expresses the condition that every group must use the same numbering method."
+      "correct_explanation": "As long as sets the condition for the inventory to stay accurate."
     }
   ],
   "provenance": {
     "authoring_method": "original_authored",
-    "source_refs": ["candidate-report-2026-english-format", "ies-adolescent-literacy-guide", "nextscholar-english-curriculum-design-v1"],
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
     "created_at": "2026-10-29T00:00:00+08:00",
     "authored_by": "Codex English E4 checkpoint milestone",
     "reviewed_at": null,

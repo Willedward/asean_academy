@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "er-l1-001",
   "bank_key": "english-er-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -109,20 +109,32 @@
       "position": 4,
       "prompt": "In paragraph 3, what does “This result” refer to?",
       "response": {
-        "type": "short_text",
-        "canonical_answer": "the soil absorbed the pooled water within a few hours",
-        "accepted_alternatives": [
-          "the rain garden absorbed the pooled water within a few hours",
-          "the garden absorbed the water within a few hours",
-          "the soil absorbed the water within a few hours"
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "the garden looking unremarkable at first"
+          },
+          {
+            "key": "B",
+            "text": "the soil absorbing the pooled water quickly"
+          },
+          {
+            "key": "C",
+            "text": "the walkway flooding during the strong storm"
+          },
+          {
+            "key": "D",
+            "text": "the school adding two more beds near the canteen"
+          }
         ],
-        "normalisation": {
-          "unicode_form": "NFKC",
-          "collapse_whitespace": true,
-          "case_sensitive": false,
-          "strip_terminal_punctuation": true
-        },
-        "rationale": "The phrase points back to the immediately preceding observation that the pooled storm water was absorbed within a few hours."
+        "correct_key": "B",
+        "choice_rationales": {
+          "A": "This describes how the garden looked before the storm, not the result.",
+          "B": "The sentence before “This result” says the soil absorbed the pooled water within a few hours.",
+          "C": "The storm filled the beds without flooding the walkway.",
+          "D": "Adding beds is what the result persuaded the school to do."
+        }
       },
       "hint": "Read the sentence immediately before “This result” and state the observed event.",
       "correct_explanation": "It refers to the soil absorbing the pooled storm water within a few hours."
@@ -218,4 +230,3 @@
     "review_notes": null
   }
 }
-

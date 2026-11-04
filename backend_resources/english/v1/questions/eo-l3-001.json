@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l3-001",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,7 +21,7 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: complete the fixed expression meaning “with little warning”: at short ___.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "notice",
@@ -30,7 +30,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The established expression “at short notice” means with little time to prepare, matching the unexpected booking change."
       },
@@ -39,16 +39,20 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: complete the expression meaning “accept responsibility for”: take ___ of.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "charge",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "care",
+          "control",
+          "ownership"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Take charge of” means assume responsibility for organising or controlling something, which is what Mei does with the schedule."
       },
@@ -57,7 +61,7 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: complete the expression meaning “watch carefully”: keep an ___ on.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "eye",
@@ -66,7 +70,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The fixed expression “keep an eye on” means monitor something carefully, matching Arif's responsibility for the props and cables."
       },
@@ -75,18 +79,19 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: complete the expression describing an activity that stops: came to a ___.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "halt",
         "accepted_alternatives": [
-          "stop"
+          "stop",
+          "standstill"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Both “came to a halt” and “came to a stop” naturally describe the rehearsal ceasing when the sound system failed."
       },
@@ -95,19 +100,20 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: complete the expression meaning “very close to doing something”: on the ___ of.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "verge",
         "accepted_alternatives": [
           "brink",
-          "point"
+          "point",
+          "edge"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“On the verge of”, “on the brink of” and “on the point of” can all mean very close to an action or event; each fits the team's near-cancellation."
       },
@@ -116,16 +122,18 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: complete the expression meaning “decided”: made up their ___.",
+      "prompt": "Gap 6: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "minds",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "mind"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The plural fixed expression “made up their minds” means the actors reached a decision to continue without recorded music."
       },
@@ -134,7 +142,7 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: complete the collocation describing an important contribution: played a crucial ___.",
+      "prompt": "Gap 7: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "role",
@@ -145,7 +153,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Played a crucial role” and “played a crucial part” both describe the percussion group's important contribution to saving the scene."
       },
@@ -154,7 +162,7 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: complete the expression showing that the preparation changed the result: made all the ___.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "difference",
@@ -163,7 +171,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The fixed expression “made all the difference” means the calm preparation was decisive in producing a successful scene."
       },

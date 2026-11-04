@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l4-001",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,16 +21,18 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: identify who arrived first by linking the earlier roles with the following pronoun and toolkit reference.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "Farid",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "He"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The following sentence uses “He” and mentions a toolkit, while the opening role sentence assigns electrical examination to Farid. Together those cross-sentence clues identify Farid."
       },
@@ -39,18 +41,19 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: use a demonstrative that refers to the whole successful lamp repair in the previous sentence.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "This",
         "accepted_alternatives": [
-          "That"
+          "That",
+          "It"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Both “This” and “That” can point back to the complete event in which Farid repaired the switch and the lamp lit, making that success the cause of the visitors' confidence."
       },
@@ -59,19 +62,21 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: signal the contrast between the organisers' expectation and the difficult radio that actually arrived next.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "However",
         "accepted_alternatives": [
           "Yet",
-          "Instead"
+          "Instead",
+          "But",
+          "Unfortunately"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The difficult radio conflicts with the expectation of mostly simple repairs. “However”, “Yet” and “Instead” can all mark that contrast in this position."
       },
@@ -80,16 +85,19 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: complete the inversion “Only ___ did he notice” by following the earlier sequence of tests.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "then",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "later",
+          "afterwards"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Farid notices the loose connection after testing the battery, speaker and wires. “Only then did he notice” links the discovery to that preceding sequence and correctly triggers inversion."
       },
@@ -98,7 +106,7 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: use a plural object pronoun that refers to the lamp owners named in the previous sentence.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "them",
@@ -107,7 +115,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The antecedent is the plural human noun phrase “The owners of the lamps”. After “to”, the required object pronoun is “them”."
       },
@@ -116,7 +124,7 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: show that Farid repeated the action after the first unsuccessful attempt.",
+      "prompt": "Gap 6: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "again",
@@ -125,7 +133,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The earlier sentence states that Farid already switched the radio on once. “Again” marks the later switch as a repeated action after he adjusted the connection."
       },
@@ -134,16 +142,19 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: use the possessive determiner that continues the reference to Mr Lee.",
+      "prompt": "Gap 7: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "his",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "this",
+          "that"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Mr Lee is the singular male person who stays to help. The possessive determiner before “help” must therefore be “his”."
       },
@@ -152,16 +163,19 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: use a singular object pronoun that refers to the shared notebook in the previous sentence.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "it",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "them",
+          "this"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The singular object being studied is the shared notebook. The object pronoun “it” continues that reference without unnecessarily repeating the noun."
       },

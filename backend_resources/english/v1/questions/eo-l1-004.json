@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l1-004",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,12 +21,19 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: supply the object pronoun referring to Sara after ‘asked’.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "her",
-        "accepted_alternatives": [],
-        "normalisation": {"unicode_form": "NFKC", "collapse_whitespace": true, "case_sensitive": false, "strip_terminal_punctuation": false},
+        "accepted_alternatives": [
+          "Sara"
+        ],
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
         "rationale": "The verb ‘asked’ requires an object before the infinitive, and ‘her’ refers back to Sara."
       },
       "hint": "Protected checkpoint: no hint is available.",
@@ -34,12 +41,17 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: complete the passive past-perfect phrase before ‘been sent’.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "had",
         "accepted_alternatives": [],
-        "normalisation": {"unicode_form": "NFKC", "collapse_whitespace": true, "case_sensitive": false, "strip_terminal_punctuation": false},
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
         "rationale": "The parcel was sent before Sara examined the labels, so ‘had been sent’ marks the earlier passive action."
       },
       "hint": "Protected checkpoint: no hint is available.",
@@ -47,12 +59,17 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: complete the fixed pattern ‘consisted ___ six charcoal sketches’.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "of",
         "accepted_alternatives": [],
-        "normalisation": {"unicode_form": "NFKC", "collapse_whitespace": true, "case_sensitive": false, "strip_terminal_punctuation": false},
+        "normalisation": {
+          "unicode_form": "NFKC",
+          "collapse_whitespace": true,
+          "case_sensitive": false,
+          "strip_terminal_punctuation": true
+        },
         "rationale": "The fixed verb–preposition pattern is ‘consist of’ when naming the parts that form a whole."
       },
       "hint": "Protected checkpoint: no hint is available.",
@@ -61,7 +78,11 @@
   ],
   "provenance": {
     "authoring_method": "original_authored",
-    "source_refs": ["candidate-report-2026-english-format", "ies-adolescent-literacy-guide", "nextscholar-english-curriculum-design-v1"],
+    "source_refs": [
+      "candidate-report-2026-english-format",
+      "ies-adolescent-literacy-guide",
+      "nextscholar-english-curriculum-design-v1"
+    ],
     "created_at": "2026-10-29T00:00:00+08:00",
     "authored_by": "Codex English E4 checkpoint milestone",
     "reviewed_at": null,

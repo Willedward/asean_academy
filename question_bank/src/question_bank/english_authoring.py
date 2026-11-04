@@ -173,6 +173,13 @@ def detect_english_duplicates(
         first_exact = _normalise_prompt(_question_prompt(first))
         first_template = _normalise_prompt(_question_prompt(first), template=True)
         for second in questions[index + 1 :]:
+            # Passage items share neutral gap prompts, so only their passages can distinguish them.
+            if (
+                first.passage_ref
+                and second.passage_ref
+                and first.passage_ref.stable_key != second.passage_ref.stable_key
+            ):
+                continue
             second_exact = _normalise_prompt(_question_prompt(second))
             if first_exact == second_exact:
                 matches.append(

@@ -1519,7 +1519,8 @@ def test_e4_lexical_cloze_uses_collocations_and_reviewed_equivalents(english_roo
     assert check_english_answer(question.parts[3].response, "STOP")["correct"]
     assert check_english_answer(question.parts[4].response, "brink")["correct"]
     assert check_english_answer(question.parts[6].response, "part")["correct"]
-    assert not check_english_answer(question.parts[1].response, "control")["correct"]
+    assert check_english_answer(question.parts[1].response, "control")["correct"]
+    assert not check_english_answer(question.parts[1].response, "notice")["correct"]
 
 
 def test_e4_cohesion_cloze_requires_cross_sentence_links(english_root):
@@ -1580,15 +1581,12 @@ def test_e5_reading_group_mixes_comprehension_responses_and_marks_exactly(englis
         "single_choice",
         "single_choice",
         "short_text",
-        "short_text",
+        "single_choice",
         "single_choice",
         "multiple_response",
     ]
     assert check_english_answer(question.parts[2].response, "Retain.")["correct"]
-    assert check_english_answer(
-        question.parts[3].response,
-        "The rain garden absorbed the pooled water within a few hours.",
-    )["correct"]
+    assert check_english_answer(question.parts[3].response, "B")["correct"]
     assert check_english_answer(question.parts[5].response, ["D", "A"])["correct"]
     assert not check_english_answer(question.parts[5].response, ["A", "B"])["correct"]
 
@@ -1604,17 +1602,14 @@ def test_e5_reference_chain_group_resolves_people_events_and_labels_exactly(engl
     assert [part.response.type for part in question.parts] == [
         "single_choice",
         "short_text",
-        "short_text",
+        "single_choice",
         "single_choice",
         "single_choice",
         "multiple_response",
     ]
     assert check_english_answer(question.parts[0].response, "A")["correct"]
     assert check_english_answer(question.parts[1].response, "The coastal ecologist.")["correct"]
-    assert check_english_answer(
-        question.parts[2].response,
-        "The club moved half the trays to a covered walkway and left the others beside the sports shed.",
-    )["correct"]
+    assert check_english_answer(question.parts[2].response, "A")["correct"]
     assert check_english_answer(question.parts[5].response, ["D", "A"])["correct"]
     assert not check_english_answer(question.parts[4].response, "A")["correct"]
 
@@ -2294,7 +2289,7 @@ def test_reading_reviewer_export_includes_complete_passage_and_answers(english_r
     assert "A second life for the school courtyard" in page
     assert "Then a strong storm filled the shallow beds" in page
     assert "retain" in page
-    assert "the soil absorbed the pooled water within a few hours" in page
+    assert "the soil absorbing the pooled water quickly" in page
 
 
 def test_context_synonym_reviewer_export_includes_passage_pin_and_all_answers(
