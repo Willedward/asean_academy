@@ -231,7 +231,7 @@ def _check_quality(report, root: Path, foundation) -> None:
 
 
 def validate_english_authoring(
-    root: Path, *, near_duplicate_threshold: float = 0.9
+    root: Path, *, near_duplicate_threshold: float = 0.9, content_checks: bool = True
 ) -> EnglishAuthoringReport:
     root = root.resolve()
     foundation = validate_english_foundation(root)
@@ -276,6 +276,9 @@ def validate_english_authoring(
             batch_root,
             f"Questions without a batch: {unassigned}",
         )
+    # These compare every question with every other, so only CI and authors should run them.
+    if not content_checks:
+        return report
     _check_quality(report, root, foundation)
     report.duplicates = detect_english_duplicates(
         report.questions, near_threshold=near_duplicate_threshold

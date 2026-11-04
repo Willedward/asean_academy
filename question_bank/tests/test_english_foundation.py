@@ -2925,3 +2925,13 @@ def test_full_mocks_follow_the_reported_paper_and_share_no_questions(english_roo
         assert sum(len(question.parts) for question in questions) == 38
         assert not english_quality_findings(questions, [], [form])
 
+
+def test_runtime_validation_skips_the_slow_content_checks(english_root, monkeypatch):
+    def fail(*_args, **_kwargs):
+        raise AssertionError("The API must not run content checks while serving requests")
+
+    monkeypatch.setattr("question_bank.english_authoring.detect_english_duplicates", fail)
+    monkeypatch.setattr("question_bank.english_authoring._check_quality", fail)
+
+    assert validate_english_authoring(english_root, content_checks=False).valid
+

@@ -202,11 +202,11 @@ class CourseCatalogue:
     @cached_property
     def english_review_question_batches(self) -> dict[str, str]:
         root = self.repository_root / ENGLISH_ROOT
-        report = validate_english_authoring(root)
+        report = validate_english_authoring(root, content_checks=False)
         if not report.valid:
             raise CatalogueError(
                 "english_authoring_invalid",
-                "English batches or duplicate checks failed and cannot be reviewed.",
+                "English batches are invalid and cannot be reviewed.",
                 503,
             )
         return question_batch_map(root)
