@@ -28,10 +28,11 @@ from typing import Any
 from ..diagram_checks import DiagramContext
 from ..geometry_validation import geometry_diagram_findings
 from .canvas import DiagramLayoutError
-from .common import CHECKED_RENDERERS, PLANE_GEOMETRY_RENDERER, Diagram, answer_values
+from .common import CHECKED_RENDERERS, Diagram, answer_values
 from .questions import (
     LESSON_TEMPLATES,
     UnsupportedDiagram,
+    bank_renderer,
     diagram_assets,
     question_text,
     render_lesson_asset,
@@ -294,7 +295,7 @@ def _new_asset(question: dict[str, Any]) -> dict[str, Any]:
         "format": "svg",
         "path": f"assets/{key}-diagram.svg",
         "alt_text": "",
-        "generation_spec": {"renderer": PLANE_GEOMETRY_RENDERER},
+        "generation_spec": {"renderer": bank_renderer(question)},
     }
     question.setdefault("assets", []).append(asset)
     question["stem"] = [

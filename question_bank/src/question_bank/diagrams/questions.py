@@ -14,12 +14,13 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from . import mensuration, plane_geometry, right_triangle
+from . import mensuration, plane_geometry, right_triangle, sec1_mensuration
 from .common import (
     CHECKED_RENDERERS,
     MENSURATION_RENDERER,
     PLANE_GEOMETRY_RENDERER,
     RIGHT_TRIANGLE_RENDERER,
+    SEC1_MENSURATION_RENDERER,
     Diagram,
     UnsupportedDiagram,
     answer_values,
@@ -32,11 +33,15 @@ LEGACY_TO_CURRENT = {
     MENSURATION_RENDERER: MENSURATION_RENDERER,
     "nextscholar-geometry-svg-v1": PLANE_GEOMETRY_RENDERER,
     PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
+    SEC1_MENSURATION_RENDERER: SEC1_MENSURATION_RENDERER,
 }
+# ``nextscholar-geometry-svg-v1`` drew several banks; these banks have their own checked generator.
+LEGACY_GEOMETRY_ROUTES = {"g5-": SEC1_MENSURATION_RENDERER}
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
     MENSURATION_RENDERER: mensuration.TEMPLATES,
     PLANE_GEOMETRY_RENDERER: plane_geometry.TEMPLATES,
+    SEC1_MENSURATION_RENDERER: sec1_mensuration.TEMPLATES,
 }
 
 NUM = r"(\d+(?:\.\d+)?)"
@@ -377,6 +382,7 @@ PATTERNS = {
     RIGHT_TRIANGLE_RENDERER: _RIGHT_TRIANGLE_PATTERNS,
     MENSURATION_RENDERER: _MENSURATION_PATTERNS,
     PLANE_GEOMETRY_RENDERER: plane_geometry.PATTERNS,
+    SEC1_MENSURATION_RENDERER: sec1_mensuration.PATTERNS,
 }
 
 
@@ -389,9 +395,21 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
+def bank_renderer(question: dict[str, Any]) -> str:
+    """Return the checked generator for a figure of this question's bank."""
+    key = question.get("stable_key", "")
+    return next(
+        (renderer for prefix, renderer in LEGACY_GEOMETRY_ROUTES.items() if key.startswith(prefix)),
+        PLANE_GEOMETRY_RENDERER,
+    )
+
+
 def text_only_reason(question: dict[str, Any]) -> str | None:
-    """Return why a G1 question should have no figure, or ``None`` if it can have one."""
-    return plane_geometry.text_only_reason(_prompt_text(question))
+    """Return why a question should have no figure, or ``None`` if it can have one."""
+    prompt = _prompt_text(question)
+    if bank_renderer(question) == SEC1_MENSURATION_RENDERER:
+        return sec1_mensuration.text_only_reason(prompt)
+    return plane_geometry.text_only_reason(prompt)
 
 
 def stem_findings(question: dict[str, Any], template: str) -> list[str]:
@@ -414,6 +432,8 @@ def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramReque
     """Choose the template and inputs for one question asset."""
     spec = asset.get("generation_spec", {})
     renderer = LEGACY_TO_CURRENT.get(spec.get("renderer", ""))
+    if spec.get("renderer") == "nextscholar-geometry-svg-v1":
+        renderer = bank_renderer(question)
     if renderer is None:
         raise UnsupportedDiagram(f"Renderer {spec.get('renderer')!r} has no checked generator.")
     if spec.get("renderer") in CHECKED_RENDERERS and spec.get("template") in TEMPLATES[renderer]:

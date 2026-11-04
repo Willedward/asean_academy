@@ -18,6 +18,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Any
 
+from .sec1_mensuration_checks import SEC1_MENSURATION_RENDERER, sec1_mensuration_issues
 from .svg_metrics import (
     MIN_PHONE_FONT_PX,
     Box,
@@ -1355,6 +1356,8 @@ class _Checked:
             self.plane_markings()
             self.plane_arcs()
             self.plane_alternative_text()
+        if self.spec.get("renderer") == SEC1_MENSURATION_RENDERER:
+            sec1_mensuration_issues(self)
         self.issues.extend(text_layout_issues(self.root, check_strokes=True))
         return _unique(self.issues)
 
