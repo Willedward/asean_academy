@@ -487,7 +487,7 @@ exit tickets for the Full route. E1.2 begins Core expansion with a draft word-fa
 and E1.4 adds a bounded synonym-precision lesson. E1.5 adds a collocation-and-register lesson,
 and E2.3 now adds time-anchor, event-order and viewpoint control; each increment has six
 deterministic practice/exit questions and one disjoint retry. The next independently executable
-content sequence continues with the remaining Core-route gap, E3.4,
+content sequence continues with the remaining Full-route lessons,
 alongside Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the
@@ -517,5 +517,5 @@ core meaning, degree and attitude without rewarding unsupported exaggeration. Co
 sentence checks without treating greater formality as automatically better. Continue with
 **E2.3 tense and aspect** now uses `Anchor -> Order -> View -> Verify` to distinguish routines,
 completed events, actions in progress, earlier past actions and continuing results without
-forcing every verb into the same tense. **E2.6 logical connections** followed it. **E3.2 grammar filter** followed it. Continue with **E3.4** as the
-next Core gap; it must remain another draft, review-gated increment.
+forcing every verb into the same tense. **E2.6 logical connections** followed it. **E3.2 grammar filter** followed it. **E3.4 solve globally** completes Core lesson
+coverage. Each remains a draft, review-gated increment.
