@@ -301,8 +301,8 @@ must execute the private ENG-T3.9 package against already-captured outputs, and 
 privacy/safeguarding owners must record genuine T3.10 evidence. Do not enable Render or invoke a
 paid provider until those gates pass.
 
-The next independently executable content sequence continues with the two remaining Core-route
-gaps, **E3.2 and E3.4**, followed by the Full-route gaps, alongside the existing Sprint human
+The next independently executable content sequence continues with the remaining Core-route
+gap, **E3.4**, followed by the Full-route gaps, alongside the existing Sprint human
 review and publication evidence. Human
 English/editorial curriculum review is separate from essay-feedback calibration and is never
 replaced by it.

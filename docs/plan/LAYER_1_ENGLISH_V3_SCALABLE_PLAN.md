@@ -554,8 +554,8 @@ sequence now includes draft-only **E1.2 word class and word family** and **E1.4 
 precision**, each with a fresh parallel retry and deterministic marking. The next increment is
 **E1.5 collocation and register** is now implemented as the third bounded Core expansion with
 a fresh parallel retry. **E2.3 tense and aspect** is now implemented as the fourth bounded Core
-expansion with a fresh parallel retry. **E2.6 logical connections** is the fifth. The next
-increment is **E3.2**, the first of two remaining Core gaps; none of these increments can bypass human review or
+expansion with a fresh parallel retry. **E2.6 logical connections** is the fifth. **E3.2 grammar
+filter** is the sixth. The next increment is **E3.4**, the last Core gap; none of these increments can bypass human review or
 publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing

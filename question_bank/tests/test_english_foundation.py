@@ -38,9 +38,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 44
-    assert len(report.passages) == 37
-    assert len(report.questions) == 140
+    assert len(report.lessons) == 45
+    assert len(report.passages) == 44
+    assert len(report.questions) == 147
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -106,18 +106,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 44,
-        "core": 30,
+        "full": 45,
+        "core": 31,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 44,
-        "core": 30,
+        "full": 45,
+        "core": 31,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 21,
-        "core": 21,
+        "full": 22,
+        "core": 22,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -1919,6 +1919,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eb-b005",
         "english-eb-b006",
         "english-eb-b007",
+        "english-eb-b008",
+        "english-eb-b009",
         "english-eg-b001",
         "english-eg-b002",
             "english-eg-b003",
@@ -2003,7 +2005,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b036",
         "english-ex-b037",
     ]
-    assert len(report.questions) == 140
+    assert len(report.questions) == 147
     assert not report.duplicates
 
 
@@ -2814,5 +2816,23 @@ def test_e2_6_logical_connections_passes_quality_rules_and_uses_a_fresh_retry(en
     for question, answer in zip(questions, ["C", "A", "D", "B", "C", "A", "D"], strict=True):
         assert check_english_answer(question.parts[0].response, answer)["correct"]
     assert questions[6].parallel_form_of == questions[5].stable_key
+    assert not english_quality_findings(questions, [], [])
+
+
+def test_e3_2_grammar_filter_passes_quality_rules_and_each_bank_has_spare_words(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/eb-l2-{number:03d}.json").read_text()
+        )
+        for number in range(1, 8)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EB3.2"}
+    assert {question.question_type for question in questions} == {"banked_cloze"}
+    assert [len(question.parts) for question in questions] == [4, 4, 5, 5, 5, 8, 8]
+    for question in questions:
+        assert len(question.parts[0].response.options) > len(question.parts)
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert questions[6].passage_ref.stable_key != questions[5].passage_ref.stable_key
     assert not english_quality_findings(questions, [], [])
 
