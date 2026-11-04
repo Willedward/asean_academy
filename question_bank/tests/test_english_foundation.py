@@ -38,9 +38,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 43
+    assert len(report.lessons) == 44
     assert len(report.passages) == 37
-    assert len(report.questions) == 133
+    assert len(report.questions) == 140
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -106,18 +106,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 43,
-        "core": 29,
+        "full": 44,
+        "core": 30,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 43,
-        "core": 29,
+        "full": 44,
+        "core": 30,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 20,
-        "core": 20,
+        "full": 21,
+        "core": 21,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -1925,6 +1925,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
             "english-eg-b004",
             "english-eg-b005",
             "english-eg-b006",
+            "english-eg-b007",
+            "english-eg-b008",
         "english-eo-b001",
         "english-eo-b002",
         "english-eo-b003",
@@ -2001,7 +2003,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b036",
         "english-ex-b037",
     ]
-    assert len(report.questions) == 133
+    assert len(report.questions) == 140
     assert not report.duplicates
 
 
@@ -2789,3 +2791,28 @@ def test_quality_baseline_rejects_new_findings_and_stale_entries(english_root, t
     assert "stale_quality_baseline" in {
         issue.code for issue in validate_english_authoring(copy).errors
     }
+
+
+def test_e2_6_logical_connections_passes_quality_rules_and_uses_a_fresh_retry(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/eg-l5-{number}.json").read_text()
+        )
+        for number in range(101, 108)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EG2.6"}
+    assert [question.exposure_pool for question in questions] == [
+        "guided_practice",
+        "guided_practice",
+        "independent_practice",
+        "independent_practice",
+        "independent_practice",
+        "exit_ticket",
+        "retry_review",
+    ]
+    for question, answer in zip(questions, ["C", "A", "D", "B", "C", "A", "D"], strict=True):
+        assert check_english_answer(question.parts[0].response, answer)["correct"]
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert not english_quality_findings(questions, [], [])
+
