@@ -95,3 +95,21 @@ The §6 action to confirm the target band is closed.
 11. **Rubric:** gloss *proportionate, economical, qualification*, and keep the standards.
 12. **Pilot the baseline:** flag parts answered correctly by more than about 85% of learners, and
     revise difficulty labels from data.
+
+## Automatic checks
+
+`question-bank english-authoring-validate` now rejects new content that has:
+
+- a title naming the answer;
+- an open-cloze prompt other than the neutral form;
+- a key more than 30% longer than every other option;
+- one option position holding more than 60% of a form's keys;
+- a protected vocabulary word that also appears in a lesson or unprotected item;
+- a lesson repeating 8 or more consecutive words from an exit ticket or protected item; or
+- a term banned by rule 9, other than the common words *construct* and *norm*, which need a person
+  to judge them.
+
+Known findings are listed in `authoring/quality_baseline.json`. Fixing one requires removing its
+entry, so run `question-bank english-quality-baseline` after a correction and check that the list
+only got shorter. The checks catch patterns only. They do not judge level, ambiguity or whether a
+key is right.

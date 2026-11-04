@@ -44,6 +44,7 @@ from .english_authoring import (
     release_english_batch,
     validate_english_authoring,
 )
+from .english_quality import english_quality_findings, write_quality_baseline
 from .english_repository import EnglishObjectiveImporter
 from .english_validation import validate_english_foundation, write_english_schemas
 from .practice import PracticeEngine
@@ -410,6 +411,13 @@ def parser():
     english_authoring_validate.add_argument(
         "--near-duplicate-threshold", type=float, default=0.9
     )
+    english_quality_baseline = commands.add_parser(
+        "english-quality-baseline",
+        help="Rewrite the known English quality findings after fixing some of them",
+    )
+    english_quality_baseline.add_argument(
+        "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION
+    )
     english_export = commands.add_parser(
         "english-authoring-export", help="Export a protected English reviewer packet"
     )
@@ -470,6 +478,14 @@ def main(argv=None):
         )
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
+    if args.command == "english-quality-baseline":
+        foundation = validate_english_foundation(args.root.resolve())
+        count = write_quality_baseline(
+            args.root.resolve(),
+            english_quality_findings(foundation.questions, foundation.lessons, foundation.forms),
+        )
+        print(json.dumps({"accepted_findings": count}, indent=2))
+        return 0
     if args.command == "english-authoring-export":
         result = export_english_reviewer_batch(args.root, args.batch, args.output)
         print(json.dumps({"status": "complete", **result}, indent=2))

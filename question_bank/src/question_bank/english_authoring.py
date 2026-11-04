@@ -23,6 +23,11 @@ from .english_models import (
     EnglishObjectiveQuestion,
     EnglishPassage,
 )
+from .english_quality import (
+    BASELINE_PATH,
+    english_quality_findings,
+    load_quality_baseline,
+)
 from .english_validation import (
     EnglishFoundationReport,
     EnglishIssue,
@@ -208,6 +213,23 @@ def load_english_claims(path: Path) -> EnglishBatchClaimRegistry:
     return EnglishBatchClaimRegistry.model_validate_json(path.read_text())
 
 
+def _check_quality(report, root: Path, foundation) -> None:
+    findings = english_quality_findings(foundation.questions, foundation.lessons, foundation.forms)
+    baseline = load_quality_baseline(root)
+    baseline_path = root / BASELINE_PATH
+    for finding in findings:
+        if finding.key not in baseline:
+            _issue(report, "error", finding.code, baseline_path, f"{finding.location}: {finding.message}")
+    for stale in sorted(baseline - {finding.key for finding in findings}):
+        _issue(
+            report,
+            "error",
+            "stale_quality_baseline",
+            baseline_path,
+            f"{stale} is fixed. Remove it from the baseline.",
+        )
+
+
 def validate_english_authoring(
     root: Path, *, near_duplicate_threshold: float = 0.9
 ) -> EnglishAuthoringReport:
@@ -254,6 +276,7 @@ def validate_english_authoring(
             batch_root,
             f"Questions without a batch: {unassigned}",
         )
+    _check_quality(report, root, foundation)
     report.duplicates = detect_english_duplicates(
         report.questions, near_threshold=near_duplicate_threshold
     )
