@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l1-009",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,198 @@
       "asset_key": "g1-l1-009-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l1-009-diagram.svg",
-      "alt_text": "Schematic for Third angle of a triangle. Not drawn to scale. Stated measures include 50°, 60°.",
+      "path": "assets/g1-l1-009-diagram-r3.svg",
+      "alt_text": "A triangle with one base angle marked 50°, the other base angle marked 60° and the top angle marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "polygons",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "triangle",
         "question_key": "g1-l1-009",
         "outcome": "1.4",
-        "not_to_scale": true
+        "template": "triangle_third_angle",
+        "inputs": {
+          "angles": [
+            50,
+            60
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "given": [
+              50,
+              60
+            ]
+          }
+        },
+        "forbidden_visible_labels": [
+          "70"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          412.0
+        ],
+        "points": {
+          "A": [
+            94.61,
+            338.0
+          ],
+          "B": [
+            505.39,
+            338.0
+          ],
+          "C": [
+            337.95,
+            48.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_key": "angle-a",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "C",
+              "A"
+            ],
+            "marker_key": "angle-b",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          },
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 70.0,
+            "degrees": 70.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-a",
+            "center": [
+              94.61,
+              338.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              505.39,
+              338.0
+            ],
+            "end_ray_point": [
+              337.95,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-b",
+            "center": [
+              505.39,
+              338.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              337.95,
+              48.0
+            ],
+            "end_ray_point": [
+              94.61,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              337.95,
+              48.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              94.61,
+              338.0
+            ],
+            "end_ray_point": [
+              505.39,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "50°",
+            "target": "angle:angle-a"
+          },
+          {
+            "text": "60°",
+            "target": "angle:angle-b"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-a",
+              "angle-b",
+              "angle-x"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "cdcd165e14b3575e56996753a101489ccccc1e04b8f7fcd5998688723535a3d4",
-      "width": 940,
-      "height": 390
+      "sha256": "6371f6b4ff1024914f901d1345ec70b042ee8439f1ac7de0d21285d423d28b2a",
+      "width": 600,
+      "height": 412
     }
   ],
   "provenance": {
@@ -113,6 +293,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

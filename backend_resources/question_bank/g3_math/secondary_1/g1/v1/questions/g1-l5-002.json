@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l5-002",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,248 @@
       "asset_key": "g1-l5-002-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l5-002-diagram.svg",
-      "alt_text": "Schematic for Alternating expressions at an intersection. Not drawn to scale.",
+      "path": "assets/g1-l5-002-diagram-r3.svg",
+      "alt_text": "Two straight lines crossing at a point, with an arc in each of the four angles. Going round the point, the angles are marked (3x − 5)°, (2x + 15)°, (3x − 5)° and (2x + 15)°. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "intersection",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "intersecting_lines",
         "question_key": "g1-l5-002",
         "outcome": "1.2",
-        "not_to_scale": true
+        "template": "intersection_expressions",
+        "inputs": {
+          "first": {
+            "coefficient": 3,
+            "constant": -5
+          },
+          "second": {
+            "coefficient": 2,
+            "constant": 15
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "expressions": [
+            "(3x − 5)°",
+            "(2x + 15)°"
+          ]
+        },
+        "forbidden_visible_labels": [
+          "34",
+          "2a + 2b",
+          "a + b",
+          "360",
+          "97",
+          "83"
+        ],
+        "unknowns": [],
+        "viewbox": [
+          600.0,
+          412.0
+        ],
+        "points": {
+          "W": [
+            153.91,
+            193.0
+          ],
+          "E": [
+            446.09,
+            193.0
+          ],
+          "O": [
+            300.0,
+            193.0
+          ],
+          "P": [
+            282.2,
+            48.0
+          ],
+          "Q": [
+            317.8,
+            338.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "WE",
+            "from": "W",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QP",
+            "from": "Q",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "E",
+              "P"
+            ],
+            "marker_key": "angle-1",
+            "drawn_degrees": 97.0,
+            "degrees": 97.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "P",
+              "W"
+            ],
+            "marker_key": "angle-2",
+            "drawn_degrees": 83.0,
+            "degrees": 83.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "W",
+              "Q"
+            ],
+            "marker_key": "angle-3",
+            "drawn_degrees": 97.0,
+            "degrees": 97.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "Q",
+              "E"
+            ],
+            "marker_key": "angle-4",
+            "drawn_degrees": 83.0,
+            "degrees": 83.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-1",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 40.0,
+            "start_ray_point": [
+              446.09,
+              193.0
+            ],
+            "end_ray_point": [
+              282.2,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-2",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              282.2,
+              48.0
+            ],
+            "end_ray_point": [
+              153.91,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-3",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 40.0,
+            "start_ray_point": [
+              153.91,
+              193.0
+            ],
+            "end_ray_point": [
+              317.8,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-4",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              317.8,
+              338.0
+            ],
+            "end_ray_point": [
+              446.09,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "(3x − 5)°",
+            "target": "angle:angle-1"
+          },
+          {
+            "text": "(2x + 15)°",
+            "target": "angle:angle-2"
+          },
+          {
+            "text": "(3x − 5)°",
+            "target": "angle:angle-3"
+          },
+          {
+            "text": "(2x + 15)°",
+            "target": "angle:angle-4"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "W",
+              "O",
+              "E"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "Q",
+              "O",
+              "P"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-1",
+              "angle-2"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "a28ff0c8a027225ced6647a1af9d86b312fd910491ebe63748fd3f74137278c3",
-      "width": 940,
-      "height": 390
+      "sha256": "34ad14f2e1ec8c49eb57194ab3b98bfa8b9dd9b027148ed8e0e92d2a0177a849",
+      "width": 600,
+      "height": 412
     }
   ],
   "provenance": {
@@ -135,6 +365,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-015",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-015-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -83,7 +92,145 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-015-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-015-diagram-r2.svg",
+      "alt_text": "Segment AB marked 10 cm. Compass arcs of equal radius centred at A and B meet at two points, one above and one below the segment. A dashed radius from each of A and B to the upper point is marked r. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "construction",
+        "question_key": "g1-l3-015",
+        "outcome": "1.7",
+        "template": "safe_radius",
+        "inputs": {
+          "segment": {
+            "value": 10,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "segment": {
+            "value": 10,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "6",
+          "5"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AP",
+            "label": "r"
+          },
+          {
+            "target": "segment:BP",
+            "label": "r"
+          }
+        ],
+        "neutral_radius_ratio": 0.78,
+        "arcs": {
+          "arc-a-1": {
+            "center": "A",
+            "radius": 195.44,
+            "through": "P"
+          },
+          "arc-a-2": {
+            "center": "A",
+            "radius": 195.44,
+            "through": "Q"
+          },
+          "arc-b-1": {
+            "center": "B",
+            "radius": 195.44,
+            "through": "P"
+          },
+          "arc-b-2": {
+            "center": "B",
+            "radius": 195.44,
+            "through": "Q"
+          }
+        },
+        "viewbox": [
+          600.0,
+          422.0
+        ],
+        "points": {
+          "A": [
+            174.72,
+            198.0
+          ],
+          "B": [
+            425.28,
+            198.0
+          ],
+          "P": [
+            300.0,
+            48.0
+          ],
+          "Q": [
+            300.0,
+            348.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AP",
+            "from": "A",
+            "to": "P",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BP",
+            "from": "B",
+            "to": "P",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "10 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "r",
+            "target": "segment:AP"
+          },
+          {
+            "text": "r",
+            "target": "segment:BP"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "5dc866034748b89969d505d4f55f36d21424746107973800dc2f3b56ff6a3042",
+      "width": 600,
+      "height": 422
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +244,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
