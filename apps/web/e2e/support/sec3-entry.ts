@@ -173,10 +173,18 @@ const repositoryRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../../../..",
 );
+const bankRoot = path.join(repositoryRoot, "backend_resources/question_bank/g3_math");
+// Every topic's diagnostic bank, because the readiness forms span all 19 topic groups.
+const diagnosticDirectories = ["secondary_1", "secondary_2"].flatMap((level) =>
+  readdirSync(path.join(bankRoot, level), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(bankRoot, level, entry.name, "v2/questions")),
+);
 const questionDirectories = [
-  "backend_resources/question_bank/g3_math/secondary_1/n1/v1/questions",
-  "backend_resources/question_bank/g3_math/secondary_2/g5/v1/questions",
-].map((directory) => path.join(repositoryRoot, directory));
+  path.join(bankRoot, "secondary_1/n1/v1/questions"),
+  path.join(bankRoot, "secondary_2/g5/v1/questions"),
+  ...diagnosticDirectories,
+];
 
 let cachedKey: Map<string, AuthoredQuestion> | null = null;
 

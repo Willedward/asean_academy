@@ -54,4 +54,6 @@ Until step 5, `/diagnostics` continues returning `content_pending`; the new sour
 
 Each form attaches to the current `g3-sec1-math` revision because the schema needs one course, but a learner in either or both courses gets the same check and keeps one baseline when they join another course. The endline unlocks once every lesson in all of the learner's active courses is mastered. Lesson recommendations are not filtered by enrolment, so a learner in only one course can be recommended a lesson in the other.
 
+The pre-review findings are in [PRE_REVIEW_AUDIT_diagnostics_v2.md](./PRE_REVIEW_AUDIT_diagnostics_v2.md).
+
 The authenticated E2E seed approves these drafts in its disposable database only, so browser journeys can run the whole check.

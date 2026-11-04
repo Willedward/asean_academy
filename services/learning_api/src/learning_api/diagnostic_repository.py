@@ -12,7 +12,7 @@ from uuid import UUID
 import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
-from question_bank.checking import check_answer
+from question_bank.checking import CONFIGURATION_MESSAGE, check_answer
 from question_bank.diagnostic_repository import DIAGNOSTIC_ANCHOR_COURSE_KEY
 from question_bank.models import AlgebraicResponse, NumericResponse
 
@@ -37,6 +37,12 @@ def _canonical(value: dict[str, Any]) -> str:
 
 def _fingerprint(value: dict[str, Any]) -> str:
     return hashlib.sha256(_canonical(value).encode()).hexdigest()
+
+
+def _format_message(response_type: str, error: str) -> str:
+    if response_type == "numeric":
+        return f"{error} Leave out units, and use a point for decimals, such as 3.8."
+    return error
 
 
 def band_for(percentage: float) -> str:
@@ -484,7 +490,8 @@ class PostgresDiagnosticRepository:
                     "question": {
                         "stable_key": row["stable_key"],
                         "revision": row["revision"],
-                        "title": row["title"],
+                        # Authored titles can name the answer, so learners see only the number.
+                        "title": f"Question {row['position']}",
                         "difficulty": row["difficulty"],
                         "calculator_allowed": row["calculator_allowed"],
                         "stem": row["stem_blocks"],
@@ -622,6 +629,13 @@ class PostgresDiagnosticRepository:
             raw_score = Decimal("0")
             for part in parts:
                 result = check_answer(self._spec(part), answers[str(part["position"])])
+                # An unreadable answer is not a wrong one, so ask the learner to fix it.
+                if result["error"] and result["error"] != CONFIGURATION_MESSAGE:
+                    raise DiagnosticError(
+                        "diagnostic_answer_format",
+                        _format_message(part["response_type"], result["error"]),
+                        422,
+                    )
                 if result["correct"]:
                     raw_score += Decimal(part["marks"])
             weight = Decimal(item["weight"])
