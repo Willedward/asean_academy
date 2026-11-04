@@ -1,5 +1,9 @@
 """Regenerate the checked geometry diagrams for one question batch or a set of lessons.
 
+A batch run can also add a figure to a text-only question that needs one (``add``). When the
+generator says an accurate figure would show a question's answer, that question becomes text-only
+instead. Both decisions are recorded in the bank's ``diagram_audit.json``.
+
 Without ``apply`` nothing in the repository changes: each SVG is rendered, validated and, when
 an output directory is given, written there with a manifest for review. With ``apply`` the SVG
 is written beside the existing asset under a revisioned filename (``…-r2.svg``), the previous
@@ -24,7 +28,7 @@ from typing import Any
 from ..diagram_checks import DiagramContext
 from ..geometry_validation import geometry_diagram_findings
 from .canvas import DiagramLayoutError
-from .common import CHECKED_RENDERERS, Diagram, answer_values
+from .common import CHECKED_RENDERERS, PLANE_GEOMETRY_RENDERER, Diagram, answer_values
 from .questions import (
     LESSON_TEMPLATES,
     UnsupportedDiagram,
@@ -32,11 +36,17 @@ from .questions import (
     question_text,
     render_lesson_asset,
     render_question_asset,
+    text_only_reason,
 )
 
 REVIEW_NOTE = (
     "Diagram regenerated from the content data with {renderer}; awaiting Mathematics and "
     "editorial review."
+)
+TEXT_ONLY_NOTE = "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+SCHEMATIC_STEM = (
+    "Use the schematic together with the measurements stated in the question. "
+    "The diagram is not drawn to scale."
 )
 
 
@@ -67,6 +77,7 @@ class RegenerationReport:
     output: str | None
     assets: list[RegeneratedAsset] = field(default_factory=list)
     unsupported: list[dict[str, str]] = field(default_factory=list)
+    text_only: list[dict[str, str]] = field(default_factory=list)
 
     @property
     def ok(self) -> bool:
@@ -84,6 +95,7 @@ class RegenerationReport:
             "content_finding_count": sum(len(asset.content_findings) for asset in self.assets),
             "assets": [asdict(asset) for asset in self.assets],
             "unsupported": self.unsupported,
+            "text_only": self.text_only,
         }
 
 
@@ -152,6 +164,10 @@ def _write_preview(output: Path, report: RegenerationReport, files: dict[str, st
     if findings:
         lines += ["## Findings for the question or lesson text (not applied)", ""]
         lines += [f"- `{key}`: {item}" for key, item in findings]
+        lines.append("")
+    if report.text_only:
+        lines += ["## Text-only: an accurate figure would show the answer", ""]
+        lines += [f"- `{item['key']}`: {item['reason']}" for item in report.text_only]
         lines.append("")
     if report.unsupported:
         lines += ["## Unsupported", ""]
@@ -247,10 +263,75 @@ def _regenerate_document(
     path.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def _record_audit_decision(
+    bank_root: Path, key: str, reason: str, asset_key: str | None = None
+) -> None:
+    """Record one question's diagram decision in the bank's audit, when the bank has one.
+
+    ``diagram_question_count`` is left alone: every batch would otherwise change the same line.
+    """
+    path = bank_root / "diagram_audit.json"
+    if not path.is_file():
+        return
+    audit = json.loads(path.read_text(encoding="utf-8"))
+    for decision in audit.get("decisions", []):
+        if decision.get("question_key") == key:
+            decision.clear()
+            decision["question_key"] = key
+            decision["decision"] = "diagram_added" if asset_key else "text_sufficient"
+            if asset_key:
+                decision["asset_key"] = asset_key
+            decision["reason"] = reason
+    path.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def _new_asset(question: dict[str, Any]) -> dict[str, Any]:
+    """Attach an empty asset to a text-only question so a template can draw it."""
+    key = question["stable_key"]
+    asset = {
+        "asset_key": f"{key}-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": f"assets/{key}-diagram.svg",
+        "alt_text": "",
+        "generation_spec": {"renderer": PLANE_GEOMETRY_RENDERER},
+    }
+    question.setdefault("assets", []).append(asset)
+    question["stem"] = [
+        {"type": "text", "text": SCHEMATIC_STEM},
+        {"type": "asset_ref", "asset_key": asset["asset_key"]},
+        *question.get("stem", []),
+    ]
+    return asset
+
+
+def _make_text_only(question: dict[str, Any], assets: list[dict[str, Any]]) -> None:
+    keys = {asset["asset_key"] for asset in assets}
+    question["assets"] = [
+        asset for asset in question.get("assets", []) if asset["asset_key"] not in keys
+    ]
+    question["stem"] = [
+        block
+        for block in question.get("stem", [])
+        if not (block.get("type") == "asset_ref" and block.get("asset_key") in keys)
+        and not (block.get("type") == "text" and block.get("text") == SCHEMATIC_STEM)
+    ]
+    _reset_review(question, "")
+    question["provenance"]["review_notes"] = TEXT_ONLY_NOTE
+
+
 def regenerate_batch(
-    bank_root: Path, batch: str, *, output: Path | None = None, apply: bool = False
+    bank_root: Path,
+    batch: str,
+    *,
+    output: Path | None = None,
+    apply: bool = False,
+    add: list[str] | None = None,
 ) -> RegenerationReport:
-    """Regenerate every right-triangle and mensuration diagram in one question batch."""
+    """Regenerate every checked-renderer diagram in one question batch.
+
+    ``add`` names text-only questions in the batch that need a new figure.
+    """
     bank_root = bank_root.resolve()
     _check_output(output, bank_root)
     manifest_path = find_batch_manifest(bank_root, batch)
@@ -262,10 +343,28 @@ def regenerate_batch(
         output=str(output) if output else None,
     )
     files: dict[str, str] = {}
+    additions = set(add or [])
+    outside = additions - set(manifest.get("question_keys", []))
+    if outside:
+        raise ValueError(f"Not in batch {report.scope}: {', '.join(sorted(outside))}.")
     for key in manifest.get("question_keys", []):
         path = bank_root / "questions" / f"{key}.json"
         question = json.loads(path.read_text(encoding="utf-8"))
         assets = diagram_assets(question)
+        added = key in additions and not assets
+        reason = text_only_reason(question) if assets or added else None
+        if reason is not None:
+            report.text_only.append({"key": key, "reason": reason})
+            if apply:
+                if assets:
+                    _make_text_only(question, assets)
+                    path.write_text(
+                        json.dumps(question, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+                    )
+                _record_audit_decision(bank_root, key, reason)
+            continue
+        if added:
+            assets = [_new_asset(question)]
         if not assets:
             continue
         context = DiagramContext(tuple(answer_values(question)), question_text(question))
@@ -280,6 +379,15 @@ def regenerate_batch(
             files=files,
             apply=apply,
         )
+        if apply and any(item.owner_key == key for item in report.assets):
+            planned = next(item for item in report.assets if item.owner_key == key)
+            if not planned.validation_errors and not planned.unchanged:
+                _record_audit_decision(
+                    bank_root,
+                    key,
+                    f"Drawn from the question with {planned.renderer} ({planned.template}).",
+                    planned.asset_key,
+                )
     if output is not None:
         _write_preview(output, report, files)
     return report

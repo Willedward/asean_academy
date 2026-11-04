@@ -22,6 +22,7 @@ from .svg_metrics import (
     MIN_PHONE_FONT_PX,
     Box,
     SvgText,
+    arc_centre,
     iter_strokes,
     iter_texts,
     local_name,
@@ -38,6 +39,22 @@ RIGHT_ANGLE_TOLERANCE = 0.5
 MAX_LABEL_GAP = 40.0
 LABEL_STROKE_CLEARANCE = 1.0
 CONVERSE_TASKS = frozenset({"converse_test", "perimeter_verify"})
+PLANE_GEOMETRY_RENDERER = "nextscholar-plane-geometry-svg-v1"
+# What the alternative text of each plane-geometry figure must name.
+PLANE_FIGURE_WORDS = {
+    "angles_on_line": "straight line",
+    "right_angle_split": "right angle",
+    "intersecting_lines": "lines",
+    "parallel_lines": "parallel",
+    "triangle": "triangle",
+    "diagonals": "segments",
+    "kite": "kite",
+    "construction": "arc",
+}
+_ARC_D = re.compile(
+    r"^\s*M\s*(-?[\d.]+)[ ,]+(-?[\d.]+)\s+A\s*(-?[\d.]+)[ ,]+(-?[\d.]+)[ ,]+0[ ,]+([01])[ ,]+([01])"
+    r"[ ,]+(-?[\d.]+)[ ,]+(-?[\d.]+)\s*$"
+)
 SOLID_WORDS = {
     "pyramid": "pyramid",
     "cone": "cone",
@@ -565,7 +582,7 @@ class _Checked:
             (
                 angle
                 for angle in self.spec.get("angles") or []
-                if angle.get("vertex") == vertex_name
+                if angle.get("marker_key") == vertex_name or angle.get("vertex") == vertex_name
             ),
             None,
         )
@@ -574,7 +591,7 @@ class _Checked:
                 "geometry_label_detached", f"Label {text!r} targets undeclared angle {vertex_name}."
             )
             return
-        vertex = self.points.get(vertex_name)
+        vertex = self.points.get(item.get("vertex"))
         arms = [self.points.get(name) for name in item.get("arms", [])]
         if vertex is None or None in arms or len(arms) != 2:
             return
@@ -650,6 +667,11 @@ class _Checked:
             "on_ellipse": self._on_ellipse,
             "ellipse_centre": self._ellipse_centre,
             "equal_lengths": self._equal_lengths,
+            "perpendicular": self._perpendicular,
+            "not_perpendicular": self._not_perpendicular,
+            "unequal_segments": self._unequal_segments,
+            "angle_sum": self._angle_sum,
+            "corresponding_angles": self._corresponding_angles,
         }
         for relation in self.spec.get("relationships") or []:
             kind = relation.get("type") if isinstance(relation, dict) else None
@@ -887,6 +909,314 @@ class _Checked:
             return f"Declared equal lengths {values} differ."
         return None
 
+    def _cross_angle(self, keys: list[str]) -> float | None:
+        ends = [self.endpoints(key) for key in keys]
+        if len(ends) != 2 or None in ends:
+            return None
+        (a, b), (c, d) = ends
+        return _angle((0.0, 0.0), (b[0] - a[0], b[1] - a[1]), (d[0] - c[0], d[1] - c[1]))
+
+    def _perpendicular(self, relation) -> str | None:
+        measured = self._cross_angle(relation.get("segments", []))
+        if measured is None:
+            return f"Perpendicular relation {relation.get('segments')} uses undeclared segments."
+        if not math.isclose(measured, 90, abs_tol=RIGHT_ANGLE_TOLERANCE):
+            return f"Segments {relation['segments']} are declared perpendicular but meet at {measured:.1f}°."
+        return None
+
+    def _not_perpendicular(self, relation) -> str | None:
+        measured = self._cross_angle(relation.get("segments", []))
+        if measured is None:
+            return f"Relation {relation.get('segments')} uses undeclared segments."
+        if abs(measured - 90) < 10:
+            return f"Segments {relation['segments']} must not look perpendicular but meet at {measured:.1f}°."
+        return None
+
+    def _unequal_segments(self, relation) -> str | None:
+        lengths = [self._length(key) for key in relation.get("segments", [])]
+        if len(lengths) != 2 or None in lengths:
+            return f"Relation {relation.get('segments')} uses undeclared segments."
+        if abs(lengths[0] - lengths[1]) < 0.1 * max(lengths):
+            return f"Segments {relation['segments']} are declared unequal but look equal."
+        return None
+
+    def _angle_by_marker(self, key: str) -> float | None:
+        for item in self.spec.get("angles") or []:
+            if item.get("marker_key") == key and len(item.get("arms") or []) == 2:
+                vertex = self.points.get(item.get("vertex"))
+                first, second = (self.points.get(name) for name in item["arms"])
+                if vertex and first and second:
+                    return _angle(vertex, first, second)
+        return None
+
+    def _angle_sum(self, relation) -> str | None:
+        values = [self._angle_by_marker(key) for key in relation.get("angles", [])]
+        if not values or None in values:
+            return f"Angle sum {relation.get('angles')} uses undeclared angles."
+        if not math.isclose(sum(values), float(relation["value"]), abs_tol=2 * ANGLE_TOLERANCE):
+            return f"Angles {relation['angles']} are drawn summing to {sum(values):.1f}°, not {relation['value']}°."
+        return None
+
+    def _corresponding_angles(self, relation) -> str | None:
+        rays = []
+        for key in relation.get("angles", []):
+            item = next(
+                (
+                    angle
+                    for angle in self.spec.get("angles") or []
+                    if angle.get("marker_key") == key
+                ),
+                None,
+            )
+            if item is None:
+                return f"Corresponding angle {key} is not declared."
+            vertex = self.points.get(item.get("vertex"))
+            arms = [self.points.get(name) for name in item.get("arms", [])]
+            if vertex is None or len(arms) != 2 or None in arms:
+                return f"Corresponding angle {key} uses undeclared points."
+            rays.append([(arm[0] - vertex[0], arm[1] - vertex[1]) for arm in arms])
+        if len(rays) != 2 or any(
+            _angle((0.0, 0.0), rays[0][index], rays[1][index]) > 2 * ANGLE_TOLERANCE
+            for index in (0, 1)
+        ):
+            return f"Angles {relation.get('angles')} are not in corresponding positions."
+        return None
+
+    # ------------------------------------------------------------ plane-geometry figures
+    def _on_drawn_segment(self, point: tuple[float, float]) -> set[str]:
+        keys = set()
+        for key in self.segments:
+            ends = self.endpoints(key)
+            if ends and point_segment_distance(point, ends[0], ends[1]) <= POINT_TOLERANCE:
+                keys.add(key)
+        return keys
+
+    def plane_angle_rays(self) -> None:
+        """Each arc must sit on real drawn rays, centred on its vertex and inside its angle."""
+        declared = {
+            item.get("marker_key"): item
+            for item in self.spec.get("angles") or []
+            if isinstance(item, dict)
+        }
+        for marker in self.spec.get("angle_markers") or []:
+            key = marker.get("marker_key")
+            item = declared.get(key)
+            if item is None:
+                self.add("geometry_angle_marker_vertex", f"Arc {key} has no declared angle.")
+                continue
+            vertex = self.points.get(item.get("vertex"))
+            arms = [self.points.get(name) for name in item.get("arms", [])]
+            if vertex is None or len(arms) != 2 or None in arms:
+                self.add("geometry_angle_marker_vertex", f"Arc {key} uses undeclared points.")
+                continue
+            for name, arm in zip(item["arms"], arms, strict=True):
+                if not (self._on_drawn_segment(vertex) & self._on_drawn_segment(arm)):
+                    self.add(
+                        "geometry_angle_ray_undrawn",
+                        f"Arc {key} uses a ray from {item.get('vertex')} to {name} that is not drawn.",
+                    )
+            measured = _angle(vertex, arms[0], arms[1])
+            if not math.isclose(
+                float(item.get("drawn_degrees", -1)), measured, abs_tol=ANGLE_TOLERANCE
+            ):
+                self.add(
+                    "geometry_angle_measure",
+                    f"Arc {key} records {item.get('drawn_degrees')}° but its rays measure {measured:.1f}°.",
+                )
+            node = next(
+                (
+                    candidate
+                    for candidate in self.root.iter()
+                    if candidate.attrib.get("data-angle-marker") == key
+                ),
+                None,
+            )
+            match = _ARC_D.fullmatch(node.attrib.get("d", "")) if node is not None else None
+            if match is None:
+                self.add("geometry_angle_marker_path", f"Arc {key} must be one M … A … path.")
+                continue
+            start = (float(match[1]), float(match[2]))
+            end = (float(match[7]), float(match[8]))
+            centre = arc_centre(start, float(match[3]), int(match[5]), int(match[6]), end)
+            if not _close(centre, vertex, 1.5):
+                self.add(
+                    "geometry_angle_marker_centre",
+                    f"Arc {key} is centred at ({centre[0]:.1f}, {centre[1]:.1f}), not on its vertex "
+                    f"{item.get('vertex')}.",
+                )
+                continue
+            samples = path_polylines(node.attrib["d"])[0]
+            middle = samples[len(samples) // 2]
+            if (
+                _angle(vertex, middle, arms[0]) > measured + ANGLE_TOLERANCE
+                or _angle(vertex, middle, arms[1]) > measured + ANGLE_TOLERANCE
+            ):
+                self.add(
+                    "geometry_angle_marker_sweep",
+                    f"Arc {key} sweeps outside the angle between its rays.",
+                )
+
+    def plane_label_attachment(self) -> None:
+        """A label must sit next to the arc or point it names."""
+        radii = {
+            item.get("marker_key"): item.get("radius")
+            for item in self.spec.get("angle_markers") or []
+            if isinstance(item, dict)
+        }
+        for text in self.texts:
+            target = text.element.attrib.get("data-label-for") or ""
+            kind, _, name = target.partition(":")
+            if kind == "angle" and name in radii:
+                item = next(
+                    (a for a in self.spec.get("angles") or [] if a.get("marker_key") == name), {}
+                )
+                vertex = self.points.get(item.get("vertex"))
+                if vertex and (
+                    segment_box_distance(vertex, vertex, text.box) > float(radii[name]) + MAX_LABEL_GAP
+                ):
+                    self.add(
+                        "geometry_label_detached",
+                        f"Label {text.text!r} is too far from its arc {name}.",
+                    )
+            elif kind == "point":
+                point = self.points.get(name)
+                if point and segment_box_distance(point, point, text.box) > 30:
+                    self.add(
+                        "geometry_label_detached", f"Label {text.text!r} is too far from {name}."
+                    )
+
+    def plane_markings(self) -> None:
+        """Equal ticks and parallel arrows must be on their segments and tell the truth."""
+        drawn: dict[str, list[ET.Element]] = {}
+        for node in self.root.iter():
+            for attribute in ("data-tick-mark", "data-parallel-mark"):
+                if attribute in node.attrib:
+                    drawn.setdefault(f"{attribute}:{node.attrib[attribute]}", []).append(node)
+        declared: set[str] = set()
+        for group in self.spec.get("equal_marks") or []:
+            keys = group.get("segments") or []
+            lengths = [self._length(key) for key in keys]
+            if len(keys) < 2 or None in lengths:
+                self.add("geometry_marking", f"Equal marks {keys} use undeclared segments.")
+                continue
+            if max(lengths) - min(lengths) > 2 * POINT_TOLERANCE:
+                self.add(
+                    "geometry_marking",
+                    f"Segments {keys} carry equal marks but measure {[round(v, 1) for v in lengths]}.",
+                )
+            for key in keys:
+                name = f"data-tick-mark:{key}"
+                declared.add(name)
+                self._check_mark_on_segment(name, key, drawn, group.get("ticks"))
+        for group in self.spec.get("parallel_marks") or []:
+            keys = group.get("segments") or []
+            measured = self._cross_angle(keys)
+            if measured is None:
+                self.add("geometry_marking", f"Parallel marks {keys} use undeclared segments.")
+                continue
+            if min(measured, 180 - measured) > 0.5:
+                self.add(
+                    "geometry_marking",
+                    f"Segments {keys} carry parallel marks but meet at {measured:.1f}°.",
+                )
+            for key in keys:
+                name = f"data-parallel-mark:{key}"
+                declared.add(name)
+                self._check_mark_on_segment(name, key, drawn, None)
+        for name in drawn:
+            if name not in declared:
+                self.add("geometry_marking", f"The SVG has an undeclared marking {name}.")
+
+    def _check_mark_on_segment(self, name, key, drawn, ticks) -> None:
+        nodes = drawn.get(name)
+        ends = self.endpoints(key)
+        if not nodes or ends is None:
+            self.add("geometry_marking", f"Segment {key} has no drawn marking.")
+            return
+        node = nodes[0]
+        if ticks is not None and node.attrib.get("data-ticks") != str(ticks):
+            self.add("geometry_marking", f"Segment {key} must carry {ticks} tick marks.")
+        polylines = path_polylines(node.attrib.get("d", ""))
+        if not polylines:
+            self.add("geometry_marking", f"The marking on {key} has no path.")
+            return
+        # A tick crosses the segment at its middle; a parallel chevron touches it at its tip.
+        centre = _mean_point(polylines[0]) if ticks is not None else polylines[0][1]
+        if point_segment_distance(centre, ends[0], ends[1]) > 2 * POINT_TOLERANCE:
+            self.add("geometry_marking", f"The marking on {key} is not on that segment.")
+
+    def plane_arcs(self) -> None:
+        """Compass arcs must be centred where declared and pass through the point they locate."""
+        arcs = self.spec.get("arcs") or {}
+        nodes = {
+            node.attrib["data-arc"]: node for node in self.root.iter() if "data-arc" in node.attrib
+        }
+        for key, arc in arcs.items():
+            node = nodes.get(key)
+            centre = self.points.get(arc.get("center"))
+            through = self.points.get(arc.get("through"))
+            match = _ARC_D.fullmatch(node.attrib.get("d", "")) if node is not None else None
+            if match is None or centre is None or through is None:
+                self.add("geometry_arc", f"Compass arc {key} is not drawn as declared.")
+                continue
+            start, end = (float(match[1]), float(match[2])), (float(match[7]), float(match[8]))
+            actual = arc_centre(start, float(match[3]), int(match[5]), int(match[6]), end)
+            if not _close(actual, centre, 1.5) or not math.isclose(
+                float(match[3]), float(arc.get("radius", -1)), abs_tol=POINT_TOLERANCE
+            ):
+                self.add(
+                    "geometry_arc", f"Compass arc {key} is not centred on {arc.get('center')}."
+                )
+                continue
+            samples = path_polylines(node.attrib["d"])[0]
+            if min(math.hypot(p[0] - through[0], p[1] - through[1]) for p in samples) > 5:
+                self.add(
+                    "geometry_arc", f"Compass arc {key} does not pass through {arc.get('through')}."
+                )
+        for key in nodes:
+            if key not in arcs:
+                self.add("geometry_arc", f"The SVG has an undeclared compass arc {key}.")
+
+    def plane_alternative_text(self) -> None:
+        """The alternative text must describe what is drawn and nothing that is not."""
+        alt = self.alt_text
+        folded = alt.casefold()
+        word = PLANE_FIGURE_WORDS.get(self.spec.get("diagram_kind"))
+        if word is None:
+            self.add(
+                "geometry_alt_text_figure",
+                f"Unknown plane figure {self.spec.get('diagram_kind')!r}.",
+            )
+        elif word not in folded:
+            self.add("geometry_alt_text_figure", f"The alternative text does not say {word!r}.")
+        for label in self.spec.get("labels") or []:
+            text = label.get("text", "")
+            target = label.get("target", "")
+            if not target.startswith("point:") and text not in alt:
+                self.add(
+                    "geometry_alt_text_values",
+                    f"The alternative text omits the label {text!r} shown on the diagram.",
+                )
+        shown = {number for text in self.texts for number in _NUMBER.findall(text.text)}
+        for number in _NUMBER.findall(alt):
+            if number not in shown:
+                self.add(
+                    "geometry_alt_text_values",
+                    f"The alternative text states {number}, which the diagram does not show.",
+                )
+        marked_right = bool(self.spec.get("right_angles"))
+        if marked_right != ("right angle" in folded):
+            self.add(
+                "geometry_alt_text_figure",
+                "The alternative text must mention a right angle exactly when one is marked.",
+            )
+        marked_parallel = bool(self.spec.get("parallel_marks"))
+        if marked_parallel != ("parallel" in folded):
+            self.add(
+                "geometry_alt_text_figure",
+                "The alternative text must mention parallel lines exactly when they are marked.",
+            )
+
     # ------------------------------------------------------------------- solids
     def solids(self) -> None:
         relations = [
@@ -1019,8 +1349,18 @@ class _Checked:
         self.solids()
         self.dimension_lines()
         self.alternative_text()
+        if self.spec.get("renderer") == PLANE_GEOMETRY_RENDERER:
+            self.plane_angle_rays()
+            self.plane_label_attachment()
+            self.plane_markings()
+            self.plane_arcs()
+            self.plane_alternative_text()
         self.issues.extend(text_layout_issues(self.root, check_strokes=True))
         return _unique(self.issues)
+
+
+def _mean_point(points) -> tuple[float, float]:
+    return (sum(p[0] for p in points) / len(points), sum(p[1] for p in points) / len(points))
 
 
 def _same_number(first: str, second: str) -> bool:

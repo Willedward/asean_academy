@@ -173,6 +173,56 @@ A second run makes no changes. `findings.md` lists problems that belong in the q
 text, such as wrong answer keys and stems that presuppose the answer. The command never
 edits those.
 
+## Checked generator: Sec 1 G1 plane geometry
+
+`nextscholar-plane-geometry-svg-v1` (`diagrams/plane_geometry.py`) replaces the fixed templates of
+`nextscholar-geometry-svg-v1` for Sec 1 G1. It follows the same contract as the generators above.
+It does not cover Sec 1 G5, Sec 2 G2 or lesson figures, and their prompts are reported as
+unsupported. `nextscholar-geometry-svg-v2`, used by the G1 v2 diagnostic bank, is a separate set of
+hand-made assets and is unaffected.
+
+| `diagram_kind` | Templates |
+| --- | --- |
+| `angles_on_line` | `straight_line_given`, `straight_line_ratio` |
+| `right_angle_split` | `complement_split` |
+| `intersecting_lines` | `intersection_expressions`, `intersection_obtuse` |
+| `parallel_lines` | `parallel_corresponding`, `parallel_cointerior_ratio`, `two_transversals_meeting`, `perpendicular_transversal` |
+| `triangle` | `triangle_third_angle`, `triangle_expressions`, `triangle_angle_sum`, `isosceles_exterior` |
+| `diagonals` | `diagonals_equal_bisect`, `diagonals_perpendicular_one_bisected` |
+| `kite` | `kite_symmetry`, `kite_angles` |
+| `construction` | `perpendicular_bisector_midpoint`, `safe_radius`, `equilateral_on_ray`, `sss_arc_radius`, `sss_mirror_image` |
+
+**Text-only test.** If every accurate figure of a question shows its answer, and any other figure
+would draw a false relationship, the question has no figure. `plane_geometry.TEXT_ONLY` lists these
+prompts with the reason: classifying a stated angle, and any polygon whose side count is the answer.
+A classification by diagonals can still have a figure, because the diagonals alone do not show the
+shape, so those templates draw the diagonals and not the sides.
+
+**Extra checks for this renderer** (each failure is an error):
+
+- `geometry_angle_ray_undrawn`: both rays of an arc must lie on drawn segments.
+- `geometry_angle_marker_centre` and `geometry_angle_marker_sweep`: the centre computed from the
+  SVG arc's endpoints and flags must be the vertex, and the arc must stay inside the angle.
+- `geometry_marking`: segments with equal ticks must measure equal, and segments with parallel
+  arrows must be parallel. Every mark must be declared and sit on its segment.
+- `geometry_relationship`: adds the measured relationships `perpendicular`, `not_perpendicular`,
+  `unequal_segments`, `angle_sum` and `corresponding_angles`.
+- `geometry_arc`: a compass arc must be centred on its declared point and pass through the point
+  it locates.
+- `geometry_alt_text_values`: the alternative text must include every label and state no number
+  that the diagram does not show.
+- `geometry_alt_text_figure`: it must name the figure, and mention a right angle or parallel lines
+  exactly when they are marked.
+
+**Regenerating.** Add `--add <question key>` for a text-only question that needs a new figure.
+Questions the generator refuses become text-only when applied. Both decisions go in the bank's
+`diagram_audit.json`. The command leaves `diagram_question_count` alone, because every batch would
+otherwise change the same line.
+
+```bash
+uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_1/g1/v1 --batch B003 --add g1-l3-020 --add g1-l4-011 --apply
+```
+
 ## Review feedback
 
 The admin reviewer lists every diagram's immutable asset key. Select **Comment on diagram**

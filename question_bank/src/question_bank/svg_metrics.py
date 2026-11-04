@@ -261,6 +261,25 @@ def _arc_points(
     return points
 
 
+def arc_centre(
+    start: tuple[float, float],
+    radius: float,
+    large_arc: int,
+    sweep: int,
+    end: tuple[float, float],
+) -> tuple[float, float]:
+    """Return the centre of a circular SVG arc from its endpoints and flags (SVG 1.1 F.6.5)."""
+    half = ((start[0] - end[0]) / 2, (start[1] - end[1]) / 2)
+    squared = half[0] ** 2 + half[1] ** 2
+    factor = math.sqrt(max(0.0, radius**2 - squared) / squared) if squared else 0.0
+    if large_arc == sweep:
+        factor = -factor
+    return (
+        factor * half[1] + (start[0] + end[0]) / 2,
+        -factor * half[0] + (start[1] + end[1]) / 2,
+    )
+
+
 _PATH_TOKEN = re.compile(r"[MmLlHhVvAaZzCcSsQqTt]|[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?")
 
 

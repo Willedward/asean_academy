@@ -189,7 +189,7 @@ def parser():
     )
     diagrams_regenerate = commands.add_parser(
         "diagrams-regenerate",
-        help="Regenerate the right-triangle and mensuration diagrams of one question batch",
+        help="Regenerate the checked geometry diagrams of one question batch",
     )
     diagrams_regenerate.add_argument("bank", type=Path)
     diagrams_regenerate.add_argument(
@@ -197,6 +197,12 @@ def parser():
     )
     diagrams_regenerate.add_argument(
         "--output", type=Path, help="Write previews, manifest.json and findings.md here"
+    )
+    diagrams_regenerate.add_argument(
+        "--add",
+        action="append",
+        default=[],
+        help="Text-only question in this batch that needs a new figure; repeat as needed",
     )
     diagrams_regenerate.add_argument(
         "--apply",
@@ -806,7 +812,9 @@ def main(argv=None):
         print(json.dumps({"status": "complete", "result": result}, indent=2))
         return 0
     if args.command == "diagrams-regenerate":
-        result = regenerate_batch(args.bank, args.batch, output=args.output, apply=args.apply)
+        result = regenerate_batch(
+            args.bank, args.batch, output=args.output, apply=args.apply, add=args.add
+        )
         print(json.dumps(result.as_dict(), indent=2, ensure_ascii=False))
         return 0 if result.ok else 1
     if args.command == "lesson-diagrams-regenerate":

@@ -21,7 +21,11 @@ from .diagram_checks import (
 
 # Generators whose generation_spec declares every point, segment, label and relationship.
 CHECKED_GEOMETRY_RENDERERS = frozenset(
-    {"nextscholar-right-triangle-svg-v2", "nextscholar-mensuration-svg-v2"}
+    {
+        "nextscholar-right-triangle-svg-v2",
+        "nextscholar-mensuration-svg-v2",
+        "nextscholar-plane-geometry-svg-v1",
+    }
 )
 # Fixed-template generators whose assets raise advisory warnings until they are regenerated.
 # Validating with strict geometry turns those warnings into errors.
