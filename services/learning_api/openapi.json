@@ -3678,7 +3678,9 @@
               {
                 "enum": [
                   "baseline",
-                  "endline"
+                  "endline",
+                  "mock_a",
+                  "mock_b"
                 ],
                 "type": "string"
               },
@@ -3816,6 +3818,24 @@
           "rating"
         ],
         "title": "CreateEnglishEssayUsefulnessRequest",
+        "type": "object"
+      },
+      "CreateEnglishMockSessionRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "purpose": {
+            "enum": [
+              "mock_a",
+              "mock_b"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          }
+        },
+        "required": [
+          "purpose"
+        ],
+        "title": "CreateEnglishMockSessionRequest",
         "type": "object"
       },
       "CreateEnglishPracticeSessionRequest": {
@@ -5595,7 +5615,9 @@
               {
                 "enum": [
                   "baseline",
-                  "endline"
+                  "endline",
+                  "mock_a",
+                  "mock_b"
                 ],
                 "type": "string"
               },
@@ -5735,7 +5757,9 @@
           "purpose": {
             "enum": [
               "baseline",
-              "endline"
+              "endline",
+              "mock_a",
+              "mock_b"
             ],
             "title": "Purpose",
             "type": "string"
@@ -7928,6 +7952,101 @@
           "question_count"
         ],
         "title": "EnglishLessonSectionResponse",
+        "type": "object"
+      },
+      "EnglishMockActionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "estimated_minutes": {
+            "title": "Estimated Minutes",
+            "type": "integer"
+          },
+          "expected_part_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Part Count"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "purpose": {
+            "enum": [
+              "mock_a",
+              "mock_b"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          },
+          "result_session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result Session Id"
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          },
+          "status": {
+            "enum": [
+              "content_pending",
+              "locked",
+              "start",
+              "resume",
+              "completed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "purpose",
+          "status",
+          "title",
+          "message",
+          "estimated_minutes"
+        ],
+        "title": "EnglishMockActionResponse",
+        "type": "object"
+      },
+      "EnglishMockListResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "mocks": {
+            "items": {
+              "$ref": "#/components/schemas/EnglishMockActionResponse"
+            },
+            "title": "Mocks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "mocks"
+        ],
+        "title": "EnglishMockListResponse",
         "type": "object"
       },
       "EnglishModuleMap": {
@@ -24559,6 +24678,261 @@
           }
         ],
         "summary": "Get one learner-safe English lesson revision",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/mock-sessions": {
+      "post": {
+        "operationId": "createEnglishMockSession",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnglishMockSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishDiagnosticSessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Start or resume an English full mock",
+        "tags": [
+          "english"
+        ]
+      }
+    },
+    "/api/v1/english/mocks": {
+      "get": {
+        "operationId": "listEnglishMocks",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnglishMockListResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Request Entity Too Large"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get the learner's available English full mocks",
         "tags": [
           "english"
         ]

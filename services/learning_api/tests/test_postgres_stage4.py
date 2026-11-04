@@ -14,6 +14,7 @@ from uuid import uuid4
 import httpx
 import psycopg
 import pytest
+from question_bank.english_validation import validate_english_foundation
 from question_bank.practice import solution_for
 from question_bank.validation import validate_bank
 
@@ -21,6 +22,7 @@ from learning_api.admin_contracts import CreateInvitationRequest
 from learning_api.admin_repository import PostgresBetaOperationsRepository
 from learning_api.config import Settings
 from learning_api.english_contracts import EnglishEssaySelfReviewCriterionRequest
+from learning_api.english_diagnostic_repository import PostgresEnglishDiagnosticRepository
 from learning_api.english_essay_allowance import (
     EssayFeedbackLimits,
     EssayFeedbackQuote,
@@ -1440,3 +1442,47 @@ def test_postgres_format_errors_are_not_attempts(monkeypatch, wrong_answers):
         assert counted["attempt_number"] == number
     assert counted["solution_available"] is True
     assert recorded() == (2, ("pending", 2), (2, 2))
+
+
+@pytest.mark.postgres
+def test_postgres_english_full_mock_sessions_are_separate_per_form():
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    with psycopg.connect(database_url) as connection:
+        connection.execute(
+            "insert into auth.users (id, email) values (%s, %s)",
+            (learner_id, f"{learner_id}@example.test"),
+        )
+    report = validate_english_foundation(
+        Path(__file__).resolve().parents[3] / "backend_resources/english/v1"
+    )
+    repository = PostgresEnglishDiagnosticRepository(database_url)
+    sessions = {}
+    for purpose, form_key in (
+        ("mock_a", "english-mock-sec3-a-v1"),
+        ("mock_b", "english-mock-sec3-b-v1"),
+    ):
+        form = next(item for item in report.forms if item.form_key == form_key)
+        questions = {item.stable_key: item for item in report.questions}
+        sessions[purpose] = repository.create_session(
+            learner_id,
+            exam_profile_key=form.profile_key,
+            purpose=purpose,
+            form_key=form.form_key,
+            form_revision=form.revision,
+            title=form.title,
+            questions=[
+                (key, questions[key].revision, questions[key].question_type)
+                for key in form.question_keys
+            ],
+            expected_part_count=form.expected_scored_part_count,
+            idempotency_key=f"mock-{purpose}",
+            development_drafts=True,
+        )
+    assert sessions["mock_a"]["session_id"] != sessions["mock_b"]["session_id"]
+    assert repository.latest(learner_id, "mock_a")["form_key"] == "english-mock-sec3-a-v1"
+    assert repository.latest(learner_id, "baseline") is None
+    assert repository.next_assignment(learner_id, sessions["mock_b"]["session_id"])[
+        "question_key"
+    ] == "ev-l5-102"
+

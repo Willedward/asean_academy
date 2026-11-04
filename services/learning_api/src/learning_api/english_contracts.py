@@ -14,7 +14,8 @@ EnglishLessonState = Literal[
     "not_started", "in_progress", "practice_completed", "proficient", "mastered"
 ]
 EnglishPracticeMode = Literal["guided_practice", "retry_review"]
-EnglishDiagnosticPurpose = Literal["baseline", "endline"]
+EnglishDiagnosticPurpose = Literal["baseline", "endline", "mock_a", "mock_b"]
+EnglishMockPurpose = Literal["mock_a", "mock_b"]
 EnglishDiagnosticTaskType = Literal[
     "vocabulary_in_context", "banked_cloze", "open_cloze", "reading_comprehension"
 ]
@@ -576,6 +577,25 @@ class EnglishDiagnosticNextResponse(ApiModel):
     message: str
     estimated_minutes: int | None = None
     question_count: int | None = None
+
+
+class EnglishMockActionResponse(ApiModel):
+    purpose: EnglishMockPurpose
+    status: Literal["content_pending", "locked", "start", "resume", "completed"]
+    title: str
+    message: str
+    session_id: str | None = None
+    result_session_id: str | None = None
+    estimated_minutes: int
+    expected_part_count: int | None = None
+
+
+class EnglishMockListResponse(ApiModel):
+    mocks: list[EnglishMockActionResponse]
+
+
+class CreateEnglishMockSessionRequest(ApiModel):
+    purpose: EnglishMockPurpose
 
 
 class EnglishChoiceOptionResponse(ApiModel):

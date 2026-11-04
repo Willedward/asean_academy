@@ -17,6 +17,8 @@ export type EnglishProgressResponse =
   components["schemas"]["EnglishProgressResponse"];
 export type EnglishDiagnosticNextResponse =
   components["schemas"]["EnglishDiagnosticNextResponse"];
+export type EnglishMockAction =
+  components["schemas"]["EnglishMockActionResponse"];
 export type EnglishDiagnosticSessionResponse =
   components["schemas"]["EnglishDiagnosticSessionResponse"];
 export type EnglishDiagnosticNextQuestionResponse =
@@ -494,7 +496,7 @@ export async function getNextEnglishDiagnostic(): Promise<EnglishDiagnosticNextR
 }
 
 export async function createEnglishDiagnosticSession(
-  expectedPurpose: "baseline" | "endline",
+  expectedPurpose: NonNullable<EnglishDiagnosticNextResponse["purpose"]>,
 ): Promise<EnglishDiagnosticSessionResponse> {
   fixtureGuard();
   const { data, error, response } = await createApiClient().POST(
@@ -502,6 +504,30 @@ export async function createEnglishDiagnosticSession(
     {
       params: { header: { "Idempotency-Key": idempotencyKey() } },
       body: { expected_purpose: expectedPurpose },
+    },
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data;
+}
+
+export async function listEnglishMocks(): Promise<EnglishMockAction[]> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().GET(
+    "/api/v1/english/mocks",
+  );
+  if (error || !data) throw new Error(apiErrorMessage(error, response.status));
+  return data.mocks;
+}
+
+export async function createEnglishMockSession(
+  purpose: EnglishMockAction["purpose"],
+): Promise<EnglishDiagnosticSessionResponse> {
+  fixtureGuard();
+  const { data, error, response } = await createApiClient().POST(
+    "/api/v1/english/mock-sessions",
+    {
+      params: { header: { "Idempotency-Key": idempotencyKey() } },
+      body: { purpose },
     },
   );
   if (error || !data) throw new Error(apiErrorMessage(error, response.status));

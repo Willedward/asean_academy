@@ -16,6 +16,7 @@ import type {
   EnglishProgressResponse,
 } from "@/lib/api/english";
 import { EnglishDiagnosticCard } from "@/components/english-diagnostic-card";
+import { EnglishMockCard } from "@/components/english-mock-card";
 import { EnglishEssayDraftCard } from "@/components/english-essay-draft-card";
 
 import { SubjectSwitch } from "../screens/english";
@@ -126,6 +127,8 @@ export function EnglishCourseScreen({
       </Card>
 
       <EnglishDiagnosticCard />
+
+      <EnglishMockCard />
 
       {essayPrompt ? <EnglishEssayDraftCard prompt={essayPrompt} /> : null}
 

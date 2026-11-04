@@ -11,6 +11,9 @@ import { EnglishCourseScreen } from "./english-learning-screens";
 vi.mock("@/components/english-diagnostic-card", () => ({
   EnglishDiagnosticCard: () => <div>English diagnostic</div>,
 }));
+vi.mock("@/components/english-mock-card", () => ({
+  EnglishMockCard: () => <div>English mocks</div>,
+}));
 
 afterEach(cleanup);
 

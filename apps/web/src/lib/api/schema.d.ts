@@ -1405,6 +1405,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/english/mock-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start or resume an English full mock */
+        post: operations["createEnglishMockSession"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/english/mocks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the learner's available English full mocks */
+        get: operations["listEnglishMocks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/english/practice-sessions": {
         parameters: {
             query?: never;
@@ -3311,7 +3345,7 @@ export interface components {
         /** CreateEnglishDiagnosticSessionRequest */
         CreateEnglishDiagnosticSessionRequest: {
             /** Expected Purpose */
-            expected_purpose?: ("baseline" | "endline") | null;
+            expected_purpose?: ("baseline" | "endline" | "mock_a" | "mock_b") | null;
         };
         /** CreateEnglishEssayDraftRequest */
         CreateEnglishEssayDraftRequest: {
@@ -3366,6 +3400,14 @@ export interface components {
              * @enum {string}
              */
             rating: "helpful" | "partly_helpful" | "not_helpful";
+        };
+        /** CreateEnglishMockSessionRequest */
+        CreateEnglishMockSessionRequest: {
+            /**
+             * Purpose
+             * @enum {string}
+             */
+            purpose: "mock_a" | "mock_b";
         };
         /** CreateEnglishPracticeSessionRequest */
         CreateEnglishPracticeSessionRequest: {
@@ -4035,7 +4077,7 @@ export interface components {
             /** Message */
             message: string;
             /** Purpose */
-            purpose?: ("baseline" | "endline") | null;
+            purpose?: ("baseline" | "endline" | "mock_a" | "mock_b") | null;
             /** Question Count */
             question_count?: number | null;
             /** Result Session Id */
@@ -4074,7 +4116,7 @@ export interface components {
              * Purpose
              * @enum {string}
              */
-            purpose: "baseline" | "endline";
+            purpose: "baseline" | "endline" | "mock_a" | "mock_b";
             /** Question Count */
             question_count: number;
             /** Resolved Count */
@@ -4939,6 +4981,36 @@ export interface components {
             section_type: "retrieval_warmup" | "explicit_model" | "worked_analysis" | "guided_practice" | "independent_application" | "error_classification" | "exit_ticket";
             /** Title */
             title: string;
+        };
+        /** EnglishMockActionResponse */
+        EnglishMockActionResponse: {
+            /** Estimated Minutes */
+            estimated_minutes: number;
+            /** Expected Part Count */
+            expected_part_count?: number | null;
+            /** Message */
+            message: string;
+            /**
+             * Purpose
+             * @enum {string}
+             */
+            purpose: "mock_a" | "mock_b";
+            /** Result Session Id */
+            result_session_id?: string | null;
+            /** Session Id */
+            session_id?: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "content_pending" | "locked" | "start" | "resume" | "completed";
+            /** Title */
+            title: string;
+        };
+        /** EnglishMockListResponse */
+        EnglishMockListResponse: {
+            /** Mocks */
+            mocks: components["schemas"]["EnglishMockActionResponse"][];
         };
         /** EnglishModuleMap */
         EnglishModuleMap: {
@@ -15628,6 +15700,214 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EnglishLessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    createEnglishMockSession: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEnglishMockSessionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishDiagnosticSessionResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Request Entity Too Large */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    listEnglishMocks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnglishMockListResponse"];
                 };
             };
             /** @description Bad Request */

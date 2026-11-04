@@ -17,6 +17,9 @@ TASK_RECOMMENDATIONS = {
     "reading_comprehension": ("e5-lesson-01", "Reading comprehension"),
 }
 
+MOCK_FORMS = {"mock_a": "english-mock-sec3-a-v1", "mock_b": "english-mock-sec3-b-v1"}
+MOCK_MINUTES = 90
+
 
 class EnglishDiagnosticService:
     def __init__(
@@ -162,7 +165,11 @@ class EnglishDiagnosticService:
                 "The eligible English diagnostic purpose has changed. Refresh and try again.",
                 409,
             )
-        form = self._form(purpose)
+        return self._start_form(
+            self._form(purpose), purpose, f"{purpose}_diagnostic", idempotency_key
+        )
+
+    def _start_form(self, form, purpose: str, expected_pool: str, idempotency_key: str) -> dict:
         if form is None:
             raise EnglishLearningError(
                 "english_diagnostic_form_not_found",
@@ -170,7 +177,6 @@ class EnglishDiagnosticService:
                 404,
             )
         questions = [self.learning._question(key) for key in form.question_keys]
-        expected_pool = f"{purpose}_diagnostic"
         if any(question.exposure_pool != expected_pool for question in questions):
             raise EnglishLearningError(
                 "english_diagnostic_exposure_mismatch",
@@ -202,6 +208,72 @@ class EnglishDiagnosticService:
                 or any(question.status != "published" for question in questions)
             ),
         )
+
+    def _mock_form(self, purpose: str):
+        return next(
+            (
+                form
+                for form in self.learning.report.forms
+                if form.form_key == MOCK_FORMS[purpose] and self.learning._visible(form.status)
+            ),
+            None,
+        )
+
+    def mocks(self) -> dict:
+        self.learning._assert_curriculum_visible()
+        baseline = self.repository.latest(self.learner_id, "baseline")
+        baseline_done = baseline is not None and baseline["status"] == "completed"
+        actions = []
+        previous_done = True
+        for purpose in MOCK_FORMS:
+            form = self._mock_form(purpose)
+            session = self.repository.latest(self.learner_id, purpose)
+            action = {
+                "purpose": purpose,
+                "title": form.title if form else "English full mock",
+                "estimated_minutes": MOCK_MINUTES,
+                "expected_part_count": form.expected_scored_part_count if form else None,
+            }
+            if form is None:
+                action |= {"status": "content_pending", "message": "This mock is being prepared."}
+            elif session is not None and session["status"] == "active":
+                action |= {
+                    "status": "resume",
+                    "session_id": session["session_id"],
+                    "message": "Your completed question groups are saved.",
+                }
+            elif session is not None:
+                action |= {
+                    "status": "completed",
+                    "result_session_id": session["session_id"],
+                    "message": "See how you did in each part of the paper.",
+                }
+            elif not baseline_done:
+                action |= {"status": "locked", "message": "Complete your baseline first."}
+            elif not previous_done:
+                action |= {"status": "locked", "message": "Complete mock A first."}
+            else:
+                action |= {
+                    "status": "start",
+                    "message": "Section 1 under exam conditions, with no hints or early feedback.",
+                }
+            actions.append(action)
+            previous_done = session is not None and session["status"] == "completed"
+        return {"mocks": actions}
+
+    def create_mock_session(self, *, purpose: str, idempotency_key: str) -> dict:
+        if not 1 <= len(idempotency_key) <= 200:
+            raise EnglishLearningError(
+                "invalid_idempotency_key", "Supply a non-empty idempotency key."
+            )
+        action = next(item for item in self.mocks()["mocks"] if item["purpose"] == purpose)
+        if action["status"] == "resume":
+            return self._enrich(self.repository.session(self.learner_id, action["session_id"]))
+        if action["status"] != "start":
+            raise EnglishLearningError(
+                "english_mock_not_available", "This English mock cannot be started now.", 409
+            )
+        return self._start_form(self._mock_form(purpose), purpose, "full_mock", idempotency_key)
 
     def session(self, session_id: str) -> dict:
         return self._enrich(self.repository.session(self.learner_id, session_id))

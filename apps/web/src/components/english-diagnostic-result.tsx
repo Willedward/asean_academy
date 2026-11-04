@@ -87,7 +87,12 @@ export function EnglishDiagnosticResult({ sessionId }: { sessionId: string }) {
     <div className="flex flex-col gap-5">
       <Card tone="success" className="items-center gap-4 py-9 text-center">
         <CheckCircle2 size={48} className="text-ns-success" aria-hidden />
-        <Eyebrow>{result.purpose.toUpperCase()} COMPLETE</Eyebrow>
+        <Eyebrow>
+          {result.purpose.startsWith("mock")
+            ? `MOCK ${result.purpose.slice(-1).toUpperCase()}`
+            : result.purpose.toUpperCase()}{" "}
+          COMPLETE
+        </Eyebrow>
         <H1>
           {result.correct_parts} of {result.total_parts} parts correct
         </H1>
