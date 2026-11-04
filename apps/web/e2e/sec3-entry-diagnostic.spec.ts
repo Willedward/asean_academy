@@ -4,13 +4,18 @@
  */
 import { expect, test } from "@playwright/test";
 
-import { apiGet, authenticate, sec3Learners } from "./support/sec3-entry";
+import {
+  apiGet,
+  authenticate,
+  correctAnswers,
+  sec3Learners,
+} from "./support/sec3-entry";
 
 const learner = sec3Learners.diagnostic;
 
 type Session = {
   session_id: string;
-  items: { position: number; question: { parts: { position: number }[] } }[];
+  items: { position: number; question: { stable_key: string } }[];
 };
 
 test("a two-course learner completes one cross-year readiness check", async ({
@@ -24,6 +29,7 @@ test("a two-course learner completes one cross-year readiness check", async ({
   await expect(page.getByRole("link", { name: "Continue to course" })).toBeVisible();
   await page.getByRole("button", { name: "Start readiness check" }).click();
   await page.waitForURL(/\/diagnostics\/[0-9a-f-]+$/);
+  await expect(page.getByRole("heading", { name: "Question 1", level: 2 })).toBeVisible();
 
   const next = await apiGet<{ status: string; session_id: string }>(
     page,
@@ -36,15 +42,22 @@ test("a two-course learner completes one cross-year readiness check", async ({
   );
   expect(session.items).toHaveLength(38);
 
+  const unreadable = await page.request.put(
+    `/api/v1/diagnostics/sessions/${session.session_id}/responses/1`,
+    {
+      headers: { "Idempotency-Key": "e2e-diagnostic-unreadable" },
+      data: { answers: { "1": "not an answer!" } },
+    },
+  );
+  expect(unreadable.status()).toBe(422);
+
   for (const item of session.items) {
     const saved = await page.request.put(
       `/api/v1/diagnostics/sessions/${session.session_id}/responses/${item.position}`,
       {
         headers: { "Idempotency-Key": `e2e-diagnostic-${item.position}` },
         data: {
-          answers: Object.fromEntries(
-            item.question.parts.map((part) => [String(part.position), "0"]),
-          ),
+          answers: correctAnswers(item.question.stable_key),
         },
       },
     );
@@ -58,13 +71,11 @@ test("a two-course learner completes one cross-year readiness check", async ({
 
   const result = await apiGet<{
     topic_scores: { school_level: string }[];
-    recommendations: { lesson_key: string }[];
   }>(page, `/api/v1/diagnostics/sessions/${session.session_id}/result`);
   expect(result.topic_scores).toHaveLength(19);
   expect(new Set(result.topic_scores.map((topic) => topic.school_level))).toEqual(
     new Set(["secondary_1", "secondary_2"]),
   );
-  expect(result.recommendations.length).toBeGreaterThan(0);
 
   const after = await apiGet<{ status: string }>(page, "/api/v1/diagnostics/next");
   expect(after.status).toBe("baseline_complete");

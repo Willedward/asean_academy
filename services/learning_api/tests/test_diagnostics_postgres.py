@@ -11,12 +11,18 @@ import psycopg
 import pytest
 from question_bank.diagnostic_plan import validate_diagnostic_plan
 from question_bank.diagnostic_repository import DiagnosticFormImporter
+from question_bank.practice import solution_for
 
+from learning_api.course_catalogue import CourseCatalogue
 from learning_api.diagnostic_repository import DiagnosticError, PostgresDiagnosticRepository
 
 ROOT = Path(__file__).resolve().parents[3]
 PLAN_PATH = ROOT / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
 SYLLABUS_PATH = ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
+QUESTIONS = {
+    question.stable_key: question
+    for question in CourseCatalogue(ROOT, allow_drafts=True).review_questions
+}
 
 
 def _database_url() -> str:
@@ -193,6 +199,16 @@ def test_diagnostic_is_refresh_safe_scored_immutable_and_resettable():
     assert replay["session_id"] == session["session_id"]
     assert len(session["items"]) == 2
 
+    assert session["items"][0]["question"]["title"] == "Question 1"
+    with pytest.raises(DiagnosticError, match="use a point for decimals") as unreadable:
+        repository.save_response(
+            learner_id, str(session["session_id"]), 1, {"1": "3,8"}, "save-unreadable"
+        )
+    assert unreadable.value.code == "diagnostic_answer_format"
+    assert repository.session(learner_id, str(session["session_id"]))["items"][0][
+        "saved_answers"
+    ] is None
+
     first = repository.save_response(
         learner_id, str(session["session_id"]), 1, {"1": "0"}, "save-one"
     )
@@ -362,7 +378,8 @@ def test_cross_year_forms_publish_only_when_approved_and_serve_two_course_learne
             )
             published = DiagnosticFormImporter(connection).import_plan(approved)
             assert published["status"] == "published"
-            assert set(published["forms"].values()) == {"published"}
+            # A re-run on the same disposable database restores the earlier forms.
+            assert set(published["forms"].values()) <= {"published", "restored"}
             repeated = DiagnosticFormImporter(connection).import_plan(approved)
             assert set(repeated["forms"].values()) == {"unchanged"}
             changed = approved.model_copy(deep=True)
@@ -404,11 +421,15 @@ def test_cross_year_forms_publish_only_when_approved_and_serve_two_course_learne
                 learner_id,
                 str(session["session_id"]),
                 item["position"],
-                {str(part["position"]): "0" for part in item["question"]["parts"]},
+                {
+                    str(part["position"]): part["canonical_answer"]
+                    for part in solution_for(QUESTIONS[item["question"]["stable_key"]])["parts"]
+                },
                 f"cross-year-{item['position']}",
             )
         result = repository.submit(learner_id, str(session["session_id"]))
         assert len(result["topic_scores"]) == 19
+        assert result["percentage"] == 100
         assert {topic["school_level"] for topic in result["topic_scores"]} == {
             "secondary_1",
             "secondary_2",
