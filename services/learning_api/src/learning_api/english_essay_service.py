@@ -52,12 +52,12 @@ class EnglishEssayService:
         self.allow_drafts = allow_drafts
         source = (
             repository_root
-            / "backend_resources/english/v1/prompts/english-essay-prompt-school-learning-transfer-v1-v1.json"
+            / "backend_resources/english/v1/prompts/english-essay-prompt-school-learning-transfer-v1-v2.json"
         )
         self.prompt = json.loads(source.read_text())
         rubric_source = (
             repository_root
-            / "backend_resources/english/v1/rubrics/english-essay-rubric-instructional-v1-v1.json"
+            / "backend_resources/english/v1/rubrics/english-essay-rubric-instructional-v1-v2.json"
         )
         self.rubric = json.loads(rubric_source.read_text())
 

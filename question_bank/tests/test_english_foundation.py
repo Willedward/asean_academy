@@ -40,7 +40,7 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert len(report.passages) == 37
     assert len(report.questions) == 133
     assert report.exam_profile is not None
-    assert report.exam_profile.profile_key == "asean-english-sec1-id-reported-v1"
+    assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
@@ -1338,7 +1338,7 @@ def test_essay_prompt_pins_an_instructional_non_official_rubric(english_root):
         json.loads(
             (
                 english_root
-                / "rubrics/english-essay-rubric-instructional-v1-v1.json"
+                / "rubrics/english-essay-rubric-instructional-v1-v2.json"
             ).read_text()
         )
     )
@@ -1346,7 +1346,7 @@ def test_essay_prompt_pins_an_instructional_non_official_rubric(english_root):
         json.loads(
             (
                 english_root
-                / "prompts/english-essay-prompt-school-learning-transfer-v1-v1.json"
+                / "prompts/english-essay-prompt-school-learning-transfer-v1-v2.json"
             ).read_text()
         )
     )
@@ -1373,7 +1373,7 @@ def test_essay_prompt_pins_an_instructional_non_official_rubric(english_root):
 def test_essay_contracts_reject_official_claims_and_invalid_weights(english_root):
     payload = json.loads(
         (
-            english_root / "rubrics/english-essay-rubric-instructional-v1-v1.json"
+            english_root / "rubrics/english-essay-rubric-instructional-v1-v2.json"
         ).read_text()
     )
     payload["official_score_claim"] = True

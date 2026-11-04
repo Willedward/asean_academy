@@ -2,8 +2,8 @@
 
 **Prepared:** 18 October 2026  
 **Status:** proposed v1 curriculum for educator review  
-**Audience:** secondary-school students in Indonesia and Southeast Asia preparing for
-the ASEAN Scholarship selection process  
+**Audience:** students in Indonesia and Southeast Asia applying for Secondary 3 entry
+through the ASEAN Scholarship, tested at Secondary 1 and 2 level  
 **Depends on:** [LAYER_1_ENGLISH_SCOPE.md](./LAYER_1_ENGLISH_SCOPE.md)
 
 ## 1. Purpose and evidence boundary

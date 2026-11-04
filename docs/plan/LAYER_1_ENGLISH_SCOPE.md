@@ -2,7 +2,7 @@
 
 **Decision date:** 18 October 2026  
 **Product phase:** Layer 1 invitation Beta  
-**Audience:** Secondary-school students in Indonesia and Southeast Asia preparing for the ASEAN Scholarship selection process
+**Audience:** Students in Indonesia and Southeast Asia applying for Secondary 3 entry through the ASEAN Scholarship. The selection test assesses Secondary 1 and 2 level Mathematics and English.
 
 **Curriculum:** [LAYER_1_ENGLISH_CURRICULUM.md](./LAYER_1_ENGLISH_CURRICULUM.md)
 

@@ -24,6 +24,11 @@ approval, and it records no decision in the review pipeline.
   0 errors and 0 warnings. They check structure, so they cannot catch the language, ambiguity
   and validity defects below.
 
+**Correction, 4 November 2026.** The product owner confirmed that English targets the Secondary
+3-entry test at Secondary 1 and 2 level, not Secondary 1 entry. The level judgements in §4.6 and
+§5.3 used the wrong band of about 11–12 and must be redone. The profile and form keys named here
+now use `sec3` in place of `sec1`.
+
 ## 1. Scope and method
 
 | Asset | Files | Audited |

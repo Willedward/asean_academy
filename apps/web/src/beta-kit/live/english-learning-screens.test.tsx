@@ -29,10 +29,10 @@ const course: EnglishCourseMapResponse = {
   content_status: "draft",
   development_preview: true,
   exam_profile: {
-    profile_key: "asean-english-sec1-id-reported-v1",
+    profile_key: "asean-english-sec3-id-reported-v1",
     status: "reported",
     evidence_boundary: "Candidate-reported format.",
-    entry_level: "secondary_1_entry",
+    entry_level: "secondary_3_entry",
     effective_from: "2026-10-01",
     review_due: "2027-10-01",
     sections: [],

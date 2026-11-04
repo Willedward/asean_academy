@@ -179,7 +179,7 @@ class EnglishExamProfile(EnglishModel):
     evidence_boundary: str = Field(min_length=1)
     source_refs: list[str] = Field(min_length=1)
     audience: str = Field(min_length=1)
-    entry_level: Literal["secondary_1_entry"]
+    entry_level: Literal["secondary_3_entry"]
     effective_from: date
     review_due: date
     sections: list[EnglishExamProfileSection] = Field(min_length=2, max_length=2)
