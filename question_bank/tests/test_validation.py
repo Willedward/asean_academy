@@ -140,7 +140,27 @@ def test_question_angle_diagram_rays_must_match_the_declared_classification(
     )
     question_path = bank_root / "questions/g1-l1-001.json"
     question = json.loads(question_path.read_text())
-    asset = question["assets"][0]
+    # This item is text-only now, so reattach its kept legacy angle-type figure.
+    asset = {
+        "asset_key": "g1-l1-001-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l1-001-diagram-r3.svg",
+        "alt_text": "Schematic of four angle types.",
+        "generation_spec": {
+            "renderer": "nextscholar-geometry-svg-v1",
+            "diagram_kind": "angle_types",
+            "question_key": "g1-l1-001",
+            "outcome": "1.1",
+            "not_to_scale": True,
+            "angle_measures": {"acute": 60, "right": 90, "obtuse": 120, "reflex": 240},
+        },
+        "width": 940,
+        "height": 390,
+    }
+    question["revision"] = 3
+    question["assets"] = [asset]
+    question["stem"] = [{"type": "asset_ref", "asset_key": asset["asset_key"]}]
     svg_path = bank_root / asset["path"]
     svg = svg_path.read_text().replace(
         '<line x1="520" y1="230" x2="628.25" y2="292.5"/>',
