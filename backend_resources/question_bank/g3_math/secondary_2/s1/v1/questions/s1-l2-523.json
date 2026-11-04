@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-523",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Emerald Palm Bay — Science fair: displayed bar increase",
+  "title": "Displayed bar increase",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Emerald Palm Bay dataset for Science fair: displayed bar increase — A vertical axis starts at 100. Two values are 110 and 120. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "The vertical axis of a rainfall bar chart starts at 100. One month reads 110 and the next reads 120. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
         }
       ],
       "marks": 2,
@@ -30,11 +30,19 @@
         "type": "numeric",
         "comparison_mode": "exact_numeric",
         "canonical_answer": "100",
-        "canonical_latex": "100",
+        "canonical_latex": "100\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -66,7 +74,7 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(120-100)-(110-100)}{110-100}\times100=100"
+              "latex": "\\frac{(120-100)-(110-100)}{110-100}\\times100=100"
             }
           ],
           "mark_type": "M",
@@ -81,7 +89,7 @@
             },
             {
               "type": "display_math",
-              "latex": "100"
+              "latex": "100\\%"
             }
           ],
           "mark_type": "A",

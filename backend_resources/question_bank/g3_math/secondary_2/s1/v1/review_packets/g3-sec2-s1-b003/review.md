@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-510 — Amber Orchid Bay — Angklung ensemble: compare grouped means
+## s1-l4-510 — Compare grouped means
 
 [Open this question in the HTML preview](index.html#s1-l4-510)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-521 — Jade Orchid Bay — Library makerspace: retain archaeological measurements
+## s1-l2-521 — Retain archaeological measurements
 
 [Open this question in the HTML preview](index.html#s1-l2-521)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-517 — Lilac Orchid Bay — Library makerspace: compare two small distributions
+## s1-l3-517 — Compare two small distributions
 
 [Open this question in the HTML preview](index.html#s1-l3-517)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-512 — Silver Orchid Bay — Library makerspace: reject an unsuitable display
+## s1-l4-512 — Reject an unsuitable display
 
 [Open this question in the HTML preview](index.html#s1-l4-512)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-522 — Amber Palm Bay — Heritage museum: retain archaeological measurements
+## s1-l2-522 — Retain archaeological measurements
 
 [Open this question in the HTML preview](index.html#s1-l2-522)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-523 — Emerald Palm Bay — Science fair: displayed bar increase
+## s1-l2-523 — Displayed bar increase
 
 [Open this question in the HTML preview](index.html#s1-l2-523)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-521 — Indigo Palm Bay — Solar classroom: representative centre after a delay
+## s1-l3-521 — Representative centre after a delay
 
 [Open this question in the HTML preview](index.html#s1-l3-521)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-522 — Violet Palm Bay — School canteen: representative centre after a delay
+## s1-l3-522 — Representative centre after a delay
 
 [Open this question in the HTML preview](index.html#s1-l3-522)
 
