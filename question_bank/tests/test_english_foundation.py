@@ -1,4 +1,5 @@
 import json
+import shutil
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -21,6 +22,7 @@ from question_bank.english_models import (
     ShortTextResponse,
     TextNormalisation,
 )
+from question_bank.english_quality import BASELINE_PATH, english_quality_findings
 from question_bank.english_repository import english_question_content_hash
 from question_bank.english_validation import validate_english_foundation
 
@@ -2730,3 +2732,60 @@ def test_english_question_hash_excludes_review_workflow_metadata(english_root):
     reviewed = question.model_copy(update={"status": "reviewed"})
 
     assert english_question_content_hash(reviewed) == english_question_content_hash(question)
+
+
+def _quality_question(english_root, key):
+    return EnglishObjectiveQuestion.model_validate_json(
+        (english_root / f"questions/{key}.json").read_text()
+    )
+
+
+def test_quality_rules_flag_answer_cues_in_new_content(english_root):
+    question = _quality_question(english_root, "ev-l5-003").model_copy(deep=True)
+    question.title = "Baseline word: reluctant"
+    codes = {finding.code for finding in english_quality_findings([question], [], [])}
+    assert "title_names_answer" in codes
+
+    cloze = _quality_question(english_root, "eo-l5-003").model_copy(deep=True)
+    assert not english_quality_findings([cloze], [], [])
+    cloze.parts[0].prompt = "Gap 1: enter the article before the noun."
+    assert {finding.code for finding in english_quality_findings([cloze], [], [])} == {
+        "open_cloze_prompt_not_neutral"
+    }
+
+
+def test_quality_rules_flag_a_key_much_longer_than_every_other_option(english_root):
+    question = _quality_question(english_root, "ev-l5-004").model_copy(deep=True)
+    assert not [
+        finding
+        for finding in english_quality_findings([question], [], [])
+        if finding.code == "key_uniquely_longest"
+    ]
+    question.parts[0].response.options[0].text = "extremely hard-working and steady over a long time"
+    assert "ev-l5-004#1" in {
+        finding.location
+        for finding in english_quality_findings([question], [], [])
+        if finding.code == "key_uniquely_longest"
+    }
+
+
+def test_quality_baseline_rejects_new_findings_and_stale_entries(english_root, tmp_path):
+    copy = tmp_path / "english"
+    shutil.copytree(english_root, copy)
+    assert validate_english_authoring(copy).valid
+    path = copy / "questions/eo-l5-003.json"
+    payload = json.loads(path.read_text())
+    payload["parts"][0]["prompt"] = "Gap 1: enter the article before the noun."
+    path.write_text(json.dumps(payload, ensure_ascii=False))
+    assert "open_cloze_prompt_not_neutral" in {
+        issue.code for issue in validate_english_authoring(copy).errors
+    }
+
+    path.write_text((english_root / "questions/eo-l5-003.json").read_text())
+    baseline = copy / BASELINE_PATH
+    data = json.loads(baseline.read_text())
+    data["accepted_findings"].append("title_names_answer|eo-l5-003")
+    baseline.write_text(json.dumps(data))
+    assert "stale_quality_baseline" in {
+        issue.code for issue in validate_english_authoring(copy).errors
+    }
