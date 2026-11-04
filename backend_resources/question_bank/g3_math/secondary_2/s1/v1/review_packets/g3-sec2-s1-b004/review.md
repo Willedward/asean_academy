@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-528 — Amber Teak Bay — Mekong ecology club: retain archaeological measurements
+## s1-l2-528 — Retain archaeological measurements
 
 [Open this question in the HTML preview](index.html#s1-l2-528)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-526 — Azure Teak Bay — Heritage museum: inspect paired quiz patterns
+## s1-l3-526 — Inspect paired quiz patterns
 
 [Open this question in the HTML preview](index.html#s1-l3-526)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-529 — Emerald Teak Bay — Orchid nursery: displayed bar increase
+## s1-l2-529 — Displayed bar increase
 
 [Open this question in the HTML preview](index.html#s1-l2-529)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-527 — Golden Teak Bay — Mekong ecology club: inspect paired quiz patterns
+## s1-l3-527 — Inspect paired quiz patterns
 
 [Open this question in the HTML preview](index.html#s1-l3-527)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-530 — Bronze Willow Bay — Komodo field camp: representative centre after a delay
+## s1-l3-530 — Representative centre after a delay
 
 [Open this question in the HTML preview](index.html#s1-l3-530)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-531 — Coral Willow Bay — Rattan workshop: representative centre after a delay
+## s1-l3-531 — Representative centre after a delay
 
 [Open this question in the HTML preview](index.html#s1-l3-531)
 
