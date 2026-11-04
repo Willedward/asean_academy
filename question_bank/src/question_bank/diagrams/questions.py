@@ -14,12 +14,14 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from . import mensuration, right_triangle
+from . import mensuration, plane_geometry, right_triangle
 from .common import (
     CHECKED_RENDERERS,
     MENSURATION_RENDERER,
+    PLANE_GEOMETRY_RENDERER,
     RIGHT_TRIANGLE_RENDERER,
     Diagram,
+    UnsupportedDiagram,
     answer_values,
 )
 
@@ -28,10 +30,13 @@ LEGACY_TO_CURRENT = {
     "nextscholar-mensuration-svg-v1": MENSURATION_RENDERER,
     RIGHT_TRIANGLE_RENDERER: RIGHT_TRIANGLE_RENDERER,
     MENSURATION_RENDERER: MENSURATION_RENDERER,
+    "nextscholar-geometry-svg-v1": PLANE_GEOMETRY_RENDERER,
+    PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
 }
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
     MENSURATION_RENDERER: mensuration.TEMPLATES,
+    PLANE_GEOMETRY_RENDERER: plane_geometry.TEMPLATES,
 }
 
 NUM = r"(\d+(?:\.\d+)?)"
@@ -60,10 +65,6 @@ _FRACTION_WORDS = {
     "twenty-seventh": 1 / 27,
     "sixty-fourth": 1 / 64,
 }
-
-
-class UnsupportedDiagram(ValueError):
-    """The question's diagram cannot be generated from its data."""
 
 
 @dataclass
@@ -375,6 +376,7 @@ _MENSURATION_PATTERNS: list[
 PATTERNS = {
     RIGHT_TRIANGLE_RENDERER: _RIGHT_TRIANGLE_PATTERNS,
     MENSURATION_RENDERER: _MENSURATION_PATTERNS,
+    PLANE_GEOMETRY_RENDERER: plane_geometry.PATTERNS,
 }
 
 
@@ -385,6 +387,11 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
         for asset in question.get("assets", [])
         if asset.get("generation_spec", {}).get("renderer") in LEGACY_TO_CURRENT
     ]
+
+
+def text_only_reason(question: dict[str, Any]) -> str | None:
+    """Return why a G1 question should have no figure, or ``None`` if it can have one."""
+    return plane_geometry.text_only_reason(_prompt_text(question))
 
 
 def stem_findings(question: dict[str, Any], template: str) -> list[str]:
