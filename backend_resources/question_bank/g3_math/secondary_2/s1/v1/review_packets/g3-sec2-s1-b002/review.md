@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-507 — Azure Lotus Bay — Batik cooperative: compare grouped means
+## s1-l4-507 — Compare grouped means
 
 [Open this question in the HTML preview](index.html#s1-l4-507)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-512 — Coral Lotus Bay — Mangrove survey: preserve exact values
+## s1-l2-512 — Preserve exact values
 
 [Open this question in the HTML preview](index.html#s1-l2-512)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-510 — Emerald Lotus Bay — Mangrove survey: compare two small distributions
+## s1-l3-510 — Compare two small distributions
 
 [Open this question in the HTML preview](index.html#s1-l3-510)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-513 — Jade Lotus Bay — Robotics club: displayed bar increase
+## s1-l2-513 — Displayed bar increase
 
 [Open this question in the HTML preview](index.html#s1-l2-513)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-508 — Coral Maple Bay — Mangrove survey: reject an unsuitable display
+## s1-l4-508 — Reject an unsuitable display
 
 [Open this question in the HTML preview](index.html#s1-l4-508)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-514 — Indigo Maple Bay — Rattan workshop: compare centre under skew
+## s1-l3-514 — Compare centre under skew
 
 [Open this question in the HTML preview](index.html#s1-l3-514)
 
