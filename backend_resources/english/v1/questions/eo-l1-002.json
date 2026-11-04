@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l1-002",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -22,7 +22,7 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: supply the article before “envelope”.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "an",
@@ -31,7 +31,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Envelope is a singular count noun introduced for the first time and begins with a vowel sound."
       },
@@ -40,16 +40,18 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: supply the pronoun referring to the envelope.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "it",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "this"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The singular pronoun refers back to the envelope."
       },
@@ -58,7 +60,7 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: complete the past-perfect verb phrase.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "had",
@@ -67,7 +69,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Past perfect uses had before the past participle donated."
       },
@@ -76,7 +78,7 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: complete the pattern “labelled ___ a date”.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "with",
@@ -85,7 +87,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Labelled with identifies information attached to each photograph."
       },
@@ -94,16 +96,22 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: supply the conjunction contrasting labels with faded names.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "although",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "but",
+          "yet",
+          "though",
+          "while",
+          "whilst"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Although introduces the concession."
       },
@@ -112,7 +120,7 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: supply the relative word after the comma.",
+      "prompt": "Gap 6: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "which",
@@ -121,7 +129,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Which introduces a non-defining clause about the display."
       },
@@ -130,16 +138,18 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: mark the endpoint of Riko's waiting.",
+      "prompt": "Gap 7: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "until",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "till"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Until marks when the waiting ended."
       },
@@ -148,16 +158,19 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: supply the plural subject referring to former residents.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "they",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "residents",
+          "people"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "They refers to the former residents who remembered names."
       },

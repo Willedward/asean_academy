@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l2-001",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,7 +21,7 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: use the past-tense form of “meets” required by “during the previous term”.",
+      "prompt": "Gap 1 (MEET): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "met",
@@ -30,7 +30,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“During the previous term” places the repeated action in the past, and the irregular past form of “meet” is “met”."
       },
@@ -39,7 +39,7 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: use the plural form of “planter” required after “four more”.",
+      "prompt": "Gap 2 (PLANTER): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "planters",
@@ -48,7 +48,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The number “four” requires a plural count noun, so “planter” takes the plural ending to become “planters”."
       },
@@ -57,7 +57,7 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: use the present-tense form that matches “the club leader” and parallels “checks”.",
+      "prompt": "Gap 3 (CHECK): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "checks",
@@ -66,7 +66,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The singular subject “the club leader” controls both coordinated verbs, so the second verb repeats the third-person singular form “checks”."
       },
@@ -75,7 +75,7 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: use the past participle of “drains” after the auxiliary “had”.",
+      "prompt": "Gap 4 (DRAIN): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "drained",
@@ -84,7 +84,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The auxiliary “had” requires a past participle, so the regular verb “drain” becomes “drained”."
       },
@@ -93,7 +93,7 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: use the comparative form of “bright” required by “even” and “than before”.",
+      "prompt": "Gap 5 (BRIGHT): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "brighter",
@@ -102,7 +102,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Even” and “than before” establish a comparison, so the one-syllable adjective “bright” takes “-er”."
       },
@@ -111,7 +111,7 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: use the noun related to “grew” after “their unexpected”.",
+      "prompt": "Gap 6 (GROW): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "growth",
@@ -120,7 +120,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The possessive determiner “their” and adjective “unexpected” require a noun, and the noun related to “grow/grew” is “growth”."
       },
@@ -129,7 +129,7 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: use the plural noun formed from “measure” to name the recorded results.",
+      "prompt": "Gap 7 (MEASURE): write the correct form of the word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "measurements",
@@ -138,7 +138,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“These” and the plural verb “help” require a plural noun; the recorded results of measuring are “measurements”."
       },
@@ -147,7 +147,7 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: use the reflexive pronoun that agrees with the plural noun “students”.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "themselves",
@@ -156,7 +156,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "After “by”, the reflexive pronoun refers back to the plural subject “the students”, so the agreeing form is “themselves”."
       },

@@ -29,6 +29,12 @@ approval, and it records no decision in the review pipeline.
 §5.3 used the wrong band of about 11–12 and must be redone. The profile and form keys named here
 now use `sec3` in place of `sec1`.
 
+**Corrections, 4 November 2026.** Proposed corrections for the §3 S1 rows, §4.2 titles and §4.3
+open-cloze prompts now exist as new draft revisions, awaiting English and editorial decisions.
+Choices the educator should check first: the accepted-answer sets; `eo-l5-006` part 1 and `eo-l5-007`
+part 1, where a neutral prompt leaves several adverbs possible; and the fresh words in `ev-l5-004` and
+`ev-l5-005`. §4.1, §4.4 (other than `e5-lesson-03`), §4.5 and §4.7–§4.11 remain open.
+
 ## 1. Scope and method
 
 | Asset | Files | Audited |

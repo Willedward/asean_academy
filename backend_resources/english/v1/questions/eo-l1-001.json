@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l1-001",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,7 +21,7 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: enter the article required before “unopened wooden box”.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "an",
@@ -30,7 +30,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The singular countable noun is introduced for the first time, and “unopened” begins with a vowel sound, so the article is “an”."
       },
@@ -39,16 +39,18 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: enter the pronoun that refers to the wooden box.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "it",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "anything"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The object pronoun “it” refers back to the singular inanimate noun “box”."
       },
@@ -57,16 +59,19 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: enter the auxiliary that completes the past-perfect verb phrase.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "had",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "originally",
+          "first"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Packing happened before the later donation and workshop discovery, and “packed” is a past participle, so “had packed” completes the past-perfect phrase."
       },
@@ -75,16 +80,18 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: enter the preposition that completes “tied ___ a ribbon”.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "with",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "by"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The established pattern is “tie something with” the material used to fasten it."
       },
@@ -93,18 +100,20 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: enter the conjunction that contrasts fragile paper with clear writing.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "although",
         "accepted_alternatives": [
-          "though"
+          "though",
+          "while",
+          "whilst"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Although” and the approved alternative “though” introduce a concession: the paper was fragile, yet the writing remained clear."
       },
@@ -113,7 +122,7 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: enter the relative word required after the comma.",
+      "prompt": "Gap 6: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "which",
@@ -122,7 +131,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The comma begins a non-defining relative clause about the concert, which requires “which” rather than “that”."
       },
@@ -131,7 +140,7 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: enter the conjunction that marks the end point of the waiting.",
+      "prompt": "Gap 7: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "until",
@@ -142,7 +151,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Until” and the approved alternative “till” introduce the event that ended the audience's wait."
       },
@@ -151,16 +160,19 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: enter the pronoun that refers to the letters.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "they",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "these",
+          "each"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The plural subject pronoun “they” refers back to the letters and controls the plural verb “connected”."
       },

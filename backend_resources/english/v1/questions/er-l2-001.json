@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "er-l2-001",
   "bank_key": "english-er-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -61,7 +61,11 @@
         "canonical_answer": "Dr Arun",
         "accepted_alternatives": [
           "Dr Arun, the coastal ecologist",
-          "the coastal ecologist"
+          "the coastal ecologist",
+          "Dr. Arun",
+          "Arun",
+          "the ecologist",
+          "coastal ecologist"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
@@ -78,19 +82,32 @@
       "position": 3,
       "prompt": "In paragraph 3, what does “This change” refer to?",
       "response": {
-        "type": "short_text",
-        "canonical_answer": "moving half the trays to a covered walkway while leaving the others beside the sports shed",
-        "accepted_alternatives": [
-          "the club moved half the trays to a covered walkway and left the others beside the sports shed",
-          "moving half the trays to the covered walkway"
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "A",
+            "text": "moving half the trays to a covered walkway"
+          },
+          {
+            "key": "B",
+            "text": "moving all the trays to a covered walkway"
+          },
+          {
+            "key": "C",
+            "text": "adding a water tap beside the covered walkway"
+          },
+          {
+            "key": "D",
+            "text": "fixing two water containers to a light trolley"
+          }
         ],
-        "normalisation": {
-          "unicode_form": "NFKC",
-          "collapse_whitespace": true,
-          "case_sensitive": false,
-          "strip_terminal_punctuation": true
-        },
-        "rationale": "The demonstrative phrase points to the complete action in the preceding sentence: relocating half the trays while retaining a comparison at the original site."
+        "correct_key": "A",
+        "choice_rationales": {
+          "A": "The sentence before “This change” says the club moved half the trays.",
+          "B": "Paragraph 3 says the others stayed beside the sports shed.",
+          "C": "The walkway had no tap, and none was added.",
+          "D": "The trolley came later, to solve the problem this change created."
+        }
       },
       "hint": "A demonstrative plus a general noun often refers to a whole earlier action, not one object.",
       "correct_explanation": "It refers to moving half the trays to the covered walkway while leaving the remaining trays beside the sports shed."

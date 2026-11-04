@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l5-003",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,16 +21,18 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: supply the article required before “bicycle library”.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "a",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "one"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The singular count noun is introduced for the first time and bicycle begins with a consonant sound."
       },
@@ -39,16 +41,18 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: supply the pronoun referring to registered members.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "they",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "members"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "They is the plural subject referring to members."
       },
@@ -57,16 +61,21 @@
     },
     {
       "position": 3,
-      "prompt": "Gap 3: complete the clause “worried ___ bicycles would be returned late”.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "that",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "some",
+          "many",
+          "the",
+          "their"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "Worried that introduces the content of the concern."
       },
@@ -75,16 +84,23 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: supply the conjunction contrasting the concern with actual behaviour.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "but",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "yet",
+          "although",
+          "though",
+          "while",
+          "whilst",
+          "whereas"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "But marks direct contrast."
       },
@@ -93,21 +109,25 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: mark the time before which the second check occurred.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "after",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "when",
+          "once",
+          "as"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
-        "rationale": "The bicycle was checked again after it was returned."
+        "rationale": "The second check happens after the bicycle comes back, so a time word such as after or when fits."
       },
       "hint": "Protected baseline: no hint is available.",
-      "correct_explanation": "The bicycle was checked again after it was returned."
+      "correct_explanation": "The second check happens after the bicycle comes back, so a time word such as after or when fits."
     }
   ],
   "provenance": {

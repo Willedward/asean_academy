@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "eo-l5-001",
   "bank_key": "english-eo-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -21,7 +21,7 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Gap 1: complete the fixed verb–preposition pattern describing how the route was separated into sections.",
+      "prompt": "Gap 1: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "into",
@@ -30,7 +30,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The standard construction is “divide something into parts”. The route is the object being divided, and the three sections are the resulting parts."
       },
@@ -39,27 +39,29 @@
     },
     {
       "position": 2,
-      "prompt": "Gap 2: link the clear appearance of the water with Aisha's decision to test it anyway.",
+      "prompt": "Gap 2: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "but",
         "accepted_alternatives": [
-          "yet"
+          "yet",
+          "although",
+          "though"
         ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
-        "rationale": "Aisha collects a sample despite the water looking clear, so the two independent clauses require a coordinating contrast. Both “but” and “yet” express that relationship."
+        "rationale": "A contrast word is needed. But, yet, although and though all work."
       },
       "hint": "The second clause describes a cautious action despite the reassuring appearance.",
       "correct_explanation": "“But” marks the contrast between the water's clear appearance and Aisha's decision to test it; “yet” is also accepted."
     },
     {
       "position": 3,
-      "prompt": "Gap 3: complete the expression showing that one sample must not be mistaken for the others.",
+      "prompt": "Gap 3: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "with",
@@ -68,7 +70,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The passive expression is “be confused with something”, meaning to be wrongly identified as that other thing."
       },
@@ -77,16 +79,18 @@
     },
     {
       "position": 4,
-      "prompt": "Gap 4: complete the collocation describing a plank that has become unsecured.",
+      "prompt": "Gap 4: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "loose",
-        "accepted_alternatives": [],
+        "accepted_alternatives": [
+          "free"
+        ],
         "normalisation": {
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Work loose” is the established collocation for something gradually becoming unsecured through movement or pressure. The rain explains the change in the repaired plank."
       },
@@ -95,7 +99,7 @@
     },
     {
       "position": 5,
-      "prompt": "Gap 5: complete the two-part structure showing what Ben chose in preference to stepping on the plank.",
+      "prompt": "Gap 5: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "than",
@@ -104,7 +108,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "“Rather than” introduces the rejected action before the sentence states Ben's safer alternative."
       },
@@ -113,7 +117,7 @@
     },
     {
       "position": 6,
-      "prompt": "Gap 6: show that Ben repeated an action first recorded before the class left.",
+      "prompt": "Gap 6: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "again",
@@ -122,7 +126,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The opening paragraph records Ben's first count of six students. After the bridge crossing, he repeats that count, so “again” restores the cross-paragraph sequence."
       },
@@ -131,7 +135,7 @@
     },
     {
       "position": 7,
-      "prompt": "Gap 7: express the necessary condition for the groups' measurements to be useful.",
+      "prompt": "Gap 7: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "unless",
@@ -140,7 +144,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The data is useful only if all groups follow the same method. “Unless” means “if not” and therefore states that the data would be useless if this condition were not met."
       },
@@ -149,7 +153,7 @@
     },
     {
       "position": 8,
-      "prompt": "Gap 8: complete the earlier action in the “By the time” sequence with the correct auxiliary.",
+      "prompt": "Gap 8: write one word.",
       "response": {
         "type": "short_text",
         "canonical_answer": "had",
@@ -158,7 +162,7 @@
           "unicode_form": "NFKC",
           "collapse_whitespace": true,
           "case_sensitive": false,
-          "strip_terminal_punctuation": false
+          "strip_terminal_punctuation": true
         },
         "rationale": "The wind became weaker before the sun appeared. The past perfect “had fallen” marks that earlier completed change within a past-time sequence."
       },

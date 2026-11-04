@@ -117,5 +117,5 @@ def test_missing_english_revision_blocks_readiness():
     stored = database(catalogue)
     stored.english_questions = [row for row in stored.english_questions if row[0] != "ev-l1-001"]
 
-    with pytest.raises(ContentSyncError, match="english_question:ev-l1-001:r1"):
+    with pytest.raises(ContentSyncError, match="english_question:ev-l1-001:r2"):
         check_content(stored, catalogue)
