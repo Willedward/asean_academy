@@ -27,9 +27,12 @@ release:
 11. deploy the web service; and
 12. verify the complete public application.
 
-The workflow uses a GitHub `production` environment. Configure that environment
-with one or more required reviewers so production changes require a final human
-approval after all verification has passed. The workflow concurrency group does
+The workflow first runs an `authorize` job. It stops the release unless the repository
+owner started it from `main`, gave the exact commit SHA and typed `deploy production`.
+GitHub does not offer required reviewers for private repositories below Enterprise, so
+this job is the human approval. Anyone with write access could still weaken it from a
+branch or by pushing to `main`, so it guards against mistakes, not against a malicious
+collaborator. The workflow concurrency group does
 not cancel a running release, preventing two migration/deployment sequences from
 overlapping.
 
@@ -40,8 +43,11 @@ dedicated external uptime service before a public launch.
 
 ## GitHub configuration required once
 
-Create a GitHub environment named `production`, enable required reviewers, and
-add these environment secrets:
+The GitHub environment named `production` exists and allows deployment from `main` only.
+GitHub documents environment secrets and deployment branches for private repositories as
+requiring GitHub Pro or Team, and branch protection also needs a paid plan. Before adding
+production secrets while another collaborator has write access, upgrade so they can be
+environment-scoped and `main` can be protected. Then add these secrets:
 
 | Secret | Source | Scope |
 | --- | --- | --- |
