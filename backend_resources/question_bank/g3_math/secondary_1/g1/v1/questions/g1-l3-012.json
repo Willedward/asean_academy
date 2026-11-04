@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-012",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-012-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,115 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-012-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-012-diagram-r2.svg",
+      "alt_text": "A kite with its upper pair of adjacent equal sides marked with a single tick and its lower pair of adjacent equal sides marked with double ticks. No diagonals are drawn. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "kite",
+        "question_key": "g1-l3-012",
+        "outcome": "1.4",
+        "template": "kite_symmetry",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": "two distinct pairs of adjacent equal sides"
+        },
+        "forbidden_visible_labels": [
+          "1"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "AD"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "CB",
+              "CD"
+            ],
+            "ticks": 2
+          }
+        ],
+        "viewbox": [
+          600.0,
+          432.0
+        ],
+        "points": {
+          "A": [
+            300.0,
+            48.0
+          ],
+          "B": [
+            160.69,
+            270.95
+          ],
+          "C": [
+            300.0,
+            358.0
+          ],
+          "D": [
+            439.31,
+            270.95
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CB",
+            "from": "C",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [],
+        "relationships": [
+          {
+            "type": "unequal_segments",
+            "segments": [
+              "AB",
+              "CB"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "54f1c271f0435c1e7b89963bb03f3d287f18808cb9e239ab918d82f7c46be40a",
+      "width": 600,
+      "height": 432
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +203,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
