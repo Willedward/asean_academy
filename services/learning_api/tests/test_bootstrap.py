@@ -55,7 +55,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         assert bootstrap_module.bootstrap(target, apply=True) == result
         with psycopg.connect(target) as c:
             assert c.execute("select count(*) from profiles").fetchone()[0] == 0
-            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 1976
+            assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 2052
             assert (
                 c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
                 == 199

@@ -36,6 +36,7 @@ from .course_repository import CourseImporter
 from .course_validation import validate_course, write_schemas
 from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
+from .diagnostic_repository import DiagnosticFormImporter
 from .diagrams.regenerate import regenerate_batch, regenerate_lessons
 from .english_authoring import (
     claim_english_batch,
@@ -369,6 +370,14 @@ def parser():
         "plan", type=Path, nargs="?", default=DEFAULT_DIAGNOSTIC_PLAN
     )
     diagnostic_plan_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    diagnostic_import = commands.add_parser(
+        "diagnostic-import-db",
+        help="Publish the diagnostic forms once the plan and all their questions are approved",
+    )
+    diagnostic_import.add_argument(
+        "plan", type=Path, nargs="?", default=DEFAULT_DIAGNOSTIC_PLAN
+    )
+    diagnostic_import.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
     diagnostic_authoring_plan = commands.add_parser(
         "diagnostic-authoring-plan",
         help="Create 19 isolated four-question diagnostic banks and manifests",
@@ -758,6 +767,22 @@ def main(argv=None):
     if args.command == "catalogue-schema":
         write_catalogue_schemas(args.output)
         print(json.dumps({"status": "complete", "output": str(args.output)}, indent=2))
+        return 0
+    if args.command == "diagnostic-import-db":
+        plan, issues = validate_diagnostic_plan(args.plan, args.syllabus)
+        if plan is None or any(issue.severity == "error" for issue in issues):
+            print(json.dumps([asdict(issue) for issue in issues], indent=2))
+            return 1
+        database_url = os.environ.get("DATABASE_URL")
+        if not database_url:
+            raise SystemExit("Set DATABASE_URL before running diagnostic-import-db")
+        try:
+            import psycopg
+        except ImportError as exc:
+            raise SystemExit("Install the postgres extra: uv sync --extra postgres") from exc
+        with psycopg.connect(database_url, prepare_threshold=None) as connection:
+            result = DiagnosticFormImporter(connection).import_plan(plan)
+        print(json.dumps(result, indent=2))
         return 0
     if args.command == "catalogue-import-db":
         report = validate_catalogue(args.banks, args.syllabus, publish=args.publish)

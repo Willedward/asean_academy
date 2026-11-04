@@ -47,3 +47,11 @@ This recommendation path is ordinary application logic. It does not need an LLM 
 5. Run authenticated hosted baseline, resume, submit, recommendation and endline-comparison journeys.
 
 Until step 5, `/diagnostics` continues returning `content_pending`; the new source plan alone cannot expose draft questions to learners.
+
+## Publishing and the two-course learner
+
+`question-bank diagnostic-import-db` loads the forms. It runs on every deployment and publishes nothing until the plan's `status` is `published` and all 76 question revisions are published and reviewed. A database trigger enforces the same rule, so drafts cannot reach a form on any environment, including review sites. To release a form after an approved correction to one of its questions, increment that form's `revision`; the importer refuses a changed form at the same revision.
+
+Each form attaches to the current `g3-sec1-math` revision because the schema needs one course, but a learner in either or both courses gets the same check and keeps one baseline when they join another course. The endline unlocks once every lesson in all of the learner's active courses is mastered. Lesson recommendations are not filtered by enrolment, so a learner in only one course can be recommended a lesson in the other.
+
+The authenticated E2E seed approves these drafts in its disposable database only, so browser journeys can run the whole check.

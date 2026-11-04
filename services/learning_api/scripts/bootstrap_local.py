@@ -10,37 +10,38 @@ from pathlib import Path
 import psycopg
 from question_bank.catalogue_repository import CatalogueImporter
 from question_bank.course_repository import CourseImporter
+from question_bank.diagnostic_plan import validate_diagnostic_plan
+from question_bank.diagnostic_repository import DiagnosticFormImporter
 from question_bank.english_repository import EnglishObjectiveImporter
 from run_dev import REPOSITORY_ROOT, _configure_environment
 
 from learning_api.config import Settings
 from learning_api.content_sync import check_content
-from learning_api.course_catalogue import CourseCatalogue
+from learning_api.course_catalogue import SYLLABUS_PATH, CourseCatalogue
 
 sys.path.insert(0, str(REPOSITORY_ROOT / "scripts"))
 from check_migration_safety import inspect_migrations  # noqa: E402
 
 
-def import_question_catalogue(connection, reports):
-    bank_reports = [bank for report in reports for bank in report.bank_reports.values()]
-    if not bank_reports or bank_reports[0].catalogue is None:
-        raise ValueError("Validated course has no syllabus catalogue")
-    banks = [
-        (bank.blueprint, bank.questions)
-        for bank in bank_reports
-        if bank.blueprint is not None
-    ]
-    return CatalogueImporter(connection).import_all(
-        bank_reports[0].catalogue,
-        banks,
-    )
+def import_question_catalogue(connection, catalogue):
+    # The review catalogue also holds the diagnostic banks, which no course pool references.
+    report = catalogue.review_catalogue_report
+    banks = [(bank.blueprint, bank.questions) for bank in report.banks if bank.blueprint is not None]
+    return CatalogueImporter(connection).import_all(report.syllabus, banks)
 
 
-def import_courses(connection, reports):
-    import_question_catalogue(connection, reports)
+def import_courses(connection, catalogue, reports):
+    import_question_catalogue(connection, catalogue)
     importer = CourseImporter(connection)
     for report in reports:
         importer.import_all(report.course, report.lessons, report.pools)
+    plan, _issues = validate_diagnostic_plan(
+        REPOSITORY_ROOT / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json",
+        REPOSITORY_ROOT / SYLLABUS_PATH,
+    )
+    if plan is None:
+        raise ValueError("The diagnostic plan is invalid")
+    DiagnosticFormImporter(connection).import_plan(plan)
 
 
 def migration_body(path: Path) -> str:
@@ -89,7 +90,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             if not pending:
                 with connection.transaction(force_rollback=True):
                     lock(connection)
-                    import_courses(connection, reports)
+                    import_courses(connection, catalogue, reports)
                     EnglishObjectiveImporter(connection).import_all(english_report)
                     check_content(connection, catalogue)
                 print("Content import preview passed; transaction rolled back.")
@@ -115,7 +116,7 @@ def bootstrap(database_url: str, *, apply: bool) -> dict:
             print(f"Applied {migration.name}")
         with connection.transaction():
             lock(connection)
-            import_courses(connection, reports)
+            import_courses(connection, catalogue, reports)
             english_result = EnglishObjectiveImporter(connection).import_all(english_report)
             result = check_content(connection, catalogue)
         print("Imported and verified content. Enrolments and credentials were not changed.")

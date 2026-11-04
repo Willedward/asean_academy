@@ -52,5 +52,10 @@ def test_production_release_is_manual_and_gated_before_any_other_job():
 @pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
 def test_releases_import_all_content_that_readiness_requires(name):
     source = (WORKFLOWS / name).read_text()
-    for command in ("catalogue-import-db", "course-import-db", "english-import-db"):
+    for command in (
+        "catalogue-import-db",
+        "course-import-db",
+        "english-import-db",
+        "diagnostic-import-db",
+    ):
         assert source.count(f"question-bank {command}") == 2

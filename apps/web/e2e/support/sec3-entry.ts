@@ -40,6 +40,12 @@ export const sec3Learners = {
     displayName: "Review Learner",
     sec1Code: "e2e-sec3-review-invitation-2026",
   },
+  diagnostic: {
+    learner_id: "30000000-0000-4000-8000-000000000006",
+    email: "sec3.diagnostic.e2e@example.test",
+    displayName: "Diagnostic Learner",
+    sec1Code: "e2e-sec3-diagnostic-invitation-2026",
+  },
   oneInvitation: {
     learner_id: "30000000-0000-4000-8000-000000000005",
     email: "sec3.one-invitation.e2e@example.test",

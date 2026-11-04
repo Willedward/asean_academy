@@ -146,6 +146,25 @@ describe("diagnostic learner flow", () => {
     ).toHaveAttribute("href", "/learn");
   });
 
+  it("lets a learner continue to the course instead of starting now", async () => {
+    render(
+      <DiagnosticLanding
+        appearance="nextscholar"
+        loadNext={vi.fn().mockResolvedValue({
+          status: "start",
+          purpose: "baseline",
+          title: "Readiness check",
+          message: "Answer every question.",
+          question_count: 38,
+          estimated_minutes: 60,
+        })}
+      />,
+    );
+    expect(
+      await screen.findByRole("link", { name: "Continue to course" }),
+    ).toHaveAttribute("href", "/learn");
+  });
+
   it("starts the API-selected readiness purpose and follows its session id", async () => {
     const available: DiagnosticNext = {
       status: "start",

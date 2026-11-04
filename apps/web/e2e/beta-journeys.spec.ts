@@ -52,9 +52,6 @@ async function onboard(
 
 async function continueFromReadiness(page: Page) {
   await page.waitForURL("**/diagnostics");
-  await expect(
-    page.getByRole("heading", { name: "Readiness check is being prepared" }),
-  ).toBeVisible();
   await page.getByRole("link", { name: "Continue to course" }).click();
   await page.waitForURL("**/learn");
   await expect(

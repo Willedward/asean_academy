@@ -33,7 +33,7 @@ The Playwright report attaches administrator screenshots at all three widths and
 ### Sec 3-entry scholarship track
 
 The track covers Secondary 1 (**g3-sec1-math**) and Secondary 2 (**g3-sec2-math**)
-together. Four spec files each own one seeded learner, so they can run in any order
+together. Each spec file owns one seeded learner, so they can run in any order
 against the one-shot database:
 
 | Spec | Journey asserted after a reload or a new sign-in |
@@ -42,6 +42,8 @@ against the one-shot database:
 | **sec3-entry-checkpoint-mastery.spec.ts** | lesson and checkpoint locks refuse direct API calls; all seven N1 lessons become proficient; checkpoint support stays locked; a 50% checkpoint keeps proficiency and schedules four two-day reviews; a 100% retake masters N1 and cannot be repeated |
 | **sec3-entry-support-resume.spec.ts** | interrupted practice resumes at the same question and wrong-try count in a second browser; a simulated tutor outage and a real exhausted synthetic-tutor allowance (429 tutor_quota_exceeded) leave hints and Give up working |
 | **sec3-entry-spaced-review.spec.ts** | a due Give up is recommended, reviewed and moved to the seven-day interval, and an early review is refused |
+| **sec3-entry-one-invitation.spec.ts** | one invitation link enrols both courses and records the Sec 3-entry track |
+| **sec3-entry-diagnostic.spec.ts** | one cross-year readiness check runs from onboarding through 38 answers to results covering both years, then the endline stays locked |
 
 Tests marked **test.fail** describe intended behaviour that the product does not support
 yet. Playwright reports them as expected failures and flags them as soon as they start
@@ -83,11 +85,12 @@ database or Supabase credential.
 - one academic administrator;
 - one content administrator;
 - two invitation-only learners for the original beta journeys;
-- five invitation-only Sec 3-entry learners, one per Sec 3-entry spec file. The
+- six invitation-only Sec 3-entry learners, one per Sec 3-entry spec file. The
   two-course learner holds a separate invitation for each course, and the one-invitation
   learner holds a single Sec 3-entry invitation covering both.
 
-It refuses remote hosts, requires a database name containing e2e, and refuses to run
+The seed also marks the 76 diagnostic questions as approved in this disposable database and
+publishes both readiness forms, so journeys can run the check. It refuses remote hosts, requires a database name containing e2e, and refuses to run
 again when fixture identities are present. This guard reduces the chance of running it
 against shared data. It runs only after migrations and content imports.
 

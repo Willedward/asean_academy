@@ -4,10 +4,16 @@ from __future__ import annotations
 
 import hashlib
 import os
+from pathlib import Path
 from urllib.parse import urlparse
 
 import psycopg
+from question_bank.diagnostic_plan import validate_diagnostic_plan
+from question_bank.diagnostic_repository import DiagnosticFormImporter
 
+ROOT = Path(__file__).resolve().parents[3]
+DIAGNOSTIC_PLAN = ROOT / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
+DIAGNOSTIC_SYLLABUS = ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
 ACADEMIC_ADMIN_ID = "10000000-0000-4000-8000-000000000001"
 CONTENT_ADMIN_ID = "10000000-0000-4000-8000-000000000002"
 STUDENT_A_ID = "20000000-0000-4000-8000-000000000001"
@@ -18,6 +24,7 @@ SEC3_MASTERY_ID = "30000000-0000-4000-8000-000000000002"
 SEC3_SUPPORT_ID = "30000000-0000-4000-8000-000000000003"
 SEC3_REVIEW_ID = "30000000-0000-4000-8000-000000000004"
 SEC3_ONE_INVITATION_ID = "30000000-0000-4000-8000-000000000005"
+SEC3_DIAGNOSTIC_ID = "30000000-0000-4000-8000-000000000006"
 
 ACADEMIC_ADMIN_EMAIL = "academic.e2e@example.test"
 CONTENT_ADMIN_EMAIL = "content.e2e@example.test"
@@ -28,6 +35,7 @@ SEC3_MASTERY_EMAIL = "sec3.mastery.e2e@example.test"
 SEC3_SUPPORT_EMAIL = "sec3.support.e2e@example.test"
 SEC3_REVIEW_EMAIL = "sec3.review.e2e@example.test"
 SEC3_ONE_INVITATION_EMAIL = "sec3.one-invitation.e2e@example.test"
+SEC3_DIAGNOSTIC_EMAIL = "sec3.diagnostic.e2e@example.test"
 
 STUDENT_A_CODE = "e2e-student-a-invitation-2026"
 STUDENT_B_CODE = "e2e-student-b-invitation-2026"
@@ -37,6 +45,7 @@ SEC3_MASTERY_CODE = "e2e-sec3-mastery-invitation-2026"
 SEC3_SUPPORT_CODE = "e2e-sec3-support-invitation-2026"
 SEC3_REVIEW_CODE = "e2e-sec3-review-invitation-2026"
 SEC3_ONE_INVITATION_CODE = "e2e-sec3-one-invitation-2026"
+SEC3_DIAGNOSTIC_CODE = "e2e-sec3-diagnostic-invitation-2026"
 
 # The review learner starts with one Give up that became due an hour ago. The API
 # trusts database time and has no test clock, so a one-shot seed is the only way to
@@ -71,6 +80,31 @@ def _current_course_version(connection, course_key: str):
         (course_key,),
     ).fetchone()
     return None if row is None else row[0]
+
+
+def _publish_diagnostics_for_e2e(connection) -> None:
+    """Approve the diagnostic drafts in this disposable database only, so journeys can run them."""
+    plan, _issues = validate_diagnostic_plan(DIAGNOSTIC_PLAN, DIAGNOSTIC_SYLLABUS)
+    if plan is None:
+        raise SystemExit("The diagnostic plan is invalid.")
+    keys = [item.stable_key for form in plan.forms for item in form.items]
+    connection.execute(
+        "update math_questions set status = 'published' where stable_key = any(%s)", (keys,)
+    )
+    connection.execute(
+        """
+        update math_question_versions versions
+        set reviewed_at = now()
+        from math_questions questions
+        where questions.id = versions.question_id and questions.stable_key = any(%s)
+        """,
+        (keys,),
+    )
+    result = DiagnosticFormImporter(connection).import_plan(
+        plan.model_copy(update={"status": "published"})
+    )
+    if result["status"] != "published":
+        raise SystemExit(f"The E2E diagnostic forms did not publish: {result}")
 
 
 def main() -> None:
@@ -138,32 +172,31 @@ def main() -> None:
                 ACADEMIC_ADMIN_ID,
             ),
         )
-        connection.execute(
-            "insert into auth.users(id, email) values (%s, %s)",
-            (SEC3_ONE_INVITATION_ID, SEC3_ONE_INVITATION_EMAIL),
-        )
-        track_invitation = connection.execute(
-            """
-            insert into beta_invitations(
-                token_sha256, email, course_version_id, target_track, max_uses,
-                expires_at, created_by
-            ) values (%s, %s, %s, 'sec3-entry', 1, now() + interval '1 day', %s)
-            returning id
-            """,
-            (
-                _digest(SEC3_ONE_INVITATION_CODE),
-                SEC3_ONE_INVITATION_EMAIL,
-                sec1_version,
-                ACADEMIC_ADMIN_ID,
-            ),
-        ).fetchone()[0]
-        connection.execute(
-            """
-            insert into beta_invitation_additional_courses(invitation_id, course_version_id)
-            values (%s, %s)
-            """,
-            (track_invitation, sec2_version),
-        )
+        for user_id, email, code in (
+            (SEC3_ONE_INVITATION_ID, SEC3_ONE_INVITATION_EMAIL, SEC3_ONE_INVITATION_CODE),
+            (SEC3_DIAGNOSTIC_ID, SEC3_DIAGNOSTIC_EMAIL, SEC3_DIAGNOSTIC_CODE),
+        ):
+            connection.execute(
+                "insert into auth.users(id, email) values (%s, %s)", (user_id, email)
+            )
+            track_invitation = connection.execute(
+                """
+                insert into beta_invitations(
+                    token_sha256, email, course_version_id, target_track, max_uses,
+                    expires_at, created_by
+                ) values (%s, %s, %s, 'sec3-entry', 1, now() + interval '1 day', %s)
+                returning id
+                """,
+                (_digest(code), email, sec1_version, ACADEMIC_ADMIN_ID),
+            ).fetchone()[0]
+            connection.execute(
+                """
+                insert into beta_invitation_additional_courses(invitation_id, course_version_id)
+                values (%s, %s)
+                """,
+                (track_invitation, sec2_version),
+            )
+        _publish_diagnostics_for_e2e(connection)
         seeded_review = connection.execute(
             """
             insert into question_progress(
@@ -182,7 +215,7 @@ def main() -> None:
         ).rowcount
         if seeded_review != 1:
             raise SystemExit("Import the question catalogue before seeding E2E identities.")
-    print(f"Seeded two administrators and {len(students) + 1} invitation-only learners.")
+    print(f"Seeded two administrators and {len(students) + 2} invitation-only learners.")
 
 
 if __name__ == "__main__":

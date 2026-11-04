@@ -13,6 +13,7 @@ import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from question_bank.checking import check_answer
+from question_bank.diagnostic_repository import DIAGNOSTIC_ANCHOR_COURSE_KEY
 from question_bank.models import AlgebraicResponse, NumericResponse
 
 from .diagnostic_recommendations import (
@@ -125,15 +126,11 @@ class PostgresDiagnosticRepository:
         )
 
     @staticmethod
-    def _enrolment(connection, learner_id: str) -> dict:
+    def _require_enrolment(connection, learner_id: str) -> None:
         row = connection.execute(
             """
-            select enrolments.course_version_id, courses.course_key
-            from course_enrolments enrolments
-            join course_versions versions on versions.id = enrolments.course_version_id
-            join courses on courses.id = versions.course_id
-            where enrolments.student_id = %s and enrolments.status = 'active'
-            order by enrolments.enrolled_at desc
+            select 1 from course_enrolments
+            where student_id = %s and status = 'active'
             limit 1
             """,
             (learner_id,),
@@ -144,69 +141,71 @@ class PostgresDiagnosticRepository:
                 "An active course enrolment is required.",
                 403,
             )
-        return row
 
     @staticmethod
-    def _form(connection, course_version_id: UUID, purpose: str) -> dict | None:
+    def _form(connection, purpose: str) -> dict | None:
         return connection.execute(
             """
             select forms.*,
                    (select count(*) from diagnostic_form_items items
                     where items.form_id = forms.id)::integer as question_count
             from diagnostic_forms forms
-            where forms.course_version_id = %s
+            join course_versions versions on versions.id = forms.course_version_id
+            join courses on courses.id = versions.course_id
+            where courses.course_key = %s
               and forms.purpose = %s
               and forms.status = 'published'
               and forms.is_current
+            order by forms.published_at desc
+            limit 1
             """,
-            (course_version_id, purpose),
+            (DIAGNOSTIC_ANCHOR_COURSE_KEY, purpose),
         ).fetchone()
 
     @staticmethod
-    def _effective_session(
-        connection, learner_id: str, course_version_id: UUID, purpose: str
-    ) -> dict | None:
+    def _effective_session(connection, learner_id: str, purpose: str) -> dict | None:
         return connection.execute(
             """
             select sessions.*, results.id as result_id
             from diagnostic_sessions sessions
+            join course_versions versions on versions.id = sessions.course_version_id
+            join courses on courses.id = versions.course_id
             left join diagnostic_results results on results.session_id = sessions.id
             where sessions.student_id = %s
-              and sessions.course_version_id = %s
+              and courses.course_key = %s
               and sessions.purpose = %s
               and sessions.state <> 'reset'
             order by sessions.started_at desc
             limit 1
             """,
-            (learner_id, course_version_id, purpose),
+            (learner_id, DIAGNOSTIC_ANCHOR_COURSE_KEY, purpose),
         ).fetchone()
 
     @staticmethod
-    def _course_mastered(connection, learner_id: str, course_version_id: UUID) -> bool:
+    def _enrolled_courses_mastered(connection, learner_id: str) -> bool:
         row = connection.execute(
             """
             select count(*) filter (where progress.state = 'mastered') = count(*) as mastered
-            from unit_versions units
+            from course_enrolments enrolments
+            join unit_versions units on units.course_version_id = enrolments.course_version_id
             join unit_version_lessons assignments on assignments.unit_version_id = units.id
             join lesson_versions versions on versions.id = assignments.lesson_version_id
             left join learner_lesson_progress progress
-              on progress.student_id = %s and progress.lesson_id = versions.lesson_id
-            where units.course_version_id = %s
+              on progress.student_id = enrolments.student_id
+             and progress.lesson_id = versions.lesson_id
+            where enrolments.student_id = %s and enrolments.status = 'active'
             """,
-            (learner_id, course_version_id),
+            (learner_id,),
         ).fetchone()
         return bool(row and row["mastered"])
 
     def next(self, learner_id: str) -> dict:
         with self._connect() as connection:
             self._set_identity(connection, learner_id)
-            enrolment = self._enrolment(connection, learner_id)
-            course_version_id = enrolment["course_version_id"]
-            baseline = self._effective_session(
-                connection, learner_id, course_version_id, "baseline"
-            )
+            self._require_enrolment(connection, learner_id)
+            baseline = self._effective_session(connection, learner_id, "baseline")
             if baseline is None:
-                form = self._form(connection, course_version_id, "baseline")
+                form = self._form(connection, "baseline")
                 if form is None or form["question_count"] == 0:
                     return {
                         "status": "content_pending",
@@ -230,9 +229,7 @@ class PostgresDiagnosticRepository:
                     "message": "Your saved answers are ready when you return.",
                 }
 
-            endline = self._effective_session(
-                connection, learner_id, course_version_id, "endline"
-            )
+            endline = self._effective_session(connection, learner_id, "endline")
             if endline is not None:
                 if endline["state"] == "in_progress":
                     return {
@@ -252,16 +249,16 @@ class PostgresDiagnosticRepository:
                     "message": "View your baseline and endline evidence side by side.",
                 }
 
-            if not self._course_mastered(connection, learner_id, course_version_id):
+            if not self._enrolled_courses_mastered(connection, learner_id):
                 return {
                     "status": "baseline_complete",
                     "purpose": "baseline",
                     "session_id": baseline["id"],
                     "result_session_id": baseline["id"],
                     "title": "Baseline readiness recorded",
-                    "message": "Complete N1 mastery before the final readiness check unlocks.",
+                    "message": "Master every lesson in your courses to unlock the final readiness check.",
                 }
-            form = self._form(connection, course_version_id, "endline")
+            form = self._form(connection, "endline")
             if form is None or form["question_count"] == 0:
                 return {
                     "status": "content_pending",
@@ -315,12 +312,9 @@ class PostgresDiagnosticRepository:
                     )
                 return self._session_payload(connection, replay)
 
-            enrolment = self._enrolment(connection, learner_id)
-            course_version_id = enrolment["course_version_id"]
+            self._require_enrolment(connection, learner_id)
             for purpose in ("baseline", "endline"):
-                active = self._effective_session(
-                    connection, learner_id, course_version_id, purpose
-                )
+                active = self._effective_session(connection, learner_id, purpose)
                 if active is not None and active["state"] == "in_progress":
                     if expected_purpose and expected_purpose != purpose:
                         raise DiagnosticError(
@@ -330,16 +324,14 @@ class PostgresDiagnosticRepository:
                         )
                     return self._session_payload(connection, active)
 
-            baseline = self._effective_session(
-                connection, learner_id, course_version_id, "baseline"
-            )
+            baseline = self._effective_session(connection, learner_id, "baseline")
             purpose = "baseline" if baseline is None else "endline"
-            if purpose == "endline" and not self._course_mastered(
-                connection, learner_id, course_version_id
+            if purpose == "endline" and not self._enrolled_courses_mastered(
+                connection, learner_id
             ):
                 raise DiagnosticError(
                     "endline_locked",
-                    "Complete N1 mastery before starting the final readiness check.",
+                    "Master every lesson in your courses before starting the final readiness check.",
                     409,
                 )
             if expected_purpose and expected_purpose != purpose:
@@ -355,16 +347,14 @@ class PostgresDiagnosticRepository:
                     409,
                 )
             if purpose == "endline":
-                existing_endline = self._effective_session(
-                    connection, learner_id, course_version_id, "endline"
-                )
+                existing_endline = self._effective_session(connection, learner_id, "endline")
                 if existing_endline is not None:
                     raise DiagnosticError(
                         "diagnostic_already_completed",
                         "The final readiness check is already complete.",
                         409,
                     )
-            form = self._form(connection, course_version_id, purpose)
+            form = self._form(connection, purpose)
             if form is None or form["question_count"] == 0:
                 raise DiagnosticError(
                     "diagnostic_content_pending",
@@ -382,7 +372,7 @@ class PostgresDiagnosticRepository:
                 (
                     learner_id,
                     form["id"],
-                    course_version_id,
+                    form["course_version_id"],
                     purpose,
                     idempotency_key,
                     fingerprint,
