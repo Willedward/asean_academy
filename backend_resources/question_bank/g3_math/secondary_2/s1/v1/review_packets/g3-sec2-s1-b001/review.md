@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-501 — Emerald Banyan Bay — River clean-up: compare grouped means
+## s1-l4-501 — Compare grouped means
 
 [Open this question in the HTML preview](index.html#s1-l4-501)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-504 — Violet Banyan Bay — Mekong ecology club: preserve exact values
+## s1-l2-504 — Preserve exact values
 
 [Open this question in the HTML preview](index.html#s1-l2-504)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-505 — Amber Cedar Bay — Orchid nursery: displayed bar increase
+## s1-l2-505 — Displayed bar increase
 
 [Open this question in the HTML preview](index.html#s1-l2-505)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-503 — Azure Cedar Bay — Mekong ecology club: compare two small distributions
+## s1-l3-503 — Compare two small distributions
 
 [Open this question in the HTML preview](index.html#s1-l3-503)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-503 — Bronze Cedar Bay — Mekong ecology club: reject an unsuitable display
+## s1-l4-503 — Reject an unsuitable display
 
 [Open this question in the HTML preview](index.html#s1-l4-503)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-506 — Coral Cedar Bay — Kite festival: displayed bar increase
+## s1-l2-506 — Displayed bar increase
 
 [Open this question in the HTML preview](index.html#s1-l2-506)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-506 — Bronze Fern Bay — Komodo field camp: compare centre under skew
+## s1-l3-506 — Compare centre under skew
 
 [Open this question in the HTML preview](index.html#s1-l3-506)
 

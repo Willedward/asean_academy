@@ -422,14 +422,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-501",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.10",
-    "title": "Emerald Banyan Bay — River clean-up: compare grouped means",
+    "title": "Compare grouped means",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -442,7 +442,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Emerald Banyan Bay dataset for River clean-up: compare grouped means — Two grouped datasets use midpoints 5, 15, 25. Frequencies for A are [5, 7, 3]; frequencies for B are [3, 5, 7]. By how much is B's estimated mean greater than A's?"
+            "text": "Two grouped datasets use midpoints 5, 15, 25. Frequencies for A are [5, 7, 3]; frequencies for B are [3, 5, 7]. By how much is B's estimated mean greater than A's?"
           }
         ],
         "marks": 4,
@@ -451,8 +451,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4.000000000000002",
-          "canonical_latex": "4.000000000000002",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -503,7 +503,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "4.000000000000002"
+                "latex": "4"
               }
             ],
             "mark_type": "A",
@@ -1044,14 +1044,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-504",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Violet Banyan Bay — Mekong ecology club: preserve exact values",
+    "title": "Preserve exact values",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1064,7 +1064,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Violet Banyan Bay dataset for Mekong ecology club: preserve exact values — Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A small class has 24 integer scores. The reader must recover every score while also seeing the distribution. Enter the most suitable code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A small class has 24 integer scores spread widely from 41 to 97, with few repeats. The reader must recover every exact score while also seeing the distribution. Enter the most suitable code."
           }
         ],
         "marks": 2,
@@ -1154,14 +1154,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-505",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Amber Cedar Bay — Orchid nursery: displayed bar increase",
+    "title": "Displayed bar increase",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1174,7 +1174,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Amber Cedar Bay dataset for Orchid nursery: displayed bar increase — A vertical axis starts at 85. Two values are 95 and 105. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+            "text": "A vertical axis starts at 85. Two values are 95 and 105. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
           }
         ],
         "marks": 2,
@@ -1184,11 +1184,19 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_latex": "100\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -1220,7 +1228,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{(105-85)-(95-85)}{95-85}\times100=100"
+                "latex": "\\frac{(105-85)-(95-85)}{95-85}\\times100=100"
               }
             ],
             "mark_type": "M",
@@ -1235,7 +1243,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "100"
+                "latex": "100\\%"
               }
             ],
             "mark_type": "A",
@@ -1264,14 +1272,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-503",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Azure Cedar Bay — Mekong ecology club: compare two small distributions",
+    "title": "Compare two small distributions",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1284,7 +1292,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Azure Cedar Bay dataset for Mekong ecology club: compare two small distributions — Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two groups each contain 18 whole-number results. The aim is to compare clusters and gaps while retaining individual observations. Enter the best code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two groups each contain 18 whole-number results on a scale from 0 to 10. The aim is to compare clusters and gaps while retaining individual observations. Enter the best code."
           }
         ],
         "marks": 3,
@@ -1374,14 +1382,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-503",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Bronze Cedar Bay — Mekong ecology club: reject an unsuitable display",
+    "title": "Reject an unsuitable display",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1394,7 +1402,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Bronze Cedar Bay dataset for Mekong ecology club: reject an unsuitable display — Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A dataset contains 2,400 heights measured to the nearest millimetre. Exact individual values are unnecessary; the overall distribution is required. Which code is least suitable because it would become overcrowded?"
+            "text": "Use code 1 for a dot diagram, 2 for a histogram and 3 for a grouped frequency table. A dataset contains 2,400 heights measured to the nearest millimetre. Exact individual values are unnecessary; the overall distribution is required. Which code is least suitable because it would become overcrowded?"
           }
         ],
         "marks": 4,
@@ -1484,14 +1492,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Coral Cedar Bay — Kite festival: displayed bar increase",
+    "title": "Displayed bar increase",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1504,7 +1512,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Coral Cedar Bay dataset for Kite festival: displayed bar increase — A vertical axis starts at 90. Two values are 100 and 110. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+            "text": "A bar chart of club membership has a vertical axis that starts at 90. The two bars show 100 and 110 members. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
           }
         ],
         "marks": 2,
@@ -1514,11 +1522,19 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_latex": "100\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -1550,7 +1566,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{(110-90)-(100-90)}{100-90}\times100=100"
+                "latex": "\\frac{(110-90)-(100-90)}{100-90}\\times100=100"
               }
             ],
             "mark_type": "M",
@@ -1565,7 +1581,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "100"
+                "latex": "100\\%"
               }
             ],
             "mark_type": "A",
@@ -2546,14 +2562,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.9",
-    "title": "Bronze Fern Bay — Komodo field camp: compare centre under skew",
+    "title": "Compare centre under skew",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2566,7 +2582,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Bronze Fern Bay dataset for Komodo field camp: compare centre under skew — Use code 1 for mean, 2 for median and 3 for mode. The values are 8, 9, 9, 10, 45. Select the measure that best describes a typical value without being pulled upward by the extreme observation."
+            "text": "Use code 1 for mean, 2 for median and 3 for mode. The values are 8, 9, 11, 12, 45, and no value repeats. Select the measure that best describes a typical value without being pulled upward by the extreme observation."
           }
         ],
         "marks": 3,
@@ -2597,7 +2613,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The median remains 9 while the mean is pulled well above most values."
+                "text": "The median remains 11 while the mean is pulled well above most values."
               }
             ]
           }
@@ -2612,7 +2628,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "\\text{median}\\Rightarrow 2"
+                "latex": "\\text{median}=11,\\quad \\text{mean}=17,\\quad \\text{no value repeats, so no mode}\\Rightarrow 2"
               }
             ],
             "mark_type": "M",
