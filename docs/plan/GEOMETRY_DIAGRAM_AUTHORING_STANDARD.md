@@ -177,8 +177,8 @@ edits those.
 
 `nextscholar-plane-geometry-svg-v1` (`diagrams/plane_geometry.py`) replaces the fixed templates of
 `nextscholar-geometry-svg-v1` for Sec 1 G1. It follows the same contract as the generators above.
-It does not cover Sec 1 G5, Sec 2 G2 or lesson figures, and their prompts are reported as
-unsupported. `nextscholar-geometry-svg-v2`, used by the G1 v2 diagnostic bank, is a separate set of
+It does not cover Sec 1 G5 or lesson figures, and their prompts are reported as unsupported.
+Sec 2 G2 has its own generator, described below. `nextscholar-geometry-svg-v2`, used by the G1 v2 diagnostic bank, is a separate set of
 hand-made assets and is unaffected.
 
 | `diagram_kind` | Templates |
@@ -221,6 +221,64 @@ otherwise change the same line.
 
 ```bash
 uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_1/g1/v1 --batch B003 --add g1-l3-020 --add g1-l4-011 --apply
+```
+
+## Checked generator: Sec 2 G2 congruence and similarity
+
+`nextscholar-similarity-svg-v1` (`diagrams/similarity.py`) replaces the fixed templates of
+`nextscholar-geometry-svg-v1` for Sec 2 G2. A question uses it when its `school_level` is
+`secondary_2` and its `topic_code` is `G2`. It follows the same contract as the generators above,
+and adds its own checks in `similarity_checks.py`. It does not draw lesson figures.
+
+| `diagram_kind` | Templates |
+| --- | --- |
+| `congruent_triangles` | `scalene_tiles`, `congruent_algebra`, `sas_condition` |
+| `congruent_pentagons` | `congruent_pentagons` |
+| `shared_side` | `shared_side` |
+| `similar_triangles` | `similar_edges`, `similar_perimeter`, `similar_angle`, `similar_angle_expressions` |
+| `similar_polygons` | `similar_chain` |
+| `nested_triangles` | `nested_parallel`, `nested_shared_vertex` |
+| `shadow`, `mirror`, `survey` | `shadow_pair`, `mirror_method`, `river_survey` |
+| `coordinate_grid` | `origin_point_ray`, `centre_unknown_line`, `centre_given_ray` |
+| `enlargement_line` | `enlargement_line` |
+| `scale_segments`, `scale_rectangles` | `scale_segments`, `scale_model`, `scale_plan_stage` |
+
+**How it draws.**
+
+- Figures called congruent or similar are one set of vertices transformed, drawn at the stated
+  factor. When the shape is free, it uses one fixed scalene shape.
+- A question that fixes its lengths is drawn in those proportions, including the value the learner
+  finds, which carries a variable. A scale such as 1 : 300 cannot fit on one screen, so that
+  figure keeps the shape and its arrow carries the ratio.
+- Where equality of sides or angles is the question, the figure does not state it. `scalene_tiles`
+  has side labels and no ticks. `sas_condition` draws different included angles and marks no angle.
+- On a coordinate grid only the coordinates in the question are numbered, and the point the learner
+  must find is not plotted, because a plotted point on a numbered grid shows its coordinates.
+- A figure too small to hold marks carries none, so the `shadow_pair` stick has no corner mark or
+  arc, and it keeps the true factor.
+
+**Text-only test.** `similarity.TEXT_ONLY` lists prompts whose accurate figure shows the step that
+is assessed. It holds the successive factors 3/2 and 2/3, which an accurate chain draws back at the
+original size.
+
+**Extra checks for this renderer** (each failure is an error, and the `plane_*` checks above also
+run):
+
+- `geometry_figure_proportion`: figures declared `congruent` or `similar` must measure so, at any
+  declared factor. `to_scale` lengths must be in the proportion of their stated values, and an
+  `enlargement` must sit at its factor from its centre.
+- `geometry_figure_shape`: every side of a declared figure must be drawn, and a figure must have the
+  side count of the shape the question names, so a pentagon question cannot show triangles.
+- `geometry_correspondence`: ticks must join corresponding sides, one from each figure, and matching
+  arcs must be equal and at corresponding vertices.
+- `geometry_given_mismatch`: every number shown must be stated in the question, and every stated
+  number must be shown or listed in `generation_spec.omitted_givens` with a reason.
+- `geometry_arrow`: a scaling arrow must run from its declared source to its target, and its factor
+  must match the figures as drawn.
+- `geometry_grid`: points, grid lines and axis numbers must be at their coordinates.
+
+```bash
+uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_2/g2/v1 --batch B004 --add g2-l3-530 --apply
 ```
 
 ## Review feedback

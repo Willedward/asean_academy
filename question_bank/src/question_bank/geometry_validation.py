@@ -25,6 +25,7 @@ CHECKED_GEOMETRY_RENDERERS = frozenset(
         "nextscholar-right-triangle-svg-v2",
         "nextscholar-mensuration-svg-v2",
         "nextscholar-plane-geometry-svg-v1",
+        "nextscholar-similarity-svg-v1",
     }
 )
 # Fixed-template generators whose assets raise advisory warnings until they are regenerated.
