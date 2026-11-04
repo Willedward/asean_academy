@@ -59,7 +59,7 @@ def _valid_feedback():
     return {
         "schema_version": PROVIDER_FEEDBACK_SCHEMA_VERSION,
         "rubric_key": "english-essay-rubric-instructional-v1",
-        "rubric_revision": 1,
+        "rubric_revision": 2,
         "preparation_estimate": "developing",
         "criterion_feedback": [
             {
@@ -106,7 +106,7 @@ def _repositories():
         SUBMISSION,
         reservation=reservation,
         rubric_key="english-essay-rubric-instructional-v1",
-        rubric_revision=1,
+        rubric_revision=2,
         rubric_criteria=CRITERIA,
         provider_name="calibration-provider",
         model_name="calibration-model",
@@ -121,7 +121,7 @@ def test_provider_feedback_requires_exact_evidence_and_exact_rubric_coverage():
         _valid_feedback(),
         submission_body=BODY,
         rubric_key="english-essay-rubric-instructional-v1",
-        rubric_revision=1,
+        rubric_revision=2,
         rubric_criteria=CRITERIA,
     )
     assert validated["validation_version"] == "english-essay-evidence-validation-v1"
@@ -133,7 +133,7 @@ def test_provider_feedback_requires_exact_evidence_and_exact_rubric_coverage():
             wrong_offset,
             submission_body=BODY,
             rubric_key="english-essay-rubric-instructional-v1",
-            rubric_revision=1,
+            rubric_revision=2,
             rubric_criteria=CRITERIA,
         )
     assert error.value.code == "essay_feedback_evidence_mismatch"
@@ -145,7 +145,7 @@ def test_provider_feedback_requires_exact_evidence_and_exact_rubric_coverage():
             missing_criterion,
             submission_body=BODY,
             rubric_key="english-essay-rubric-instructional-v1",
-            rubric_revision=1,
+            rubric_revision=2,
             rubric_criteria=CRITERIA,
         )
     assert error.value.code == "essay_feedback_provider_coverage_invalid"
@@ -159,7 +159,7 @@ def test_provider_feedback_rejects_extra_fields_and_official_outcome_claims():
             extra_field,
             submission_body=BODY,
             rubric_key="english-essay-rubric-instructional-v1",
-            rubric_revision=1,
+            rubric_revision=2,
             rubric_criteria=CRITERIA,
         )
     assert error.value.code == "essay_feedback_provider_schema_invalid"
@@ -171,7 +171,7 @@ def test_provider_feedback_rejects_extra_fields_and_official_outcome_claims():
             prohibited,
             submission_body=BODY,
             rubric_key="english-essay-rubric-instructional-v1",
-            rubric_revision=1,
+            rubric_revision=2,
             rubric_criteria=CRITERIA,
         )
     assert error.value.code == "essay_feedback_prohibited_claim"
@@ -183,7 +183,7 @@ def test_provider_feedback_rejects_extra_fields_and_official_outcome_claims():
             chance_claim,
             submission_body=BODY,
             rubric_key="english-essay-rubric-instructional-v1",
-            rubric_revision=1,
+            rubric_revision=2,
             rubric_criteria=CRITERIA,
         )
     assert error.value.code == "essay_feedback_prohibited_claim"
@@ -200,7 +200,7 @@ def test_submission_text_is_treated_as_evidence_data_not_provider_instructions()
         feedback,
         submission_body=injected_body,
         rubric_key="english-essay-rubric-instructional-v1",
-        rubric_revision=1,
+        rubric_revision=2,
         rubric_criteria=CRITERIA,
     )
     assert validated["preparation_estimate"] == "developing"

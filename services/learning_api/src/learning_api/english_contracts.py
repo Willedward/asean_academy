@@ -89,7 +89,7 @@ class EnglishExamProfileResponse(ApiModel):
     profile_key: str
     status: Literal["reported", "corroborated", "official"]
     evidence_boundary: str
-    entry_level: Literal["secondary_1_entry"]
+    entry_level: Literal["secondary_3_entry"]
     effective_from: str
     review_due: str
     sections: list[EnglishExamProfileSectionResponse]

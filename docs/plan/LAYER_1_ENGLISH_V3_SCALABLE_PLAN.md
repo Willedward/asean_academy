@@ -2,7 +2,7 @@
 
 **Prepared:** 28 October 2026
 **Status:** V3-A merged; V3-B Sprint content, protected measurement, checkpoints, progress visibility and consolidated reviewer evidence structurally complete for human review
-**Audience:** Secondary 1-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia  
+**Audience:** Secondary 3-entry ASEAN Scholarship candidates in Indonesia and Southeast Asia, tested at Secondary 1 and 2 level  
 **Supersedes for decision-making:** the unapproved `docs/english-plans-v2` proposal  
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
 question revisions
@@ -139,7 +139,7 @@ owner:
 Editing questions and scored “answer in your own words” questions are **not** part of the V3
 Beta blueprint. Older or different-entry reports that mention them remain evidence records,
 but they do not create learner-facing task types unless newer evidence confirms that the
-target Indonesian Secondary 1-entry paper uses them.
+target Indonesian Secondary 3-entry paper uses them.
 
 V3 retains the existing 10 modules and 51 planned lessons. It does not add E2.7, E5.8,
 E9.6 or E9.7 as core lessons. Descriptive or letter prompts may be stored as optional prompt
@@ -166,7 +166,7 @@ personalised calendar or study planner.
 | --- | --- | --- |
 | Wider evidence inventory | Keep | Record source, year, country, entry level, authority and limitation. Treat reports as format evidence, never as questions to copy. |
 | Structured post-test recall | Keep | A short form collects format, timing and task types without collecting verbatim questions. |
-| Entry-level configuration | Simplify | Use one versioned Beta exam profile for Secondary 1 entry. Add other profiles only when the product supports them. |
+| Entry-level configuration | Simplify | Use one versioned Beta exam profile for Secondary 3 entry. Add other profiles only when the product supports them. |
 | Full, Core and Sprint routes | Keep | Fixed lesson subsets chosen from the existing 51 lessons; no personalised scheduling. |
 | Indonesian/Malay transfer patterns | Keep carefully | Use them as teaching and error-analysis cues, never as assumptions about an individual learner. |
 | Editing lesson | Reject for Beta | No learner-facing editing section without current target-exam evidence. Editing remains an essay-revision skill inside E8. |
@@ -188,7 +188,7 @@ personalised calendar or study planner.
 ## 4. Versioned exam profile
 
 Do not hard-code a universal “ASEAN English exam”. Store a profile such as
-`asean-english-sec1-id-reported-2026-v1` with:
+`asean-english-sec3-id-reported-v1` with:
 
 - audience and entry level;
 - source references and evidence status;

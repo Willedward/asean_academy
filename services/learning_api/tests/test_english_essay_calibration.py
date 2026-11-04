@@ -45,7 +45,7 @@ def _feedback(body: str, level: int = 3):
     return {
         "schema_version": PROVIDER_FEEDBACK_SCHEMA_VERSION,
         "rubric_key": RUBRIC_KEY,
-        "rubric_revision": 1,
+        "rubric_revision": 2,
         "preparation_estimate": "developing",
         "criterion_feedback": [
             {
@@ -87,9 +87,9 @@ def _package_dict():
                 "submission_body": body,
                 "case_tags": tags,
                 "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-                "prompt_revision": 1,
+                "prompt_revision": 2,
                 "rubric_key": RUBRIC_KEY,
-                "rubric_revision": 1,
+                "rubric_revision": 2,
                 "rubric_criteria": CRITERIA,
                 "educator_levels": {
                     criterion["criterion_key"]: 3 for criterion in CRITERIA

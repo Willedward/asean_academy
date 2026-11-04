@@ -4789,7 +4789,7 @@ export interface components {
              * Entry Level
              * @constant
              */
-            entry_level: "secondary_1_entry";
+            entry_level: "secondary_3_entry";
             /** Evidence Boundary */
             evidence_boundary: string;
             /** Excluded Task Types */

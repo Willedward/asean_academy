@@ -2,7 +2,7 @@
 
 **Prepared:** 28 October 2026
 **Status:** fixed technical blueprint; Sprint content, protected measurement, checkpoints, progress visibility and consolidated reviewer evidence structurally complete; human review and release pending
-**Exam profile:** `asean-english-sec1-id-reported-v1`
+**Exam profile:** `asean-english-sec3-id-reported-v1`
 
 ## 1. Decision
 

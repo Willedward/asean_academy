@@ -203,7 +203,7 @@ def test_owned_essay_draft_is_idempotent_refresh_safe_and_conflict_protected():
         headers={"Idempotency-Key": "essay-draft-create"},
         json={
             "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-            "prompt_revision": 1,
+            "prompt_revision": 2,
         },
     )
     assert created.status_code == 201, created.text
@@ -221,7 +221,7 @@ def test_owned_essay_draft_is_idempotent_refresh_safe_and_conflict_protected():
         headers={"Idempotency-Key": "essay-draft-create"},
         json={
             "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-            "prompt_revision": 1,
+            "prompt_revision": 2,
         },
     )
     assert repeated.status_code == 201, repeated.text
@@ -270,7 +270,7 @@ def test_essay_pre_submit_checks_and_immutable_submission_revisions():
         headers={"Idempotency-Key": "essay-submission-draft"},
         json={
             "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-            "prompt_revision": 1,
+            "prompt_revision": 2,
         },
     )
     assert created.status_code == 201, created.text
@@ -319,9 +319,9 @@ def test_essay_pre_submit_checks_and_immutable_submission_revisions():
     assert preview["can_submit"] is True
     assert preview["word_count"] == 12
     assert preview["paragraph_count"] == 2
-    assert preview["prompt_revision"] == 1
+    assert preview["prompt_revision"] == 2
     assert preview["rubric_key"] == "english-essay-rubric-instructional-v1"
-    assert preview["rubric_revision"] == 1
+    assert preview["rubric_revision"] == 2
     assert preview["continuous_timing_observed"] is False
 
     not_confirmed = request(
@@ -423,7 +423,7 @@ def test_essay_self_review_covers_the_pinned_rubric_without_creating_a_score():
         headers={"Idempotency-Key": "self-review-draft"},
         json={
             "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-            "prompt_revision": 1,
+            "prompt_revision": 2,
         },
     )
     draft_id = created.json()["draft_id"]
@@ -472,7 +472,7 @@ def test_essay_self_review_covers_the_pinned_rubric_without_creating_a_score():
     )
     assert workspace.status_code == 200, workspace.text
     review_workspace = workspace.json()
-    assert review_workspace["rubric_revision"] == 1
+    assert review_workspace["rubric_revision"] == 2
     assert len(review_workspace["criteria"]) == 4
     assert review_workspace["self_review"] is None
     assert "not an official ASEAN Scholarship score" in review_workspace[
@@ -588,7 +588,7 @@ def _completed_essay_self_review(app, key: str) -> str:
         headers={"Idempotency-Key": f"{key}-draft"},
         json={
             "prompt_key": "english-essay-prompt-school-learning-transfer-v1",
-            "prompt_revision": 1,
+            "prompt_revision": 2,
         },
     )
     draft_id = created.json()["draft_id"]
@@ -927,7 +927,7 @@ def test_protected_english_baseline_routes_scores_and_withholds_early_feedback()
     )
     assert created.status_code == 201, created.text
     body = created.json()
-    assert body["form_key"] == "english-baseline-sec1-id-v1"
+    assert body["form_key"] == "english-baseline-sec3-id-v1"
     assert body["expected_part_count"] == 20
     assert body["score"] is None
     assert body["task_scores"] == []
@@ -1022,7 +1022,7 @@ def test_english_endline_unlocks_only_after_sprint_mastery_and_uses_disjoint_for
         json={"expected_purpose": "endline"},
     )
     assert endline.status_code == 201, endline.text
-    assert endline.json()["form_key"] == "english-endline-sec1-id-v1"
+    assert endline.json()["form_key"] == "english-endline-sec3-id-v1"
     first = request(
         app,
         "GET",
@@ -1040,7 +1040,7 @@ def test_e1_1_course_and_lesson_are_learner_safe_in_development_preview():
 
     assert course.status_code == 200, course.text
     assert len(course.json()["modules"]) == 10
-    assert course.json()["exam_profile"]["profile_key"] == ("asean-english-sec1-id-reported-v1")
+    assert course.json()["exam_profile"]["profile_key"] == ("asean-english-sec3-id-reported-v1")
     assert course.json()["exam_profile"]["excluded_task_types"] == [
         "editing_section",
         "own_words_short_answer",
@@ -2073,7 +2073,7 @@ def test_full_e1_1_journey_marks_deterministically_and_retries_failed_exit_ticke
 
     assert created.status_code == 201, created.text
     assert created.json() == replay.json()
-    assert created.json()["exam_profile_key"] == "asean-english-sec1-id-reported-v1"
+    assert created.json()["exam_profile_key"] == "asean-english-sec3-id-reported-v1"
     assert created.json()["question_count"] == 6
     assert created.json()["development_drafts"] is True
     session_id = created.json()["session_id"]

@@ -145,14 +145,14 @@ def test_postgres_english_essay_contracts_pin_exact_immutable_revisions():
 
         assert row == (
             "english-essay-prompt-school-learning-transfer-v1",
-            1,
+            2,
             "reflective_personal_expository",
             30,
             "candidate_reported",
             300,
             "guidance",
             "english-essay-rubric-instructional-v1",
-            1,
+            2,
             False,
             4,
         )
@@ -188,7 +188,7 @@ def test_postgres_english_essay_draft_is_owned_revision_pinned_and_conflict_safe
         )
     prompt = {
         "stable_key": "english-essay-prompt-school-learning-transfer-v1",
-        "revision": 1,
+        "revision": 2,
     }
     repository = PostgresEnglishEssayRepository(database_url)
 

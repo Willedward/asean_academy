@@ -29,7 +29,7 @@ const current: EnglishNextQuestionResponse = {
     correct_count: 0,
     incorrect_count: 0,
     development_drafts: true,
-    exam_profile_key: "asean-english-sec1-id-reported-v1",
+    exam_profile_key: "asean-english-sec3-id-reported-v1",
   },
   position: 1,
   question: {

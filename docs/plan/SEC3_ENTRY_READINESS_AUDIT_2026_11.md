@@ -319,8 +319,9 @@ gates; items 10–11 are release evidence.
     two-course learner, accessibility, restore, load and rate limits, owners, freeze and
     founder sign-off. Then run the founder-alpha phase.
 
-The English Layer 1 gate (B5 doc) also applies if English remains in the first cohort. Its
-exam profile is currently Sec 1-entry only.
+The English Layer 1 gate (B5 doc) also applies if English remains in the first cohort. The
+product owner confirmed on 4 November 2026 that English targets Sec 3 entry, and the profile
+now says so.
 
 ## 6. Smallest change that supports both courses
 
