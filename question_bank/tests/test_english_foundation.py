@@ -15,6 +15,7 @@ from question_bank.english_authoring import (
 )
 from question_bank.english_checking import check_english_answer, normalise_text
 from question_bank.english_models import (
+    EnglishAssessmentForm,
     EnglishCurriculumCatalogue,
     EnglishEssayPrompt,
     EnglishEssayRubric,
@@ -39,15 +40,15 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 51
-    assert len(report.passages) == 58
-    assert len(report.questions) == 189
+    assert len(report.passages) == 66
+    assert len(report.questions) == 199
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
         "editing_section",
         "own_words_short_answer",
     }
-    assert len(report.forms) == 23
+    assert len(report.forms) == 25
     assert len(report.essay_rubrics) == 1
     assert len(report.essay_prompts) == 1
     assert {form.status for form in report.forms} == {"draft"}
@@ -143,7 +144,9 @@ def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(eng
     }
     selected_keys = set()
 
-    measurement_forms = [form for form in report.forms if form.form_type != "checkpoint"]
+    measurement_forms = [
+        form for form in report.forms if form.form_type not in {"checkpoint", "mock"}
+    ]
     assert len(measurement_forms) == 3
     for form in measurement_forms:
         question_keys, exposure_pool = expected[form.form_type]
@@ -1925,6 +1928,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eb-b011",
         "english-eb-b012",
         "english-eb-b013",
+        "english-eb-b014",
         "english-eg-b001",
         "english-eg-b002",
             "english-eg-b003",
@@ -1948,6 +1952,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eo-b009",
         "english-eo-b010",
         "english-eo-b011",
+        "english-eo-b012",
         "english-er-b001",
         "english-er-b002",
         "english-er-b003",
@@ -1961,6 +1966,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-er-b011",
         "english-er-b012",
         "english-er-b013",
+        "english-er-b014",
         "english-ev-b001",
         "english-ev-b002",
         "english-ev-b003",
@@ -1977,6 +1983,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b014",
         "english-ev-b015",
         "english-ev-b016",
+        "english-ev-b017",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -2017,7 +2024,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b038",
         "english-ex-b039",
     ]
-    assert len(report.questions) == 189
+    assert len(report.questions) == 199
     assert not report.duplicates
 
 
@@ -2889,6 +2896,34 @@ def test_full_route_lessons_pass_quality_rules_and_use_a_fresh_retry(
     assert questions[5].exposure_pool == "exit_ticket"
     assert questions[6].parallel_form_of == questions[5].stable_key
     assert not english_quality_findings(questions, [], [])
+
+
+def test_full_mocks_follow_the_reported_paper_and_share_no_questions(english_root):
+    forms = [
+        EnglishAssessmentForm.model_validate_json(
+            (english_root / f"forms/english-mock-sec3-{form}-v1.json").read_text()
+        )
+        for form in "ab"
+    ]
+
+    assert not set(forms[0].question_keys) & set(forms[1].question_keys)
+    for form in forms:
+        questions = [
+            EnglishObjectiveQuestion.model_validate_json(
+                (english_root / f"questions/{key}.json").read_text()
+            )
+            for key in form.question_keys
+        ]
+        assert {question.exposure_pool for question in questions} == {"full_mock"}
+        assert [question.question_type for question in questions] == [
+            "vocabulary_in_context",
+            "banked_cloze",
+            "open_cloze",
+            "reading_comprehension",
+            "reading_comprehension",
+        ]
+        assert sum(len(question.parts) for question in questions) == 38
+        assert not english_quality_findings(questions, [], [form])
 
 
 def test_runtime_validation_skips_the_slow_content_checks(english_root, monkeypatch):
