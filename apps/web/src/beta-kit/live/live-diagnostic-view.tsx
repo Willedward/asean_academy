@@ -192,7 +192,7 @@ export function LiveDiagnosticLanding({
               View results
             </Button>
           ) : null}
-          {next.status === "content_pending" ? (
+          {next.status === "content_pending" || canStart ? (
             <Button href="/learn">Continue to course</Button>
           ) : null}
         </div>

@@ -162,7 +162,7 @@ export function DiagnosticLanding({
             </Link>
           </Button>
         ) : null}
-        {next.status === "content_pending" ? (
+        {next.status === "content_pending" || next.status === "start" ? (
           <Button asChild variant="outline">
             <Link href="/learn">Continue to course</Link>
           </Button>

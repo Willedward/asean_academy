@@ -1,10 +1,6 @@
 /**
  * Sec 3-entry track: one learner studies Secondary 1 (g3-sec1-math) and
  * Secondary 2 (g3-sec2-math) together.
- *
- * The readiness diagnostic is still marked test.fail, because no diagnostic form
- * is published or attached across both courses. Playwright reports it as an
- * expected failure and flags it when it starts passing.
  */
 import { expect, test } from "@playwright/test";
 
@@ -69,13 +65,6 @@ test.describe.serial("Sec 3-entry two-course track", () => {
   test("the Secondary 1–2 readiness diagnostic can be started", async ({
     page,
   }) => {
-    test.fail(
-      true,
-      "Missing capability: no diagnostic form exists for either course " +
-        "revision, and nothing imports one into the E2E database. Forms need " +
-        "76 reviewed items across the 19 Secondary 1–2 topic groups, so " +
-        "/diagnostics only shows 'Readiness check is being prepared'.",
-    );
     await authenticate(page, learner);
     await page.goto("/diagnostics");
     await expect(

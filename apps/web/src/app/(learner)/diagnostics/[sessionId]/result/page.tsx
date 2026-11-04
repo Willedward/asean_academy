@@ -2,6 +2,7 @@ import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { DiagnosticResultPanel } from "@/components/diagnostic-result";
 import { LearnerHeader } from "@/components/learner-header";
+import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
 
@@ -25,10 +26,7 @@ export default async function DiagnosticResultPage({
   }
 
   const learner = await requireEnrolledLearner();
-  const activeEnrolment = learner?.enrolments.find(
-    (enrolment) => enrolment.status === "active",
-  );
-  if (!learner || !activeEnrolment) {
+  if (!learner || !hasActiveEnrolment(learner)) {
     return <EstablishedDiagnosticResultPage sessionId={sessionId} />;
   }
 
@@ -36,7 +34,7 @@ export default async function DiagnosticResultPage({
     <CoreLearningShell
       active="readiness"
       learner={coreLearnerFromProfile(learner.profile)}
-      courseHref={`/courses/${activeEnrolment.course_key}`}
+      courseHref={learnerCourseHref(learner)}
       maxWidth={920}
     >
       <DiagnosticResultPanel appearance="nextscholar" sessionId={sessionId} />

@@ -180,6 +180,7 @@ jobs:
       - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
       - run: uv run --project services/learning_api --locked question-bank english-import-db
+      - run: uv run --project services/learning_api --locked question-bank diagnostic-import-db
       - name: Run database integration tests (including bootstrap)
         run: uv run --project services/learning_api --locked pytest services/learning_api/tests -m postgres
         env:

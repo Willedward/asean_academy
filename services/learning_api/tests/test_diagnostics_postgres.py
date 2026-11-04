@@ -4,12 +4,19 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 from uuid import uuid4
 
 import psycopg
 import pytest
+from question_bank.diagnostic_plan import validate_diagnostic_plan
+from question_bank.diagnostic_repository import DiagnosticFormImporter
 
-from learning_api.diagnostic_repository import PostgresDiagnosticRepository
+from learning_api.diagnostic_repository import DiagnosticError, PostgresDiagnosticRepository
+
+ROOT = Path(__file__).resolve().parents[3]
+PLAN_PATH = ROOT / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
+SYLLABUS_PATH = ROOT / "backend_resources/syllabi/g3_math/v1/catalogue.json"
 
 
 def _database_url() -> str:
@@ -303,3 +310,130 @@ def test_diagnostic_form_rejects_learning_pool_questions():
                 """,
                 (form_id, pooled[0], pooled[2]),
             )
+
+
+def _master_course(connection, learner_id: str, course_key: str) -> None:
+    connection.execute(
+        """
+        insert into learner_lesson_progress (student_id, lesson_id, lesson_version_id, state)
+        select %s, lesson_versions.lesson_id, lesson_versions.id, 'mastered'
+        from courses
+        join course_versions versions on versions.course_id = courses.id and versions.is_current
+        join unit_versions units on units.course_version_id = versions.id
+        join unit_version_lessons assignments on assignments.unit_version_id = units.id
+        join lesson_versions on lesson_versions.id = assignments.lesson_version_id
+        where courses.course_key = %s
+        """,
+        (learner_id, course_key),
+    )
+
+
+@pytest.mark.postgres
+def test_cross_year_forms_publish_only_when_approved_and_serve_two_course_learners():
+    database_url = _database_url()
+    plan, issues = validate_diagnostic_plan(PLAN_PATH, SYLLABUS_PATH)
+    assert plan is not None and not issues
+    keys = [item.stable_key for form in plan.forms for item in form.items]
+    learner_id = str(uuid4())
+    email = f"cross-year-{learner_id}@example.test"
+    with psycopg.connect(database_url) as connection:
+        waiting = DiagnosticFormImporter(connection).import_plan(plan)
+        assert waiting["status"] == "waiting_for_approval"
+        assert connection.execute(
+            "select count(*) from diagnostic_forms "
+            "where is_current and stable_key like 'g3-sec1-2-math-%%'"
+        ).fetchone()[0] == 0
+    approved = plan.model_copy(update={"status": "published"})
+    try:
+        with psycopg.connect(database_url) as connection:
+            still_waiting = DiagnosticFormImporter(connection).import_plan(approved)
+            assert still_waiting["unapproved_questions"] == 76
+            connection.execute(
+                "update math_questions set status = 'published' where stable_key = any(%s)",
+                (keys,),
+            )
+            connection.execute(
+                """
+                update math_question_versions versions set reviewed_at = now()
+                from math_questions questions
+                where questions.id = versions.question_id and questions.stable_key = any(%s)
+                """,
+                (keys,),
+            )
+            published = DiagnosticFormImporter(connection).import_plan(approved)
+            assert published["status"] == "published"
+            assert set(published["forms"].values()) == {"published"}
+            repeated = DiagnosticFormImporter(connection).import_plan(approved)
+            assert set(repeated["forms"].values()) == {"unchanged"}
+            changed = approved.model_copy(deep=True)
+            changed.forms[0].title = "A changed title"
+            with pytest.raises(ValueError, match="increment its revision"):
+                DiagnosticFormImporter(connection).import_plan(changed)
+
+            connection.execute(
+                "insert into auth.users (id, email) values (%s, %s)", (learner_id, email)
+            )
+            connection.execute(
+                """
+                insert into profiles (id, role, email, display_name)
+                values (%s, 'student', %s, 'Cross-year learner')
+                """,
+                (learner_id, email),
+            )
+            enrol = """
+                insert into course_enrolments (student_id, course_id, course_version_id)
+                select %s, courses.id, versions.id
+                from courses join course_versions versions on versions.course_id = courses.id
+                where courses.course_key = %s and versions.is_current
+            """
+            connection.execute(enrol, (learner_id, "g3-sec2-math"))
+
+        repository = PostgresDiagnosticRepository(database_url)
+        # A Secondary 2 enrolment alone still resolves the same anchored form.
+        assert repository.next(learner_id)["status"] == "start"
+        session = repository.create_session(learner_id, "cross-year-one", "baseline")
+        assert len(session["items"]) == 38
+
+        # Joining another course later must not open a second baseline.
+        with psycopg.connect(database_url) as connection:
+            connection.execute(enrol, (learner_id, "g3-sec1-math"))
+        assert repository.next(learner_id)["session_id"] == session["session_id"]
+
+        for item in session["items"]:
+            repository.save_response(
+                learner_id,
+                str(session["session_id"]),
+                item["position"],
+                {str(part["position"]): "0" for part in item["question"]["parts"]},
+                f"cross-year-{item['position']}",
+            )
+        result = repository.submit(learner_id, str(session["session_id"]))
+        assert len(result["topic_scores"]) == 19
+        assert {topic["school_level"] for topic in result["topic_scores"]} == {
+            "secondary_1",
+            "secondary_2",
+        }
+        assert repository.next(learner_id)["status"] == "baseline_complete"
+        with pytest.raises(DiagnosticError, match="Master every lesson"):
+            repository.create_session(learner_id, "cross-year-too-early", "endline")
+
+        # Mastering one course is not enough while the other is still enrolled.
+        with psycopg.connect(database_url) as connection:
+            _master_course(connection, learner_id, "g3-sec1-math")
+        assert repository.next(learner_id)["status"] == "baseline_complete"
+        with psycopg.connect(database_url) as connection:
+            _master_course(connection, learner_id, "g3-sec2-math")
+        assert repository.next(learner_id)["status"] == "start"
+        endline = repository.create_session(learner_id, "cross-year-endline", "endline")
+        assert endline["purpose"] == "endline"
+        assert len(endline["items"]) == 38
+    finally:
+        with psycopg.connect(database_url) as connection:
+            connection.execute(
+                "update diagnostic_forms set is_current = false "
+                "where stable_key like 'g3-sec1-2-math-%%'"
+            )
+            connection.execute(
+                "update math_questions set status = 'draft' where stable_key = any(%s)", (keys,)
+            )
+

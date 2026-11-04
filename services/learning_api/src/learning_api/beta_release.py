@@ -9,6 +9,7 @@ from typing import Any
 
 from question_bank.course_repository import course_content_hash
 from question_bank.course_validation import lesson_note_depth_shortfalls
+from question_bank.diagnostic_repository import DIAGNOSTIC_ANCHOR_COURSE_KEY
 
 from .content_review import verify_release_workflow
 from .content_sync import check_content
@@ -291,8 +292,6 @@ def database_checks(connection, catalogue, requirements: BetaReleaseRequirements
             )
         )
 
-    report = catalogue.report
-    course = report.course
     diagnostic_rows = connection.execute(
         """
         select forms.purpose::text as purpose, forms.stable_key, forms.revision,
@@ -304,13 +303,13 @@ def database_checks(connection, catalogue, requirements: BetaReleaseRequirements
         join math_question_versions question_versions
           on question_versions.id = items.question_version_id
         where courses.course_key = %s
-          and versions.revision = %s
           and forms.status = 'published'
           and forms.is_current
         order by forms.purpose, items.position
         """,
-        (course.stable_key, course.revision),
+        (DIAGNOSTIC_ANCHOR_COURSE_KEY,),
     ).fetchall()
+    # The forms span both years, so they must stay separate from every enrolled course's pools.
     allocated_rows = connection.execute(
         """
         select items.question_id
@@ -318,18 +317,16 @@ def database_checks(connection, catalogue, requirements: BetaReleaseRequirements
         join lesson_question_pools pools on pools.id = items.pool_id
         join unit_versions units on units.id = pools.unit_version_id
         join course_versions versions on versions.id = units.course_version_id
-        join courses on courses.id = versions.course_id
-        where courses.course_key = %s and versions.revision = %s
+        where versions.is_current
         union
         select items.question_id
         from unit_checkpoint_pool_items items
         join unit_checkpoint_pools pools on pools.id = items.pool_id
         join unit_versions units on units.id = pools.unit_version_id
         join course_versions versions on versions.id = units.course_version_id
-        join courses on courses.id = versions.course_id
-        where courses.course_key = %s and versions.revision = %s
+        where versions.is_current
         """,
-        (course.stable_key, course.revision, course.stable_key, course.revision),
+        (),
     ).fetchall()
     allocated_ids = {
         str(row["question_id"])
