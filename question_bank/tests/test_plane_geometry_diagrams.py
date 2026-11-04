@@ -187,6 +187,21 @@ def test_validator_rejects_an_arc_that_is_not_centred_on_its_vertex(tmp_path):
     assert "geometry_angle_marker_centre" in codes(tmp_path, diagram, answers, svg=flipped, spec=spec)
 
 
+def test_validator_rejects_an_arc_that_sweeps_outside_its_angle(tmp_path):
+    diagram, answers = render("triangle_third_angle")
+    swept = re.sub(
+        r'(data-angle-marker="angle-a" d="M\S+ \S+ A\S+ \S+ 0 )0 ([01])',
+        lambda m: f"{m[1]}1 {1 - int(m[2])}",
+        diagram.svg,
+    )
+    assert swept != diagram.svg
+    spec = json.loads(json.dumps(diagram.generation_spec))
+    for marker in spec["angle_markers"]:
+        if marker["marker_key"] == "angle-a":
+            marker["large_arc"], marker["sweep"] = 1, 1 - marker["sweep"]
+    assert "geometry_angle_marker_sweep" in codes(tmp_path, diagram, answers, svg=swept, spec=spec)
+
+
 def test_validator_rejects_an_arc_on_a_ray_that_is_not_drawn(tmp_path):
     diagram, answers = render("straight_line_given")
     spec = json.loads(json.dumps(diagram.generation_spec))
