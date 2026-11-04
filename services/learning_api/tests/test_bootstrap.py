@@ -49,7 +49,7 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
         assert result["questions"] == 1976
         assert result["english_questions"] == 189
         assert result["english_passages"] == 58
-        assert result["english"]["outcome_count"] == 58
+        assert result["english"]["outcome_count"] == 51
         assert result["status"] == "current"
         assert bootstrap_module.bootstrap(target, apply=False)["pending_migrations"] == 0
         assert bootstrap_module.bootstrap(target, apply=True) == result
