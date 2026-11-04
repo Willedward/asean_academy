@@ -95,6 +95,7 @@ jobs:
       - run: uv run --project question_bank question-bank course-registry-validate
       - run: uv run --project question_bank question-bank authoring-validate
       - run: uv run --project question_bank question-bank authoring-claims-validate
+      - run: uv run --project question_bank question-bank english-authoring-validate
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
       - run: uv run --project question_bank pytest question_bank/tests
 
