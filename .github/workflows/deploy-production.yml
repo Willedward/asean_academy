@@ -2,6 +2,13 @@ name: Production release
 
 on:
   workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Exact 40-character commit on main to release
+        required: true
+      confirmation:
+        description: Type "deploy production" to confirm
+        required: true
 
 permissions:
   contents: read
@@ -11,8 +18,28 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  authorize:
+    name: Authorize production release
+    runs-on: ubuntu-latest
+    steps:
+      # Required reviewers are unavailable for private repositories below GitHub Enterprise.
+      - name: Require the owner, the main branch and an explicit confirmation
+        env:
+          ACTOR: ${{ github.actor }}
+          TRIGGERING_ACTOR: ${{ github.triggering_actor }}
+          OWNER: ${{ github.repository_owner }}
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$ACTOR" = "$OWNER"
+          test "$TRIGGERING_ACTOR" = "$OWNER"
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$RELEASE_SHA" = "$GITHUB_SHA"
+          test "$CONFIRMATION" = "deploy production"
+
   verify:
     name: Verify release candidate
+    needs: authorize
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -46,8 +73,6 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-      - name: Require the main branch for production
-        run: test "$GITHUB_REF" = "refs/heads/main"
       - run: uv sync --project services/learning_api --locked
       - run: uv sync --project question_bank --locked
       - run: pnpm install --frozen-lockfile
@@ -55,6 +80,7 @@ jobs:
       - run: bash scripts/validate_migrations.sh
       - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
+      - run: uv run --project services/learning_api --locked question-bank english-import-db
       - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts
       - run: uv run --project services/learning_api pytest services/learning_api/tests
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
@@ -119,6 +145,7 @@ jobs:
           uv sync --project services/learning_api --locked --no-dev
           uv run --project services/learning_api --locked question-bank catalogue-import-db
           uv run --project services/learning_api --locked question-bank course-import-db
+          uv run --project services/learning_api --locked question-bank english-import-db
       - name: Stamp and deploy the API
         run: |
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_RELEASE_SHA=$GITHUB_SHA" --skip-deploys --service "$RAILWAY_API_SERVICE"

@@ -29,3 +29,28 @@ def test_workflow_run_jobs_only_run_for_pushes_to_this_repository(job):
     condition = " ".join(str(job.get("if", "")).split())
     for required in REQUIRED_CONDITIONS:
         assert required in condition
+
+
+def load_workflow(name):
+    workflow = yaml.safe_load((WORKFLOWS / name).read_text())
+    return workflow, workflow.get("on", workflow.get(True))
+
+
+def test_production_release_is_manual_and_gated_before_any_other_job():
+    workflow, triggers = load_workflow("deploy-production.yml")
+    assert set(triggers) == {"workflow_dispatch"}
+    assert {"release_sha", "confirmation"} <= set(triggers["workflow_dispatch"]["inputs"])
+    jobs = workflow["jobs"]
+    assert "needs" not in jobs["authorize"]
+    assert jobs["verify"]["needs"] == "authorize"
+    assert jobs["release"]["needs"] == "verify"
+    gate = jobs["authorize"]["steps"][0]["run"]
+    for check in ("$ACTOR", "$TRIGGERING_ACTOR", "refs/heads/main", "$RELEASE_SHA", "deploy production"):
+        assert check in gate
+
+
+@pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
+def test_releases_import_all_content_that_readiness_requires(name):
+    source = (WORKFLOWS / name).read_text()
+    for command in ("catalogue-import-db", "course-import-db", "english-import-db"):
+        assert source.count(f"question-bank {command}") == 2

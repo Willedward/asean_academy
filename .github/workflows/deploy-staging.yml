@@ -70,6 +70,7 @@ jobs:
       - run: bash scripts/validate_migrations.sh
       - run: uv run --project services/learning_api --locked question-bank catalogue-import-db
       - run: uv run --project services/learning_api --locked question-bank course-import-db
+      - run: uv run --project services/learning_api --locked question-bank english-import-db
       - run: uv run --project services/learning_api ruff check services/learning_api/src services/learning_api/tests services/learning_api/scripts scripts/smoke_deployment.py scripts/verify_supabase_auth_config.py scripts/test_smoke_deployment.py scripts/load_test_api.py scripts/backup_restore_drill.py
       - run: uv run --project services/learning_api pytest services/learning_api/tests scripts/test_smoke_deployment.py
       - run: uv run --project question_bank ruff check question_bank/src question_bank/tests
@@ -154,6 +155,7 @@ jobs:
           uv sync --project services/learning_api --locked --no-dev
           uv run --project services/learning_api --locked question-bank catalogue-import-db
           uv run --project services/learning_api --locked question-bank course-import-db
+          uv run --project services/learning_api --locked question-bank english-import-db
       - name: Configure and deploy the staging API
         run: |
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ENV=preview" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
