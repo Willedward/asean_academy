@@ -89,8 +89,8 @@ def _key_texts(question: EnglishObjectiveQuestion) -> list[str]:
 
 
 def _title_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
-    # One- and two-letter keys such as "a" appear in ordinary titles.
-    answers = {text for text in _key_texts(question) if len(text) >= 3 and " " not in text}
+    # Short keys such as "a" and "the" appear in ordinary titles.
+    answers = {text for text in _key_texts(question) if len(text) >= 4 and " " not in text}
     answers |= {
         match.group(1)
         for part in question.parts

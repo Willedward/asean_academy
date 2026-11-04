@@ -487,7 +487,7 @@ exit tickets for the Full route. E1.2 begins Core expansion with a draft word-fa
 and E1.4 adds a bounded synonym-precision lesson. E1.5 adds a collocation-and-register lesson,
 and E2.3 now adds time-anchor, event-order and viewpoint control; each increment has six
 deterministic practice/exit questions and one disjoint retry. The next independently executable
-content sequence continues with the remaining Full-route lessons,
+content sequence continues with mock forms and the open audit findings,
 alongside Sprint review/release evidence.
 
 E4.1–E4.5 form the complete hosted open-cloze learning sequence, E5.1–E5.7 complete the

@@ -555,7 +555,8 @@ precision**, each with a fresh parallel retry and deterministic marking. The nex
 **E1.5 collocation and register** is now implemented as the third bounded Core expansion with
 a fresh parallel retry. **E2.3 tense and aspect** is now implemented as the fourth bounded Core
 expansion with a fresh parallel retry. **E2.6 logical connections** is the fifth. **E3.2 grammar
-filter** is the sixth. **E3.4 solve globally** completes Core lesson coverage; none of these increments can bypass human review or
+filter** is the sixth. **E3.4 solve globally** completes Core lesson coverage, and E0.3, E1.3, E2.4, E2.5
+and E3.3 complete all 51 lessons; none of these increments can bypass human review or
 publication controls.
 
 Complete the remaining **V3-B Sprint review and release evidence** before publishing or routing

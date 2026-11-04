@@ -72,7 +72,7 @@ must update both the source catalogue and its evidence.
 
 | Route | Selected | Authored | Still requiring lessons |
 | --- | ---: | ---: | --- |
-| Full | 51 | 46 | 5 |
+| Full | 51 | 51 | 0 |
 | Core | 32 | 32 | 0 |
 | Sprint | 16 | 16 | 0 |
 
@@ -181,7 +181,7 @@ Full-route, draft-only increment. It moves from supported 45-minute evidence thr
 reduced-support 35-minute run to a fresh 30-minute independent rehearsal without treating speed
 alone or repeated prompts as transfer. Its lesson and exit ticket remain outside the fixed
 Sprint scope and require their own English, editorial and publication evidence. The next
-content-expansion sequence now continues with the Full-route gaps.
+content-expansion sequence now now moves to mock forms and the open audit findings.
 
 The E1.2 word-class-and-family lesson is the first completed Core-expansion increment. It
 identifies sentence slots before testing form, meaning and collocation, and its retry uses a
@@ -217,4 +217,4 @@ Sprint, and its lesson and seven questions need their own English, editorial and
 evidence.
 
 The E3.2 grammar-filter lesson is the sixth increment, with its own seven passages and word banks.
-E3.4 solve-globally completes Core lesson coverage. All remain draft and need human review.
+E3.4 solve-globally completes Core lesson coverage. E0.3, E1.3, E2.4, E2.5 and E3.3 complete Full lesson coverage. All remain draft and need human review.
