@@ -16,9 +16,10 @@ Fixes were checked by reading the code and running the real checker. Diagrams we
 source and a headless render, not inside the learner app. Scope rests on one-line catalogue outcomes,
 and no item statistics exist yet.
 
-## Fixed in draft revisions
+## Fixed
 
-These still need human review.
+The first two rows are application fixes. The item corrections are draft revisions, each in its own
+claimed batch pull request, and need human review.
 
 | Item | Problem | Change |
 | --- | --- | --- |
