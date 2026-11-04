@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-020",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-020-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,158 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-020-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-020-diagram-r3.svg",
+      "alt_text": "Only the diagonals of a quadrilateral are shown: two straight line segments crossing at a right angle, shown with a corner mark. The two parts of the horizontal segment have the same tick mark. The two parts of the vertical segment have different lengths. The sides are not drawn. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "diagonals",
+        "question_key": "g1-l3-020",
+        "outcome": "1.5",
+        "template": "diagonals_perpendicular_one_bisected",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "diagonals": "perpendicular, only one bisects the other"
+        },
+        "forbidden_visible_labels": [
+          "5",
+          "square",
+          "rectangle",
+          "rhombus",
+          "parallelogram",
+          "kite",
+          "trapezium"
+        ],
+        "unknowns": [],
+        "answer_kind": "classification_code",
+        "equal_marks": [
+          {
+            "segments": [
+              "BO",
+              "DO"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          420.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            169.0
+          ],
+          "A": [
+            300.0,
+            76.0
+          ],
+          "C": [
+            300.0,
+            346.0
+          ],
+          "B": [
+            183.0,
+            169.0
+          ],
+          "D": [
+            417.0,
+            169.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AO",
+            "from": "A",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BO",
+            "from": "B",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CO",
+            "from": "C",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DO",
+            "from": "D",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "D",
+              "C"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "labels": [],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "O",
+              "C"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "O",
+              "D"
+            ]
+          },
+          {
+            "type": "perpendicular",
+            "segments": [
+              "AO",
+              "BO"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "B",
+              "D"
+            ]
+          },
+          {
+            "type": "unequal_segments",
+            "segments": [
+              "AO",
+              "CO"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "4b06ae6faf8d39e45dba37fae520c82da97b0edf2ce8fafc63b6c05e2d16081b",
+      "width": 600,
+      "height": 420
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +246,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
