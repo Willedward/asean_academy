@@ -181,7 +181,7 @@ Full-route, draft-only increment. It moves from supported 45-minute evidence thr
 reduced-support 35-minute run to a fresh 30-minute independent rehearsal without treating speed
 alone or repeated prompts as transfer. Its lesson and exit ticket remain outside the fixed
 Sprint scope and require their own English, editorial and publication evidence. The next
-content-expansion sequence now now moves to mock forms and the open audit findings.
+content-expansion sequence now moves to mock forms and the open audit findings.
 
 The E1.2 word-class-and-family lesson is the first completed Core-expansion increment. It
 identifies sentence slots before testing form, meaning and collocation, and its retry uses a
