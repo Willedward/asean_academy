@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-509",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l4-509-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -83,7 +92,206 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l4-509-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l4-509-diagram-r2.svg",
+      "alt_text": "Two triangles ABC and PQR. AB and PQ have one tick, and AC and PR have two ticks. No angle is marked as equal. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "congruent_triangles",
+        "question_key": "g2-l4-509",
+        "outcome": "2.1",
+        "template": "sas_condition",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": "AB = PQ and AC = PR"
+        },
+        "forbidden_visible_labels": [
+          "1",
+          "SSS",
+          "SAS",
+          "ASA",
+          "RHS",
+          "included",
+          "∠A = ∠P"
+        ],
+        "unknowns": [],
+        "answer_kind": "classification_code",
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ],
+          "PQR": [
+            "P",
+            "Q",
+            "R"
+          ]
+        },
+        "omitted_givens": [
+          {
+            "value": "1",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "2",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "3",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "4",
+            "reason": "A response code in the question, not a measurement of the figure."
+          }
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "PQ"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "CA",
+              "RP"
+            ],
+            "ticks": 2
+          }
+        ],
+        "viewbox": [
+          600.0,
+          304.0
+        ],
+        "points": {
+          "A": [
+            55.0,
+            194.19
+          ],
+          "B": [
+            257.48,
+            194.19
+          ],
+          "C": [
+            175.38,
+            85.8
+          ],
+          "P": [
+            342.52,
+            194.19
+          ],
+          "Q": [
+            545.0,
+            194.19
+          ],
+          "R": [
+            403.2,
+            44.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PQ",
+            "from": "P",
+            "to": "Q",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QR",
+            "from": "Q",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "RP",
+            "from": "R",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "P",
+            "target": "point:P"
+          },
+          {
+            "text": "Q",
+            "target": "point:Q"
+          },
+          {
+            "text": "R",
+            "target": "point:R"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "correspondence",
+            "figures": [
+              "ABC",
+              "PQR"
+            ]
+          },
+          {
+            "type": "unequal_segments",
+            "segments": [
+              "BC",
+              "QR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "b6c1c495f2feb0b5f914625c7caddd4303b60c8a9bc738bf435bd6c3bbd1fdbd",
+      "width": 600,
+      "height": 304
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +305,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

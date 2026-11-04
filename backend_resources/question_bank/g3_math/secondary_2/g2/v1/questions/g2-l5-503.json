@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l5-503",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,278 @@
       "asset_key": "g2-l5-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l5-503-diagram.svg",
-      "alt_text": "Schematic for Similar-triangle ratio synthesis. Not drawn to scale. Stated measures include 12 cm, 21 cm.",
+      "path": "assets/g2-l5-503-diagram-r3.svg",
+      "alt_text": "Triangle ABC inside triangle ADE, sharing vertex A, with B on AD and C on AE. AB is marked (x + 2) cm, the whole of AD is marked (2x − 1) cm, BC is marked 12 cm and DE is marked 21 cm. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "proportion",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "nested_triangles",
         "question_key": "g2-l5-503",
         "outcome": "2.3",
-        "not_to_scale": true
+        "template": "nested_shared_vertex",
+        "inputs": {
+          "ab": {
+            "coefficient": 1,
+            "constant": 2
+          },
+          "ad": {
+            "coefficient": 2,
+            "constant": -1
+          },
+          "bc": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "de": {
+            "value": 21,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "AB": "(x + 2) cm",
+          "AD": "(2x − 1) cm",
+          "BC": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "DE": {
+            "value": 21,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "18",
+          "20",
+          "35"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ],
+          "ADE": [
+            "A",
+            "D",
+            "E"
+          ]
+        },
+        "viewbox": [
+          600.0,
+          512.0
+        ],
+        "points": {
+          "A": [
+            379.73,
+            44.0
+          ],
+          "D": [
+            305.78,
+            422.02
+          ],
+          "E": [
+            536.89,
+            422.02
+          ],
+          "B": [
+            337.47,
+            260.01
+          ],
+          "C": [
+            469.54,
+            260.01
+          ],
+          "PadL": [
+            40.0,
+            422.02
+          ],
+          "PadR": [
+            560.0,
+            422.02
+          ],
+          "dim-AB-1": [
+            289.44,
+            26.34
+          ],
+          "dim-AB-2": [
+            247.18,
+            242.35
+          ],
+          "dim-AD-1": [
+            336.55,
+            35.55
+          ],
+          "dim-AD-2": [
+            262.6,
+            413.57
+          ]
+        },
+        "segments": [
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AE",
+            "from": "A",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "dim-AB",
+            "from": "dim-AB-1",
+            "to": "dim-AB-2",
+            "hidden": false,
+            "role": "dimension"
+          },
+          {
+            "key": "dim-AD",
+            "from": "dim-AD-1",
+            "to": "dim-AD-2",
+            "hidden": false,
+            "role": "dimension"
+          }
+        ],
+        "right_angles": [],
+        "dimension_lines": [
+          {
+            "segment": "dim-AB",
+            "measures": "AB"
+          },
+          {
+            "segment": "dim-AD",
+            "measures": "AD"
+          }
+        ],
+        "labels": [
+          {
+            "text": "(x + 2) cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "(2x − 1) cm",
+            "target": "segment:AD"
+          },
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "D",
+            "target": "point:D"
+          },
+          {
+            "text": "E",
+            "target": "point:E"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "12 cm",
+            "target": "segment:BC"
+          },
+          {
+            "text": "21 cm",
+            "target": "segment:DE"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "ABC",
+              "ADE"
+            ],
+            "value": 1.75
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "B",
+              "D"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "C",
+              "E"
+            ]
+          },
+          {
+            "type": "parallel",
+            "segments": [
+              "BC",
+              "DE"
+            ]
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "A",
+                  "B"
+                ],
+                20.0
+              ],
+              [
+                [
+                  "A",
+                  "D"
+                ],
+                35.0
+              ],
+              [
+                [
+                  "B",
+                  "C"
+                ],
+                12.0
+              ],
+              [
+                [
+                  "D",
+                  "E"
+                ],
+                21.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "b921099f3885721c803feff0ff0bf5f07f461c05d9bf389f7782f6e3534029ff",
-      "width": 940,
-      "height": 390
+      "sha256": "8e9ad76e64dc35ecbf92cab49a8a28577002c8eac47ebc6bb127d88214971cfb",
+      "width": 600,
+      "height": 512
     }
   ],
   "provenance": {
@@ -146,6 +406,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
