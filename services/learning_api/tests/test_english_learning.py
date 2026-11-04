@@ -4707,3 +4707,68 @@ def test_e2_6_logical_connections_journey_is_learner_safe_and_uses_fresh_retry()
     assert wrong.json()["correct"] is False
     assert wrong.json()["retry_queued"] is True
 
+
+def test_full_mocks_unlock_in_order_and_hide_answers_until_the_end():
+    app = application()
+    mocks = request(app, "GET", "/api/v1/english/mocks")
+    assert mocks.status_code == 200, mocks.text
+    assert [item["status"] for item in mocks.json()["mocks"]] == ["locked", "locked"]
+    refused = request(
+        app,
+        "POST",
+        "/api/v1/english/mock-sessions",
+        headers={"Idempotency-Key": "mock-too-early"},
+        json={"purpose": "mock_a"},
+    )
+    assert refused.status_code == 409
+    assert refused.json()["error"]["code"] == "english_mock_not_available"
+
+    baseline = request(
+        app,
+        "POST",
+        "/api/v1/english/diagnostic-sessions",
+        headers={"Idempotency-Key": "mock-baseline"},
+        json={"expected_purpose": "baseline"},
+    ).json()
+    complete_diagnostic(app, baseline["session_id"], "mock-baseline-answer")
+    mocks = request(app, "GET", "/api/v1/english/mocks").json()["mocks"]
+    assert [item["status"] for item in mocks] == ["start", "locked"]
+
+    created = request(
+        app,
+        "POST",
+        "/api/v1/english/mock-sessions",
+        headers={"Idempotency-Key": "mock-a"},
+        json={"purpose": "mock_a"},
+    )
+    assert created.status_code == 201, created.text
+    session = created.json()
+    assert session["form_key"] == "english-mock-sec3-a-v1"
+    assert session["expected_part_count"] == 38
+
+    attempts = complete_diagnostic(app, session["session_id"], "mock-a-answer")
+    assert [question["stable_key"] for question, _ in attempts] == [
+        "ev-l5-101",
+        "eb-l5-001",
+        "eo-l5-101",
+        "er-l5-101",
+        "er-l5-102",
+    ]
+    for question, attempt in attempts[:-1]:
+        encoded = json.dumps(question)
+        assert "correct_key" not in encoded
+        assert "canonical_answer" not in encoded
+        assert attempt["session"]["score"] is None
+    assert attempts[-1][1]["session"]["correct_parts"] == 38
+
+    resumed_after_finish = request(
+        app,
+        "POST",
+        "/api/v1/english/mock-sessions",
+        headers={"Idempotency-Key": "mock-a-again"},
+        json={"purpose": "mock_a"},
+    )
+    assert resumed_after_finish.status_code == 409
+    mocks = request(app, "GET", "/api/v1/english/mocks").json()["mocks"]
+    assert [item["status"] for item in mocks] == ["completed", "start"]
+    assert mocks[0]["result_session_id"] == session["session_id"]

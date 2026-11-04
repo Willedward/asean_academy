@@ -25,6 +25,7 @@ from ..english_contracts import (
     CreateEnglishEssaySelfReviewRequest,
     CreateEnglishEssaySubmissionRequest,
     CreateEnglishEssayUsefulnessRequest,
+    CreateEnglishMockSessionRequest,
     CreateEnglishPracticeSessionRequest,
     EnglishAttemptResponse,
     EnglishCheckpointAttemptResponse,
@@ -50,6 +51,7 @@ from ..english_contracts import (
     EnglishEssayUsefulnessResponse,
     EnglishHintResponse,
     EnglishLessonResponse,
+    EnglishMockListResponse,
     EnglishNextQuestionResponse,
     EnglishPracticeSessionResponse,
     EnglishProgressResponse,
@@ -266,9 +268,7 @@ async def create_essay_marking_job(
     _rate_limit: PracticeAttemptRateLimitDependency,
 ) -> EnglishEssayMarkingWorkspaceResponse:
     workspace = _safe(
-        lambda: service.enqueue_marking_job(
-            str(submission_id), idempotency_key=idempotency_key
-        )
+        lambda: service.enqueue_marking_job(str(submission_id), idempotency_key=idempotency_key)
     )
     if workspace.job and workspace.job.status in {"queued", "retryable_failed"}:
         background_tasks.add_task(
@@ -391,6 +391,37 @@ async def create_diagnostic_session(
     return _safe(
         lambda: service.create_session(
             expected_purpose=body.expected_purpose,
+            idempotency_key=idempotency_key,
+        )
+    )
+
+
+@router.get(
+    "/mocks",
+    operation_id="listEnglishMocks",
+    response_model=EnglishMockListResponse,
+    summary="Get the learner's available English full mocks",
+)
+async def list_mocks(service: EnglishDiagnosticServiceDependency) -> EnglishMockListResponse:
+    return _safe(service.mocks)
+
+
+@router.post(
+    "/mock-sessions",
+    operation_id="createEnglishMockSession",
+    response_model=EnglishDiagnosticSessionResponse,
+    status_code=201,
+    summary="Start or resume an English full mock",
+)
+async def create_mock_session(
+    body: CreateEnglishMockSessionRequest,
+    idempotency_key: IdempotencyHeader,
+    service: EnglishDiagnosticServiceDependency,
+    _rate_limit: PracticeSessionRateLimitDependency,
+) -> EnglishDiagnosticSessionResponse:
+    return _safe(
+        lambda: service.create_mock_session(
+            purpose=body.purpose,
             idempotency_key=idempotency_key,
         )
     )

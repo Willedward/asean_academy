@@ -4,6 +4,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  Clock,
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";
@@ -36,6 +37,8 @@ type EnglishDiagnosticApi = {
   submitAttempt: typeof submitEnglishDiagnosticAttempt;
 };
 
+const MOCK_MINUTES = 90;
+
 const defaultApi: EnglishDiagnosticApi = {
   getNextQuestion: getNextEnglishDiagnosticQuestion,
   submitAttempt: submitEnglishDiagnosticAttempt,
@@ -58,6 +61,12 @@ export function EnglishDiagnosticPlayer({
   const [answers, setAnswers] = useState<EnglishAnswers>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 30_000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   async function load() {
     setBusy(true);
@@ -253,6 +262,12 @@ export function EnglishDiagnosticPlayer({
     );
   }
 
+  const isMock = current.session.purpose.startsWith("mock");
+  const minutesLeft = Math.ceil(
+    MOCK_MINUTES -
+      (now - new Date(current.session.started_at).getTime()) / 60_000,
+  );
+
   return (
     <article className="flex flex-col gap-5 lg:gap-6">
       <Link
@@ -265,13 +280,24 @@ export function EnglishDiagnosticPlayer({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <Eyebrow>
-              {current.session.purpose.toUpperCase()} · PROTECTED DIAGNOSTIC
+              {isMock
+                ? `MOCK ${current.session.purpose.slice(-1).toUpperCase()} · SECTION 1`
+                : `${current.session.purpose.toUpperCase()} · PROTECTED DIAGNOSTIC`}
             </Eyebrow>
             <H1>
               Question group {position} of {current.session.question_count}
             </H1>
           </div>
-          <Tag icon={ShieldCheck}>No feedback during the form</Tag>
+          <div className="flex flex-wrap gap-2">
+            {isMock ? (
+              <Tag icon={Clock}>
+                {minutesLeft > 0
+                  ? `About ${minutesLeft} minutes left`
+                  : "The 90 minutes are up. Finish when you can."}
+              </Tag>
+            ) : null}
+            <Tag icon={ShieldCheck}>No feedback during the form</Tag>
+          </div>
         </div>
         <Steps
           done={position - 1}

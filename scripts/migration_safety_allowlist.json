@@ -86,5 +86,12 @@
       "match": "drop constraint unit_checkpoint_pools_unit_version_id_pool_type_key",
       "reason": "Removes no data. A partial unique index in the same transaction keeps one checkpoint pool per unit; only adaptive_reserve pools may now repeat, and pool keys stay unique per unit."
     }
+  ],
+  "202611040054_english_full_mock_sessions.sql": [
+    {
+      "category": "drop_object",
+      "match": "drop constraint english_diagnostic_sessions_form_key_check",
+      "reason": "Removes no data. The same transaction adds a wider check that still accepts every existing baseline and endline key."
+    }
   ]
 }
