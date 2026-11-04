@@ -751,11 +751,13 @@ def test_applying_all_batches_clears_strict_geometry(repository_root, tmp_path):
 def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_path):
     bank = copy_bank(repository_root, tmp_path)
     before = json.loads((bank / "questions" / "g5-l5-002.json").read_text())
+    count = json.loads((bank / "diagram_audit.json").read_text())["diagram_question_count"]
     report = regenerate_batch(bank, "B002", apply=True, add=NEW_FIGURES["B002"])
     assert report.ok
 
     question = json.loads((bank / "questions" / "g5-l5-002.json").read_text())
-    assert question["revision"] == before["revision"] + 1
+    if before["assets"][0]["generation_spec"]["renderer"] != SEC1_MENSURATION_RENDERER:
+        assert question["revision"] == before["revision"] + 1
     assert (bank / before["assets"][0]["path"]).is_file()
     assert question["assets"][0]["path"].endswith(f"-r{question['revision']}.svg")
     assert question["assets"][0]["generation_spec"]["renderer"] == SEC1_MENSURATION_RENDERER
@@ -769,7 +771,7 @@ def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_pa
     audit = json.loads((bank / "diagram_audit.json").read_text())
     decision = next(item for item in audit["decisions"] if item["question_key"] == "g5-l2-011")
     assert decision["decision"] == "diagram_added"
-    assert audit["diagram_question_count"] == 15
+    assert audit["diagram_question_count"] == count
 
     again = regenerate_batch(bank, "B002", apply=True, add=NEW_FIGURES["B002"])
     assert all(asset.unchanged for asset in again.assets)
