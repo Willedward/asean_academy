@@ -33,7 +33,9 @@ now use `sec3` in place of `sec1`.
 open-cloze prompts now exist as new draft revisions, awaiting English and editorial decisions.
 Choices the educator should check first: the accepted-answer sets; `eo-l5-006` part 1 and `eo-l5-007`
 part 1, where a neutral prompt leaves several adverbs possible; and the fresh words in `ev-l5-004` and
-`ev-l5-005`. §4.1, §4.4 (other than `e5-lesson-03`), §4.5 and §4.7–§4.11 remain open.
+`ev-l5-005`. §4.1, §4.4 (other than `e5-lesson-03`), §4.5 and §4.7–§4.11 remain open. The
+missing lessons in §5.1 now exist as drafts, written to the
+[level review](./ENGLISH_LEVEL_REVIEW_SEC3_2026_11.md).
 
 ## 1. Scope and method
 

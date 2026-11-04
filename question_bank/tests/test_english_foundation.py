@@ -38,9 +38,9 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert report.valid
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
-    assert len(report.lessons) == 45
-    assert len(report.passages) == 44
-    assert len(report.questions) == 147
+    assert len(report.lessons) == 51
+    assert len(report.passages) == 58
+    assert len(report.questions) == 189
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -106,18 +106,18 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     summary = report.as_dict()
     assert summary["route_lesson_counts"] == {"full": 51, "core": 32, "sprint": 16}
     assert summary["route_authored_lesson_counts"] == {
-        "full": 45,
-        "core": 31,
+        "full": 51,
+        "core": 32,
         "sprint": 16,
     }
     assert summary["route_exit_ticket_lesson_counts"] == {
-        "full": 45,
-        "core": 31,
+        "full": 51,
+        "core": 32,
         "sprint": 16,
     }
     assert summary["route_parallel_retry_lesson_counts"] == {
-        "full": 22,
-        "core": 22,
+        "full": 28,
+        "core": 23,
         "sprint": 16,
     }
     assert summary["route_unauthored_lesson_codes"]["sprint"] == []
@@ -1921,6 +1921,10 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eb-b007",
         "english-eb-b008",
         "english-eb-b009",
+        "english-eb-b010",
+        "english-eb-b011",
+        "english-eb-b012",
+        "english-eb-b013",
         "english-eg-b001",
         "english-eg-b002",
             "english-eg-b003",
@@ -1929,6 +1933,10 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
             "english-eg-b006",
             "english-eg-b007",
             "english-eg-b008",
+            "english-eg-b009",
+            "english-eg-b010",
+            "english-eg-b011",
+            "english-eg-b012",
         "english-eo-b001",
         "english-eo-b002",
         "english-eo-b003",
@@ -1967,6 +1975,8 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b012",
         "english-ev-b013",
         "english-ev-b014",
+        "english-ev-b015",
+        "english-ev-b016",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -2004,8 +2014,10 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b035",
         "english-ex-b036",
         "english-ex-b037",
+        "english-ex-b038",
+        "english-ex-b039",
     ]
-    assert len(report.questions) == 147
+    assert len(report.questions) == 189
     assert not report.duplicates
 
 
@@ -2834,5 +2846,47 @@ def test_e3_2_grammar_filter_passes_quality_rules_and_each_bank_has_spare_words(
         assert len(question.parts[0].response.options) > len(question.parts)
     assert questions[6].parallel_form_of == questions[5].stable_key
     assert questions[6].passage_ref.stable_key != questions[5].passage_ref.stable_key
+    assert not english_quality_findings(questions, [], [])
+
+
+def test_e3_4_solve_globally_passes_quality_rules_and_uses_a_fresh_retry(english_root):
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/eb-l4-{number:03d}.json").read_text()
+        )
+        for number in range(1, 8)
+    ]
+
+    assert {question.outcome_code for question in questions} == {"EB3.4"}
+    assert [len(question.parts) for question in questions] == [4, 4, 5, 5, 5, 8, 8]
+    assert questions[6].parallel_form_of == questions[5].stable_key
+    assert questions[6].passage_ref.stable_key != questions[5].passage_ref.stable_key
+    assert not english_quality_findings(questions, [], [])
+
+
+@pytest.mark.parametrize(
+    ("first_key", "outcome"),
+    [
+        ("eg-l4-001", "EG2.4"),
+        ("eg-l5-001", "EG2.5"),
+        ("ev-l3-001", "EV1.3"),
+        ("ex-l1-201", "EX0.3"),
+        ("eb-l3-001", "EB3.3"),
+    ],
+)
+def test_full_route_lessons_pass_quality_rules_and_use_a_fresh_retry(
+    english_root, first_key, outcome
+):
+    prefix, start = first_key.rsplit("-", 1)
+    questions = [
+        EnglishObjectiveQuestion.model_validate_json(
+            (english_root / f"questions/{prefix}-{int(start) + offset:03d}.json").read_text()
+        )
+        for offset in range(7)
+    ]
+
+    assert {question.outcome_code for question in questions} == {outcome}
+    assert questions[5].exposure_pool == "exit_ticket"
+    assert questions[6].parallel_form_of == questions[5].stable_key
     assert not english_quality_findings(questions, [], [])
 
