@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l2-026",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l2-026-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two lines intersect. Each obtuse angle is 128\u00b0. Find the sum of the two acute angles in degrees."
+          "text": "Two lines intersect. Each obtuse angle is 128°. Find the sum of the two acute angles in degrees."
         }
       ],
       "marks": 2,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Each acute angle is supplementary to 128\u00b0."
+              "text": "Each acute angle is supplementary to 128°."
             }
           ]
         },
@@ -83,7 +92,252 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l2-026-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l2-026-diagram-r2.svg",
+      "alt_text": "Two straight lines crossing at a point. Each of the two obtuse angles is marked 128°. The two acute angles are marked a and b. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "intersecting_lines",
+        "question_key": "g1-l2-026",
+        "outcome": "1.2",
+        "template": "intersection_obtuse",
+        "inputs": {
+          "obtuse": 128
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "obtuse": 128
+          }
+        },
+        "forbidden_visible_labels": [
+          "104",
+          "52"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-a",
+            "label": "a"
+          },
+          {
+            "target": "angle:angle-b",
+            "label": "b"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          412.0
+        ],
+        "points": {
+          "W": [
+            115.99,
+            193.0
+          ],
+          "E": [
+            484.01,
+            193.0
+          ],
+          "O": [
+            300.0,
+            193.0
+          ],
+          "P": [
+            413.29,
+            48.0
+          ],
+          "Q": [
+            186.71,
+            338.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "WE",
+            "from": "W",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QP",
+            "from": "Q",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "E",
+              "P"
+            ],
+            "marker_key": "angle-a",
+            "drawn_degrees": 52.0,
+            "degrees": 52.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "P",
+              "W"
+            ],
+            "marker_key": "angle-1",
+            "drawn_degrees": 128.0,
+            "degrees": 128.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "W",
+              "Q"
+            ],
+            "marker_key": "angle-b",
+            "drawn_degrees": 52.0,
+            "degrees": 52.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "Q",
+              "E"
+            ],
+            "marker_key": "angle-2",
+            "drawn_degrees": 128.0,
+            "degrees": 128.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-a",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              484.01,
+              193.0
+            ],
+            "end_ray_point": [
+              413.29,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-1",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 36.0,
+            "start_ray_point": [
+              413.29,
+              48.0
+            ],
+            "end_ray_point": [
+              115.99,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-b",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              115.99,
+              193.0
+            ],
+            "end_ray_point": [
+              186.71,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-2",
+            "center": [
+              300.0,
+              193.0
+            ],
+            "radius": 36.0,
+            "start_ray_point": [
+              186.71,
+              338.0
+            ],
+            "end_ray_point": [
+              484.01,
+              193.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "a",
+            "target": "angle:angle-a"
+          },
+          {
+            "text": "128°",
+            "target": "angle:angle-1"
+          },
+          {
+            "text": "b",
+            "target": "angle:angle-b"
+          },
+          {
+            "text": "128°",
+            "target": "angle:angle-2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "W",
+              "O",
+              "E"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "Q",
+              "O",
+              "P"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-a",
+              "angle-1"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "5a0ef169691e776d8c3ce0bbfb1eb2a11b2415a9e1316dc53c33703c9260be8b",
+      "width": 600,
+      "height": 412
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +351,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

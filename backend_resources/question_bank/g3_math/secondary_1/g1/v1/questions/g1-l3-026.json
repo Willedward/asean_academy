@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-026",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g1-l3-026-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A transversal makes an acute angle of 37\u00b0 with one of two parallel lines. A second transversal is perpendicular to the first. Find the acute angle that the second transversal makes with either parallel line."
+          "text": "A transversal makes an acute angle of 37° with one of two parallel lines. A second transversal is perpendicular to the first. Find the acute angle that the second transversal makes with either parallel line."
         }
       ],
       "marks": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "A right angle is 90\u00b0."
+              "text": "A right angle is 90°."
             }
           ]
         },
@@ -72,7 +81,229 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g1-l3-026-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g1-l3-026-diagram-r2.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, and two transversals that cross between them at a right angle, shown with a corner mark. At the lower line, one transversal makes an angle marked 37° and the other makes an angle marked x. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "parallel_lines",
+        "question_key": "g1-l3-026",
+        "outcome": "1.3",
+        "template": "perpendicular_transversal",
+        "inputs": {
+          "given": 37
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "given": 37
+          }
+        },
+        "forbidden_visible_labels": [
+          "53"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "parallel_marks": [
+          {
+            "segments": [
+              "L1L2",
+              "M1M2"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "L1": [
+            65.0,
+            30.0
+          ],
+          "L2": [
+            535.0,
+            30.0
+          ],
+          "M1": [
+            65.0,
+            219.2
+          ],
+          "M2": [
+            535.0,
+            219.2
+          ],
+          "P": [
+            290.09,
+            109.47
+          ],
+          "A": [
+            144.47,
+            219.2
+          ],
+          "B": [
+            372.79,
+            219.2
+          ],
+          "E": [
+            395.55,
+            30.0
+          ],
+          "F": [
+            230.21,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "L1L2",
+            "from": "L1",
+            "to": "L2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AE",
+            "from": "A",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BF",
+            "from": "B",
+            "to": "F",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "P",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "P"
+            ],
+            "marker_key": "angle-given",
+            "drawn_degrees": 37.0,
+            "degrees": 37.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "A",
+              "P"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 53.0,
+            "degrees": 53.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-given",
+            "center": [
+              144.47,
+              219.2
+            ],
+            "radius": 58.0,
+            "start_ray_point": [
+              372.79,
+              219.2
+            ],
+            "end_ray_point": [
+              290.09,
+              109.47
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              372.79,
+              219.2
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              144.47,
+              219.2
+            ],
+            "end_ray_point": [
+              290.09,
+              109.47
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "labels": [
+          {
+            "text": "37°",
+            "target": "angle:angle-given"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "P",
+              "E"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "P",
+              "F"
+            ]
+          },
+          {
+            "type": "perpendicular",
+            "segments": [
+              "AE",
+              "BF"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "fcdab3398daf1f6d278bd66570b177f22c9808de51a9aea7f351bf311dc37f85",
+      "width": 600,
+      "height": 300
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +317,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
