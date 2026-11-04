@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-l2-001",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,24 +86,191 @@
       "asset_key": "g1-l2-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l2-001-diagram-r3.svg",
-      "alt_text": "Schematic for Complement of an acute angle. Not drawn to scale. Stated measures include 38°.",
+      "path": "assets/g1-l2-001-diagram-r4.svg",
+      "alt_text": "A right angle, shown with a corner mark, split in two by a ray. One part is marked 38° and the other part is marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "angle_types",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "right_angle_split",
         "question_key": "g1-l2-001",
         "outcome": "1.1",
+        "template": "complement_split",
+        "inputs": {
+          "given": 38
+        },
         "not_to_scale": true,
-        "angle_measures": {
-          "acute": 60,
-          "right": 90,
-          "obtuse": 120,
-          "reflex": 240
-        }
+        "dimensions": {
+          "angles": {
+            "given": 38,
+            "whole": 90
+          }
+        },
+        "forbidden_visible_labels": [
+          "52"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          402.0
+        ],
+        "points": {
+          "V": [
+            160.0,
+            328.0
+          ],
+          "O": [
+            160.0,
+            328.0
+          ],
+          "A": [
+            440.0,
+            328.0
+          ],
+          "B": [
+            160.0,
+            48.0
+          ],
+          "R": [
+            380.64,
+            155.61
+          ]
+        },
+        "segments": [
+          {
+            "key": "VA",
+            "from": "V",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VB",
+            "from": "V",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "V",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "A",
+              "R"
+            ],
+            "marker_key": "angle-given",
+            "drawn_degrees": 38.0,
+            "degrees": 38.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "R",
+              "B"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 52.0,
+            "degrees": 52.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-given",
+            "center": [
+              160.0,
+              328.0
+            ],
+            "radius": 70.0,
+            "start_ray_point": [
+              440.0,
+              328.0
+            ],
+            "end_ray_point": [
+              380.64,
+              155.61
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              160.0,
+              328.0
+            ],
+            "radius": 54.0,
+            "start_ray_point": [
+              380.64,
+              155.61
+            ],
+            "end_ray_point": [
+              160.0,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "38°",
+            "target": "angle:angle-given"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "same_point",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "perpendicular",
+            "segments": [
+              "VA",
+              "VB"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-given",
+              "angle-x"
+            ],
+            "value": 90
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "99931cf865a027e6b87fe5c9a87ac7d7580b2a931b26c499a986b0e87c958b4f",
-      "width": 940,
-      "height": 390
+      "sha256": "5559fab273e46c72af1af6724c5df9c7186485c6fcad99ed09f100c7f7e187be",
+      "width": 600,
+      "height": 402
     }
   ],
   "provenance": {
@@ -119,6 +286,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Corrected shared angle-classification diagram after founder review; awaiting Mathematics and editorial re-review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

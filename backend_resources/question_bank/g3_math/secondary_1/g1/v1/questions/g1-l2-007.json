@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l2-007",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,169 @@
       "asset_key": "g1-l2-007-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l2-007-diagram.svg",
-      "alt_text": "Schematic for Constructing a sixty-degree angle. Not drawn to scale.",
+      "path": "assets/g1-l2-007-diagram-r3.svg",
+      "alt_text": "A ray from endpoint A passes through B. Compass arcs of equal radius centred at A and B meet at C. The sides AB, BC and CA of the triangle have the same tick mark. The angle at A between the ray and AC is marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "construction",
         "question_key": "g1-l2-007",
         "outcome": "1.7",
-        "not_to_scale": true
+        "template": "equilateral_on_ray",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": "AB = BC = CA"
+        },
+        "forbidden_visible_labels": [
+          "60",
+          "sixty"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "BC",
+              "AC"
+            ],
+            "ticks": 1
+          }
+        ],
+        "arcs": {
+          "arc-a-1": {
+            "center": "A",
+            "radius": 302.82,
+            "through": "C"
+          },
+          "arc-b-1": {
+            "center": "B",
+            "radius": 302.82,
+            "through": "C"
+          }
+        },
+        "viewbox": [
+          600.0,
+          384.0
+        ],
+        "points": {
+          "A": [
+            85.0,
+            310.25
+          ],
+          "B": [
+            387.82,
+            310.25
+          ],
+          "E": [
+            515.0,
+            310.25
+          ],
+          "C": [
+            236.41,
+            48.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BE",
+            "from": "B",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 60.0,
+            "degrees": 60
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-x",
+            "center": [
+              85.0,
+              310.25
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              387.82,
+              310.25
+            ],
+            "end_ray_point": [
+              236.41,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          },
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "B",
+              "E"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "1c27925449accc0a6bfb9283f4797c52942f771e2e5880acd56a708d67189d92",
-      "width": 940,
-      "height": 390
+      "sha256": "18a83524cb8473dd2d250d14c87f091fcbbbbac3eae799af76871f206ff7a278",
+      "width": 600,
+      "height": 384
     }
   ],
   "provenance": {
@@ -113,6 +264,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

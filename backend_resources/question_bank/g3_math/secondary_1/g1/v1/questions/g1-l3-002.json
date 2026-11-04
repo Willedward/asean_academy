@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-002",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -97,18 +97,166 @@
       "asset_key": "g1-l3-002-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-002-diagram.svg",
-      "alt_text": "Schematic for Straight-line ratio. Not drawn to scale.",
+      "path": "assets/g1-l3-002-diagram-r3.svg",
+      "alt_text": "A straight line with one ray from a point on it. The two adjacent angles are marked 2k and 3k, where k is the size of one ratio part. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "intersection",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "angles_on_line",
         "question_key": "g1-l3-002",
         "outcome": "1.2",
-        "not_to_scale": true
+        "template": "straight_line_ratio",
+        "inputs": {
+          "ratio": [
+            2,
+            3
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "ratio": [
+            2,
+            3
+          ],
+          "angle_sum": 180
+        },
+        "forbidden_visible_labels": [
+          "108",
+          "72",
+          "36"
+        ],
+        "unknowns": [],
+        "viewbox": [
+          600.0,
+          325.0
+        ],
+        "points": {
+          "L": [
+            60.0,
+            250.7
+          ],
+          "O": [
+            300.0,
+            250.7
+          ],
+          "R": [
+            540.0,
+            250.7
+          ],
+          "T": [
+            368.46,
+            40.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "LR",
+            "from": "L",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "OT",
+            "from": "O",
+            "to": "T",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "R",
+              "T"
+            ],
+            "marker_key": "angle-first",
+            "drawn_degrees": 72.0,
+            "degrees": 72.0
+          },
+          {
+            "vertex": "O",
+            "arms": [
+              "T",
+              "L"
+            ],
+            "marker_key": "angle-second",
+            "drawn_degrees": 108.0,
+            "degrees": 108.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-first",
+            "center": [
+              300.0,
+              250.7
+            ],
+            "radius": 56.0,
+            "start_ray_point": [
+              540.0,
+              250.7
+            ],
+            "end_ray_point": [
+              368.46,
+              40.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-second",
+            "center": [
+              300.0,
+              250.7
+            ],
+            "radius": 40.0,
+            "start_ray_point": [
+              368.46,
+              40.0
+            ],
+            "end_ray_point": [
+              60.0,
+              250.7
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "2k",
+            "target": "angle:angle-first"
+          },
+          {
+            "text": "3k",
+            "target": "angle:angle-second"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "L",
+              "O",
+              "R"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-first",
+              "angle-second"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "9155fa62954d30ab81d956cd8dfff7de0ffc545fa23bf236254c9880d51d080f",
-      "width": 940,
-      "height": 390
+      "sha256": "00be94686be34bddb173559cccf5afde906a6f826be52661818d437aabe3031a",
+      "width": 600,
+      "height": 325
     }
   ],
   "provenance": {
@@ -124,6 +272,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

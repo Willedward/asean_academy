@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-006",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,130 @@
       "asset_key": "g1-l3-006-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-006-diagram.svg",
-      "alt_text": "Schematic for Equal diagonals that bisect. Not drawn to scale.",
+      "path": "assets/g1-l3-006-diagram-r3.svg",
+      "alt_text": "Only the diagonals of a quadrilateral are shown: two straight line segments crossing at a slant. Each of the four parts from the crossing point has the same tick mark, so the segments are equal and bisect each other. The sides are not drawn. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "quadrilateral",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "diagonals",
         "question_key": "g1-l3-006",
         "outcome": "1.5",
-        "not_to_scale": true
+        "template": "diagonals_equal_bisect",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "diagonals": "equal, bisecting, not perpendicular"
+        },
+        "forbidden_visible_labels": [
+          "2",
+          "square",
+          "rectangle",
+          "rhombus",
+          "parallelogram",
+          "kite",
+          "trapezium"
+        ],
+        "unknowns": [],
+        "answer_kind": "classification_code",
+        "forbid_right_angle_marker": true,
+        "equal_marks": [
+          {
+            "segments": [
+              "AO",
+              "CO",
+              "BO",
+              "DO"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          355.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            178.55
+          ],
+          "A": [
+            115.0,
+            281.09
+          ],
+          "C": [
+            485.0,
+            76.0
+          ],
+          "B": [
+            115.0,
+            76.0
+          ],
+          "D": [
+            485.0,
+            281.09
+          ]
+        },
+        "segments": [
+          {
+            "key": "AO",
+            "from": "A",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BO",
+            "from": "B",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CO",
+            "from": "C",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DO",
+            "from": "D",
+            "to": "O",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "O",
+              "C"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "O",
+              "D"
+            ]
+          },
+          {
+            "type": "not_perpendicular",
+            "segments": [
+              "CO",
+              "DO"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "1817733cf782dd376fa98a1144e6b9967ee3589c93653ad59d56756685592563",
-      "width": 940,
-      "height": 390
+      "sha256": "3764362d3c6d47632ddff37fae7b415ee31ac4a45081ce463360c856d50bba40",
+      "width": 600,
+      "height": 355
     }
   ],
   "provenance": {
@@ -113,6 +225,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

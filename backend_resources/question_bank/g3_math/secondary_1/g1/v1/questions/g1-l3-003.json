@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-003",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -97,18 +97,198 @@
       "asset_key": "g1-l3-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-003-diagram.svg",
-      "alt_text": "Schematic for Co-interior ratio. Not drawn to scale.",
+      "path": "assets/g1-l3-003-diagram-r3.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. The two angles between the lines on the right of the transversal are marked 2k at the lower line and 3k at the upper line, where k is the size of one ratio part. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "parallel",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "parallel_lines",
         "question_key": "g1-l3-003",
         "outcome": "1.3",
-        "not_to_scale": true
+        "template": "parallel_cointerior_ratio",
+        "inputs": {
+          "ratio": [
+            2,
+            3
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "ratio": [
+            2,
+            3
+          ],
+          "angle_sum": 180
+        },
+        "forbidden_visible_labels": [
+          "108",
+          "72",
+          "36"
+        ],
+        "unknowns": [],
+        "parallel_marks": [
+          {
+            "segments": [
+              "L1L2",
+              "M1M2"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          377.0
+        ],
+        "points": {
+          "L1": [
+            65.0,
+            83.24
+          ],
+          "L2": [
+            535.0,
+            83.24
+          ],
+          "M1": [
+            65.0,
+            249.62
+          ],
+          "M2": [
+            535.0,
+            249.62
+          ],
+          "D": [
+            256.33,
+            249.62
+          ],
+          "U": [
+            310.39,
+            83.24
+          ],
+          "T1": [
+            239.03,
+            302.86
+          ],
+          "T2": [
+            327.69,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "L1L2",
+            "from": "L1",
+            "to": "L2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "D",
+            "arms": [
+              "M2",
+              "U"
+            ],
+            "marker_key": "angle-first",
+            "drawn_degrees": 72.0,
+            "degrees": 72.0
+          },
+          {
+            "vertex": "U",
+            "arms": [
+              "D",
+              "L2"
+            ],
+            "marker_key": "angle-second",
+            "drawn_degrees": 108.0,
+            "degrees": 108.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-first",
+            "center": [
+              256.33,
+              249.62
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              535.0,
+              249.62
+            ],
+            "end_ray_point": [
+              310.39,
+              83.24
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-second",
+            "center": [
+              310.39,
+              83.24
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              256.33,
+              249.62
+            ],
+            "end_ray_point": [
+              535.0,
+              83.24
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "2k",
+            "target": "angle:angle-first"
+          },
+          {
+            "text": "3k",
+            "target": "angle:angle-second"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "T1",
+              "D",
+              "U",
+              "T2"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-first",
+              "angle-second"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "46fca25eb9544541c9a6b82112c2d68ba5a674531f8dd3dc02adfd8cc712e6f1",
-      "width": 940,
-      "height": 390
+      "sha256": "d6166ea1cd281b314cf459b970f4be6b45e8f5de8afa433f6639e04d9b7e9d2b",
+      "width": 600,
+      "height": 377
     }
   ],
   "provenance": {
@@ -124,6 +304,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

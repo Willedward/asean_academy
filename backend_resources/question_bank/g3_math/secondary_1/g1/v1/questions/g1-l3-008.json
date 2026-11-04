@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-008",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,151 @@
       "asset_key": "g1-l3-008-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-008-diagram.svg",
-      "alt_text": "Schematic for Compass radius in an SSS construction. Not drawn to scale. Stated measures include 5 cm, 6 cm, 7 cm.",
+      "path": "assets/g1-l3-008-diagram-r3.svg",
+      "alt_text": "Segment AB marked 5 cm. A compass arc centred at A and a compass arc centred at B meet at C. The dashed line from B to C is marked 7 cm and the dashed radius from A to C is marked r. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "construction",
         "question_key": "g1-l3-008",
         "outcome": "1.7",
-        "not_to_scale": true
+        "template": "sss_arc_radius",
+        "inputs": {
+          "ab": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "ac": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "bc": {
+            "value": 7,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "AB": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "BC": {
+            "value": 7,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "6"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AC",
+            "label": "r"
+          }
+        ],
+        "arcs": {
+          "arc-a-1": {
+            "center": "A",
+            "radius": 306.19,
+            "through": "C"
+          },
+          "arc-b-1": {
+            "center": "B",
+            "radius": 357.22,
+            "through": "C"
+          }
+        },
+        "viewbox": [
+          600.0,
+          422.0
+        ],
+        "points": {
+          "A": [
+            172.42,
+            348.0
+          ],
+          "B": [
+            427.58,
+            348.0
+          ],
+          "C": [
+            233.66,
+            48.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:BC"
+          },
+          {
+            "text": "r",
+            "target": "segment:AC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.8333
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "BC"
+            ],
+            "value": 0.7143
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "ba5eaa8446f098ec45c62506dfa6054a343fdceeb6fb0536b2439bfc786b89f9",
-      "width": 940,
-      "height": 390
+      "sha256": "0f97610ea60349d52f112cfecc3b258635528b40984049802a42912d63a881ed",
+      "width": 600,
+      "height": 422
     }
   ],
   "provenance": {
@@ -113,6 +246,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

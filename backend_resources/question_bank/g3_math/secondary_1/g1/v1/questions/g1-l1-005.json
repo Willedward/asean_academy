@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l1-005",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,184 @@
       "asset_key": "g1-l1-005-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l1-005-diagram.svg",
-      "alt_text": "Schematic for Interior sum of a triangle. Not drawn to scale.",
+      "path": "assets/g1-l1-005-diagram-r3.svg",
+      "alt_text": "A triangle with its three interior angles marked a, b and c. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "exterior",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "triangle",
         "question_key": "g1-l1-005",
         "outcome": "1.6",
-        "not_to_scale": true
+        "template": "triangle_angle_sum",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "interior_angles": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        "forbidden_visible_labels": [
+          "180"
+        ],
+        "unknowns": [],
+        "viewbox": [
+          600.0,
+          412.0
+        ],
+        "points": {
+          "A": [
+            110.86,
+            338.0
+          ],
+          "B": [
+            489.14,
+            338.0
+          ],
+          "C": [
+            371.97,
+            48.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_key": "angle-a",
+            "drawn_degrees": 48.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "C",
+              "A"
+            ],
+            "marker_key": "angle-b",
+            "drawn_degrees": 68.0
+          },
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-c",
+            "drawn_degrees": 64.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-a",
+            "center": [
+              110.86,
+              338.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              489.14,
+              338.0
+            ],
+            "end_ray_point": [
+              371.97,
+              48.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-b",
+            "center": [
+              489.14,
+              338.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              371.97,
+              48.0
+            ],
+            "end_ray_point": [
+              110.86,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-c",
+            "center": [
+              371.97,
+              48.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              110.86,
+              338.0
+            ],
+            "end_ray_point": [
+              489.14,
+              338.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "a",
+            "target": "angle:angle-a"
+          },
+          {
+            "text": "b",
+            "target": "angle:angle-b"
+          },
+          {
+            "text": "c",
+            "target": "angle:angle-c"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-a",
+              "angle-b",
+              "angle-c"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "51421c97ed13d6f86bde732237c2ab1f667f530a8001cbba049eb664fc5f666b",
-      "width": 940,
-      "height": 390
+      "sha256": "53bb3112827a5e164c50a22bafed8b7e2ede9794501e6c1ed6dce8db274a38f3",
+      "width": 600,
+      "height": 412
     }
   ],
   "provenance": {
@@ -113,6 +279,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

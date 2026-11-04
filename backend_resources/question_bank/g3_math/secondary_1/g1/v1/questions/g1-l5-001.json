@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l5-001",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,253 @@
       "asset_key": "g1-l5-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l5-001-diagram.svg",
-      "alt_text": "Schematic for Angle between two transversals. Not drawn to scale. Stated measures include 38°, 67°.",
+      "path": "assets/g1-l5-001-diagram-r3.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, and two transversals that cross at point P between them. Going up from P, one transversal reaches the upper line to the left, making an angle marked 38° with it, and the other reaches it to the right, making an angle marked 67°. The angle at P between the two upward rays is marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "parallel",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "parallel_lines",
         "question_key": "g1-l5-001",
         "outcome": "1.3",
-        "not_to_scale": true
+        "template": "two_transversals_meeting",
+        "inputs": {
+          "left_angle": 38,
+          "right_angle": 67
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "left": 38,
+            "right": 67
+          }
+        },
+        "forbidden_visible_labels": [
+          "75"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "parallel_marks": [
+          {
+            "segments": [
+              "L1L2",
+              "M1M2"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          354.0
+        ],
+        "points": {
+          "L1": [
+            65.0,
+            30.0
+          ],
+          "L2": [
+            535.0,
+            30.0
+          ],
+          "M1": [
+            65.0,
+            280.01
+          ],
+          "M2": [
+            535.0,
+            280.01
+          ],
+          "P": [
+            357.6,
+            200.01
+          ],
+          "A": [
+            140.0,
+            30.0
+          ],
+          "B": [
+            429.76,
+            30.0
+          ],
+          "C": [
+            460.0,
+            280.01
+          ],
+          "D": [
+            323.64,
+            280.01
+          ]
+        },
+        "segments": [
+          {
+            "key": "L1L2",
+            "from": "L1",
+            "to": "L2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BD",
+            "from": "B",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "P"
+            ],
+            "marker_key": "angle-left",
+            "drawn_degrees": 38.0,
+            "degrees": 38.0
+          },
+          {
+            "vertex": "B",
+            "arms": [
+              "A",
+              "P"
+            ],
+            "marker_key": "angle-right",
+            "drawn_degrees": 67.0,
+            "degrees": 67.0
+          },
+          {
+            "vertex": "P",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 75.0,
+            "degrees": 75.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-left",
+            "center": [
+              140.0,
+              30.0
+            ],
+            "radius": 52.0,
+            "start_ray_point": [
+              429.76,
+              30.0
+            ],
+            "end_ray_point": [
+              357.6,
+              200.01
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          },
+          {
+            "marker_key": "angle-right",
+            "center": [
+              429.76,
+              30.0
+            ],
+            "radius": 40.0,
+            "start_ray_point": [
+              140.0,
+              30.0
+            ],
+            "end_ray_point": [
+              357.6,
+              200.01
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              357.6,
+              200.01
+            ],
+            "radius": 34.0,
+            "start_ray_point": [
+              140.0,
+              30.0
+            ],
+            "end_ray_point": [
+              429.76,
+              30.0
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "labels": [
+          {
+            "text": "38°",
+            "target": "angle:angle-left"
+          },
+          {
+            "text": "67°",
+            "target": "angle:angle-right"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          },
+          {
+            "text": "P",
+            "target": "point:P"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "P",
+              "C"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "P",
+              "D"
+            ]
+          },
+          {
+            "type": "angle_sum",
+            "angles": [
+              "angle-left",
+              "angle-right",
+              "angle-x"
+            ],
+            "value": 180
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "2d60ce8ada76e92603a04bfef1592f07278509214ac9d4c219cd8ae0861503da",
-      "width": 940,
-      "height": 390
+      "sha256": "d159d86068e17f3cb54df9ba20bd24c87aeec7df7a8444de7ed7230bb8adbd4a",
+      "width": 600,
+      "height": 354
     }
   ],
   "provenance": {
@@ -135,6 +370,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

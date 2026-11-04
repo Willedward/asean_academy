@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l1-006",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,202 @@
       "asset_key": "g1-l1-006-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l1-006-diagram.svg",
-      "alt_text": "Schematic for Midpoint from a perpendicular bisector. Not drawn to scale. Stated measures include 8 cm.",
+      "path": "assets/g1-l1-006-diagram-r3.svg",
+      "alt_text": "Segment AB marked 8 cm. Equal-radius compass arcs from A and B meet above and below the segment, and the line through these points crosses AB at M, with a right angle shown by a corner mark. The distance from A to M is marked d. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "construction",
         "question_key": "g1-l1-006",
         "outcome": "1.7",
-        "not_to_scale": true
+        "template": "perpendicular_bisector_midpoint",
+        "inputs": {
+          "segment": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "segment": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "4"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AM",
+            "label": "d"
+          }
+        ],
+        "arcs": {
+          "arc-a-1": {
+            "center": "A",
+            "radius": 180.55,
+            "through": "P"
+          },
+          "arc-a-2": {
+            "center": "A",
+            "radius": 180.55,
+            "through": "Q"
+          },
+          "arc-b-1": {
+            "center": "B",
+            "radius": 180.55,
+            "through": "P"
+          },
+          "arc-b-2": {
+            "center": "B",
+            "radius": 180.55,
+            "through": "Q"
+          }
+        },
+        "viewbox": [
+          600.0,
+          442.0
+        ],
+        "points": {
+          "A": [
+            174.62,
+            208.0
+          ],
+          "B": [
+            425.38,
+            208.0
+          ],
+          "M": [
+            300.0,
+            208.0
+          ],
+          "P": [
+            300.0,
+            78.09
+          ],
+          "Q": [
+            300.0,
+            337.91
+          ],
+          "T": [
+            300.0,
+            48.0
+          ],
+          "S": [
+            300.0,
+            368.0
+          ],
+          "dim-AM-1": [
+            174.62,
+            178.0
+          ],
+          "dim-AM-2": [
+            300.0,
+            178.0
+          ],
+          "dim-AB-1": [
+            174.62,
+            252.0
+          ],
+          "dim-AB-2": [
+            425.38,
+            252.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "ST",
+            "from": "S",
+            "to": "T",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "dim-AM",
+            "from": "dim-AM-1",
+            "to": "dim-AM-2",
+            "hidden": false,
+            "role": "dimension"
+          },
+          {
+            "key": "dim-AB",
+            "from": "dim-AB-1",
+            "to": "dim-AB-2",
+            "hidden": false,
+            "role": "dimension"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "M",
+            "arms": [
+              "B",
+              "T"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "dimension_lines": [
+          {
+            "segment": "dim-AM",
+            "measures": "AM"
+          },
+          {
+            "segment": "dim-AB",
+            "measures": "AB"
+          }
+        ],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "M",
+            "target": "point:M"
+          },
+          {
+            "text": "d",
+            "target": "segment:AM"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:AB"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "midpoint",
+            "point": "M",
+            "of": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "type": "perpendicular",
+            "segments": [
+              "AB",
+              "ST"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "06dc210d9351fd9a0cbde1601e248bcab0ff19a0d2db11eaaeca4e289a69f6f6",
-      "width": 940,
-      "height": 390
+      "sha256": "d81264f1ca9399ca80654d04f4fefc0bf9b7c3058ab53a0df9dc208a24cc71da",
+      "width": 600,
+      "height": 442
     }
   ],
   "provenance": {
@@ -113,6 +297,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }

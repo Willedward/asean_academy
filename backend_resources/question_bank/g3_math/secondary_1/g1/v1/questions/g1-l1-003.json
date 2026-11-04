@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l1-003",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,199 @@
       "asset_key": "g1-l1-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l1-003-diagram.svg",
-      "alt_text": "Schematic for Corresponding angle. Not drawn to scale. Stated measures include 64°.",
+      "path": "assets/g1-l1-003-diagram-r3.svg",
+      "alt_text": "Two parallel horizontal lines, shown with arrow marks, cut by one transversal. At the upper line, the angle above the line and to the right of the transversal is marked 64°. At the lower line, the angle in the same position is marked x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "parallel",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
+        "diagram_kind": "parallel_lines",
         "question_key": "g1-l1-003",
         "outcome": "1.3",
-        "not_to_scale": true
+        "template": "parallel_corresponding",
+        "inputs": {
+          "given": 64
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angles": {
+            "given": 64
+          }
+        },
+        "forbidden_visible_labels": [],
+        "forbidden_label_exemptions": [
+          {
+            "value": "64",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [
+          {
+            "target": "angle:angle-x",
+            "label": "x"
+          }
+        ],
+        "parallel_marks": [
+          {
+            "segments": [
+              "L1L2",
+              "M1M2"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          362.0
+        ],
+        "points": {
+          "L1": [
+            65.0,
+            80.34
+          ],
+          "L2": [
+            535.0,
+            80.34
+          ],
+          "M1": [
+            65.0,
+            237.65
+          ],
+          "M2": [
+            535.0,
+            237.65
+          ],
+          "D": [
+            245.91,
+            237.65
+          ],
+          "U": [
+            322.63,
+            80.34
+          ],
+          "T1": [
+            221.35,
+            287.99
+          ],
+          "T2": [
+            347.18,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "L1L2",
+            "from": "L1",
+            "to": "L2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "angles": [
+          {
+            "vertex": "U",
+            "arms": [
+              "L2",
+              "T2"
+            ],
+            "marker_key": "angle-given",
+            "drawn_degrees": 64.0,
+            "degrees": 64.0
+          },
+          {
+            "vertex": "D",
+            "arms": [
+              "M2",
+              "U"
+            ],
+            "marker_key": "angle-x",
+            "drawn_degrees": 64.0,
+            "degrees": 64.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-given",
+            "center": [
+              322.63,
+              80.34
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              535.0,
+              80.34
+            ],
+            "end_ray_point": [
+              347.18,
+              30.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-x",
+            "center": [
+              245.91,
+              237.65
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              535.0,
+              237.65
+            ],
+            "end_ray_point": [
+              322.63,
+              80.34
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "64°",
+            "target": "angle:angle-given"
+          },
+          {
+            "text": "x",
+            "target": "angle:angle-x"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "T1",
+              "D",
+              "U",
+              "T2"
+            ]
+          },
+          {
+            "type": "corresponding_angles",
+            "angles": [
+              "angle-given",
+              "angle-x"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "1b6f2fa6955fdc3fe4b5eadc0d58c18f2fd3770996337e69634a4f99ac12086c",
-      "width": 940,
-      "height": 390
+      "sha256": "cc8f95132011012cb8de4f4c94173897c18ac973e871d85a187c69c1c23533b0",
+      "width": 600,
+      "height": 362
     }
   ],
   "provenance": {
@@ -113,6 +294,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
