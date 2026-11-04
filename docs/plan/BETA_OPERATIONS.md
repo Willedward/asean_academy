@@ -102,7 +102,9 @@ computer.
 
 1. Open `/admin/invitations` and sign in with the bootstrapped Google account.
 2. Enter the student's exact Google email.
-3. Choose the expiry and usage limit, then select **Create invitation**.
+3. Keep **Sec 3-entry** to enrol the student in Secondary 1 and Secondary 2 with one
+   link, or choose a single course. Choose the expiry and usage limit, then select
+   **Create invitation**.
 4. Select **Copy onboarding link** before leaving or reloading the page.
 5. Send the link through a private channel to the intended student.
 6. Ask the student to sign in with the same Google email and accept the invitation.
@@ -117,7 +119,7 @@ The code in the URL is sensitive until it expires or is accepted. Email matching
 expiry and usage checks still apply if another person sees it.
 
 The old `create_invitation.py` command remains available as an emergency server
-operator fallback. The web dashboard is the normal beta workflow.
+operator fallback. It issues single-course invitations only. The web dashboard is the normal beta workflow.
 
 ## 4. API endpoints
 

@@ -83,9 +83,9 @@ database or Supabase credential.
 - one academic administrator;
 - one content administrator;
 - two invitation-only learners for the original beta journeys;
-- four invitation-only Sec 3-entry learners, one per Sec 3-entry spec file. The
-  two-course learner also gets a Secondary 2 invitation when a current g3-sec2-math
-  version has been imported.
+- five invitation-only Sec 3-entry learners, one per Sec 3-entry spec file. The
+  two-course learner holds a separate invitation for each course, and the one-invitation
+  learner holds a single Sec 3-entry invitation covering both.
 
 It refuses remote hosts, requires a database name containing e2e, and refuses to run
 again when fixture identities are present. This guard reduces the chance of running it

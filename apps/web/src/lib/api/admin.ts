@@ -9,8 +9,11 @@ export type InvitationList = components["schemas"]["InvitationListResponse"];
 export type OperationsSummary =
   components["schemas"]["BetaOperationsSummaryResponse"];
 export type AuditEventList = components["schemas"]["AuditEventListResponse"];
-export type CreateInvitationInput =
-  components["schemas"]["CreateInvitationRequest"];
+export type CreateInvitationInput = Omit<
+  components["schemas"]["CreateInvitationRequest"],
+  "course_key" | "target_track"
+> &
+  ({ course_key: string } | { target_track: "sec3-entry" });
 
 export async function listInvitations(): Promise<InvitationList> {
   const { data, error, response } = await createApiClient().GET(
@@ -29,7 +32,8 @@ export async function createInvitation(
   const { data, error, response } = await createApiClient().POST(
     "/api/v1/admin/invitations",
     {
-      body: input,
+      // The generated type marks course_key required because it has a server default.
+      body: input as components["schemas"]["CreateInvitationRequest"],
     },
   );
   if (error || !data) throw apiRequestError(error, response.status);

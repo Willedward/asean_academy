@@ -40,6 +40,12 @@ export const sec3Learners = {
     displayName: "Review Learner",
     sec1Code: "e2e-sec3-review-invitation-2026",
   },
+  oneInvitation: {
+    learner_id: "30000000-0000-4000-8000-000000000005",
+    email: "sec3.one-invitation.e2e@example.test",
+    displayName: "One Invitation Learner",
+    sec1Code: "e2e-sec3-one-invitation-2026",
+  },
 } as const;
 
 export type Sec3Learner = (typeof sec3Learners)[keyof typeof sec3Learners];

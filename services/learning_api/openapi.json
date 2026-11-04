@@ -3871,6 +3871,18 @@
             "minimum": 1.0,
             "title": "Max Uses",
             "type": "integer"
+          },
+          "target_track": {
+            "anyOf": [
+              {
+                "const": "sec3-entry",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Track"
           }
         },
         "required": [
@@ -4061,6 +4073,13 @@
             "title": "Course Revision",
             "type": "integer"
           },
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationCourse"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
           "created_at": {
             "format": "date-time",
             "title": "Created At",
@@ -4123,6 +4142,17 @@
             "title": "Status",
             "type": "string"
           },
+          "target_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Track"
+          },
           "use_count": {
             "title": "Use Count",
             "type": "integer"
@@ -4133,6 +4163,8 @@
           "email",
           "course_key",
           "course_revision",
+          "target_track",
+          "courses",
           "status",
           "max_uses",
           "use_count",
@@ -8751,6 +8783,25 @@
         "title": "InvitationAcceptanceResponse",
         "type": "object"
       },
+      "InvitationCourse": {
+        "additionalProperties": false,
+        "properties": {
+          "course_key": {
+            "title": "Course Key",
+            "type": "string"
+          },
+          "course_revision": {
+            "title": "Course Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "course_key",
+          "course_revision"
+        ],
+        "title": "InvitationCourse",
+        "type": "object"
+      },
       "InvitationListResponse": {
         "additionalProperties": false,
         "properties": {
@@ -8783,6 +8834,13 @@
           "course_revision": {
             "title": "Course Revision",
             "type": "integer"
+          },
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationCourse"
+            },
+            "title": "Courses",
+            "type": "array"
           },
           "created_at": {
             "format": "date-time",
@@ -8841,6 +8899,17 @@
             "title": "Status",
             "type": "string"
           },
+          "target_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Track"
+          },
           "use_count": {
             "title": "Use Count",
             "type": "integer"
@@ -8851,6 +8920,8 @@
           "email",
           "course_key",
           "course_revision",
+          "target_track",
+          "courses",
           "status",
           "max_uses",
           "use_count",

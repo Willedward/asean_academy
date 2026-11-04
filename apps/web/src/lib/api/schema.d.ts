@@ -3397,6 +3397,8 @@ export interface components {
              * @default 1
              */
             max_uses: number;
+            /** Target Track */
+            target_track?: "sec3-entry" | null;
         };
         /** CreateLifecycleRequest */
         CreateLifecycleRequest: {
@@ -3466,6 +3468,8 @@ export interface components {
             course_key: string;
             /** Course Revision */
             course_revision: number;
+            /** Courses */
+            courses: components["schemas"]["InvitationCourse"][];
             /**
              * Created At
              * Format: date-time
@@ -3496,6 +3500,8 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "expired" | "exhausted" | "revoked";
+            /** Target Track */
+            target_track: string | null;
             /** Use Count */
             use_count: number;
         };
@@ -5254,6 +5260,13 @@ export interface components {
             enrolments: components["schemas"]["EnrolmentResponse"][];
             profile: components["schemas"]["ProfileResponse"];
         };
+        /** InvitationCourse */
+        InvitationCourse: {
+            /** Course Key */
+            course_key: string;
+            /** Course Revision */
+            course_revision: number;
+        };
         /** InvitationListResponse */
         InvitationListResponse: {
             /** Invitations */
@@ -5267,6 +5280,8 @@ export interface components {
             course_key: string;
             /** Course Revision */
             course_revision: number;
+            /** Courses */
+            courses: components["schemas"]["InvitationCourse"][];
             /**
              * Created At
              * Format: date-time
@@ -5295,6 +5310,8 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "expired" | "exhausted" | "revoked";
+            /** Target Track */
+            target_track: string | null;
             /** Use Count */
             use_count: number;
         };

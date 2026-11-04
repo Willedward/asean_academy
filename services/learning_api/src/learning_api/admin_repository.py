@@ -47,12 +47,35 @@ class PostgresBetaOperationsRepository:
         """
 
     @staticmethod
+    def _courses_sql(alias: str = "invitations") -> str:
+        return f"""
+            (
+                select jsonb_agg(
+                    jsonb_build_object(
+                        'course_key', courses.course_key,
+                        'course_revision', versions.revision
+                    )
+                    order by courses.course_key
+                )
+                from course_versions versions
+                join courses on courses.id = versions.course_id
+                where versions.id = {alias}.course_version_id
+                   or versions.id in (
+                       select course_version_id from beta_invitation_additional_courses
+                       where invitation_id = {alias}.id
+                   )
+            )
+        """
+
+    @staticmethod
     def _serialize(row: dict) -> dict:
         return {
             "invitation_id": row["invitation_id"],
             "email": row["email"],
             "course_key": row["course_key"],
             "course_revision": row["course_revision"],
+            "target_track": row["target_track"],
+            "courses": row["courses"],
             "status": row["status"],
             "max_uses": row["max_uses"],
             "use_count": row["use_count"],
@@ -79,28 +102,30 @@ class PostgresBetaOperationsRepository:
         raw_code = secrets.token_urlsafe(32)
         expires_at = datetime.now(UTC) + timedelta(days=body.expires_days)
         with self._connect() as connection:
-            version = connection.execute(
+            versions = connection.execute(
                 """
                 select versions.id, versions.revision, courses.course_key
                 from course_versions versions
                 join courses on courses.id = versions.course_id
-                where courses.course_key = %s and versions.is_current
+                where courses.course_key = any(%s) and versions.is_current
+                order by courses.course_key
                 """,
-                (body.course_key,),
-            ).fetchone()
-            if version is None:
+                (list(body.course_keys),),
+            ).fetchall()
+            if len(versions) != len(body.course_keys):
                 raise BetaOperationsError(
                     "course_not_found",
                     "The requested current course revision was not found.",
                     404,
                 )
+            version = versions[0]
             row = connection.execute(
                 f"""
                 insert into beta_invitations (
-                    token_sha256, email, course_version_id, max_uses,
+                    token_sha256, email, course_version_id, target_track, max_uses,
                     expires_at, created_by
-                ) values (%s, %s, %s, %s, %s, %s)
-                returning id as invitation_id, email, max_uses, use_count,
+                ) values (%s, %s, %s, %s, %s, %s, %s)
+                returning id as invitation_id, email, target_track, max_uses, use_count,
                           expires_at, revoked_at, created_by, created_at,
                           {self._status_sql('beta_invitations')} as status
                 """,
@@ -108,12 +133,22 @@ class PostgresBetaOperationsRepository:
                     invitation_digest(raw_code),
                     body.email,
                     version["id"],
+                    body.target_track,
                     body.max_uses,
                     expires_at,
                     administrator.learner_id,
                 ),
             ).fetchone()
             assert row is not None
+            for additional in versions[1:]:
+                connection.execute(
+                    """
+                    insert into beta_invitation_additional_courses (
+                        invitation_id, course_version_id
+                    ) values (%s, %s)
+                    """,
+                    (row["invitation_id"], additional["id"]),
+                )
             connection.execute(
                 """
                 insert into beta_audit_events (
@@ -128,6 +163,8 @@ class PostgresBetaOperationsRepository:
                         {
                             "course_key": version["course_key"],
                             "course_revision": version["revision"],
+                            "course_keys": [item["course_key"] for item in versions],
+                            "target_track": body.target_track,
                             "max_uses": body.max_uses,
                             "expires_days": body.expires_days,
                         }
@@ -138,6 +175,10 @@ class PostgresBetaOperationsRepository:
                 **dict(row),
                 "course_key": version["course_key"],
                 "course_revision": version["revision"],
+                "courses": [
+                    {"course_key": item["course_key"], "course_revision": item["revision"]}
+                    for item in versions
+                ],
             }
         return {**self._serialize(invitation), "invitation_code": raw_code}
 
@@ -158,6 +199,8 @@ class PostgresBetaOperationsRepository:
                 select invitations.id as invitation_id, invitations.email,
                        courses.course_key, versions.revision as course_revision,
                        {status_expression} as status,
+                       invitations.target_track,
+                       {self._courses_sql()} as courses,
                        invitations.max_uses, invitations.use_count,
                        invitations.expires_at, invitations.revoked_at,
                        invitations.created_by, invitations.created_at
@@ -191,7 +234,8 @@ class PostgresBetaOperationsRepository:
                 update beta_invitations
                 set revoked_at = now()
                 where id = %s and revoked_at is null
-                returning id as invitation_id, email, course_version_id,
+                returning id as invitation_id, email, course_version_id, target_track,
+                          {self._courses_sql('beta_invitations')} as courses,
                           max_uses, use_count, expires_at, revoked_at,
                           created_by, created_at,
                           {self._status_sql('beta_invitations')} as status
@@ -202,7 +246,8 @@ class PostgresBetaOperationsRepository:
             if row is None:
                 row = connection.execute(
                     f"""
-                    select id as invitation_id, email, course_version_id,
+                    select id as invitation_id, email, course_version_id, target_track,
+                           {self._courses_sql('beta_invitations')} as courses,
                            max_uses, use_count, expires_at, revoked_at,
                            created_by, created_at,
                            {self._status_sql('beta_invitations')} as status

@@ -243,7 +243,8 @@ export function CoreCourseMapScreen({
       />
       <section className="flex flex-col gap-2">
         <Eyebrow>
-          {course.school_level.toUpperCase()} · {course.subject.toUpperCase()}
+          {course.school_level.replace("secondary_", "level ").toUpperCase()} ·{" "}
+          {course.subject.toUpperCase()}
         </Eyebrow>
         <H1>{course.title}</H1>
         <Muted className="max-w-3xl">{course.description}</Muted>
