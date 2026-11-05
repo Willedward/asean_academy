@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from . import similarity_checks
+from .right_triangle_checks import RIGHT_TRIANGLE_RENDERER, right_triangle_issues
 from .sec1_mensuration_checks import SEC1_MENSURATION_RENDERER, sec1_mensuration_issues
 from .svg_metrics import (
     MIN_PHONE_FONT_PX,
@@ -1370,6 +1371,8 @@ class _Checked:
             sec1_mensuration_issues(self)
         if self.spec.get("renderer") == SIMILARITY_RENDERER:
             similarity_checks.run(self)
+        if self.spec.get("renderer") == RIGHT_TRIANGLE_RENDERER:
+            right_triangle_issues(self)
         self.issues.extend(text_layout_issues(self.root, check_strokes=True))
         return _unique(self.issues)
 

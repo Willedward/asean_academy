@@ -406,7 +406,11 @@ def text_only_reason(question: dict[str, Any]) -> str | None:
     text = _prompt_text(question)
     if _is_sec1_g5(question):
         return sec1_mensuration.text_only_reason(text)
-    return plane_geometry.text_only_reason(text) or similarity.text_only_reason(text)
+    return (
+        plane_geometry.text_only_reason(text)
+        or similarity.text_only_reason(text)
+        or right_triangle.text_only_reason(text)
+    )
 
 
 def stem_findings(question: dict[str, Any], template: str) -> list[str]:

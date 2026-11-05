@@ -53,10 +53,10 @@ unsupported; it is never drawn from a guess.
 - **Right triangles.** The angle arc is centred on the acute vertex it describes, between that
   vertex's two sides, and drawn at the stated size. Narrow angles get a wider arc so that the
   label fits inside the angle. A right-angle mark appears only where the right angle is
-  given. "Is it right-angled?" items (`converse_test`) and `perimeter_verify` use one fixed,
-  clearly acute scalene triangle with no mark, so right-angled and non-right cases look
-  alike. The unknown side or angle carries its variable (`c`, `b`, `x`, `d`, `h`, `θ`), never
-  its value. Elevation items show the tower to the ground, the dashed eye-level line, the
+  given. "Is it right-angled?" items get no figure in the bank (see below). `perimeter_verify`
+  draws the true triangle from its three sides with no mark, because the prompt says the
+  triangle is right-angled and the learner verifies it. The unknown side or angle carries its
+  variable (`c`, `b`, `x`, `d`, `h`, `θ`), never its value. Elevation items show the tower to the ground, the dashed eye-level line, the
   observer's eye height and the full height `h`. The two-position item shows both
   observation points, both sight lines and both angles.
 - **Mensuration.** Pyramid bases have four sides. The apex is above the centre of the base,
@@ -75,6 +75,25 @@ unsupported; it is never drawn from a guess.
   segment than to any other segment. The alternative text names the solid and every given
   value, and leaves out the answer. A value the learner must find is drawn at a neutral size
   whenever the drawn givens do not already fix it.
+
+### Sec 2 G4: text-only items and extra checks
+
+**Text-only test.** `right_triangle.TEXT_ONLY` lists the "is it right-angled?" prompts. A triangle
+drawn from the three sides shows the answer, and any other triangle is a false figure, so founder
+decision D6 B makes all 28 text-only. The `converse_test` template stays for tests and old assets,
+and draws one fixed scalene triangle with no mark. The figure's stem sentence goes with the figure.
+
+**Extra checks for this renderer** (`right_triangle_checks.py`; each failure is an error):
+
+- `geometry_impossible_triangle`: labels at a right angle that break Pythagoras' theorem.
+- `geometry_given_mismatch`: every number shown must be stated in the question, and every stated
+  number must be shown. A right-angle mark counts as showing 90°.
+- `geometry_label_notation`: `θ°`, because θ already names the angle.
+- `geometry_method_named`: a title or label that names the ratio or theorem the learner must
+  choose. Lesson figures may name them.
+
+G4 keeps a `diagram_audit.json` like the other geometry banks. The last batch PR of a topic sets
+`diagram_question_count`.
 
 ### `generation_spec` contract
 

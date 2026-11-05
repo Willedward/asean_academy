@@ -48,6 +48,10 @@ SCHEMATIC_STEM = (
     "Use the schematic together with the measurements stated in the question. "
     "The diagram is not drawn to scale."
 )
+# A sentence that only introduces a figure goes when the figure does.
+FIGURE_STEMS = frozenset(
+    {SCHEMATIC_STEM, "Use the labelled right-triangle schematic. The diagram is not drawn to scale."}
+)
 
 
 @dataclass
@@ -314,7 +318,7 @@ def _make_text_only(question: dict[str, Any], assets: list[dict[str, Any]]) -> N
         block
         for block in question.get("stem", [])
         if not (block.get("type") == "asset_ref" and block.get("asset_key") in keys)
-        and not (block.get("type") == "text" and block.get("text") == SCHEMATIC_STEM)
+        and not (block.get("type") == "text" and block.get("text") in FIGURE_STEMS)
     ]
     _reset_review(question, "")
     question["provenance"]["review_notes"] = TEXT_ONLY_NOTE
