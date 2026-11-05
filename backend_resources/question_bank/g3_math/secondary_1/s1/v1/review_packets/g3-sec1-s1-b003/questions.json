@@ -569,7 +569,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-013",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -589,7 +589,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A line graph records temperatures of 24°C at 10:00, 27°C at 12:00 and 25°C at 14:00. Enter the temperature at 12:00."
+            "text": "A line graph records temperatures of 24°C at 10:00, 27°C at 12:00 and 25°C at 14:00. Enter the temperature at 12:00 in °C as a number only."
           }
         ],
         "marks": 1,
@@ -599,11 +599,18 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "27",
-          "canonical_latex": "27",
+          "canonical_latex": "27^\\circ\\text{C}",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "°C",
+            "accepted": [
+              "°C",
+              "C"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -631,7 +638,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "T(12{:}00)=27"
+                "latex": "T(12{:}00)=27^\\circ\\text{C}"
               }
             ],
             "mark_type": "A",
@@ -751,7 +758,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-018",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -781,11 +788,19 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "25",
-          "canonical_latex": "25",
+          "canonical_latex": "25\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -813,7 +828,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\frac{15}{60}(100)=25"
+                "latex": "\\frac{15}{60}(100\\%)=25\\%"
               }
             ],
             "mark_type": "A",
@@ -2138,7 +2153,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-023",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2168,11 +2183,19 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "29",
-          "canonical_latex": "29",
+          "canonical_latex": "29\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -2200,7 +2223,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\frac{210-150}{210}(100)=28.57\\ldots"
+                "latex": "\\frac{210-150}{210}(100\\%)=28.57\\ldots\\%"
               }
             ],
             "mark_type": "M",
@@ -2211,7 +2234,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\text{nearest whole percent}=29"
+                "latex": "\\text{nearest whole percent}=29\\%"
               }
             ],
             "mark_type": "A",
@@ -2240,7 +2263,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-012",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2270,11 +2293,21 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "35",
-          "canonical_latex": "35",
+          "canonical_latex": "35\\text{ percentage points}",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "percentage points",
+            "accepted": [
+              "percentage points",
+              "percentage point",
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -2324,7 +2357,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "20-(-15)=35"
+                "latex": "20-(-15)=35\\text{ percentage points}"
               }
             ],
             "mark_type": "A",
