@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-027",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l2-027-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An open-top cuboid is 10 cm long, 6 cm wide and 4 cm high. Find the area of material used in cm\u00b2. Enter the numerical value only."
+          "text": "An open-top cuboid is 10 cm long, 6 cm wide and 4 cm high. Find the area of material used in cm². Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 10 \u00d7 6, two 10 \u00d7 4 faces and two 6 \u00d7 4 faces."
+              "text": "Add 10 × 6, two 10 × 4 faces and two 6 × 4 faces."
             }
           ]
         }
@@ -72,7 +81,265 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l2-027-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l2-027-diagram-r2.svg",
+      "alt_text": "A cuboid with an open top, 10 cm long, 6 cm wide and 4 cm high. The top is shaded darker to show that it is open, and hidden edges are dashed. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cuboid",
+        "question_key": "g5-l2-027",
+        "outcome": "5.3",
+        "template": "open_box",
+        "inputs": {
+          "length": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "188",
+          "60",
+          "40",
+          "24",
+          "80",
+          "48"
+        ],
+        "unknowns": [],
+        "drawn_scale": 32.4272,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "F1",
+              "F2": "F2",
+              "F3": "F3",
+              "F4": "F4",
+              "B1": "B1",
+              "B2": "B2",
+              "B3": "B3",
+              "B4": "B4"
+            },
+            "hidden_vertex": "B1",
+            "open_top": true,
+            "segments": [
+              "B1B2",
+              "B1B4",
+              "F1B1",
+              "F1F2",
+              "F2F3",
+              "F3F4",
+              "F4F1",
+              "F2B2",
+              "B2B3",
+              "F3B3",
+              "B3B4",
+              "F4B4"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "F1F2",
+            "label": "10 cm",
+            "factor": 1.0,
+            "value": 10.0
+          },
+          {
+            "segment": "F4F1",
+            "label": "4 cm",
+            "factor": 1.0,
+            "value": 4.0
+          },
+          {
+            "segment": "F2B2",
+            "label": "6 cm",
+            "factor": 0.5,
+            "value": 6.0
+          }
+        ],
+        "captions": [
+          "Open top"
+        ],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face"
+        ],
+        "viewbox": [
+          600.0,
+          338.0
+        ],
+        "points": {
+          "F1": [
+            98.02,
+            249.51
+          ],
+          "F2": [
+            422.29,
+            249.51
+          ],
+          "F3": [
+            422.29,
+            119.8
+          ],
+          "F4": [
+            98.02,
+            119.8
+          ],
+          "B2": [
+            501.98,
+            193.71
+          ],
+          "B3": [
+            501.98,
+            64.0
+          ],
+          "B4": [
+            177.71,
+            64.0
+          ],
+          "B1": [
+            177.71,
+            193.71
+          ]
+        },
+        "segments": [
+          {
+            "key": "B1B2",
+            "from": "B1",
+            "to": "B2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "B1B4",
+            "from": "B1",
+            "to": "B4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1B1",
+            "from": "F1",
+            "to": "B1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1F2",
+            "from": "F1",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2F3",
+            "from": "F2",
+            "to": "F3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3F4",
+            "from": "F3",
+            "to": "F4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4F1",
+            "from": "F4",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2B2",
+            "from": "F2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3B3",
+            "from": "F3",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B3B4",
+            "from": "B3",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4B4",
+            "from": "F4",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "10 cm",
+            "target": "segment:F1F2"
+          },
+          {
+            "text": "4 cm",
+            "target": "segment:F4F1"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:F2B2"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "1e4a2c334b76313f953bf745f8f352f18e4959b2eef58b9a93058f17726378ef",
+      "width": 600,
+      "height": 338
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +353,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

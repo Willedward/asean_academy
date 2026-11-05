@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -87,18 +87,186 @@
         "asset_key": "g5-l1-001-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-001-diagram.svg",
-        "alt_text": "Schematic for Area of a classroom display. Not drawn to scale. Stated measures include 8 cm, 5 cm.",
+        "path": "assets/g5-l1-001-diagram-r3.svg",
+        "alt_text": "A parallelogram with base 8 cm and a dashed perpendicular height of 5 cm, with a right angle marked where the height meets the base. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "area",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "parallelogram",
           "question_key": "g5-l1-001",
           "outcome": "5.1",
-          "not_to_scale": true
+          "template": "parallelogram_area",
+          "inputs": {
+            "base": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 5,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "base": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 5,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "40"
+          ],
+          "unknowns": [],
+          "drawn_scale": 40.9756,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "parallelogram",
+              "points": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "heights": [
+                {
+                  "segment": "DF",
+                  "foot": "F",
+                  "top": "D",
+                  "base": [
+                    "A",
+                    "B"
+                  ]
+                }
+              ],
+              "segments": [
+                "AB",
+                "BC",
+                "CD",
+                "DA",
+                "DF"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            },
+            {
+              "segment": "DF",
+              "label": "5 cm",
+              "factor": 1.0,
+              "value": 5.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "parallelogram"
+          ],
+          "viewbox": [
+            600.0,
+            333.0
+          ],
+          "points": {
+            "A": [
+              90.0,
+              244.88
+            ],
+            "B": [
+              417.8,
+              244.88
+            ],
+            "C": [
+              510.0,
+              40.0
+            ],
+            "D": [
+              182.2,
+              40.0
+            ],
+            "F": [
+              182.2,
+              244.88
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DA",
+              "from": "D",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DF",
+              "from": "D",
+              "to": "F",
+              "hidden": true,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "F",
+              "arms": [
+                "B",
+                "D"
+              ],
+              "marker_size": 18
+            }
+          ],
+          "labels": [
+            {
+              "text": "8 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:DF"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "A",
+                "F",
+                "B"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "0b0781bc49aa6adb3c87ac6453cf6acb6aaed6b11e7a9ca9e9a5770ba66a1034",
-        "width": 940,
-        "height": 390
+        "sha256": "4d136eb60d7fa6ad2271f18514f1821a9d1e4dda1a378ac4911bafd653aa428d",
+        "width": 600,
+        "height": 333
       }
     ],
     "provenance": {
@@ -114,7 +282,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -301,7 +469,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -387,18 +555,341 @@
         "asset_key": "g5-l3-001-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-001-diagram.svg",
-        "alt_text": "Schematic for Combined area of two panels. Not drawn to scale. Stated measures include 12 cm, 6 cm, 8 cm, 14 cm, 6 cm.",
+        "path": "assets/g5-l3-001-diagram-r3.svg",
+        "alt_text": "A parallelogram with base 12 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 8 cm and 14 cm and dashed perpendicular height 6 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "area",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "two_quadrilaterals",
           "question_key": "g5-l3-001",
           "outcome": "5.1",
-          "not_to_scale": true
+          "template": "parallelogram_and_trapezium",
+          "inputs": {
+            "base": {
+              "value": 12,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "parallel_short": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "parallel_long": {
+              "value": 14,
+              "unit": "cm"
+            },
+            "trapezium_height": {
+              "value": 6,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "base": {
+              "value": 12,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "parallel_short": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "parallel_long": {
+              "value": 14,
+              "unit": "cm"
+            },
+            "trapezium_height": {
+              "value": 6,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "138",
+            "72",
+            "66"
+          ],
+          "unknowns": [],
+          "drawn_scale": 17.2313,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "parallelogram",
+              "points": [
+                "PA",
+                "PB",
+                "PC",
+                "PD"
+              ],
+              "heights": [
+                {
+                  "segment": "PDPF",
+                  "foot": "PF",
+                  "top": "PD",
+                  "base": [
+                    "PA",
+                    "PB"
+                  ]
+                }
+              ],
+              "segments": [
+                "PAPB",
+                "PBPC",
+                "PCPD",
+                "PDPA",
+                "PDPF"
+              ]
+            },
+            {
+              "type": "trapezium",
+              "points": [
+                "TA",
+                "TB",
+                "TC",
+                "TD"
+              ],
+              "heights": [
+                {
+                  "segment": "TDTF",
+                  "foot": "TF",
+                  "top": "TD",
+                  "base": [
+                    "TA",
+                    "TB"
+                  ]
+                }
+              ],
+              "segments": [
+                "TATB",
+                "TBTC",
+                "TCTD",
+                "TDTA",
+                "TDTF"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "PAPB",
+              "label": "12 cm",
+              "factor": 1.0,
+              "value": 12.0
+            },
+            {
+              "segment": "PDPF",
+              "label": "6 cm",
+              "factor": 1.0,
+              "value": 6.0
+            },
+            {
+              "segment": "TATB",
+              "label": "14 cm",
+              "factor": 1.0,
+              "value": 14.0
+            },
+            {
+              "segment": "TCTD",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            },
+            {
+              "segment": "TDTF",
+              "label": "6 cm",
+              "factor": 1.0,
+              "value": 6.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "Pparallelogram",
+            "Ttrapezium"
+          ],
+          "viewbox": [
+            600.0,
+            300.0
+          ],
+          "points": {
+            "PA": [
+              35.0,
+              159.39
+            ],
+            "PB": [
+              241.78,
+              159.39
+            ],
+            "PC": [
+              288.3,
+              56.0
+            ],
+            "PD": [
+              81.52,
+              56.0
+            ],
+            "PF": [
+              81.52,
+              159.39
+            ],
+            "TA": [
+              323.76,
+              159.39
+            ],
+            "TB": [
+              565.0,
+              159.39
+            ],
+            "TC": [
+              513.31,
+              56.0
+            ],
+            "TD": [
+              375.46,
+              56.0
+            ],
+            "TF": [
+              375.46,
+              159.39
+            ]
+          },
+          "segments": [
+            {
+              "key": "PAPB",
+              "from": "PA",
+              "to": "PB",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PBPC",
+              "from": "PB",
+              "to": "PC",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PCPD",
+              "from": "PC",
+              "to": "PD",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PDPA",
+              "from": "PD",
+              "to": "PA",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PDPF",
+              "from": "PD",
+              "to": "PF",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "TATB",
+              "from": "TA",
+              "to": "TB",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TBTC",
+              "from": "TB",
+              "to": "TC",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TCTD",
+              "from": "TC",
+              "to": "TD",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TDTA",
+              "from": "TD",
+              "to": "TA",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TDTF",
+              "from": "TD",
+              "to": "TF",
+              "hidden": true,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "PF",
+              "arms": [
+                "PB",
+                "PD"
+              ],
+              "marker_size": 18
+            },
+            {
+              "vertex": "TF",
+              "arms": [
+                "TB",
+                "TD"
+              ],
+              "marker_size": 18
+            }
+          ],
+          "labels": [
+            {
+              "text": "12 cm",
+              "target": "segment:PAPB"
+            },
+            {
+              "text": "6 cm",
+              "target": "segment:PDPF"
+            },
+            {
+              "text": "14 cm",
+              "target": "segment:TATB"
+            },
+            {
+              "text": "8 cm",
+              "target": "segment:TCTD"
+            },
+            {
+              "text": "6 cm",
+              "target": "segment:TDTF"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "PA",
+                "PF",
+                "PB"
+              ]
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "TA",
+                "TF",
+                "TB"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "69ebcc88ecd9e2e66d0e0692d6c91c9a80ab6efb865ccae759e3efc0ccc2eba6",
-        "width": 940,
-        "height": 390
+        "sha256": "825ba495f5b77308e1c7ac865419521f72a3b10d789f44e25d07a25bf4cd4f04",
+        "width": 600,
+        "height": 300
       }
     ],
     "provenance": {
@@ -414,7 +905,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -532,7 +1023,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l5-001",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -651,18 +1142,330 @@
         "asset_key": "g5-l5-001-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l5-001-diagram.svg",
-        "alt_text": "Schematic for Linked quadrilateral design. Not drawn to scale. Stated measures include 10 cm, 8 cm, 260 cm².",
+        "path": "assets/g5-l5-001-diagram-r3.svg",
+        "alt_text": "A trapezium with parallel sides x cm and (x + 4) cm and dashed perpendicular height 10 cm, beside a parallelogram with base (x + 3) cm and dashed perpendicular height 8 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "area",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "two_quadrilaterals",
           "question_key": "g5-l5-001",
           "outcome": "5.1",
-          "not_to_scale": true
+          "template": "trapezium_and_parallelogram_algebra",
+          "inputs": {
+            "long_extra": 4,
+            "trapezium_height": {
+              "value": 10,
+              "unit": "cm"
+            },
+            "base_extra": 3,
+            "height": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "total_area": {
+              "value": 260,
+              "unit": "cm²"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "expressions": [
+              "x cm",
+              "(x + 4) cm",
+              "(x + 3) cm"
+            ]
+          },
+          "forbidden_visible_labels": [
+            "12",
+            "16",
+            "15"
+          ],
+          "unknowns": [],
+          "drawn_scale": 17.4227,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "trapezium",
+              "points": [
+                "TA",
+                "TB",
+                "TC",
+                "TD"
+              ],
+              "heights": [
+                {
+                  "segment": "TDTF",
+                  "foot": "TF",
+                  "top": "TD",
+                  "base": [
+                    "TA",
+                    "TB"
+                  ]
+                }
+              ],
+              "segments": [
+                "TATB",
+                "TBTC",
+                "TCTD",
+                "TDTA",
+                "TDTF"
+              ]
+            },
+            {
+              "type": "parallelogram",
+              "points": [
+                "PA",
+                "PB",
+                "PC",
+                "PD"
+              ],
+              "heights": [
+                {
+                  "segment": "PDPF",
+                  "foot": "PF",
+                  "top": "PD",
+                  "base": [
+                    "PA",
+                    "PB"
+                  ]
+                }
+              ],
+              "segments": [
+                "PAPB",
+                "PBPC",
+                "PCPD",
+                "PDPA",
+                "PDPF"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "TATB",
+              "label": "(x + 4) cm",
+              "factor": 1.0,
+              "variable": "x",
+              "constant": 4.0
+            },
+            {
+              "segment": "TCTD",
+              "label": "x cm",
+              "factor": 1.0,
+              "variable": "x",
+              "constant": 0.0
+            },
+            {
+              "segment": "TDTF",
+              "label": "10 cm",
+              "factor": 1.0,
+              "value": 10.0
+            },
+            {
+              "segment": "PAPB",
+              "label": "(x + 3) cm",
+              "factor": 1.0,
+              "variable": "x",
+              "constant": 3.0
+            },
+            {
+              "segment": "PDPF",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "Ttrapezium",
+            "Pparallelogram"
+          ],
+          "neutral_lengths": [
+            {
+              "variable": "x",
+              "drawn": 9.0,
+              "avoid": 12.0
+            }
+          ],
+          "viewbox": [
+            600.0,
+            318.0
+          ],
+          "points": {
+            "TA": [
+              35.0,
+              230.23
+            ],
+            "TB": [
+              261.5,
+              230.23
+            ],
+            "TC": [
+              226.65,
+              56.0
+            ],
+            "TD": [
+              69.85,
+              56.0
+            ],
+            "TF": [
+              69.85,
+              230.23
+            ],
+            "PA": [
+              293.21,
+              230.23
+            ],
+            "PB": [
+              502.28,
+              230.23
+            ],
+            "PC": [
+              565.0,
+              90.85
+            ],
+            "PD": [
+              355.93,
+              90.85
+            ],
+            "PF": [
+              355.93,
+              230.23
+            ]
+          },
+          "segments": [
+            {
+              "key": "TATB",
+              "from": "TA",
+              "to": "TB",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TBTC",
+              "from": "TB",
+              "to": "TC",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TCTD",
+              "from": "TC",
+              "to": "TD",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TDTA",
+              "from": "TD",
+              "to": "TA",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TDTF",
+              "from": "TD",
+              "to": "TF",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "PAPB",
+              "from": "PA",
+              "to": "PB",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PBPC",
+              "from": "PB",
+              "to": "PC",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PCPD",
+              "from": "PC",
+              "to": "PD",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PDPA",
+              "from": "PD",
+              "to": "PA",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "PDPF",
+              "from": "PD",
+              "to": "PF",
+              "hidden": true,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "TF",
+              "arms": [
+                "TB",
+                "TD"
+              ],
+              "marker_size": 18
+            },
+            {
+              "vertex": "PF",
+              "arms": [
+                "PB",
+                "PD"
+              ],
+              "marker_size": 18
+            }
+          ],
+          "labels": [
+            {
+              "text": "(x + 4) cm",
+              "target": "segment:TATB"
+            },
+            {
+              "text": "x cm",
+              "target": "segment:TCTD"
+            },
+            {
+              "text": "10 cm",
+              "target": "segment:TDTF"
+            },
+            {
+              "text": "(x + 3) cm",
+              "target": "segment:PAPB"
+            },
+            {
+              "text": "8 cm",
+              "target": "segment:PDPF"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "TA",
+                "TF",
+                "TB"
+              ]
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "PA",
+                "PF",
+                "PB"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "362659a1553181539325d47d6de3af6b6000f82abe0ce3a02e09a95fa3b211d6",
-        "width": 940,
-        "height": 390
+        "sha256": "d9f8172165c9b2ba14ab3c3c38eb5b4dd472a865c1a21ba9faccfa58c2e719c6",
+        "width": 600,
+        "height": 318
       }
     ],
     "provenance": {
@@ -678,12 +1481,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -769,18 +1572,238 @@
         "asset_key": "g5-l1-003-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-003-diagram.svg",
-        "alt_text": "Schematic for Rectangle and square area. Not drawn to scale. Stated measures include 8 cm, 5 cm, 3 cm.",
+        "path": "assets/g5-l1-003-diagram-r3.svg",
+        "alt_text": "A rectangle 8 cm by 5 cm with a square of side 3 cm attached along one edge. The two shapes do not overlap, and the four sides of the square carry equal marks. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
           "diagram_kind": "composite_plane",
           "question_key": "g5-l1-003",
           "outcome": "5.2",
-          "not_to_scale": true
+          "template": "rectangle_and_square",
+          "inputs": {
+            "width": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "side": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "width": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "side": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "49",
+            "40",
+            "9"
+          ],
+          "unknowns": [],
+          "drawn_scale": 36.7236,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "rectangle",
+              "points": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "segments": [
+                "AB",
+                "JC",
+                "CD",
+                "DA"
+              ]
+            },
+            {
+              "type": "square",
+              "points": [
+                "B",
+                "S",
+                "T",
+                "J"
+              ],
+              "non_overlapping": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "segments": [
+                "BS",
+                "ST",
+                "TJ",
+                "BJ"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            },
+            {
+              "segment": "DA",
+              "label": "5 cm",
+              "factor": 1.0,
+              "value": 5.0
+            },
+            {
+              "segment": "ST",
+              "label": "3 cm",
+              "factor": 1.0,
+              "value": 3.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "rectangle",
+            "square"
+          ],
+          "equal_marks": [
+            {
+              "segments": [
+                "BS",
+                "ST",
+                "TJ",
+                "BJ"
+              ],
+              "ticks": 1
+            }
+          ],
+          "viewbox": [
+            600.0,
+            312.0
+          ],
+          "points": {
+            "A": [
+              98.02,
+              223.62
+            ],
+            "B": [
+              391.81,
+              223.62
+            ],
+            "J": [
+              391.81,
+              113.45
+            ],
+            "C": [
+              391.81,
+              40.0
+            ],
+            "D": [
+              98.02,
+              40.0
+            ],
+            "S": [
+              501.98,
+              223.62
+            ],
+            "T": [
+              501.98,
+              113.45
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "JC",
+              "from": "J",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DA",
+              "from": "D",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BS",
+              "from": "B",
+              "to": "S",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "ST",
+              "from": "S",
+              "to": "T",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TJ",
+              "from": "T",
+              "to": "J",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BJ",
+              "from": "B",
+              "to": "J",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "8 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:DA"
+            },
+            {
+              "text": "3 cm",
+              "target": "segment:ST"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "436984e393f081424ce97cda14c0fc5e15d5856d867e5b6b0834a8f099089ce6",
-        "width": 940,
-        "height": 390
+        "sha256": "1eaccde54748a1f00724ac89900522f7e143cddf6a479ed5773ca829ed8559ad",
+        "width": 600,
+        "height": 312
       }
     ],
     "provenance": {
@@ -796,7 +1819,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -892,7 +1915,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -989,18 +2012,214 @@
         "asset_key": "g5-l3-003-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-003-diagram.svg",
-        "alt_text": "Schematic for Tiles for an L-shaped lobby. Not drawn to scale. Stated measures include 16 m, 12 m, 6 m, 5 m, 0.5 m².",
+        "path": "assets/g5-l3-003-diagram-r3.svg",
+        "alt_text": "An L-shape. The full bottom edge is 16 m and the full left edge is 12 m. The removed top-right corner has edges 6 m and 5 m. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "composite_plane",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "rectilinear",
           "question_key": "g5-l3-003",
           "outcome": "5.2",
-          "not_to_scale": true
+          "template": "corner_removed",
+          "inputs": {
+            "width": {
+              "value": 16,
+              "unit": "m"
+            },
+            "height": {
+              "value": 12,
+              "unit": "m"
+            },
+            "cut_width": {
+              "value": 6,
+              "unit": "m"
+            },
+            "cut_height": {
+              "value": 5,
+              "unit": "m"
+            },
+            "tile_area": 0.5
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "width": {
+              "value": 16,
+              "unit": "m"
+            },
+            "height": {
+              "value": 12,
+              "unit": "m"
+            },
+            "cut_width": {
+              "value": 6,
+              "unit": "m"
+            },
+            "cut_height": {
+              "value": 5,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "324",
+            "162",
+            "192",
+            "30",
+            "10",
+            "7",
+            "56"
+          ],
+          "unknowns": [],
+          "drawn_scale": 22.5,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "l_shape",
+              "points": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F"
+              ],
+              "segments": [
+                "AB",
+                "BC",
+                "CD",
+                "DE",
+                "EF",
+                "FA"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "16 m",
+              "factor": 1.0,
+              "value": 16.0
+            },
+            {
+              "segment": "FA",
+              "label": "12 m",
+              "factor": 1.0,
+              "value": 12.0
+            },
+            {
+              "segment": "CD",
+              "label": "6 m",
+              "factor": 1.0,
+              "value": 6.0
+            },
+            {
+              "segment": "DE",
+              "label": "5 m",
+              "factor": 1.0,
+              "value": 5.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "l-shape"
+          ],
+          "viewbox": [
+            600.0,
+            398.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              310.0
+            ],
+            "B": [
+              480.0,
+              310.0
+            ],
+            "C": [
+              480.0,
+              152.5
+            ],
+            "D": [
+              345.0,
+              152.5
+            ],
+            "E": [
+              345.0,
+              40.0
+            ],
+            "F": [
+              120.0,
+              40.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DE",
+              "from": "D",
+              "to": "E",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "EF",
+              "from": "E",
+              "to": "F",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "FA",
+              "from": "F",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "16 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "12 m",
+              "target": "segment:FA"
+            },
+            {
+              "text": "6 m",
+              "target": "segment:CD"
+            },
+            {
+              "text": "5 m",
+              "target": "segment:DE"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "28047258f1e02cbc11764b77674721bccb2e9cc6607707ae975c07e468363213",
-        "width": 940,
-        "height": 390
+        "sha256": "3b7d7f1b7ef2cc58b052aa3b4c4350ebbf5c34ad202acf7a32c575c69f1a316b",
+        "width": 600,
+        "height": 398
       }
     ],
     "provenance": {
@@ -1016,7 +2235,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1247,7 +2466,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-004",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1333,18 +2552,250 @@
         "asset_key": "g5-l1-004-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-004-diagram.svg",
-        "alt_text": "Schematic for Volume of a cuboid. Not drawn to scale. Stated measures include 8 cm, 5 cm, 3 cm.",
+        "path": "assets/g5-l1-004-diagram-r3.svg",
+        "alt_text": "A cuboid with edges 8 cm, 5 cm and 3 cm. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "solids",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "cuboid",
           "question_key": "g5-l1-004",
           "outcome": "5.3",
-          "not_to_scale": true
+          "template": "cuboid_volume",
+          "inputs": {
+            "length": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "depth": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "length": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "depth": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "120"
+          ],
+          "unknowns": [],
+          "drawn_scale": 40.2035,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "cuboid",
+              "vertices": {
+                "F1": "F1",
+                "F2": "F2",
+                "F3": "F3",
+                "F4": "F4",
+                "B1": "B1",
+                "B2": "B2",
+                "B3": "B3",
+                "B4": "B4"
+              },
+              "hidden_vertex": "B1",
+              "segments": [
+                "B1B2",
+                "B1B4",
+                "F1B1",
+                "F1F2",
+                "F2F3",
+                "F3F4",
+                "F4F1",
+                "F2B2",
+                "B2B3",
+                "F3B3",
+                "B3B4",
+                "F4B4"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "F1F2",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            },
+            {
+              "segment": "F4F1",
+              "label": "3 cm",
+              "factor": 1.0,
+              "value": 3.0
+            },
+            {
+              "segment": "F2B2",
+              "label": "5 cm",
+              "factor": 0.5,
+              "value": 5.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "right-face",
+            "top-face",
+            "front-face"
+          ],
+          "viewbox": [
+            600.0,
+            306.0
+          ],
+          "points": {
+            "F1": [
+              98.02,
+              218.26
+            ],
+            "F2": [
+              419.65,
+              218.26
+            ],
+            "F3": [
+              419.65,
+              97.65
+            ],
+            "F4": [
+              98.02,
+              97.65
+            ],
+            "B2": [
+              501.98,
+              160.61
+            ],
+            "B3": [
+              501.98,
+              40.0
+            ],
+            "B4": [
+              180.35,
+              40.0
+            ],
+            "B1": [
+              180.35,
+              160.61
+            ]
+          },
+          "segments": [
+            {
+              "key": "B1B2",
+              "from": "B1",
+              "to": "B2",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "B1B4",
+              "from": "B1",
+              "to": "B4",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "F1B1",
+              "from": "F1",
+              "to": "B1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "F1F2",
+              "from": "F1",
+              "to": "F2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F2F3",
+              "from": "F2",
+              "to": "F3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F3F4",
+              "from": "F3",
+              "to": "F4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F4F1",
+              "from": "F4",
+              "to": "F1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F2B2",
+              "from": "F2",
+              "to": "B2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "B2B3",
+              "from": "B2",
+              "to": "B3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F3B3",
+              "from": "F3",
+              "to": "B3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "B3B4",
+              "from": "B3",
+              "to": "B4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F4B4",
+              "from": "F4",
+              "to": "B4",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "8 cm",
+              "target": "segment:F1F2"
+            },
+            {
+              "text": "3 cm",
+              "target": "segment:F4F1"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:F2B2"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "5c04c6d70b2d44514c629ef8dc16a0b3036f662ed3f8f4523dc3404a38e6eddb",
-        "width": 940,
-        "height": 390
+        "sha256": "38cb9ed63fa08c242d3a41d6b7f3c05f4f1b99de9a9cf6f27777b6ccb67162bd",
+        "width": 600,
+        "height": 306
       }
     ],
     "provenance": {
@@ -1360,12 +2811,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l2-003",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1377,7 +2828,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l2-003-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1437,7 +2897,244 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l2-003-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l2-003-diagram-r2.svg",
+        "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 6 cm and 4 cm, and the right angle is marked. The prism is 10 cm long, and hidden edges are dashed. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "prism",
+          "question_key": "g5-l2-003",
+          "outcome": "5.3",
+          "template": "prism_right_triangle_legs",
+          "inputs": {
+            "base": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 4,
+              "unit": "cm"
+            },
+            "length": {
+              "value": 10,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "base": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 4,
+              "unit": "cm"
+            },
+            "length": {
+              "value": 10,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "120",
+            "12"
+          ],
+          "unknowns": [],
+          "drawn_scale": 39.3134,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "prism",
+              "front": [
+                "A",
+                "B",
+                "C"
+              ],
+              "back": [
+                "Ab",
+                "Bb",
+                "Cb"
+              ],
+              "hidden_vertex": "Ab",
+              "cross_section": {
+                "type": "right_triangle",
+                "points": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "right_at": "A"
+              },
+              "segments": [
+                "AbBb",
+                "CbAb",
+                "AAb",
+                "BbCb",
+                "BBb",
+                "CCb",
+                "AB",
+                "BC",
+                "CA"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "6 cm",
+              "factor": 1.0,
+              "value": 6.0
+            },
+            {
+              "segment": "CA",
+              "label": "4 cm",
+              "factor": 1.0,
+              "value": 4.0
+            },
+            {
+              "segment": "BBb",
+              "label": "10 cm",
+              "factor": 0.5,
+              "value": 10.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "rear-face",
+            "side-BC",
+            "cross-section"
+          ],
+          "viewbox": [
+            600.0,
+            388.0
+          ],
+          "points": {
+            "A": [
+              101.55,
+              300.0
+            ],
+            "B": [
+              337.43,
+              300.0
+            ],
+            "C": [
+              101.55,
+              142.75
+            ],
+            "Ab": [
+              262.57,
+              187.25
+            ],
+            "Bb": [
+              498.45,
+              187.25
+            ],
+            "Cb": [
+              262.57,
+              30.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AbBb",
+              "from": "Ab",
+              "to": "Bb",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "CbAb",
+              "from": "Cb",
+              "to": "Ab",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "AAb",
+              "from": "A",
+              "to": "Ab",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "BbCb",
+              "from": "Bb",
+              "to": "Cb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BBb",
+              "from": "B",
+              "to": "Bb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CCb",
+              "from": "C",
+              "to": "Cb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CA",
+              "from": "C",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 20
+            }
+          ],
+          "labels": [
+            {
+              "text": "6 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "4 cm",
+              "target": "segment:CA"
+            },
+            {
+              "text": "10 cm",
+              "target": "segment:BBb"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "72f59948fb7a8edd41b5dcf2078c2fefd91ac3a03f0afb5e3d0a0014a426774e",
+        "width": 600,
+        "height": 388
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1451,12 +3148,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1542,18 +3239,261 @@
         "asset_key": "g5-l3-005-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-005-diagram.svg",
-        "alt_text": "Schematic for Surface area of a triangular prism. Not drawn to scale. Stated measures include 3 cm, 4 cm, 5 cm, 10 cm.",
+        "path": "assets/g5-l3-005-diagram-r3.svg",
+        "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 4 cm and 3 cm and longest side 5 cm, and the right angle is marked. The prism is 10 cm long, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "solids",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "prism",
           "question_key": "g5-l3-005",
           "outcome": "5.3",
-          "not_to_scale": true
+          "template": "prism_right_triangle_sides",
+          "inputs": {
+            "sides": [
+              {
+                "value": 3,
+                "unit": "cm"
+              },
+              {
+                "value": 4,
+                "unit": "cm"
+              },
+              {
+                "value": 5,
+                "unit": "cm"
+              }
+            ],
+            "length": {
+              "value": 10,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "sides": [
+              {
+                "value": 3,
+                "unit": "cm"
+              },
+              {
+                "value": 4,
+                "unit": "cm"
+              },
+              {
+                "value": 5,
+                "unit": "cm"
+              }
+            ],
+            "length": {
+              "value": 10,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "132",
+            "6",
+            "12",
+            "120"
+          ],
+          "unknowns": [],
+          "drawn_scale": 46.0132,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "prism",
+              "front": [
+                "A",
+                "B",
+                "C"
+              ],
+              "back": [
+                "Ab",
+                "Bb",
+                "Cb"
+              ],
+              "hidden_vertex": "Ab",
+              "cross_section": {
+                "type": "right_triangle",
+                "points": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "right_at": "A"
+              },
+              "segments": [
+                "AbBb",
+                "CbAb",
+                "AAb",
+                "BbCb",
+                "BBb",
+                "CCb",
+                "AB",
+                "BC",
+                "CA"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "4 cm",
+              "factor": 1.0,
+              "value": 4.0
+            },
+            {
+              "segment": "CA",
+              "label": "3 cm",
+              "factor": 1.0,
+              "value": 3.0
+            },
+            {
+              "segment": "BBb",
+              "label": "10 cm",
+              "factor": 0.5,
+              "value": 10.0
+            },
+            {
+              "segment": "BC",
+              "label": "5 cm",
+              "factor": 1.0,
+              "value": 5.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "rear-face",
+            "side-BC",
+            "cross-section"
+          ],
+          "viewbox": [
+            600.0,
+            388.0
+          ],
+          "points": {
+            "A": [
+              113.74,
+              300.0
+            ],
+            "B": [
+              297.8,
+              300.0
+            ],
+            "C": [
+              113.74,
+              161.96
+            ],
+            "Ab": [
+              302.2,
+              168.04
+            ],
+            "Bb": [
+              486.26,
+              168.04
+            ],
+            "Cb": [
+              302.2,
+              30.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AbBb",
+              "from": "Ab",
+              "to": "Bb",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "CbAb",
+              "from": "Cb",
+              "to": "Ab",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "AAb",
+              "from": "A",
+              "to": "Ab",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "BbCb",
+              "from": "Bb",
+              "to": "Cb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BBb",
+              "from": "B",
+              "to": "Bb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CCb",
+              "from": "C",
+              "to": "Cb",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CA",
+              "from": "C",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 20
+            }
+          ],
+          "labels": [
+            {
+              "text": "4 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "3 cm",
+              "target": "segment:CA"
+            },
+            {
+              "text": "10 cm",
+              "target": "segment:BBb"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "00e755fe509eeaec8622fdd8900cc4390c8b3d69c02c2cee5f584edae6471a8a",
-        "width": 940,
-        "height": 390
+        "sha256": "c320952b32240b54093be092d344118641776e95d81f49eddabfc69e24eeb6a2",
+        "width": 600,
+        "height": 388
       }
     ],
     "provenance": {
@@ -1569,7 +3509,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1778,7 +3718,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-005",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1790,16 +3730,7 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
-      },
-      {
-        "type": "asset_ref",
-        "asset_key": "g5-l1-005-diagram"
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -1859,25 +3790,7 @@
       }
     ],
     "total_marks": 1,
-    "assets": [
-      {
-        "asset_key": "g5-l1-005-diagram",
-        "kind": "geometry",
-        "format": "svg",
-        "path": "assets/g5-l1-005-diagram.svg",
-        "alt_text": "Schematic for Square metres to square centimetres. Not drawn to scale. Stated measures include 3 m².",
-        "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "conversion",
-          "question_key": "g5-l1-005",
-          "outcome": "5.4",
-          "not_to_scale": true
-        },
-        "sha256": "980f32c9ddfe95663f490095f1c88f82474ca20cd9049eb6a752c02b34b70fba",
-        "width": 940,
-        "height": 390
-      }
-    ],
+    "assets": [],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1891,7 +3804,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2078,7 +3991,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-007",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2090,16 +4003,7 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
-      },
-      {
-        "type": "asset_ref",
-        "asset_key": "g5-l3-007-diagram"
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -2159,25 +4063,7 @@
       }
     ],
     "total_marks": 3,
-    "assets": [
-      {
-        "asset_key": "g5-l3-007-diagram",
-        "kind": "geometry",
-        "format": "svg",
-        "path": "assets/g5-l3-007-diagram.svg",
-        "alt_text": "Schematic for Difference between two areas. Not drawn to scale. Stated measures include 2.4 m², 500 cm².",
-        "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "conversion",
-          "question_key": "g5-l3-007",
-          "outcome": "5.4",
-          "not_to_scale": true
-        },
-        "sha256": "8e2c3b3f65d1beef39a7d6b816eb670df936b77c8db55e0d21dafa463bdb3116",
-        "width": 940,
-        "height": 390
-      }
-    ],
+    "assets": [],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2191,7 +4077,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2287,7 +4173,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l1-006",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2299,16 +4185,7 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
-      },
-      {
-        "type": "asset_ref",
-        "asset_key": "g5-l1-006-diagram"
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -2368,25 +4245,7 @@
       }
     ],
     "total_marks": 1,
-    "assets": [
-      {
-        "asset_key": "g5-l1-006-diagram",
-        "kind": "geometry",
-        "format": "svg",
-        "path": "assets/g5-l1-006-diagram.svg",
-        "alt_text": "Schematic for Volume of joined cuboids. Not drawn to scale. Stated measures include 120 cm³, 80 cm³.",
-        "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "composite_solid",
-          "question_key": "g5-l1-006",
-          "outcome": "5.5",
-          "not_to_scale": true
-        },
-        "sha256": "02c14f08e915e99c6a36c62c70ab68d12ef155de17f5effe00f5d1cec847cf19",
-        "width": 940,
-        "height": 390
-      }
-    ],
+    "assets": [],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2400,7 +4259,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2496,7 +4355,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l2-007",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2508,7 +4367,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l2-007-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2568,7 +4436,418 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l2-007-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l2-007-diagram-r2.svg",
+        "alt_text": "A cuboid with a front face 12 cm by 8 cm and depth 5 cm. A rectangular tunnel 4 cm by 3 cm opens on the front face and runs through the 5 cm depth. The tunnel's hidden edges are dashed. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "drilled_solid",
+          "question_key": "g5-l2-007",
+          "outcome": "5.5",
+          "template": "cuboid_tunnel",
+          "inputs": {
+            "length": {
+              "value": 12,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "run": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "hole_width": {
+              "value": 4,
+              "unit": "cm"
+            },
+            "hole_height": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "length": {
+              "value": 12,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 8,
+              "unit": "cm"
+            },
+            "run": {
+              "value": 5,
+              "unit": "cm"
+            },
+            "hole_width": {
+              "value": 4,
+              "unit": "cm"
+            },
+            "hole_height": {
+              "value": 3,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "420",
+            "480",
+            "60"
+          ],
+          "unknowns": [],
+          "drawn_scale": 28.7559,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "cuboid",
+              "vertices": {
+                "F1": "F1",
+                "F2": "F2",
+                "F3": "F3",
+                "F4": "F4",
+                "B2": "B2",
+                "B3": "B3",
+                "B4": "B4"
+              },
+              "hidden_vertex": null,
+              "segments": [
+                "F1F2",
+                "F2F3",
+                "F3F4",
+                "F4F1",
+                "F2B2",
+                "B2B3",
+                "F3B3",
+                "B3B4",
+                "F4B4"
+              ]
+            },
+            {
+              "type": "rectangular_hole",
+              "near": [
+                "H1",
+                "H2",
+                "H3",
+                "H4"
+              ],
+              "far": [
+                "J1",
+                "J2",
+                "J3",
+                "J4"
+              ],
+              "face": [
+                "F1",
+                "F2",
+                "F3",
+                "F4"
+              ],
+              "segments": [
+                "J1J2",
+                "J2J3",
+                "J3J4",
+                "J4J1",
+                "H1J1",
+                "H2J2",
+                "H3J3",
+                "H4J4",
+                "H1H2",
+                "H2H3",
+                "H3H4",
+                "H4H1"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "F1F2",
+              "label": "12 cm",
+              "factor": 1.0,
+              "value": 12.0
+            },
+            {
+              "segment": "F4F1",
+              "label": "8 cm",
+              "factor": 1.0,
+              "value": 8.0
+            },
+            {
+              "segment": "F2B2",
+              "label": "5 cm",
+              "factor": 0.5,
+              "value": 5.0
+            },
+            {
+              "segment": "H1H2",
+              "label": "4 cm",
+              "factor": 1.0,
+              "value": 4.0
+            },
+            {
+              "segment": "H4H1",
+              "label": "3 cm",
+              "factor": 1.0,
+              "value": 3.0
+            }
+          ],
+          "captions": [],
+          "shades": [
+            "right-face",
+            "top-face",
+            "front-face",
+            "tunnel-opening"
+          ],
+          "viewbox": [
+            600.0,
+            389.0
+          ],
+          "points": {
+            "F1": [
+              98.02,
+              301.28
+            ],
+            "F2": [
+              443.09,
+              301.28
+            ],
+            "F3": [
+              443.09,
+              71.23
+            ],
+            "F4": [
+              98.02,
+              71.23
+            ],
+            "B2": [
+              501.98,
+              260.05
+            ],
+            "B3": [
+              501.98,
+              30.0
+            ],
+            "B4": [
+              156.91,
+              30.0
+            ],
+            "H1": [
+              213.04,
+              229.39
+            ],
+            "H2": [
+              328.07,
+              229.39
+            ],
+            "H3": [
+              328.07,
+              143.12
+            ],
+            "H4": [
+              213.04,
+              143.12
+            ],
+            "J1": [
+              271.93,
+              188.16
+            ],
+            "J2": [
+              386.96,
+              188.16
+            ],
+            "J3": [
+              386.96,
+              101.89
+            ],
+            "J4": [
+              271.93,
+              101.89
+            ]
+          },
+          "segments": [
+            {
+              "key": "F1F2",
+              "from": "F1",
+              "to": "F2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F2F3",
+              "from": "F2",
+              "to": "F3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F3F4",
+              "from": "F3",
+              "to": "F4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F4F1",
+              "from": "F4",
+              "to": "F1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F2B2",
+              "from": "F2",
+              "to": "B2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "B2B3",
+              "from": "B2",
+              "to": "B3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F3B3",
+              "from": "F3",
+              "to": "B3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "B3B4",
+              "from": "B3",
+              "to": "B4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "F4B4",
+              "from": "F4",
+              "to": "B4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "J1J2",
+              "from": "J1",
+              "to": "J2",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "J2J3",
+              "from": "J2",
+              "to": "J3",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "J3J4",
+              "from": "J3",
+              "to": "J4",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "J4J1",
+              "from": "J4",
+              "to": "J1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "H1J1",
+              "from": "H1",
+              "to": "J1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "H2J2",
+              "from": "H2",
+              "to": "J2",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "H3J3",
+              "from": "H3",
+              "to": "J3",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "H4J4",
+              "from": "H4",
+              "to": "J4",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "H1H2",
+              "from": "H1",
+              "to": "H2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "H2H3",
+              "from": "H2",
+              "to": "H3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "H3H4",
+              "from": "H3",
+              "to": "H4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "H4H1",
+              "from": "H4",
+              "to": "H1",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "12 cm",
+              "target": "segment:F1F2"
+            },
+            {
+              "text": "8 cm",
+              "target": "segment:F4F1"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:F2B2"
+            },
+            {
+              "text": "4 cm",
+              "target": "segment:H1H2"
+            },
+            {
+              "text": "3 cm",
+              "target": "segment:H4H1"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "1289c50f022587ff417e410f4569d89be4f7a209d8e93d71c4f4cb965ad52361",
+        "width": 600,
+        "height": 389
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2582,12 +4861,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-008",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2673,18 +4952,321 @@
         "asset_key": "g5-l3-008-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-008-diagram.svg",
-        "alt_text": "Schematic for Exposed area of joined cubes. Not drawn to scale. Stated measures include 4 cm.",
+        "path": "assets/g5-l3-008-diagram-r3.svg",
+        "alt_text": "Two equal cubes of side 4 cm joined face to face to make one long block. The shared face is shaded, the four marked edges are equal, and hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "composite_solid",
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "joined_solids",
           "question_key": "g5-l3-008",
           "outcome": "5.5",
-          "not_to_scale": true
+          "template": "two_cubes_joined",
+          "inputs": {
+            "side": {
+              "value": 4,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "side": {
+              "value": 4,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "160",
+            "16",
+            "96",
+            "192"
+          ],
+          "unknowns": [],
+          "drawn_scale": 43.5761,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "joined_cubes",
+              "first": [
+                "P0",
+                "P1",
+                "Q1",
+                "Q0",
+                "R0",
+                "R1",
+                "S1",
+                "S0"
+              ],
+              "second": [
+                "P1",
+                "P2",
+                "Q2",
+                "Q1",
+                "R1",
+                "R2",
+                "S2",
+                "S1"
+              ],
+              "shared_face": "shared-face",
+              "segments": [
+                "P0R0",
+                "R0S0",
+                "R0R1",
+                "R1R2",
+                "P1R1",
+                "R1S1",
+                "P0P1",
+                "P1P2",
+                "Q0Q1",
+                "Q1Q2",
+                "P0Q0",
+                "P1Q1",
+                "P2Q2",
+                "Q0S0",
+                "Q1S1",
+                "Q2S2",
+                "S0S1",
+                "S1S2",
+                "P2R2",
+                "R2S2"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "P0P1",
+              "label": "4 cm",
+              "factor": 1.0,
+              "value": 4.0
+            }
+          ],
+          "captions": [
+            "Shaded: shared face"
+          ],
+          "shades": [
+            "right-face",
+            "top-face",
+            "front-face",
+            "shared-face"
+          ],
+          "equal_marks": [
+            {
+              "segments": [
+                "P0P1",
+                "P1P2",
+                "P0Q0",
+                "P2Q2"
+              ],
+              "ticks": 1
+            }
+          ],
+          "viewbox": [
+            600.0,
+            346.0
+          ],
+          "points": {
+            "P0": [
+              90.0,
+              254.29
+            ],
+            "P1": [
+              264.3,
+              254.29
+            ],
+            "P2": [
+              438.61,
+              254.29
+            ],
+            "Q0": [
+              90.0,
+              79.99
+            ],
+            "Q1": [
+              264.3,
+              79.99
+            ],
+            "Q2": [
+              438.61,
+              79.99
+            ],
+            "R0": [
+              161.39,
+              204.3
+            ],
+            "R1": [
+              335.7,
+              204.3
+            ],
+            "R2": [
+              510.0,
+              204.3
+            ],
+            "S0": [
+              161.39,
+              30.0
+            ],
+            "S1": [
+              335.7,
+              30.0
+            ],
+            "S2": [
+              510.0,
+              30.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "P0R0",
+              "from": "P0",
+              "to": "R0",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "R0S0",
+              "from": "R0",
+              "to": "S0",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "R0R1",
+              "from": "R0",
+              "to": "R1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "R1R2",
+              "from": "R1",
+              "to": "R2",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "P1R1",
+              "from": "P1",
+              "to": "R1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "R1S1",
+              "from": "R1",
+              "to": "S1",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "P0P1",
+              "from": "P0",
+              "to": "P1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P1P2",
+              "from": "P1",
+              "to": "P2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Q0Q1",
+              "from": "Q0",
+              "to": "Q1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Q1Q2",
+              "from": "Q1",
+              "to": "Q2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P0Q0",
+              "from": "P0",
+              "to": "Q0",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P1Q1",
+              "from": "P1",
+              "to": "Q1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P2Q2",
+              "from": "P2",
+              "to": "Q2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Q0S0",
+              "from": "Q0",
+              "to": "S0",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Q1S1",
+              "from": "Q1",
+              "to": "S1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Q2S2",
+              "from": "Q2",
+              "to": "S2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S0S1",
+              "from": "S0",
+              "to": "S1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S1S2",
+              "from": "S1",
+              "to": "S2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P2R2",
+              "from": "P2",
+              "to": "R2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "R2S2",
+              "from": "R2",
+              "to": "S2",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "4 cm",
+              "target": "segment:P0P1"
+            }
+          ],
+          "relationships": [],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "577280dc12f75a62aacf4a988e36921561feb8de7c112fa5730cb71878767168",
-        "width": 940,
-        "height": 390
+        "sha256": "83e3e5c816333992fdd9e9d4b64046921450965e5ed56bab40ed750ecdf6bc0e",
+        "width": 600,
+        "height": 346
       }
     ],
     "provenance": {
@@ -2700,7 +5282,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {

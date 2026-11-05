@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-004",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,393 @@
       "asset_key": "g5-l5-004-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-004-diagram.svg",
-      "alt_text": "Schematic for Packing cubes with mixed units. Not drawn to scale. Stated measures include 1.2 m, 80 cm, 50 cm, 10 cm.",
+      "path": "assets/g5-l5-004-diagram-r3.svg",
+      "alt_text": "A cuboid box with edges 1.2 m, 80 cm and 50 cm, and hidden edges dashed. One small cube of side 10 cm sits in the front bottom corner. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "conversion",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cuboid",
         "question_key": "g5-l5-004",
         "outcome": "5.4",
-        "not_to_scale": true
+        "template": "box_with_cube",
+        "inputs": {
+          "length": {
+            "value": 1.2,
+            "unit": "m"
+          },
+          "depth": {
+            "value": 80,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 50,
+            "unit": "cm"
+          },
+          "cube": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "percent": 75.0
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 1.2,
+            "unit": "m"
+          },
+          "depth": {
+            "value": 80,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 50,
+            "unit": "cm"
+          },
+          "cube": {
+            "value": 10,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "360",
+          "480000",
+          "360000",
+          "1000",
+          "120",
+          "12",
+          "8",
+          "5",
+          "480"
+        ],
+        "unknowns": [],
+        "drawn_scale": 2.3992,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "F1",
+              "F2": "F2",
+              "F3": "F3",
+              "F4": "F4",
+              "B1": "B1",
+              "B2": "B2",
+              "B3": "B3",
+              "B4": "B4"
+            },
+            "hidden_vertex": "B1",
+            "segments": [
+              "B1B2",
+              "B1B4",
+              "F1B1",
+              "F1F2",
+              "F2F3",
+              "F3F4",
+              "F4F1",
+              "F2B2",
+              "B2B3",
+              "F3B3",
+              "B3B4",
+              "F4B4"
+            ]
+          },
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "cF1",
+              "F2": "cF2",
+              "F3": "cF3",
+              "F4": "cF4",
+              "B2": "cB2",
+              "B3": "cB3",
+              "B4": "cB4"
+            },
+            "hidden_vertex": null,
+            "cube": true,
+            "segments": [
+              "cF2cF3",
+              "cF3cF4",
+              "cF2cB2",
+              "cB2cB3",
+              "cF3cB3",
+              "cB3cB4",
+              "cF4cB4"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "F1F2",
+            "label": "1.2 m",
+            "factor": 1.0,
+            "value": 120.0
+          },
+          {
+            "segment": "F4F1",
+            "label": "50 cm",
+            "factor": 1.0,
+            "value": 50.0
+          },
+          {
+            "segment": "F2B2",
+            "label": "80 cm",
+            "factor": 0.5,
+            "value": 80.0
+          },
+          {
+            "segment": "cF2cF3",
+            "label": "10 cm",
+            "factor": 1.0,
+            "value": 10.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face",
+          "cright-face",
+          "ctop-face",
+          "cfront-face"
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "F1": [
+            116.74,
+            205.01
+          ],
+          "F2": [
+            404.65,
+            205.01
+          ],
+          "F3": [
+            404.65,
+            85.05
+          ],
+          "F4": [
+            116.74,
+            85.05
+          ],
+          "B2": [
+            483.26,
+            149.96
+          ],
+          "B3": [
+            483.26,
+            30.0
+          ],
+          "B4": [
+            195.35,
+            30.0
+          ],
+          "B1": [
+            195.35,
+            149.96
+          ],
+          "cF1": [
+            116.74,
+            205.01
+          ],
+          "cF2": [
+            140.73,
+            205.01
+          ],
+          "cF3": [
+            140.73,
+            181.01
+          ],
+          "cF4": [
+            116.74,
+            181.01
+          ],
+          "cB2": [
+            150.56,
+            198.13
+          ],
+          "cB3": [
+            150.56,
+            174.13
+          ],
+          "cB4": [
+            126.57,
+            174.13
+          ]
+        },
+        "segments": [
+          {
+            "key": "B1B2",
+            "from": "B1",
+            "to": "B2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "B1B4",
+            "from": "B1",
+            "to": "B4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1B1",
+            "from": "F1",
+            "to": "B1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1F2",
+            "from": "F1",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2F3",
+            "from": "F2",
+            "to": "F3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3F4",
+            "from": "F3",
+            "to": "F4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4F1",
+            "from": "F4",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2B2",
+            "from": "F2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3B3",
+            "from": "F3",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B3B4",
+            "from": "B3",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4B4",
+            "from": "F4",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cF2cF3",
+            "from": "cF2",
+            "to": "cF3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cF3cF4",
+            "from": "cF3",
+            "to": "cF4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cF2cB2",
+            "from": "cF2",
+            "to": "cB2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cB2cB3",
+            "from": "cB2",
+            "to": "cB3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cF3cB3",
+            "from": "cF3",
+            "to": "cB3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cB3cB4",
+            "from": "cB3",
+            "to": "cB4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cF4cB4",
+            "from": "cF4",
+            "to": "cB4",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:cF2cF3",
+            "from": [
+              140.73,
+              193.01
+            ],
+            "to": [
+              185.78,
+              186.25
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "1.2 m",
+            "target": "segment:F1F2"
+          },
+          {
+            "text": "50 cm",
+            "target": "segment:F4F1"
+          },
+          {
+            "text": "80 cm",
+            "target": "segment:F2B2"
+          },
+          {
+            "text": "10 cm",
+            "target": "segment:cF2cF3"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "f67c5eb79e67a8d04592d9de2d594e4495634260430a3bb53224a109bf0d9ec5",
-      "width": 940,
-      "height": 390
+      "sha256": "d9a42760b7323ebdfd742f1d737a2f106cee980237a4ba3abd02cc3f427cc794",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -135,6 +510,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
