@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-522",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,241 @@
       "asset_key": "g5-l3-522-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-522-diagram.svg",
-      "alt_text": "Cone and hemisphere capacity: a labelled composite mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l3-522-diagram-r2.svg",
+      "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 3 cm. The cone's perpendicular height is h = 4 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
-        "diagram_kind": "composite",
+        "renderer": "nextscholar-mensuration-svg-v2",
+        "diagram_kind": "cone_hemisphere",
         "question_key": "g5-l3-522",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "cone_hemisphere_volume",
+        "inputs": {
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "cone_height": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "94.2",
+          "94.25",
+          "37.7",
+          "37.70",
+          "56.5",
+          "56.55"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "O",
+              "V": "V",
+              "L": "L",
+              "R": "R"
+            }
+          },
+          {
+            "type": "hemisphere",
+            "open": false,
+            "points": {
+              "O": "hO",
+              "L": "hL",
+              "R": "hR"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          496.0
+        ],
+        "points": {
+          "hO": [
+            330.0,
+            246.0
+          ],
+          "hL": [
+            180.0,
+            246.0
+          ],
+          "hR": [
+            480.0,
+            246.0
+          ],
+          "O": [
+            330.0,
+            246.0
+          ],
+          "V": [
+            330.0,
+            46.0
+          ],
+          "L": [
+            180.0,
+            246.0
+          ],
+          "R": [
+            480.0,
+            246.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "VL",
+            "from": "V",
+            "to": "L",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "OR",
+            "from": "O",
+            "to": "R",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "hrim": {
+            "center": "hO",
+            "rx": 150.0,
+            "ry": 51.0
+          },
+          "base": {
+            "center": "O",
+            "rx": 150.0,
+            "ry": 51.0
+          }
+        },
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "V",
+              "R"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:OR",
+            "from": [
+              405.0,
+              246.0
+            ],
+            "to": [
+              507.31,
+              338.08
+            ]
+          },
+          {
+            "target": "segment:VO",
+            "from": [
+              330.0,
+              130.0
+            ],
+            "to": [
+              258.79,
+              105.08
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "r = 3 cm",
+            "target": "segment:OR"
+          },
+          {
+            "text": "h = 4 cm",
+            "target": "segment:VO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "O"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hO",
+              "O"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hR",
+              "R"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hL",
+              "L"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "3cc9f2dfd3c14ef6d1c7429ccda3d6b03c46af360ff23a418e0b0de84341458b",
-      "width": 760,
-      "height": 430
+      "sha256": "c894d2a76d79c36b390a5982a1e3752a25b065f4b226c9d6eda08762aa62c846",
+      "width": 600,
+      "height": 496
     }
   ],
   "provenance": {
@@ -128,6 +351,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
