@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-002",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,259 @@
       "asset_key": "g5-l5-002-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-002-diagram.svg",
-      "alt_text": "Schematic for Perimeter from a composite area. Not drawn to scale. Stated measures include 8 cm, 5 cm, 5 cm, 120 cm².",
+      "path": "assets/g5-l5-002-diagram-r3.svg",
+      "alt_text": "A rectangle x cm by 8 cm joined to a rectangle (x − 2) cm by 5 cm. The whole 5 cm edge of the second rectangle lies along a side of the first, and that shared edge is dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
         "diagram_kind": "composite_plane",
         "question_key": "g5-l5-002",
         "outcome": "5.2",
-        "not_to_scale": true
+        "template": "joined_rectangles_algebra",
+        "inputs": {
+          "side": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "less": 2,
+          "shared": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "total_area": {
+            "value": 120,
+            "unit": "cm²"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "expressions": [
+            "x cm",
+            "(x − 2) cm"
+          ],
+          "side": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "52",
+          "10",
+          "80",
+          "40"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "8",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [],
+        "drawn_scale": 16.8317,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "joined_rectangles",
+            "first": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "second": [
+              "B",
+              "S",
+              "T",
+              "J"
+            ],
+            "shared": "BJ",
+            "segments": [
+              "BJ",
+              "AB",
+              "JC",
+              "CD",
+              "DA",
+              "BS",
+              "ST",
+              "TJ"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "x cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 0.0
+          },
+          {
+            "segment": "DA",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "BS",
+            "label": "(x − 2) cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": -2.0
+          },
+          {
+            "segment": "ST",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          }
+        ],
+        "captions": [
+          "Dashed: shared edge"
+        ],
+        "shades": [
+          "first-rectangle",
+          "second-rectangle"
+        ],
+        "neutral_lengths": [
+          {
+            "variable": "x",
+            "drawn": 13.0,
+            "avoid": 10.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "A": [
+            98.02,
+            174.65
+          ],
+          "B": [
+            316.83,
+            174.65
+          ],
+          "J": [
+            316.83,
+            90.5
+          ],
+          "C": [
+            316.83,
+            40.0
+          ],
+          "D": [
+            98.02,
+            40.0
+          ],
+          "S": [
+            501.98,
+            174.65
+          ],
+          "T": [
+            501.98,
+            90.5
+          ]
+        },
+        "segments": [
+          {
+            "key": "BJ",
+            "from": "B",
+            "to": "J",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "JC",
+            "from": "J",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DA",
+            "from": "D",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BS",
+            "from": "B",
+            "to": "S",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "ST",
+            "from": "S",
+            "to": "T",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TJ",
+            "from": "T",
+            "to": "J",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "x cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:DA"
+          },
+          {
+            "text": "(x − 2) cm",
+            "target": "segment:BS"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:ST"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "B",
+              "S"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "J",
+              "C"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "3550c1c16e183080db520ed5b8f9a5a9d132e9af55891d390a91464c16bc50ef",
-      "width": 940,
-      "height": 390
+      "sha256": "38efa975c72a3edf16b51b980478e7e1b2b5afc8ce2ab4a1ad19d0e62770cd5d",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -146,6 +387,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-012",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-012-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A prism has a trapezium cross-section with parallel sides 6 cm and 10 cm and height 5 cm. The prism is 12 cm long. Find its volume in cm\u00b3. Enter the numerical value only."
+          "text": "A prism has a trapezium cross-section with parallel sides 6 cm and 10 cm and height 5 cm. The prism is 12 cm long. Find its volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate \u00bd(6 + 10)(5), then multiply by 12."
+              "text": "Calculate ½(6 + 10)(5), then multiply by 12."
             }
           ]
         }
@@ -83,7 +92,342 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-012-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-012-diagram-r2.svg",
+      "alt_text": "A prism whose front face is a trapezium with parallel sides 6 cm and 10 cm and dashed perpendicular height 5 cm, with a right angle marked at its foot. The prism is 12 cm long, and hidden edges are dashed. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "prism",
+        "question_key": "g5-l3-012",
+        "outcome": "5.3",
+        "template": "trapezoidal_prism",
+        "inputs": {
+          "parallel_short": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "parallel_long": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "length": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "parallel_short": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "parallel_long": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "length": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "480",
+          "40"
+        ],
+        "unknowns": [],
+        "drawn_scale": 28.1597,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "prism",
+            "front": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "back": [
+              "Ab",
+              "Bb",
+              "Cb",
+              "Db"
+            ],
+            "hidden_vertex": "Ab",
+            "cross_section": {
+              "type": "trapezium",
+              "points": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "heights": [
+                {
+                  "segment": "CF",
+                  "foot": "F",
+                  "top": "C",
+                  "base": [
+                    "A",
+                    "B"
+                  ]
+                }
+              ]
+            },
+            "segments": [
+              "AbBb",
+              "DbAb",
+              "AAb",
+              "BbCb",
+              "CbDb",
+              "BBb",
+              "CCb",
+              "DDb",
+              "AB",
+              "BC",
+              "CD",
+              "DA",
+              "CF"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "10 cm",
+            "factor": 1.0,
+            "value": 10.0
+          },
+          {
+            "segment": "CD",
+            "label": "6 cm",
+            "factor": 1.0,
+            "value": 6.0
+          },
+          {
+            "segment": "CF",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "BBb",
+            "label": "12 cm",
+            "factor": 0.5,
+            "value": 12.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "rear-face",
+          "side-BC",
+          "side-CD",
+          "cross-section"
+        ],
+        "viewbox": [
+          600.0,
+          356.0
+        ],
+        "points": {
+          "A": [
+            90.0,
+            267.71
+          ],
+          "B": [
+            371.6,
+            267.71
+          ],
+          "C": [
+            315.28,
+            126.91
+          ],
+          "D": [
+            146.32,
+            126.91
+          ],
+          "Ab": [
+            228.4,
+            170.8
+          ],
+          "Bb": [
+            510.0,
+            170.8
+          ],
+          "Cb": [
+            453.68,
+            30.0
+          ],
+          "Db": [
+            284.72,
+            30.0
+          ],
+          "F": [
+            315.28,
+            267.71
+          ]
+        },
+        "segments": [
+          {
+            "key": "AbBb",
+            "from": "Ab",
+            "to": "Bb",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "DbAb",
+            "from": "Db",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "AAb",
+            "from": "A",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BbCb",
+            "from": "Bb",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CbDb",
+            "from": "Cb",
+            "to": "Db",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BBb",
+            "from": "B",
+            "to": "Bb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CCb",
+            "from": "C",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DDb",
+            "from": "D",
+            "to": "Db",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DA",
+            "from": "D",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CF",
+            "from": "C",
+            "to": "F",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "F",
+            "arms": [
+              "A",
+              "C"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:CD",
+            "from": [
+              230.8,
+              126.91
+            ],
+            "to": [
+              180.83,
+              76.94
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "10 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:CD"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:CF"
+          },
+          {
+            "text": "12 cm",
+            "target": "segment:BBb"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "F",
+              "B"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "d69ad09be57899399e7eaf5bca992df9b44a247e58886189bf695d58343038de",
+      "width": 600,
+      "height": 356
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +441,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
