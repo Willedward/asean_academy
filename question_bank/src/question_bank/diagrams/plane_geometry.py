@@ -69,6 +69,8 @@ def _key_findings(expected: float, answers: Sequence[str]) -> list[str]:
 class _Figure:
     """A canvas plus the markings and relationships the validator measures."""
 
+    renderer = PLANE_GEOMETRY_RENDERER
+
     def __init__(
         self,
         points: dict[str, Point],
@@ -248,7 +250,7 @@ class _Figure:
         if self.arcs:
             details["arcs"] = self.arcs
         spec = base_spec(
-            renderer=PLANE_GEOMETRY_RENDERER,
+            renderer=self.renderer,
             diagram_kind=kind,
             template=template,
             inputs=inputs,
@@ -262,7 +264,7 @@ class _Figure:
         )
         return finish(
             canvas,
-            renderer=PLANE_GEOMETRY_RENDERER,
+            renderer=self.renderer,
             title=title,
             alt_text=f"{alt_text} {NOT_TO_SCALE}",
             spec=spec,

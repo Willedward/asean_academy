@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l5-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,319 @@
       "asset_key": "g2-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l5-505-diagram.svg",
-      "alt_text": "Schematic for Scale-plan courtyard synthesis. Not drawn to scale. Stated measures include 7.5 cm, 4.8 cm.",
+      "path": "assets/g2-l5-505-diagram-r3.svg",
+      "alt_text": "Three similar rectangles, one above another. The rectangle labelled plan is marked 7.5 cm and 4.8 cm. An arrow marked 1 : 400 points down to a rectangle labelled courtyard, whose sides are not marked. An arrow marked × 3/5 points down to a smaller rectangle labelled stage, marked area s. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "scale",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "scale_rectangles",
         "question_key": "g2-l5-505",
         "outcome": "2.5",
-        "not_to_scale": true
+        "template": "scale_plan_stage",
+        "inputs": {
+          "length": {
+            "value": 7.5,
+            "unit": "cm"
+          },
+          "width": {
+            "value": 4.8,
+            "unit": "cm"
+          },
+          "scale": 400,
+          "factor": [
+            3,
+            5
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "plan": [
+            {
+              "value": 7.5,
+              "unit": "cm"
+            },
+            {
+              "value": 4.8,
+              "unit": "cm"
+            }
+          ],
+          "scale": "1 : 400",
+          "factor": [
+            3,
+            5
+          ]
+        },
+        "forbidden_visible_labels": [
+          "207.36",
+          "207.4",
+          "30",
+          "19.2",
+          "19.20",
+          "18",
+          "11.5",
+          "11.52"
+        ],
+        "unknowns": [
+          {
+            "target": "caption:unknown",
+            "label": "area s"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "plan": [
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ],
+          "courtyard": [
+            "Y1",
+            "Y2",
+            "Y3",
+            "Y4"
+          ],
+          "stage": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "plan",
+            "from": "plan",
+            "to": "courtyard"
+          },
+          {
+            "key": "stage",
+            "from": "courtyard",
+            "to": "stage",
+            "factor": 0.6
+          }
+        ],
+        "viewbox": [
+          600.0,
+          630.0
+        ],
+        "points": {
+          "P1": [
+            241.86,
+            130.42
+          ],
+          "P2": [
+            358.14,
+            130.42
+          ],
+          "P3": [
+            358.14,
+            56.0
+          ],
+          "P4": [
+            241.86,
+            56.0
+          ],
+          "Y1": [
+            154.65,
+            380.42
+          ],
+          "Y2": [
+            445.35,
+            380.42
+          ],
+          "Y3": [
+            445.35,
+            194.37
+          ],
+          "Y4": [
+            154.65,
+            194.37
+          ],
+          "S1": [
+            212.79,
+            556.0
+          ],
+          "S2": [
+            387.21,
+            556.0
+          ],
+          "S3": [
+            387.21,
+            444.37
+          ],
+          "S4": [
+            212.79,
+            444.37
+          ],
+          "Tail1": [
+            300.0,
+            136.81
+          ],
+          "Tip1": [
+            300.0,
+            187.98
+          ],
+          "Tail2": [
+            300.0,
+            386.81
+          ],
+          "Tip2": [
+            300.0,
+            437.98
+          ],
+          "PadL": [
+            81.98,
+            556.0
+          ],
+          "PadR": [
+            518.02,
+            556.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2P3",
+            "from": "P2",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P3P4",
+            "from": "P3",
+            "to": "P4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P4P1",
+            "from": "P4",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Y1Y2",
+            "from": "Y1",
+            "to": "Y2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Y2Y3",
+            "from": "Y2",
+            "to": "Y3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Y3Y4",
+            "from": "Y3",
+            "to": "Y4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Y4Y1",
+            "from": "Y4",
+            "to": "Y1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2S3",
+            "from": "S2",
+            "to": "S3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S3S4",
+            "from": "S3",
+            "to": "S4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S4S1",
+            "from": "S4",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "1 : 400",
+            "target": "caption:arrow-plan"
+          },
+          {
+            "text": "× 3/5",
+            "target": "caption:arrow-stage"
+          },
+          {
+            "text": "7.5 cm",
+            "target": "segment:P3P4"
+          },
+          {
+            "text": "4.8 cm",
+            "target": "segment:P4P1"
+          },
+          {
+            "text": "plan",
+            "target": "caption:plan"
+          },
+          {
+            "text": "courtyard",
+            "target": "caption:courtyard"
+          },
+          {
+            "text": "stage",
+            "target": "caption:stage"
+          },
+          {
+            "text": "area s",
+            "target": "caption:unknown"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "plan",
+              "courtyard"
+            ],
+            "value": 2.5
+          },
+          {
+            "type": "similar",
+            "figures": [
+              "courtyard",
+              "stage"
+            ],
+            "value": 0.6
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "df1b4027f1b0cacf74281f52f7cbfb9633d5d16e7ad9793b89fcc328efe2ccc9",
-      "width": 940,
-      "height": 390
+      "sha256": "e52e5e35c24bea6699f352bf47505b7225862ea2b8ed4797dbcd91ddfba9400d",
+      "width": 600,
+      "height": 630
     }
   ],
   "provenance": {
@@ -146,6 +447,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
