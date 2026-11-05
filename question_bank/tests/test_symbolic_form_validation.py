@@ -83,25 +83,39 @@ def test_only_prompt_text_is_read_for_the_task():
     assert missing_symbolic_form(prompt, symbolic()) is None
 
 
-def test_bank_warns_for_drafts_and_blocks_publication(repository_root):
-    draft = validate_bank(repository_root / N5_BANK)
+def bank_without_forms(repository_root, root, *question_keys):
+    """Copy the N5 bank and clear the form on these items, so each test sets its own state."""
+
+    bank_root = root / "question_bank/g3_math/secondary_1/n5/v1"
+    shutil.copytree(repository_root / N5_BANK, bank_root)
+    shutil.copytree(
+        repository_root / "backend_resources/question_bank/schema",
+        root / "question_bank/schema",
+    )
+    for question_key in question_keys:
+        question_path = bank_root / f"questions/{question_key}.json"
+        question = json.loads(question_path.read_text())
+        question["parts"][0]["response"]["checker_config"] = {}
+        question_path.write_text(json.dumps(question))
+    return bank_root
+
+
+def test_bank_warns_for_drafts_and_blocks_publication(repository_root, tmp_path):
+    bank_root = bank_without_forms(repository_root, tmp_path, "n5-l1-016")
+    catalogue = repository_root / SYLLABUS
+    draft = validate_bank(bank_root, catalogue_path=catalogue)
     assert draft.valid
     warned = flagged(draft, "warning")
     assert any(path.endswith("n5-l1-016.json") for path in warned)
     assert not any(path.endswith("n5-l1-001.json") for path in warned)
 
-    publish = validate_bank(repository_root / N5_BANK, publish=True)
+    publish = validate_bank(bank_root, catalogue_path=catalogue, publish=True)
     assert flagged(publish, "error") == warned
     assert not flagged(publish, "warning")
 
 
 def test_setting_a_form_clears_the_issue(repository_root, tmp_path):
-    bank_root = tmp_path / "question_bank/g3_math/secondary_1/n5/v1"
-    shutil.copytree(repository_root / N5_BANK, bank_root)
-    shutil.copytree(
-        repository_root / "backend_resources/question_bank/schema",
-        tmp_path / "question_bank/schema",
-    )
+    bank_root = bank_without_forms(repository_root, tmp_path, "n5-l1-015", "n5-l1-016")
     question_path = bank_root / "questions/n5-l1-016.json"
     question = json.loads(question_path.read_text())
     question["parts"][0]["response"]["checker_config"] = {"form": "expanded"}
@@ -111,7 +125,7 @@ def test_setting_a_form_clears_the_issue(repository_root, tmp_path):
 
     assert report.valid
     assert not any(path.endswith("n5-l1-016.json") for path in flagged(report, "warning"))
-    assert flagged(report, "warning")
+    assert any(path.endswith("n5-l1-015.json") for path in flagged(report, "warning"))
 
 
 def test_lesson_recall_warns_for_drafts_and_blocks_publication(repository_root, course_bank_root):
@@ -134,6 +148,10 @@ def test_batch_validation_blocks_only_approved_batches(repository_root, tmp_path
     isolated_root = tmp_path / "repository"
     bank_root = isolated_root / N5_BANK
     shutil.copytree(repository_root / N5_BANK, bank_root)
+    question_path = bank_root / "questions/n5-l1-016.json"
+    question = json.loads(question_path.read_text())
+    question["parts"][0]["response"]["checker_config"] = {}
+    question_path.write_text(json.dumps(question))
     manifest_path = next(
         path
         for path in sorted((bank_root / "batches").glob("*.json"))
