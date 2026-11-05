@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l2-516",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a community planning study. A vehicle covers a fixed route in 3 hours at a constant speed of 40 km/h. Assuming travel time is inversely proportional to speed, find the time in hours at 40 km/h. Enter the exact numerical value only."
+          "text": "Use the data from a community planning study. A vehicle covers a fixed route in 3 hours at a constant speed of 40 km/h. Assuming travel time is inversely proportional to speed, find the time in hours at 60 km/h. Enter the exact numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The route length is 40 × 3 km; divide it by 40."
+              "text": "The route length is 40 × 3 km; divide it by 60."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "d=40(3)=120,\\quad t=\\frac{120}{40}=3"
+              "latex": "d=40(3)=120,\\quad t=\\frac{120}{60}=2"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{3}"
+              "latex": "\\boxed{2}"
             }
           ],
           "mark_type": "A",
