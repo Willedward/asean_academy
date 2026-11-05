@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,330 @@
       "asset_key": "g5-l5-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-001-diagram.svg",
-      "alt_text": "Schematic for Linked quadrilateral design. Not drawn to scale. Stated measures include 10 cm, 8 cm, 260 cm².",
+      "path": "assets/g5-l5-001-diagram-r3.svg",
+      "alt_text": "A trapezium with parallel sides x cm and (x + 4) cm and dashed perpendicular height 10 cm, beside a parallelogram with base (x + 3) cm and dashed perpendicular height 8 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "area",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "two_quadrilaterals",
         "question_key": "g5-l5-001",
         "outcome": "5.1",
-        "not_to_scale": true
+        "template": "trapezium_and_parallelogram_algebra",
+        "inputs": {
+          "long_extra": 4,
+          "trapezium_height": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "base_extra": 3,
+          "height": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "total_area": {
+            "value": 260,
+            "unit": "cm²"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "expressions": [
+            "x cm",
+            "(x + 4) cm",
+            "(x + 3) cm"
+          ]
+        },
+        "forbidden_visible_labels": [
+          "12",
+          "16",
+          "15"
+        ],
+        "unknowns": [],
+        "drawn_scale": 17.4227,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "trapezium",
+            "points": [
+              "TA",
+              "TB",
+              "TC",
+              "TD"
+            ],
+            "heights": [
+              {
+                "segment": "TDTF",
+                "foot": "TF",
+                "top": "TD",
+                "base": [
+                  "TA",
+                  "TB"
+                ]
+              }
+            ],
+            "segments": [
+              "TATB",
+              "TBTC",
+              "TCTD",
+              "TDTA",
+              "TDTF"
+            ]
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "PA",
+              "PB",
+              "PC",
+              "PD"
+            ],
+            "heights": [
+              {
+                "segment": "PDPF",
+                "foot": "PF",
+                "top": "PD",
+                "base": [
+                  "PA",
+                  "PB"
+                ]
+              }
+            ],
+            "segments": [
+              "PAPB",
+              "PBPC",
+              "PCPD",
+              "PDPA",
+              "PDPF"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "TATB",
+            "label": "(x + 4) cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 4.0
+          },
+          {
+            "segment": "TCTD",
+            "label": "x cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 0.0
+          },
+          {
+            "segment": "TDTF",
+            "label": "10 cm",
+            "factor": 1.0,
+            "value": 10.0
+          },
+          {
+            "segment": "PAPB",
+            "label": "(x + 3) cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 3.0
+          },
+          {
+            "segment": "PDPF",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "Ttrapezium",
+          "Pparallelogram"
+        ],
+        "neutral_lengths": [
+          {
+            "variable": "x",
+            "drawn": 9.0,
+            "avoid": 12.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          318.0
+        ],
+        "points": {
+          "TA": [
+            35.0,
+            230.23
+          ],
+          "TB": [
+            261.5,
+            230.23
+          ],
+          "TC": [
+            226.65,
+            56.0
+          ],
+          "TD": [
+            69.85,
+            56.0
+          ],
+          "TF": [
+            69.85,
+            230.23
+          ],
+          "PA": [
+            293.21,
+            230.23
+          ],
+          "PB": [
+            502.28,
+            230.23
+          ],
+          "PC": [
+            565.0,
+            90.85
+          ],
+          "PD": [
+            355.93,
+            90.85
+          ],
+          "PF": [
+            355.93,
+            230.23
+          ]
+        },
+        "segments": [
+          {
+            "key": "TATB",
+            "from": "TA",
+            "to": "TB",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TBTC",
+            "from": "TB",
+            "to": "TC",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TCTD",
+            "from": "TC",
+            "to": "TD",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TDTA",
+            "from": "TD",
+            "to": "TA",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TDTF",
+            "from": "TD",
+            "to": "TF",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "PAPB",
+            "from": "PA",
+            "to": "PB",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PBPC",
+            "from": "PB",
+            "to": "PC",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PCPD",
+            "from": "PC",
+            "to": "PD",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PDPA",
+            "from": "PD",
+            "to": "PA",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PDPF",
+            "from": "PD",
+            "to": "PF",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "TF",
+            "arms": [
+              "TB",
+              "TD"
+            ],
+            "marker_size": 18
+          },
+          {
+            "vertex": "PF",
+            "arms": [
+              "PB",
+              "PD"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "labels": [
+          {
+            "text": "(x + 4) cm",
+            "target": "segment:TATB"
+          },
+          {
+            "text": "x cm",
+            "target": "segment:TCTD"
+          },
+          {
+            "text": "10 cm",
+            "target": "segment:TDTF"
+          },
+          {
+            "text": "(x + 3) cm",
+            "target": "segment:PAPB"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:PDPF"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "TA",
+              "TF",
+              "TB"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "PA",
+              "PF",
+              "PB"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "362659a1553181539325d47d6de3af6b6000f82abe0ce3a02e09a95fa3b211d6",
-      "width": 940,
-      "height": 390
+      "sha256": "d9f8172165c9b2ba14ab3c3c38eb5b4dd472a865c1a21ba9faccfa58c2e719c6",
+      "width": 600,
+      "height": 318
     }
   ],
   "provenance": {
@@ -146,6 +458,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
