@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-504",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-504-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,105 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-504-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-504-diagram-r2.svg",
+      "alt_text": "Bar chart with First: 96, Second: 100.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l1-504",
+        "outcome": "1.7",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "First",
+            "Second"
+          ],
+          "values": [
+            96.0,
+            100.0
+          ],
+          "y_min": 92.0,
+          "y_max": 100,
+          "tick_step": 5
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "96",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "245",
+              "width": "177",
+              "height": "140"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "100",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:92",
+            "axis": "y",
+            "value": "92",
+            "position": "385",
+            "label": "92"
+          },
+          {
+            "key": "y:97",
+            "axis": "y",
+            "value": "97",
+            "position": "210",
+            "label": "97"
+          },
+          {
+            "key": "x:First",
+            "axis": "x",
+            "value": "First",
+            "position": "237.5",
+            "label": "First"
+          },
+          {
+            "key": "x:Second",
+            "axis": "x",
+            "value": "Second",
+            "position": "532.5",
+            "label": "Second"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 92.0,
+          "y_max": 100.0,
+          "tick_step": 5.0
+        }
+      },
+      "sha256": "0660fc08d4fd18422ef3b6d80b93c677419c9929b0dea5b1c77d8cd3a4a79834",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +193,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

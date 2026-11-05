@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-502",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-502-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -91,7 +100,59 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-502-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-502-diagram-r2.svg",
+      "alt_text": "Stem-and-leaf diagram. stem 4, leaves 1 3 4 7 8. Key: 4|1 means 41.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "stem_leaf",
+        "question_key": "s1-l2-502",
+        "outcome": "1.5",
+        "template": "stem_leaf",
+        "inputs": {
+          "rows": [
+            {
+              "stem": 4,
+              "leaves": [
+                1,
+                3,
+                4,
+                7,
+                8
+              ]
+            }
+          ],
+          "key": "4|1 means 41"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "row-0",
+            "kind": "stem-leaf-row",
+            "value": "4|1 3 4 7 8",
+            "tag": "text",
+            "geometry": {
+              "x": "335",
+              "y": "125"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "253b359067166d926eb7dbf3769510bfe2366667544c702b46f4d907d4234436",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +166,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
