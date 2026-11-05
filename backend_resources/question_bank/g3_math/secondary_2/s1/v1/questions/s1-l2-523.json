@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-523",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-523-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -99,7 +108,114 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-523-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-523-diagram-r3.svg",
+      "alt_text": "Bar chart with First month: 110, Next month: 120.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-523",
+        "outcome": "1.7",
+        "template": "bar_chart",
+        "inputs": {
+          "title": "Monthly rainfall",
+          "categories": [
+            "First month",
+            "Next month"
+          ],
+          "values": [
+            110,
+            120
+          ],
+          "y_min": 100,
+          "y_max": 120,
+          "tick_step": 10,
+          "y_label": "Rainfall"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "110",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "245",
+              "width": "177",
+              "height": "140"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "120",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:100",
+            "axis": "y",
+            "value": "100",
+            "position": "385",
+            "label": "100"
+          },
+          {
+            "key": "y:110",
+            "axis": "y",
+            "value": "110",
+            "position": "245",
+            "label": "110"
+          },
+          {
+            "key": "y:120",
+            "axis": "y",
+            "value": "120",
+            "position": "105",
+            "label": "120"
+          },
+          {
+            "key": "x:First month",
+            "axis": "x",
+            "value": "First month",
+            "position": "237.5",
+            "label": "First month"
+          },
+          {
+            "key": "x:Next month",
+            "axis": "x",
+            "value": "Next month",
+            "position": "532.5",
+            "label": "Next month"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 100.0,
+          "y_max": 120.0,
+          "tick_step": 10.0
+        }
+      },
+      "sha256": "18edb5a7aab31ed9e895084776b89f3db06f246b1973d0e54c502d144b9be688",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -113,6 +229,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
