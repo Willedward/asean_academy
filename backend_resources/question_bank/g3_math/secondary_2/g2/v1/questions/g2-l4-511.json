@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-511",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l4-511-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -94,7 +103,214 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l4-511-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l4-511-diagram-r2.svg",
+      "alt_text": "Coordinate axes x and y with a unit grid and origin O. The centre C(3, −2) and the point A(−3, 7) are plotted and joined by a straight line. The image point is not plotted. A caption reads scale factor 2/3. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "coordinate_grid",
+        "question_key": "g2-l4-511",
+        "outcome": "2.4",
+        "template": "centre_given_ray",
+        "inputs": {
+          "centre": [
+            3,
+            -2
+          ],
+          "factor": [
+            2,
+            3
+          ],
+          "point": [
+            -3,
+            7
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "C": [
+            3,
+            -2
+          ],
+          "A": [
+            -3,
+            7
+          ],
+          "factor": [
+            2,
+            3
+          ]
+        },
+        "forbidden_visible_labels": [
+          "−1",
+          "(−1, 4)",
+          "1",
+          "4"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "3",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "grid": {
+          "origin": "O",
+          "unit": 39.07,
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -4,
+            8
+          ],
+          "points": {
+            "C": [
+              3.0,
+              -2.0
+            ],
+            "A": [
+              -3.0,
+              7.0
+            ]
+          },
+          "ticks": {
+            "x": [
+              -3,
+              3
+            ],
+            "y": [
+              7,
+              -2
+            ]
+          }
+        },
+        "viewbox": [
+          600.0,
+          628.0
+        ],
+        "points": {
+          "GridA": [
+            100.78,
+            560.28
+          ],
+          "GridB": [
+            491.41,
+            91.53
+          ],
+          "O": [
+            296.09,
+            404.03
+          ],
+          "UnitX": [
+            335.16,
+            404.03
+          ],
+          "XEnd": [
+            510.94,
+            404.03
+          ],
+          "XStart": [
+            89.06,
+            404.03
+          ],
+          "YEnd": [
+            296.09,
+            72.0
+          ],
+          "YStart": [
+            296.09,
+            572.0
+          ],
+          "C": [
+            413.28,
+            482.16
+          ],
+          "A": [
+            178.91,
+            130.59
+          ]
+        },
+        "segments": [
+          {
+            "key": "XStartXEnd",
+            "from": "XStart",
+            "to": "XEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "YStartYEnd",
+            "from": "YStart",
+            "to": "YEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "−3",
+            "target": "tick:x:-3"
+          },
+          {
+            "text": "3",
+            "target": "tick:x:3"
+          },
+          {
+            "text": "7",
+            "target": "tick:y:7"
+          },
+          {
+            "text": "−2",
+            "target": "tick:y:-2"
+          },
+          {
+            "text": "x",
+            "target": "axis:x"
+          },
+          {
+            "text": "y",
+            "target": "axis:y"
+          },
+          {
+            "text": "O",
+            "target": "point:O"
+          },
+          {
+            "text": "C(3, −2)",
+            "target": "point:C"
+          },
+          {
+            "text": "A(−3, 7)",
+            "target": "point:A"
+          },
+          {
+            "text": "scale factor 2/3",
+            "target": "caption:factor"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "abd80d9c1c098c25c1de2322d27cf1960b20715ceed840adc803968f67b34e48",
+      "width": 600,
+      "height": 628
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -108,6 +324,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

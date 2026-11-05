@@ -18,6 +18,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Any
 
+from . import similarity_checks
 from .sec1_mensuration_checks import SEC1_MENSURATION_RENDERER, sec1_mensuration_issues
 from .svg_metrics import (
     MIN_PHONE_FONT_PX,
@@ -41,6 +42,7 @@ MAX_LABEL_GAP = 40.0
 LABEL_STROKE_CLEARANCE = 1.0
 CONVERSE_TASKS = frozenset({"converse_test", "perimeter_verify"})
 PLANE_GEOMETRY_RENDERER = "nextscholar-plane-geometry-svg-v1"
+SIMILARITY_RENDERER = "nextscholar-similarity-svg-v1"
 # What the alternative text of each plane-geometry figure must name.
 PLANE_FIGURE_WORDS = {
     "angles_on_line": "straight line",
@@ -51,6 +53,7 @@ PLANE_FIGURE_WORDS = {
     "diagonals": "segments",
     "kite": "kite",
     "construction": "arc",
+    **similarity_checks.FIGURE_WORDS,
 }
 _ARC_D = re.compile(
     r"^\s*M\s*(-?[\d.]+)[ ,]+(-?[\d.]+)\s+A\s*(-?[\d.]+)[ ,]+(-?[\d.]+)[ ,]+0[ ,]+([01])[ ,]+([01])"
@@ -673,6 +676,7 @@ class _Checked:
             "unequal_segments": self._unequal_segments,
             "angle_sum": self._angle_sum,
             "corresponding_angles": self._corresponding_angles,
+            **similarity_checks.relationship_checks(self),
         }
         for relation in self.spec.get("relationships") or []:
             kind = relation.get("type") if isinstance(relation, dict) else None
@@ -984,6 +988,12 @@ class _Checked:
         return None
 
     # ------------------------------------------------------------ plane-geometry figures
+    def measured_angle(self, key: str) -> float | None:
+        return self._angle_by_marker(key)
+
+    def drawn_segments_at(self, point: tuple[float, float]) -> set[str]:
+        return self._on_drawn_segment(point)
+
     def _on_drawn_segment(self, point: tuple[float, float]) -> set[str]:
         keys = set()
         for key in self.segments:
@@ -1350,7 +1360,7 @@ class _Checked:
         self.solids()
         self.dimension_lines()
         self.alternative_text()
-        if self.spec.get("renderer") == PLANE_GEOMETRY_RENDERER:
+        if self.spec.get("renderer") in {PLANE_GEOMETRY_RENDERER, SIMILARITY_RENDERER}:
             self.plane_angle_rays()
             self.plane_label_attachment()
             self.plane_markings()
@@ -1358,6 +1368,8 @@ class _Checked:
             self.plane_alternative_text()
         if self.spec.get("renderer") == SEC1_MENSURATION_RENDERER:
             sec1_mensuration_issues(self)
+        if self.spec.get("renderer") == SIMILARITY_RENDERER:
+            similarity_checks.run(self)
         self.issues.extend(text_layout_issues(self.root, check_strokes=True))
         return _unique(self.issues)
 
