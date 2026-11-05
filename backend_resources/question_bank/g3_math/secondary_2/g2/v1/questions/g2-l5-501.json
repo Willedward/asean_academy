@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l5-501",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,304 @@
       "asset_key": "g2-l5-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l5-501-diagram.svg",
-      "alt_text": "Schematic for Congruent pentagon synthesis. Not drawn to scale. Stated measures include 12 cm, 15 cm, 17 cm, 18 cm.",
+      "path": "assets/g2-l5-501-diagram-r3.svg",
+      "alt_text": "Two pentagons, the second turned upside down below the first. The sides of the first are marked (3x + 2) cm, 12 cm, 15 cm, 17 cm and 18 cm. One side of the second is marked (5x − 10) cm. These two sides correspond, and each has one tick. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "congruent",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "congruent_pentagons",
         "question_key": "g2-l5-501",
         "outcome": "2.1",
-        "not_to_scale": true
+        "template": "congruent_pentagons",
+        "inputs": {
+          "first": {
+            "coefficient": 3,
+            "constant": 2
+          },
+          "second": {
+            "coefficient": 5,
+            "constant": -10
+          },
+          "others": [
+            {
+              "value": 12,
+              "unit": "cm"
+            },
+            {
+              "value": 15,
+              "unit": "cm"
+            },
+            {
+              "value": 17,
+              "unit": "cm"
+            },
+            {
+              "value": 18,
+              "unit": "cm"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "first": "(3x + 2) cm",
+          "second": "(5x − 10) cm",
+          "others": [
+            {
+              "value": 12,
+              "unit": "cm"
+            },
+            {
+              "value": 15,
+              "unit": "cm"
+            },
+            {
+              "value": 17,
+              "unit": "cm"
+            },
+            {
+              "value": 18,
+              "unit": "cm"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "82",
+          "6",
+          "20"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "first": [
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5"
+          ],
+          "second": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ]
+        },
+        "equal_marks": [
+          {
+            "segments": [
+              "V1V2",
+              "W1W2"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          674.0
+        ],
+        "points": {
+          "V1": [
+            202.75,
+            244.0
+          ],
+          "V2": [
+            375.84,
+            244.0
+          ],
+          "V3": [
+            410.23,
+            146.0
+          ],
+          "V4": [
+            329.93,
+            44.0
+          ],
+          "V5": [
+            189.77,
+            88.76
+          ],
+          "W1": [
+            397.25,
+            364.0
+          ],
+          "W2": [
+            224.16,
+            364.0
+          ],
+          "W3": [
+            189.77,
+            462.0
+          ],
+          "W4": [
+            270.07,
+            564.0
+          ],
+          "W5": [
+            410.23,
+            519.24
+          ],
+          "PadL": [
+            125.77,
+            244.0
+          ],
+          "PadR": [
+            474.23,
+            244.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "V1V2",
+            "from": "V1",
+            "to": "V2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "V2V3",
+            "from": "V2",
+            "to": "V3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "V3V4",
+            "from": "V3",
+            "to": "V4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "V4V5",
+            "from": "V4",
+            "to": "V5",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "V5V1",
+            "from": "V5",
+            "to": "V1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W1W2",
+            "from": "W1",
+            "to": "W2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W2W3",
+            "from": "W2",
+            "to": "W3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W3W4",
+            "from": "W3",
+            "to": "W4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W4W5",
+            "from": "W4",
+            "to": "W5",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W5W1",
+            "from": "W5",
+            "to": "W1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "(3x + 2) cm",
+            "target": "segment:V1V2"
+          },
+          {
+            "text": "12 cm",
+            "target": "segment:V2V3"
+          },
+          {
+            "text": "15 cm",
+            "target": "segment:V3V4"
+          },
+          {
+            "text": "17 cm",
+            "target": "segment:V4V5"
+          },
+          {
+            "text": "18 cm",
+            "target": "segment:V5V1"
+          },
+          {
+            "text": "(5x − 10) cm",
+            "target": "segment:W1W2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "congruent",
+            "figures": [
+              "first",
+              "second"
+            ]
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "V1",
+                  "V2"
+                ],
+                20.0
+              ],
+              [
+                [
+                  "V2",
+                  "V3"
+                ],
+                12.0
+              ],
+              [
+                [
+                  "V3",
+                  "V4"
+                ],
+                15.0
+              ],
+              [
+                [
+                  "V4",
+                  "V5"
+                ],
+                17.0
+              ],
+              [
+                [
+                  "V5",
+                  "V1"
+                ],
+                18.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "509e0f7d44a7f522cabdd2408e17a31e665f1bc708aa4617ee31e007df0d3f34",
-      "width": 940,
-      "height": 390
+      "sha256": "22debfc8fddbc2200360d8924306a8a30c9a4743aec0f8acec26a69202af5f72",
+      "width": 600,
+      "height": 674
     }
   ],
   "provenance": {
@@ -146,6 +432,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

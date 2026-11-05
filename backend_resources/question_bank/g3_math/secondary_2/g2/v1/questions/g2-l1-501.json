@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-501",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -97,18 +97,274 @@
       "asset_key": "g2-l1-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l1-501-diagram.svg",
-      "alt_text": "Schematic for Matching triangular tiles. Not drawn to scale. Stated measures include 4 cm, 6 cm, 7 cm, 7 cm, 4 cm.",
+      "path": "assets/g2-l1-501-diagram-r3.svg",
+      "alt_text": "Two triangles. The sides of the first are marked 4 cm, 6 cm and 7 cm. The second triangle is turned, and its sides are marked 7 cm, 4 cm and 6 cm. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "congruent",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "congruent_triangles",
         "question_key": "g2-l1-501",
         "outcome": "2.1",
-        "not_to_scale": true
+        "template": "scalene_tiles",
+        "inputs": {
+          "first": [
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 6,
+              "unit": "cm"
+            },
+            {
+              "value": 7,
+              "unit": "cm"
+            }
+          ],
+          "second": [
+            {
+              "value": 7,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 6,
+              "unit": "cm"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "first": [
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 6,
+              "unit": "cm"
+            },
+            {
+              "value": 7,
+              "unit": "cm"
+            }
+          ],
+          "second": [
+            {
+              "value": 7,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 6,
+              "unit": "cm"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "1",
+          "congruent",
+          "same shape",
+          "same size",
+          "similar",
+          "not congruent"
+        ],
+        "unknowns": [],
+        "answer_kind": "classification_code",
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "first": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "second": [
+            "T1",
+            "T2",
+            "T3"
+          ]
+        },
+        "omitted_givens": [
+          {
+            "value": "1",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "2",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "3",
+            "reason": "A response code in the question, not a measurement of the figure."
+          }
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "S1": [
+            100.0,
+            155.91
+          ],
+          "S2": [
+            263.96,
+            155.91
+          ],
+          "S3": [
+            148.52,
+            75.76
+          ],
+          "T1": [
+            500.0,
+            64.0
+          ],
+          "T2": [
+            345.93,
+            120.08
+          ],
+          "T3": [
+            481.82,
+            155.91
+          ]
+        },
+        "segments": [
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2S3",
+            "from": "S2",
+            "to": "S3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S3S1",
+            "from": "S3",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T2T3",
+            "from": "T2",
+            "to": "T3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T3T1",
+            "from": "T3",
+            "to": "T1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "4 cm",
+            "target": "segment:S3S1"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:S2S3"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:S1S2"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:T1T2"
+          },
+          {
+            "text": "4 cm",
+            "target": "segment:T3T1"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:T2T3"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "congruent",
+            "figures": [
+              "first",
+              "second"
+            ]
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "S1",
+                  "S2"
+                ],
+                7.0
+              ],
+              [
+                [
+                  "S1",
+                  "S3"
+                ],
+                4.0
+              ],
+              [
+                [
+                  "S2",
+                  "S3"
+                ],
+                6.0
+              ],
+              [
+                [
+                  "T1",
+                  "T2"
+                ],
+                7.0
+              ],
+              [
+                [
+                  "T1",
+                  "T3"
+                ],
+                4.0
+              ],
+              [
+                [
+                  "T2",
+                  "T3"
+                ],
+                6.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "d504cbc399727b12b5d8def51ef0d81d631133eff1fca636af4cbb44ff2d2b86",
-      "width": 940,
-      "height": 390
+      "sha256": "7857c77ce3ff33305becc605c361aadcc913154c59ab249d63769fa02aad975a",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -124,6 +380,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

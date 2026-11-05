@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-501",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,195 @@
       "asset_key": "g2-l3-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l3-501-diagram.svg",
-      "alt_text": "Schematic for SSS side equation. Not drawn to scale. Stated measures include 16 cm.",
+      "path": "assets/g2-l3-501-diagram-r3.svg",
+      "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (3x + 1) cm and PQ is marked 16 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "congruent",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "congruent_triangles",
         "question_key": "g2-l3-501",
         "outcome": "2.1",
-        "not_to_scale": true
+        "template": "congruent_algebra",
+        "inputs": {
+          "ab": {
+            "coefficient": 3,
+            "constant": 1
+          },
+          "pq": {
+            "value": 16,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "PQ": {
+            "value": 16,
+            "unit": "cm"
+          },
+          "AB": "(3x + 1) cm"
+        },
+        "forbidden_visible_labels": [
+          "5"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ],
+          "PQR": [
+            "P",
+            "Q",
+            "R"
+          ]
+        },
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "PQ"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "BC",
+              "QR"
+            ],
+            "ticks": 2
+          },
+          {
+            "segments": [
+              "CA",
+              "RP"
+            ],
+            "ticks": 3
+          }
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "A": [
+            50.0,
+            181.33
+          ],
+          "B": [
+            246.08,
+            181.33
+          ],
+          "C": [
+            116.67,
+            48.0
+          ],
+          "P": [
+            550.0,
+            48.0
+          ],
+          "Q": [
+            353.92,
+            48.0
+          ],
+          "R": [
+            483.33,
+            181.33
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PQ",
+            "from": "P",
+            "to": "Q",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QR",
+            "from": "Q",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "RP",
+            "from": "R",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "P",
+            "target": "point:P"
+          },
+          {
+            "text": "Q",
+            "target": "point:Q"
+          },
+          {
+            "text": "R",
+            "target": "point:R"
+          },
+          {
+            "text": "(3x + 1) cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "16 cm",
+            "target": "segment:PQ"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "congruent",
+            "figures": [
+              "ABC",
+              "PQR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "70418f153b8921acb2b717e38478265a7807a020157ec1cb3f7dc2e8606c0e1c",
-      "width": 940,
-      "height": 390
+      "sha256": "146a1c687f4c4c15a891e804149f1aa75bc1e415469e63c0b0205c24596e4d0a",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -135,6 +312,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

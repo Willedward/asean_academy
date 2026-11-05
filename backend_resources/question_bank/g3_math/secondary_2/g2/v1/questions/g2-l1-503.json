@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-503",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,191 @@
       "asset_key": "g2-l1-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l1-503-diagram.svg",
-      "alt_text": "Schematic for Enlarged triangular emblem. Not drawn to scale. Stated measures include 3 cm, 6 cm.",
+      "path": "assets/g2-l1-503-diagram-r3.svg",
+      "alt_text": "Two similar triangles, with an arrow marked × k from the smaller to the larger. The corresponding base edges are marked 3 cm and 6 cm. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "similar",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "similar_triangles",
         "question_key": "g2-l1-503",
         "outcome": "2.2",
-        "not_to_scale": true
+        "template": "similar_edges",
+        "inputs": {
+          "small": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "large": {
+            "value": 6,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "small": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "large": {
+            "value": 6,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "2"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "first": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "second": [
+            "T1",
+            "T2",
+            "T3"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "scale",
+            "from": "first",
+            "to": "second",
+            "factor": 2.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          332.0
+        ],
+        "points": {
+          "S1": [
+            45.0,
+            221.85
+          ],
+          "S2": [
+            175.77,
+            221.85
+          ],
+          "S3": [
+            89.46,
+            132.92
+          ],
+          "T1": [
+            293.46,
+            221.85
+          ],
+          "T2": [
+            555.0,
+            221.85
+          ],
+          "T3": [
+            382.38,
+            44.0
+          ],
+          "Tail": [
+            194.6,
+            177.38
+          ],
+          "Tip": [
+            274.63,
+            177.38
+          ]
+        },
+        "segments": [
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2S3",
+            "from": "S2",
+            "to": "S3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S3S1",
+            "from": "S3",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T2T3",
+            "from": "T2",
+            "to": "T3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T3T1",
+            "from": "T3",
+            "to": "T1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "× k",
+            "target": "caption:arrow-scale"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:S1S2"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:T1T2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "first",
+              "second"
+            ],
+            "value": 2.0
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "S1",
+                  "S2"
+                ],
+                3.0
+              ],
+              [
+                [
+                  "T1",
+                  "T2"
+                ],
+                6.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "5c131c2000da16c4bb70eee4ef9145062d0a0dcaf8ca8d8fb69e9647da077d72",
-      "width": 940,
-      "height": 390
+      "sha256": "4d3795b9fa79ce9179b50a7eec95aa4199be1fe372d9d513c94907efa84fab41",
+      "width": 600,
+      "height": 332
     }
   ],
   "provenance": {
@@ -113,6 +286,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

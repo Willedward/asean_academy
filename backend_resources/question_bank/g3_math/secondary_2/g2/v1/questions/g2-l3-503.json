@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-503",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -97,18 +97,171 @@
       "asset_key": "g2-l3-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l3-503-diagram.svg",
-      "alt_text": "Schematic for Similar-triangle perimeter. Not drawn to scale. Stated measures include 24 cm.",
+      "path": "assets/g2-l3-503-diagram-r3.svg",
+      "alt_text": "Two similar triangles, with an arrow marked × 3 from the smaller to the larger. The smaller is marked perimeter 24 cm and the larger is marked perimeter p. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "similar",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "similar_triangles",
         "question_key": "g2-l3-503",
         "outcome": "2.2",
-        "not_to_scale": true
+        "template": "similar_perimeter",
+        "inputs": {
+          "perimeter": {
+            "value": 24,
+            "unit": "cm"
+          },
+          "factor": 3
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "perimeter": {
+            "value": 24,
+            "unit": "cm"
+          },
+          "factor": 3
+        },
+        "forbidden_visible_labels": [
+          "72"
+        ],
+        "unknowns": [
+          {
+            "target": "caption:second",
+            "label": "perimeter p"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "first": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "second": [
+            "T1",
+            "T2",
+            "T3"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "scale",
+            "from": "first",
+            "to": "second",
+            "factor": 3.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          360.0
+        ],
+        "points": {
+          "S1": [
+            45.0,
+            250.02
+          ],
+          "S2": [
+            145.99,
+            250.02
+          ],
+          "S3": [
+            79.34,
+            181.35
+          ],
+          "T1": [
+            252.03,
+            250.02
+          ],
+          "T2": [
+            555.0,
+            250.02
+          ],
+          "T3": [
+            355.04,
+            44.0
+          ],
+          "Tail": [
+            162.96,
+            215.68
+          ],
+          "Tip": [
+            235.06,
+            215.68
+          ]
+        },
+        "segments": [
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2S3",
+            "from": "S2",
+            "to": "S3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S3S1",
+            "from": "S3",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T2T3",
+            "from": "T2",
+            "to": "T3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T3T1",
+            "from": "T3",
+            "to": "T1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "× 3",
+            "target": "caption:arrow-scale"
+          },
+          {
+            "text": "perimeter 24 cm",
+            "target": "caption:first"
+          },
+          {
+            "text": "perimeter p",
+            "target": "caption:second"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "first",
+              "second"
+            ],
+            "value": 3.0
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "81fab220f670b4570632b78415d9ba9ee005f50c085efc3e961c230c9a2ce5a6",
-      "width": 940,
-      "height": 390
+      "sha256": "f6fccfc0e54f3025ad40784c3128c2a487463c9c2e5d548b81516fbdb421179b",
+      "width": 600,
+      "height": 360
     }
   ],
   "provenance": {
@@ -124,6 +277,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,199 @@
       "asset_key": "g2-l1-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l1-505-diagram.svg",
-      "alt_text": "Schematic for Beacon point enlargement. Not drawn to scale.",
+      "path": "assets/g2-l1-505-diagram-r3.svg",
+      "alt_text": "Coordinate axes x and y with a unit grid and origin O. Point A(2, 3) is plotted, with dashed lines to each axis. A straight ray runs from O through A and beyond. The image point is not plotted. A caption reads scale factor 2. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "enlargement",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "coordinate_grid",
         "question_key": "g2-l1-505",
         "outcome": "2.4",
-        "not_to_scale": true
+        "template": "origin_point_ray",
+        "inputs": {
+          "point": [
+            2,
+            3
+          ],
+          "factor": 2
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "point": [
+            2,
+            3
+          ],
+          "factor": 2
+        },
+        "forbidden_visible_labels": [
+          "4",
+          "(4, 6)",
+          "6"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "grid": {
+          "origin": "O",
+          "unit": 51.02,
+          "x": [
+            -1,
+            7
+          ],
+          "y": [
+            -1,
+            8
+          ],
+          "points": {
+            "A": [
+              2.0,
+              3.0
+            ]
+          },
+          "ticks": {
+            "x": [
+              2
+            ],
+            "y": [
+              3
+            ]
+          }
+        },
+        "viewbox": [
+          600.0,
+          628.0
+        ],
+        "points": {
+          "GridA": [
+            90.82,
+            556.69
+          ],
+          "GridB": [
+            498.98,
+            97.51
+          ],
+          "O": [
+            141.84,
+            505.67
+          ],
+          "UnitX": [
+            192.86,
+            505.67
+          ],
+          "XEnd": [
+            524.49,
+            505.67
+          ],
+          "XStart": [
+            75.51,
+            505.67
+          ],
+          "YEnd": [
+            141.84,
+            72.0
+          ],
+          "YStart": [
+            141.84,
+            572.0
+          ],
+          "A": [
+            243.88,
+            352.61
+          ],
+          "RayEnd": [
+            413.95,
+            97.51
+          ],
+          "FootX": [
+            243.88,
+            505.67
+          ],
+          "FootY": [
+            141.84,
+            352.61
+          ]
+        },
+        "segments": [
+          {
+            "key": "XStartXEnd",
+            "from": "XStart",
+            "to": "XEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "YStartYEnd",
+            "from": "YStart",
+            "to": "YEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "ORayEnd",
+            "from": "O",
+            "to": "RayEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AFootX",
+            "from": "A",
+            "to": "FootX",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "AFootY",
+            "from": "A",
+            "to": "FootY",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "2",
+            "target": "tick:x:2"
+          },
+          {
+            "text": "3",
+            "target": "tick:y:3"
+          },
+          {
+            "text": "x",
+            "target": "axis:x"
+          },
+          {
+            "text": "y",
+            "target": "axis:y"
+          },
+          {
+            "text": "O",
+            "target": "point:O"
+          },
+          {
+            "text": "A(2, 3)",
+            "target": "point:A"
+          },
+          {
+            "text": "scale factor 2",
+            "target": "caption:factor"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "O",
+              "A",
+              "RayEnd"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "21bc90e2154ca6360b9036e355931243196e5f075016a1f730c9d2f6f861461a",
-      "width": 940,
-      "height": 390
+      "sha256": "06e5099cd3337dea28c49ac310b8284b13d631c5b1f8b064b887d75d5600c973",
+      "width": 600,
+      "height": 628
     }
   ],
   "provenance": {
@@ -113,6 +294,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
