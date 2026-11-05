@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l2-513",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Ember quadratic factors",
+  "title": "Find two negative numbers for a quadratic",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Ember signed quadratic: Factorise x^2-13x+42."
+          "text": "Factorise x^2-13x+42."
         }
       ],
       "marks": 2,
@@ -36,7 +36,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "hints": [
         {

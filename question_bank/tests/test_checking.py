@@ -204,7 +204,7 @@ def test_symbolic_equivalence_still_rejects_wrong_answers(authored_responses, an
 
 
 def test_symbolic_equivalence_accepts_products_powers_and_unicode(authored_responses):
-    product = authored_responses[("n5-l1-509", 1)]
+    product = symbolic("(x+6)*(x+4)", ["x"])
     for answer in ["(x+4)(x+6)", "(x + 6)(x + 4)", "x^2+10x+24", "x²+10x+24", "x**2 + 10*x + 24"]:
         assert passes(product, answer), answer
     for answer in ["(x+6)(x-4)", "(x+6)(x+4)+1", "x^2+10x+25"]:
