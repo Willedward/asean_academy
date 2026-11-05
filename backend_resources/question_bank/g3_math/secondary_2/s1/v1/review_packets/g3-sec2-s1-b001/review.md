@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-504 — Golden Cedar Bay — Orchid nursery: recover a deceptive baseline
+## s1-l3-504 — Golden Cedar Bay — Orchid nursery: apparent increase from a truncated baseline
 
 [Open this question in the HTML preview](index.html#s1-l3-504)
 

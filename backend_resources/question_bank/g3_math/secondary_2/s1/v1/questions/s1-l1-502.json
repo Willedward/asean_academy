@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-502",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-502-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -72,7 +81,158 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-502-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-502-diagram-r2.svg",
+      "alt_text": "Dot diagram of 3, 5, 6, 5, 7, 5, 4.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "dot_plot",
+        "question_key": "s1-l1-502",
+        "outcome": "1.5",
+        "template": "dot_plot",
+        "inputs": {
+          "values": [
+            3.0,
+            5.0,
+            6.0,
+            5.0,
+            7.0,
+            5.0,
+            4.0
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "dot-0",
+            "kind": "dot",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "80",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-1",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-2",
+            "kind": "dot",
+            "value": "6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "530",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-3",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "323",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-4",
+            "kind": "dot",
+            "value": "7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "680",
+              "cy": "357",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-5",
+            "kind": "dot",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "289",
+              "r": "9"
+            }
+          },
+          {
+            "key": "dot-6",
+            "kind": "dot",
+            "value": "4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "230",
+              "cy": "357",
+              "r": "9"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "80",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "230",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "380",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "530",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "680",
+            "label": "7"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "f276dfacf1db5b93d35241843a3a9e044b556e0162c46d83a532372bec28c7cf",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +246,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
