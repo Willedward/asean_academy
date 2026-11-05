@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-508",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,225 @@
       "asset_key": "g2-l3-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l3-508-diagram.svg",
-      "alt_text": "Schematic for Scale model perimeter. Not drawn to scale. Stated measures include 24 m, 15 m.",
+      "path": "assets/g2-l3-508-diagram-r3.svg",
+      "alt_text": "A rectangle labelled garden, marked 24 m and 15 m. An arrow marked 1 : 300 points down to a smaller similar rectangle labelled model. The sides of the model are not marked, and it is marked perimeter p. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "scale",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "scale_rectangles",
         "question_key": "g2-l3-508",
         "outcome": "2.5",
-        "not_to_scale": true
+        "template": "scale_model",
+        "inputs": {
+          "length": {
+            "value": 24,
+            "unit": "m"
+          },
+          "width": {
+            "value": 15,
+            "unit": "m"
+          },
+          "scale": 300
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 24,
+            "unit": "m"
+          },
+          "width": {
+            "value": 15,
+            "unit": "m"
+          },
+          "scale": "1 : 300"
+        },
+        "forbidden_visible_labels": [
+          "26",
+          "13",
+          "8",
+          "5"
+        ],
+        "unknowns": [
+          {
+            "target": "caption:unknown",
+            "label": "perimeter p"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "garden": [
+            "G1",
+            "G2",
+            "G3",
+            "G4"
+          ],
+          "model": [
+            "M1",
+            "M2",
+            "M3",
+            "M4"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "scale",
+            "from": "garden",
+            "to": "model"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          500.0
+        ],
+        "points": {
+          "G1": [
+            149.29,
+            244.39
+          ],
+          "G2": [
+            450.71,
+            244.39
+          ],
+          "G3": [
+            450.71,
+            56.0
+          ],
+          "G4": [
+            149.29,
+            56.0
+          ],
+          "M1": [
+            236.7,
+            426.0
+          ],
+          "M2": [
+            363.3,
+            426.0
+          ],
+          "M3": [
+            363.3,
+            346.88
+          ],
+          "M4": [
+            236.7,
+            346.88
+          ],
+          "Tail": [
+            300.0,
+            254.64
+          ],
+          "Tip": [
+            300.0,
+            336.63
+          ],
+          "PadL": [
+            58.86,
+            426.0
+          ],
+          "PadR": [
+            541.14,
+            426.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "G1G2",
+            "from": "G1",
+            "to": "G2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "G2G3",
+            "from": "G2",
+            "to": "G3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "G3G4",
+            "from": "G3",
+            "to": "G4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "G4G1",
+            "from": "G4",
+            "to": "G1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M1M2",
+            "from": "M1",
+            "to": "M2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M2M3",
+            "from": "M2",
+            "to": "M3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M3M4",
+            "from": "M3",
+            "to": "M4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "M4M1",
+            "from": "M4",
+            "to": "M1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "1 : 300",
+            "target": "caption:arrow-scale"
+          },
+          {
+            "text": "24 m",
+            "target": "segment:G3G4"
+          },
+          {
+            "text": "15 m",
+            "target": "segment:G4G1"
+          },
+          {
+            "text": "garden",
+            "target": "caption:garden"
+          },
+          {
+            "text": "model",
+            "target": "caption:model"
+          },
+          {
+            "text": "perimeter p",
+            "target": "caption:unknown"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "garden",
+              "model"
+            ],
+            "value": 0.42
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "08bb1afa0ccc0f43ba1a4455bf0991a07a83e14e91bbf93948ca4e0ec113ff32",
-      "width": 940,
-      "height": 390
+      "sha256": "e5d2945cca963f039b808bc9864d31a95886c32ed31f672280b78e74ea3bb036",
+      "width": 600,
+      "height": 500
     }
   ],
   "provenance": {
@@ -135,6 +342,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

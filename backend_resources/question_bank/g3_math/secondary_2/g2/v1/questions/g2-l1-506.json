@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-506",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,146 @@
       "asset_key": "g2-l1-506-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l1-506-diagram.svg",
-      "alt_text": "Schematic for Toy car length. Not drawn to scale. Stated measures include 2 cm.",
+      "path": "assets/g2-l1-506-diagram-r3.svg",
+      "alt_text": "Two straight segments, one above the other. The upper, labelled design, is marked 2 cm. An arrow marked × 5 points down to the lower, longer segment, labelled toy, which is marked y. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "scale",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "scale_segments",
         "question_key": "g2-l1-506",
         "outcome": "2.5",
-        "not_to_scale": true
+        "template": "scale_segments",
+        "inputs": {
+          "length": {
+            "value": 2,
+            "unit": "cm"
+          },
+          "factor": 5,
+          "names": [
+            "design",
+            "toy"
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 2,
+            "unit": "cm"
+          },
+          "factor": 5
+        },
+        "forbidden_visible_labels": [
+          "10"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:T1T2",
+            "label": "y"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "viewbox": [
+          600.0,
+          367.0
+        ],
+        "points": {
+          "D1": [
+            65.0,
+            70.0
+          ],
+          "D2": [
+            159.0,
+            70.0
+          ],
+          "T1": [
+            65.0,
+            267.4
+          ],
+          "T2": [
+            535.0,
+            267.4
+          ],
+          "Tail": [
+            112.0,
+            125.27
+          ],
+          "Tip": [
+            112.0,
+            227.92
+          ]
+        },
+        "segments": [
+          {
+            "key": "D1D2",
+            "from": "D1",
+            "to": "D2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "T1T2",
+            "from": "T1",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "× 5",
+            "target": "caption:factor"
+          },
+          {
+            "text": "2 cm",
+            "target": "segment:D1D2"
+          },
+          {
+            "text": "y",
+            "target": "segment:T1T2"
+          },
+          {
+            "text": "design",
+            "target": "caption:first"
+          },
+          {
+            "text": "toy",
+            "target": "caption:second"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "T1T2",
+              "D1D2"
+            ],
+            "value": 5.0
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "D1",
+                  "D2"
+                ],
+                2.0
+              ],
+              [
+                [
+                  "T1",
+                  "T2"
+                ],
+                10.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "51ec659140d6302ec6c5ee82cdefbc1b32b1a5227876fc201fda9c5edd970a5d",
-      "width": 940,
-      "height": 390
+      "sha256": "1dfc787d4f2e907fa4a21fcaa4921936e0f03410b3580b645c12b006269cacd4",
+      "width": 600,
+      "height": 367
     }
   ],
   "provenance": {
@@ -113,6 +241,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
