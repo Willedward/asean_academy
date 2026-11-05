@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l5-502",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Harbour quadratic factors",
+  "title": "Full factorisation with large coefficients",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Harbour complete quadratic factorisation: Factorise 45x²+90x+45 completely."
+          "text": "Factorise 45x²+90x+45 completely."
         }
       ],
       "marks": 5,
@@ -29,14 +29,16 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "5*(3*x+3)*(3*x+3)",
-        "canonical_latex": "5(3x+3)(3x+3)",
+        "canonical_expression": "45*(x+1)^2",
+        "canonical_latex": "45(x+1)^2",
         "variables": [
           "x"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "hints": [
         {
@@ -64,11 +66,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take out the common factor first, then factorise what remains."
             },
             {
               "type": "display_math",
-              "latex": "5(9x^2+18x+9)=5(3x+3)(3x+3)"
+              "latex": "45x^2+90x+45=45(x^2+2x+1)=45(x+1)^2"
             }
           ],
           "mark_type": "M",
@@ -83,7 +85,7 @@
             },
             {
               "type": "display_math",
-              "latex": "5(3x+3)(3x+3)"
+              "latex": "45(x+1)^2"
             }
           ],
           "mark_type": "A",
