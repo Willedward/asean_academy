@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-007",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l2-007-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 12 cm by 8 cm by 5 cm cuboid has a rectangular tunnel 4 cm by 3 cm running through its full 5 cm length. Find the remaining volume in cm\u00b3. Enter the numerical value only."
+          "text": "A 12 cm by 8 cm by 5 cm cuboid has a rectangular tunnel 4 cm by 3 cm running through its full 5 cm length. Find the remaining volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 12 \u00d7 8 \u00d7 5 - 4 \u00d7 3 \u00d7 5."
+              "text": "Calculate 12 × 8 × 5 - 4 × 3 × 5."
             }
           ]
         }
@@ -72,7 +81,418 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l2-007-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l2-007-diagram-r2.svg",
+      "alt_text": "A cuboid with a front face 12 cm by 8 cm and depth 5 cm. A rectangular tunnel 4 cm by 3 cm opens on the front face and runs through the 5 cm depth. The tunnel's hidden edges are dashed. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "drilled_solid",
+        "question_key": "g5-l2-007",
+        "outcome": "5.5",
+        "template": "cuboid_tunnel",
+        "inputs": {
+          "length": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "run": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "hole_width": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "hole_height": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "run": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "hole_width": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "hole_height": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "420",
+          "480",
+          "60"
+        ],
+        "unknowns": [],
+        "drawn_scale": 28.7559,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "F1",
+              "F2": "F2",
+              "F3": "F3",
+              "F4": "F4",
+              "B2": "B2",
+              "B3": "B3",
+              "B4": "B4"
+            },
+            "hidden_vertex": null,
+            "segments": [
+              "F1F2",
+              "F2F3",
+              "F3F4",
+              "F4F1",
+              "F2B2",
+              "B2B3",
+              "F3B3",
+              "B3B4",
+              "F4B4"
+            ]
+          },
+          {
+            "type": "rectangular_hole",
+            "near": [
+              "H1",
+              "H2",
+              "H3",
+              "H4"
+            ],
+            "far": [
+              "J1",
+              "J2",
+              "J3",
+              "J4"
+            ],
+            "face": [
+              "F1",
+              "F2",
+              "F3",
+              "F4"
+            ],
+            "segments": [
+              "J1J2",
+              "J2J3",
+              "J3J4",
+              "J4J1",
+              "H1J1",
+              "H2J2",
+              "H3J3",
+              "H4J4",
+              "H1H2",
+              "H2H3",
+              "H3H4",
+              "H4H1"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "F1F2",
+            "label": "12 cm",
+            "factor": 1.0,
+            "value": 12.0
+          },
+          {
+            "segment": "F4F1",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "F2B2",
+            "label": "5 cm",
+            "factor": 0.5,
+            "value": 5.0
+          },
+          {
+            "segment": "H1H2",
+            "label": "4 cm",
+            "factor": 1.0,
+            "value": 4.0
+          },
+          {
+            "segment": "H4H1",
+            "label": "3 cm",
+            "factor": 1.0,
+            "value": 3.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face",
+          "tunnel-opening"
+        ],
+        "viewbox": [
+          600.0,
+          389.0
+        ],
+        "points": {
+          "F1": [
+            98.02,
+            301.28
+          ],
+          "F2": [
+            443.09,
+            301.28
+          ],
+          "F3": [
+            443.09,
+            71.23
+          ],
+          "F4": [
+            98.02,
+            71.23
+          ],
+          "B2": [
+            501.98,
+            260.05
+          ],
+          "B3": [
+            501.98,
+            30.0
+          ],
+          "B4": [
+            156.91,
+            30.0
+          ],
+          "H1": [
+            213.04,
+            229.39
+          ],
+          "H2": [
+            328.07,
+            229.39
+          ],
+          "H3": [
+            328.07,
+            143.12
+          ],
+          "H4": [
+            213.04,
+            143.12
+          ],
+          "J1": [
+            271.93,
+            188.16
+          ],
+          "J2": [
+            386.96,
+            188.16
+          ],
+          "J3": [
+            386.96,
+            101.89
+          ],
+          "J4": [
+            271.93,
+            101.89
+          ]
+        },
+        "segments": [
+          {
+            "key": "F1F2",
+            "from": "F1",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2F3",
+            "from": "F2",
+            "to": "F3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3F4",
+            "from": "F3",
+            "to": "F4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4F1",
+            "from": "F4",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2B2",
+            "from": "F2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3B3",
+            "from": "F3",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B3B4",
+            "from": "B3",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4B4",
+            "from": "F4",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "J1J2",
+            "from": "J1",
+            "to": "J2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "J2J3",
+            "from": "J2",
+            "to": "J3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "J3J4",
+            "from": "J3",
+            "to": "J4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "J4J1",
+            "from": "J4",
+            "to": "J1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "H1J1",
+            "from": "H1",
+            "to": "J1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "H2J2",
+            "from": "H2",
+            "to": "J2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "H3J3",
+            "from": "H3",
+            "to": "J3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "H4J4",
+            "from": "H4",
+            "to": "J4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "H1H2",
+            "from": "H1",
+            "to": "H2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "H2H3",
+            "from": "H2",
+            "to": "H3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "H3H4",
+            "from": "H3",
+            "to": "H4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "H4H1",
+            "from": "H4",
+            "to": "H1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "12 cm",
+            "target": "segment:F1F2"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:F4F1"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:F2B2"
+          },
+          {
+            "text": "4 cm",
+            "target": "segment:H1H2"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:H4H1"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "1289c50f022587ff417e410f4569d89be4f7a209d8e93d71c4f4cb965ad52361",
+      "width": 600,
+      "height": 389
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +506,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
