@@ -35,8 +35,6 @@ LEGACY_TO_CURRENT = {
     PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
     SEC1_MENSURATION_RENDERER: SEC1_MENSURATION_RENDERER,
 }
-# ``nextscholar-geometry-svg-v1`` drew several banks; these banks have their own checked generator.
-LEGACY_GEOMETRY_ROUTES = {"g5-": SEC1_MENSURATION_RENDERER}
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
     MENSURATION_RENDERER: mensuration.TEMPLATES,
@@ -395,21 +393,16 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def bank_renderer(question: dict[str, Any]) -> str:
-    """Return the checked generator for a figure of this question's bank."""
-    key = question.get("stable_key", "")
-    return next(
-        (renderer for prefix, renderer in LEGACY_GEOMETRY_ROUTES.items() if key.startswith(prefix)),
-        PLANE_GEOMETRY_RENDERER,
-    )
+def _is_sec1_g5(question: dict[str, Any]) -> bool:
+    return question.get("school_level") == "secondary_1" and question.get("topic_code") == "G5"
 
 
 def text_only_reason(question: dict[str, Any]) -> str | None:
     """Return why a question should have no figure, or ``None`` if it can have one."""
-    prompt = _prompt_text(question)
-    if bank_renderer(question) == SEC1_MENSURATION_RENDERER:
-        return sec1_mensuration.text_only_reason(prompt)
-    return plane_geometry.text_only_reason(prompt)
+    text = _prompt_text(question)
+    if _is_sec1_g5(question):
+        return sec1_mensuration.text_only_reason(text)
+    return plane_geometry.text_only_reason(text)
 
 
 def stem_findings(question: dict[str, Any], template: str) -> list[str]:
@@ -432,8 +425,8 @@ def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramReque
     """Choose the template and inputs for one question asset."""
     spec = asset.get("generation_spec", {})
     renderer = LEGACY_TO_CURRENT.get(spec.get("renderer", ""))
-    if spec.get("renderer") == "nextscholar-geometry-svg-v1":
-        renderer = bank_renderer(question)
+    if renderer == PLANE_GEOMETRY_RENDERER and _is_sec1_g5(question):
+        renderer = SEC1_MENSURATION_RENDERER
     if renderer is None:
         raise UnsupportedDiagram(f"Renderer {spec.get('renderer')!r} has no checked generator.")
     if spec.get("renderer") in CHECKED_RENDERERS and spec.get("template") in TEMPLATES[renderer]:

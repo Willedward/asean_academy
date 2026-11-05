@@ -9,8 +9,8 @@ from question_bank.diagram_checks import DiagramContext
 from question_bank.diagrams import sec1_mensuration as sm
 from question_bank.diagrams.common import SEC1_MENSURATION_RENDERER, UnsupportedDiagram
 from question_bank.diagrams.questions import (
-    bank_renderer,
     render_question_asset,
+    request_for,
     text_only_reason,
 )
 from question_bank.diagrams.regenerate import regenerate_batch
@@ -642,6 +642,8 @@ def test_validator_rejects_an_answer_in_the_svg_or_the_alt_text(tmp_path):
 def legacy_question(prompt, answer="1", key="g5-test"):
     return {
         "stable_key": key,
+        "school_level": "secondary_1",
+        "topic_code": "G5",
         "primary_outcome": "5.1",
         "stem": [],
         "assets": [
@@ -656,9 +658,26 @@ def legacy_question(prompt, answer="1", key="g5-test"):
     }
 
 
-def test_the_legacy_renderer_routes_to_the_generator_of_the_bank():
-    assert bank_renderer({"stable_key": "g5-l1-001"}) == SEC1_MENSURATION_RENDERER
-    assert bank_renderer({"stable_key": "g1-l1-001"}) != SEC1_MENSURATION_RENDERER
+def test_only_sec1_g5_routes_to_this_generator():
+    prompt = "A cuboid measures 8 cm by 5 cm by 3 cm. Find its volume in cm³."
+    question = legacy_question(prompt, answer="120")
+    assert request_for(question, question["assets"][0]).renderer == SEC1_MENSURATION_RENDERER
+
+    conversion = "Convert 3 m² to cm². Enter the numerical value only."
+    for level, topic in (("secondary_2", "G5"), ("secondary_1", "G1")):
+        other = {
+            **legacy_question(prompt, answer="120"),
+            "school_level": level,
+            "topic_code": topic,
+        }
+        with pytest.raises(UnsupportedDiagram):
+            request_for(other, other["assets"][0])
+        assert (
+            text_only_reason(
+                {**legacy_question(conversion), "school_level": level, "topic_code": topic}
+            )
+            is None
+        )
 
 
 def test_an_unrecognised_prompt_is_reported_not_drawn():

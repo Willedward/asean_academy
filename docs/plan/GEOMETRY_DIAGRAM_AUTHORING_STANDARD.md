@@ -227,8 +227,8 @@ uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_m
 
 `nextscholar-sec1-mensuration-svg-v1` (`diagrams/sec1_mensuration.py`) replaces the fixed templates of
 `nextscholar-geometry-svg-v1` for Sec 1 G5. It follows the same contract as the generators above, and
-its checks are in `sec1_mensuration_checks.py`. It does not cover the G5 lesson figures. Assets of the
-old renderer whose stable key starts with `g5-` are routed to it (`LEGACY_GEOMETRY_ROUTES`).
+its checks are in `sec1_mensuration_checks.py`. It does not cover the G5 lesson figures. Questions with
+`school_level` `secondary_1` and `topic_code` `G5` are routed to it, so Sec 2 G5 is unaffected.
 
 | `diagram_kind` | Templates |
 | --- | --- |
