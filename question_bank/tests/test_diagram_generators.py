@@ -271,18 +271,19 @@ def test_all_sec2_g4_g5_questions_and_lessons_regenerate_and_validate(repository
         questions = load_questions(repository_root, bank)
         assert len(questions) == 104
         for question in questions:
-            [asset] = diagram_assets(question)
-            first = render_question_asset(question, asset)
-            second = render_question_asset(question, asset)
-            assert first.svg == second.svg
-            assert first.generation_spec == second.generation_spec
-            templates_seen.add(first.generation_spec["template"])
-            context = DiagramContext(tuple(answer_values(question)), question_text(question))
-            root = ET.fromstring(first.svg)
-            assert root.attrib["data-renderer"] in CHECKED_RENDERERS
-            issues = _findings_from_memory(first, context)
-            assert issues == [], (question["stable_key"], issues)
-    assert len(templates_seen) == 34
+            for asset in diagram_assets(question):
+                first = render_question_asset(question, asset)
+                second = render_question_asset(question, asset)
+                assert first.svg == second.svg
+                assert first.generation_spec == second.generation_spec
+                templates_seen.add(first.generation_spec["template"])
+                context = DiagramContext(tuple(answer_values(question)), question_text(question))
+                root = ET.fromstring(first.svg)
+                assert root.attrib["data-renderer"] in CHECKED_RENDERERS
+                issues = _findings_from_memory(first, context)
+                assert issues == [], (question["stable_key"], issues)
+    # The converse items become text-only as their batches are corrected.
+    assert len(templates_seen) >= 33
     course = repository_root / SEC2_COURSE
     rendered = 0
     for key in ("g4-lesson-01", "g4-lesson-02", "g4-lesson-03", "g5-lesson-06"):
@@ -308,19 +309,20 @@ def _findings_from_memory(diagram, context):
         ]
 
 
-def test_known_answer_key_errors_are_reported_as_content_findings(repository_root):
+def test_only_the_known_answer_keys_disagree_with_their_prompts(repository_root):
     findings = {}
     for bank in (G4, G5):
         for question in load_questions(repository_root, bank):
-            [asset] = diagram_assets(question)
-            diagram = render_question_asset(question, asset)
-            answer_findings = [
-                finding for finding in diagram.content_findings if "answer key" in finding
-            ]
-            if answer_findings:
-                findings[question["stable_key"]] = answer_findings
+            for asset in diagram_assets(question):
+                diagram = render_question_asset(question, asset)
+                answer_findings = [
+                    finding for finding in diagram.content_findings if "answer key" in finding
+                ]
+                if answer_findings:
+                    findings[question["stable_key"]] = answer_findings
 
-    assert set(findings) == {"g4-l2-529", "g5-l4-507", "g5-l4-514"}
+    # These three are corrected in their batches, so the set shrinks to nothing as they land.
+    assert set(findings) <= {"g4-l2-529", "g5-l4-507", "g5-l4-514"}
 
 
 def test_stored_v2_inputs_take_precedence_over_prompt_wording(repository_root):
