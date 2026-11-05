@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l4-512",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.13",
-  "title": "Lotus factor by grouping",
+  "title": "Show the grouping that reveals a bracket",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Lotus common-binomial grouping: Factorise ax+bx+2ay+2by completely. Show the grouping that exposes the repeated factor."
+          "text": "Factorise ax+bx+2ay+2by completely. Show the grouping that exposes the repeated factor."
         }
       ],
       "marks": 4,
@@ -39,7 +39,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "hints": [
         {

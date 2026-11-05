@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l5-503",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.15",
-  "title": "Lotus algebraic fraction product",
+  "title": "Divide fractions with a difference of squares",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Lotus structured quotient: Simplify ((x²-25)/4x²)÷((x-5)/5x)."
+          "text": "Simplify ((x²-25)/4x²)÷((x-5)/5x)."
         }
       ],
       "marks": 5,
@@ -36,7 +36,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "simplified_fraction"
+        }
       },
       "hints": [
         {
