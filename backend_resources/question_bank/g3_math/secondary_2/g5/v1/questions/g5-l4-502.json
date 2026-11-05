@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,246 @@
       "asset_key": "g5-l4-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-502-diagram.svg",
-      "alt_text": "Cost of covering a pyramid: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l4-502-diagram-r2.svg",
+      "alt_text": "Closed square-based pyramid with base side 8 m. The slant height l = 12 m is marked on a triangular face from the apex to the midpoint of a base edge. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "pyramid",
         "question_key": "g5-l4-502",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "pyramid_covering_cost",
+        "inputs": {
+          "base_side": {
+            "value": 8,
+            "unit": "m"
+          },
+          "slant_height": {
+            "value": 12,
+            "unit": "m"
+          },
+          "rate": 5
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "base_side": {
+            "value": 8,
+            "unit": "m"
+          },
+          "slant_height": {
+            "value": 12,
+            "unit": "m"
+          },
+          "rate": 5.0
+        },
+        "forbidden_visible_labels": [
+          "1280",
+          "256",
+          "64",
+          "48",
+          "192"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "pyramid",
+            "base": "square",
+            "points": {
+              "P1": "P1",
+              "P2": "P2",
+              "P3": "P3",
+              "P4": "P4",
+              "O": "O",
+              "V": "V",
+              "S": "S",
+              "X": "X"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          516.0
+        ],
+        "points": {
+          "P1": [
+            164.06,
+            395.85
+          ],
+          "P2": [
+            434.06,
+            395.85
+          ],
+          "P3": [
+            560.0,
+            317.15
+          ],
+          "P4": [
+            290.0,
+            317.15
+          ],
+          "O": [
+            362.03,
+            356.5
+          ],
+          "V": [
+            362.03,
+            46.0
+          ],
+          "S": [
+            299.06,
+            395.85
+          ]
+        },
+        "segments": [
+          {
+            "key": "P1P4",
+            "from": "P1",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P4P3",
+            "from": "P4",
+            "to": "P3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "VP4",
+            "from": "V",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2P3",
+            "from": "P2",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP1",
+            "from": "V",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP2",
+            "from": "V",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP3",
+            "from": "V",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VS",
+            "from": "V",
+            "to": "S",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:VS",
+            "from": [
+              335.58,
+              192.94
+            ],
+            "to": [
+              267.25,
+              169.02
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "8 m",
+            "target": "segment:P1P2"
+          },
+          {
+            "text": "8 m",
+            "target": "segment:P2P3"
+          },
+          {
+            "text": "l = 12 m",
+            "target": "segment:VS"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "polygon_sides",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "O",
+            "of": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "S",
+            "of": [
+              "P1",
+              "P2"
+            ]
+          },
+          {
+            "type": "equal_lengths",
+            "values": [
+              8.0,
+              8.0
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "cccdee7c6edc235935de42b9cfc9d41d968ab9d503b191e4e4a8fa91113f1fff",
-      "width": 760,
-      "height": 430
+      "sha256": "6b01e52e4b8f276107b367af3310a240ce8b7bbf3bf4a8d13c5e4dee4afed1b5",
+      "width": 600,
+      "height": 516
     }
   ],
   "provenance": {
@@ -128,6 +356,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
