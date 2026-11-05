@@ -9,6 +9,7 @@ angle carries its variable instead.
 from __future__ import annotations
 
 import math
+import re
 from collections.abc import Callable, Sequence
 from typing import Any
 
@@ -17,6 +18,7 @@ from .common import (
     RIGHT_TRIANGLE_RENDERER,
     Diagram,
     Quantity,
+    UnsupportedDiagram,
     base_spec,
     decimal_forms,
     finish,
@@ -29,6 +31,24 @@ from .common import (
 ANGLE_RADIUS = 46
 MAX_LEG_RATIO = 4.5
 CONVERSE_TASKS = frozenset({"converse_test", "perimeter_verify"})
+# Questions that get no figure: every accurate figure shows the answer, and any other figure draws
+# a false shape. Founder decision D6 B makes these text-only.
+TEXT_ONLY: tuple[tuple[re.Pattern[str], str], ...] = (
+    (
+        re.compile(r"side lengths .* Enter 1 if it is right-angled and 0 if it is not"),
+        "Text-only under founder decision D6 B: a triangle drawn from these three sides shows "
+        "whether it is right-angled, which is the answer, and any other triangle would be a false "
+        "figure.",
+    ),
+)
+
+
+def text_only_reason(prompt: str) -> str | None:
+    """Return why a question should have no figure, or ``None`` if it can have one."""
+    for pattern, reason in TEXT_ONLY:
+        if pattern.search(prompt):
+            return reason
+    return None
 
 
 def q(value: dict[str, Any] | Quantity) -> Quantity:
@@ -401,7 +421,7 @@ def _general_triangle(
     dimensions: dict[str, Any],
     unknowns: list[dict[str, str]],
 ) -> Diagram:
-    """Draw one fixed scalene acute triangle so right and non-right cases look alike."""
+    """Draw one fixed scalene triangle. Banks make these items text-only (see ``TEXT_ONLY``)."""
     model = list(GENERAL_TRIANGLE.values())
     canvas, transform = layout(model, max_width=380, max_height=250, top=60, bottom=120)
     for name, point in GENERAL_TRIANGLE.items():
@@ -479,24 +499,63 @@ def converse_test(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
 
 
 def perimeter_verify(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Draw the triangle from its three true sides, with the longest as the base and no mark.
+
+    The right angle is what the learner verifies, so it is never marked, but the prompt says the
+    triangle is right-angled, so it is not drawn as some other shape either.
+    """
     perimeter = q(inputs["perimeter"])
-    sides = sorted((q(item) for item in inputs["sides"]), key=lambda item: item.value)
-    third = perimeter.value - sum(side.value for side in sides)
-    return _general_triangle(
-        template="perimeter_verify",
-        inputs=inputs,
-        labels=[sides[0].text, sides[1].text, "x"],
-        answers=answers,
-        derived=[third],
-        extra_forbidden=_RIGHT_ANGLE_PHRASES,
+    first, second = (q(item) for item in inputs["sides"])
+    third = perimeter.value - first.value - second.value
+    sides = sorted(
+        [(first.value, first.text), (second.value, second.text), (third, "x")],
+        key=lambda item: item[0],
+    )
+    (short, short_label), (middle, middle_label), (longest, longest_label) = sides
+    if short <= 0 or short + middle <= longest:
+        raise UnsupportedDiagram(
+            f"Sides {first.text}, {second.text} and {number(third)} form no triangle."
+        )
+    foot = (short**2 + longest**2 - middle**2) / (2 * longest)
+    apex = (foot, math.sqrt(max(short**2 - foot**2, 0.0)))
+    model = [(0.0, 0.0), apex, (longest, 0.0)]
+    canvas, transform = layout(model, max_width=380, max_height=250, top=60, bottom=140)
+    for name, point in zip("ABC", model, strict=True):
+        canvas.point(name, transform(point))
+    _draw_triangle(canvas)
+    inside = _centroid(canvas, "ABC")
+    canvas.segment_label(short_label, "A", "B", away_from=inside)
+    canvas.segment_label(middle_label, "B", "C", away_from=inside)
+    canvas.segment_label(longest_label, "A", "C", away_from=inside)
+    canvas.caption(f"perimeter {perimeter.text}", (300, canvas.points["A"][1] + 72))
+    target = {short_label: "segment:AB", middle_label: "segment:BC", longest_label: "segment:AC"}
+    forbidden, exemptions = _forbid(answers, [third], _RIGHT_ANGLE_PHRASES, canvas)
+    spec = _spec(
+        canvas,
+        "perimeter_verify",
+        inputs,
+        "perimeter_verify",
+        {"perimeter": perimeter.as_spec(), "sides": [first.as_spec(), second.as_spec()]},
+        forbidden,
+        exemptions,
+        [{"target": target["x"], "label": "x"}],
+        relationships=[
+            _ratio_relation("AB", "AC", short / longest),
+            _ratio_relation("BC", "AC", middle / longest),
+        ],
+        extra={"drawn_to_scale": True, "forbid_right_angle_marker": True},
+    )
+    return finish(
+        canvas,
+        renderer=RIGHT_TRIANGLE_RENDERER,
+        title="Triangle",
         alt_text=(
-            f"Triangle with perimeter {perimeter.text}. Two sides are {sides[0].text} and "
-            f"{sides[1].text}; the third side is labelled x. No angle is marked. Not drawn to "
+            f"Triangle with perimeter {perimeter.text}. Two sides are {first.text} and "
+            f"{second.text}; the third side is labelled x. No angle is marked. Not drawn to "
             "scale."
         ),
-        findings=_check_answer(third, answers, None),
-        dimensions={"perimeter": perimeter.as_spec(), "sides": [side.as_spec() for side in sides]},
-        unknowns=[{"target": "segment:AC", "label": "x"}],
+        spec=spec,
+        content_findings=_check_answer(third, answers, None),
     )
 
 

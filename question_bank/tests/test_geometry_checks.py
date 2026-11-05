@@ -244,7 +244,33 @@ def g4_bank_copy(tmp_path, repository_root):
         root / "question_bank/g3_math/secondary_2/g4",
     )
     shutil.copytree(resources / "syllabi", root / "syllabi")
-    return root / "question_bank/g3_math/secondary_2/g4/v1"
+    bank = root / "question_bank/g3_math/secondary_2/g4/v1"
+    _restore_legacy_assets(bank)
+    return bank
+
+
+def _restore_legacy_assets(bank):
+    """Put regenerated questions back on their original SVGs, so these tests have work to do."""
+    for path in (bank / "questions").glob("*.json"):
+        question = json.loads(path.read_text())
+        for asset in question["assets"]:
+            if asset["generation_spec"]["renderer"] != "nextscholar-right-triangle-svg-v2":
+                continue
+            asset["path"] = f"assets/{asset['asset_key']}.svg"
+            svg = (bank / asset["path"]).read_bytes()
+            asset["sha256"] = hashlib.sha256(svg).hexdigest()
+            asset["width"], asset["height"] = 760, 420
+            asset["generation_spec"] = {
+                "renderer": "nextscholar-right-triangle-svg-v1",
+                "diagram_kind": "right_triangle",
+                "question_key": question["stable_key"],
+                "outcome": question["primary_outcome"],
+                "not_to_scale": True,
+            }
+            question["revision"] = 1
+        path.write_text(json.dumps(question, indent=2, ensure_ascii=False) + "\n")
+    for path in (bank / "assets").glob("*-r2.svg"):
+        path.unlink()
 
 
 def _digest(directory):
@@ -268,7 +294,8 @@ def test_preview_does_not_touch_the_bank(g4_bank_copy, tmp_path):
     before = _digest(g4_bank_copy)
     report = regenerate_batch(g4_bank_copy, "B001", output=tmp_path / "preview")
 
-    assert report.ok and len(report.assets) == 26
+    # The seven converse items in B001 are text-only, so 19 of its 26 questions have a figure.
+    assert report.ok and len(report.assets) == 19
     assert _digest(g4_bank_copy) == before
     assert (tmp_path / "preview/manifest.json").is_file()
     assert (tmp_path / "preview/g4-l1-501-diagram-r2.svg").is_file()
@@ -279,7 +306,7 @@ def test_preview_does_not_touch_the_bank(g4_bank_copy, tmp_path):
 
 def test_apply_writes_revisioned_assets_and_is_idempotent(g4_bank_copy):
     report = regenerate_batch(g4_bank_copy, "B001", apply=True)
-    assert report.ok and sum(not asset.unchanged for asset in report.assets) == 26
+    assert report.ok and sum(not asset.unchanged for asset in report.assets) == 19
 
     question = json.loads((g4_bank_copy / "questions/g4-l1-501.json").read_text())
     [asset] = question["assets"]
