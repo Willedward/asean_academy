@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l4-510",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,131 @@
       "asset_key": "g4-l4-510-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-510-diagram.svg",
-      "alt_text": "Complete a right-angled specification: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l4-510-diagram-r2.svg",
+      "alt_text": "Triangle with shorter sides 12 cm and 16 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l4-510",
         "outcome": "4.2",
-        "not_to_scale": true
+        "template": "right_angle_specification",
+        "inputs": {
+          "legs": [
+            {
+              "value": 12,
+              "unit": "cm"
+            },
+            {
+              "value": 16,
+              "unit": "cm"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "perpendicular_sides": [
+            {
+              "value": 12,
+              "unit": "cm"
+            },
+            {
+              "value": 16,
+              "unit": "cm"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "20"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:BC",
+            "label": "x"
+          }
+        ],
+        "task": "find_hypotenuse",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          446.0
+        ],
+        "points": {
+          "A": [
+            120.0,
+            326.0
+          ],
+          "B": [
+            120.0,
+            56.0
+          ],
+          "C": [
+            480.0,
+            326.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "12 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "16 cm",
+            "target": "segment:AC"
+          },
+          {
+            "text": "x",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "c9155460e598d80ebee8bb1137a5f31dbe28e189017134f18e44da640d7b3c6f",
-      "width": 760,
-      "height": 420
+      "sha256": "b7767a3b5a8f1d048b587aee62c236c05abc13eb48dc84c5f5b0563cd09a1bf7",
+      "width": 600,
+      "height": 446
     }
   ],
   "provenance": {
@@ -128,6 +241,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }

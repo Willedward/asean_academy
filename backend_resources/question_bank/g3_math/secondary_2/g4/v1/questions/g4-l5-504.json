@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l5-504",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,197 @@
       "asset_key": "g4-l5-504-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-504-diagram.svg",
-      "alt_text": "Composite diagonal route: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l5-504-diagram-r2.svg",
+      "alt_text": "Rectangular floor 56 m by 42 m. The route crosses the floor along the diagonal d, then continues 42 m along a straight corridor. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l5-504",
         "outcome": "4.1",
-        "not_to_scale": true
+        "template": "diagonal_route",
+        "inputs": {
+          "floor": [
+            {
+              "value": 42,
+              "unit": "m"
+            },
+            {
+              "value": 56,
+              "unit": "m"
+            }
+          ],
+          "corridor": {
+            "value": 42,
+            "unit": "m"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "floor": [
+            {
+              "value": 56,
+              "unit": "m"
+            },
+            {
+              "value": 42,
+              "unit": "m"
+            }
+          ],
+          "corridor": {
+            "value": 42,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "112",
+          "70"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AD",
+            "label": "d"
+          }
+        ],
+        "task": "composite_route",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          381.0
+        ],
+        "points": {
+          "A": [
+            65.0,
+            261.43
+          ],
+          "B": [
+            65.0,
+            60.0
+          ],
+          "C": [
+            333.57,
+            261.43
+          ],
+          "D": [
+            333.57,
+            60.0
+          ],
+          "E": [
+            535.0,
+            60.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BD",
+            "from": "B",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "D"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "56 m",
+            "target": "segment:AC"
+          },
+          {
+            "text": "42 m",
+            "target": "segment:CD"
+          },
+          {
+            "text": "d",
+            "target": "segment:AD"
+          },
+          {
+            "text": "42 m",
+            "target": "segment:DE"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "parallel",
+            "segments": [
+              "AB",
+              "CD"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "B",
+              "D",
+              "E"
+            ]
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "CD",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "DE",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "9ec55d15bbbf29c786489993951196e9b0b284bdc0933882107b60f9eeb0e585",
-      "width": 760,
-      "height": 420
+      "sha256": "eb0733b05f2f84e8a5e7deb1f68ed1b4115539914b35b422a9c7f8f4b678833a",
+      "width": 600,
+      "height": 381
     }
   ],
   "provenance": {
@@ -128,6 +307,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
