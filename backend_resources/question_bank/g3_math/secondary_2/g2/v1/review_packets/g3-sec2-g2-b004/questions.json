@@ -2063,7 +2063,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l5-504",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2075,16 +2075,7 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
-      },
-      {
-        "type": "asset_ref",
-        "asset_key": "g2-l5-504-diagram"
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -2177,25 +2168,7 @@
       }
     ],
     "total_marks": 4,
-    "assets": [
-      {
-        "asset_key": "g2-l5-504-diagram",
-        "kind": "geometry",
-        "format": "svg",
-        "path": "assets/g2-l5-504-diagram.svg",
-        "alt_text": "Schematic for Successive enlargement synthesis. Not drawn to scale. Stated measures include 32 cm².",
-        "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "enlargement",
-          "question_key": "g2-l5-504",
-          "outcome": "2.4",
-          "not_to_scale": true
-        },
-        "sha256": "c9dba6843ddccaa042c7fea09578683b2531b358934cee11510f89227b4ce8fb",
-        "width": 940,
-        "height": 390
-      }
-    ],
+    "assets": [],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2209,7 +2182,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2407,7 +2380,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g2-l3-530",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2419,7 +2392,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l3-530-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2501,7 +2483,323 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g2-l3-530-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l3-530-diagram-r2.svg",
+        "alt_text": "A mirror on level ground between a student and a flagpole, with a right angle shown by a corner mark at the student's feet and at the foot of the flagpole. The student's eye is marked 1.6 m above the ground. Along the ground, the distance from the student to the mirror is marked 2 m and the distance from the mirror to the flagpole is marked 10 m. The flagpole height is marked h. Dashed lines join the eye to the mirror and the mirror to the top of the flagpole, and one arc on each side of the mirror marks equal angles. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-similarity-svg-v1",
+          "diagram_kind": "mirror",
+          "question_key": "g2-l3-530",
+          "outcome": "2.5",
+          "template": "mirror_method",
+          "inputs": {
+            "eye": {
+              "value": 1.6,
+              "unit": "m"
+            },
+            "near": {
+              "value": 2,
+              "unit": "m"
+            },
+            "far": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "eye": {
+              "value": 1.6,
+              "unit": "m"
+            },
+            "near": {
+              "value": 2,
+              "unit": "m"
+            },
+            "far": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "8",
+            "5"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BT",
+              "label": "h"
+            }
+          ],
+          "figures": {
+            "student": [
+              "F",
+              "E",
+              "M"
+            ],
+            "pole": [
+              "B",
+              "T",
+              "M"
+            ]
+          },
+          "viewbox": [
+            600.0,
+            423.0
+          ],
+          "points": {
+            "F": [
+              126.67,
+              318.63
+            ],
+            "E": [
+              126.67,
+              266.1
+            ],
+            "M": [
+              192.32,
+              318.63
+            ],
+            "B": [
+              520.61,
+              318.63
+            ],
+            "T": [
+              520.61,
+              56.0
+            ],
+            "PadL": [
+              40.0,
+              318.63
+            ],
+            "PadR": [
+              560.0,
+              318.63
+            ]
+          },
+          "segments": [
+            {
+              "key": "FE",
+              "from": "F",
+              "to": "E",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "FM",
+              "from": "F",
+              "to": "M",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "MB",
+              "from": "M",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BT",
+              "from": "B",
+              "to": "T",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "EM",
+              "from": "E",
+              "to": "M",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "MT",
+              "from": "M",
+              "to": "T",
+              "hidden": true,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "F",
+              "arms": [
+                "E",
+                "M"
+              ],
+              "marker_size": 14
+            },
+            {
+              "vertex": "B",
+              "arms": [
+                "M",
+                "T"
+              ],
+              "marker_size": 16
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "M",
+              "arms": [
+                "F",
+                "E"
+              ],
+              "marker_key": "mirror-near",
+              "drawn_degrees": 38.67
+            },
+            {
+              "vertex": "M",
+              "arms": [
+                "B",
+                "T"
+              ],
+              "marker_key": "mirror-far",
+              "drawn_degrees": 38.66
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "mirror-near",
+              "center": [
+                192.32,
+                318.63
+              ],
+              "radius": 30.0,
+              "start_ray_point": [
+                126.67,
+                318.63
+              ],
+              "end_ray_point": [
+                126.67,
+                266.1
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            },
+            {
+              "marker_key": "mirror-far",
+              "center": [
+                192.32,
+                318.63
+              ],
+              "radius": 30.0,
+              "start_ray_point": [
+                520.61,
+                318.63
+              ],
+              "end_ray_point": [
+                520.61,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 0
+            }
+          ],
+          "labels": [
+            {
+              "text": "1.6 m",
+              "target": "segment:FE"
+            },
+            {
+              "text": "h",
+              "target": "segment:BT"
+            },
+            {
+              "text": "2 m",
+              "target": "segment:FM"
+            },
+            {
+              "text": "10 m",
+              "target": "segment:MB"
+            },
+            {
+              "text": "eye",
+              "target": "caption:eye"
+            },
+            {
+              "text": "flagpole",
+              "target": "caption:pole"
+            },
+            {
+              "text": "mirror",
+              "target": "caption:mirror"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "similar",
+              "figures": [
+                "student",
+                "pole"
+              ],
+              "value": 5.0
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "F",
+                "M",
+                "B"
+              ]
+            },
+            {
+              "type": "to_scale",
+              "lengths": [
+                [
+                  [
+                    "F",
+                    "E"
+                  ],
+                  1.6
+                ],
+                [
+                  [
+                    "F",
+                    "M"
+                  ],
+                  2.0
+                ],
+                [
+                  [
+                    "M",
+                    "B"
+                  ],
+                  10.0
+                ],
+                [
+                  [
+                    "B",
+                    "T"
+                  ],
+                  8.0
+                ]
+              ]
+            },
+            {
+              "type": "matching_angles",
+              "angles": [
+                "mirror-near",
+                "mirror-far"
+              ],
+              "figures": [
+                "student",
+                "pole"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "692a077d6d4d6999440239f210591a79bc04a3edd323cc8d74d444ba16edf5af",
+        "width": 600,
+        "height": 423
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2515,7 +2813,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2633,7 +2931,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l5-505",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2752,18 +3050,319 @@
         "asset_key": "g2-l5-505-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g2-l5-505-diagram.svg",
-        "alt_text": "Schematic for Scale-plan courtyard synthesis. Not drawn to scale. Stated measures include 7.5 cm, 4.8 cm.",
+        "path": "assets/g2-l5-505-diagram-r3.svg",
+        "alt_text": "Three similar rectangles, one above another. The rectangle labelled plan is marked 7.5 cm and 4.8 cm. An arrow marked 1 : 400 points down to a rectangle labelled courtyard, whose sides are not marked. An arrow marked × 3/5 points down to a smaller rectangle labelled stage, marked area s. Not drawn to scale.",
         "generation_spec": {
-          "renderer": "nextscholar-geometry-svg-v1",
-          "diagram_kind": "scale",
+          "renderer": "nextscholar-similarity-svg-v1",
+          "diagram_kind": "scale_rectangles",
           "question_key": "g2-l5-505",
           "outcome": "2.5",
-          "not_to_scale": true
+          "template": "scale_plan_stage",
+          "inputs": {
+            "length": {
+              "value": 7.5,
+              "unit": "cm"
+            },
+            "width": {
+              "value": 4.8,
+              "unit": "cm"
+            },
+            "scale": 400,
+            "factor": [
+              3,
+              5
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "plan": [
+              {
+                "value": 7.5,
+                "unit": "cm"
+              },
+              {
+                "value": 4.8,
+                "unit": "cm"
+              }
+            ],
+            "scale": "1 : 400",
+            "factor": [
+              3,
+              5
+            ]
+          },
+          "forbidden_visible_labels": [
+            "207.36",
+            "207.4",
+            "30",
+            "19.2",
+            "19.20",
+            "18",
+            "11.5",
+            "11.52"
+          ],
+          "unknowns": [
+            {
+              "target": "caption:unknown",
+              "label": "area s"
+            }
+          ],
+          "forbid_right_angle_marker": true,
+          "figures": {
+            "plan": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ],
+            "courtyard": [
+              "Y1",
+              "Y2",
+              "Y3",
+              "Y4"
+            ],
+            "stage": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          },
+          "arrows": [
+            {
+              "key": "plan",
+              "from": "plan",
+              "to": "courtyard"
+            },
+            {
+              "key": "stage",
+              "from": "courtyard",
+              "to": "stage",
+              "factor": 0.6
+            }
+          ],
+          "viewbox": [
+            600.0,
+            630.0
+          ],
+          "points": {
+            "P1": [
+              241.86,
+              130.42
+            ],
+            "P2": [
+              358.14,
+              130.42
+            ],
+            "P3": [
+              358.14,
+              56.0
+            ],
+            "P4": [
+              241.86,
+              56.0
+            ],
+            "Y1": [
+              154.65,
+              380.42
+            ],
+            "Y2": [
+              445.35,
+              380.42
+            ],
+            "Y3": [
+              445.35,
+              194.37
+            ],
+            "Y4": [
+              154.65,
+              194.37
+            ],
+            "S1": [
+              212.79,
+              556.0
+            ],
+            "S2": [
+              387.21,
+              556.0
+            ],
+            "S3": [
+              387.21,
+              444.37
+            ],
+            "S4": [
+              212.79,
+              444.37
+            ],
+            "Tail1": [
+              300.0,
+              136.81
+            ],
+            "Tip1": [
+              300.0,
+              187.98
+            ],
+            "Tail2": [
+              300.0,
+              386.81
+            ],
+            "Tip2": [
+              300.0,
+              437.98
+            ],
+            "PadL": [
+              81.98,
+              556.0
+            ],
+            "PadR": [
+              518.02,
+              556.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "P1P2",
+              "from": "P1",
+              "to": "P2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P2P3",
+              "from": "P2",
+              "to": "P3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P3P4",
+              "from": "P3",
+              "to": "P4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "P4P1",
+              "from": "P4",
+              "to": "P1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Y1Y2",
+              "from": "Y1",
+              "to": "Y2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Y2Y3",
+              "from": "Y2",
+              "to": "Y3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Y3Y4",
+              "from": "Y3",
+              "to": "Y4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "Y4Y1",
+              "from": "Y4",
+              "to": "Y1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S1S2",
+              "from": "S1",
+              "to": "S2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S2S3",
+              "from": "S2",
+              "to": "S3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S3S4",
+              "from": "S3",
+              "to": "S4",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "S4S1",
+              "from": "S4",
+              "to": "S1",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "1 : 400",
+              "target": "caption:arrow-plan"
+            },
+            {
+              "text": "× 3/5",
+              "target": "caption:arrow-stage"
+            },
+            {
+              "text": "7.5 cm",
+              "target": "segment:P3P4"
+            },
+            {
+              "text": "4.8 cm",
+              "target": "segment:P4P1"
+            },
+            {
+              "text": "plan",
+              "target": "caption:plan"
+            },
+            {
+              "text": "courtyard",
+              "target": "caption:courtyard"
+            },
+            {
+              "text": "stage",
+              "target": "caption:stage"
+            },
+            {
+              "text": "area s",
+              "target": "caption:unknown"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "similar",
+              "figures": [
+                "plan",
+                "courtyard"
+              ],
+              "value": 2.5
+            },
+            {
+              "type": "similar",
+              "figures": [
+                "courtyard",
+                "stage"
+              ],
+              "value": 0.6
+            }
+          ],
+          "min_phone_font_px": 13.13
         },
-        "sha256": "df1b4027f1b0cacf74281f52f7cbfb9633d5d16e7ad9793b89fcc328efe2ccc9",
-        "width": 940,
-        "height": 390
+        "sha256": "e52e5e35c24bea6699f352bf47505b7225862ea2b8ed4797dbcd91ddfba9400d",
+        "width": 600,
+        "height": 630
       }
     ],
     "provenance": {
@@ -2779,7 +3378,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
     }
   }
 ]

@@ -680,6 +680,15 @@ def test_only_sec1_g5_routes_to_this_generator():
         )
 
 
+def test_the_other_banks_keep_their_own_text_only_decisions(repository_root):
+    g2 = repository_root / "backend_resources/question_bank/g3_math/secondary_2/g2/v1/questions"
+    question = json.loads((g2 / "g2-l5-504.json").read_text(encoding="utf-8"))
+    assert text_only_reason(question)
+    g1 = repository_root / "backend_resources/question_bank/g3_math/secondary_1/g1/v1/questions"
+    question = json.loads((g1 / "g1-l4-011.json").read_text(encoding="utf-8"))
+    assert text_only_reason(question)
+
+
 def test_an_unrecognised_prompt_is_reported_not_drawn():
     question = legacy_question("Find the area of a kite with diagonals 6 cm and 8 cm.")
     with pytest.raises(UnsupportedDiagram, match="template matches"):
