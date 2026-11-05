@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-520",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l3-520-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -94,7 +103,292 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l3-520-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l3-520-diagram-r2.svg",
+      "alt_text": "Triangle ABC with D on AB and E on AC. DE and BC are parallel, shown with arrow marks. AD is marked 6 cm, the whole of AB is marked 15 cm, DE is marked 8 cm and BC is marked y cm. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "nested_triangles",
+        "question_key": "g2-l3-520",
+        "outcome": "2.3",
+        "template": "nested_parallel",
+        "inputs": {
+          "ad": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "ab": {
+            "value": 15,
+            "unit": "cm"
+          },
+          "de": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "AD": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "AB": {
+            "value": 15,
+            "unit": "cm"
+          },
+          "DE": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "20",
+          "2.5",
+          "2.50"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:BC",
+            "label": "y cm"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ADE": [
+            "A",
+            "D",
+            "E"
+          ],
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "parallel_marks": [
+          {
+            "segments": [
+              "DE",
+              "BC"
+            ]
+          }
+        ],
+        "viewbox": [
+          600.0,
+          385.0
+        ],
+        "points": {
+          "A": [
+            296.82,
+            44.0
+          ],
+          "B": [
+            197.89,
+            288.85
+          ],
+          "C": [
+            550.0,
+            288.85
+          ],
+          "D": [
+            257.24,
+            141.94
+          ],
+          "E": [
+            398.09,
+            141.94
+          ],
+          "PadL": [
+            50.0,
+            288.85
+          ],
+          "dim-AD-1": [
+            204.1,
+            6.54
+          ],
+          "dim-AD-2": [
+            164.52,
+            104.48
+          ],
+          "dim-AB-1": [
+            252.32,
+            26.02
+          ],
+          "dim-AB-2": [
+            153.39,
+            270.87
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "dim-AD",
+            "from": "dim-AD-1",
+            "to": "dim-AD-2",
+            "hidden": false,
+            "role": "dimension"
+          },
+          {
+            "key": "dim-AB",
+            "from": "dim-AB-1",
+            "to": "dim-AB-2",
+            "hidden": false,
+            "role": "dimension"
+          }
+        ],
+        "right_angles": [],
+        "dimension_lines": [
+          {
+            "segment": "dim-AD",
+            "measures": "AD"
+          },
+          {
+            "segment": "dim-AB",
+            "measures": "AB"
+          }
+        ],
+        "labels": [
+          {
+            "text": "6 cm",
+            "target": "segment:AD"
+          },
+          {
+            "text": "15 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "D",
+            "target": "point:D"
+          },
+          {
+            "text": "E",
+            "target": "point:E"
+          },
+          {
+            "text": "8 cm",
+            "target": "segment:DE"
+          },
+          {
+            "text": "y cm",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "ADE",
+              "ABC"
+            ],
+            "value": 2.5
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "D",
+              "B"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "E",
+              "C"
+            ]
+          },
+          {
+            "type": "parallel",
+            "segments": [
+              "DE",
+              "BC"
+            ]
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "A",
+                  "D"
+                ],
+                6.0
+              ],
+              [
+                [
+                  "A",
+                  "B"
+                ],
+                15.0
+              ],
+              [
+                [
+                  "D",
+                  "E"
+                ],
+                8.0
+              ],
+              [
+                [
+                  "B",
+                  "C"
+                ],
+                20.0
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "8cfa297cdd0429165b9e959531349c44ecf7175f84d53850da3b71440c492e14",
+      "width": 600,
+      "height": 385
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -108,6 +402,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
