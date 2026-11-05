@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-513",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -39,11 +39,19 @@
         "type": "numeric",
         "comparison_mode": "rounded_dp",
         "canonical_answer": "72.8",
-        "canonical_latex": "72.8",
+        "canonical_latex": "72.8\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -86,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{72.8}"
+              "latex": "\\boxed{72.8\\%}"
             }
           ],
           "mark_type": "A",
@@ -101,18 +109,163 @@
       "asset_key": "g5-l4-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-513-diagram.svg",
-      "alt_text": "Percentage change in sphere volume: a labelled sphere mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l4-513-diagram-r2.svg",
+      "alt_text": "Two spheres side by side: the original with radius r, and the enlarged sphere with radius R, which is r increased by 20%. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
         "question_key": "g5-l4-513",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "sphere_percentage_change",
+        "inputs": {
+          "percent": 20
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius_increase_percent": 20.0
+        },
+        "forbidden_visible_labels": [
+          "72.8",
+          "72.80",
+          "1.7",
+          "1.73",
+          "1.2³",
+          "1.2r"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "aO",
+              "E": "aE",
+              "D1": "aD1",
+              "D2": "aD2"
+            }
+          },
+          {
+            "type": "sphere",
+            "points": {
+              "O": "bO",
+              "E": "bE",
+              "D1": "bD1",
+              "D2": "bD2"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          475.0
+        ],
+        "points": {
+          "aO": [
+            144.39,
+            187.27
+          ],
+          "aE": [
+            232.02,
+            113.74
+          ],
+          "bO": [
+            432.73,
+            187.27
+          ],
+          "bE": [
+            537.89,
+            99.03
+          ]
+        },
+        "segments": [
+          {
+            "key": "aOaE",
+            "from": "aO",
+            "to": "aE",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bObE",
+            "from": "bO",
+            "to": "bE",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "asphere": {
+            "center": "aO",
+            "radius": 114.39,
+            "hidden": false
+          },
+          "bsphere": {
+            "center": "bO",
+            "radius": 137.27,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "aequator": {
+            "center": "aO",
+            "rx": 114.39,
+            "ry": 34.32
+          },
+          "bequator": {
+            "center": "bO",
+            "rx": 137.27,
+            "ry": 41.18
+          }
+        },
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "r",
+            "target": "segment:aOaE"
+          },
+          {
+            "text": "R",
+            "target": "segment:bObE"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "asphere",
+            "point": "aO"
+          },
+          {
+            "type": "on_circle",
+            "circle": "asphere",
+            "points": [
+              "aE"
+            ]
+          },
+          {
+            "type": "circle_centre",
+            "circle": "bsphere",
+            "point": "bO"
+          },
+          {
+            "type": "on_circle",
+            "circle": "bsphere",
+            "points": [
+              "bE"
+            ]
+          },
+          {
+            "type": "circle_ratio",
+            "circles": [
+              "bsphere",
+              "asphere"
+            ],
+            "value": 1.2,
+            "tolerance": 0.01
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "d22cc6b5e4f168590a37f7afa42950124c9218c9bef449b66347349d1df5da27",
-      "width": 760,
-      "height": 430
+      "sha256": "4898e0fa9bd2af51b4f5c932919d1ffacd2737c2d85ec113269f77321cab4dc7",
+      "width": 600,
+      "height": 475
     }
   ],
   "provenance": {
@@ -128,6 +281,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }

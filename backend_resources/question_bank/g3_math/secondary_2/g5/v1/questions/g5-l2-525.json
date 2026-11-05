@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-525",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,261 @@
       "asset_key": "g5-l2-525-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-525-diagram.svg",
-      "alt_text": "Rectangular pyramid volume: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l2-525-diagram-r2.svg",
+      "alt_text": "Right pyramid on a rectangular base 4 cm by 5 cm. The perpendicular height h = 18 cm runs from the apex to the centre of the base, with the right angle marked. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "pyramid",
         "question_key": "g5-l2-525",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "rectangular_pyramid_volume",
+        "inputs": {
+          "base": [
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            }
+          ],
+          "height": {
+            "value": 18,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "base": [
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            }
+          ],
+          "height": {
+            "value": 18,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "120",
+          "20"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "pyramid",
+            "base": "rectangle",
+            "points": {
+              "P1": "P1",
+              "P2": "P2",
+              "P3": "P3",
+              "P4": "P4",
+              "O": "O",
+              "V": "V",
+              "S": "S",
+              "X": "X"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          525.0
+        ],
+        "points": {
+          "P1": [
+            218.06,
+            405.35
+          ],
+          "P2": [
+            434.06,
+            405.35
+          ],
+          "P3": [
+            560.0,
+            326.65
+          ],
+          "P4": [
+            344.0,
+            326.65
+          ],
+          "O": [
+            389.03,
+            366.0
+          ],
+          "V": [
+            389.03,
+            46.0
+          ],
+          "X": [
+            419.03,
+            366.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "P1P4",
+            "from": "P1",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P4P3",
+            "from": "P4",
+            "to": "P3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "VP4",
+            "from": "V",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2P3",
+            "from": "P2",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP1",
+            "from": "V",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP2",
+            "from": "V",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP3",
+            "from": "V",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "V",
+              "X"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:VO",
+            "from": [
+              389.03,
+              206.0
+            ],
+            "to": [
+              286.52,
+              170.12
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "4 cm",
+            "target": "segment:P1P2"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:P2P3"
+          },
+          {
+            "text": "h = 18 cm",
+            "target": "segment:VO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "polygon_sides",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "O",
+            "of": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "inside_polygon",
+            "point": "O",
+            "polygon": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "hidden_segment",
+            "segment": "VO"
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "fe6b8469742fc1f8a31fea5214e945f55ecec681483253dd6ba3f92809520c14",
-      "width": 760,
-      "height": 430
+      "sha256": "204e3c28716df72879b606a8c0e34e40bdbbdfee819fa6212fa324d2bca44abb",
+      "width": 600,
+      "height": 525
     }
   ],
   "provenance": {
@@ -128,6 +371,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
