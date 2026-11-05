@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l2-002",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write 6m as repeated addition."
+          "text": "Write m + m + m + m + m + m as a single term."
         }
       ],
       "marks": 2,
@@ -29,14 +29,16 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "m+m+m+m+m+m",
-        "canonical_latex": "m+m+m+m+m+m",
+        "canonical_expression": "6m",
+        "canonical_latex": "6m",
         "variables": [
           "m"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "expanded"
+        }
       },
       "hints": [
         {
@@ -64,7 +66,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "6m=6\times m"
+              "latex": "m+m+m+m+m+m=6\\times m"
             }
           ],
           "mark_type": "M",
@@ -75,7 +77,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "m+m+m+m+m+m"
+              "latex": "6m"
             }
           ],
           "mark_type": "A",
