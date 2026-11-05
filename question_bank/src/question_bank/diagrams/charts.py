@@ -595,11 +595,19 @@ def histogram(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         raise ValueError("bins must not be empty")
     starts = [float(item["start"]) for item in bins]
     ends = [float(item["end"]) for item in bins]
-    heights = [float(item["height"]) for item in bins]
+    heights = [None if item.get("height") is None else float(item["height"]) for item in bins]
+    known_heights = [height for height in heights if height is not None]
+    if any(end <= start for start, end in zip(starts, ends, strict=True)):
+        raise ValueError("every histogram bin must have positive width")
+    if not known_heights and "y_max" not in inputs:
+        raise ValueError("a histogram with no known heights requires y_max")
     low, high = min(starts), max(ends)
-    y_max = float(inputs.get("y_max", max(heights)))
+    default_y_max = max(known_heights) if known_heights else inputs["y_max"]
+    y_max = float(inputs.get("y_max", default_y_max))
     if high <= low or y_max <= 0:
         raise ValueError("histogram axes must have positive ranges")
+    if any(height > y_max for height in known_heights):
+        raise ValueError("y_max must include every known histogram bin")
     tick_step = float(inputs.get("tick_step", max(1, math.ceil(y_max / 5))))
     title = str(inputs.get("title", "Histogram"))
     y_label = str(inputs.get("y_label", "Frequency"))
@@ -607,7 +615,7 @@ def histogram(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
         inputs.get(
             "alt_text",
             f"Histogram with {len(bins)} classes; {y_label.lower()} values "
-            + ", ".join(_fmt(value) for value in heights)
+            + ", ".join("unknown" if value is None else _fmt(value) for value in heights)
             + ".",
         )
     )
@@ -636,7 +644,24 @@ def histogram(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     builder.line(left, bottom, right, bottom, width=3)
     builder.text(y_label, right, top + 22, anchor="end", size=25)
     for index, (start, end, height) in enumerate(zip(starts, ends, heights, strict=True)):
-        x, x2, y = x_scale(start), x_scale(end), y_scale(height)
+        x, x2 = x_scale(start), x_scale(end)
+        if height is None:
+            builder.mark(
+                f"bin-{index}",
+                "missing-histogram-bin",
+                "unknown",
+                "rect",
+                {"x": x, "y": top, "width": x2 - x, "height": bottom - top},
+                style={
+                    "fill": "none",
+                    "stroke": SECONDARY,
+                    "stroke-width": 3,
+                    "stroke-dasharray": "10 8",
+                },
+            )
+            builder.text("?", (x + x2) / 2, (top + bottom) / 2 + 12, size=36)
+            continue
+        y = y_scale(height)
         builder.mark(
             f"bin-{index}",
             "histogram-bin",
