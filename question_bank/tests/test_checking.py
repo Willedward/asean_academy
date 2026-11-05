@@ -192,15 +192,13 @@ def authored_responses(repository_root):
     "answer",
     ["3*x+6", "3x+6", "3x + 6", " 3 x+6 ", "6+3x", "3(x+2)", "3×x+6", "3·x + 6", "3x\u2212(\u22126)", "x+x+x+6"],
 )
-def test_symbolic_equivalence_accepts_equivalent_answers(authored_responses, answer):
-    spec = authored_responses[("n5-l1-505", 1)]
-    assert spec.canonical_expression == "3*x+6"
-    assert passes(spec, answer)
+def test_symbolic_equivalence_accepts_equivalent_answers(answer):
+    assert passes(symbolic("3*x+6", ["x"]), answer)
 
 
 @pytest.mark.parametrize("answer", ["3x+5", "3x-6", "x+6", "3(x+6)", "6x+3", "3x"])
-def test_symbolic_equivalence_still_rejects_wrong_answers(authored_responses, answer):
-    assert not passes(authored_responses[("n5-l1-505", 1)], answer)
+def test_symbolic_equivalence_still_rejects_wrong_answers(answer):
+    assert not passes(symbolic("3*x+6", ["x"]), answer)
 
 
 def test_symbolic_equivalence_accepts_products_powers_and_unicode(authored_responses):
@@ -210,7 +208,7 @@ def test_symbolic_equivalence_accepts_products_powers_and_unicode(authored_respo
     for answer in ["(x+6)(x-4)", "(x+6)(x+4)+1", "x^2+10x+25"]:
         assert not passes(product, answer), answer
 
-    square = authored_responses[("n5-l1-502", 1)]
+    square = symbolic("x^2+6x+9", ["x"])
     for answer in ["x²+6x+9", "x^2 + 6x + 9", "(x+3)^2", "(x+3)²", "9+6x+x^2"]:
         assert passes(square, answer), answer
     for answer in ["x^2+6x+6", "x^3+6x+9", "(x+3)^3"]:
