@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g2-l4-505-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -94,7 +103,175 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g2-l4-505-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g2-l4-505-diagram-r2.svg",
+      "alt_text": "Two triangles ABC and ADC, on either side of their shared side AC. AB and AD have one tick, and BC and DC have two ticks. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "shared_side",
+        "question_key": "g2-l4-505",
+        "outcome": "2.1",
+        "template": "shared_side",
+        "inputs": {},
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": "AB = AD and BC = DC, with AC shared"
+        },
+        "forbidden_visible_labels": [
+          "1",
+          "SSS",
+          "SAS",
+          "ASA",
+          "RHS",
+          "included"
+        ],
+        "unknowns": [],
+        "answer_kind": "classification_code",
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ],
+          "ADC": [
+            "A",
+            "D",
+            "C"
+          ]
+        },
+        "omitted_givens": [
+          {
+            "value": "1",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "2",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "3",
+            "reason": "A response code in the question, not a measurement of the figure."
+          },
+          {
+            "value": "4",
+            "reason": "A response code in the question, not a measurement of the figure."
+          }
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "AD"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "BC",
+              "DC"
+            ],
+            "ticks": 2
+          }
+        ],
+        "viewbox": [
+          600.0,
+          474.0
+        ],
+        "points": {
+          "A": [
+            300.0,
+            44.0
+          ],
+          "C": [
+            300.0,
+            364.0
+          ],
+          "B": [
+            162.33,
+            177.95
+          ],
+          "D": [
+            437.67,
+            177.95
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AD",
+            "from": "A",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DC",
+            "from": "D",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "D",
+            "target": "point:D"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "congruent",
+            "figures": [
+              "ABC",
+              "ADC"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "03f8c9e53baae4ebff18398b94f90b70d11bc3e72a5b9593b816930c128bf2d0",
+      "width": 600,
+      "height": 474
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -108,6 +285,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

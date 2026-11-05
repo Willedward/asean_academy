@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l5-502",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -119,18 +119,321 @@
       "asset_key": "g2-l5-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l5-502-diagram.svg",
-      "alt_text": "Schematic for Nested similar figures. Not drawn to scale. Stated measures include 27 cm, 45 cm².",
+      "path": "assets/g2-l5-502-diagram-r3.svg",
+      "alt_text": "Three similar polygons A, B and C in a row, each larger than the last. An arrow marked × 3/2 runs from A to B and an arrow marked × 4/3 runs from B to C. Labels read A: perimeter 27 cm, A: area 45 cm² and C: area y. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "similar",
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "similar_polygons",
         "question_key": "g2-l5-502",
         "outcome": "2.2",
-        "not_to_scale": true
+        "template": "similar_chain",
+        "inputs": {
+          "first_factor": [
+            3,
+            2
+          ],
+          "second_factor": [
+            4,
+            3
+          ],
+          "perimeter": {
+            "value": 27,
+            "unit": "cm"
+          },
+          "area": {
+            "value": 45,
+            "unit": "cm²"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "factors": [
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              3
+            ]
+          ],
+          "perimeter": {
+            "value": 27,
+            "unit": "cm"
+          },
+          "area": {
+            "value": 45,
+            "unit": "cm²"
+          }
+        },
+        "forbidden_visible_labels": [
+          "180"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "2",
+            "reason": "equals a stated value shown on the diagram"
+          },
+          {
+            "value": "4",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [
+          {
+            "target": "caption:unknown",
+            "label": "C: area y"
+          }
+        ],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "A": [
+            "A1",
+            "A2",
+            "A3",
+            "A4"
+          ],
+          "B": [
+            "B1",
+            "B2",
+            "B3",
+            "B4"
+          ],
+          "C": [
+            "C1",
+            "C2",
+            "C3",
+            "C4"
+          ]
+        },
+        "arrows": [
+          {
+            "key": "a-b",
+            "from": "A",
+            "to": "B",
+            "factor": 1.5
+          },
+          {
+            "key": "b-c",
+            "from": "B",
+            "to": "C",
+            "factor": 1.3333333333333333
+          }
+        ],
+        "viewbox": [
+          600.0,
+          319.0
+        ],
+        "points": {
+          "A1": [
+            30.0,
+            184.54
+          ],
+          "A2": [
+            97.37,
+            184.54
+          ],
+          "A3": [
+            107.48,
+            142.76
+          ],
+          "A4": [
+            53.58,
+            127.27
+          ],
+          "B1": [
+            203.15,
+            184.54
+          ],
+          "B2": [
+            304.21,
+            184.54
+          ],
+          "B3": [
+            319.37,
+            121.88
+          ],
+          "B4": [
+            238.52,
+            98.63
+          ],
+          "C1": [
+            415.04,
+            184.54
+          ],
+          "C2": [
+            549.79,
+            184.54
+          ],
+          "C3": [
+            570.0,
+            100.99
+          ],
+          "C4": [
+            462.2,
+            70.0
+          ],
+          "Tail1": [
+            120.87,
+            165.67
+          ],
+          "Tip1": [
+            189.76,
+            165.67
+          ],
+          "Tail2": [
+            332.76,
+            165.67
+          ],
+          "Tip2": [
+            401.65,
+            165.67
+          ]
+        },
+        "segments": [
+          {
+            "key": "A1A2",
+            "from": "A1",
+            "to": "A2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2A3",
+            "from": "A2",
+            "to": "A3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A3A4",
+            "from": "A3",
+            "to": "A4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A4A1",
+            "from": "A4",
+            "to": "A1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B1B2",
+            "from": "B1",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B3B4",
+            "from": "B3",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B4B1",
+            "from": "B4",
+            "to": "B1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "C1C2",
+            "from": "C1",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "C2C3",
+            "from": "C2",
+            "to": "C3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "C3C4",
+            "from": "C3",
+            "to": "C4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "C4C1",
+            "from": "C4",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "× 3/2",
+            "target": "caption:arrow-a-b"
+          },
+          {
+            "text": "× 4/3",
+            "target": "caption:arrow-b-c"
+          },
+          {
+            "text": "A",
+            "target": "caption:name-A"
+          },
+          {
+            "text": "B",
+            "target": "caption:name-B"
+          },
+          {
+            "text": "C",
+            "target": "caption:name-C"
+          },
+          {
+            "text": "A: perimeter 27 cm",
+            "target": "caption:perimeter"
+          },
+          {
+            "text": "A: area 45 cm²",
+            "target": "caption:area"
+          },
+          {
+            "text": "C: area y",
+            "target": "caption:unknown"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "A",
+              "B"
+            ],
+            "value": 1.5
+          },
+          {
+            "type": "similar",
+            "figures": [
+              "B",
+              "C"
+            ],
+            "value": 1.3333
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "5e61111444c7bccd730934e8e389cbff94488d3774762219ad10e89a9034779d",
-      "width": 940,
-      "height": 390
+      "sha256": "e3721c750f26e88fd11532c36c57a442aae9f7bb8e593b0f376fc4c24c0d8b91",
+      "width": 600,
+      "height": 319
     }
   ],
   "provenance": {
@@ -146,6 +449,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
