@@ -20,6 +20,7 @@ from ..admin_analytics_contracts import (
     CurriculumPreviewResponse,
     UpdateUserRoleRequest,
 )
+from ..admin_repository import BetaOperationsError
 from ..content_sync import verify_database_content
 from ..conventions import current_request_id
 from ..curriculum_admin import migrate, preview_transition
@@ -161,10 +162,13 @@ async def preview_curriculum(learner_id: UUID, request: Request,
                              administrator: AcademicAdminLearnerDependency,
                              repository: AdminAnalyticsRepositoryDependency,
                              course_key: str = Query(min_length=1, max_length=80)):
+    report = request.app.state.course_catalogue.reports.get(course_key)
+
     def read():
+        if report is None:
+            raise BetaOperationsError("course_not_found", "The course was not found.", 404)
         with repository._connect() as connection:
-            return preview_transition(connection, learner_id, course_key,
-                                      request.app.state.course_catalogue.report.course.revision)[0]
+            return preview_transition(connection, learner_id, course_key, report.course.revision)[0]
     return _safe(read)
 
 

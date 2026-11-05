@@ -1,6 +1,7 @@
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { EnglishCourseScreen } from "@/beta-kit/live/english-learning-screens";
 import { CoreLearningError } from "@/beta-kit/live/core-learning-screens";
+import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { getVerifiedSession } from "@/lib/auth/session";
 import {
@@ -15,12 +16,9 @@ export default async function EnglishPage() {
   const session = await getVerifiedSession();
   if (!learner || !session) return null;
 
-  const activeEnrolment = learner.enrolments.find(
-    (enrolment) => enrolment.status === "active",
-  );
-  if (!activeEnrolment) return null;
+  if (!hasActiveEnrolment(learner)) return null;
   const presentationLearner = coreLearnerFromProfile(learner.profile);
-  const mathsHref = `/courses/${activeEnrolment.course_key}`;
+  const mathsHref = learnerCourseHref(learner);
 
   const result = await Promise.all([
     getServerEnglishCourseMap(session),

@@ -48,6 +48,11 @@ on:
         required: true
         default: false
         type: boolean
+      tutor_safety_review:
+        description: Tutor calibration cases and a human safety and teaching review passed on staging
+        required: true
+        default: false
+        type: boolean
       founder_release_signoff:
         description: Founders approved this SHA, content revision and cohort label
         required: true
@@ -160,6 +165,7 @@ jobs:
           CONFIRM_ACCESSIBILITY: ${{ inputs.accessibility }}
           CONFIRM_INCIDENT_AND_DATA_OWNERS: ${{ inputs.incident_and_data_owners }}
           CONFIRM_SCHEMA_CONTENT_FREEZE: ${{ inputs.schema_content_freeze }}
+          CONFIRM_TUTOR_SAFETY_REVIEW: ${{ inputs.tutor_safety_review }}
           CONFIRM_FOUNDER_RELEASE_SIGNOFF: ${{ inputs.founder_release_signoff }}
           CONFIRM_RATE_LIMIT_REHEARSED: ${{ inputs.rate_limit_rehearsed }}
         run: |
@@ -171,6 +177,7 @@ jobs:
           if [[ "$CONFIRM_ACCESSIBILITY" = true ]]; then confirmations+=(--confirm accessibility); fi
           if [[ "$CONFIRM_INCIDENT_AND_DATA_OWNERS" = true ]]; then confirmations+=(--confirm incident_and_data_owners); fi
           if [[ "$CONFIRM_SCHEMA_CONTENT_FREEZE" = true ]]; then confirmations+=(--confirm schema_content_freeze); fi
+          if [[ "$CONFIRM_TUTOR_SAFETY_REVIEW" = true ]]; then confirmations+=(--confirm tutor_safety_review); fi
           if [[ "$CONFIRM_FOUNDER_RELEASE_SIGNOFF" = true ]]; then confirmations+=(--confirm founder_release_signoff); fi
           if [[ "$CONFIRM_RATE_LIMIT_REHEARSED" = true && "${{ steps.load_smoke.outcome }}" = success ]]; then confirmations+=(--confirm rate_limit_and_load); fi
           uv run --project services/learning_api --locked \
