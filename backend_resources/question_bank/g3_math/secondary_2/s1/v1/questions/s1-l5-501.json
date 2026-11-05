@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l5-501",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.5",
-  "title": "Lilac Fern Bay — Batik cooperative: missing histogram density",
+  "title": "Missing histogram frequency density",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l5-501-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Lilac Fern Bay dataset for Batik cooperative: missing histogram density — A grouped histogram contains 63 observations. Three bars have frequencies 13, 19 and 11. The missing class has width 8. Find its frequency density."
+          "text": "The histogram represents 63 observations in four classes. The classes 0–5, 5–10 and 10–15 have frequencies 13, 19 and 11 respectively. The final class, 15–23, is marked unknown. Find its frequency density."
         }
       ],
       "marks": 5,
@@ -93,7 +102,193 @@
     }
   ],
   "total_marks": 5,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l5-501-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l5-501-diagram-r2.svg",
+      "alt_text": "Histogram with 4 classes; density values 2.6, 3.8, 2.2, unknown.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "histogram",
+        "question_key": "s1-l5-501",
+        "outcome": "1.5",
+        "template": "histogram",
+        "inputs": {
+          "title": "Frequency-density histogram",
+          "bins": [
+            {
+              "start": 0,
+              "end": 5,
+              "height": 2.6
+            },
+            {
+              "start": 5,
+              "end": 10,
+              "height": 3.8
+            },
+            {
+              "start": 10,
+              "end": 15,
+              "height": 2.2
+            },
+            {
+              "start": 15,
+              "end": 23,
+              "height": null
+            }
+          ],
+          "y_max": 4,
+          "tick_step": 1,
+          "y_label": "Density",
+          "forbidden_visible_labels": [
+            "2.5"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bin-0",
+            "kind": "histogram-bin",
+            "value": "2.6",
+            "tag": "rect",
+            "geometry": {
+              "x": "90",
+              "y": "183.5",
+              "width": "128.26087",
+              "height": "201.5"
+            }
+          },
+          {
+            "key": "bin-1",
+            "kind": "histogram-bin",
+            "value": "3.8",
+            "tag": "rect",
+            "geometry": {
+              "x": "218.26087",
+              "y": "90.5",
+              "width": "128.26087",
+              "height": "294.5"
+            }
+          },
+          {
+            "key": "bin-2",
+            "kind": "histogram-bin",
+            "value": "2.2",
+            "tag": "rect",
+            "geometry": {
+              "x": "346.521739",
+              "y": "214.5",
+              "width": "128.26087",
+              "height": "170.5"
+            }
+          },
+          {
+            "key": "bin-3",
+            "kind": "missing-histogram-bin",
+            "value": "unknown",
+            "tag": "rect",
+            "geometry": {
+              "x": "474.782609",
+              "y": "75",
+              "width": "205.217391",
+              "height": "310"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "385",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "307.5",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "230",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "152.5",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "75",
+            "label": "4"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "90",
+            "label": "0"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "218.26087",
+            "label": "5"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "346.521739",
+            "label": "10"
+          },
+          {
+            "key": "x:15",
+            "axis": "x",
+            "value": "15",
+            "position": "474.782609",
+            "label": "15"
+          },
+          {
+            "key": "x:23",
+            "axis": "x",
+            "value": "23",
+            "position": "680",
+            "label": "23"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "2.5"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": 0.0,
+          "x_max": 23.0,
+          "y_min": 0,
+          "y_max": 4.0,
+          "tick_step": 1.0
+        }
+      },
+      "sha256": "f981bb65afc38fff52c9b2682859876ef41b997e0dce26e9dc8344e6616baa04",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -107,6 +302,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

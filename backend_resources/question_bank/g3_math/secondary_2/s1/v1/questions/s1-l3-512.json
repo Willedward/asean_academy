@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-512",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Silver Lotus Bay — Robotics club: recover a deceptive baseline",
+  "title": "Comparing displayed bar heights",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-512-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Silver Lotus Bay dataset for Robotics club: recover a deceptive baseline — A value rises from 150 to 171. A truncated chart makes this rise appear to be 60% of the first displayed bar height. Find the chart baseline."
+          "text": "The vertical scale on a bar chart starts at 115 rather than zero. The first bar reaches 150 and the second reaches 171. By what percentage is the displayed height of the second bar greater than that of the first?"
         }
       ],
       "marks": 3,
@@ -29,12 +38,20 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "115",
-        "canonical_latex": "115",
+        "canonical_answer": "60",
+        "canonical_latex": "60\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -42,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The visible increase equals the true numerical increase."
+              "text": "First measure each bar from 115, where the displayed vertical scale begins."
             }
           ]
         },
@@ -51,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set 21 equal to 60% of the first displayed height 150-b."
+              "text": "The displayed heights are 35 and 56. Express their difference as a percentage of 35."
             }
           ]
         }
@@ -66,7 +83,7 @@
             },
             {
               "type": "display_math",
-              "latex": "21=0.6(150-b)\\Rightarrow b=115"
+              "latex": "\\frac{(171-115)-(150-115)}{150-115}\\times100=60"
             }
           ],
           "mark_type": "M",
@@ -81,7 +98,7 @@
             },
             {
               "type": "display_math",
-              "latex": "115"
+              "latex": "60\\%"
             }
           ],
           "mark_type": "A",
@@ -91,7 +108,147 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-512-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-512-diagram-r2.svg",
+      "alt_text": "Bar chart with First: 150, Second: 171.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l3-512",
+        "outcome": "1.7",
+        "template": "bar_chart",
+        "inputs": {
+          "title": "Truncated bar chart",
+          "categories": [
+            "First",
+            "Second"
+          ],
+          "values": [
+            150,
+            171
+          ],
+          "y_min": 115,
+          "y_max": 175,
+          "tick_step": 10,
+          "y_label": "Value",
+          "forbidden_visible_labels": [
+            "60"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "150",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "221.666667",
+              "width": "177",
+              "height": "163.333333"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "171",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "123.666667",
+              "width": "177",
+              "height": "261.333333"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:115",
+            "axis": "y",
+            "value": "115",
+            "position": "385",
+            "label": "115"
+          },
+          {
+            "key": "y:125",
+            "axis": "y",
+            "value": "125",
+            "position": "338.333333",
+            "label": "125"
+          },
+          {
+            "key": "y:135",
+            "axis": "y",
+            "value": "135",
+            "position": "291.666667",
+            "label": "135"
+          },
+          {
+            "key": "y:145",
+            "axis": "y",
+            "value": "145",
+            "position": "245",
+            "label": "145"
+          },
+          {
+            "key": "y:155",
+            "axis": "y",
+            "value": "155",
+            "position": "198.333333",
+            "label": "155"
+          },
+          {
+            "key": "y:165",
+            "axis": "y",
+            "value": "165",
+            "position": "151.666667",
+            "label": "165"
+          },
+          {
+            "key": "y:175",
+            "axis": "y",
+            "value": "175",
+            "position": "105",
+            "label": "175"
+          },
+          {
+            "key": "x:First",
+            "axis": "x",
+            "value": "First",
+            "position": "237.5",
+            "label": "First"
+          },
+          {
+            "key": "x:Second",
+            "axis": "x",
+            "value": "Second",
+            "position": "532.5",
+            "label": "Second"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "60"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 115.0,
+          "y_max": 175.0,
+          "tick_step": 10.0
+        }
+      },
+      "sha256": "3190ab265b0940fb02783e7bc1bf73ee3110902271ae61fddf2e0e1aefb0c9f3",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +262,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-509",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Indigo Lotus Bay — Kite festival: misleading feature code",
+  "title": "Misleading time-axis spacing",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-509-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Indigo Lotus Bay dataset for Kite festival: misleading feature code — Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. The years 2021, 2022 and 2026 are plotted at equal horizontal distances. Enter the issue code."
+          "text": "Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. The line graph plots 2021, 2022 and 2026 at equal horizontal distances. Enter the issue code."
         }
       ],
       "marks": 1,
@@ -72,7 +81,158 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-509-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-509-diagram-r2.svg",
+      "alt_text": "Line graph with 2021: 12, 2022: 15, 2026: 18.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "question_key": "s1-l1-509",
+        "outcome": "1.7",
+        "template": "line_chart",
+        "inputs": {
+          "title": "Values by year",
+          "categories": [
+            "2021",
+            "2022",
+            "2026"
+          ],
+          "values": [
+            12,
+            15,
+            18
+          ],
+          "y_min": 10,
+          "y_max": 20,
+          "tick_step": 2,
+          "y_label": "Value",
+          "forbidden_visible_labels": [
+            "2"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "12",
+            "tag": "circle",
+            "geometry": {
+              "cx": "188.333333",
+              "cy": "329",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "15",
+            "tag": "circle",
+            "geometry": {
+              "cx": "385",
+              "cy": "245",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "18",
+            "tag": "circle",
+            "geometry": {
+              "cx": "581.666667",
+              "cy": "161",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "385",
+            "label": "10"
+          },
+          {
+            "key": "y:12",
+            "axis": "y",
+            "value": "12",
+            "position": "329",
+            "label": "12"
+          },
+          {
+            "key": "y:14",
+            "axis": "y",
+            "value": "14",
+            "position": "273",
+            "label": "14"
+          },
+          {
+            "key": "y:16",
+            "axis": "y",
+            "value": "16",
+            "position": "217",
+            "label": "16"
+          },
+          {
+            "key": "y:18",
+            "axis": "y",
+            "value": "18",
+            "position": "161",
+            "label": "18"
+          },
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "105",
+            "label": "20"
+          },
+          {
+            "key": "x:2021",
+            "axis": "x",
+            "value": "2021",
+            "position": "188.333333",
+            "label": "2021"
+          },
+          {
+            "key": "x:2022",
+            "axis": "x",
+            "value": "2022",
+            "position": "385",
+            "label": "2022"
+          },
+          {
+            "key": "x:2026",
+            "axis": "x",
+            "value": "2026",
+            "position": "581.666667",
+            "label": "2026"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "2"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 10.0,
+          "y_max": 20.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "457629acba9ee0ad662d42590aa59f336e5cef3bbe4a0605a8bea82bbe09e1bc",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +246,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
