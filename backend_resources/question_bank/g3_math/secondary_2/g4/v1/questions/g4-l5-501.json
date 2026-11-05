@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l5-501",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,148 @@
       "asset_key": "g4-l5-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-501-diagram.svg",
-      "alt_text": "Use perimeter and verify a right angle: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l5-501-diagram-r2.svg",
+      "alt_text": "Triangle with perimeter 108 m. Two sides are 27 m and 36 m; the third side is labelled x. No angle is marked. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l5-501",
         "outcome": "4.2",
-        "not_to_scale": true
+        "template": "perimeter_verify",
+        "inputs": {
+          "perimeter": {
+            "value": 108,
+            "unit": "m"
+          },
+          "sides": [
+            {
+              "value": 27,
+              "unit": "m"
+            },
+            {
+              "value": 36,
+              "unit": "m"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "perimeter": {
+            "value": 108,
+            "unit": "m"
+          },
+          "sides": [
+            {
+              "value": 27,
+              "unit": "m"
+            },
+            {
+              "value": 36,
+              "unit": "m"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "45",
+          "right-angled",
+          "right angled",
+          "right angle",
+          "right triangle",
+          "right-triangle",
+          "not right-angled",
+          "90°",
+          "hypotenuse"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AC",
+            "label": "x"
+          }
+        ],
+        "task": "perimeter_verify",
+        "drawn_to_scale": true,
+        "forbid_right_angle_marker": true,
+        "viewbox": [
+          600.0,
+          382.0
+        ],
+        "points": {
+          "A": [
+            110.0,
+            242.4
+          ],
+          "B": [
+            246.8,
+            60.0
+          ],
+          "C": [
+            490.0,
+            242.4
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "27 m",
+            "target": "segment:AB"
+          },
+          {
+            "text": "36 m",
+            "target": "segment:BC"
+          },
+          {
+            "text": "x",
+            "target": "segment:AC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.6,
+            "tolerance": 0.02
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "BC",
+              "AC"
+            ],
+            "value": 0.8,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "c53f734a7a7fa83c75104b16a847b79dcf77a6cb8b3bd38d4c3586ec200ba984",
-      "width": 760,
-      "height": 420
+      "sha256": "25c5493f17a12c60899759aa43d21c7a7dfb4a1dedc89c1d76b918ea121439e0",
+      "width": 600,
+      "height": 382
     }
   ],
   "provenance": {
@@ -128,6 +258,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
