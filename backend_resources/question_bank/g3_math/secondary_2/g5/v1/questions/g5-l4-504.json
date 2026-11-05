@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-504",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,241 @@
       "asset_key": "g5-l4-504-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-504-diagram.svg",
-      "alt_text": "Liquid depth in a similar cone: a labelled cone mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l4-504-diagram-r2.svg",
+      "alt_text": "Conical container held with its vertex pointing down, height h = 12 cm. Liquid fills one eighth of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
-        "diagram_kind": "cone",
+        "renderer": "nextscholar-mensuration-svg-v2",
+        "diagram_kind": "inverted_cone_liquid",
         "question_key": "g5-l4-504",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "liquid_depth",
+        "inputs": {
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "volume_fraction": 0.125
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          },
+          "volume_fraction": 0.125
+        },
+        "forbidden_visible_labels": [
+          "6",
+          "1/2",
+          "½",
+          "0.5",
+          "half"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:WV",
+            "label": "depth"
+          }
+        ],
+        "solids": [
+          {
+            "type": "cone",
+            "orientation": "vertex_down",
+            "points": {
+              "O": "O",
+              "V": "V",
+              "L": "L",
+              "R": "R"
+            },
+            "liquid_surface": "W"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          477.0
+        ],
+        "points": {
+          "O": [
+            270.0,
+            86.8
+          ],
+          "V": [
+            270.0,
+            386.8
+          ],
+          "L": [
+            150.0,
+            86.8
+          ],
+          "R": [
+            390.0,
+            86.8
+          ],
+          "W": [
+            270.0,
+            200.8
+          ],
+          "WL": [
+            195.6,
+            200.8
+          ],
+          "WR": [
+            344.4,
+            200.8
+          ],
+          "dim-OV-1": [
+            418.0,
+            86.8
+          ],
+          "dim-OV-2": [
+            418.0,
+            386.8
+          ],
+          "dim-WV-1": [
+            155.6,
+            200.8
+          ],
+          "dim-WV-2": [
+            155.6,
+            386.8
+          ]
+        },
+        "segments": [
+          {
+            "key": "VL",
+            "from": "V",
+            "to": "L",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "dim-OV",
+            "from": "dim-OV-1",
+            "to": "dim-OV-2",
+            "hidden": false,
+            "role": "dimension"
+          },
+          {
+            "key": "dim-WV",
+            "from": "dim-WV-1",
+            "to": "dim-WV-2",
+            "hidden": false,
+            "role": "dimension"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "O",
+            "rx": 120.0,
+            "ry": 40.8
+          },
+          "liquid": {
+            "center": "W",
+            "rx": 74.4,
+            "ry": 25.3
+          }
+        },
+        "right_angles": [],
+        "dimension_lines": [
+          {
+            "segment": "dim-OV",
+            "measures": "OV"
+          },
+          {
+            "segment": "dim-WV",
+            "measures": "WV"
+          }
+        ],
+        "labels": [
+          {
+            "text": "h = 12 cm",
+            "target": "segment:OV"
+          },
+          {
+            "text": "depth",
+            "target": "segment:WV"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "O"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "W",
+              "V"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "V",
+              "WL",
+              "L"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "V",
+              "WR",
+              "R"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "liquid",
+            "point": "W"
+          }
+        ],
+        "min_phone_font_px": 13.13,
+        "drawn_to_scale": {
+          "liquid_depth": false
+        }
       },
-      "sha256": "179457af46b2a324adc7ae35fb62a48abb21597e2de77647300c0db70decc0dd",
-      "width": 760,
-      "height": 430
+      "sha256": "536a6af039c8d2b3119b3b932f01d3142d217845591291d822800359b6e552fe",
+      "width": 600,
+      "height": 477
     }
   ],
   "provenance": {
@@ -128,6 +351,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }

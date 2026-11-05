@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l5-501",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,241 @@
       "asset_key": "g5-l5-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-501-diagram.svg",
-      "alt_text": "Equal-volume cone and sphere: a labelled cone mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l5-501-diagram-r2.svg",
+      "alt_text": "A sphere and a separate cone side by side, each with radius 3 cm. The cone has the same volume as the sphere; its perpendicular height h is marked but not given. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
-        "diagram_kind": "cone",
+        "renderer": "nextscholar-mensuration-svg-v2",
+        "diagram_kind": "separate_solids",
         "question_key": "g5-l5-501",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "equal_volume_cone_sphere",
+        "inputs": {
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "12",
+          "113.1",
+          "113.10",
+          "36π"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:cVcO",
+            "label": "h"
+          }
+        ],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "sO",
+              "E": "sE",
+              "D1": "sD1",
+              "D2": "sD2"
+            }
+          },
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "cO",
+              "V": "cV",
+              "L": "cL",
+              "R": "cR"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          451.0
+        ],
+        "points": {
+          "sO": [
+            130.0,
+            196.3
+          ],
+          "sE": [
+            202.77,
+            135.24
+          ],
+          "cO": [
+            465.0,
+            259.0
+          ],
+          "cV": [
+            465.0,
+            50.0
+          ],
+          "cL": [
+            370.0,
+            259.0
+          ],
+          "cR": [
+            560.0,
+            259.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "sOsE",
+            "from": "sO",
+            "to": "sE",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcL",
+            "from": "cV",
+            "to": "cL",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcR",
+            "from": "cV",
+            "to": "cR",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcO",
+            "from": "cV",
+            "to": "cO",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "cOcR",
+            "from": "cO",
+            "to": "cR",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "ssphere": {
+            "center": "sO",
+            "radius": 95.0,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "sequator": {
+            "center": "sO",
+            "rx": 95.0,
+            "ry": 28.5
+          },
+          "cbase": {
+            "center": "cO",
+            "rx": 95.0,
+            "ry": 32.3
+          }
+        },
+        "right_angles": [
+          {
+            "vertex": "cO",
+            "arms": [
+              "cV",
+              "cR"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:sOsE",
+            "from": [
+              166.38,
+              165.77
+            ],
+            "to": [
+              138.6,
+              96.3
+            ]
+          },
+          {
+            "target": "segment:cOcR",
+            "from": [
+              512.5,
+              259.0
+            ],
+            "to": [
+              492.18,
+              326.72
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "r = 3 cm",
+            "target": "segment:sOsE"
+          },
+          {
+            "text": "r = 3 cm",
+            "target": "segment:cOcR"
+          },
+          {
+            "text": "h",
+            "target": "segment:cVcO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "ssphere",
+            "point": "sO"
+          },
+          {
+            "type": "on_circle",
+            "circle": "ssphere",
+            "points": [
+              "sE"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "cV",
+              "cO"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "cbase",
+            "point": "cO"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "cbase",
+            "points": [
+              "cL",
+              "cR"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "cO",
+            "of": [
+              "cL",
+              "cR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "f80b1c347199f073cff15cd3216fd6830468086875cb6874925a89cbb7d4ebe2",
-      "width": 760,
-      "height": 430
+      "sha256": "8961faff2ff500b585b5fa25ae6320a251ba1a9b7cf8c47a98720839ca94a95b",
+      "width": 600,
+      "height": 451
     }
   ],
   "provenance": {
@@ -128,6 +351,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
