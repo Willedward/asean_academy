@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-005",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,261 @@
       "asset_key": "g5-l3-005-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-005-diagram.svg",
-      "alt_text": "Schematic for Surface area of a triangular prism. Not drawn to scale. Stated measures include 3 cm, 4 cm, 5 cm, 10 cm.",
+      "path": "assets/g5-l3-005-diagram-r3.svg",
+      "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 4 cm and 3 cm and longest side 5 cm, and the right angle is marked. The prism is 10 cm long, and hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "solids",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "prism",
         "question_key": "g5-l3-005",
         "outcome": "5.3",
-        "not_to_scale": true
+        "template": "prism_right_triangle_sides",
+        "inputs": {
+          "sides": [
+            {
+              "value": 3,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            }
+          ],
+          "length": {
+            "value": 10,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": [
+            {
+              "value": 3,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "value": 5,
+              "unit": "cm"
+            }
+          ],
+          "length": {
+            "value": 10,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "132",
+          "6",
+          "12",
+          "120"
+        ],
+        "unknowns": [],
+        "drawn_scale": 46.0132,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "prism",
+            "front": [
+              "A",
+              "B",
+              "C"
+            ],
+            "back": [
+              "Ab",
+              "Bb",
+              "Cb"
+            ],
+            "hidden_vertex": "Ab",
+            "cross_section": {
+              "type": "right_triangle",
+              "points": [
+                "A",
+                "B",
+                "C"
+              ],
+              "right_at": "A"
+            },
+            "segments": [
+              "AbBb",
+              "CbAb",
+              "AAb",
+              "BbCb",
+              "BBb",
+              "CCb",
+              "AB",
+              "BC",
+              "CA"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "4 cm",
+            "factor": 1.0,
+            "value": 4.0
+          },
+          {
+            "segment": "CA",
+            "label": "3 cm",
+            "factor": 1.0,
+            "value": 3.0
+          },
+          {
+            "segment": "BBb",
+            "label": "10 cm",
+            "factor": 0.5,
+            "value": 10.0
+          },
+          {
+            "segment": "BC",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "rear-face",
+          "side-BC",
+          "cross-section"
+        ],
+        "viewbox": [
+          600.0,
+          388.0
+        ],
+        "points": {
+          "A": [
+            113.74,
+            300.0
+          ],
+          "B": [
+            297.8,
+            300.0
+          ],
+          "C": [
+            113.74,
+            161.96
+          ],
+          "Ab": [
+            302.2,
+            168.04
+          ],
+          "Bb": [
+            486.26,
+            168.04
+          ],
+          "Cb": [
+            302.2,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AbBb",
+            "from": "Ab",
+            "to": "Bb",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "CbAb",
+            "from": "Cb",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "AAb",
+            "from": "A",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BbCb",
+            "from": "Bb",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BBb",
+            "from": "B",
+            "to": "Bb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CCb",
+            "from": "C",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "labels": [
+          {
+            "text": "4 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:CA"
+          },
+          {
+            "text": "10 cm",
+            "target": "segment:BBb"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "00e755fe509eeaec8622fdd8900cc4390c8b3d69c02c2cee5f584edae6471a8a",
-      "width": 940,
-      "height": 390
+      "sha256": "c320952b32240b54093be092d344118641776e95d81f49eddabfc69e24eeb6a2",
+      "width": 600,
+      "height": 388
     }
   ],
   "provenance": {
@@ -113,6 +356,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

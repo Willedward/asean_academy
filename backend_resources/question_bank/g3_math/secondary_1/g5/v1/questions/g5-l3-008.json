@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-008",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,321 @@
       "asset_key": "g5-l3-008-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-008-diagram.svg",
-      "alt_text": "Schematic for Exposed area of joined cubes. Not drawn to scale. Stated measures include 4 cm.",
+      "path": "assets/g5-l3-008-diagram-r3.svg",
+      "alt_text": "Two equal cubes of side 4 cm joined face to face to make one long block. The shared face is shaded, the four marked edges are equal, and hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "composite_solid",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "joined_solids",
         "question_key": "g5-l3-008",
         "outcome": "5.5",
-        "not_to_scale": true
+        "template": "two_cubes_joined",
+        "inputs": {
+          "side": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "side": {
+            "value": 4,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "160",
+          "16",
+          "96",
+          "192"
+        ],
+        "unknowns": [],
+        "drawn_scale": 43.5761,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "joined_cubes",
+            "first": [
+              "P0",
+              "P1",
+              "Q1",
+              "Q0",
+              "R0",
+              "R1",
+              "S1",
+              "S0"
+            ],
+            "second": [
+              "P1",
+              "P2",
+              "Q2",
+              "Q1",
+              "R1",
+              "R2",
+              "S2",
+              "S1"
+            ],
+            "shared_face": "shared-face",
+            "segments": [
+              "P0R0",
+              "R0S0",
+              "R0R1",
+              "R1R2",
+              "P1R1",
+              "R1S1",
+              "P0P1",
+              "P1P2",
+              "Q0Q1",
+              "Q1Q2",
+              "P0Q0",
+              "P1Q1",
+              "P2Q2",
+              "Q0S0",
+              "Q1S1",
+              "Q2S2",
+              "S0S1",
+              "S1S2",
+              "P2R2",
+              "R2S2"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "P0P1",
+            "label": "4 cm",
+            "factor": 1.0,
+            "value": 4.0
+          }
+        ],
+        "captions": [
+          "Shaded: shared face"
+        ],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face",
+          "shared-face"
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "P0P1",
+              "P1P2",
+              "P0Q0",
+              "P2Q2"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          346.0
+        ],
+        "points": {
+          "P0": [
+            90.0,
+            254.29
+          ],
+          "P1": [
+            264.3,
+            254.29
+          ],
+          "P2": [
+            438.61,
+            254.29
+          ],
+          "Q0": [
+            90.0,
+            79.99
+          ],
+          "Q1": [
+            264.3,
+            79.99
+          ],
+          "Q2": [
+            438.61,
+            79.99
+          ],
+          "R0": [
+            161.39,
+            204.3
+          ],
+          "R1": [
+            335.7,
+            204.3
+          ],
+          "R2": [
+            510.0,
+            204.3
+          ],
+          "S0": [
+            161.39,
+            30.0
+          ],
+          "S1": [
+            335.7,
+            30.0
+          ],
+          "S2": [
+            510.0,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "P0R0",
+            "from": "P0",
+            "to": "R0",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "R0S0",
+            "from": "R0",
+            "to": "S0",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "R0R1",
+            "from": "R0",
+            "to": "R1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "R1R2",
+            "from": "R1",
+            "to": "R2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P1R1",
+            "from": "P1",
+            "to": "R1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "R1S1",
+            "from": "R1",
+            "to": "S1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P0P1",
+            "from": "P0",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Q0Q1",
+            "from": "Q0",
+            "to": "Q1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Q1Q2",
+            "from": "Q1",
+            "to": "Q2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P0Q0",
+            "from": "P0",
+            "to": "Q0",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P1Q1",
+            "from": "P1",
+            "to": "Q1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2Q2",
+            "from": "P2",
+            "to": "Q2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Q0S0",
+            "from": "Q0",
+            "to": "S0",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Q1S1",
+            "from": "Q1",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "Q2S2",
+            "from": "Q2",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S0S1",
+            "from": "S0",
+            "to": "S1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S1S2",
+            "from": "S1",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "P2R2",
+            "from": "P2",
+            "to": "R2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "R2S2",
+            "from": "R2",
+            "to": "S2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "4 cm",
+            "target": "segment:P0P1"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "577280dc12f75a62aacf4a988e36921561feb8de7c112fa5730cb71878767168",
-      "width": 940,
-      "height": 390
+      "sha256": "83e3e5c816333992fdd9e9d4b64046921450965e5ed56bab40ed750ecdf6bc0e",
+      "width": 600,
+      "height": 346
     }
   ],
   "provenance": {
@@ -113,6 +416,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
