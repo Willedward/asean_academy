@@ -18,6 +18,7 @@ from .diagram_checks import (
     svg_accessible_text,
     svg_visible_text,
 )
+from .mensuration_checks import mensuration_issues
 
 # Generators whose generation_spec declares every point, segment, label and relationship.
 CHECKED_GEOMETRY_RENDERERS = frozenset(
@@ -411,6 +412,10 @@ def geometry_diagram_findings(
         findings.extend(
             GeometryFinding("error", code, message)
             for code, message in checked_diagram_issues(root, generation_spec, alt_text, context)
+        )
+        findings.extend(
+            GeometryFinding("error", code, message)
+            for code, message in mensuration_issues(root, generation_spec, context)
         )
     elif renderer in RETIRED_GEOMETRY_RENDERERS:
         findings.append(

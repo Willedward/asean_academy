@@ -339,6 +339,22 @@ run):
 uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_2/g2/v1 --batch B004 --add g2-l3-530 --apply
 ```
 
+## Sec 2 G5: extra checks
+
+`nextscholar-mensuration-svg-v2` also has its own checks in `mensuration_checks.py`. Each failure is
+an error:
+
+- `geometry_slant_unmarked`: a given slant height must be labelled `l` on the edge from the apex to
+  the base, and that figure must not draw the vertical height.
+- `geometry_wrong_solid`: every solid the question names must be drawn, and no other. A hollow or
+  cored solid must show its inner sphere, and liquid must be in a cone with its vertex down.
+- `geometry_cone_proportion`: a cone is drawn from its given height and radius, with height to
+  radius limited to 0.6 to 3.5.
+- `geometry_given_mismatch`: every number shown must be stated in the question, and every stated
+  number must be shown. A cost rate isn't a measurement, so it stays in the prompt.
+
+G5 keeps a `diagram_audit.json` like the other geometry banks. All 104 questions keep a figure.
+
 ## Review feedback
 
 The admin reviewer lists every diagram's immutable asset key. Select **Comment on diagram**
