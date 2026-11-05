@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-003",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -108,18 +108,229 @@
       "asset_key": "g5-l5-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-003-diagram.svg",
-      "alt_text": "Schematic for Open cylindrical tank. Not drawn to scale. Stated measures include 7 cm, 594 cm².",
+      "path": "assets/g5-l5-003-diagram-r3.svg",
+      "alt_text": "A cylinder that is open at the top, with radius 7 cm and an unknown height marked h. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "solids",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cylinder",
         "question_key": "g5-l5-003",
         "outcome": "5.3",
-        "not_to_scale": true
+        "template": "open_cylinder_material",
+        "inputs": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "material": {
+            "value": 594,
+            "unit": "cm²"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "1540",
+          "10",
+          "154",
+          "44",
+          "440"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:A2C2",
+            "label": "h"
+          }
+        ],
+        "drawn_scale": 18.0769,
+        "depth_factor": 1.0,
+        "figures": [
+          {
+            "type": "cylinder",
+            "rim": "rim",
+            "base": "base",
+            "sides": [
+              "A1C1",
+              "A2C2"
+            ],
+            "radius": "OA2",
+            "open_top": true,
+            "interior": "#c5dcd8",
+            "segments": [
+              "A1C1",
+              "A2C2",
+              "OA2"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "A2C2",
+            "label": "h",
+            "factor": 1.0,
+            "variable": "h",
+            "constant": 0.0
+          },
+          {
+            "segment": "OA2",
+            "label": "7 cm",
+            "factor": 1.0,
+            "value": 7.0
+          }
+        ],
+        "captions": [
+          "Open top"
+        ],
+        "shades": [
+          "curved-surface"
+        ],
+        "neutral_lengths": [
+          {
+            "variable": "h",
+            "drawn": 13.0,
+            "avoid": 10.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          437.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            89.96
+          ],
+          "B": [
+            300.0,
+            324.96
+          ],
+          "A1": [
+            173.46,
+            89.96
+          ],
+          "A2": [
+            426.54,
+            89.96
+          ],
+          "C1": [
+            173.46,
+            324.96
+          ],
+          "C2": [
+            426.54,
+            324.96
+          ]
+        },
+        "segments": [
+          {
+            "key": "A1C1",
+            "from": "A1",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2C2",
+            "from": "A2",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "OA2",
+            "from": "O",
+            "to": "A2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "B",
+            "rx": 126.54,
+            "ry": 37.96
+          },
+          "rim": {
+            "center": "O",
+            "rx": 126.54,
+            "ry": 37.96
+          }
+        },
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:OA2",
+            "from": [
+              363.27,
+              89.96
+            ],
+            "to": [
+              363.27,
+              152.92
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "h",
+            "target": "segment:A2C2"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:OA2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "ellipse_centre",
+            "ellipse": "rim",
+            "point": "O"
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "B"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "rim",
+            "points": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A1",
+              "C1"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A2",
+              "C2"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "204c035c3c90748d8d5f145978679bc535bcb0209172b496b92e4ce5d20c881f",
-      "width": 940,
-      "height": 390
+      "sha256": "eb184a0dd49896a7814ea469c033413afd7dfd81a7ebd972d29cb1613a17df63",
+      "width": 600,
+      "height": 437
     }
   ],
   "provenance": {
@@ -135,6 +346,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
