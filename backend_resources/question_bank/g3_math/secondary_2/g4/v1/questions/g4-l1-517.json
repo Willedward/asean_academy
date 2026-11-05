@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l1-517",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,131 @@
       "asset_key": "g4-l1-517-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-517-diagram.svg",
-      "alt_text": "Find the hypotenuse: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l1-517-diagram-r2.svg",
+      "alt_text": "Right-angled triangle with perpendicular sides 60 cm and 80 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l1-517",
         "outcome": "4.1",
-        "not_to_scale": true
+        "template": "find_hypotenuse",
+        "inputs": {
+          "legs": [
+            {
+              "value": 60,
+              "unit": "cm"
+            },
+            {
+              "value": 80,
+              "unit": "cm"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "perpendicular_sides": [
+            {
+              "value": 60,
+              "unit": "cm"
+            },
+            {
+              "value": 80,
+              "unit": "cm"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "100"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:BC",
+            "label": "c"
+          }
+        ],
+        "task": "find_hypotenuse",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          446.0
+        ],
+        "points": {
+          "A": [
+            120.0,
+            326.0
+          ],
+          "B": [
+            120.0,
+            56.0
+          ],
+          "C": [
+            480.0,
+            326.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "60 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "80 cm",
+            "target": "segment:AC"
+          },
+          {
+            "text": "c",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "21fefb2ca1005ba99452c9d73429f275bf1b43f1b672b42e576ad511781819b1",
-      "width": 760,
-      "height": 420
+      "sha256": "b475d9bec069fcc39a1623afa9d38aad7993a54f112a2c4ae7ca961382286650",
+      "width": 600,
+      "height": 446
     }
   ],
   "provenance": {
@@ -113,6 +226,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
