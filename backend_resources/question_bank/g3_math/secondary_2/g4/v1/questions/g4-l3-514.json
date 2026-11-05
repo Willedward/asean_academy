@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l3-514",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -39,11 +39,18 @@
         "type": "numeric",
         "comparison_mode": "rounded_dp",
         "canonical_answer": "22.6",
-        "canonical_latex": "22.6",
+        "canonical_latex": "22.6^\\circ",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
-        "unit": null
+        "unit": {
+          "canonical": "°",
+          "accepted": [
+            "°",
+            "degrees"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -86,7 +93,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{22.6}"
+              "latex": "\\boxed{22.6^\\circ}"
             }
           ],
           "mark_type": "A",
@@ -101,18 +108,160 @@
       "asset_key": "g4-l3-514-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-514-diagram.svg",
-      "alt_text": "Find an acute angle: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l3-514-diagram-r2.svg",
+      "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 25 cm and the adjacent side is 60 cm. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l3-514",
         "outcome": "4.3",
-        "not_to_scale": true
+        "template": "find_angle",
+        "inputs": {
+          "opposite": {
+            "value": 25,
+            "unit": "cm"
+          },
+          "adjacent": {
+            "value": 60,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "opposite": {
+            "value": 25,
+            "unit": "cm"
+          },
+          "adjacent": {
+            "value": 60,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "22.6",
+          "22.62"
+        ],
+        "unknowns": [
+          {
+            "target": "angle:C",
+            "label": "θ"
+          }
+        ],
+        "task": "find_angle",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          326.0
+        ],
+        "points": {
+          "A": [
+            120.0,
+            206.0
+          ],
+          "B": [
+            120.0,
+            56.0
+          ],
+          "C": [
+            480.0,
+            206.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-C",
+            "drawn_degrees": 22.62,
+            "degrees": 22.62
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-C",
+            "center": [
+              480.0,
+              206.0
+            ],
+            "radius": 61.0,
+            "start_ray_point": [
+              120.0,
+              206.0
+            ],
+            "end_ray_point": [
+              120.0,
+              56.0
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "labels": [
+          {
+            "text": "θ",
+            "target": "angle:C"
+          },
+          {
+            "text": "25 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "60 cm",
+            "target": "segment:AC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.4167,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "239c8b74fcb2e547b97b429eee2ed5edcc3d7a7ab6f57c3091e3e25f9040b63d",
-      "width": 760,
-      "height": 420
+      "sha256": "f5c4d454f8e645baee59fec8acb9126ed4634543015a7334bf84c84e4ff738a6",
+      "width": 600,
+      "height": 326
     }
   ],
   "provenance": {
@@ -128,6 +277,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
