@@ -71,7 +71,8 @@ def preview_transition(connection, learner_id, course_key, target_revision):
 
 
 def migrate(repository, administrator, learner_id: UUID, body, request_id, catalogue):
-    if body.target_revision != catalogue.report.course.revision or body.course_key != catalogue.report.course.stable_key:
+    report = catalogue.reports.get(body.course_key)
+    if report is None or body.target_revision != report.course.revision:
         raise BetaOperationsError("unsupported_target", "Choose the course revision served by this release.", 409)
     verify_database_content(repository.database_url, catalogue)
     with repository._connect() as connection:

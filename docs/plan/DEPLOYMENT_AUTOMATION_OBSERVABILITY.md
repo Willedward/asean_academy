@@ -52,6 +52,7 @@ environment-scoped and `main` can be protected. Then add these secrets:
 | Secret | Source | Scope |
 | --- | --- | --- |
 | `RAILWAY_TOKEN` | Railway project settings | Project token for the production environment |
+| `PRODUCTION_GEMINI_API_KEY` | Google AI Studio, on a paid plan | Tutor provider key; the free tier may use data to improve Google products |
 | `SUPABASE_ACCESS_TOKEN` | Supabase account access tokens | Token permitted to link the production project |
 | `SUPABASE_DB_PASSWORD` | Supabase database settings | Production database password used by the Supabase CLI |
 | `PRODUCTION_DATABASE_URL` | Supabase Connect panel | Encoded transaction-pooler URI used for transactional content imports |

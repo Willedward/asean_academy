@@ -11,7 +11,7 @@ from question_bank.course_repository import course_content_hash
 from question_bank.course_validation import lesson_note_depth_shortfalls
 from question_bank.diagnostic_repository import DIAGNOSTIC_ANCHOR_COURSE_KEY
 
-from .content_review import verify_release_workflow
+from .content_review import catalogue_review_items, verify_release_workflow
 from .content_sync import check_content
 
 
@@ -49,6 +49,7 @@ REQUIRED_CONFIRMATIONS = (
     "accessibility",
     "incident_and_data_owners",
     "schema_content_freeze",
+    "tutor_safety_review",
     "founder_release_signoff",
 )
 
@@ -65,14 +66,14 @@ def _check(
 
 def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[list[ReleaseCheck], dict]:
     """Inspect the validated Git catalogue without requiring PostgreSQL."""
-    report = catalogue.report
-    course = report.course
-    questions = catalogue.questions
-    units = course.units
-    lessons = report.lessons
-    pools = report.pools.pools
+    reports = list(catalogue.reports.values())
+    courses = [report.course for report in reports]
+    questions = catalogue.all_questions
+    lessons = [lesson for report in reports for lesson in report.lessons]
+    pools = [pool for report in reports for pool in report.pools.pools]
 
-    topic_codes = sorted({unit.topic_code for unit in units})
+    # Topic codes repeat across years, so each year's unit is its own topic group.
+    topic_groups = sorted({unit.stable_key for course in courses for unit in course.units})
     published_questions = sum(question.status == "published" for question in questions)
     published_lessons = sum(lesson.status == "published" for lesson in lessons)
     populated_lessons = sum(bool(lesson.sections) for lesson in lessons)
@@ -107,7 +108,7 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
         and not thin_lessons
     )
     all_source_published = (
-        course.status == "published"
+        all(course.status == "published" for course in courses)
         and published_lessons == len(lessons)
         and published_questions == len(questions)
     )
@@ -120,12 +121,12 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
     checks = [
         _check(
             "source.full_syllabus",
-            len(topic_codes) >= requirements.minimum_topics,
+            len(topic_groups) >= requirements.minimum_topics,
             "The authored catalogue covers the required Mathematics topic groups.",
             "The authored catalogue does not yet cover all required Mathematics topic groups.",
-            actual=len(topic_codes),
+            actual=len(topic_groups),
             required=requirements.minimum_topics,
-            topic_codes=topic_codes,
+            topic_groups=topic_groups,
         ),
         _check(
             "source.question_volume",
@@ -140,7 +141,7 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
             all_source_published,
             "The course, lessons and questions are published revisions.",
             "One or more course, lesson or question revisions remain unpublished.",
-            course_status=course.status,
+            course_statuses={course.stable_key: course.status for course in courses},
             published_lessons=published_lessons,
             lesson_count=len(lessons),
             published_questions=published_questions,
@@ -182,11 +183,18 @@ def source_checks(catalogue, requirements: BetaReleaseRequirements) -> tuple[lis
         ),
     ]
     snapshot = {
-        "course_key": course.stable_key,
-        "course_revision": course.revision,
-        "course_content_sha256": course_content_hash(course, lessons, report.pools),
-        "course_status": course.status,
-        "topics": len(topic_codes),
+        "courses": [
+            {
+                "course_key": report.course.stable_key,
+                "course_revision": report.course.revision,
+                "course_content_sha256": course_content_hash(
+                    report.course, report.lessons, report.pools
+                ),
+                "course_status": report.course.status,
+            }
+            for report in reports
+        ],
+        "topics": len(topic_groups),
         "lessons": len(lessons),
         "questions": len(questions),
         "allocation_counts": allocation_counts,
@@ -279,7 +287,8 @@ def database_checks(connection, catalogue, requirements: BetaReleaseRequirements
             )
         )
     else:
-        expected_items = 1 + len(catalogue.report.lessons) + len(catalogue.questions)
+        # verify_release_workflow skips drafts, so every reviewable item must have left draft.
+        expected_items = len(catalogue_review_items(catalogue))
         approvals_complete = approvals["checked_items"] == expected_items
         checks.append(
             _check(

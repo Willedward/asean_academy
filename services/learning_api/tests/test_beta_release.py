@@ -14,19 +14,24 @@ from learning_api.course_catalogue import CourseCatalogue
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 
 
-def test_current_secondary_1_catalogue_is_reported_as_blocked_without_mutating_it():
+def test_two_course_catalogue_is_counted_whole_and_blocked_until_published():
     catalogue = CourseCatalogue(REPOSITORY_ROOT, allow_drafts=True)
     checks, snapshot = source_checks(catalogue, BetaReleaseRequirements())
     by_id = {check.check_id: check for check in checks}
 
-    assert snapshot["topics"] == 10
-    assert snapshot["questions"] == 1040
-    assert len(snapshot["course_content_sha256"]) == 64
-    assert not by_id["source.full_syllabus"].passed
-    assert not by_id["source.question_volume"].passed
+    assert snapshot["topics"] == 19
+    assert snapshot["lessons"] == 87
+    assert snapshot["questions"] == 1976
+    assert [course["course_key"] for course in snapshot["courses"]] == [
+        "g3-sec1-math",
+        "g3-sec2-math",
+    ]
+    assert all(len(course["course_content_sha256"]) == 64 for course in snapshot["courses"])
+    assert by_id["source.full_syllabus"].passed
+    assert by_id["source.question_volume"].passed
     assert not by_id["source.publication_status"].passed
     assert by_id["source.lesson_materials"].passed
-    assert by_id["source.lesson_materials"].details["populated_lessons"] == 52
+    assert by_id["source.lesson_materials"].details["populated_lessons"] == 87
     assert by_id["source.lesson_materials"].details["thin_lessons"] == []
     assert by_id["source.pool_inventory"].passed
     assert by_id["source.checkpoint_reserve_capacity"].passed
@@ -132,4 +137,6 @@ def test_draft_only_review_result_does_not_count_as_complete_approval(monkeypatc
     by_id = {check.check_id: check for check in checks}
 
     assert not by_id["database.human_approvals"].passed
-    assert by_id["database.human_approvals"].details["expected_items"] == 1093
+    assert by_id["database.human_approvals"].details["expected_items"] == len(
+        release.catalogue_review_items(catalogue)
+    )

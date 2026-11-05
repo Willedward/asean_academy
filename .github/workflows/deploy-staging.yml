@@ -97,6 +97,7 @@ jobs:
       SUPABASE_DB_PASSWORD: ${{ secrets.STAGING_SUPABASE_DB_PASSWORD }}
       STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
       STAGING_ABUSE_HASH_SECRET: ${{ secrets.STAGING_ABUSE_HASH_SECRET }}
+      STAGING_GEMINI_API_KEY: ${{ secrets.STAGING_GEMINI_API_KEY }}
       STAGING_SUPABASE_PROJECT_ID: ${{ vars.STAGING_SUPABASE_PROJECT_ID }}
       STAGING_SUPABASE_URL: ${{ vars.STAGING_SUPABASE_URL }}
       STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ vars.STAGING_SUPABASE_PUBLISHABLE_KEY }}
@@ -126,6 +127,7 @@ jobs:
           : "${SUPABASE_DB_PASSWORD:?Configure STAGING_SUPABASE_DB_PASSWORD in staging.}"
           : "${STAGING_DATABASE_URL:?Configure STAGING_DATABASE_URL in staging.}"
           : "${STAGING_ABUSE_HASH_SECRET:?Configure STAGING_ABUSE_HASH_SECRET in staging.}"
+          : "${STAGING_GEMINI_API_KEY:?Configure the staging STAGING_GEMINI_API_KEY secret; real students need a paid Gemini plan.}"
           : "${STAGING_SUPABASE_PROJECT_ID:?Configure STAGING_SUPABASE_PROJECT_ID.}"
           : "${STAGING_SUPABASE_URL:?Configure STAGING_SUPABASE_URL.}"
           : "${STAGING_SUPABASE_PUBLISHABLE_KEY:?Configure STAGING_SUPABASE_PUBLISHABLE_KEY.}"
@@ -171,6 +173,14 @@ jobs:
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_DATABASE_URL=$STAGING_DATABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "SUPABASE_URL=$STAGING_SUPABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "SUPABASE_ANON_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_ENABLED=true" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_PROVIDER=gemini" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL=gemini-3.5-flash-lite" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD=384000" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD=3200000" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED=false" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED=false" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          npx -y @railway/cli@4 variable set "GEMINI_API_KEY=$STAGING_GEMINI_API_KEY" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 up --ci --service "$STAGING_RAILWAY_API_SERVICE"
       - name: Verify API release and staging database readiness
         run: |

@@ -59,3 +59,13 @@ def test_releases_import_all_content_that_readiness_requires(name):
         "diagnostic-import-db",
     ):
         assert source.count(f"question-bank {command}") == 2
+
+
+@pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
+def test_releases_turn_on_the_economy_tutor_only(name):
+    source = (WORKFLOWS / name).read_text()
+    assert '"ASEAN_ACADEMY_TUTOR_ENABLED=true"' in source
+    assert '"ASEAN_ACADEMY_TUTOR_PROVIDER=gemini"' in source
+    assert '"ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED=false"' in source
+    assert "GEMINI_API_KEY=$" in source
+

@@ -81,6 +81,7 @@ Add these **environment secrets**:
 | Name                         | Source                                                                         |
 | ---------------------------- | ------------------------------------------------------------------------------ |
 | STAGING_RAILWAY_TOKEN        | Railway project token scoped only to the staging environment                   |
+| STAGING_GEMINI_API_KEY       | Tutor provider key, on a paid plan before any real student uses staging        |
 | SUPABASE_ACCESS_TOKEN        | Fine-grained Supabase token with auth config read and project migration access |
 | STAGING_SUPABASE_DB_PASSWORD | Password for the staging Supabase database                                     |
 | STAGING_DATABASE_URL         | Encoded staging transaction-pooler connection string                           |

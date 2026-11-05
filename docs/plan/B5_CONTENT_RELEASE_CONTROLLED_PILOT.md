@@ -166,9 +166,11 @@ authoring.
 
 ### Tutor release decision
 
-- [ ] Decide whether the first learner Beta ships with the tutor disabled, economy-only, or
-  in a separately approved learner pilot. Live premium routing is not required for the core
-  learning Beta.
+- [x] The founder decided on 5 November 2026 that the tutor is on for the pilot. Releases use
+  Gemini only, because live premium routing is not required for the core learning Beta. Real
+  students need the paid Gemini plan, so each release requires a `*_GEMINI_API_KEY` secret.
+- [ ] Run the calibration cases on staging, have a person review safety and teaching, then
+  record `tutor_safety_review` in the release gate.
 - [ ] If premium routing will advance beyond administrator shadow mode, collect at least 100
   reconciled administrator shadow decisions under one unchanged policy version.
 - [ ] Cover all seven tutor modes, difficulty levels 1–5, the approved 20-case calibration
