@@ -15,7 +15,9 @@ from .canvas import WIDTH, Canvas, fit_transform, fmt
 RIGHT_TRIANGLE_RENDERER = "nextscholar-right-triangle-svg-v2"
 MENSURATION_RENDERER = "nextscholar-mensuration-svg-v2"
 PLANE_GEOMETRY_RENDERER = "nextscholar-plane-geometry-svg-v1"
+SIMILARITY_RENDERER = "nextscholar-similarity-svg-v1"
 CHECKED_RENDERERS = frozenset({RIGHT_TRIANGLE_RENDERER, MENSURATION_RENDERER, PLANE_GEOMETRY_RENDERER})
+CHECKED_RENDERERS |= {SIMILARITY_RENDERER}
 
 
 class UnsupportedDiagram(ValueError):

@@ -14,12 +14,13 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from . import mensuration, plane_geometry, right_triangle
+from . import mensuration, plane_geometry, right_triangle, similarity
 from .common import (
     CHECKED_RENDERERS,
     MENSURATION_RENDERER,
     PLANE_GEOMETRY_RENDERER,
     RIGHT_TRIANGLE_RENDERER,
+    SIMILARITY_RENDERER,
     Diagram,
     UnsupportedDiagram,
     answer_values,
@@ -32,11 +33,13 @@ LEGACY_TO_CURRENT = {
     MENSURATION_RENDERER: MENSURATION_RENDERER,
     "nextscholar-geometry-svg-v1": PLANE_GEOMETRY_RENDERER,
     PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
+    SIMILARITY_RENDERER: SIMILARITY_RENDERER,
 }
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
     MENSURATION_RENDERER: mensuration.TEMPLATES,
     PLANE_GEOMETRY_RENDERER: plane_geometry.TEMPLATES,
+    SIMILARITY_RENDERER: similarity.TEMPLATES,
 }
 
 NUM = r"(\d+(?:\.\d+)?)"
@@ -377,6 +380,7 @@ PATTERNS = {
     RIGHT_TRIANGLE_RENDERER: _RIGHT_TRIANGLE_PATTERNS,
     MENSURATION_RENDERER: _MENSURATION_PATTERNS,
     PLANE_GEOMETRY_RENDERER: plane_geometry.PATTERNS,
+    SIMILARITY_RENDERER: similarity.PATTERNS,
 }
 
 
@@ -391,7 +395,8 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
 
 def text_only_reason(question: dict[str, Any]) -> str | None:
     """Return why a G1 question should have no figure, or ``None`` if it can have one."""
-    return plane_geometry.text_only_reason(_prompt_text(question))
+    text = _prompt_text(question)
+    return plane_geometry.text_only_reason(text) or similarity.text_only_reason(text)
 
 
 def stem_findings(question: dict[str, Any], template: str) -> list[str]:
@@ -410,10 +415,16 @@ def stem_findings(question: dict[str, Any], template: str) -> list[str]:
     return findings
 
 
+def _is_sec2_g2(question: dict[str, Any]) -> bool:
+    return question.get("school_level") == "secondary_2" and question.get("topic_code") == "G2"
+
+
 def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramRequest:
     """Choose the template and inputs for one question asset."""
     spec = asset.get("generation_spec", {})
     renderer = LEGACY_TO_CURRENT.get(spec.get("renderer", ""))
+    if renderer == PLANE_GEOMETRY_RENDERER and _is_sec2_g2(question):
+        renderer = SIMILARITY_RENDERER
     if renderer is None:
         raise UnsupportedDiagram(f"Renderer {spec.get('renderer')!r} has no checked generator.")
     if spec.get("renderer") in CHECKED_RENDERERS and spec.get("template") in TEMPLATES[renderer]:
