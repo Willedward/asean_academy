@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l1-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,186 @@
       "asset_key": "g5-l1-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-001-diagram.svg",
-      "alt_text": "Schematic for Area of a classroom display. Not drawn to scale. Stated measures include 8 cm, 5 cm.",
+      "path": "assets/g5-l1-001-diagram-r3.svg",
+      "alt_text": "A parallelogram with base 8 cm and a dashed perpendicular height of 5 cm, with a right angle marked where the height meets the base. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "area",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "parallelogram",
         "question_key": "g5-l1-001",
         "outcome": "5.1",
-        "not_to_scale": true
+        "template": "parallelogram_area",
+        "inputs": {
+          "base": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "base": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "40"
+        ],
+        "unknowns": [],
+        "drawn_scale": 40.9756,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "parallelogram",
+            "points": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "heights": [
+              {
+                "segment": "DF",
+                "foot": "F",
+                "top": "D",
+                "base": [
+                  "A",
+                  "B"
+                ]
+              }
+            ],
+            "segments": [
+              "AB",
+              "BC",
+              "CD",
+              "DA",
+              "DF"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "DF",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "parallelogram"
+        ],
+        "viewbox": [
+          600.0,
+          333.0
+        ],
+        "points": {
+          "A": [
+            90.0,
+            244.88
+          ],
+          "B": [
+            417.8,
+            244.88
+          ],
+          "C": [
+            510.0,
+            40.0
+          ],
+          "D": [
+            182.2,
+            40.0
+          ],
+          "F": [
+            182.2,
+            244.88
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DA",
+            "from": "D",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DF",
+            "from": "D",
+            "to": "F",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "F",
+            "arms": [
+              "B",
+              "D"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "labels": [
+          {
+            "text": "8 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:DF"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "F",
+              "B"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "0b0781bc49aa6adb3c87ac6453cf6acb6aaed6b11e7a9ca9e9a5770ba66a1034",
-      "width": 940,
-      "height": 390
+      "sha256": "4d136eb60d7fa6ad2271f18514f1821a9d1e4dda1a378ac4911bafd653aa428d",
+      "width": 600,
+      "height": 333
     }
   ],
   "provenance": {
@@ -113,6 +281,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-018",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-018-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A photograph frame measures 20 cm by 14 cm outside. Its border is 2 cm wide on every side. Find the area of the border in cm\u00b2. Enter the numerical value only."
+          "text": "A photograph frame measures 20 cm by 14 cm outside. Its border is 2 cm wide on every side. Find the area of the border in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -72,7 +81,324 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-018-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-018-diagram-r2.svg",
+      "alt_text": "A rectangular frame 20 cm by 14 cm outside, with a smaller rectangle inside it. The shaded border between them is 2 cm wide, and equal marks show it has the same width on all four sides. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "ring",
+        "question_key": "g5-l3-018",
+        "outcome": "5.2",
+        "template": "uniform_border",
+        "inputs": {
+          "width": {
+            "value": 20,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 14,
+            "unit": "cm"
+          },
+          "border": {
+            "value": 2,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "width": {
+            "value": 20,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 14,
+            "unit": "cm"
+          },
+          "border": {
+            "value": 2,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "120",
+          "16",
+          "10",
+          "280",
+          "160"
+        ],
+        "unknowns": [],
+        "drawn_scale": 18.326,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "ring",
+            "outer": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "inner": [
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "uniform": true,
+            "widths": [
+              "W1W2",
+              "W3W4",
+              "W5W6",
+              "W7W8"
+            ],
+            "segments": [
+              "AB",
+              "BC",
+              "CD",
+              "DA",
+              "EF",
+              "FG",
+              "GH",
+              "HE",
+              "W1W2",
+              "W3W4",
+              "W5W6",
+              "W7W8"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "20 cm",
+            "factor": 1.0,
+            "value": 20.0
+          },
+          {
+            "segment": "DA",
+            "label": "14 cm",
+            "factor": 1.0,
+            "value": 14.0
+          },
+          {
+            "segment": "W1W2",
+            "label": "2 cm",
+            "factor": 1.0,
+            "value": 2.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "outer-rectangle",
+          "inner-rectangle"
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "W1W2",
+              "W3W4",
+              "W5W6",
+              "W7W8"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          385.0
+        ],
+        "points": {
+          "A": [
+            116.74,
+            296.56
+          ],
+          "B": [
+            483.26,
+            296.56
+          ],
+          "C": [
+            483.26,
+            40.0
+          ],
+          "D": [
+            116.74,
+            40.0
+          ],
+          "E": [
+            153.39,
+            259.91
+          ],
+          "F": [
+            446.61,
+            259.91
+          ],
+          "G": [
+            446.61,
+            76.65
+          ],
+          "H": [
+            153.39,
+            76.65
+          ],
+          "W1": [
+            300.0,
+            40.0
+          ],
+          "W2": [
+            300.0,
+            76.65
+          ],
+          "W3": [
+            300.0,
+            296.56
+          ],
+          "W4": [
+            300.0,
+            259.91
+          ],
+          "W5": [
+            116.74,
+            168.28
+          ],
+          "W6": [
+            153.39,
+            168.28
+          ],
+          "W7": [
+            483.26,
+            168.28
+          ],
+          "W8": [
+            446.61,
+            168.28
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DA",
+            "from": "D",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "EF",
+            "from": "E",
+            "to": "F",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "FG",
+            "from": "F",
+            "to": "G",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "GH",
+            "from": "G",
+            "to": "H",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "HE",
+            "from": "H",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W1W2",
+            "from": "W1",
+            "to": "W2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W3W4",
+            "from": "W3",
+            "to": "W4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W5W6",
+            "from": "W5",
+            "to": "W6",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "W7W8",
+            "from": "W7",
+            "to": "W8",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:W1W2",
+            "from": [
+              300.0,
+              76.65
+            ],
+            "to": [
+              300.0,
+              101.65
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "20 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "14 cm",
+            "target": "segment:DA"
+          },
+          {
+            "text": "2 cm",
+            "target": "segment:W1W2"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "a00914369c5ea92a5323b2f64c0ce7b9e7f88ab4301ea4226b602c2fd6eefe66",
+      "width": 600,
+      "height": 385
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +412,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

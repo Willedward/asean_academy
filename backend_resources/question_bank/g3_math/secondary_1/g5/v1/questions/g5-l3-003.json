@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-003",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -97,18 +97,214 @@
       "asset_key": "g5-l3-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-003-diagram.svg",
-      "alt_text": "Schematic for Tiles for an L-shaped lobby. Not drawn to scale. Stated measures include 16 m, 12 m, 6 m, 5 m, 0.5 m².",
+      "path": "assets/g5-l3-003-diagram-r3.svg",
+      "alt_text": "An L-shape. The full bottom edge is 16 m and the full left edge is 12 m. The removed top-right corner has edges 6 m and 5 m. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "composite_plane",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "rectilinear",
         "question_key": "g5-l3-003",
         "outcome": "5.2",
-        "not_to_scale": true
+        "template": "corner_removed",
+        "inputs": {
+          "width": {
+            "value": 16,
+            "unit": "m"
+          },
+          "height": {
+            "value": 12,
+            "unit": "m"
+          },
+          "cut_width": {
+            "value": 6,
+            "unit": "m"
+          },
+          "cut_height": {
+            "value": 5,
+            "unit": "m"
+          },
+          "tile_area": 0.5
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "width": {
+            "value": 16,
+            "unit": "m"
+          },
+          "height": {
+            "value": 12,
+            "unit": "m"
+          },
+          "cut_width": {
+            "value": 6,
+            "unit": "m"
+          },
+          "cut_height": {
+            "value": 5,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "324",
+          "162",
+          "192",
+          "30",
+          "10",
+          "7",
+          "56"
+        ],
+        "unknowns": [],
+        "drawn_scale": 22.5,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "l_shape",
+            "points": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "segments": [
+              "AB",
+              "BC",
+              "CD",
+              "DE",
+              "EF",
+              "FA"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "16 m",
+            "factor": 1.0,
+            "value": 16.0
+          },
+          {
+            "segment": "FA",
+            "label": "12 m",
+            "factor": 1.0,
+            "value": 12.0
+          },
+          {
+            "segment": "CD",
+            "label": "6 m",
+            "factor": 1.0,
+            "value": 6.0
+          },
+          {
+            "segment": "DE",
+            "label": "5 m",
+            "factor": 1.0,
+            "value": 5.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "l-shape"
+        ],
+        "viewbox": [
+          600.0,
+          398.0
+        ],
+        "points": {
+          "A": [
+            120.0,
+            310.0
+          ],
+          "B": [
+            480.0,
+            310.0
+          ],
+          "C": [
+            480.0,
+            152.5
+          ],
+          "D": [
+            345.0,
+            152.5
+          ],
+          "E": [
+            345.0,
+            40.0
+          ],
+          "F": [
+            120.0,
+            40.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "EF",
+            "from": "E",
+            "to": "F",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "FA",
+            "from": "F",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "16 m",
+            "target": "segment:AB"
+          },
+          {
+            "text": "12 m",
+            "target": "segment:FA"
+          },
+          {
+            "text": "6 m",
+            "target": "segment:CD"
+          },
+          {
+            "text": "5 m",
+            "target": "segment:DE"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "28047258f1e02cbc11764b77674721bccb2e9cc6607707ae975c07e468363213",
-      "width": 940,
-      "height": 390
+      "sha256": "3b7d7f1b7ef2cc58b052aa3b4c4350ebbf5c34ad202acf7a32c575c69f1a316b",
+      "width": 600,
+      "height": 398
     }
   ],
   "provenance": {
@@ -124,6 +320,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l1-003",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,238 @@
       "asset_key": "g5-l1-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-003-diagram.svg",
-      "alt_text": "Schematic for Rectangle and square area. Not drawn to scale. Stated measures include 8 cm, 5 cm, 3 cm.",
+      "path": "assets/g5-l1-003-diagram-r3.svg",
+      "alt_text": "A rectangle 8 cm by 5 cm with a square of side 3 cm attached along one edge. The two shapes do not overlap, and the four sides of the square carry equal marks. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
         "diagram_kind": "composite_plane",
         "question_key": "g5-l1-003",
         "outcome": "5.2",
-        "not_to_scale": true
+        "template": "rectangle_and_square",
+        "inputs": {
+          "width": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "side": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "width": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "side": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "49",
+          "40",
+          "9"
+        ],
+        "unknowns": [],
+        "drawn_scale": 36.7236,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "rectangle",
+            "points": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "segments": [
+              "AB",
+              "JC",
+              "CD",
+              "DA"
+            ]
+          },
+          {
+            "type": "square",
+            "points": [
+              "B",
+              "S",
+              "T",
+              "J"
+            ],
+            "non_overlapping": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "segments": [
+              "BS",
+              "ST",
+              "TJ",
+              "BJ"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "DA",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "ST",
+            "label": "3 cm",
+            "factor": 1.0,
+            "value": 3.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "rectangle",
+          "square"
+        ],
+        "equal_marks": [
+          {
+            "segments": [
+              "BS",
+              "ST",
+              "TJ",
+              "BJ"
+            ],
+            "ticks": 1
+          }
+        ],
+        "viewbox": [
+          600.0,
+          312.0
+        ],
+        "points": {
+          "A": [
+            98.02,
+            223.62
+          ],
+          "B": [
+            391.81,
+            223.62
+          ],
+          "J": [
+            391.81,
+            113.45
+          ],
+          "C": [
+            391.81,
+            40.0
+          ],
+          "D": [
+            98.02,
+            40.0
+          ],
+          "S": [
+            501.98,
+            223.62
+          ],
+          "T": [
+            501.98,
+            113.45
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "JC",
+            "from": "J",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DA",
+            "from": "D",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BS",
+            "from": "B",
+            "to": "S",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "ST",
+            "from": "S",
+            "to": "T",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TJ",
+            "from": "T",
+            "to": "J",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BJ",
+            "from": "B",
+            "to": "J",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "8 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:DA"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:ST"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "436984e393f081424ce97cda14c0fc5e15d5856d867e5b6b0834a8f099089ce6",
-      "width": 940,
-      "height": 390
+      "sha256": "1eaccde54748a1f00724ac89900522f7e143cddf6a479ed5773ca829ed8559ad",
+      "width": 600,
+      "height": 312
     }
   ],
   "provenance": {
@@ -113,6 +333,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
