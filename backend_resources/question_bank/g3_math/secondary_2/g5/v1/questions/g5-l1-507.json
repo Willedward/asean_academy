@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-507",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,18 +86,109 @@
       "asset_key": "g5-l1-507-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-507-diagram.svg",
-      "alt_text": "Surface area of a sphere: a labelled sphere mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l1-507-diagram-r2.svg",
+      "alt_text": "Sphere with radius r = 5 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
         "question_key": "g5-l1-507",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "sphere_surface_area",
+        "inputs": {
+          "radius": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "100",
+          "100π",
+          "314.2",
+          "314.16"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "O",
+              "E": "E",
+              "D1": "D1",
+              "D2": "D2"
+            },
+            "given": "radius"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          460.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            210.0
+          ],
+          "E": [
+            431.06,
+            118.23
+          ]
+        },
+        "segments": [
+          {
+            "key": "OE",
+            "from": "O",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "sphere": {
+            "center": "O",
+            "radius": 160.0,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "equator": {
+            "center": "O",
+            "rx": 160.0,
+            "ry": 48.0
+          }
+        },
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "r = 5 cm",
+            "target": "segment:OE"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "sphere",
+            "point": "O"
+          },
+          {
+            "type": "on_circle",
+            "circle": "sphere",
+            "points": [
+              "E"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "bdcfe3f0c9df7112d9d5daeb3b56c3ef4a6d13ecdabb4641a2b7ce4673906979",
-      "width": 760,
-      "height": 430
+      "sha256": "d03821208560335fb7951c8ecd3c8d3439be8636140b4b4ff66b5d8831400360",
+      "width": 600,
+      "height": 460
     }
   ],
   "provenance": {
@@ -113,6 +204,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }

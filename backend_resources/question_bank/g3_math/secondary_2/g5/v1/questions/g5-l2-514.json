@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-514",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,191 @@
       "asset_key": "g5-l2-514-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-514-diagram.svg",
-      "alt_text": "Cone volume: a labelled cone mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l2-514-diagram-r2.svg",
+      "alt_text": "Cone with base radius r = 8 cm and perpendicular height h = 12 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "cone",
         "question_key": "g5-l2-514",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "cone_volume",
+        "inputs": {
+          "radius": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "804.2",
+          "804.25",
+          "256π"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "O",
+              "V": "V",
+              "L": "L",
+              "R": "R"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          473.0
+        ],
+        "points": {
+          "O": [
+            340.0,
+            305.0
+          ],
+          "V": [
+            340.0,
+            50.0
+          ],
+          "L": [
+            170.0,
+            305.0
+          ],
+          "R": [
+            510.0,
+            305.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "VL",
+            "from": "V",
+            "to": "L",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VO",
+            "from": "V",
+            "to": "O",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "OR",
+            "from": "O",
+            "to": "R",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "O",
+            "rx": 170.0,
+            "ry": 57.8
+          }
+        },
+        "right_angles": [
+          {
+            "vertex": "O",
+            "arms": [
+              "V",
+              "R"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:OR",
+            "from": [
+              425.0,
+              305.0
+            ],
+            "to": [
+              449.06,
+              373.75
+            ]
+          },
+          {
+            "target": "segment:VO",
+            "from": [
+              340.0,
+              177.5
+            ],
+            "to": [
+              237.49,
+              141.62
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "r = 8 cm",
+            "target": "segment:OR"
+          },
+          {
+            "text": "h = 12 cm",
+            "target": "segment:VO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "O"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "L",
+              "R"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "e81e09ebaf374eabf4ea483bc600481c64df19685e8e01660aac862baea2e45e",
-      "width": 760,
-      "height": 430
+      "sha256": "f2f7765bbe25c08c2fa4c1a774641672012c930981e5a7532d0fc75348af3287",
+      "width": 600,
+      "height": 473
     }
   ],
   "provenance": {
@@ -128,6 +301,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
