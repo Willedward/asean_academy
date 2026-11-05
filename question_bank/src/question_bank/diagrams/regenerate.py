@@ -1,4 +1,4 @@
-"""Regenerate the checked geometry diagrams for one question batch or a set of lessons.
+"""Regenerate checked question diagrams for one batch or geometry diagrams for lessons.
 
 A batch run can also add a figure to a text-only question that needs one (``add``). When the
 generator says an accurate figure would show a question's answer, that question becomes text-only
@@ -28,7 +28,14 @@ from typing import Any
 from ..diagram_checks import DiagramContext
 from ..geometry_validation import geometry_diagram_findings
 from .canvas import DiagramLayoutError
-from .common import CHECKED_RENDERERS, PLANE_GEOMETRY_RENDERER, Diagram, answer_values
+from .charts import TEMPLATES as CHART_TEMPLATES
+from .common import (
+    CHECKED_RENDERERS,
+    DATA_CHART_RENDERER,
+    PLANE_GEOMETRY_RENDERER,
+    Diagram,
+    answer_values,
+)
 from .questions import (
     LESSON_TEMPLATES,
     UnsupportedDiagram,
@@ -48,9 +55,14 @@ SCHEMATIC_STEM = (
     "Use the schematic together with the measurements stated in the question. "
     "The diagram is not drawn to scale."
 )
+DATA_DISPLAY_STEM = "Use the data display together with the information in the question."
 # A sentence that only introduces a figure goes when the figure does.
 FIGURE_STEMS = frozenset(
-    {SCHEMATIC_STEM, "Use the labelled right-triangle schematic. The diagram is not drawn to scale."}
+    {
+        SCHEMATIC_STEM,
+        DATA_DISPLAY_STEM,
+        "Use the labelled right-triangle schematic. The diagram is not drawn to scale.",
+    }
 )
 
 
@@ -187,6 +199,7 @@ def _apply_asset(root: Path, asset: dict[str, Any], diagram: Diagram, target_pat
     target = root / target_path
     if target.exists() and target.read_text(encoding="utf-8") != diagram.svg:
         raise FileExistsError(f"{target} already exists with different content.")
+    target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(diagram.svg, encoding="utf-8")
     asset["path"] = target_path
     asset["alt_text"] = diagram.alt_text
@@ -289,20 +302,30 @@ def _record_audit_decision(
     path.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def _new_asset(question: dict[str, Any]) -> dict[str, Any]:
+def _new_asset(
+    question: dict[str, Any], renderer: str, request: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Attach an empty asset to a text-only question so a template can draw it."""
     key = question["stable_key"]
+    generation_spec = {"renderer": renderer}
+    if request is not None:
+        generation_spec.update(
+            {"template": request["template"], "inputs": dict(request["inputs"])}
+        )
     asset = {
         "asset_key": f"{key}-diagram",
-        "kind": "geometry",
+        "kind": "chart" if renderer == DATA_CHART_RENDERER else "geometry",
         "format": "svg",
         "path": f"assets/{key}-diagram.svg",
         "alt_text": "",
-        "generation_spec": {"renderer": PLANE_GEOMETRY_RENDERER},
+        "generation_spec": generation_spec,
     }
     question.setdefault("assets", []).append(asset)
     question["stem"] = [
-        {"type": "text", "text": SCHEMATIC_STEM},
+        {
+            "type": "text",
+            "text": DATA_DISPLAY_STEM if renderer == DATA_CHART_RENDERER else SCHEMATIC_STEM,
+        },
         {"type": "asset_ref", "asset_key": asset["asset_key"]},
         *question.get("stem", []),
     ]
@@ -331,6 +354,8 @@ def regenerate_batch(
     output: Path | None = None,
     apply: bool = False,
     add: list[str] | None = None,
+    renderer: str = PLANE_GEOMETRY_RENDERER,
+    requests: dict[str, dict[str, Any]] | None = None,
 ) -> RegenerationReport:
     """Regenerate every checked-renderer diagram in one question batch.
 
@@ -348,9 +373,27 @@ def regenerate_batch(
     )
     files: dict[str, str] = {}
     additions = set(add or [])
+    chart_requests = requests or {}
     outside = additions - set(manifest.get("question_keys", []))
     if outside:
         raise ValueError(f"Not in batch {report.scope}: {', '.join(sorted(outside))}.")
+    unadded_requests = set(chart_requests) - additions
+    if unadded_requests:
+        raise ValueError(
+            "Chart requests must also be named by --add: "
+            + ", ".join(sorted(unadded_requests))
+            + "."
+        )
+    if chart_requests and renderer != DATA_CHART_RENDERER:
+        raise ValueError("Explicit chart requests require the chart renderer.")
+    for key, request in chart_requests.items():
+        if not isinstance(request, dict):
+            raise ValueError(f"Chart request for {key} must be an object.")
+        template = request.get("template")
+        if template not in CHART_TEMPLATES:
+            raise ValueError(f"Chart request for {key} has unknown template {template!r}.")
+        if not isinstance(request.get("inputs"), dict):
+            raise ValueError(f"Chart request for {key} must contain an inputs object.")
     for key in manifest.get("question_keys", []):
         path = bank_root / "questions" / f"{key}.json"
         question = json.loads(path.read_text(encoding="utf-8"))
@@ -368,7 +411,7 @@ def regenerate_batch(
                 _record_audit_decision(bank_root, key, reason)
             continue
         if added:
-            assets = [_new_asset(question)]
+            assets = [_new_asset(question, renderer, chart_requests.get(key))]
         if not assets:
             continue
         context = DiagramContext(tuple(answer_values(question)), question_text(question))

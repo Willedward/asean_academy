@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from .chart_checks import checked_chart_issues
 from .diagram_checks import (
     LEGACY_ADVISORY_CODES,
     DiagramContext,
@@ -28,6 +29,7 @@ CHECKED_GEOMETRY_RENDERERS = frozenset(
         "nextscholar-plane-geometry-svg-v1",
         "nextscholar-sec1-mensuration-svg-v1",
         "nextscholar-similarity-svg-v1",
+        "nextscholar-data-chart-svg-v1",
     }
 )
 # Fixed-template generators whose assets raise advisory warnings until they are regenerated.
@@ -409,14 +411,20 @@ def geometry_diagram_findings(
     )
     renderer = generation_spec.get("renderer")
     if renderer in CHECKED_GEOMETRY_RENDERERS:
-        findings.extend(
-            GeometryFinding("error", code, message)
-            for code, message in checked_diagram_issues(root, generation_spec, alt_text, context)
-        )
-        findings.extend(
-            GeometryFinding("error", code, message)
-            for code, message in mensuration_issues(root, generation_spec, context)
-        )
+        if renderer == "nextscholar-data-chart-svg-v1":
+            findings.extend(
+                GeometryFinding("error", code, message)
+                for code, message in checked_chart_issues(root, generation_spec, alt_text)
+            )
+        else:
+            findings.extend(
+                GeometryFinding("error", code, message)
+                for code, message in checked_diagram_issues(root, generation_spec, alt_text, context)
+            )
+            findings.extend(
+                GeometryFinding("error", code, message)
+                for code, message in mensuration_issues(root, generation_spec, context)
+            )
     elif renderer in RETIRED_GEOMETRY_RENDERERS:
         findings.append(
             GeometryFinding(

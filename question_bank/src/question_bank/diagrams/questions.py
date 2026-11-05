@@ -14,9 +14,10 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from . import mensuration, plane_geometry, right_triangle, sec1_mensuration, similarity
+from . import charts, mensuration, plane_geometry, right_triangle, sec1_mensuration, similarity
 from .common import (
     CHECKED_RENDERERS,
+    DATA_CHART_RENDERER,
     MENSURATION_RENDERER,
     PLANE_GEOMETRY_RENDERER,
     RIGHT_TRIANGLE_RENDERER,
@@ -36,6 +37,7 @@ LEGACY_TO_CURRENT = {
     PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
     SEC1_MENSURATION_RENDERER: SEC1_MENSURATION_RENDERER,
     SIMILARITY_RENDERER: SIMILARITY_RENDERER,
+    DATA_CHART_RENDERER: DATA_CHART_RENDERER,
 }
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
@@ -43,6 +45,7 @@ TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     PLANE_GEOMETRY_RENDERER: plane_geometry.TEMPLATES,
     SEC1_MENSURATION_RENDERER: sec1_mensuration.TEMPLATES,
     SIMILARITY_RENDERER: similarity.TEMPLATES,
+    DATA_CHART_RENDERER: charts.TEMPLATES,
 }
 
 NUM = r"(\d+(?:\.\d+)?)"
@@ -385,6 +388,7 @@ PATTERNS = {
     PLANE_GEOMETRY_RENDERER: plane_geometry.PATTERNS,
     SEC1_MENSURATION_RENDERER: sec1_mensuration.PATTERNS,
     SIMILARITY_RENDERER: similarity.PATTERNS,
+    DATA_CHART_RENDERER: charts.PATTERNS,
 }
 
 
