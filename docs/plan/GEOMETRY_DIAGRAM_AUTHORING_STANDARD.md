@@ -223,15 +223,61 @@ otherwise change the same line.
 uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_1/g1/v1 --batch B003 --add g1-l3-020 --add g1-l4-011 --apply
 ```
 
-## Checked generator: Sec 2 G2 congruence and similarity
+## Checked generator: Sec 1 G5 mensuration
 
+`nextscholar-sec1-mensuration-svg-v1` (`diagrams/sec1_mensuration.py`) replaces the fixed templates of
+`nextscholar-geometry-svg-v1` for Sec 1 G5. It follows the same contract as the generators above, and
+its checks are in `sec1_mensuration_checks.py`. It does not cover the G5 lesson figures. Questions with
+`school_level` `secondary_1` and `topic_code` `G5` are routed to it, so Sec 2 G5 is unaffected.
+
+| `diagram_kind` | Templates |
+| --- | --- |
+| `parallelogram` | `parallelogram_area` |
+| `two_quadrilaterals` | `parallelogram_and_trapezium`, `trapezium_and_parallelogram_algebra` |
+| `composite_plane` | `rectangle_and_square`, `joined_rectangles`, `joined_rectangles_algebra` |
+| `rectilinear` | `corner_removed`, `corner_removed_algebra` |
+| `ring` | `uniform_border`, `track_algebra` |
+| `cuboid` | `cuboid_volume`, `open_box`, `box_with_cube` |
+| `prism` | `prism_right_triangle_legs`, `prism_right_triangle_sides`, `trapezoidal_prism` |
+| `joined_solids` | `two_cubes_joined`, `block_on_cuboid` |
+| `drilled_solid` | `cuboid_tunnel`, `cuboid_vertical_hole`, `cuboid_cylindrical_hole`, `cube_cylindrical_hole` |
+| `cylinder` | `open_cylinder`, `open_cylinder_material` |
+
+**What it draws.** One scale per figure, so every stated length measures true against the others. An
+unknown is drawn at a neutral size and labelled with its variable. Solids use an oblique view, with
+depth at half length, so a front face keeps its true shape and its right angle measures 90°. A
+cylindrical hole on a top face uses an isometric view, where the circle is a true horizontal ellipse.
+
+**Text-only test.** `sec1_mensuration.TEXT_ONLY` lists prompts with no figure: a unit conversion or a
+sum of stated values, which have no spatial content, and a prompt that any figure would contradict.
+
+**Extra checks for this renderer** (each failure is an error):
+
+- `geometry_figure_mismatch`: the template must draw exactly its own figures.
+- `geometry_figure_not_in_question`: each figure must be one the question describes, and each shape the
+  question names must be drawn. A cut-out cannot stand in for a joined shape.
+- `geometry_figure_shape` and `geometry_figure_overlap`: each shape is measured, including parallel
+  sides, right angles, equal cube edges, and a rear face that is a copy of the front.
+- `geometry_height`: a height is dashed, perpendicular to its base and ends on it, with a right-angle
+  mark at its foot.
+- `geometry_given_unlabelled`, `geometry_drawn_length` and `geometry_neutral_length`: every given is
+  labelled on its own segment at the drawn scale, and an unknown is not drawn at its true size.
+- `geometry_label_not_stated`: a label must be a length the question states, or a declared unknown.
+- `geometry_shared_edge`: a shared edge is dashed and a complete edge of the smaller rectangle, and a
+  shared face is shaded.
+- `geometry_hole` and `geometry_open_top`: a hole's rim lies inside its face with its far side dashed,
+  and an open solid shades its opening and says that it is open.
+- `geometry_stray_stroke`, `geometry_stray_text` and `geometry_duplicate_stroke`: no undeclared arrow,
+  box, faint line or caption, and no stroke drawn over another.
+- `geometry_alt_text_figure` and `geometry_alt_text_values`: as for the plane-geometry renderer.
+
+```bash
+uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_1/g5/v1 --batch B002 --add g5-l2-011 --add g5-l3-011 --add g5-l3-012 --add g5-l3-016 --add g5-l4-008 --apply
+## Checked generator: Sec 2 G2 congruence and similarity
 `nextscholar-similarity-svg-v1` (`diagrams/similarity.py`) replaces the fixed templates of
 `nextscholar-geometry-svg-v1` for Sec 2 G2. A question uses it when its `school_level` is
 `secondary_2` and its `topic_code` is `G2`. It follows the same contract as the generators above,
 and adds its own checks in `similarity_checks.py`. It does not draw lesson figures.
-
-| `diagram_kind` | Templates |
-| --- | --- |
 | `congruent_triangles` | `scalene_tiles`, `congruent_algebra`, `sas_condition` |
 | `congruent_pentagons` | `congruent_pentagons` |
 | `shared_side` | `shared_side` |
@@ -242,9 +288,7 @@ and adds its own checks in `similarity_checks.py`. It does not draw lesson figur
 | `coordinate_grid` | `origin_point_ray`, `centre_unknown_line`, `centre_given_ray` |
 | `enlargement_line` | `enlargement_line` |
 | `scale_segments`, `scale_rectangles` | `scale_segments`, `scale_model`, `scale_plan_stage` |
-
 **How it draws.**
-
 - Figures called congruent or similar are one set of vertices transformed, drawn at the stated
   factor. When the shape is free, it uses one fixed scalene shape.
 - A question that fixes its lengths is drawn in those proportions, including the value the learner
@@ -256,14 +300,11 @@ and adds its own checks in `similarity_checks.py`. It does not draw lesson figur
   must find is not plotted, because a plotted point on a numbered grid shows its coordinates.
 - A figure too small to hold marks carries none, so the `shadow_pair` stick has no corner mark or
   arc, and it keeps the true factor.
-
 **Text-only test.** `similarity.TEXT_ONLY` lists prompts whose accurate figure shows the step that
 is assessed. It holds the successive factors 3/2 and 2/3, which an accurate chain draws back at the
 original size.
-
 **Extra checks for this renderer** (each failure is an error, and the `plane_*` checks above also
 run):
-
 - `geometry_figure_proportion`: figures declared `congruent` or `similar` must measure so, at any
   declared factor. `to_scale` lengths must be in the proportion of their stated values, and an
   `enlargement` must sit at its factor from its centre.
@@ -276,8 +317,6 @@ run):
 - `geometry_arrow`: a scaling arrow must run from its declared source to its target, and its factor
   must match the figures as drawn.
 - `geometry_grid`: points, grid lines and axis numbers must be at their coordinates.
-
-```bash
 uv run question-bank diagrams-regenerate ../backend_resources/question_bank/g3_math/secondary_2/g2/v1 --batch B004 --add g2-l3-530 --apply
 ```
 

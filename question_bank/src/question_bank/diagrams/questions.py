@@ -14,12 +14,13 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from . import mensuration, plane_geometry, right_triangle, similarity
+from . import mensuration, plane_geometry, right_triangle, sec1_mensuration, similarity
 from .common import (
     CHECKED_RENDERERS,
     MENSURATION_RENDERER,
     PLANE_GEOMETRY_RENDERER,
     RIGHT_TRIANGLE_RENDERER,
+    SEC1_MENSURATION_RENDERER,
     SIMILARITY_RENDERER,
     Diagram,
     UnsupportedDiagram,
@@ -33,12 +34,14 @@ LEGACY_TO_CURRENT = {
     MENSURATION_RENDERER: MENSURATION_RENDERER,
     "nextscholar-geometry-svg-v1": PLANE_GEOMETRY_RENDERER,
     PLANE_GEOMETRY_RENDERER: PLANE_GEOMETRY_RENDERER,
+    SEC1_MENSURATION_RENDERER: SEC1_MENSURATION_RENDERER,
     SIMILARITY_RENDERER: SIMILARITY_RENDERER,
 }
 TEMPLATES: dict[str, dict[str, Callable[..., Diagram]]] = {
     RIGHT_TRIANGLE_RENDERER: right_triangle.TEMPLATES,
     MENSURATION_RENDERER: mensuration.TEMPLATES,
     PLANE_GEOMETRY_RENDERER: plane_geometry.TEMPLATES,
+    SEC1_MENSURATION_RENDERER: sec1_mensuration.TEMPLATES,
     SIMILARITY_RENDERER: similarity.TEMPLATES,
 }
 
@@ -380,6 +383,7 @@ PATTERNS = {
     RIGHT_TRIANGLE_RENDERER: _RIGHT_TRIANGLE_PATTERNS,
     MENSURATION_RENDERER: _MENSURATION_PATTERNS,
     PLANE_GEOMETRY_RENDERER: plane_geometry.PATTERNS,
+    SEC1_MENSURATION_RENDERER: sec1_mensuration.PATTERNS,
     SIMILARITY_RENDERER: similarity.PATTERNS,
 }
 
@@ -393,9 +397,15 @@ def diagram_assets(question: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
+def _is_sec1_g5(question: dict[str, Any]) -> bool:
+    return question.get("school_level") == "secondary_1" and question.get("topic_code") == "G5"
+
+
 def text_only_reason(question: dict[str, Any]) -> str | None:
-    """Return why a G1 question should have no figure, or ``None`` if it can have one."""
+    """Return why a question should have no figure, or ``None`` if it can have one."""
     text = _prompt_text(question)
+    if _is_sec1_g5(question):
+        return sec1_mensuration.text_only_reason(text)
     return plane_geometry.text_only_reason(text) or similarity.text_only_reason(text)
 
 
@@ -423,6 +433,8 @@ def request_for(question: dict[str, Any], asset: dict[str, Any]) -> DiagramReque
     """Choose the template and inputs for one question asset."""
     spec = asset.get("generation_spec", {})
     renderer = LEGACY_TO_CURRENT.get(spec.get("renderer", ""))
+    if renderer == PLANE_GEOMETRY_RENDERER and _is_sec1_g5(question):
+        renderer = SEC1_MENSURATION_RENDERER
     if renderer == PLANE_GEOMETRY_RENDERER and _is_sec2_g2(question):
         renderer = SIMILARITY_RENDERER
     if renderer is None:

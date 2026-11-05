@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from . import similarity_checks
+from .sec1_mensuration_checks import SEC1_MENSURATION_RENDERER, sec1_mensuration_issues
 from .svg_metrics import (
     MIN_PHONE_FONT_PX,
     Box,
@@ -1365,6 +1366,8 @@ class _Checked:
             self.plane_markings()
             self.plane_arcs()
             self.plane_alternative_text()
+        if self.spec.get("renderer") == SEC1_MENSURATION_RENDERER:
+            sec1_mensuration_issues(self)
         if self.spec.get("renderer") == SIMILARITY_RENDERER:
             similarity_checks.run(self)
         self.issues.extend(text_layout_issues(self.root, check_strokes=True))
