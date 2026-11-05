@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l3-516",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.10",
-  "title": "Lotus subject change",
+  "title": "Change the subject of an area formula",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Lotus area-style formula: Given A=x(3+3)/2+7, make x the subject."
+          "text": "Given A=x(3+3)/2+7, make x the subject."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "2*(A-7)/6",
-        "canonical_latex": "\\frac{2(A-7)}{6}",
+        "canonical_expression": "(A-7)/3",
+        "canonical_latex": "\\frac{A-7}{3}",
         "variables": [
           "A",
           "x"
@@ -69,7 +69,7 @@
             },
             {
               "type": "display_math",
-              "latex": "A-7=\\frac{6x}{2}\\Rightarrow x=\\frac{2(A-7)}{6}"
+              "latex": "A-7=\\frac{6x}{2}=3x\\Rightarrow x=\\frac{A-7}{3}"
             }
           ],
           "mark_type": "M",
@@ -84,7 +84,7 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{2(A-7)}{6}"
+              "latex": "\\frac{A-7}{3}"
             }
           ],
           "mark_type": "A",
