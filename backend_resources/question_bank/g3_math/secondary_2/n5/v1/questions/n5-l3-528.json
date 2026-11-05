@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l3-528",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Nimbus quadratic factors",
+  "title": "Complete factorisation of a three-term quadratic",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Nimbus non-monic quadratic: Factorise 4x^2+16x+12."
+          "text": "Factorise 4x^2+16x+12 completely."
         }
       ],
       "marks": 3,
@@ -29,14 +29,16 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(2*x+2)*(2*x+6)",
-        "canonical_latex": "(2x+2)(2x+6)",
+        "canonical_expression": "4*(x+1)*(x+3)",
+        "canonical_latex": "4(x+1)(x+3)",
         "variables": [
           "x"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "hints": [
         {
@@ -64,11 +66,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take out the common factor first, then factorise what remains."
             },
             {
               "type": "display_math",
-              "latex": "4x^2+12x+4x+12=(2x+2)(2x+6)"
+              "latex": "4x^2+16x+12=4(x^2+4x+3)=4(x+1)(x+3)"
             }
           ],
           "mark_type": "M",
@@ -83,7 +85,7 @@
             },
             {
               "type": "display_math",
-              "latex": "(2x+2)(2x+6)"
+              "latex": "4(x+1)(x+3)"
             }
           ],
           "mark_type": "A",
