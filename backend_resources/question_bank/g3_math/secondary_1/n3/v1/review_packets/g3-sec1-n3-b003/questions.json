@@ -828,7 +828,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l4-011",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -848,7 +848,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Asha initially earns 20% more than Bala. Asha's salary then decreases by 10%, while Bala's salary increases by 8%. By what percentage is Asha's new salary greater than Bala's new salary?"
+            "text": "Asha initially earns 50% more than Bala. Asha's salary then decreases by 10%, while Bala's salary increases by 8%. By what percentage is Asha's new salary greater than Bala's new salary?"
           }
         ],
         "marks": 3,
@@ -857,12 +857,20 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "0",
-          "canonical_latex": "0\\%",
+          "canonical_answer": "25",
+          "canonical_latex": "25\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -879,7 +887,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "If Bala initially earns x, Asha initially earns 1.2x. Compare 0.9(1.2x) with 1.08x."
+                "text": "If Bala initially earns x, Asha initially earns 1.5x. Compare 0.9(1.5x) with 1.08x."
               }
             ]
           }
@@ -890,7 +898,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A_{\\rm new}=0.9(1.2x)=1.08x"
+                "latex": "A_{\\rm new}=0.9(1.5x)=1.35x"
               }
             ],
             "mark_type": "M",
@@ -912,7 +920,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\frac{1.08x-1.08x}{1.08x}\\times100\\%=0\\%"
+                "latex": "\\frac{1.35x-1.08x}{1.08x}\\times100\\%=25\\%"
               }
             ],
             "mark_type": "A",
@@ -1451,7 +1459,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-022",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1481,11 +1489,21 @@
           "type": "numeric",
           "comparison_mode": "exact_numeric",
           "canonical_answer": "6",
-          "canonical_latex": "6",
+          "canonical_latex": "6\\text{ percentage points}",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "percentage points",
+            "accepted": [
+              "percentage points",
+              "percentage point",
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -1553,7 +1571,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-018",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1573,7 +1591,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A price of S$500 is increased by 10% and then decreased by 12%. Find the overall percentage change from the original price."
+            "text": "A price of S$500 is increased by 10% and then decreased by 12%. Find the overall percentage decrease from the original price."
           }
         ],
         "marks": 3,
@@ -1587,7 +1605,15 @@
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -1666,7 +1692,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-019",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1686,7 +1712,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A fund initially contains S$800. It decreases by 15%, after which S$80 is added. Find the overall percentage change from the initial amount."
+            "text": "A fund initially contains S$800. It decreases by 15%, after which S$80 is added. Find the overall percentage decrease from the initial amount."
           }
         ],
         "marks": 3,
@@ -1700,7 +1726,15 @@
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
