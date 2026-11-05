@@ -373,7 +373,7 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     question_response = get("/api/v1/content-assets/question/g2-l1-501/g2-l1-501-diagram")
     assert question_response.status_code == 200
     assert question_response.headers["content-type"].startswith("image/svg+xml")
-    assert b"Matching triangular tiles" in question_response.content
+    assert b"6 cm" in question_response.content
 
     missing_response = get("/api/v1/content-assets/question/g2-l1-501/not-a-real-diagram")
     assert missing_response.status_code == 404
