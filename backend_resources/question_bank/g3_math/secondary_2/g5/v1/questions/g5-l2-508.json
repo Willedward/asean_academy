@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,122 @@
       "asset_key": "g5-l2-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-508-diagram.svg",
-      "alt_text": "Sphere volume from diameter: a labelled sphere mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l2-508-diagram-r2.svg",
+      "alt_text": "Sphere with a full diameter d = 20 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
         "question_key": "g5-l2-508",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "sphere_volume_diameter",
+        "inputs": {
+          "diameter": {
+            "value": 20,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "diameter": {
+            "value": 20,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "4188.8",
+          "4188.79",
+          "10",
+          "r = 10"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "O",
+              "E": "E",
+              "D1": "D1",
+              "D2": "D2"
+            },
+            "given": "diameter"
+          }
+        ],
+        "viewbox": [
+          600.0,
+          460.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            210.0
+          ],
+          "D1": [
+            140.0,
+            210.0
+          ],
+          "D2": [
+            460.0,
+            210.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "D1D2",
+            "from": "D1",
+            "to": "D2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "sphere": {
+            "center": "O",
+            "radius": 160.0,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "equator": {
+            "center": "O",
+            "rx": 160.0,
+            "ry": 48.0
+          }
+        },
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "d = 20 cm",
+            "target": "segment:D1D2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "sphere",
+            "point": "O"
+          },
+          {
+            "type": "on_circle",
+            "circle": "sphere",
+            "points": [
+              "D1",
+              "D2"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "D1",
+              "D2"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "eacfc6229e95f0254284154e7c9b925232f05e00c6be44e2fbf3a47dde9cc4f1",
-      "width": 760,
-      "height": 430
+      "sha256": "219dff6c2aae9c77f2ef0e133840744961a40fb2e09da7034c5a33fcaa25b2fa",
+      "width": 600,
+      "height": 460
     }
   ],
   "provenance": {
@@ -128,6 +232,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }

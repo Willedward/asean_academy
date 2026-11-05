@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,215 @@
       "asset_key": "g5-l4-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-508-diagram.svg",
-      "alt_text": "External area of a joined solid: a labelled composite mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l4-508-diagram-r2.svg",
+      "alt_text": "Solid made of a cone joined base to base with a hemisphere of radius r = 5 cm. The cone's slant height is l = 13 cm. The joined circular faces are hidden inside the solid. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
-        "diagram_kind": "composite",
+        "renderer": "nextscholar-mensuration-svg-v2",
+        "diagram_kind": "cone_hemisphere",
         "question_key": "g5-l4-508",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "cone_hemisphere_area",
+        "inputs": {
+          "radius": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "slant_height": {
+            "value": 13,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "slant_height": {
+            "value": 13,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "361.3",
+          "361.28",
+          "204.2",
+          "204.20",
+          "157.1",
+          "157.08",
+          "115π"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "O",
+              "V": "V",
+              "L": "L",
+              "R": "R"
+            }
+          },
+          {
+            "type": "hemisphere",
+            "open": false,
+            "points": {
+              "O": "hO",
+              "L": "hL",
+              "R": "hR"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          500.0
+        ],
+        "points": {
+          "hO": [
+            330.0,
+            296.0
+          ],
+          "hL": [
+            225.83,
+            296.0
+          ],
+          "hR": [
+            434.17,
+            296.0
+          ],
+          "O": [
+            330.0,
+            296.0
+          ],
+          "V": [
+            330.0,
+            46.0
+          ],
+          "L": [
+            225.83,
+            296.0
+          ],
+          "R": [
+            434.17,
+            296.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "VL",
+            "from": "V",
+            "to": "L",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VR",
+            "from": "V",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "OR",
+            "from": "O",
+            "to": "R",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "hrim": {
+            "center": "hO",
+            "rx": 104.17,
+            "ry": 35.42
+          },
+          "base": {
+            "center": "O",
+            "rx": 104.17,
+            "ry": 35.42
+          }
+        },
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:OR",
+            "from": [
+              382.09,
+              296.0
+            ],
+            "to": [
+              436.61,
+              304.18
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "r = 5 cm",
+            "target": "segment:OR"
+          },
+          {
+            "text": "l = 13 cm",
+            "target": "segment:VR"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "vertical",
+            "points": [
+              "V",
+              "O"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "O"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "O",
+            "of": [
+              "L",
+              "R"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hO",
+              "O"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hR",
+              "R"
+            ]
+          },
+          {
+            "type": "same_point",
+            "points": [
+              "hL",
+              "L"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "df03665c3b8360be47efd168097572a177142baf3f93387b45a543916430ffd8",
-      "width": 760,
-      "height": 430
+      "sha256": "fde8723d2132e3045a2c4e090525030475421ec9c7f86a45e5a446df9f96e02d",
+      "width": 600,
+      "height": 500
     }
   ],
   "provenance": {
@@ -128,6 +325,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l5-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,271 @@
       "asset_key": "g5-l5-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-502-diagram.svg",
-      "alt_text": "Recast spheres into cones: a labelled composite mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l5-502-diagram-r2.svg",
+      "alt_text": "Four separate solid spheres, each of radius 3 cm, are melted and recast into identical separate cones of radius 2 cm and perpendicular height 9 cm. One sphere and one cone are drawn. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
-        "diagram_kind": "composite",
+        "renderer": "nextscholar-mensuration-svg-v2",
+        "diagram_kind": "separate_solids",
         "question_key": "g5-l5-502",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "recast_spheres_cones",
+        "inputs": {
+          "sphere_count": 4,
+          "sphere_radius": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "cone_radius": {
+            "value": 2,
+            "unit": "cm"
+          },
+          "cone_height": {
+            "value": 9,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "sphere_count": 4,
+          "sphere_radius": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "cone_radius": {
+            "value": 2,
+            "unit": "cm"
+          },
+          "cone_height": {
+            "value": 9,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "12",
+          "452.4",
+          "452.39",
+          "113.1",
+          "113.10",
+          "37.7",
+          "37.70",
+          "36π",
+          "144π",
+          "12π"
+        ],
+        "unknowns": [],
+        "solids": [
+          {
+            "type": "sphere",
+            "points": {
+              "O": "sO",
+              "E": "sE",
+              "D1": "sD1",
+              "D2": "sD2"
+            }
+          },
+          {
+            "type": "cone",
+            "orientation": "vertex_up",
+            "points": {
+              "O": "cO",
+              "V": "cV",
+              "L": "cL",
+              "R": "cR"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          517.0
+        ],
+        "points": {
+          "sO": [
+            130.0,
+            261.53
+          ],
+          "sE": [
+            202.77,
+            200.47
+          ],
+          "cO": [
+            465.0,
+            335.0
+          ],
+          "cV": [
+            465.0,
+            50.0
+          ],
+          "cL": [
+            401.67,
+            335.0
+          ],
+          "cR": [
+            528.33,
+            335.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "sOsE",
+            "from": "sO",
+            "to": "sE",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcL",
+            "from": "cV",
+            "to": "cL",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcR",
+            "from": "cV",
+            "to": "cR",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "cVcO",
+            "from": "cV",
+            "to": "cO",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "cOcR",
+            "from": "cO",
+            "to": "cR",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "circles": {
+          "ssphere": {
+            "center": "sO",
+            "radius": 95.0,
+            "hidden": false
+          }
+        },
+        "ellipses": {
+          "sequator": {
+            "center": "sO",
+            "rx": 95.0,
+            "ry": 28.5
+          },
+          "cbase": {
+            "center": "cO",
+            "rx": 63.33,
+            "ry": 21.53
+          }
+        },
+        "right_angles": [
+          {
+            "vertex": "cO",
+            "arms": [
+              "cV",
+              "cR"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:sOsE",
+            "from": [
+              166.38,
+              231.0
+            ],
+            "to": [
+              138.6,
+              161.53
+            ]
+          },
+          {
+            "target": "segment:cOcR",
+            "from": [
+              496.67,
+              335.0
+            ],
+            "to": [
+              516.99,
+              402.72
+            ]
+          },
+          {
+            "target": "segment:cVcO",
+            "from": [
+              465.0,
+              192.5
+            ],
+            "to": [
+              409.91,
+              198.01
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "r = 3 cm",
+            "target": "segment:sOsE"
+          },
+          {
+            "text": "r = 2 cm",
+            "target": "segment:cOcR"
+          },
+          {
+            "text": "h = 9 cm",
+            "target": "segment:cVcO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "circle_centre",
+            "circle": "ssphere",
+            "point": "sO"
+          },
+          {
+            "type": "on_circle",
+            "circle": "ssphere",
+            "points": [
+              "sE"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "cV",
+              "cO"
+            ]
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "cbase",
+            "point": "cO"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "cbase",
+            "points": [
+              "cL",
+              "cR"
+            ]
+          },
+          {
+            "type": "midpoint",
+            "point": "cO",
+            "of": [
+              "cL",
+              "cR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "3720db1a123a18aeddc96461b496458006493842d8bee488f9847514c463bbeb",
-      "width": 760,
-      "height": 430
+      "sha256": "9d33f1e51f6b12aa8b0a97ab8bd6e58268192aa483a8895553e13c9085b33011",
+      "width": 600,
+      "height": 517
     }
   ],
   "provenance": {
@@ -128,6 +381,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
