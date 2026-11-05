@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l2-506",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,158 @@
       "asset_key": "g4-l2-506-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-506-diagram.svg",
-      "alt_text": "Calculate a side using tangent: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l2-506-diagram-r2.svg",
+      "alt_text": "Right-angled triangle on level ground. The sight line makes 60° with the ground, the horizontal distance is 14 m and the vertical height is labelled x. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l2-506",
         "outcome": "4.3",
-        "not_to_scale": true
+        "template": "tangent_opposite",
+        "inputs": {
+          "angle": 60,
+          "adjacent": {
+            "value": 14,
+            "unit": "m"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "angle_degrees": 60.0,
+          "adjacent": {
+            "value": 14,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "24.2",
+          "24.25"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:AB",
+            "label": "x"
+          }
+        ],
+        "task": "find_side_trigonometry",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          466.0
+        ],
+        "points": {
+          "A": [
+            216.28,
+            346.0
+          ],
+          "B": [
+            216.28,
+            56.0
+          ],
+          "C": [
+            383.72,
+            346.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "C",
+            "arms": [
+              "A",
+              "B"
+            ],
+            "marker_key": "angle-C",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-C",
+            "center": [
+              383.72,
+              346.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              216.28,
+              346.0
+            ],
+            "end_ray_point": [
+              216.28,
+              56.0
+            ],
+            "large_arc": 0,
+            "sweep": 1
+          }
+        ],
+        "labels": [
+          {
+            "text": "60°",
+            "target": "angle:C"
+          },
+          {
+            "text": "x",
+            "target": "segment:AB"
+          },
+          {
+            "text": "14 m",
+            "target": "segment:AC"
+          },
+          {
+            "text": "sight line",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 1.7321,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "309aa7f2ff4027cd0b90e73143cad2b3b7f956ebdc5302ed6e4b8f66a94811c4",
-      "width": 760,
-      "height": 420
+      "sha256": "2835f39a9d11d08f6891c7de4452cc947926fe912f75a0e18411b53c1edf4118",
+      "width": 600,
+      "height": 466
     }
   ],
   "provenance": {
@@ -128,6 +268,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
