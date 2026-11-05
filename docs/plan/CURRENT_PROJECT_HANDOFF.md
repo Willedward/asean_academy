@@ -1,9 +1,143 @@
 # Current project handoff
 
-Updated: 3 November 2026 (Asia/Singapore)
+Updated: 5 November 2026 (Asia/Singapore)
 
 This is the short restart file for a new Codex or collaborator session. Read it before loading
 the larger plans; do not use the full chat transcript as project state.
+
+## Start here: state on 5 November 2026
+
+This section replaces the older status notes further down, which are kept as history. Where they
+disagree, trust this section and the repo.
+
+### What we are building towards
+
+A beta pilot for the ASEAN Scholarship Sec 3-entry test: Indonesian applicants entering Secondary 3
+in Singapore, tested at Sec 1-2 level in Mathematics and English. Both Sec 1 and Sec 2 Mathematics
+and English are in the pilot, and the AI tutor is on.
+
+### Decisions already made by William
+
+Don't ask about these again.
+
+- **Work order:** Mathematics batches, then the Mathematics diagrams, the two-course gate and the
+  staging test. English fixes come after that, because Mathematics review starts first.
+- **English in the pilot:** required, so the two-course gate stays as it is.
+- **English level:** the same Sec 3-entry test as Mathematics, Sec 1-2 level. The paper has no
+  editing questions and no "answer in your own words" questions. See
+  `docs/plan/ENGLISH_LEVEL_REVIEW_SEC3_2026_11.md`.
+- **Tutor:** Gemini only for the pilot, no premium routing. Model switching must stay easy for the
+  full launch (see "Switching tutor models").
+- **Content fix decisions** in `docs/plan/CONTENT_FIX_LEDGER.md`: D1 A, D2 A, D3 A, D4 B, D5 B, D6 B,
+  D7 A, D8 C, D9 A. For D3, area and volume scale factors and standard form stay, with teaching;
+  other flagged topics are rewritten in scope. D8 C means fix categories 1-3 now and do duplicates
+  and the rest later.
+
+### Rules that CI or the release process depend on
+
+- PRs target `feature/bulk-question-authoring-pipeline`. `main` is 750+ commits behind and
+  unprotected. The Render review site deploys the integration branch automatically once checks pass.
+- A content PR changes exactly one claimed batch, on the exact branch
+  `fix/<batch-id>-willedward`. `question-bank authoring-pr-check` enforces this; run it locally with
+  `--changed-files`, `--head-branch` and `--output`.
+- Bump `revision` on every changed question. Keep `status` as `draft`. Never record a Mathematics or
+  editorial approval, because only human reviewers do that.
+- Diagrams: keep the old SVG, add a revisioned file (`-r2`), and update `sha256` and
+  `generation_spec`. Draw only through the checked generators in
+  `question_bank/src/question_bank/diagrams/`. A stored template overrides the prompt, so a rewritten
+  prompt keeps its old figure unless the template changes too.
+- Never edit an existing migration, force-push a shared branch, commit secrets or learner data, or
+  use paid LLM APIs for content.
+- Check every changed item through `question_bank.checking.check_answer` with right and plausible
+  wrong answers. Grep `services/learning_api/tests` for changed keys, because tests can assert on
+  content.
+- Known CI noise: a browser-journey "socket hang up" and a web job that fails after all its tests pass
+  have both cleared on rerun. Read the log before assuming that.
+
+### Done
+
+- **Mathematics fixes:** categories 1-3 are merged for every batch on the fix list that has them
+  (PRs #299-#361). All 19 Mathematics banks report 0 errors under `validate --strict-geometry`, and
+  `catalogue-validate` and `authoring-validate` are clean (2,052 questions, 0 duplicate findings).
+- **Diagrams:** checked figures for Sec 1 G1 and G5 and Sec 2 G2, G4 and G5.
+- **Diagnostic:** connected to the Mathematics course. Students wait on human approval of its 76
+  questions, which are imported to staging.
+- **English:** all 51 lessons and both Section 1 mocks exist as drafts, retargeted to Sec 3 entry, with
+  a learner mock runtime.
+- **Release:** two-course gate (#313), single invitation (#280), Gemini-only tutor deploy settings.
+
+### Still to do, in suggested order
+
+1. **Staging test on the review site.** William signs in with Google, since this needs a person. Click
+   through the review flow and a small review batch, a mock, and the tutor, including calibration.
+   Never clicked through on hosted: the review flow, the mock, and #272, #274 and #277.
+2. **Data charts.** Questions the ledger marks as needing a new diagram and which still have none: Sec 2
+   S1 35, Sec 1 S1 32, Sec 2 N7 23, Sec 2 N6 8, Sec 2 S2 2. `g1-l4-011` and `g5-l3-011` (below) also have
+   none. No chart generator exists yet.
+   Adding a figure changes the question and cancels approvals, so finish these before those banks go
+   to review.
+3. **Start Mathematics review** using `docs/plan/MATH_REVIEWER_GUIDE.md`. Banks without pending charts
+   can go first: G1, G2, G4, G5, N1-N5. Tell the reviewer which batches are ready.
+4. **Mathematics items left open:**
+   - Prompts: `g2-l3-530`, `g2-l4-512`, `g2-l5-503`.
+   - CFL-530: `s1-l1-505`, `-515` and `-521` may have two right answers.
+   - CFL-015: `g5-l3-011`, where any figure contradicts the prompt or the key. Rewording to "the
+     smaller rectangle's 5 cm edge" already draws.
+   - CFL-189: 13 N2 items in `g3-sec2-n2-b001`, `b003` and `b004` still say "exact numerical value only".
+   - `g1-l5-004` hint leak; a `90°` answer is a format error in practice; `s1` lesson 06 diagram conflict.
+   - CFL-026: codename prefixes remain on 77 Sec 2 S1 questions.
+   - Lesson figures, including all five Sec 1 G5 lesson figures (D-22 to D-31).
+5. **Checker changes that would let prompts mean what they say:** a lowest-terms option for numeric
+   answers (CFL-180, 69 Sec 2 S2 parts, which D9 A needs, and CFL-177, where N1 prompts were reworded
+   instead); requiring index notation on prime factorisation (CFL-181); promoting
+   `content_control_character` in the lint policy.
+6. **Later content passes:** categories 4-8 in the ledger, which are hint leaks, duplicates, teaching
+   gaps, plain-text maths and polish, plus 87 lesson fix groups. Number-shifted clones remain. The Sec 2
+   N5 and N6 codenames were replaced with distinct titles, so the duplicate scan can't see them
+   (CFL-286, 287, 298). True duplicates include `n6-l3-504`, `-511`, `-518`, `-525`.
+7. **Diagnostic:** S2 and S3 items and the form-design decision in
+   `docs/plan/PRE_REVIEW_AUDIT_diagnostics_v2.md`.
+8. **English, after the staging test:** 270 quality findings
+   (`backend_resources/english/v1/authoring/quality_baseline.json`), form equivalence, practice depth,
+   and 8-12 essay prompts. The educator's review blocks the pilot, so their start date matters.
+9. **App fixes:** two `main` elements on some pages, about 19 database connections on `/progress`, and
+   the accessibility findings.
+10. **Production:** Railway staging and production aren't set up and no GitHub secrets exist. Needs
+    `STAGING_GEMINI_API_KEY` and `PRODUCTION_GEMINI_API_KEY` among others. See
+    `docs/plan/RELEASE_OPERATIONS.md` and `docs/plan/HOSTED_STAGING.md`.
+
+### Questions for William
+
+Judgement calls made in PRs, each easy to reverse:
+
+- Text-only "is it right-angled?" items in Sec 2 G4 under D6 B (28 items).
+- Whole-number answers: `15` passes for 15 tan 45°, but `34` fails on 33.95 because the prompt asks for
+  1 decimal place.
+- `simplified_fraction` on Sec 1 N5 "simplest form" items, and `expanded` rejecting `6(x+2)` on
+  "Simplify" items.
+- Distinct titles to remove codenames in Sec 2 N5 and N6, which leaves the clones in place for now.
+- `n5-l2-002` changed from "write as repeated addition" to "write as a single term".
+
+### Switching tutor models
+
+Read from the code, not yet run end to end.
+
+- **Another Gemini model:** change the model and cost settings in `.github/workflows/deploy-staging.yml`
+  and `deploy-production.yml`, which set them directly.
+- **OpenAI:** `OpenAITutorProvider` exists. Set `ASEAN_ACADEMY_TUTOR_PROVIDER=openai`,
+  `OPENAI_API_KEY` and `ASEAN_ACADEMY_TUTOR_OPENAI_MODEL`, and update the two deploy files, which are
+  written for Gemini only.
+- **Another company:** add a provider class in `services/learning_api/src/learning_api/tutor_provider.py`
+  and allow it in `config.py`.
+- Whichever you choose, rerun tutor safety and calibration first.
+
+### Local setup notes
+
+- CI order for the database: `check_migration_safety.py`, `validate_migrations.sh`,
+  `catalogue-import-db`, `course-import-db`, `english-import-db`, `diagnostic-import-db`,
+  `pytest -m postgres`.
+- For web, run `corepack pnpm openapi:generate`, then `next typegen` before `tsc`, and delete
+  `apps/web/.next-e2e` before lint.
 
 ## Product boundary
 
@@ -294,7 +428,7 @@ review and publication gates pass.
 - Migration safety passed. No new schema migration was required because E9.4 uses the existing
   composition-planning and content-review contracts.
 
-## Immediate next milestone
+## Essay-feedback next milestone (older note; overall order is under "Start here")
 
 The next operational step requires people, not more provider code: a qualified English educator
 must execute the private ENG-T3.9 package against already-captured outputs, and the responsible
