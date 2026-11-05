@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l5-503",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,446 @@
       "asset_key": "g5-l5-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-503-diagram.svg",
-      "alt_text": "Pyramid with a volume constraint: a labelled pyramid mensuration schematic; not drawn to scale.",
+      "path": "assets/g5-l5-503-diagram-r2.svg",
+      "alt_text": "Two separate square-based pyramids with the same volume. The first has base side 10 cm and perpendicular height 15 cm. The second has base side 5 cm and perpendicular height h. Each height runs from the apex to the centre of the base. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-mensuration-svg-v1",
+        "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "pyramid",
         "question_key": "g5-l5-503",
         "outcome": "5.6",
-        "not_to_scale": true
+        "template": "pyramid_volume_constraint",
+        "inputs": {
+          "base_side": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 15,
+            "unit": "cm"
+          },
+          "second_base_side": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "first": {
+            "base_side": {
+              "value": 10,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 15,
+              "unit": "cm"
+            }
+          },
+          "second": {
+            "base_side": {
+              "value": 5,
+              "unit": "cm"
+            }
+          }
+        },
+        "forbidden_visible_labels": [
+          "60",
+          "500",
+          "100",
+          "25"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:bVbO",
+            "label": "h"
+          }
+        ],
+        "solids": [
+          {
+            "type": "pyramid",
+            "base": "square",
+            "points": {
+              "P1": "aP1",
+              "P2": "aP2",
+              "P3": "aP3",
+              "P4": "aP4",
+              "O": "aO",
+              "V": "aV",
+              "S": "aS",
+              "X": "aX"
+            }
+          },
+          {
+            "type": "pyramid",
+            "base": "square",
+            "points": {
+              "P1": "bP1",
+              "P2": "bP2",
+              "P3": "bP3",
+              "P4": "bP4",
+              "O": "bO",
+              "V": "bV",
+              "S": "bS",
+              "X": "bX"
+            }
+          }
+        ],
+        "viewbox": [
+          600.0,
+          526.0
+        ],
+        "points": {
+          "aP1": [
+            125.0,
+            360.68
+          ],
+          "aP2": [
+            275.0,
+            360.68
+          ],
+          "aP3": [
+            344.96,
+            316.96
+          ],
+          "aP4": [
+            194.96,
+            316.96
+          ],
+          "aO": [
+            234.98,
+            338.82
+          ],
+          "aV": [
+            234.98,
+            113.82
+          ],
+          "aX": [
+            264.98,
+            338.82
+          ],
+          "bP1": [
+            410.0,
+            360.68
+          ],
+          "bP2": [
+            485.0,
+            360.68
+          ],
+          "bP3": [
+            519.98,
+            338.82
+          ],
+          "bP4": [
+            444.98,
+            338.82
+          ],
+          "bO": [
+            464.99,
+            349.75
+          ],
+          "bV": [
+            464.99,
+            46.0
+          ],
+          "bX": [
+            494.99,
+            349.75
+          ]
+        },
+        "segments": [
+          {
+            "key": "aP1aP4",
+            "from": "aP1",
+            "to": "aP4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "aP4aP3",
+            "from": "aP4",
+            "to": "aP3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "aVaP4",
+            "from": "aV",
+            "to": "aP4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "aP1aP2",
+            "from": "aP1",
+            "to": "aP2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "aP2aP3",
+            "from": "aP2",
+            "to": "aP3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "aVaP1",
+            "from": "aV",
+            "to": "aP1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "aVaP2",
+            "from": "aV",
+            "to": "aP2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "aVaP3",
+            "from": "aV",
+            "to": "aP3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "aVaO",
+            "from": "aV",
+            "to": "aO",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "bP1bP4",
+            "from": "bP1",
+            "to": "bP4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "bP4bP3",
+            "from": "bP4",
+            "to": "bP3",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "bVbP4",
+            "from": "bV",
+            "to": "bP4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "bP1bP2",
+            "from": "bP1",
+            "to": "bP2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bP2bP3",
+            "from": "bP2",
+            "to": "bP3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bVbP1",
+            "from": "bV",
+            "to": "bP1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bVbP2",
+            "from": "bV",
+            "to": "bP2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bVbP3",
+            "from": "bV",
+            "to": "bP3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "bVbO",
+            "from": "bV",
+            "to": "bO",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "aO",
+            "arms": [
+              "aV",
+              "aX"
+            ],
+            "marker_size": 16
+          },
+          {
+            "vertex": "bO",
+            "arms": [
+              "bV",
+              "bX"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "leaders": [
+          {
+            "target": "segment:aVaO",
+            "from": [
+              234.98,
+              226.32
+            ],
+            "to": [
+              180.98,
+              207.42
+            ]
+          },
+          {
+            "target": "segment:bVbO",
+            "from": [
+              464.99,
+              197.88
+            ],
+            "to": [
+              409.38,
+              203.43
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "10 cm",
+            "target": "segment:aP1aP2"
+          },
+          {
+            "text": "15 cm",
+            "target": "segment:aVaO"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:bP1bP2"
+          },
+          {
+            "text": "h",
+            "target": "segment:bVbO"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "polygon_sides",
+            "points": [
+              "aP1",
+              "aP2",
+              "aP3",
+              "aP4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "aP1",
+              "aP2",
+              "aP3",
+              "aP4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "aO",
+            "of": [
+              "aP1",
+              "aP2",
+              "aP3",
+              "aP4"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "aV",
+              "aO"
+            ]
+          },
+          {
+            "type": "inside_polygon",
+            "point": "aO",
+            "polygon": [
+              "aP1",
+              "aP2",
+              "aP3",
+              "aP4"
+            ]
+          },
+          {
+            "type": "hidden_segment",
+            "segment": "aVaO"
+          },
+          {
+            "type": "polygon_sides",
+            "points": [
+              "bP1",
+              "bP2",
+              "bP3",
+              "bP4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "bP1",
+              "bP2",
+              "bP3",
+              "bP4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "bO",
+            "of": [
+              "bP1",
+              "bP2",
+              "bP3",
+              "bP4"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "bV",
+              "bO"
+            ]
+          },
+          {
+            "type": "inside_polygon",
+            "point": "bO",
+            "polygon": [
+              "bP1",
+              "bP2",
+              "bP3",
+              "bP4"
+            ]
+          },
+          {
+            "type": "hidden_segment",
+            "segment": "bVbO"
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "c0f271eb804ce207faeb0ee3f99b668e7d60559f1bc08f728120ede3d6e3f087",
-      "width": 760,
-      "height": 430
+      "sha256": "580a7b02b1c1a356b7a118d0a29b2bb057408431c93b146a0b9b14894b07724f",
+      "width": 600,
+      "height": 526
     }
   ],
   "provenance": {
@@ -128,6 +556,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
   }
 }
