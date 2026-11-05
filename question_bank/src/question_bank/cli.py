@@ -37,6 +37,7 @@ from .course_validation import validate_course, write_schemas
 from .diagnostic_authoring import plan_diagnostic_authoring_banks
 from .diagnostic_plan import validate_diagnostic_plan, write_diagnostic_plan
 from .diagnostic_repository import DiagnosticFormImporter
+from .diagrams.common import DATA_CHART_RENDERER, PLANE_GEOMETRY_RENDERER
 from .diagrams.regenerate import regenerate_batch, regenerate_lessons
 from .english_authoring import (
     claim_english_batch,
@@ -189,7 +190,7 @@ def parser():
     )
     diagrams_regenerate = commands.add_parser(
         "diagrams-regenerate",
-        help="Regenerate the checked geometry diagrams of one question batch",
+        help="Regenerate checked geometry or data-chart diagrams for one question batch",
     )
     diagrams_regenerate.add_argument("bank", type=Path)
     diagrams_regenerate.add_argument(
@@ -203,6 +204,20 @@ def parser():
         action="append",
         default=[],
         help="Text-only question in this batch that needs a new figure; repeat as needed",
+    )
+    diagrams_regenerate.add_argument(
+        "--renderer",
+        choices=("geometry", "chart"),
+        default="geometry",
+        help="Renderer family for newly added figures; existing assets keep their renderer",
+    )
+    diagrams_regenerate.add_argument(
+        "--requests",
+        type=Path,
+        help=(
+            "JSON object mapping --add question keys to explicit chart template and inputs; "
+            "use when prompt parsing would be ambiguous"
+        ),
     )
     diagrams_regenerate.add_argument(
         "--apply",
@@ -812,8 +827,21 @@ def main(argv=None):
         print(json.dumps({"status": "complete", "result": result}, indent=2))
         return 0
     if args.command == "diagrams-regenerate":
+        requests = None
+        if args.requests is not None:
+            requests = json.loads(args.requests.read_text(encoding="utf-8"))
+            if not isinstance(requests, dict):
+                raise ValueError("--requests must contain a JSON object keyed by question key.")
         result = regenerate_batch(
-            args.bank, args.batch, output=args.output, apply=args.apply, add=args.add
+            args.bank,
+            args.batch,
+            output=args.output,
+            apply=args.apply,
+            add=args.add,
+            renderer=(
+                DATA_CHART_RENDERER if args.renderer == "chart" else PLANE_GEOMETRY_RENDERER
+            ),
+            requests=requests,
         )
         print(json.dumps(result.as_dict(), indent=2, ensure_ascii=False))
         return 0 if result.ok else 1
