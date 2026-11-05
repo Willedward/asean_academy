@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l1-504",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.16",
-  "title": "Amber algebraic fraction sum",
+  "title": "Add fractions with the same denominator",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Amber common denominator: Simplify 2/(x-3)+4/(x-3)."
+          "text": "Simplify 2/(x-3)+4/(x-3)."
         }
       ],
       "marks": 1,
@@ -36,7 +36,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "simplified_fraction"
+        }
       },
       "hints": [
         {

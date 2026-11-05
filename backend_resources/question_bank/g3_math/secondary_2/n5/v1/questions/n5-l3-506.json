@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l3-506",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.15",
-  "title": "Bamboo algebraic fraction product",
+  "title": "Cancel common factors in a product",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Bamboo factor cancellation: Simplify ((x+4)/4x)(7x²/(x+4))."
+          "text": "Simplify ((x+4)/4x)(7x²/(x+4))."
         }
       ],
       "marks": 3,
@@ -36,7 +36,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "simplified_fraction"
+        }
       },
       "hints": [
         {
