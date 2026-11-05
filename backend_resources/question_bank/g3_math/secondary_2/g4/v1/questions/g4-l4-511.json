@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l4-511",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,205 @@
       "asset_key": "g4-l4-511-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-511-diagram.svg",
-      "alt_text": "Angle of elevation with observer height: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l4-511-diagram-r2.svg",
+      "alt_text": "An observer stands 18 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 60°. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l4-511",
         "outcome": "4.3",
-        "not_to_scale": true
+        "template": "elevation_observer",
+        "inputs": {
+          "distance": {
+            "value": 18,
+            "unit": "m"
+          },
+          "angle": 60,
+          "eye_height": {
+            "value": 1.6,
+            "unit": "m"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "distance": {
+            "value": 18,
+            "unit": "m"
+          },
+          "angle_degrees": 60.0,
+          "eye_height": {
+            "value": 1.6,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "32.8",
+          "32.78",
+          "31.2",
+          "31.18"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:TQ",
+            "label": "h"
+          }
+        ],
+        "task": "angle_of_elevation",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          470.0
+        ],
+        "points": {
+          "F": [
+            217.62,
+            350.0
+          ],
+          "E": [
+            217.62,
+            335.36
+          ],
+          "T": [
+            382.38,
+            350.0
+          ],
+          "P": [
+            382.38,
+            335.36
+          ],
+          "Q": [
+            382.38,
+            50.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "FT",
+            "from": "F",
+            "to": "T",
+            "hidden": false,
+            "role": "ground"
+          },
+          {
+            "key": "TQ",
+            "from": "T",
+            "to": "Q",
+            "hidden": false,
+            "role": "tower"
+          },
+          {
+            "key": "FE",
+            "from": "F",
+            "to": "E",
+            "hidden": false,
+            "role": "observer"
+          },
+          {
+            "key": "EP",
+            "from": "E",
+            "to": "P",
+            "hidden": true,
+            "role": "eye_level"
+          },
+          {
+            "key": "EQ",
+            "from": "E",
+            "to": "Q",
+            "hidden": false,
+            "role": "line_of_sight"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "P",
+            "arms": [
+              "E",
+              "Q"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "E",
+            "arms": [
+              "P",
+              "Q"
+            ],
+            "marker_key": "angle-E",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-E",
+            "center": [
+              217.62,
+              335.36
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              382.38,
+              335.36
+            ],
+            "end_ray_point": [
+              382.38,
+              50.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "60°",
+            "target": "angle:E"
+          },
+          {
+            "text": "18 m",
+            "target": "segment:FT"
+          },
+          {
+            "text": "1.6 m",
+            "target": "segment:FE"
+          },
+          {
+            "text": "h",
+            "target": "segment:TQ"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "T",
+              "P",
+              "Q"
+            ]
+          },
+          {
+            "type": "parallel",
+            "segments": [
+              "FT",
+              "EP"
+            ]
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "FE",
+              "FT"
+            ],
+            "value": 0.0889,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "9a08cb34d1902fd5fb5471a16ed9827b492bc02a881bf9b17fe109f6b8730932",
-      "width": 760,
-      "height": 420
+      "sha256": "2d9aed2f6b190a6e8b69d03ba787c62876b2b04cfdc994dc0dec3f02f0c27fd2",
+      "width": 600,
+      "height": 470
     }
   ],
   "provenance": {
@@ -128,6 +315,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
