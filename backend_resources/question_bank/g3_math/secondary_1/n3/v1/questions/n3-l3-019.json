@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l3-019",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A fund initially contains S$800. It decreases by 15%, after which S$80 is added. Find the overall percentage change from the initial amount."
+          "text": "A fund initially contains S$800. It decreases by 15%, after which S$80 is added. Find the overall percentage decrease from the initial amount."
         }
       ],
       "marks": 3,
@@ -34,7 +34,15 @@
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
