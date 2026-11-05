@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-513",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-513-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -99,7 +108,119 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-513-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-513-diagram-r3.svg",
+      "alt_text": "Bar chart with First day: 105, Second day: 115.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-513",
+        "outcome": "1.7",
+        "template": "bar_chart",
+        "inputs": {
+          "title": "Daily museum visitors",
+          "categories": [
+            "First day",
+            "Second day"
+          ],
+          "values": [
+            105,
+            115
+          ],
+          "y_min": 95,
+          "y_max": 115,
+          "tick_step": 10,
+          "y_label": "Visitors",
+          "forbidden_visible_labels": [
+            "100"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "105",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "245",
+              "width": "177",
+              "height": "140"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "115",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:95",
+            "axis": "y",
+            "value": "95",
+            "position": "385",
+            "label": "95"
+          },
+          {
+            "key": "y:105",
+            "axis": "y",
+            "value": "105",
+            "position": "245",
+            "label": "105"
+          },
+          {
+            "key": "y:115",
+            "axis": "y",
+            "value": "115",
+            "position": "105",
+            "label": "115"
+          },
+          {
+            "key": "x:First day",
+            "axis": "x",
+            "value": "First day",
+            "position": "237.5",
+            "label": "First day"
+          },
+          {
+            "key": "x:Second day",
+            "axis": "x",
+            "value": "Second day",
+            "position": "532.5",
+            "label": "Second day"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "100"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 95.0,
+          "y_max": 115.0,
+          "tick_step": 10.0
+        }
+      },
+      "sha256": "a9bf8578f511e88ee356f16d40a035e3a6e195e08989a34e48f871bf20286ebf",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -113,6 +234,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l5-501 — Lilac Fern Bay — Batik cooperative: missing histogram density
+## s1-l5-501 — Missing histogram frequency density
 
 [Open this question in the HTML preview](index.html#s1-l5-501)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-511 — Golden Lotus Bay — Kite festival: recover a deceptive baseline
+## s1-l3-511 — Apparent increase from a truncated baseline
 
 [Open this question in the HTML preview](index.html#s1-l3-511)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-509 — Indigo Lotus Bay — Kite festival: misleading feature code
+## s1-l1-509 — Misleading time-axis spacing
 
 [Open this question in the HTML preview](index.html#s1-l1-509)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-512 — Silver Lotus Bay — Robotics club: recover a deceptive baseline
+## s1-l3-512 — Comparing displayed bar heights
 
 [Open this question in the HTML preview](index.html#s1-l3-512)
 
