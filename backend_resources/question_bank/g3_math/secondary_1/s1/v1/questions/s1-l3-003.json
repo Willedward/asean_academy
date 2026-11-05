@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-003",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -30,11 +30,19 @@
         "type": "numeric",
         "comparison_mode": "exact_numeric",
         "canonical_answer": "25",
-        "canonical_latex": "25",
+        "canonical_latex": "25\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
-        "unit": null
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -73,7 +81,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{20}{80}(100)=25"
+              "latex": "\\frac{20}{80}(100\\%)=25\\%"
             }
           ],
           "mark_type": "A",
