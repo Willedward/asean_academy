@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-010",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l4-010-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle measures (x + 5) cm by (x + 3) cm. A 5 cm by 3 cm corner is removed, leaving area 84 cm\u00b2. Find x. Enter the numerical value only."
+          "text": "A rectangle measures (x + 5) cm by (x + 3) cm. A 5 cm by 3 cm corner is removed, leaving area 84 cm². Find x. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -105,7 +114,212 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l4-010-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l4-010-diagram-r2.svg",
+      "alt_text": "An L-shape. The full bottom edge is (x + 5) cm and the full left edge is (x + 3) cm. The removed top-right corner has edges 5 cm and 3 cm. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "rectilinear",
+        "question_key": "g5-l4-010",
+        "outcome": "5.2",
+        "template": "corner_removed_algebra",
+        "inputs": {
+          "width_extra": 5,
+          "height_extra": 3,
+          "cut_width": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "cut_height": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "remaining_area": {
+            "value": 84,
+            "unit": "cm²"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "expressions": [
+            "(x + 5) cm",
+            "(x + 3) cm"
+          ]
+        },
+        "forbidden_visible_labels": [
+          "6",
+          "11",
+          "9",
+          "99"
+        ],
+        "unknowns": [],
+        "drawn_scale": 18.2738,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "l_shape",
+            "points": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "segments": [
+              "AB",
+              "BC",
+              "CD",
+              "DE",
+              "EF",
+              "FA"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "(x + 5) cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 5.0
+          },
+          {
+            "segment": "FA",
+            "label": "(x + 3) cm",
+            "factor": 1.0,
+            "variable": "x",
+            "constant": 3.0
+          },
+          {
+            "segment": "CD",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "DE",
+            "label": "3 cm",
+            "factor": 1.0,
+            "value": 3.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "l-shape"
+        ],
+        "neutral_lengths": [
+          {
+            "variable": "x",
+            "drawn": 8.0,
+            "avoid": 6.0
+          }
+        ],
+        "viewbox": [
+          600.0,
+          329.0
+        ],
+        "points": {
+          "A": [
+            181.22,
+            241.01
+          ],
+          "B": [
+            418.78,
+            241.01
+          ],
+          "C": [
+            418.78,
+            94.82
+          ],
+          "D": [
+            327.41,
+            94.82
+          ],
+          "E": [
+            327.41,
+            40.0
+          ],
+          "F": [
+            181.22,
+            40.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "DE",
+            "from": "D",
+            "to": "E",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "EF",
+            "from": "E",
+            "to": "F",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "FA",
+            "from": "F",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "(x + 5) cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "(x + 3) cm",
+            "target": "segment:FA"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:CD"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:DE"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "6bb24a15618618eb1b8a5f40dc8b918361e282d68591fd2d903088c27c7bb538",
+      "width": 600,
+      "height": 329
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -119,6 +333,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

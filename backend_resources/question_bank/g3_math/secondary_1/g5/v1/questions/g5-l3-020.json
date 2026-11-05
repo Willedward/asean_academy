@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-020",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "g5-l3-020-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylindrical container has radius 7 cm and height 8 cm and is open at the top. Using \u03c0 = 22/7, find its surface area in cm\u00b2. Enter the numerical value only."
+          "text": "A cylindrical container has radius 7 cm and height 8 cm and is open at the top. Using π = 22/7, find its surface area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use \u03c0r\u00b2 + 2\u03c0rh."
+              "text": "Use πr² + 2πrh."
             }
           ]
         }
@@ -72,7 +81,225 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "g5-l3-020-diagram",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-l3-020-diagram-r2.svg",
+      "alt_text": "A cylinder that is open at the top, with radius 7 cm and height 8 cm. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cylinder",
+        "question_key": "g5-l3-020",
+        "outcome": "5.3",
+        "template": "open_cylinder",
+        "inputs": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 8,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "506",
+          "154",
+          "352"
+        ],
+        "unknowns": [],
+        "drawn_scale": 21.4286,
+        "depth_factor": 1.0,
+        "figures": [
+          {
+            "type": "cylinder",
+            "rim": "rim",
+            "base": "base",
+            "sides": [
+              "A1C1",
+              "A2C2"
+            ],
+            "radius": "OA2",
+            "open_top": true,
+            "interior": "#c5dcd8",
+            "segments": [
+              "A1C1",
+              "A2C2",
+              "OA2"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "A2C2",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "OA2",
+            "label": "7 cm",
+            "factor": 1.0,
+            "value": 7.0
+          }
+        ],
+        "captions": [
+          "Open top"
+        ],
+        "shades": [
+          "curved-surface"
+        ],
+        "viewbox": [
+          600.0,
+          387.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            97.0
+          ],
+          "B": [
+            300.0,
+            268.43
+          ],
+          "A1": [
+            150.0,
+            97.0
+          ],
+          "A2": [
+            450.0,
+            97.0
+          ],
+          "C1": [
+            150.0,
+            268.43
+          ],
+          "C2": [
+            450.0,
+            268.43
+          ]
+        },
+        "segments": [
+          {
+            "key": "A1C1",
+            "from": "A1",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2C2",
+            "from": "A2",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "OA2",
+            "from": "O",
+            "to": "A2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "B",
+            "rx": 150.0,
+            "ry": 45.0
+          },
+          "rim": {
+            "center": "O",
+            "rx": 150.0,
+            "ry": 45.0
+          }
+        },
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:OA2",
+            "from": [
+              375.0,
+              97.0
+            ],
+            "to": [
+              375.0,
+              167.0
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "8 cm",
+            "target": "segment:A2C2"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:OA2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "ellipse_centre",
+            "ellipse": "rim",
+            "point": "O"
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "B"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "rim",
+            "points": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A1",
+              "C1"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A2",
+              "C2"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "43d98c988be86e774b4f44436847e8902db9cbb66451696630d17b2db8d546c8",
+      "width": 600,
+      "height": 387
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +313,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }
