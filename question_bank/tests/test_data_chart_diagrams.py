@@ -162,6 +162,31 @@ def test_number_line_distinguishes_open_and_closed_boundaries():
     assert 'data-direction="left"' in closed.svg
 
 
+def test_histogram_can_mark_a_bin_as_unknown_without_inventing_its_height():
+    diagram = charts.histogram(
+        {
+            "bins": [
+                {"start": 0, "end": 5, "height": 2.6},
+                {"start": 5, "end": 10, "height": 3.8},
+                {"start": 10, "end": 15, "height": 2.2},
+                {"start": 15, "end": 23, "height": None},
+            ],
+            "y_max": 4,
+            "tick_step": 1,
+            "y_label": "Frequency density",
+            "forbidden_visible_labels": ["2.5"],
+        }
+    )
+
+    missing = diagram.generation_spec["chart_marks"][-1]
+    assert missing["kind"] == "missing-histogram-bin"
+    assert missing["value"] == "unknown"
+    assert 'stroke-dasharray="10 8"' in diagram.svg
+    assert ">?</text>" in diagram.svg
+    assert "unknown" in diagram.alt_text
+    assert findings(diagram) == []
+
+
 def test_pictogram_marks_record_the_value_represented_by_each_symbol():
     diagram = charts.pictogram(
         {"rows": [{"label": "Votes", "count": 2.5}], "key": 4, "symbol": "★"}
