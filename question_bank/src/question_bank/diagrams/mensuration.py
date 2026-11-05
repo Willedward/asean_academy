@@ -411,6 +411,7 @@ def _single_pyramid(
     withheld: Sequence[str],
     unknowns: list[dict[str, str]],
     base_shape: str,
+    caption: str | None = None,
     alt: str,
     title: str,
     dimensions: dict[str, Any],
@@ -423,7 +424,9 @@ def _single_pyramid(
     dy = depth_px * math.sin(math.radians(RECEDE_DEGREES))
     top = 46
     y0 = top + height_px + dy / 2
-    canvas = _canvas(y0 + 120)
+    canvas = _canvas(y0 + (165 if caption else 120))
+    if caption:
+        canvas.caption(caption, (300, y0 + 86))
     x0 = WIDTH - 40 - width - dx
     show_height = height_label is not None
     names = _pyramid(
@@ -562,6 +565,7 @@ def pyramid_height(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
         withheld=_values(height, length.value * breadth.value),
         unknowns=[{"target": "segment:VO", "label": "h"}],
         base_shape="rectangle",
+        caption=f"volume {volume.text}",
         alt=(
             f"Rectangular-based pyramid with base {length.text} by {breadth.text} and volume "
             f"{volume.text}. The perpendicular height h runs from the apex to the centre of the "
@@ -1367,7 +1371,7 @@ def _cone_on_hemisphere(
     dimensions: dict[str, Any],
 ) -> Diagram:
     true_height = height.value if height else math.sqrt(max(slant.value**2 - radius.value**2, 0.0))
-    ratio = _clamp(true_height / radius.value, 0.6, 3.0)
+    ratio = _clamp(true_height / radius.value, 0.6, 3.5)
     rx = min(150.0, 250 / ratio)
     height_px = rx * ratio
     top = 46
