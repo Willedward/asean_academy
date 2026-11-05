@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l5-505",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,225 @@
       "asset_key": "g4-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-505-diagram.svg",
-      "alt_text": "Two-position angle-of-elevation problem: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l5-505-diagram-r2.svg",
+      "alt_text": "A vertical mast of height h stands on level ground. Two observation points on the same line as the mast are 20 m apart; the nearer point is x from the mast. The angle of elevation of the top is 35° from the farther point and 50° from the nearer point. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l5-505",
         "outcome": "4.3",
-        "not_to_scale": true
+        "template": "two_position",
+        "inputs": {
+          "gap": {
+            "value": 20,
+            "unit": "m"
+          },
+          "far_angle": 35,
+          "near_angle": 50
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "gap": {
+            "value": 20,
+            "unit": "m"
+          },
+          "far_angle_degrees": 35.0,
+          "near_angle_degrees": 50.0
+        },
+        "forbidden_visible_labels": [
+          "34.0",
+          "34",
+          "33.95",
+          "28.5",
+          "28.49"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:TQ",
+            "label": "h"
+          },
+          {
+            "target": "segment:NT",
+            "label": "x"
+          }
+        ],
+        "task": "two_angles_of_elevation",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          460.0
+        ],
+        "points": {
+          "F": [
+            100.06,
+            330.0
+          ],
+          "N": [
+            264.99,
+            330.0
+          ],
+          "T": [
+            499.94,
+            330.0
+          ],
+          "Q": [
+            499.94,
+            50.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "FN",
+            "from": "F",
+            "to": "N",
+            "hidden": false,
+            "role": "ground"
+          },
+          {
+            "key": "NT",
+            "from": "N",
+            "to": "T",
+            "hidden": false,
+            "role": "ground"
+          },
+          {
+            "key": "TQ",
+            "from": "T",
+            "to": "Q",
+            "hidden": false,
+            "role": "mast"
+          },
+          {
+            "key": "FQ",
+            "from": "F",
+            "to": "Q",
+            "hidden": false,
+            "role": "line_of_sight"
+          },
+          {
+            "key": "NQ",
+            "from": "N",
+            "to": "Q",
+            "hidden": false,
+            "role": "line_of_sight"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "T",
+            "arms": [
+              "N",
+              "Q"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "F",
+            "arms": [
+              "N",
+              "Q"
+            ],
+            "marker_key": "angle-F",
+            "drawn_degrees": 35.0,
+            "degrees": 35.0
+          },
+          {
+            "vertex": "N",
+            "arms": [
+              "T",
+              "Q"
+            ],
+            "marker_key": "angle-N",
+            "drawn_degrees": 50.0,
+            "degrees": 50.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-F",
+            "center": [
+              100.06,
+              330.0
+            ],
+            "radius": 60.0,
+            "start_ray_point": [
+              264.99,
+              330.0
+            ],
+            "end_ray_point": [
+              499.94,
+              50.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-N",
+            "center": [
+              264.99,
+              330.0
+            ],
+            "radius": 46.0,
+            "start_ray_point": [
+              499.94,
+              330.0
+            ],
+            "end_ray_point": [
+              499.94,
+              50.0
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "35°",
+            "target": "angle:F"
+          },
+          {
+            "text": "50°",
+            "target": "angle:N"
+          },
+          {
+            "text": "20 m",
+            "target": "segment:FN"
+          },
+          {
+            "text": "x",
+            "target": "segment:NT"
+          },
+          {
+            "text": "h",
+            "target": "segment:TQ"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "F",
+              "N",
+              "T"
+            ]
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "FN",
+              "NT"
+            ],
+            "value": 0.702,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "84f87c27ecd32aaf28be5ab0c6c1842cf39a75ae1a4e4c289f557230ef54f98e",
-      "width": 760,
-      "height": 420
+      "sha256": "b006b3b39a83a59103832994eb2efdb0edce3d4daf721bf3250751d41dccca77",
+      "width": 600,
+      "height": 460
     }
   ],
   "provenance": {
@@ -128,6 +335,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }

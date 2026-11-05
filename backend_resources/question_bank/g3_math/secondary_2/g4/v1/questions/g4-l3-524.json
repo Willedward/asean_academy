@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l3-524",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,163 @@
       "asset_key": "g4-l3-524-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-524-diagram.svg",
-      "alt_text": "Diagonal across a rectangular structure: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l3-524-diagram-r2.svg",
+      "alt_text": "Rectangle 35 m by 12 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l3-524",
         "outcome": "4.1",
-        "not_to_scale": true
+        "template": "rectangle_diagonal",
+        "inputs": {
+          "sides": [
+            {
+              "value": 12,
+              "unit": "m"
+            },
+            {
+              "value": 35,
+              "unit": "m"
+            }
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "sides": [
+            {
+              "value": 35,
+              "unit": "m"
+            },
+            {
+              "value": 12,
+              "unit": "m"
+            }
+          ]
+        },
+        "forbidden_visible_labels": [
+          "37"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:BC",
+            "label": "d"
+          }
+        ],
+        "task": "find_hypotenuse",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          306.0
+        ],
+        "points": {
+          "A": [
+            110.0,
+            186.29
+          ],
+          "B": [
+            110.0,
+            56.0
+          ],
+          "C": [
+            490.0,
+            186.29
+          ],
+          "D": [
+            490.0,
+            56.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CD",
+            "from": "C",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BD",
+            "from": "B",
+            "to": "D",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "12 m",
+            "target": "segment:AB"
+          },
+          {
+            "text": "35 m",
+            "target": "segment:AC"
+          },
+          {
+            "text": "d",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "parallel",
+            "segments": [
+              "AB",
+              "CD"
+            ]
+          },
+          {
+            "type": "parallel",
+            "segments": [
+              "AC",
+              "BD"
+            ]
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.3429,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "5887ef1ec5b783b8bd86971f90ce264a0666caa586f22e51740ddeca307349dd",
-      "width": 760,
-      "height": 420
+      "sha256": "457e7e3062191350af9a283702100a5ba1fdcd18b2f70e5fa5caaff96a4201d9",
+      "width": 600,
+      "height": 306
     }
   ],
   "provenance": {
@@ -128,6 +273,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }

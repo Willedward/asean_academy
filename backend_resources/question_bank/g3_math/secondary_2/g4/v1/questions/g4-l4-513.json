@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g4-l4-513",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,18 +101,159 @@
       "asset_key": "g4-l4-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-513-diagram.svg",
-      "alt_text": "Cable with fastening allowance: right-triangle schematic with labelled sides and a right-angle marker; not drawn to scale.",
+      "path": "assets/g4-l4-513-diagram-r2.svg",
+      "alt_text": "Vertical post 28 m high with a cable c from its top to an anchor 45 m from its base, right angle marked at the base. A further 2 m of cable is shown beyond the anchor for fastening. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-right-triangle-svg-v1",
+        "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
         "question_key": "g4-l4-513",
         "outcome": "4.1",
-        "not_to_scale": true
+        "template": "cable_allowance",
+        "inputs": {
+          "post": {
+            "value": 28,
+            "unit": "m"
+          },
+          "anchor_distance": {
+            "value": 45,
+            "unit": "m"
+          },
+          "allowance": {
+            "value": 2,
+            "unit": "m"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "post": {
+            "value": 28,
+            "unit": "m"
+          },
+          "anchor_distance": {
+            "value": 45,
+            "unit": "m"
+          },
+          "allowance": {
+            "value": 2,
+            "unit": "m"
+          }
+        },
+        "forbidden_visible_labels": [
+          "55",
+          "53"
+        ],
+        "unknowns": [
+          {
+            "target": "segment:BC",
+            "label": "c"
+          }
+        ],
+        "task": "find_hypotenuse_then_add",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          390.0
+        ],
+        "points": {
+          "A": [
+            110.0,
+            259.83
+          ],
+          "B": [
+            110.0,
+            56.0
+          ],
+          "C": [
+            437.59,
+            259.83
+          ],
+          "E": [
+            490.0,
+            259.83
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CE",
+            "from": "C",
+            "to": "E",
+            "hidden": true,
+            "role": "allowance"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "28 m",
+            "target": "segment:AB"
+          },
+          {
+            "text": "45 m",
+            "target": "segment:AC"
+          },
+          {
+            "text": "c",
+            "target": "segment:BC"
+          },
+          {
+            "text": "+2 m",
+            "target": "segment:CE"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.6222,
+            "tolerance": 0.02
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "A",
+              "C",
+              "E"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "d6a22b5cbc7aa3a52bcebe5f75ea08f0ed25e4e3f16bd276c8964149b447eee6",
-      "width": 760,
-      "height": 420
+      "sha256": "c1ac820ab988afc63bbc5d5efaae1eca1a0851356824dd62887a1ee725ed9368",
+      "width": 600,
+      "height": 390
     }
   ],
   "provenance": {
@@ -128,6 +269,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram-authored; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   }
 }
