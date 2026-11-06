@@ -52,6 +52,7 @@ from .english_validation import validate_english_foundation, write_english_schem
 from .practice import PracticeEngine
 from .practice_web import serve_practice
 from .preview import serve
+from .review_readiness import audit_review_readiness, write_readiness_report
 from .validation import validate_bank, validate_catalogue
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -77,6 +78,7 @@ DEFAULT_AUTHORING_SCHEMA = REPOSITORY_ROOT / "backend_resources/question_bank/sc
 DEFAULT_CLAIMS = (
     REPOSITORY_ROOT / "backend_resources/question_bank/authoring/batch-claims-v1.json"
 )
+DEFAULT_MATH_FIX_WORKLIST = REPOSITORY_ROOT / "docs/plan/CONTENT_FIX_LEDGER.json"
 DEFAULT_DIAGNOSTIC_PLAN = (
     REPOSITORY_ROOT
     / "backend_resources/diagnostics/g3_math/secondary_1_2/v1/plan.json"
@@ -284,6 +286,25 @@ def parser():
     )
     authoring_validate.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
     authoring_validate.add_argument("--near-duplicate-threshold", type=float, default=0.82)
+    review_readiness = commands.add_parser(
+        "review-readiness",
+        help="Report which Mathematics batches are technically safe to assign to reviewers",
+    )
+    review_readiness.add_argument(
+        "banks", type=Path, nargs="?", default=DEFAULT_BANK_CATALOGUE
+    )
+    review_readiness.add_argument("--syllabus", type=Path, default=DEFAULT_SYLLABUS)
+    review_readiness.add_argument("--claims", type=Path, default=DEFAULT_CLAIMS)
+    review_readiness.add_argument(
+        "--worklist", type=Path, default=DEFAULT_MATH_FIX_WORKLIST
+    )
+    review_readiness.add_argument("--output", type=Path)
+    review_readiness.add_argument("--include-diagnostics", action="store_true")
+    review_readiness.add_argument(
+        "--require-all-ready",
+        action="store_true",
+        help="Return a failing exit status while any batch is still in progress or blocked",
+    )
     authoring_export = commands.add_parser(
         "authoring-export", help="Export one authored batch for mathematics and editorial review"
     )
@@ -759,6 +780,25 @@ def main(argv=None):
         )
         print(json.dumps(report.as_dict(), indent=2))
         return 0 if report.valid else 1
+    if args.command == "review-readiness":
+        report = audit_review_readiness(
+            args.banks,
+            args.syllabus,
+            args.claims,
+            repository_root=REPOSITORY_ROOT,
+            worklist_path=args.worklist,
+            include_diagnostics=args.include_diagnostics,
+        )
+        if args.output:
+            write_readiness_report(report, args.output)
+        summary = report.as_dict()
+        summary.pop("batches")
+        print(json.dumps({**summary, "output": str(args.output) if args.output else None}, indent=2))
+        if not report.valid:
+            return 1
+        if args.require_all_ready and not report.all_ready_or_complete:
+            return 1
+        return 0
     if args.command == "authoring-export":
         result = export_reviewer_batch(
             args.manifest,
