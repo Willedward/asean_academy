@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l1-513",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s2-l1-513-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A point marked on a probability scale has value 0.35. Express the probability as a percentage. Enter the numerical value only."
+          "text": "Point P is marked on the probability scale. Express its probability as a percentage. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -80,7 +89,126 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s2-l1-513-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s2-l1-513-diagram-r3.svg",
+      "alt_text": "Probability scale from 0 to 1 with a point at 0.35.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "probability_scale",
+        "question_key": "s2-l1-513",
+        "outcome": "2.1",
+        "template": "probability_scale",
+        "inputs": {
+          "value": 0.35
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "probability",
+            "kind": "probability-point",
+            "value": "0.35",
+            "tag": "circle",
+            "geometry": {
+              "cx": "289.5",
+              "cy": "255",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "90",
+            "label": "0"
+          },
+          {
+            "key": "x:0.1",
+            "axis": "x",
+            "value": "0.1",
+            "position": "147",
+            "label": ""
+          },
+          {
+            "key": "x:0.2",
+            "axis": "x",
+            "value": "0.2",
+            "position": "204",
+            "label": ""
+          },
+          {
+            "key": "x:0.3",
+            "axis": "x",
+            "value": "0.3",
+            "position": "261",
+            "label": ""
+          },
+          {
+            "key": "x:0.4",
+            "axis": "x",
+            "value": "0.4",
+            "position": "318",
+            "label": ""
+          },
+          {
+            "key": "x:0.5",
+            "axis": "x",
+            "value": "0.5",
+            "position": "375",
+            "label": "0.5"
+          },
+          {
+            "key": "x:0.6",
+            "axis": "x",
+            "value": "0.6",
+            "position": "432",
+            "label": ""
+          },
+          {
+            "key": "x:0.7",
+            "axis": "x",
+            "value": "0.7",
+            "position": "489",
+            "label": ""
+          },
+          {
+            "key": "x:0.8",
+            "axis": "x",
+            "value": "0.8",
+            "position": "546",
+            "label": ""
+          },
+          {
+            "key": "x:0.9",
+            "axis": "x",
+            "value": "0.9",
+            "position": "603",
+            "label": ""
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "660",
+            "label": "1"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "c74d705d5411da1d0cd49e89a340a41c0b501b8d4648c9687f05b0e0dfef1daa",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -94,6 +222,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
