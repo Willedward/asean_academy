@@ -95,7 +95,11 @@ export function EnglishDiagnosticCard() {
           <H2>{next.title}</H2>
           <Muted className="mt-1">{next.message}</Muted>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Tag icon={ClipboardCheck}>20 scored parts</Tag>
+            {next.expected_part_count ? (
+              <Tag icon={ClipboardCheck}>
+                {next.expected_part_count} scored parts
+              </Tag>
+            ) : null}
             <Tag>Feedback after the full form</Tag>
             {next.estimated_minutes ? (
               <Tag>{next.estimated_minutes} minutes</Tag>

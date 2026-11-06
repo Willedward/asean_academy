@@ -661,7 +661,13 @@ def test_postgres_english_baseline_is_protected_idempotent_and_immutable():
     assert replay.status_code == 201, replay.text
     assert replay.json()["session_id"] == session_id
 
-    expected_questions = ["ev-l5-003", "eb-l1-003", "eo-l5-003", "er-l5-005"]
+    expected_questions = [
+        "ev-l5-201",
+        "eb-l5-201",
+        "eo-l5-201",
+        "er-l5-201",
+        "er-l5-204",
+    ]
     for position, expected_key in enumerate(expected_questions, 1):
         current = _request(
             app,
@@ -693,7 +699,7 @@ def test_postgres_english_baseline_is_protected_idempotent_and_immutable():
 
     assert answered.json()["diagnostic_completed"] is True
     assert answered.json()["session"]["score"] == 1
-    assert answered.json()["session"]["total_parts"] == 20
+    assert answered.json()["session"]["total_parts"] == 43
     with psycopg.connect(database_url) as connection:
         row = connection.execute(
             """
@@ -704,7 +710,7 @@ def test_postgres_english_baseline_is_protected_idempotent_and_immutable():
         ).fetchone()
         assert row[0] == "completed"
         assert float(row[1]) == 1
-        assert row[2] == 20
+        assert row[2] == 43
         with pytest.raises(psycopg.errors.RaiseException):
             connection.execute(
                 "update english_diagnostic_attempts set correct_parts=0 where student_id=%s",

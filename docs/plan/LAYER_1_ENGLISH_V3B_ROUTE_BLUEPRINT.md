@@ -4,6 +4,10 @@
 **Status:** fixed technical blueprint; Sprint content, protected measurement, checkpoints, progress visibility and consolidated reviewer evidence structurally complete; human review and release pending
 **Exam profile:** `asean-english-sec3-id-reported-v1`
 
+**Protected-measurement update (6 November 2026):** section 5 records the original 20-part
+increment. The active contract is now the 43-part, 60-minute baseline/endline/reserve design in
+[`ENGLISH_DIAGNOSTIC_60_MINUTE_V2.md`](ENGLISH_DIAGNOSTIC_60_MINUTE_V2.md).
+
 ## 1. Decision
 
 The existing 51-lesson English curriculum now has three fixed routes:
@@ -85,10 +89,11 @@ Authored does not mean publishable. Every released lesson still needs its review
 ticket, distinct parallel retry form and the normal immutable academic/editorial approvals.
 All 16 Sprint lessons now reference an exit ticket and have a distinct parallel retry form.
 The retry increment adds ten question groups and six fresh passage assets without exposing
-protected diagnostic or mock content. A separate protected-measurement increment now adds a
-draft 20-part baseline: five vocabulary decisions, five banked-cloze gaps, five open-cloze
-gaps and five reading decisions. Matched endline and reserve forms now repeat that exact
-5–5–5–5 blueprint with disjoint question groups and fresh passages in the
+protected diagnostic or mock content. A separate protected-measurement increment originally
+added a draft 20-part baseline. Diagnostic v2 now replaces it with 15 vocabulary decisions,
+eight banked-cloze gaps, eight open-cloze gaps and twelve reading decisions across one
+narrative and one informational passage. Matched endline and reserve forms repeat that exact
+15–8–8–12 blueprint with disjoint question groups and fresh passages in the
 `endline_diagnostic` and `protected_reserve` pools. Across all three protected forms, tutoring
 is disabled and feedback is withheld until the form ends. The first checkpoint slice now
 adds reciprocal E1 vocabulary forms with five fresh decisions each and an explicit mastery

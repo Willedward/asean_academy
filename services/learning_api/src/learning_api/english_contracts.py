@@ -577,6 +577,7 @@ class EnglishDiagnosticNextResponse(ApiModel):
     message: str
     estimated_minutes: int | None = None
     question_count: int | None = None
+    expected_part_count: int | None = None
 
 
 class EnglishMockActionResponse(ApiModel):

@@ -7,6 +7,10 @@
 **Integrated with:** the executable English catalogue without rewriting historical lesson or
 question revisions
 
+**Protected-measurement update (6 November 2026):** the original 20-part contract described
+below has been superseded by the implemented 43-part, 60-minute contract in
+[`ENGLISH_DIAGNOSTIC_60_MINUTE_V2.md`](ENGLISH_DIAGNOSTIC_60_MINUTE_V2.md).
+
 ## Implementation status
 
 V3-A now provides:
@@ -15,7 +19,8 @@ V3-A now provides:
 - explicit exclusion of an editing paper section and scored own-words short answers;
 - Full-route metadata on all 51 stable lessons, while Core and Sprint membership remains
   intentionally unassigned pending outcome review;
-- planned, protected 20-part baseline, matched endline and reserve-form contracts;
+- the original protected 20-part baseline, matched endline and reserve-form contracts, since
+  superseded by the 43-part diagnostic v2 contract;
 - part-level 75% proficiency scoring and persisted hint use;
 - the checkpoint-ready `mastered` progress state;
 - explicit parallel-form validation and one functional E1.1 parallel retry proving the
@@ -34,13 +39,13 @@ The Sprint-breadth increment now authors all five former gaps (E0.1, E0.2, E1.6,
 E9.5) with complete lesson anatomy, five-decision exit tickets and distinct retry forms. The
 current totals are 36 authored Full lessons, 25 authored Core lessons and all 16 Sprint
 lessons. All Sprint lessons now have exit tickets and distinct parallel retries. The retry
-increment adds ten question groups and six fresh passage assets. The protected-baseline
-increment then adds four disjoint assessment groups and three passages. The matched-endline
-increment adds eight more assessment groups and six fresh passages, bringing the draft
-foundation to 74 question records and 29 passages. Baseline, endline and reserve each contain
-exactly 20 scored parts—five each for vocabulary, banked cloze, open cloze and reading—and
-withhold feedback until the form ends. Release remains blocked on checkpoints and human
-approvals.
+increment adds ten question groups and six fresh passage assets. The original protected
+measurement increment added twelve assessment groups and nine passages. Diagnostic v2 now
+supersedes those forms with fifteen fresh assessment groups and twelve fresh passages.
+Baseline, endline and reserve each contain exactly 43 scored parts: 15 vocabulary, eight
+banked-cloze, eight open-cloze and twelve reading decisions across narrative and informational
+texts. They target 60 minutes and withhold feedback until the form ends. Release remains
+blocked on human approvals.
 
 All three protected measurement forms are now draft and structurally complete, but cannot be
 served to learners until the existing review and release gates pass. Remaining lesson gaps and
@@ -577,8 +582,8 @@ revealing answers, and remains `review_pending` until human decisions are record
 remains `publication_pending` until every approved revision is publication-requested and
 published; only that complete state can report `ready`.
 
-The objective diagnostic runtime is implemented and deployed in preview. It uses the four-group,
-20-part baseline and matched endline contracts, keeps group correctness hidden until form
+The objective diagnostic runtime is implemented in preview. It now uses five-group,
+43-part baseline and matched endline contracts with a 60-minute soft limit, keeps group correctness hidden until form
 completion, reports task-level skill evidence rather than an official scholarship score and
 keeps the endline locked until all fixed Sprint lessons are mastered. Migration
 `202610300037` and the protected hosted routes were accepted against release

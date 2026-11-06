@@ -132,8 +132,9 @@ sections.
 The English design kit remains the visual reference. The authenticated learner routes at
 `/english`, `/english/lessons/[lessonKey]`, `/english/practice/[sessionId]` and
 `/english/diagnostics/[sessionId]` now connect the source contracts to production-shaped
-APIs. The protected diagnostic pins four disjoint question groups and 20 scored parts,
-withholds correctness until completion, records immutable evidence and unlocks the matched
+APIs. The protected diagnostic pins five disjoint question groups and 43 scored parts,
+targets 60 minutes, includes 15 vocabulary decisions plus one narrative and one informational
+reading passage, withholds correctness until completion, records immutable evidence and unlocks the matched
 endline only after the Sprint route is mastered. Draft content still fails closed when the
 development content flag is disabled.
 

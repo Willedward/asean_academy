@@ -38,6 +38,7 @@ type EnglishDiagnosticApi = {
 };
 
 const MOCK_MINUTES = 90;
+const DIAGNOSTIC_MINUTES = 60;
 
 const defaultApi: EnglishDiagnosticApi = {
   getNextQuestion: getNextEnglishDiagnosticQuestion,
@@ -263,8 +264,9 @@ export function EnglishDiagnosticPlayer({
   }
 
   const isMock = current.session.purpose.startsWith("mock");
+  const timeLimitMinutes = isMock ? MOCK_MINUTES : DIAGNOSTIC_MINUTES;
   const minutesLeft = Math.ceil(
-    MOCK_MINUTES -
+    timeLimitMinutes -
       (now - new Date(current.session.started_at).getTime()) / 60_000,
   );
 
@@ -289,13 +291,11 @@ export function EnglishDiagnosticPlayer({
             </H1>
           </div>
           <div className="flex flex-wrap gap-2">
-            {isMock ? (
-              <Tag icon={Clock}>
-                {minutesLeft > 0
-                  ? `About ${minutesLeft} minutes left`
-                  : "The 90 minutes are up. Finish when you can."}
-              </Tag>
-            ) : null}
+            <Tag icon={Clock}>
+              {minutesLeft > 0
+                ? `About ${minutesLeft} minutes left`
+                : `The ${timeLimitMinutes} minutes are up. Finish when you can.`}
+            </Tag>
             <Tag icon={ShieldCheck}>No feedback during the form</Tag>
           </div>
         </div>

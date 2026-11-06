@@ -47,8 +47,8 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             assert c.execute("select to_regclass('public.profiles')").fetchone()[0] is None
         result = bootstrap_module.bootstrap(target, apply=True)
         assert result["questions"] == 1976
-        assert result["english_questions"] == 199
-        assert result["english_passages"] == 66
+        assert result["english_questions"] == 214
+        assert result["english_passages"] == 78
         assert result["english"]["outcome_count"] == 51
         assert result["status"] == "current"
         assert bootstrap_module.bootstrap(target, apply=False)["pending_migrations"] == 0
@@ -58,9 +58,9 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             assert c.execute("select count(*) from math_question_versions").fetchone()[0] == 2052
             assert (
                 c.execute("select count(*) from english_objective_question_versions").fetchone()[0]
-                == 199
+                == 214
             )
-            assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 66
+            assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 78
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0
             c.execute(
                 "insert into supabase_migrations.schema_migrations(version) values ('299999999999')"

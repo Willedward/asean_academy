@@ -35,7 +35,7 @@ const session = {
   band: null,
   task_scores: [],
   development_drafts: true,
-  started_at: "2026-10-30T00:00:00Z",
+  started_at: new Date().toISOString(),
   completed_at: null,
 };
 
@@ -104,6 +104,7 @@ describe("EnglishDiagnosticPlayer", () => {
       await screen.findByRole("heading", { name: "Question group 1 of 1" }),
     ).toBeInTheDocument();
     expect(screen.getByText("No feedback during the form")).toBeInTheDocument();
+    expect(screen.getByText("About 60 minutes left")).toBeInTheDocument();
     expect(screen.queryByText(/correct/i)).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("radio", { name: /B\. clear/i }));
