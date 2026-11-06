@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-529",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-529-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -99,7 +108,119 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-529-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-529-diagram-r3.svg",
+      "alt_text": "Bar chart with First week: 115, Second week: 125.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-529",
+        "outcome": "1.7",
+        "template": "bar_chart",
+        "inputs": {
+          "title": "Weekly sales",
+          "categories": [
+            "First week",
+            "Second week"
+          ],
+          "values": [
+            115,
+            125
+          ],
+          "y_min": 105,
+          "y_max": 125,
+          "tick_step": 10,
+          "y_label": "Sales",
+          "forbidden_visible_labels": [
+            "100"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "115",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "245",
+              "width": "177",
+              "height": "140"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "125",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:105",
+            "axis": "y",
+            "value": "105",
+            "position": "385",
+            "label": "105"
+          },
+          {
+            "key": "y:115",
+            "axis": "y",
+            "value": "115",
+            "position": "245",
+            "label": "115"
+          },
+          {
+            "key": "y:125",
+            "axis": "y",
+            "value": "125",
+            "position": "105",
+            "label": "125"
+          },
+          {
+            "key": "x:First week",
+            "axis": "x",
+            "value": "First week",
+            "position": "237.5",
+            "label": "First week"
+          },
+          {
+            "key": "x:Second week",
+            "axis": "x",
+            "value": "Second week",
+            "position": "532.5",
+            "label": "Second week"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "100"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 105.0,
+          "y_max": 125.0,
+          "tick_step": 10.0
+        }
+      },
+      "sha256": "181274b8a9e2a568255da08db770878cc70357614bf1778120d876b95c897386",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -113,6 +234,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

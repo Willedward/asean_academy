@@ -312,7 +312,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-514",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -324,7 +324,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-514-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -403,7 +412,152 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-514-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-514-diagram-r2.svg",
+        "alt_text": "Histogram with 2 classes; density values 5, 4.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "histogram",
+          "question_key": "s1-l4-514",
+          "outcome": "1.5",
+          "template": "histogram",
+          "inputs": {
+            "title": "Frequency-density histogram",
+            "bins": [
+              {
+                "start": 0,
+                "end": 5,
+                "height": 5
+              },
+              {
+                "start": 5,
+                "end": 15,
+                "height": 4
+              }
+            ],
+            "y_max": 5,
+            "tick_step": 1,
+            "y_label": "Density",
+            "forbidden_visible_labels": [
+              "65"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bin-0",
+              "kind": "histogram-bin",
+              "value": "5",
+              "tag": "rect",
+              "geometry": {
+                "x": "90",
+                "y": "75",
+                "width": "196.666667",
+                "height": "310"
+              }
+            },
+            {
+              "key": "bin-1",
+              "kind": "histogram-bin",
+              "value": "4",
+              "tag": "rect",
+              "geometry": {
+                "x": "286.666667",
+                "y": "137",
+                "width": "393.333333",
+                "height": "248"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:1",
+              "axis": "y",
+              "value": "1",
+              "position": "323",
+              "label": "1"
+            },
+            {
+              "key": "y:2",
+              "axis": "y",
+              "value": "2",
+              "position": "261",
+              "label": "2"
+            },
+            {
+              "key": "y:3",
+              "axis": "y",
+              "value": "3",
+              "position": "199",
+              "label": "3"
+            },
+            {
+              "key": "y:4",
+              "axis": "y",
+              "value": "4",
+              "position": "137",
+              "label": "4"
+            },
+            {
+              "key": "y:5",
+              "axis": "y",
+              "value": "5",
+              "position": "75",
+              "label": "5"
+            },
+            {
+              "key": "x:0",
+              "axis": "x",
+              "value": "0",
+              "position": "90",
+              "label": "0"
+            },
+            {
+              "key": "x:5",
+              "axis": "x",
+              "value": "5",
+              "position": "286.666667",
+              "label": "5"
+            },
+            {
+              "key": "x:15",
+              "axis": "x",
+              "value": "15",
+              "position": "680",
+              "label": "15"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "65"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "x_min": 0.0,
+            "x_max": 15.0,
+            "y_min": 0,
+            "y_max": 5.0,
+            "tick_step": 1.0
+          }
+        },
+        "sha256": "a18390d4fac70115190a838f9374542e8a2c8a883fd36ae479f875063d303fd5",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -417,12 +571,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-517",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -434,7 +588,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-517-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -494,7 +657,164 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-517-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-517-diagram-r2.svg",
+        "alt_text": "Dot diagram of 6, 8, 9, 8, 10, 8, 7.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "dot_plot",
+          "question_key": "s1-l1-517",
+          "outcome": "1.5",
+          "template": "dot_plot",
+          "inputs": {
+            "title": "Dot diagram",
+            "values": [
+              6,
+              8,
+              9,
+              8,
+              10,
+              8,
+              7
+            ],
+            "forbidden_visible_labels": [
+              "3"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "dot-0",
+              "kind": "dot",
+              "value": "6",
+              "tag": "circle",
+              "geometry": {
+                "cx": "80",
+                "cy": "357",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-1",
+              "kind": "dot",
+              "value": "8",
+              "tag": "circle",
+              "geometry": {
+                "cx": "380",
+                "cy": "357",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-2",
+              "kind": "dot",
+              "value": "9",
+              "tag": "circle",
+              "geometry": {
+                "cx": "530",
+                "cy": "357",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-3",
+              "kind": "dot",
+              "value": "8",
+              "tag": "circle",
+              "geometry": {
+                "cx": "380",
+                "cy": "323",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-4",
+              "kind": "dot",
+              "value": "10",
+              "tag": "circle",
+              "geometry": {
+                "cx": "680",
+                "cy": "357",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-5",
+              "kind": "dot",
+              "value": "8",
+              "tag": "circle",
+              "geometry": {
+                "cx": "380",
+                "cy": "289",
+                "r": "9"
+              }
+            },
+            {
+              "key": "dot-6",
+              "kind": "dot",
+              "value": "7",
+              "tag": "circle",
+              "geometry": {
+                "cx": "230",
+                "cy": "357",
+                "r": "9"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "x:6",
+              "axis": "x",
+              "value": "6",
+              "position": "80",
+              "label": "6"
+            },
+            {
+              "key": "x:7",
+              "axis": "x",
+              "value": "7",
+              "position": "230",
+              "label": "7"
+            },
+            {
+              "key": "x:8",
+              "axis": "x",
+              "value": "8",
+              "position": "380",
+              "label": "8"
+            },
+            {
+              "key": "x:9",
+              "axis": "x",
+              "value": "9",
+              "position": "530",
+              "label": "9"
+            },
+            {
+              "key": "x:10",
+              "axis": "x",
+              "value": "10",
+              "position": "680",
+              "label": "10"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "3"
+          ],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "51f0af722de3939638bfd3ee67da25a5dc53988270c0dc18af8b9e05f3e9a557",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -508,12 +828,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-527",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -525,7 +845,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-527-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -604,7 +933,60 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-527-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-527-diagram-r2.svg",
+        "alt_text": "Stem-and-leaf diagram. stem 8, leaves 1 3 4 7 8. Key: 8 | 1 means 81.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "stem_leaf",
+          "question_key": "s1-l2-527",
+          "outcome": "1.5",
+          "template": "stem_leaf",
+          "inputs": {
+            "title": "Stem-and-leaf diagram",
+            "rows": [
+              {
+                "stem": 8,
+                "leaves": [
+                  1,
+                  3,
+                  4,
+                  7,
+                  8
+                ]
+              }
+            ],
+            "key": "8 | 1 means 81"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "row-0",
+              "kind": "stem-leaf-row",
+              "value": "8|1 3 4 7 8",
+              "tag": "text",
+              "geometry": {
+                "x": "335",
+                "y": "125"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "9887805b57be376d1e0c80a5a7a6f5ba41140fe9d120e5a61e2e3b122af809dc",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -618,7 +1000,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -733,7 +1115,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-525",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -745,7 +1127,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-525-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -824,7 +1215,176 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-525-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-525-diagram-r2.svg",
+        "alt_text": "Histogram with 3 classes; frequency values 8, 10, 9.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "histogram",
+          "question_key": "s1-l3-525",
+          "outcome": "1.5",
+          "template": "histogram",
+          "inputs": {
+            "title": "Frequency histogram",
+            "bins": [
+              {
+                "start": 0,
+                "end": 10,
+                "height": 8
+              },
+              {
+                "start": 10,
+                "end": 20,
+                "height": 10
+              },
+              {
+                "start": 20,
+                "end": 30,
+                "height": 9
+              }
+            ],
+            "y_max": 10,
+            "tick_step": 2,
+            "y_label": "Frequency",
+            "forbidden_visible_labels": [
+              "19"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bin-0",
+              "kind": "histogram-bin",
+              "value": "8",
+              "tag": "rect",
+              "geometry": {
+                "x": "90",
+                "y": "137",
+                "width": "196.666667",
+                "height": "248"
+              }
+            },
+            {
+              "key": "bin-1",
+              "kind": "histogram-bin",
+              "value": "10",
+              "tag": "rect",
+              "geometry": {
+                "x": "286.666667",
+                "y": "75",
+                "width": "196.666667",
+                "height": "310"
+              }
+            },
+            {
+              "key": "bin-2",
+              "kind": "histogram-bin",
+              "value": "9",
+              "tag": "rect",
+              "geometry": {
+                "x": "483.333333",
+                "y": "106",
+                "width": "196.666667",
+                "height": "279"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:2",
+              "axis": "y",
+              "value": "2",
+              "position": "323",
+              "label": "2"
+            },
+            {
+              "key": "y:4",
+              "axis": "y",
+              "value": "4",
+              "position": "261",
+              "label": "4"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "199",
+              "label": "6"
+            },
+            {
+              "key": "y:8",
+              "axis": "y",
+              "value": "8",
+              "position": "137",
+              "label": "8"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "75",
+              "label": "10"
+            },
+            {
+              "key": "x:0",
+              "axis": "x",
+              "value": "0",
+              "position": "90",
+              "label": "0"
+            },
+            {
+              "key": "x:10",
+              "axis": "x",
+              "value": "10",
+              "position": "286.666667",
+              "label": "10"
+            },
+            {
+              "key": "x:20",
+              "axis": "x",
+              "value": "20",
+              "position": "483.333333",
+              "label": "20"
+            },
+            {
+              "key": "x:30",
+              "axis": "x",
+              "value": "30",
+              "position": "680",
+              "label": "30"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "19"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "x_min": 0.0,
+            "x_max": 30.0,
+            "y_min": 0,
+            "y_max": 10.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "32abc536f6b885929bc65a00318310cd0cafd064d1d4e8da4800050663913ce0",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -838,7 +1398,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1264,7 +1824,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-515",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1276,7 +1836,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-515-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1355,7 +1924,138 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-515-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-515-diagram-r2.svg",
+        "alt_text": "Histogram with 2 classes; frequency values 10, 60.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "histogram",
+          "question_key": "s1-l4-515",
+          "outcome": "1.7",
+          "template": "histogram",
+          "inputs": {
+            "title": "Class frequencies",
+            "bins": [
+              {
+                "start": 0,
+                "end": 5,
+                "height": 10
+              },
+              {
+                "start": 5,
+                "end": 20,
+                "height": 60
+              }
+            ],
+            "y_max": 60,
+            "tick_step": 20,
+            "y_label": "Frequency",
+            "forbidden_visible_labels": [
+              "50"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bin-0",
+              "kind": "histogram-bin",
+              "value": "10",
+              "tag": "rect",
+              "geometry": {
+                "x": "90",
+                "y": "333.333333",
+                "width": "147.5",
+                "height": "51.666667"
+              }
+            },
+            {
+              "key": "bin-1",
+              "kind": "histogram-bin",
+              "value": "60",
+              "tag": "rect",
+              "geometry": {
+                "x": "237.5",
+                "y": "75",
+                "width": "442.5",
+                "height": "310"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "281.666667",
+              "label": "20"
+            },
+            {
+              "key": "y:40",
+              "axis": "y",
+              "value": "40",
+              "position": "178.333333",
+              "label": "40"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "75",
+              "label": "60"
+            },
+            {
+              "key": "x:0",
+              "axis": "x",
+              "value": "0",
+              "position": "90",
+              "label": "0"
+            },
+            {
+              "key": "x:5",
+              "axis": "x",
+              "value": "5",
+              "position": "237.5",
+              "label": "5"
+            },
+            {
+              "key": "x:20",
+              "axis": "x",
+              "value": "20",
+              "position": "680",
+              "label": "20"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "50"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "x_min": 0.0,
+            "x_max": 20.0,
+            "y_min": 0,
+            "y_max": 60.0,
+            "tick_step": 20.0
+          }
+        },
+        "sha256": "512471fc2901e58e94e92888d412f3c0dbefd62042dac70f974082ce4874db89",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1369,24 +2069,33 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-519",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Coral Teak Bay — Science fair: misleading feature code",
+    "title": "Selectively shortened time period",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-519-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1394,7 +2103,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Coral Teak Bay dataset for Science fair: misleading feature code — Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. A symbol is doubled in both height and width to represent twice the amount. Enter the issue code."
+            "text": "Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. Records were collected from 2015 to 2024, but the line graph shows only 2022, 2023 and 2024. Enter the issue code."
           }
         ],
         "marks": 1,
@@ -1403,8 +2112,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1436,7 +2145,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\text{issue code}=4"
+                "latex": "\\text{issue code}=5"
               }
             ],
             "mark_type": "A",
@@ -1446,7 +2155,151 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-519-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-519-diagram-r2.svg",
+        "alt_text": "Line graph with 2022: 8, 2023: 12, 2024: 10.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l1-519",
+          "outcome": "1.7",
+          "template": "line_chart",
+          "inputs": {
+            "title": "Recent reported results",
+            "categories": [
+              "2022",
+              "2023",
+              "2024"
+            ],
+            "values": [
+              8,
+              12,
+              10
+            ],
+            "y_min": 0,
+            "y_max": 12,
+            "tick_step": 3,
+            "y_label": "Value",
+            "forbidden_visible_labels": [
+              "5"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "8",
+              "tag": "circle",
+              "geometry": {
+                "cx": "188.333333",
+                "cy": "198.333333",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "12",
+              "tag": "circle",
+              "geometry": {
+                "cx": "385",
+                "cy": "105",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-2",
+              "kind": "point",
+              "value": "10",
+              "tag": "circle",
+              "geometry": {
+                "cx": "581.666667",
+                "cy": "151.666667",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:3",
+              "axis": "y",
+              "value": "3",
+              "position": "315",
+              "label": "3"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "245",
+              "label": "6"
+            },
+            {
+              "key": "y:9",
+              "axis": "y",
+              "value": "9",
+              "position": "175",
+              "label": "9"
+            },
+            {
+              "key": "y:12",
+              "axis": "y",
+              "value": "12",
+              "position": "105",
+              "label": "12"
+            },
+            {
+              "key": "x:2022",
+              "axis": "x",
+              "value": "2022",
+              "position": "188.333333",
+              "label": "2022"
+            },
+            {
+              "key": "x:2023",
+              "axis": "x",
+              "value": "2023",
+              "position": "385",
+              "label": "2023"
+            },
+            {
+              "key": "x:2024",
+              "axis": "x",
+              "value": "2024",
+              "position": "581.666667",
+              "label": "2024"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "5"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 12.0,
+            "tick_step": 3.0
+          }
+        },
+        "sha256": "6b6b4d1fd62c5f37f04af6ce39b4afb5362665ea4188b4beaab8d15e76f88bbf",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1460,12 +2313,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-529",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1477,7 +2330,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-529-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1564,7 +2426,119 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-529-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-529-diagram-r3.svg",
+        "alt_text": "Bar chart with First week: 115, Second week: 125.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l2-529",
+          "outcome": "1.7",
+          "template": "bar_chart",
+          "inputs": {
+            "title": "Weekly sales",
+            "categories": [
+              "First week",
+              "Second week"
+            ],
+            "values": [
+              115,
+              125
+            ],
+            "y_min": 105,
+            "y_max": 125,
+            "tick_step": 10,
+            "y_label": "Sales",
+            "forbidden_visible_labels": [
+              "100"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "115",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "245",
+                "width": "177",
+                "height": "140"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "125",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "105",
+                "width": "177",
+                "height": "280"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:105",
+              "axis": "y",
+              "value": "105",
+              "position": "385",
+              "label": "105"
+            },
+            {
+              "key": "y:115",
+              "axis": "y",
+              "value": "115",
+              "position": "245",
+              "label": "115"
+            },
+            {
+              "key": "y:125",
+              "axis": "y",
+              "value": "125",
+              "position": "105",
+              "label": "125"
+            },
+            {
+              "key": "x:First week",
+              "axis": "x",
+              "value": "First week",
+              "position": "237.5",
+              "label": "First week"
+            },
+            {
+              "key": "x:Second week",
+              "axis": "x",
+              "value": "Second week",
+              "position": "532.5",
+              "label": "Second week"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "100"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 105.0,
+            "y_max": 125.0,
+            "tick_step": 10.0
+          }
+        },
+        "sha256": "181274b8a9e2a568255da08db770878cc70357614bf1778120d876b95c897386",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1578,7 +2552,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2004,19 +2978,28 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-528",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.7",
-    "title": "Silver Teak Bay — Orchid nursery: recover a deceptive baseline",
+    "title": "Visible difference between truncated bars",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-528-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2024,7 +3007,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Silver Teak Bay dataset for Orchid nursery: recover a deceptive baseline — A value rises from 170 to 197. A truncated chart makes this rise appear to be 60% of the first displayed bar height. Find the chart baseline."
+            "text": "The vertical axis of a bar chart is cut off at 125. The first bar reaches 170 and the second reaches 197. The difference between their displayed heights is what percentage of the first bar's displayed height?"
           }
         ],
         "marks": 3,
@@ -2033,12 +3016,20 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "125",
-          "canonical_latex": "125",
+          "canonical_answer": "60",
+          "canonical_latex": "60\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
-          "unit": null
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -2046,7 +3037,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The visible increase equals the true numerical increase."
+                "text": "Displayed height is measured upward from 125, not from zero."
               }
             ]
           },
@@ -2055,7 +3046,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set 27 equal to 60% of the first displayed height 170-b."
+                "text": "The first displayed height is 45, and the difference between displayed heights is 27."
               }
             ]
           }
@@ -2070,7 +3061,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "27=0.6(170-b)\\Rightarrow b=125"
+                "latex": "\\frac{197-170}{170-125}\\times100=60"
               }
             ],
             "mark_type": "M",
@@ -2085,7 +3076,7 @@
               },
               {
                 "type": "display_math",
-                "latex": "125"
+                "latex": "60\\%"
               }
             ],
             "mark_type": "A",
@@ -2095,7 +3086,161 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-528-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-528-diagram-r2.svg",
+        "alt_text": "Bar chart with First: 170, Second: 197.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l3-528",
+          "outcome": "1.7",
+          "template": "bar_chart",
+          "inputs": {
+            "title": "Truncated bar chart",
+            "categories": [
+              "First",
+              "Second"
+            ],
+            "values": [
+              170,
+              197
+            ],
+            "y_min": 125,
+            "y_max": 205,
+            "tick_step": 10,
+            "y_label": "Value",
+            "forbidden_visible_labels": [
+              "60"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "170",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "227.5",
+                "width": "177",
+                "height": "157.5"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "197",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "133",
+                "width": "177",
+                "height": "252"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:125",
+              "axis": "y",
+              "value": "125",
+              "position": "385",
+              "label": "125"
+            },
+            {
+              "key": "y:135",
+              "axis": "y",
+              "value": "135",
+              "position": "350",
+              "label": "135"
+            },
+            {
+              "key": "y:145",
+              "axis": "y",
+              "value": "145",
+              "position": "315",
+              "label": "145"
+            },
+            {
+              "key": "y:155",
+              "axis": "y",
+              "value": "155",
+              "position": "280",
+              "label": "155"
+            },
+            {
+              "key": "y:165",
+              "axis": "y",
+              "value": "165",
+              "position": "245",
+              "label": "165"
+            },
+            {
+              "key": "y:175",
+              "axis": "y",
+              "value": "175",
+              "position": "210",
+              "label": "175"
+            },
+            {
+              "key": "y:185",
+              "axis": "y",
+              "value": "185",
+              "position": "175",
+              "label": "185"
+            },
+            {
+              "key": "y:195",
+              "axis": "y",
+              "value": "195",
+              "position": "140",
+              "label": "195"
+            },
+            {
+              "key": "y:205",
+              "axis": "y",
+              "value": "205",
+              "position": "105",
+              "label": "205"
+            },
+            {
+              "key": "x:First",
+              "axis": "x",
+              "value": "First",
+              "position": "237.5",
+              "label": "First"
+            },
+            {
+              "key": "x:Second",
+              "axis": "x",
+              "value": "Second",
+              "position": "532.5",
+              "label": "Second"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "60"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 125.0,
+            "y_max": 205.0,
+            "tick_step": 10.0
+          }
+        },
+        "sha256": "0cb908f51027c2360099c4bbbf623b079c5d913b24e8bf5c55c957e6fdce02fb",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2109,7 +3254,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
