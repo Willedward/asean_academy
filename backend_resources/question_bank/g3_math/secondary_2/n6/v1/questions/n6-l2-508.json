@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-508",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.7",
-  "title": "Reflect a point in the axis of symmetry",
+  "title": "Reflect a root in the axis of symmetry",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n6-l2-508-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parabola has axis of symmetry x=-3. The points at x=-6 and x=q have equal y-values and lie on opposite sides of the axis. Find q."
+          "text": "The parabola has axis of symmetry x=-3. Its two roots are marked on the graph. The left root is x=-6 and the right root is x=q. Find q."
         }
       ],
       "marks": 2,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x=-b/(2a), set x=0 for the y-intercept, or reflect the input across the axis."
+              "text": "The two roots are the same horizontal distance from the axis of symmetry."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Once the axis input is known, substitute it into the original rule to find the turning value."
+              "text": "The left root -6 is 3 units left of -3, so the right root is 3 units right of -3."
             }
           ]
         }
@@ -61,12 +70,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
-            },
-            {
               "type": "display_math",
-              "latex": "q=2(-3)-(-6)=0."
+          "latex": "q-(-3)=(-3)-(-6)=3."
             }
           ],
           "mark_type": "M",
@@ -76,12 +81,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
-            },
-            {
               "type": "display_math",
-              "latex": "0"
+          "latex": "q=0."
             }
           ],
           "mark_type": "A",
@@ -91,7 +92,170 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-l2-508-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-l2-508-diagram-r3.svg",
+      "alt_text": "Parabola crossing the x-axis at -6 and 0.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "quadratic_graph",
+        "question_key": "n6-l2-508",
+        "outcome": "6.7",
+        "template": "quadratic_graph",
+        "inputs": {
+          "roots": [
+            -6,
+            0
+          ],
+          "a": 1,
+          "x_min": -8,
+          "x_max": 2,
+          "title": "Quadratic graph"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "curve",
+            "kind": "quadratic-curve",
+            "value": "1;-6;0",
+            "tag": "path",
+            "geometry": {
+              "d": "M90 60 L97.375 77.034375 L104.75 93.6375 L112.125 109.809375 L119.5 125.55 L126.875 140.859375 L134.25 155.7375 L141.625 170.184375 L149 184.2 L156.375 197.784375 L163.75 210.9375 L171.125 223.659375 L178.5 235.95 L185.875 247.809375 L193.25 259.2375 L200.625 270.234375 L208 280.8 L215.375 290.934375 L222.75 300.6375 L230.125 309.909375 L237.5 318.75 L244.875 327.159375 L252.25 335.1375 L259.625 342.684375 L267 349.8 L274.375 356.484375 L281.75 362.7375 L289.125 368.559375 L296.5 373.95 L303.875 378.909375 L311.25 383.4375 L318.625 387.534375 L326 391.2 L333.375 394.434375 L340.75 397.2375 L348.125 399.609375 L355.5 401.55 L362.875 403.059375 L370.25 404.1375 L377.625 404.784375 L385 405 L392.375 404.784375 L399.75 404.1375 L407.125 403.059375 L414.5 401.55 L421.875 399.609375 L429.25 397.2375 L436.625 394.434375 L444 391.2 L451.375 387.534375 L458.75 383.4375 L466.125 378.909375 L473.5 373.95 L480.875 368.559375 L488.25 362.7375 L495.625 356.484375 L503 349.8 L510.375 342.684375 L517.75 335.1375 L525.125 327.159375 L532.5 318.75 L539.875 309.909375 L547.25 300.6375 L554.625 290.934375 L562 280.8 L569.375 270.234375 L576.75 259.2375 L584.125 247.809375 L591.5 235.95 L598.875 223.659375 L606.25 210.9375 L613.625 197.784375 L621 184.2 L628.375 170.184375 L635.75 155.7375 L643.125 140.859375 L650.5 125.55 L657.875 109.809375 L665.25 93.6375 L672.625 77.034375 L680 60"
+            }
+          },
+          {
+            "key": "root-0",
+            "kind": "root",
+            "value": "-6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "208",
+              "cy": "280.8",
+              "r": "7"
+            }
+          },
+          {
+            "key": "root-1",
+            "kind": "root",
+            "value": "0",
+            "tag": "circle",
+            "geometry": {
+              "cx": "562",
+              "cy": "280.8",
+              "r": "7"
+            }
+          },
+          {
+            "key": "vertex",
+            "kind": "vertex",
+            "value": "-3,-9",
+            "tag": "circle",
+            "geometry": {
+              "cx": "385",
+              "cy": "405",
+              "r": "7"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-8",
+            "axis": "x",
+            "value": "-8",
+            "position": "90",
+            "label": "-8"
+          },
+          {
+            "key": "x:-7",
+            "axis": "x",
+            "value": "-7",
+            "position": "149",
+            "label": "-7"
+          },
+          {
+            "key": "x:-6",
+            "axis": "x",
+            "value": "-6",
+            "position": "208",
+            "label": "-6"
+          },
+          {
+            "key": "x:-5",
+            "axis": "x",
+            "value": "-5",
+            "position": "267",
+            "label": "-5"
+          },
+          {
+            "key": "x:-4",
+            "axis": "x",
+            "value": "-4",
+            "position": "326",
+            "label": "-4"
+          },
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "385",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "444",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "503",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "562",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "621",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "680",
+            "label": "2"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -8.0,
+          "x_max": 2.0,
+          "y_min": -9.0,
+          "y_max": 16.0
+        }
+      },
+      "sha256": "7745cd25b000f43d25f2a531dd99bc9408e3f14c20562248b09710d132cd5b55",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +269,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
