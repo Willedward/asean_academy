@@ -4074,6 +4074,8 @@ export interface components {
         EnglishDiagnosticNextResponse: {
             /** Estimated Minutes */
             estimated_minutes?: number | null;
+            /** Expected Part Count */
+            expected_part_count?: number | null;
             /** Message */
             message: string;
             /** Purpose */

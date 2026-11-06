@@ -19,6 +19,7 @@ TASK_RECOMMENDATIONS = {
 
 MOCK_FORMS = {"mock_a": "english-mock-sec3-a-v1", "mock_b": "english-mock-sec3-b-v1"}
 MOCK_MINUTES = 90
+DIAGNOSTIC_MINUTES = 60
 
 
 class EnglishDiagnosticService:
@@ -74,11 +75,12 @@ class EnglishDiagnosticService:
                 "purpose": "baseline",
                 "title": baseline_form.title,
                 "message": (
-                    "Complete 20 objective parts independently. Feedback remains hidden "
-                    "until the full form is complete."
+                    f"Complete {baseline_form.expected_scored_part_count} objective parts "
+                    "independently. Feedback remains hidden until the full form is complete."
                 ),
-                "estimated_minutes": 25,
+                "estimated_minutes": DIAGNOSTIC_MINUTES,
                 "question_count": len(baseline_form.question_keys),
+                "expected_part_count": baseline_form.expected_scored_part_count,
             }
         if baseline["status"] == "active":
             return {
@@ -87,6 +89,8 @@ class EnglishDiagnosticService:
                 "session_id": baseline["session_id"],
                 "title": "Resume your English baseline",
                 "message": "Your completed question groups are saved.",
+                "estimated_minutes": DIAGNOSTIC_MINUTES,
+                "expected_part_count": baseline["expected_part_count"],
             }
 
         endline = self.repository.latest(self.learner_id, "endline")
@@ -98,6 +102,8 @@ class EnglishDiagnosticService:
                     "session_id": endline["session_id"],
                     "title": "Resume your English endline",
                     "message": "Your completed question groups are saved.",
+                    "estimated_minutes": DIAGNOSTIC_MINUTES,
+                    "expected_part_count": endline["expected_part_count"],
                 }
             return {
                 "status": "completed",
@@ -131,11 +137,12 @@ class EnglishDiagnosticService:
             "purpose": "endline",
             "title": endline_form.title,
             "message": (
-                "Complete the matched 20-part form independently. Results appear only after "
-                "the full form is complete."
+                f"Complete the matched {endline_form.expected_scored_part_count}-part form "
+                "independently. Results appear only after the full form is complete."
             ),
-            "estimated_minutes": 25,
+            "estimated_minutes": DIAGNOSTIC_MINUTES,
             "question_count": len(endline_form.question_keys),
+            "expected_part_count": endline_form.expected_scored_part_count,
         }
 
     def create_session(self, *, expected_purpose: str | None, idempotency_key: str) -> dict:

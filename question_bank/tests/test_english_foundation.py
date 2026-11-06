@@ -40,8 +40,8 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert len(report.catalogue.modules) == 10
     assert sum(len(module.lessons) for module in report.catalogue.modules) == 51
     assert len(report.lessons) == 51
-    assert len(report.passages) == 66
-    assert len(report.questions) == 199
+    assert len(report.passages) == 78
+    assert len(report.questions) == 214
     assert report.exam_profile is not None
     assert report.exam_profile.profile_key == "asean-english-sec3-id-reported-v1"
     assert set(report.exam_profile.excluded_task_types) == {
@@ -125,20 +125,21 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     assert not report.issues
 
 
-def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(english_root):
+def test_protected_english_forms_pin_matched_disjoint_sixty_minute_blueprints(english_root):
     report = validate_english_foundation(english_root)
     questions = {question.stable_key: question for question in report.questions}
+    passages = {passage.stable_key: passage for passage in report.passages}
     expected = {
         "baseline": (
-            ["ev-l5-003", "eb-l1-003", "eo-l5-003", "er-l5-005"],
+            ["ev-l5-201", "eb-l5-201", "eo-l5-201", "er-l5-201", "er-l5-204"],
             "baseline_diagnostic",
         ),
         "endline": (
-            ["ev-l5-004", "eb-l1-004", "eo-l5-004", "er-l5-006"],
+            ["ev-l5-202", "eb-l5-202", "eo-l5-202", "er-l5-202", "er-l5-205"],
             "endline_diagnostic",
         ),
         "endline_reserve": (
-            ["ev-l5-005", "eb-l1-005", "eo-l5-005", "er-l5-007"],
+            ["ev-l5-203", "eb-l5-203", "eo-l5-203", "er-l5-203", "er-l5-206"],
             "protected_reserve",
         ),
     }
@@ -156,15 +157,34 @@ def test_protected_english_forms_pin_matched_disjoint_twenty_part_blueprints(eng
         assert not form.tutoring_enabled
         assert form.feedback_timing == "after_form"
         assert form.question_keys == question_keys
-        assert sum(len(question.parts) for question in selected) == 20
-        assert {
-            question.question_type: len(question.parts) for question in selected
-        } == form.task_part_distribution
+        assert sum(len(question.parts) for question in selected) == 43
+        assert form.task_part_distribution == {
+            "vocabulary_in_context": 15,
+            "banked_cloze": 8,
+            "open_cloze": 8,
+            "reading_comprehension": 12,
+        }
+        actual_distribution = {
+            task_type: sum(
+                len(question.parts)
+                for question in selected
+                if question.question_type == task_type
+            )
+            for task_type in form.task_part_distribution
+        }
+        assert actual_distribution == form.task_part_distribution
+        reading = [
+            question for question in selected if question.question_type == "reading_comprehension"
+        ]
+        assert {passages[question.passage_ref.stable_key].text_type for question in reading} == {
+            "informational",
+            "narrative",
+        }
         assert {question.exposure_pool for question in selected} == {exposure_pool}
         assert selected_keys.isdisjoint(form.question_keys)
         selected_keys.update(form.question_keys)
 
-    assert len(selected_keys) == 12
+    assert len(selected_keys) == 15
 
 
 def test_e1_checkpoint_forms_have_reciprocal_disjoint_mastery_scope(english_root):
@@ -1929,6 +1949,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eb-b012",
         "english-eb-b013",
         "english-eb-b014",
+            "english-eb-b015",
         "english-eg-b001",
         "english-eg-b002",
             "english-eg-b003",
@@ -1953,6 +1974,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-eo-b010",
         "english-eo-b011",
         "english-eo-b012",
+            "english-eo-b013",
         "english-er-b001",
         "english-er-b002",
         "english-er-b003",
@@ -1967,6 +1989,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-er-b012",
         "english-er-b013",
         "english-er-b014",
+            "english-er-b015",
         "english-ev-b001",
         "english-ev-b002",
         "english-ev-b003",
@@ -1984,6 +2007,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ev-b015",
         "english-ev-b016",
         "english-ev-b017",
+            "english-ev-b018",
         "english-ex-b001",
         "english-ex-b002",
         "english-ex-b003",
@@ -2024,7 +2048,7 @@ def test_english_pilot_has_complete_reviewable_batches(english_root):
         "english-ex-b038",
         "english-ex-b039",
     ]
-    assert len(report.questions) == 199
+    assert len(report.questions) == 214
     assert not report.duplicates
 
 

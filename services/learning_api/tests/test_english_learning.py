@@ -911,11 +911,12 @@ def test_protected_english_baseline_routes_scores_and_withholds_early_feedback()
         "result_session_id": None,
         "title": "English Core baseline form A",
         "message": (
-            "Complete 20 objective parts independently. Feedback remains hidden until the "
+            "Complete 43 objective parts independently. Feedback remains hidden until the "
             "full form is complete."
         ),
-        "estimated_minutes": 25,
-        "question_count": 4,
+        "estimated_minutes": 60,
+        "question_count": 5,
+        "expected_part_count": 43,
     }
 
     created = request(
@@ -928,16 +929,17 @@ def test_protected_english_baseline_routes_scores_and_withholds_early_feedback()
     assert created.status_code == 201, created.text
     body = created.json()
     assert body["form_key"] == "english-baseline-sec3-id-v1"
-    assert body["expected_part_count"] == 20
+    assert body["expected_part_count"] == 43
     assert body["score"] is None
     assert body["task_scores"] == []
 
     attempts = complete_diagnostic(app, body["session_id"], "english-baseline-answer")
     assert [question["stable_key"] for question, _ in attempts] == [
-        "ev-l5-003",
-        "eb-l1-003",
-        "eo-l5-003",
-        "er-l5-005",
+        "ev-l5-201",
+        "eb-l5-201",
+        "eo-l5-201",
+        "er-l5-201",
+        "er-l5-204",
     ]
     for question, attempt in attempts[:-1]:
         encoded = json.dumps(question)
@@ -952,8 +954,8 @@ def test_protected_english_baseline_routes_scores_and_withholds_early_feedback()
 
     final = attempts[-1][1]
     assert final["diagnostic_completed"] is True
-    assert final["session"]["correct_parts"] == 20
-    assert final["session"]["total_parts"] == 20
+    assert final["session"]["correct_parts"] == 43
+    assert final["session"]["total_parts"] == 43
     assert final["session"]["percentage"] == 100
     assert final["session"]["band"] == "secure"
     assert len(final["session"]["task_scores"]) == 4
@@ -1028,7 +1030,7 @@ def test_english_endline_unlocks_only_after_sprint_mastery_and_uses_disjoint_for
         "GET",
         f"/api/v1/english/diagnostic-sessions/{endline.json()['session_id']}/next",
     ).json()["question"]
-    assert first["stable_key"] == "ev-l5-004"
+    assert first["stable_key"] == "ev-l5-202"
     assert first["stable_key"] not in baseline_questions
 
 
