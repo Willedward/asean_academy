@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-519 — Coral Teak Bay — Science fair: misleading feature code
+## s1-l1-519 — Selectively shortened time period
 
 [Open this question in the HTML preview](index.html#s1-l1-519)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-528 — Silver Teak Bay — Orchid nursery: recover a deceptive baseline
+## s1-l3-528 — Visible difference between truncated bars
 
 [Open this question in the HTML preview](index.html#s1-l3-528)
 
