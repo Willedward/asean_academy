@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## s1-l1-501 — Amber Banyan Bay — River clean-up: two-class estimated mean
+## s1-l1-501 — Estimated mean of two equal groups
 
 [Open this question in the HTML preview](index.html#s1-l1-501)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-501 — Azure Banyan Bay — River clean-up: grouped midpoint calculation
+## s1-l2-501 — Estimated mean from three class midpoints
 
 [Open this question in the HTML preview](index.html#s1-l2-501)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-502 — Bronze Banyan Bay — Batik cooperative: stem-and-leaf range
+## s1-l2-502 — Range from a 40s stem-and-leaf row
 
 [Open this question in the HTML preview](index.html#s1-l2-502)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-501 — Coral Banyan Bay — River clean-up: missing grouped frequency
+## s1-l3-501 — Recover a missing grouped frequency
 
 [Open this question in the HTML preview](index.html#s1-l3-501)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-502 — Golden Banyan Bay — Batik cooperative: dot frequency
+## s1-l1-502 — Count a repeated value on a dot diagram
 
 [Open this question in the HTML preview](index.html#s1-l1-502)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-503 — Indigo Banyan Bay — Angklung ensemble: stem-and-leaf range
+## s1-l2-503 — Spread represented by a 50s stem-and-leaf row
 
 [Open this question in the HTML preview](index.html#s1-l2-503)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-502 — Jade Banyan Bay — Batik cooperative: histogram interval total
+## s1-l3-502 — Total frequency across two histogram intervals
 
 [Open this question in the HTML preview](index.html#s1-l3-502)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-502 — Lilac Banyan Bay — Batik cooperative: unequal-width histogram
+## s1-l4-502 — Frequency from unequal-width histogram bars
 
 [Open this question in the HTML preview](index.html#s1-l4-502)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-503 — Silver Banyan Bay — Mekong ecology club: representation purpose
+## s1-l1-503 — Choose a display for continuous grouped data
 
 [Open this question in the HTML preview](index.html#s1-l1-503)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-507 — Emerald Cedar Bay — Bamboo design lab: calculate the mean
+## s1-l2-507 — Mean of five consecutive odd values
 
 [Open this question in the HTML preview](index.html#s1-l2-507)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-504 — Golden Cedar Bay — Orchid nursery: apparent increase from a truncated baseline
+## s1-l3-504 — Apparent increase on a truncated axis
 
 [Open this question in the HTML preview](index.html#s1-l3-504)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-504 — Indigo Cedar Bay — Orchid nursery: diagnose unequal histogram widths
+## s1-l4-504 — Compare frequencies in unequal-width classes
 
 [Open this question in the HTML preview](index.html#s1-l4-504)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-504 — Jade Cedar Bay — Orchid nursery: misleading feature code
+## s1-l1-504 — Identify a truncated vertical axis
 
 [Open this question in the HTML preview](index.html#s1-l1-504)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-508 — Lilac Cedar Bay — Coral monitoring team: calculate the mean
+## s1-l2-508 — Mean of five consecutive even values
 
 [Open this question in the HTML preview](index.html#s1-l2-508)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-505 — Silver Cedar Bay — Bamboo design lab: missing value from a mean
+## s1-l3-505 — Find a missing value from the mean
 
 [Open this question in the HTML preview](index.html#s1-l3-505)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-505 — Violet Cedar Bay — Bamboo design lab: outlier changes the mean
+## s1-l4-505 — Change in mean after adding an outlier
 
 [Open this question in the HTML preview](index.html#s1-l4-505)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-505 — Amber Fern Bay — Komodo field camp: typical value with an outlier
+## s1-l1-505 — Choose a typical value when none repeats
 
 [Open this question in the HTML preview](index.html#s1-l1-505)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-509 — Azure Fern Bay — Komodo field camp: most common category
+## s1-l2-509 — Choose the measure for the most common shoe size
 
 [Open this question in the HTML preview](index.html#s1-l2-509)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-506 — Coral Fern Bay — Komodo field camp: use every balanced observation
+## s1-l4-506 — Choose a centre for balanced observations
 
 [Open this question in the HTML preview](index.html#s1-l4-506)
 
