@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-516",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.10",
-  "title": "Change the subject of an area formula",
+  "title": "Make v the subject of the kinetic energy formula",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,15 @@
         },
         {
           "type": "inline_math",
-          "latex": "A=\\frac{6x}{2}+7"
+          "latex": "E=\\frac{1}{2}mv^{2}"
+        },
+        {
+          "type": "text",
+          "text": " with "
+        },
+        {
+          "type": "inline_math",
+          "latex": "v>0"
         },
         {
           "type": "text",
@@ -32,7 +40,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "x"
+          "latex": "v"
         },
         {
           "type": "text",
@@ -45,11 +53,11 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(A-7)/3",
-        "canonical_latex": "\\frac{A-7}{3}",
+        "canonical_expression": "sqrt(2*E/m)",
+        "canonical_latex": "\\sqrt{\\frac{2E}{m}}",
         "variables": [
-          "A",
-          "x"
+          "E",
+          "m"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
@@ -61,7 +69,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Identify the operations acting on the required subject and preserve equality."
+              "text": "The subject is squared, so isolate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "v^2"
+            },
+            {
+              "type": "text",
+              "text": " first and take the square root last."
             }
           ]
         },
@@ -70,7 +86,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+              "text": "Multiply both sides by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": ", then divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "m"
+            },
+            {
+              "type": "text",
+              "text": ", before taking the root."
             }
           ]
         }
@@ -81,11 +113,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Multiply by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": " and divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "m"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "A-7=\\frac{6x}{2}=3x\\Rightarrow x=\\frac{A-7}{3}"
+              "latex": "E=\\frac12mv^2\\Rightarrow2E=mv^2\\Rightarrow v^2=\\frac{2E}{m}"
             }
           ],
           "mark_type": "M",
@@ -96,11 +144,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Take the positive square root because "
+            },
+            {
+              "type": "inline_math",
+              "latex": "v>0"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{A-7}{3}"
+              "latex": "v=\\sqrt{\\frac{2E}{m}}"
             }
           ],
           "mark_type": "A",

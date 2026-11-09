@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-513",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,9 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-6 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +56,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "The common denominator is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-6)^2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +73,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Multiply the top and bottom of the first fraction by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-6)"
+            },
+            {
+              "type": "text",
+              "text": ", then subtract the numerators."
             }
           ]
         }
@@ -74,11 +92,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Write both fractions over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-6)^2"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{2(x-6)-2}{(x-6)^2}=\\frac{2x-14}{(x-6)^2}"
+              "latex": "\\frac{2(x-6)}{(x-6)^2}-\\frac{2}{(x-6)^2}=\\frac{2x-12-2}{(x-6)^2}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +115,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Collect like terms: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{2x-14}{(x-6)^2}"
+              "latex": "\\frac{2x-14}{(x-6)^2},\\quad x\\neq6"
             }
           ],
           "mark_type": "A",
