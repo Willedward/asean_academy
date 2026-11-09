@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-951",
   "bank_key": "g3-sec2-s1-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,11 @@
   "stem": [
     {
       "type": "text",
-      "text": "A stem-and-leaf diagram lists these values. 1 | 2 4 7; 2 | 0 0 5 8; 3 | 1 6. The key is 2 | 5 = 25."
+      "text": "The stem-and-leaf diagram shows a set of values."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-951-diagram"
     }
   ],
   "parts": [
@@ -56,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count 25, 28, 31 and 36."
+              "text": "Count the entries that are 25 or more, working through the rows from the top."
             }
           ]
         }
@@ -88,7 +92,94 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-951-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-951-diagram-r2.svg",
+      "alt_text": "Stem-and-leaf diagram. stem 1, leaves 2 4 7; stem 2, leaves 0 0 5 8; stem 3, leaves 1 6. Key: 2 | 5 = 25.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "stem_leaf",
+        "question_key": "s1-l3-951",
+        "outcome": "1.5",
+        "template": "stem_leaf",
+        "inputs": {
+          "rows": [
+            {
+              "stem": 1,
+              "leaves": [
+                2,
+                4,
+                7
+              ]
+            },
+            {
+              "stem": 2,
+              "leaves": [
+                0,
+                0,
+                5,
+                8
+              ]
+            },
+            {
+              "stem": 3,
+              "leaves": [
+                1,
+                6
+              ]
+            }
+          ],
+          "key": "2 | 5 = 25",
+          "title": "Stem-and-leaf diagram"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "row-0",
+            "kind": "stem-leaf-row",
+            "value": "1|2 4 7",
+            "tag": "text",
+            "geometry": {
+              "x": "335",
+              "y": "125"
+            }
+          },
+          {
+            "key": "row-1",
+            "kind": "stem-leaf-row",
+            "value": "2|0 0 5 8",
+            "tag": "text",
+            "geometry": {
+              "x": "335",
+              "y": "183"
+            }
+          },
+          {
+            "key": "row-2",
+            "kind": "stem-leaf-row",
+            "value": "3|1 6",
+            "tag": "text",
+            "geometry": {
+              "x": "335",
+              "y": "241"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "6a9bf5231f7a4f51fb9c72b5ae283c34091e7564893211291f4e1a2b3348cee4",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -102,6 +193,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
