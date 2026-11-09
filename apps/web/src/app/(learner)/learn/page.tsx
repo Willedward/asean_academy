@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EnrolledCourseMaps } from "@/components/enrolled-course-maps";
 import { LearnerHeader } from "@/components/learner-header";
 import { LearningHomePanel } from "@/components/learning-home-panel";
@@ -15,6 +16,8 @@ import {
   getServerLearningHome,
   ServerLearningApiError,
 } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "Learn" };
 
 function EstablishedLearningPage() {
   return (

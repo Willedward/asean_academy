@@ -10,7 +10,7 @@ import {
   Send,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   Button,
@@ -36,6 +36,7 @@ import {
   type EnglishHintResponse,
   type EnglishNextQuestionResponse,
 } from "@/lib/api/english";
+import { useFocusOnChange } from "@/beta-kit/components/use-focus";
 import { cn } from "@/lib/utils";
 
 type EnglishPracticeApi = {
@@ -197,6 +198,18 @@ export function EnglishPracticePlayer({
   const [activePassageParagraph, setActivePassageParagraph] = useState(1);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const headingRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+  // These controls disable or unmount during the request, which would drop focus to the body.
+  useFocusOnChange(current, () => headingRef.current, { skipFirst: true });
+  useFocusOnChange(hint, () =>
+    document.querySelector<HTMLElement>("[data-hint-feedback]"),
+  );
+  useFocusOnChange(attempt, () =>
+    document.querySelector<HTMLElement>("[data-attempt-feedback]"),
+  );
+  useFocusOnChange(error, () => errorRef.current);
 
   async function loadQuestion() {
     setBusy(true);
@@ -391,10 +404,12 @@ export function EnglishPracticePlayer({
       <Card tone="success" className="items-center gap-4 py-10 text-center">
         <CheckCircle2 size={48} className="text-ns-success" aria-hidden />
         <Eyebrow>PRACTICE COMPLETE</Eyebrow>
-        <H1>
-          {current.session.correct_count} of {current.session.question_count}{" "}
-          correct
-        </H1>
+        <div ref={headingRef} tabIndex={-1} className={focusRing}>
+          <H1>
+            {current.session.correct_count} of {current.session.question_count}{" "}
+            correct
+          </H1>
+        </div>
         <Muted className="max-w-xl text-base leading-7">
           {retryNeeded
             ? "Review the feedback and return to this lesson when an exit ticket appears in your retry queue."
@@ -548,9 +563,11 @@ export function EnglishPracticePlayer({
                 ? "RETRY REVIEW"
                 : "ENGLISH PRACTICE"}
             </Eyebrow>
-            <H1>
-              Question {position} of {current.session.question_count}
-            </H1>
+            <div ref={headingRef} tabIndex={-1} className={focusRing}>
+              <H1>
+                Question {position} of {current.session.question_count}
+              </H1>
+            </div>
           </div>
           <div className="flex gap-2">
             <Tag>Difficulty {question.difficulty}</Tag>
@@ -749,18 +766,22 @@ export function EnglishPracticePlayer({
               </Muted>
             ) : null}
             {hint ? (
-              <Callout tone="amber" icon={Lightbulb}>
-                <strong>Gap hints</strong>
-                <ol className="m-0 space-y-1 pl-5">
-                  {hint.parts.map((partHint, index) => (
-                    <li key={index}>{partHint}</li>
-                  ))}
-                </ol>
-              </Callout>
+              <div data-hint-feedback tabIndex={-1} className={focusRing}>
+                <Callout tone="amber" icon={Lightbulb}>
+                  <strong>Gap hints</strong>
+                  <ol className="m-0 space-y-1 pl-5">
+                    {hint.parts.map((partHint, index) => (
+                      <li key={index}>{partHint}</li>
+                    ))}
+                  </ol>
+                </Callout>
+              </div>
             ) : null}
             {attempt ? (
               <ol
-                className="m-0 grid gap-3 p-0 sm:grid-cols-2"
+                data-attempt-feedback
+                tabIndex={-1}
+                className={cn("m-0 grid gap-3 p-0 sm:grid-cols-2", focusRing)}
                 aria-label="Passage feedback"
               >
                 {attempt.parts.map((result) => (
@@ -856,20 +877,28 @@ export function EnglishPracticePlayer({
                     </div>
                   )}
                   {hint?.parts[part.position - 1] ? (
-                    <Callout tone="amber" icon={Lightbulb}>
-                      <span>{hint.parts[part.position - 1]}</span>
-                    </Callout>
+                    <div data-hint-feedback tabIndex={-1} className={focusRing}>
+                      <Callout tone="amber" icon={Lightbulb}>
+                        <span>{hint.parts[part.position - 1]}</span>
+                      </Callout>
+                    </div>
                   ) : null}
                   {result ? (
-                    <Callout
-                      tone={result.correct ? "success" : "amber"}
-                      icon={result.correct ? CheckCircle2 : AlertTriangle}
+                    <div
+                      data-attempt-feedback
+                      tabIndex={-1}
+                      className={focusRing}
                     >
-                      <strong>
-                        {result.correct ? "Correct" : "Check the evidence"}
-                      </strong>
-                      <span>{result.feedback}</span>
-                    </Callout>
+                      <Callout
+                        tone={result.correct ? "success" : "amber"}
+                        icon={result.correct ? CheckCircle2 : AlertTriangle}
+                      >
+                        <strong>
+                          {result.correct ? "Correct" : "Check the evidence"}
+                        </strong>
+                        <span>{result.feedback}</span>
+                      </Callout>
+                    </div>
                   ) : null}
                 </fieldset>
               );
@@ -937,9 +966,11 @@ export function EnglishPracticePlayer({
       ) : null}
 
       {error ? (
-        <Callout tone="amber" icon={AlertTriangle}>
-          <span>{error}</span>
-        </Callout>
+        <div ref={errorRef} tabIndex={-1} className={focusRing}>
+          <Callout tone="amber" icon={AlertTriangle}>
+            <span>{error}</span>
+          </Callout>
+        </div>
       ) : null}
 
       <div className="flex flex-wrap justify-end gap-3">

@@ -18,6 +18,7 @@ import { Hornbill } from "../components/hornbill";
 import { LessonRow } from "../components/lesson-row";
 import {
   Button,
+  focusRingOnDark,
   Callout,
   Card,
   Divider,
@@ -142,7 +143,12 @@ export function CoreLearningDashboard({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Button href={actionHref} variant="gold" iconRight={ArrowRight}>
+          <Button
+            href={actionHref}
+            variant="gold"
+            iconRight={ArrowRight}
+            className={focusRingOnDark}
+          >
             {actionLabel}
           </Button>
           {home.next_retry_due_at ? (

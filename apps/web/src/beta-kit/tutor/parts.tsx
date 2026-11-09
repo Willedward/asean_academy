@@ -122,7 +122,7 @@ export function QuestionPin({
     "flex w-full items-center gap-2.5 rounded-[14px] border border-ns-line bg-ns-sunken px-3 py-2.5 text-ns-ink no-underline",
     focusRing,
   );
-  const aria = "Show the question";
+  const aria = `${label}: show the question`;
   return href ? (
     <Link href={href} aria-label={aria} className={classes}>
       {inner}
@@ -519,7 +519,7 @@ export function Composer({
           }
         }}
         className={cn(
-          "max-h-32 min-h-12 grow resize-none rounded-3xl border-[1.5px] border-ns-line-strong bg-ns-raised px-4 py-3 text-base leading-[22px] text-ns-ink placeholder:text-ns-muted/80 disabled:bg-ns-sunken disabled:opacity-60",
+          "max-h-32 min-h-12 grow resize-none rounded-3xl border-[1.5px] border-ns-line-strong bg-ns-raised px-4 py-3 text-base leading-[22px] text-ns-ink placeholder:text-ns-muted disabled:bg-ns-sunken disabled:opacity-60",
           focusRing,
         )}
       />

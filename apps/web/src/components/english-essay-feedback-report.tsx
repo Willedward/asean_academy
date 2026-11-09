@@ -455,7 +455,7 @@ export function EnglishEssayFeedbackReport({
                           {RATING_OPTIONS.map((option) => (
                             <label
                               key={option.value}
-                              className="cursor-pointer rounded-full border border-ns-line-strong px-4 py-2 text-sm font-semibold text-ns-ink has-[:checked]:border-ns-brand has-[:checked]:bg-ns-brand-soft"
+                              className="cursor-pointer rounded-full border border-ns-line-strong px-4 py-2 text-sm font-semibold text-ns-ink has-[:checked]:border-2 has-[:checked]:border-ns-brand has-[:checked]:bg-ns-brand-soft has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ns-success"
                             >
                               <input
                                 type="radio"

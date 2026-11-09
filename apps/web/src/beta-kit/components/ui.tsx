@@ -15,6 +15,9 @@ type IconType = ComponentType<{
 export const focusRing =
   "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ns-success";
 
+/** Focus outline for controls on the dark ink cards. */
+export const focusRingOnDark = "focus-visible:outline-ns-gold";
+
 /* ------------------------------------------------------------------ */
 /* Button                                                              */
 /* ------------------------------------------------------------------ */
@@ -208,15 +211,21 @@ export function Tag({
 export function Eyebrow({
   children,
   muted,
+  onDark,
 }: {
   children: ReactNode;
   muted?: boolean;
+  onDark?: boolean;
 }) {
   return (
     <div
       className={cn(
         "text-xs font-semibold tracking-[0.02em]",
-        muted ? "text-ns-muted" : "text-ns-amber-text",
+        onDark
+          ? "text-ns-gold"
+          : muted
+            ? "text-ns-muted"
+            : "text-ns-amber-text",
       )}
     >
       {children}
@@ -383,17 +392,26 @@ export function ProgressBar({
   value,
   pct,
   fill = "amber",
+  onDark,
 }: {
   label: string;
   value: string;
   pct: number;
   fill?: "amber" | "success";
+  onDark?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between gap-3 text-sm leading-5">
         <span className="font-semibold">{label}</span>
-        <span className="text-ns-muted tabular-nums">{value}</span>
+        <span
+          className={cn(
+            "tabular-nums",
+            onDark ? "text-ns-on-dark-muted" : "text-ns-muted",
+          )}
+        >
+          {value}
+        </span>
       </div>
       <div
         role="progressbar"
@@ -578,25 +596,4 @@ export function Sup({ base, exp }: { base: ReactNode; exp: ReactNode }) {
   );
 }
 
-/** Bottom sheet dialog used on phones (centred card on desktop). */
-export function Sheet({
-  titleId,
-  children,
-}: {
-  titleId: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-ns-dark/45 lg:items-center">
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        className="flex w-full max-w-[520px] flex-col gap-4 rounded-t-3xl bg-ns-raised px-5 pt-3 pb-7 shadow-ns-lg lg:rounded-3xl lg:pt-6"
-      >
-        <span className="h-1 w-10 self-center rounded-full bg-ns-line lg:hidden" />
-        {children}
-      </div>
-    </div>
-  );
-}
+export { Sheet } from "./sheet";

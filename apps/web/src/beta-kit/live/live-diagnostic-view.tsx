@@ -368,15 +368,19 @@ export function LiveDiagnosticPlayer({
                   maxLength={500}
                   value={currentAnswers[String(part.position)] ?? ""}
                   placeholder={part.input_placeholder}
+                  aria-describedby={`${inputId}-help`}
                   onChange={(event) =>
                     onAnswerChange(part.position, event.target.value)
                   }
                   className={cn(
-                    "h-[52px] w-full rounded-lg border-[1.5px] border-ns-line-strong bg-ns-raised px-4 font-ns-math text-xl text-ns-ink placeholder:text-ns-muted/80",
+                    "h-[52px] w-full rounded-lg border-[1.5px] border-ns-line-strong bg-ns-raised px-4 font-ns-math text-xl text-ns-ink placeholder:text-ns-muted",
                     focusRing,
                   )}
                 />
-                <span className="text-[13px] leading-[18px] text-ns-muted">
+                <span
+                  id={`${inputId}-help`}
+                  className="text-[13px] leading-[18px] text-ns-muted"
+                >
                   {part.response_type === "numeric"
                     ? "Enter a number."
                     : "Enter an algebraic expression using standard keyboard notation."}
@@ -482,7 +486,7 @@ export function LiveDiagnosticResult({
           CHECK COMPLETE
         </Tag>
         <div className="flex flex-col gap-2">
-          <Eyebrow>
+          <Eyebrow onDark>
             {result.purpose.toUpperCase()} MATHEMATICS READINESS
           </Eyebrow>
           <H1>{resultLabels[result.band]}</H1>
@@ -498,6 +502,7 @@ export function LiveDiagnosticResult({
             value={`${result.percentage}%`}
             pct={result.percentage}
             fill="success"
+            onDark
           />
         </div>
       </Card>

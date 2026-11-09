@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { DiagnosticResultPanel } from "@/components/diagnostic-result";
@@ -5,6 +6,8 @@ import { LearnerHeader } from "@/components/learner-header";
 import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
+
+export const metadata: Metadata = { title: "Readiness check result" };
 
 function EstablishedDiagnosticResultPage({ sessionId }: { sessionId: string }) {
   return (

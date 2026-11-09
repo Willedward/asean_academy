@@ -1,6 +1,8 @@
 import katex from "katex";
 import { Fragment } from "react";
 
+import { DisplayMath } from "@/components/display-math";
+
 export type ContentBlock =
   | { type: "text"; text: string }
   | { type: "inline_math"; latex: string }
@@ -27,12 +29,10 @@ function MathExpression({
     strict: "warn",
     trust: false,
   });
+  if (displayMode) return <DisplayMath markup={markup} />;
   return (
     <span
-      aria-label={latex}
-      className={
-        displayMode ? "my-3 block overflow-x-auto py-1" : "inline-block"
-      }
+      className="inline-block"
       dangerouslySetInnerHTML={{ __html: markup }}
     />
   );

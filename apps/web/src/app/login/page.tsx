@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ArrowLeft, GraduationCap, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +14,8 @@ import {
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
 
 import { signInWithGoogle } from "./actions";
+
+export const metadata: Metadata = { title: "Sign in" };
 
 const errorMessages: Record<string, string> = {
   auth_callback_failed:

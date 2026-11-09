@@ -21,6 +21,7 @@
   --color-ns-line: #e4e1d8;
   --color-ns-line-strong: #7f9292;
   --color-ns-ink: #0f3d40;
+  --color-ns-brand: #0f3d40;
   --color-ns-muted: #4e6667;
   --color-ns-on-brand: #fbfaf7;
   --color-ns-brand-soft: #e3ecea;
@@ -111,4 +112,15 @@
    colour back to the utility classes. */
 .ns-root a[class] {
   color: revert-layer;
+}
+
+/* Keep keyboard focus clear of the phone shell's sticky header and fixed bottom navigation. */
+@media (width < 64rem) {
+  html:has([data-ns-sticky-header]) {
+    scroll-padding-top: 76px;
+  }
+
+  html:has([data-ns-bottom-nav]) {
+    scroll-padding-bottom: 88px;
+  }
 }

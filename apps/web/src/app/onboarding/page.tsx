@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CircleCheck, LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +22,8 @@ import {
   getServerLearner,
   ServerLearningApiError,
 } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "Activate access" };
 
 function EstablishedUnavailable() {
   return (

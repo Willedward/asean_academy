@@ -45,7 +45,7 @@ export function ReportReplySheet({
   const [note, setNote] = useState("");
   if (sent) {
     return (
-      <Sheet titleId={titleId}>
+      <Sheet titleId={titleId} onClose={onCancel}>
         <div className="flex flex-col items-center gap-2 text-center">
           <Hornbill size={88} mood="happy" branch={false} />
           <h2 id={titleId} className="m-0 text-xl leading-7 font-semibold">
@@ -60,7 +60,7 @@ export function ReportReplySheet({
     );
   }
   return (
-    <Sheet titleId={titleId}>
+    <Sheet titleId={titleId} onClose={onCancel}>
       <h2 id={titleId} className="m-0 text-xl leading-7 font-semibold">
         Report this reply
       </h2>
@@ -133,7 +133,7 @@ export interface TutorPlanSheetProps {
 export function TutorPlanSheet({ onSendToParent, parentSent, onClose, closeHref, plansHref }: TutorPlanSheetProps) {
   const titleId = useId();
   return (
-    <Sheet titleId={titleId}>
+    <Sheet titleId={titleId} onClose={onClose}>
       <div className="flex items-center gap-3">
         <Hornbill size={80} mood="happy" outfit="cap" branch={false} label="Hornbill with a graduation cap" />
         <div className="flex min-w-0 grow flex-col gap-1">

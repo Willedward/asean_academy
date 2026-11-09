@@ -12,12 +12,13 @@
  * TutorAnswerLocked.m, TutorSolution.m, TutorSolution.d, TutorLowQuota.m,
  * TutorOutForToday.m, TutorOffline.m
  */
-import { useEffect, useId, useRef, type ReactNode } from "react";
+import { useEffect, useId, useRef, useSyncExternalStore, type ReactNode } from "react";
 
 import { TUTOR_MESSAGE_MAX_LENGTH } from "@/lib/api/tutor";
 import { cn } from "@/lib/utils";
 
 import { Button } from "../components/ui";
+import { useDialogFocus } from "../components/use-focus";
 import type { Href } from "../types";
 import {
   AiNotice,
@@ -90,6 +91,18 @@ export interface TutorViewProps {
   timeZone?: string;
 }
 
+const BELOW_LG = "(max-width: 63.98rem)";
+
+function isBelowLg() {
+  return window.matchMedia?.(BELOW_LG).matches ?? false;
+}
+
+function subscribeBelowLg(onChange: () => void) {
+  const query = window.matchMedia?.(BELOW_LG);
+  query?.addEventListener("change", onChange);
+  return () => query?.removeEventListener("change", onChange);
+}
+
 export function TutorView({
   questionLabel,
   questionSummary,
@@ -118,6 +131,11 @@ export function TutorView({
   const titleId = useId();
   const inputId = useId();
   const listRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  // Below lg the tutor is a full-screen sheet; on desktop it is a side panel beside the question.
+  const belowLg = useSyncExternalStore(subscribeBelowLg, isBelowLg, () => false);
+  const modal = !inline && belowLg;
+  useDialogFocus(dialogRef, { modal, onEscape: onClose });
   const hasAsked = messages.some((message) => message.role === "student");
   const lastAssistant = [...messages].reverse().find((message) => message.role === "assistant");
   const out = notice?.kind === "out_for_today";
@@ -144,14 +162,16 @@ export function TutorView({
 
   const body = (
     <section
+      ref={dialogRef}
       role="dialog"
       aria-labelledby={titleId}
+      aria-modal={modal ? true : undefined}
       className={cn(
         "relative flex min-h-0 grow flex-col overflow-hidden bg-ns-surface font-ns text-ns-ink",
         inline ? "rounded-3xl border border-ns-line shadow-ns-md" : "mt-[72px] rounded-t-3xl shadow-ns-lg motion-safe:animate-[ns-sheet_.35s_ease-out_both] lg:mt-0 lg:rounded-3xl lg:border lg:border-ns-line",
       )}
       onKeyDown={(event) => {
-        if (event.key === "Escape") onClose?.();
+        if (!modal && event.key === "Escape") onClose?.();
       }}
     >
       <div className="flex shrink-0 flex-col gap-2.5 border-b border-ns-line px-4 pt-2 pb-3 lg:px-5 lg:pt-4">

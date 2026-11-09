@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { LearnerHeader } from "@/components/learner-header";
@@ -5,6 +6,8 @@ import { LessonPanel } from "@/components/lesson-panel";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { hasActiveEnrolment, learnerCourseHref } from "@/lib/auth/learner-state";
 import { betaLearningUiEnabled } from "@/lib/features/beta-learning-ui";
+
+export const metadata: Metadata = { title: "Lesson" };
 
 function EstablishedLessonPage({ lessonKey }: { lessonKey: string }) {
   return (
