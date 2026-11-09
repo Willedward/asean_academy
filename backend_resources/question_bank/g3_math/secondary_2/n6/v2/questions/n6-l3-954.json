@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-954",
   "bank_key": "g3-sec2-n6-v2",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.7",
-  "title": "Axis between two roots",
+  "title": "Least value from the roots of a parabola",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -15,7 +15,7 @@
   "stem": [
     {
       "type": "text",
-      "text": "A quadratic graph crosses the x-axis at x = 2 and x = 10."
+      "text": "A curve has equation y = x² - 12x + 20, and it meets the x-axis where x = 2 and x = 10."
     }
   ],
   "parts": [
@@ -25,7 +25,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the x-coordinate of its axis of symmetry."
+          "text": "What is the least value of y on this curve?"
         }
       ],
       "marks": 3,
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "-16",
+        "canonical_latex": "-16",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The axis of symmetry lies halfway between the two roots."
+              "text": "The turning point lies on the line of symmetry, halfway between the two roots."
             }
           ]
         },
@@ -56,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the average of 2 and 10."
+              "text": "Substitute x = 6 into the equation of the curve."
             }
           ]
         }
@@ -67,18 +67,29 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=\\frac{2+10}{2}"
+              "latex": "x=\\frac{2+10}{2}=6"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "x=6"
+              "latex": "y=6^2-12(6)+20"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "y_{\\min}=-16"
             }
           ],
           "mark_type": "A",
