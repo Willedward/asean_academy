@@ -120,6 +120,10 @@ class ProgressRepository(Protocol):
         self, learner_id: str, unit_key: str
     ) -> CheckpointSessionRecord | None: ...
 
+    def latest_checkpoint_sessions(
+        self, learner_id: str
+    ) -> dict[str, CheckpointSessionRecord]: ...
+
     def sync_checkpoint(
         self,
         learner_id: str,
@@ -603,6 +607,23 @@ class SQLiteProgressRepository:
                 (learner_id, unit_key),
             ).fetchone()
         return self._checkpoint(row) if row is not None else None
+
+    def latest_checkpoint_sessions(
+        self, learner_id: str
+    ) -> dict[str, CheckpointSessionRecord]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                select * from learner_checkpoint_sessions
+                where learner_id = ?
+                order by updated_at desc
+                """,
+                (learner_id,),
+            ).fetchall()
+        latest: dict[str, CheckpointSessionRecord] = {}
+        for row in rows:
+            latest.setdefault(row["unit_key"], self._checkpoint(row))
+        return latest
 
     def sync_checkpoint(
         self,
@@ -1271,6 +1292,26 @@ class PostgresProgressRepository:
                 (learner_id, unit_key),
             ).fetchone()
         return self._checkpoint(row) if row else None
+
+    def latest_checkpoint_sessions(
+        self, learner_id: str
+    ) -> dict[str, CheckpointSessionRecord]:
+        with self._connect() as connection:
+            self._set_identity(connection, learner_id)
+            rows = connection.execute(
+                self._checkpoint_query()
+                + """
+                  where sessions.student_id = %s
+                    and sessions.scope->>'mode' = 'checkpoint'
+                  group by sessions.id
+                  order by sessions.created_at desc
+                """,
+                (learner_id,),
+            ).fetchall()
+        latest: dict[str, CheckpointSessionRecord] = {}
+        for row in rows:
+            latest.setdefault(row["unit_key"], self._checkpoint(row))
+        return latest
 
     def sync_checkpoint(
         self,

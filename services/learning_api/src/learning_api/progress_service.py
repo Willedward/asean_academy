@@ -107,10 +107,7 @@ class ProgressService:
         lesson = self._authored_lesson_model(lesson_key)
         if lesson is None:
             raise ProgressError("lesson_not_found", "The requested lesson was not found.", 404)
-        records = {
-            record.lesson_key: record
-            for record in self.repository.lesson_progress(self.learner_id)
-        }
+        records = self._lesson_records()
         if any(
             records.get(key) is None
             or records[key].state not in {"proficient", "mastered"}
@@ -341,13 +338,23 @@ class ProgressService:
             "updated_at": record.updated_at if record else None,
         }
 
-    def checkpoint_status(self, unit_key: str) -> dict:
-        report, unit = self._owned_unit(unit_key)
-        policy = self._policy(report)
-        records = {
+    def _lesson_records(self) -> dict:
+        return {
             record.lesson_key: record
             for record in self.repository.lesson_progress(self.learner_id)
         }
+
+    def checkpoint_status(self, unit_key: str) -> dict:
+        report, unit = self._owned_unit(unit_key)
+        return self._checkpoint_response(
+            report,
+            unit,
+            self._lesson_records(),
+            self.latest_checkpoint_session(unit_key),
+        )
+
+    def _checkpoint_response(self, report, unit, records: dict, latest) -> dict:
+        policy = self._policy(report)
         lesson_keys = [lesson.stable_key for lesson in unit.lessons]
         passed = bool(lesson_keys) and all(
             records.get(key) is not None and records[key].checkpoint_passed
@@ -358,7 +365,6 @@ class ProgressService:
             and records[key].state in {"proficient", "mastered"}
             for key in lesson_keys
         )
-        latest = self.latest_checkpoint_session(unit_key)
         if passed:
             state = "passed"
         elif latest is not None and latest.status == "active":
@@ -369,7 +375,7 @@ class ProgressService:
             state = "locked"
         return {
             "course_key": report.course.stable_key,
-            "unit_key": unit_key,
+            "unit_key": unit.stable_key,
             "state": state,
             "available": available and state != "passed",
             "question_count": unit.checkpoint_question_count,
@@ -378,11 +384,7 @@ class ProgressService:
             "last_percentage": latest.percentage if latest else None,
         }
 
-    def _lesson_responses(self, reports: list) -> list[dict]:
-        records = {
-            record.lesson_key: record
-            for record in self.repository.lesson_progress(self.learner_id)
-        }
+    def _lesson_responses(self, reports: list, records: dict) -> list[dict]:
         retry_counts = self._retry_counts()
         responses = []
         for report in reports:
@@ -409,9 +411,11 @@ class ProgressService:
                 )
         return responses
 
-    def _checkpoint_responses(self, reports: list) -> list[dict]:
+    def _checkpoint_responses(self, reports: list, records: dict) -> list[dict]:
+        # One read covers every unit, so the connection count does not grow with the course.
+        latest = self.repository.latest_checkpoint_sessions(self.learner_id)
         return [
-            self.checkpoint_status(unit.stable_key)
+            self._checkpoint_response(report, unit, records, latest.get(unit.stable_key))
             for report in reports
             for unit in report.course.units
         ]
@@ -433,6 +437,7 @@ class ProgressService:
     def progress(self) -> dict:
         reports = self._active_reports()
         first_policy = self._policy(reports[0])
+        records = self._lesson_records()
         scheduled_retry_count, next_retry_due_at = self.repository.retry_schedule(
             self.learner_id
         )
@@ -444,8 +449,8 @@ class ProgressService:
             "checkpoint_required_for_mastery": first_policy.mastery_requires_checkpoint,
             "scheduled_retry_count": scheduled_retry_count,
             "next_retry_due_at": next_retry_due_at,
-            "lessons": self._lesson_responses(reports),
-            "checkpoints": self._checkpoint_responses(reports),
+            "lessons": self._lesson_responses(reports, records),
+            "checkpoints": self._checkpoint_responses(reports, records),
         }
 
     def learning_home(self) -> dict:
@@ -609,11 +614,12 @@ class ProgressService:
         )
         if report is None:
             return course_map
+        records = self._lesson_records()
         lesson_progress = {
-            item["lesson_key"]: item for item in self._lesson_responses([report])
+            item["lesson_key"]: item for item in self._lesson_responses([report], records)
         }
         checkpoint_progress = {
-            item["unit_key"]: item for item in self._checkpoint_responses([report])
+            item["unit_key"]: item for item in self._checkpoint_responses([report], records)
         }
         for unit in course_map.units:
             unit.checkpoint_available = checkpoint_progress[unit.stable_key]["available"]

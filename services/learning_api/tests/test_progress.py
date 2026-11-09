@@ -7,6 +7,7 @@ from question_bank.validation import validate_bank
 
 from learning_api.config import Settings
 from learning_api.main import create_app
+from learning_api.progress_repository import SQLiteProgressRepository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 BANK_ROOT = (
@@ -299,3 +300,26 @@ def test_progress_fails_closed_without_a_learner_identity(tmp_path):
 
     assert response.status_code == 401
     assert response.json()["error"]["code"] == "authentication_required"
+
+
+class CountingProgressRepository(SQLiteProgressRepository):
+    connections = 0
+
+    def _connect(self):
+        self.connections += 1
+        return super()._connect()
+
+
+def test_progress_connection_count_does_not_grow_with_course_units(tmp_path):
+    app = application(tmp_path)
+    repository = CountingProgressRepository(tmp_path / "counted.sqlite3")
+    app.state.progress_repository = repository
+    repository.connections = 0
+
+    response = request(app, "GET", "/api/v1/progress")
+
+    assert response.status_code == 200
+    assert len(response.json()["checkpoints"]) > 1
+    # Retry schedule, lesson records, retry questions and latest checkpoints, whatever
+    # the number of units.
+    assert repository.connections == 4
