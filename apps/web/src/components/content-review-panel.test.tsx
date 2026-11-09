@@ -441,7 +441,7 @@ describe("ContentReviewPanel", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText("3:5", { selector: "annotation" }),
-    ).toBeInTheDocument();
+    ).toBeTruthy();
     expect(screen.getByText("Source references")).toBeInTheDocument();
   });
 
