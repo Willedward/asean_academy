@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l2-504",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,11 +86,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=2"
+            },
+            {
+              "type": "text",
+              "text": " and simplify the known terms. "
             },
             {
               "type": "display_math",
-              "latex": "11=4(2)^2+p(2)+1\\Rightarrow p=-3."
+              "latex": "11=4(2)^2+2p+1=17+2p"
             }
           ],
           "mark_type": "M",
@@ -101,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "-3"
+              "latex": "2p=-6,\\ p=-3"
             }
           ],
           "mark_type": "A",

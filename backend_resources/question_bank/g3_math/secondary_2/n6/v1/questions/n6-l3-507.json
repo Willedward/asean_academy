@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-507",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.7",
-  "title": "Other root from the axis of symmetry",
+  "title": "Axis of symmetry from two points",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,23 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A quadratic has axis of symmetry "
+          "text": "The points "
         },
         {
           "type": "inline_math",
-          "latex": "x=0"
+          "latex": "(-4,7)"
         },
         {
           "type": "text",
-          "text": " and one root "
+          "text": " and "
         },
         {
           "type": "inline_math",
-          "latex": "x=-3"
+          "latex": "(2,7)"
         },
         {
           "type": "text",
-          "text": ". Find the other root."
+          "text": " lie on a parabola. Find the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-coordinate of its turning point."
         }
       ],
       "marks": 3,
@@ -45,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "-1",
+        "canonical_latex": "-1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the axis using standard form, the midpoint of the roots, or the factorised form."
+              "text": "The two points have the same "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-value, so they are mirror images in the axis of symmetry."
             }
           ]
         },
@@ -67,15 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the axis input for the turning value, and solve "
+              "text": "The turning point lies on the axis, halfway between the two "
             },
             {
               "type": "inline_math",
-              "latex": "y=0"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": " when counting x-intercepts."
+              "text": "-values."
             }
           ]
         }
@@ -86,11 +102,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Equal "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-values mean the axis is halfway between the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-values. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{-3+r_2}{2}=0\\Rightarrow r_2=3."
+              "latex": "x=\\frac{-4+2}{2}"
             }
           ],
           "mark_type": "M",
@@ -101,11 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "x=-1"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l2-503",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -86,11 +86,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=2"
+            },
+            {
+              "type": "text",
+              "text": " and simplify the known terms. "
             },
             {
               "type": "display_math",
-              "latex": "-7=-3(2)^2+3(2)+k\\Rightarrow k=-1."
+              "latex": "-7=-3(2)^2+3(2)+k=-12+6+k=-6+k"
             }
           ],
           "mark_type": "M",
@@ -101,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "-1"
+              "latex": "k=-1"
             }
           ],
           "mark_type": "A",
