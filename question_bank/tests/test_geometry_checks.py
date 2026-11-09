@@ -291,6 +291,12 @@ def test_revisioned_paths_and_batch_lookup(g4_bank_copy):
 
 
 def test_preview_does_not_touch_the_bank(g4_bank_copy, tmp_path):
+    # Plant a stem that presupposes a right angle on the perimeter item, so the finding below has
+    # something to report now that the live stem is neutral.
+    question_path = g4_bank_copy / "questions/g4-l5-501.json"
+    question = json.loads(question_path.read_text())
+    question["stem"][0]["text"] = "Use the labelled right-triangle schematic. Not to scale."
+    question_path.write_text(json.dumps(question, indent=2, ensure_ascii=False) + "\n")
     before = _digest(g4_bank_copy)
     report = regenerate_batch(g4_bank_copy, "B001", output=tmp_path / "preview")
 
