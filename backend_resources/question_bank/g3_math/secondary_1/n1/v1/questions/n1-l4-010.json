@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-010",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Insert < or > to compare -2.84 and -17/6. Write the complete statement, for example -3 < 2."
+          "text": "Insert < or > to compare -2.84 and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{17}{6}"
+        },
+        {
+          "type": "text",
+          "text": ". Write the complete statement, for example "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3<2"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -48,7 +64,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the positive magnitudes 2.84 and 17/6 without rounding the fraction."
+              "text": "Compare the positive magnitudes 2.84 and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{17}{6}"
+            },
+            {
+              "type": "text",
+              "text": " without rounding the fraction."
             }
           ]
         },
@@ -67,8 +91,20 @@
           "position": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "2.84\\times 6=17.04>17"
+            },
+            {
               "type": "text",
-              "text": "2.84×6=17.04>17, so 2.84>17/6."
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2.84>\\frac{17}{6}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -79,7 +115,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Negating reverses the relation: -2.84<-17/6."
+              "text": "Negating reverses the relation: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2.84<-\\frac{17}{6}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

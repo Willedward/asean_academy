@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n1-l2-020",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -66,8 +66,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "1386=2×693=2×3×231"
+                "type": "display_math",
+                "latex": "1386=2\\times 693=2\\times 3\\times 231"
               }
             ],
             "mark_type": "M",
@@ -77,8 +77,16 @@
             "position": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "231=3\\times 77=3\\times 7\\times 11"
+              },
+              {
                 "type": "text",
-                "text": "231=3×77=3×7×11, so 1386=2×3^2×7×11"
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1386=2\\times 3^{2}\\times 7\\times 11"
               }
             ],
             "mark_type": "A",
@@ -107,7 +115,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l3-019",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -127,7 +135,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the smallest positive integer m such that 540m is a perfect cube."
+            "text": "Find the smallest positive integer "
+          },
+          {
+            "type": "inline_math",
+            "latex": "m"
+          },
+          {
+            "type": "text",
+            "text": " such that "
+          },
+          {
+            "type": "inline_math",
+            "latex": "540m"
+          },
+          {
+            "type": "text",
+            "text": " is a perfect cube."
           }
         ],
         "marks": 2,
@@ -157,8 +181,12 @@
             "stage": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "540=2^{2}\\times 3^{3}\\times 5"
+              },
+              {
                 "type": "text",
-                "text": "540=2^2×3^3×5; complete the powers of 2 and 5."
+                "text": "; complete the powers of 2 and 5."
               }
             ]
           }
@@ -168,8 +196,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "540=2^2×3^3×5"
+                "type": "display_math",
+                "latex": "540=2^{2}\\times 3^{3}\\times 5"
               }
             ],
             "mark_type": "M",
@@ -179,8 +207,16 @@
             "position": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "m=2\\times 5^{2}=50"
+              },
+              {
                 "type": "text",
-                "text": "m=2×5^2=50, and 540m=27000=30^3"
+                "text": ", and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "540m=27000=30^{3}"
               }
             ],
             "mark_type": "A",
@@ -209,7 +245,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l4-006",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -224,7 +260,31 @@
     "stem": [
       {
         "type": "text",
-        "text": "Let N=2^a×3^b×5, where a and b are positive integers. N is divisible by 48 and has exactly 30 positive factors."
+        "text": "Let "
+      },
+      {
+        "type": "inline_math",
+        "latex": "N=2^{a}\\times 3^{b}\\times 5"
+      },
+      {
+        "type": "text",
+        "text": ", where "
+      },
+      {
+        "type": "inline_math",
+        "latex": "a"
+      },
+      {
+        "type": "text",
+        "text": " and "
+      },
+      {
+        "type": "inline_math",
+        "latex": "b"
+      },
+      {
+        "type": "text",
+        "text": " are positive integers. N is divisible by 48 and has exactly 30 positive factors."
       }
     ],
     "parts": [
@@ -256,7 +316,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use divisibility by 48 to bound a and b, then apply the divisor-count formula."
+                "text": "Use divisibility by 48 to bound "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
+              },
+              {
+                "type": "text",
+                "text": ", then apply the divisor-count formula."
               }
             ]
           },
@@ -265,7 +341,39 @@
             "content": [
               {
                 "type": "text",
-                "text": "Since 48=2^4×3, a≥4 and b≥1; also 2(a+1)(b+1)=30."
+                "text": "Since "
+              },
+              {
+                "type": "inline_math",
+                "latex": "48=2^{4}\\times 3"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a\\ge 4"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b\\ge 1"
+              },
+              {
+                "type": "text",
+                "text": "; also "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2(a+1)(b+1)=30"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -275,8 +383,36 @@
             "position": 1,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "(a+1)(b+1)=15"
+              },
+              {
                 "type": "text",
-                "text": "(a+1)(b+1)=15; the required factor pair is 5×3, so a=4 and b=2."
+                "text": "; the required factor pair is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5\\times 3"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=4"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -286,8 +422,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "N=2^4×3^2×5=720"
+                "type": "display_math",
+                "latex": "N=2^{4}\\times 3^{2}\\times 5=720"
               }
             ],
             "mark_type": "A",
@@ -316,7 +452,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l2-021",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -377,8 +513,16 @@
             "position": 1,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "72=2^{3}\\times 3^{2}"
+              },
+              {
                 "type": "text",
-                "text": "72=2^3×3^2 and 90=2×3^2×5"
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "90=2\\times 3^{2}\\times 5"
               }
             ],
             "mark_type": "M",
@@ -388,8 +532,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "LCM=2^3×3^2×5=360"
+                "type": "display_math",
+                "latex": "\\text{LCM}=2^{3}\\times 3^{2}\\times 5=360"
               }
             ],
             "mark_type": "A",
@@ -418,7 +562,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l4-007",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -474,7 +618,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 18=2×3^2, 24=2^3×3 and 30=2×3×5."
+                "text": "Use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "18=2\\times 3^{2}"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "24=2^{3}\\times 3"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "30=2\\times 3\\times 5"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -484,8 +652,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "LCM=2^3×3^2×5"
+                "type": "display_math",
+                "latex": "\\text{LCM}=2^{3}\\times 3^{2}\\times 5"
               }
             ],
             "mark_type": "M",
@@ -525,7 +693,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l2-022",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -550,7 +718,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate 2 1/3 - 5/6 + 1/4."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "2\\frac{1}{3}-\\frac{5}{6}+\\frac{1}{4}"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -593,8 +769,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "7/3-5/6+1/4=28/12-10/12+3/12"
+                "type": "display_math",
+                "latex": "\\frac{7}{3}-\\frac{5}{6}+\\frac{1}{4}=\\frac{28}{12}-\\frac{10}{12}+\\frac{3}{12}"
               }
             ],
             "mark_type": "M",
@@ -604,8 +780,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "21/12=7/4=1 3/4"
+                "type": "display_math",
+                "latex": "\\frac{21}{12}=\\frac{7}{4}=1\\frac{3}{4}"
               }
             ],
             "mark_type": "A",
@@ -634,7 +810,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l3-020",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -649,7 +825,23 @@
     "stem": [
       {
         "type": "text",
-        "text": "A tank is 3/5 full. After 28 litres are added, it is 4/5 full."
+        "text": "A tank is "
+      },
+      {
+        "type": "inline_math",
+        "latex": "\\frac{3}{5}"
+      },
+      {
+        "type": "text",
+        "text": " full. After 28 litres are added, it is "
+      },
+      {
+        "type": "inline_math",
+        "latex": "\\frac{4}{5}"
+      },
+      {
+        "type": "text",
+        "text": " full."
       }
     ],
     "parts": [
@@ -690,7 +882,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "The change from 3/5 to 4/5 is 1/5 of the capacity."
+                "text": "The change from "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{3}{5}"
+              },
+              {
+                "type": "text",
+                "text": " to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{4}{5}"
+              },
+              {
+                "type": "text",
+                "text": " is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{1}{5}"
+              },
+              {
+                "type": "text",
+                "text": " of the capacity."
               }
             ]
           }
@@ -700,8 +916,12 @@
             "position": 1,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "\\frac{1}{5}"
+              },
+              {
                 "type": "text",
-                "text": "1/5 of the capacity is 28 litres."
+                "text": " of the capacity is 28 litres."
               }
             ],
             "mark_type": "M",
@@ -712,7 +932,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Capacity=28×5=140 litres."
+                "text": "Capacity = "
+              },
+              {
+                "type": "inline_math",
+                "latex": "28\\times 5=140"
+              },
+              {
+                "type": "text",
+                "text": " litres."
               }
             ],
             "mark_type": "A",
@@ -741,7 +969,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l5-003",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -766,7 +994,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate [(5/6-3/8)/(7/9+1/6)] ÷ (1-5/12)."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "[\\frac{\\frac{5}{6}-\\frac{3}{8}}{\\frac{7}{9}+\\frac{1}{6}}]\\div(1-\\frac{5}{12})"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -797,7 +1033,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "The first numerator is 11/24, the first denominator is 17/18, and the final bracket is 7/12."
+                "text": "The first numerator is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{11}{24}"
+              },
+              {
+                "type": "text",
+                "text": ", the first denominator is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{17}{18}"
+              },
+              {
+                "type": "text",
+                "text": ", and the final bracket is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{7}{12}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -807,8 +1067,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "(11/24)÷(17/18)=33/68"
+                "type": "display_math",
+                "latex": "(\\frac{11}{24})\\div(\\frac{17}{18})=\\frac{33}{68}"
               }
             ],
             "mark_type": "M",
@@ -818,115 +1078,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "(33/68)÷(7/12)=99/119"
-              }
-            ],
-            "mark_type": "A",
-            "mark_value": 1
-          }
-        ]
-      }
-    ],
-    "total_marks": 2,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-16T10:15:00+08:00",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 1,
-    "stable_key": "n1-l2-023",
-    "bank_key": "g3-sec1-n1-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_1",
-    "topic_code": "N1",
-    "primary_outcome": "1.4",
-    "title": "Evaluate powers and roots",
-    "difficulty": 2,
-    "calculator_allowed": true,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Use a calculator where appropriate."
-      }
-    ],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "Calculate sqrt(196)+4.8^2/1.2."
-          }
-        ],
-        "marks": 2,
-        "primary_outcome": "1.4",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "numeric",
-          "comparison_mode": "exact_numeric",
-          "canonical_answer": "33.2",
-          "canonical_latex": "33.2",
-          "accepted_answers": [],
-          "absolute_tolerance": null,
-          "rounding_precision": null,
-          "unit": null
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Evaluate the square root and the power before dividing and adding."
-              }
-            ]
-          },
-          {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "sqrt(196)=14 and 4.8^2=23.04."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "23.04÷1.2=19.2"
-              }
-            ],
-            "mark_type": "M",
-            "mark_value": 1
-          },
-          {
-            "position": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "14+19.2=33.2"
+                "type": "display_math",
+                "latex": "(\\frac{33}{68})\\div(\\frac{7}{12})=\\frac{99}{119}"
               }
             ],
             "mark_type": "A",
@@ -956,6 +1109,133 @@
   {
     "schema_version": "1.0.0",
     "revision": 2,
+    "stable_key": "n1-l2-023",
+    "bank_key": "g3-sec1-n1-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N1",
+    "primary_outcome": "1.4",
+    "title": "Evaluate powers and roots",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use a calculator where appropriate."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\sqrt{196}+\\frac{4.8^{2}}{1.2}"
+          },
+          {
+            "type": "text",
+            "text": "."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "1.4",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "33.2",
+          "canonical_latex": "33.2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Evaluate the square root and the power before dividing and adding."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "\\sqrt{196}=14"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4.8^{2}=23.04"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "23.04\\div 1.2=19.2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "14+19.2=33.2"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T10:15:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
     "stable_key": "n1-l3-021",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -980,7 +1260,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate [(6.4×10^5)-(2.75×10^4)]/(3.2×10^5). Give your answer correct to 3 significant figures."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{(6.4\\times 10^{5})-(2.75\\times 10^{4})}{3.2\\times 10^{5}}"
+          },
+          {
+            "type": "text",
+            "text": ". Give your answer correct to 3 significant figures."
           }
         ],
         "marks": 2,
@@ -1011,7 +1299,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "First find 640 000 − 27 500, then divide by 320 000. Keep the full display."
+                "text": "First find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "640\\,000-27\\,500"
+              },
+              {
+                "type": "text",
+                "text": ", then divide by 320 000. Keep the full display."
               }
             ]
           }
@@ -1021,8 +1317,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "640000-27500=612500"
+                "type": "display_math",
+                "latex": "640000-27500=612500"
               }
             ],
             "mark_type": "M",
@@ -1032,8 +1328,12 @@
             "position": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "612500\\div 320000=1.9140625"
+              },
+              {
                 "type": "text",
-                "text": "612500÷320000=1.9140625, which is 1.91 to 3 significant figures."
+                "text": ", which is 1.91 to 3 significant figures."
               }
             ],
             "mark_type": "A",
@@ -1062,7 +1362,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l4-008",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1077,7 +1377,15 @@
     "stem": [
       {
         "type": "text",
-        "text": "Define A=(2.84^3+sqrt(51.6))/0.72. Use the unrounded value of A in the second calculation."
+        "text": "Define "
+      },
+      {
+        "type": "inline_math",
+        "latex": "A=\\frac{2.84^{3}+\\sqrt{51.6}}{0.72}"
+      },
+      {
+        "type": "text",
+        "text": ". Use the unrounded value of A in the second calculation."
       }
     ],
     "parts": [
@@ -1087,7 +1395,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate 100(A-18)/(A+18). Give your answer correct to 4 significant figures."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "100\\frac{A-18}{A+18}"
+          },
+          {
+            "type": "text",
+            "text": ". Give your answer correct to 4 significant figures."
           }
         ],
         "marks": 3,
@@ -1128,8 +1444,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "A=(2.84^3+sqrt(51.6))/0.72=41.791136..."
+                "type": "display_math",
+                "latex": "A=\\frac{2.84^{3}+\\sqrt{51.6}}{0.72}=41.791136"
               }
             ],
             "mark_type": "M",
@@ -1139,8 +1455,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "100(A-18)/(A+18)=39.790406..."
+                "type": "display_math",
+                "latex": "100\\frac{A-18}{A+18}=39.790406"
               }
             ],
             "mark_type": "M",
@@ -1180,7 +1496,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l1-019",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1200,7 +1516,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate -8+13."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-8+13"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 1,
@@ -1241,8 +1565,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "-8+13=5"
+                "type": "display_math",
+                "latex": "-8+13=5"
               }
             ],
             "mark_type": "A",
@@ -1271,7 +1595,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l2-024",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1291,7 +1615,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate -2.7-(-4.35)+1.2."
+            "text": "Calculate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-2.7-(-4.35)+1.2"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -1322,7 +1654,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Rewrite the expression as -2.7+4.35+1.2."
+                "text": "Rewrite the expression as "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-2.7+4.35+1.2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1332,8 +1672,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "-2.7+4.35=1.65"
+                "type": "display_math",
+                "latex": "-2.7+4.35=1.65"
               }
             ],
             "mark_type": "M",
@@ -1343,8 +1683,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "1.65+1.2=2.85"
+                "type": "display_math",
+                "latex": "1.65+1.2=2.85"
               }
             ],
             "mark_type": "A",
@@ -1373,7 +1713,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l3-022",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1429,7 +1769,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate -3.5+7.8-5.6 in order."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-3.5+7.8-5.6"
+              },
+              {
+                "type": "text",
+                "text": " in order."
               }
             ]
           }
@@ -1439,8 +1787,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "-3.5+7.8=4.3"
+                "type": "display_math",
+                "latex": "-3.5+7.8=4.3"
               }
             ],
             "mark_type": "M",
@@ -1450,8 +1798,12 @@
             "position": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "4.3-5.6=-1.3"
+              },
+              {
                 "type": "text",
-                "text": "4.3-5.6=-1.3, so the final temperature is -1.3°C."
+                "text": ", so the final temperature is -1.3°C."
               }
             ],
             "mark_type": "A",
@@ -1480,7 +1832,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l4-009",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1495,7 +1847,31 @@
     "stem": [
       {
         "type": "text",
-        "text": "On a number line, A has coordinate -7/3 and B has coordinate 11/6. Point P is 3/5 of the way from A to B."
+        "text": "On a number line, A has coordinate "
+      },
+      {
+        "type": "inline_math",
+        "latex": "-\\frac{7}{3}"
+      },
+      {
+        "type": "text",
+        "text": " and B has coordinate "
+      },
+      {
+        "type": "inline_math",
+        "latex": "\\frac{11}{6}"
+      },
+      {
+        "type": "text",
+        "text": ". Point P is "
+      },
+      {
+        "type": "inline_math",
+        "latex": "\\frac{3}{5}"
+      },
+      {
+        "type": "text",
+        "text": " of the way from A to B."
       }
     ],
     "parts": [
@@ -1527,7 +1903,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use P=A+(3/5)(B-A)."
+                "text": "Use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "P=A+(\\frac{3}{5})(B-A)"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1536,7 +1920,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "First find B-A using a common denominator of 6."
+                "text": "First find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "B-A"
+              },
+              {
+                "type": "text",
+                "text": " using a common denominator of 6."
               }
             ]
           }
@@ -1546,8 +1938,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "B-A=11/6-(-7/3)=25/6"
+                "type": "display_math",
+                "latex": "B-A=\\frac{11}{6}-(-\\frac{7}{3})=\\frac{25}{6}"
               }
             ],
             "mark_type": "M",
@@ -1557,8 +1949,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "P=-7/3+(3/5)(25/6)=-14/6+15/6=1/6"
+                "type": "display_math",
+                "latex": "P=-\\frac{7}{3}+(\\frac{3}{5})(\\frac{25}{6})=-\\frac{14}{6}+\\frac{15}{6}=\\frac{1}{6}"
               }
             ],
             "mark_type": "A",
@@ -1587,7 +1979,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l1-020",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1607,7 +1999,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Insert < or > to make a true statement: -0.8 ___ -3/4. Write the complete statement, for example -3 < 2."
+            "text": "Insert < or > to make a true statement: -0.8 ___ "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-\\frac{3}{4}"
+          },
+          {
+            "type": "text",
+            "text": ". Write the complete statement, for example "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-3<2"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -1643,8 +2051,12 @@
             "stage": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "-\\frac{3}{4}=-0.75"
+              },
+              {
                 "type": "text",
-                "text": "-3/4=-0.75; the more negative value lies farther left."
+                "text": "; the more negative value lies farther left."
               }
             ]
           }
@@ -1654,8 +2066,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "-0.8<-0.75"
+                "type": "display_math",
+                "latex": "-0.8<-0.75"
               }
             ],
             "mark_type": "M",
@@ -1666,7 +2078,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Therefore -0.8<-3/4."
+                "text": "Therefore "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-0.8<-\\frac{3}{4}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -1695,7 +2115,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l2-025",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1715,7 +2135,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Write -7/4, -1.68, -13/8 and -1.6 in ascending order."
+            "text": "Write "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-\\frac{7}{4}"
+          },
+          {
+            "type": "text",
+            "text": ", -1.68, "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-\\frac{13}{8}"
+          },
+          {
+            "type": "text",
+            "text": " and -1.6 in ascending order."
           }
         ],
         "marks": 2,
@@ -1748,8 +2184,20 @@
             "stage": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "-\\frac{7}{4}=-1.75"
+              },
+              {
                 "type": "text",
-                "text": "-7/4=-1.75 and -13/8=-1.625; the most negative value comes first."
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-\\frac{13}{8}=-1.625"
+              },
+              {
+                "type": "text",
+                "text": "; the most negative value comes first."
               }
             ]
           }
@@ -1771,7 +2219,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Ascending order: -7/4, -1.68, -13/8, -1.6."
+                "text": "Ascending order: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-\\frac{7}{4}"
+              },
+              {
+                "type": "text",
+                "text": ", -1.68, "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-\\frac{13}{8}"
+              },
+              {
+                "type": "text",
+                "text": ", -1.6."
               }
             ],
             "mark_type": "A",
@@ -1800,7 +2264,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l3-023",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1814,8 +2278,12 @@
     "status": "draft",
     "stem": [
       {
+        "type": "inline_math",
+        "latex": "x"
+      },
+      {
         "type": "text",
-        "text": "x is an integer."
+        "text": " is an integer."
       }
     ],
     "parts": [
@@ -1825,7 +2293,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "List all possible values of x if -7/3 < x/2 <= 5/4."
+            "text": "List all possible values of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " if "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-\\frac{7}{3}<\\frac{x}{2}\\le\\frac{5}{4}"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -1861,7 +2345,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The equivalent bounds are -14/3<x<=5/2."
+                "text": "The equivalent bounds are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1871,8 +2363,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "-14/3<x<=5/2"
+                "type": "display_math",
+                "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
               }
             ],
             "mark_type": "M",
@@ -1883,7 +2375,167 @@
             "content": [
               {
                 "type": "text",
-                "text": "The integer values are -4,-3,-2,-1,0,1,2."
+                "text": "The integer values are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-4,-3,-2,-1, 0, 1, 2"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T10:15:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
+    "stable_key": "n1-l4-010",
+    "bank_key": "g3-sec1-n1-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N1",
+    "primary_outcome": "1.6",
+    "title": "Compare close negative values exactly",
+    "difficulty": 4,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Insert < or > to compare -2.84 and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-\\frac{17}{6}"
+          },
+          {
+            "type": "text",
+            "text": ". Write the complete statement, for example "
+          },
+          {
+            "type": "inline_math",
+            "latex": "-3<2"
+          },
+          {
+            "type": "text",
+            "text": "."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "1.6",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "algebraic_expression",
+          "comparison_mode": "exact_relation",
+          "canonical_expression": "-2.84<-17/6",
+          "canonical_latex": "-2.84<-\\frac{17}{6}",
+          "variables": [],
+          "domain_constraints": [],
+          "accepted_equivalents": [],
+          "checker_config": {
+            "allowed_operators": [
+              "<",
+              ">"
+            ],
+            "allow_reversed_equivalent": true
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare the positive magnitudes 2.84 and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{17}{6}"
+              },
+              {
+                "type": "text",
+                "text": " without rounding the fraction."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Multiply 2.84 by 6 and compare the result with 17."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "2.84\\times 6=17.04>17"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2.84>\\frac{17}{6}"
+              },
+              {
+                "type": "text",
+                "text": "."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Negating reverses the relation: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-2.84<-\\frac{17}{6}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -1913,114 +2565,6 @@
   {
     "schema_version": "1.0.0",
     "revision": 2,
-    "stable_key": "n1-l4-010",
-    "bank_key": "g3-sec1-n1-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_1",
-    "topic_code": "N1",
-    "primary_outcome": "1.6",
-    "title": "Compare close negative values exactly",
-    "difficulty": 4,
-    "calculator_allowed": false,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "Insert < or > to compare -2.84 and -17/6. Write the complete statement, for example -3 < 2."
-          }
-        ],
-        "marks": 2,
-        "primary_outcome": "1.6",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "exact_relation",
-          "canonical_expression": "-2.84<-17/6",
-          "canonical_latex": "-2.84<-\\frac{17}{6}",
-          "variables": [],
-          "domain_constraints": [],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "allowed_operators": [
-              "<",
-              ">"
-            ],
-            "allow_reversed_equivalent": true
-          }
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Compare the positive magnitudes 2.84 and 17/6 without rounding the fraction."
-              }
-            ]
-          },
-          {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "Multiply 2.84 by 6 and compare the result with 17."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "2.84×6=17.04>17, so 2.84>17/6."
-              }
-            ],
-            "mark_type": "M",
-            "mark_value": 1
-          },
-          {
-            "position": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "Negating reverses the relation: -2.84<-17/6."
-              }
-            ],
-            "mark_type": "A",
-            "mark_value": 1
-          }
-        ]
-      }
-    ],
-    "total_marks": 2,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-16T10:15:00+08:00",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": "Awaiting Mathematics and editorial review."
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 1,
     "stable_key": "n1-l2-026",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2045,7 +2589,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Estimate (31.4×0.198)/0.049."
+            "text": "Estimate "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{31.4\\times 0.198}{0.049}"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -2086,8 +2638,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "(30×0.2)/0.05=6/0.05"
+                "type": "display_math",
+                "latex": "\\frac{30\\times 0.2}{0.05}=\\frac{6}{0.05}"
               }
             ],
             "mark_type": "M",
@@ -2127,7 +2679,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n1-l4-011",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2141,8 +2693,20 @@
     "status": "draft",
     "stem": [
       {
+        "type": "inline_math",
+        "latex": "a=7.4"
+      },
+      {
         "type": "text",
-        "text": "a=7.4 correct to 1 decimal place and b=0.62 correct to 2 decimal places. Both values are positive."
+        "text": " correct to 1 decimal place and "
+      },
+      {
+        "type": "inline_math",
+        "latex": "b=0.62"
+      },
+      {
+        "type": "text",
+        "text": " correct to 2 decimal places. Both values are positive."
       }
     ],
     "parts": [
@@ -2152,7 +2716,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the lower bound of a/b."
+            "text": "Find the lower bound of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{a}{b}"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -2183,7 +2755,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The required bounds are a≥7.35 and b<0.625."
+                "text": "The required bounds are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a\\ge 7.35"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b<0.625"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2194,7 +2782,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Lower bound=7.35/0.625"
+                "text": "Lower bound = "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{7.35}{0.625}"
               }
             ],
             "mark_type": "M",
@@ -2204,8 +2796,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "7.35÷0.625=11.76"
+                "type": "display_math",
+                "latex": "7.35\\div 0.625=11.76"
               }
             ],
             "mark_type": "A",

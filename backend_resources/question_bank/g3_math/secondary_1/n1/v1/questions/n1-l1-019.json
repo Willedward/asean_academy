@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l1-019",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate -8+13."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-8+13"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -61,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-8+13=5"
+              "type": "display_math",
+              "latex": "-8+13=5"
             }
           ],
           "mark_type": "A",

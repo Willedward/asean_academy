@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-020",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,23 @@
   "stem": [
     {
       "type": "text",
-      "text": "A tank is 3/5 full. After 28 litres are added, it is 4/5 full."
+      "text": "A tank is "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{3}{5}"
+    },
+    {
+      "type": "text",
+      "text": " full. After 28 litres are added, it is "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{4}{5}"
+    },
+    {
+      "type": "text",
+      "text": " full."
     }
   ],
   "parts": [
@@ -56,7 +72,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The change from 3/5 to 4/5 is 1/5 of the capacity."
+              "text": "The change from "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{5}"
+            },
+            {
+              "type": "text",
+              "text": " to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{4}{5}"
+            },
+            {
+              "type": "text",
+              "text": " is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{5}"
+            },
+            {
+              "type": "text",
+              "text": " of the capacity."
             }
           ]
         }
@@ -66,8 +106,12 @@
           "position": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "\\frac{1}{5}"
+            },
+            {
               "type": "text",
-              "text": "1/5 of the capacity is 28 litres."
+              "text": " of the capacity is 28 litres."
             }
           ],
           "mark_type": "M",
@@ -78,7 +122,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Capacity=28×5=140 litres."
+              "text": "Capacity = "
+            },
+            {
+              "type": "inline_math",
+              "latex": "28\\times 5=140"
+            },
+            {
+              "type": "text",
+              "text": " litres."
             }
           ],
           "mark_type": "A",

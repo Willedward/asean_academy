@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-023",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -14,8 +14,12 @@
   "status": "draft",
   "stem": [
     {
+      "type": "inline_math",
+      "latex": "x"
+    },
+    {
       "type": "text",
-      "text": "x is an integer."
+      "text": " is an integer."
     }
   ],
   "parts": [
@@ -25,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "List all possible values of x if -7/3 < x/2 <= 5/4."
+          "text": "List all possible values of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " if "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{7}{3}<\\frac{x}{2}\\le\\frac{5}{4}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -61,7 +81,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The equivalent bounds are -14/3<x<=5/2."
+              "text": "The equivalent bounds are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,8 +99,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-14/3<x<=5/2"
+              "type": "display_math",
+              "latex": "-\\frac{14}{3}<x\\le\\frac{5}{2}"
             }
           ],
           "mark_type": "M",
@@ -83,7 +111,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The integer values are -4,-3,-2,-1,0,1,2."
+              "text": "The integer values are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-4,-3,-2,-1, 0, 1, 2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",
