@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l1-519",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.12",
-  "title": "Square a bracket containing a sum",
+  "title": "Factorise a difference of two squares",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Expand and simplify "
+          "text": "Factorise "
         },
         {
           "type": "inline_math",
-          "latex": "(x+5)^{2}"
+          "latex": "x^{2}-49"
         },
         {
           "type": "text",
@@ -37,15 +37,15 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "x^2+10x+25",
-        "canonical_latex": "x^2+10x+25",
+        "canonical_expression": "(x-7)*(x+7)",
+        "canonical_latex": "(x-7)(x+7)",
         "variables": [
           "x"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
         "checker_config": {
-          "form": "expanded"
+          "form": "factorised_completely"
         }
       },
       "hints": [
@@ -54,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the expression to a perfect-square or difference-of-squares identity."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a^2-b^2=(a-b)(a+b)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +71,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute complete terms for a and b, then simplify and verify by expansion."
+              "text": "Write "
+            },
+            {
+              "type": "inline_math",
+              "latex": "49"
+            },
+            {
+              "type": "text",
+              "text": " as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7^2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,7 +98,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "(x+5)^2=x^2+2(5)x+5^2=x^2+10x+25"
+              "latex": "x^2-49=x^2-7^2=(x-7)(x+7)"
             }
           ],
           "mark_type": "A",

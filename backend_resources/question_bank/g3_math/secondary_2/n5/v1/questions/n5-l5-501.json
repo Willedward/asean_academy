@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l5-501",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.13",
-  "title": "Four-term factorisation by grouping",
+  "title": "Grouping with reordering and an overall factor",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,11 +24,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "ax+bx+6ay+6by"
+          "latex": "12by-8bx+12ax-18ay"
         },
         {
           "type": "text",
-          "text": " completely. Show the grouping that exposes the repeated factor."
+          "text": " completely."
         }
       ],
       "marks": 5,
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(a+b)*(x+6*y)",
-        "canonical_latex": "(a+b)(x+6y)",
+        "canonical_expression": "2*(2*x-3*y)*(3*a-2*b)",
+        "canonical_latex": "2(2x-3y)(3a-2b)",
         "variables": [
           "a",
           "b",
@@ -57,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Reorder if needed, then factor a common term from each useful pair."
+              "text": "Take out any factor common to all four terms, then pair the terms so that both pairs give the same bracket."
             }
           ]
         },
@@ -66,7 +66,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+              "text": "Pair the two terms containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": " and the two terms containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a"
+            },
+            {
+              "type": "text",
+              "text": ", and watch the sign of the factor you take out of the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": " pair."
             }
           ]
         }
@@ -77,11 +101,43 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take out the overall factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": " and pair the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": " terms and the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a"
+            },
+            {
+              "type": "text",
+              "text": " terms, taking out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2b"
+            },
+            {
+              "type": "text",
+              "text": " from the first pair. "
             },
             {
               "type": "display_math",
-              "latex": "x(a+b)+6y(a+b)=(a+b)(x+6y)"
+              "latex": "12by-8bx+12ax-18ay=2\\left[(6by-4bx)+(6ax-9ay)\\right]=2\\left[-2b(2x-3y)+3a(2x-3y)\\right]"
             }
           ],
           "mark_type": "M",
@@ -92,11 +148,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Take out the common bracket "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(2x-3y)"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "(a+b)(x+6y)"
+              "latex": "2(2x-3y)(3a-2b)"
             }
           ],
           "mark_type": "A",

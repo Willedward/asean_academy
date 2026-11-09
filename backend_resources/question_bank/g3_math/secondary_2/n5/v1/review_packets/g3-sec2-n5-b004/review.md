@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-524 — Find x in terms of A
+## n5-l3-524 — Subject in the denominator
 
 [Open this question in the HTML preview](index.html#n5-l3-524)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l4-514 — Reveal the repeated bracket by grouping
+## n5-l4-514 — Reorder and take out factors
 
 [Open this question in the HTML preview](index.html#n5-l4-514)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-525 — Work out a using a motion formula
+## n5-l3-525 — Motion formula with a decimal acceleration
 
 [Open this question in the HTML preview](index.html#n5-l3-525)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l1-519 — Square a bracket containing a sum
+## n5-l1-519 — Factorise a difference of two squares
 
 [Open this question in the HTML preview](index.html#n5-l1-519)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l5-504 — An identity inside a fraction
+## n5-l5-504 — Use an identity twice
 
 [Open this question in the HTML preview](index.html#n5-l5-504)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l2-528 — Sum and product with a negative sum
+## n5-l2-528 — Quadratic with a negative constant term
 
 [Open this question in the HTML preview](index.html#n5-l2-528)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-528 — Complete factorisation of a three-term quadratic
+## n5-l3-528 — Common factor and a difference of two squares
 
 [Open this question in the HTML preview](index.html#n5-l3-528)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-529 — Cancelling across two fractions
+## n5-l3-529 — Factorise and divide algebraic fractions
 
 [Open this question in the HTML preview](index.html#n5-l3-529)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l2-530 — Combine fractions with unlike denominators
+## n5-l2-530 — Subtract fractions with unlike denominators
 
 [Open this question in the HTML preview](index.html#n5-l2-530)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-530 — Factorise a denominator before adding
+## n5-l3-530 — Subtract after factorising a denominator
 
 [Open this question in the HTML preview](index.html#n5-l3-530)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l1-521 — Sum over a common denominator
+## n5-l1-521 — Subtract over a common denominator
 
 [Open this question in the HTML preview](index.html#n5-l1-521)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l2-531 — Two brackets with positive terms
+## n5-l2-531 — Two brackets with one negative term
 
 [Open this question in the HTML preview](index.html#n5-l2-531)
 

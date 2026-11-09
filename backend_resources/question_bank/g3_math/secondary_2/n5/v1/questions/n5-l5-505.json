@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l5-505",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,10 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-5 != 0",
+          "x+5 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "Factorise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2-25"
+            },
+            {
+              "type": "text",
+              "text": " and use it as the common denominator for all three fractions."
             }
           ]
         },
@@ -63,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Write each numerator over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-5)(x+5)"
+            },
+            {
+              "type": "text",
+              "text": ", using brackets where you subtract, and collect like terms."
             }
           ]
         }
@@ -74,11 +93,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Write each fraction over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-5)(x+5)"
+            },
+            {
+              "type": "text",
+              "text": " and combine. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(x+5)+2(x-5)-3x}{(x-5)(x+5)}=\\frac{-5}{(x-5)(x+5)}"
+              "latex": "\\frac{(x+5)+2(x-5)-3x}{(x-5)(x+5)}=\\frac{x+5+2x-10-3x}{(x-5)(x+5)}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +116,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "The "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " terms cancel: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{-5}{(x-5)(x+5)}"
+              "latex": "\\frac{-5}{(x-5)(x+5)},\\quad x\\neq\\pm5"
             }
           ],
           "mark_type": "A",

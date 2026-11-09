@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-529",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.15",
-  "title": "Cancelling across two fractions",
+  "title": "Factorise and divide algebraic fractions",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\left(\\frac{x+8}{3x}\\right)\\left(\\frac{3x^{2}}{x+8}\\right)"
+          "latex": "\\left(\\frac{x^{2}+7x+12}{2x}\\right)\\div\\left(\\frac{x+3}{4x^{2}}\\right)"
         },
         {
           "type": "text",
@@ -37,12 +37,15 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "x",
-        "canonical_latex": "x",
+        "canonical_expression": "2*x*(x+4)",
+        "canonical_latex": "2x(x+4)",
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x != 0",
+          "x+3 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+              "text": "Factorise the quadratic numerator, then multiply by the reciprocal of the divisor."
             }
           ]
         },
@@ -63,7 +66,31 @@
           "content": [
             {
               "type": "text",
-              "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+              "text": "Look for two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7"
+            },
+            {
+              "type": "text",
+              "text": ", then cancel a bracket and the powers of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +101,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise and multiply by the reciprocal. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{x+8}{3x}\\times\\frac{3x^2}{x+8}=x"
+              "latex": "\\frac{(x+3)(x+4)}{2x}\\times\\frac{4x^2}{x+3}=\\frac{4x^2(x+4)}{2x}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +116,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Cancel common factors: "
             },
             {
               "type": "display_math",
-              "latex": "x"
+              "latex": "2x(x+4),\\quad x\\neq0,\\ x\\neq-3"
             }
           ],
           "mark_type": "A",

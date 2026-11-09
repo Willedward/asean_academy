@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-513",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.15",
-  "title": "Cancel a bracket and powers of x",
+  "title": "Factorise before cancelling",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\left(\\frac{x+7}{3x}\\right)\\left(\\frac{5x^{2}}{x+7}\\right)"
+          "latex": "\\left(\\frac{x^{2}+5x+6}{3x}\\right)\\left(\\frac{6x^{2}}{x+2}\\right)"
         },
         {
           "type": "text",
@@ -37,12 +37,15 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(5*x)/(3)",
-        "canonical_latex": "\\frac{5x}{3}",
+        "canonical_expression": "2*x*(x+3)",
+        "canonical_latex": "2x(x+3)",
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x != 0",
+          "x+2 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+              "text": "Factorise the quadratic numerator first."
             }
           ]
         },
@@ -63,7 +66,31 @@
           "content": [
             {
               "type": "text",
-              "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+              "text": "Look for two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "6"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": ", then cancel a bracket and powers of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +101,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise the numerator and cancel the common bracket "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+2)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{x+7}{3x}\\times\\frac{5x^2}{x+7}=\\frac{5x}{3}"
+              "latex": "\\frac{(x+2)(x+3)}{3x}\\times\\frac{6x^2}{x+2}=\\frac{6x^2(x+3)}{3x}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +124,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Cancel "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{5x}{3}"
+              "latex": "2x(x+3),\\quad x\\neq0,\\ x\\neq-2"
             }
           ],
           "mark_type": "A",
