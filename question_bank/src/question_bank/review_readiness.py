@@ -156,7 +156,8 @@ def _open_content_findings(worklist_path: Path | None) -> dict[str, list[dict]]:
     Historical ``confirmed`` findings describe the audit baseline and are not a
     reliable unresolved-state marker because completed content PRs intentionally
     preserve that evidence. The statuses below are the ledger's explicit signal
-    that work or a decision is still outstanding.
+    that work or a decision is still outstanding, unless the record's
+    ``resolution`` lists the batch as fixed.
     """
 
     if worklist_path is None or not worklist_path.is_file():
@@ -168,8 +169,10 @@ def _open_content_findings(worklist_path: Path | None) -> dict[str, list[dict]]:
             continue
         if record.get("status") not in OPEN_CONTENT_FINDING_STATUSES:
             continue
+        resolved_batches = set(record.get("resolution", {}).get("batches", []))
         for batch_id in record.get("batches", []):
-            result.setdefault(batch_id, []).append(record)
+            if batch_id not in resolved_batches:
+                result.setdefault(batch_id, []).append(record)
     for records in result.values():
         records.sort(key=lambda item: item.get("id", ""))
     return result
