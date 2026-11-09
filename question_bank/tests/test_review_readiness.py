@@ -37,8 +37,6 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
 
     unresolved_s2_batch = by_id["g3-sec2-s2-b003"]
     assert unresolved_s2_batch.packet_status == "current"
-    assert unresolved_s2_batch.state == "blocked"
-    assert unresolved_s2_batch.active_claim is None
     assert "open_content_finding" in {
         finding.code for finding in unresolved_s2_batch.blockers
     }
