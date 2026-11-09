@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l1-010",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The point (2, k) lies on the graph y = 5x - 1. Find k."
+          "text": "The point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(2, k)"
+        },
+        {
+          "type": "text",
+          "text": " lies on the graph "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=5x-1"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x = 2."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

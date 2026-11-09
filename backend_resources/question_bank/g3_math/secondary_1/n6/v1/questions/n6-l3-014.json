@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-014",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line passes through (-2, 7) and (4, -5). Write y as an expression in x."
+          "text": "A line passes through "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-2, 7)"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(4,-5)"
+        },
+        {
+          "type": "text",
+          "text": ". Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " as an expression in "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -53,7 +85,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute either point into y = ax + b."
+              "text": "Substitute either point into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=ax+b"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
