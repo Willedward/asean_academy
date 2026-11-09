@@ -41,8 +41,7 @@ reported as `complete` and is not put back into the review queue.
 
 Warnings remain visible but do not silently become approvals. Planned-figure evidence is
 conservative: if the ledger and its explanatory note disagree, the batch stays out of the ready
-list until the ledger is reconciled. This currently catches the stale `s2-l1-507` worklist entry;
-the same ledger record says only `s2-l1-513` needed the new probability-scale chart.
+list until the ledger is reconciled.
 
 The ledger's historical `confirmed` status is audit evidence, not an unresolved-state flag: earlier
 content PRs deliberately preserved it after applying fixes. The readiness gate therefore blocks

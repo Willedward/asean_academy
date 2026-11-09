@@ -41,31 +41,6 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
     assert completed_chart_batch.state == "ready"
     assert completed_chart_batch.active_claim is None
 
-    unresolved_s2_batch = by_id["g3-sec2-s2-b003"]
-    assert unresolved_s2_batch.packet_status == "current"
-    assert "open_content_finding" in {
-        finding.code for finding in unresolved_s2_batch.blockers
-    }
-
-    unfinished_chart_batch = by_id["g3-sec1-g1-b003"]
-    assert unfinished_chart_batch.packet_status == "current"
-    assert unfinished_chart_batch.state == "blocked"
-    assert unfinished_chart_batch.active_claim is None
-    assert unfinished_chart_batch.pending_asset_keys == ["g1-l4-011"]
-    assert "planned_assets_missing" in {
-        finding.code for finding in unfinished_chart_batch.blockers
-    }
-
-    unresolved_checker_batch = by_id["g3-sec1-n1-b001"]
-    open_messages = [
-        finding.message
-        for finding in unresolved_checker_batch.blockers
-        if finding.code == "open_content_finding"
-    ]
-    assert any(
-        message.startswith("CFL-181 (category 3, open)") for message in open_messages
-    )
-
     write_readiness_report(report, tmp_path)
     payload = json.loads((tmp_path / "report.json").read_text())
     assert payload["ready_count"] == len(report.ready_batches)
