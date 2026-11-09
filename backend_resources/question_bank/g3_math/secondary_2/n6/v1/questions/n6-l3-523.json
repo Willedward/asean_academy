@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-523",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.7",
-  "title": "How often a graph meets the x-axis",
+  "title": "How many times the graph meets the x-axis",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,11 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many distinct x-intercepts does "
+          "text": "How many distinct "
         },
         {
           "type": "inline_math",
-          "latex": "y=(x+2)^{2}-4"
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-intercepts does "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=(x+2)^{2}+3"
         },
         {
           "type": "text",
@@ -37,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the axis using standard form, the midpoint of the roots, or the factorised form."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": " and rearrange to isolate the squared bracket."
             }
           ]
         },
@@ -59,15 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the axis input for the turning value, and solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "y=0"
-            },
-            {
-              "type": "text",
-              "text": " when counting x-intercepts."
+              "text": "Can a squared bracket be equal to a negative number?"
             }
           ]
         }
@@ -78,11 +86,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "(x+2)^2=4=(2)^2\\Rightarrow x=-4\\text{ or }x=0,\\text{ so there are 2 distinct intercepts.}"
+              "latex": "(x+2)^2=-3"
+            },
+            {
+              "type": "text",
+              "text": " A square cannot be negative, so there is no solution."
             }
           ],
           "mark_type": "M",
@@ -93,11 +113,23 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "There are "
             },
             {
               "type": "display_math",
-              "latex": "2"
+              "latex": "0"
+            },
+            {
+              "type": "text",
+              "text": " distinct "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-intercepts."
             }
           ],
           "mark_type": "A",

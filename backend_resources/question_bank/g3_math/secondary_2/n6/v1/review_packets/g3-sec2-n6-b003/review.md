@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-518 — Read the second zero from the factors
+## n6-l3-518 — Positive zero with a coefficient
 
 [Open this question in the HTML preview](index.html#n6-l3-518)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l1-516 — Output at the vertex
+## n6-l1-516 — y-coordinate of the turning point
 
 [Open this question in the HTML preview](index.html#n6-l1-516)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-521 — Read the y-intercept
+## n6-l2-521 — y-intercept from completed-square form
 
 [Open this question in the HTML preview](index.html#n6-l2-521)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-523 — How often a graph meets the x-axis
+## n6-l3-523 — How many times the graph meets the x-axis
 
 [Open this question in the HTML preview](index.html#n6-l3-523)
 

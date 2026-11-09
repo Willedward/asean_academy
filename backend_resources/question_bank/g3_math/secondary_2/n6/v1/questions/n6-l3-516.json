@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-516",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -28,7 +28,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(2)=-5"
+          "latex": "f(2)=15"
         },
         {
           "type": "text",
@@ -49,8 +49,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-2",
-        "canonical_latex": "-2",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -82,11 +82,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=2"
+            },
+            {
+              "type": "text",
+              "text": " and simplify. "
             },
             {
               "type": "display_math",
-              "latex": "-5=k(2)^2+2(2)-1\\Rightarrow 4k=-8\\Rightarrow k=-2."
+              "latex": "15=4k+4-1=4k+3"
             }
           ],
           "mark_type": "M",
@@ -97,11 +105,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "-2"
+              "latex": "4k=12,\\ k=3"
             }
           ],
           "mark_type": "A",
