@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-016",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Lina has S$18 more than Amir. Together they have S$126. Let x dollars be Amir's amount. Find x."
+          "text": "Lina has S$18 more than Amir. Together they have S$126. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " dollars be Amir's amount. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Lina's amount is x + 18."
+              "text": "Lina's amount is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+18"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Form x + (x + 18) = 126."
+              "text": "Form "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+(x+18)=126"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

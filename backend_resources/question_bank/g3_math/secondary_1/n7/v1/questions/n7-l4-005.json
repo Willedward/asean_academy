@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-005",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation is true for x = 11."
+          "text": "The equation is true for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=11"
+        },
+        {
+          "type": "text",
+          "text": "."
         },
         {
           "type": "display_math",
@@ -28,7 +36,15 @@
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -50,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x = 11 on both sides."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=11"
+            },
+            {
+              "type": "text",
+              "text": " on both sides."
             }
           ]
         },
@@ -59,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The left side becomes 16, so 11 + k = 16."
+              "text": "Evaluate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2(11-3)"
+            },
+            {
+              "type": "text",
+              "text": " first."
             }
           ]
         }
