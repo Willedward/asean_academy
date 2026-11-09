@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-518",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Violet Reed Bay — Coral laboratory: inequality boundary",
+  "title": "Positive integers on a number line",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l1-518-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The solution of x+6<15 is x<k. Find k, the open-circle boundary on the number line."
+          "text": "The number line shows the solution of x+6<15. How many positive integers satisfy the inequality?"
         }
       ],
       "marks": 1,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "9",
-        "canonical_latex": "9",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the same number from both sides; the inequality sign stays unchanged."
+              "text": "Decide whether the boundary value is included."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 6 from both sides."
+              "text": "List the positive integers 1, 2, 3, ... below the open circle and count them."
             }
           ]
         }
@@ -61,8 +70,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The solution shown is x<9, so the positive integers are 1 to 8."
+            },
+            {
               "type": "display_math",
-              "latex": "x<15-6=9\\Rightarrow k=9"
+              "latex": "x\\in\\{1,2,\\dots,8\\}\\Rightarrow 8\\text{ integers}"
             }
           ],
           "mark_type": "A",
@@ -72,7 +85,137 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l1-518-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l1-518-diagram-r2.svg",
+      "alt_text": "Number line showing values less than 9.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l1-518",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 9,
+          "relation": "<",
+          "title": "Number line",
+          "x_min": 0,
+          "x_max": 11
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "open-boundary",
+            "value": "9",
+            "tag": "circle",
+            "geometry": {
+              "cx": "570.909091",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "80",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "134.545455",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "189.090909",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "243.636364",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "298.181818",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "352.727273",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "407.272727",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "461.818182",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "516.363636",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "570.909091",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "625.454545",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "680",
+            "label": "11"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "9788d8e89293e6a74a8718cf321530afc12afdf0551b3e663897b1377f4b9ee6",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +229,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

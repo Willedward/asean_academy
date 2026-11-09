@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-528",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.7",
-  "title": "Silver Teak Bay — Robotics club: coordinate on a line",
+  "title": "Triangle under a line graph",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l3-528-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A sensor point ( 7, k ) lies on 3x+3y=30. Find k and hence locate the point on the graph."
+          "text": "The straight line shown and the two coordinate axes enclose a triangle. Find the area of this triangle in square units."
         }
       ],
       "marks": 3,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "50",
+        "canonical_latex": "50",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Coordinates on a line satisfy its equation."
+              "text": "Find where the line crosses each axis."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Put x=7 and y=k into the equation."
+              "text": "The triangle has its right angle at the origin, so use half × base × height."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "The line crosses the axes at (10, 0) and (0, 10), so the base and height are both 10."
             },
             {
               "type": "display_math",
-              "latex": "3(7)+3k=30\\Rightarrow 3k=9\\Rightarrow k=3"
+              "latex": "\\text{base}=10,\\quad\\text{height}=10"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "Apply the area formula."
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "\\text{area}=\\tfrac{1}{2}\\times 10\\times 10=50"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,239 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l3-528-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l3-528-diagram-r2.svg",
+      "alt_text": "Straight line through the grid points (0, 10), (7, 3) and (10, 0).",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "coordinate_line",
+        "question_key": "n7-l3-528",
+        "outcome": "7.7",
+        "template": "coordinate_line",
+        "inputs": {
+          "a": 3,
+          "b": 3,
+          "c": 30,
+          "x_min": 0,
+          "x_max": 11,
+          "y_min": -1,
+          "y_max": 11,
+          "title": "Straight-line graph",
+          "alt_text": "Straight line through the grid points (0, 10), (7, 3) and (10, 0)."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "line",
+            "kind": "coordinate-line",
+            "value": "3,3,30",
+            "tag": "line",
+            "geometry": {
+              "x1": "90",
+              "y1": "88.75",
+              "x2": "680",
+              "y2": "405"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "90",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "143.636364",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "197.272727",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "250.909091",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "304.545455",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "358.181818",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "411.818182",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "465.454545",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "519.090909",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "572.727273",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "626.363636",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "680",
+            "label": "11"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "405",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "376.25",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "347.5",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "318.75",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "290",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "261.25",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "232.5",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "203.75",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "175",
+            "label": "7"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "146.25",
+            "label": "8"
+          },
+          {
+            "key": "y:9",
+            "axis": "y",
+            "value": "9",
+            "position": "117.5",
+            "label": "9"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "88.75",
+            "label": "10"
+          },
+          {
+            "key": "y:11",
+            "axis": "y",
+            "value": "11",
+            "position": "60",
+            "label": "11"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": 0.0,
+          "x_max": 11.0,
+          "y_min": -1.0,
+          "y_max": 11.0
+        }
+      },
+      "sha256": "4ea39950b540bf692fe6cea1ddd08060eadfb00c412bc516b3f2c68ccaa6cc05",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +346,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
