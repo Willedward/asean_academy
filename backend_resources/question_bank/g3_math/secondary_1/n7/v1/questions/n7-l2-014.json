@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-014",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Ravi already has S$35 and saves S$12 each week. After x weeks he has S$119. Find x."
+          "text": "Ravi already has S$35 and saves S$12 each week. After "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " weeks he has S$119. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the final savings as 35 + 12x."
+              "text": "Write the final savings as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "35+12x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },

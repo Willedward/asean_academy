@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-010",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equations x + 4 = 10 and 3x = k have the same solution."
+          "text": "The equations "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+4=10"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x=k"
+        },
+        {
+          "type": "text",
+          "text": " have the same solution."
         },
         {
           "type": "display_math",
@@ -28,7 +44,15 @@
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -50,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "First find the solution of x + 4 = 10."
+              "text": "First find the solution of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+4=10"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -59,7 +91,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute that value of x into 3x."
+              "text": "Substitute that value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

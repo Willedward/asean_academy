@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-011",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle has length 5 cm and perimeter 26 cm. Let x cm be its width. Find x."
+          "text": "A rectangle has length 5 cm and perimeter 26 cm. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " cm be its width. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 2(5 + x) = 26."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2(5+x)=26"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
