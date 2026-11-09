@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-025",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Subtract 2x and then subtract 1 from both sides to obtain 2x = k."
+          "text": "Subtract "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x"
+        },
+        {
+          "type": "text",
+          "text": " and then subtract 1 from both sides to obtain "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x=k"
+        },
+        {
+          "type": "text",
+          "text": "."
         },
         {
           "type": "display_math",
@@ -28,7 +44,15 @@
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -50,7 +74,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Removing 2x leaves 2x + 1 = 11."
+              "text": "Removing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x"
+            },
+            {
+              "type": "text",
+              "text": " leaves "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+1=11"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },

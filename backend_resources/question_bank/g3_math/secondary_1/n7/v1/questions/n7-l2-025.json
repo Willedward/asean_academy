@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-025",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation is changed to the equivalent equation 3x = 15 by subtracting k from both sides."
+          "text": "The equation is changed to the equivalent equation "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x=15"
+        },
+        {
+          "type": "text",
+          "text": " by subtracting "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " from both sides."
         },
         {
           "type": "display_math",
@@ -28,7 +44,15 @@
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -50,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Identify the constant added to 3x."
+              "text": "Identify the constant added to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -59,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 4 from each side."
+              "text": "Which constant is added to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x"
+            },
+            {
+              "type": "text",
+              "text": "? Subtract that number from both sides."
             }
           ]
         }
