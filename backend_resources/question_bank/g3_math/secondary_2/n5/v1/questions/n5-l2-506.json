@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l2-506",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify (3x/4y)÷(6x²/8y²)."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\left(\\frac{3x}{4y}\\right)\\div \\left(\\frac{6x^{2}}{8y^{2}}\\right)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -30,7 +38,7 @@
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
         "canonical_expression": "(y)/(x)",
-        "canonical_latex": "(y)/(x)",
+        "canonical_latex": "\\frac{y}{x}",
         "variables": [
           "x",
           "y"
@@ -71,7 +79,7 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{3x}{4y}\\times\\frac{8y^2}{6x^2}=(y)/(x)"
+              "latex": "\\frac{3x}{4y}\\times\\frac{8y^2}{6x^2}=\\frac{y}{x}"
             }
           ],
           "mark_type": "M",
@@ -86,7 +94,7 @@
             },
             {
               "type": "display_math",
-              "latex": "(y)/(x)"
+              "latex": "\\frac{y}{x}"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-503",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Evaluate (55+5)(55-5) using an identity."
+          "text": "Evaluate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(55+5)(55-5)"
+        },
+        {
+          "type": "text",
+          "text": " using an identity."
         }
       ],
       "marks": 3,
