@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l2-507",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.7",
-  "title": "y-intercept of a quadratic graph",
+  "title": "y-intercept from factorised form",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -24,11 +24,27 @@
         },
         {
           "type": "inline_math",
-          "latex": "y=-x^{2}+6x-13"
+          "latex": "y=(x-3)(2x+1)"
         },
         {
           "type": "text",
-          "text": ", find the y-coordinate where the graph crosses the y-axis."
+          "text": ", find the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": "-coordinate of the point where the graph crosses the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": "-axis."
         }
       ],
       "marks": 2,
@@ -37,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-13",
-        "canonical_latex": "-13",
+        "canonical_answer": "-3",
+        "canonical_latex": "-3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,15 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
+              "text": "The graph crosses the "
             },
             {
               "type": "inline_math",
-              "latex": "x=\\frac{-b}{2a}"
+              "latex": "y"
             },
             {
               "type": "text",
-              "text": ", set "
+              "text": "-axis where "
             },
             {
               "type": "inline_math",
@@ -66,7 +82,7 @@
             },
             {
               "type": "text",
-              "text": " for the y-intercept, or reflect the input across the axis."
+              "text": "."
             }
           ]
         },
@@ -75,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Once the axis input is known, substitute it into the original rule to find the turning value."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
+              "type": "text",
+              "text": " into each bracket, then multiply."
             }
           ]
         }
@@ -86,11 +110,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
-            },
-            {
-              "type": "text",
-              "text": "At the y-intercept "
+              "text": "Substitute "
             },
             {
               "type": "inline_math",
@@ -98,15 +118,11 @@
             },
             {
               "type": "text",
-              "text": ", so "
+              "text": ". "
             },
             {
-              "type": "inline_math",
-              "latex": "y=-13"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "type": "display_math",
+              "latex": "y=(0-3)(2(0)+1)=(-3)(1)"
             }
           ],
           "mark_type": "M",
@@ -117,11 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "-13"
+              "latex": "y=-3"
             }
           ],
           "mark_type": "A",

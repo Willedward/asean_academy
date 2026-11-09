@@ -143,16 +143,32 @@ Judgement calls made in PRs, each easy to reverse:
 
 ### Switching tutor models
 
-Read from the code, not yet run end to end.
+Provider and model are chosen by GitHub Actions variables, read by both deploy workflows through
+`services/learning_api/scripts/tutor_deploy_settings.py`. Set them on the `staging` or `production`
+environment (or the repository for both), then redeploy. With none set, deploys stay on today's pilot:
+Gemini `gemini-3.5-flash-lite`, premium routing off.
 
-- **Another Gemini model:** change the model and cost settings in `.github/workflows/deploy-staging.yml`
-  and `deploy-production.yml`, which set them directly.
-- **OpenAI:** `OpenAITutorProvider` exists. Set `ASEAN_ACADEMY_TUTOR_PROVIDER=openai`,
-  `OPENAI_API_KEY` and `ASEAN_ACADEMY_TUTOR_OPENAI_MODEL`, and update the two deploy files, which are
-  written for Gemini only.
-- **Another company:** add a provider class in `services/learning_api/src/learning_api/tutor_provider.py`
-  and allow it in `config.py`.
-- Whichever you choose, rerun tutor safety and calibration first.
+| Variable | Value |
+| --- | --- |
+| `TUTOR_PROVIDER` | `gemini` (default) or `openai` |
+| `TUTOR_MODEL` | Model name; needed for `openai` or any Gemini model other than the default |
+| `TUTOR_INPUT_COST_PER_MILLION_MICROS_SGD` | Price per million input tokens; needed unless on the default model |
+| `TUTOR_OUTPUT_COST_PER_MILLION_MICROS_SGD` | Price per million output tokens; same rule |
+
+Keys are secrets named `<STAGING|PRODUCTION>_<GEMINI|OPENAI>_API_KEY`, matching the provider.
+
+1. Rerun tutor safety and calibration for the new provider or model before switching. The calibration
+   lab at `/admin/tutor-evaluation` can only run Gemini or synthetic today, so OpenAI needs the lab extended
+   or a manual review first.
+2. Add the key secret for the new provider, then set the variables above and redeploy staging.
+3. The deploy fails before changing anything if a combination is wrong: unknown provider, missing model,
+   missing key, missing or non-numeric prices, or a model that doesn't belong to the provider. The API
+   applies the same checks at start-up (`learning_api/config.py`).
+4. Check a tutor turn on staging, then do the same for production.
+
+Deploys always set hybrid and shadow routing off; turning those on is a separate release decision.
+To add another company, add a provider class in `services/learning_api/src/learning_api/tutor_provider.py`,
+allow it in `config.py` and add it to `_PROVIDERS` in the deploy script.
 
 ### Local setup notes
 

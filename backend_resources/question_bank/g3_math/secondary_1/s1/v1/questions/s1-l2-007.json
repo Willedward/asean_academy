@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-007",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -70,12 +70,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{96-90}{92-90}=3"
+              "type": "inline_math",
+              "latex": "62-60=2\\quad\\text{and}\\quad 68-60=8"
             }
           ],
-          "mark_type": "B",
-          "mark_value": 2
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "\\frac{8}{2}=4"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }
@@ -86,8 +97,8 @@
       "asset_key": "s1-l2-007-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-007-diagram-r2.svg",
-      "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96.",
+      "path": "assets/s1-l2-007-diagram-r3.svg",
+      "alt_text": "Bar chart with an axis break and a vertical axis from 60 to 70 in steps of 2. A: 62, B: 68.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -100,15 +111,15 @@
             "B"
           ],
           "values": [
-            92,
-            96
+            62,
+            68
           ],
-          "y_max": 98,
+          "y_max": 70,
           "tick_step": 2,
           "y_label": "Score",
           "title": "Two scores",
-          "y_min": 90,
-          "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96."
+          "y_min": 60,
+          "alt_text": "Bar chart with an axis break and a vertical axis from 60 to 70 in steps of 2. A: 62, B: 68."
         },
         "viewbox": [
           720,
@@ -118,63 +129,70 @@
           {
             "key": "bar-0",
             "kind": "bar",
-            "value": "92",
+            "value": "62",
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "315",
+              "y": "329",
               "width": "177",
-              "height": "70"
+              "height": "56"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "96",
+            "value": "68",
             "tag": "rect",
             "geometry": {
               "x": "444",
-              "y": "175",
+              "y": "161",
               "width": "177",
-              "height": "210"
+              "height": "224"
             }
           }
         ],
         "chart_ticks": [
           {
-            "key": "y:90",
+            "key": "y:60",
             "axis": "y",
-            "value": "90",
+            "value": "60",
             "position": "385",
-            "label": "90"
+            "label": "60"
           },
           {
-            "key": "y:92",
+            "key": "y:62",
             "axis": "y",
-            "value": "92",
-            "position": "315",
-            "label": "92"
+            "value": "62",
+            "position": "329",
+            "label": "62"
           },
           {
-            "key": "y:94",
+            "key": "y:64",
             "axis": "y",
-            "value": "94",
-            "position": "245",
-            "label": "94"
+            "value": "64",
+            "position": "273",
+            "label": "64"
           },
           {
-            "key": "y:96",
+            "key": "y:66",
             "axis": "y",
-            "value": "96",
-            "position": "175",
-            "label": "96"
+            "value": "66",
+            "position": "217",
+            "label": "66"
           },
           {
-            "key": "y:98",
+            "key": "y:68",
             "axis": "y",
-            "value": "98",
+            "value": "68",
+            "position": "161",
+            "label": "68"
+          },
+          {
+            "key": "y:70",
+            "axis": "y",
+            "value": "70",
             "position": "105",
-            "label": "98"
+            "label": "70"
           },
           {
             "key": "x:A",
@@ -194,12 +212,12 @@
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43,
         "axis": {
-          "y_min": 90.0,
-          "y_max": 98.0,
+          "y_min": 60.0,
+          "y_max": 70.0,
           "tick_step": 2.0
         }
       },
-      "sha256": "329c2bac5a6d2702f34d1d82b4396c7c23ab7b411891b4ef4866fb55901b2661",
+      "sha256": "b4de28a2ed629c9aa278729d867d40000402f333c4f1dc2847f624c6a2a3166c",
       "width": 720,
       "height": 480
     }

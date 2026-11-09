@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-008",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -70,12 +70,39 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{4^2}{100/25}=4"
+              "type": "text",
+              "text": "Area ratio "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{4^2}{1^2}=16"
+            },
+            {
+              "type": "text",
+              "text": " and data ratio "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{100}{25}=4"
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "16\\div4=4"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
@@ -86,7 +113,7 @@
       "asset_key": "s1-l3-008-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-008-diagram-r2.svg",
+      "path": "assets/s1-l3-008-diagram-r3.svg",
       "alt_text": "Two circles: Value 25 with diameter 1 unit and Value 100 with diameter 4 units.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
