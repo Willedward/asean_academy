@@ -1,0 +1,526 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g5-l3-951",
+    "bank_key": "g3-sec2-g5-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G5",
+    "primary_outcome": "5.6",
+    "title": "Surface area of a spherical lantern",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A spherical lantern has radius 4.5 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l3-951-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Using the calculator's value of π, find its surface area in cm², correct to 1 decimal place."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "5.6",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "254.5",
+          "canonical_latex": "254.5",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use the surface area formula for a sphere."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Substitute r = 4.5 into 4πr²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=4\\pi(4.5)^2=81\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=254.5\\text{ cm}^2\\text{ (1 d.p.)}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g5-l3-951-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l3-951-diagram.svg",
+        "alt_text": "A sphere with radius 4.5 cm marked from its centre.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g5-l3-951",
+          "not_to_scale": true,
+          "relationships": [
+            "A sphere with radius 4.5 cm marked from its centre."
+          ]
+        },
+        "sha256": "efefefb5d894c96d44a7f416531ae23782aafbacd82f4a059d8decba33c26a37",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g5-l4-952",
+    "bank_key": "g3-sec2-g5-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G5",
+    "primary_outcome": "5.6",
+    "title": "Total surface area of a closed cone",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A closed cone has radius 5 cm and slant height 13 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l4-952-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Using the calculator's value of π, find its total surface area in cm², correct to 1 decimal place."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "5.6",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "282.7",
+          "canonical_latex": "282.7",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Total surface area includes the curved surface and the circular base."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Calculate πrl + πr² with r = 5 and l = 13."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=\\pi(5)(13)+\\pi(5)^2=65\\pi+25\\pi=90\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=282.7\\text{ cm}^2\\text{ (1 d.p.)}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g5-l4-952-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l4-952-diagram.svg",
+        "alt_text": "A closed cone with radius 5 cm and slant height 13 cm.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g5-l4-952",
+          "not_to_scale": true,
+          "relationships": [
+            "A closed cone with radius 5 cm and slant height 13 cm."
+          ]
+        },
+        "sha256": "d2938757bafd1120c6920030c4edbccec63e836fbc3d20af091efd99ef7b5d9a",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g5-l3-953",
+    "bank_key": "g3-sec2-g5-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G5",
+    "primary_outcome": "5.6",
+    "title": "Volume of a square-based pyramid",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A square-based pyramid has base side 12 cm and perpendicular height 9 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l3-953-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find its volume in cm³. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "5.6",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "432",
+          "canonical_latex": "432",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find the square base area before using the pyramid volume formula."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use V = (1/3) × 12² × 9."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Base area}=12^2=144\\text{ cm}^2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=\\frac13(144)(9)=432\\text{ cm}^3"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g5-l3-953-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l3-953-diagram-r2.svg",
+        "alt_text": "A square-based pyramid with base side 12 cm and perpendicular height 9 cm.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g5-l3-953",
+          "not_to_scale": true,
+          "relationships": [
+            "A square-based pyramid with base side 12 cm and perpendicular height 9 cm."
+          ]
+        },
+        "sha256": "98b0b112bae65762c42c31180a9fb3605a369366c493ed3b20554db6c2ce60f2",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g5-l4-954",
+    "bank_key": "g3-sec2-g5-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G5",
+    "primary_outcome": "5.6",
+    "title": "Volume of a composite ornament",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A solid ornament consists of a cone joined to a hemisphere of the same radius. The common radius is 3 cm and the cone's perpendicular height is 8 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l4-954-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Using the calculator's value of π, find the total volume in cm³, correct to 1 decimal place."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "5.6",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "131.9",
+          "canonical_latex": "131.9",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the cone volume and hemisphere volume; do not count the joined circular face."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use (1/3)π(3²)(8) + (2/3)π(3³)."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=24\\pi+18\\pi=42\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=131.9\\text{ cm}^3\\text{ (1 d.p.)}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g5-l4-954-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l4-954-diagram.svg",
+        "alt_text": "A cone of height 8 cm joined to a hemisphere, both with radius 3 cm.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g5-l4-954",
+          "not_to_scale": true,
+          "relationships": [
+            "A cone of height 8 cm joined to a hemisphere, both with radius 3 cm."
+          ]
+        },
+        "sha256": "7e919d8122a872eea59110212d234a26173afe009cb4fe578016f86c40802308",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  }
+]
