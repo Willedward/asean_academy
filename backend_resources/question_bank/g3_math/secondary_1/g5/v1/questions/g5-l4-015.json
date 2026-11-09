@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-015",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A closed prism has a rectangular cross-section 5 cm by 4 cm and length x cm. Its volume plus its total surface area is 420 when numerical values are added. Find x. Enter the numerical value only."
+          "text": "A closed prism has a rectangular cross-section 5 cm by 4 cm and length "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " cm. Its volume plus its total surface area is 420 when numerical values are added. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write volume and surface area in terms of x."
+              "text": "Write volume and surface area in terms of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Volume is 20x and surface area is 40 + 18x."
+              "text": "Volume is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "20x"
+            },
+            {
+              "type": "text",
+              "text": " and surface area is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "40+18x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
