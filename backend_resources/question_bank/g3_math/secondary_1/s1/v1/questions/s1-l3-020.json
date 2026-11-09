@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-020",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-020-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Four bar heights have total 96. Three heights are 18, 25 and 31. Find the fourth height. Enter the numerical value only."
+          "text": "The four bars in the chart have a total height of 96. Find the height of bar D. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 96 - 18 - 25 - 31."
+              "text": "Subtract the three heights shown from 96."
             }
           ]
         }
@@ -72,7 +81,195 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-020-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-020-diagram-r2.svg",
+      "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l3-020",
+        "outcome": "1.2",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": [
+            18,
+            25,
+            31,
+            null
+          ],
+          "y_max": 35,
+          "tick_step": 5,
+          "y_label": "Height",
+          "title": "Four bars",
+          "show_values": true,
+          "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
+          "forbidden_visible_labels": [
+            "22"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "18",
+            "tag": "rect",
+            "geometry": {
+              "x": "119.5",
+              "y": "241",
+              "width": "88.5",
+              "height": "144"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "25",
+            "tag": "rect",
+            "geometry": {
+              "x": "267",
+              "y": "185",
+              "width": "88.5",
+              "height": "200"
+            }
+          },
+          {
+            "key": "bar-2",
+            "kind": "bar",
+            "value": "31",
+            "tag": "rect",
+            "geometry": {
+              "x": "414.5",
+              "y": "137",
+              "width": "88.5",
+              "height": "248"
+            }
+          },
+          {
+            "key": "bar-3",
+            "kind": "unknown-bar",
+            "value": "?",
+            "tag": "text",
+            "geometry": {
+              "x": "606.25",
+              "y": "371"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "385",
+            "label": "0"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "345",
+            "label": "5"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "305",
+            "label": "10"
+          },
+          {
+            "key": "y:15",
+            "axis": "y",
+            "value": "15",
+            "position": "265",
+            "label": "15"
+          },
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "225",
+            "label": "20"
+          },
+          {
+            "key": "y:25",
+            "axis": "y",
+            "value": "25",
+            "position": "185",
+            "label": "25"
+          },
+          {
+            "key": "y:30",
+            "axis": "y",
+            "value": "30",
+            "position": "145",
+            "label": "30"
+          },
+          {
+            "key": "y:35",
+            "axis": "y",
+            "value": "35",
+            "position": "105",
+            "label": "35"
+          },
+          {
+            "key": "x:A",
+            "axis": "x",
+            "value": "A",
+            "position": "163.75",
+            "label": "A"
+          },
+          {
+            "key": "x:B",
+            "axis": "x",
+            "value": "B",
+            "position": "311.25",
+            "label": "B"
+          },
+          {
+            "key": "x:C",
+            "axis": "x",
+            "value": "C",
+            "position": "458.75",
+            "label": "C"
+          },
+          {
+            "key": "x:D",
+            "axis": "x",
+            "value": "D",
+            "position": "606.25",
+            "label": "D"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "22"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 0.0,
+          "y_max": 35.0,
+          "tick_step": 5.0
+        }
+      },
+      "sha256": "99ea292061d0b7a0db466558bbb0fdd98fc27461fc943cf0390db39892cfa984",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +283,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

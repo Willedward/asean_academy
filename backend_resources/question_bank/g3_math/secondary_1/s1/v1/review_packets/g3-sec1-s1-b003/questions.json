@@ -569,7 +569,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-013",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -581,7 +581,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-013-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -589,7 +598,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A line graph records temperatures of 24°C at 10:00, 27°C at 12:00 and 25°C at 14:00. Enter the temperature at 12:00 in °C as a number only."
+            "text": "The line graph shows the temperature at three times. Enter the temperature at 12:00 in °C as a number only."
           }
         ],
         "marks": 1,
@@ -627,7 +636,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The stated point is 27°C."
+                "text": "Read across from that point to the vertical scale. It may lie between two labelled marks."
               }
             ]
           }
@@ -648,7 +657,160 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-013-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-013-diagram-r3.svg",
+        "alt_text": "Line graph of temperature at 10:00, 12:00 and 14:00, with an axis break and a vertical axis from 20 to 30 °C in steps of 2.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l1-013",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "10:00",
+              "12:00",
+              "14:00"
+            ],
+            "values": [
+              24,
+              27,
+              25
+            ],
+            "y_min": 20,
+            "y_max": 30,
+            "tick_step": 2,
+            "y_label": "°C",
+            "title": "Temperature",
+            "axis_break": true,
+            "alt_text": "Line graph of temperature at 10:00, 12:00 and 14:00, with an axis break and a vertical axis from 20 to 30 °C in steps of 2.",
+            "forbidden_visible_labels": [
+              "27"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "24",
+              "tag": "circle",
+              "geometry": {
+                "cx": "188.333333",
+                "cy": "273",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "27",
+              "tag": "circle",
+              "geometry": {
+                "cx": "385",
+                "cy": "189",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-2",
+              "kind": "point",
+              "value": "25",
+              "tag": "circle",
+              "geometry": {
+                "cx": "581.666667",
+                "cy": "245",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "385",
+              "label": "20"
+            },
+            {
+              "key": "y:22",
+              "axis": "y",
+              "value": "22",
+              "position": "329",
+              "label": "22"
+            },
+            {
+              "key": "y:24",
+              "axis": "y",
+              "value": "24",
+              "position": "273",
+              "label": "24"
+            },
+            {
+              "key": "y:26",
+              "axis": "y",
+              "value": "26",
+              "position": "217",
+              "label": "26"
+            },
+            {
+              "key": "y:28",
+              "axis": "y",
+              "value": "28",
+              "position": "161",
+              "label": "28"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "105",
+              "label": "30"
+            },
+            {
+              "key": "x:10:00",
+              "axis": "x",
+              "value": "10:00",
+              "position": "188.333333",
+              "label": "10:00"
+            },
+            {
+              "key": "x:12:00",
+              "axis": "x",
+              "value": "12:00",
+              "position": "385",
+              "label": "12:00"
+            },
+            {
+              "key": "x:14:00",
+              "axis": "x",
+              "value": "14:00",
+              "position": "581.666667",
+              "label": "14:00"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "27"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 20.0,
+            "y_max": 30.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "c6d2c490bd370f97d79f006a71142fc9bb1e5bfbe366245a04abcaae2462e80a",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -662,24 +824,33 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-014",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.2",
-    "title": "Quarter-circle sector",
+    "title": "Sector angle from a labelled fraction",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-014-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -687,7 +858,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pie chart sector occupies one quarter of the circle. Find its angle in degrees. Enter the numerical value only."
+            "text": "One sector of the pie chart is labelled with its fraction of the circle. Find its angle in degrees. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -718,7 +889,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate one quarter of 360°."
+                "text": "Find that fraction of 360°."
               }
             ]
           }
@@ -739,7 +910,69 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-014-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-014-diagram-r2.svg",
+        "alt_text": "Pie chart with a sector labelled one quarter and the rest of the circle labelled Rest.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pie_chart",
+          "question_key": "s1-l1-014",
+          "outcome": "1.2",
+          "template": "pie_chart",
+          "inputs": {
+            "labels": [
+              "¼",
+              "Rest"
+            ],
+            "values": [
+              1,
+              3
+            ],
+            "title": "Pie chart",
+            "alt_text": "Pie chart with a sector labelled one quarter and the rest of the circle labelled Rest.",
+            "forbidden_visible_labels": [
+              "90"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "sector-0",
+              "kind": "pie-sector",
+              "value": "1",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L360 90 A160 160 0 0 1 520 250 Z"
+              }
+            },
+            {
+              "key": "sector-1",
+              "kind": "pie-sector",
+              "value": "3",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L520 250 A160 160 0 1 1 360 90 Z"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [
+            "90"
+          ],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "3a21e2d5b8a620a015c852e4097e5619929bc53c5b919d8ce47ddbcfe0ad668c",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -753,7 +986,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -857,7 +1090,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-019",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -869,7 +1102,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-019-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -877,7 +1119,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Three bars have heights 14, 19 and 17. Find their combined frequency. Enter the numerical value only."
+            "text": "The bar chart shows three frequencies. Find their combined frequency. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -908,7 +1150,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 14 + 19 + 17."
+                "text": "Read each bar against the scale, then add the three values."
               }
             ]
           }
@@ -929,7 +1171,190 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-019-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-019-diagram-r2.svg",
+        "alt_text": "Bar chart with A: 14, B: 19, C: 17.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l2-019",
+          "outcome": "1.2",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "A",
+              "B",
+              "C"
+            ],
+            "values": [
+              14,
+              19,
+              17
+            ],
+            "y_max": 20,
+            "tick_step": 2,
+            "y_label": "Frequency",
+            "title": "Three frequencies"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "14",
+              "tag": "rect",
+              "geometry": {
+                "x": "129.333333",
+                "y": "189",
+                "width": "118",
+                "height": "196"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "19",
+              "tag": "rect",
+              "geometry": {
+                "x": "326",
+                "y": "119",
+                "width": "118",
+                "height": "266"
+              }
+            },
+            {
+              "key": "bar-2",
+              "kind": "bar",
+              "value": "17",
+              "tag": "rect",
+              "geometry": {
+                "x": "522.666667",
+                "y": "147",
+                "width": "118",
+                "height": "238"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:2",
+              "axis": "y",
+              "value": "2",
+              "position": "357",
+              "label": "2"
+            },
+            {
+              "key": "y:4",
+              "axis": "y",
+              "value": "4",
+              "position": "329",
+              "label": "4"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "301",
+              "label": "6"
+            },
+            {
+              "key": "y:8",
+              "axis": "y",
+              "value": "8",
+              "position": "273",
+              "label": "8"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "245",
+              "label": "10"
+            },
+            {
+              "key": "y:12",
+              "axis": "y",
+              "value": "12",
+              "position": "217",
+              "label": "12"
+            },
+            {
+              "key": "y:14",
+              "axis": "y",
+              "value": "14",
+              "position": "189",
+              "label": "14"
+            },
+            {
+              "key": "y:16",
+              "axis": "y",
+              "value": "16",
+              "position": "161",
+              "label": "16"
+            },
+            {
+              "key": "y:18",
+              "axis": "y",
+              "value": "18",
+              "position": "133",
+              "label": "18"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "105",
+              "label": "20"
+            },
+            {
+              "key": "x:A",
+              "axis": "x",
+              "value": "A",
+              "position": "188.333333",
+              "label": "A"
+            },
+            {
+              "key": "x:B",
+              "axis": "x",
+              "value": "B",
+              "position": "385",
+              "label": "B"
+            },
+            {
+              "key": "x:C",
+              "axis": "x",
+              "value": "C",
+              "position": "581.666667",
+              "label": "C"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 20.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "066cba0f068266d82e7e19433bfd18bcf06124ddb8a0b026c68c5c0e54a401c2",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -943,12 +1368,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-019",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -960,7 +1385,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-019-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -968,7 +1402,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A line graph rises from 30 at week 1 to 54 at week 4 through three equal weekly intervals. Find the average increase per interval. Enter the numerical value only."
+            "text": "The line graph shows a value at week 1 and at week 4, with three equal weekly intervals between them. Find the average increase per interval. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -999,7 +1433,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide the total rise by three."
+                "text": "Find the total rise from the graph, then divide by three."
               }
             ]
           }
@@ -1031,7 +1465,168 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-019-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-019-diagram-r2.svg",
+        "alt_text": "Line graph with Week 1: 30, Week 4: 54.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l3-019",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "Week 1",
+              "Week 4"
+            ],
+            "values": [
+              30,
+              54
+            ],
+            "y_min": 0,
+            "y_max": 60,
+            "tick_step": 6,
+            "y_label": "Value",
+            "title": "Value by week"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "30",
+              "tag": "circle",
+              "geometry": {
+                "cx": "237.5",
+                "cy": "245",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "54",
+              "tag": "circle",
+              "geometry": {
+                "cx": "532.5",
+                "cy": "133",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "357",
+              "label": "6"
+            },
+            {
+              "key": "y:12",
+              "axis": "y",
+              "value": "12",
+              "position": "329",
+              "label": "12"
+            },
+            {
+              "key": "y:18",
+              "axis": "y",
+              "value": "18",
+              "position": "301",
+              "label": "18"
+            },
+            {
+              "key": "y:24",
+              "axis": "y",
+              "value": "24",
+              "position": "273",
+              "label": "24"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "245",
+              "label": "30"
+            },
+            {
+              "key": "y:36",
+              "axis": "y",
+              "value": "36",
+              "position": "217",
+              "label": "36"
+            },
+            {
+              "key": "y:42",
+              "axis": "y",
+              "value": "42",
+              "position": "189",
+              "label": "42"
+            },
+            {
+              "key": "y:48",
+              "axis": "y",
+              "value": "48",
+              "position": "161",
+              "label": "48"
+            },
+            {
+              "key": "y:54",
+              "axis": "y",
+              "value": "54",
+              "position": "133",
+              "label": "54"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "105",
+              "label": "60"
+            },
+            {
+              "key": "x:Week 1",
+              "axis": "x",
+              "value": "Week 1",
+              "position": "237.5",
+              "label": "Week 1"
+            },
+            {
+              "key": "x:Week 4",
+              "axis": "x",
+              "value": "Week 4",
+              "position": "532.5",
+              "label": "Week 4"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 60.0,
+            "tick_step": 6.0
+          }
+        },
+        "sha256": "25e91b75c7a6a51e4058e37db82b2964a871fb5c98dc1298f96883edd46ea111",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1045,12 +1640,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-020",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1062,7 +1657,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-020-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1070,7 +1674,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Four bar heights have total 96. Three heights are 18, 25 and 31. Find the fourth height. Enter the numerical value only."
+            "text": "The four bars in the chart have a total height of 96. Find the height of bar D. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1101,7 +1705,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 96 - 18 - 25 - 31."
+                "text": "Subtract the three heights shown from 96."
               }
             ]
           }
@@ -1122,7 +1726,195 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-020-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-020-diagram-r2.svg",
+        "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l3-020",
+          "outcome": "1.2",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "values": [
+              18,
+              25,
+              31,
+              null
+            ],
+            "y_max": 35,
+            "tick_step": 5,
+            "y_label": "Height",
+            "title": "Four bars",
+            "show_values": true,
+            "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
+            "forbidden_visible_labels": [
+              "22"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "18",
+              "tag": "rect",
+              "geometry": {
+                "x": "119.5",
+                "y": "241",
+                "width": "88.5",
+                "height": "144"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "25",
+              "tag": "rect",
+              "geometry": {
+                "x": "267",
+                "y": "185",
+                "width": "88.5",
+                "height": "200"
+              }
+            },
+            {
+              "key": "bar-2",
+              "kind": "bar",
+              "value": "31",
+              "tag": "rect",
+              "geometry": {
+                "x": "414.5",
+                "y": "137",
+                "width": "88.5",
+                "height": "248"
+              }
+            },
+            {
+              "key": "bar-3",
+              "kind": "unknown-bar",
+              "value": "?",
+              "tag": "text",
+              "geometry": {
+                "x": "606.25",
+                "y": "371"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:5",
+              "axis": "y",
+              "value": "5",
+              "position": "345",
+              "label": "5"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "305",
+              "label": "10"
+            },
+            {
+              "key": "y:15",
+              "axis": "y",
+              "value": "15",
+              "position": "265",
+              "label": "15"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "225",
+              "label": "20"
+            },
+            {
+              "key": "y:25",
+              "axis": "y",
+              "value": "25",
+              "position": "185",
+              "label": "25"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "145",
+              "label": "30"
+            },
+            {
+              "key": "y:35",
+              "axis": "y",
+              "value": "35",
+              "position": "105",
+              "label": "35"
+            },
+            {
+              "key": "x:A",
+              "axis": "x",
+              "value": "A",
+              "position": "163.75",
+              "label": "A"
+            },
+            {
+              "key": "x:B",
+              "axis": "x",
+              "value": "B",
+              "position": "311.25",
+              "label": "B"
+            },
+            {
+              "key": "x:C",
+              "axis": "x",
+              "value": "C",
+              "position": "458.75",
+              "label": "C"
+            },
+            {
+              "key": "x:D",
+              "axis": "x",
+              "value": "D",
+              "position": "606.25",
+              "label": "D"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "22"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 35.0,
+            "tick_step": 5.0
+          }
+        },
+        "sha256": "99ea292061d0b7a0db466558bbb0fdd98fc27461fc943cf0390db39892cfa984",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1136,12 +1928,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-010",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1153,7 +1945,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-010-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1161,7 +1962,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cumulative line graph shows 24 units after day 2 and 63 after day 5. The increases on days 3 and 4 are 11 and 16. Find the increase on day 5. Enter the numerical value only."
+            "text": "The cumulative line graph shows the total units after day 2 and after day 5. The increases on days 3 and 4 were 11 and 16. Find the increase on day 5. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1183,7 +1984,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The total increase from day 2 to day 5 is 39."
+                "text": "Find the total increase from day 2 to day 5 using the graph."
               }
             ]
           },
@@ -1224,7 +2025,148 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-010-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-010-diagram-r2.svg",
+        "alt_text": "Line graph with Day 2: 24, Day 5: 63.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l4-010",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "Day 2",
+              "Day 5"
+            ],
+            "values": [
+              24,
+              63
+            ],
+            "y_min": 0,
+            "y_max": 70,
+            "tick_step": 10,
+            "y_label": "Units",
+            "title": "Cumulative units",
+            "show_values": true
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "24",
+              "tag": "circle",
+              "geometry": {
+                "cx": "237.5",
+                "cy": "289",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "63",
+              "tag": "circle",
+              "geometry": {
+                "cx": "532.5",
+                "cy": "133",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "345",
+              "label": "10"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "305",
+              "label": "20"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "265",
+              "label": "30"
+            },
+            {
+              "key": "y:40",
+              "axis": "y",
+              "value": "40",
+              "position": "225",
+              "label": "40"
+            },
+            {
+              "key": "y:50",
+              "axis": "y",
+              "value": "50",
+              "position": "185",
+              "label": "50"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "145",
+              "label": "60"
+            },
+            {
+              "key": "y:70",
+              "axis": "y",
+              "value": "70",
+              "position": "105",
+              "label": "70"
+            },
+            {
+              "key": "x:Day 2",
+              "axis": "x",
+              "value": "Day 2",
+              "position": "237.5",
+              "label": "Day 2"
+            },
+            {
+              "key": "x:Day 5",
+              "axis": "x",
+              "value": "Day 5",
+              "position": "532.5",
+              "label": "Day 5"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 70.0,
+            "tick_step": 10.0
+          }
+        },
+        "sha256": "c07d4d54983c5706b77b7ced2a9b1e8ab711f7c2edc8bc577738ade8db6e0c77",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1238,7 +2180,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
