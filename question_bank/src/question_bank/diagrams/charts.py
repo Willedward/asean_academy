@@ -866,7 +866,81 @@ def data_table(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     return _finish(builder, template="data_table", diagram_kind="data_table", inputs=inputs)
 
 
+def _number_line_interval(inputs: dict[str, Any]) -> Diagram:
+    """Draw a bounded solution such as -3 < x <= 5 on a number line."""
+    lower = float(inputs["boundary"])
+    upper = float(inputs["upper_boundary"])
+    lower_relation = str(inputs["relation"])
+    upper_relation = str(inputs["upper_relation"])
+    if lower_relation not in {">", ">="} or upper_relation not in {"<", "<="}:
+        raise ValueError("an interval needs relation > or >= and upper_relation < or <=")
+    if upper <= lower:
+        raise ValueError("upper_boundary must be greater than boundary")
+    low = int(inputs.get("x_min", math.floor(lower) - 2))
+    high = int(inputs.get("x_max", math.ceil(upper) + 2))
+    if high <= low or not (low <= lower and upper <= high):
+        raise ValueError("number-line bounds must contain both boundaries")
+    title = str(inputs.get("title", "Number line"))
+    words = {
+        ">": "greater than",
+        ">=": "greater than or equal to",
+        "<": "less than",
+        "<=": "less than or equal to",
+    }
+    description = str(
+        inputs.get(
+            "alt_text",
+            f"Number line showing values {words[lower_relation]} {_fmt(lower)} "
+            f"and {words[upper_relation]} {_fmt(upper)}.",
+        )
+    )
+    builder = _Builder(title, description)
+    builder.text(title, WIDTH / 2, 75, size=TITLE_FONT)
+    left, right, y = 80.0, 680.0, 250.0
+    builder.line(left, y, right, y, width=4)
+    builder.path(f"M{_fmt(left)} {_fmt(y)} l18 -10 M{_fmt(left)} {_fmt(y)} l18 10", width=3)
+    builder.path(f"M{_fmt(right)} {_fmt(y)} l-18 -10 M{_fmt(right)} {_fmt(y)} l-18 10", width=3)
+    for tick in range(low, high + 1):
+        x = left + (tick - low) / (high - low) * (right - left)
+        builder.line(x, y - 10, x, y + 10, width=2)
+        builder.text(tick, x, y + 42, size=25)
+        builder.tick("x", tick, x)
+
+    def position(value: float) -> float:
+        return left + (value - low) / (high - low) * (right - left)
+
+    builder.line(
+        position(lower),
+        y,
+        position(upper),
+        y,
+        stroke=ACCENT,
+        width=6,
+        attrs={"data-role": "solution-segment"},
+    )
+    for key, value, relation in (
+        ("boundary", lower, lower_relation),
+        ("upper-boundary", upper, upper_relation),
+    ):
+        closed = "=" in relation
+        builder.mark(
+            key,
+            "closed-boundary" if closed else "open-boundary",
+            _fmt(value),
+            "circle",
+            {"cx": position(value), "cy": y, "r": 10},
+            style={
+                "fill": ACCENT if closed else BACKGROUND,
+                "stroke": ACCENT,
+                "stroke-width": 4,
+            },
+        )
+    return _finish(builder, template="number_line", diagram_kind="number_line", inputs=inputs)
+
+
 def number_line(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    if "upper_boundary" in inputs:
+        return _number_line_interval(inputs)
     boundary = float(inputs["boundary"])
     relation = str(inputs["relation"])
     if relation not in {"<", "<=", ">", ">="}:
