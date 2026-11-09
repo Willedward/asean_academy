@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l3-504",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Apparent increase on a truncated axis",
+  "title": "Apparent increase from a truncated baseline",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar chart begins its vertical axis at 105. Two values are 130 and 145. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "A bar chart begins its vertical axis at 105. Two bars show the values 130 and 150. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60\\%",
+        "canonical_answer": "80",
+        "canonical_latex": "80",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -80,11 +80,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "145-105"
+              "latex": "150-105"
             },
             {
               "type": "text",
-              "text": ". Compare their increase with the first displayed height."
+              "text": ". Compare the increase with the first displayed height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(145-105)-(130-105)}{130-105}\\times100=60"
+              "latex": "\\frac{(150-105)-(130-105)}{130-105}\\times100=\\frac{20}{25}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "60\\%"
+              "latex": "80\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l3-504-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-504-diagram-r4.svg",
-      "alt_text": "Bar chart with First: 130, Second: 145.",
+      "path": "assets/s1-l3-504-diagram-r5.svg",
+      "alt_text": "Bar chart with First: 130, Second: 150.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -145,14 +145,14 @@
           ],
           "values": [
             130,
-            145
+            150
           ],
           "y_min": 105,
-          "y_max": 145,
+          "y_max": 150,
           "tick_step": 10,
           "y_label": "Value",
           "forbidden_visible_labels": [
-            "60"
+            "80"
           ]
         },
         "viewbox": [
@@ -167,15 +167,15 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "210",
+              "y": "229.444444",
               "width": "177",
-              "height": "175"
+              "height": "155.555556"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "145",
+            "value": "150",
             "tag": "rect",
             "geometry": {
               "x": "444",
@@ -197,28 +197,28 @@
             "key": "y:115",
             "axis": "y",
             "value": "115",
-            "position": "315",
+            "position": "322.777778",
             "label": "115"
           },
           {
             "key": "y:125",
             "axis": "y",
             "value": "125",
-            "position": "245",
+            "position": "260.555556",
             "label": "125"
           },
           {
             "key": "y:135",
             "axis": "y",
             "value": "135",
-            "position": "175",
+            "position": "198.333333",
             "label": "135"
           },
           {
             "key": "y:145",
             "axis": "y",
             "value": "145",
-            "position": "105",
+            "position": "136.111111",
             "label": "145"
           },
           {
@@ -237,16 +237,16 @@
           }
         ],
         "forbidden_visible_labels": [
-          "60"
+          "80"
         ],
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 105.0,
-          "y_max": 145.0,
+          "y_max": 150.0,
           "tick_step": 10.0
         }
       },
-      "sha256": "be9b780d30982a9f17c5492158d4e65985252d8ac1d8e4d09ceae140117ced77",
+      "sha256": "df26ae756511f8097efff52b297d79d7e51d2fba37fd2b4e786981841ac01192",
       "width": 720,
       "height": 480
     }

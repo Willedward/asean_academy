@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l1-504",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. A bar chart begins its vertical axis at 92 although the values are 96 and 100. Enter the issue code."
+          "text": "Use code 1 for a truncated vertical axis, 2 for unequal time spacing, 3 for using raw frequency with unequal class widths, 4 for area-scaled pictures and 5 for a selectively shortened time period. A bar chart begins its vertical axis at 80 although the values are 86 and 90. Enter the issue code."
         }
       ],
       "marks": 1,
@@ -86,8 +86,8 @@
       "asset_key": "s1-l1-504-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l1-504-diagram-r3.svg",
-      "alt_text": "Bar chart with First: 96, Second: 100.",
+      "path": "assets/s1-l1-504-diagram-r4.svg",
+      "alt_text": "Bar chart with First: 86, Second: 90.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -100,11 +100,11 @@
             "Second"
           ],
           "values": [
-            96.0,
-            100.0
+            86,
+            90
           ],
-          "y_min": 92.0,
-          "y_max": 100,
+          "y_min": 80,
+          "y_max": 90,
           "tick_step": 5
         },
         "viewbox": [
@@ -115,19 +115,19 @@
           {
             "key": "bar-0",
             "kind": "bar",
-            "value": "96",
+            "value": "86",
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "245",
+              "y": "217",
               "width": "177",
-              "height": "140"
+              "height": "168"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "100",
+            "value": "90",
             "tag": "rect",
             "geometry": {
               "x": "444",
@@ -139,18 +139,25 @@
         ],
         "chart_ticks": [
           {
-            "key": "y:92",
+            "key": "y:80",
             "axis": "y",
-            "value": "92",
+            "value": "80",
             "position": "385",
-            "label": "92"
+            "label": "80"
           },
           {
-            "key": "y:97",
+            "key": "y:85",
             "axis": "y",
-            "value": "97",
-            "position": "210",
-            "label": "97"
+            "value": "85",
+            "position": "245",
+            "label": "85"
+          },
+          {
+            "key": "y:90",
+            "axis": "y",
+            "value": "90",
+            "position": "105",
+            "label": "90"
           },
           {
             "key": "x:First",
@@ -170,12 +177,12 @@
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43,
         "axis": {
-          "y_min": 92.0,
-          "y_max": 100.0,
+          "y_min": 80.0,
+          "y_max": 90.0,
           "tick_step": 5.0
         }
       },
-      "sha256": "0660fc08d4fd18422ef3b6d80b93c677419c9929b0dea5b1c77d8cd3a4a79834",
+      "sha256": "b3970892363a607751c5399c00454d222ff0074fe5594afabe055ac2a4800776",
       "width": 720,
       "height": 480
     }

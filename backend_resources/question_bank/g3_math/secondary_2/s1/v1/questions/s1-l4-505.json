@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l4-505",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.8",
-  "title": "Change in mean after adding an outlier",
+  "title": "Change in mean after adding a large value",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The values are 5, 7, 9, 11. A new value 18 is added. By how much does the mean increase?"
+          "text": "The values are 5, 7, 9, 11. A new value 23 is added. By how much does the mean increase?"
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2.0",
-        "canonical_latex": "2.0",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Find the two means. "
             },
             {
               "type": "display_math",
-              "latex": "\\bar x_1=32/4=8,\\quad \\bar x_2=50/5=10,\\quad \\Delta=2"
+              "latex": "\\bar x_1=\\frac{32}{4}=8,\\quad\\bar x_2=\\frac{55}{5}=11"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "The mean increases by "
             },
             {
               "type": "display_math",
-              "latex": "2.0"
+              "latex": "11-8=3"
             }
           ],
           "mark_type": "A",

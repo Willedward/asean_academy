@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l1-501",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Grouped data have class midpoints 5 and 15, each with frequency 3. Calculate the estimated mean."
+          "text": "Grouped data have class midpoints 5 and 15, with frequencies 3 and 1. Calculate the estimated mean."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10",
+        "canonical_answer": "7.5",
+        "canonical_latex": "7.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the products and divide by the total frequency."
+              "text": "Add the two products and divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -62,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\bar x\\approx\\frac{5(3)+15(3)}{6}=10"
+              "latex": "\\bar x\\approx\\frac{5(3)+15(1)}{4}=\\frac{30}{4}=7.5"
             }
           ],
           "mark_type": "A",
