@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-026",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-026-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Five identical symbols represent 35 bicycles. How many bicycles does each symbol represent? Enter the numerical value only."
+          "text": "The row of symbols in the pictogram represents 35 bicycles in total. How many bicycles does each symbol represent? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 35 \u00f7 5."
+              "text": "Count the symbols, then divide 35 by that number."
             }
           ]
         }
@@ -72,7 +81,101 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-026-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-026-diagram-r2.svg",
+      "alt_text": "Pictogram with one row labelled Bicycles, containing 5 symbols.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pictogram",
+        "question_key": "s1-l2-026",
+        "outcome": "1.2",
+        "template": "pictogram",
+        "inputs": {
+          "rows": [
+            {
+              "label": "Bicycles",
+              "count": 5
+            }
+          ],
+          "key": 7,
+          "title": "Bicycles",
+          "show_key": false,
+          "alt_text": "Pictogram with one row labelled Bicycles, containing 5 symbols.",
+          "forbidden_visible_labels": [
+            "7"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0-0",
+            "kind": "icon",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "200",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-1",
+            "kind": "icon",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "258",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-2",
+            "kind": "icon",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "316",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-3",
+            "kind": "icon",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "374",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-4",
+            "kind": "icon",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "432",
+              "y": "124"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [
+          "7"
+        ],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "f4a47f6cc780491c04568ead89f139f8a2d091b3a0b77a0e517bfa01c27206ef",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +189,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-019",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-019-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A table lists bus frequencies 5, 8, 11 and 6 for four time slots. What is the largest frequency? Enter the numerical value only."
+          "text": "The table lists bus frequencies for four time slots. What is the largest frequency? Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The greatest of 5, 8, 11 and 6 is 11."
+              "text": "Go down the Frequency column and keep the largest value you have seen so far."
             }
           ]
         }
@@ -72,7 +81,101 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-019-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-019-diagram-r2.svg",
+      "alt_text": "Table of bus frequencies. Slot 1: 5, Slot 2: 8, Slot 3: 11, Slot 4: 6.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "question_key": "s1-l1-019",
+        "outcome": "1.2",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Frequency"
+          ],
+          "rows": [
+            "Slot 1",
+            "Slot 2",
+            "Slot 3",
+            "Slot 4"
+          ],
+          "cells": [
+            [
+              5
+            ],
+            [
+              8
+            ],
+            [
+              11
+            ],
+            [
+              6
+            ]
+          ],
+          "title": "Bus frequencies",
+          "alt_text": "Table of bus frequencies. Slot 1: 5, Slot 2: 8, Slot 3: 11, Slot 4: 6."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "5",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-2-0",
+            "kind": "table-cell",
+            "value": "11",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-3-0",
+            "kind": "table-cell",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "375.8"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "32c10fc08a26b8a6503e8faad4f24348985c07066b34c22cfdfabb20c040dd95",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +189,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

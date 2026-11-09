@@ -183,7 +183,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-025",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -195,7 +195,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-025-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -203,7 +212,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A two-way table shows 6 boys and 9 girls choosing cats, while 8 boys and 5 girls choose dogs. Find the total frequency in the dogs column. Enter the numerical value only."
+            "text": "The two-way table shows the pets chosen by boys and girls. Find the total frequency in the dogs column. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -234,7 +243,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Combine 8 boys and 5 girls."
+                "text": "Add the boys entry and the girls entry in that column."
               }
             ]
           }
@@ -255,7 +264,96 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-025-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-025-diagram-r2.svg",
+        "alt_text": "Two-way table with columns Cats and Dogs. Boys: 6 cats, 8 dogs. Girls: 9 cats, 5 dogs.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "data_table",
+          "question_key": "s1-l2-025",
+          "outcome": "1.1",
+          "template": "data_table",
+          "inputs": {
+            "columns": [
+              "Cats",
+              "Dogs"
+            ],
+            "rows": [
+              "Boys",
+              "Girls"
+            ],
+            "cells": [
+              [
+                6,
+                8
+              ],
+              [
+                9,
+                5
+              ]
+            ],
+            "title": "Pets chosen",
+            "alt_text": "Two-way table with columns Cats and Dogs. Boys: 6 cats, 8 dogs. Girls: 9 cats, 5 dogs."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "cell-0-0",
+              "kind": "table-cell",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "360",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-0-1",
+              "kind": "table-cell",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "543.333333",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-1-0",
+              "kind": "table-cell",
+              "value": "9",
+              "tag": "text",
+              "geometry": {
+                "x": "360",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-1-1",
+              "kind": "table-cell",
+              "value": "5",
+              "tag": "text",
+              "geometry": {
+                "x": "543.333333",
+                "y": "277.24"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "f51801748e8c10e2763bcaa38cc369c94be8587d736ec07b4f37257b3fe40235",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -269,7 +367,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -558,7 +656,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-019",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -570,7 +668,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-019-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -578,7 +685,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A table lists bus frequencies 5, 8, 11 and 6 for four time slots. What is the largest frequency? Enter the numerical value only."
+            "text": "The table lists bus frequencies for four time slots. What is the largest frequency? Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -609,7 +716,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The greatest of 5, 8, 11 and 6 is 11."
+                "text": "Go down the Frequency column and keep the largest value you have seen so far."
               }
             ]
           }
@@ -630,7 +737,101 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-019-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-019-diagram-r2.svg",
+        "alt_text": "Table of bus frequencies. Slot 1: 5, Slot 2: 8, Slot 3: 11, Slot 4: 6.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "data_table",
+          "question_key": "s1-l1-019",
+          "outcome": "1.2",
+          "template": "data_table",
+          "inputs": {
+            "columns": [
+              "Frequency"
+            ],
+            "rows": [
+              "Slot 1",
+              "Slot 2",
+              "Slot 3",
+              "Slot 4"
+            ],
+            "cells": [
+              [
+                5
+              ],
+              [
+                8
+              ],
+              [
+                11
+              ],
+              [
+                6
+              ]
+            ],
+            "title": "Bus frequencies",
+            "alt_text": "Table of bus frequencies. Slot 1: 5, Slot 2: 8, Slot 3: 11, Slot 4: 6."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "cell-0-0",
+              "kind": "table-cell",
+              "value": "5",
+              "tag": "text",
+              "geometry": {
+                "x": "497.5",
+                "y": "195.8"
+              }
+            },
+            {
+              "key": "cell-1-0",
+              "kind": "table-cell",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "497.5",
+                "y": "255.8"
+              }
+            },
+            {
+              "key": "cell-2-0",
+              "kind": "table-cell",
+              "value": "11",
+              "tag": "text",
+              "geometry": {
+                "x": "497.5",
+                "y": "315.8"
+              }
+            },
+            {
+              "key": "cell-3-0",
+              "kind": "table-cell",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "497.5",
+                "y": "375.8"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "32c10fc08a26b8a6503e8faad4f24348985c07066b34c22cfdfabb20c040dd95",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -644,12 +845,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-026",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -661,7 +862,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-026-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -669,7 +879,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Five identical symbols represent 35 bicycles. How many bicycles does each symbol represent? Enter the numerical value only."
+            "text": "The row of symbols in the pictogram represents 35 bicycles in total. How many bicycles does each symbol represent? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -700,7 +910,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 35 ÷ 5."
+                "text": "Count the symbols, then divide 35 by that number."
               }
             ]
           }
@@ -721,7 +931,101 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-026-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-026-diagram-r2.svg",
+        "alt_text": "Pictogram with one row labelled Bicycles, containing 5 symbols.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pictogram",
+          "question_key": "s1-l2-026",
+          "outcome": "1.2",
+          "template": "pictogram",
+          "inputs": {
+            "rows": [
+              {
+                "label": "Bicycles",
+                "count": 5
+              }
+            ],
+            "key": 7,
+            "title": "Bicycles",
+            "show_key": false,
+            "alt_text": "Pictogram with one row labelled Bicycles, containing 5 symbols.",
+            "forbidden_visible_labels": [
+              "7"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0-0",
+              "kind": "icon",
+              "value": "7",
+              "tag": "text",
+              "geometry": {
+                "x": "200",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-1",
+              "kind": "icon",
+              "value": "7",
+              "tag": "text",
+              "geometry": {
+                "x": "258",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-2",
+              "kind": "icon",
+              "value": "7",
+              "tag": "text",
+              "geometry": {
+                "x": "316",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-3",
+              "kind": "icon",
+              "value": "7",
+              "tag": "text",
+              "geometry": {
+                "x": "374",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-4",
+              "kind": "icon",
+              "value": "7",
+              "tag": "text",
+              "geometry": {
+                "x": "432",
+                "y": "124"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [
+            "7"
+          ],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "f4a47f6cc780491c04568ead89f139f8a2d091b3a0b77a0e517bfa01c27206ef",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -735,12 +1039,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-027",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -752,7 +1056,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-027-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -760,7 +1073,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A value rises from 42 to 57, then falls to 49. Find the net change from the first to the final value. Enter the numerical value only."
+            "text": "The line graph shows a value at three points in time. Find the net change from the first to the final value. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -791,7 +1104,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 42 from 49."
+                "text": "Read the first and final points, then subtract the first from the final."
               }
             ]
           }
@@ -812,7 +1125,190 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-027-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-027-diagram-r2.svg",
+        "alt_text": "Line graph with an axis break and a vertical axis from 40 to 60 in steps of 2. Start: 42, Middle: 57, End: 49.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l2-027",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "Start",
+              "Middle",
+              "End"
+            ],
+            "values": [
+              42,
+              57,
+              49
+            ],
+            "y_min": 40,
+            "y_max": 60,
+            "tick_step": 2,
+            "y_label": "Value",
+            "title": "Value over time",
+            "axis_break": true,
+            "alt_text": "Line graph with an axis break and a vertical axis from 40 to 60 in steps of 2. Start: 42, Middle: 57, End: 49."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "42",
+              "tag": "circle",
+              "geometry": {
+                "cx": "188.333333",
+                "cy": "357",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "57",
+              "tag": "circle",
+              "geometry": {
+                "cx": "385",
+                "cy": "147",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-2",
+              "kind": "point",
+              "value": "49",
+              "tag": "circle",
+              "geometry": {
+                "cx": "581.666667",
+                "cy": "259",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:40",
+              "axis": "y",
+              "value": "40",
+              "position": "385",
+              "label": "40"
+            },
+            {
+              "key": "y:42",
+              "axis": "y",
+              "value": "42",
+              "position": "357",
+              "label": "42"
+            },
+            {
+              "key": "y:44",
+              "axis": "y",
+              "value": "44",
+              "position": "329",
+              "label": "44"
+            },
+            {
+              "key": "y:46",
+              "axis": "y",
+              "value": "46",
+              "position": "301",
+              "label": "46"
+            },
+            {
+              "key": "y:48",
+              "axis": "y",
+              "value": "48",
+              "position": "273",
+              "label": "48"
+            },
+            {
+              "key": "y:50",
+              "axis": "y",
+              "value": "50",
+              "position": "245",
+              "label": "50"
+            },
+            {
+              "key": "y:52",
+              "axis": "y",
+              "value": "52",
+              "position": "217",
+              "label": "52"
+            },
+            {
+              "key": "y:54",
+              "axis": "y",
+              "value": "54",
+              "position": "189",
+              "label": "54"
+            },
+            {
+              "key": "y:56",
+              "axis": "y",
+              "value": "56",
+              "position": "161",
+              "label": "56"
+            },
+            {
+              "key": "y:58",
+              "axis": "y",
+              "value": "58",
+              "position": "133",
+              "label": "58"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "105",
+              "label": "60"
+            },
+            {
+              "key": "x:Start",
+              "axis": "x",
+              "value": "Start",
+              "position": "188.333333",
+              "label": "Start"
+            },
+            {
+              "key": "x:Middle",
+              "axis": "x",
+              "value": "Middle",
+              "position": "385",
+              "label": "Middle"
+            },
+            {
+              "key": "x:End",
+              "axis": "x",
+              "value": "End",
+              "position": "581.666667",
+              "label": "End"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 40.0,
+            "y_max": 60.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "c66380dd79f49c11a64c39261b6e3f0020e7795ddd7d7c234723265b7f0b083a",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -826,12 +1322,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-026",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -843,7 +1339,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-026-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -851,7 +1356,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "In a sample of 150, a pie chart has sectors of 120° and 72°. How many more observations are in the larger sector? Enter the numerical value only."
+            "text": "The pie chart shows a sample of 150 observations. How many more observations are in sector P than in sector Q? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -873,7 +1378,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the difference in sector angles."
+                "text": "Find the difference in the two sector angles."
               }
             ]
           },
@@ -882,7 +1387,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Convert the 48° difference into a frequency."
+                "text": "Convert that angle difference into a fraction of 150."
               }
             ]
           }
@@ -914,7 +1419,75 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-026-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-026-diagram-r2.svg",
+        "alt_text": "Pie chart with sector P of 120 degrees, sector Q of 72 degrees and a remaining sector labelled Other.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pie_chart",
+          "question_key": "s1-l3-026",
+          "outcome": "1.2",
+          "template": "pie_chart",
+          "inputs": {
+            "labels": [
+              "P 120°",
+              "Q 72°",
+              "Other"
+            ],
+            "values": [
+              120,
+              72,
+              168
+            ],
+            "title": "Pie chart",
+            "alt_text": "Pie chart with sector P of 120 degrees, sector Q of 72 degrees and a remaining sector labelled Other."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "sector-0",
+              "kind": "pie-sector",
+              "value": "120",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L360 90 A160 160 0 0 1 498.564065 330 Z"
+              }
+            },
+            {
+              "key": "sector-1",
+              "kind": "pie-sector",
+              "value": "72",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L498.564065 330 A160 160 0 0 1 326.734129 406.503616 Z"
+              }
+            },
+            {
+              "key": "sector-2",
+              "kind": "pie-sector",
+              "value": "168",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L326.734129 406.503616 A160 160 0 0 1 360 90 Z"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "0c51e75711a1e83ec0ba2a675bada4cddbf561ddfdc817e1dc79de343bd2c8f1",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -928,12 +1501,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-027",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -945,7 +1518,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-027-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -953,7 +1535,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A graph's vertical scale marks every 5 units. A point moves from the third mark above zero to the eighth mark above zero. Find the increase in value. Enter the numerical value only."
+            "text": "Two points are marked on the vertical scale in the figure. Find the increase in value from the lower point to the higher point. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -984,7 +1566,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Five intervals of 5 units are crossed."
+                "text": "Count the intervals between the points, then multiply by the size of one interval."
               }
             ]
           }
@@ -1005,7 +1587,145 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-027-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-027-diagram-r2.svg",
+        "alt_text": "Vertical scale marked every 5 units from 0 to 40, with points at 15 and 40.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "vertical_scale",
+          "question_key": "s1-l3-027",
+          "outcome": "1.2",
+          "template": "vertical_scale",
+          "inputs": {
+            "ticks": [
+              0,
+              5,
+              10,
+              15,
+              20,
+              25,
+              30,
+              35,
+              40
+            ],
+            "title": "Vertical scale",
+            "points": [
+              {
+                "tick_index": 3,
+                "label": "A"
+              },
+              {
+                "tick_index": 8,
+                "label": "B"
+              }
+            ],
+            "alt_text": "Vertical scale marked every 5 units from 0 to 40, with points at 15 and 40."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "A",
+              "tag": "circle",
+              "geometry": {
+                "cx": "330",
+                "cy": "281.25",
+                "r": "7"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "B",
+              "tag": "circle",
+              "geometry": {
+                "cx": "330",
+                "cy": "75",
+                "r": "7"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "405",
+              "label": "0"
+            },
+            {
+              "key": "y:5",
+              "axis": "y",
+              "value": "5",
+              "position": "363.75",
+              "label": "5"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "322.5",
+              "label": "10"
+            },
+            {
+              "key": "y:15",
+              "axis": "y",
+              "value": "15",
+              "position": "281.25",
+              "label": "15"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "240",
+              "label": "20"
+            },
+            {
+              "key": "y:25",
+              "axis": "y",
+              "value": "25",
+              "position": "198.75",
+              "label": "25"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "157.5",
+              "label": "30"
+            },
+            {
+              "key": "y:35",
+              "axis": "y",
+              "value": "35",
+              "position": "116.25",
+              "label": "35"
+            },
+            {
+              "key": "y:40",
+              "axis": "y",
+              "value": "40",
+              "position": "75",
+              "label": "40"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "c27a714cfbb8a10fe29aef4331871a21fe87f597b1f596c593c698284af4722a",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1019,7 +1739,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1876,7 +2596,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-030",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1888,7 +2608,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-030-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1896,7 +2625,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A vertical scale labels consecutive equally spaced ticks 0, 10, 20, 50 and 60. How large is the anomalous interval from 20 to 50? Enter the numerical value only."
+            "text": "The vertical scale in the figure labels equally spaced ticks. How large is the anomalous interval between neighbouring labels? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1918,7 +2647,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the two adjacent labels."
+                "text": "Subtract each pair of adjacent labels."
               }
             ]
           },
@@ -1927,7 +2656,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 50 - 20."
+                "text": "Find the pair whose gap is unlike the others, then subtract."
               }
             ]
           }
@@ -1948,7 +2677,79 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-030-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-030-diagram-r2.svg",
+        "alt_text": "Vertical scale marked 0, 10, 20, 50, 60.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "vertical_scale",
+          "question_key": "s1-l2-030",
+          "outcome": "1.4",
+          "template": "vertical_scale",
+          "inputs": {
+            "ticks": [
+              0,
+              10,
+              20,
+              50,
+              60
+            ],
+            "title": "Vertical scale"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "405",
+              "label": "0"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "322.5",
+              "label": "10"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "240",
+              "label": "20"
+            },
+            {
+              "key": "y:50",
+              "axis": "y",
+              "value": "50",
+              "position": "157.5",
+              "label": "50"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "75",
+              "label": "60"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "7edc5873cc2edacf0ed729a7cc32de8271818911130b4248f1791f76038dc42f",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1962,12 +2763,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-031",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1979,7 +2780,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-031-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1987,7 +2797,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Profit rises from 48 to 52, but a chart begins at 46. What is the ratio of the displayed height increase to the first bar's displayed height? Express the result as a percentage. Enter the numerical value only."
+            "text": "The bar chart shows profit rising. What is the ratio of the displayed height increase to the first bar's displayed height? Express the result as a percentage. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2017,7 +2827,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The first displayed height is 48 - 46."
+                "text": "Measure the first bar's displayed height from the bottom of the axis."
               }
             ]
           },
@@ -2026,7 +2836,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The increase is 4 compared with a displayed starting height of 2."
+                "text": "Find the increase in height, then divide it by the first displayed height."
               }
             ]
           }
@@ -2047,7 +2857,143 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-031-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-031-diagram-r3.svg",
+        "alt_text": "Bar chart with an axis break and a vertical axis from 46 to 52 in steps of 1. First: 48, Second: 52.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l2-031",
+          "outcome": "1.4",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "First",
+              "Second"
+            ],
+            "values": [
+              48,
+              52
+            ],
+            "y_max": 52,
+            "tick_step": 1,
+            "y_label": "Profit",
+            "title": "Profit rising",
+            "y_min": 46,
+            "alt_text": "Bar chart with an axis break and a vertical axis from 46 to 52 in steps of 1. First: 48, Second: 52."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "48",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "291.666667",
+                "width": "177",
+                "height": "93.333333"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "52",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "105",
+                "width": "177",
+                "height": "280"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:46",
+              "axis": "y",
+              "value": "46",
+              "position": "385",
+              "label": "46"
+            },
+            {
+              "key": "y:47",
+              "axis": "y",
+              "value": "47",
+              "position": "338.333333",
+              "label": "47"
+            },
+            {
+              "key": "y:48",
+              "axis": "y",
+              "value": "48",
+              "position": "291.666667",
+              "label": "48"
+            },
+            {
+              "key": "y:49",
+              "axis": "y",
+              "value": "49",
+              "position": "245",
+              "label": "49"
+            },
+            {
+              "key": "y:50",
+              "axis": "y",
+              "value": "50",
+              "position": "198.333333",
+              "label": "50"
+            },
+            {
+              "key": "y:51",
+              "axis": "y",
+              "value": "51",
+              "position": "151.666667",
+              "label": "51"
+            },
+            {
+              "key": "y:52",
+              "axis": "y",
+              "value": "52",
+              "position": "105",
+              "label": "52"
+            },
+            {
+              "key": "x:First",
+              "axis": "x",
+              "value": "First",
+              "position": "237.5",
+              "label": "First"
+            },
+            {
+              "key": "x:Second",
+              "axis": "x",
+              "value": "Second",
+              "position": "532.5",
+              "label": "Second"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 46.0,
+            "y_max": 52.0,
+            "tick_step": 1.0
+          }
+        },
+        "sha256": "623ff57f92297238a1715355fef7c02231327ad8d3932fb02c1013549b949179",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2061,12 +3007,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-030",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2078,7 +3024,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-030-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2086,7 +3041,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A graph places years 2018, 2019, 2023 and 2024 one grid square apart. If each square is interpreted as one year, by how many years is the 2019–2023 interval understated? Enter the numerical value only."
+            "text": "Each labelled year on the time axis is one grid square from the next. If each square is interpreted as one year, by how many years is the misleading interval understated? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2117,7 +3072,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The actual gap is four years but appears as one."
+                "text": "Find the gap that is not one year, then subtract the one-square gap it appears to be."
               }
             ]
           }
@@ -2138,7 +3093,73 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-030-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-030-diagram-r2.svg",
+        "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "vertical_scale",
+          "question_key": "s1-l3-030",
+          "outcome": "1.4",
+          "template": "vertical_scale",
+          "inputs": {
+            "ticks": [
+              2018,
+              2019,
+              2023,
+              2024
+            ],
+            "title": "Time axis",
+            "orientation": "horizontal",
+            "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [],
+          "chart_ticks": [
+            {
+              "key": "x:2018",
+              "axis": "x",
+              "value": "2018",
+              "position": "90",
+              "label": "2018"
+            },
+            {
+              "key": "x:2019",
+              "axis": "x",
+              "value": "2019",
+              "position": "270",
+              "label": "2019"
+            },
+            {
+              "key": "x:2023",
+              "axis": "x",
+              "value": "2023",
+              "position": "450",
+              "label": "2023"
+            },
+            {
+              "key": "x:2024",
+              "axis": "x",
+              "value": "2024",
+              "position": "630",
+              "label": "2024"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "8313eefce2046b2cb41439162e47a3fa38049bb1994cd6129dd364f8da2ee34c",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2152,7 +3173,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2248,7 +3269,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-016",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2260,7 +3281,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-016-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2268,7 +3298,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A timeline gives every labelled year one equal 2 cm gap: 2019, 2020, 2024, 2025. If 2 cm correctly represents one year, how long should the 2020–2024 gap be? Enter the numerical value only."
+            "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm correctly represents one year, how long should the gap that spans more than one year be? Give your answer in cm. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -2290,7 +3320,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The actual interval spans four years."
+                "text": "Work out how many years that gap actually spans."
               }
             ]
           },
@@ -2299,7 +3329,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply four yearly intervals by 2 cm."
+                "text": "Multiply the number of years in that gap by 2 cm."
               }
             ]
           }
@@ -2320,7 +3350,73 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-016-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-016-diagram-r2.svg",
+        "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "vertical_scale",
+          "question_key": "s1-l4-016",
+          "outcome": "1.4",
+          "template": "vertical_scale",
+          "inputs": {
+            "ticks": [
+              2019,
+              2020,
+              2024,
+              2025
+            ],
+            "title": "Timeline",
+            "orientation": "horizontal",
+            "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [],
+          "chart_ticks": [
+            {
+              "key": "x:2019",
+              "axis": "x",
+              "value": "2019",
+              "position": "90",
+              "label": "2019"
+            },
+            {
+              "key": "x:2020",
+              "axis": "x",
+              "value": "2020",
+              "position": "270",
+              "label": "2020"
+            },
+            {
+              "key": "x:2024",
+              "axis": "x",
+              "value": "2024",
+              "position": "450",
+              "label": "2024"
+            },
+            {
+              "key": "x:2025",
+              "axis": "x",
+              "value": "2025",
+              "position": "630",
+              "label": "2025"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "356908e38cc43b74b765e7e8d7606bef8c0af3af905be2dff15bfeb89b0379ea",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2334,7 +3430,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {

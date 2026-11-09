@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-027",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-027-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A value rises from 42 to 57, then falls to 49. Find the net change from the first to the final value. Enter the numerical value only."
+          "text": "The line graph shows a value at three points in time. Find the net change from the first to the final value. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 42 from 49."
+              "text": "Read the first and final points, then subtract the first from the final."
             }
           ]
         }
@@ -72,7 +81,190 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-027-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-027-diagram-r2.svg",
+      "alt_text": "Line graph with an axis break and a vertical axis from 40 to 60 in steps of 2. Start: 42, Middle: 57, End: 49.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "question_key": "s1-l2-027",
+        "outcome": "1.2",
+        "template": "line_chart",
+        "inputs": {
+          "categories": [
+            "Start",
+            "Middle",
+            "End"
+          ],
+          "values": [
+            42,
+            57,
+            49
+          ],
+          "y_min": 40,
+          "y_max": 60,
+          "tick_step": 2,
+          "y_label": "Value",
+          "title": "Value over time",
+          "axis_break": true,
+          "alt_text": "Line graph with an axis break and a vertical axis from 40 to 60 in steps of 2. Start: 42, Middle: 57, End: 49."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "42",
+            "tag": "circle",
+            "geometry": {
+              "cx": "188.333333",
+              "cy": "357",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "57",
+            "tag": "circle",
+            "geometry": {
+              "cx": "385",
+              "cy": "147",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "49",
+            "tag": "circle",
+            "geometry": {
+              "cx": "581.666667",
+              "cy": "259",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:40",
+            "axis": "y",
+            "value": "40",
+            "position": "385",
+            "label": "40"
+          },
+          {
+            "key": "y:42",
+            "axis": "y",
+            "value": "42",
+            "position": "357",
+            "label": "42"
+          },
+          {
+            "key": "y:44",
+            "axis": "y",
+            "value": "44",
+            "position": "329",
+            "label": "44"
+          },
+          {
+            "key": "y:46",
+            "axis": "y",
+            "value": "46",
+            "position": "301",
+            "label": "46"
+          },
+          {
+            "key": "y:48",
+            "axis": "y",
+            "value": "48",
+            "position": "273",
+            "label": "48"
+          },
+          {
+            "key": "y:50",
+            "axis": "y",
+            "value": "50",
+            "position": "245",
+            "label": "50"
+          },
+          {
+            "key": "y:52",
+            "axis": "y",
+            "value": "52",
+            "position": "217",
+            "label": "52"
+          },
+          {
+            "key": "y:54",
+            "axis": "y",
+            "value": "54",
+            "position": "189",
+            "label": "54"
+          },
+          {
+            "key": "y:56",
+            "axis": "y",
+            "value": "56",
+            "position": "161",
+            "label": "56"
+          },
+          {
+            "key": "y:58",
+            "axis": "y",
+            "value": "58",
+            "position": "133",
+            "label": "58"
+          },
+          {
+            "key": "y:60",
+            "axis": "y",
+            "value": "60",
+            "position": "105",
+            "label": "60"
+          },
+          {
+            "key": "x:Start",
+            "axis": "x",
+            "value": "Start",
+            "position": "188.333333",
+            "label": "Start"
+          },
+          {
+            "key": "x:Middle",
+            "axis": "x",
+            "value": "Middle",
+            "position": "385",
+            "label": "Middle"
+          },
+          {
+            "key": "x:End",
+            "axis": "x",
+            "value": "End",
+            "position": "581.666667",
+            "label": "End"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 40.0,
+          "y_max": 60.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "c66380dd79f49c11a64c39261b6e3f0020e7795ddd7d7c234723265b7f0b083a",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +278,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

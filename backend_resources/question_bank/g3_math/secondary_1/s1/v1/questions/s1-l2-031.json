@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-031",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-031-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Profit rises from 48 to 52, but a chart begins at 46. What is the ratio of the displayed height increase to the first bar's displayed height? Express the result as a percentage. Enter the numerical value only."
+          "text": "The bar chart shows profit rising. What is the ratio of the displayed height increase to the first bar's displayed height? Express the result as a percentage. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -50,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The first displayed height is 48 - 46."
+              "text": "Measure the first bar's displayed height from the bottom of the axis."
             }
           ]
         },
@@ -59,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The increase is 4 compared with a displayed starting height of 2."
+              "text": "Find the increase in height, then divide it by the first displayed height."
             }
           ]
         }
@@ -80,7 +89,143 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-031-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-031-diagram-r3.svg",
+      "alt_text": "Bar chart with an axis break and a vertical axis from 46 to 52 in steps of 1. First: 48, Second: 52.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-031",
+        "outcome": "1.4",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "First",
+            "Second"
+          ],
+          "values": [
+            48,
+            52
+          ],
+          "y_max": 52,
+          "tick_step": 1,
+          "y_label": "Profit",
+          "title": "Profit rising",
+          "y_min": 46,
+          "alt_text": "Bar chart with an axis break and a vertical axis from 46 to 52 in steps of 1. First: 48, Second: 52."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "48",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "291.666667",
+              "width": "177",
+              "height": "93.333333"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "52",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:46",
+            "axis": "y",
+            "value": "46",
+            "position": "385",
+            "label": "46"
+          },
+          {
+            "key": "y:47",
+            "axis": "y",
+            "value": "47",
+            "position": "338.333333",
+            "label": "47"
+          },
+          {
+            "key": "y:48",
+            "axis": "y",
+            "value": "48",
+            "position": "291.666667",
+            "label": "48"
+          },
+          {
+            "key": "y:49",
+            "axis": "y",
+            "value": "49",
+            "position": "245",
+            "label": "49"
+          },
+          {
+            "key": "y:50",
+            "axis": "y",
+            "value": "50",
+            "position": "198.333333",
+            "label": "50"
+          },
+          {
+            "key": "y:51",
+            "axis": "y",
+            "value": "51",
+            "position": "151.666667",
+            "label": "51"
+          },
+          {
+            "key": "y:52",
+            "axis": "y",
+            "value": "52",
+            "position": "105",
+            "label": "52"
+          },
+          {
+            "key": "x:First",
+            "axis": "x",
+            "value": "First",
+            "position": "237.5",
+            "label": "First"
+          },
+          {
+            "key": "x:Second",
+            "axis": "x",
+            "value": "Second",
+            "position": "532.5",
+            "label": "Second"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 46.0,
+          "y_max": 52.0,
+          "tick_step": 1.0
+        }
+      },
+      "sha256": "623ff57f92297238a1715355fef7c02231327ad8d3932fb02c1013549b949179",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -94,6 +239,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

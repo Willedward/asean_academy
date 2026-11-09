@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-030",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-030-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A vertical scale labels consecutive equally spaced ticks 0, 10, 20, 50 and 60. How large is the anomalous interval from 20 to 50? Enter the numerical value only."
+          "text": "The vertical scale in the figure labels equally spaced ticks. How large is the anomalous interval between neighbouring labels? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the two adjacent labels."
+              "text": "Subtract each pair of adjacent labels."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 50 - 20."
+              "text": "Find the pair whose gap is unlike the others, then subtract."
             }
           ]
         }
@@ -72,7 +81,79 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-030-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-030-diagram-r2.svg",
+      "alt_text": "Vertical scale marked 0, 10, 20, 50, 60.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "vertical_scale",
+        "question_key": "s1-l2-030",
+        "outcome": "1.4",
+        "template": "vertical_scale",
+        "inputs": {
+          "ticks": [
+            0,
+            10,
+            20,
+            50,
+            60
+          ],
+          "title": "Vertical scale"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "405",
+            "label": "0"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "322.5",
+            "label": "10"
+          },
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "240",
+            "label": "20"
+          },
+          {
+            "key": "y:50",
+            "axis": "y",
+            "value": "50",
+            "position": "157.5",
+            "label": "50"
+          },
+          {
+            "key": "y:60",
+            "axis": "y",
+            "value": "60",
+            "position": "75",
+            "label": "60"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "7edc5873cc2edacf0ed729a7cc32de8271818911130b4248f1791f76038dc42f",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +167,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
