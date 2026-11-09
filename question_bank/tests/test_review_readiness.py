@@ -34,7 +34,6 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
     assert len(report.batches) == 75
     assert all("diagnostic" not in batch.batch_id for batch in report.batches)
 
-    by_id = {batch.batch_id: batch for batch in report.batches}
     assert all(batch.packet_status == "current" for batch in report.batches)
     # Any batch being worked on carries a claim, so test one that is ready and unclaimed now.
     ready_batch = next(
