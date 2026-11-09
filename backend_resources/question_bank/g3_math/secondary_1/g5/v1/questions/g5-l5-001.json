@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-001",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve ½[x + (x + 4)](10) + 8(x + 3) = 260."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{2}[x+(x+4)](10)+8(x+3)=260"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -119,7 +127,7 @@
       "asset_key": "g5-l5-001-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-001-diagram-r3.svg",
+      "path": "assets/g5-l5-001-diagram-r4.svg",
       "alt_text": "A trapezium with parallel sides x cm and (x + 4) cm and dashed perpendicular height 10 cm, beside a parallelogram with base (x + 3) cm and dashed perpendicular height 8 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

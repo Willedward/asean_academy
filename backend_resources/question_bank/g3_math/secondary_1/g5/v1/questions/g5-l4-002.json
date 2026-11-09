@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-002",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A closed cuboid has length 12 cm, width 8 cm and height h cm. Its total surface area is 392 cm\u00b2. Find h. Enter the numerical value only."
+          "text": "A closed cuboid has length 12 cm, width 8 cm and height "
+        },
+        {
+          "type": "inline_math",
+          "latex": "h"
+        },
+        {
+          "type": "text",
+          "text": " cm. Its total surface area is 392 cm². Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "h"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use S = 2(lw + lh + wh)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "S=2(lw+lh+wh)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 2[96 + 12h + 8h] = 392."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2[96+12h+8h]=392"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
