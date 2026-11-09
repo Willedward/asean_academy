@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-016",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l4-016-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A timeline gives every labelled year one equal 2 cm gap: 2019, 2020, 2024, 2025. If 2 cm correctly represents one year, how long should the 2020\u20132024 gap be? Enter the numerical value only."
+          "text": "On this timeline, every gap between neighbouring labelled years is drawn 2 cm long. If 2 cm correctly represents one year, how long should the gap that spans more than one year be? Give your answer in cm. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The actual interval spans four years."
+              "text": "Work out how many years that gap actually spans."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply four yearly intervals by 2 cm."
+              "text": "Multiply the number of years in that gap by 2 cm."
             }
           ]
         }
@@ -72,7 +81,73 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l4-016-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l4-016-diagram-r2.svg",
+      "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "vertical_scale",
+        "question_key": "s1-l4-016",
+        "outcome": "1.4",
+        "template": "vertical_scale",
+        "inputs": {
+          "ticks": [
+            2019,
+            2020,
+            2024,
+            2025
+          ],
+          "title": "Timeline",
+          "orientation": "horizontal",
+          "alt_text": "Horizontal timeline with the years 2019, 2020, 2024 and 2025 at equal 2 cm gaps."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [],
+        "chart_ticks": [
+          {
+            "key": "x:2019",
+            "axis": "x",
+            "value": "2019",
+            "position": "90",
+            "label": "2019"
+          },
+          {
+            "key": "x:2020",
+            "axis": "x",
+            "value": "2020",
+            "position": "270",
+            "label": "2020"
+          },
+          {
+            "key": "x:2024",
+            "axis": "x",
+            "value": "2024",
+            "position": "450",
+            "label": "2024"
+          },
+          {
+            "key": "x:2025",
+            "axis": "x",
+            "value": "2025",
+            "position": "630",
+            "label": "2025"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "356908e38cc43b74b765e7e8d7606bef8c0af3af905be2dff15bfeb89b0379ea",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +161,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

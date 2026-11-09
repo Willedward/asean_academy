@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-026",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-026-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "In a sample of 150, a pie chart has sectors of 120\u00b0 and 72\u00b0. How many more observations are in the larger sector? Enter the numerical value only."
+          "text": "The pie chart shows a sample of 150 observations. How many more observations are in sector P than in sector Q? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the difference in sector angles."
+              "text": "Find the difference in the two sector angles."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert the 48\u00b0 difference into a frequency."
+              "text": "Convert that angle difference into a fraction of 150."
             }
           ]
         }
@@ -83,7 +92,75 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-026-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-026-diagram-r2.svg",
+      "alt_text": "Pie chart with sector P of 120 degrees, sector Q of 72 degrees and a remaining sector labelled Other.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pie_chart",
+        "question_key": "s1-l3-026",
+        "outcome": "1.2",
+        "template": "pie_chart",
+        "inputs": {
+          "labels": [
+            "P 120°",
+            "Q 72°",
+            "Other"
+          ],
+          "values": [
+            120,
+            72,
+            168
+          ],
+          "title": "Pie chart",
+          "alt_text": "Pie chart with sector P of 120 degrees, sector Q of 72 degrees and a remaining sector labelled Other."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "sector-0",
+            "kind": "pie-sector",
+            "value": "120",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L360 90 A160 160 0 0 1 498.564065 330 Z"
+            }
+          },
+          {
+            "key": "sector-1",
+            "kind": "pie-sector",
+            "value": "72",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L498.564065 330 A160 160 0 0 1 326.734129 406.503616 Z"
+            }
+          },
+          {
+            "key": "sector-2",
+            "kind": "pie-sector",
+            "value": "168",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L326.734129 406.503616 A160 160 0 0 1 360 90 Z"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "0c51e75711a1e83ec0ba2a675bada4cddbf561ddfdc817e1dc79de343bd2c8f1",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +174,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

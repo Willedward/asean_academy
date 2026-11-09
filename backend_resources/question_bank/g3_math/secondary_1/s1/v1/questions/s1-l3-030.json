@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-030",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-030-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A graph places years 2018, 2019, 2023 and 2024 one grid square apart. If each square is interpreted as one year, by how many years is the 2019\u20132023 interval understated? Enter the numerical value only."
+          "text": "Each labelled year on the time axis is one grid square from the next. If each square is interpreted as one year, by how many years is the misleading interval understated? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The actual gap is four years but appears as one."
+              "text": "Find the gap that is not one year, then subtract the one-square gap it appears to be."
             }
           ]
         }
@@ -72,7 +81,73 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-030-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-030-diagram-r2.svg",
+      "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "vertical_scale",
+        "question_key": "s1-l3-030",
+        "outcome": "1.4",
+        "template": "vertical_scale",
+        "inputs": {
+          "ticks": [
+            2018,
+            2019,
+            2023,
+            2024
+          ],
+          "title": "Time axis",
+          "orientation": "horizontal",
+          "alt_text": "Horizontal time axis with the years 2018, 2019, 2023 and 2024, each one grid square from the next."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [],
+        "chart_ticks": [
+          {
+            "key": "x:2018",
+            "axis": "x",
+            "value": "2018",
+            "position": "90",
+            "label": "2018"
+          },
+          {
+            "key": "x:2019",
+            "axis": "x",
+            "value": "2019",
+            "position": "270",
+            "label": "2019"
+          },
+          {
+            "key": "x:2023",
+            "axis": "x",
+            "value": "2023",
+            "position": "450",
+            "label": "2023"
+          },
+          {
+            "key": "x:2024",
+            "axis": "x",
+            "value": "2024",
+            "position": "630",
+            "label": "2024"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "8313eefce2046b2cb41439162e47a3fa38049bb1994cd6129dd364f8da2ee34c",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +161,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

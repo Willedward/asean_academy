@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-025",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-025-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A two-way table shows 6 boys and 9 girls choosing cats, while 8 boys and 5 girls choose dogs. Find the total frequency in the dogs column. Enter the numerical value only."
+          "text": "The two-way table shows the pets chosen by boys and girls. Find the total frequency in the dogs column. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Combine 8 boys and 5 girls."
+              "text": "Add the boys entry and the girls entry in that column."
             }
           ]
         }
@@ -72,7 +81,96 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-025-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-025-diagram-r2.svg",
+      "alt_text": "Two-way table with columns Cats and Dogs. Boys: 6 cats, 8 dogs. Girls: 9 cats, 5 dogs.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "question_key": "s1-l2-025",
+        "outcome": "1.1",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Cats",
+            "Dogs"
+          ],
+          "rows": [
+            "Boys",
+            "Girls"
+          ],
+          "cells": [
+            [
+              6,
+              8
+            ],
+            [
+              9,
+              5
+            ]
+          ],
+          "title": "Pets chosen",
+          "alt_text": "Two-way table with columns Cats and Dogs. Boys: 6 cats, 8 dogs. Girls: 9 cats, 5 dogs."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "9",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "5",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "277.24"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "f51801748e8c10e2763bcaa38cc369c94be8587d736ec07b4f37257b3fe40235",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +184,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

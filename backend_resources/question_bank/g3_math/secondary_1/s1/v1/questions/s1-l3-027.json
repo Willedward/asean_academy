@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-027",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-027-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A graph's vertical scale marks every 5 units. A point moves from the third mark above zero to the eighth mark above zero. Find the increase in value. Enter the numerical value only."
+          "text": "Two points are marked on the vertical scale in the figure. Find the increase in value from the lower point to the higher point. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Five intervals of 5 units are crossed."
+              "text": "Count the intervals between the points, then multiply by the size of one interval."
             }
           ]
         }
@@ -72,7 +81,145 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-027-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-027-diagram-r2.svg",
+      "alt_text": "Vertical scale marked every 5 units from 0 to 40, with points at 15 and 40.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "vertical_scale",
+        "question_key": "s1-l3-027",
+        "outcome": "1.2",
+        "template": "vertical_scale",
+        "inputs": {
+          "ticks": [
+            0,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40
+          ],
+          "title": "Vertical scale",
+          "points": [
+            {
+              "tick_index": 3,
+              "label": "A"
+            },
+            {
+              "tick_index": 8,
+              "label": "B"
+            }
+          ],
+          "alt_text": "Vertical scale marked every 5 units from 0 to 40, with points at 15 and 40."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "A",
+            "tag": "circle",
+            "geometry": {
+              "cx": "330",
+              "cy": "281.25",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "B",
+            "tag": "circle",
+            "geometry": {
+              "cx": "330",
+              "cy": "75",
+              "r": "7"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "405",
+            "label": "0"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "363.75",
+            "label": "5"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "322.5",
+            "label": "10"
+          },
+          {
+            "key": "y:15",
+            "axis": "y",
+            "value": "15",
+            "position": "281.25",
+            "label": "15"
+          },
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "240",
+            "label": "20"
+          },
+          {
+            "key": "y:25",
+            "axis": "y",
+            "value": "25",
+            "position": "198.75",
+            "label": "25"
+          },
+          {
+            "key": "y:30",
+            "axis": "y",
+            "value": "30",
+            "position": "157.5",
+            "label": "30"
+          },
+          {
+            "key": "y:35",
+            "axis": "y",
+            "value": "35",
+            "position": "116.25",
+            "label": "35"
+          },
+          {
+            "key": "y:40",
+            "axis": "y",
+            "value": "40",
+            "position": "75",
+            "label": "40"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "c27a714cfbb8a10fe29aef4331871a21fe87f597b1f596c593c698284af4722a",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +233,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
