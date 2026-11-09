@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-522",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A side becomes 27 cm after enlargement by scale factor 9/4. Find the original side length. Enter the numerical value only."
+          "text": "A side becomes 27 cm after enlargement by scale factor "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{9}{4}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the original side length. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Reverse the enlargement by dividing by 9/4."
+              "text": "Reverse the enlargement by dividing by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{9}{4}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 27 × 4/9."
+              "text": "Dividing by a fraction is the same as multiplying by its reciprocal. Apply that to the length you have."
             }
           ]
         }

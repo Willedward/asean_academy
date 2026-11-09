@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-521",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar arrowheads have one pair of matching edges 6 cm and 3 cm. Another original edge is 30 cm. Find its copied length y. Enter the numerical value only."
+          "text": "Two similar arrowheads have one pair of matching edges 6 cm and 3 cm. Another original edge is 30 cm. Find its copied length "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y/30 = 3/6."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{30}=\\frac{3}{6}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
