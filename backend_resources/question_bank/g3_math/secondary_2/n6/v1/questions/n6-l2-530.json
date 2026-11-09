@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-530",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For y=-3x²-6x-8, the axis is x=-1. Find the y-coordinate of the turning point."
+          "text": "For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=-3x^{2}-6x-8"
+        },
+        {
+          "type": "text",
+          "text": ", the axis is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=-1"
+        },
+        {
+          "type": "text",
+          "text": ". Find the y-coordinate of the turning point."
         }
       ],
       "marks": 2,
@@ -42,7 +58,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x=-b/(2a), set x=0 for the y-intercept, or reflect the input across the axis."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=\\frac{-b}{2a}"
+            },
+            {
+              "type": "text",
+              "text": ", set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
+              "type": "text",
+              "text": " for the y-intercept, or reflect the input across the axis."
             }
           ]
         },

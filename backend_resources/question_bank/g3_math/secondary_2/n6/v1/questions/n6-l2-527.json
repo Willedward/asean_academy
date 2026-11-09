@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-527",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For f(x)=-2x²+0x-4, find f(-2)."
+          "text": "For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(x)=-2x^{2}-4"
+        },
+        {
+          "type": "text",
+          "text": ", find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(-2)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -66,7 +82,7 @@
             },
             {
               "type": "display_math",
-              "latex": "f(-2)=-2(-2)^2+0(-2)-4=-12."
+              "latex": "f(-2)=-2(-2)^2-4=-12."
             }
           ],
           "mark_type": "M",

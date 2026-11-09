@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-516",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For y=1x²+2x-1, find the minimum or maximum y-value."
+          "text": "For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=x^{2}+2x-1"
+        },
+        {
+          "type": "text",
+          "text": ", find the minimum or maximum y-value."
         }
       ],
       "marks": 4,
@@ -66,7 +74,7 @@
             },
             {
               "type": "display_math",
-              "latex": "y=1(x+1)^2-2,\\text{ so the turning value is }-2."
+              "latex": "y=(x+1)^2-2,\\text{ so the turning value is }-2."
             }
           ],
           "mark_type": "M",
