@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-014",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "On a line graph, the horizontal distance from 2020 to 2021 is 3 cm and the distance from 2021 to 2024 is also 3 cm. How many actual years are represented by the second interval? Enter the numerical value only."
+          "text": "On a line graph, the horizontal distance from 2016 to 2017 is 3 cm and the distance from 2017 to 2021 is also 3 cm. How many times too short is the second interval, if the scale of the first interval is correct? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the stated endpoint years."
+              "text": "Find how many years each 3 cm interval actually covers."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 2021 from 2024."
+              "text": "The second interval should be as long as one year's distance multiplied by the number of years it covers. Compare that length with the 3 cm drawn."
             }
           ]
         }
@@ -61,12 +61,47 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2024-2021=3"
+              "type": "text",
+              "text": "The first interval shows 1 year in 3 cm, and the second covers "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2021-2017=4"
+            },
+            {
+              "type": "text",
+              "text": " years."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "The second interval should be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4\\times3=12"
+            },
+            {
+              "type": "text",
+              "text": " cm, so it is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12\\div3=4"
+            },
+            {
+              "type": "text",
+              "text": " times too short."
             }
           ],
           "mark_type": "A",
-          "mark_value": 2
+          "mark_value": 1
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-015",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -70,12 +70,39 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{5(8)}{2(8)}=2.5"
+              "type": "text",
+              "text": "Area of the wide bar is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5\\times8=40"
+            },
+            {
+              "type": "text",
+              "text": " and area of the narrow bar is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2\\times8=16"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
-          "mark_type": "B",
-          "mark_value": 3
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "\\frac{40}{16}=2.5"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }
@@ -86,7 +113,7 @@
       "asset_key": "s1-l3-015-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-015-diagram-r2.svg",
+      "path": "assets/s1-l3-015-diagram-r3.svg",
       "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

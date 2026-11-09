@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-014",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.3",
-  "title": "Communicate a simple whole",
+  "title": "Share of a town's land",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Four funding sources sum to exactly 100%, and a presentation needs their relative contributions at a glance. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A town plan divides all of its land into housing, parks, roads and shops, and the percentages add up to exactly 100%. A presentation needs the relative share of each use at a glance. For the reason code, use 1 if a bar graph cannot show percentages, 2 if a bar graph cannot show four categories, or 3 if a bar graph compares the uses but does not show them as parts of one whole. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "53",
+        "canonical_latex": "53",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Ask whether the four land uses together make up one whole."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The four funding sources add up to 100%, and the audience must see at a glance how large each share is. Ask which display shows shares of one whole."
+              "text": "The four percentages add up to 100%, and the audience must see at a glance how large each share is. Choose the display that shows shares of one whole, then think about what a bar graph does not show."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A pie chart shows the four land uses as parts of one whole at a glance. A bar graph can compare the uses, but it does not show them as parts of one whole, so the reason code is 3."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=5"
+              "latex": "\\text{Code}=53"
             }
           ],
           "mark_type": "B",

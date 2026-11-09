@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-012",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -78,12 +78,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{6}{6+4}(100\\%)=60\\%"
+              "type": "inline_math",
+              "latex": "\\frac{6}{6+4}=0.6"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "0.6\\times100\\%=60\\%"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
@@ -94,7 +105,7 @@
       "asset_key": "s1-l3-012-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-012-diagram-r3.svg",
+      "path": "assets/s1-l3-012-diagram-r4.svg",
       "alt_text": "Pictogram where each ● represents 8; X has 6 symbols; Y has 4 symbols.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
