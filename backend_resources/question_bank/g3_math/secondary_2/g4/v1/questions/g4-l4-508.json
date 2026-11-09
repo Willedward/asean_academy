@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g4-l4-508",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Find 21 tan 40°, then add 1.6 m."
+              "text": "Find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "21 \\tan 40^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": ", then add 1.6 m."
             }
           ]
         }
@@ -101,7 +109,7 @@
       "asset_key": "g4-l4-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-508-diagram-r2.svg",
+      "path": "assets/g4-l4-508-diagram-r3.svg",
       "alt_text": "An observer stands 21 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 40°. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
