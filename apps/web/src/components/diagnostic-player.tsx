@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { LiveDiagnosticPlayer } from "@/beta-kit/live/live-diagnostic-view";
 import { MathContent, type ContentBlock } from "@/components/math-content";
@@ -55,6 +55,40 @@ export function DiagnosticPlayer({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const saved = useRef<Record<number, string>>({});
+  // A completed answer waiting for its debounce. Leaving the question cancels the
+  // timer, so navigation flushes this rather than dropping the answer.
+  const pending = useRef<{
+    position: number;
+    value: Record<string, string>;
+  } | null>(null);
+
+  const saveAnswer = useCallback(
+    (position: number, value: Record<string, string>) => {
+      pending.current = null;
+      return api.save(sessionId, position, value).then(
+        () => {
+          saved.current[position] = encoded(value);
+        },
+        (caught: unknown) => {
+          setSaveState("idle");
+          setError(
+            caught instanceof Error
+              ? caught.message
+              : "This answer could not be saved.",
+          );
+          throw caught;
+        },
+      );
+    },
+    [api, sessionId],
+  );
+  const flushPending = useCallback(() => {
+    const unsaved = pending.current;
+    if (unsaved)
+      void saveAnswer(unsaved.position, unsaved.value).catch(() => undefined);
+  }, [saveAnswer]);
+
+  useEffect(() => flushPending, [flushPending]);
 
   useEffect(() => {
     let active = true;
@@ -74,6 +108,17 @@ export function DiagnosticPlayer({
         saved.current = snapshots;
         setAnswers(restored);
         setSession(value);
+        // Resume at the first unanswered question, or the last one (where Submit
+        // is) once every question has an answer.
+        const unanswered = value.items.findIndex(
+          (candidate) =>
+            !candidate.question.parts.every((part) =>
+              (restored[candidate.position]?.[String(part.position)] ?? "").trim(),
+            ),
+        );
+        setCurrentIndex(
+          unanswered === -1 ? Math.max(value.items.length - 1, 0) : unanswered,
+        );
       },
       (caught: unknown) =>
         active &&
@@ -108,28 +153,30 @@ export function DiagnosticPlayer({
       !item ||
       !complete ||
       encoded(currentAnswers) === saved.current[item.position]
-    )
+    ) {
+      pending.current = null;
       return;
+    }
+    pending.current = { position: item.position, value: currentAnswers };
     setSaveState("saving");
     const timer = window.setTimeout(() => {
-      void api.save(sessionId, item.position, currentAnswers).then(
+      void saveAnswer(item.position, currentAnswers).then(
         () => {
-          saved.current[item.position] = encoded(currentAnswers);
           setSaveState("saved");
           setError(null);
         },
-        (caught: unknown) => {
-          setSaveState("idle");
-          setError(
-            caught instanceof Error
-              ? caught.message
-              : "This answer could not be saved.",
-          );
-        },
+        () => undefined,
       );
     }, 700);
     return () => window.clearTimeout(timer);
-  }, [api, complete, currentAnswers, item, sessionId]);
+  }, [complete, currentAnswers, item, saveAnswer]);
+
+  function move(step: -1 | 1) {
+    flushPending();
+    setError(null);
+    setSaveState("idle");
+    setCurrentIndex((value) => value + step);
+  }
 
   async function saveDirtyItems() {
     if (!session) return;
@@ -200,14 +247,8 @@ export function DiagnosticPlayer({
             },
           }));
         }}
-        onPrevious={() => {
-          setError(null);
-          setCurrentIndex((value) => value - 1);
-        }}
-        onNext={() => {
-          setError(null);
-          setCurrentIndex((value) => value + 1);
-        }}
+        onPrevious={() => move(-1)}
+        onNext={() => move(1)}
         onSubmit={() => void submit()}
         onRetry={() => window.location.reload()}
       />
@@ -359,22 +400,14 @@ export function DiagnosticPlayer({
       >
         <Button
           disabled={currentIndex === 0}
-          onClick={() => {
-            setError(null);
-            setCurrentIndex((value) => value - 1);
-          }}
+          onClick={() => move(-1)}
           variant="outline"
         >
           <ArrowLeft className="mr-2 size-4" />
           Previous
         </Button>
         {currentIndex < session.items.length - 1 ? (
-          <Button
-            onClick={() => {
-              setError(null);
-              setCurrentIndex((value) => value + 1);
-            }}
-          >
+          <Button onClick={() => move(1)}>
             Next
             <ArrowRight className="ml-2 size-4" />
           </Button>
