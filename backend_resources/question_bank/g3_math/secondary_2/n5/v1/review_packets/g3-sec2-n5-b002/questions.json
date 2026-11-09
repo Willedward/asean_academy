@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l1-506",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -62,7 +62,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Identify the operations acting on the required subject and preserve equality."
+                "text": "Undo the operations on "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " in reverse order."
               }
             ]
           },
@@ -71,7 +79,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+                "text": "Subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": " from both sides, then divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "6"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -111,7 +135,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-509",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -172,7 +196,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Identify the operations acting on the required subject and preserve equality."
+                "text": "The subject "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " is inside a fraction, so clear the denominator first."
               }
             ]
           },
@@ -181,7 +213,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+                "text": "Multiply both sides by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": ", then subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " and divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -192,11 +248,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply both sides by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " and isolate the term in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "4q=2x+4\\Rightarrow 2x=4q-4\\Rightarrow x=2q-2"
+                "latex": "4q=2x+4\\Rightarrow 2x=4q-4"
               }
             ],
             "mark_type": "M",
@@ -207,11 +279,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "2q-2"
+                "latex": "x=2q-2"
               }
             ],
             "mark_type": "A",
@@ -240,14 +320,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-509",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N5",
     "primary_outcome": "5.10",
-    "title": "Area formula with x as the subject",
+    "title": "Sum formula: make l the subject",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -264,7 +344,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "A=\\frac{5x}{2}+6"
+            "latex": "S=\\frac{n(a+l)}{2}"
           },
           {
             "type": "text",
@@ -272,7 +352,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "x"
+            "latex": "l"
           },
           {
             "type": "text",
@@ -285,11 +365,12 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "2*(A-6)/5",
-          "canonical_latex": "\\frac{2(A-6)}{5}",
+          "canonical_expression": "2*S/n-a",
+          "canonical_latex": "\\frac{2S}{n}-a",
           "variables": [
-            "A",
-            "x"
+            "S",
+            "a",
+            "n"
           ],
           "domain_constraints": [],
           "accepted_equivalents": [],
@@ -301,7 +382,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Identify the operations acting on the required subject and preserve equality."
+                "text": "The letter "
+              },
+              {
+                "type": "inline_math",
+                "latex": "l"
+              },
+              {
+                "type": "text",
+                "text": " is inside a bracket. Undo the division by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": " and the multiplication by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "n"
+              },
+              {
+                "type": "text",
+                "text": " first."
               }
             ]
           },
@@ -310,7 +415,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+                "text": "Multiply both sides by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": ", divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "n"
+              },
+              {
+                "type": "text",
+                "text": ", then deal with the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -321,11 +450,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": ", then divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "n"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "A-6=\\frac{5x}{2}\\Rightarrow x=\\frac{2(A-6)}{5}"
+                "latex": "2S=n(a+l)\\Rightarrow\\frac{2S}{n}=a+l"
               }
             ],
             "mark_type": "M",
@@ -336,11 +481,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{2(A-6)}{5}"
+                "latex": "l=\\frac{2S}{n}-a"
               }
             ],
             "mark_type": "A",
@@ -369,7 +522,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l1-507",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -423,7 +576,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the expression to a perfect-square or difference-of-squares identity."
+                "text": "Use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(a+b)^2=a^2+2ab+b^2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -432,7 +593,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute complete terms for a and b, then simplify and verify by expansion."
+                "text": "Here "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=6"
+              },
+              {
+                "type": "text",
+                "text": ", so the middle term is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2\\times x\\times6"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -472,7 +657,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-510",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -491,6 +676,10 @@
         "label": null,
         "prompt": [
           {
+            "type": "text",
+            "text": "A trapezium (a quadrilateral with one pair of parallel sides) has area "
+          },
+          {
             "type": "inline_math",
             "latex": "A=\\frac{1}{2}h(a+b)"
           },
@@ -500,7 +689,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "A=64"
+            "latex": "A=64\\text{ cm}^{2}"
           },
           {
             "type": "text",
@@ -508,7 +697,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "a=6"
+            "latex": "a=6\\text{ cm}"
           },
           {
             "type": "text",
@@ -516,7 +705,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "b=10"
+            "latex": "b=10\\text{ cm}"
           },
           {
             "type": "text",
@@ -528,7 +717,7 @@
           },
           {
             "type": "text",
-            "text": "."
+            "text": " in cm."
           }
         ],
         "marks": 2,
@@ -550,7 +739,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute every known value into the original formula before rearranging."
+                "text": "Substitute the three known values into the formula before rearranging."
               }
             ]
           },
@@ -559,7 +748,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Isolate the unknown, keep exact intermediate values, and check by substitution."
+                "text": "Add the parallel sides first, then use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{1}{2}\\times16"
+              },
+              {
+                "type": "text",
+                "text": " to write an equation in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "h"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -570,11 +775,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Substitute the known values. "
               },
               {
                 "type": "display_math",
-                "latex": "64=\\frac12h(6+10)\\Rightarrow h=8"
+                "latex": "64=\\frac12 h(6+10)=8h"
               }
             ],
             "mark_type": "M",
@@ -585,11 +790,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "8"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "h=8"
               }
             ],
             "mark_type": "A",
@@ -618,7 +831,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-510",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -650,7 +863,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "v=10"
+            "latex": "v=10\\text{ m/s}"
           },
           {
             "type": "text",
@@ -658,7 +871,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "u=6"
+            "latex": "u=6\\text{ m/s}"
           },
           {
             "type": "text",
@@ -666,7 +879,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "s=8"
+            "latex": "s=8\\text{ m}"
           },
           {
             "type": "text",
@@ -675,6 +888,14 @@
           {
             "type": "inline_math",
             "latex": "a"
+          },
+          {
+            "type": "text",
+            "text": " in "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\text{m/s}^{2}"
           },
           {
             "type": "text",
@@ -700,7 +921,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute every known value into the original formula before rearranging."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "v"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "s"
+              },
+              {
+                "type": "text",
+                "text": " into the formula, squaring carefully."
               }
             ]
           },
@@ -709,7 +954,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Isolate the unknown, keep exact intermediate values, and check by substitution."
+                "text": "Work out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "10^2"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "6^2"
+              },
+              {
+                "type": "text",
+                "text": ", then subtract to isolate the term in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -720,11 +989,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Substitute and subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "6^2"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "10^2=6^2+2(a)(8)\\Rightarrow a=\\frac{64}{16}=4"
+                "latex": "100=36+16a\\Rightarrow16a=64"
               }
             ],
             "mark_type": "M",
@@ -735,11 +1012,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "16"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "4"
+                "latex": "a=4"
               }
             ],
             "mark_type": "A",
@@ -768,7 +1053,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l4-505",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -831,7 +1116,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Identify the operations acting on the required subject and preserve equality."
+                "text": "The subject appears in the numerator and the denominator, so clear the fraction and collect the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " terms."
               }
             ]
           },
@@ -840,7 +1133,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+                "text": "After multiplying out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y(2x+3)"
+              },
+              {
+                "type": "text",
+                "text": ", move every term containing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " to one side and factor out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -851,11 +1168,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply both sides by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x+3"
+              },
+              {
+                "type": "text",
+                "text": ", collect the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " terms and factorise. "
               },
               {
                 "type": "display_math",
-                "latex": "y(2x+3)=4x+1\\Rightarrow(2y-4)x=1-3y\\Rightarrow x=\\frac{1-3y}{2y-4}"
+                "latex": "y(2x+3)=4x+1\\Rightarrow2xy-4x=1-3y\\Rightarrow x(2y-4)=1-3y"
               }
             ],
             "mark_type": "M",
@@ -866,11 +1199,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2y-4"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{1-3y}{2y-4}"
+                "latex": "x=\\frac{1-3y}{2y-4},\\quad y\\neq2"
               }
             ],
             "mark_type": "A",
@@ -899,7 +1240,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-511",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -953,7 +1294,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the expression to a perfect-square or difference-of-squares identity."
+                "text": "Use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(a-b)^2=a^2-2ab+b^2"
+              },
+              {
+                "type": "text",
+                "text": " with the whole term "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x"
+              },
+              {
+                "type": "text",
+                "text": " as "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -962,7 +1327,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute complete terms for a and b, then simplify and verify by expansion."
+                "text": "Square "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x"
+              },
+              {
+                "type": "text",
+                "text": ", work out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2\\times3x\\times6"
+              },
+              {
+                "type": "text",
+                "text": " for the middle term, and square "
+              },
+              {
+                "type": "inline_math",
+                "latex": "6"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -973,11 +1362,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Apply the identity with "
+              },
+              {
+                "type": "inline_math",
+                "latex": "a=3x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b=6"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "(3x-6)^2=9x^2-36x+36=9x^2-36x+36"
+                "latex": "(3x-6)^2=(3x)^2-2(3x)(6)+6^2"
               }
             ],
             "mark_type": "M",
@@ -988,7 +1393,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Simplify each term: "
               },
               {
                 "type": "display_math",
@@ -1021,14 +1426,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-511",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N5",
     "primary_outcome": "5.13",
-    "title": "Group terms to find a common bracket",
+    "title": "Factorise four terms in two letters",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1045,7 +1450,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "ax+bx+4ay+4by"
+            "latex": "3ax-6bx+2ay-4by"
           },
           {
             "type": "text",
@@ -1058,8 +1463,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "(a+b)*(x+4*y)",
-          "canonical_latex": "(a+b)(x+4y)",
+          "canonical_expression": "(a-2*b)*(3*x+2*y)",
+          "canonical_latex": "(a-2b)(3x+2y)",
           "variables": [
             "a",
             "b",
@@ -1078,7 +1483,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Reorder if needed, then factor a common term from each useful pair."
+                "text": "Group the first two terms and the last two terms, then find the common factor of each pair."
               }
             ]
           },
@@ -1087,7 +1492,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+                "text": "Take a factor containing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " out of the first pair and a factor containing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " out of the second pair."
               }
             ]
           }
@@ -1098,11 +1519,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Take "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x"
+              },
+              {
+                "type": "text",
+                "text": " out of the first pair and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2y"
+              },
+              {
+                "type": "text",
+                "text": " out of the second. "
               },
               {
                 "type": "display_math",
-                "latex": "x(a+b)+4y(a+b)=(a+b)(x+4y)"
+                "latex": "3x(a-2b)+2y(a-2b)"
               }
             ],
             "mark_type": "M",
@@ -1113,11 +1550,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Take out the common bracket "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(a-2b)"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "(a+b)(x+4y)"
+                "latex": "(a-2b)(3x+2y)"
               }
             ],
             "mark_type": "A",
@@ -1146,7 +1591,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l4-506",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1165,6 +1610,10 @@
         "label": null,
         "prompt": [
           {
+            "type": "text",
+            "text": "Use "
+          },
+          {
             "type": "inline_math",
             "latex": "E=mgh+\\frac{1}{2}mv^{2}"
           },
@@ -1174,7 +1623,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "E=192"
+            "latex": "E=192\\text{ J}"
           },
           {
             "type": "text",
@@ -1182,7 +1631,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "m=4"
+            "latex": "m=4\\text{ kg}"
           },
           {
             "type": "text",
@@ -1190,7 +1639,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "g=10"
+            "latex": "g=10\\text{ m/s}^{2}"
           },
           {
             "type": "text",
@@ -1198,7 +1647,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "h=4"
+            "latex": "h=4\\text{ m}"
           },
           {
             "type": "text",
@@ -1210,7 +1659,7 @@
           },
           {
             "type": "text",
-            "text": "."
+            "text": " in m/s."
           }
         ],
         "marks": 4,
@@ -1232,7 +1681,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute every known value into the original formula before rearranging."
+                "text": "Substitute the four known values, then isolate the term containing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "v^2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1241,7 +1698,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Isolate the unknown, keep exact intermediate values, and check by substitution."
+                "text": "Work out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "mgh"
+              },
+              {
+                "type": "text",
+                "text": " first and subtract it from "
+              },
+              {
+                "type": "inline_math",
+                "latex": "E"
+              },
+              {
+                "type": "text",
+                "text": ". What must "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac12mv^2"
+              },
+              {
+                "type": "text",
+                "text": " equal?"
               }
             ]
           }
@@ -1252,11 +1733,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Substitute and isolate the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "v^2"
+              },
+              {
+                "type": "text",
+                "text": " term. "
               },
               {
                 "type": "display_math",
-                "latex": "192=4(10)(4)+\\frac12(4)v^2\\Rightarrow v^2=16\\Rightarrow v=4"
+                "latex": "192=4(10)(4)+\\frac12(4)v^2=160+2v^2\\Rightarrow2v^2=32\\Rightarrow v^2=16"
               }
             ],
             "mark_type": "M",
@@ -1267,11 +1756,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Take the positive root: "
               },
               {
                 "type": "display_math",
-                "latex": "4"
+                "latex": "v=4"
               }
             ],
             "mark_type": "A",
@@ -1300,7 +1789,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l1-508",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1356,7 +1845,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Reorder if needed, then factor a common term from each useful pair."
+                "text": "Look for pairs of terms that share a common factor."
               }
             ]
           },
@@ -1365,7 +1854,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+                "text": "Take "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3"
+              },
+              {
+                "type": "text",
+                "text": " out of the first pair and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4x"
+              },
+              {
+                "type": "text",
+                "text": " out of the second pair."
               }
             ]
           }
@@ -1405,7 +1910,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-512",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1461,7 +1966,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Reorder if needed, then factor a common term from each useful pair."
+                "text": "Group the first two terms and the last two terms."
               }
             ]
           },
@@ -1470,7 +1975,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+                "text": "Take "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " out of the first pair and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5k"
+              },
+              {
+                "type": "text",
+                "text": " out of the second, then look for the common bracket."
               }
             ]
           }
@@ -1481,11 +2002,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Take "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " out of the first pair and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5k"
+              },
+              {
+                "type": "text",
+                "text": " out of the second. "
               },
               {
                 "type": "display_math",
-                "latex": "4(x+y)+5k(x+y)=(x+y)(4+5k)"
+                "latex": "4x+4y+5kx+5ky=4(x+y)+5k(x+y)"
               }
             ],
             "mark_type": "M",
@@ -1496,7 +2033,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Take out the common bracket: "
               },
               {
                 "type": "display_math",
@@ -1529,7 +2066,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l4-507",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1583,7 +2120,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the expression to a perfect-square or difference-of-squares identity."
+                "text": "Use the identity for each square, or treat the expression as a difference of two squares."
               }
             ]
           },
@@ -1592,7 +2129,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute complete terms for a and b, then simplify and verify by expansion."
+                "text": "If you expand each bracket, take care to subtract the whole of the second expansion."
               }
             ]
           }
@@ -1603,11 +2140,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Expand both squares and subtract with brackets. "
               },
               {
                 "type": "display_math",
-                "latex": "(x^2+16x+64)-(x^2-16x+64)=32x"
+                "latex": "(x^2+16x+64)-(x^2-16x+64)"
               }
             ],
             "mark_type": "M",
@@ -1618,7 +2155,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
@@ -1651,7 +2188,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l1-509",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1705,7 +2242,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove any overall common factor, then use the required sum and product."
+                "text": "You need two numbers that multiply to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "24"
+              },
+              {
+                "type": "text",
+                "text": " and add to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "10"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1714,7 +2267,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+                "text": "Try factor pairs of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "24"
+              },
+              {
+                "type": "text",
+                "text": " until the sum is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "10"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1754,7 +2323,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-513",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1808,7 +2377,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove any overall common factor, then use the required sum and product."
+                "text": "You need two numbers that multiply to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "42"
+              },
+              {
+                "type": "text",
+                "text": " and add to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-13"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1817,7 +2402,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+                "text": "Both numbers are negative. Try factor pairs of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "42"
+              },
+              {
+                "type": "text",
+                "text": " until the sum is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "13"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1828,11 +2429,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Find two numbers with product "
+              },
+              {
+                "type": "inline_math",
+                "latex": "42"
+              },
+              {
+                "type": "text",
+                "text": " and sum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-13"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "-7+(-6)=-13,\\ (-7)(-6)=42\\Rightarrow (x-7)(x-6)"
+                "latex": "-6+(-7)=-13,\\quad(-6)(-7)=42"
               }
             ],
             "mark_type": "M",
@@ -1843,7 +2460,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "So "
               },
               {
                 "type": "display_math",
@@ -1876,7 +2493,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-512",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1930,7 +2547,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove any overall common factor, then use the required sum and product."
+                "text": "Take out the common factor of all three terms first."
               }
             ]
           },
@@ -1939,7 +2556,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+                "text": "After removing "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": ", find two numbers with product "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " and sum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1950,11 +2591,35 @@
             "content": [
               {
                 "type": "text",
-                "text": "Take out the common factor first, then factorise what remains."
+                "text": "Take out the common factor "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": ", then look for numbers with product "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4"
+              },
+              {
+                "type": "text",
+                "text": " and sum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "4x^2+20x+16=4(x^2+5x+4)=4(x+1)(x+4)"
+                "latex": "4x^2+20x+16=4(x^2+5x+4)"
               }
             ],
             "mark_type": "M",
@@ -1965,7 +2630,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "So "
               },
               {
                 "type": "display_math",
@@ -1998,14 +2663,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l1-510",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N5",
     "primary_outcome": "5.9",
-    "title": "Multiply out one bracket",
+    "title": "Expand with a negative multiplier",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2022,7 +2687,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "3(x+1)"
+            "latex": "-2(x-5)"
           },
           {
             "type": "text",
@@ -2035,8 +2700,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "3*x+3",
-          "canonical_latex": "3x+3",
+          "canonical_expression": "-2*x+10",
+          "canonical_latex": "-2x+10",
           "variables": [
             "x"
           ],
@@ -2052,7 +2717,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Distribute each term to every term in the other factor."
+                "text": "Multiply both terms inside the bracket by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -2061,7 +2734,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write all products first, then combine only terms with identical variable parts."
+                "text": "Remember that a negative multiplied by a negative is positive."
               }
             ]
           }
@@ -2072,7 +2745,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "3(x+1)=3x+3"
+                "latex": "-2(x-5)=-2x+10"
               }
             ],
             "mark_type": "A",
@@ -2101,7 +2774,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-514",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2144,7 +2817,10 @@
             "x",
             "y"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x != 0",
+            "y != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -2156,7 +2832,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+                "text": "Dividing by a fraction is the same as multiplying by its reciprocal."
               }
             ]
           },
@@ -2165,7 +2841,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+                "text": "Rewrite as "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}"
+              },
+              {
+                "type": "text",
+                "text": " and cancel common factors."
               }
             ]
           }
@@ -2176,11 +2860,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply by the reciprocal of the second fraction. "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}=\\frac{4y}{21x}"
+                "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}=\\frac{12xy^2}{63x^2y}"
               }
             ],
             "mark_type": "M",
@@ -2191,11 +2875,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Cancel common factors: "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{4y}{21x}"
+                "latex": "\\frac{4y}{21x},\\quad x\\neq0,\\ y\\neq0"
               }
             ],
             "mark_type": "A",
@@ -2224,14 +2908,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-513",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N5",
     "primary_outcome": "5.15",
-    "title": "Cancel a bracket and powers of x",
+    "title": "Factorise before cancelling",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2248,7 +2932,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "\\left(\\frac{x+7}{3x}\\right)\\left(\\frac{5x^{2}}{x+7}\\right)"
+            "latex": "\\left(\\frac{x^{2}+5x+6}{3x}\\right)\\left(\\frac{6x^{2}}{x+2}\\right)"
           },
           {
             "type": "text",
@@ -2261,12 +2945,15 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "(5*x)/(3)",
-          "canonical_latex": "\\frac{5x}{3}",
+          "canonical_expression": "2*x*(x+3)",
+          "canonical_latex": "2x(x+3)",
           "variables": [
             "x"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x != 0",
+            "x+2 != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -2278,7 +2965,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+                "text": "Factorise the quadratic numerator first."
               }
             ]
           },
@@ -2287,7 +2974,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+                "text": "Look for two numbers with product "
+              },
+              {
+                "type": "inline_math",
+                "latex": "6"
+              },
+              {
+                "type": "text",
+                "text": " and sum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5"
+              },
+              {
+                "type": "text",
+                "text": ", then cancel a bracket and powers of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2298,11 +3009,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Factorise the numerator and cancel the common bracket "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x+2)"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{x+7}{3x}\\times\\frac{5x^2}{x+7}=\\frac{5x}{3}"
+                "latex": "\\frac{(x+2)(x+3)}{3x}\\times\\frac{6x^2}{x+2}=\\frac{6x^2(x+3)}{3x}"
               }
             ],
             "mark_type": "M",
@@ -2313,11 +3032,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Cancel "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{5x}{3}"
+                "latex": "2x(x+3),\\quad x\\neq0,\\ x\\neq-2"
               }
             ],
             "mark_type": "A",
@@ -2346,14 +3073,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l5-502",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N5",
     "primary_outcome": "5.14",
-    "title": "Full factorisation with large coefficients",
+    "title": "Factorise using a repeated bracket",
     "difficulty": 5,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2370,7 +3097,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "45x^{2}+90x+45"
+            "latex": "2(x+1)^{2}-10(x+1)-28"
           },
           {
             "type": "text",
@@ -2383,8 +3110,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "45*(x+1)^2",
-          "canonical_latex": "45(x+1)^2",
+          "canonical_expression": "2*(x-6)*(x+3)",
+          "canonical_latex": "2(x-6)(x+3)",
           "variables": [
             "x"
           ],
@@ -2400,7 +3127,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove any overall common factor, then use the required sum and product."
+                "text": "Take out the common factor, then treat "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x+1)"
+              },
+              {
+                "type": "text",
+                "text": " as a single letter."
               }
             ]
           },
@@ -2409,7 +3144,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+                "text": "With "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u=x+1"
+              },
+              {
+                "type": "text",
+                "text": ", the bracket is a quadratic in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u"
+              },
+              {
+                "type": "text",
+                "text": ". Factorise it, then replace "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u"
+              },
+              {
+                "type": "text",
+                "text": " and tidy each bracket."
               }
             ]
           }
@@ -2420,11 +3179,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Take out the common factor first, then factorise what remains."
+                "text": "Take out the factor "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": " and put "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u=x+1"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "45x^2+90x+45=45(x^2+2x+1)=45(x+1)^2"
+                "latex": "2\\left[u^2-5u-14\\right]=2(u-7)(u+2)"
               }
             ],
             "mark_type": "M",
@@ -2435,11 +3210,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Replace "
+              },
+              {
+                "type": "inline_math",
+                "latex": "u"
+              },
+              {
+                "type": "text",
+                "text": " with "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x+1"
+              },
+              {
+                "type": "text",
+                "text": ": "
               },
               {
                 "type": "display_math",
-                "latex": "45(x+1)^2"
+                "latex": "2(x+1-7)(x+1+2)=2(x-6)(x+3)"
               }
             ],
             "mark_type": "A",
@@ -2468,7 +3259,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-515",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2510,7 +3301,10 @@
           "variables": [
             "x"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x-6 != 0",
+            "x-8 != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -2522,7 +3316,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor each denominator and build the least common denominator from the required factors."
+                "text": "Use the common denominator "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-6)(x-8)"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -2531,7 +3333,39 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+                "text": "Multiply "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1"
+              },
+              {
+                "type": "text",
+                "text": " by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-8)"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2"
+              },
+              {
+                "type": "text",
+                "text": " by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-6)"
+              },
+              {
+                "type": "text",
+                "text": ", then collect like terms in the numerator."
               }
             ]
           }
@@ -2542,11 +3376,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Write both fractions over "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-6)(x-8)"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{1(x-8)+2(x-6)}{(x-6)(x-8)}=\\frac{3x-20}{(x-6)(x-8)}"
+                "latex": "\\frac{(x-8)+2(x-6)}{(x-6)(x-8)}=\\frac{x-8+2x-12}{(x-6)(x-8)}"
               }
             ],
             "mark_type": "M",
@@ -2557,11 +3399,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{3x-20}{(x-6)(x-8)}"
+                "latex": "\\frac{3x-20}{(x-6)(x-8)},\\quad x\\neq6,\\ x\\neq8"
               }
             ],
             "mark_type": "A",
@@ -2590,7 +3432,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-514",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2632,7 +3474,10 @@
           "variables": [
             "x"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x-2 != 0",
+            "x+2 != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -2644,7 +3489,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor each denominator and build the least common denominator from the required factors."
+                "text": "Factorise "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2-4"
+              },
+              {
+                "type": "text",
+                "text": " first and use it as the common denominator."
               }
             ]
           },
@@ -2653,7 +3506,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+                "text": "The second fraction needs its top and bottom multiplied by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x+2)"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2664,11 +3525,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Factorise the denominator and write both fractions over "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-2)(x+2)"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{2+3(x+2)}{(x-2)(x+2)}=\\frac{3x+8}{(x-2)(x+2)}"
+                "latex": "\\frac{2}{(x-2)(x+2)}+\\frac{3(x+2)}{(x-2)(x+2)}=\\frac{2+3x+6}{(x-2)(x+2)}"
               }
             ],
             "mark_type": "M",
@@ -2679,11 +3548,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{3x+8}{(x-2)(x+2)}"
+                "latex": "\\frac{3x+8}{(x-2)(x+2)},\\quad x\\neq\\pm2"
               }
             ],
             "mark_type": "A",
@@ -2712,7 +3581,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l4-508",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2754,7 +3623,10 @@
           "variables": [
             "x"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x != 0",
+            "x+8 != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -2766,7 +3638,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+                "text": "Factorise the numerator "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x^2-64"
+              },
+              {
+                "type": "text",
+                "text": " before cancelling."
               }
             ]
           },
@@ -2774,8 +3654,20 @@
             "stage": 2,
             "content": [
               {
+                "type": "inline_math",
+                "latex": "x^2-64"
+              },
+              {
                 "type": "text",
-                "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+                "text": " is a difference of two squares. After factorising, cancel a bracket and the common factor of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2786,11 +3678,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Factorise, then cancel the common bracket "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x+8)"
+              },
+              {
+                "type": "text",
+                "text": " and the factor "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{(x-8)(x+8)}{4x}\\times\\frac{6x}{x+8}=\\frac{3(x-8)}{2}"
+                "latex": "\\frac{(x-8)(x+8)}{4x}\\times\\frac{6x}{x+8}=\\frac{6(x-8)}{4}"
               }
             ],
             "mark_type": "M",
@@ -2801,11 +3709,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Simplify: "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{3(x-8)}{2}"
+                "latex": "\\frac{3(x-8)}{2},\\quad x\\neq0,\\ x\\neq-8"
               }
             ],
             "mark_type": "A",
@@ -2834,7 +3742,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l2-516",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2888,7 +3796,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Distribute each term to every term in the other factor."
+                "text": "Multiply each term in the first bracket by each term in the second."
               }
             ]
           },
@@ -2897,7 +3805,47 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write all products first, then combine only terms with identical variable parts."
+                "text": "Work out "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x\\times x"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x\\times5"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2\\times x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2\\times5"
+              },
+              {
+                "type": "text",
+                "text": ", then collect the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " terms."
               }
             ]
           }
@@ -2908,11 +3856,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply out each pair of terms. "
               },
               {
                 "type": "display_math",
-                "latex": "(x+2)(x+5)=x^2+5x+2x+10=x^2+7x+10"
+                "latex": "(x+2)(x+5)=x^2+5x+2x+10"
               }
             ],
             "mark_type": "M",
@@ -2923,7 +3871,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
@@ -2956,7 +3904,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l3-515",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3010,7 +3958,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Distribute each term to every term in the other factor."
+                "text": "Multiply each term in the first bracket by each term in the second."
               }
             ]
           },
@@ -3019,7 +3967,39 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write all products first, then combine only terms with identical variable parts."
+                "text": "The four products are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "15x^2"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-30x"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "9x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-18"
+              },
+              {
+                "type": "text",
+                "text": ". Collect the middle pair."
               }
             ]
           }
@@ -3030,11 +4010,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Multiply out each pair of terms. "
               },
               {
                 "type": "display_math",
-                "latex": "(5x+3)(3x-6)=15x^2-30x+9x-18=15x^2-21x-18"
+                "latex": "(5x+3)(3x-6)=15x^2-30x+9x-18"
               }
             ],
             "mark_type": "M",
@@ -3045,7 +4025,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
@@ -3078,7 +4058,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n5-l4-509",
     "bank_key": "g3-sec2-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3120,7 +4100,9 @@
           "variables": [
             "x"
           ],
-          "domain_constraints": [],
+          "domain_constraints": [
+            "x-3 != 0"
+          ],
           "accepted_equivalents": [],
           "checker_config": {
             "form": "simplified_fraction"
@@ -3132,7 +4114,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Factor each denominator and build the least common denominator from the required factors."
+                "text": "The common denominator is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-3)^2"
+              },
+              {
+                "type": "text",
+                "text": ", not "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-3)^3"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -3141,7 +4139,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+                "text": "Multiply the top and bottom of the first fraction by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-3)"
+              },
+              {
+                "type": "text",
+                "text": ", then subtract the numerators with care."
               }
             ]
           }
@@ -3152,11 +4158,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+                "text": "Write both fractions over "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x-3)^2"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{3(x-3)-4}{(x-3)^2}=\\frac{3x-13}{(x-3)^2}"
+                "latex": "\\frac{3(x-3)}{(x-3)^2}-\\frac{4}{(x-3)^2}=\\frac{3x-9-4}{(x-3)^2}"
               }
             ],
             "mark_type": "M",
@@ -3167,11 +4181,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the simplified result with the required subject, factors or value."
+                "text": "Collect like terms: "
               },
               {
                 "type": "display_math",
-                "latex": "\\frac{3x-13}{(x-3)^2}"
+                "latex": "\\frac{3x-13}{(x-3)^2},\\quad x\\neq3"
               }
             ],
             "mark_type": "A",
