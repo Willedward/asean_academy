@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-l3-008",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "To construct triangle ABC with AB = 5 cm, AC = 6 cm and BC = 7 cm, an arc centred at A is drawn to locate C. What radius should this arc have, in centimetres?"
+          "text": "To construct triangle ABC with AB = 5 cm, BC = 7 cm and perimeter 18 cm, an arc centred at A is drawn to locate C. What radius should this arc have, in centimetres?"
         }
       ],
       "marks": 1,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the specified length AC = 6 cm."
+              "text": "First use the perimeter to work out AC. Then ask which length the arc centred at A has to measure."
             }
           ]
         }
@@ -71,7 +71,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "AC=6\\text{ cm}"
+              "latex": "AC=18-5-7=6\\text{ cm}"
             }
           ],
           "mark_type": "A",
@@ -86,7 +86,7 @@
       "asset_key": "g1-l3-008-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-008-diagram-r3.svg",
+      "path": "assets/g1-l3-008-diagram-r4.svg",
       "alt_text": "Segment AB marked 5 cm. A compass arc centred at A and a compass arc centred at B meet at C. The dashed line from B to C is marked 7 cm and the dashed radius from A to C is marked r. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-plane-geometry-svg-v1",
