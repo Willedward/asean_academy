@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l1-510",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n6-l1-510-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A quadratic graph crosses the x-axis at x=-7 and x=1. Find the x-coordinate of its axis of symmetry."
+          "text": "The marked points show where this parabola meets the x-axis. Its line of symmetry is x=h. Find h."
         }
       ],
       "marks": 1,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the rule with y=a(x-h)²+k, or use the midpoint of the two roots."
+              "text": "Read the x-coordinates of the two marked points."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The turning point is (h,k) and the vertical symmetry line is x=h."
+              "text": "The line of symmetry is halfway between those two x-values."
             }
           ]
         }
@@ -62,7 +71,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=\\frac{-7+(1)}{2}=-3."
+              "latex": "h=\\frac{-7+1}{2}=-3."
             }
           ],
           "mark_type": "A",
@@ -72,7 +81,174 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n6-l1-510-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-l1-510-diagram-r3.svg",
+      "alt_text": "Parabola crossing the x-axis at -7 and 1.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "quadratic_graph",
+        "question_key": "n6-l1-510",
+        "outcome": "6.7",
+        "template": "quadratic_graph",
+        "inputs": {
+          "roots": [
+            -7,
+            1
+          ],
+          "a": 1,
+          "x_min": -9,
+          "x_max": 3,
+          "title": "Quadratic graph",
+          "show_symmetry": false
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "curve",
+            "kind": "quadratic-curve",
+            "value": "1;-7;1",
+            "tag": "path",
+            "geometry": {
+              "d": "M90 60 L97.375 77.034375 L104.75 93.6375 L112.125 109.809375 L119.5 125.55 L126.875 140.859375 L134.25 155.7375 L141.625 170.184375 L149 184.2 L156.375 197.784375 L163.75 210.9375 L171.125 223.659375 L178.5 235.95 L185.875 247.809375 L193.25 259.2375 L200.625 270.234375 L208 280.8 L215.375 290.934375 L222.75 300.6375 L230.125 309.909375 L237.5 318.75 L244.875 327.159375 L252.25 335.1375 L259.625 342.684375 L267 349.8 L274.375 356.484375 L281.75 362.7375 L289.125 368.559375 L296.5 373.95 L303.875 378.909375 L311.25 383.4375 L318.625 387.534375 L326 391.2 L333.375 394.434375 L340.75 397.2375 L348.125 399.609375 L355.5 401.55 L362.875 403.059375 L370.25 404.1375 L377.625 404.784375 L385 405 L392.375 404.784375 L399.75 404.1375 L407.125 403.059375 L414.5 401.55 L421.875 399.609375 L429.25 397.2375 L436.625 394.434375 L444 391.2 L451.375 387.534375 L458.75 383.4375 L466.125 378.909375 L473.5 373.95 L480.875 368.559375 L488.25 362.7375 L495.625 356.484375 L503 349.8 L510.375 342.684375 L517.75 335.1375 L525.125 327.159375 L532.5 318.75 L539.875 309.909375 L547.25 300.6375 L554.625 290.934375 L562 280.8 L569.375 270.234375 L576.75 259.2375 L584.125 247.809375 L591.5 235.95 L598.875 223.659375 L606.25 210.9375 L613.625 197.784375 L621 184.2 L628.375 170.184375 L635.75 155.7375 L643.125 140.859375 L650.5 125.55 L657.875 109.809375 L665.25 93.6375 L672.625 77.034375 L680 60"
+            }
+          },
+          {
+            "key": "root-0",
+            "kind": "root",
+            "value": "-7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "188.333333",
+              "cy": "251.666667",
+              "r": "7"
+            }
+          },
+          {
+            "key": "root-1",
+            "kind": "root",
+            "value": "1",
+            "tag": "circle",
+            "geometry": {
+              "cx": "581.666667",
+              "cy": "251.666667",
+              "r": "7"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-9",
+            "axis": "x",
+            "value": "-9",
+            "position": "90",
+            "label": "-9"
+          },
+          {
+            "key": "x:-8",
+            "axis": "x",
+            "value": "-8",
+            "position": "139.166667",
+            "label": "-8"
+          },
+          {
+            "key": "x:-7",
+            "axis": "x",
+            "value": "-7",
+            "position": "188.333333",
+            "label": "-7"
+          },
+          {
+            "key": "x:-6",
+            "axis": "x",
+            "value": "-6",
+            "position": "237.5",
+            "label": "-6"
+          },
+          {
+            "key": "x:-5",
+            "axis": "x",
+            "value": "-5",
+            "position": "286.666667",
+            "label": "-5"
+          },
+          {
+            "key": "x:-4",
+            "axis": "x",
+            "value": "-4",
+            "position": "335.833333",
+            "label": "-4"
+          },
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "385",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "434.166667",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "483.333333",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "532.5",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "581.666667",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "630.833333",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "680",
+            "label": "3"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -9.0,
+          "x_max": 3.0,
+          "y_min": -16.0,
+          "y_max": 20.0
+        }
+      },
+      "sha256": "b5b1052faa34c4e02a79733eac65c4589eb1c8deae72383c686389e63ab34252",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +262,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
