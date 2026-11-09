@@ -1219,6 +1219,9 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session(wron
         policy_key="n1-default-v1",
     )
     assert recorded.percentage == 87.5
+    assert repository.latest_checkpoint_sessions(learner_id) == {
+        "g3-sec1-n1": repository.latest_checkpoint_session(learner_id, "g3-sec1-n1")
+    }
     assert all(
         progress.state == "mastered" and progress.checkpoint_passed
         for progress in repository.lesson_progress(learner_id)
@@ -1242,6 +1245,54 @@ def test_postgres_checkpoint_records_mastery_and_replays_one_active_session(wron
                 """,
                 (learner_id, created["session_id"]),
             )
+
+
+@pytest.mark.postgres
+def test_postgres_progress_reads_all_units_with_constant_connections(monkeypatch):
+    database_url = _database_url()
+    learner_id = str(uuid4())
+    email = f"{learner_id}@example.test"
+    code = f"progress-connections-{learner_id}"
+    with psycopg.connect(database_url) as connection:
+        _seed_learner(connection, learner_id, email, code)
+    app = create_app(
+        Settings(
+            environment="test",
+            cors_origins=("http://localhost:3000",),
+            log_level="INFO",
+            repository_root=REPOSITORY_ROOT,
+            allow_draft_content=True,
+            development_learner_id=None,
+            database_url=database_url,
+            rate_limits_enabled=False,
+        ),
+        token_verifier=StaticTokenVerifier(
+            {"progress-learner": AuthenticatedLearner(learner_id, "authenticated", email)}
+        ),
+    )
+    accepted = _request(
+        app,
+        "POST",
+        "/api/v1/onboarding/accept-invitation",
+        "progress-learner",
+        json={"invitation_code": code, "display_name": "Connection learner"},
+    )
+    assert accepted.status_code == 200, accepted.text
+
+    real_connect = psycopg.connect
+    connections = []
+
+    def counting_connect(*args, **kwargs):
+        connections.append(args)
+        return real_connect(*args, **kwargs)
+
+    monkeypatch.setattr(psycopg, "connect", counting_connect)
+    response = _request(app, "GET", "/api/v1/progress", "progress-learner")
+
+    assert response.status_code == 200, response.text
+    assert len(response.json()["checkpoints"]) > 1
+    # Enrolment check plus five progress reads, whatever the number of units.
+    assert len(connections) == 6
 
 
 @pytest.mark.postgres
