@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l1-001",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Point P has coordinates (-4, 3). State the x-coordinate of P."
+          "text": "Point P has coordinates "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-4, 3)"
+        },
+        {
+          "type": "text",
+          "text": ". State the x-coordinate of P."
         }
       ],
       "marks": 1,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the first number in (-4, 3)."
+              "text": "Read the first number in the ordered pair, including its sign."
             }
           ]
         }

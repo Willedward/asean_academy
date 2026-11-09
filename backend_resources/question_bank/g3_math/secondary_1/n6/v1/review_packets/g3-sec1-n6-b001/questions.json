@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-001",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Point P has coordinates (-4, 3). State the x-coordinate of P."
+            "text": "Point P has coordinates "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(-4, 3)"
+          },
+          {
+            "type": "text",
+            "text": ". State the x-coordinate of P."
           }
         ],
         "marks": 1,
@@ -52,7 +60,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the first number in (-4, 3)."
+                "text": "Read the first number in the ordered pair, including its sign."
               }
             ]
           }
@@ -92,7 +100,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-002",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -112,7 +120,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Point Q has coordinates (5, -2). State the y-coordinate of Q."
+            "text": "Point Q has coordinates "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(5,-2)"
+          },
+          {
+            "type": "text",
+            "text": ". State the y-coordinate of Q."
           }
         ],
         "marks": 1,
@@ -143,7 +159,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the second number in (5, -2), including its sign."
+                "text": "Read the second number in the ordered pair, including its sign."
               }
             ]
           }
@@ -183,7 +199,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-001",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -203,7 +219,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Point A(3, 5) is reflected in the x-axis to A'. State the y-coordinate of A'."
+            "text": "Point "
+          },
+          {
+            "type": "inline_math",
+            "latex": "A(3, 5)"
+          },
+          {
+            "type": "text",
+            "text": " is reflected in the x-axis to A'. State the y-coordinate of A'."
           }
         ],
         "marks": 2,
@@ -234,7 +258,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Keep x = 3 and replace y = 5 by -5."
+                "text": "Keep "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=3"
+              },
+              {
+                "type": "text",
+                "text": " and replace "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=5"
+              },
+              {
+                "type": "text",
+                "text": " by -5."
               }
             ]
           }
@@ -285,7 +325,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-001",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -305,7 +345,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Point K(-5, 2) moves 8 units right, 3 units down and then 2 units left. Find the x-coordinate of its final position."
+            "text": "Point "
+          },
+          {
+            "type": "inline_math",
+            "latex": "K(-5, 2)"
+          },
+          {
+            "type": "text",
+            "text": " moves 8 units right, 3 units down and then 2 units left. Find the x-coordinate of its final position."
           }
         ],
         "marks": 2,
@@ -336,7 +384,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "For the x-coordinate, calculate -5 + 8 - 2."
+                "text": "For the x-coordinate, calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-5+8-2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -387,7 +443,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-002",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -406,8 +462,20 @@
         "label": null,
         "prompt": [
           {
+            "type": "inline_math",
+            "latex": "M(3,-1)"
+          },
+          {
             "type": "text",
-            "text": "M(3, -1) is the midpoint of L(-5, -1) and N. Find the x-coordinate of N."
+            "text": " is the midpoint of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "L(-5,-1)"
+          },
+          {
+            "type": "text",
+            "text": " and N. Find the x-coordinate of N."
           }
         ],
         "marks": 3,
@@ -438,7 +506,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve (-5 + x_N)/2 = 3."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{-5+x_{N}}{2}=3"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -500,7 +576,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l5-001",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -520,7 +596,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A rectangle has sides parallel to the axes. Its lower-left vertex is (-3, -2), its upper-right vertex is (k, 6), and its area is 72 square units. Given k > -3, find k."
+            "text": "A rectangle has sides parallel to the axes. Its lower-left vertex is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(-3,-2)"
+          },
+          {
+            "type": "text",
+            "text": ", its upper-right vertex is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(k, 6)"
+          },
+          {
+            "type": "text",
+            "text": ", and its area is 72 square units. Given "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k>-3"
+          },
+          {
+            "type": "text",
+            "text": ", find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -542,7 +650,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The height is fixed by the two y-coordinates; express the width using k."
+                "text": "The height is fixed by the two y-coordinates; express the width using "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -551,7 +667,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use (k - (-3))(6 - (-2)) = 72 and the condition k > -3."
+                "text": "The height is 8 units. Write the width in terms of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": ", then form an equation using the area."
               }
             ]
           }
@@ -613,7 +737,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-003",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -633,7 +757,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A relationship contains the ordered pair (4, 11). State the value of y when x = 4."
+            "text": "A relationship contains the ordered pair "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(4, 11)"
+          },
+          {
+            "type": "text",
+            "text": ". State the value of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=4"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 1,
@@ -655,7 +803,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "In an ordered pair (x, y), the second number is the y-value."
+                "text": "In an ordered pair "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(x, y)"
+              },
+              {
+                "type": "text",
+                "text": ", the second number is the y-value."
               }
             ]
           },
@@ -664,7 +820,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read the second coordinate of (4, 11)."
+                "text": "Read the second coordinate of the ordered pair."
               }
             ]
           }
@@ -704,7 +860,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-002",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -724,7 +880,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The ordered pairs (1, 4), (2, 7), (3, 10) follow a linear pattern. Find y when x = 4."
+            "text": "The ordered pairs "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(1, 4)"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(2, 7)"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(3, 10)"
+          },
+          {
+            "type": "text",
+            "text": " follow a linear pattern. Find y when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=4"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -746,7 +934,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Observe how y changes when x increases by 1."
+                "text": "Observe how y changes when "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " increases by 1."
               }
             ]
           },
@@ -806,7 +1002,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-003",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -826,7 +1022,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A mobile plan charges y = 12 + 3x dollars for x gigabytes beyond the allowance. If the bill is $33, find the number of extra gigabytes used."
+            "text": "A mobile plan charges "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=12+3x"
+          },
+          {
+            "type": "text",
+            "text": " dollars for "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " gigabytes beyond the allowance. If the bill is $33, find the number of extra gigabytes used."
           }
         ],
         "marks": 3,
@@ -857,7 +1069,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve 12 + 3x = 33."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "12+3x=33"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -919,7 +1139,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-004",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -939,7 +1159,47 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A linear relationship has values (x, y) = (-2, 9), (1, 3) and (4, -3). Write y as an expression in x."
+            "text": "A linear relationship has values "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(x, y)=(-2, 9)"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(1, 3)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(4,-3)"
+          },
+          {
+            "type": "text",
+            "text": ". Write "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " as an expression in "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -963,7 +1223,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use two pairs to find the change in y for each unit change in x."
+                "text": "Use two pairs to find the change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " for each unit change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1034,7 +1310,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l4-001",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1054,7 +1330,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The points (1, 5), (4, 17) and (7, 3k - 1) lie on one straight line. Find k."
+            "text": "The points "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(1, 5)"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(4, 17)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(7, 3k-1)"
+          },
+          {
+            "type": "text",
+            "text": " lie on one straight line. Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -1076,7 +1384,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the constant change in y between the first two points."
+                "text": "Find the constant change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " between the first two points."
               }
             ]
           },
@@ -1085,7 +1401,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "An increase of 3 in x gives an increase of 12 in y; extend the pattern to x = 7."
+                "text": "An increase of 3 in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " gives an increase of 12 in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "; extend the pattern to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=7"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1147,7 +1487,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-004",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1167,7 +1507,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "For y = 3x + 1, find y when x = 2."
+            "text": "For "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=3x+1"
+          },
+          {
+            "type": "text",
+            "text": ", find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=2"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 1,
@@ -1189,7 +1553,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Replace x by the given value."
+                "text": "Replace "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " by the given value."
               }
             ]
           },
@@ -1198,7 +1570,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 3(2) + 1."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3(2)+1"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1238,7 +1618,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-003",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1258,7 +1638,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "For y = 4x + 5, find y when x = -3."
+            "text": "For "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=4x+5"
+          },
+          {
+            "type": "text",
+            "text": ", find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=-3"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -1289,7 +1693,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 4(-3) + 5."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(-3)+5"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1340,7 +1752,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-005",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1360,7 +1772,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A linear function passes through (1, 6) and (4, 15). Write y as an expression in x."
+            "text": "A linear function passes through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(1, 6)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(4, 15)"
+          },
+          {
+            "type": "text",
+            "text": ". Write "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " as an expression in "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -1384,7 +1828,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find a from the change in y divided by the change in x."
+                "text": "Find a from the change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " divided by the change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1393,7 +1853,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Then use either point to determine b."
+                "text": "Then use either point to determine "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1455,7 +1923,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-006",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1475,7 +1943,55 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A linear function has y = 12 when x = -1 and y = 0 when x = 3. Write y as an expression in x."
+            "text": "A linear function has "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=12"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=-1"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=0"
+          },
+          {
+            "type": "text",
+            "text": " when "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x=3"
+          },
+          {
+            "type": "text",
+            "text": ". Write "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " as an expression in "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -1508,7 +2024,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute a known input and output to find b."
+                "text": "Substitute a known input and output to find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1570,7 +2094,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l4-002",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1590,7 +2114,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A linear function f(x) = ax + b satisfies f(-2) = 11 and f(5) = -3. Find f(8)."
+            "text": "A linear function "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f(x)=ax+b"
+          },
+          {
+            "type": "text",
+            "text": " satisfies "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f(-2)=11"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f(5)=-3"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f"
+          },
+          {
+            "type": "text",
+            "text": "(8)."
           }
         ],
         "marks": 3,
@@ -1621,7 +2177,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Determine b, then evaluate the completed function at x = 8."
+                "text": "Determine "
+              },
+              {
+                "type": "inline_math",
+                "latex": "b"
+              },
+              {
+                "type": "text",
+                "text": ", then evaluate the completed function at "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=8"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1683,7 +2255,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-005",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1703,7 +2275,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The graph of y = 3x + 4 crosses the y-axis at (0, b). Find b."
+            "text": "The graph of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=3x+4"
+          },
+          {
+            "type": "text",
+            "text": " crosses the y-axis at "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(0, b)"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "b"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 1,
@@ -1725,7 +2321,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "A point on the y-axis has x = 0."
+                "text": "A point on the y-axis has "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1734,7 +2338,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute x = 0 into the equation."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": " into the equation."
               }
             ]
           }
@@ -1774,7 +2386,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-004",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1794,7 +2406,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the x-coordinate where the graph y = 2x - 8 crosses the x-axis."
+            "text": "Find the x-coordinate where the graph "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=2x-8"
+          },
+          {
+            "type": "text",
+            "text": " crosses the x-axis."
           }
         ],
         "marks": 2,
@@ -1816,7 +2436,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "A point on the x-axis has y = 0."
+                "text": "A point on the x-axis has "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=0"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1825,7 +2453,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set 2x - 8 equal to zero."
+                "text": "Set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x-8"
+              },
+              {
+                "type": "text",
+                "text": " equal to zero."
               }
             ]
           }
@@ -1876,7 +2512,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-005",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1896,7 +2532,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The point (3, 7) is tested against the graph y = 2x + c. Find c so that the point lies on the graph."
+            "text": "The point "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(3, 7)"
+          },
+          {
+            "type": "text",
+            "text": " is tested against the graph "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y=2x+c"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "c"
+          },
+          {
+            "type": "text",
+            "text": " so that the point lies on the graph."
           }
         ],
         "marks": 2,
@@ -1927,7 +2587,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve 7 = 2(3) + c."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "7=2(3)+c"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1978,7 +2646,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-007",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1998,7 +2666,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A straight-line graph passes through (0, 5) and (3, 11). Write y as an expression in x."
+            "text": "A straight-line graph passes through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(0, 5)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(3, 11)"
+          },
+          {
+            "type": "text",
+            "text": ". Write "
+          },
+          {
+            "type": "inline_math",
+            "latex": "y"
+          },
+          {
+            "type": "text",
+            "text": " as an expression in "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -2022,7 +2722,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The point with x = 0 gives the vertical intercept."
+                "text": "The point with "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=0"
+              },
+              {
+                "type": "text",
+                "text": " gives the vertical intercept."
               }
             ]
           },
@@ -2031,7 +2739,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the change in y divided by the change in x."
+                "text": "Find the change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " divided by the change in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2093,7 +2817,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l4-003",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2113,7 +2837,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A straight line crosses the y-axis at -7 and passes through (6, 5). Find its x-intercept."
+            "text": "A straight line crosses the y-axis at -7 and passes through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(6, 5)"
+          },
+          {
+            "type": "text",
+            "text": ". Find its x-intercept."
           }
         ],
         "marks": 3,
@@ -2144,7 +2876,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Then set y = 0 to locate the x-intercept."
+                "text": "Then set "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=0"
+              },
+              {
+                "type": "text",
+                "text": " to locate the x-intercept."
               }
             ]
           }
@@ -2206,7 +2946,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l1-006",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2257,7 +2997,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 6/3."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{6}{3}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2297,7 +3045,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-006",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2317,7 +3065,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the gradient of the line through (1, 3) and (5, 11)."
+            "text": "Find the gradient of the line through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(1, 3)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(5, 11)"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -2348,7 +3112,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate (11 - 3)/(5 - 1)."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{11-3}{5-1}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2399,7 +3171,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l2-007",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2419,7 +3191,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the gradient of the line through (-2, 7) and (4, -5)."
+            "text": "Find the gradient of the line through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(-2, 7)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(4,-5)"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 2,
@@ -2450,7 +3238,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate [-5 - 7]/[4 - (-2)]."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{-5-7}{4-(-2)}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2501,7 +3297,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l3-008",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2521,7 +3317,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The gradient of the line through (2, 5) and (8, k) is 3. Find k."
+            "text": "The gradient of the line through "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(2, 5)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(8, k)"
+          },
+          {
+            "type": "text",
+            "text": " is 3. Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -2552,7 +3372,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve (k - 5)/(8 - 2) = 3."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{k-5}{8-2}=3"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2614,7 +3442,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n6-l4-004",
     "bank_key": "g3-sec1-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2634,7 +3462,39 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Points A(-4, 9), B(2, -3) and C(k, -13) are collinear. Find k."
+            "text": "Points "
+          },
+          {
+            "type": "inline_math",
+            "latex": "A(-4, 9)"
+          },
+          {
+            "type": "text",
+            "text": ", "
+          },
+          {
+            "type": "inline_math",
+            "latex": "B(2,-3)"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "C(k,-13)"
+          },
+          {
+            "type": "text",
+            "text": " are collinear. Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "k"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,

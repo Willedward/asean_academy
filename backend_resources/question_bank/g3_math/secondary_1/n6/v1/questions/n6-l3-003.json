@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-003",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A mobile plan charges y = 12 + 3x dollars for x gigabytes beyond the allowance. If the bill is $33, find the number of extra gigabytes used."
+          "text": "A mobile plan charges "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=12+3x"
+        },
+        {
+          "type": "text",
+          "text": " dollars for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " gigabytes beyond the allowance. If the bill is $33, find the number of extra gigabytes used."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 12 + 3x = 33."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12+3x=33"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

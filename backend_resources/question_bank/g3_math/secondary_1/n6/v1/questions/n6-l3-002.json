@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-002",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,20 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "M(3,-1)"
+        },
+        {
           "type": "text",
-          "text": "M(3, -1) is the midpoint of L(-5, -1) and N. Find the x-coordinate of N."
+          "text": " is the midpoint of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "L(-5,-1)"
+        },
+        {
+          "type": "text",
+          "text": " and N. Find the x-coordinate of N."
         }
       ],
       "marks": 3,
@@ -51,7 +63,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (-5 + x_N)/2 = 3."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{-5+x_{N}}{2}=3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
