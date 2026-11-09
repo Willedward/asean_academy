@@ -182,6 +182,8 @@ class ContentStatusResponse(ApiModel):
     courses: list[ContentCourseStatusResponse]
     lessons: int
     questions: int
+    english_passages: int
+    english_questions: int
 
 
 class CurriculumPreviewResponse(ApiModel):
