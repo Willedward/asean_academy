@@ -1,0 +1,716 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g1-l3-901",
+    "bank_key": "g3-sec1-g1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "G1",
+    "primary_outcome": "1.1",
+    "title": "Reflex angle from an algebraic relationship",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The diagram shows the smaller and reflex angles formed by rays OA and OB. It is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g1-l3-901-reflex-angle"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "The smaller angle is x° and the reflex angle is (2x + 60)°. Find the reflex angle in degrees."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "260",
+          "canonical_latex": "260",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The smaller angle and the reflex angle make one complete turn."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Set up x + (2x + 60) = 360, then use the value of x in the reflex-angle expression."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "x+(2x+60)=360"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "3x=300,\\quad x=100"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "2(100)+60=260"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g1-l3-901-reflex-angle",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l3-901-reflex-angle-r2.svg",
+        "alt_text": "Two rays OA and OB form a smaller angle labelled x degrees and a reflex angle labelled 2x plus 60 degrees.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v2",
+          "diagram_kind": "smaller_and_reflex_angles",
+          "question_key": "g1-l3-901",
+          "not_to_scale": true,
+          "labels": {
+            "smaller_angle": "x degrees",
+            "reflex_angle": "2x plus 60 degrees"
+          },
+          "angle_markers": [
+            {
+              "marker_key": "smaller-angle",
+              "center": [
+                470,
+                285
+              ],
+              "radius": 82,
+              "start_ray_point": [
+                735,
+                285
+              ],
+              "end_ray_point": [
+                433,
+                75
+              ],
+              "large_arc": 0,
+              "sweep": 0
+            },
+            {
+              "marker_key": "reflex-angle",
+              "center": [
+                470,
+                285
+              ],
+              "radius": 128,
+              "start_ray_point": [
+                433,
+                75
+              ],
+              "end_ray_point": [
+                735,
+                285
+              ],
+              "large_arc": 1,
+              "sweep": 0
+            }
+          ],
+          "forbidden_visible_labels": [
+            "100°",
+            "100 degrees",
+            "260°",
+            "260 degrees"
+          ]
+        },
+        "sha256": "2465d41eebd38d7ccf7bfea7be25868a9733f8ea305c0ae97d6106fc4d06bf8f",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T04:36:42.882454Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "g1-l3-902",
+    "bank_key": "g3-sec1-g1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "G1",
+    "primary_outcome": "1.2",
+    "title": "Adjacent then vertically opposite angle",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Two straight lines intersect at O, as shown. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g1-l3-902-intersecting-lines"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "The adjacent angles (5x - 8)° and (3x + 12)° lie on a straight line. The angle y° is vertically opposite the (5x - 8)° angle. Find y."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "102",
+          "canonical_latex": "102",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "First use the fact that adjacent angles on a straight line total 180°."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Solve (5x - 8) + (3x + 12) = 180, then use vertically opposite angles."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "(5x-8)+(3x+12)=180"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "8x+4=180,\\quad x=22"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "y=5(22)-8=102"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g1-l3-902-intersecting-lines",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l3-902-intersecting-lines.svg",
+        "alt_text": "Two straight lines intersect at O. Adjacent angles are labelled 5x minus 8 degrees and 3x plus 12 degrees, with the vertically opposite angle labelled y degrees.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "intersecting_lines",
+          "question_key": "g1-l3-902",
+          "not_to_scale": true,
+          "relationships": [
+            "adjacent angles on a straight line",
+            "vertically opposite angles"
+          ]
+        },
+        "sha256": "4e0250a5580cb70900d6f991a76d749139338badfc0cb2ddc64ff974694b5579",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T04:36:42.882454Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
+    "stable_key": "g1-l3-903",
+    "bank_key": "g3-sec1-g1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "G1",
+    "primary_outcome": "1.3",
+    "title": "Co-interior and vertically opposite angles",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "AB is parallel to CD. A transversal crosses both lines, as shown. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g1-l3-903-parallel-lines"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "The angles (5x - 20)° and (3x + 16)° are co-interior angles (interior angles on the same side of the transversal). Angle y° is vertically opposite the (3x + 16)° angle. Find y."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.3",
+        "secondary_outcomes": [
+          "1.2"
+        ],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "85",
+          "canonical_latex": "85",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Co-interior angles between parallel lines total 180°."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Solve (5x - 20) + (3x + 16) = 180, then use the vertical-opposite relationship at the lower intersection."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "(5x-20)+(3x+16)=180"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "8x-4=180,\\quad x=23"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "y=3(23)+16=85"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g1-l3-903-parallel-lines",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l3-903-parallel-lines-r3.svg",
+        "alt_text": "Parallel lines AB and CD cut by a transversal, with co-interior angles labelled 5x minus 20 degrees and 3x plus 16 degrees and a vertically opposite angle labelled y degrees.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v2",
+          "diagram_kind": "parallel_lines_transversal",
+          "question_key": "g1-l3-903",
+          "not_to_scale": true,
+          "parallel_lines": [
+            "AB",
+            "CD"
+          ],
+          "relationships": [
+            "co-interior angles",
+            "vertically opposite angles"
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "upper-co-interior",
+              "center": [
+                526.04,
+                170
+              ],
+              "radius": 55,
+              "start_ray_point": [
+                790,
+                170
+              ],
+              "end_ray_point": [
+                472,
+                455
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            },
+            {
+              "marker_key": "lower-co-interior",
+              "center": [
+                488.12,
+                370
+              ],
+              "radius": 55,
+              "start_ray_point": [
+                545,
+                70
+              ],
+              "end_ray_point": [
+                790,
+                370
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            },
+            {
+              "marker_key": "vertical-opposite",
+              "center": [
+                488.12,
+                370
+              ],
+              "radius": 55,
+              "start_ray_point": [
+                472,
+                455
+              ],
+              "end_ray_point": [
+                160,
+                370
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "forbidden_visible_labels": [
+            "23°",
+            "23 degrees",
+            "85°",
+            "85 degrees"
+          ]
+        },
+        "sha256": "f5a6fbc3bca7c62cc9b4b4d5c56207fb59fb50eb41670db8772e185cdca8f66f",
+        "width": 940,
+        "height": 520
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T04:36:42.882454Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g1-l3-904",
+    "bank_key": "g3-sec1-g1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "G1",
+    "primary_outcome": "1.4",
+    "title": "Base angle in a regular octagon",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "ABCDEFGH is a regular octagon with centre O. Adjacent vertices A and B are joined to O, as shown."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g1-l3-904-regular-octagon"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find angle OAB in degrees."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.4",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "67.5",
+          "canonical_latex": "67.5",
+          "accepted_answers": [
+            "135/2"
+          ],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The eight equal central angles total 360°, and OA equals OB because both are radii."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Angle AOB is 45°. The other two angles in isosceles triangle AOB are equal and share the remaining 135°."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\angle AOB=360\\div8=45"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "OA=OB,\\quad \\angle OAB=\\angle OBA"
+              }
+            ],
+            "mark_type": "B",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\angle OAB=(180-45)\\div2=67.5"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g1-l3-904-regular-octagon",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g1-l3-904-regular-octagon-r2.svg",
+        "alt_text": "Regular octagon with centre O and adjacent vertices A and B joined to O, forming an isosceles triangle at the centre.",
+        "generation_spec": {
+          "renderer": "nextscholar-geometry-svg-v2",
+          "diagram_kind": "regular_octagon_central_triangle",
+          "question_key": "g1-l3-904",
+          "not_to_scale": true,
+          "polygon_sides": 8,
+          "central_angle_degrees": 45,
+          "equal_sides": [
+            "OA",
+            "OB"
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "central-angle",
+              "center": [
+                470,
+                275
+              ],
+              "radius": 52,
+              "start_ray_point": [
+                408.77,
+                127.18
+              ],
+              "end_ray_point": [
+                531.23,
+                127.18
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "forbidden_visible_labels": [
+            "45°",
+            "45 degrees",
+            "67.5°",
+            "67.5 degrees"
+          ]
+        },
+        "sha256": "6001a0262309400b99dc6eea52cf836a82aefd30b8cc590ff76ec1f347fbbfe0",
+        "width": 940,
+        "height": 520
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T04:36:42.882454Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  }
+]

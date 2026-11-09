@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-903",
   "bank_key": "g3-sec1-g1-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The angles (5x - 11)° and (3x + 15)° are co-interior angles. Angle y° is vertically opposite the (3x + 15)° angle. Find y."
+          "text": "The angles (5x - 20)° and (3x + 16)° are co-interior angles (interior angles on the same side of the transversal). Angle y° is vertically opposite the (3x + 16)° angle. Find y."
         }
       ],
       "marks": 3,
@@ -40,8 +40,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "81",
-        "canonical_latex": "81",
+        "canonical_answer": "85",
+        "canonical_latex": "85",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (5x - 11) + (3x + 15) = 180, then use the vertical-opposite relationship at the lower intersection."
+              "text": "Solve (5x - 20) + (3x + 16) = 180, then use the vertical-opposite relationship at the lower intersection."
             }
           ]
         }
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "(5x-11)+(3x+15)=180"
+              "latex": "(5x-20)+(3x+16)=180"
             }
           ],
           "mark_type": "M",
@@ -84,7 +84,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "8x+4=180,\\quad x=22"
+              "latex": "8x-4=180,\\quad x=23"
             }
           ],
           "mark_type": "M",
@@ -95,7 +95,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "y=3(22)+15=81"
+              "latex": "y=3(23)+16=85"
             }
           ],
           "mark_type": "A",
@@ -110,8 +110,8 @@
       "asset_key": "g1-l3-903-parallel-lines",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-903-parallel-lines-r2.svg",
-      "alt_text": "Parallel lines AB and CD cut by a transversal, with co-interior angles labelled 5x minus 11 degrees and 3x plus 15 degrees and a vertically opposite angle labelled y degrees.",
+      "path": "assets/g1-l3-903-parallel-lines-r3.svg",
+      "alt_text": "Parallel lines AB and CD cut by a transversal, with co-interior angles labelled 5x minus 20 degrees and 3x plus 16 degrees and a vertically opposite angle labelled y degrees.",
       "generation_spec": {
         "renderer": "nextscholar-geometry-svg-v2",
         "diagram_kind": "parallel_lines_transversal",
@@ -128,40 +128,67 @@
         "angle_markers": [
           {
             "marker_key": "upper-co-interior",
-            "center": [526.04, 170],
+            "center": [
+              526.04,
+              170
+            ],
             "radius": 55,
-            "start_ray_point": [790, 170],
-            "end_ray_point": [472, 455],
+            "start_ray_point": [
+              790,
+              170
+            ],
+            "end_ray_point": [
+              472,
+              455
+            ],
             "large_arc": 0,
             "sweep": 1
           },
           {
             "marker_key": "lower-co-interior",
-            "center": [488.12, 370],
+            "center": [
+              488.12,
+              370
+            ],
             "radius": 55,
-            "start_ray_point": [545, 70],
-            "end_ray_point": [790, 370],
+            "start_ray_point": [
+              545,
+              70
+            ],
+            "end_ray_point": [
+              790,
+              370
+            ],
             "large_arc": 0,
             "sweep": 1
           },
           {
             "marker_key": "vertical-opposite",
-            "center": [488.12, 370],
+            "center": [
+              488.12,
+              370
+            ],
             "radius": 55,
-            "start_ray_point": [472, 455],
-            "end_ray_point": [160, 370],
+            "start_ray_point": [
+              472,
+              455
+            ],
+            "end_ray_point": [
+              160,
+              370
+            ],
             "large_arc": 0,
             "sweep": 1
           }
         ],
         "forbidden_visible_labels": [
-          "22°",
-          "22 degrees",
-          "81°",
-          "81 degrees"
+          "23°",
+          "23 degrees",
+          "85°",
+          "85 degrees"
         ]
       },
-      "sha256": "563c7bb50da9bad1d857270b5aa7cdfece8e091153e2b15846a2030d7446cb29",
+      "sha256": "f5a6fbc3bca7c62cc9b4b4d5c56207fb59fb50eb41670db8772e185cdca8f66f",
       "width": 940,
       "height": 520
     }
