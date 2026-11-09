@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-511 — Apparent increase from a shortened axis
+## s1-l3-511 — How much taller a bar looks on a cut-off axis
 
 [Open this question in the HTML preview](index.html#s1-l3-511)
 
