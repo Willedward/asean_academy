@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-002",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Multiply every term by 3 to obtain x + 6 = k."
+          "text": "Multiply every term by 3 to obtain "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+6=k"
+        },
+        {
+          "type": "text",
+          "text": "."
         },
         {
           "type": "display_math",
@@ -28,7 +36,15 @@
         },
         {
           "type": "text",
-          "text": "Find k."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,

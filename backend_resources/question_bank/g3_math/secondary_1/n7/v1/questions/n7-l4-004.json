@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-004",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Noah buys 4 identical pens and a S$6 notebook. He pays with S$50 and receives S$12 change. Let x dollars be the price of one pen. Find x."
+          "text": "Noah buys 4 identical pens and a S$6 notebook. He pays with S$50 and receives S$12 change. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " dollars be the price of one pen. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The amount spent is 50 - 12."
+              "text": "The amount spent is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "50-12"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Model the purchase by 4x + 6 = 38."
+              "text": "Model the purchase by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x+6=38"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

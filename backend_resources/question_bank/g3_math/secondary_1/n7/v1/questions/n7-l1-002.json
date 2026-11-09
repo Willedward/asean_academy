@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-002",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For the equation below, enter 1 if x = 3 is a solution and 0 if it is not."
+          "text": "For the equation below, enter 1 if "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=3"
+        },
+        {
+          "type": "text",
+          "text": " is a solution and 0 if it is not."
         },
         {
           "type": "display_math",
@@ -50,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace x by 3 on the left-hand side."
+              "text": "Replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " by 3 on the left-hand side."
             }
           ]
         },
@@ -59,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Since 2(3) + 1 = 7, the two sides are equal."
+              "text": "Work out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2(3)+1"
+            },
+            {
+              "type": "text",
+              "text": " and compare it with 7."
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-007",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A child ticket costs S$6 and an adult ticket costs S$10. A family buys two child tickets and x adult tickets for S$42. Find x."
+          "text": "A child ticket costs S$6 and an adult ticket costs S$10. A family buys two child tickets and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " adult tickets for S$42. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Form 12 + 10x = 42."
+              "text": "Form "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12+10x=42"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
