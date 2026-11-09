@@ -1,0 +1,502 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "g4-l3-951",
+    "bank_key": "g3-sec2-g4-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Length of an access ramp",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "An access ramp rises 1.2 m over a horizontal distance of 6.5 m. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-951-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the ramp length in metres, correct to 2 decimal places."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "6.61",
+          "canonical_latex": "6.61",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 2,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The rise and horizontal distance are perpendicular sides of a right-angled triangle."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use length² = 6.5² + 1.2²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "L^2=6.5^2+1.2^2=43.69"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "L=\\sqrt{43.69}=6.61\\text{ m}\\text{ (2 d.p.)}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-951-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-951-diagram.svg",
+        "alt_text": "A right-angled ramp triangle with horizontal distance 6.5 m and vertical rise 1.2 m.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g4-l3-951",
+          "not_to_scale": true,
+          "relationships": [
+            "A right-angled ramp triangle with horizontal distance 6.5 m and vertical rise 1.2 m."
+          ]
+        },
+        "sha256": "05ff40513e04d2033871d1925b2ff9a6728c2b6d242d10659c082eb3b80ca1f2",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "g4-l3-952",
+    "bank_key": "g3-sec2-g4-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Diagonal of a display",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A rectangular display is 35 cm wide and 12 cm high. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-952-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the length of its diagonal in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "37",
+          "canonical_latex": "37",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The diagonal is the hypotenuse of a right-angled triangle."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Calculate √(35² + 12²)."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "d^2=35^2+12^2=1225+144=1369"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{1369}=37\\text{ cm}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-952-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-952-diagram.svg",
+        "alt_text": "A 35 cm by 12 cm rectangle with its diagonal marked.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g4-l3-952",
+          "not_to_scale": true,
+          "relationships": [
+            "A 35 cm by 12 cm rectangle with its diagonal marked."
+          ]
+        },
+        "sha256": "a026e46d78d321cbdb5c60fbfceb86d9bf4637b372ee199179cb62779f98ca05",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "g4-l3-953",
+    "bank_key": "g3-sec2-g4-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Identifying a right-angled triangle",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Which set of side lengths forms a right-angled triangle? 1 = 7 cm, 8 cm, 10 cm; 2 = 9 cm, 12 cm, 15 cm; 3 = 10 cm, 12 cm, 16 cm; 4 = 6 cm, 7 cm, 9 cm."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Enter the number of the correct set."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "For each set, treat the longest side as c and test whether a² + b² = c²."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "For set 2, compare 9² + 12² with 15²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "9^2+12^2=81+144=225=15^2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Therefore set }2\\text{ is right-angled.}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-954",
+    "bank_key": "g3-sec2-g4-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Angle of elevation to a marker",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "From a point on level ground, a marker is 10 m vertically above the ground and 24 m horizontally away. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-954-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the angle of elevation, in degrees, correct to 1 decimal place."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "22.6",
+          "canonical_latex": "22.6",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Relative to the angle, 10 m is opposite and 24 m is adjacent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan θ = 10/24, then apply inverse tangent."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\tan\\theta=\\frac{10}{24}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\theta=\\tan^{-1}\\left(\\frac{10}{24}\\right)=22.6^\\circ\\text{ (1 d.p.)}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-954-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-954-diagram-r2.svg",
+        "alt_text": "A right triangle showing a 24 m horizontal distance, a 10 m vertical height and an angle of elevation.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g4-l3-954",
+          "not_to_scale": true,
+          "relationships": [
+            "A right triangle showing a 24 m horizontal distance, a 10 m vertical height and an angle of elevation."
+          ]
+        },
+        "sha256": "30f65b0fb6727a0dc3ffc76eab8728e076396664c42bf81032c3dcdfceb6631c",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  }
+]
