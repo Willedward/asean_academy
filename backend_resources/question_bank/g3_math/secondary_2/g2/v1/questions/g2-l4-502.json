@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-502",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Triangles ABC and PQR are similar with A corresponding to P. Angles A and P are (4x − 6)° and (2x + 34)°. A side of 9 cm in ABC corresponds to 15 cm in PQR. Find x. Enter the numerical value only."
+          "text": "Triangles ABC and PQR are similar with A corresponding to P. Angles A and P are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(4x-6)^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(2x+34)^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": ". A side of 9 cm in ABC corresponds to 15 cm in PQR. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 4x − 6 = 2x + 34."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x-6=2x+34"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

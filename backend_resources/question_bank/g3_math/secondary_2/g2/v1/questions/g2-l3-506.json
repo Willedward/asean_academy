@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-506",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Similar triangles have corresponding sides 8 cm and 12 cm. Another pair is (x + 2) cm and 15 cm. Find x. Enter the numerical value only."
+          "text": "Similar triangles have corresponding sides 8 cm and 12 cm. Another pair is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x+2)"
+        },
+        {
+          "type": "text",
+          "text": " cm and 15 cm. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 12/8 = 15/(x + 2)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{12}{8}=\\frac{15}{x+2}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
