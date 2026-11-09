@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g4-l1-515 — Use tangent at 45 degrees
+## g4-l1-515 — Find the adjacent side
 
 [Open this question in the HTML preview](index.html#g4-l1-515)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g4-l1-516 — Use tangent at 45 degrees
+## g4-l1-516 — Find the adjacent side
 
 [Open this question in the HTML preview](index.html#g4-l1-516)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g4-l2-521 — Calculate a side using tangent
+## g4-l2-521 — Find the vertical height
 
 [Open this question in the HTML preview](index.html#g4-l2-521)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g4-l2-522 — Calculate a side using tangent
+## g4-l2-522 — Find the vertical height
 
 [Open this question in the HTML preview](index.html#g4-l2-522)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g4-l2-523 — Calculate a side using tangent
+## g4-l2-523 — Find the vertical height
 
 [Open this question in the HTML preview](index.html#g4-l2-523)
 
