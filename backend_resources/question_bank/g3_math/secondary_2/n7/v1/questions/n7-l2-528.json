@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-528",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of 3x+1≤25. How many whole numbers (0, 1, 2, ...) satisfy the inequality?"
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x+1\\le 25"
+        },
+        {
+          "type": "text",
+          "text": ". How many whole numbers (0, 1, 2, ...) satisfy the inequality?"
         }
       ],
       "marks": 2,
@@ -71,7 +79,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution shown is x≤8, so the whole numbers are 0, 1, 2, ..., 8."
+              "text": "The solution shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x\\le 8"
+            },
+            {
+              "type": "text",
+              "text": ", so the whole numbers are 0, 1, 2, ..., 8."
             },
             {
               "type": "display_math",
@@ -105,7 +121,7 @@
       "asset_key": "n7-l2-528-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l2-528-diagram-r2.svg",
+      "path": "assets/n7-l2-528-diagram-r3.svg",
       "alt_text": "Number line showing values less than or equal to 8.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

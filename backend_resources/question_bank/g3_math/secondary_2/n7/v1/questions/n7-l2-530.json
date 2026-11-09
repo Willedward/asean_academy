@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-530",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,44 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
           "type": "text",
-          "text": "x and y satisfy 2x+y=18 and x-y=6. State the value of x."
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " satisfy "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x+y=18"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x-y=6"
+        },
+        {
+          "type": "text",
+          "text": ". State the value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +87,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the equations to obtain 3x=24."
+              "text": "Add the equations to obtain "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x=24"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

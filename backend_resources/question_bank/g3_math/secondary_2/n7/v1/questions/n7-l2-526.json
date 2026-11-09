@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-526",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Club T-shirts cost S$4 each and caps cost S$3 each. Ten items cost S$38 altogether. If x is the number of T-shirts and y the number of caps, find x."
+          "text": "Club T-shirts cost S$4 each and caps cost S$3 each. Ten items cost S$38 altogether. If "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " is the number of T-shirts and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " the number of caps, find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The equations are x+y=10 and 4x+3y=38."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=10"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the total cost, then solve the pair."
             }
           ]
         }

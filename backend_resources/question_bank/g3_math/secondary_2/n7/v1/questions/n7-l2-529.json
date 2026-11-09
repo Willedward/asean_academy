@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-529",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "State the x-coordinate of the point where 4x+2y=28 meets the x-axis."
+          "text": "State the x-coordinate of the point where "
+        },
+        {
+          "type": "inline_math",
+          "latex": "4x+2y=28"
+        },
+        {
+          "type": "text",
+          "text": " meets the x-axis."
         }
       ],
       "marks": 2,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Every point on the x-axis has y=0."
+              "text": "Every point on the x-axis has "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute y=0 into 4x+2y=28."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": " into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x+2y=28"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
