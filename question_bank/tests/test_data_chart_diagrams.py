@@ -257,3 +257,15 @@ def test_explicit_chart_request_applies_revisioned_asset(repository_root, tmp_pa
         strict_geometry=True,
     )
     assert validation.valid, validation.errors
+
+
+def test_quadratic_graph_can_hide_the_axis_of_symmetry():
+    inputs = {"roots": [-7, 1], "a": 1, "x_min": -9, "x_max": 3}
+
+    shown = charts.quadratic_graph(inputs)
+    hidden = charts.quadratic_graph({**inputs, "show_symmetry": False})
+
+    assert 'data-role="axis-of-symmetry"' in shown.svg
+    assert 'data-role="axis-of-symmetry"' not in hidden.svg
+    assert not [mark for mark in hidden.generation_spec["chart_marks"] if mark["key"] == "vertex"]
+    assert findings(hidden) == []

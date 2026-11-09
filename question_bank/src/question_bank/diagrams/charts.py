@@ -1048,24 +1048,25 @@ def quadratic_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diag
         )
     vertex_x = sum(roots) / 2
     vertex_y = a * (vertex_x - roots[0]) * (vertex_x - roots[1])
-    builder.mark(
-        "vertex",
-        "vertex",
-        f"{_fmt(vertex_x)},{_fmt(vertex_y)}",
-        "circle",
-        {"cx": sx(vertex_x), "cy": sy(vertex_y), "r": 7},
-        style={"fill": INK},
-    )
-    builder.line(
-        sx(vertex_x),
-        top,
-        sx(vertex_x),
-        bottom,
-        stroke=SECONDARY,
-        width=2,
-        dash="8 7",
-        attrs={"data-role": "axis-of-symmetry", "data-value": _fmt(vertex_x)},
-    )
+    if inputs.get("show_symmetry", True):
+        builder.mark(
+            "vertex",
+            "vertex",
+            f"{_fmt(vertex_x)},{_fmt(vertex_y)}",
+            "circle",
+            {"cx": sx(vertex_x), "cy": sy(vertex_y), "r": 7},
+            style={"fill": INK},
+        )
+        builder.line(
+            sx(vertex_x),
+            top,
+            sx(vertex_x),
+            bottom,
+            stroke=SECONDARY,
+            width=2,
+            dash="8 7",
+            attrs={"data-role": "axis-of-symmetry", "data-value": _fmt(vertex_x)},
+        )
     return _finish(
         builder,
         template="quadratic_graph",

@@ -66,6 +66,15 @@ and three ambiguous centre questions were subsequently fixed in PRs #377, #379, 
 This historical count must not be used as the current assignment list. Regenerate the report after
 claim and packet cleanup before William assigns the next bank to a reviewer.
 
+## Recorded fixes
+
+A ledger status records the audit, and nobody updates it when a fix merges. A record's `resolution`
+lists the batches whose fix was merged and re-checked against the current question files, with the
+PRs as evidence, and the gate no longer blocks those batches. Any batch not listed stays blocked.
+
+The readiness list only knows what the ledger records. Check the handoff for prompt fixes still
+planned in batches this report calls ready.
+
 ## Post-cleanup result on 9 November 2026
 
 After releasing all 74 finished claims and regenerating the 50 stale plus 17 missing reviewer

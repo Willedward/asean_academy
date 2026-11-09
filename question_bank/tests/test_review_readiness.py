@@ -58,7 +58,6 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
         for finding in unresolved_checker_batch.blockers
         if finding.code == "open_content_finding"
     ]
-    assert any(message.startswith("CFL-177 (category 3, open)") for message in open_messages)
     assert any(
         message.startswith("CFL-181 (category 3, open)") for message in open_messages
     )
@@ -164,3 +163,27 @@ def test_open_content_findings_use_explicit_unresolved_statuses(tmp_path):
     assert [item["id"] for item in findings["g3-sec1-n1-b001"]] == ["CFL-002"]
     assert [item["id"] for item in findings["g3-sec1-n1-b002"]] == ["CFL-003"]
     assert "g3-sec1-n1-b003" not in findings
+
+
+def test_open_content_findings_skip_batches_the_ledger_records_as_fixed(tmp_path):
+    worklist = tmp_path / "worklist.json"
+    worklist.write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "id": "CFL-005",
+                        "category_rank": 3,
+                        "status": "needs_checker_config",
+                        "batches": ["g3-sec1-n1-b001", "g3-sec1-n1-b002"],
+                        "resolution": {"batches": ["g3-sec1-n1-b001"]},
+                    },
+                ]
+            }
+        )
+    )
+
+    findings = _open_content_findings(worklist)
+
+    assert list(findings) == ["g3-sec1-n1-b002"]
+
