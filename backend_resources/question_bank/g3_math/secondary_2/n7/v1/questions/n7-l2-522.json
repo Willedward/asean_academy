@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-522",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Amber Palm Bay — Coral laboratory: closed endpoint",
+  "title": "Sum of positive whole solutions",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l2-522-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 2x+5≤19. Write the solution as x≤k and give the value of k."
+          "text": "The number line shows the solution of 2x+5≤19. Find the sum of all the positive integers that satisfy the inequality."
         }
       ],
       "marks": 2,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "28",
+        "canonical_latex": "28",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use inverse operations while keeping the inequality balanced."
+              "text": "List the positive integers the solution covers, remembering what the filled circle means."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 5, then divide by the positive number 2."
+              "text": "Add 1, 2, 3, ... up to and including the boundary value."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "The solution shown is x≤7, so the positive integers are 1, 2, 3, 4, 5, 6 and 7."
             },
             {
               "type": "display_math",
-              "latex": "2x\\le 14\\Rightarrow x\\le 7\\Rightarrow k=7"
+              "latex": "x\\in\\{1,2,3,4,5,6,7\\}"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "Add them."
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "1+2+3+4+5+6+7=28"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,123 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l2-522-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l2-522-diagram-r2.svg",
+      "alt_text": "Number line showing values less than or equal to 7.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l2-522",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 7,
+          "relation": "<=",
+          "title": "Number line",
+          "x_min": 0,
+          "x_max": 9
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "closed-boundary",
+            "value": "7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "546.666667",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "80",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "146.666667",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "213.333333",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "280",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "346.666667",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "413.333333",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "480",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "546.666667",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "613.333333",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "680",
+            "label": "9"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "5e0b71b59db103d79ba93e49f4d0282ec0ab59a3dd2b2f861ee4b670b8e5355d",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +230,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

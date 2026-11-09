@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## n7-l1-511 — Lilac Maple Bay — Komodo research camp: checking equality
+## n7-l1-511 — Comparing two sides at a given value
 
 [Open this question in the HTML preview](index.html#n7-l1-511)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-518 — Silver Maple Bay — School canteen: item prices
+## n7-l2-518 — Canteen purchase of boxes and drinks
 
 [Open this question in the HTML preview](index.html#n7-l2-518)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-515 — Violet Maple Bay — School canteen: admission model
+## n7-l3-515 — Fair tickets at the canteen
 
 [Open this question in the HTML preview](index.html#n7-l3-515)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-510 — Amber Orchid Bay — School canteen: parcel allocation
+## n7-l4-510 — Courier parcels of two sizes
 
 [Open this question in the HTML preview](index.html#n7-l4-510)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-512 — Azure Orchid Bay — Angklung club: inequality boundary
+## n7-l1-512 — Inequality limit from a number line
 
 [Open this question in the HTML preview](index.html#n7-l1-512)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-519 — Bronze Orchid Bay — Orchid nursery: item prices
+## n7-l2-519 — Plants and seed packets bought together
 
 [Open this question in the HTML preview](index.html#n7-l2-519)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-520 — Coral Orchid Bay — Kite festival: solving a balanced equation
+## n7-l2-520 — Making a two-step equation true
 
 [Open this question in the HTML preview](index.html#n7-l2-520)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-516 — Emerald Orchid Bay — Kite festival: brackets in an equation
+## n7-l3-516 — Determining x in a bracketed equation
 
 [Open this question in the HTML preview](index.html#n7-l3-516)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-511 — Golden Orchid Bay — Mekong field station: equivalent solution sets
+## n7-l4-511 — Two equations sharing a solution
 
 [Open this question in the HTML preview](index.html#n7-l4-511)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-513 — Indigo Orchid Bay — Mangrove centre: vertical-axis intercept
+## n7-l1-513 — Reading the y-intercept of a line
 
 [Open this question in the HTML preview](index.html#n7-l1-513)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-521 — Jade Orchid Bay — Angklung club: closed endpoint
+## n7-l2-521 — Added constant from a number line
 
 [Open this question in the HTML preview](index.html#n7-l2-521)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-517 — Lilac Orchid Bay — Angklung club: reversing an inequality
+## n7-l3-517 — Inequality constant from its graph
 
 [Open this question in the HTML preview](index.html#n7-l3-517)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-512 — Silver Orchid Bay — Angklung club: integers in a compound inequality
+## n7-l4-512 — Coefficient inside a compound inequality
 
 [Open this question in the HTML preview](index.html#n7-l4-512)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-514 — Violet Orchid Bay — Komodo research camp: symmetric simultaneous equations
+## n7-l1-514 — Where two lines cross, given y
 
 [Open this question in the HTML preview](index.html#n7-l1-514)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-522 — Amber Palm Bay — Coral laboratory: closed endpoint
+## n7-l2-522 — Sum of positive whole solutions
 
 [Open this question in the HTML preview](index.html#n7-l2-522)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-518 — Azure Palm Bay — Rattan cooperative: coordinate on a line
+## n7-l3-518 — Where a line meets y equals x
 
 [Open this question in the HTML preview](index.html#n7-l3-518)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-519 — Bronze Palm Bay — Kite festival: substitution at an intersection
+## n7-l3-519 — Crossing point of two paths
 
 [Open this question in the HTML preview](index.html#n7-l3-519)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-515 — Coral Palm Bay — Angklung club: read roots from factors
+## n7-l1-515 — Larger solution of a factorised equation
 
 [Open this question in the HTML preview](index.html#n7-l1-515)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-523 — Emerald Palm Bay — Rattan cooperative: horizontal-axis intercept
+## n7-l2-523 — Point where a line meets the x-axis
 
 [Open this question in the HTML preview](index.html#n7-l2-523)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-520 — Golden Palm Bay — Rainforest survey: substitution at an intersection
+## n7-l3-520 — Where two roads meet
 
 [Open this question in the HTML preview](index.html#n7-l3-520)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-521 — Indigo Palm Bay — Coral laboratory: rearrange before factorising
+## n7-l3-521 — Greater solution of a shifted quadratic
 
 [Open this question in the HTML preview](index.html#n7-l3-521)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-503 — Jade Palm Bay — Orchid nursery: synthesise both quadratic roots
+## n7-l5-503 — Difference between two roots
 
 [Open this question in the HTML preview](index.html#n7-l5-503)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-524 — Lilac Palm Bay — Community garden: eliminate one variable
+## n7-l2-524 — Value of x from a linear pair
 
 [Open this question in the HTML preview](index.html#n7-l2-524)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-525 — Silver Palm Bay — Library makerspace: factor a monic quadratic
+## n7-l2-525 — Smaller root after factorising
 
 [Open this question in the HTML preview](index.html#n7-l2-525)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-522 — Violet Palm Bay — Library makerspace: rearrange before factorising
+## n7-l3-522 — Larger value of x in a quadratic equation
 
 [Open this question in the HTML preview](index.html#n7-l3-522)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-513 — Amber Reed Bay — Bamboo studio: parameter line through a point
+## n7-l4-513 — Line through a point and its x-intercept
 
 [Open this question in the HTML preview](index.html#n7-l4-513)
 
