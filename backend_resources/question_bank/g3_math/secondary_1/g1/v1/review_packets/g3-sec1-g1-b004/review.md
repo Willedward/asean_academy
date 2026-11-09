@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-016 — Composite 105-degree construction
+## g1-l4-016 — Combining two constructed angles
 
 [Open this question in the HTML preview](index.html#g1-l4-016)
 
