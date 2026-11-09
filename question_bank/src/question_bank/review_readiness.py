@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
@@ -10,6 +11,7 @@ from typing import Literal
 
 from .authoring import BatchValidationReport, load_manifest, validate_authoring_pipeline
 from .collaboration import BatchClaim, load_claim_registry
+from .models import Question
 
 PacketStatus = Literal["current", "missing", "incomplete", "invalid", "stale"]
 BatchState = Literal["ready", "in_progress", "blocked", "complete"]
@@ -21,6 +23,15 @@ REQUIRED_PACKET_FILES = (
     "review.csv",
     "review.md",
     "validation.json",
+)
+
+OPEN_CONTENT_FINDING_STATUSES = {
+    "open",
+    "needs_checker_config",
+    "needs_founder_decision",
+}
+LEARNER_VISIBLE_CODENAME = re.compile(
+    r"\b[A-Z][a-z]+ [A-Z][a-z]+ Bay(?:\s+dataset for\b|\s+—)"
 )
 
 
@@ -139,6 +150,45 @@ def _planned_assets(worklist_path: Path | None) -> dict[str, list[str]]:
     return result
 
 
+def _open_content_findings(worklist_path: Path | None) -> dict[str, list[dict]]:
+    """Return explicitly unresolved category 1-3 findings by owned batch.
+
+    Historical ``confirmed`` findings describe the audit baseline and are not a
+    reliable unresolved-state marker because completed content PRs intentionally
+    preserve that evidence. The statuses below are the ledger's explicit signal
+    that work or a decision is still outstanding.
+    """
+
+    if worklist_path is None or not worklist_path.is_file():
+        return {}
+    payload = json.loads(worklist_path.read_text(encoding="utf-8"))
+    result: dict[str, list[dict]] = {}
+    for record in payload.get("records", []):
+        if record.get("category_rank") not in {1, 2, 3}:
+            continue
+        if record.get("status") not in OPEN_CONTENT_FINDING_STATUSES:
+            continue
+        for batch_id in record.get("batches", []):
+            result.setdefault(batch_id, []).append(record)
+    for records in result.values():
+        records.sort(key=lambda item: item.get("id", ""))
+    return result
+
+
+def _question_has_learner_visible_codename(question: Question) -> bool:
+    learner_text = [question.title]
+    learner_text.extend(
+        block.text for block in question.stem if getattr(block, "type", None) == "text"
+    )
+    for part in question.parts:
+        learner_text.extend(
+            block.text
+            for block in part.prompt
+            if getattr(block, "type", None) == "text"
+        )
+    return any(LEARNER_VISIBLE_CODENAME.search(text) for text in learner_text)
+
+
 def _packet_status(
     report: BatchValidationReport,
     manifest_path: Path,
@@ -248,6 +298,7 @@ def audit_review_readiness(
     manifests = _manifest_paths(bank_root)
     registry = load_claim_registry(claims_path)
     planned_assets = _planned_assets(worklist_path)
+    open_content_findings = _open_content_findings(worklist_path)
     catalogue_errors = [
         ReadinessFinding(issue.code, issue.path, issue.message) for issue in pipeline.errors
     ]
@@ -271,6 +322,31 @@ def audit_review_readiness(
             ReadinessFinding(issue.code, issue.path, issue.message)
             for issue in batch_report.errors
         )
+
+        for record in open_content_findings.get(manifest.batch_id, []):
+            blockers.append(
+                ReadinessFinding(
+                    "open_content_finding",
+                    str(worklist_path) if worklist_path else manifest.batch_id,
+                    f"{record['id']} (category {record['category_rank']}, "
+                    f"{record['status']}): {record['title']}",
+                )
+            )
+
+        codename_keys = sorted(
+            question.stable_key
+            for question in batch_report.questions
+            if _question_has_learner_visible_codename(question)
+        )
+        if codename_keys:
+            blockers.append(
+                ReadinessFinding(
+                    "learner_visible_codename",
+                    str(manifest_path.parent.parent / "questions"),
+                    "Remove generated learner-visible codename prefixes from: "
+                    + ", ".join(codename_keys),
+                )
+            )
 
         questions = {question.stable_key: question for question in batch_report.questions}
         pending_asset_keys = [
