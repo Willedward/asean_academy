@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-019",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-019-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line graph rises from 30 at week 1 to 54 at week 4 through three equal weekly intervals. Find the average increase per interval. Enter the numerical value only."
+          "text": "The line graph shows a value at week 1 and at week 4, with three equal weekly intervals between them. Find the average increase per interval. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the total rise by three."
+              "text": "Find the total rise from the graph, then divide by three."
             }
           ]
         }
@@ -83,7 +92,168 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-019-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-019-diagram-r2.svg",
+      "alt_text": "Line graph with Week 1: 30, Week 4: 54.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "question_key": "s1-l3-019",
+        "outcome": "1.2",
+        "template": "line_chart",
+        "inputs": {
+          "categories": [
+            "Week 1",
+            "Week 4"
+          ],
+          "values": [
+            30,
+            54
+          ],
+          "y_min": 0,
+          "y_max": 60,
+          "tick_step": 6,
+          "y_label": "Value",
+          "title": "Value by week"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "30",
+            "tag": "circle",
+            "geometry": {
+              "cx": "237.5",
+              "cy": "245",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "54",
+            "tag": "circle",
+            "geometry": {
+              "cx": "532.5",
+              "cy": "133",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "385",
+            "label": "0"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "357",
+            "label": "6"
+          },
+          {
+            "key": "y:12",
+            "axis": "y",
+            "value": "12",
+            "position": "329",
+            "label": "12"
+          },
+          {
+            "key": "y:18",
+            "axis": "y",
+            "value": "18",
+            "position": "301",
+            "label": "18"
+          },
+          {
+            "key": "y:24",
+            "axis": "y",
+            "value": "24",
+            "position": "273",
+            "label": "24"
+          },
+          {
+            "key": "y:30",
+            "axis": "y",
+            "value": "30",
+            "position": "245",
+            "label": "30"
+          },
+          {
+            "key": "y:36",
+            "axis": "y",
+            "value": "36",
+            "position": "217",
+            "label": "36"
+          },
+          {
+            "key": "y:42",
+            "axis": "y",
+            "value": "42",
+            "position": "189",
+            "label": "42"
+          },
+          {
+            "key": "y:48",
+            "axis": "y",
+            "value": "48",
+            "position": "161",
+            "label": "48"
+          },
+          {
+            "key": "y:54",
+            "axis": "y",
+            "value": "54",
+            "position": "133",
+            "label": "54"
+          },
+          {
+            "key": "y:60",
+            "axis": "y",
+            "value": "60",
+            "position": "105",
+            "label": "60"
+          },
+          {
+            "key": "x:Week 1",
+            "axis": "x",
+            "value": "Week 1",
+            "position": "237.5",
+            "label": "Week 1"
+          },
+          {
+            "key": "x:Week 4",
+            "axis": "x",
+            "value": "Week 4",
+            "position": "532.5",
+            "label": "Week 4"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 0.0,
+          "y_max": 60.0,
+          "tick_step": 6.0
+        }
+      },
+      "sha256": "25e91b75c7a6a51e4058e37db82b2964a871fb5c98dc1298f96883edd46ea111",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +267,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

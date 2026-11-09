@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 4,
   "stable_key": "s1-l1-013",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-013-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line graph records temperatures of 24\u00b0C at 10:00, 27\u00b0C at 12:00 and 25\u00b0C at 14:00. Enter the temperature at 12:00 in \u00b0C as a number only."
+          "text": "The line graph shows the temperature at three times. Enter the temperature at 12:00 in °C as a number only."
         }
       ],
       "marks": 1,
@@ -35,9 +44,9 @@
         "absolute_tolerance": null,
         "rounding_precision": null,
         "unit": {
-          "canonical": "\u00b0C",
+          "canonical": "°C",
           "accepted": [
-            "\u00b0C",
+            "°C",
             "C"
           ],
           "required": false
@@ -58,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The stated point is 27\u00b0C."
+              "text": "Read across from that point to the vertical scale. It may lie between two labelled marks."
             }
           ]
         }
@@ -79,7 +88,155 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-013-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-013-diagram-r4.svg",
+      "alt_text": "Line graph of temperature at 10:00, 12:00 and 14:00, with an axis break and a vertical axis from 20 to 30 °C in steps of 2. 10:00: 24, 12:00: 27, 14:00: 25.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "question_key": "s1-l1-013",
+        "outcome": "1.2",
+        "template": "line_chart",
+        "inputs": {
+          "categories": [
+            "10:00",
+            "12:00",
+            "14:00"
+          ],
+          "values": [
+            24,
+            27,
+            25
+          ],
+          "y_min": 20,
+          "y_max": 30,
+          "tick_step": 2,
+          "y_label": "°C",
+          "title": "Temperature",
+          "axis_break": true,
+          "alt_text": "Line graph of temperature at 10:00, 12:00 and 14:00, with an axis break and a vertical axis from 20 to 30 °C in steps of 2. 10:00: 24, 12:00: 27, 14:00: 25."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "24",
+            "tag": "circle",
+            "geometry": {
+              "cx": "188.333333",
+              "cy": "273",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "27",
+            "tag": "circle",
+            "geometry": {
+              "cx": "385",
+              "cy": "189",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "25",
+            "tag": "circle",
+            "geometry": {
+              "cx": "581.666667",
+              "cy": "245",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "385",
+            "label": "20"
+          },
+          {
+            "key": "y:22",
+            "axis": "y",
+            "value": "22",
+            "position": "329",
+            "label": "22"
+          },
+          {
+            "key": "y:24",
+            "axis": "y",
+            "value": "24",
+            "position": "273",
+            "label": "24"
+          },
+          {
+            "key": "y:26",
+            "axis": "y",
+            "value": "26",
+            "position": "217",
+            "label": "26"
+          },
+          {
+            "key": "y:28",
+            "axis": "y",
+            "value": "28",
+            "position": "161",
+            "label": "28"
+          },
+          {
+            "key": "y:30",
+            "axis": "y",
+            "value": "30",
+            "position": "105",
+            "label": "30"
+          },
+          {
+            "key": "x:10:00",
+            "axis": "x",
+            "value": "10:00",
+            "position": "188.333333",
+            "label": "10:00"
+          },
+          {
+            "key": "x:12:00",
+            "axis": "x",
+            "value": "12:00",
+            "position": "385",
+            "label": "12:00"
+          },
+          {
+            "key": "x:14:00",
+            "axis": "x",
+            "value": "14:00",
+            "position": "581.666667",
+            "label": "14:00"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 20.0,
+          "y_max": 30.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "ca1c04dd8b265f13615fd63369af33ecdb62f676f8697e737c892deff7e9cd03",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -93,6 +250,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-014 — Quarter-circle sector
+## s1-l1-014 — Sector angle from a labelled fraction
 
 [Open this question in the HTML preview](index.html#s1-l1-014)
 
