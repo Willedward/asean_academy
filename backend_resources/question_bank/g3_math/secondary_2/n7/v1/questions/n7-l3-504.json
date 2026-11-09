@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-504",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The straight line shown has equation 2x+3y=c. Read a point on the line from the grid and find c."
+          "text": "The straight line shown has equation "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x+3y=c"
+        },
+        {
+          "type": "text",
+          "text": ". Read a point on the line from the grid and find c."
         }
       ],
       "marks": 3,
@@ -60,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the coordinates of your point into 2x+3y."
+              "text": "Substitute the coordinates of your point into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+3y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +87,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The line passes through the grid point (0, 6). Substitute it."
+              "text": "The line passes through the grid point "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(0,6)"
+            },
+            {
+              "type": "text",
+              "text": ". Substitute it."
             },
             {
               "type": "display_math",
@@ -86,7 +110,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Check with the point (9, 0)."
+              "text": "Check with the point "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(9,0)"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +137,7 @@
       "asset_key": "n7-l3-504-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l3-504-diagram-r2.svg",
+      "path": "assets/n7-l3-504-diagram-r3.svg",
       "alt_text": "Straight line through the grid points (0, 6), (3, 4), (6, 2) and (9, 0).",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

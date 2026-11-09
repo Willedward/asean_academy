@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-501",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The community garden has x senior helpers and y junior helpers. There are 7 helpers altogether, and there is 1 more senior helper than junior helpers. Form two equations and find x."
+          "text": "The community garden has "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " senior helpers and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " junior helpers. There are 7 helpers altogether, and there is 1 more senior helper than junior helpers. Form two equations and find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x+y=7 and x-y=1."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=7"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the difference between the two groups, then solve the pair."
             }
           ]
         }

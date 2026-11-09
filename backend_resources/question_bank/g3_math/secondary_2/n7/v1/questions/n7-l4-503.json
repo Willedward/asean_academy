@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of a<2x+2≤b, where a and b are constants. Find a+b."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a<2x+2\\le b"
+        },
+        {
+          "type": "text",
+          "text": ", where a and b are constants. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a+b"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Each constant is the value of 2x+2 at the matching end of the graph."
+              "text": "Each constant is the value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+2"
+            },
+            {
+              "type": "text",
+              "text": " at the matching end of the graph."
             }
           ]
         },
@@ -60,7 +84,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate 2x+2 at each end of the graph, then add the two results."
+              "text": "Evaluate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+2"
+            },
+            {
+              "type": "text",
+              "text": " at each end of the graph, then add the two results."
             }
           ]
         }
@@ -71,7 +103,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The graph shows -3<x≤5, with x=-3 at the open end and x=5 at the closed end."
+              "text": "The graph shows "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-3<x\\le 5"
+            },
+            {
+              "type": "text",
+              "text": ", with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=-3"
+            },
+            {
+              "type": "text",
+              "text": " at the open end and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=5"
+            },
+            {
+              "type": "text",
+              "text": " at the closed end."
             },
             {
               "type": "display_math",
@@ -105,7 +161,7 @@
       "asset_key": "n7-l4-503-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l4-503-diagram-r2.svg",
+      "path": "assets/n7-l4-503-diagram-r3.svg",
       "alt_text": "Number line showing values greater than -3 and less than or equal to 5.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

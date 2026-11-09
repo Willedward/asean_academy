@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of the inequality x+a<9. Find the value of a."
+          "text": "The number line shows the solution of the inequality "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+a<9"
+        },
+        {
+          "type": "text",
+          "text": ". Find the value of a."
         }
       ],
       "marks": 1,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the boundary of the solution from the number line, then think about what x+a equals there."
+              "text": "Read the boundary of the solution from the number line, then think about what "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+a"
+            },
+            {
+              "type": "text",
+              "text": " equals there."
             }
           ]
         },
@@ -60,7 +76,31 @@
           "content": [
             {
               "type": "text",
-              "text": "At the boundary x=6, so put x=6 into x+a=9."
+              "text": "At the boundary "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=6"
+            },
+            {
+              "type": "text",
+              "text": ", so put "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=6"
+            },
+            {
+              "type": "text",
+              "text": " into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+a=9"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +111,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The open circle at 6 and the line to the left show x<6, so at the boundary x+a=9."
+              "text": "The open circle at 6 and the line to the left show "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x<6"
+            },
+            {
+              "type": "text",
+              "text": ", so at the boundary "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+a=9"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -90,7 +146,7 @@
       "asset_key": "n7-l1-503-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l1-503-diagram-r2.svg",
+      "path": "assets/n7-l1-503-diagram-r3.svg",
       "alt_text": "Number line showing values less than 6.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

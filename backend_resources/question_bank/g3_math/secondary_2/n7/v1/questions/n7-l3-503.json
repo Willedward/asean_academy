@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Arif solved 19-3x>10 and drew the number line shown. Enter 1 if it is correct, 2 if only the circle at the boundary is wrong, 3 if only the direction of the solution line is wrong, or 4 if both are wrong."
+          "text": "Arif solved "
+        },
+        {
+          "type": "inline_math",
+          "latex": "19-3x>10"
+        },
+        {
+          "type": "text",
+          "text": " and drew the number line shown. Enter 1 if it is correct, 2 if only the circle at the boundary is wrong, 3 if only the direction of the solution line is wrong, or 4 if both are wrong."
         }
       ],
       "marks": 3,
@@ -105,7 +113,7 @@
       "asset_key": "n7-l3-503-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l3-503-diagram-r2.svg",
+      "path": "assets/n7-l3-503-diagram-r3.svg",
       "alt_text": "Number line showing values greater than 3.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

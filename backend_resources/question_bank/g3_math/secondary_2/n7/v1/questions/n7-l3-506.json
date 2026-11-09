@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-506",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve x²-7x+15=3. Give the larger root."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-7x+15=3"
+        },
+        {
+          "type": "text",
+          "text": ". Give the larger root."
         }
       ],
       "marks": 3,
