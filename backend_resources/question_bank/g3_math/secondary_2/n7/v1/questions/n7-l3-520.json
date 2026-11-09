@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-520",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "On a grid, one road follows 3x+4y=26 and another follows x+y=8. At what value of x do they meet?"
+          "text": "On a grid, one road follows "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x+4y=26"
+        },
+        {
+          "type": "text",
+          "text": " and another follows "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+y=8"
+        },
+        {
+          "type": "text",
+          "text": ". At what value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " do they meet?"
         }
       ],
       "marks": 3,
@@ -51,7 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "From x+y=8, use y=8-x in the other equation."
+              "text": "From "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=8"
+            },
+            {
+              "type": "text",
+              "text": ", use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=8-x"
+            },
+            {
+              "type": "text",
+              "text": " in the other equation."
             }
           ]
         }

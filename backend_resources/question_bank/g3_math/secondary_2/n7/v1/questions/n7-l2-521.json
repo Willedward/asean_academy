@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-521",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of 5x+b≤34. Find b."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "5x+b\\le 34"
+        },
+        {
+          "type": "text",
+          "text": ". Find b."
         }
       ],
       "marks": 2,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Because the circle is filled, 5x+b equals 34 at the boundary."
+              "text": "Because the circle is filled, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5x+b"
+            },
+            {
+              "type": "text",
+              "text": " equals 34 at the boundary."
             }
           ]
         },
@@ -60,7 +76,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the boundary value from the number line for x, then solve for b."
+              "text": "Substitute the boundary value from the number line for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ", then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +103,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution shown is x≤6, so the boundary is x=6."
+              "text": "The solution shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x\\le 6"
+            },
+            {
+              "type": "text",
+              "text": ", so the boundary is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=6"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +153,7 @@
       "asset_key": "n7-l2-521-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l2-521-diagram-r2.svg",
+      "path": "assets/n7-l2-521-diagram-r3.svg",
       "alt_text": "Number line showing values less than or equal to 6.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

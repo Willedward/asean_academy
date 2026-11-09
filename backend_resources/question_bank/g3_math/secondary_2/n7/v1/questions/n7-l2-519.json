@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-519",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Orchid plants cost S$3 each and seed packets cost S$2 each. A customer buys x plants and y packets, 13 items costing S$33. Form two equations and find x."
+          "text": "Orchid plants cost S$3 each and seed packets cost S$2 each. A customer buys "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " plants and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " packets, 13 items costing S$33. Form two equations and find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The equations are x+y=13 and 3x+2y=33."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=13"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the total cost, then solve the pair."
             }
           ]
         }

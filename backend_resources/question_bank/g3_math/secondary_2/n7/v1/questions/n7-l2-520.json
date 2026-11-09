@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-520",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "What value of x makes 2x+5=19 true?"
+          "text": "What value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " makes "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2x+5=19"
+        },
+        {
+          "type": "text",
+          "text": " true?"
         }
       ],
       "marks": 2,
