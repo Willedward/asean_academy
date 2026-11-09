@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l3-511",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A journey is late with probability 3/20. The expected number of late journeys is 27. Find the total number of journeys."
+          "text": "A journey is late with probability "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3}{20}"
+        },
+        {
+          "type": "text",
+          "text": ". The expected number of late journeys is 27. Find the total number of journeys."
         }
       ],
       "marks": 3,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the number of trials be n and use expected frequency = np."
+              "text": "Let the number of trials be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "n"
+            },
+            {
+              "type": "text",
+              "text": " and use expected frequency = np."
             }
           ]
         },
