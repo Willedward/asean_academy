@@ -1,0 +1,636 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "s1-l2-901",
+    "bank_key": "g3-sec1-s1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "S1",
+    "primary_outcome": "1.1",
+    "title": "Tallying travel choices",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Twenty pupils recorded how they travelled to a workshop: bus, walk, bus, car, cycle, bus, walk, bus, cycle, walk, car, bus, bus, cycle, walk, bus, car, walk, bus, cycle."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Classify the responses and find the frequency for bus."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "1.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "8",
+          "canonical_latex": "8",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Make a tally for each travel category."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Count only the entries labelled bus."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Bus tally}=|||||\\ |||"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Frequency for bus}=8"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "s1-l3-902",
+    "bank_key": "g3-sec1-s1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "S1",
+    "primary_outcome": "1.2",
+    "title": "Largest temperature rise",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The line graph shows the temperature at noon from Monday to Friday."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-902-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the greatest rise in temperature between two consecutive days, in °C. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare each day's temperature with the previous day's value."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Work out the change from each day to the next, then choose the largest increase."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "29-27=2,\\quad 28-29=-1,\\quad 32-28=4,\\quad 31-32=-1"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Greatest rise}=4^\\circ\\text{C}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "s1-l3-902-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-902-diagram-r2.svg",
+        "alt_text": "Line graph of the temperature at noon. Monday 27 degrees Celsius, Tuesday 29, Wednesday 28, Thursday 32 and Friday 31.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l3-902",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "values": [
+              27,
+              29,
+              28,
+              32,
+              31
+            ],
+            "y_min": 26,
+            "y_max": 33,
+            "tick_step": 1,
+            "axis_break": true,
+            "y_label": "Temperature (°C)",
+            "title": "Temperature at noon",
+            "alt_text": "Line graph of the temperature at noon. Monday 27 degrees Celsius, Tuesday 29, Wednesday 28, Thursday 32 and Friday 31."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "27",
+              "tag": "circle",
+              "geometry": {
+                "cx": "149",
+                "cy": "345",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "29",
+              "tag": "circle",
+              "geometry": {
+                "cx": "267",
+                "cy": "265",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-2",
+              "kind": "point",
+              "value": "28",
+              "tag": "circle",
+              "geometry": {
+                "cx": "385",
+                "cy": "305",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-3",
+              "kind": "point",
+              "value": "32",
+              "tag": "circle",
+              "geometry": {
+                "cx": "503",
+                "cy": "145",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-4",
+              "kind": "point",
+              "value": "31",
+              "tag": "circle",
+              "geometry": {
+                "cx": "621",
+                "cy": "185",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:26",
+              "axis": "y",
+              "value": "26",
+              "position": "385",
+              "label": "26"
+            },
+            {
+              "key": "y:27",
+              "axis": "y",
+              "value": "27",
+              "position": "345",
+              "label": "27"
+            },
+            {
+              "key": "y:28",
+              "axis": "y",
+              "value": "28",
+              "position": "305",
+              "label": "28"
+            },
+            {
+              "key": "y:29",
+              "axis": "y",
+              "value": "29",
+              "position": "265",
+              "label": "29"
+            },
+            {
+              "key": "y:30",
+              "axis": "y",
+              "value": "30",
+              "position": "225",
+              "label": "30"
+            },
+            {
+              "key": "y:31",
+              "axis": "y",
+              "value": "31",
+              "position": "185",
+              "label": "31"
+            },
+            {
+              "key": "y:32",
+              "axis": "y",
+              "value": "32",
+              "position": "145",
+              "label": "32"
+            },
+            {
+              "key": "y:33",
+              "axis": "y",
+              "value": "33",
+              "position": "105",
+              "label": "33"
+            },
+            {
+              "key": "x:Mon",
+              "axis": "x",
+              "value": "Mon",
+              "position": "149",
+              "label": "Mon"
+            },
+            {
+              "key": "x:Tue",
+              "axis": "x",
+              "value": "Tue",
+              "position": "267",
+              "label": "Tue"
+            },
+            {
+              "key": "x:Wed",
+              "axis": "x",
+              "value": "Wed",
+              "position": "385",
+              "label": "Wed"
+            },
+            {
+              "key": "x:Thu",
+              "axis": "x",
+              "value": "Thu",
+              "position": "503",
+              "label": "Thu"
+            },
+            {
+              "key": "x:Fri",
+              "axis": "x",
+              "value": "Fri",
+              "position": "621",
+              "label": "Fri"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 26.0,
+            "y_max": 33.0,
+            "tick_step": 1.0
+          }
+        },
+        "sha256": "bc47565e3291e7f721f17efe3197736f40eb55f9f91b3fcb5f2e19eb69958a6b",
+        "width": 720,
+        "height": 480
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "s1-l2-903",
+    "bank_key": "g3-sec1-s1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "S1",
+    "primary_outcome": "1.3",
+    "title": "Choosing a display for proportions",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A school wants to show how its annual activity budget is divided among sports, arts, service and clubs. Choose the most suitable display: 1 = pie chart, 2 = line graph, 3 = scatter plot."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Enter the number of the most suitable display."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "1.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The categories form parts of one fixed total."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Choose a display that shows each category as a share of the whole."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{The budget categories partition one annual total.}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{A pie chart is option }1."
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "s1-l3-904",
+    "bank_key": "g3-sec1-s1-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "S1",
+    "primary_outcome": "1.4",
+    "title": "Spotting a truncated-axis claim",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A bar chart compares two test averages, 92 and 96 marks. Its vertical axis starts at 90, so the second bar appears three times as tall as the first. Choose the correct criticism: 1 = the second average is truly three times the first; 2 = the truncated axis exaggerates the difference; 3 = bars may never show averages."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Enter the number of the correct criticism."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "1.4",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare the actual values before comparing the visible bar heights."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The four-mark difference is drawn above a baseline of 90 rather than zero."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "96-92=4\\text{ marks, while }96\\div92\\approx1.04"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{The truncated axis exaggerates the difference, so choose }2."
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  }
+]
