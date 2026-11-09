@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l5-504",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A laboratory reports 72 successes in 120 trials. A missing group of x trials, all successful, is then added to the record. The corrected experimental probability is 5/8. Find x."
+          "text": "A laboratory reports 72 successes in 120 trials. A missing group of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " trials, all successful, is then added to the record. The corrected experimental probability is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{5}{8}"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 5,
@@ -42,7 +66,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Adding x successful trials increases both the success count and total by x."
+              "text": "Adding "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " successful trials increases both the success count and total by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (72 + x)/(120 + x) = 5/8."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{72+x}{120+x}=\\frac{5}{8}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
