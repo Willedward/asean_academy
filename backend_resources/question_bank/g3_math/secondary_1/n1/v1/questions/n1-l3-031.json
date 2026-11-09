@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-031",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Estimate (398×0.0204)/1.98."
+          "text": "Estimate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{398\\times 0.0204}{1.98}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -66,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "(400×0.02)÷2"
+              "type": "display_math",
+              "latex": "(400\\times 0.02)\\div 2"
             }
           ],
           "mark_type": "M",
@@ -77,8 +85,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "8÷2=4."
+              "type": "display_math",
+              "latex": "8\\div 2=4"
             }
           ],
           "mark_type": "A",

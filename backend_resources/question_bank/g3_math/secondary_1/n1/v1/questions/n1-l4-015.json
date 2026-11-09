@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-015",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,15 @@
   "stem": [
     {
       "type": "text",
-      "text": "Let B=[sqrt(92.4)+6.15^2]/(2.8-0.35). Use the unrounded value of B."
+      "text": "Let "
+    },
+    {
+      "type": "inline_math",
+      "latex": "B=\\frac{\\sqrt{92.4}+6.15^{2}}{2.8-0.35}"
+    },
+    {
+      "type": "text",
+      "text": ". Use the unrounded value of B."
     }
   ],
   "parts": [
@@ -25,7 +33,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate 100(B-10)/(B+10). Give your answer correct to 3 significant figures."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "100\\frac{B-10}{B+10}"
+        },
+        {
+          "type": "text",
+          "text": ". Give your answer correct to 3 significant figures."
         }
       ],
       "marks": 3,
@@ -66,8 +82,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "B=[sqrt(92.4)+6.15^2]/(2.8-0.35)=19.361221..."
+              "type": "display_math",
+              "latex": "B=\\frac{\\sqrt{92.4}+6.15^{2}}{2.8-0.35}=19.361221"
             }
           ],
           "mark_type": "M",
@@ -77,8 +93,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "100(B-10)/(B+10)=31.882942..."
+              "type": "display_math",
+              "latex": "100\\frac{B-10}{B+10}=31.882942"
             }
           ],
           "mark_type": "M",

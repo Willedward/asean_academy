@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n1-l2-027",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -54,8 +54,12 @@
           "stage": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "1008\\div 16=63"
+            },
+            {
               "type": "text",
-              "text": "1008÷16=63, and 63 factors into powers of 3 and 7."
+              "text": ", and 63 factors into powers of 3 and 7."
             }
           ]
         }
@@ -65,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "1008=2^4×63"
+              "type": "display_math",
+              "latex": "1008=2^{4}\\times 63"
             }
           ],
           "mark_type": "M",
@@ -76,8 +80,20 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "63=3^{2}\\times 7"
+            },
+            {
               "type": "text",
-              "text": "63=3^2×7, so 1008=2^4×3^2×7."
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1008=2^{4}\\times 3^{2}\\times 7"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",
