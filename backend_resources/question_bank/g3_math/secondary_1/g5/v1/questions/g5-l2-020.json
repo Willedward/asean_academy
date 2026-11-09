@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-020",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A prism has volume 540 cm\u00b3 and cross-sectional area 45 cm\u00b2. Find its length in cm. Enter the numerical value only."
+          "text": "A prism has volume 540 cm³ and cross-sectional area 45 cm². Find its length in cm. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +42,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Rearrange V = A\u2113."
+              "text": "Rearrange "
+            },
+            {
+              "type": "inline_math",
+              "latex": "V=A\\ell"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },

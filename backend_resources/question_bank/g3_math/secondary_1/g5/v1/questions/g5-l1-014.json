@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-014",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylinder has radius 7 cm and height 5 cm. Using \u03c0 = 22/7, find its volume in cm\u00b3. Enter the numerical value only."
+          "text": "A cylinder has radius 7 cm and height 5 cm. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find its volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use V = \u03c0r\u00b2h."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "V=\\pi r^{2}h"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate (22/7) \u00d7 7\u00b2 \u00d7 5."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(\\frac{22}{7})\\times 7^{2}\\times 5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

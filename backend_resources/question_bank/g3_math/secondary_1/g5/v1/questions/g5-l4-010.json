@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-010",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (x + 5)(x + 3) - 15 = 84."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+5)(x+3)-15=84"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -119,7 +127,7 @@
       "asset_key": "g5-l4-010-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-010-diagram-r2.svg",
+      "path": "assets/g5-l4-010-diagram-r3.svg",
       "alt_text": "An L-shape. The full bottom edge is (x + 5) cm and the full left edge is (x + 3) cm. The removed top-right corner has edges 5 cm and 3 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

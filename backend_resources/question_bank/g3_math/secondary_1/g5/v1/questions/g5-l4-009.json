@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-009",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Trapezium A has parallel sides 10 cm and 18 cm and height 8 cm. Trapezium B has the same height, parallel sides x cm and 22 cm, and 1.5 times the area of A. Find x. Enter the numerical value only."
+          "text": "Trapezium A has parallel sides 10 cm and 18 cm and height 8 cm. Trapezium B has the same height, parallel sides "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " cm and 22 cm, and 1.5 times the area of A. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set \u00bd(x + 22)(8) equal to 168."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{2}(x+22)(8)"
+            },
+            {
+              "type": "text",
+              "text": " equal to 168."
             }
           ]
         }
