@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-011",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Corresponding angles are (4x + 18)\u00b0 and (7x - 42)\u00b0. Find their common angle in degrees."
+          "text": "Corresponding angles are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(4x+18)^\\circ"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(7x-42)^\\circ"
+        },
+        {
+          "type": "text",
+          "text": ". Find their common angle in degrees."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve for x, then evaluate an angle expression."
+              "text": "Solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ", then evaluate an angle expression."
             }
           ]
         }
