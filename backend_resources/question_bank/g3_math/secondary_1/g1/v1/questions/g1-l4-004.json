@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l4-004",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A convex polygon has interior-angle sum 1980\u00b0. Find the number of sides."
+          "text": "A convex polygon has interior-angle sum 1980°. Find the number of sides."
         }
       ],
       "marks": 3,
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (n - 2)180 = 1980."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(n-2)180=1980"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

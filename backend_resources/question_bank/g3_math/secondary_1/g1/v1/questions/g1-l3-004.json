@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g1-l3-004",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Find x, then use x + 40."
+              "text": "Find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ", then use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+40"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -108,7 +124,7 @@
       "asset_key": "g1-l3-004-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-l3-004-diagram-r3.svg",
+      "path": "assets/g1-l3-004-diagram-r4.svg",
       "alt_text": "A triangle with its three angles marked x°, (x + 20)° and (x + 40)°. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-plane-geometry-svg-v1",

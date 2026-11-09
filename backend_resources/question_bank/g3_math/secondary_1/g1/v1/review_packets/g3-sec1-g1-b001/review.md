@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l2-007 — Constructing a sixty-degree angle
+## g1-l2-007 — Angle from an equilateral construction
 
 [Open this question in the HTML preview](index.html#g1-l2-007)
 
