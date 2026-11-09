@@ -1,14 +1,14 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.10",
-    "title": "Emerald Fern Bay — Batik cooperative: two-class estimated mean",
+    "title": "Estimated mean with four observations per class",
     "difficulty": 1,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Emerald Fern Bay dataset for Batik cooperative: two-class estimated mean — Grouped data have class midpoints 5 and 15, each with frequency 4. Calculate the estimated mean."
+            "text": "Two grouped classes have midpoints 5 and 15. Each class contains 4 observations. Calculate the estimated mean."
           }
         ],
         "marks": 1,
@@ -92,14 +92,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-510",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.10",
-    "title": "Golden Fern Bay — Batik cooperative: grouped midpoint calculation",
+    "title": "Weighted mean from a symmetric frequency table",
     "difficulty": 2,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -112,7 +112,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Golden Fern Bay dataset for Batik cooperative: grouped midpoint calculation — A grouped table has midpoints 5, 15 and 25 with frequencies 4, 6 and 4. Find the estimated mean."
+            "text": "A grouped frequency table uses midpoints 5, 15 and 25. Their frequencies are 4, 6 and 4. Use midpoint multiplied by frequency to estimate the mean."
           }
         ],
         "marks": 2,
@@ -202,14 +202,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-507",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.10",
-    "title": "Indigo Fern Bay — Batik cooperative: missing grouped frequency",
+    "title": "Missing middle-class frequency from a target mean",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -222,7 +222,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Indigo Fern Bay dataset for Batik cooperative: missing grouped frequency — Class midpoints 10, 20 and 30 have frequencies 4, f and 12. The estimated mean is 24. Find f."
+            "text": "The classes with midpoints 10, 20 and 30 contain 4, f and 12 observations respectively. Their estimated mean is 24. Determine f."
           }
         ],
         "marks": 3,
@@ -312,14 +312,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-508",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Jade Fern Bay — Angklung ensemble: histogram interval total",
+    "title": "Observations in the upper two equal-width bins",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -341,7 +341,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Jade Fern Bay dataset for Angklung ensemble: histogram interval total — A histogram has equal-width intervals 0–10, 10–20 and 20–30 with frequencies 5, 7 and 6. How many observations lie from 10 up to 30?"
+            "text": "A frequency histogram has equal-width intervals 0–10, 10–20 and 20–30 with heights 5, 7 and 6. Add the frequencies in the two intervals at or above 10."
           }
         ],
         "marks": 3,
@@ -417,7 +417,7 @@
         "asset_key": "s1-l3-508-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-508-diagram-r2.svg",
+        "path": "assets/s1-l3-508-diagram-r3.svg",
         "alt_text": "Histogram with 3 classes; frequency values 5, 7, 6.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -900,14 +900,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-507",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Silver Fern Bay — Angklung ensemble: dot frequency",
+    "title": "Multiplicity of six in a dot plot",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -929,7 +929,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Silver Fern Bay dataset for Angklung ensemble: dot frequency — A dot diagram represents the values 4, 6, 7, 6, 8, 6, 5. How many dots are positioned at 6?"
+            "text": "The dots encode the values 4, 6, 7, 6, 8, 6 and 5. State the frequency represented above the value 6."
           }
         ],
         "marks": 1,
@@ -986,7 +986,7 @@
         "asset_key": "s1-l1-507-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l1-507-diagram-r2.svg",
+        "path": "assets/s1-l1-507-diagram-r3.svg",
         "alt_text": "Dot diagram of 4, 6, 7, 6, 8, 6, 5.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1157,14 +1157,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-511",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Violet Fern Bay — Rainforest station: stem-and-leaf range",
+    "title": "Difference between extreme leaves on a 60s row",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1186,7 +1186,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Violet Fern Bay dataset for Rainforest station: stem-and-leaf range — A stem-and-leaf row is 6 | 1 3 4 7 8, where 6|1 means 61. Find the range of the five values."
+            "text": "The stem-and-leaf row 6 | 1 3 4 7 8 uses 6|1 to represent 61. Subtract the least observation from the greatest observation."
           }
         ],
         "marks": 2,
@@ -1262,7 +1262,7 @@
         "asset_key": "s1-l2-511-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-511-diagram-r2.svg",
+        "path": "assets/s1-l2-511-diagram-r3.svg",
         "alt_text": "Stem-and-leaf diagram. stem 6, leaves 1 3 4 7 8. Key: 6 | 1 means 61.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1329,14 +1329,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-509",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.5",
-    "title": "Amber Lotus Bay — Rainforest station: histogram interval total",
+    "title": "Combined count in the final two histogram classes",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1358,7 +1358,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Amber Lotus Bay dataset for Rainforest station: histogram interval total — A histogram has equal-width intervals 0–10, 10–20 and 20–30 with frequencies 6, 8 and 7. How many observations lie from 10 up to 30?"
+            "text": "A histogram records 6, 8 and 7 observations in the intervals 0–10, 10–20 and 20–30 respectively. Calculate how many observations are in the final two intervals."
           }
         ],
         "marks": 3,
@@ -1434,7 +1434,7 @@
         "asset_key": "s1-l3-509-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-509-diagram-r2.svg",
+        "path": "assets/s1-l3-509-diagram-r3.svg",
         "alt_text": "Histogram with 3 classes; frequency values 6, 8, 7.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1722,14 +1722,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-508",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.6",
-    "title": "Bronze Lotus Bay — Mangrove survey: representation purpose",
+    "title": "Select a graph for 150 grouped reaction times",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1742,7 +1742,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Bronze Lotus Bay dataset for Mangrove survey: representation purpose — Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A teacher wants to display the shape of 150 continuous reaction-time measurements grouped into intervals. Enter the most suitable code."
+            "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A set of 150 continuous reaction times has already been grouped into class intervals. Which display uses touching bars to reveal its distribution? Enter the code."
           }
         ],
         "marks": 1,
@@ -2783,14 +2783,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-514",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Lilac Lotus Bay — Community garden: calculate the mean",
+    "title": "Mean of an odd-number sequence beginning at seven",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2803,7 +2803,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Lilac Lotus Bay dataset for Community garden: calculate the mean — Calculate the mean of 7, 9, 11, 13, 15."
+            "text": "Find the arithmetic mean of the five values 7, 9, 11, 13 and 15."
           }
         ],
         "marks": 2,
@@ -3160,14 +3160,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l5-502",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Violet Lotus Bay — Bamboo design lab: reconstruct mean and median",
+    "title": "Recover the fourth ordered value from mean and median",
     "difficulty": 5,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -3180,7 +3180,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Violet Lotus Bay dataset for Bamboo design lab: reconstruct mean and median — Five ordered values are 5, 7, x, y, 13. Their median is 9 and their mean is 9. Find y."
+            "text": "An ordered list is 5, 7, x, y, 13. Its median is 9 and its arithmetic mean is 9. Calculate y."
           }
         ],
         "marks": 5,
@@ -3270,14 +3270,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-515",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Amber Maple Bay — Cycling project: calculate the mean",
+    "title": "Mean of an even-number sequence beginning at eight",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3290,7 +3290,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Amber Maple Bay dataset for Cycling project: calculate the mean — Calculate the mean of 8, 10, 12, 14, 16."
+            "text": "The observations 8, 10, 12, 14 and 16 form an arithmetic sequence. Calculate their mean."
           }
         ],
         "marks": 2,
@@ -3380,14 +3380,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-516",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.9",
-    "title": "Azure Maple Bay — Rattan workshop: most common category",
+    "title": "Identify the most popular requested shoe size",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3400,7 +3400,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Azure Maple Bay dataset for Rattan workshop: most common category — Use code 1 for mean, 2 for median and 3 for mode. A shop wants the most frequently requested shoe size. Which measure directly answers the question?"
+            "text": "Use code 1 for mean, 2 for median and 3 for mode. A footwear order sheet repeats the requested size for every customer. Which measure identifies the shoe size occurring most often?"
           }
         ],
         "marks": 2,
@@ -3490,14 +3490,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-513",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Bronze Maple Bay — Coral monitoring team: missing value from a mean",
+    "title": "Recover the fifth value from a known mean",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -3510,7 +3510,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Bronze Maple Bay dataset for Coral monitoring team: missing value from a mean — Five values have mean 12. Four of them are 7, 9, 11, 13. Find the missing value."
+            "text": "A group of five numbers has mean 12. Four of the numbers are 7, 9, 11 and 13. Calculate the fifth number."
           }
         ],
         "marks": 3,
@@ -3710,14 +3710,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-510",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.8",
-    "title": "Emerald Maple Bay — Bamboo design lab: identify the mode",
+    "title": "Most frequent value in a short list",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3730,7 +3730,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Emerald Maple Bay dataset for Bamboo design lab: identify the mode — Find the mode of 3, 4, 4, 6, 9."
+            "text": "For the values 3, 4, 4, 6 and 9, state the value that occurs most often."
           }
         ],
         "marks": 1,
@@ -3801,14 +3801,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-517",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.9",
-    "title": "Golden Maple Bay — Solar classroom: most common category",
+    "title": "Choose a centre for repeated colour labels",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3821,7 +3821,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Golden Maple Bay dataset for Solar classroom: most common category — Use code 1 for mean, 2 for median and 3 for mode. A shop wants the most frequently requested shoe size. Which measure directly answers the question?"
+            "text": "Use code 1 for mean, 2 for median and 3 for mode. A survey records the preferred colours blue, green, blue, red and blue. Which measure identifies the most common colour?"
           }
         ],
         "marks": 2,
@@ -4021,14 +4021,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-509",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S1",
     "primary_outcome": "1.9",
-    "title": "Jade Maple Bay — Rattan workshop: use every balanced observation",
+    "title": "Choose a centre that uses every balanced score",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -4041,7 +4041,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Jade Maple Bay dataset for Rattan workshop: use every balanced observation — Use code 1 for mean, 2 for median and 3 for mode. The values 14, 16, 18, 20, 22 are symmetric, contain no outlier and will be used to compare total performance between groups. Select the most informative measure."
+            "text": "Use code 1 for mean, 2 for median and 3 for mode. The scores 14, 16, 18, 20 and 22 are symmetric and contain no outlier. The comparison should incorporate every numerical score. Select the measure code."
           }
         ],
         "marks": 4,
