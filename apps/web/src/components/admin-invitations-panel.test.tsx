@@ -90,6 +90,26 @@ describe("AdminInvitationsPanel", () => {
     expect(api.listInvitations).toHaveBeenCalledTimes(2);
   });
 
+  it("keeps the invitations table scroller keyboard reachable and positioned", async () => {
+    const api = {
+      listInvitations: vi.fn(async () => ({ invitations: [invitation], total: 1 })),
+      getOperationsSummary: vi.fn(async () => summary),
+      listAuditEvents: vi.fn(async () => audit),
+      createInvitation: vi.fn(async () => created),
+      revokeInvitation: vi.fn(async () => ({ ...invitation, status: "revoked" as const })),
+    };
+
+    render(<AdminInvitationsPanel api={api} />);
+    await screen.findByText("student@example.test");
+
+    const scroller = screen.getByRole("region", { name: "Recent invitations table" });
+    expect(scroller).toHaveAttribute("tabindex", "0");
+    // The header's sr-only text is absolutely positioned; without a positioned
+    // scroller it escapes the clip and widens the page at phone widths.
+    expect(scroller).toHaveClass("relative");
+    expect(scroller).toContainElement(screen.getByText("Actions"));
+  });
+
   it("shows both courses of a Sec 3-entry invitation", async () => {
     const track = {
       ...invitation,

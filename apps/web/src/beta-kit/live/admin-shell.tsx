@@ -218,6 +218,15 @@ export function AdminShell({
 
   return (
     <div className="ns-root ns-admin-root min-h-dvh bg-ns-surface font-ns text-ns-ink lg:flex">
+      <a
+        href="#main-content"
+        className={cn(
+          "fixed top-3 left-3 z-50 -translate-y-20 rounded-full bg-ns-ink px-4 py-2 text-sm font-bold text-white no-underline transition-transform focus:translate-y-0",
+          focusRing,
+        )}
+      >
+        Skip to content
+      </a>
       <aside className="sticky top-0 hidden h-dvh w-[280px] shrink-0 flex-col border-r border-ns-line bg-ns-surface px-5 py-6 lg:flex">
         <Link className="mb-2 block px-3" href="/admin">
           <Logo height={25} />
@@ -314,7 +323,11 @@ export function AdminShell({
           </div>
         ) : null}
 
-        <main className="ns-admin-content mx-auto w-full max-w-[1320px] px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="ns-admin-content mx-auto w-full max-w-[1320px] px-4 py-6 outline-none sm:px-6 lg:px-10 lg:py-10"
+        >
           {children}
         </main>
       </div>

@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { StudentPanel } from "@/components/admin-dashboard";
 import { requireAdministrator } from "@/lib/auth/admin";
+
+export const metadata: Metadata = { title: "Admin · Student detail" };
 
 export default async function StudentPage({
   params,

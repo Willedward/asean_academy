@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { focusRing } from "@/beta-kit/components/ui";
 import { Button } from "@/components/ui/button";
 import { adminRequest } from "@/lib/api/admin-dashboard";
 import { ApiRequestError } from "@/lib/api/errors";
@@ -627,7 +628,12 @@ export function TutorRoutingEvidencePanel() {
         ) : null}
 
         {decisions.length ? (
-          <div className="overflow-x-auto rounded-lg border">
+          <div
+            aria-label="Routing decisions table"
+            className={`overflow-x-auto rounded-lg border ${focusRing}`}
+            role="region"
+            tabIndex={0}
+          >
             <table className="w-full min-w-[78rem] text-left text-sm">
               <thead>
                 <tr>

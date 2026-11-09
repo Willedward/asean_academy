@@ -106,6 +106,9 @@ describe("TutorRoutingEvidencePanel", () => {
     ).toBeGreaterThan(0);
     expect(screen.getByText("high_difficulty")).toBeInTheDocument();
     expect(screen.getAllByText(/gpt-4o/).length).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("region", { name: "Routing decisions table" }),
+    ).toHaveAttribute("tabindex", "0");
   });
 
   it("shows an empty state and sends filters to the server", async () => {

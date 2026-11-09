@@ -101,6 +101,15 @@ describe("administrator dashboard", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("not passed")).toBeInTheDocument();
     expect(screen.getByText("60%")).toBeInTheDocument();
+    for (const name of [
+      "English lesson progress table",
+      "English module checkpoints table",
+    ]) {
+      expect(screen.getByRole("region", { name })).toHaveAttribute(
+        "tabindex",
+        "0",
+      );
+    }
   });
 
   it("requires an explicit confirmation before changing a role", async () => {

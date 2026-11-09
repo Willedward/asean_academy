@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 
+import { focusRing } from "@/beta-kit/components/ui";
 import { Button } from "@/components/ui/button";
 import {
   createInvitation,
@@ -310,7 +311,12 @@ export function AdminInvitationsPanel({ api = defaultApi }: { api?: AdminApi }) 
           <div><h2 className="m-0 text-2xl font-extrabold" id="invitations-title">Recent invitations</h2><p className="mb-0 mt-1 text-sm text-slate-500">Codes are deliberately excluded from this list.</p></div>
           <Button disabled={loading} onClick={() => void load()} type="button" variant="outline"><RefreshCw aria-hidden="true" className={`mr-2 size-4 ${loading ? "animate-spin" : ""}`} />Refresh</Button>
         </div>
-        <div className="overflow-x-auto">
+        <div
+          aria-label="Recent invitations table"
+          className={`relative overflow-x-auto ${focusRing}`}
+          role="region"
+          tabIndex={0}
+        >
           <table className="w-full min-w-3xl border-collapse text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500"><tr><th className="px-6 py-3">Student</th><th className="px-6 py-3">Course</th><th className="px-6 py-3">Status</th><th className="px-6 py-3">Usage</th><th className="px-6 py-3">Expires</th><th className="px-6 py-3"><span className="sr-only">Actions</span></th></tr></thead>
             <tbody>

@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
+
 import { AdminInvitationsPanel } from "@/components/admin-invitations-panel";
+
+export const metadata: Metadata = { title: "Admin · Invitations" };
+
 export default function AdminInvitationsPage() {
   return (
     <>
