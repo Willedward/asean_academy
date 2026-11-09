@@ -373,7 +373,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-501",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -393,7 +393,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Class midpoints 10, 20 and 30 have frequencies 3, f and 9. The estimated mean is 24. Find f."
+            "text": "Class midpoints 10, 20 and 30 have frequencies 3, "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f"
+          },
+          {
+            "type": "text",
+            "text": " and 9. The estimated mean is 24. Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "f"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -415,7 +431,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write the grouped-mean numerator and denominator using f."
+                "text": "Write the grouped-mean numerator and denominator using "
+              },
+              {
+                "type": "inline_math",
+                "latex": "f"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -424,7 +448,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve [10(3)+20f+30(9)]/[3+f+9]=24."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{10(3)+20f+30(9)}{3+f+9}=24"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1523,7 +1555,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-503",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1574,7 +1606,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Adjacent histogram bars show the distribution across continuous intervals."
+                "text": "Rule out any display that shows each of the 150 values separately. Which of the remaining displays shows the shape of the grouped data, not just a list of counts?"
               }
             ]
           }
@@ -1614,7 +1646,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-504",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1665,7 +1697,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A stem-and-leaf diagram orders the observations without grouping them away."
+                "text": "Rule out any display that groups the scores into intervals. Of the displays left, which one keeps each score in an ordered list?"
               }
             ]
           }
@@ -1724,7 +1756,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l2-505",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1792,7 +1824,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The visible heights are 95-85 and 105-85."
+                "text": "The visible heights are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "95-85"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "105-85"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1837,7 +1885,7 @@
         "asset_key": "s1-l2-505-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-505-diagram-r3.svg",
+        "path": "assets/s1-l2-505-diagram-r4.svg",
         "alt_text": "Bar chart with First: 95, Second: 105.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1970,7 +2018,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-503",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2021,7 +2069,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A dot diagram preserves every observation and supports a direct visual comparison."
+                "text": "You want each single result to appear as its own mark, so that repeats and gaps stand out when you compare the two groups. Which display does that?"
               }
             ]
           }
@@ -2080,7 +2128,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-503",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2131,7 +2179,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A dot diagram would require thousands of dots and obscure the distribution."
+                "text": "Compare what each display draws: one mark per observation, one bar per interval, or one row per interval. With this many values, which of these becomes unreadable?"
               }
             ]
           }
@@ -2190,7 +2238,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l2-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2258,7 +2306,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The visible heights are 100-90 and 110-90."
+                "text": "The visible heights are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "100-90"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "110-90"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2303,7 +2367,7 @@
         "asset_key": "s1-l2-506-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l2-506-diagram-r3.svg",
+        "path": "assets/s1-l2-506-diagram-r4.svg",
         "alt_text": "Bar chart with First: 100, Second: 110.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2548,7 +2612,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l3-504",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2616,7 +2680,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The displayed heights are 130-105 and 145-105. Compare their increase with the first displayed height."
+                "text": "The displayed heights are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "130-105"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "145-105"
+              },
+              {
+                "type": "text",
+                "text": ". Compare their increase with the first displayed height."
               }
             ]
           }
@@ -2661,7 +2741,7 @@
         "asset_key": "s1-l3-504-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-504-diagram-r3.svg",
+        "path": "assets/s1-l3-504-diagram-r4.svg",
         "alt_text": "Bar chart with First: 130, Second: 145.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2801,7 +2881,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s1-l4-504",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2861,7 +2941,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 10 from 30."
+                "text": "Ignore the widths here: you only need how much more one frequency is than the other. Which calculation gives that?"
               }
             ]
           }
@@ -2906,7 +2986,7 @@
         "asset_key": "s1-l4-504-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l4-504-diagram-r3.svg",
+        "path": "assets/s1-l4-504-diagram-r4.svg",
         "alt_text": "Histogram with 2 classes; frequency values 10, 30.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -3375,7 +3455,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-505",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3426,7 +3506,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The required total is 5×11; subtract the four known values."
+                "text": "The required total is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "5\\times 11"
+              },
+              {
+                "type": "text",
+                "text": "; subtract the four known values."
               }
             ]
           }
@@ -3595,7 +3683,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-505",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3646,7 +3734,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The median is resistant to one very large observation."
+                "text": "Work out what the 40 does to each measure. Which measure stays close to most of the times?"
               }
             ]
           }
@@ -3686,7 +3774,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-509",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3737,7 +3825,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "That definition identifies the mode."
+                "text": "Which of the three measures can be read off from the highest frequency, with no adding up or ordering?"
               }
             ]
           }
@@ -3796,7 +3884,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3847,7 +3935,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The median remains 11 while the mean is pulled well above most values."
+                "text": "Work out how the largest value changes the mean and the middle value. Which one stays close to the ordinary values?"
               }
             ]
           }
@@ -3906,7 +3994,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-506",
     "bank_key": "g3-sec2-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3957,7 +4045,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The mean uses all values and is appropriate when extremes do not distort the result."
+                "text": "Decide which measure is calculated from every value, then check that no value here would distort it."
               }
             ]
           }
