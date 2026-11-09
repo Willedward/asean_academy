@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-008",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle has height 7 cm and width (x + 3) cm. Its area is 98 cm\u00b2. Find x."
+          "text": "A rectangle has height 7 cm and width "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x+3)\\text{ cm}"
+        },
+        {
+          "type": "text",
+          "text": ". Its area is 98 cm². Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 7(x + 3) = 98."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7(x+3)=98"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

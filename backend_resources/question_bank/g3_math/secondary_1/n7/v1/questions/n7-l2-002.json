@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-002",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Both sides are divided by the same positive number to obtain x = 7."
+          "text": "Both sides are divided by the same positive number to obtain "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=7"
+        },
+        {
+          "type": "text",
+          "text": "."
         },
         {
           "type": "display_math",
@@ -50,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The factor multiplying x must be removed."
+              "text": "The factor multiplying "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " must be removed."
             }
           ]
         },
@@ -59,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide both 3x and 21 by 3."
+              "text": "Which number multiplies "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "? Divide both sides by that number."
             }
           ]
         }

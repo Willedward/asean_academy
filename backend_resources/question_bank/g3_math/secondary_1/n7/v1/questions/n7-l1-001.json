@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-001",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,15 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Substitute x = 4 into the equation shown."
+          "text": "Substitute "
         },
         {
-          "type": "display_math",
-          "latex": "x+7=11"
+          "type": "inline_math",
+          "latex": "x=4"
         },
         {
           "type": "text",
-          "text": "What common value do the two sides have?"
+          "text": " into the equation shown."
+        },
+        {
+          "type": "display_math",
+          "latex": "x+7=12"
+        },
+        {
+          "type": "text",
+          "text": "What is the value of the left-hand side?"
         }
       ],
       "marks": 1,
@@ -50,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate the left-hand side using x = 4."
+              "text": "Evaluate the left-hand side using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -59,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 4 + 7 and compare it with the right-hand side."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4+7"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
