@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-531",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Give the smaller value of x that satisfies x²-20x+84=0."
+          "text": "Give the smaller value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " that satisfies "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-20x+84=0"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The required factorisation is (x-6)(x-14)=0."
+              "text": "One bracket is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-14)"
+            },
+            {
+              "type": "text",
+              "text": ". Work out the other bracket, then set each bracket equal to zero."
             }
           ]
         }

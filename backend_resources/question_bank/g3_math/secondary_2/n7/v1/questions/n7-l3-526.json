@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-526",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Mei solved 22-2x>10 and drew the number line shown, but she made one mistake. What is the greatest integer that satisfies the correct solution?"
+          "text": "Mei solved "
+        },
+        {
+          "type": "inline_math",
+          "latex": "22-2x>10"
+        },
+        {
+          "type": "text",
+          "text": " and drew the number line shown, but she made one mistake. What is the greatest integer that satisfies the correct solution?"
         }
       ],
       "marks": 3,
@@ -71,7 +79,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Dividing by -2 reverses the sign, so the correct solution is x<6. The line in the drawing goes the wrong way."
+              "text": "Dividing by -2 reverses the sign, so the correct solution is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x<6"
+            },
+            {
+              "type": "text",
+              "text": ". The line in the drawing goes the wrong way."
             },
             {
               "type": "display_math",
@@ -105,7 +121,7 @@
       "asset_key": "n7-l3-526-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l3-526-diagram-r2.svg",
+      "path": "assets/n7-l3-526-diagram-r3.svg",
       "alt_text": "Number line showing values greater than 6.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

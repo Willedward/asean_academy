@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-518",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of x+6<15. How many positive integers satisfy the inequality?"
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+6<15"
+        },
+        {
+          "type": "text",
+          "text": ". How many positive integers satisfy the inequality?"
         }
       ],
       "marks": 1,
@@ -71,7 +79,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution shown is x<9, so the positive integers are 1 to 8."
+              "text": "The solution shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x<9"
+            },
+            {
+              "type": "text",
+              "text": ", so the positive integers are 1 to 8."
             },
             {
               "type": "display_math",
@@ -90,7 +106,7 @@
       "asset_key": "n7-l1-518-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l1-518-diagram-r2.svg",
+      "path": "assets/n7-l1-518-diagram-r3.svg",
       "alt_text": "Number line showing values less than 9.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

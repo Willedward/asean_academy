@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-521",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Which of the two roots of (x-5)(x-8)=0 is larger? Enter it."
+          "text": "Which of the two roots of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x-5)(x-8)=0"
+        },
+        {
+          "type": "text",
+          "text": " is larger? Enter it."
         }
       ],
       "marks": 1,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set x-5=0 or x-8=0."
+              "text": "Set each bracket equal to zero in turn and solve each small equation."
             }
           ]
         }
