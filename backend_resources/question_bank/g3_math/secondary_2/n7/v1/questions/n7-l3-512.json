@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-512",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.7",
-  "title": "Silver Lotus Bay — Mangrove centre: coordinate on a line",
+  "title": "A point beyond the visible grid",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l3-512-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A sensor point ( 5, k ) lies on 1x+5y=35. Find k and hence locate the point on the graph."
+          "text": "The line continues beyond the part shown in the graph. The point (k, 3) lies on this line. Find k."
         }
       ],
       "marks": 3,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "20",
+        "canonical_latex": "20",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Coordinates on a line satisfy its equation."
+              "text": "Read two grid points on the line and see how much y falls as x rises."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Put x=5 and y=k into the equation."
+              "text": "Find the fall in y when x rises by 5, then continue the pattern until y reaches 3."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "From (0, 7) to (5, 6), y falls by 1 when x rises by 5. To fall from 7 to 3 is a fall of 4."
             },
             {
               "type": "display_math",
-              "latex": "1(5)+5k=35\\Rightarrow 5k=30\\Rightarrow k=6"
+              "latex": "x=4\\times 5=20\\Rightarrow k=20"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "Check: the line through these points has equation x+5y=35."
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "20+5(3)=35"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,218 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l3-512-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l3-512-diagram-r2.svg",
+      "alt_text": "Straight line through the grid points (0, 7), (5, 6) and (10, 5).",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "coordinate_line",
+        "question_key": "n7-l3-512",
+        "outcome": "7.7",
+        "template": "coordinate_line",
+        "inputs": {
+          "a": 1,
+          "b": 5,
+          "c": 35,
+          "x_min": 0,
+          "x_max": 11,
+          "y_min": -1,
+          "y_max": 8,
+          "title": "Straight-line graph",
+          "alt_text": "Straight line through the grid points (0, 7), (5, 6) and (10, 5)."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "line",
+            "kind": "coordinate-line",
+            "value": "1,5,35",
+            "tag": "line",
+            "geometry": {
+              "x1": "90",
+              "y1": "98.333333",
+              "x2": "680",
+              "y2": "182.666667"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "90",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "143.636364",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "197.272727",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "250.909091",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "304.545455",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "358.181818",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "411.818182",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "465.454545",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "519.090909",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "572.727273",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "626.363636",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "680",
+            "label": "11"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "405",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "366.666667",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "328.333333",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "290",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "251.666667",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "213.333333",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "175",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "136.666667",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "98.333333",
+            "label": "7"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "60",
+            "label": "8"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": 0.0,
+          "x_max": 11.0,
+          "y_min": -1.0,
+          "y_max": 8.0
+        }
+      },
+      "sha256": "156101a43f4000670324a34a43f4c037962a9463a2f834414e07c9bcb79d14ea",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +325,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

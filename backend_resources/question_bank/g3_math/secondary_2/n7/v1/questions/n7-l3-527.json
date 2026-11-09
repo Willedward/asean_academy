@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-527",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Golden Teak Bay — Library makerspace: reversing an inequality",
+  "title": "Checking a classmate's solution graph",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l3-527-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 23-3x>2. The answer has the form x<k. Find k."
+          "text": "Bima's working for 23-3x>2 ends with the number line shown. Compare it with the correct solution. Code 1 means it is correct, code 2 means the boundary circle is the only problem, code 3 means the direction of the line is the only problem, and code 4 means both are wrong. Enter the code."
         }
       ],
       "marks": 3,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Collect the x-term, remembering that division by a negative number reverses the sign."
+              "text": "Solve the inequality yourself first, paying attention to the step that divides by a negative number."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "After subtracting 23, divide both sides by -3."
+              "text": "Subtract 23 from both sides, divide both sides by -3, then compare both the circle and the direction with the drawing."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Dividing by -3 reverses the sign. The correct solution needs an open circle at 7 and a line going left."
             },
             {
               "type": "display_math",
-              "latex": "-3x>-21\\Rightarrow x<7\\Rightarrow k=7"
+              "latex": "23-3x>2\\Rightarrow -3x>-21\\Rightarrow x<7"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The drawing has a filled circle and a line going right, so both are wrong: code 4."
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "\\text{code }4"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,114 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l3-527-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l3-527-diagram-r2.svg",
+      "alt_text": "Number line showing values greater than or equal to 7.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l3-527",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 7,
+          "relation": ">=",
+          "title": "Number line"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "closed-boundary",
+            "value": "7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "80",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "155",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "230",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "305",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "380",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "455",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "530",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "605",
+            "label": "10"
+          },
+          {
+            "key": "x:11",
+            "axis": "x",
+            "value": "11",
+            "position": "680",
+            "label": "11"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "7103ff89e3cb9be4bf2becd17af3767d7c3716657ed04a1fe6b3087c462689f6",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +221,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

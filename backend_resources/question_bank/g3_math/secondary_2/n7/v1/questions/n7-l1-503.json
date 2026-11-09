@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Silver Banyan Bay — School canteen: inequality boundary",
+  "title": "Constant from a number line",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l1-503-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The solution of x+3<9 is x<k. Find k, the open-circle boundary on the number line."
+          "text": "The number line shows the solution of the inequality x+a<9. Find the value of a."
         }
       ],
       "marks": 1,
@@ -29,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the same number from both sides; the inequality sign stays unchanged."
+              "text": "Read the boundary of the solution from the number line, then think about what x+a equals there."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 3 from both sides."
+              "text": "At the boundary x=6, so put x=6 into x+a=9."
             }
           ]
         }
@@ -61,8 +70,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The open circle at 6 and the line to the left show x<6, so at the boundary x+a=9."
+            },
+            {
               "type": "display_math",
-              "latex": "x<9-3=6\\Rightarrow k=6"
+              "latex": "6+a=9\\Rightarrow a=3"
             }
           ],
           "mark_type": "A",
@@ -72,7 +85,114 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l1-503-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l1-503-diagram-r2.svg",
+      "alt_text": "Number line showing values less than 6.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l1-503",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 6,
+          "relation": "<",
+          "title": "Number line"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "open-boundary",
+            "value": "6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "80",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "155",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "230",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "305",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "380",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "455",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "530",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "605",
+            "label": "9"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "680",
+            "label": "10"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "2d318cf9c69dd4e20519ffe030d15cc390e7db6e08841000e01c48818340d0ec",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +206,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

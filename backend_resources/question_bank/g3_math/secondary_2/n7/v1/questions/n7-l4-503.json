@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Bronze Cedar Bay — School canteen: integers in a compound inequality",
+  "title": "Compound inequality behind a number line",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l4-503-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For an integer x, solve -4<2x+2≤12. How many integer values satisfy the inequality?"
+          "text": "The number line shows the solution of a<2x+2≤b, where a and b are constants. Find a+b."
         }
       ],
       "marks": 4,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Isolate x in both parts of the compound inequality before listing integers."
+              "text": "Each constant is the value of 2x+2 at the matching end of the graph."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 2 throughout and divide every part by 2."
+              "text": "Evaluate 2x+2 at each end of the graph, then add the two results."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "The graph shows -3<x≤5, with x=-3 at the open end and x=5 at the closed end."
             },
             {
               "type": "display_math",
-              "latex": "-6<2x\\le 10\\Rightarrow -3<x\\le 5;\\quad 8\\text{ integers}"
+              "latex": "a=2(-3)+2=-4,\\quad b=2(5)+2=12"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "Add the two constants."
             },
             {
               "type": "display_math",
-              "latex": "8"
+              "latex": "a+b=-4+12=8"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,157 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l4-503-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l4-503-diagram-r2.svg",
+      "alt_text": "Number line showing values greater than -3 and less than or equal to 5.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l4-503",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": -3,
+          "relation": ">",
+          "upper_boundary": 5,
+          "upper_relation": "<=",
+          "x_min": -5,
+          "x_max": 7,
+          "title": "Number line"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "open-boundary",
+            "value": "-3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "180",
+              "cy": "250",
+              "r": "10"
+            }
+          },
+          {
+            "key": "upper-boundary",
+            "kind": "closed-boundary",
+            "value": "5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "580",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-5",
+            "axis": "x",
+            "value": "-5",
+            "position": "80",
+            "label": "-5"
+          },
+          {
+            "key": "x:-4",
+            "axis": "x",
+            "value": "-4",
+            "position": "130",
+            "label": "-4"
+          },
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "180",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "230",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "280",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "330",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "380",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "430",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "480",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "530",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "580",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "630",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "680",
+            "label": "7"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "6629754299d8c5939451721e9fb3a0e0337bff8b7bee94ecae806052b3c5ffa6",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +264,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
