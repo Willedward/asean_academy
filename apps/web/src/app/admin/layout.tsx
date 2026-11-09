@@ -43,6 +43,12 @@ function EstablishedAdminLayout({
   ];
   return (
     <>
+      <a
+        href="#main-content"
+        className="fixed top-3 left-3 z-50 -translate-y-20 rounded-full bg-teal-900 px-4 py-2 text-sm font-bold text-white no-underline transition-transform focus:translate-y-0 focus-visible:outline-2"
+      >
+        Skip to content
+      </a>
       <header className="border-b bg-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5">
           <Link href="/admin" className="text-xl font-extrabold">
@@ -73,7 +79,13 @@ function EstablishedAdminLayout({
           ))}
         </nav>
       </header>
-      <main className="mx-auto max-w-7xl space-y-6 px-6 py-8">{children}</main>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto max-w-7xl space-y-6 px-6 py-8 outline-none"
+      >
+        {children}
+      </main>
     </>
   );
 }

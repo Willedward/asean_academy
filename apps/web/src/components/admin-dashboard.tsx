@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { focusRing } from "@/beta-kit/components/ui";
 import { AdminAccountDeletion } from "@/components/admin-account-deletion";
 import { AdminDiagnosticReset } from "@/components/admin-diagnostic-reset";
 import { Button } from "@/components/ui/button";
@@ -91,14 +92,21 @@ function Metrics({ values }: { values: Record<string, number | string> }) {
   );
 }
 function Table({
+  label,
   headers,
   children,
 }: {
+  label: string;
   headers: string[];
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+    <div
+      aria-label={label}
+      className={`overflow-x-auto rounded-2xl border border-slate-200 bg-white ${focusRing}`}
+      role="region"
+      tabIndex={0}
+    >
       <table className="w-full text-left text-sm">
         <thead className="bg-slate-100">
           <tr>
@@ -217,6 +225,7 @@ export function StudentsPanel() {
             </p>
           ) : (
             <Table
+              label="Students table"
               headers={[
                 "Student",
                 "Enrolment",
@@ -342,6 +351,7 @@ export function StudentPanel({
         <p>No lesson progress yet.</p>
       ) : (
         <Table
+          label="Lesson progress table"
           headers={[
             "Lesson",
             "State",
@@ -370,6 +380,7 @@ export function StudentPanel({
         <p>No English lesson progress yet.</p>
       ) : (
         <Table
+          label="English lesson progress table"
           headers={[
             "Lesson",
             "State",
@@ -398,6 +409,7 @@ export function StudentPanel({
         <p>No English checkpoint attempts yet.</p>
       ) : (
         <Table
+          label="English module checkpoints table"
           headers={[
             "Module",
             "State",
@@ -427,7 +439,10 @@ export function StudentPanel({
       {!data.difficulty_performance.length ? (
         <p>No attempts yet.</p>
       ) : (
-        <Table headers={["Difficulty", "Attempts", "Correct", "Accuracy"]}>
+        <Table
+          label="Difficulty performance table"
+          headers={["Difficulty", "Attempts", "Correct", "Accuracy"]}
+        >
           {data.difficulty_performance.map((item) => (
             <tr key={item.difficulty}>
               <td>{item.difficulty}</td>
@@ -503,6 +518,7 @@ export function QuestionsPanel() {
             <p>No matching questions.</p>
           ) : (
             <Table
+              label="Question performance table"
               headers={[
                 "Question",
                 "Difficulty / outcome",
@@ -754,7 +770,10 @@ export function UsersPanel({ selfId }: { selfId: string }) {
           {!data.total ? (
             <p>No registered profiles match.</p>
           ) : (
-            <Table headers={["User", "Role and course access"]}>
+            <Table
+              label="Users and roles table"
+              headers={["User", "Role and course access"]}
+            >
               {data.users.map((user) => (
                 <tr key={user.learner_id}>
                   <td>
@@ -840,6 +859,7 @@ export function AuditPanel() {
         <p>No administrative events yet.</p>
       ) : (
         <Table
+          label="Audit events table"
           headers={["When", "Event", "Actor / target", "Details", "Request"]}
         >
           {data.events.map((event) => (

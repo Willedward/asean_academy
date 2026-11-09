@@ -410,29 +410,35 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                         )?.decision ?? "pending"}
                       </p>
                       <div className="grid gap-3 sm:grid-cols-2">
-                        <select
-                          value={dimension}
-                          onChange={(e) =>
-                            setDimension(e.target.value as typeof dimension)
-                          }
-                          disabled={!academic}
-                          className="rounded-lg border p-2"
-                        >
-                          <option value="mathematics">Mathematics</option>
-                          <option value="editorial">Editorial</option>
-                        </select>
-                        <select
-                          value={decision}
-                          onChange={(e) =>
-                            setDecision(e.target.value as typeof decision)
-                          }
-                          className="rounded-lg border p-2"
-                        >
-                          <option value="approved">Approve</option>
-                          <option value="changes_requested">
-                            Request changes
-                          </option>
-                        </select>
+                        <label className="text-xs">
+                          Review dimension
+                          <select
+                            value={dimension}
+                            onChange={(e) =>
+                              setDimension(e.target.value as typeof dimension)
+                            }
+                            disabled={!academic}
+                            className="mt-1 block w-full rounded-lg border p-2 text-base"
+                          >
+                            <option value="mathematics">Mathematics</option>
+                            <option value="editorial">Editorial</option>
+                          </select>
+                        </label>
+                        <label className="text-xs">
+                          Decision
+                          <select
+                            value={decision}
+                            onChange={(e) =>
+                              setDecision(e.target.value as typeof decision)
+                            }
+                            className="mt-1 block w-full rounded-lg border p-2 text-base"
+                          >
+                            <option value="approved">Approve</option>
+                            <option value="changes_requested">
+                              Request changes
+                            </option>
+                          </select>
+                        </label>
                       </div>
                       <div className="grid gap-2 sm:grid-cols-4">
                         {Object.entries(scores).map(([key, value]) => (
@@ -455,12 +461,15 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                           </label>
                         ))}
                       </div>
-                      <textarea
-                        className="min-h-24 w-full rounded-lg border p-3"
-                        placeholder="Record what you checked (minimum 10 characters)"
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                      />
+                      <label className="block text-xs">
+                        Review notes
+                        <textarea
+                          className="mt-1 min-h-24 w-full rounded-lg border p-3 text-base"
+                          placeholder="Record what you checked (minimum 10 characters)"
+                          value={notes}
+                          onChange={(e) => setNotes(e.target.value)}
+                        />
+                      </label>
                       <Button
                         disabled={busy || notes.trim().length < 10}
                         onClick={() => void review()}

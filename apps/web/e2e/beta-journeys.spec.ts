@@ -530,4 +530,47 @@ test.describe.serial("authenticated beta journeys", () => {
     await expectNoPageOverflow(page);
     await attachScreenshot(page, testInfo, "content-admin-phone-navigation");
   });
+
+  test("administrator pages are titled, skippable and reflow at phone width", async ({
+    page,
+  }) => {
+    await authenticate(page, identities.academic);
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    for (const [path, title] of [
+      ["/admin", "Overview"],
+      ["/admin/students", "Students"],
+      ["/admin/questions", "Question analytics"],
+      ["/admin/reports", "Reports inbox"],
+      ["/admin/content", "Content review"],
+      ["/admin/tutor-evaluation", "Tutor evaluation"],
+      ["/admin/invitations", "Invitations"],
+      ["/admin/audit", "Audit history"],
+      ["/admin/users", "Users & roles"],
+      ["/admin/essay-feedback", "Essay feedback gate"],
+      ["/admin/operations", "System status"],
+    ] as const) {
+      await page.goto(path);
+      await expect(page).toHaveTitle(`Admin · ${title} · NextScholar`);
+      await expect(page.locator("main h1")).toBeVisible();
+      await expectNoPageOverflow(page);
+    }
+
+    await page.goto("/admin/invitations");
+    await expect(
+      page.getByRole("heading", { name: "Recent invitations" }),
+    ).toBeVisible();
+    await expectNoPageOverflow(page);
+    await page.keyboard.press("Tab");
+    const skip = page.getByRole("link", { name: "Skip to content" });
+    await expect(skip).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("main#main-content")).toBeFocused();
+    await page
+      .getByRole("region", { name: "Recent invitations table" })
+      .focus();
+    await expect(
+      page.getByRole("region", { name: "Recent invitations table" }),
+    ).toBeFocused();
+  });
 });

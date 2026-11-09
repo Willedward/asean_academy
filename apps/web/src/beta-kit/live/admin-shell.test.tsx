@@ -60,6 +60,27 @@ describe("AdminShell", () => {
     expect(screen.getByText("Content administrator")).toBeInTheDocument();
   });
 
+  it("offers a first-stop skip link to the focusable main region", () => {
+    const { container } = render(
+      <AdminShell
+        identity={{
+          displayName: "William",
+          email: "william@example.com",
+          role: "academic_admin",
+        }}
+      >
+        <h1>Learning overview</h1>
+      </AdminShell>,
+    );
+
+    const skip = screen.getByRole("link", { name: "Skip to content" });
+    expect(container.querySelector("a[href]")).toBe(skip);
+    expect(skip).toHaveAttribute("href", "#main-content");
+    const main = screen.getByRole("main");
+    expect(main).toHaveAttribute("id", "main-content");
+    expect(main).toHaveAttribute("tabindex", "-1");
+  });
+
   it("opens the mobile navigation with focus and closes it with Escape", () => {
     render(
       <AdminShell

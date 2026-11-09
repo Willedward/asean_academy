@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import {
   StudentsPanel,
@@ -11,6 +12,28 @@ import { requireAdministrator } from "@/lib/auth/admin";
 import { ContentReviewPanel } from "@/components/content-review-panel";
 import { TutorEvaluationPanel } from "@/components/tutor-evaluation-panel";
 import { EnglishEssayReleasePanel } from "@/components/english-essay-release-panel";
+
+const viewTitles = new Map([
+  ["students", "Students"],
+  ["questions", "Question analytics"],
+  ["reports", "Reports inbox"],
+  ["content", "Content review"],
+  ["tutor-evaluation", "Tutor evaluation"],
+  ["users", "Users & roles"],
+  ["operations", "System status"],
+  ["essay-feedback", "Essay feedback gate"],
+  ["audit", "Audit history"],
+]);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ view: string }>;
+}): Promise<Metadata> {
+  const { view } = await params;
+  const title = viewTitles.get(view);
+  return { title: title ? `Admin · ${title}` : "Admin" };
+}
 
 export default async function AdminView({
   params,
