@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## n7-l1-516 — Azure Reed Bay — School canteen: two unknown counts
+## n7-l1-516 — Cooks and servers in the canteen
 
 [Open this question in the HTML preview](index.html#n7-l1-516)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-526 — Bronze Reed Bay — Angklung club: item prices
+## n7-l2-526 — T-shirts and caps for a club
 
 [Open this question in the HTML preview](index.html#n7-l2-526)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-523 — Coral Reed Bay — Orchid nursery: admission model
+## n7-l3-523 — Flower-show ticket sales
 
 [Open this question in the HTML preview](index.html#n7-l3-523)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-514 — Emerald Reed Bay — Komodo research camp: equivalent solution sets
+## n7-l4-514 — One value satisfying two equations
 
 [Open this question in the HTML preview](index.html#n7-l4-514)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-517 — Golden Reed Bay — Kite festival: checking equality
+## n7-l1-517 — Checking an equation by substitution
 
 [Open this question in the HTML preview](index.html#n7-l1-517)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-527 — Indigo Reed Bay — Rainforest survey: solving a balanced equation
+## n7-l2-527 — Working out x in a two-step equation
 
 [Open this question in the HTML preview](index.html#n7-l2-527)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-524 — Jade Reed Bay — Angklung club: admission model
+## n7-l3-524 — Concert tickets at the angklung club
 
 [Open this question in the HTML preview](index.html#n7-l3-524)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-525 — Lilac Reed Bay — Rainforest survey: brackets in an equation
+## n7-l3-525 — Solving a longer bracketed equation
 
 [Open this question in the HTML preview](index.html#n7-l3-525)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-504 — Silver Reed Bay — Community garden: two-digit number model
+## n7-l5-504 — Two-digit code and its reverse
 
 [Open this question in the HTML preview](index.html#n7-l5-504)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-518 — Violet Reed Bay — Coral laboratory: inequality boundary
+## n7-l1-518 — Positive integers on a number line
 
 [Open this question in the HTML preview](index.html#n7-l1-518)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-528 — Amber Teak Bay — Library makerspace: closed endpoint
+## n7-l2-528 — Whole-number solutions on a number line
 
 [Open this question in the HTML preview](index.html#n7-l2-528)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-526 — Azure Teak Bay — Coral laboratory: reversing an inequality
+## n7-l3-526 — Correcting a drawn solution
 
 [Open this question in the HTML preview](index.html#n7-l3-526)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-515 — Bronze Teak Bay — Mangrove centre: parameter line through a point
+## n7-l4-515 — Line through a point crossing the x-axis
 
 [Open this question in the HTML preview](index.html#n7-l4-515)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-519 — Coral Teak Bay — Rattan cooperative: vertical-axis intercept
+## n7-l1-519 — The y-intercept of a line
 
 [Open this question in the HTML preview](index.html#n7-l1-519)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-529 — Emerald Teak Bay — Robotics club: horizontal-axis intercept
+## n7-l2-529 — x-axis crossing of a line
 
 [Open this question in the HTML preview](index.html#n7-l2-529)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-527 — Golden Teak Bay — Library makerspace: reversing an inequality
+## n7-l3-527 — Checking a classmate's solution graph
 
 [Open this question in the HTML preview](index.html#n7-l3-527)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-516 — Indigo Teak Bay — Komodo research camp: parameter through a known intersection
+## n7-l4-516 — Point on two lines with a parameter
 
 [Open this question in the HTML preview](index.html#n7-l4-516)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-520 — Jade Teak Bay — Kite festival: symmetric simultaneous equations
+## n7-l1-520 — Where two lines cross when y is known
 
 [Open this question in the HTML preview](index.html#n7-l1-520)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-530 — Lilac Teak Bay — Heritage museum: eliminate one variable
+## n7-l2-530 — x and y satisfying a pair
 
 [Open this question in the HTML preview](index.html#n7-l2-530)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-528 — Silver Teak Bay — Robotics club: coordinate on a line
+## n7-l3-528 — Triangle under a line graph
 
 [Open this question in the HTML preview](index.html#n7-l3-528)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-529 — Violet Teak Bay — Community garden: substitution at an intersection
+## n7-l3-529 — Crossing point of two graphs
 
 [Open this question in the HTML preview](index.html#n7-l3-529)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-521 — Amber Willow Bay — Coral laboratory: read roots from factors
+## n7-l1-521 — Larger of two factorised roots
 
 [Open this question in the HTML preview](index.html#n7-l1-521)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-531 — Azure Willow Bay — Solar classroom: factor a monic quadratic
+## n7-l2-531 — Smaller value satisfying a quadratic
 
 [Open this question in the HTML preview](index.html#n7-l2-531)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-530 — Bronze Willow Bay — Solar classroom: rearrange before factorising
+## n7-l3-530 — Larger solution with a small constant
 
 [Open this question in the HTML preview](index.html#n7-l3-530)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-531 — Coral Willow Bay — Science fair: rearrange before factorising
+## n7-l3-531 — Greater root of a rearranged quadratic
 
 [Open this question in the HTML preview](index.html#n7-l3-531)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-505 — Emerald Willow Bay — School canteen: constrained inequality count
+## n7-l5-505 — Recovering a linear expression from a graph
 
 [Open this question in the HTML preview](index.html#n7-l5-505)
 
