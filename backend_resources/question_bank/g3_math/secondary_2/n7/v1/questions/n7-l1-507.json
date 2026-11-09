@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-507",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Put x=4 into x+7=11. What number does each side equal?"
+          "text": "The equation "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+7=k"
+        },
+        {
+          "type": "text",
+          "text": " has the solution "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=4"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -51,7 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x=4 into x+7."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=4"
+            },
+            {
+              "type": "text",
+              "text": " into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+7"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

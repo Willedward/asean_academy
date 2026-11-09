@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-517",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,12 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "x^{2}-14x+40=0"
+        },
+        {
           "type": "text",
-          "text": "x²-14x+40=0 has two solutions. Find the smaller one by factorisation."
+          "text": " has two solutions. Find the smaller one by factorisation."
         }
       ],
       "marks": 2,
@@ -51,7 +55,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The required factorisation is (x-4)(x-10)=0."
+              "text": "One bracket is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-10)"
+            },
+            {
+              "type": "text",
+              "text": ". Work out the other bracket, then set each bracket equal to zero."
             }
           ]
         }

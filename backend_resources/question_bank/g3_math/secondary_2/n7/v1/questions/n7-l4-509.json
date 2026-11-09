@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-509",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Given that 4 and 8 are the roots of x²-12x+k=0, find k and write the factorised form."
+          "text": "Given that 4 and 8 are the roots of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-12x+k=0"
+        },
+        {
+          "type": "text",
+          "text": ", find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " and write the factorised form."
         }
       ],
       "marks": 4,
@@ -51,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the factorised form (x-4)(x-8)=0 and expand its constant term."
+              "text": "Use the two roots to write the two brackets, then find the constant term when you expand them."
             }
           ]
         }

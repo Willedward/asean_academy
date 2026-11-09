@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-515",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Given 3x+y=23 and x-y=1, determine x."
+          "text": "Given "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x+y=23"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x-y=1"
+        },
+        {
+          "type": "text",
+          "text": ", determine "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the equations to obtain 4x=24."
+              "text": "Add the equations to obtain "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x=24"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
