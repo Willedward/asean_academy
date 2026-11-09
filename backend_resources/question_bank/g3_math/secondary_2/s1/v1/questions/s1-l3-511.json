@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-511",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -68,7 +68,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The displayed heights are 140-110 and 158-110. Compare their increase with the first displayed height."
+              "text": "The displayed heights are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "140-110"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "158-110"
+            },
+            {
+              "type": "text",
+              "text": ". Compare their increase with the first displayed height."
             }
           ]
         }
@@ -113,7 +129,7 @@
       "asset_key": "s1-l3-511-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-511-diagram-r2.svg",
+      "path": "assets/s1-l3-511-diagram-r3.svg",
       "alt_text": "Bar chart with First: 140, Second: 158.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
