@@ -64,8 +64,25 @@ def test_releases_import_all_content_that_readiness_requires(name):
 @pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
 def test_releases_turn_on_the_economy_tutor_only(name):
     source = (WORKFLOWS / name).read_text()
-    assert '"ASEAN_ACADEMY_TUTOR_ENABLED=true"' in source
-    assert '"ASEAN_ACADEMY_TUTOR_PROVIDER=gemini"' in source
-    assert '"ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED=false"' in source
-    assert "GEMINI_API_KEY=$" in source
+    # The resolver writes the tutor settings, with hybrid and shadow routing always off.
+    assert "scripts/tutor_deploy_settings.py" in source
+    assert "vars.TUTOR_PROVIDER" in source
+    assert '"$TUTOR_KEY_NAME=${!TUTOR_KEY_SOURCE}"' in source
+    assert "HYBRID_ROUTING_ENABLED=true" not in source
+    assert "HYBRID_ROUTING_SHADOW_ENABLED=true" not in source
 
+
+@pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
+def test_releases_validate_the_tutor_before_changing_anything(name):
+    source = (WORKFLOWS / name).read_text()
+    resolver = source.index("scripts/tutor_deploy_settings.py")
+    assert resolver < source.index("db push")
+    assert resolver < source.index("variable set")
+
+
+@pytest.mark.parametrize("name", ["deploy-production.yml", "deploy-staging.yml"])
+def test_tutor_settings_loop_keeps_railway_off_its_input(name):
+    source = (WORKFLOWS / name).read_text()
+    # npx would otherwise read the settings file and silently end the loop early.
+    loop = source[source.index("while IFS= read -r setting"):source.index('done < "$RUNNER_TEMP/tutor-settings"')]
+    assert "</dev/null" in loop
