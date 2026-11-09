@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-030",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Work out (-7/12)×18 and (-2.6)×4, then use < or > to compare the two results. Write the complete statement, for example -3 < 2."
+          "text": "Work out "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-\\frac{7}{12})\\times 18"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-2.6)\\times 4"
+        },
+        {
+          "type": "text",
+          "text": ", then use < or > to compare the two results. Write the complete statement, for example "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3<2"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -57,7 +81,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The left product is -10.5 and the right product is -10.4."
+              "text": "Work out each product and write both as decimals. Then compare them: the smaller number lies further to the left on a number line."
             }
           ]
         }
@@ -67,8 +91,16 @@
           "position": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "(-\\frac{7}{12})\\times 18=-10.5"
+            },
+            {
               "type": "text",
-              "text": "(-7/12)×18=-10.5 and (-2.6)×4=-10.4"
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(-2.6)\\times 4=-10.4"
             }
           ],
           "mark_type": "M",
@@ -79,7 +111,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Since -10.5<-10.4, the left product is smaller."
+              "text": "Since "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-10.5<-10.4"
+            },
+            {
+              "type": "text",
+              "text": ", the left product is smaller."
             }
           ],
           "mark_type": "A",

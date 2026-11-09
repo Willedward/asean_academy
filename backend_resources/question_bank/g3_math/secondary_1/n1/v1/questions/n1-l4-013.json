@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-013",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -47,7 +47,15 @@
           "content": [
             {
               "type": "text",
-              "text": "For two positive integers, their product equals HCF×LCM."
+              "text": "For two positive integers, their product equals "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\text{HCF}\\times\\text{LCM}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -56,7 +64,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide 12×1260 by 180, then verify the HCF condition."
+              "text": "Divide "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12\\times 1260"
+            },
+            {
+              "type": "text",
+              "text": " by 180, then verify the HCF condition."
             }
           ]
         }
@@ -67,7 +83,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Other integer=(12×1260)÷180=84"
+              "text": "Other integer = "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(12\\times 1260)\\div 180=84"
             }
           ],
           "mark_type": "M",
@@ -77,8 +97,20 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "\\text{HCF}(180, 84)=12"
+            },
+            {
               "type": "text",
-              "text": "HCF(180,84)=12 and LCM(180,84)=1260."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\text{LCM}(180, 84)=1260"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

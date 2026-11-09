@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-028",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -56,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Their sum is 2.0, and there are four measurements."
+              "text": "Add the four signed values, keeping track of the negatives, then divide the total by the number of measurements."
             }
           ]
         }
@@ -66,8 +66,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-2.4+1.8-0.6+3.2=2.0"
+              "type": "display_math",
+              "latex": "-2.4+1.8-0.6+3.2=2.0"
             }
           ],
           "mark_type": "M",
@@ -78,7 +78,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Mean=2.0÷4=0.5."
+              "text": "Mean = "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2.0\\div 4=0.5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

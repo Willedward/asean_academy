@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-026",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate (3.75×10^6)/(1.5×10^6)+sqrt(625)."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3.75\\times 10^{6}}{1.5\\times 10^{6}}+\\sqrt{625}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The quotient is 2.5 and sqrt(625)=25."
+              "text": "Find the quotient of the two standard-form numbers first, find the square root separately, and then add the two results."
             }
           ]
         }
@@ -61,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "(3.75×10^6)/(1.5×10^6)=2.5"
+              "type": "display_math",
+              "latex": "\\frac{3.75\\times 10^{6}}{1.5\\times 10^{6}}=2.5"
             }
           ],
           "mark_type": "M",
@@ -72,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "2.5+25=27.5."
+              "type": "display_math",
+              "latex": "2.5+25=27.5"
             }
           ],
           "mark_type": "A",

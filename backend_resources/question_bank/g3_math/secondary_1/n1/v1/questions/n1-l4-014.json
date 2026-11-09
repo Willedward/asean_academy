@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-014",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,23 @@
   "stem": [
     {
       "type": "text",
-      "text": "A student spends 2/7 of some money. The student then spends 1/3 of the remainder and has $80 left."
+      "text": "A student spends "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{2}{7}"
+    },
+    {
+      "type": "text",
+      "text": " of some money. The student then spends "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{1}{3}"
+    },
+    {
+      "type": "text",
+      "text": " of the remainder and has $80 left."
     }
   ],
   "parts": [
@@ -56,7 +72,23 @@
           "content": [
             {
               "type": "text",
-              "text": "After the first purchase 5/7 remains; after the second, 2/3 of that remains."
+              "text": "After the first purchase "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{5}{7}"
+            },
+            {
+              "type": "text",
+              "text": " remains; after the second, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{2}{3}"
+            },
+            {
+              "type": "text",
+              "text": " of that remains."
             }
           ]
         }
@@ -66,8 +98,12 @@
           "position": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "(\\frac{2}{3})(\\frac{5}{7})=\\frac{10}{21}"
+            },
+            {
               "type": "text",
-              "text": "(2/3)(5/7)=10/21 of the starting amount remains."
+              "text": " of the starting amount remains."
             }
           ],
           "mark_type": "M",
@@ -78,7 +114,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Starting amount=80×21/10=$168."
+              "text": "Starting amount = "
+            },
+            {
+              "type": "inline_math",
+              "latex": "80\\times\\frac{21}{10}"
+            },
+            {
+              "type": "text",
+              "text": "=$168."
             }
           ],
           "mark_type": "A",

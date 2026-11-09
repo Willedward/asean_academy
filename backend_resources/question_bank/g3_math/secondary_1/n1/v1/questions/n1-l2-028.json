@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l2-028",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate (3/5)÷(9/10)+7/12."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(\\frac{3}{5})\\div(\\frac{9}{10})+\\frac{7}{12}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -58,7 +66,23 @@
           "content": [
             {
               "type": "text",
-              "text": "First simplify (3/5)×(10/9), then use a common denominator with 7/12."
+              "text": "First simplify "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(\\frac{3}{5})\\times(\\frac{10}{9})"
+            },
+            {
+              "type": "text",
+              "text": ", then use a common denominator with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{7}{12}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -68,8 +92,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "(3/5)÷(9/10)=2/3"
+              "type": "display_math",
+              "latex": "(\\frac{3}{5})\\div(\\frac{9}{10})=\\frac{2}{3}"
             }
           ],
           "mark_type": "M",
@@ -79,8 +103,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "2/3+7/12=8/12+7/12=15/12=5/4."
+              "type": "display_math",
+              "latex": "\\frac{2}{3}+\\frac{7}{12}=\\frac{8}{12}+\\frac{7}{12}=\\frac{15}{12}=\\frac{5}{4}"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-029",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -14,8 +14,12 @@
   "status": "draft",
   "stem": [
     {
+      "type": "inline_math",
+      "latex": "k"
+    },
+    {
       "type": "text",
-      "text": "k is an integer."
+      "text": " is an integer."
     }
   ],
   "parts": [
@@ -25,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "List all values of k satisfying -5/2<=k/3<4/3."
+          "text": "List all values of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " satisfying "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{5}{2}\\le\\frac{k}{3}<\\frac{4}{3}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -61,7 +81,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The new bounds are -15/2<=k<4."
+              "text": "The new bounds are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{15}{2}\\le k<4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,8 +99,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-7.5<=k<4"
+              "type": "display_math",
+              "latex": "-7.5\\le k<4"
             }
           ],
           "mark_type": "M",
@@ -83,7 +111,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Thus k=-7,-6,-5,-4,-3,-2,-1,0,1,2,3."
+              "text": "Thus "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k=-7,-6,-5,-4,-3,-2,-1, 0, 1, 2, 3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",
