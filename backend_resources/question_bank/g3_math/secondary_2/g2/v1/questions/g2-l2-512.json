@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-512",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A polygonal mosaic and its copy are similar. A 4 cm edge matches a 7 cm edge; a different 12 cm edge matches y cm. Determine y. Enter the numerical value only."
+          "text": "A polygonal mosaic and its copy are similar. A 4 cm edge matches a 7 cm edge; a different 12 cm edge matches "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " cm. Determine "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y/12 = 7/4."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{12}=\\frac{7}{4}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

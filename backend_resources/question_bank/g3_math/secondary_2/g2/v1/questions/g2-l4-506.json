@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-506",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar trapeziums have corresponding bases 10 cm and 25 cm. Their other corresponding sides are (x + 4) cm and (3x − 2) cm. Find the longer of those two sides. Enter the numerical value only."
+          "text": "Two similar trapeziums have corresponding bases 10 cm and 25 cm. Their other corresponding sides are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x+4)"
+        },
+        {
+          "type": "text",
+          "text": " cm and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3x-2)"
+        },
+        {
+          "type": "text",
+          "text": " cm. Find the longer of those two sides. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set (3x − 2)/(x + 4) = 25/10."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3x-2}{x+4}=\\frac{25}{10}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
