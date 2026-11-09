@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n5-l4-954",
   "bank_key": "g3-sec2-n5-v2",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,7 @@
   "stem": [
     {
       "type": "text",
-      "text": "For all values of x, (ax - 4)(2x + 3) ≡ 6x² + bx - 12."
+      "text": "For all values of x, (2x + a)² ≡ 4x² + bx + 49, where a > 0. The symbol ≡ means the two sides are equal for every value of x."
     }
   ],
   "parts": [
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "35",
+        "canonical_latex": "35",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Expand the left side and compare coefficients of matching powers of x."
+              "text": "Expand the left side using (p + q)² = p² + 2pq + q²."
             }
           ]
         },
@@ -56,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The x² coefficient gives 2a = 6; then use the coefficient of x."
+              "text": "The constant terms give a² = 49; then compare the coefficients of x."
             }
           ]
         }
@@ -67,18 +67,29 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "(ax-4)(2x+3)=2ax^2+(3a-8)x-12"
+              "latex": "(2x+a)^2=4x^2+4ax+a^2"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 2
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "a=3,\\ b=3(3)-8=1,\\quad a+b=4"
+              "latex": "a^2=49,\\ a>0\\Rightarrow a=7"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "b=4a=28,\\quad a+b=35"
             }
           ],
           "mark_type": "A",
