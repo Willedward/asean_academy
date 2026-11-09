@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l2-023",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A triangle is constructed with sides 5 cm and 7 cm enclosing an angle of 48\u00b0. What angle must be set on the protractor, in degrees?"
+          "text": "A triangle is constructed with sides 5 cm and 7 cm enclosing an angle. That enclosed angle is the supplement of 132°. What angle must be set on the protractor, in degrees?"
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "SAS uses the stated included angle."
+              "text": "SAS uses the included angle, so first work out its size from the supplement."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set the protractor to the given 48\u00b0 before marking the second side."
+              "text": "Two supplementary angles add up to 180°, so subtract 132° from 180°."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\theta=48^\\circ"
+              "latex": "\\theta=180^\\circ-132^\\circ=48^\\circ"
             }
           ],
           "mark_type": "A",

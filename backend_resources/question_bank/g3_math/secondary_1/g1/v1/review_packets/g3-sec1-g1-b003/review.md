@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-023 — Constructing a 75-degree angle
+## g1-l3-023 — Combining two constructed angles
 
 [Open this question in the HTML preview](index.html#g1-l3-023)
 

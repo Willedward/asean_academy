@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l2-022",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Each exterior angle of a regular polygon is 45\u00b0. Find the number of sides."
+          "text": "Each exterior angle of a regular polygon is 45°. Find the number of sides."
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Regular exterior angles divide 360\u00b0 equally."
+              "text": "Regular exterior angles divide 360° equally."
             }
           ]
         },
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compute 360 \u00f7 45."
+              "text": "Compute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "360\\div 45"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
