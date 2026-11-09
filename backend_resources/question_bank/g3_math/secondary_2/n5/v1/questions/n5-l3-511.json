@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-511",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.13",
-  "title": "Group terms to find a common bracket",
+  "title": "Factorise four terms in two letters",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "ax+bx+4ay+4by"
+          "latex": "3ax-6bx+2ay-4by"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(a+b)*(x+4*y)",
-        "canonical_latex": "(a+b)(x+4y)",
+        "canonical_expression": "(a-2*b)*(3*x+2*y)",
+        "canonical_latex": "(a-2b)(3x+2y)",
         "variables": [
           "a",
           "b",
@@ -57,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Reorder if needed, then factor a common term from each useful pair."
+              "text": "Group the first two terms and the last two terms, then find the common factor of each pair."
             }
           ]
         },
@@ -66,7 +66,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+              "text": "Take a factor containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " out of the first pair and a factor containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " out of the second pair."
             }
           ]
         }
@@ -77,11 +93,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x"
+            },
+            {
+              "type": "text",
+              "text": " out of the first pair and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2y"
+            },
+            {
+              "type": "text",
+              "text": " out of the second. "
             },
             {
               "type": "display_math",
-              "latex": "x(a+b)+4y(a+b)=(a+b)(x+4y)"
+              "latex": "3x(a-2b)+2y(a-2b)"
             }
           ],
           "mark_type": "M",
@@ -92,11 +124,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Take out the common bracket "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(a-2b)"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "(a+b)(x+4y)"
+              "latex": "(a-2b)(3x+2y)"
             }
           ],
           "mark_type": "A",

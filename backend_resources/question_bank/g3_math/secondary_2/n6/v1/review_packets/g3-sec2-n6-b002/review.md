@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-511 — Zeros from factorised form
+## n6-l3-511 — Negative zero of a factorised function
 
 [Open this question in the HTML preview](index.html#n6-l3-511)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l1-511 — Vertex ordinate from completed-square form
+## n6-l1-511 — y-coordinate of the turning point
 
 [Open this question in the HTML preview](index.html#n6-l1-511)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-514 — Where the graph meets the y-axis
+## n6-l2-514 — y-intercept with a negative leading factor
 
 [Open this question in the HTML preview](index.html#n6-l2-514)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-513 — Complete the square for the turning value
+## n6-l3-513 — Turning point of an expanded quadratic
 
 [Open this question in the HTML preview](index.html#n6-l3-513)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-514 — Second root by symmetry
+## n6-l3-514 — Mirror point on a parabola
 
 [Open this question in the HTML preview](index.html#n6-l3-514)
 

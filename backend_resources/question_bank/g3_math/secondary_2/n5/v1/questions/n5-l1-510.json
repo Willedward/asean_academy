@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l1-510",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.9",
-  "title": "Multiply out one bracket",
+  "title": "Expand with a negative multiplier",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "3(x+1)"
+          "latex": "-2(x-5)"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "3*x+3",
-        "canonical_latex": "3x+3",
+        "canonical_expression": "-2*x+10",
+        "canonical_latex": "-2x+10",
         "variables": [
           "x"
         ],
@@ -54,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Distribute each term to every term in the other factor."
+              "text": "Multiply both terms inside the bracket by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +71,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write all products first, then combine only terms with identical variable parts."
+              "text": "Remember that a negative multiplied by a negative is positive."
             }
           ]
         }
@@ -74,7 +82,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "3(x+1)=3x+3"
+              "latex": "-2(x-5)=-2x+10"
             }
           ],
           "mark_type": "A",

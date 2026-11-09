@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l2-514",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -43,7 +43,10 @@
           "x",
           "y"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x != 0",
+          "y != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -55,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+              "text": "Dividing by a fraction is the same as multiplying by its reciprocal."
             }
           ]
         },
@@ -64,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+              "text": "Rewrite as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}"
+            },
+            {
+              "type": "text",
+              "text": " and cancel common factors."
             }
           ]
         }
@@ -75,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Multiply by the reciprocal of the second fraction. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}=\\frac{4y}{21x}"
+              "latex": "\\frac{2x}{7y}\\times\\frac{6y^2}{9x^2}=\\frac{12xy^2}{63x^2y}"
             }
           ],
           "mark_type": "M",
@@ -90,11 +101,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Cancel common factors: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{4y}{21x}"
+              "latex": "\\frac{4y}{21x},\\quad x\\neq0,\\ y\\neq0"
             }
           ],
           "mark_type": "A",

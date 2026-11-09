@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-506",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,10 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x != 0",
+          "x+4 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor every numerator and denominator, and record values excluded by the original expression."
+              "text": "Look for the same factor in a numerator and a denominator before multiplying."
             }
           ]
         },
@@ -63,7 +66,39 @@
           "content": [
             {
               "type": "text",
-              "text": "For division, multiply by the reciprocal; cancel complete factors and apply index laws."
+              "text": "The bracket "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+4)"
+            },
+            {
+              "type": "text",
+              "text": " cancels, and one factor of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " cancels between "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +109,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Cancel the common bracket and a factor of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{x+4}{4x}\\times\\frac{7x^2}{x+4}=\\frac{7x}{4}"
+              "latex": "\\frac{x+4}{4x}\\times\\frac{7x^2}{x+4}=\\frac{7x^2}{4x}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +132,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Simplify: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{7x}{4}"
+              "latex": "\\frac{7x}{4},\\quad x\\neq0,\\ x\\neq-4"
             }
           ],
           "mark_type": "A",

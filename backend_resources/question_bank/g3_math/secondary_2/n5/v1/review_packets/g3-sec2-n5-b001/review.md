@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-501 — Rearrange an area-style formula
+## n5-l3-501 — Trapezium area formula: make a the subject
 
 [Open this question in the HTML preview](index.html#n5-l3-501)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-503 — Evaluate using the difference of two squares
+## n5-l3-503 — Evaluate a product using the difference of two squares
 
 [Open this question in the HTML preview](index.html#n5-l3-503)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-504 — Factorise four terms using k
+## n5-l3-504 — Group with a negative common factor
 
 [Open this question in the HTML preview](index.html#n5-l3-504)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l5-501 — Four-term factorisation by grouping
+## n5-l5-501 — Grouping with reordering and an overall factor
 
 [Open this question in the HTML preview](index.html#n5-l5-501)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l2-507",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,10 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-4 != 0",
+          "x-7 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "Use the common denominator "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-4)(x-7)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +74,39 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Multiply "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": " by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-7)"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": " by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-4)"
+            },
+            {
+              "type": "text",
+              "text": ", then collect like terms in the numerator."
             }
           ]
         }
@@ -74,11 +117,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Write both fractions over the common denominator "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-4)(x-7)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{3(x-7)+5(x-4)}{(x-4)(x-7)}=\\frac{8x-41}{(x-4)(x-7)}"
+              "latex": "\\frac{3(x-7)+5(x-4)}{(x-4)(x-7)}=\\frac{3x-21+5x-20}{(x-4)(x-7)}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +140,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Collect like terms: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{8x-41}{(x-4)(x-7)}"
+              "latex": "\\frac{8x-41}{(x-4)(x-7)},\\quad x\\neq4,\\ x\\neq7"
             }
           ],
           "mark_type": "A",
