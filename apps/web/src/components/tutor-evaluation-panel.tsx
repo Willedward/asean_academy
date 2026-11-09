@@ -282,12 +282,20 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
               ))}
             </aside>
             {active ? (
-              <main className="space-y-5 rounded-2xl border bg-white p-5">
+              <section
+                aria-labelledby="tutor-evaluation-case-title"
+                className="space-y-5 rounded-2xl border bg-white p-5"
+              >
                 <div>
                   <p className="text-xs font-bold uppercase text-teal-700">
                     {active.case_id} · {active.question_key}
                   </p>
-                  <h2 className="text-2xl font-bold">{active.title}</h2>
+                  <h2
+                    id="tutor-evaluation-case-title"
+                    className="text-2xl font-bold"
+                  >
+                    {active.title}
+                  </h2>
                   <p>
                     <strong>Learner prompt:</strong> {active.learner_message}
                   </p>
@@ -466,7 +474,7 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
                     Run this case to create a response for review.
                   </p>
                 )}
-              </main>
+              </section>
             ) : null}
           </div>
         </>

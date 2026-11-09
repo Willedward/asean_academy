@@ -499,6 +499,12 @@ test.describe.serial("authenticated beta journeys", () => {
       await attachScreenshot(page, testInfo, "admin-" + viewport.name);
     }
 
+    await page.goto("/admin/tutor-evaluation");
+    await expect(page.locator("#tutor-evaluation-case-title")).toBeVisible({
+      timeout: 30_000,
+    });
+    await expect(page.locator("main")).toHaveCount(1);
+
     await authenticate(page, identities.content);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/admin");
