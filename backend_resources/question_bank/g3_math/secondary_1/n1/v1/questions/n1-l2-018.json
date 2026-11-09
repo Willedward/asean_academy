@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l2-018",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write -7/4, -1.6, -1.58 and -3/2 in ascending order."
+          "text": "Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{7}{4}"
+        },
+        {
+          "type": "text",
+          "text": ", -1.6, -1.58 and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{3}{2}"
+        },
+        {
+          "type": "text",
+          "text": " in ascending order."
         }
       ],
       "marks": 2,
@@ -53,8 +69,20 @@
           "stage": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "-\\frac{7}{4}=-1.75"
+            },
+            {
               "type": "text",
-              "text": "-7/4=-1.75 and -3/2=-1.5; more negative values come first."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{3}{2}=-1.5"
+            },
+            {
+              "type": "text",
+              "text": "; more negative values come first."
             }
           ]
         }
@@ -76,7 +104,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Ascending order: -7/4, -1.6, -1.58, -3/2"
+              "text": "Ascending order: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{7}{4}"
+            },
+            {
+              "type": "text",
+              "text": ", -1.6, -1.58, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{3}{2}"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-013",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate -3/4 + 5/6 - (-7/12)."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{3}{4}+\\frac{5}{6}-(-\\frac{7}{12})"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -66,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-3/4+5/6+7/12=(-9+10+7)/12"
+              "type": "display_math",
+              "latex": "-\\frac{3}{4}+\\frac{5}{6}+\\frac{7}{12}=\\frac{-9+10+7}{12}"
             }
           ],
           "mark_type": "M",
@@ -77,8 +85,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "8/12=2/3"
+              "type": "display_math",
+              "latex": "\\frac{8}{12}=\\frac{2}{3}"
             }
           ],
           "mark_type": "A",

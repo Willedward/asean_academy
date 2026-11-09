@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l1-016",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate (7.2^2 - 3.6) / 1.2."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{7.2^{2}-3.6}{1.2}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -66,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "7.2^2-3.6=48.24"
+              "type": "display_math",
+              "latex": "7.2^{2}-3.6=48.24"
             }
           ],
           "mark_type": "M",
@@ -77,8 +85,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "48.24÷1.2=40.2"
+              "type": "display_math",
+              "latex": "48.24\\div 1.2=40.2"
             }
           ],
           "mark_type": "A",

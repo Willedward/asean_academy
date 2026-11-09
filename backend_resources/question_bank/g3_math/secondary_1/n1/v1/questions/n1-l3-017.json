@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-017",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -14,8 +14,12 @@
   "status": "draft",
   "stem": [
     {
+      "type": "inline_math",
+      "latex": "n"
+    },
+    {
       "type": "text",
-      "text": "n is an integer."
+      "text": " is an integer."
     }
   ],
   "parts": [
@@ -25,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "List all possible values of n if -1.5 <= n/2 < 2.25."
+          "text": "List all possible values of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "n"
+        },
+        {
+          "type": "text",
+          "text": " if "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-1.5\\le\\frac{n}{2}<2.25"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -61,7 +81,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The equivalent bounds are -3 <= n < 4.5; list only integers."
+              "text": "The equivalent bounds are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-3\\le n<4.5"
+            },
+            {
+              "type": "text",
+              "text": "; list only integers."
             }
           ]
         }
@@ -71,8 +99,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "-3<=n<4.5"
+              "type": "display_math",
+              "latex": "-3\\le n<4.5"
             }
           ],
           "mark_type": "M",
@@ -82,8 +110,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "n=-3,-2,-1,0,1,2,3,4"
+              "type": "display_math",
+              "latex": "n=-3,-2,-1, 0, 1, 2, 3, 4"
             }
           ],
           "mark_type": "A",
