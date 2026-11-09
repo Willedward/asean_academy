@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l1-517",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered heavy seasonal rainfall while preparing a capacity check for the recycling centre container. Sorted materials arrive in reusable bins of fixed capacity. The design must also be explained clearly in the safety briefing. A sphere has radius 9 cm. Its surface area is kπ cm². Find k."
+          "text": "Community planners considered heavy seasonal rainfall while preparing a capacity check for the recycling centre container. Sorted materials arrive in reusable bins of fixed capacity. The design must also be explained clearly in the safety briefing. A sphere has radius 9 cm. Its surface area is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k\\pi"
+        },
+        {
+          "type": "text",
+          "text": " cm². Find k."
         }
       ],
       "marks": 1,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the surface-area formula 4πr²."
+              "text": "Use the surface-area formula "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4\\pi r^{2}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -60,7 +76,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate 4 × 9²; π is already shown in kπ."
+              "text": "Evaluate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4\\times 9^{2}"
+            },
+            {
+              "type": "text",
+              "text": "; π is already shown in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k\\pi"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -86,7 +118,7 @@
       "asset_key": "g5-l1-517-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-517-diagram-r2.svg",
+      "path": "assets/g5-l1-517-diagram-r3.svg",
       "alt_text": "Sphere with radius r = 9 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
