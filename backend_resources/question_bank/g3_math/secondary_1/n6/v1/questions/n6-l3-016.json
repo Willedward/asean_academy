@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-016",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The line through (-1, 4) and (3, p) is parallel to y = -2x + 7. Find p."
+          "text": "The line through "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-1, 4)"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3, p)"
+        },
+        {
+          "type": "text",
+          "text": " is parallel to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=-2x+7"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -51,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set (p - 4)/(3 - (-1)) equal to -2."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{p-4}{3-(-1)}"
+            },
+            {
+              "type": "text",
+              "text": " equal to -2."
             }
           ]
         }

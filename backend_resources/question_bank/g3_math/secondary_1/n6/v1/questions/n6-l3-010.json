@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l3-010",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The cost per person y dollars for a $72 booking is y = 72/x, where x is the number of people. Find y when 9 people share the booking."
+          "text": "The cost per person "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " dollars for a $72 booking is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=\\frac{72}{x}"
+        },
+        {
+          "type": "text",
+          "text": ", where "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " is the number of people. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " when 9 people share the booking."
         }
       ],
       "marks": 2,
@@ -42,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the number of people for x."
+              "text": "Substitute the number of people for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
