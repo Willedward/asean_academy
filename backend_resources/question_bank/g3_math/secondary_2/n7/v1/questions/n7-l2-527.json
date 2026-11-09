@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l2-527",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -32,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "3x+1=25"
+          "latex": "3x+1=1"
         },
         {
           "type": "text",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8",
-        "canonical_latex": "8",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "First subtract 1, then divide by 3."
+              "text": "Subtract "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1"
+            },
+            {
+              "type": "text",
+              "text": " from both sides, then divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -78,11 +94,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Subtract "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1"
+            },
+            {
+              "type": "text",
+              "text": " from both sides, then divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "3x=25-1=24\\Rightarrow x=8"
+              "latex": "3x=0"
             }
           ],
           "mark_type": "M",
@@ -93,11 +125,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "8"
+              "latex": "x=0"
             }
           ],
           "mark_type": "A",

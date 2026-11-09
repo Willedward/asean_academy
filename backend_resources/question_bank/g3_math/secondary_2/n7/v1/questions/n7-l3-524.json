@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l3-524",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The angklung club charged S$8 per adult and S$5 per student for a concert. Ten tickets brought in S$74. How many adult tickets were sold? Use a pair of simultaneous equations."
+          "text": "The angklung club charged S$9 per adult and S$6 per student for a concert. Eleven tickets brought in S$81. How many adult tickets were sold? Use a pair of simultaneous equations."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8",
-        "canonical_latex": "8",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,15 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "One equation is "
+              "text": "Substitute "
             },
             {
               "type": "inline_math",
-              "latex": "x+y=10"
+              "latex": "y=11-x"
             },
             {
               "type": "text",
-              "text": ". Write a second equation for the total cost, then solve the pair."
+              "text": " into the money equation."
             }
           ]
         }
@@ -70,11 +70,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Let "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " be adult tickets and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " be student tickets. "
             },
             {
               "type": "display_math",
-              "latex": "x+y=10,\\ 8x+5y=74\\Rightarrow x=8"
+              "latex": "x+y=11,\\quad9x+6y=81\\Rightarrow9x+6(11-x)=81\\Rightarrow3x=15"
             }
           ],
           "mark_type": "M",
@@ -85,11 +101,23 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "8"
+              "latex": "x=5"
+            },
+            {
+              "type": "text",
+              "text": " Check: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "9(5)+6(6)=81"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

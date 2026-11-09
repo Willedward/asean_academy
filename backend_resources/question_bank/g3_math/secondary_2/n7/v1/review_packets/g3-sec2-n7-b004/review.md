@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-514 — One value satisfying two equations
+## n7-l4-514 — Clear fractions in a linear equation
 
 [Open this question in the HTML preview](index.html#n7-l4-514)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-515 — Line through a point crossing the x-axis
+## n7-l4-515 — Area enclosed by a line and the axes
 
 [Open this question in the HTML preview](index.html#n7-l4-515)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-516 — Point on two lines with a parameter
+## n7-l4-516 — Find k when three lines meet
 
 [Open this question in the HTML preview](index.html#n7-l4-516)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-520 — Where two lines cross when y is known
+## n7-l1-520 — Intersection of two lines
 
 [Open this question in the HTML preview](index.html#n7-l1-520)
 
