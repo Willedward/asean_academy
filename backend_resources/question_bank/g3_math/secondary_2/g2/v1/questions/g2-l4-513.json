@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-513",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two congruent rectangular frames have widths (2x + 1) cm and 13 cm. Their common length is 18 cm. Find the perimeter of either frame. Enter the numerical value only."
+          "text": "Two congruent rectangular frames have widths "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(2x+1)"
+        },
+        {
+          "type": "text",
+          "text": " cm and 13 cm. Their common length is 18 cm. Find the perimeter of either frame. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "After finding x, use P = 2(length + width)."
+              "text": "After finding "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ", use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "P=2"
+            },
+            {
+              "type": "text",
+              "text": "(length + width)."
             }
           ]
         }

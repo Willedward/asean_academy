@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-527",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Similar trapeziums have corresponding short bases 8 cm and 5 cm. The first long base is 24 cm and the second is y cm. Find y. Enter the numerical value only."
+          "text": "Similar trapeziums have corresponding short bases 8 cm and 5 cm. The first long base is 24 cm and the second is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " cm. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y/24 = 5/8."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{24}=\\frac{5}{8}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

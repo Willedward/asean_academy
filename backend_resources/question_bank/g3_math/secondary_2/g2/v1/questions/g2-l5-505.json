@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g2-l5-505",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The courtyard is 30 m by 19.2 m; the stage is 18 m by 11.52 m."
+              "text": "Turn each plan length into metres using 1:400. Multiply each by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{5}"
+            },
+            {
+              "type": "text",
+              "text": " for the stage, then multiply the two stage lengths."
             }
           ]
         }
@@ -119,7 +127,7 @@
       "asset_key": "g2-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l5-505-diagram-r3.svg",
+      "path": "assets/g2-l5-505-diagram-r4.svg",
       "alt_text": "Three similar rectangles, one above another. The rectangle labelled plan is marked 7.5 cm and 4.8 cm. An arrow marked 1 : 400 points down to a rectangle labelled courtyard, whose sides are not marked. An arrow marked × 3/5 points down to a smaller rectangle labelled stage, marked area s. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-similarity-svg-v1",

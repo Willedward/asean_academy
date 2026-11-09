@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-528",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar quadrilaterals have scale factor 5/3 from the smaller to the larger. A diagonal of the smaller is 12 cm. Find the corresponding diagonal of the larger. Enter the numerical value only."
+          "text": "Two similar quadrilaterals have scale factor "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{5}{3}"
+        },
+        {
+          "type": "text",
+          "text": " from the smaller to the larger. A diagonal of the smaller is 12 cm. Find the corresponding diagonal of the larger. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply 12 by 5/3."
+              "text": "Use the scale factor from the smaller shape to the larger. Multiply the smaller diagonal by it."
             }
           ]
         }

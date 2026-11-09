@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-526",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Congruent pentagons have corresponding sides (4x − 3) cm and (2x + 9) cm. Find their common side length. Enter the numerical value only."
+          "text": "Congruent pentagons have corresponding sides "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(4x-3)"
+        },
+        {
+          "type": "text",
+          "text": " cm and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(2x+9)"
+        },
+        {
+          "type": "text",
+          "text": " cm. Find their common side length. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 4x − 3 = 2x + 9, then substitute."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x-3=2x+9"
+            },
+            {
+              "type": "text",
+              "text": ", then substitute."
             }
           ]
         }
