@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-002",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The parallel sides of a trapezium card are 7 cm and 11 cm, and its height is 4 cm. Find its area in cm\u00b2. Enter the numerical value only."
+          "text": "The parallel sides of a trapezium card are 7 cm and 11 cm, and its height is 4 cm. Find its area in cm². Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use \u00bd(7 + 11)(4)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{2}(7+11)(4)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

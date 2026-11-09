@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-004",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A composite solid consists of a 10 cm by 8 cm by 4 cm cuboid and a 6 cm by 5 cm by h cm cuboid, joined without overlap. Its total volume is 500 cm\u00b3. Find h. Enter the numerical value only."
+          "text": "A composite solid consists of a 10 cm by 8 cm by 4 cm cuboid and a 6 cm by 5 cm by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "h"
+        },
+        {
+          "type": "text",
+          "text": " cm cuboid, joined without overlap. Its total volume is 500 cm³. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "h"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The second cuboid has volume 180 cm\u00b3, so solve 30h = 180."
+              "text": "The second cuboid has volume 180 cm³, so solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "30h=180"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

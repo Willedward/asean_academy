@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-002",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has area 84 cm\u00b2, height 7 cm and one parallel side 8 cm. Find the length of the other parallel side in cm. Enter the numerical value only."
+          "text": "A trapezium has area 84 cm², height 7 cm and one parallel side 8 cm. Find the length of the other parallel side in cm. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +42,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the unknown parallel side be x and use the area formula."
+              "text": "Let the unknown parallel side be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " and use the area formula."
             }
           ]
         },
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 84 = \u00bd(8 + x)(7)."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "84=\\frac{1}{2}(8+x)(7)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
