@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-511",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A parabola has rule y=p(x+1)²+3 and passes through (2,21). Find p."
+          "text": "A parabola has rule "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=p(x+1)^{2}+3"
+        },
+        {
+          "type": "text",
+          "text": " and passes through "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(2,21)"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,

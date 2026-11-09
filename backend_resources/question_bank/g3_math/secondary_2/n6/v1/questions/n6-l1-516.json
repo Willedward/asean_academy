@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l1-516",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A curve has equation y=(x-3)²+5. What output does the function take at its vertex?"
+          "text": "A curve has equation "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=(x-3)^{2}+5"
+        },
+        {
+          "type": "text",
+          "text": ". What output does the function take at its vertex?"
         }
       ],
       "marks": 1,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the rule with y=a(x-h)²+k, or use the midpoint of the two roots."
+              "text": "Compare the rule with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=a(x-h)^{2}+k"
+            },
+            {
+              "type": "text",
+              "text": ", or use the midpoint of the two roots."
             }
           ]
         },
@@ -51,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The turning point is (h,k) and the vertical symmetry line is x=h."
+              "text": "The turning point is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(h,k)"
+            },
+            {
+              "type": "text",
+              "text": " and the vertical symmetry line is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=h"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
