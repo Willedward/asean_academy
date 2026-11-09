@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-518",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -68,7 +68,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The first displayed height is 160-120, while the visible rise is 184-160."
+              "text": "The first displayed height is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "160-120"
+            },
+            {
+              "type": "text",
+              "text": ", while the visible rise is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "184-160"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -113,7 +129,7 @@
       "asset_key": "s1-l3-518-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-518-diagram-r2.svg",
+      "path": "assets/s1-l3-518-diagram-r3.svg",
       "alt_text": "Bar chart with First: 160, Second: 184.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
