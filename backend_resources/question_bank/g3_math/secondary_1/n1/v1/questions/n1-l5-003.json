@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l5-003",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate [(5/6-3/8)/(7/9+1/6)] ÷ (1-5/12)."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "[\\frac{\\frac{5}{6}-\\frac{3}{8}}{\\frac{7}{9}+\\frac{1}{6}}]\\div(1-\\frac{5}{12})"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -56,7 +64,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The first numerator is 11/24, the first denominator is 17/18, and the final bracket is 7/12."
+              "text": "The first numerator is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{11}{24}"
+            },
+            {
+              "type": "text",
+              "text": ", the first denominator is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{17}{18}"
+            },
+            {
+              "type": "text",
+              "text": ", and the final bracket is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{7}{12}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -66,8 +98,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "(11/24)÷(17/18)=33/68"
+              "type": "display_math",
+              "latex": "(\\frac{11}{24})\\div(\\frac{17}{18})=\\frac{33}{68}"
             }
           ],
           "mark_type": "M",
@@ -77,8 +109,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "(33/68)÷(7/12)=99/119"
+              "type": "display_math",
+              "latex": "(\\frac{33}{68})\\div(\\frac{7}{12})=\\frac{99}{119}"
             }
           ],
           "mark_type": "A",

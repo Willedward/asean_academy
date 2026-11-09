@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-009",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,31 @@
   "stem": [
     {
       "type": "text",
-      "text": "On a number line, A has coordinate -7/3 and B has coordinate 11/6. Point P is 3/5 of the way from A to B."
+      "text": "On a number line, A has coordinate "
+    },
+    {
+      "type": "inline_math",
+      "latex": "-\\frac{7}{3}"
+    },
+    {
+      "type": "text",
+      "text": " and B has coordinate "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{11}{6}"
+    },
+    {
+      "type": "text",
+      "text": ". Point P is "
+    },
+    {
+      "type": "inline_math",
+      "latex": "\\frac{3}{5}"
+    },
+    {
+      "type": "text",
+      "text": " of the way from A to B."
     }
   ],
   "parts": [
@@ -47,7 +71,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use P=A+(3/5)(B-A)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "P=A+(\\frac{3}{5})(B-A)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -56,7 +88,15 @@
           "content": [
             {
               "type": "text",
-              "text": "First find B-A using a common denominator of 6."
+              "text": "First find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "B-A"
+            },
+            {
+              "type": "text",
+              "text": " using a common denominator of 6."
             }
           ]
         }
@@ -66,8 +106,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "B-A=11/6-(-7/3)=25/6"
+              "type": "display_math",
+              "latex": "B-A=\\frac{11}{6}-(-\\frac{7}{3})=\\frac{25}{6}"
             }
           ],
           "mark_type": "M",
@@ -77,8 +117,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "P=-7/3+(3/5)(25/6)=-14/6+15/6=1/6"
+              "type": "display_math",
+              "latex": "P=-\\frac{7}{3}+(\\frac{3}{5})(\\frac{25}{6})=-\\frac{14}{6}+\\frac{15}{6}=\\frac{1}{6}"
             }
           ],
           "mark_type": "A",

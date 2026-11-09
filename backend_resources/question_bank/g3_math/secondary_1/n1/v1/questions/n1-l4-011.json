@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-011",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -14,8 +14,20 @@
   "status": "draft",
   "stem": [
     {
+      "type": "inline_math",
+      "latex": "a=7.4"
+    },
+    {
       "type": "text",
-      "text": "a=7.4 correct to 1 decimal place and b=0.62 correct to 2 decimal places. Both values are positive."
+      "text": " correct to 1 decimal place and "
+    },
+    {
+      "type": "inline_math",
+      "latex": "b=0.62"
+    },
+    {
+      "type": "text",
+      "text": " correct to 2 decimal places. Both values are positive."
     }
   ],
   "parts": [
@@ -25,7 +37,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the lower bound of a/b."
+          "text": "Find the lower bound of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{a}{b}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -56,7 +76,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The required bounds are a≥7.35 and b<0.625."
+              "text": "The required bounds are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a\\ge 7.35"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b<0.625"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -67,7 +103,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Lower bound=7.35/0.625"
+              "text": "Lower bound = "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{7.35}{0.625}"
             }
           ],
           "mark_type": "M",
@@ -77,8 +117,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "7.35÷0.625=11.76"
+              "type": "display_math",
+              "latex": "7.35\\div 0.625=11.76"
             }
           ],
           "mark_type": "A",

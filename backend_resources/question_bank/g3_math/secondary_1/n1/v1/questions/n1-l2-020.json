@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n1-l2-020",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -65,8 +65,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "1386=2×693=2×3×231"
+              "type": "display_math",
+              "latex": "1386=2\\times 693=2\\times 3\\times 231"
             }
           ],
           "mark_type": "M",
@@ -76,8 +76,16 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "231=3\\times 77=3\\times 7\\times 11"
+            },
+            {
               "type": "text",
-              "text": "231=3×77=3×7×11, so 1386=2×3^2×7×11"
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1386=2\\times 3^{2}\\times 7\\times 11"
             }
           ],
           "mark_type": "A",

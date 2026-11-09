@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-021",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate [(6.4×10^5)-(2.75×10^4)]/(3.2×10^5). Give your answer correct to 3 significant figures."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{(6.4\\times 10^{5})-(2.75\\times 10^{4})}{3.2\\times 10^{5}}"
+        },
+        {
+          "type": "text",
+          "text": ". Give your answer correct to 3 significant figures."
         }
       ],
       "marks": 2,
@@ -56,7 +64,15 @@
           "content": [
             {
               "type": "text",
-              "text": "First find 640 000 − 27 500, then divide by 320 000. Keep the full display."
+              "text": "First find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "640\\,000-27\\,500"
+            },
+            {
+              "type": "text",
+              "text": ", then divide by 320 000. Keep the full display."
             }
           ]
         }
@@ -66,8 +82,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "640000-27500=612500"
+              "type": "display_math",
+              "latex": "640000-27500=612500"
             }
           ],
           "mark_type": "M",
@@ -77,8 +93,12 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "612500\\div 320000=1.9140625"
+            },
+            {
               "type": "text",
-              "text": "612500÷320000=1.9140625, which is 1.91 to 3 significant figures."
+              "text": ", which is 1.91 to 3 significant figures."
             }
           ],
           "mark_type": "A",
