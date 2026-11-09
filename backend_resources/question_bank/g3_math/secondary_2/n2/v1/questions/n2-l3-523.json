@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l3-523",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from an environmental field study. A table contains the pair x = 5, y = 8. The relationship is direct proportion. Find the y-value paired with x = 10. Enter the exact numerical value only."
+          "text": "Use the data from an environmental field study. A table contains the pair "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=5"
+        },
+        {
+          "type": "text",
+          "text": ", "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=8"
+        },
+        {
+          "type": "text",
+          "text": ". The relationship is direct proportion. Find the y-value paired with "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=10"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the exact numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "A direct-proportion table keeps y/x constant."
+              "text": "A direct-proportion table keeps "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{x}"
+            },
+            {
+              "type": "text",
+              "text": " constant."
             }
           ]
         },
@@ -51,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y/10 = 8/5."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{10}=\\frac{8}{5}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
