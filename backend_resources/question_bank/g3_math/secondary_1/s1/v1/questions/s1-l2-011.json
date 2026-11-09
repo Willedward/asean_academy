@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-011",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-011-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line graph falls from 68 units in April to 53 units in May. Find the decrease. Enter the numerical value only."
+          "text": "The line graph shows the units recorded in April and May. Find the decrease. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 68 - 53."
+              "text": "Read both points from the scale, then subtract."
             }
           ]
         }
@@ -72,7 +81,170 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-011-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-011-diagram-r2.svg",
+      "alt_text": "Line graph with an axis break and a vertical axis from 50 to 70 in steps of 2. April: 68, May: 53.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_chart",
+        "question_key": "s1-l2-011",
+        "outcome": "1.2",
+        "template": "line_chart",
+        "inputs": {
+          "categories": [
+            "April",
+            "May"
+          ],
+          "values": [
+            68,
+            53
+          ],
+          "y_min": 50,
+          "y_max": 70,
+          "tick_step": 2,
+          "y_label": "Units",
+          "title": "Units recorded",
+          "axis_break": true,
+          "alt_text": "Line graph with an axis break and a vertical axis from 50 to 70 in steps of 2. April: 68, May: 53."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "68",
+            "tag": "circle",
+            "geometry": {
+              "cx": "237.5",
+              "cy": "133",
+              "r": "6"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "53",
+            "tag": "circle",
+            "geometry": {
+              "cx": "532.5",
+              "cy": "343",
+              "r": "6"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:50",
+            "axis": "y",
+            "value": "50",
+            "position": "385",
+            "label": "50"
+          },
+          {
+            "key": "y:52",
+            "axis": "y",
+            "value": "52",
+            "position": "357",
+            "label": "52"
+          },
+          {
+            "key": "y:54",
+            "axis": "y",
+            "value": "54",
+            "position": "329",
+            "label": "54"
+          },
+          {
+            "key": "y:56",
+            "axis": "y",
+            "value": "56",
+            "position": "301",
+            "label": "56"
+          },
+          {
+            "key": "y:58",
+            "axis": "y",
+            "value": "58",
+            "position": "273",
+            "label": "58"
+          },
+          {
+            "key": "y:60",
+            "axis": "y",
+            "value": "60",
+            "position": "245",
+            "label": "60"
+          },
+          {
+            "key": "y:62",
+            "axis": "y",
+            "value": "62",
+            "position": "217",
+            "label": "62"
+          },
+          {
+            "key": "y:64",
+            "axis": "y",
+            "value": "64",
+            "position": "189",
+            "label": "64"
+          },
+          {
+            "key": "y:66",
+            "axis": "y",
+            "value": "66",
+            "position": "161",
+            "label": "66"
+          },
+          {
+            "key": "y:68",
+            "axis": "y",
+            "value": "68",
+            "position": "133",
+            "label": "68"
+          },
+          {
+            "key": "y:70",
+            "axis": "y",
+            "value": "70",
+            "position": "105",
+            "label": "70"
+          },
+          {
+            "key": "x:April",
+            "axis": "x",
+            "value": "April",
+            "position": "237.5",
+            "label": "April"
+          },
+          {
+            "key": "x:May",
+            "axis": "x",
+            "value": "May",
+            "position": "532.5",
+            "label": "May"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 50.0,
+          "y_max": 70.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "275ad909bbe486f30ba69c47d24efcd9656ac0e10be7e68e48223a73f216d503",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +258,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

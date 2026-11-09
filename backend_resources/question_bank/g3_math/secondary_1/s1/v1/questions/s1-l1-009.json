@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-009",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-009-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "In a pictogram, each star represents 4 votes. A row contains 3 stars. Find the number of votes represented. Enter the numerical value only."
+          "text": "The pictogram shows the votes for one option. Find the number of votes represented. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 3 \u00d7 4."
+              "text": "Count the stars, then multiply by the value in the key."
             }
           ]
         }
@@ -72,7 +81,74 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-009-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-009-diagram-r2.svg",
+      "alt_text": "Pictogram where each ★ represents 4; Votes has 3 symbols.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pictogram",
+        "question_key": "s1-l1-009",
+        "outcome": "1.2",
+        "template": "pictogram",
+        "inputs": {
+          "rows": [
+            {
+              "label": "Votes",
+              "count": 3
+            }
+          ],
+          "key": 4,
+          "title": "Votes for one option"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0-0",
+            "kind": "icon",
+            "value": "4",
+            "tag": "text",
+            "geometry": {
+              "x": "200",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-1",
+            "kind": "icon",
+            "value": "4",
+            "tag": "text",
+            "geometry": {
+              "x": "258",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-2",
+            "kind": "icon",
+            "value": "4",
+            "tag": "text",
+            "geometry": {
+              "x": "316",
+              "y": "124"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "78506e216759133342e2d1be1d91701186eced338723071c1aacc05c15f2482f",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +162,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

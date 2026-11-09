@@ -31,6 +31,13 @@ SAMPLES = {
         "points": [{"tick_index": 3, "label": "A"}, {"tick_index": 8, "label": "B"}],
     },
     "dot_plot": {"values": [3, 5, 6, 5, 7, 5, 4]},
+    "scaled_icons": {
+        "shape": "circle",
+        "items": [
+            {"label": "Value 25", "caption": "diameter 1 unit", "width": 1},
+            {"label": "Value 100", "caption": "diameter 4 units", "width": 4},
+        ],
+    },
     "stem_leaf": {
         "rows": [{"stem": 4, "leaves": [1, 3, 4, 7, 8]}],
         "key": "4 | 1 means 41",
@@ -192,6 +199,49 @@ def test_number_line_interval_rejects_impossible_bounds():
         charts.number_line(
             {"boundary": 5, "relation": ">", "upper_boundary": 1, "upper_relation": "<"}
         )
+def test_bar_chart_can_leave_a_bar_unknown_and_label_the_others():
+    diagram = charts.bar_chart(
+        {
+            "categories": ["A", "B", "C"],
+            "values": [18, 25, None],
+            "show_values": True,
+            "y_max": 35,
+            "tick_step": 5,
+        }
+    )
+    marks = {mark["key"]: mark for mark in diagram.generation_spec["chart_marks"]}
+
+    assert marks["bar-2"]["kind"] == "unknown-bar"
+    assert marks["bar-2"]["value"] == "?"
+    assert "C: unknown" in diagram.alt_text
+    assert ">25</text>" in diagram.svg
+    assert findings(diagram) == []
+
+
+def test_chart_options_default_to_the_existing_rendering():
+    bar = {"categories": ["A"], "values": [4], "y_max": 5, "tick_step": 1}
+    assert charts.bar_chart(bar).svg == charts.bar_chart({**bar, "show_values": False}).svg
+
+    line = {"categories": ["A", "B"], "values": [4, 5], "y_max": 5, "tick_step": 1}
+    assert charts.line_chart(line).svg == charts.line_chart({**line, "axis_break": False}).svg
+    assert "axis-break" in charts.line_chart({**line, "axis_break": True}).svg
+
+    rows = {"rows": [{"label": "A", "count": 2}], "key": 7}
+    assert charts.pictogram(rows).svg == charts.pictogram({**rows, "show_key": True}).svg
+    assert "Key:" not in charts.pictogram({**rows, "show_key": False}).svg
+
+    scale = {"ticks": [0, 5, 10]}
+    assert (
+        charts.vertical_scale(scale).svg
+        == charts.vertical_scale({**scale, "orientation": "vertical"}).svg
+    )
+
+
+def test_horizontal_scale_declares_x_ticks():
+    diagram = charts.vertical_scale({"ticks": [2019, 2020, 2023], "orientation": "horizontal"})
+
+    assert {tick["axis"] for tick in diagram.generation_spec["chart_ticks"]} == {"x"}
+    assert findings(diagram) == []
 
 
 def test_histogram_can_mark_a_bin_as_unknown_without_inventing_its_height():

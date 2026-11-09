@@ -299,8 +299,10 @@ def _plot_axes(
 
 def bar_chart(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     categories = [str(item) for item in inputs["categories"]]
-    values = _numeric(inputs["values"], "values")
-    _same_length(categories, values, "categories and values")
+    raw_values = list(inputs["values"])
+    _same_length(categories, raw_values, "categories and values")
+    # A null value is a bar the learner has to work out: it is labelled but not drawn.
+    values = _numeric([value for value in raw_values if value is not None], "values")
     y_min = float(inputs.get("y_min", 0))
     y_max = float(inputs.get("y_max", max(values)))
     if y_max <= y_min:
@@ -312,7 +314,12 @@ def bar_chart(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     description = str(
         inputs.get(
             "alt_text",
-            f"Bar chart with {', '.join(f'{c}: {_fmt(v)}' for c, v in zip(categories, values, strict=True))}.",
+            "Bar chart with "
+            + ", ".join(
+                f"{c}: {'unknown' if v is None else _fmt(v)}"
+                for c, v in zip(categories, raw_values, strict=True)
+            )
+            + ".",
         )
     )
     builder = _Builder(title, description)
@@ -327,8 +334,32 @@ def bar_chart(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
     )
     left, right, bottom = 90.0, 680.0, 385.0
     spacing = (right - left) / len(categories)
-    for index, value in enumerate(values):
+    show_values = bool(inputs.get("show_values", False))
+    for index, value in enumerate(raw_values):
         x = left + index * spacing + spacing * 0.2
+        if value is None:
+            label_x, label_y = x + spacing * 0.3, bottom - 14
+            builder.text(
+                "?",
+                label_x,
+                label_y,
+                size=32,
+                attrs={
+                    "data-chart-mark": f"bar-{index}",
+                    "data-chart-kind": "unknown-bar",
+                    "data-value": "?",
+                },
+            )
+            builder.marks.append(
+                {
+                    "key": f"bar-{index}",
+                    "kind": "unknown-bar",
+                    "value": "?",
+                    "tag": "text",
+                    "geometry": {"x": _fmt(label_x), "y": _fmt(label_y)},
+                }
+            )
+            continue
         y = scale(value)
         builder.mark(
             f"bar-{index}",
@@ -338,6 +369,8 @@ def bar_chart(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
             {"x": x, "y": y, "width": spacing * 0.6, "height": bottom - y},
             style={"fill": ACCENT, "stroke": INK, "stroke-width": 2},
         )
+        if show_values:
+            builder.text(_fmt(value), x + spacing * 0.3, y - 10, size=25)
     if y_min != 0:
         builder.path(
             "M78 382 l10 -8 l10 8 l10 -8", stroke=INK, width=3, attrs={"data-role": "axis-break"}
@@ -392,6 +425,12 @@ def line_chart(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
             "circle",
             {"cx": x, "cy": y, "r": 6},
             style={"fill": ACCENT, "stroke": INK, "stroke-width": 2},
+        )
+        if inputs.get("show_values", False):
+            builder.text(_fmt(value), x, y - 16, size=25)
+    if inputs.get("axis_break", False):
+        builder.path(
+            "M78 382 l10 -8 l10 8 l10 -8", stroke=INK, width=3, attrs={"data-role": "axis-break"}
         )
     return _finish(
         builder,
@@ -473,11 +512,36 @@ def pictogram(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
                     "geometry": {"x": _fmt(x), "y": _fmt(y + 9)},
                 }
             )
-    builder.text(f"Key: {symbol} represents {_fmt(key)}", WIDTH / 2, 435, size=25)
+    if inputs.get("show_key", True):
+        builder.text(f"Key: {symbol} represents {_fmt(key)}", WIDTH / 2, 435, size=25)
     return _finish(builder, template="pictogram", diagram_kind="pictogram", inputs=inputs)
 
 
+def _horizontal_scale(inputs: dict[str, Any]) -> Diagram:
+    """Draw equally spaced labelled ticks along a horizontal axis, such as a time axis."""
+    values = _numeric(inputs["ticks"], "ticks")
+    title = str(inputs.get("title", "Horizontal scale"))
+    description = str(
+        inputs.get(
+            "alt_text",
+            "Horizontal scale marked " + ", ".join(_fmt(value) for value in values) + ".",
+        )
+    )
+    builder = _Builder(title, description)
+    builder.text(title, WIDTH / 2, 75, size=TITLE_FONT)
+    left, right, y = 90.0, 630.0, 250.0
+    builder.line(left - 30, y, right + 30, y, width=4)
+    for index, value in enumerate(values):
+        x = left + index * (right - left) / max(1, len(values) - 1)
+        builder.line(x, y - 16, x, y + 16, width=3)
+        builder.text(_fmt(value), x, y + 50, size=25)
+        builder.tick("x", _fmt(value), x)
+    return _finish(builder, template="vertical_scale", diagram_kind="vertical_scale", inputs=inputs)
+
+
 def vertical_scale(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    if inputs.get("orientation", "vertical") == "horizontal":
+        return _horizontal_scale(inputs)
     values = _numeric(inputs["ticks"], "ticks")
     title = str(inputs.get("title", "Vertical scale"))
     description = str(
@@ -506,6 +570,63 @@ def vertical_scale(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
             style={"fill": ACCENT, "stroke": INK, "stroke-width": 2},
         )
     return _finish(builder, template="vertical_scale", diagram_kind="vertical_scale", inputs=inputs)
+
+
+def scaled_icons(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Draw squares, circles or bars side by side at one shared scale, with their labels."""
+    shape = str(inputs.get("shape", "square"))
+    if shape not in {"square", "circle", "rect"}:
+        raise ValueError("shape must be square, circle or rect")
+    items = list(inputs["items"])
+    if not items:
+        raise ValueError("items must not be empty")
+    widths = _numeric([item["width"] for item in items], "item widths")
+    heights = _numeric([item.get("height", item["width"]) for item in items], "item heights")
+    if any(value <= 0 for value in [*widths, *heights]):
+        raise ValueError("icon sizes must be positive")
+    title = str(inputs.get("title", "Icons"))
+    description = str(
+        inputs.get(
+            "alt_text",
+            f"{len(items)} {shape} icons: "
+            + "; ".join(f"{item['label']}, {item['caption']}" for item in items)
+            + ".",
+        )
+    )
+    builder = _Builder(title, description)
+    builder.text(title, WIDTH / 2, 48, size=TITLE_FONT)
+    slot = WIDTH / len(items)
+    scale = min(240.0 / max(heights), (slot - 60.0) / max(widths))
+    bottom = 340.0
+    for index, (item, width, height) in enumerate(zip(items, widths, heights, strict=True)):
+        cx = slot * (index + 0.5)
+        drawn_width, drawn_height = width * scale, height * scale
+        if shape == "circle":
+            kind, tag = "circle-icon", "circle"
+            geometry: dict[str, float] = {
+                "cx": cx,
+                "cy": bottom - drawn_width / 2,
+                "r": drawn_width / 2,
+            }
+        else:
+            kind, tag = f"{shape}-icon", "rect"
+            geometry = {
+                "x": cx - drawn_width / 2,
+                "y": bottom - drawn_height,
+                "width": drawn_width,
+                "height": drawn_height,
+            }
+        builder.mark(
+            f"icon-{index}",
+            kind,
+            f"{_fmt(width)}x{_fmt(height)}",
+            tag,
+            geometry,
+            style={"fill": FILL, "stroke": INK, "stroke-width": 3},
+        )
+        builder.text(str(item["label"]), cx, bottom + 45, size=25)
+        builder.text(str(item["caption"]), cx, bottom + 85, size=25, weight=500)
+    return _finish(builder, template="scaled_icons", diagram_kind="scaled_icons", inputs=inputs)
 
 
 def dot_plot(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
@@ -1151,6 +1272,7 @@ def quadratic_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diag
 
 
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
+    "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
     "line_chart": line_chart,
     "pictogram": pictogram,
