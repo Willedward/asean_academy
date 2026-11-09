@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-005",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The point (3, 7) is tested against the graph y = 2x + c. Find c so that the point lies on the graph."
+          "text": "The point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3, 7)"
+        },
+        {
+          "type": "text",
+          "text": " is tested against the graph "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=2x+c"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "c"
+        },
+        {
+          "type": "text",
+          "text": " so that the point lies on the graph."
         }
       ],
       "marks": 2,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 7 = 2(3) + c."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7=2(3)+c"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

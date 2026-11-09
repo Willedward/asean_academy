@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l4-003",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A straight line crosses the y-axis at -7 and passes through (6, 5). Find its x-intercept."
+          "text": "A straight line crosses the y-axis at -7 and passes through "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(6, 5)"
+        },
+        {
+          "type": "text",
+          "text": ". Find its x-intercept."
         }
       ],
       "marks": 3,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Then set y = 0 to locate the x-intercept."
+              "text": "Then set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": " to locate the x-intercept."
             }
           ]
         }

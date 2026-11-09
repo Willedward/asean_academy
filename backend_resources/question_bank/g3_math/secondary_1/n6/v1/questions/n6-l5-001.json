@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l5-001",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle has sides parallel to the axes. Its lower-left vertex is (-3, -2), its upper-right vertex is (k, 6), and its area is 72 square units. Given k > -3, find k."
+          "text": "A rectangle has sides parallel to the axes. Its lower-left vertex is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(-3,-2)"
+        },
+        {
+          "type": "text",
+          "text": ", its upper-right vertex is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(k, 6)"
+        },
+        {
+          "type": "text",
+          "text": ", and its area is 72 square units. Given "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k>-3"
+        },
+        {
+          "type": "text",
+          "text": ", find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The height is fixed by the two y-coordinates; express the width using k."
+              "text": "The height is fixed by the two y-coordinates; express the width using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use (k - (-3))(6 - (-2)) = 72 and the condition k > -3."
+              "text": "The height is 8 units. Write the width in terms of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": ", then form an equation using the area."
             }
           ]
         }

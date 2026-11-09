@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-001",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Point A(3, 5) is reflected in the x-axis to A'. State the y-coordinate of A'."
+          "text": "Point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A(3, 5)"
+        },
+        {
+          "type": "text",
+          "text": " is reflected in the x-axis to A'. State the y-coordinate of A'."
         }
       ],
       "marks": 2,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Keep x = 3 and replace y = 5 by -5."
+              "text": "Keep "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=3"
+            },
+            {
+              "type": "text",
+              "text": " and replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=5"
+            },
+            {
+              "type": "text",
+              "text": " by -5."
             }
           ]
         }
