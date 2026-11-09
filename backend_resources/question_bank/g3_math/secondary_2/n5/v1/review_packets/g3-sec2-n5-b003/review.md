@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-517 — Motion formula with a negative acceleration
+## n5-l3-517 — Braking car: a negative acceleration
 
 [Open this question in the HTML preview](index.html#n5-l3-517)
 
