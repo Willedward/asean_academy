@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l2-501",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The probability that a train is delayed is 3/20. Find the probability that it is not delayed. Give your answer as a fraction in simplest form."
+          "text": "The probability that a train is delayed is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3}{20}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the probability that it is not delayed. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 2,

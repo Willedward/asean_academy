@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l1-501",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -43,7 +43,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "An impossible outcome has probability 0."
+                "text": "Where does an impossible event sit on the probability scale?"
               }
             ]
           },
@@ -92,7 +92,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l1-502",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -134,7 +134,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A certain event has probability 1."
+                "text": "Where does a certain event sit on the probability scale?"
               }
             ]
           },
@@ -183,7 +183,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l1-503",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -236,7 +236,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Heads is one of the two possible outcomes."
+                "text": "Count how many of the outcomes are heads, then count all the outcomes."
               }
             ]
           }
@@ -276,7 +276,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-501",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -296,7 +296,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The probability that a train is delayed is 3/20. Find the probability that it is not delayed. Give your answer as a fraction in simplest form."
+            "text": "The probability that a train is delayed is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{3}{20}"
+          },
+          {
+            "type": "text",
+            "text": ". Find the probability that it is not delayed. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 2,
@@ -380,7 +388,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l2-502",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -431,7 +439,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 1 - 0.08."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1-0.08"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -482,7 +498,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-503",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -502,7 +518,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An archer hits a practice target with probability 7/10. Find the probability that the archer misses. Give your answer as a fraction in simplest form."
+            "text": "An archer hits a practice target with probability "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{7}{10}"
+          },
+          {
+            "type": "text",
+            "text": ". Find the probability that the archer misses. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 2,
@@ -586,7 +610,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -645,7 +669,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 100 - 35."
+                "text": "Calculate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "100-35"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -696,7 +728,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l3-501",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -716,7 +748,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A spinner lands on blue with probability 3/10. It is spun 120 times. Find the expected number of results that are not blue."
+            "text": "A spinner lands on blue with probability "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{3}{10}"
+          },
+          {
+            "type": "text",
+            "text": ". It is spun 120 times. Find the expected number of results that are not blue."
           }
         ],
         "marks": 3,
@@ -798,7 +838,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l3-502",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -818,7 +858,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bus is delayed with probability 1/8. Over 96 journeys, find the expected number of journeys without a delay."
+            "text": "A bus is delayed with probability "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{1}{8}"
+          },
+          {
+            "type": "text",
+            "text": ". Over 96 journeys, find the expected number of journeys without a delay."
           }
         ],
         "marks": 3,
@@ -1002,7 +1050,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l3-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1022,7 +1070,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A player scores with probability 7/12 on each practice shot. For 180 shots, find the expected number of misses."
+            "text": "A player scores with probability "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{7}{12}"
+          },
+          {
+            "type": "text",
+            "text": " on each practice shot. For 180 shots, find the expected number of misses."
           }
         ],
         "marks": 3,
@@ -1104,7 +1160,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l4-501",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1124,7 +1180,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bag contains 5 blue and 7 yellow counters. Blue counters are added until the probability of selecting blue is 1/2. How many blue counters are added?"
+            "text": "A bag contains 5 blue and 7 yellow counters. Blue counters are added until the probability of selecting blue is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{1}{2}"
+          },
+          {
+            "type": "text",
+            "text": ". How many blue counters are added?"
           }
         ],
         "marks": 4,
@@ -1146,7 +1210,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Let x be the number of blue counters added and update both favourable and total counts."
+                "text": "Let "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " be the number of blue counters added and update both favourable and total counts."
               }
             ]
           },
@@ -1155,7 +1227,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve (5 + x)/(12 + x) = 1/2."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{5+x}{12+x}=\\frac{1}{2}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1206,7 +1286,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l4-502",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1226,7 +1306,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A box contains 9 red and 12 white balls. Red balls are removed until the probability of selecting red is 1/5. How many red balls are removed?"
+            "text": "A box contains 9 red and 12 white balls. Red balls are removed until the probability of selecting red is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{1}{5}"
+          },
+          {
+            "type": "text",
+            "text": ". How many red balls are removed?"
           }
         ],
         "marks": 4,
@@ -1248,7 +1336,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "If x red balls are removed, both the red count and total fall by x."
+                "text": "If "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " red balls are removed, both the red count and total fall by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1257,7 +1361,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve (9 - x)/(21 - x) = 1/5."
+                "text": "Solve "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac{9-x}{21-x}=\\frac{1}{5}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -1308,7 +1420,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l1-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1361,7 +1473,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 3 favourable outcomes out of 8."
+                "text": "Count the red counters, then count all the counters in the bag."
               }
             ]
           }
@@ -1494,7 +1606,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l1-506",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1547,7 +1659,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 2 favourable outcomes out of 5."
+                "text": "Count the vowels among the cards, then count all the cards."
               }
             ]
           }
@@ -2107,7 +2219,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-506",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2160,7 +2272,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "The favourable pairs run from (1,6) to (6,1)."
+                "text": "The favourable pairs run from "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(1,6)"
+              },
+              {
+                "type": "text",
+                "text": " to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(6,1)"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2211,7 +2339,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-507",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2264,7 +2392,31 @@
             "content": [
               {
                 "type": "text",
-                "text": "Matches are (1,1), (2,2) and (3,3)."
+                "text": "Matches are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(1,1)"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(2,2)"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(3,3)"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2523,7 +2675,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l4-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2576,7 +2728,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "There are three non-primes, so the complement probability is (3/6)^2."
+                "text": "There are three non-primes, so the complement probability is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\left(\\frac{3}{6}\\right)^{2}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
