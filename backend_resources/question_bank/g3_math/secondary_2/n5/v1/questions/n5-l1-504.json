@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l1-504",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,9 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-3 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "The denominators are the same, so you only need to add the numerators."
             }
           ]
         },
@@ -63,7 +65,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Keep the denominator "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x-3"
+            },
+            {
+              "type": "text",
+              "text": " and add "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,7 +100,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{2+4}{x-3}=\\frac{6}{x-3}"
+              "latex": "\\frac{2+4}{x-3}=\\frac{6}{x-3},\\quad x\\neq3"
             }
           ],
           "mark_type": "A",
