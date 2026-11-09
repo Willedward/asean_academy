@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l1-520",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify (5a/4b)(4b²/8a²)."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\left(\\frac{5a}{4b}\\right)\\left(\\frac{4b^{2}}{8a^{2}}\\right)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -30,7 +38,7 @@
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
         "canonical_expression": "(5*b)/(8*a)",
-        "canonical_latex": "(5b)/(8a)",
+        "canonical_latex": "\\frac{5b}{8a}",
         "variables": [
           "a",
           "b"
@@ -67,7 +75,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{20ab^2}{32a^2b}=(5b)/(8a)"
+              "latex": "\\frac{20ab^2}{32a^2b}=\\frac{5b}{8a}"
             }
           ],
           "mark_type": "A",
