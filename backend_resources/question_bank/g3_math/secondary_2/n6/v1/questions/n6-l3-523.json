@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l3-523",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many distinct x-intercepts does y=(x+2)²-4 have?"
+          "text": "How many distinct x-intercepts does "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=(x+2)^{2}-4"
+        },
+        {
+          "type": "text",
+          "text": " have?"
         }
       ],
       "marks": 3,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the axis input for the turning value, and solve y=0 when counting x-intercepts."
+              "text": "Substitute the axis input for the turning value, and solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": " when counting x-intercepts."
             }
           ]
         }
