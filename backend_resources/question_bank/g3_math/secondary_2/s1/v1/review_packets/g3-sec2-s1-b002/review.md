@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## s1-l1-506 — Emerald Fern Bay — Batik cooperative: two-class estimated mean
+## s1-l1-506 — Estimated mean with four observations per class
 
 [Open this question in the HTML preview](index.html#s1-l1-506)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-510 — Golden Fern Bay — Batik cooperative: grouped midpoint calculation
+## s1-l2-510 — Weighted mean from a symmetric frequency table
 
 [Open this question in the HTML preview](index.html#s1-l2-510)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-507 — Indigo Fern Bay — Batik cooperative: missing grouped frequency
+## s1-l3-507 — Missing middle-class frequency from a target mean
 
 [Open this question in the HTML preview](index.html#s1-l3-507)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-508 — Jade Fern Bay — Angklung ensemble: histogram interval total
+## s1-l3-508 — Observations in the upper two equal-width bins
 
 [Open this question in the HTML preview](index.html#s1-l3-508)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-507 — Silver Fern Bay — Angklung ensemble: dot frequency
+## s1-l1-507 — Multiplicity of six in a dot plot
 
 [Open this question in the HTML preview](index.html#s1-l1-507)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-511 — Violet Fern Bay — Rainforest station: stem-and-leaf range
+## s1-l2-511 — Difference between extreme leaves on a 60s row
 
 [Open this question in the HTML preview](index.html#s1-l2-511)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-509 — Amber Lotus Bay — Rainforest station: histogram interval total
+## s1-l3-509 — Combined count in the final two histogram classes
 
 [Open this question in the HTML preview](index.html#s1-l3-509)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-508 — Bronze Lotus Bay — Mangrove survey: representation purpose
+## s1-l1-508 — Select a graph for 150 grouped reaction times
 
 [Open this question in the HTML preview](index.html#s1-l1-508)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-514 — Lilac Lotus Bay — Community garden: calculate the mean
+## s1-l2-514 — Mean of an odd-number sequence beginning at seven
 
 [Open this question in the HTML preview](index.html#s1-l2-514)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l5-502 — Violet Lotus Bay — Bamboo design lab: reconstruct mean and median
+## s1-l5-502 — Recover the fourth ordered value from mean and median
 
 [Open this question in the HTML preview](index.html#s1-l5-502)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-515 — Amber Maple Bay — Cycling project: calculate the mean
+## s1-l2-515 — Mean of an even-number sequence beginning at eight
 
 [Open this question in the HTML preview](index.html#s1-l2-515)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-516 — Azure Maple Bay — Rattan workshop: most common category
+## s1-l2-516 — Identify the most popular requested shoe size
 
 [Open this question in the HTML preview](index.html#s1-l2-516)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-513 — Bronze Maple Bay — Coral monitoring team: missing value from a mean
+## s1-l3-513 — Recover the fifth value from a known mean
 
 [Open this question in the HTML preview](index.html#s1-l3-513)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-510 — Emerald Maple Bay — Bamboo design lab: identify the mode
+## s1-l1-510 — Most frequent value in a short list
 
 [Open this question in the HTML preview](index.html#s1-l1-510)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-517 — Golden Maple Bay — Solar classroom: most common category
+## s1-l2-517 — Choose a centre for repeated colour labels
 
 [Open this question in the HTML preview](index.html#s1-l2-517)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-509 — Jade Maple Bay — Rattan workshop: use every balanced observation
+## s1-l4-509 — Choose a centre that uses every balanced score
 
 [Open this question in the HTML preview](index.html#s1-l4-509)
 
