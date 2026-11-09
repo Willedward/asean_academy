@@ -315,7 +315,7 @@ def _is_prime(value: int) -> bool:
     return all(value % divisor for divisor in range(2, isqrt(value) + 1))
 
 
-def _prime_factor_value(expression: str) -> int:
+def _prime_factor_value(expression: str, *, require_index_notation: bool = False) -> int:
     text = _normalise(expression)
     for command in (r"\times", r"\cdot"):
         text = text.replace(command, "×")
@@ -323,6 +323,7 @@ def _prime_factor_value(expression: str) -> int:
     text = _SUPERSCRIPT_RUN.sub(lambda match: "^" + match[0].translate(_SUPERSCRIPT_DIGITS), text)
     product = 1
     size = 0
+    seen_bases: set[int] = set()
     for piece in re.split(r"[*×·⋅∙xX]", text):
         match = _PRIME_FACTOR.fullmatch(piece.strip())
         if match is None:
@@ -335,6 +336,9 @@ def _prime_factor_value(expression: str) -> int:
             raise AnswerFormatError("Each prime factor must be smaller than one billion.")
         if not _is_prime(base):
             raise AnswerFormatError("Every factor base must be prime.")
+        if require_index_notation and base in seen_bases:
+            raise AnswerFormatError("Write repeated factors with a power, such as 2^3.")
+        seen_bases.add(base)
         size += power * base.bit_length()
         if size > MAX_PRIME_PRODUCT_BITS:
             raise AnswerFormatError(TOO_LARGE_MESSAGE)
@@ -1077,6 +1081,26 @@ def _is_simplified_fraction(node: _Node, target: Rational) -> bool:
     return _degree(denominator) <= _degree(target[1])
 
 
+def _is_simplest_fraction(node: _Node) -> bool:
+    """One fraction of whole numbers in lowest terms, or a whole number."""
+
+    node = _without_brackets(node)
+    if node.kind == "neg":
+        node = _without_brackets(node.children[0])
+    if node.kind == "number":
+        return node.value.denominator == 1
+    if node.kind != "div":
+        return False
+    numerator, denominator = (_without_brackets(child) for child in node.children)
+    if numerator.kind != "number" or denominator.kind != "number":
+        return False
+    if numerator.value.denominator != 1 or denominator.value.denominator != 1:
+        return False
+    return denominator.value.numerator > 1 and (
+        gcd(numerator.value.numerator, denominator.value.numerator) == 1
+    )
+
+
 def _has_form(form: str, node: _Node, target_node: _Node, target_value: Rational) -> bool:
     if form == "any":
         return True
@@ -1088,6 +1112,8 @@ def _has_form(form: str, node: _Node, target_node: _Node, target_value: Rational
         return _is_factorised_completely(node, target_node)
     if form == "simplified_fraction":
         return _is_simplified_fraction(node, target_value)
+    if form == "simplest_fraction":
+        return _is_simplest_fraction(node)
     raise CheckerConfigurationError(f"Unknown symbolic form {form!r}")
 
 
@@ -1121,7 +1147,13 @@ def _check_expression(spec: AlgebraicResponse, answer: str) -> bool:
         return _check_symbolic(spec, answer)
     if spec.comparison_mode == "prime_factorisation":
         expected = _configured(_read_number, spec.canonical_expression).value
-        return _prime_factor_value(answer) == expected
+        return (
+            _prime_factor_value(
+                answer,
+                require_index_notation=spec.checker_config.get("require_index_notation", False),
+            )
+            == expected
+        )
     if spec.comparison_mode == "ordered_numeric_list":
         expected = [
             _configured(_fraction, str(value)) for value in json.loads(spec.canonical_expression)

@@ -681,3 +681,39 @@ def test_checker_never_evaluates_learner_text():
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             modules = [alias.name for alias in node.names] + [getattr(node, "module", "") or ""]
             assert not {"ast", "sympy"} & {module.split(".")[0] for module in modules}, modules
+
+
+@pytest.mark.parametrize("answer", ["1/2", "(1)/(2)", "1 / 2"])
+def test_simplest_fraction_accepts_the_lowest_terms_fraction(answer):
+    assert check_answer(symbolic("1/2", [], form="simplest_fraction"), answer)["correct"]
+
+
+@pytest.mark.parametrize("answer", ["2/4", "0.5", "1/3"])
+def test_simplest_fraction_rejects_other_forms_and_values(answer):
+    assert not check_answer(symbolic("1/2", [], form="simplest_fraction"), answer)["correct"]
+
+
+def test_simplest_fraction_allows_a_whole_number_only_when_that_is_the_value():
+    spec = symbolic("3", [], form="simplest_fraction")
+
+    assert check_answer(spec, "3")["correct"]
+    assert not check_answer(spec, "6/2")["correct"]
+
+
+def test_prime_factorisation_can_require_index_notation():
+    spec = AlgebraicResponse(
+        type="algebraic_expression",
+        comparison_mode="prime_factorisation",
+        canonical_expression="756",
+        canonical_latex="2^2\\times3^3\\times7",
+        variables=[],
+        domain_constraints=[],
+        accepted_equivalents=[],
+        checker_config={"require_prime_bases": True, "require_index_notation": True},
+    )
+
+    assert check_answer(spec, "2^2×3^3×7")["correct"]
+    result = check_answer(spec, "2×2×3×3×3×7")
+    assert not result["correct"]
+    assert "power" in result["error"]
+
