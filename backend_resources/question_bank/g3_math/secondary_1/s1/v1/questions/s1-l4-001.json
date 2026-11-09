@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-001",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l4-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A two-way table contains 72 students. The chess column totals 31. In the robotics row, 16 choose chess and 23 choose coding. Find how many students in the other row choose coding. Enter the numerical value only."
+          "text": "The two-way table shows the choices of some students, and some cells are blank. Find the value in the cell marked ?. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Coding totals 72 - 31 = 41; remove the 23 robotics students."
+              "text": "Subtract the robotics entry from that column total."
             }
           ]
         }
@@ -83,7 +92,155 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l4-001-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l4-001-diagram-r2.svg",
+      "alt_text": "Two-way table with columns Chess, Coding and Total and rows Robotics, Other and Total. Robotics: Chess 16, Coding 23. Total row: Chess 31, grand total 72. The Other row's Coding cell is unknown.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "question_key": "s1-l4-001",
+        "outcome": "1.1",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Chess",
+            "Coding",
+            "Total"
+          ],
+          "rows": [
+            "Robotics",
+            "Other",
+            "Total"
+          ],
+          "cells": [
+            [
+              16,
+              23,
+              ""
+            ],
+            [
+              "",
+              null,
+              ""
+            ],
+            [
+              31,
+              "",
+              72
+            ]
+          ],
+          "title": "Student choices",
+          "alt_text": "Two-way table with columns Chess, Coding and Total and rows Robotics, Other and Total. Robotics: Chess 16, Coding 23. Total row: Chess 31, grand total 72. The Other row's Coding cell is unknown."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "16",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "23",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-2",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "?",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-2",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-2-0",
+            "kind": "table-cell",
+            "value": "31",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "345.24"
+            }
+          },
+          {
+            "key": "cell-2-1",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "345.24"
+            }
+          },
+          {
+            "key": "cell-2-2",
+            "kind": "table-cell",
+            "value": "72",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "345.24"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "0f3bc70939308d0a3a603cb5143ab9202830092a929477979b56f9e0fbb018c2",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +254,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

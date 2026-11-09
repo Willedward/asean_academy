@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-008",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-008-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A square icon representing 20 items has side 2 cm. The icon for 40 items is drawn with side 4 cm. How many times as large is the second icon's area? Enter the numerical value only."
+          "text": "The two square icons in the figure represent the numbers of items shown. How many times as large as the first icon's area is the second icon's area? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare 4\u00b2 with 2\u00b2."
+              "text": "Square each side length from the figure, then divide."
             }
           ]
         }
@@ -72,7 +81,77 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-008-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-008-diagram-r2.svg",
+      "alt_text": "Two square icons: one for 20 items with side 2 cm and one for 40 items with side 4 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "scaled_icons",
+        "question_key": "s1-l2-008",
+        "outcome": "1.4",
+        "template": "scaled_icons",
+        "inputs": {
+          "shape": "square",
+          "items": [
+            {
+              "label": "20 items",
+              "caption": "side 2 cm",
+              "width": 2,
+              "height": 2
+            },
+            {
+              "label": "40 items",
+              "caption": "side 4 cm",
+              "width": 4,
+              "height": 4
+            }
+          ],
+          "title": "Two square icons",
+          "alt_text": "Two square icons: one for 20 items with side 2 cm and one for 40 items with side 4 cm."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0",
+            "kind": "square-icon",
+            "value": "2x2",
+            "tag": "rect",
+            "geometry": {
+              "x": "120",
+              "y": "220",
+              "width": "120",
+              "height": "120"
+            }
+          },
+          {
+            "key": "icon-1",
+            "kind": "square-icon",
+            "value": "4x4",
+            "tag": "rect",
+            "geometry": {
+              "x": "420",
+              "y": "100",
+              "width": "240",
+              "height": "240"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "d4c8050cf27cedc49bf56e0bedac18c41e2415f640c59890ce725d5fd9dc260f",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +165,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

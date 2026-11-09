@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-007",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-007-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar chart for scores 92 and 96 starts its vertical axis at 90. Using height above the baseline, how many times as tall is the 96 bar as the 92 bar? Enter the numerical value only."
+          "text": "The bar chart shows scores A and B. Using the height of each bar above the bottom of the axis, how many times as tall is bar B as bar A? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the baseline from each plotted value."
+              "text": "Subtract the value at the bottom of the axis from each plotted value."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare heights 6 and 2."
+              "text": "Divide bar B's height above the axis by bar A's height above the axis."
             }
           ]
         }
@@ -72,7 +81,129 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-007-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-007-diagram-r2.svg",
+      "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-007",
+        "outcome": "1.4",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "A",
+            "B"
+          ],
+          "values": [
+            92,
+            96
+          ],
+          "y_max": 98,
+          "tick_step": 2,
+          "y_label": "Score",
+          "title": "Two scores",
+          "y_min": 90,
+          "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "92",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "315",
+              "width": "177",
+              "height": "70"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "96",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "175",
+              "width": "177",
+              "height": "210"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:90",
+            "axis": "y",
+            "value": "90",
+            "position": "385",
+            "label": "90"
+          },
+          {
+            "key": "y:92",
+            "axis": "y",
+            "value": "92",
+            "position": "315",
+            "label": "92"
+          },
+          {
+            "key": "y:94",
+            "axis": "y",
+            "value": "94",
+            "position": "245",
+            "label": "94"
+          },
+          {
+            "key": "y:96",
+            "axis": "y",
+            "value": "96",
+            "position": "175",
+            "label": "96"
+          },
+          {
+            "key": "y:98",
+            "axis": "y",
+            "value": "98",
+            "position": "105",
+            "label": "98"
+          },
+          {
+            "key": "x:A",
+            "axis": "x",
+            "value": "A",
+            "position": "237.5",
+            "label": "A"
+          },
+          {
+            "key": "x:B",
+            "axis": "x",
+            "value": "B",
+            "position": "532.5",
+            "label": "B"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 90.0,
+          "y_max": 98.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "329c2bac5a6d2702f34d1d82b4396c7c23ab7b411891b4ef4866fb55901b2661",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +217,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

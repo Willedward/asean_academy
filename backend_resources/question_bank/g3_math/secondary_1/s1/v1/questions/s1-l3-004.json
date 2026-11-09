@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-004",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-004-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 72\u00b0 sector in a pie chart represents 18 students. Find the total number of students. Enter the numerical value only."
+          "text": "The sector marked 72° in the pie chart represents 18 students. Find the total number of students. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The sector is 72/360 of the whole."
+              "text": "The sector's fraction of the circle is its angle over 360°."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set 72/360 of the total equal to 18."
+              "text": "Set that fraction of the total equal to the number of students in the sector."
             }
           ]
         }
@@ -83,7 +92,64 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-004-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-004-diagram-r2.svg",
+      "alt_text": "Pie chart with a sector marked 72 degrees and the rest of the circle labelled Rest.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pie_chart",
+        "question_key": "s1-l3-004",
+        "outcome": "1.2",
+        "template": "pie_chart",
+        "inputs": {
+          "labels": [
+            "72°",
+            "Rest"
+          ],
+          "values": [
+            72,
+            288
+          ],
+          "title": "Pie chart",
+          "alt_text": "Pie chart with a sector marked 72 degrees and the rest of the circle labelled Rest."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "sector-0",
+            "kind": "pie-sector",
+            "value": "72",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L360 90 A160 160 0 0 1 512.169043 200.557281 Z"
+            }
+          },
+          {
+            "key": "sector-1",
+            "kind": "pie-sector",
+            "value": "288",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L512.169043 200.557281 A160 160 0 1 1 360 90 Z"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "f33001b30d2c4522b59f941064edc60f68f5c887a692ca032001c556852b8e2b",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +163,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

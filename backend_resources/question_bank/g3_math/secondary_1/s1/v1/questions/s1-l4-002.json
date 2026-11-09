@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-002",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l4-002-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pie chart sector is 135\u00b0. The remaining 225\u00b0 represents 75 observations. Find the number represented by the 135\u00b0 sector. Enter the numerical value only."
+          "text": "In the pie chart, the sector marked 225° represents 75 observations. Find the number represented by the other sector. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up the ratio 135/225 against the known 75."
+              "text": "Set up a ratio of the two sector angles against the known observations."
             }
           ]
         }
@@ -83,7 +92,64 @@
     }
   ],
   "total_marks": 4,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l4-002-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l4-002-diagram-r2.svg",
+      "alt_text": "Pie chart with two sectors, marked 135 degrees and 225 degrees.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pie_chart",
+        "question_key": "s1-l4-002",
+        "outcome": "1.2",
+        "template": "pie_chart",
+        "inputs": {
+          "labels": [
+            "135°",
+            "225°"
+          ],
+          "values": [
+            135,
+            225
+          ],
+          "title": "Pie chart",
+          "alt_text": "Pie chart with two sectors, marked 135 degrees and 225 degrees."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "sector-0",
+            "kind": "pie-sector",
+            "value": "135",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L360 90 A160 160 0 0 1 473.137085 363.137085 Z"
+            }
+          },
+          {
+            "key": "sector-1",
+            "kind": "pie-sector",
+            "value": "225",
+            "tag": "path",
+            "geometry": {
+              "d": "M360 250 L473.137085 363.137085 A160 160 0 1 1 360 90 Z"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "c09d957d902d5c136fc0d25bc7f9366c9bb3019b807ea3ee0db2ef9f5e8967bb",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +163,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

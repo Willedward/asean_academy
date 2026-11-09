@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-004",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-004-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pictogram key is one circle = 6 students. A category shows 4 complete circles and one half-circle. Find the number of students. Enter the numerical value only."
+          "text": "The pictogram shows the number of students in one category. Find the number of students. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "A half-circle represents half of six."
+              "text": "A half symbol represents half of the value in the key."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Combine 4 \u00d7 6 with 3."
+              "text": "Multiply the whole symbols by the key, then add the half symbol's value."
             }
           ]
         }
@@ -72,7 +81,95 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-004-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-004-diagram-r2.svg",
+      "alt_text": "Pictogram where each ● represents 6; Category has 4.5 symbols.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pictogram",
+        "question_key": "s1-l2-004",
+        "outcome": "1.2",
+        "template": "pictogram",
+        "inputs": {
+          "rows": [
+            {
+              "label": "Category",
+              "count": 4.5
+            }
+          ],
+          "key": 6,
+          "title": "Students in one category",
+          "symbol": "●"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0-0",
+            "kind": "icon",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "200",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-1",
+            "kind": "icon",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "258",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-2",
+            "kind": "icon",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "316",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-3",
+            "kind": "icon",
+            "value": "6",
+            "tag": "text",
+            "geometry": {
+              "x": "374",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-partial",
+            "kind": "partial-icon",
+            "value": "3",
+            "tag": "text",
+            "geometry": {
+              "x": "432",
+              "y": "124"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "2189f801e491aa484d13b8af44d772f633c148bd37331842035f335f5b22a358",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +183,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

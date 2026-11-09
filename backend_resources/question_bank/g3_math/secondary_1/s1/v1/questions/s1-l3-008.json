@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-008",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-008-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two circular symbols represent values 25 and 100. Their diameters are drawn in the ratio 1:4. Divide the displayed area ratio by the true data ratio. Enter the numerical value only."
+          "text": "The two circular symbols in the figure represent the values shown below them. Divide the displayed area ratio by the true data ratio. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Displayed area ratio is 16 while the true ratio is 4."
+              "text": "Find the ratio of the areas from the diameters and the ratio of the values, then divide."
             }
           ]
         }
@@ -72,7 +81,75 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-008-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-008-diagram-r2.svg",
+      "alt_text": "Two circles: Value 25 with diameter 1 unit and Value 100 with diameter 4 units.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "scaled_icons",
+        "question_key": "s1-l3-008",
+        "outcome": "1.4",
+        "template": "scaled_icons",
+        "inputs": {
+          "shape": "circle",
+          "items": [
+            {
+              "label": "Value 25",
+              "caption": "diameter 1 unit",
+              "width": 1,
+              "height": 1
+            },
+            {
+              "label": "Value 100",
+              "caption": "diameter 4 units",
+              "width": 4,
+              "height": 4
+            }
+          ],
+          "title": "Two circular symbols",
+          "alt_text": "Two circles: Value 25 with diameter 1 unit and Value 100 with diameter 4 units."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0",
+            "kind": "circle-icon",
+            "value": "1x1",
+            "tag": "circle",
+            "geometry": {
+              "cx": "180",
+              "cy": "310",
+              "r": "30"
+            }
+          },
+          {
+            "key": "icon-1",
+            "kind": "circle-icon",
+            "value": "4x4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "540",
+              "cy": "220",
+              "r": "120"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "2b10495fb42b61b526cfaace21fb018ddd1a5d6b12122183185280c7499ebb6b",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +163,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
