@@ -773,7 +773,7 @@ def test_applying_all_batches_clears_strict_geometry(repository_root, tmp_path):
         bool(json.loads(path.read_text(encoding="utf-8")).get("assets"))
         for path in (bank / "questions").glob("*.json")
     )
-    assert drawn == 26
+    assert drawn == 27
 
 
 def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_path):
@@ -819,12 +819,10 @@ def test_apply_makes_figures_with_no_spatial_content_text_only(repository_root, 
     assert "no spatial" in decision["reason"]
 
 
-def test_the_contradictory_prompt_stays_text_only_and_records_why(repository_root, tmp_path):
-    bank = copy_bank(repository_root, tmp_path)
-    before = (bank / "questions" / "g5-l3-011.json").read_text()
-    regenerate_batch(bank, "B002", apply=True, add=NEW_FIGURES["B002"])
-    assert (bank / "questions" / "g5-l3-011.json").read_text() == before
-    audit = json.loads((bank / "diagram_audit.json").read_text())
-    decision = next(item for item in audit["decisions"] if item["question_key"] == "g5-l3-011")
-    assert decision["decision"] == "text_sufficient"
-    assert "CFL-015" in decision["reason"]
+def test_the_contradictory_wording_is_refused():
+    prompt = (
+        "A 9 cm by 7 cm rectangle and a 6 cm by 5 cm rectangle are joined along an edge of "
+        "length x cm. The outside perimeter is 48 cm. Find x."
+    )
+
+    assert sm.text_only_reason(prompt) is not None

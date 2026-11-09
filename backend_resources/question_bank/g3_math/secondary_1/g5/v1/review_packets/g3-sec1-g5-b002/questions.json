@@ -1119,19 +1119,28 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g5-l3-011",
     "bank_key": "g3-sec1-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G5",
     "primary_outcome": "5.2",
-    "title": "Shared edge of joined rectangles",
+    "title": "Perimeter of joined rectangles",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the schematic together with the measurements stated in the question. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g5-l3-011-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1139,7 +1148,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 9 cm by 7 cm rectangle and a 6 cm by 5 cm rectangle are joined along an edge of length x cm. The outside perimeter is 48 cm. Find x. Enter the numerical value only."
+            "text": "A 9 cm by 7 cm rectangle is joined to a 6 cm by 5 cm rectangle along the smaller rectangle's 5 cm edge. Find the outside perimeter of the shape in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1148,8 +1157,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "44",
+          "canonical_latex": "44",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1161,7 +1170,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The shared edge is counted twice in the separate perimeters but not outside."
+                "text": "Add the two rectangle perimeters first."
               }
             ]
           },
@@ -1170,7 +1179,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve 32 + 22 - 2x = 48."
+                "text": "The joined edge is inside the shape, so it is counted twice too many: once from each rectangle."
               }
             ]
           }
@@ -1181,7 +1190,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "2(9+7)+2(6+5)-2x=48"
+                "latex": "2(9+7)+2(6+5)=54"
               }
             ],
             "mark_type": "M",
@@ -1192,7 +1201,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "54-2x=48"
+                "latex": "54-2(5)"
               }
             ],
             "mark_type": "M",
@@ -1203,7 +1212,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "x=3"
+                "latex": "=44\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -1213,7 +1222,261 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "g5-l3-011-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g5-l3-011-diagram-r2.svg",
+        "alt_text": "A rectangle 9 cm by 7 cm joined to a smaller rectangle 6 cm by 5 cm. The whole 5 cm edge of the smaller rectangle lies along a side of the larger one, and that shared edge is dashed. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-sec1-mensuration-svg-v1",
+          "diagram_kind": "composite_plane",
+          "question_key": "g5-l3-011",
+          "outcome": "5.2",
+          "template": "joined_rectangles",
+          "inputs": {
+            "width": {
+              "value": 9,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 7,
+              "unit": "cm"
+            },
+            "extension": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "shared": {
+              "value": 5,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "width": {
+              "value": 9,
+              "unit": "cm"
+            },
+            "height": {
+              "value": 7,
+              "unit": "cm"
+            },
+            "extension": {
+              "value": 6,
+              "unit": "cm"
+            },
+            "shared": {
+              "value": 5,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "44",
+            "32",
+            "22"
+          ],
+          "unknowns": [],
+          "drawn_scale": 26.9307,
+          "depth_factor": 0.5,
+          "figures": [
+            {
+              "type": "joined_rectangles",
+              "first": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "second": [
+                "B",
+                "S",
+                "T",
+                "J"
+              ],
+              "shared": "BJ",
+              "segments": [
+                "BJ",
+                "AB",
+                "JC",
+                "CD",
+                "DA",
+                "BS",
+                "ST",
+                "TJ"
+              ]
+            }
+          ],
+          "measures": [
+            {
+              "segment": "AB",
+              "label": "9 cm",
+              "factor": 1.0,
+              "value": 9.0
+            },
+            {
+              "segment": "DA",
+              "label": "7 cm",
+              "factor": 1.0,
+              "value": 7.0
+            },
+            {
+              "segment": "BS",
+              "label": "6 cm",
+              "factor": 1.0,
+              "value": 6.0
+            },
+            {
+              "segment": "ST",
+              "label": "5 cm",
+              "factor": 1.0,
+              "value": 5.0
+            }
+          ],
+          "captions": [
+            "Dashed: shared edge"
+          ],
+          "shades": [
+            "first-rectangle",
+            "second-rectangle"
+          ],
+          "viewbox": [
+            600.0,
+            321.0
+          ],
+          "points": {
+            "A": [
+              98.02,
+              228.51
+            ],
+            "B": [
+              340.4,
+              228.51
+            ],
+            "J": [
+              340.4,
+              93.86
+            ],
+            "C": [
+              340.4,
+              40.0
+            ],
+            "D": [
+              98.02,
+              40.0
+            ],
+            "S": [
+              501.98,
+              228.51
+            ],
+            "T": [
+              501.98,
+              93.86
+            ]
+          },
+          "segments": [
+            {
+              "key": "BJ",
+              "from": "B",
+              "to": "J",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "JC",
+              "from": "J",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DA",
+              "from": "D",
+              "to": "A",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BS",
+              "from": "B",
+              "to": "S",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "ST",
+              "from": "S",
+              "to": "T",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "TJ",
+              "from": "T",
+              "to": "J",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [],
+          "labels": [
+            {
+              "text": "9 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "7 cm",
+              "target": "segment:DA"
+            },
+            {
+              "text": "6 cm",
+              "target": "segment:BS"
+            },
+            {
+              "text": "5 cm",
+              "target": "segment:ST"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "A",
+                "B",
+                "S"
+              ]
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "B",
+                "J",
+                "C"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "662950c477c424cd2420a90930354b1c2d142962f55e749cb4d6b6c03a1dbf44",
+        "width": 600,
+        "height": 321
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1227,7 +1490,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
