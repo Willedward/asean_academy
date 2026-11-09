@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-527",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.6",
-  "title": "Inspect paired quiz patterns",
+  "title": "Compare exact marks in two classes",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two language classes of 22 students each sit a spelling quiz marked from 0 to 8. Their teacher wants to compare repeated marks, empty intervals and clusters while keeping each student's mark visible. Enter the best code."
+          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two language classes of 22 students each sit a test marked out of 100, with marks from 31 to 98 and few repeats. Their teacher wants to compare the two classes while still being able to read off each exact mark. Enter the best code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose a display whose separate marks make frequencies and gaps easy to compare."
+              "text": "Each exact mark must stay readable."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "You want each quiz mark to appear as its own mark, so that clusters and gaps stand out when you compare the two classes. Which display does that?"
+              "text": "Rule out displays that group marks into intervals. Which remaining display keeps each mark in an ordered list?"
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Keeping every exact mark while showing the spread suggests a stem-and-leaf diagram. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{dot diagram}\\Rightarrow 1"
+              "latex": "\\text{stem-and-leaf diagram}\\Rightarrow3"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "1"
+              "latex": "3"
             }
           ],
           "mark_type": "A",
