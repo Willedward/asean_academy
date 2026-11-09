@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-516",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.9",
-  "title": "Identify the most popular requested shoe size",
+  "title": "Choose a measure for electricity bills",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for mean, 2 for median and 3 for mode. A footwear order sheet repeats the requested size for every customer. Which measure identifies the shoe size occurring most often?"
+          "text": "Use code 1 for mean, 2 for median and 3 for mode. Five monthly electricity bills are S$42, S$44, S$45, S$47 and S$200 (one month had a repair charge). Which measure best describes a typical month without being pulled upward by the unusual bill?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The question asks for the value with greatest frequency."
+              "text": "Think about what the unusual bill does to each measure."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Which of the three measures can be read off from the highest frequency, with no adding up or ordering?"
+              "text": "Which measure depends only on the middle value of the ordered list?"
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "The median is S$45, close to most bills. The mean is pulled upward by S$200, and no value repeats. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{mode}\\Rightarrow 3"
+              "latex": "\\text{median}\\Rightarrow2"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "2"
             }
           ],
           "mark_type": "A",

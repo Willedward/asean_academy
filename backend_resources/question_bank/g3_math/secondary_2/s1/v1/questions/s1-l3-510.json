@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-510",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.6",
-  "title": "Compare two small distributions",
+  "title": "Compare the shapes of two large groups",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two groups of 18 students each rate a school talk with a whole number from 1 to 10. The aim is to compare clusters and gaps while retaining every individual rating. Enter the best code."
+          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. Two groups of 200 students each have their reaction times measured and grouped into equal intervals. The aim is to compare the overall shapes of the two sets of data, without needing each individual time. Enter the best code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The display should make repeated values, gaps and clusters visually immediate."
+              "text": "The data are continuous, there are many values, and individual values are not needed."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "You want each single result to appear as its own mark, so that repeats and gaps stand out when you compare the two groups. Which display does that?"
+              "text": "Which display shows the shape of grouped continuous data as touching bars?"
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "With so many grouped continuous values and no need for individual times, a histogram shows each shape clearly. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{dot diagram}\\Rightarrow 1"
+              "latex": "\\text{histogram}\\Rightarrow2"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "1"
+              "latex": "2"
             }
           ],
           "mark_type": "A",

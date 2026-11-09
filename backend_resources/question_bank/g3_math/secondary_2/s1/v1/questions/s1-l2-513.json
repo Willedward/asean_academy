@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l2-513",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Displayed bar increase",
+  "title": "Apparent increase in museum visitors",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A chart of daily museum visitors starts its vertical axis at 95. The two bars reach 105 and 115. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "A chart of daily museum visitors starts its vertical axis at 95. The two bars reach 105 and 110. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "100",
-        "canonical_latex": "100\\%",
+        "canonical_answer": "50",
+        "canonical_latex": "50",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -80,11 +80,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "115-95"
+              "latex": "110-95"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(115-95)-(105-95)}{105-95}\\times100=100"
+              "latex": "\\frac{(110-95)-(105-95)}{105-95}\\times100=\\frac{5}{10}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "100\\%"
+              "latex": "50\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l2-513-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-513-diagram-r4.svg",
-      "alt_text": "Bar chart with First day: 105, Second day: 115.",
+      "path": "assets/s1-l2-513-diagram-r5.svg",
+      "alt_text": "Bar chart with First day: 105, Second day: 110.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -145,14 +145,14 @@
           ],
           "values": [
             105,
-            115
+            110
           ],
           "y_min": 95,
-          "y_max": 115,
-          "tick_step": 10,
+          "y_max": 110,
+          "tick_step": 5,
           "y_label": "Visitors",
           "forbidden_visible_labels": [
-            "100"
+            "50"
           ]
         },
         "viewbox": [
@@ -167,15 +167,15 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "245",
+              "y": "198.333333",
               "width": "177",
-              "height": "140"
+              "height": "186.666667"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "115",
+            "value": "110",
             "tag": "rect",
             "geometry": {
               "x": "444",
@@ -194,18 +194,25 @@
             "label": "95"
           },
           {
+            "key": "y:100",
+            "axis": "y",
+            "value": "100",
+            "position": "291.666667",
+            "label": "100"
+          },
+          {
             "key": "y:105",
             "axis": "y",
             "value": "105",
-            "position": "245",
+            "position": "198.333333",
             "label": "105"
           },
           {
-            "key": "y:115",
+            "key": "y:110",
             "axis": "y",
-            "value": "115",
+            "value": "110",
             "position": "105",
-            "label": "115"
+            "label": "110"
           },
           {
             "key": "x:First day",
@@ -223,16 +230,16 @@
           }
         ],
         "forbidden_visible_labels": [
-          "100"
+          "50"
         ],
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 95.0,
-          "y_max": 115.0,
-          "tick_step": 10.0
+          "y_max": 110.0,
+          "tick_step": 5.0
         }
       },
-      "sha256": "a9bf8578f511e88ee356f16d40a035e3a6e195e08989a34e48f871bf20286ebf",
+      "sha256": "e73c81c05b424d58c9359e6c80deb315927b9677a9b6b373f7c83bcc5a43a033",
       "width": 720,
       "height": 480
     }

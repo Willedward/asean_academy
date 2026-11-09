@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l1-506",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two grouped classes have midpoints 5 and 15. Each class contains 4 observations. Calculate the estimated mean."
+          "text": "Grouped data have two classes with midpoints 10 and 20 and frequencies 4 and 6. Calculate the estimated mean."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10",
+        "canonical_answer": "16",
+        "canonical_latex": "16",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the products and divide by the total frequency."
+              "text": "Add the products and divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -62,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\bar x\\approx\\frac{5(4)+15(4)}{8}=10"
+              "latex": "\\bar x\\approx\\frac{10(4)+20(6)}{10}=\\frac{160}{10}=16"
             }
           ],
           "mark_type": "A",

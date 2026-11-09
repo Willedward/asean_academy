@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-507",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The classes with midpoints 10, 20 and 30 contain 4, "
+          "text": "The classes with midpoints 10, 20 and 30 contain 1, "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": " and 12 observations respectively. Their estimated mean is 24. Determine "
+          "text": " and 9 observations respectively. Their estimated mean is 24. Determine "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -75,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Multiply both sides by the total frequency before collecting the "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{10(4)+20f+30(12)}{4+f+12}=24"
+              "latex": "f"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " terms."
             }
           ]
         }
@@ -94,11 +94,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Form the equation. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{40+20f+360}{4+f+12}=24\\Rightarrow f=4"
+              "latex": "\\frac{10(1)+20f+30(9)}{1+f+9}=24\\Rightarrow 280+20f=240+24f"
             }
           ],
           "mark_type": "M",
@@ -109,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "4f=40,\\ f=10"
             }
           ],
           "mark_type": "A",
