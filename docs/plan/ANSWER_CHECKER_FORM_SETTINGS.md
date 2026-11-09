@@ -35,6 +35,7 @@ notation, "as a product", "in simplest form"), so their setting must be applied 
 | `factorised` | A product of at least two factors, at least one a bracketed sum with like terms collected | Factorise (when a partial factorisation is acceptable) |
 | `factorised_completely` | Factorised; every bracket has integer coefficients with no common factor and no common letter; no one-letter quadratic bracket with a rational root; no fewer non-constant factors than the canonical | Factorise, factorise completely, take out the greatest common factor |
 | `simplified_fraction` | Expanded, factorised, or one fraction N/D in lowest terms (integer coefficients with no common factor, and no common polynomial factor; `2a/3`, not `6a/9`) | Simplify an algebraic fraction or a sum of fractions |
+| `simplest_fraction` | A number written as one fraction of whole numbers in lowest terms, or a whole number. `2/4`, `0.5` and `2/1` are rejected. Use for "as a fraction in simplest form" on a numeric answer. |
 
 With any form other than `any`, retyping the expression from the prompt (for example `3(x+4)` for
 "Simplify 3(x+4)", or `x^2+10x+24` for "Factorise x^2+10x+24") is marked incorrect. That was

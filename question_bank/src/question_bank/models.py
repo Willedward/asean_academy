@@ -68,7 +68,14 @@ ExpressionMode = Literal[
     "exact_relation",
     "exact_ratio",
 ]
-SYMBOLIC_FORMS = ("any", "expanded", "factorised", "factorised_completely", "simplified_fraction")
+SYMBOLIC_FORMS = (
+    "any",
+    "expanded",
+    "factorised",
+    "factorised_completely",
+    "simplified_fraction",
+    "simplest_fraction",
+)
 """Values of ``checker_config["form"]`` for ``symbolic_equivalence``; ``any`` is the default.
 
 - ``any``: every equivalent expression is accepted.
@@ -80,6 +87,8 @@ SYMBOLIC_FORMS = ("any", "expanded", "factorised", "factorised_completely", "sim
   and no fewer non-constant factors than the canonical answer.
 - ``simplified_fraction``: expanded, factorised, or a single fraction N/D in lowest terms;
   coefficient fractions are in lowest terms too (2a/3, not 6a/9).
+- ``simplest_fraction``: a number written as one fraction of whole numbers in lowest terms, or a
+  whole number (1/2, not 2/4, 0.5 or 2/1).
 """
 
 
