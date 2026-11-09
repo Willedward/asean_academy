@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l3-520",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -27,14 +27,16 @@
       "primary_outcome": "2.2",
       "secondary_outcomes": [],
       "response": {
-        "type": "numeric",
-        "comparison_mode": "exact_numeric",
-        "canonical_answer": "11/36",
+        "type": "algebraic_expression",
+        "comparison_mode": "symbolic_equivalence",
+        "canonical_expression": "11/36",
         "canonical_latex": "\\frac{11}{36}",
-        "accepted_answers": [],
-        "absolute_tolerance": null,
-        "rounding_precision": null,
-        "unit": null
+        "variables": [],
+        "domain_constraints": [],
+        "accepted_equivalents": [],
+        "checker_config": {
+          "form": "simplest_fraction"
+        }
       },
       "hints": [
         {
