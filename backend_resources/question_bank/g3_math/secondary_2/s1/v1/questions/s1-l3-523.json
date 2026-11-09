@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-523",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "At midpoints 10, 20 and 30, the class frequencies are 6, f and 18. The estimated mean is 24. Determine the central frequency f."
+          "text": "At midpoints 10, 20 and 30, the class frequencies are 6, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f"
+        },
+        {
+          "type": "text",
+          "text": " and 18. The estimated mean is 24. Determine the central frequency "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the grouped-mean numerator and denominator using f."
+              "text": "Write the grouped-mean numerator and denominator using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve [10(6)+20f+30(18)]/[6+f+18]=24."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{10(6)+20f+30(18)}{6+f+18}=24"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

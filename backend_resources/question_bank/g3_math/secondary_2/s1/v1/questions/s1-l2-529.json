@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-529",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -68,7 +68,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The visible heights are 115-105 and 125-105."
+              "text": "The visible heights are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "115-105"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "125-105"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -113,7 +129,7 @@
       "asset_key": "s1-l2-529-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-529-diagram-r3.svg",
+      "path": "assets/s1-l2-529-diagram-r4.svg",
       "alt_text": "Bar chart with First week: 115, Second week: 125.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
