@@ -1,0 +1,509 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "n2-l3-901",
+    "bank_key": "g3-sec1-n2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N2",
+    "primary_outcome": "2.1",
+    "title": "Link two rational ratios",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Three positive quantities A, B and C satisfy the following ratios."
+      },
+      {
+        "type": "display_math",
+        "latex": "A:B=0.84:1.4\\qquad B:C=\\frac78:\\frac34"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find A:C in its simplest form."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "2.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "algebraic_expression",
+          "comparison_mode": "exact_ratio",
+          "canonical_expression": "7:10",
+          "canonical_latex": "7:10",
+          "variables": [],
+          "domain_constraints": [
+            "positive ratio terms"
+          ],
+          "accepted_equivalents": [],
+          "checker_config": {
+            "terms": 2,
+            "require_simplest_integer_terms": true
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Simplify each ratio separately before linking them through B."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The two ratios simplify to A:B=3:5 and B:C=7:6. Make the two values representing B equal."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A:B=0.84:1.4=3:5"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "B:C=\\frac78:\\frac34=7:6"
+              },
+              {
+                "type": "display_math",
+                "latex": "A:B:C=21:35:30"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A:C=21:30=7:10"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T08:21:32.043203Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "n2-l3-902",
+    "bank_key": "g3-sec1-n2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N2",
+    "primary_outcome": "2.2",
+    "title": "Compare two filling rates",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Tap A delivers 2.4 litres of water in 36 seconds. Tap B delivers 1.75 litres of water in 30 seconds. Both taps deliver water at constant rates."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Write the ratio of the delivery rate of Tap A to the delivery rate of Tap B in its simplest positive integer form."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "2.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "algebraic_expression",
+          "comparison_mode": "exact_ratio",
+          "canonical_expression": "8:7",
+          "canonical_latex": "8:7",
+          "variables": [],
+          "domain_constraints": [
+            "positive ratio terms"
+          ],
+          "accepted_equivalents": [],
+          "checker_config": {
+            "terms": 2,
+            "require_simplest_integer_terms": true
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find each tap's volume delivered per second before forming the ratio."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The rates are 2.4/36 and 1.75/30 litres per second. Express both rates with a common denominator."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Rate of A}=\\frac{2.4}{36}=\\frac1{15}\\text{ L/s}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Rate of B}=\\frac{1.75}{30}=\\frac7{120}\\text{ L/s}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\frac1{15}:\\frac7{120}=8:7"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T08:21:32.043203Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "n2-l3-903",
+    "bank_key": "g3-sec1-n2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N2",
+    "primary_outcome": "2.3",
+    "title": "Ratio after a transfer of money",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Aini and Budi share S$216 in the ratio 7:11. Budi then gives Aini S$12."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the new ratio of Aini's money to Budi's money in its simplest form."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "2.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "algebraic_expression",
+          "comparison_mode": "exact_ratio",
+          "canonical_expression": "4:5",
+          "canonical_latex": "4:5",
+          "variables": [],
+          "domain_constraints": [
+            "positive ratio terms"
+          ],
+          "accepted_equivalents": [],
+          "checker_config": {
+            "terms": 2,
+            "require_simplest_integer_terms": true
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use the total and the 7:11 ratio to find how much each person has at first."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "There are 18 ratio parts altogether. After finding one part, add 12 to Aini's amount and subtract 12 from Budi's amount."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "216\\div(7+11)=12"
+              },
+              {
+                "type": "text",
+                "text": "Each ratio part represents S$12."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Aini}=7(12)+12=96,\\qquad\\text{Budi}=11(12)-12=120"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "96:120=4:5"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T08:21:32.043203Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "n2-l3-904",
+    "bank_key": "g3-sec1-n2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N2",
+    "primary_outcome": "2.1",
+    "title": "Use a rational ratio and a difference",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The positive quantities x and y are in the following ratio."
+      },
+      {
+        "type": "display_math",
+        "latex": "x:y=1\\frac18:0.75"
+      },
+      {
+        "type": "text",
+        "text": "The difference between x and y is 18."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find x."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "2.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "54",
+          "canonical_latex": "54",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Convert the mixed number and decimal to fractions with a common denominator, then simplify the ratio."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The ratio simplifies to x:y=3:2. Relate the difference of one ratio part to 18."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "1\\frac18:0.75=\\frac98:\\frac34=9:6=3:2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The difference of one ratio part represents 18, so each ratio part is 18."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "x=3\\times18=54"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-16T08:21:32.043203Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  }
+]
