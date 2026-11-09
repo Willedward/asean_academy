@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-510",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A courier carries x parcels of 2 kg and y parcels of 8 kg, 11 parcels in all with a combined mass of 52 kg. Form a pair of equations and find x."
+          "text": "A courier carries "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " parcels of 2 kg and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " parcels of 8 kg, 11 parcels in all with a combined mass of 52 kg. Form a pair of equations and find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write x+y=11 and 2x+8y=52."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=11"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the total mass, then solve the pair."
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-525",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise x²-17x+60 and hence give the smaller root of x²-17x+60=0."
+          "text": "Factorise "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-17x+60"
+        },
+        {
+          "type": "text",
+          "text": " and hence give the smaller root of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-17x+60=0"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The required factorisation is (x-5)(x-12)=0."
+              "text": "One bracket is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-12)"
+            },
+            {
+              "type": "text",
+              "text": ". Work out the other bracket, then set each bracket equal to zero."
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-522",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "What is the larger value of x for which x²-9x+24=6?"
+          "text": "What is the larger value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " for which "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-9x+24=6"
+        },
+        {
+          "type": "text",
+          "text": "?"
         }
       ],
       "marks": 3,

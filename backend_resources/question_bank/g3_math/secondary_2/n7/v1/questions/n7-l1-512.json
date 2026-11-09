@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-512",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of x+5<c. Find c."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+5<c"
+        },
+        {
+          "type": "text",
+          "text": ". Find c."
         }
       ],
       "marks": 1,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "At the boundary of the solution, x+5 equals c."
+              "text": "At the boundary of the solution, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+5"
+            },
+            {
+              "type": "text",
+              "text": " equals "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -60,7 +84,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x=8, the boundary on the number line, into x+5."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=8"
+            },
+            {
+              "type": "text",
+              "text": ", the boundary on the number line, into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +111,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution shown is x<8, so at the boundary x=8."
+              "text": "The solution shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x<8"
+            },
+            {
+              "type": "text",
+              "text": ", so at the boundary "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=8"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -90,7 +146,7 @@
       "asset_key": "n7-l1-512-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l1-512-diagram-r2.svg",
+      "path": "assets/n7-l1-512-diagram-r3.svg",
       "alt_text": "Number line showing values less than 8.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

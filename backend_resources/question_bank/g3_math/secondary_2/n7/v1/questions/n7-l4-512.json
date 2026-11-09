@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-512",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of -3<px+1≤15, where p is a positive constant. Find p."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3<px+1\\le 15"
+        },
+        {
+          "type": "text",
+          "text": ", where p is a positive constant. Find p."
         }
       ],
       "marks": 4,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "At each end of the graph, px+1 reaches one of the limits."
+              "text": "At each end of the graph, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "px+1"
+            },
+            {
+              "type": "text",
+              "text": " reaches one of the limits."
             }
           ]
         },
@@ -60,7 +76,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the right-hand end: set px+1 equal to 15, using the x-value at that end."
+              "text": "Use the right-hand end: set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "px+1"
+            },
+            {
+              "type": "text",
+              "text": " equal to 15, using the x-value at that end."
             }
           ]
         }
@@ -71,7 +95,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The graph shows -2<x≤7, so px+1=15 when x=7."
+              "text": "The graph shows "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2<x\\le 7"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "px+1=15"
+            },
+            {
+              "type": "text",
+              "text": " when "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=7"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +153,7 @@
       "asset_key": "n7-l4-512-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l4-512-diagram-r2.svg",
+      "path": "assets/n7-l4-512-diagram-r3.svg",
       "alt_text": "Number line showing values greater than -2 and less than or equal to 7.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
