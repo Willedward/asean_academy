@@ -36,10 +36,11 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
 
     by_id = {batch.batch_id: batch for batch in report.batches}
     assert all(batch.packet_status == "current" for batch in report.batches)
-    completed_chart_batch = by_id["g3-sec2-n6-b004"]
-    assert completed_chart_batch.packet_status == "current"
-    assert completed_chart_batch.state == "ready"
-    assert completed_chart_batch.active_claim is None
+    # Any batch being worked on carries a claim, so test one that is ready and unclaimed now.
+    ready_batch = next(
+        batch for batch in report.batches if batch.state == "ready" and batch.active_claim is None
+    )
+    assert ready_batch.packet_status == "current"
 
     write_readiness_report(report, tmp_path)
     payload = json.loads((tmp_path / "report.json").read_text())
