@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-509",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Given A=x(2+3)/2+6, make x the subject."
+          "text": "Given "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A=\\frac{5x}{2}+6"
+        },
+        {
+          "type": "text",
+          "text": ", make "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " the subject."
         }
       ],
       "marks": 3,

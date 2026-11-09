@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l5-502",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise 45x²+90x+45 completely."
+          "text": "Factorise "
+        },
+        {
+          "type": "inline_math",
+          "latex": "45x^{2}+90x+45"
+        },
+        {
+          "type": "text",
+          "text": " completely."
         }
       ],
       "marks": 5,
