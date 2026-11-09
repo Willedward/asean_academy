@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l2-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Halve 20, then use 4πr³/3."
+              "text": "Halve 20, then use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{4\\pi r^{3}}{3}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -101,7 +109,7 @@
       "asset_key": "g5-l2-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-508-diagram-r2.svg",
+      "path": "assets/g5-l2-508-diagram-r3.svg",
       "alt_text": "Sphere with a full diameter d = 20 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
