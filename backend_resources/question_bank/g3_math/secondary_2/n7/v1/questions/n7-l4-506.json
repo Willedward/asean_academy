@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-506",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.9",
-  "title": "Constant term from given roots",
+  "title": "Rectangle area leading to a quadratic",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation "
+          "text": "A rectangle has length "
         },
         {
           "type": "inline_math",
-          "latex": "x^{2}-10x+k=0"
+          "latex": "(x+3)"
         },
         {
           "type": "text",
-          "text": " has integer roots 3 and 7. Find "
+          "text": " cm and width "
         },
         {
           "type": "inline_math",
-          "latex": "k"
+          "latex": "(x-2)"
         },
         {
           "type": "text",
-          "text": " and confirm the factorised equation."
+          "text": " cm. Its area is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "24\\text{ cm}^{2}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
@@ -45,8 +61,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "21",
-        "canonical_latex": "21",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +74,23 @@
           "content": [
             {
               "type": "text",
-              "text": "For a monic quadratic, the constant is the product of the two roots."
+              "text": "Use length "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\times"
+            },
+            {
+              "type": "text",
+              "text": " width "
+            },
+            {
+              "type": "inline_math",
+              "latex": "="
+            },
+            {
+              "type": "text",
+              "text": " area to form an equation."
             }
           ]
         },
@@ -67,7 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the two roots to write the two brackets, then find the constant term when you expand them."
+              "text": "Expand, rearrange to zero and factorise. Check which root makes both lengths positive."
             }
           ]
         }
@@ -78,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Form the equation, expand and factorise. "
             },
             {
               "type": "display_math",
-              "latex": "(x-3)(x-7)=x^2-10x+21\\Rightarrow k=21"
+              "latex": "(x+3)(x-2)=24\\Rightarrow x^2+x-30=0\\Rightarrow(x+6)(x-5)=0"
             }
           ],
           "mark_type": "M",
@@ -92,12 +124,16 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "x=-6"
+            },
+            {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": " gives a negative width, so "
             },
             {
               "type": "display_math",
-              "latex": "21"
+              "latex": "x=5"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l3-506",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "x^{2}-7x+15=3"
+          "latex": "x^{2}-5x+9=3"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Move all terms to one side before searching for factors."
+              "text": "Rearrange so one side is zero before factorising."
             }
           ]
         },
@@ -59,7 +59,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 3; the constant term becomes 12."
+              "text": "Subtract "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": " from both sides, then find two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "6"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -70,11 +94,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Rearrange to zero and factorise. "
             },
             {
               "type": "display_math",
-              "latex": "x^2-7x+12=0\\Rightarrow (x-3)(x-4)=0\\Rightarrow x=3\\text{ or }4"
+              "latex": "x^2-5x+6=0\\Rightarrow(x-2)(x-3)=0\\Rightarrow x=2\\text{ or }x=3"
             }
           ],
           "mark_type": "M",
@@ -85,11 +109,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The larger root is "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "x=3"
             }
           ],
           "mark_type": "A",

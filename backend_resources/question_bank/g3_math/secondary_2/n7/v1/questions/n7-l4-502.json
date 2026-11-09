@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-502",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.5",
-  "title": "Constant from a shared solution",
+  "title": "Solve with brackets on both sides",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equations "
+          "text": "Solve "
         },
         {
           "type": "inline_math",
-          "latex": "3x+3=15"
+          "latex": "2(x-3)-3(x+1)=5(2-x)"
         },
         {
           "type": "text",
-          "text": " and "
+          "text": ". Give "
         },
         {
           "type": "inline_math",
-          "latex": "kx=16"
+          "latex": "x"
         },
         {
           "type": "text",
-          "text": " have exactly the same solution. Determine "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": " as an exact decimal."
         }
       ],
       "marks": 4,
@@ -53,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "4.75",
+        "canonical_latex": "4.75",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve the fully known equation first, then use its solution in the second equation."
+              "text": "Expand every bracket first, taking care with the signs."
             }
           ]
         },
@@ -75,15 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "3x+3=15"
-            },
-            {
-              "type": "text",
-              "text": " for "
+              "text": "Collect the "
             },
             {
               "type": "inline_math",
@@ -91,23 +75,7 @@
             },
             {
               "type": "text",
-              "text": ", then substitute your value into "
-            },
-            {
-              "type": "inline_math",
-              "latex": "kx=16"
-            },
-            {
-              "type": "text",
-              "text": " and solve for "
-            },
-            {
-              "type": "inline_math",
-              "latex": "k"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": " terms on one side and the numbers on the other."
             }
           ]
         }
@@ -118,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Expand and collect terms. "
             },
             {
               "type": "display_math",
-              "latex": "3x=12\\Rightarrow x=4;\\quad 4k=16\\Rightarrow k=4"
+              "latex": "2x-6-3x-3=10-5x\\Rightarrow-x-9=10-5x\\Rightarrow4x=19"
             }
           ],
           "mark_type": "M",
@@ -133,11 +101,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "x=4.75"
             }
           ],
           "mark_type": "A",

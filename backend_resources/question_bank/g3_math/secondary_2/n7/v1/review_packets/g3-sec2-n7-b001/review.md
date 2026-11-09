@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-501 — Adult and student garden tickets
+## n7-l3-501 — Ages: Ana and her brother
 
 [Open this question in the HTML preview](index.html#n7-l3-501)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-501 — Small and large parcels on one delivery
+## n7-l4-501 — A two-digit number and its reversal
 
 [Open this question in the HTML preview](index.html#n7-l4-501)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-502 — Constant from a shared solution
+## n7-l4-502 — Solve with brackets on both sides
 
 [Open this question in the HTML preview](index.html#n7-l4-502)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-504 — Parameter from a point on a line
+## n7-l4-504 — x-intercept after finding k
 
 [Open this question in the HTML preview](index.html#n7-l4-504)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-505 — Parameter from a known intersection
+## n7-l4-505 — Find k from a meeting point
 
 [Open this question in the HTML preview](index.html#n7-l4-505)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-506 — Constant term from given roots
+## n7-l4-506 — Rectangle area leading to a quadratic
 
 [Open this question in the HTML preview](index.html#n7-l4-506)
 
