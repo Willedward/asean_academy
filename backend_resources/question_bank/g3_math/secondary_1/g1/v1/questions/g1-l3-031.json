@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g1-l3-031",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line through a point is constructed parallel to a given line by copying a corresponding angle of 58\u00b0. What angle must be copied, in degrees?"
+          "text": "A line through point P is to be constructed parallel to a given line. A transversal through P crosses the given line, making angles of 122° and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^\\circ"
+        },
+        {
+          "type": "text",
+          "text": " on a straight line. To construct the parallel line, the corresponding angle "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^\\circ"
+        },
+        {
+          "type": "text",
+          "text": " is copied at P. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ", in degrees."
         }
       ],
       "marks": 1,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Copy the full given 58\u00b0 angle."
+              "text": "First find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " using the straight-line fact, then use it as the angle to copy."
             }
           ]
         }
@@ -62,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\theta=58^\\circ"
+              "latex": "x=180^\\circ-122^\\circ=58^\\circ"
             }
           ],
           "mark_type": "A",
