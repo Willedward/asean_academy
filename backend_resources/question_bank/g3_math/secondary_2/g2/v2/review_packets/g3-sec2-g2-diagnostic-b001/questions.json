@@ -1,0 +1,537 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g2-l2-951",
+    "bank_key": "g3-sec2-g2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G2",
+    "primary_outcome": "2.1",
+    "title": "Perimeter of a congruent triangle",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Triangle PQR is congruent to triangle XYZ. The side lengths of triangle PQR are 7 cm, 9 cm and 11 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l2-951-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the perimeter of triangle XYZ in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "2.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "27",
+          "canonical_latex": "27",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Congruent triangles have equal corresponding side lengths."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the three side lengths 7, 9 and 11."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\triangle PQR\\cong\\triangle XYZ\\Rightarrow\\text{same three side lengths}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Perimeter}=7+9+11=27\\text{ cm}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g2-l2-951-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l2-951-diagram-r2.svg",
+        "alt_text": "Two congruent triangles; triangle PQR has side lengths 7 cm, 9 cm and 11 cm.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g2-l2-951",
+          "not_to_scale": true,
+          "relationships": [
+            "Two congruent triangles; triangle PQR has side lengths 7 cm, 9 cm and 11 cm."
+          ]
+        },
+        "sha256": "5b828fd890b4e50066707c74bcee9e566abbd05345197e6fb87410c0c4a8bbb4",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "g2-l4-952",
+    "bank_key": "g3-sec2-g2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G2",
+    "primary_outcome": "2.2",
+    "title": "Area of a smaller similar banner",
+    "difficulty": 4,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Two rectangular banners are similar. Corresponding widths are 12 cm for the smaller banner and 18 cm for the larger banner. The larger banner has area 405 cm². The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l4-952-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the area of the smaller banner in cm². Enter the numerical value only."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "2.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "180",
+          "canonical_latex": "180",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find the linear scale factor from the smaller banner to the larger banner."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The area scale factor is (18/12)²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "k=\\frac{18}{12}=\\frac32,\\qquad k^2=\\frac94"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Smaller area}=405\\div\\frac94=180\\text{ cm}^2"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g2-l4-952-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l4-952-diagram.svg",
+        "alt_text": "Two similar rectangular banners with corresponding widths 12 cm and 18 cm; the larger area is 405 cm².",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g2-l4-952",
+          "not_to_scale": true,
+          "relationships": [
+            "Two similar rectangular banners with corresponding widths 12 cm and 18 cm; the larger area is 405 cm²."
+          ]
+        },
+        "sha256": "c6583d12685912096b2bdb06f30529725bd45ecc404460448fbfc274368d9bf8",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g2-l2-953",
+    "bank_key": "g3-sec2-g2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G2",
+    "primary_outcome": "2.3",
+    "title": "Corresponding sides in similar triangles",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Triangles ABC and DEF are similar, with A corresponding to D, B to E and C to F. AB = 8 cm, DE = 12 cm and BC = 10 cm. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l2-953-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find EF in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "2.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "15",
+          "canonical_latex": "15",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use equal ratios of corresponding sides."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The scale factor from ABC to DEF is 12 ÷ 8."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\frac{DE}{AB}=\\frac{12}{8}=\\frac32"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "EF=10\\left(\\frac32\\right)=15\\text{ cm}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g2-l2-953-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l2-953-diagram-r2.svg",
+        "alt_text": "Similar triangles ABC and DEF with AB 8 cm, DE 12 cm and BC 10 cm.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g2-l2-953",
+          "not_to_scale": true,
+          "relationships": [
+            "Similar triangles ABC and DEF, with DEF an enlargement of ABC, AB 8 cm, DE 12 cm and BC 10 cm."
+          ]
+        },
+        "sha256": "f8f519815b18e09ea3568808ac8f09d17cf652a3ef5e8f789bf0e790ccfe059e",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g2-l4-954",
+    "bank_key": "g3-sec2-g2-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G2",
+    "primary_outcome": "2.4",
+    "title": "Original area from a reduction",
+    "difficulty": 4,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A display panel is reduced using a linear scale factor of 3/4. The reduced panel has area 27 cm². The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g2-l4-954-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the area of the original panel in cm². Enter the numerical value only."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "2.4",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "48",
+          "canonical_latex": "48",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Area changes by the square of the linear scale factor."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The area scale factor is (3/4)² = 9/16, so the reduced area is 9/16 of the original area."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Area scale factor}=\\left(\\frac34\\right)^2=\\frac9{16}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\frac9{16}A=27"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "A=27\\times\\frac{16}9=48\\text{ cm}^2"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g2-l4-954-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g2-l4-954-diagram-r2.svg",
+        "alt_text": "A display panel and its reduction. The linear scale factor from the original panel to the reduced panel is 3/4, and the reduced panel has area 27 cm².",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "diagnostic_geometry",
+          "question_key": "g2-l4-954",
+          "not_to_scale": true,
+          "relationships": [
+            "A display panel and its reduction with reduced area 27 cm² and linear scale factor 3/4."
+          ]
+        },
+        "sha256": "aa63d74ea8601686c73c6fe8e3bd894a260395a96c0befeefd1815a1bc52e4ee",
+        "width": 940,
+        "height": 500
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-18T16:00:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Awaiting Mathematics and editorial review."
+    }
+  }
+]

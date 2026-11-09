@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-954",
   "bank_key": "g3-sec2-g2-v2",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.4",
-  "title": "Area after a reduction",
+  "title": "Original area from a reduction",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -15,7 +15,7 @@
   "stem": [
     {
       "type": "text",
-      "text": "A display panel with area 48 cm² is reduced with linear scale factor 3/4. The diagram is not drawn to scale."
+      "text": "A display panel is reduced using a linear scale factor of 3/4. The reduced panel has area 27 cm². The diagram is not drawn to scale."
     },
     {
       "type": "asset_ref",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the area of the reduced panel in cm². Enter the numerical value only."
+          "text": "Find the area of the original panel in cm². Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "27",
-        "canonical_latex": "27",
+        "canonical_answer": "48",
+        "canonical_latex": "48",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply 48 by (3/4)²."
+              "text": "The area scale factor is (3/4)² = 9/16, so the reduced area is 9/16 of the original area."
             }
           ]
         }
@@ -75,14 +75,25 @@
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 2
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "48\\left(\\frac9{16}\\right)=27\\text{ cm}^2"
+              "latex": "\\frac9{16}A=27"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "A=27\\times\\frac{16}9=48\\text{ cm}^2"
             }
           ],
           "mark_type": "A",
@@ -97,18 +108,18 @@
       "asset_key": "g2-l4-954-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-l4-954-diagram.svg",
-      "alt_text": "A display panel and its reduction with original area 48 cm² and linear scale factor 3/4.",
+      "path": "assets/g2-l4-954-diagram-r2.svg",
+      "alt_text": "A display panel and its reduction. The linear scale factor from the original panel to the reduced panel is 3/4, and the reduced panel has area 27 cm².",
       "generation_spec": {
         "renderer": "hand-authored-svg-v1",
         "diagram_kind": "diagnostic_geometry",
         "question_key": "g2-l4-954",
         "not_to_scale": true,
         "relationships": [
-          "A display panel and its reduction with original area 48 cm² and linear scale factor 3/4."
+          "A display panel and its reduction with reduced area 27 cm² and linear scale factor 3/4."
         ]
       },
-      "sha256": "b40534d4eaa4f5a1ef4d8036a79faf047110b97049220021e31ad22d43cb1e5b",
+      "sha256": "aa63d74ea8601686c73c6fe8e3bd894a260395a96c0befeefd1815a1bc52e4ee",
       "width": 940,
       "height": 500
     }
