@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-515",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -54,7 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove any overall common factor, then use the required sum and product."
+              "text": "All three coefficients share a common factor. Take it out first."
             }
           ]
         },
@@ -63,7 +63,39 @@
           "content": [
             {
               "type": "text",
-              "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+              "text": "After removing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "9"
+            },
+            {
+              "type": "text",
+              "text": ", the quadratic "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x^2+11x+8"
+            },
+            {
+              "type": "text",
+              "text": " needs two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3\\times8=24"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "11"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +106,35 @@
           "content": [
             {
               "type": "text",
-              "text": "Take out the common factor first, then factorise what remains."
+              "text": "Take out the common factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "9"
+            },
+            {
+              "type": "text",
+              "text": ", then split the middle term using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "8"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "27x^2+99x+72=9(3x^2+11x+8)=9(3x^2+3x+8x+8)=9(x+1)(3x+8)"
+              "latex": "9(3x^2+11x+8)=9(3x^2+3x+8x+8)=9\\left[3x(x+1)+8(x+1)\\right]"
             }
           ],
           "mark_type": "M",
@@ -89,7 +145,7 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "So "
             },
             {
               "type": "display_math",
