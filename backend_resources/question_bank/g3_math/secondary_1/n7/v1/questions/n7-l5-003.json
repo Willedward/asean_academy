@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l5-003",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A hall has x rows with 18 seats in each row. After 4 rows are removed and 6 seats are added to each remaining row, the total number of seats is unchanged. Find x."
+          "text": "A hall has "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " rows with 18 seats in each row. After 4 rows are removed and 6 seats are added to each remaining row, the total number of seats is unchanged. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The original total is 18x."
+              "text": "The original total is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "18x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The rearranged total is 24(x - 4)."
+              "text": "The rearranged total is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "24(x-4)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

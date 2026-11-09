@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-022",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An isosceles triangle has two equal sides of x cm and a base of 8 cm. Its perimeter is 38 cm. Find x."
+          "text": "An isosceles triangle has two equal sides of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " cm and a base of 8 cm. Its perimeter is 38 cm. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The two equal sides contribute 2x."
+              "text": "The two equal sides contribute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Form 2x + 8 = 38."
+              "text": "Form "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+8=38"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

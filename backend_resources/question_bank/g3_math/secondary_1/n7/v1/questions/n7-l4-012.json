@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-012",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A tank initially contains x litres. First 18 litres are used, then one third of the remaining water is used. There are 40 litres left. Find x."
+          "text": "A tank initially contains "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " litres. First 18 litres are used, then one third of the remaining water is used. There are 40 litres left. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "After 18 litres are used, x - 18 remains."
+              "text": "After 18 litres are used, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x-18"
+            },
+            {
+              "type": "text",
+              "text": " remains."
             }
           ]
         },
