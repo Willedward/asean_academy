@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-510",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.10",
-  "title": "Courier parcels of two sizes",
+  "title": "Ages of two friends",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A courier carries "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " parcels of 2 kg and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": " parcels of 8 kg, 11 parcels in all with a combined mass of 52 kg. Form a pair of equations and find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "Ben is 7 years older than Cara. In 5 years' time Ben will be twice as old as Cara. Form simultaneous equations and find Ben's present age."
         }
       ],
       "marks": 4,
@@ -53,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +42,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The independent totals are parcel count and mass; model each before eliminating a variable."
+              "text": "Let Ben be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " and Cara be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": ". One equation comes from \"7 years older\"."
             }
           ]
         },
@@ -75,15 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "One equation is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x+y=11"
-            },
-            {
-              "type": "text",
-              "text": ". Write a second equation for the total mass, then solve the pair."
+              "text": "Add 5 to each age in the second condition, then substitute."
             }
           ]
         }
@@ -94,11 +78,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Write the two equations. "
             },
             {
               "type": "display_math",
-              "latex": "x+y=11,\\ 2x+8y=52\\Rightarrow x=6"
+              "latex": "x=y+7,\\quad x+5=2(y+5)\\Rightarrow y+12=2y+10"
             }
           ],
           "mark_type": "M",
@@ -109,11 +93,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=2"
+            },
+            {
+              "type": "text",
+              "text": " and "
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "x=9"
             }
           ],
           "mark_type": "A",

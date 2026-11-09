@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l5-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.9",
-  "title": "Difference between two roots",
+  "title": "Roots that differ by two",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Factorise "
+          "text": "The equation "
         },
         {
           "type": "inline_math",
-          "latex": "x^{2}-13x+36=0"
+          "latex": "x^{2}+px+24=0"
         },
         {
           "type": "text",
-          "text": ", solve it, then find the positive difference between its two roots."
+          "text": " has two roots that differ by 2. Find the positive value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 5,
@@ -37,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +58,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Find two numbers with the stated sum and product, then use the zero-product rule."
+              "text": "Let the roots be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r+2"
+            },
+            {
+              "type": "text",
+              "text": ". Their product is the constant term."
             }
           ]
         },
@@ -59,15 +83,23 @@
           "content": [
             {
               "type": "text",
-              "text": "One bracket is "
+              "text": "Solve "
             },
             {
               "type": "inline_math",
-              "latex": "(x-9)"
+              "latex": "r(r+2)=24"
             },
             {
               "type": "text",
-              "text": ". Find the other bracket, solve each bracket equal to zero, then subtract the smaller root from the larger."
+              "text": ", then use the sum of the roots to find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -78,11 +110,83 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "If the roots are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r+2"
+            },
+            {
+              "type": "text",
+              "text": ", then "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r(r+2)=24"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r=4"
+            },
+            {
+              "type": "text",
+              "text": " or "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r=-6"
+            },
+            {
+              "type": "text",
+              "text": ". The roots are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4,6"
+            },
+            {
+              "type": "text",
+              "text": " or "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-6,-4"
+            },
+            {
+              "type": "text",
+              "text": ". For "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2+px+24=(x-a)(x-b)"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p=-(a+b)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "(x-4)(x-9)=0\\Rightarrow x=4,9;\\quad 9-4=5"
+              "latex": "p=-(4+6)\\text{ or }p=-(-6+(-4))"
             }
           ],
           "mark_type": "M",
@@ -93,11 +197,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The positive value is "
             },
             {
               "type": "display_math",
-              "latex": "5"
+              "latex": "p=10"
             }
           ],
           "mark_type": "A",
