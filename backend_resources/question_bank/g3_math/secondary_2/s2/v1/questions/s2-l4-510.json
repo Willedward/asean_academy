@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l4-510",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "In a morning trial, 36 of 60 attempts succeed. In an afternoon trial, 54 attempts are made. The combined experimental probability of success is 2/3. How many afternoon attempts succeed?"
+          "text": "In a morning trial, 36 of 60 attempts succeed. In an afternoon trial, 54 attempts are made. The combined experimental probability of success is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{2}{3}"
+        },
+        {
+          "type": "text",
+          "text": ". How many afternoon attempts succeed?"
         }
       ],
       "marks": 4,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Let x be afternoon successes and solve (36 + x)/(60 + 54) = 2/3."
+              "text": "Let "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " be afternoon successes and solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{36+x}{60+54}=\\frac{2}{3}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
