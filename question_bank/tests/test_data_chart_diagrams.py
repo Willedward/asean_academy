@@ -162,6 +162,38 @@ def test_number_line_distinguishes_open_and_closed_boundaries():
     assert 'data-direction="left"' in closed.svg
 
 
+def test_number_line_can_show_a_bounded_interval():
+    diagram = charts.number_line(
+        {
+            "boundary": -3,
+            "relation": ">",
+            "upper_boundary": 5,
+            "upper_relation": "<=",
+            "x_min": -5,
+            "x_max": 7,
+        }
+    )
+    kinds = {
+        mark["key"]: mark["kind"] for mark in diagram.generation_spec["chart_marks"]
+    }
+
+    assert kinds == {"boundary": "open-boundary", "upper-boundary": "closed-boundary"}
+    assert 'data-role="solution-segment"' in diagram.svg
+    assert "solution-ray" not in diagram.svg
+    assert "greater than -3 and less than or equal to 5" in diagram.alt_text
+
+    single = charts.number_line({"boundary": 6, "relation": "<"})
+    assert 'data-role="solution-ray"' in single.svg
+    assert "solution-segment" not in single.svg
+
+
+def test_number_line_interval_rejects_impossible_bounds():
+    with pytest.raises(ValueError, match="upper_boundary"):
+        charts.number_line(
+            {"boundary": 5, "relation": ">", "upper_boundary": 1, "upper_relation": "<"}
+        )
+
+
 def test_histogram_can_mark_a_bin_as_unknown_without_inventing_its_height():
     diagram = charts.histogram(
         {
