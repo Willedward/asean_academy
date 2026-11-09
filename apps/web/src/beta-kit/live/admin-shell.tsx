@@ -227,7 +227,7 @@ export function AdminShell({
       >
         Skip to content
       </a>
-      <aside className="sticky top-0 hidden h-dvh w-[280px] shrink-0 flex-col border-r border-ns-line bg-ns-surface px-5 py-6 lg:flex">
+      <aside aria-label="Admin sections" className="sticky top-0 hidden h-dvh w-[280px] shrink-0 flex-col border-r border-ns-line bg-ns-surface px-5 py-6 lg:flex">
         <Link className="mb-2 block px-3" href="/admin">
           <Logo height={25} />
         </Link>

@@ -3125,6 +3125,10 @@ export interface components {
             course_revision: number;
             /** Courses */
             courses: components["schemas"]["ContentCourseStatusResponse"][];
+            /** English Passages */
+            english_passages: number;
+            /** English Questions */
+            english_questions: number;
             /** Lessons */
             lessons: number;
             /** Questions */

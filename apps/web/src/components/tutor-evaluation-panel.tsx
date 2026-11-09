@@ -260,7 +260,10 @@ export function TutorEvaluationPanel({ academic }: { academic: boolean }) {
           </section>
           {academic ? <TutorRoutingEvidencePanel /> : null}
           <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
-            <aside className="max-h-[70vh] space-y-2 overflow-auto rounded-2xl border bg-white p-3">
+            <aside
+              aria-label="Evaluation cases"
+              className="max-h-[70vh] space-y-2 overflow-auto rounded-2xl border bg-white p-3"
+            >
               {lab.cases.map((item) => (
                 <button
                   key={item.case_id}

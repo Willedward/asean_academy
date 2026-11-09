@@ -11,6 +11,8 @@ import pytest
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
 
+from learning_api.admin_analytics_contracts import ContentStatusResponse
+
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "services/learning_api/scripts"))
 spec = importlib.util.spec_from_file_location(
@@ -62,6 +64,9 @@ def test_bootstrap_preview_apply_and_repeat_are_safe():
             )
             assert c.execute("select count(*) from english_passage_versions").fetchone()[0] == 78
             assert c.execute("select count(*) from course_enrolments").fetchone()[0] == 0
+            # The admin content status route returns this report through a closed response model.
+            catalogue = bootstrap_module.CourseCatalogue(ROOT, allow_drafts=True)
+            ContentStatusResponse.model_validate(bootstrap_module.check_content(c, catalogue))
             c.execute(
                 "insert into supabase_migrations.schema_migrations(version) values ('299999999999')"
             )
