@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-010",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Convert 45 000 cm\u00b2 to m\u00b2. Enter the numerical value only."
+          "text": "Convert 45 000 cm² to m². Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by 10 000 when converting cm\u00b2 to m\u00b2."
+              "text": "Divide by 10 000 when converting cm² to m²."
             }
           ]
         },
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 45 000 \u00f7 10 000."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "45\\,000\\div 10\\,000"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

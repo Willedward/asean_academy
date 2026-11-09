@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l4-006",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylinder of radius 7 cm has the same volume as a cuboid measuring 11 cm by 14 cm by 10 cm. Using \u03c0 = 22/7, find the cylinder height in cm. Enter the numerical value only."
+          "text": "A cylinder of radius 7 cm has the same volume as a cuboid measuring 11 cm by 14 cm by 10 cm. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find the cylinder height in cm. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Both the cuboid volume and \u03c0r\u00b2h contain a factor of 154."
+              "text": "Both the cuboid volume and πr²h contain a factor of 154."
             }
           ]
         }

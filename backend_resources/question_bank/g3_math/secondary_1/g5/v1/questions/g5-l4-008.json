@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-008",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 14 cm by 14 cm by 10 cm cuboid has a cylindrical hole of radius 3.5 cm drilled through its 10 cm height. Using π = 22/7, find the remaining volume in cm³. Enter the numerical value only."
+          "text": "A 14 cm by 14 cm by 10 cm cuboid has a cylindrical hole of radius 3.5 cm drilled through its 10 cm height. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find the remaining volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -60,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The cuboid volume is 1960 cm³ and the hole volume is 385 cm³."
+              "text": "The cuboid volume is 1960 cm³. Now find the volume of the hole, then subtract it."
             }
           ]
         }
@@ -86,7 +94,7 @@
       "asset_key": "g5-l4-008-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-008-diagram-r2.svg",
+      "path": "assets/g5-l4-008-diagram-r3.svg",
       "alt_text": "A cuboid with edges 14 cm, 14 cm and height 10 cm. A cylindrical hole of radius 3.5 cm opens on the top face and passes straight down through the solid. The hole's far rim and sides are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",
