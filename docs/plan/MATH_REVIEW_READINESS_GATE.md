@@ -41,8 +41,7 @@ reported as `complete` and is not put back into the review queue.
 
 Warnings remain visible but do not silently become approvals. Planned-figure evidence is
 conservative: if the ledger and its explanatory note disagree, the batch stays out of the ready
-list until the ledger is reconciled. This currently catches the stale `s2-l1-507` worklist entry;
-the same ledger record says only `s2-l1-513` needed the new probability-scale chart.
+list until the ledger is reconciled.
 
 The ledger's historical `confirmed` status is audit evidence, not an unresolved-state flag: earlier
 content PRs deliberately preserved it after applying fixes. The readiness gate therefore blocks
@@ -75,33 +74,10 @@ PRs as evidence, and the gate no longer blocks those batches. Any batch not list
 The readiness list only knows what the ledger records. Check the handoff for prompt fixes still
 planned in batches this report calls ready.
 
-## Post-cleanup result on 9 November 2026
+## Result on 9 November 2026
 
-After releasing all 74 finished claims and regenerating the 50 stale plus 17 missing reviewer
-packets, the gate reports:
+After the chart, answer-form and claim work, the gate reports 75 learning batches with current
+reviewer packets: 71 ready for assignment, 4 already approved (Sec 1 N2), none blocked, no active
+claims and no planned figures missing. Run `question-bank review-readiness` for the current list.
 
-- 75 learning batches inspected, all with current reviewer packets;
-- 26 ready for assignment;
-- 45 blocked by a live content, checker, codename or planned-figure gate;
-- 4 already approved; and
-- 0 active claims.
-
-The 26 technically ready batches are:
-
-- Secondary 1 G1: B001, B002 and B004;
-- Secondary 1 G5: B001, B003 and B004;
-- Secondary 1 N4: B001–B004;
-- Secondary 1 N6: B001 and B003;
-- Secondary 1 N7: B001–B003;
-- Secondary 2 G2: B001–B004;
-- Secondary 2 N2: B001–B004; and
-- Secondary 2 N6: B001, B003 and B004.
-
-This is still technical pre-flight evidence, not Mathematics approval. Re-run the command after
-each content or chart PR because changing a question revision makes its reviewer packet stale until
-it is exported again.
-
-The pull-request policy permits a bulk reviewer-packet refresh only when every changed file inside
-the Mathematics bank is under `review_packets/` and none of the affected batches has an active
-claim. Any source question, manifest or source-asset change continues to require exactly one claimed
-batch per PR.
+This is technical pre-flight evidence only, not Mathematics approval.
