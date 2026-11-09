@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-517",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A tracing of one polygon fits exactly over its partner. The congruent polygons have corresponding angles of 74° and y°. Find y. Enter the numerical value only."
+          "text": "A tracing of one polygon fits exactly over its partner. The congruent polygons have corresponding angles of 74° and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set the corresponding angle measures equal."
+              "text": "Which angle corresponds to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": "? Think about what congruence tells you about matching angles."
             }
           ]
         }
