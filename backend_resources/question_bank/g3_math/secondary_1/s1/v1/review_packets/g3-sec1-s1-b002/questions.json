@@ -682,7 +682,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-009",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -694,7 +694,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-009-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -702,7 +711,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "In a pictogram, each star represents 4 votes. A row contains 3 stars. Find the number of votes represented. Enter the numerical value only."
+            "text": "The pictogram shows the votes for one option. Find the number of votes represented. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -733,7 +742,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 3 × 4."
+                "text": "Count the stars, then multiply by the value in the key."
               }
             ]
           }
@@ -754,7 +763,74 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-009-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-009-diagram-r2.svg",
+        "alt_text": "Pictogram where each ★ represents 4; Votes has 3 symbols.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pictogram",
+          "question_key": "s1-l1-009",
+          "outcome": "1.2",
+          "template": "pictogram",
+          "inputs": {
+            "rows": [
+              {
+                "label": "Votes",
+                "count": 3
+              }
+            ],
+            "key": 4,
+            "title": "Votes for one option"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0-0",
+              "kind": "icon",
+              "value": "4",
+              "tag": "text",
+              "geometry": {
+                "x": "200",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-1",
+              "kind": "icon",
+              "value": "4",
+              "tag": "text",
+              "geometry": {
+                "x": "258",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-2",
+              "kind": "icon",
+              "value": "4",
+              "tag": "text",
+              "geometry": {
+                "x": "316",
+                "y": "124"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "78506e216759133342e2d1be1d91701186eced338723071c1aacc05c15f2482f",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -768,7 +844,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -864,7 +940,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-011",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -876,7 +952,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-011-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -884,7 +969,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A line graph falls from 68 units in April to 53 units in May. Find the decrease. Enter the numerical value only."
+            "text": "The line graph shows the units recorded in April and May. Find the decrease. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -915,7 +1000,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 68 - 53."
+                "text": "Read both points from the scale, then subtract."
               }
             ]
           }
@@ -936,7 +1021,170 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-011-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-011-diagram-r2.svg",
+        "alt_text": "Line graph with an axis break and a vertical axis from 50 to 70 in steps of 2. April: 68, May: 53.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "line_chart",
+          "question_key": "s1-l2-011",
+          "outcome": "1.2",
+          "template": "line_chart",
+          "inputs": {
+            "categories": [
+              "April",
+              "May"
+            ],
+            "values": [
+              68,
+              53
+            ],
+            "y_min": 50,
+            "y_max": 70,
+            "tick_step": 2,
+            "y_label": "Units",
+            "title": "Units recorded",
+            "axis_break": true,
+            "alt_text": "Line graph with an axis break and a vertical axis from 50 to 70 in steps of 2. April: 68, May: 53."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "point-0",
+              "kind": "point",
+              "value": "68",
+              "tag": "circle",
+              "geometry": {
+                "cx": "237.5",
+                "cy": "133",
+                "r": "6"
+              }
+            },
+            {
+              "key": "point-1",
+              "kind": "point",
+              "value": "53",
+              "tag": "circle",
+              "geometry": {
+                "cx": "532.5",
+                "cy": "343",
+                "r": "6"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:50",
+              "axis": "y",
+              "value": "50",
+              "position": "385",
+              "label": "50"
+            },
+            {
+              "key": "y:52",
+              "axis": "y",
+              "value": "52",
+              "position": "357",
+              "label": "52"
+            },
+            {
+              "key": "y:54",
+              "axis": "y",
+              "value": "54",
+              "position": "329",
+              "label": "54"
+            },
+            {
+              "key": "y:56",
+              "axis": "y",
+              "value": "56",
+              "position": "301",
+              "label": "56"
+            },
+            {
+              "key": "y:58",
+              "axis": "y",
+              "value": "58",
+              "position": "273",
+              "label": "58"
+            },
+            {
+              "key": "y:60",
+              "axis": "y",
+              "value": "60",
+              "position": "245",
+              "label": "60"
+            },
+            {
+              "key": "y:62",
+              "axis": "y",
+              "value": "62",
+              "position": "217",
+              "label": "62"
+            },
+            {
+              "key": "y:64",
+              "axis": "y",
+              "value": "64",
+              "position": "189",
+              "label": "64"
+            },
+            {
+              "key": "y:66",
+              "axis": "y",
+              "value": "66",
+              "position": "161",
+              "label": "66"
+            },
+            {
+              "key": "y:68",
+              "axis": "y",
+              "value": "68",
+              "position": "133",
+              "label": "68"
+            },
+            {
+              "key": "y:70",
+              "axis": "y",
+              "value": "70",
+              "position": "105",
+              "label": "70"
+            },
+            {
+              "key": "x:April",
+              "axis": "x",
+              "value": "April",
+              "position": "237.5",
+              "label": "April"
+            },
+            {
+              "key": "x:May",
+              "axis": "x",
+              "value": "May",
+              "position": "532.5",
+              "label": "May"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 50.0,
+            "y_max": 70.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "275ad909bbe486f30ba69c47d24efcd9656ac0e10be7e68e48223a73f216d503",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -950,7 +1198,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1068,7 +1316,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-012",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1080,7 +1328,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-012-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1088,7 +1345,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pictogram uses one icon for 8 items. Category X has 6 icons and Category Y has 4 icons. What percentage of the two-category total belongs to X? Enter the numerical value only."
+            "text": "The pictogram shows Category X and Category Y. What percentage of the two-category total belongs to X? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1127,7 +1384,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 6 out of 10 icons."
+                "text": "Count the icons for each category, then find X as a percentage of the total."
               }
             ]
           }
@@ -1148,7 +1405,149 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-012-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-012-diagram-r3.svg",
+        "alt_text": "Pictogram where each ● represents 8; X has 6 symbols; Y has 4 symbols.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pictogram",
+          "question_key": "s1-l3-012",
+          "outcome": "1.2",
+          "template": "pictogram",
+          "inputs": {
+            "rows": [
+              {
+                "label": "X",
+                "count": 6
+              },
+              {
+                "label": "Y",
+                "count": 4
+              }
+            ],
+            "key": 8,
+            "title": "Categories X and Y",
+            "symbol": "●"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0-0",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "200",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-1",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "258",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-2",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "316",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-3",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "374",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-4",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "432",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-5",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "490",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-1-0",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "200",
+                "y": "194"
+              }
+            },
+            {
+              "key": "icon-1-1",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "258",
+                "y": "194"
+              }
+            },
+            {
+              "key": "icon-1-2",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "316",
+                "y": "194"
+              }
+            },
+            {
+              "key": "icon-1-3",
+              "kind": "icon",
+              "value": "8",
+              "tag": "text",
+              "geometry": {
+                "x": "374",
+                "y": "194"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "376f179074c1cf3763c6ae8ba4a26a1025c70ce78712c71615a6f4c1ce094cfc",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1162,7 +1561,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1906,19 +2305,28 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-011",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.4",
-    "title": "Irregular year spacing",
+    "title": "Issue on a time axis",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-011-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1926,7 +2334,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph places 2019, 2020, 2023 and 2024 at equal horizontal distances. Enter the issue code."
+            "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. The figure shows the time axis of a line graph, with its labels at equal distances. Enter the issue code."
           }
         ],
         "marks": 1,
@@ -1957,7 +2365,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Unequal time gaps are displayed as equal intervals."
+                "text": "Work out the number of years between each pair of neighbouring labels, then compare it with the spacing."
               }
             ]
           }
@@ -1978,7 +2386,73 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-011-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-011-diagram-r2.svg",
+        "alt_text": "Horizontal time axis of a line graph with the years 2019, 2020, 2023 and 2024 at equal distances.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "vertical_scale",
+          "question_key": "s1-l1-011",
+          "outcome": "1.4",
+          "template": "vertical_scale",
+          "inputs": {
+            "ticks": [
+              2019,
+              2020,
+              2023,
+              2024
+            ],
+            "title": "Time axis of a line graph",
+            "orientation": "horizontal",
+            "alt_text": "Horizontal time axis of a line graph with the years 2019, 2020, 2023 and 2024 at equal distances."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [],
+          "chart_ticks": [
+            {
+              "key": "x:2019",
+              "axis": "x",
+              "value": "2019",
+              "position": "90",
+              "label": "2019"
+            },
+            {
+              "key": "x:2020",
+              "axis": "x",
+              "value": "2020",
+              "position": "270",
+              "label": "2020"
+            },
+            {
+              "key": "x:2023",
+              "axis": "x",
+              "value": "2023",
+              "position": "450",
+              "label": "2023"
+            },
+            {
+              "key": "x:2024",
+              "axis": "x",
+              "value": "2024",
+              "position": "630",
+              "label": "2024"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "9d296814ee10b56f8261cd3fbeb74a6f6b63d6e4ea82495694f69ae07dfaa381",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1992,7 +2466,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -2179,7 +2653,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-015",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2191,7 +2665,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-015-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2199,7 +2682,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two bars have equal height 8 units, but widths 2 cm and 5 cm. If viewers compare ink area, how many times as large as the narrow bar's area is the wide bar's area? Enter the numerical value only."
+            "text": "The two bars in the figure have the widths and heights shown. If viewers compare ink area, how many times as large as the narrow bar's area is the wide bar's area? Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2230,7 +2713,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The equal heights cancel, so compare widths 5/2."
+                "text": "The equal heights cancel, so compare the two widths."
               }
             ]
           }
@@ -2251,7 +2734,77 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-015-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-015-diagram-r2.svg",
+        "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "scaled_icons",
+          "question_key": "s1-l3-015",
+          "outcome": "1.4",
+          "template": "scaled_icons",
+          "inputs": {
+            "shape": "rect",
+            "items": [
+              {
+                "label": "Narrow bar",
+                "caption": "2 cm by 8 units",
+                "width": 2,
+                "height": 8
+              },
+              {
+                "label": "Wide bar",
+                "caption": "5 cm by 8 units",
+                "width": 5,
+                "height": 8
+              }
+            ],
+            "title": "Two bars",
+            "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0",
+              "kind": "rect-icon",
+              "value": "2x8",
+              "tag": "rect",
+              "geometry": {
+                "x": "150",
+                "y": "100",
+                "width": "60",
+                "height": "240"
+              }
+            },
+            {
+              "key": "icon-1",
+              "kind": "rect-icon",
+              "value": "5x8",
+              "tag": "rect",
+              "geometry": {
+                "x": "465",
+                "y": "100",
+                "width": "150",
+                "height": "240"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "e806e5b589163528732f5a20713f2a432efffe9e898dd1a5eb5ef9b423fb5824",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2265,7 +2818,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {

@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-011",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.4",
-  "title": "Irregular year spacing",
+  "title": "Issue on a time axis",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-011-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph places 2019, 2020, 2023 and 2024 at equal horizontal distances. Enter the issue code."
+          "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. The figure shows the time axis of a line graph, with its labels at equal distances. Enter the issue code."
         }
       ],
       "marks": 1,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Unequal time gaps are displayed as equal intervals."
+              "text": "Work out the number of years between each pair of neighbouring labels, then compare it with the spacing."
             }
           ]
         }
@@ -72,7 +81,73 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-011-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-011-diagram-r2.svg",
+      "alt_text": "Horizontal time axis of a line graph with the years 2019, 2020, 2023 and 2024 at equal distances.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "vertical_scale",
+        "question_key": "s1-l1-011",
+        "outcome": "1.4",
+        "template": "vertical_scale",
+        "inputs": {
+          "ticks": [
+            2019,
+            2020,
+            2023,
+            2024
+          ],
+          "title": "Time axis of a line graph",
+          "orientation": "horizontal",
+          "alt_text": "Horizontal time axis of a line graph with the years 2019, 2020, 2023 and 2024 at equal distances."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [],
+        "chart_ticks": [
+          {
+            "key": "x:2019",
+            "axis": "x",
+            "value": "2019",
+            "position": "90",
+            "label": "2019"
+          },
+          {
+            "key": "x:2020",
+            "axis": "x",
+            "value": "2020",
+            "position": "270",
+            "label": "2020"
+          },
+          {
+            "key": "x:2023",
+            "axis": "x",
+            "value": "2023",
+            "position": "450",
+            "label": "2023"
+          },
+          {
+            "key": "x:2024",
+            "axis": "x",
+            "value": "2024",
+            "position": "630",
+            "label": "2024"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "9d296814ee10b56f8261cd3fbeb74a6f6b63d6e4ea82495694f69ae07dfaa381",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +161,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

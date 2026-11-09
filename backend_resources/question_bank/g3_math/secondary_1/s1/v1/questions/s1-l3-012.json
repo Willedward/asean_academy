@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-012",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-012-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pictogram uses one icon for 8 items. Category X has 6 icons and Category Y has 4 icons. What percentage of the two-category total belongs to X? Enter the numerical value only."
+          "text": "The pictogram shows Category X and Category Y. What percentage of the two-category total belongs to X? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -59,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 6 out of 10 icons."
+              "text": "Count the icons for each category, then find X as a percentage of the total."
             }
           ]
         }
@@ -80,7 +89,149 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-012-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-012-diagram-r3.svg",
+      "alt_text": "Pictogram where each ● represents 8; X has 6 symbols; Y has 4 symbols.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "pictogram",
+        "question_key": "s1-l3-012",
+        "outcome": "1.2",
+        "template": "pictogram",
+        "inputs": {
+          "rows": [
+            {
+              "label": "X",
+              "count": 6
+            },
+            {
+              "label": "Y",
+              "count": 4
+            }
+          ],
+          "key": 8,
+          "title": "Categories X and Y",
+          "symbol": "●"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0-0",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "200",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-1",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "258",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-2",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "316",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-3",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "374",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-4",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "432",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-0-5",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "490",
+              "y": "124"
+            }
+          },
+          {
+            "key": "icon-1-0",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "200",
+              "y": "194"
+            }
+          },
+          {
+            "key": "icon-1-1",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "258",
+              "y": "194"
+            }
+          },
+          {
+            "key": "icon-1-2",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "316",
+              "y": "194"
+            }
+          },
+          {
+            "key": "icon-1-3",
+            "kind": "icon",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "374",
+              "y": "194"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "376f179074c1cf3763c6ae8ba4a26a1025c70ce78712c71615a6f4c1ce094cfc",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -94,6 +245,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

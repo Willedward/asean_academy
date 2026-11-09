@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-011 — Irregular year spacing
+## s1-l1-011 — Issue on a time axis
 
 [Open this question in the HTML preview](index.html#s1-l1-011)
 

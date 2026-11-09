@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-015",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-015-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two bars have equal height 8 units, but widths 2 cm and 5 cm. If viewers compare ink area, how many times as large as the narrow bar's area is the wide bar's area? Enter the numerical value only."
+          "text": "The two bars in the figure have the widths and heights shown. If viewers compare ink area, how many times as large as the narrow bar's area is the wide bar's area? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Bar area is width \u00d7 height."
+              "text": "Bar area is width × height."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The equal heights cancel, so compare widths 5/2."
+              "text": "The equal heights cancel, so compare the two widths."
             }
           ]
         }
@@ -72,7 +81,77 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-015-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-015-diagram-r2.svg",
+      "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "scaled_icons",
+        "question_key": "s1-l3-015",
+        "outcome": "1.4",
+        "template": "scaled_icons",
+        "inputs": {
+          "shape": "rect",
+          "items": [
+            {
+              "label": "Narrow bar",
+              "caption": "2 cm by 8 units",
+              "width": 2,
+              "height": 8
+            },
+            {
+              "label": "Wide bar",
+              "caption": "5 cm by 8 units",
+              "width": 5,
+              "height": 8
+            }
+          ],
+          "title": "Two bars",
+          "alt_text": "Two bars of equal height 8 units, with widths 2 cm and 5 cm."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "icon-0",
+            "kind": "rect-icon",
+            "value": "2x8",
+            "tag": "rect",
+            "geometry": {
+              "x": "150",
+              "y": "100",
+              "width": "60",
+              "height": "240"
+            }
+          },
+          {
+            "key": "icon-1",
+            "kind": "rect-icon",
+            "value": "5x8",
+            "tag": "rect",
+            "geometry": {
+              "x": "465",
+              "y": "100",
+              "width": "150",
+              "height": "240"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "e806e5b589163528732f5a20713f2a432efffe9e898dd1a5eb5ef9b423fb5824",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +165,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
