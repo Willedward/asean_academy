@@ -1,0 +1,5889 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l1-512",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Find the hypotenuse",
+    "difficulty": 1,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l1-512-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Survey crew noted soft ground around the supports while preparing a replacement frame. For the clinic wheelchair ramp, a right triangular panel has perpendicular sides 88 cm and 105 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "137",
+          "canonical_latex": "137",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Identify the two perpendicular sides before using Pythagoras’ theorem."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Evaluate the square root of 88² + 105²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "c=\\sqrt{88^2+105^2}=137"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 1,
+    "assets": [
+      {
+        "asset_key": "g4-l1-512-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l1-512-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with perpendicular sides 88 cm and 105 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l1-512",
+          "outcome": "4.1",
+          "template": "find_hypotenuse",
+          "inputs": {
+            "legs": [
+              {
+                "value": 88,
+                "unit": "cm"
+              },
+              {
+                "value": 105,
+                "unit": "cm"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "perpendicular_sides": [
+              {
+                "value": 88,
+                "unit": "cm"
+              },
+              {
+                "value": 105,
+                "unit": "cm"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "137"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "c"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            466.0
+          ],
+          "points": {
+            "A": [
+              126.99,
+              346.0
+            ],
+            "B": [
+              126.99,
+              56.0
+            ],
+            "C": [
+              473.01,
+              346.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "88 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "105 cm",
+              "target": "segment:AC"
+            },
+            {
+              "text": "c",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.8381,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "3c4f793c36bcb5918e9405737ebd3c55124cd3a436120a4b312a8b2742bdf77d",
+        "width": 600,
+        "height": 466
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l1-513",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Find the hypotenuse",
+    "difficulty": 1,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l1-513-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Maintenance team noted soft ground around the supports while preparing a replacement frame. For the market canopy support, a right triangular panel has perpendicular sides 3 cm and 4 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Identify the two perpendicular sides before using Pythagoras’ theorem."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Evaluate the square root of 3² + 4²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "c=\\sqrt{3^2+4^2}=5"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 1,
+    "assets": [
+      {
+        "asset_key": "g4-l1-513-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l1-513-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with perpendicular sides 3 cm and 4 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l1-513",
+          "outcome": "4.1",
+          "template": "find_hypotenuse",
+          "inputs": {
+            "legs": [
+              {
+                "value": 3,
+                "unit": "cm"
+              },
+              {
+                "value": 4,
+                "unit": "cm"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "perpendicular_sides": [
+              {
+                "value": 3,
+                "unit": "cm"
+              },
+              {
+                "value": 4,
+                "unit": "cm"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "5"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "c"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              326.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              326.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "3 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "4 cm",
+              "target": "segment:AC"
+            },
+            {
+              "text": "c",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "d9af52461b50262f165be353dec00103fdc47fc60a6023a5d950b6156c029983",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-516",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Find a missing perpendicular side",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l2-516-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Student engineers noted soft ground around the supports while preparing a replacement frame. A safety brace in the river research station forms a right triangle. Its hypotenuse is 17 m and one shorter side is 8 m. Find the other shorter side in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "15",
+          "canonical_latex": "15",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The unknown is a shorter side, so subtract its known partner’s square from the hypotenuse square."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compute √(17² − 8²)."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "b=\\sqrt{17^2-8^2}=15"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{15}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g4-l2-516-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l2-516-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with hypotenuse 17 m and one perpendicular side 8 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l2-516",
+          "outcome": "4.1",
+          "template": "missing_leg",
+          "inputs": {
+            "hypotenuse": {
+              "value": 17,
+              "unit": "m"
+            },
+            "leg": {
+              "value": 8,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "hypotenuse": {
+              "value": 17,
+              "unit": "m"
+            },
+            "perpendicular_side": {
+              "value": 8,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "15"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AC",
+              "label": "b"
+            }
+          ],
+          "task": "find_leg",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            368.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              248.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              248.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "8 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "b",
+              "target": "segment:AC"
+            },
+            {
+              "text": "17 m",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.5333,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "8298cb2b5543c96d597af8e4c4cf1fc6f3f4927eb1e3ed9f2310ef2b458d5a6f",
+        "width": 600,
+        "height": 368
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-517",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Find a missing perpendicular side",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l2-517-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Safety inspectors noted soft ground around the supports while preparing a replacement frame. A safety brace in the library staircase forms a right triangle. Its hypotenuse is 26 m and one shorter side is 10 m. Find the other shorter side in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "24",
+          "canonical_latex": "24",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The unknown is a shorter side, so subtract its known partner’s square from the hypotenuse square."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compute √(26² − 10²)."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "b=\\sqrt{26^2-10^2}=24"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{24}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g4-l2-517-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l2-517-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with hypotenuse 26 m and one perpendicular side 10 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l2-517",
+          "outcome": "4.1",
+          "template": "missing_leg",
+          "inputs": {
+            "hypotenuse": {
+              "value": 26,
+              "unit": "m"
+            },
+            "leg": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "hypotenuse": {
+              "value": 26,
+              "unit": "m"
+            },
+            "perpendicular_side": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "24"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AC",
+              "label": "b"
+            }
+          ],
+          "task": "find_leg",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            326.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              206.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              206.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "10 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "b",
+              "target": "segment:AC"
+            },
+            {
+              "text": "26 m",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.4167,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "c1d0f784f43387d5ef6de7f9dbf8fc7ff02104a888350907ba6dbb53bea04b32",
+        "width": 600,
+        "height": 326
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-516",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Diagonal across a rectangular structure",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-516-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Field researchers noted soft ground around the supports while preparing a replacement frame. A rectangular section of the weather-sensor mast measures 20 m by 21 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "29",
+          "canonical_latex": "29",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The rectangle’s diagonal is the hypotenuse of a right triangle."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use d² = 20² + 21²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{20^2+21^2}=29"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{29}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-516-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-516-diagram-r2.svg",
+        "alt_text": "Rectangle 21 m by 20 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l3-516",
+          "outcome": "4.1",
+          "template": "rectangle_diagonal",
+          "inputs": {
+            "sides": [
+              {
+                "value": 20,
+                "unit": "m"
+              },
+              {
+                "value": 21,
+                "unit": "m"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "sides": [
+              {
+                "value": 21,
+                "unit": "m"
+              },
+              {
+                "value": 20,
+                "unit": "m"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "29"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "d"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              158.25,
+              326.0
+            ],
+            "B": [
+              158.25,
+              56.0
+            ],
+            "C": [
+              441.75,
+              326.0
+            ],
+            "D": [
+              441.75,
+              56.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BD",
+              "from": "B",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "20 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "21 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "d",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "parallel",
+              "segments": [
+                "AB",
+                "CD"
+              ]
+            },
+            {
+              "type": "parallel",
+              "segments": [
+                "AC",
+                "BD"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.9524,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "d32d7fbe16e25546db320fba1845650b6d9f1fbb2a5ba94575db282ca1f8ac31",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-517",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Diagonal across a rectangular structure",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-517-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Design technicians noted soft ground around the supports while preparing a replacement frame. A rectangular section of the aquaculture walkway measures 21 m by 28 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "35",
+          "canonical_latex": "35",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The rectangle’s diagonal is the hypotenuse of a right triangle."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use d² = 21² + 28²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{21^2+28^2}=35"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{35}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-517-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-517-diagram-r2.svg",
+        "alt_text": "Rectangle 28 m by 21 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l3-517",
+          "outcome": "4.1",
+          "template": "rectangle_diagonal",
+          "inputs": {
+            "sides": [
+              {
+                "value": 21,
+                "unit": "m"
+              },
+              {
+                "value": 28,
+                "unit": "m"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "sides": [
+              {
+                "value": 28,
+                "unit": "m"
+              },
+              {
+                "value": 21,
+                "unit": "m"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "35"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "d"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              326.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              326.0
+            ],
+            "D": [
+              480.0,
+              56.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BD",
+              "from": "B",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "21 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "28 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "d",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "parallel",
+              "segments": [
+                "AB",
+                "CD"
+              ]
+            },
+            {
+              "type": "parallel",
+              "segments": [
+                "AC",
+                "BD"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "b4e6e9f21f3bbcfc9ad83cf95e13ae21cfc27f8fa5820c2a5deb28b824f0be28",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-518",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Diagonal across a rectangular structure",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-518-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Rescue planners noted soft ground around the supports while preparing a replacement frame. A rectangular section of the heritage-site barrier measures 14 m by 48 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "50",
+          "canonical_latex": "50",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "The rectangle’s diagonal is the hypotenuse of a right triangle."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use d² = 14² + 48²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{14^2+48^2}=50"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{50}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-518-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-518-diagram-r2.svg",
+        "alt_text": "Rectangle 48 m by 14 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l3-518",
+          "outcome": "4.1",
+          "template": "rectangle_diagonal",
+          "inputs": {
+            "sides": [
+              {
+                "value": 14,
+                "unit": "m"
+              },
+              {
+                "value": 48,
+                "unit": "m"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "sides": [
+              {
+                "value": 48,
+                "unit": "m"
+              },
+              {
+                "value": 14,
+                "unit": "m"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "50"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "d"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            300.0
+          ],
+          "points": {
+            "A": [
+              110.0,
+              166.83
+            ],
+            "B": [
+              110.0,
+              56.0
+            ],
+            "C": [
+              490.0,
+              166.83
+            ],
+            "D": [
+              490.0,
+              56.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BD",
+              "from": "B",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "14 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "48 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "d",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "parallel",
+              "segments": [
+                "AB",
+                "CD"
+              ]
+            },
+            {
+              "type": "parallel",
+              "segments": [
+                "AC",
+                "BD"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.2917,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "fa68b52a10961be4d3ce7bcab6837d8cb95386d2d20d45748f8edd86f0e6a86c",
+        "width": 600,
+        "height": 300
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l4-509",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Cable with fastening allowance",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l4-509-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Construction monitors noted soft ground around the supports while preparing a replacement frame. At the volleyball court marking, a cable runs from the top of a 36 m vertical post to an anchor 48 m from its base. Another 2 m is required for fastening. Find the total cable length in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "62",
+          "canonical_latex": "62",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "First find the sloping part as the hypotenuse; the fastening allowance is separate."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Calculate √(36² + 48²), then add 2."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\sqrt{36^2+48^2}+2=60+2=62"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{62}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g4-l4-509-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l4-509-diagram-r2.svg",
+        "alt_text": "Vertical post 36 m high with a cable c from its top to an anchor 48 m from its base, right angle marked at the base. A further 2 m of cable is shown beyond the anchor for fastening. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l4-509",
+          "outcome": "4.1",
+          "template": "cable_allowance",
+          "inputs": {
+            "post": {
+              "value": 36,
+              "unit": "m"
+            },
+            "anchor_distance": {
+              "value": 48,
+              "unit": "m"
+            },
+            "allowance": {
+              "value": 2,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "post": {
+              "value": 36,
+              "unit": "m"
+            },
+            "anchor_distance": {
+              "value": 48,
+              "unit": "m"
+            },
+            "allowance": {
+              "value": 2,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "62",
+            "60"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "c"
+            }
+          ],
+          "task": "find_hypotenuse_then_add",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            432.0
+          ],
+          "points": {
+            "A": [
+              110.0,
+              301.69
+            ],
+            "B": [
+              110.0,
+              56.0
+            ],
+            "C": [
+              437.59,
+              301.69
+            ],
+            "E": [
+              490.0,
+              301.69
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CE",
+              "from": "C",
+              "to": "E",
+              "hidden": true,
+              "role": "allowance"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "36 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "48 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "c",
+              "target": "segment:BC"
+            },
+            {
+              "text": "+2 m",
+              "target": "segment:CE"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "A",
+                "C",
+                "E"
+              ]
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "b9aa299ac55efbf0b8799ed14d7e43b78276a994d56b28abab0524b93edd5fb3",
+        "width": 600,
+        "height": 432
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l5-504",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.1",
+    "title": "Composite diagonal route",
+    "difficulty": 5,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l5-504-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Environmental officers noted soft ground around the supports while preparing a replacement frame. An inspection route at the drainage inspection route crosses a rectangular floor 42 m by 56 m diagonally, then continues 42 m along a straight corridor. Find the complete route length in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 5,
+        "primary_outcome": "4.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "112",
+          "canonical_latex": "112",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Split the route into the rectangular diagonal and the corridor segment."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The diagonal is √(42² + 56²); add 42 m."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\sqrt{42^2+56^2}+42=112"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 4
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{112}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 5,
+    "assets": [
+      {
+        "asset_key": "g4-l5-504-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l5-504-diagram-r2.svg",
+        "alt_text": "Rectangular floor 56 m by 42 m. The route crosses the floor along the diagonal d, then continues 42 m along a straight corridor. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l5-504",
+          "outcome": "4.1",
+          "template": "diagonal_route",
+          "inputs": {
+            "floor": [
+              {
+                "value": 42,
+                "unit": "m"
+              },
+              {
+                "value": 56,
+                "unit": "m"
+              }
+            ],
+            "corridor": {
+              "value": 42,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "floor": [
+              {
+                "value": 56,
+                "unit": "m"
+              },
+              {
+                "value": 42,
+                "unit": "m"
+              }
+            ],
+            "corridor": {
+              "value": 42,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "112",
+            "70"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AD",
+              "label": "d"
+            }
+          ],
+          "task": "composite_route",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            381.0
+          ],
+          "points": {
+            "A": [
+              65.0,
+              261.43
+            ],
+            "B": [
+              65.0,
+              60.0
+            ],
+            "C": [
+              333.57,
+              261.43
+            ],
+            "D": [
+              333.57,
+              60.0
+            ],
+            "E": [
+              535.0,
+              60.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "CD",
+              "from": "C",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BD",
+              "from": "B",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AD",
+              "from": "A",
+              "to": "D",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "DE",
+              "from": "D",
+              "to": "E",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "D"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "56 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "42 m",
+              "target": "segment:CD"
+            },
+            {
+              "text": "d",
+              "target": "segment:AD"
+            },
+            {
+              "text": "42 m",
+              "target": "segment:DE"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "parallel",
+              "segments": [
+                "AB",
+                "CD"
+              ]
+            },
+            {
+              "type": "collinear",
+              "points": [
+                "B",
+                "D",
+                "E"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "CD",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "DE",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "eb0733b05f2f84e8a5e7deb1f68ed1b4115539914b35b422a9c7f8f4b678833a",
+        "width": 600,
+        "height": 381
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l1-514",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 1,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Transport analysts noted soft ground around the supports while preparing a replacement frame. A triangular support at the forest ranger cabin has side lengths 25 cm, 60 cm and 65 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 25² + 60² with 65²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "25^2+60^2=4225,\\quad 65^2=4225"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 1,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-518",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Community builders noted soft ground around the supports while preparing a replacement frame. A triangular support at the emergency radio tower has side lengths 45 cm, 60 cm and 75 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 45² + 60² with 75²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "45^2+60^2=5625,\\quad 75^2=5625"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{1}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-519",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Quality auditors noted soft ground around the supports while preparing a replacement frame. A triangular support at the recycling-centre conveyor has side lengths 60 cm, 63 cm and 87 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 60² + 63² with 87²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "60^2+63^2=7569,\\quad 87^2=7569"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{1}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-520",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Site coordinators noted soft ground around the supports while preparing a replacement frame. A triangular support at the greenhouse roof panel has side lengths 20 cm, 99 cm and 102 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 20² + 99² with 102²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "20^2+99^2=10201,\\quad 102^2=10404"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{0}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-519",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Survey crew noted restricted clearance for equipment while preparing a replacement frame. A triangular support at the bicycle parking shelter has side lengths 17 cm, 144 cm and 145 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 17² + 144² with 145²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "17^2+144^2=21025,\\quad 145^2=21025"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{1}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-520",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Maintenance team noted restricted clearance for equipment while preparing a replacement frame. A triangular support at the reservoir service road has side lengths 5 cm, 12 cm and 14 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 5² + 12² with 14²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "5^2+12^2=169,\\quad 14^2=196"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{0}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-521",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Test whether a triangle is right-angled",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Student engineers noted restricted clearance for equipment while preparing a replacement frame. A triangular support at the wildlife crossing sign has side lengths 8 cm, 15 cm and 17 cm. Enter 1 if it is right-angled and 0 if it is not."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Treat the longest side as the possible hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare 8² + 15² with 17²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "8^2+15^2=289,\\quad 17^2=289"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{1}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l4-510",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.2",
+    "title": "Complete a right-angled specification",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l4-510-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Safety inspectors noted restricted clearance for equipment while preparing a replacement frame. Two shorter sides of a triangular frame for the laboratory equipment stand are 12 cm and 16 cm. The angle between them must be 90°. Find the required longest side x in centimetres. Enter the numerical value only."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "4.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "20",
+          "canonical_latex": "20",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "A right angle between the known sides makes the unknown side the hypotenuse."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Solve x² = 12² + 16²."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "x^2=12^2+16^2\\Rightarrow x=20"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{20}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g4-l4-510-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l4-510-diagram-r2.svg",
+        "alt_text": "Triangle with shorter sides 12 cm and 16 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l4-510",
+          "outcome": "4.2",
+          "template": "right_angle_specification",
+          "inputs": {
+            "legs": [
+              {
+                "value": 12,
+                "unit": "cm"
+              },
+              {
+                "value": 16,
+                "unit": "cm"
+              }
+            ]
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "perpendicular_sides": [
+              {
+                "value": 12,
+                "unit": "cm"
+              },
+              {
+                "value": 16,
+                "unit": "cm"
+              }
+            ]
+          },
+          "forbidden_visible_labels": [
+            "20"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:BC",
+              "label": "x"
+            }
+          ],
+          "task": "find_hypotenuse",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              326.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              326.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "labels": [
+            {
+              "text": "12 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "16 cm",
+              "target": "segment:AC"
+            },
+            {
+              "text": "x",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "b7767a3b5a8f1d048b587aee62c236c05abc13eb48dc84c5f5b0563cd09a1bf7",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l1-515",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Use tangent at 45 degrees",
+    "difficulty": 1,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l1-515-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Field researchers noted restricted clearance for equipment while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the community garden plot, the opposite side is 9 m. Find the adjacent side x in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Tangent compares the opposite and adjacent sides."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan 45° = 1."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\tan45^\\circ=\\frac{9}{x}=1\\Rightarrow x=9"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 1,
+    "assets": [
+      {
+        "asset_key": "g4-l1-515-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l1-515-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 9 m and the adjacent side is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l1-515",
+          "outcome": "4.3",
+          "template": "tangent_adjacent",
+          "inputs": {
+            "angle": 45,
+            "opposite": {
+              "value": 9,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "angle_degrees": 45.0,
+            "opposite": {
+              "value": 9,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [],
+          "forbidden_label_exemptions": [
+            {
+              "value": "9",
+              "reason": "equals a stated value shown on the diagram"
+            }
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AC",
+              "label": "x"
+            }
+          ],
+          "task": "find_side_trigonometry",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            466.0
+          ],
+          "points": {
+            "A": [
+              155.0,
+              346.0
+            ],
+            "B": [
+              155.0,
+              56.0
+            ],
+            "C": [
+              445.0,
+              346.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 45.0,
+              "degrees": 45.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                445.0,
+                346.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                155.0,
+                346.0
+              ],
+              "end_ray_point": [
+                155.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "45°",
+              "target": "angle:C"
+            },
+            {
+              "text": "9 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "x",
+              "target": "segment:AC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 1.0,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "b9cd6e3fde824f0b2dcb65fd14ca50b3800d253ad0dd0fa8023e625f0271d922",
+        "width": 600,
+        "height": 466
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l1-516",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Use tangent at 45 degrees",
+    "difficulty": 1,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l1-516-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Design technicians noted restricted clearance for equipment while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the airport luggage frame, the opposite side is 10 m. Find the adjacent side x in metres. Enter the numerical value only."
+          }
+        ],
+        "marks": 1,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "10",
+          "canonical_latex": "10",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Tangent compares the opposite and adjacent sides."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan 45° = 1."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\tan45^\\circ=\\frac{10}{x}=1\\Rightarrow x=10"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 1,
+    "assets": [
+      {
+        "asset_key": "g4-l1-516-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l1-516-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 10 m and the adjacent side is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l1-516",
+          "outcome": "4.3",
+          "template": "tangent_adjacent",
+          "inputs": {
+            "angle": 45,
+            "opposite": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "angle_degrees": 45.0,
+            "opposite": {
+              "value": 10,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [],
+          "forbidden_label_exemptions": [
+            {
+              "value": "10",
+              "reason": "equals a stated value shown on the diagram"
+            }
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AC",
+              "label": "x"
+            }
+          ],
+          "task": "find_side_trigonometry",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            466.0
+          ],
+          "points": {
+            "A": [
+              155.0,
+              346.0
+            ],
+            "B": [
+              155.0,
+              56.0
+            ],
+            "C": [
+              445.0,
+              346.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 45.0,
+              "degrees": 45.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                445.0,
+                346.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                155.0,
+                346.0
+              ],
+              "end_ray_point": [
+                155.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "45°",
+              "target": "angle:C"
+            },
+            {
+              "text": "10 m",
+              "target": "segment:AB"
+            },
+            {
+              "text": "x",
+              "target": "segment:AC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 1.0,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "80f7fc1a4b0fc4256c9d970bac01a8ac95f5df53a8f1ba18203e30a6ac4029a7",
+        "width": 600,
+        "height": 466
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-521",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Calculate a side using tangent",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l2-521-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Rescue planners noted restricted clearance for equipment while preparing a replacement frame. A sight line at the mangrove boardwalk makes an angle of 35° with level ground. The horizontal distance is 17 m. Find the vertical height x in metres, correct to 1 decimal place."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "11.9",
+          "canonical_latex": "11.9",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Relative to the given angle, identify the vertical side as opposite and the horizontal side as adjacent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan 35° = x/17 and round only the final answer."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "x=17\\tan 35^\\circ=11.9"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{11.9}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g4-l2-521-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l2-521-diagram-r2.svg",
+        "alt_text": "Right-angled triangle on level ground. The sight line makes 35° with the ground, the horizontal distance is 17 m and the vertical height is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l2-521",
+          "outcome": "4.3",
+          "template": "tangent_opposite",
+          "inputs": {
+            "angle": 35,
+            "adjacent": {
+              "value": 17,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "angle_degrees": 35.0,
+            "adjacent": {
+              "value": 17,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "11.9",
+            "11.90"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AB",
+              "label": "x"
+            }
+          ],
+          "task": "find_side_trigonometry",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            428.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              308.07
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              308.07
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 35.0,
+              "degrees": 35.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                480.0,
+                308.07
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                120.0,
+                308.07
+              ],
+              "end_ray_point": [
+                120.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "35°",
+              "target": "angle:C"
+            },
+            {
+              "text": "x",
+              "target": "segment:AB"
+            },
+            {
+              "text": "17 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "sight line",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.7002,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "3362f86cb11de68fa1358c44f0b2c87e0f0e0c1ad55a5e02b1d19329cd1b81b7",
+        "width": 600,
+        "height": 428
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-522",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Calculate a side using tangent",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l2-522-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Construction monitors noted restricted clearance for equipment while preparing a replacement frame. A sight line at the food-distribution awning makes an angle of 40° with level ground. The horizontal distance is 6 m. Find the vertical height x in metres, correct to 1 decimal place."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "5.0",
+          "canonical_latex": "5.0",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Relative to the given angle, identify the vertical side as opposite and the horizontal side as adjacent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan 40° = x/6 and round only the final answer."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "x=6\\tan 40^\\circ=5.0"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{5.0}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g4-l2-522-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l2-522-diagram-r2.svg",
+        "alt_text": "Right-angled triangle on level ground. The sight line makes 40° with the ground, the horizontal distance is 6 m and the vertical height is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l2-522",
+          "outcome": "4.3",
+          "template": "tangent_opposite",
+          "inputs": {
+            "angle": 40,
+            "adjacent": {
+              "value": 6,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "angle_degrees": 40.0,
+            "adjacent": {
+              "value": 6,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "5.0",
+            "5",
+            "5.03"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AB",
+              "label": "x"
+            }
+          ],
+          "task": "find_side_trigonometry",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            466.0
+          ],
+          "points": {
+            "A": [
+              127.2,
+              346.0
+            ],
+            "B": [
+              127.2,
+              56.0
+            ],
+            "C": [
+              472.8,
+              346.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 40.0,
+              "degrees": 40.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                472.8,
+                346.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                127.2,
+                346.0
+              ],
+              "end_ray_point": [
+                127.2,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "40°",
+              "target": "angle:C"
+            },
+            {
+              "text": "x",
+              "target": "segment:AB"
+            },
+            {
+              "text": "6 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "sight line",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.8391,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "5fa5cb211972ba8c30ae9eb9699639eae3a54a855529cd64b4cf843b6845c60b",
+        "width": 600,
+        "height": 466
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l2-523",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Calculate a side using tangent",
+    "difficulty": 2,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l2-523-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Environmental officers noted restricted clearance for equipment while preparing a replacement frame. A sight line at the hydrology survey marker makes an angle of 45° with level ground. The horizontal distance is 7 m. Find the vertical height x in metres, correct to 1 decimal place."
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "7.0",
+          "canonical_latex": "7.0",
+          "accepted_answers": [
+            "7"
+          ],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Relative to the given angle, identify the vertical side as opposite and the horizontal side as adjacent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use tan 45° = x/7 and round only the final answer."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "x=7\\tan 45^\\circ=7.0"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{7.0}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [
+      {
+        "asset_key": "g4-l2-523-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l2-523-diagram-r2.svg",
+        "alt_text": "Right-angled triangle on level ground. The sight line makes 45° with the ground, the horizontal distance is 7 m and the vertical height is labelled x. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l2-523",
+          "outcome": "4.3",
+          "template": "tangent_opposite",
+          "inputs": {
+            "angle": 45,
+            "adjacent": {
+              "value": 7,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "angle_degrees": 45.0,
+            "adjacent": {
+              "value": 7,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [],
+          "forbidden_label_exemptions": [
+            {
+              "value": "7.0",
+              "reason": "equals a stated value shown on the diagram"
+            },
+            {
+              "value": "7",
+              "reason": "equals a stated value shown on the diagram"
+            }
+          ],
+          "unknowns": [
+            {
+              "target": "segment:AB",
+              "label": "x"
+            }
+          ],
+          "task": "find_side_trigonometry",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            466.0
+          ],
+          "points": {
+            "A": [
+              155.0,
+              346.0
+            ],
+            "B": [
+              155.0,
+              56.0
+            ],
+            "C": [
+              445.0,
+              346.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 45.0,
+              "degrees": 45.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                445.0,
+                346.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                155.0,
+                346.0
+              ],
+              "end_ray_point": [
+                155.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "45°",
+              "target": "angle:C"
+            },
+            {
+              "text": "x",
+              "target": "segment:AB"
+            },
+            {
+              "text": "7 m",
+              "target": "segment:AC"
+            },
+            {
+              "text": "sight line",
+              "target": "segment:BC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 1.0,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "e6114f28315d44229939dddd6329be0cd26d2a759b31ce44a86b9f7ae31374a1",
+        "width": 600,
+        "height": 466
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-522",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Find an acute angle",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-522-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Transport analysts noted restricted clearance for equipment while preparing a replacement frame. A right triangular component at the training-camp flagpole has an opposite side of 39 cm and an adjacent side of 52 cm relative to angle θ. Find θ correct to 1 decimal place."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "36.9",
+          "canonical_latex": "36.9^\\circ",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": {
+            "canonical": "°",
+            "accepted": [
+              "°",
+              "degrees"
+            ],
+            "required": false
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Both named sides are relative to θ, so use the tangent ratio."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Calculate tan⁻¹(39/52) in degree mode."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\theta=\\tan^{-1}\\left(\\frac{39}{52}\\right)=36.9^\\circ"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{36.9^\\circ}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-522-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-522-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 39 cm and the adjacent side is 52 cm. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l3-522",
+          "outcome": "4.3",
+          "template": "find_angle",
+          "inputs": {
+            "opposite": {
+              "value": 39,
+              "unit": "cm"
+            },
+            "adjacent": {
+              "value": 52,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "opposite": {
+              "value": 39,
+              "unit": "cm"
+            },
+            "adjacent": {
+              "value": 52,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "36.9",
+            "36.87"
+          ],
+          "unknowns": [
+            {
+              "target": "angle:C",
+              "label": "θ"
+            }
+          ],
+          "task": "find_angle",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              326.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              326.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 36.87,
+              "degrees": 36.87
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                480.0,
+                326.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                120.0,
+                326.0
+              ],
+              "end_ray_point": [
+                120.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "θ",
+              "target": "angle:C"
+            },
+            {
+              "text": "39 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "52 cm",
+              "target": "segment:AC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "9d8410a3d8ff1b2cacf27d604af4fa0334d37877794cc3f1927db4f9a87f5b43",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l3-523",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Find an acute angle",
+    "difficulty": 3,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l3-523-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Community builders noted restricted clearance for equipment while preparing a replacement frame. A right triangular component at the public-transit map board has an opposite side of 42 cm and an adjacent side of 56 cm relative to angle θ. Find θ correct to 1 decimal place."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "36.9",
+          "canonical_latex": "36.9^\\circ",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": {
+            "canonical": "°",
+            "accepted": [
+              "°",
+              "degrees"
+            ],
+            "required": false
+          }
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Both named sides are relative to θ, so use the tangent ratio."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Calculate tan⁻¹(42/56) in degree mode."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\theta=\\tan^{-1}\\left(\\frac{42}{56}\\right)=36.9^\\circ"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{36.9^\\circ}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "g4-l3-523-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l3-523-diagram-r2.svg",
+        "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 42 cm and the adjacent side is 56 cm. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l3-523",
+          "outcome": "4.3",
+          "template": "find_angle",
+          "inputs": {
+            "opposite": {
+              "value": 42,
+              "unit": "cm"
+            },
+            "adjacent": {
+              "value": 56,
+              "unit": "cm"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "opposite": {
+              "value": 42,
+              "unit": "cm"
+            },
+            "adjacent": {
+              "value": 56,
+              "unit": "cm"
+            }
+          },
+          "forbidden_visible_labels": [
+            "36.9",
+            "36.87"
+          ],
+          "unknowns": [
+            {
+              "target": "angle:C",
+              "label": "θ"
+            }
+          ],
+          "task": "find_angle",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            446.0
+          ],
+          "points": {
+            "A": [
+              120.0,
+              326.0
+            ],
+            "B": [
+              120.0,
+              56.0
+            ],
+            "C": [
+              480.0,
+              326.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "AB",
+              "from": "A",
+              "to": "B",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "AC",
+              "from": "A",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "BC",
+              "from": "B",
+              "to": "C",
+              "hidden": false,
+              "role": "edge"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "A",
+              "arms": [
+                "B",
+                "C"
+              ],
+              "marker_size": 22
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "C",
+              "arms": [
+                "A",
+                "B"
+              ],
+              "marker_key": "angle-C",
+              "drawn_degrees": 36.87,
+              "degrees": 36.87
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-C",
+              "center": [
+                480.0,
+                326.0
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                120.0,
+                326.0
+              ],
+              "end_ray_point": [
+                120.0,
+                56.0
+              ],
+              "large_arc": 0,
+              "sweep": 1
+            }
+          ],
+          "labels": [
+            {
+              "text": "θ",
+              "target": "angle:C"
+            },
+            {
+              "text": "42 cm",
+              "target": "segment:AB"
+            },
+            {
+              "text": "56 cm",
+              "target": "segment:AC"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "length_ratio",
+              "segments": [
+                "AB",
+                "AC"
+              ],
+              "value": 0.75,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "a7fabeea0ac3254e6b13f76e6f6c31eba33f496e12a3b8cb50f10fcdb9545acf",
+        "width": 600,
+        "height": 446
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l4-511",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Angle of elevation with observer height",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l4-511-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Quality auditors noted restricted clearance for equipment while preparing a replacement frame. An observer stands 18 m from a vertical tower at the seismic sensor enclosure. The angle of elevation from eye level to the top is 60°, and the observer’s eye is 1.6 m above the ground. Find the tower height correct to 1 decimal place."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "32.8",
+          "canonical_latex": "32.8",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "First calculate the height above eye level using tangent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find 18 tan 60°, then add 1.6 m."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "h=18\\tan 60^\\circ+1.6=32.8"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{32.8}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g4-l4-511-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l4-511-diagram-r2.svg",
+        "alt_text": "An observer stands 18 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 60°. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l4-511",
+          "outcome": "4.3",
+          "template": "elevation_observer",
+          "inputs": {
+            "distance": {
+              "value": 18,
+              "unit": "m"
+            },
+            "angle": 60,
+            "eye_height": {
+              "value": 1.6,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "distance": {
+              "value": 18,
+              "unit": "m"
+            },
+            "angle_degrees": 60.0,
+            "eye_height": {
+              "value": 1.6,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "32.8",
+            "32.78",
+            "31.2",
+            "31.18"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:TQ",
+              "label": "h"
+            }
+          ],
+          "task": "angle_of_elevation",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            470.0
+          ],
+          "points": {
+            "F": [
+              217.62,
+              350.0
+            ],
+            "E": [
+              217.62,
+              335.36
+            ],
+            "T": [
+              382.38,
+              350.0
+            ],
+            "P": [
+              382.38,
+              335.36
+            ],
+            "Q": [
+              382.38,
+              50.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "FT",
+              "from": "F",
+              "to": "T",
+              "hidden": false,
+              "role": "ground"
+            },
+            {
+              "key": "TQ",
+              "from": "T",
+              "to": "Q",
+              "hidden": false,
+              "role": "tower"
+            },
+            {
+              "key": "FE",
+              "from": "F",
+              "to": "E",
+              "hidden": false,
+              "role": "observer"
+            },
+            {
+              "key": "EP",
+              "from": "E",
+              "to": "P",
+              "hidden": true,
+              "role": "eye_level"
+            },
+            {
+              "key": "EQ",
+              "from": "E",
+              "to": "Q",
+              "hidden": false,
+              "role": "line_of_sight"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "P",
+              "arms": [
+                "E",
+                "Q"
+              ],
+              "marker_size": 18
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "E",
+              "arms": [
+                "P",
+                "Q"
+              ],
+              "marker_key": "angle-E",
+              "drawn_degrees": 60.0,
+              "degrees": 60.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-E",
+              "center": [
+                217.62,
+                335.36
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                382.38,
+                335.36
+              ],
+              "end_ray_point": [
+                382.38,
+                50.0
+              ],
+              "large_arc": 0,
+              "sweep": 0
+            }
+          ],
+          "labels": [
+            {
+              "text": "60°",
+              "target": "angle:E"
+            },
+            {
+              "text": "18 m",
+              "target": "segment:FT"
+            },
+            {
+              "text": "1.6 m",
+              "target": "segment:FE"
+            },
+            {
+              "text": "h",
+              "target": "segment:TQ"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "T",
+                "P",
+                "Q"
+              ]
+            },
+            {
+              "type": "parallel",
+              "segments": [
+                "FT",
+                "EP"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "FE",
+                "FT"
+              ],
+              "value": 0.0889,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "2d9aed2f6b190a6e8b69d03ba787c62876b2b04cfdc994dc0dec3f02f0c27fd2",
+        "width": 600,
+        "height": 470
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "g4-l4-512",
+    "bank_key": "g3-sec2-g4-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_2",
+    "topic_code": "G4",
+    "primary_outcome": "4.3",
+    "title": "Angle of elevation with observer height",
+    "difficulty": 4,
+    "calculator_allowed": true,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the labelled right-triangle schematic. The diagram is not drawn to scale."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "g4-l4-512-diagram"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Site coordinators noted restricted clearance for equipment while preparing a replacement frame. An observer stands 19 m from a vertical tower at the floating farm platform. The angle of elevation from eye level to the top is 30°, and the observer’s eye is 1.6 m above the ground. Find the tower height correct to 1 decimal place."
+          }
+        ],
+        "marks": 4,
+        "primary_outcome": "4.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "rounded_dp",
+          "canonical_answer": "12.6",
+          "canonical_latex": "12.6",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": 1,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "First calculate the height above eye level using tangent."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Find 19 tan 30°, then add 1.6 m."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Select and apply the right-triangle relationship."
+              },
+              {
+                "type": "display_math",
+                "latex": "h=19\\tan 30^\\circ+1.6=12.6"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 3
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\boxed{12.6}"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 4,
+    "assets": [
+      {
+        "asset_key": "g4-l4-512-diagram",
+        "kind": "geometry",
+        "format": "svg",
+        "path": "assets/g4-l4-512-diagram-r2.svg",
+        "alt_text": "An observer stands 19 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 30°. Not drawn to scale.",
+        "generation_spec": {
+          "renderer": "nextscholar-right-triangle-svg-v2",
+          "diagram_kind": "right_triangle",
+          "question_key": "g4-l4-512",
+          "outcome": "4.3",
+          "template": "elevation_observer",
+          "inputs": {
+            "distance": {
+              "value": 19,
+              "unit": "m"
+            },
+            "angle": 30,
+            "eye_height": {
+              "value": 1.6,
+              "unit": "m"
+            }
+          },
+          "not_to_scale": true,
+          "dimensions": {
+            "distance": {
+              "value": 19,
+              "unit": "m"
+            },
+            "angle_degrees": 30.0,
+            "eye_height": {
+              "value": 1.6,
+              "unit": "m"
+            }
+          },
+          "forbidden_visible_labels": [
+            "12.6",
+            "12.57",
+            "11.0",
+            "11",
+            "10.97"
+          ],
+          "unknowns": [
+            {
+              "target": "segment:TQ",
+              "label": "h"
+            }
+          ],
+          "task": "angle_of_elevation",
+          "drawn_to_scale": true,
+          "viewbox": [
+            600.0,
+            368.0
+          ],
+          "points": {
+            "F": [
+              150.0,
+              248.47
+            ],
+            "E": [
+              150.0,
+              223.21
+            ],
+            "T": [
+              450.0,
+              248.47
+            ],
+            "P": [
+              450.0,
+              223.21
+            ],
+            "Q": [
+              450.0,
+              50.0
+            ]
+          },
+          "segments": [
+            {
+              "key": "FT",
+              "from": "F",
+              "to": "T",
+              "hidden": false,
+              "role": "ground"
+            },
+            {
+              "key": "TQ",
+              "from": "T",
+              "to": "Q",
+              "hidden": false,
+              "role": "tower"
+            },
+            {
+              "key": "FE",
+              "from": "F",
+              "to": "E",
+              "hidden": false,
+              "role": "observer"
+            },
+            {
+              "key": "EP",
+              "from": "E",
+              "to": "P",
+              "hidden": true,
+              "role": "eye_level"
+            },
+            {
+              "key": "EQ",
+              "from": "E",
+              "to": "Q",
+              "hidden": false,
+              "role": "line_of_sight"
+            }
+          ],
+          "right_angles": [
+            {
+              "vertex": "P",
+              "arms": [
+                "E",
+                "Q"
+              ],
+              "marker_size": 18
+            }
+          ],
+          "angles": [
+            {
+              "vertex": "E",
+              "arms": [
+                "P",
+                "Q"
+              ],
+              "marker_key": "angle-E",
+              "drawn_degrees": 30.0,
+              "degrees": 30.0
+            }
+          ],
+          "angle_markers": [
+            {
+              "marker_key": "angle-E",
+              "center": [
+                150.0,
+                223.21
+              ],
+              "radius": 46.0,
+              "start_ray_point": [
+                450.0,
+                223.21
+              ],
+              "end_ray_point": [
+                450.0,
+                50.0
+              ],
+              "large_arc": 0,
+              "sweep": 0
+            }
+          ],
+          "labels": [
+            {
+              "text": "30°",
+              "target": "angle:E"
+            },
+            {
+              "text": "19 m",
+              "target": "segment:FT"
+            },
+            {
+              "text": "1.6 m",
+              "target": "segment:FE"
+            },
+            {
+              "text": "h",
+              "target": "segment:TQ"
+            }
+          ],
+          "relationships": [
+            {
+              "type": "collinear",
+              "points": [
+                "T",
+                "P",
+                "Q"
+              ]
+            },
+            {
+              "type": "parallel",
+              "segments": [
+                "FT",
+                "EP"
+              ]
+            },
+            {
+              "type": "length_ratio",
+              "segments": [
+                "FE",
+                "FT"
+              ],
+              "value": 0.0842,
+              "tolerance": 0.02
+            }
+          ],
+          "min_phone_font_px": 13.13
+        },
+        "sha256": "383c1a7181651617252250efec86719b520eab07da9ed57483e20304ce5c6ede",
+        "width": 600,
+        "height": 368
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-14T14:30:00+08:00",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    }
+  }
+]

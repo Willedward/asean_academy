@@ -560,6 +560,68 @@ def test_pull_request_check_exports_claimed_ready_batch(repository_root, tmp_pat
     assert json.loads((tmp_path / "evidence/report.json").read_text())["valid"] is True
 
 
+def test_pull_request_check_allows_unclaimed_packet_only_refresh(repository_root, tmp_path):
+    from question_bank.collaboration import check_pull_request
+
+    packet_paths = [
+        "backend_resources/question_bank/g3_math/secondary_1/g1/v1/"
+        "review_packets/g3-sec1-g1-b001/manifest.json",
+        "backend_resources/question_bank/g3_math/secondary_1/g5/v1/"
+        "review_packets/g3-sec1-g5-b001/manifest.json",
+    ]
+    registry_path = tmp_path / "claims.json"
+    registry_path.write_text(
+        json.dumps({"schema_version": "1.0.0", "claims": []})
+    )
+
+    report = check_pull_request(
+        changed_files=packet_paths,
+        head_branch="chore/math-review-evidence-refresh",
+        repository_root=repository_root,
+        bank_root=repository_root / "backend_resources/question_bank/g3_math",
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        registry_path=registry_path,
+        output=tmp_path / "evidence",
+    )
+
+    assert report.valid
+    assert report.changed_batches == ["g3-sec1-g1-b001", "g3-sec1-g5-b001"]
+    assert report.exported_batches == ["g3-sec1-g1-b001", "g3-sec1-g5-b001"]
+
+    registry_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0.0",
+                "claims": [
+                    {
+                        "batch_id": "g3-sec1-g1-b001",
+                        "owner": "william",
+                        "branch": "fix/g3-sec1-g1-b001-william",
+                        "claimed_at": "2026-11-09T00:00:00Z",
+                        "released_at": None,
+                    }
+                ],
+            }
+        )
+    )
+    active_report = check_pull_request(
+        changed_files=packet_paths,
+        head_branch="chore/math-review-evidence-refresh",
+        repository_root=repository_root,
+        bank_root=repository_root / "backend_resources/question_bank/g3_math",
+        syllabus_path=repository_root
+        / "backend_resources/syllabi/g3_math/v1/catalogue.json",
+        registry_path=registry_path,
+        output=tmp_path / "active-evidence",
+    )
+
+    assert not active_report.valid
+    assert "active_claim_blocks_evidence_refresh" in {
+        issue.code for issue in active_report.errors
+    }
+
+
 def test_pull_request_check_rejects_wrong_branch_and_planned_question(repository_root, tmp_path):
     from question_bank.collaboration import check_pull_request
 
