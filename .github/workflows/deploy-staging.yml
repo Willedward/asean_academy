@@ -98,6 +98,11 @@ jobs:
       STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
       STAGING_ABUSE_HASH_SECRET: ${{ secrets.STAGING_ABUSE_HASH_SECRET }}
       STAGING_GEMINI_API_KEY: ${{ secrets.STAGING_GEMINI_API_KEY }}
+      STAGING_OPENAI_API_KEY: ${{ secrets.STAGING_OPENAI_API_KEY }}
+      TUTOR_PROVIDER: ${{ vars.TUTOR_PROVIDER }}
+      TUTOR_MODEL: ${{ vars.TUTOR_MODEL }}
+      TUTOR_INPUT_COST_PER_MILLION_MICROS_SGD: ${{ vars.TUTOR_INPUT_COST_PER_MILLION_MICROS_SGD }}
+      TUTOR_OUTPUT_COST_PER_MILLION_MICROS_SGD: ${{ vars.TUTOR_OUTPUT_COST_PER_MILLION_MICROS_SGD }}
       STAGING_SUPABASE_PROJECT_ID: ${{ vars.STAGING_SUPABASE_PROJECT_ID }}
       STAGING_SUPABASE_URL: ${{ vars.STAGING_SUPABASE_URL }}
       STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ vars.STAGING_SUPABASE_PUBLISHABLE_KEY }}
@@ -127,7 +132,6 @@ jobs:
           : "${SUPABASE_DB_PASSWORD:?Configure STAGING_SUPABASE_DB_PASSWORD in staging.}"
           : "${STAGING_DATABASE_URL:?Configure STAGING_DATABASE_URL in staging.}"
           : "${STAGING_ABUSE_HASH_SECRET:?Configure STAGING_ABUSE_HASH_SECRET in staging.}"
-          : "${STAGING_GEMINI_API_KEY:?Configure the staging STAGING_GEMINI_API_KEY secret; real students need a paid Gemini plan.}"
           : "${STAGING_SUPABASE_PROJECT_ID:?Configure STAGING_SUPABASE_PROJECT_ID.}"
           : "${STAGING_SUPABASE_URL:?Configure STAGING_SUPABASE_URL.}"
           : "${STAGING_SUPABASE_PUBLISHABLE_KEY:?Configure STAGING_SUPABASE_PUBLISHABLE_KEY.}"
@@ -140,6 +144,10 @@ jobs:
           test "$STAGING_API_URL" != "$STAGING_WEB_URL"
           test "$STAGING_API_URL" != "${{ vars.PRODUCTION_API_URL }}"
           test "$STAGING_WEB_URL" != "${{ vars.PRODUCTION_WEB_URL }}"
+      - name: Validate tutor provider and model
+        run: |
+          uv run --project services/learning_api --locked python services/learning_api/scripts/tutor_deploy_settings.py \
+            --environment staging --output "$RUNNER_TEMP/tutor-settings"
       - name: Verify Google OAuth and callback configuration
         run: |
           python3 scripts/verify_supabase_auth_config.py \
@@ -173,14 +181,10 @@ jobs:
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_DATABASE_URL=$STAGING_DATABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "SUPABASE_URL=$STAGING_SUPABASE_URL" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "SUPABASE_ANON_KEY=$STAGING_SUPABASE_PUBLISHABLE_KEY" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_ENABLED=true" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_PROVIDER=gemini" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL=gemini-3.5-flash-lite" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD=384000" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD=3200000" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED=false" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED=false" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "GEMINI_API_KEY=$STAGING_GEMINI_API_KEY" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
+          while IFS= read -r setting; do
+            npx -y @railway/cli@4 variable set "$setting" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE" </dev/null
+          done < "$RUNNER_TEMP/tutor-settings"
+          npx -y @railway/cli@4 variable set "$TUTOR_KEY_NAME=${!TUTOR_KEY_SOURCE}" --skip-deploys --service "$STAGING_RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 up --ci --service "$STAGING_RAILWAY_API_SERVICE"
       - name: Verify API release and staging database readiness
         run: |

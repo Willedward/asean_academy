@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from uuid import UUID
 
 DEFAULT_REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
 REQUIRED_SCHEMA_REVISION = "202611020047"
+# Catches a model left over from the other provider; names are otherwise free to change.
+_GEMINI_MODEL_PATTERN = re.compile(r"^gemini-", re.IGNORECASE)
+_OPENAI_MODEL_PATTERN = re.compile(r"^(gpt-|chatgpt-|o\d)", re.IGNORECASE)
 
 
 def _csv(name: str, default: str) -> tuple[str, ...]:
@@ -392,6 +396,13 @@ class Settings:
             )
         if settings.tutor_provider == "gemini" and not settings.tutor_gemini_model:
             raise RuntimeError("ASEAN_ACADEMY_TUTOR_GEMINI_MODEL must not be empty")
+        if settings.tutor_provider == "gemini" and not _GEMINI_MODEL_PATTERN.match(
+            settings.tutor_gemini_model
+        ):
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL must name a Gemini model when "
+                f"ASEAN_ACADEMY_TUTOR_PROVIDER=gemini, not {settings.tutor_gemini_model!r}"
+            )
         if settings.tutor_enabled and settings.tutor_provider == "gemini":
             if not settings.tutor_gemini_api_key:
                 raise RuntimeError("GEMINI_API_KEY is required when the Gemini tutor is enabled")
@@ -404,6 +415,13 @@ class Settings:
                 )
         if settings.tutor_provider == "openai" and not settings.tutor_openai_model:
             raise RuntimeError("ASEAN_ACADEMY_TUTOR_OPENAI_MODEL must not be empty")
+        if settings.tutor_provider == "openai" and not _OPENAI_MODEL_PATTERN.match(
+            settings.tutor_openai_model
+        ):
+            raise RuntimeError(
+                "ASEAN_ACADEMY_TUTOR_OPENAI_MODEL must name an OpenAI model when "
+                f"ASEAN_ACADEMY_TUTOR_PROVIDER=openai, not {settings.tutor_openai_model!r}"
+            )
         if settings.tutor_enabled and settings.tutor_provider == "openai":
             if not settings.tutor_openai_api_key:
                 raise RuntimeError("OPENAI_API_KEY is required when the OpenAI tutor is enabled")
