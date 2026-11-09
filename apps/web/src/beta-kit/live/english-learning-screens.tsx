@@ -221,7 +221,7 @@ export function EnglishCourseScreen({
                 ) : (
                   <div
                     key={lesson.stable_key}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 opacity-70"
+                    className="flex items-center gap-3 rounded-xl px-3 py-3"
                   >
                     {content}
                   </div>

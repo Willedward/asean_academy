@@ -151,6 +151,9 @@ test.describe.serial("authenticated beta journeys", () => {
     await expect(
       page.getByRole("status").filter({ hasText: "Try again" }),
     ).toContainText("Try again");
+    await expect(
+      page.getByRole("status").filter({ hasText: "Try again" }).locator(".."),
+    ).toBeFocused();
     await page.getByRole("button", { name: "Ask the hornbill" }).click();
     const tutor = page.getByRole("dialog", { name: "Hornbill" });
     await expect(tutor).toBeVisible();
@@ -166,6 +169,9 @@ test.describe.serial("authenticated beta journeys", () => {
         name: "Close the hornbill and go back to the question",
       })
       .click();
+    await expect(
+      page.getByRole("button", { name: "Ask the hornbill" }),
+    ).toBeFocused();
     await page.getByRole("button", { name: "Hint 1", exact: true }).click();
     await expect(page.getByRole("region", { name: "Hints" })).toContainText(
       "Hint 1",

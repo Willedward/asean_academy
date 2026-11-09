@@ -1,7 +1,7 @@
 "use client";
 
 import { Flag } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 
 import { Button as KitButton } from "@/beta-kit/components/ui";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,9 @@ export function QuestionReportForm({
   appearance?: "established" | "nextscholar";
 }) {
   const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLElement>(null);
+  const sentRef = useRef<HTMLParagraphElement>(null);
+  const reopenFocus = useRef(false);
   const [category, setCategory] = useState<ReportCategory>("possible_error");
   const [comment, setComment] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
@@ -52,9 +55,29 @@ export function QuestionReportForm({
     }
   }
 
+  useEffect(() => {
+    if (open) {
+      rootRef.current?.querySelector("select")?.focus();
+    } else if (reopenFocus.current) {
+      reopenFocus.current = false;
+      rootRef.current?.querySelector("button")?.focus();
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (state === "sent") sentRef.current?.focus();
+  }, [state]);
+
+  function cancel() {
+    reopenFocus.current = true;
+    setOpen(false);
+  }
+
   if (state === "sent") {
     return (
       <p
+        ref={sentRef}
+        tabIndex={-1}
         className={
           appearance === "nextscholar"
             ? "m-0 text-sm font-semibold text-ns-success"
@@ -68,19 +91,24 @@ export function QuestionReportForm({
     );
   }
   if (!open) {
-    return appearance === "nextscholar" ? (
-      <KitButton onClick={() => setOpen(true)} icon={Flag}>
-        Report a problem
-      </KitButton>
-    ) : (
-      <Button onClick={() => setOpen(true)} variant="outline">
-        <Flag className="mr-2 size-4" />
-        Report a problem
-      </Button>
+    return (
+      <div className="contents" ref={rootRef as RefObject<HTMLDivElement>}>
+        {appearance === "nextscholar" ? (
+          <KitButton onClick={() => setOpen(true)} icon={Flag}>
+            Report a problem
+          </KitButton>
+        ) : (
+          <Button onClick={() => setOpen(true)} variant="outline">
+            <Flag className="mr-2 size-4" />
+            Report a problem
+          </Button>
+        )}
+      </div>
     );
   }
   return (
     <section
+      ref={rootRef}
       className={
         appearance === "nextscholar"
           ? "w-full rounded-2xl border border-ns-line bg-ns-sunken p-4 text-ns-ink"
@@ -135,7 +163,7 @@ export function QuestionReportForm({
             >
               {state === "sending" ? "Sending…" : "Send report"}
             </KitButton>
-            <KitButton onClick={() => setOpen(false)}>Cancel</KitButton>
+            <KitButton onClick={cancel}>Cancel</KitButton>
           </>
         ) : (
           <>
@@ -145,7 +173,7 @@ export function QuestionReportForm({
             >
               {state === "sending" ? "Sending…" : "Send report"}
             </Button>
-            <Button onClick={() => setOpen(false)} variant="outline">
+            <Button onClick={cancel} variant="outline">
               Cancel
             </Button>
           </>

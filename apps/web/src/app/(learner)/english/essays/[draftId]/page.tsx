@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { EnglishEssayDraftEditor } from "@/components/english-essay-draft-editor";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { getVerifiedSession } from "@/lib/auth/session";
 import { getServerEnglishEssayDraft } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "Essay" };
 
 export default async function EnglishEssayDraftPage({
   params,

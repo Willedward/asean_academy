@@ -12,7 +12,7 @@ const figtree = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "NextScholar",
+  title: { default: "NextScholar", template: "%s · NextScholar" },
   description:
     "Structured mathematics learning for ASEAN Scholarship preparation.",
 };

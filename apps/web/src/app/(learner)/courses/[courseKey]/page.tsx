@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   CoreCourseMapScreen,
   CoreLearningError,
@@ -13,6 +14,8 @@ import {
   getServerProgress,
   ServerLearningApiError,
 } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "Course map" };
 
 function EstablishedCoursePage({ courseKey }: { courseKey: string }) {
   return (

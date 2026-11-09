@@ -14,6 +14,7 @@ import { useState } from "react";
 import { EnglishLessonHeader } from "@/beta-kit/live/english-learning-screens";
 import {
   Button,
+  focusRingOnDark,
   Callout,
   Card,
   Divider,
@@ -122,6 +123,7 @@ export function EnglishLessonPanel({ lesson }: { lesson: EnglishLessonResponse }
           <Button
             variant="gold"
             icon={PlayCircle}
+            className={focusRingOnDark}
             disabled={
               busy ||
               (!lesson.practice.available && !lesson.practice.development_available)
@@ -134,6 +136,7 @@ export function EnglishLessonPanel({ lesson }: { lesson: EnglishLessonResponse }
             <Button
               icon={RotateCcw}
               disabled={busy}
+              className={focusRingOnDark}
               onClick={() => void begin("retry_review")}
             >
               Retry {lesson.practice.retry_question_count} exit ticket

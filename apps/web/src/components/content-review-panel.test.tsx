@@ -439,7 +439,9 @@ describe("ContentReviewPanel", () => {
     expect(
       screen.getByText("Meaning and order of a ratio"),
     ).toBeInTheDocument();
-    expect(screen.getByLabelText("3:5")).toBeInTheDocument();
+    expect(
+      screen.getByText("3:5", { selector: "annotation" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Source references")).toBeInTheDocument();
   });
 

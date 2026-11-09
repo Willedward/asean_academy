@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { EnglishPracticePlayer } from "@/components/english-practice-player";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
+
+export const metadata: Metadata = { title: "English practice" };
 
 export default async function EnglishPracticePage({
   params,

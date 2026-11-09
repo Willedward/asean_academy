@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { EnglishDiagnosticResult } from "@/components/english-diagnostic-result";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
+
+export const metadata: Metadata = { title: "English check result" };
 
 export default async function EnglishDiagnosticResultPage({
   params,

@@ -224,7 +224,7 @@ export function EnglishEssayMarking({
   return (
     <Card tone="brand" className="gap-4">
       <div className="flex items-start gap-3">
-        <FlaskConical className="mt-0.5 shrink-0 text-ns-brand" aria-hidden />
+        <FlaskConical className="mt-0.5 shrink-0 text-ns-gold" aria-hidden />
         <div>
           <H3>Test structured marking feedback</H3>
           <Muted>

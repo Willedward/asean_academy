@@ -66,6 +66,7 @@ function Navigation({
     return (
       <nav
         aria-label="Main"
+        data-ns-bottom-nav
         className="fixed inset-x-0 bottom-0 z-30 flex h-[72px] border-t border-ns-line bg-ns-raised px-1 pb-3 lg:hidden"
       >
         {items.map(({ key, label, href, icon: Icon }) => {
@@ -173,6 +174,15 @@ export function CoreLearningShell({
 }) {
   return (
     <div className="ns-root relative min-h-dvh bg-ns-surface font-ns text-ns-ink lg:flex">
+      <a
+        href="#main-content"
+        className={cn(
+          "fixed top-3 left-3 z-50 -translate-y-20 rounded-full bg-ns-ink px-4 py-2 text-sm font-bold text-white transition-transform focus:translate-y-0",
+          focusRing,
+        )}
+      >
+        Skip to content
+      </a>
       <aside className="sticky top-0 hidden h-dvh w-[264px] shrink-0 flex-col gap-6 border-r border-ns-line bg-ns-surface px-5 pt-7 pb-6 lg:flex">
         <Link href="/learn" className="block px-3.5">
           <Logo height={26} />
@@ -183,7 +193,10 @@ export function CoreLearningShell({
         </div>
       </aside>
       <div className="flex min-h-dvh min-w-0 grow flex-col">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-ns-line bg-ns-surface px-4 lg:hidden">
+        <header
+          data-ns-sticky-header
+          className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-ns-line bg-ns-surface px-4 lg:hidden"
+        >
           <Link href="/learn">
             <Logo height={21} />
           </Link>
@@ -195,8 +208,10 @@ export function CoreLearningShell({
           </div>
         </header>
         <main
+          id="main-content"
+          tabIndex={-1}
           className={cn(
-            "flex grow justify-center px-4 pt-5 lg:px-14 lg:pt-10 lg:pb-16",
+            "flex grow justify-center px-4 outline-none pt-5 lg:px-14 lg:pt-10 lg:pb-16",
             focus ? "pb-10" : "pb-28",
           )}
         >

@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { CoreLearningShell } from "@/beta-kit/live/core-learning-shell";
 import { EnglishLessonPanel } from "@/components/english-lesson-panel";
 import { requireEnrolledLearner } from "@/lib/auth/learner";
 import { getVerifiedSession } from "@/lib/auth/session";
 import { getServerEnglishLesson } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "English lesson" };
 
 export default async function EnglishLessonPage({
   params,

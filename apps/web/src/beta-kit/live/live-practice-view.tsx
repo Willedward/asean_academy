@@ -5,6 +5,7 @@ import {
   RefreshCw,
   Send,
 } from "lucide-react";
+import { useRef, type RefObject } from "react";
 
 import { MathContent, type ContentBlock } from "@/components/math-content";
 import { QuestionReportForm } from "@/components/question-report-form";
@@ -31,6 +32,7 @@ import {
   Tag,
   focusRing,
 } from "../components/ui";
+import { useFocusOnChange } from "../components/use-focus";
 
 type Props = {
   sessionId: string;
@@ -87,7 +89,13 @@ function Loading() {
   );
 }
 
-function Completed({ current }: { current: NextQuestionResponse }) {
+function Completed({
+  current,
+  headingRef,
+}: {
+  current: NextQuestionResponse;
+  headingRef: RefObject<HTMLDivElement | null>;
+}) {
   const checkpoint = current.session.mode === "checkpoint";
   const percentage = current.session.question_count
     ? Math.round(
@@ -100,7 +108,9 @@ function Completed({ current }: { current: NextQuestionResponse }) {
       <Eyebrow>
         {checkpoint ? "CHECKPOINT COMPLETE" : "PRACTICE COMPLETE"}
       </Eyebrow>
-      <H1>{checkpoint ? "Checkpoint submitted" : "Practice complete"}</H1>
+      <div ref={headingRef} tabIndex={-1} className={focusRing}>
+        <H1>{checkpoint ? "Checkpoint submitted" : "Practice complete"}</H1>
+      </div>
       <Muted className="max-w-lg text-base leading-7">
         {checkpoint
           ? `You answered ${current.session.correct_count} of ${current.session.question_count} correctly (${percentage}%).`
@@ -136,13 +146,25 @@ export function LivePracticeView({
   onRevealSolution,
   onContinue,
 }: Props) {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const hintsRef = useRef<HTMLElement>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
+  const solutionRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+  // These controls disable or unmount during the request, which would drop focus to the body.
+  useFocusOnChange(current, () => headingRef.current, { skipFirst: true });
+  useFocusOnChange(hints.length, () => hintsRef.current);
+  useFocusOnChange(attempt, () => feedbackRef.current);
+  useFocusOnChange(solution, () => solutionRef.current);
+  useFocusOnChange(error, () => errorRef.current);
+
   if (error && !current)
     return <LoadError message={error} onRetry={onContinue} />;
   if (!current) return <Loading />;
 
   const question = current.question;
   if (current.status === "completed" || !question)
-    return <Completed current={current} />;
+    return <Completed current={current} headingRef={headingRef} />;
 
   const checkpoint = current.session.mode === "checkpoint";
   const lessonHref = current.session.lesson_key
@@ -169,9 +191,11 @@ export function LivePracticeView({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div className="flex flex-col gap-1">
             <Eyebrow>{stage.toUpperCase()}</Eyebrow>
-            <H1>
-              Question {position} of {current.session.question_count}
-            </H1>
+            <div ref={headingRef} tabIndex={-1} className={focusRing}>
+              <H1>
+                Question {position} of {current.session.question_count}
+              </H1>
+            </div>
           </div>
           <Tag tone="brand">
             {question.total_marks}{" "}
@@ -297,11 +321,16 @@ export function LivePracticeView({
                 aria-invalid={
                   status === "wrong" || status === "unreadable" ? true : undefined
                 }
+                aria-describedby={
+                  result?.error
+                    ? `${inputId}-help ${inputId}-error`
+                    : `${inputId}-help`
+                }
                 onChange={(event) =>
                   onAnswerChange(part.position, event.target.value)
                 }
                 className={cn(
-                  "h-[52px] w-full rounded-lg border-[1.5px] bg-ns-raised px-4 font-ns-math text-xl text-ns-ink placeholder:text-ns-muted/80",
+                  "h-[52px] w-full rounded-lg border-[1.5px] bg-ns-raised px-4 font-ns-math text-xl text-ns-ink placeholder:text-ns-muted",
                   status === "correct"
                     ? "border-ns-success bg-ns-success-soft"
                     : status === "wrong" || status === "unreadable"
@@ -310,13 +339,19 @@ export function LivePracticeView({
                   focusRing,
                 )}
               />
-              <span className="text-[13px] leading-[18px] text-ns-muted">
+              <span
+                id={`${inputId}-help`}
+                className="text-[13px] leading-[18px] text-ns-muted"
+              >
                 {part.response_type === "numeric"
                   ? "Enter a number."
                   : "Enter an algebraic expression using standard keyboard notation."}
               </span>
               {result?.error ? (
-                <span className="text-[13px] font-semibold text-ns-danger">
+                <span
+                  id={`${inputId}-error`}
+                  className="text-[13px] font-semibold text-ns-danger"
+                >
                   {result.error}
                 </span>
               ) : null}
@@ -327,8 +362,13 @@ export function LivePracticeView({
 
       {hints.length ? (
         <section
+          ref={hintsRef}
+          tabIndex={-1}
           aria-label="Hints"
-          className="flex flex-col gap-3 rounded-xl bg-ns-amber-soft p-4"
+          className={cn(
+            "flex flex-col gap-3 rounded-xl bg-ns-amber-soft p-4",
+            focusRing,
+          )}
         >
           {[...hints]
             .sort((a, b) => a.stage - b.stage)
@@ -355,79 +395,85 @@ export function LivePracticeView({
         </section>
       ) : null}
 
-      {attempt?.format_error ? (
-        <Callout tone="amber" icon={AlertTriangle}>
-          <strong>Check your answer</strong>
-          <span>
-            An answer could not be read, so this check was not counted. Fix the
-            answer marked &ldquo;Check format&rdquo; and check again.
-          </span>
-        </Callout>
-      ) : attempt ? (
-        <Callout
-          tone={attempt.correct ? "success" : "danger"}
-          icon={attempt.correct ? CheckCircle2 : AlertTriangle}
-        >
-          <strong>{attempt.correct ? "Correct" : "Try again"}</strong>
-          <span>
-            {attempt.correct
-              ? `You earned ${attempt.marks_awarded} of ${attempt.marks_available} marks.`
-              : "That final answer is not correct yet. Retry it or open an authored hint."}
-          </span>
-        </Callout>
-      ) : null}
+      <div ref={feedbackRef} tabIndex={-1} className={focusRing}>
+        {attempt?.format_error ? (
+          <Callout tone="amber" icon={AlertTriangle}>
+            <strong>Check your answer</strong>
+            <span>
+              An answer could not be read, so this check was not counted. Fix the
+              answer marked &ldquo;Check format&rdquo; and check again.
+            </span>
+          </Callout>
+        ) : attempt ? (
+          <Callout
+            tone={attempt.correct ? "success" : "danger"}
+            icon={attempt.correct ? CheckCircle2 : AlertTriangle}
+          >
+            <strong>{attempt.correct ? "Correct" : "Try again"}</strong>
+            <span>
+              {attempt.correct
+                ? `You earned ${attempt.marks_awarded} of ${attempt.marks_available} marks.`
+                : "That final answer is not correct yet. Retry it or open an authored hint."}
+            </span>
+          </Callout>
+        ) : null}
+      </div>
 
       {solution ? (
-        <Card className="gap-5">
-          <H2>Worked solution</H2>
-          {solution.parts.map((part) => (
-            <section className="flex flex-col gap-3" key={part.position}>
-              <div className="rounded-xl bg-ns-sunken p-4">
-                <Eyebrow muted>
-                  {part.label ? `ANSWER (${part.label})` : "ANSWER"}
-                </Eyebrow>
-                <div className="mt-1 font-ns-math text-[22px]">
-                  <MathContent
-                    blocks={[
-                      { type: "inline_math", latex: part.canonical_latex },
-                    ]}
-                  />
+        <div ref={solutionRef} tabIndex={-1} className={focusRing}>
+          <Card className="gap-5">
+            <H2>Worked solution</H2>
+            {solution.parts.map((part) => (
+              <section className="flex flex-col gap-3" key={part.position}>
+                <div className="rounded-xl bg-ns-sunken p-4">
+                  <Eyebrow muted>
+                    {part.label ? `ANSWER (${part.label})` : "ANSWER"}
+                  </Eyebrow>
+                  <div className="mt-1 font-ns-math text-[22px]">
+                    <MathContent
+                      blocks={[
+                        { type: "inline_math", latex: part.canonical_latex },
+                      ]}
+                    />
+                  </div>
                 </div>
-              </div>
-              <ol className="m-0 flex list-none flex-col gap-3 p-0">
-                {part.steps.map((step, index) => {
-                  const content = Array.isArray(step.content)
-                    ? step.content
-                    : [];
-                  return (
-                    <li className="flex items-start gap-3" key={index}>
-                      <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-ns-brand-soft text-sm font-bold">
-                        {index + 1}
-                      </span>
-                      <div className="min-w-0 grow pt-0.5 leading-7">
-                        <MathContent
-                          assets={question.assets}
-                          assetScope={{
-                            kind: "question",
-                            stableKey: question.stable_key,
-                          }}
-                          blocks={content as ContentBlock[]}
-                        />
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
-              <Divider />
-            </section>
-          ))}
-        </Card>
+                <ol className="m-0 flex list-none flex-col gap-3 p-0">
+                  {part.steps.map((step, index) => {
+                    const content = Array.isArray(step.content)
+                      ? step.content
+                      : [];
+                    return (
+                      <li className="flex items-start gap-3" key={index}>
+                        <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-ns-brand-soft text-sm font-bold">
+                          {index + 1}
+                        </span>
+                        <div className="min-w-0 grow pt-0.5 leading-7">
+                          <MathContent
+                            assets={question.assets}
+                            assetScope={{
+                              kind: "question",
+                              stableKey: question.stable_key,
+                            }}
+                            blocks={content as ContentBlock[]}
+                          />
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <Divider />
+              </section>
+            ))}
+          </Card>
+        </div>
       ) : null}
 
       {error ? (
-        <Callout tone="danger" icon={AlertTriangle}>
-          <span>{error}</span>
-        </Callout>
+        <div ref={errorRef} tabIndex={-1} className={focusRing}>
+          <Callout tone="danger" icon={AlertTriangle}>
+            <span>{error}</span>
+          </Callout>
+        </div>
       ) : null}
 
       <div className="flex flex-wrap gap-3 rounded-2xl border border-ns-line bg-ns-raised p-4 shadow-ns-sm">

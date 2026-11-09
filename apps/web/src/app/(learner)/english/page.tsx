@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { coreLearnerFromProfile } from "@/beta-kit/live/core-learner";
 import { EnglishCourseScreen } from "@/beta-kit/live/english-learning-screens";
 import { CoreLearningError } from "@/beta-kit/live/core-learning-screens";
@@ -10,6 +11,8 @@ import {
   getServerEnglishProgress,
   ServerLearningApiError,
 } from "@/lib/server/learning-api";
+
+export const metadata: Metadata = { title: "English" };
 
 export default async function EnglishPage() {
   const learner = await requireEnrolledLearner("/english");
