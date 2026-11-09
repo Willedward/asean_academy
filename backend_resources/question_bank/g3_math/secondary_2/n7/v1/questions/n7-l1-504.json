@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-504",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For the line 3x+2y=8, find the y-coordinate where it crosses the y-axis."
+          "text": "For the line "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x+2y=8"
+        },
+        {
+          "type": "text",
+          "text": ", find the y-coordinate where it crosses the y-axis."
         }
       ],
       "marks": 1,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "A point on the y-axis has x=0."
+              "text": "A point on the y-axis has "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Set x=0, so 2y=8."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2y=8"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

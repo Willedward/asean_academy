@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-505",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve (x-3)(x-6)=0. Give the larger root."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x-3)(x-6)=0"
+        },
+        {
+          "type": "text",
+          "text": ". Give the larger root."
         }
       ],
       "marks": 1,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set x-3=0 or x-6=0."
+              "text": "Set each bracket equal to zero in turn and solve each small equation."
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-502",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 3(x-2)+3=12."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3(x-2)+3=12"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Rewrite the equation as 3(x-2)=9."
+              "text": "Rewrite the equation as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3(x-2)=9"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

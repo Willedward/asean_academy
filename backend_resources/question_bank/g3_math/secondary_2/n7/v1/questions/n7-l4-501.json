@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-501",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A delivery has x small parcels of 3 kg and y large parcels of 6 kg. There are 7 parcels with total mass 30 kg. Construct two equations, solve them, and give x."
+          "text": "A delivery has "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " small parcels of 3 kg and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " large parcels of 6 kg. There are 7 parcels with total mass 30 kg. Construct two equations, solve them, and give "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write x+y=7 and 3x+6y=30."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=7"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the total mass, then solve the pair."
             }
           ]
         }

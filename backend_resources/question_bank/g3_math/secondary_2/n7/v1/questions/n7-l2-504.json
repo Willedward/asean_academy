@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-504",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of 3x+2≤c. Find c."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x+2\\le c"
+        },
+        {
+          "type": "text",
+          "text": ". Find c."
         }
       ],
       "marks": 2,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The filled circle means the boundary value is included, so 3x+2 equals c at the boundary."
+              "text": "The filled circle means the boundary value is included, so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x+2"
+            },
+            {
+              "type": "text",
+              "text": " equals "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c"
+            },
+            {
+              "type": "text",
+              "text": " at the boundary."
             }
           ]
         },
@@ -60,7 +84,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the boundary from the number line and substitute it for x in 3x+2."
+              "text": "Read the boundary from the number line and substitute it for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3x+2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +111,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution shown is x≤4, so the boundary is x=4."
+              "text": "The solution shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x\\le 4"
+            },
+            {
+              "type": "text",
+              "text": ", so the boundary is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=4"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +161,7 @@
       "asset_key": "n7-l2-504-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l2-504-diagram-r2.svg",
+      "path": "assets/n7-l2-504-diagram-r3.svg",
       "alt_text": "Number line showing values less than or equal to 4.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
