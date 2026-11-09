@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l4-501",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bag contains 5 blue and 7 yellow counters. Blue counters are added until the probability of selecting blue is 1/2. How many blue counters are added?"
+          "text": "A bag contains 5 blue and 7 yellow counters. Blue counters are added until the probability of selecting blue is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{1}{2}"
+        },
+        {
+          "type": "text",
+          "text": ". How many blue counters are added?"
         }
       ],
       "marks": 4,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Let x be the number of blue counters added and update both favourable and total counts."
+              "text": "Let "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " be the number of blue counters added and update both favourable and total counts."
             }
           ]
         },
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve (5 + x)/(12 + x) = 1/2."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{5+x}{12+x}=\\frac{1}{2}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

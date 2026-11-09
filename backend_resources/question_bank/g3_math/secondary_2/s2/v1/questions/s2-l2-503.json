@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l2-503",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An archer hits a practice target with probability 7/10. Find the probability that the archer misses. Give your answer as a fraction in simplest form."
+          "text": "An archer hits a practice target with probability "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{7}{10}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the probability that the archer misses. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 2,
@@ -52,8 +60,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "text",
-              "text": "1-\\frac{7}{10}"
+              "type": "inline_math",
+              "latex": "1-\\frac{7}{10}"
             }
           ]
         }
