@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-007",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -70,12 +70,39 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{20/5}{20/80}=16"
+              "type": "text",
+              "text": "Displayed rise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{100-80}{80-75}=\\frac{20}{5}=4"
+            },
+            {
+              "type": "text",
+              "text": " and true rise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{20}{80}=\\frac{1}{4}"
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "4\\div\\frac{1}{4}=16"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
@@ -86,7 +113,7 @@
       "asset_key": "s1-l3-007-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-007-diagram-r2.svg",
+      "path": "assets/s1-l3-007-diagram-r3.svg",
       "alt_text": "Bar chart with an axis break and a vertical axis from 75 to 100 in steps of 5. First: 80, Second: 100.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

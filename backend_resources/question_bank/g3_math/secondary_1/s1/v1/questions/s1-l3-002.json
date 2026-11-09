@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-002",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Class P records chess choices C, R, C, D, C, R and Class Q records D, C, R, C, C. Find the combined frequency of chess choice C. Enter the numerical value only."
+          "text": "Students in two classes each choose one club: C for chess, R for robotics or D for drama. Class P's choices are C, R, C, D, C, R. Class Q's choices are D, C, R, C, C. Find the combined frequency of C. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Class P has 3 and Class Q has 3."
+              "text": "Count the C entries for Class P, count them for Class Q, then add."
             }
           ]
         }
@@ -61,12 +61,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "text",
+              "text": "Class P has 3 C entries and Class Q has 3 C entries."
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
               "latex": "3+3=6"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
