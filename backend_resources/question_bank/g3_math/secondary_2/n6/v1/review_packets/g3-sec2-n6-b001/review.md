@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-508 — Reflect a root in the axis of symmetry
+## n6-l2-508 — Reflect a point in the axis of symmetry
 
 [Open this question in the HTML preview](index.html#n6-l2-508)
 
