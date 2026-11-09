@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-012",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -50,8 +50,12 @@
           "stage": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "180=2^{2}\\times 3^{2}\\times 5"
+            },
+            {
               "type": "text",
-              "text": "180=2^2×3^2×5, so only the exponent of 5 needs another factor of 5."
+              "text": ", so only the exponent of 5 needs another factor of 5."
             }
           ]
         }
@@ -61,8 +65,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "180=2^2×3^2×5"
+              "type": "display_math",
+              "latex": "180=2^{2}\\times 3^{2}\\times 5"
             }
           ],
           "mark_type": "M",
@@ -72,8 +76,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "180×5=2^2×3^2×5^2=900=30^2"
+              "type": "display_math",
+              "latex": "180\\times 5=2^{2}\\times 3^{2}\\times 5^{2}=900=30^{2}"
             }
           ],
           "mark_type": "A",

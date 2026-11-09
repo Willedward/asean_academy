@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n1-l2-016",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -65,8 +65,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "756=2×378=2^2×189"
+              "type": "display_math",
+              "latex": "756=2\\times 378=2^{2}\\times 189"
             }
           ],
           "mark_type": "M",
@@ -76,8 +76,16 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "189=3^{3}\\times 7"
+            },
+            {
               "type": "text",
-              "text": "189=3^3×7, so 756=2^2×3^3×7"
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "756=2^{2}\\times 3^{3}\\times 7"
             }
           ],
           "mark_type": "A",

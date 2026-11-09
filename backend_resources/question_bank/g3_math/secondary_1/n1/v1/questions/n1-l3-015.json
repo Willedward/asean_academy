@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-015",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate [(4.86×10^7)(3.2×10^-4)]/(7.5×10^2). Give your answer correct to 4 significant figures."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{(4.86\\times 10^{7})(3.2\\times 10^{-4})}{7.5\\times 10^{2}}"
+        },
+        {
+          "type": "text",
+          "text": ". Give your answer correct to 4 significant figures."
         }
       ],
       "marks": 2,
@@ -56,7 +64,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The unrounded quotient is 20.736, whose fifth significant digit is 6."
+              "text": "Multiply the two standard-form numbers on the top first, then divide by the bottom. Keep all the digits, then look at the fifth significant digit to decide how to round."
             }
           ]
         }
@@ -66,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "(4.86×10^7)(3.2×10^-4)=15552"
+              "type": "display_math",
+              "latex": "(4.86\\times 10^{7})(3.2\\times 10^{-4})=15552"
             }
           ],
           "mark_type": "M",
@@ -77,8 +85,12 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "\\frac{15552}{750}=20.736"
+            },
+            {
               "type": "text",
-              "text": "15552/750=20.736, so the answer is 20.74"
+              "text": ", so the answer is 20.74"
             }
           ],
           "mark_type": "A",

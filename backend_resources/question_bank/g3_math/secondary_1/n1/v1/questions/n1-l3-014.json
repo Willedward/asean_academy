@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l3-014",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate sqrt(83.2) + 17.35/0.48. Give your answer correct to 3 significant figures."
+          "text": "Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\sqrt{83.2}+\\frac{17.35}{0.48}"
+        },
+        {
+          "type": "text",
+          "text": ". Give your answer correct to 3 significant figures."
         }
       ],
       "marks": 2,
@@ -56,7 +64,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The unrounded value is approximately 45.2672; use the fourth significant digit to round."
+              "text": "Keep every calculator digit until the end, then look at the fourth significant digit to decide how to round."
             }
           ]
         }
@@ -66,8 +74,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "sqrt(83.2)+17.35/0.48=45.267236..."
+              "type": "display_math",
+              "latex": "\\sqrt{83.2}+\\frac{17.35}{0.48}=45.267236"
             }
           ],
           "mark_type": "M",

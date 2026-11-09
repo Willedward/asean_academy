@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-004",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -25,7 +25,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Insert < or > to compare -50/7 and -7.13. Write the complete statement, for example -3 < 2."
+          "text": "Insert < or > to compare "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-\\frac{50}{7}"
+        },
+        {
+          "type": "text",
+          "text": " and -7.13. Write the complete statement, for example "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-3<2"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -62,7 +78,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare 50/7 with 7.13 by multiplying 7.13 by 7."
+              "text": "Compare "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{50}{7}"
+            },
+            {
+              "type": "text",
+              "text": " with 7.13 by multiplying 7.13 by 7."
             }
           ]
         }
@@ -72,8 +96,20 @@
           "position": 1,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "7.13\\times 7=49.91<50"
+            },
+            {
               "type": "text",
-              "text": "7.13\\times7=49.91<50, so 7.13<50/7."
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7.13<\\frac{50}{7}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -84,7 +120,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Negating reverses the relation: -50/7<-7.13."
+              "text": "Negating reverses the relation: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{50}{7}<-7.13"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

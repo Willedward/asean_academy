@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n1-l4-003",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -55,8 +55,20 @@
           "stage": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "B-A=4.2"
+            },
+            {
               "type": "text",
-              "text": "B-A=4.2, so move (2/5)(4.2)=1.68 units right from -2.4."
+              "text": ", so move "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(\\frac{2}{5})(4.2)=1.68"
+            },
+            {
+              "type": "text",
+              "text": " units right from -2.4."
             }
           ]
         }
@@ -66,8 +78,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "B-A=1.8-(-2.4)=4.2"
+              "type": "display_math",
+              "latex": "B-A=1.8-(-2.4)=4.2"
             }
           ],
           "mark_type": "M",
@@ -77,8 +89,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "R=-2.4+(2/5)(4.2)=-0.72"
+              "type": "display_math",
+              "latex": "R=-2.4+(\\frac{2}{5})(4.2)=-0.72"
             }
           ],
           "mark_type": "A",
