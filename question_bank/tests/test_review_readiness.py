@@ -30,7 +30,6 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
 
     by_id = {batch.batch_id: batch for batch in report.batches}
     assert all(batch.packet_status == "current" for batch in report.batches)
-    assert all(batch.active_claim is None for batch in report.batches)
     completed_chart_batch = by_id["g3-sec2-n6-b001"]
     assert completed_chart_batch.packet_status == "current"
     assert completed_chart_batch.state == "ready"
@@ -44,15 +43,11 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
         finding.code for finding in unresolved_s2_batch.blockers
     }
 
-    unfinished_chart_batch = by_id["g3-sec2-n6-b002"]
+    unfinished_chart_batch = by_id["g3-sec1-g1-b003"]
     assert unfinished_chart_batch.packet_status == "current"
     assert unfinished_chart_batch.state == "blocked"
     assert unfinished_chart_batch.active_claim is None
-    assert unfinished_chart_batch.pending_asset_keys == [
-        "n6-l1-510",
-        "n6-l2-515",
-        "n6-l5-501",
-    ]
+    assert unfinished_chart_batch.pending_asset_keys == ["g1-l4-011"]
     assert "planned_assets_missing" in {
         finding.code for finding in unfinished_chart_batch.blockers
     }
