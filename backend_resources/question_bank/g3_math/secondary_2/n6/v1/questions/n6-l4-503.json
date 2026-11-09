@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-503",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For y=1(x-0)(x-4), find the minimum y-value."
+          "text": "For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=x(x-4)"
+        },
+        {
+          "type": "text",
+          "text": ", find the minimum y-value."
         }
       ],
       "marks": 4,
@@ -66,7 +74,7 @@
             },
             {
               "type": "display_math",
-              "latex": "x=\\frac{0+(4)}{2}=2,\\quad y(2)=1(2)(-2)=-4."
+              "latex": "x=\\frac{0+(4)}{2}=2,\\quad y(2)=(2)(-2)=-4."
             }
           ],
           "mark_type": "M",
