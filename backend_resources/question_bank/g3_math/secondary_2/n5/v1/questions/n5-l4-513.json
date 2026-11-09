@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l4-513",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Simplify 2/(x-6)-2/(x-6)²."
+          "text": "Simplify "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{2}{x-6}-\\frac{2}{(x-6)^{2}}"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
