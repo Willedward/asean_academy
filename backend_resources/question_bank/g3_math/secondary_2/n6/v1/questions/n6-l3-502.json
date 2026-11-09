@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l3-502",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,28 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "f(x)=kx^{2}-x-4"
+        },
+        {
           "type": "text",
-          "text": "f(x)=kx²-1x-4 and f(2)=-14. Find k."
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(2)=-14"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -66,7 +86,7 @@
             },
             {
               "type": "display_math",
-              "latex": "-14=k(2)^2-1(2)-4\\Rightarrow 4k=-8\\Rightarrow k=-2."
+              "latex": "-14=k(2)^2-(2)-4\\Rightarrow 4k=-8\\Rightarrow k=-2."
             }
           ],
           "mark_type": "M",
