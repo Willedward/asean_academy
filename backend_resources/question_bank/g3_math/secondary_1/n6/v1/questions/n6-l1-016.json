@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l1-016",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "State the gradient of the line y = 5x - 7."
+          "text": "State the gradient of the line "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=5x-7"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the equation with y = mx + c."
+              "text": "Compare the equation with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=mx+c"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The coefficient of x is the gradient."
+              "text": "The coefficient of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " is the gradient."
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-018",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A taxi fare y dollars is given by y = 4 + 1.5x, where x is the distance in kilometres. Find the fare for 6 km."
+          "text": "A taxi fare "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " dollars is given by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=4+1.5x"
+        },
+        {
+          "type": "text",
+          "text": ", where "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " is the distance in kilometres. Find the fare for 6 km."
         }
       ],
       "marks": 2,
@@ -42,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the journey distance for x."
+              "text": "Substitute the journey distance for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 4 + 1.5(6)."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4+1.5(6)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
