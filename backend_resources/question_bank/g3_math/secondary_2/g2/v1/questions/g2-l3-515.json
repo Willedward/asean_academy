@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-515",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Point Q = (12, −8) is enlarged about the origin by scale factor 3/4. Find the sum of the coordinates of Q′. Enter the numerical value only."
+          "text": "Point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "Q=(12,-8)"
+        },
+        {
+          "type": "text",
+          "text": " is enlarged about the origin by scale factor "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3}{4}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the sum of the coordinates of Q′. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply both coordinates by 3/4."
+              "text": "Multiply both coordinates by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{4}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Q′ = (9, −6), then add."
+              "text": "Write Q′ as (first coordinate × "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{4}"
+            },
+            {
+              "type": "text",
+              "text": ", second coordinate × "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{4}"
+            },
+            {
+              "type": "text",
+              "text": "), then add the two results."
             }
           ]
         }

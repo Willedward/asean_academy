@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-514",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An enlargement centred at the origin maps P = (3, 4) to P′ = (12, 16). Find its scale factor. Enter the numerical value only."
+          "text": "An enlargement centred at the origin maps "
+        },
+        {
+          "type": "inline_math",
+          "latex": "P=(3,4)"
+        },
+        {
+          "type": "text",
+          "text": " to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "P'=(12,16)"
+        },
+        {
+          "type": "text",
+          "text": ". Find its scale factor. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 12 ÷ 3 or 16 ÷ 4."
+              "text": "Divide an image coordinate by the matching original coordinate."
             }
           ]
         }
