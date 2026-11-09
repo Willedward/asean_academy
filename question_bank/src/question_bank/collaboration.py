@@ -326,6 +326,26 @@ def changed_batch_ids(
     return batches, issues, changed_question_batches
 
 
+def _review_packet_only_change(
+    changed_files: list[str], *, repository_root: Path, bank_root: Path
+) -> bool:
+    """Whether every changed file inside the Mathematics bank is reviewer evidence."""
+
+    relative_bank_root = PurePosixPath(
+        bank_root.resolve().relative_to(repository_root.resolve()).as_posix()
+    )
+    saw_bank_file = False
+    for raw_path in changed_files:
+        path = PurePosixPath(raw_path.strip())
+        if not raw_path.strip() or relative_bank_root not in (path, *path.parents):
+            continue
+        saw_bank_file = True
+        relative = path.relative_to(relative_bank_root)
+        if "review_packets" not in relative.parts:
+            return False
+    return saw_bank_file
+
+
 def _summary(
     report: CollaborationReport,
     registry: BatchClaimRegistry | None,
@@ -496,7 +516,12 @@ def check_pull_request(
         and load_manifest(manifest_paths[batch_id]).status == "planned"
         for batch_id in batches
     )
-    if len(batches) > 1 and not planning_only:
+    evidence_only = _review_packet_only_change(
+        report.changed_files,
+        repository_root=repository_root,
+        bank_root=bank_root,
+    )
+    if len(batches) > 1 and not planning_only and not evidence_only:
         report.issues.append(
             Issue(
                 "error",
@@ -508,7 +533,16 @@ def check_pull_request(
     for batch_id in sorted(batches):
         manifest = load_manifest(manifest_paths[batch_id])
         claim = registry.active_claim(batch_id) if registry else None
-        if claim is None and not planning_only:
+        if evidence_only and claim is not None:
+            report.issues.append(
+                Issue(
+                    "error",
+                    "active_claim_blocks_evidence_refresh",
+                    str(registry_path),
+                    f"{claim.owner} is still editing {batch_id} on {claim.branch}.",
+                )
+            )
+        elif claim is None and not planning_only and not evidence_only:
             report.issues.append(
                 Issue(
                     "error",
@@ -517,7 +551,7 @@ def check_pull_request(
                     f"Claim {batch_id} before changing its authored files",
                 )
             )
-        elif claim is not None and claim.branch != head_branch:
+        elif not evidence_only and claim is not None and claim.branch != head_branch:
             report.issues.append(
                 Issue(
                     "error",
