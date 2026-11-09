@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-027",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The point (3, 13) lies on y = 2x + b. Find b."
+          "text": "The point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3, 13)"
+        },
+        {
+          "type": "text",
+          "text": " lies on "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=2x+b"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "b"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 13 = 2(3) + b."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "13=2(3)+b"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
