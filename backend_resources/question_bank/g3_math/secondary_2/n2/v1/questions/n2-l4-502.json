@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l4-502",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A square district has actual area 36 km² and appears as a square of area 4 cm² on a map. Find the denominator n of the scale 1 : n. Enter the numerical value only."
+          "text": "A square district has actual area 36 km² and appears as a square of area 4 cm² on a map. Find the denominator "
+        },
+        {
+          "type": "inline_math",
+          "latex": "n"
+        },
+        {
+          "type": "text",
+          "text": " of the scale "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1:n"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The actual side is 6 km and the map side is 2 cm; convert kilometres to centimetres."
+              "text": "Find both side lengths using square roots, write them in the same unit, then compare them to find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "n"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -62,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "n=\\frac{6\\times100\\,000}{2}=300,000"
+              "latex": "n=\\frac{6\\times100\\,000}{2}=300{,}000"
             }
           ],
           "mark_type": "M",

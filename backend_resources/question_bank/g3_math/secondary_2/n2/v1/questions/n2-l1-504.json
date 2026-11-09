@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l1-504",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,52 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
           "type": "text",
-          "text": "y is directly proportional to x and y = 24 when x = 3. Find y when x = 7. Enter the numerical value only."
+          "text": " is directly proportional to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=24"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=3"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=7"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +86,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Find y for one unit of x."
+              "text": "Find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " for one unit of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +111,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The constant is 24 ÷ 3; multiply it by 7."
+              "text": "The constant is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "24\\div 3"
+            },
+            {
+              "type": "text",
+              "text": "; multiply it by 7."
             }
           ]
         }
