@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l5-504",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A grouped distribution has midpoints 10, 20 and 40 with frequencies 3, 5 and k. Its estimated mean is 30. Determine the final class frequency k."
+          "text": "A grouped distribution has midpoints 10, 20 and 40 with frequencies 3, 5 and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": ". Its estimated mean is 30. Determine the final class frequency "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 5,
@@ -51,7 +67,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Use [10(3)+20(5)+40k]/(8+k)=30, then solve for k."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{10(3)+20(5)+40k}{8+k}=30"
+            },
+            {
+              "type": "text",
+              "text": ", then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
