@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-509",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,9 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-3 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +56,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "The common denominator is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-3)^2"
+            },
+            {
+              "type": "text",
+              "text": ", not "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-3)^3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -63,7 +81,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Multiply the top and bottom of the first fraction by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-3)"
+            },
+            {
+              "type": "text",
+              "text": ", then subtract the numerators with care."
             }
           ]
         }
@@ -74,11 +100,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Write both fractions over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-3)^2"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{3(x-3)-4}{(x-3)^2}=\\frac{3x-13}{(x-3)^2}"
+              "latex": "\\frac{3(x-3)}{(x-3)^2}-\\frac{4}{(x-3)^2}=\\frac{3x-9-4}{(x-3)^2}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +123,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Collect like terms: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{3x-13}{(x-3)^2}"
+              "latex": "\\frac{3x-13}{(x-3)^2},\\quad x\\neq3"
             }
           ],
           "mark_type": "A",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-514",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.13",
-  "title": "Reveal the repeated bracket by grouping",
+  "title": "Reorder and take out factors",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,11 +24,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "ax+bx+5ay+5by"
+          "latex": "12px-20qx-18py+30qy"
         },
         {
           "type": "text",
-          "text": " completely. Show the grouping that exposes the repeated factor."
+          "text": " completely."
         }
       ],
       "marks": 4,
@@ -37,11 +37,11 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(a+b)*(x+5*y)",
-        "canonical_latex": "(a+b)(x+5y)",
+        "canonical_expression": "2*(3*p-5*q)*(2*x-3*y)",
+        "canonical_latex": "2(3p-5q)(2x-3y)",
         "variables": [
-          "a",
-          "b",
+          "p",
+          "q",
           "x",
           "y"
         ],
@@ -57,7 +57,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Reorder if needed, then factor a common term from each useful pair."
+              "text": "Group the terms containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " and the terms containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -66,7 +82,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The two groups should contain the same bracket; factor that bracket and expand to check."
+              "text": "Take "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x"
+            },
+            {
+              "type": "text",
+              "text": " out of the first pair and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-6y"
+            },
+            {
+              "type": "text",
+              "text": " out of the second, then look for a common factor left in the brackets."
             }
           ]
         }
@@ -77,11 +109,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise each pair so that the brackets match. "
             },
             {
               "type": "display_math",
-              "latex": "x(a+b)+5y(a+b)=(a+b)(x+5y)"
+              "latex": "12px-20qx-18py+30qy=4x(3p-5q)-6y(3p-5q)"
+            },
+            {
+              "type": "text",
+              "text": " Take out the common bracket and the common factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -92,11 +136,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "(a+b)(x+5y)"
+              "latex": "2(3p-5q)(2x-3y)"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-503",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -28,7 +28,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "(4,38)"
+          "latex": "(4,86)"
         },
         {
           "type": "text",
@@ -49,8 +49,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-2",
-        "canonical_latex": "-2",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -82,11 +82,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=4"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(x)=86"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "38=3(4)^2+4q-2\\Rightarrow q=-2."
+              "latex": "86=3(4)^2+4q-2=46+4q"
             }
           ],
           "mark_type": "M",
@@ -97,11 +113,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "-2"
+              "latex": "4q=40,\\ q=10"
             }
           ],
           "mark_type": "A",

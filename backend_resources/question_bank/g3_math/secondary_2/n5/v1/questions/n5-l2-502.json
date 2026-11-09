@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l2-502",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,6 +19,10 @@
       "label": null,
       "prompt": [
         {
+          "type": "text",
+          "text": "A trapezium (a quadrilateral with one pair of parallel sides) has area "
+        },
+        {
           "type": "inline_math",
           "latex": "A=\\frac{1}{2}h(a+b)"
         },
@@ -28,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "A=72"
+          "latex": "A=72\\text{ cm}^{2}"
         },
         {
           "type": "text",
@@ -36,7 +40,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "a=10"
+          "latex": "a=10\\text{ cm}"
         },
         {
           "type": "text",
@@ -44,7 +48,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "b=14"
+          "latex": "b=14\\text{ cm}"
         },
         {
           "type": "text",
@@ -56,7 +60,7 @@
         },
         {
           "type": "text",
-          "text": "."
+          "text": " in cm."
         }
       ],
       "marks": 2,
@@ -78,7 +82,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute every known value into the original formula before rearranging."
+              "text": "Substitute the three known values into the formula before rearranging."
             }
           ]
         },
@@ -87,7 +91,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Isolate the unknown, keep exact intermediate values, and check by substitution."
+              "text": "Add the parallel sides first, then use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{2}\\times 24=12"
+            },
+            {
+              "type": "text",
+              "text": " to get an equation in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "h"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -98,11 +118,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Substitute the known values. "
             },
             {
               "type": "display_math",
-              "latex": "72=\\frac12h(10+14)\\Rightarrow h=6"
+              "latex": "72=\\frac12 h(10+14)=12h"
             }
           ],
           "mark_type": "M",
@@ -113,11 +133,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "h=6"
             }
           ],
           "mark_type": "A",

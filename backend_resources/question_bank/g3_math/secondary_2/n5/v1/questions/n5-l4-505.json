@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-505",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -63,7 +63,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Identify the operations acting on the required subject and preserve equality."
+              "text": "The subject appears in the numerator and the denominator, so clear the fraction and collect the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " terms."
             }
           ]
         },
@@ -72,7 +80,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Undo the operations on both sides; if the subject appears twice, collect and factor its terms."
+              "text": "After multiplying out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y(2x+3)"
+            },
+            {
+              "type": "text",
+              "text": ", move every term containing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " to one side and factor out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -83,11 +115,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Multiply both sides by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+3"
+            },
+            {
+              "type": "text",
+              "text": ", collect the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " terms and factorise. "
             },
             {
               "type": "display_math",
-              "latex": "y(2x+3)=4x+1\\Rightarrow(2y-4)x=1-3y\\Rightarrow x=\\frac{1-3y}{2y-4}"
+              "latex": "y(2x+3)=4x+1\\Rightarrow2xy-4x=1-3y\\Rightarrow x(2y-4)=1-3y"
             }
           ],
           "mark_type": "M",
@@ -98,11 +146,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2y-4"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{1-3y}{2y-4}"
+              "latex": "x=\\frac{1-3y}{2y-4},\\quad y\\neq2"
             }
           ],
           "mark_type": "A",

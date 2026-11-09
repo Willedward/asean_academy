@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-530",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.16",
-  "title": "Factorise a denominator before adding",
+  "title": "Subtract after factorising a denominator",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{1}{x^{2}-16}+\\frac{5}{x-4}"
+          "latex": "\\frac{5}{x-4}-\\frac{1}{x^{2}-16}"
         },
         {
           "type": "text",
@@ -37,12 +37,15 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "(5*x+21)/((x-4)*(x+4))",
-        "canonical_latex": "\\frac{5x+21}{(x-4)(x+4)}",
+        "canonical_expression": "(5*x+19)/((x-4)*(x+4))",
+        "canonical_latex": "\\frac{5x+19}{(x-4)(x+4)}",
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-4 != 0",
+          "x+4 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "Factorise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2-16"
+            },
+            {
+              "type": "text",
+              "text": " first and use it as the common denominator."
             }
           ]
         },
@@ -63,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "The first fraction needs its top and bottom multiplied by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+4)"
+            },
+            {
+              "type": "text",
+              "text": ". Take care when subtracting."
             }
           ]
         }
@@ -74,11 +93,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise the denominator and write both fractions over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-4)(x+4)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{1+5(x+4)}{(x-4)(x+4)}=\\frac{5x+21}{(x-4)(x+4)}"
+              "latex": "\\frac{5(x+4)}{(x-4)(x+4)}-\\frac{1}{(x-4)(x+4)}=\\frac{5x+20-1}{(x-4)(x+4)}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +116,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Collect like terms: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{5x+21}{(x-4)(x+4)}"
+              "latex": "\\frac{5x+19}{(x-4)(x+4)},\\quad x\\neq\\pm4"
             }
           ],
           "mark_type": "A",

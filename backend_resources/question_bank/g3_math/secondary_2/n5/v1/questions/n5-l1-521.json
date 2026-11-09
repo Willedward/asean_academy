@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l1-521",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.16",
-  "title": "Sum over a common denominator",
+  "title": "Subtract over a common denominator",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{3}{x-2}+\\frac{3}{x-2}"
+          "latex": "\\frac{7}{x-2}-\\frac{3}{x-2}"
         },
         {
           "type": "text",
@@ -37,12 +37,14 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "6/(x-2)",
-        "canonical_latex": "\\frac{6}{x-2}",
+        "canonical_expression": "4/(x-2)",
+        "canonical_latex": "\\frac{4}{x-2}",
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-2 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "The denominators are the same, so subtract the numerators."
             }
           ]
         },
@@ -63,7 +65,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "Keep the denominator "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x-2"
+            },
+            {
+              "type": "text",
+              "text": " and work out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "7-3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,7 +92,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{3+3}{x-2}=\\frac{6}{x-2}"
+              "latex": "\\frac{7-3}{x-2}=\\frac{4}{x-2},\\quad x\\neq2"
             }
           ],
           "mark_type": "A",
