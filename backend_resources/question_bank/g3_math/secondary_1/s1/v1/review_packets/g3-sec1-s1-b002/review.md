@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-015 — Missing-unit ambiguity count
+## s1-l2-015 — Weekly output chart
 
 [Open this question in the HTML preview](index.html#s1-l2-015)
 
