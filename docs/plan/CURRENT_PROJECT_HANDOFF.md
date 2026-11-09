@@ -1,11 +1,11 @@
 # Current project handoff
 
-Updated: 5 November 2026 (Asia/Singapore)
+Updated: 9 November 2026 (Asia/Singapore)
 
-This is the short restart file for a new Codex or collaborator session. Read it before loading
+This is the short restart file for a new session or collaborator. Read it before loading
 the larger plans; do not use the full chat transcript as project state.
 
-## Start here: state on 5 November 2026
+## Start here: state on 9 November 2026
 
 This section replaces the older status notes further down, which are kept as history. Where they
 disagree, trust this section and the repo.
@@ -63,6 +63,11 @@ Don't ask about these again.
   Sec 1 S1, from the generator in `question_bank/src/question_bank/diagrams/charts.py`.
 - **Answer forms under D9 A:** `simplest_fraction` and `require_index_notation` (#397) are applied to
   Sec 2 S2 and Sec 1 N1.
+- **Answer leaks and plain-text maths:** ledger categories 4 and 7 are merged for 67 batches
+  (#437-#508), 1,269 questions changed, under D5 B. Every maths block parses in KaTeX. Most of the
+  conversion was only checked by script and has not been viewed in the app. Sec 1 N2 stays closed
+  under D4 B. On questions with figures, expressions that match a label and lone letters stay as text,
+  because the geometry checks read only text blocks.
 - **Readiness:** `question-bank review-readiness` lists what can go to a reviewer. A ledger record's
   `resolution` shows which batches were fixed and by which PRs, because statuses are never updated.
   All 75 reviewer packets are current.
@@ -71,8 +76,9 @@ Don't ask about these again.
   in 60 minutes (#370).
 - **English:** all 51 lessons and both Section 1 mocks exist as drafts, retargeted to Sec 3 entry, with
   a learner mock runtime.
-- **App:** `/progress` no longer opens a connection per unit (#416), one `main` per page (#417), and
-  the learner accessibility findings in `docs/plan/ACCESSIBILITY_AUDIT_2026_11.md` (#432).
+- **App:** `/progress` no longer opens a connection per unit (#416), one `main` per page (#417), the
+  learner accessibility findings in `docs/plan/ACCESSIBILITY_AUDIT_2026_11.md` (#432), the admin ones
+  (#436), and the admin content status route (#442).
 - **Release:** two-course gate (#313), single invitation (#280), Gemini-only tutor deploy settings.
 
 ### Still to do, in suggested order
@@ -85,17 +91,23 @@ Don't ask about these again.
 2. **Start Mathematics review** using `docs/plan/MATH_REVIEWER_GUIDE.md`, from the batches
    `review-readiness` lists as ready.
 3. **Diagnostic decisions for William,** listed under "Questions for William".
-4. **Later content passes:** categories 4-8 in the ledger (hint leaks, duplicates, teaching gaps,
-   plain-text maths and polish), 87 lesson fix groups, and the Sec 1 G5 lesson figures (D-22 to D-31).
-   Doing these after review cancels approvals on the questions changed. Sec 1 S1 still needs a
-   `diagram_audit.json` (CFL-426).
+4. **Later content passes:** ledger categories 5, 6 and 8 (duplicates, teaching gaps and polish), 87
+   lesson fix groups, and the Sec 1 G5 lesson figures (D-22 to D-31). Doing these after review cancels
+   approvals on the questions changed. Sec 1 S1 still needs a `diagram_audit.json` (CFL-426).
+   Leftovers from categories 4 and 7:
+   - Real leaks the pass missed or left: `n7-l1-513`, `n6-l1-012`, `n6-l1-021`, `n6-l1-015`,
+     `n6-l2-008`, `n1-l1-019`, `g1-l1-012`, and the title of `s1-l1-017`.
+   - Outside the batches: CFL-230, CFL-248, CFL-249, CFL-250 and `n1-l2-11` (older calibration
+     questions), and lesson items CFL-234, CFL-595 and CFL-601.
+   - A check that flags plain-text maths (CFL-586).
+   - Sec 2 G4 b004 keeps `x` and `θ` as inline maths on 19 figure prompts while b001-b003 use text.
+   - Stage-2 hints such as "Calculate tan⁻¹(48/55)" on difficulty 3+ items weren't on the worklist.
 5. **English, after the staging test:** 270 quality findings
    (`backend_resources/english/v1/authoring/quality_baseline.json`), form equivalence, practice depth,
    and 8-12 essay prompts. The educator's review blocks the pilot, so their start date matters. The new
    diagnostic's vocabulary is mostly B2-C1, which the level review flagged as hard; the educator should
    judge it.
-6. **Admin accessibility:** P1-5 (the invitations page overflows on a phone), P2-5, P2-9, and admin skip
-   links and titles. P2-11, P2-12 and P3 are left too.
+6. **Remaining accessibility:** P2-11, P2-12 and P3 in the audit.
 7. **Production:** Railway staging and production aren't set up and no GitHub secrets exist. Needs
    `STAGING_GEMINI_API_KEY` and `PRODUCTION_GEMINI_API_KEY` among others. See
    `docs/plan/RELEASE_OPERATIONS.md` and `docs/plan/HOSTED_STAGING.md`.
@@ -111,6 +123,12 @@ Judgement calls made in PRs, each easy to reverse:
   "Simplify" items.
 - Distinct titles to remove codenames in Sec 2 N5 and N6, which leaves the clones in place for now.
 - `n5-l2-002` changed from "write as repeated addition" to "write as a single term".
+- `s1-l2-015` replaced with an issue-code item (key 4), because the old one counted words in its own
+  prompt. `n3-l1-004` has new numbers (S$72, key 90).
+- Prompts rewritten so the value must be derived, keys unchanged: `g1-l3-008`, `g1-l2-023`, `g1-l3-031`,
+  `n7-l1-001`, and the four Sec 2 N7 "x+6=k has the solution x=3" items (CFL-214).
+- `n5-l1-515` prints 5a/5b and the key agrees. Changing it to 5a/6b (CFL-598) would change the answer, so
+  it was left: which was intended?
 - `g5-l3-011` changed from "find x" to "find the perimeter", key 44, because its old givens contradicted
   each other.
 - `g1-l4-011` stays text-only, because a drawn polygon shows its number of sides, which is the answer.
