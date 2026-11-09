@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l4-502",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -54,7 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove any overall common factor, then use the required sum and product."
+              "text": "All three coefficients share a common factor. Take it out first."
             }
           ]
         },
@@ -63,7 +63,39 @@
           "content": [
             {
               "type": "text",
-              "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+              "text": "After removing "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": ", the quadratic "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4x^2+28x+45"
+            },
+            {
+              "type": "text",
+              "text": " needs two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4\\times45=180"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "28"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +106,51 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Take out the common factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": ", then split the middle term using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "18"
+            },
+            {
+              "type": "text",
+              "text": " (product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "180"
+            },
+            {
+              "type": "text",
+              "text": ", sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "28"
+            },
+            {
+              "type": "text",
+              "text": "). "
             },
             {
               "type": "display_math",
-              "latex": "5(4x^2+28x+45)=5(2x+5)(2x+9)"
+              "latex": "5(4x^2+28x+45)=5(4x^2+10x+18x+45)=5\\left[2x(2x+5)+9(2x+5)\\right]"
             }
           ],
           "mark_type": "M",
@@ -89,7 +161,7 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "So "
             },
             {
               "type": "display_math",

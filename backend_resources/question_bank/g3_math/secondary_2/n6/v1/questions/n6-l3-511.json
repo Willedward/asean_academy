@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-511",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N6",
   "primary_outcome": "6.6",
-  "title": "Zeros from factorised form",
+  "title": "Negative zero of a factorised function",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,19 +20,19 @@
       "prompt": [
         {
           "type": "inline_math",
-          "latex": "g(x)=(x-4)(x-8)"
+          "latex": "g(x)=(2x+1)(x-3)"
         },
         {
           "type": "text",
-          "text": ". One zero is "
+          "text": ". Find the negative zero of "
         },
         {
           "type": "inline_math",
-          "latex": "x=4"
+          "latex": "g"
         },
         {
           "type": "text",
-          "text": ". Find the other zero."
+          "text": "."
         }
       ],
       "marks": 3,
@@ -41,8 +41,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8",
-        "canonical_latex": "8",
+        "canonical_answer": "-0.5",
+        "canonical_latex": "-0.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -54,7 +54,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the given point, zero or pair of inputs into an equation using the function rule."
+              "text": "A zero is a value of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " that makes "
+            },
+            {
+              "type": "inline_math",
+              "latex": "g(x)=0"
+            },
+            {
+              "type": "text",
+              "text": ", so set each factor equal to zero."
             }
           ]
         },
@@ -63,7 +79,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Simplify all known terms first, then solve for the remaining value and substitute back to check."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+1=0"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x-3=0"
+            },
+            {
+              "type": "text",
+              "text": ", then decide which solution is negative."
             }
           ]
         }
@@ -74,11 +106,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Set each factor equal to zero. "
             },
             {
               "type": "display_math",
-              "latex": "g(x)=0\\Rightarrow x-4=0\\text{ or }x-8=0,\\text{ so the other zero is }8."
+              "latex": "2x+1=0\\text{ or }x-3=0\\Rightarrow x=-\\tfrac12\\text{ or }x=3"
             }
           ],
           "mark_type": "M",
@@ -89,11 +121,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "The negative zero is "
             },
             {
               "type": "display_math",
-              "latex": "8"
+              "latex": "x=-0.5"
             }
           ],
           "mark_type": "A",

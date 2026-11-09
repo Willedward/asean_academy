@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-528",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Complete factorisation of a three-term quadratic",
+  "title": "Common factor and a difference of two squares",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "4x^{2}+16x+12"
+          "latex": "36x^{2}-16"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "4*(x+1)*(x+3)",
-        "canonical_latex": "4(x+1)(x+3)",
+        "canonical_expression": "4*(3*x-2)*(3*x+2)",
+        "canonical_latex": "4(3x-2)(3x+2)",
         "variables": [
           "x"
         ],
@@ -54,7 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove any overall common factor, then use the required sum and product."
+              "text": "Take out the common factor first."
             }
           ]
         },
@@ -63,7 +63,7 @@
           "content": [
             {
               "type": "text",
-              "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+              "text": "What is left inside the bracket is a difference of two squares."
             }
           ]
         }
@@ -74,11 +74,39 @@
           "content": [
             {
               "type": "text",
-              "text": "Take out the common factor first, then factorise what remains."
+              "text": "Take out the common factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "4x^2+16x+12=4(x^2+4x+3)=4(x+1)(x+3)"
+              "latex": "36x^2-16=4(9x^2-4)"
+            },
+            {
+              "type": "text",
+              "text": " Write "
+            },
+            {
+              "type": "inline_math",
+              "latex": "9x^2-4"
+            },
+            {
+              "type": "text",
+              "text": " as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(3x)^2-2^2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -89,11 +117,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "4(x+1)(x+3)"
+              "latex": "4(3x-2)(3x+2)"
             }
           ],
           "mark_type": "A",

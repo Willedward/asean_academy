@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l2-502",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -78,11 +78,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=-2"
+            },
+            {
+              "type": "text",
+              "text": ", keeping it in brackets. "
             },
             {
               "type": "display_math",
-              "latex": "f(-2)=2(-2)^2+2(-2)-3=1."
+              "latex": "f(-2)=2(-2)^2+2(-2)-3=8-4-3"
             }
           ],
           "mark_type": "M",
@@ -93,11 +101,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "1"
+              "latex": "f(-2)=1"
             }
           ],
           "mark_type": "A",

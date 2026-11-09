@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l5-502",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N5",
   "primary_outcome": "5.14",
-  "title": "Full factorisation with large coefficients",
+  "title": "Factorise using a repeated bracket",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "45x^{2}+90x+45"
+          "latex": "2(x+1)^{2}-10(x+1)-28"
         },
         {
           "type": "text",
@@ -37,8 +37,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "45*(x+1)^2",
-        "canonical_latex": "45(x+1)^2",
+        "canonical_expression": "2*(x-6)*(x+3)",
+        "canonical_latex": "2(x-6)(x+3)",
         "variables": [
           "x"
         ],
@@ -54,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Remove any overall common factor, then use the required sum and product."
+              "text": "Take out the common factor, then treat "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+1)"
+            },
+            {
+              "type": "text",
+              "text": " as a single letter."
             }
           ]
         },
@@ -63,7 +71,31 @@
           "content": [
             {
               "type": "text",
-              "text": "For a non-monic quadratic, split the middle term and group; expand the factors to verify."
+              "text": "With "
+            },
+            {
+              "type": "inline_math",
+              "latex": "u=x+1"
+            },
+            {
+              "type": "text",
+              "text": ", the bracket is a quadratic in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "u"
+            },
+            {
+              "type": "text",
+              "text": ". Factorise it, then replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "u"
+            },
+            {
+              "type": "text",
+              "text": " and tidy each bracket."
             }
           ]
         }
@@ -74,11 +106,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Take out the common factor first, then factorise what remains."
+              "text": "Take out the factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2"
+            },
+            {
+              "type": "text",
+              "text": " and put "
+            },
+            {
+              "type": "inline_math",
+              "latex": "u=x+1"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "45x^2+90x+45=45(x^2+2x+1)=45(x+1)^2"
+              "latex": "2\\left[u^2-5u-14\\right]=2(u-7)(u+2)"
             }
           ],
           "mark_type": "M",
@@ -89,11 +137,27 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "u"
+            },
+            {
+              "type": "text",
+              "text": " with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+1"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "45(x+1)^2"
+              "latex": "2(x+1-7)(x+1+2)=2(x-6)(x+3)"
             }
           ],
           "mark_type": "A",

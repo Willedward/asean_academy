@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-526",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -9,7 +9,7 @@
   "primary_outcome": "5.12",
   "title": "Mental calculation with an identity",
   "difficulty": 3,
-  "calculator_allowed": true,
+  "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
   "stem": [],
@@ -20,11 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Evaluate "
+          "text": "Without using a calculator, evaluate "
         },
         {
           "type": "inline_math",
-          "latex": "(100+7)(100-7)"
+          "latex": "107\\times93"
         },
         {
           "type": "text",
@@ -50,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the expression to a perfect-square or difference-of-squares identity."
+              "text": "Write both numbers as a distance either side of their midpoint."
             }
           ]
         },
@@ -58,8 +58,36 @@
           "stage": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "107"
+            },
+            {
               "type": "text",
-              "text": "Substitute complete terms for a and b, then simplify and verify by expansion."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "93"
+            },
+            {
+              "type": "text",
+              "text": " are equally spaced around "
+            },
+            {
+              "type": "inline_math",
+              "latex": "100"
+            },
+            {
+              "type": "text",
+              "text": ", so use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(a+b)(a-b)=a^2-b^2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -70,11 +98,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Write the product as a difference of two squares. "
             },
             {
               "type": "display_math",
-              "latex": "(100+7)(100-7)=100^2-7^2=9951"
+              "latex": "107\\times93=(100+7)(100-7)=100^2-7^2"
             }
           ],
           "mark_type": "M",
@@ -85,11 +113,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Evaluate: "
             },
             {
               "type": "display_math",
-              "latex": "9951"
+              "latex": "10000-49=9951"
             }
           ],
           "mark_type": "A",

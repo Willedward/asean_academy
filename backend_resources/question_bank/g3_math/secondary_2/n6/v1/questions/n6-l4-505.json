@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l4-505",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -32,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(-1)=5"
+          "latex": "f(-1)=9"
         },
         {
           "type": "text",
@@ -40,7 +40,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(0)=1"
+          "latex": "f(0)=2"
         },
         {
           "type": "text",
@@ -48,11 +48,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(1)=1"
+          "latex": "f(1)=5"
         },
         {
           "type": "text",
-          "text": ". Use the symmetric inputs to determine coefficient "
+          "text": ". Use the symmetric inputs to find the coefficient "
         },
         {
           "type": "inline_math",
@@ -69,8 +69,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -102,11 +102,43 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Add the equations for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(1)"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(-1)"
+            },
+            {
+              "type": "text",
+              "text": " to eliminate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": ", using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c=f(0)=2"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "f(1)+f(-1)=2a+2c\\Rightarrow 1+(5)=2a+2(1)\\Rightarrow a=2."
+              "latex": "f(1)+f(-1)=2a+2c\\Rightarrow 5+9=2a+4"
             }
           ],
           "mark_type": "M",
@@ -117,11 +149,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "2"
+              "latex": "2a=10,\\ a=5"
             }
           ],
           "mark_type": "A",
