@@ -1,0 +1,588 @@
+[
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "n6-l3-901",
+    "bank_key": "g3-sec1-n6-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N6",
+    "primary_outcome": "6.1",
+    "title": "Midpoint followed by a translation",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The diagram shows points A and B on a Cartesian grid."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "n6-l3-901-coordinate-diagram"
+      },
+      {
+        "type": "text",
+        "text": "M is the midpoint of AB. Point M is translated 5 units to the right and 1 unit down to point N."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the sum of the x-coordinate and y-coordinate of N."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "6.1",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Read A and B from the grid, then average their corresponding coordinates to find M."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "A is (-5, 4) and B is (3, -2), so first find their midpoint before applying the translation."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "M=\\left(\\frac{-5+3}{2},\\frac{4+(-2)}{2}\\right)=(-1,1)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "N=(-1+5,1-1)=(4,0)"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "4+0=4"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "n6-l3-901-coordinate-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/n6-l3-901-coordinate-diagram-r2.svg",
+        "alt_text": "Cartesian grid showing point A at negative 5 comma 4 and point B at 3 comma negative 2.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "cartesian_points",
+          "question_key": "n6-l3-901",
+          "x_range": [
+            -6,
+            8
+          ],
+          "y_range": [
+            -5,
+            5
+          ],
+          "points": {
+            "A": [
+              -5,
+              4
+            ],
+            "B": [
+              3,
+              -2
+            ]
+          }
+        },
+        "sha256": "7abbe7d3e7750ef9969594f70e1af089d6d486a2cb043e22254eb6bd9fb057a6",
+        "width": 720,
+        "height": 520
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T03:51:12.662628Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 2,
+    "stable_key": "n6-l3-902",
+    "bank_key": "g3-sec1-n6-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N6",
+    "primary_outcome": "6.2",
+    "title": "Extend an ordered-pair relationship",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The graph shows four ordered pairs belonging to a linear relationship."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "n6-l3-902-relationship-graph"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "The relationship continues. Find the input x when the output y is -10."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "6.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "7",
+          "canonical_latex": "7",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use two plotted points to identify how y changes when x increases."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The plotted relationship has rule y = -2x + 4. Substitute y = -10 and solve for x."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{Gradient}=\\frac{0-4}{2-0}=-2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "y=-2x+4"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "-10=-2x+4\\implies x=7"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "n6-l3-902-relationship-graph",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/n6-l3-902-relationship-graph-r2.svg",
+        "alt_text": "Straight-line graph through the points negative 2 comma 8, 0 comma 4, 2 comma 0 and 4 comma negative 4.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "linear_relationship",
+          "question_key": "n6-l3-902",
+          "rule": "y=-2x+4",
+          "points": [
+            [
+              -2,
+              8
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              4,
+              -4
+            ]
+          ]
+        },
+        "sha256": "9515972ba2c05ada6b5e8fc586f60a512bf46337e943feafe788dfcd0a014d4b",
+        "width": 720,
+        "height": 520
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T03:51:12.662628Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "n6-l3-903",
+    "bank_key": "g3-sec1-n6-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N6",
+    "primary_outcome": "6.3",
+    "title": "Function from a rate of change",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "A linear function has the form y = ax + b. When x increases by 5, y decreases by 15. The function also has y = 9 when x = 2."
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Find the value of y when x = -3."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "6.3",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "24",
+          "canonical_latex": "24",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use the change in y divided by the change in x to find a."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "First find a = -15/5. Then substitute x = 2 and y = 9 to find b."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "a=\\frac{-15}{5}=-3"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "9=-3(2)+b\\implies b=15"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "y=-3(-3)+15=24"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T03:51:12.662628Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 1,
+    "stable_key": "n6-l3-904",
+    "bank_key": "g3-sec1-n6-v2",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N6",
+    "primary_outcome": "6.4",
+    "title": "Equation from graph intercepts",
+    "difficulty": 3,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [
+      {
+        "type": "text",
+        "text": "The diagram shows a straight-line graph with its intercepts marked."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "n6-l3-904-linear-graph"
+      }
+    ],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "Write y as an expression in x for this graph."
+          }
+        ],
+        "marks": 3,
+        "primary_outcome": "6.4",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "algebraic_expression",
+          "comparison_mode": "symbolic_equivalence",
+          "canonical_expression": "-2*x+6",
+          "canonical_latex": "-2x+6",
+          "variables": [
+            "x"
+          ],
+          "domain_constraints": [],
+          "accepted_equivalents": [],
+          "checker_config": {}
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Use the two marked intercepts to calculate the gradient."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "The graph passes through (0, 6) and (3, 0). Use y = ax + b."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "a=\\frac{0-6}{3-0}=-2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "b=6"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "y=-2x+6"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 3,
+    "assets": [
+      {
+        "asset_key": "n6-l3-904-linear-graph",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/n6-l3-904-linear-graph.svg",
+        "alt_text": "Decreasing straight-line graph crossing the y-axis at 6 and the x-axis at 3.",
+        "generation_spec": {
+          "renderer": "hand-authored-svg-v1",
+          "diagram_kind": "linear_graph_intercepts",
+          "question_key": "n6-l3-904",
+          "rule": "y=-2x+6",
+          "intercepts": [
+            [
+              0,
+              6
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        },
+        "sha256": "b8301f03bb3ac5794e68b802bfee061ab2d2323c1b2c031db49d2becc14708b3",
+        "width": 720,
+        "height": 520
+      }
+    ],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-17T03:51:12.662628Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  }
+]
