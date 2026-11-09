@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-017",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A taxi fare is S$4 plus S$2 per kilometre. The fare is S$18. Let x be the distance travelled in kilometres. Find x."
+          "text": "A taxi fare is S$4 plus S$2 per kilometre. The fare is S$18. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " be the distance travelled in kilometres. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the fare as 4 + 2x."
+              "text": "Write the fare as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4+2x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 4 + 2x = 18."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4+2x=18"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

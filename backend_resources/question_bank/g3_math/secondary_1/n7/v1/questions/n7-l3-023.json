@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-023",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The length of a rectangle is 5 cm more than twice its width. Its perimeter is 58 cm. Let x cm be the width. Find x."
+          "text": "The length of a rectangle is 5 cm more than twice its width. Its perimeter is 58 cm. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " cm be the width. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the length as 2x + 5."
+              "text": "Write the length as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 2[x + (2x + 5)] = 58."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2[x+(2x+5)]=58"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

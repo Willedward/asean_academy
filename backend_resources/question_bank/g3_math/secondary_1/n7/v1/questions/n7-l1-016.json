@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-016",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maya is 20 years old now. Seven years ago she was x years old. Find x."
+          "text": "Maya is 20 years old now. Seven years ago she was "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " years old. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Her present age is x + 7."
+              "text": "Her present age is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+7"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve x + 7 = 20."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+7=20"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
