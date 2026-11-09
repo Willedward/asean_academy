@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## s1-l1-516 — Azure Reed Bay — Angklung ensemble: two-class estimated mean
+## s1-l1-516 — Estimated mean when both classes contain five values
 
 [Open this question in the HTML preview](index.html#s1-l1-516)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-526 — Bronze Reed Bay — River clean-up: grouped midpoint calculation
+## s1-l2-526 — Weighted midpoint mean with equal outer frequencies
 
 [Open this question in the HTML preview](index.html#s1-l2-526)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-523 — Coral Reed Bay — Rainforest station: missing grouped frequency
+## s1-l3-523 — Find the central frequency from an estimated mean of 24
 
 [Open this question in the HTML preview](index.html#s1-l3-523)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-514 — Emerald Reed Bay — Rainforest station: unequal-width histogram
+## s1-l4-514 — Combine frequencies from widths five and ten
 
 [Open this question in the HTML preview](index.html#s1-l4-514)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-517 — Golden Reed Bay — River clean-up: dot frequency
+## s1-l1-517 — Count the dots aligned at eight
 
 [Open this question in the HTML preview](index.html#s1-l1-517)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-527 — Indigo Reed Bay — Batik cooperative: stem-and-leaf range
+## s1-l2-527 — Extreme difference on an 80s stem
 
 [Open this question in the HTML preview](index.html#s1-l2-527)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-524 — Jade Reed Bay — River clean-up: missing grouped frequency
+## s1-l3-524 — Recover f using a weighted-total equation
 
 [Open this question in the HTML preview](index.html#s1-l3-524)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-525 — Lilac Reed Bay — Batik cooperative: histogram interval total
+## s1-l3-525 — Total in the last twenty histogram units
 
 [Open this question in the HTML preview](index.html#s1-l3-525)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l5-504 — Silver Reed Bay — River clean-up: reconstruct a grouped table
+## s1-l5-504 — Determine the final class frequency from a mean of thirty
 
 [Open this question in the HTML preview](index.html#s1-l5-504)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-518 — Violet Reed Bay — Heritage museum: representation purpose
+## s1-l1-518 — Choose a graph that preserves continuous class boundaries
 
 [Open this question in the HTML preview](index.html#s1-l1-518)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-515 — Bronze Teak Bay — Robotics club: diagnose unequal histogram widths
+## s1-l4-515 — Frequency difference when the wider class has sixty
 
 [Open this question in the HTML preview](index.html#s1-l4-515)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-516 — Indigo Teak Bay — Coral monitoring team: outlier changes the mean
+## s1-l4-516 — Increase in average after adding nineteen
 
 [Open this question in the HTML preview](index.html#s1-l4-516)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-520 — Jade Teak Bay — Community garden: identify the mode
+## s1-l1-520 — Repeated value with the highest count
 
 [Open this question in the HTML preview](index.html#s1-l1-520)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-530 — Lilac Teak Bay — Coral monitoring team: calculate the mean
+## s1-l2-530 — Average of five consecutive even values from ten
 
 [Open this question in the HTML preview](index.html#s1-l2-530)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-529 — Violet Teak Bay — Bamboo design lab: missing value from a mean
+## s1-l3-529 — Missing fifth value when the mean is fifteen
 
 [Open this question in the HTML preview](index.html#s1-l3-529)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-521 — Amber Willow Bay — Solar classroom: typical value with an outlier
+## s1-l1-521 — Choose the only centre defined for transport labels
 
 [Open this question in the HTML preview](index.html#s1-l1-521)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-531 — Azure Willow Bay — Komodo field camp: most common category
+## s1-l2-531 — Choose a centre for the shoe size stocked most often
 
 [Open this question in the HTML preview](index.html#s1-l2-531)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l5-505 — Emerald Willow Bay — Mekong ecology club: balance detail and distribution
+## s1-l5-505 — Balance exact retrieval with a visible distribution
 
 [Open this question in the HTML preview](index.html#s1-l5-505)
 

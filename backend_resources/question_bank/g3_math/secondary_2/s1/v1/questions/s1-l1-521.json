@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-521",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.9",
-  "title": "Amber Willow Bay — Solar classroom: typical value with an outlier",
+  "title": "Choose the only centre defined for transport labels",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Amber Willow Bay dataset for Solar classroom: typical value with an outlier — Use code 1 for mean, 2 for median and 3 for mode. Household travel times include one exceptionally long delay. Which measure is most resistant to that extreme value?"
+          "text": "Use code 1 for mean, 2 for median and 3 for mode. A survey records the transport labels bus, walk, bus, cycle and bus. Which measure identifies the most common response?"
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose the measure determined by position rather than every magnitude."
+              "text": "Mean and median require numerical or ordered data."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The median is resistant to one very large observation."
+              "text": "The mode is the category that occurs most often."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\text{median}\\Rightarrow 2"
+              "latex": "\\text{mode}\\Rightarrow 3"
             }
           ],
           "mark_type": "A",
