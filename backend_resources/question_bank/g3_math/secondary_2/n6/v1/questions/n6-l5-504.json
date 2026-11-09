@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l5-504",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,47 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A quadratic f(x)=ax²+bx+c satisfies f(0)=0, f(1)=2, and f(-1)=2. Find f(4)."
+          "text": "A quadratic "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(x)=ax^{2}+bx+c"
+        },
+        {
+          "type": "text",
+          "text": " satisfies "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(0)=0"
+        },
+        {
+          "type": "text",
+          "text": ", "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(1)=2"
+        },
+        {
+          "type": "text",
+          "text": ", and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(-1)=2"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(4)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 5,
@@ -42,7 +82,39 @@
           "content": [
             {
               "type": "text",
-              "text": "Use f(0) to find c, then add and subtract the equations from f(1) and f(-1)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(0)"
+            },
+            {
+              "type": "text",
+              "text": " to find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c"
+            },
+            {
+              "type": "text",
+              "text": ", then add and subtract the equations from "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(1)"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f(-1)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +123,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The sum isolates a while the difference isolates b; reconstruct the rule before evaluating the final input."
+              "text": "The sum isolates a while the difference isolates "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": "; reconstruct the rule before evaluating the final input."
             }
           ]
         }
