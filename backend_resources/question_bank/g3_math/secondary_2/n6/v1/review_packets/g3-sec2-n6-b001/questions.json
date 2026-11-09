@@ -1465,7 +1465,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l1-505",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1551,7 +1551,7 @@
         "asset_key": "n6-l1-505-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/n6-l1-505-diagram-r3.svg",
+        "path": "assets/n6-l1-505-diagram-r4.svg",
         "alt_text": "Parabola crossing the x-axis at -5 and 3.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1567,7 +1567,8 @@
             "a": 1,
             "x_min": -7,
             "x_max": 5,
-            "title": "Quadratic graph"
+            "title": "Quadratic graph",
+            "show_symmetry": false
           },
           "viewbox": [
             720,
@@ -1602,17 +1603,6 @@
               "geometry": {
                 "cx": "581.666667",
                 "cy": "251.666667",
-                "r": "7"
-              }
-            },
-            {
-              "key": "vertex",
-              "kind": "vertex",
-              "value": "-1,-16",
-              "tag": "circle",
-              "geometry": {
-                "cx": "385",
-                "cy": "405",
                 "r": "7"
               }
             }
@@ -1719,7 +1709,7 @@
             "y_max": 20.0
           }
         },
-        "sha256": "7fb0710fd1bf49559fdcab0561caec64b33fb9394ba18cb11d52c9e7d2452dd8",
+        "sha256": "4144494a3befbc3fdcbc77929356a6535e5e2ef243a17291455a43403d84c6a1",
         "width": 720,
         "height": 480
       }
@@ -2163,14 +2153,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n6-l2-508",
     "bank_key": "g3-sec2-n6-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N6",
     "primary_outcome": "6.7",
-    "title": "Reflect a root in the axis of symmetry",
+    "title": "Reflect a point in the axis of symmetry",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2192,7 +2182,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The parabola has axis of symmetry x=-3. Its two roots are marked on the graph. The left root is x=-6 and the right root is x=q. Find q."
+            "text": "Using the graph, find q if (-5, t) and (q, t) are two different points on this parabola."
           }
         ],
         "marks": 2,
@@ -2201,8 +2191,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "0",
-          "canonical_latex": "0",
+          "canonical_answer": "-1",
+          "canonical_latex": "-1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2214,7 +2204,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The two roots are the same horizontal distance from the axis of symmetry."
+                "text": "The two points have equal y-values, so they are mirror images in the axis of symmetry."
               }
             ]
           },
@@ -2223,7 +2213,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The left root -6 is 3 units left of -3, so the right root is 3 units right of -3."
+                "text": "Find how far x=-5 is from the axis, then go the same distance on the other side."
               }
             ]
           }
@@ -2233,8 +2223,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The graph gives the axis of symmetry x=-3."
+              },
+              {
                 "type": "display_math",
-                "latex": "q-(-3)=(-3)-(-6)=3."
+                "latex": "(-3)-(-5)=2."
               }
             ],
             "mark_type": "M",
@@ -2245,7 +2239,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "q=0."
+                "latex": "q=-3+2=-1."
               }
             ],
             "mark_type": "A",
@@ -2260,7 +2254,7 @@
         "asset_key": "n6-l2-508-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/n6-l2-508-diagram-r3.svg",
+        "path": "assets/n6-l2-508-diagram-r4.svg",
         "alt_text": "Parabola crossing the x-axis at -6 and 0.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
