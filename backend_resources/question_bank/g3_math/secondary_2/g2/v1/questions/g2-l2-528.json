@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-528",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar triangular frames pair a 9 cm side with a 4 cm side. The side corresponding to 27 cm is labelled y. Calculate y. Enter the numerical value only."
+          "text": "Two similar triangular frames pair a 9 cm side with a 4 cm side. The side corresponding to 27 cm is labelled "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set y/27 = 4/9."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{27}=\\frac{4}{9}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

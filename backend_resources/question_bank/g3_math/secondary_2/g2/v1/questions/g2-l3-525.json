@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l3-525",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Triangle ABC is translated 5 units right and 2 units up to congruent triangle PQR. If A = (−2, 3), find the x-coordinate of P. Enter the numerical value only."
+          "text": "Triangle ABC is translated 5 units right and 2 units up to congruent triangle PQR. If "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A=(-2,3)"
+        },
+        {
+          "type": "text",
+          "text": ", find the x-coordinate of P. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 5 to the x-coordinate of A."
+              "text": "Which part of the translation changes the x-coordinate: the move right or the move up? Apply that to the x-coordinate of A."
             }
           ]
         }

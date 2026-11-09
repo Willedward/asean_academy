@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l4-514",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar triangles have corresponding side pairs 6 cm and 15 cm, and (x + 1) cm and (3x − 2) cm. Find x. Enter the numerical value only."
+          "text": "Two similar triangles have corresponding side pairs 6 cm and 15 cm, and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(x+1)"
+        },
+        {
+          "type": "text",
+          "text": " cm and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(3x-2)"
+        },
+        {
+          "type": "text",
+          "text": " cm. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 15/6 = (3x − 2)/(x + 1)."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{15}{6}=\\frac{3x-2}{x+1}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

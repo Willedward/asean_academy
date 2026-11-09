@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l1-519",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An obtuse vertex of 105° on a polygon matches vertex x° on a similar polygon. Calculate x. Enter the numerical value only."
+          "text": "An obtuse vertex of 105° on a polygon matches vertex "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": " on a similar polygon. Calculate "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set x equal to the stated 105° angle."
+              "text": "Which angle in the first figure is in the same position as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "? Its size is not changed by similarity."
             }
           ]
         }
