@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l5-501",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -32,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "(k-3)x+5=4x+5"
+          "latex": "(2k-3)x+5=4x+5"
         },
         {
           "type": "text",
@@ -53,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "3.5",
+        "canonical_latex": "3.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +66,23 @@
           "content": [
             {
               "type": "text",
-              "text": "For an identity, matching terms on the two sides must have equal coefficients."
+              "text": "An equation is true for every "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " only if the coefficients of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " and the constant terms match on both sides."
             }
           ]
         },
@@ -75,15 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Equate the x-coefficients: "
+              "text": "Compare the coefficients of "
             },
             {
               "type": "inline_math",
-              "latex": "k-3=4"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " on the two sides."
             }
           ]
         }
@@ -94,11 +110,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "The constant terms already match, so the coefficients of "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " must be equal. "
             },
             {
               "type": "display_math",
-              "latex": "k-3=4\\Rightarrow k=7"
+              "latex": "2k-3=4"
             }
           ],
           "mark_type": "M",
@@ -109,11 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "k=3.5"
             }
           ],
           "mark_type": "A",

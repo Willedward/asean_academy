@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l2-517",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -46,7 +46,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Look for two numbers whose product is 40 and sum is -14."
+              "text": "Find two numbers with product "
+            },
+            {
+              "type": "inline_math",
+              "latex": "40"
+            },
+            {
+              "type": "text",
+              "text": " and sum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-14"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -74,11 +90,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Factorise. "
             },
             {
               "type": "display_math",
-              "latex": "x^2-14x+40=(x-4)(x-10)=0\\Rightarrow x=4\\text{ or }10"
+              "latex": "x^2-14x+40=0\\Rightarrow(x-4)(x-10)=0\\Rightarrow x=4\\text{ or }x=10"
             }
           ],
           "mark_type": "M",
@@ -89,11 +105,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The smaller solution is "
             },
             {
               "type": "display_math",
-              "latex": "4"
+              "latex": "x=4"
             }
           ],
           "mark_type": "A",
