@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l2-030",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A jacket is sold for S$64 after a 20% discount. Let x dollars be its original price. Find x."
+          "text": "A jacket is sold for S$64 after a 20% discount. Let "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " dollars be its original price. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 0.8x = 64."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0.8x=64"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

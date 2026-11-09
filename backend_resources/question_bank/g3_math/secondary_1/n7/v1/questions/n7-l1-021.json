@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-021",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two consecutive integers have sum 31. Let the smaller integer be x. Find x."
+          "text": "Two consecutive integers have sum 31. Let the smaller integer be "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The next integer is x + 1."
+              "text": "The next integer is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+1"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve x + (x + 1) = 31."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+(x+1)=31"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

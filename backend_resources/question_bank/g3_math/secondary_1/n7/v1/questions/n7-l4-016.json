@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l4-016",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A two-digit number has tens digit x and units digit x + 3. The number is 4 times the sum of its digits plus 9. Find x."
+          "text": "A two-digit number has tens digit "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " and units digit "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+3"
+        },
+        {
+          "type": "text",
+          "text": ". The number is 4 times the sum of its digits plus 9. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the number as 10x + (x + 3)."
+              "text": "Write the number as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10x+(x+3)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the digit sum as x + (x + 3)."
+              "text": "Write the digit sum as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+(x+3)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

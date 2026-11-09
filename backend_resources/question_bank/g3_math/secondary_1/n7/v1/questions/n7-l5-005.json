@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l5-005",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A class collects x dollars. It spends S$48 on materials, then donates one third of the remaining amount. After receiving an additional S$20, it has S$100 left. Find x."
+          "text": "A class collects "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " dollars. It spends S$48 on materials, then donates one third of the remaining amount. After receiving an additional S$20, it has S$100 left. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "After spending, x - 48 remains; donating one third leaves two thirds."
+              "text": "After spending, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x-48"
+            },
+            {
+              "type": "text",
+              "text": " remains; donating one third leaves two thirds."
             }
           ]
         },
