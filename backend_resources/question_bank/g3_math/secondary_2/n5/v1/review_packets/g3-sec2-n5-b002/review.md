@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-509 — Area formula with x as the subject
+## n5-l3-509 — Sum formula: make l the subject
 
 [Open this question in the HTML preview](index.html#n5-l3-509)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-511 — Group terms to find a common bracket
+## n5-l3-511 — Factorise four terms in two letters
 
 [Open this question in the HTML preview](index.html#n5-l3-511)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l1-510 — Multiply out one bracket
+## n5-l1-510 — Expand with a negative multiplier
 
 [Open this question in the HTML preview](index.html#n5-l1-510)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l3-513 — Cancel a bracket and powers of x
+## n5-l3-513 — Factorise before cancelling
 
 [Open this question in the HTML preview](index.html#n5-l3-513)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l5-502 — Full factorisation with large coefficients
+## n5-l5-502 — Factorise using a repeated bracket
 
 [Open this question in the HTML preview](index.html#n5-l5-502)
 

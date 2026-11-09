@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l3-514",
   "bank_key": "g3-sec2-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -42,7 +42,10 @@
         "variables": [
           "x"
         ],
-        "domain_constraints": [],
+        "domain_constraints": [
+          "x-2 != 0",
+          "x+2 != 0"
+        ],
         "accepted_equivalents": [],
         "checker_config": {
           "form": "simplified_fraction"
@@ -54,7 +57,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Factor each denominator and build the least common denominator from the required factors."
+              "text": "Factorise "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x^2-4"
+            },
+            {
+              "type": "text",
+              "text": " first and use it as the common denominator."
             }
           ]
         },
@@ -63,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply complete numerators by missing factors, use brackets for subtraction, then simplify."
+              "text": "The second fraction needs its top and bottom multiplied by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+2)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -74,11 +93,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the relevant algebraic structure and show the intermediate transformation."
+              "text": "Factorise the denominator and write both fractions over "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-2)(x+2)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{2+3(x+2)}{(x-2)(x+2)}=\\frac{3x+8}{(x-2)(x+2)}"
+              "latex": "\\frac{2}{(x-2)(x+2)}+\\frac{3(x+2)}{(x-2)(x+2)}=\\frac{2+3x+6}{(x-2)(x+2)}"
             }
           ],
           "mark_type": "M",
@@ -89,11 +116,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the simplified result with the required subject, factors or value."
+              "text": "Collect like terms: "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{3x+8}{(x-2)(x+2)}"
+              "latex": "\\frac{3x+8}{(x-2)(x+2)},\\quad x\\neq\\pm2"
             }
           ],
           "mark_type": "A",
