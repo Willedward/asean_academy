@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-025",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For the relationship y = 5x - 1, find x when y = 24."
+          "text": "For the relationship "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=5x-1"
+        },
+        {
+          "type": "text",
+          "text": ", find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=24"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -42,7 +66,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace y by 24 and form an equation in x."
+              "text": "Replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " by 24 and form an equation in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve 5x - 1 = 24."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5x-1=24"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

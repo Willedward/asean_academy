@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l4-016",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The lines y = kx + 1 and y = -2x + 13 intersect at a point whose x-coordinate is 3. Find k."
+          "text": "The lines "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=kx+1"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=-2x+13"
+        },
+        {
+          "type": "text",
+          "text": " intersect at a point whose x-coordinate is 3. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "At x = 3, both lines have the same y-value."
+              "text": "At "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=3"
+            },
+            {
+              "type": "text",
+              "text": ", both lines have the same y-value."
             }
           ]
         },
@@ -51,7 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute x = 3 into both equations and equate them."
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=3"
+            },
+            {
+              "type": "text",
+              "text": " into both equations and equate them."
             }
           ]
         }

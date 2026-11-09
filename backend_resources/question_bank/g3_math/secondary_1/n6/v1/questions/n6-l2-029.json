@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n6-l2-029",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "To plot y = -2x + 5, find the y-value to pair with x = -3."
+          "text": "To plot "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=-2x+5"
+        },
+        {
+          "type": "text",
+          "text": ", find the y-value to pair with "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=-3"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate -2(-3) + 5."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-2(-3)+5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

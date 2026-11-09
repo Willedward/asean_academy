@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-024",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Point J(-2, 6) is translated 5 units right and 9 units down. In which quadrant does the image lie? Enter 1 for Quadrant I, 2 for Quadrant II, 3 for Quadrant III or 4 for Quadrant IV."
+          "text": "Point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "J(-2, 6)"
+        },
+        {
+          "type": "text",
+          "text": " is translated 5 units right and 9 units down. In which quadrant does the image lie? Enter 1 for Quadrant I, 2 for Quadrant II, 3 for Quadrant III or 4 for Quadrant IV."
         }
       ],
       "marks": 2,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The image is (3, -3); determine its quadrant from the signs."
+              "text": "Add 5 to the x-coordinate and subtract 9 from the y-coordinate, then check the signs of the new coordinates."
             }
           ]
         }
