@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l1-506",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -19,8 +19,52 @@
       "label": null,
       "prompt": [
         {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
           "type": "text",
-          "text": "y is directly proportional to x. When x = 6, y = 54. Find the constant of proportionality k in y = kx. Enter the numerical value only."
+          "text": " is directly proportional to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": ". When "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=6"
+        },
+        {
+          "type": "text",
+          "text": ", "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=54"
+        },
+        {
+          "type": "text",
+          "text": ". Find the constant of proportionality "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " in "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=kx"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +86,15 @@
           "content": [
             {
               "type": "text",
-              "text": "For direct proportion, y/x is constant."
+              "text": "For direct proportion, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{y}{x}"
+            },
+            {
+              "type": "text",
+              "text": " is constant."
             }
           ]
         },
@@ -51,7 +103,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 54 ÷ 6."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "54\\div 6"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
