@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l5-505",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -59,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The constant 4π/3 cancels in the volume fraction."
+              "text": "The constant "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{4\\pi}{3}"
+            },
+            {
+              "type": "text",
+              "text": " cancels in the volume fraction."
             }
           ]
         },
@@ -68,7 +76,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare R³ − r³ with R³, then multiply by 100%."
+              "text": "Compare "
+            },
+            {
+              "type": "inline_math",
+              "latex": "R^{3}-r^{3}"
+            },
+            {
+              "type": "text",
+              "text": " with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "R^{3}"
+            },
+            {
+              "type": "text",
+              "text": ", then multiply by 100%."
             }
           ]
         }
@@ -109,7 +133,7 @@
       "asset_key": "g5-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-505-diagram-r2.svg",
+      "path": "assets/g5-l5-505-diagram-r3.svg",
       "alt_text": "Sphere of radius R = 6 cm with a dashed concentric spherical core of radius r = 3 cm removed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
