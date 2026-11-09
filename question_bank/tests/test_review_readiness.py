@@ -5,6 +5,7 @@ from question_bank.review_readiness import (
     BatchReadiness,
     ReadinessFinding,
     ReviewReadinessReport,
+    _open_content_findings,
     audit_review_readiness,
     readiness_markdown,
     write_readiness_report,
@@ -45,6 +46,25 @@ def test_repository_readiness_audit_is_report_only_and_evidence_backed(
         "missing_reviewer_packet",
         "planned_assets_missing",
     }
+
+    unresolved_checker_batch = by_id["g3-sec1-n1-b001"]
+    open_messages = [
+        finding.message
+        for finding in unresolved_checker_batch.blockers
+        if finding.code == "open_content_finding"
+    ]
+    assert any(message.startswith("CFL-177 (category 3, open)") for message in open_messages)
+    assert any(
+        message.startswith("CFL-181 (category 3, open)") for message in open_messages
+    )
+
+    codename_batch = by_id["g3-sec2-n7-b004"]
+    codename_blocker = next(
+        finding
+        for finding in codename_batch.blockers
+        if finding.code == "learner_visible_codename"
+    )
+    assert "n7-l1-517" in codename_blocker.message
 
     write_readiness_report(report, tmp_path)
     payload = json.loads((tmp_path / "report.json").read_text())
@@ -97,3 +117,45 @@ def test_readiness_markdown_separates_ready_and_blocked_batches():
     assert "`g3-sec1-n1-b001`" in page
     assert "`g3-sec2-n6-b001` | blocked | stale" in page
     assert "approval" in page
+
+
+def test_open_content_findings_use_explicit_unresolved_statuses(tmp_path):
+    worklist = tmp_path / "worklist.json"
+    worklist.write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "id": "CFL-001",
+                        "category_rank": 1,
+                        "status": "confirmed",
+                        "batches": ["g3-sec1-n1-b001"],
+                    },
+                    {
+                        "id": "CFL-002",
+                        "category_rank": 2,
+                        "status": "open",
+                        "batches": ["g3-sec1-n1-b001"],
+                    },
+                    {
+                        "id": "CFL-003",
+                        "category_rank": 3,
+                        "status": "needs_checker_config",
+                        "batches": ["g3-sec1-n1-b002"],
+                    },
+                    {
+                        "id": "CFL-004",
+                        "category_rank": 4,
+                        "status": "open",
+                        "batches": ["g3-sec1-n1-b003"],
+                    },
+                ]
+            }
+        )
+    )
+
+    findings = _open_content_findings(worklist)
+
+    assert [item["id"] for item in findings["g3-sec1-n1-b001"]] == ["CFL-002"]
+    assert [item["id"] for item in findings["g3-sec1-n1-b002"]] == ["CFL-003"]
+    assert "g3-sec1-n1-b003" not in findings
