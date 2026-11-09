@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l1-509",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For f(x)=1x²-1x+1, find f(1)."
+          "text": "For "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(x)=x^{2}-x+1"
+        },
+        {
+          "type": "text",
+          "text": ", find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f(1)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -62,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "f(1)=1(1)^2-1(1)+1=1."
+              "latex": "f(1)=(1)^2-(1)+1=1."
             }
           ],
           "mark_type": "A",

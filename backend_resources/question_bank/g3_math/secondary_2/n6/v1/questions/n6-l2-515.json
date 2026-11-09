@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l2-515",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The parabola meets the x-axis at the marked points. The points on the curve at x=0 and x=q have the same y-value, and q is not 0. Find q."
+          "text": "The parabola meets the x-axis at the marked points. The points on the curve at "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=0"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=q"
+        },
+        {
+          "type": "text",
+          "text": " have the same y-value, and q is not 0. Find q."
         }
       ],
       "marks": 2,
@@ -85,8 +101,20 @@
           "position": 2,
           "content": [
             {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
               "type": "text",
-              "text": "x=0 is 2 units left of the axis, so x=q is 2 units right of it."
+              "text": " is 2 units left of the axis, so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=q"
+            },
+            {
+              "type": "text",
+              "text": " is 2 units right of it."
             },
             {
               "type": "display_math",
@@ -105,7 +133,7 @@
       "asset_key": "n6-l2-515-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-l2-515-diagram-r3.svg",
+      "path": "assets/n6-l2-515-diagram-r4.svg",
       "alt_text": "Parabola crossing the x-axis at -1 and 5.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
