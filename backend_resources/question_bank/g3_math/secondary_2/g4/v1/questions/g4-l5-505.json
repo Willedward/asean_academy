@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g4-l5-505",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -51,7 +51,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the nearer horizontal distance be x; the farther distance is x + 20."
+              "text": "Let the nearer horizontal distance be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "; the farther distance is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+20"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -60,7 +76,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Write h = x tan 50° and h = (x + 20) tan 35°, then eliminate x."
+              "text": "Write "
+            },
+            {
+              "type": "inline_math",
+              "latex": "h=x \\tan 50^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "h=(x+20) \\tan 35^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": ", then eliminate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -101,7 +141,7 @@
       "asset_key": "g4-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-505-diagram-r2.svg",
+      "path": "assets/g4-l5-505-diagram-r3.svg",
       "alt_text": "A vertical mast of height h stands on level ground. Two observation points on the same line as the mast are 20 m apart; the nearer point is x from the mast. The angle of elevation of the top is 35° from the farther point and 50° from the nearer point. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
