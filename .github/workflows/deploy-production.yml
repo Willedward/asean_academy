@@ -103,6 +103,11 @@ jobs:
       PRODUCTION_DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
       PRODUCTION_ABUSE_HASH_SECRET: ${{ secrets.PRODUCTION_ABUSE_HASH_SECRET }}
       PRODUCTION_GEMINI_API_KEY: ${{ secrets.PRODUCTION_GEMINI_API_KEY }}
+      PRODUCTION_OPENAI_API_KEY: ${{ secrets.PRODUCTION_OPENAI_API_KEY }}
+      TUTOR_PROVIDER: ${{ vars.TUTOR_PROVIDER }}
+      TUTOR_MODEL: ${{ vars.TUTOR_MODEL }}
+      TUTOR_INPUT_COST_PER_MILLION_MICROS_SGD: ${{ vars.TUTOR_INPUT_COST_PER_MILLION_MICROS_SGD }}
+      TUTOR_OUTPUT_COST_PER_MILLION_MICROS_SGD: ${{ vars.TUTOR_OUTPUT_COST_PER_MILLION_MICROS_SGD }}
       SUPABASE_PROJECT_ID: ${{ vars.SUPABASE_PROJECT_ID }}
       RAILWAY_API_SERVICE: ${{ vars.RAILWAY_API_SERVICE }}
       RAILWAY_WEB_SERVICE: ${{ vars.RAILWAY_WEB_SERVICE }}
@@ -127,12 +132,15 @@ jobs:
           : "${SUPABASE_DB_PASSWORD:?Configure the production SUPABASE_DB_PASSWORD secret.}"
           : "${PRODUCTION_DATABASE_URL:?Configure the production PRODUCTION_DATABASE_URL secret.}"
           : "${PRODUCTION_ABUSE_HASH_SECRET:?Configure the production PRODUCTION_ABUSE_HASH_SECRET secret.}"
-          : "${PRODUCTION_GEMINI_API_KEY:?Configure the production PRODUCTION_GEMINI_API_KEY secret; real students need a paid Gemini plan.}"
           : "${SUPABASE_PROJECT_ID:?Configure the SUPABASE_PROJECT_ID repository variable.}"
           : "${RAILWAY_API_SERVICE:?Configure the RAILWAY_API_SERVICE repository variable.}"
           : "${RAILWAY_WEB_SERVICE:?Configure the RAILWAY_WEB_SERVICE repository variable.}"
           : "${PRODUCTION_API_URL:?Configure the PRODUCTION_API_URL repository variable.}"
           : "${PRODUCTION_WEB_URL:?Configure the PRODUCTION_WEB_URL repository variable.}"
+      - name: Validate tutor provider and model
+        run: |
+          uv run --project services/learning_api --locked python services/learning_api/scripts/tutor_deploy_settings.py \
+            --environment production --output "$RUNNER_TEMP/tutor-settings"
       - name: Apply pending Supabase migrations
         run: |
           supabase link --project-ref "$SUPABASE_PROJECT_ID" --password "$SUPABASE_DB_PASSWORD"
@@ -156,14 +164,10 @@ jobs:
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_ABUSE_HASH_SECRET=$PRODUCTION_ABUSE_HASH_SECRET" --skip-deploys --service "$RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_RATE_LIMITS_ENABLED=true" --skip-deploys --service "$RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TRUST_PROXY_HEADERS=true" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_ENABLED=true" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_PROVIDER=gemini" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_MODEL=gemini-3.5-flash-lite" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_INPUT_COST_PER_MILLION_MICROS_SGD=384000" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_GEMINI_OUTPUT_COST_PER_MILLION_MICROS_SGD=3200000" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_ENABLED=false" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "ASEAN_ACADEMY_TUTOR_HYBRID_ROUTING_SHADOW_ENABLED=false" --skip-deploys --service "$RAILWAY_API_SERVICE"
-          npx -y @railway/cli@4 variable set "GEMINI_API_KEY=$PRODUCTION_GEMINI_API_KEY" --skip-deploys --service "$RAILWAY_API_SERVICE"
+          while IFS= read -r setting; do
+            npx -y @railway/cli@4 variable set "$setting" --skip-deploys --service "$RAILWAY_API_SERVICE" </dev/null
+          done < "$RUNNER_TEMP/tutor-settings"
+          npx -y @railway/cli@4 variable set "$TUTOR_KEY_NAME=${!TUTOR_KEY_SOURCE}" --skip-deploys --service "$RAILWAY_API_SERVICE"
           npx -y @railway/cli@4 up --ci --service "$RAILWAY_API_SERVICE"
       - name: Verify the API release and database readiness
         run: |

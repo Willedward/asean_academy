@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-005 — Compare four house teams
+## s1-l1-005 — Compare four school teams
 
 [Open this question in the HTML preview](index.html#s1-l1-005)
 

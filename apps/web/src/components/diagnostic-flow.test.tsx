@@ -295,6 +295,69 @@ describe("diagnostic learner flow", () => {
     );
   });
 
+  const twoQuestions = (firstSaved: Record<string, string> | null) => ({
+    ...session,
+    items: [
+      { ...session.items[0]!, saved_answers: firstSaved },
+      {
+        ...session.items[0]!,
+        position: 2,
+        question: {
+          ...session.items[0]!.question,
+          stable_key: "n1-diagnostic-a-02",
+          title: "Second question",
+        },
+      },
+    ],
+  });
+
+  it("saves an answer when the learner moves on before the autosave delay", async () => {
+    const api = {
+      get: vi.fn().mockResolvedValue(twoQuestions(null)),
+      save: vi.fn().mockResolvedValue(undefined),
+      submit: vi.fn().mockResolvedValue(result),
+    };
+    render(
+      <DiagnosticPlayer
+        api={api}
+        appearance="nextscholar"
+        sessionId={session.session_id}
+      />,
+    );
+    await screen.findByRole("heading", { name: "Prime recognition" });
+    fireEvent.change(screen.getByLabelText(/Your final answer/), {
+      target: { value: "17" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+
+    await screen.findByRole("heading", { name: "Second question" });
+    await waitFor(() =>
+      expect(api.save).toHaveBeenCalledWith(session.session_id, 1, {
+        "1": "17",
+      }),
+    );
+    expect(api.save).toHaveBeenCalledTimes(1);
+  });
+
+  it("resumes at the first unanswered question", async () => {
+    const api = {
+      get: vi.fn().mockResolvedValue(twoQuestions({ "1": "17" })),
+      save: vi.fn().mockResolvedValue(undefined),
+      submit: vi.fn().mockResolvedValue(result),
+    };
+    render(
+      <DiagnosticPlayer
+        api={api}
+        appearance="nextscholar"
+        sessionId={session.session_id}
+      />,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Second question" }),
+    ).toBeInTheDocument();
+  });
+
   it("presents supportive outcome evidence after submission", async () => {
     render(
       <DiagnosticResultPanel

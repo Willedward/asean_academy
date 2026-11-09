@@ -377,17 +377,20 @@ export function LivePracticeView({
                 <Tag tone="amber" icon={Lightbulb}>
                   Hint {hint.stage}
                 </Tag>
-                <div className="flex min-w-0 flex-col gap-2 text-[15px] leading-6">
+                <div className="flex min-w-0 grow flex-col gap-2 overflow-x-auto text-[15px] leading-6">
                   {hint.parts.map((part) => (
-                    <MathContent
-                      assets={question.assets}
-                      assetScope={{
-                        kind: "question",
-                        stableKey: question.stable_key,
-                      }}
-                      key={part.position}
-                      blocks={part.content as ContentBlock[]}
-                    />
+                    // A wrapper per part keeps text and inline maths in one line of
+                    // flow: as direct flex children, each block got its own line.
+                    <div key={part.position}>
+                      <MathContent
+                        assets={question.assets}
+                        assetScope={{
+                          kind: "question",
+                          stableKey: question.stable_key,
+                        }}
+                        blocks={part.content as ContentBlock[]}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -429,7 +432,8 @@ export function LivePracticeView({
                   <Eyebrow muted>
                     {part.label ? `ANSWER (${part.label})` : "ANSWER"}
                   </Eyebrow>
-                  <div className="mt-1 font-ns-math text-[22px]">
+                  {/* Inline maths is inline-block, so a long answer cannot wrap. */}
+                  <div className="mt-1 overflow-x-auto font-ns-math text-[22px]">
                     <MathContent
                       blocks={[
                         { type: "inline_math", latex: part.canonical_latex },

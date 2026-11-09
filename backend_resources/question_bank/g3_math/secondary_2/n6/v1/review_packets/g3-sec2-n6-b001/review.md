@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-504 — Other zero of a factorised function
+## n6-l3-504 — Positive zero of a factorised function
 
 [Open this question in the HTML preview](index.html#n6-l3-504)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-507 — y-intercept of a quadratic graph
+## n6-l2-507 — y-intercept from factorised form
 
 [Open this question in the HTML preview](index.html#n6-l2-507)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-507 — Other root from the axis of symmetry
+## n6-l3-507 — Axis of symmetry from two points
 
 [Open this question in the HTML preview](index.html#n6-l3-507)
 
