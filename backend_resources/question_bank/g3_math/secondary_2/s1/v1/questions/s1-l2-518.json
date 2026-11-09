@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-518",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The class midpoints 5, 15 and 25 have frequencies 5, 7 and 5. Calculate the midpoint-weighted estimate of the mean."
+          "text": "The class midpoints 10, 20 and 30 have frequencies 1, 2 and 2. Calculate the estimated mean."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "15.0",
-        "canonical_latex": "15.0",
+        "canonical_answer": "22",
+        "canonical_latex": "22",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Form the products midpoint × frequency for all classes."
+              "text": "Multiply each midpoint by its frequency."
             }
           ]
         },
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the sum of products by total frequency 17."
+              "text": "Add the products, then divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -62,11 +70,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Multiply midpoints by frequencies and add. "
             },
             {
               "type": "display_math",
-              "latex": "\\bar x\\approx\\frac{5(5)+15(7)+25(5)}{17}=15"
+              "latex": "10(1)+20(2)+30(2)=110"
             }
           ],
           "mark_type": "M",
@@ -77,11 +85,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "5"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "15.0"
+              "latex": "\\bar x\\approx22"
             }
           ],
           "mark_type": "A",
