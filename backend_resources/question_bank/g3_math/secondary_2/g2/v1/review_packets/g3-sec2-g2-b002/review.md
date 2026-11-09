@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-508 — Matching trapeziums
+## g2-l2-508 — Congruent shapes with an unknown angle
 
 [Open this question in the HTML preview](index.html#g2-l2-508)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-509 — Congruent triangular badges
+## g2-l2-509 — Perimeter of a congruent triangle
 
 [Open this question in the HTML preview](index.html#g2-l2-509)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-510 — Similar rectangles
+## g2-l2-510 — Find the original side
 
 [Open this question in the HTML preview](index.html#g2-l2-510)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-511 — Scale drawing wall
+## g2-l1-511 — Scale drawing of a wall
 
 [Open this question in the HTML preview](index.html#g2-l1-511)
 
