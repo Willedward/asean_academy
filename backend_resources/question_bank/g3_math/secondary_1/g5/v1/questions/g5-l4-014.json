@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-014",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Expand (x + 4)(x + 2) - x(x - 2) = 88."
+              "text": "Expand "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x+4)(x+2)-x(x-2)=88"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -108,7 +116,7 @@
       "asset_key": "g5-l4-014-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-014-diagram-r2.svg",
+      "path": "assets/g5-l4-014-diagram-r3.svg",
       "alt_text": "A rectangular track shown as a shaded band between two rectangles. The outside rectangle is (x + 4) m by (x + 2) m and the inside rectangle is x m by (x − 2) m. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

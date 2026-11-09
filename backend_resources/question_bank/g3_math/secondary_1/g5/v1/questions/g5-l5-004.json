@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-004",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the occupied volume by 10³ cm³ per cube."
+              "text": "Divide the occupied volume by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10^{3}\\text{ cm}^{3}"
+            },
+            {
+              "type": "text",
+              "text": " per cube."
             }
           ]
         }
@@ -108,7 +116,7 @@
       "asset_key": "g5-l5-004-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-004-diagram-r3.svg",
+      "path": "assets/g5-l5-004-diagram-r4.svg",
       "alt_text": "A cuboid box with edges 1.2 m, 80 cm and 50 cm, and hidden edges dashed. One small cube of side 10 cm sits in the front bottom corner. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

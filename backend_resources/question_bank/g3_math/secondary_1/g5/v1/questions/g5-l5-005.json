@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-005",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it. Using π = 22/7, find the remaining volume in cm³. Enter the numerical value only."
+          "text": "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find the remaining volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -60,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The cube volume is 14³ and the cylinder height is 14 cm."
+              "text": "The cube volume is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "14^{3}"
+            },
+            {
+              "type": "text",
+              "text": " and the cylinder height is 14 cm."
             }
           ]
         }
@@ -86,7 +102,7 @@
       "asset_key": "g5-l5-005-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-005-diagram-r3.svg",
+      "path": "assets/g5-l5-005-diagram-r4.svg",
       "alt_text": "A cube of side 14 cm, with equal marks on three of its edges. A cylindrical hole of radius 3.5 cm opens on the top face and passes straight down through the solid. The hole's far rim and sides are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",
