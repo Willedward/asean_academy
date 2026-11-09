@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## n7-l1-506 — Emerald Fern Bay — Heritage museum: two unknown counts
+## n7-l1-506 — Guides and volunteers at a museum
 
 [Open this question in the HTML preview](index.html#n7-l1-506)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-510 — Golden Fern Bay — Heritage museum: item prices
+## n7-l2-510 — Posters and postcards sold
 
 [Open this question in the HTML preview](index.html#n7-l2-510)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-507 — Indigo Fern Bay — Heritage museum: admission model
+## n7-l3-507 — Museum entry for adults and students
 
 [Open this question in the HTML preview](index.html#n7-l3-507)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-508 — Jade Fern Bay — Mekong field station: brackets in an equation
+## n7-l3-508 — Bracketed equation, find x
 
 [Open this question in the HTML preview](index.html#n7-l3-508)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-501 — Lilac Fern Bay — Cycling project: parameter for an identity
+## n7-l5-501 — Making an equation true for every x
 
 [Open this question in the HTML preview](index.html#n7-l5-501)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-507 — Silver Fern Bay — Mekong field station: checking equality
+## n7-l1-507 — Substituting into a one-step equation
 
 [Open this question in the HTML preview](index.html#n7-l1-507)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-511 — Violet Fern Bay — Komodo research camp: solving a balanced equation
+## n7-l2-511 — Equation with a single solution
 
 [Open this question in the HTML preview](index.html#n7-l2-511)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-509 — Amber Lotus Bay — Komodo research camp: brackets in an equation
+## n7-l3-509 — Single solution of a bracketed equation
 
 [Open this question in the HTML preview](index.html#n7-l3-509)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-507 — Azure Lotus Bay — Heritage museum: parcel allocation
+## n7-l4-507 — Nine parcels of two masses
 
 [Open this question in the HTML preview](index.html#n7-l4-507)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-508 — Bronze Lotus Bay — Orchid nursery: inequality boundary
+## n7-l1-508 — Greatest integer on a number line
 
 [Open this question in the HTML preview](index.html#n7-l1-508)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-512 — Coral Lotus Bay — Orchid nursery: closed endpoint
+## n7-l2-512 — Coefficient of x from a number line
 
 [Open this question in the HTML preview](index.html#n7-l2-512)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-510 — Emerald Lotus Bay — Orchid nursery: reversing an inequality
+## n7-l3-510 — Starting value from a solution graph
 
 [Open this question in the HTML preview](index.html#n7-l3-510)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-511 — Golden Lotus Bay — Bamboo studio: coordinate on a line
+## n7-l3-511 — Missing coefficient from a line graph
 
 [Open this question in the HTML preview](index.html#n7-l3-511)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-509 — Indigo Lotus Bay — Bamboo studio: vertical-axis intercept
+## n7-l1-509 — y-intercept from a line equation
 
 [Open this question in the HTML preview](index.html#n7-l1-509)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-513 — Jade Lotus Bay — Mangrove centre: horizontal-axis intercept
+## n7-l2-513 — x-coordinate where a line crosses the axis
 
 [Open this question in the HTML preview](index.html#n7-l2-513)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-514 — Lilac Lotus Bay — Kite festival: eliminate one variable
+## n7-l2-514 — Two equations true at once
 
 [Open this question in the HTML preview](index.html#n7-l2-514)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-512 — Silver Lotus Bay — Mangrove centre: coordinate on a line
+## n7-l3-512 — A point beyond the visible grid
 
 [Open this question in the HTML preview](index.html#n7-l3-512)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-502 — Violet Lotus Bay — Mekong field station: reconstruct an intersection
+## n7-l5-502 — Two unknown counts at a field station
 
 [Open this question in the HTML preview](index.html#n7-l5-502)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-515 — Amber Maple Bay — Rainforest survey: eliminate one variable
+## n7-l2-515 — Determining x from a given pair
 
 [Open this question in the HTML preview](index.html#n7-l2-515)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-516 — Azure Maple Bay — Angklung club: factor a monic quadratic
+## n7-l2-516 — Smaller solution by factorising
 
 [Open this question in the HTML preview](index.html#n7-l2-516)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-513 — Bronze Maple Bay — Komodo research camp: substitution at an intersection
+## n7-l3-513 — x-coordinate where two lines meet
 
 [Open this question in the HTML preview](index.html#n7-l3-513)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-508 — Coral Maple Bay — Orchid nursery: integers in a compound inequality
+## n7-l4-508 — Constant inside a compound inequality
 
 [Open this question in the HTML preview](index.html#n7-l4-508)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-510 — Emerald Maple Bay — Mekong field station: symmetric simultaneous equations
+## n7-l1-510 — Crossing point with one coordinate given
 
 [Open this question in the HTML preview](index.html#n7-l1-510)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-517 — Golden Maple Bay — Coral laboratory: factor a monic quadratic
+## n7-l2-517 — Quadratic with two solutions
 
 [Open this question in the HTML preview](index.html#n7-l2-517)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-514 — Indigo Maple Bay — Angklung club: rearrange before factorising
+## n7-l3-514 — Larger root of a quadratic equal to a number
 
 [Open this question in the HTML preview](index.html#n7-l3-514)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-509 — Jade Maple Bay — Angklung club: parameter enabling factorisation
+## n7-l4-509 — Given roots, find the constant
 
 [Open this question in the HTML preview](index.html#n7-l4-509)
 
