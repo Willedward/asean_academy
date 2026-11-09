@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-003",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An open cylindrical tank has radius 7 cm. The base and curved surface together use 594 cm² of metal. Using π = 22/7, find the tank's volume in cm³. Enter the numerical value only."
+          "text": "An open cylindrical tank has radius 7 cm. The base and curved surface together use 594 cm² of metal. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find the tank's volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -60,7 +68,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve πr² + 2πrh = 594, then use V = πr²h."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\pi r^{2}+2\\pi rh=594"
+            },
+            {
+              "type": "text",
+              "text": ", then use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "V=\\pi r^{2}h"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -108,7 +132,7 @@
       "asset_key": "g5-l5-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-003-diagram-r3.svg",
+      "path": "assets/g5-l5-003-diagram-r4.svg",
       "alt_text": "A cylinder that is open at the top, with radius 7 cm and an unknown height marked h. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

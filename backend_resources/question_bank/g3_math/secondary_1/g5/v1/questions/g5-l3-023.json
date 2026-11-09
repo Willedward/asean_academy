@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-023",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged. Using \u03c0 = 22/7, find their total displacement in cm\u00b3. Enter the numerical value only."
+          "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find their total displacement in cm³. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -51,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The cuboid volume is 200 cm\u00b3 and the cylinder volume is 308 cm\u00b3."
+              "text": "The cuboid volume is 200 cm³. Now find the cylinder volume using πr²h, then add the two volumes."
             }
           ]
         }

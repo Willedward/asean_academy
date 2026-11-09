@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l3-019",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylinder has height 14 cm and volume 1100 cm\u00b3. Using \u03c0 = 22/7, find its radius in cm. Enter the numerical value only."
+          "text": "A cylinder has height 14 cm and volume 1100 cm³. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find its radius in cm. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +50,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute into V = \u03c0r\u00b2h and solve for r\u00b2."
+              "text": "Substitute into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "V=\\pi r^{2}h"
+            },
+            {
+              "type": "text",
+              "text": " and solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "r^{2}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -50,8 +74,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "text",
-              "text": "r\u00b2 = 1100 \u00f7 44 = 25."
+              "type": "display_math",
+              "latex": "r^{2}=1100\\div 44=25"
             }
           ]
         }

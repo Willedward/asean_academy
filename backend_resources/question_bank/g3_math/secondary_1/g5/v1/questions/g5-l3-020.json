@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-020",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylindrical container has radius 7 cm and height 8 cm and is open at the top. Using π = 22/7, find its surface area in cm². Enter the numerical value only."
+          "text": "A cylindrical container has radius 7 cm and height 8 cm and is open at the top. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find its surface area in cm². Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -60,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use πr² + 2πrh."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\pi r^{2}+2\\pi rh"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -86,7 +102,7 @@
       "asset_key": "g5-l3-020-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-020-diagram-r2.svg",
+      "path": "assets/g5-l3-020-diagram-r3.svg",
       "alt_text": "A cylinder that is open at the top, with radius 7 cm and height 8 cm. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",

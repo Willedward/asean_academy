@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l1-012",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has parallel sides 9 m and 15 m and height 5 m. Find its area in m\u00b2. Enter the numerical value only."
+          "text": "A trapezium has parallel sides 9 m and 15 m and height 5 m. Find its area in m². Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate \u00bd(9 + 15)(5)."
+              "text": "Calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{1}{2}(9+15)(5)"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
