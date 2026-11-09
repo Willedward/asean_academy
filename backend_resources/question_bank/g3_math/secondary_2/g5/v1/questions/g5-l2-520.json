@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l2-520",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate π × 8² × 9 ÷ 3, then round."
+              "text": "Evaluate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\pi\\times 8^{2}\\times 9\\div 3"
+            },
+            {
+              "type": "text",
+              "text": ", then round."
             }
           ]
         }
@@ -101,7 +109,7 @@
       "asset_key": "g5-l2-520-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-520-diagram-r2.svg",
+      "path": "assets/g5-l2-520-diagram-r3.svg",
       "alt_text": "Cone with base radius r = 8 cm and perpendicular height h = 9 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",

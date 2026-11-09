@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-510",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,23 @@
           "content": [
             {
               "type": "text",
-              "text": "The cube root of 1/8 is 1/2; apply this to the height."
+              "text": "Write the volume ratio as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\left(\\frac{h}{H}\\right)^{3}=\\frac{1}{8}"
+            },
+            {
+              "type": "text",
+              "text": ", where H is the full height, then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "h"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -101,7 +117,7 @@
       "asset_key": "g5-l4-510-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-510-diagram-r2.svg",
+      "path": "assets/g5-l4-510-diagram-r3.svg",
       "alt_text": "Conical container held with its vertex pointing down, height h = 18 cm. Liquid fills one eighth of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
