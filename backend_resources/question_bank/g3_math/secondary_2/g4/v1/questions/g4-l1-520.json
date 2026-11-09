@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g4-l1-520",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G4",
   "primary_outcome": "4.3",
-  "title": "Use tangent at 45 degrees",
+  "title": "Find the adjacent side",
   "difficulty": 1,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers noted a protected habitat boundary while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the library staircase, the opposite side is 11 m. Find the adjacent side x in metres. Enter the numerical value only."
+          "text": "Field researchers noted a protected habitat boundary while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the library staircase, the opposite side is 11 m. Find the adjacent side "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " in metres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -60,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use tan 45° = 1."
+              "text": "Write "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\tan 45^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": " as a fraction using the opposite and adjacent sides."
             }
           ]
         }
@@ -86,7 +102,7 @@
       "asset_key": "g4-l1-520-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-520-diagram-r2.svg",
+      "path": "assets/g4-l1-520-diagram-r3.svg",
       "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 11 m and the adjacent side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
