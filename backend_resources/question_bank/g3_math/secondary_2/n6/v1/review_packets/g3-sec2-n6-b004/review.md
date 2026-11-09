@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-525 — Factorised quadratic: the remaining zero
+## n6-l3-525 — Positive zero with a repeated factor
 
 [Open this question in the HTML preview](index.html#n6-l3-525)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-528 — Crossing point on the y-axis
+## n6-l2-528 — y-intercept from turning-point form
 
 [Open this question in the HTML preview](index.html#n6-l2-528)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l4-516 — Complete the square to find the extreme value
+## n6-l4-516 — Turning value and whether it is a maximum or minimum
 
 [Open this question in the HTML preview](index.html#n6-l4-516)
 

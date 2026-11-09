@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l3-530",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,11 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "How many distinct x-intercepts does "
+          "text": "How many distinct "
         },
         {
           "type": "inline_math",
-          "latex": "y=(x-3)^{2}-4"
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-intercepts does "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=(x-1)^{2}"
         },
         {
           "type": "text",
@@ -37,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +58,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the axis using standard form, the midpoint of the roots, or the factorised form."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": " and solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -59,15 +83,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the axis input for the turning value, and solve "
+              "text": "How many values of "
             },
             {
               "type": "inline_math",
-              "latex": "y=0"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": " when counting x-intercepts."
+              "text": " make "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-1)^2=0"
+            },
+            {
+              "type": "text",
+              "text": "?"
             }
           ]
         }
@@ -78,11 +110,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "Set "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "(x-3)^2=4=(2)^2\\Rightarrow x=1\\text{ or }x=5,\\text{ so there are 2 distinct intercepts.}"
+              "latex": "(x-1)^2=0\\Rightarrow x=1"
+            },
+            {
+              "type": "text",
+              "text": " The two roots coincide, so the graph just touches the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-axis."
             }
           ],
           "mark_type": "M",
@@ -93,11 +145,23 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "There is "
             },
             {
               "type": "display_math",
-              "latex": "2"
+              "latex": "1"
+            },
+            {
+              "type": "text",
+              "text": " distinct "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-intercept."
             }
           ],
           "mark_type": "A",

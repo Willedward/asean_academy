@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n6-l4-515",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,11 +24,35 @@
         },
         {
           "type": "inline_math",
-          "latex": "y=-3(x+6)(x-2)"
+          "latex": "y=-2(x+6)(x-2)"
         },
         {
           "type": "text",
-          "text": " has roots -6 and 2. Find its maximum y-value."
+          "text": " has roots "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-6"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2"
+        },
+        {
+          "type": "text",
+          "text": ". Find its maximum "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": "-value."
         }
       ],
       "marks": 4,
@@ -37,8 +61,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "48",
-        "canonical_latex": "48",
+        "canonical_answer": "32",
+        "canonical_latex": "32",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -70,11 +94,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the supplied function information into the relevant equation or graph feature."
+              "text": "The axis is halfway between the roots, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=-2"
+            },
+            {
+              "type": "text",
+              "text": ". Substitute. "
             },
             {
               "type": "display_math",
-              "latex": "x=\\frac{-6+(2)}{2}=-2,\\quad y(-2)=-3(4)(-4)=48."
+              "latex": "y(-2)=-2(-2+6)(-2-2)=-2(4)(-4)"
             }
           ],
           "mark_type": "M",
@@ -85,11 +117,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "The maximum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-value is "
             },
             {
               "type": "display_math",
-              "latex": "48"
+              "latex": "32"
             }
           ],
           "mark_type": "A",

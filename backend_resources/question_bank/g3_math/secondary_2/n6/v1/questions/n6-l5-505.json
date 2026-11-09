@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "n6-l5-505",
   "bank_key": "g3-sec2-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -87,11 +87,59 @@
           "content": [
             {
               "type": "text",
-              "text": "The graph gives roots -3 and 3. Use the extra point to determine the scale factor, then evaluate at the axis of symmetry."
+              "text": "The graph gives roots "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=p(x+3)(x-3)"
+            },
+            {
+              "type": "text",
+              "text": ". Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(4,14)"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "y=p(x+3)(x-3);\\ 14=p(7)(1)\\Rightarrow p=2.\\ x_{min}=0,\\ y_{min}=2(3)(-3)=-18."
+              "latex": "14=p(7)(1)\\Rightarrow p=2"
+            },
+            {
+              "type": "text",
+              "text": " The axis is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=0"
+            },
+            {
+              "type": "text",
+              "text": " (the midpoint of the roots). "
+            },
+            {
+              "type": "display_math",
+              "latex": "y(0)=2(3)(-3)"
             }
           ],
           "mark_type": "M",
@@ -102,7 +150,15 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested exact value and check it against the original function or symmetry condition."
+              "text": "So the minimum "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-value is "
             },
             {
               "type": "display_math",
@@ -121,7 +177,7 @@
       "asset_key": "n6-l5-505-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-l5-505-diagram-r4.svg",
+      "path": "assets/n6-l5-505-diagram-r5.svg",
       "alt_text": "Parabola crossing the x-axis at -3 and 3.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
