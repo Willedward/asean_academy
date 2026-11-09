@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-501 — Congruent triangles
+## g2-l2-501 — Congruent triangles with an unknown
 
 [Open this question in the HTML preview](index.html#g2-l2-501)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l3-501 — SSS side equation
+## g2-l3-501 — Congruent sides equation
 
 [Open this question in the HTML preview](index.html#g2-l3-501)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l4-501 — Two-stage similar enlargement
+## g2-l4-501 — Two-stage scaling: find the second factor
 
 [Open this question in the HTML preview](index.html#g2-l4-501)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l4-502 — Coupled angle and side similarity
+## g2-l4-502 — Coupled angle similarity
 
 [Open this question in the HTML preview](index.html#g2-l4-502)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-505 — Beacon point enlargement
+## g2-l1-505 — Point enlargement
 
 [Open this question in the HTML preview](index.html#g2-l1-505)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-506 — Toy car length
+## g2-l1-506 — Toy car on a design sketch
 
 [Open this question in the HTML preview](index.html#g2-l1-506)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-507 — Tree shadow
+## g2-l2-507 — Shadow of a tree
 
 [Open this question in the HTML preview](index.html#g2-l2-507)
 

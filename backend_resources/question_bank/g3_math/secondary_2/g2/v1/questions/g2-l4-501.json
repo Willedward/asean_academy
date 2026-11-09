@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l4-501",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Two-stage similar enlargement",
+  "title": "Two-stage scaling: find the second factor",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,15 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A logo is enlarged by scale factor 3 and the enlarged copy is then reduced by scale factor "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\frac{1}{2}"
-        },
-        {
-          "type": "text",
-          "text": ". An original side is 10 cm. Find the final corresponding side length. Enter the numerical value only."
+          "text": "A logo has an original side of 10 cm. It is enlarged by scale factor 3, and the enlarged copy is then scaled so that the final side is 15 cm. Find the scale factor of the second step. Give your answer in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -37,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "15",
-        "canonical_latex": "15",
+        "canonical_answer": "0.5",
+        "canonical_latex": "0.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the two scale factors to obtain one overall factor."
+              "text": "Work out the side length after the first enlargement."
             }
           ]
         },
@@ -59,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply your overall factor to the original 10 cm side."
+              "text": "The second scale factor is the final length divided by the length after the first step."
             }
           ]
         }
@@ -69,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Find the length after the first enlargement. "
+            },
+            {
               "type": "display_math",
-              "latex": "k=3\\times\\frac12=\\frac32"
+              "latex": "10\\times3=30"
             }
           ],
           "mark_type": "M",
@@ -80,8 +76,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Compare the final length with this length. "
+            },
+            {
               "type": "display_math",
-              "latex": "L=10\\times\\frac32"
+              "latex": "k=\\frac{15}{30}"
             }
           ],
           "mark_type": "M",
@@ -91,8 +91,12 @@
           "position": 3,
           "content": [
             {
+              "type": "text",
+              "text": "So the second scale factor is "
+            },
+            {
               "type": "display_math",
-              "latex": "L=15"
+              "latex": "0.5"
             }
           ],
           "mark_type": "A",
