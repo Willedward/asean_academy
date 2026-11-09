@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g5-l2-012",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A closed cylinder has radius 7 cm and height 10 cm. Using \u03c0 = 22/7, find its total surface area in cm\u00b2. Enter the numerical value only."
+          "text": "A closed cylinder has radius 7 cm and height 10 cm. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\pi=\\frac{22}{7}"
+        },
+        {
+          "type": "text",
+          "text": ", find its total surface area in cm². Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 2\u03c0r\u00b2 + 2\u03c0rh."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2\\pi r^{2}+2\\pi rh"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
