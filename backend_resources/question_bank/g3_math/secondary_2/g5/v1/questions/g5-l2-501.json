@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l2-501",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate π × 12 × 20; do not add the base."
+              "text": "Evaluate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\pi\\times 12\\times 20"
+            },
+            {
+              "type": "text",
+              "text": "; do not add the base."
             }
           ]
         }
@@ -101,7 +109,7 @@
       "asset_key": "g5-l2-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-501-diagram-r2.svg",
+      "path": "assets/g5-l2-501-diagram-r3.svg",
       "alt_text": "Cone with base radius r = 12 cm and slant height l = 20 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
