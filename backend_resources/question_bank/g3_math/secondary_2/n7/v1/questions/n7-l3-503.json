@@ -1,18 +1,27 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l3-503",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.6",
-  "title": "Azure Cedar Bay — School canteen: reversing an inequality",
+  "title": "Spotting the error in a solution graph",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "n7-l3-503-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 19-3x>10. The answer has the form x<k. Find k."
+          "text": "Arif solved 19-3x>10 and drew the number line shown. Enter 1 if it is correct, 2 if only the circle at the boundary is wrong, 3 if only the direction of the solution line is wrong, or 4 if both are wrong."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Collect the x-term, remembering that division by a negative number reverses the sign."
+              "text": "Solve the inequality yourself first. Think about what dividing by a negative number does to the sign."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "After subtracting 19, divide both sides by -3."
+              "text": "Subtract 19 from both sides, divide both sides by -3, then compare your solution with the drawing."
             }
           ]
         }
@@ -62,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Dividing by -3 reverses the sign, so the correct solution has an open circle at 3 and a line going left."
             },
             {
               "type": "display_math",
-              "latex": "-3x>-9\\Rightarrow x<3\\Rightarrow k=3"
+              "latex": "19-3x>10\\Rightarrow -3x>-9\\Rightarrow x<3"
             }
           ],
           "mark_type": "M",
@@ -77,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "The drawing has the correct open circle but its line goes right, so only the direction is wrong: code 3."
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "\\text{code }3"
             }
           ],
           "mark_type": "A",
@@ -91,7 +100,114 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "n7-l3-503-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n7-l3-503-diagram-r2.svg",
+      "alt_text": "Number line showing values greater than 3.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "number_line",
+        "question_key": "n7-l3-503",
+        "outcome": "7.6",
+        "template": "number_line",
+        "inputs": {
+          "boundary": 3,
+          "relation": ">",
+          "title": "Number line"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "boundary",
+            "kind": "open-boundary",
+            "value": "3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "380",
+              "cy": "250",
+              "r": "10"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "80",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "155",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "230",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "305",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "380",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "455",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "530",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "605",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "680",
+            "label": "7"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "50bcacf87c7240dfc52339a15e8e04c9c5db81da1e51cabb596b124d43a805a8",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -105,6 +221,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
