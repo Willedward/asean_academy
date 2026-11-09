@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-003",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l2-003-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar chart shows 18 participants for badminton and 11 for tennis. How many more chose badminton? Enter the numerical value only."
+          "text": "The bar chart shows how many participants chose badminton and how many chose tennis. How many more chose badminton? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 18 - 11."
+              "text": "Read each bar against the scale, then subtract."
             }
           ]
         }
@@ -72,7 +81,169 @@
     }
   ],
   "total_marks": 2,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l2-003-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l2-003-diagram-r2.svg",
+      "alt_text": "Bar chart with Badminton: 18, Tennis: 11.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l2-003",
+        "outcome": "1.2",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "Badminton",
+            "Tennis"
+          ],
+          "values": [
+            18,
+            11
+          ],
+          "y_max": 20,
+          "tick_step": 2,
+          "y_label": "Participants",
+          "title": "Sports chosen"
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "18",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "133",
+              "width": "177",
+              "height": "252"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "11",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "231",
+              "width": "177",
+              "height": "154"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "385",
+            "label": "0"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "357",
+            "label": "2"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "329",
+            "label": "4"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "301",
+            "label": "6"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "273",
+            "label": "8"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "245",
+            "label": "10"
+          },
+          {
+            "key": "y:12",
+            "axis": "y",
+            "value": "12",
+            "position": "217",
+            "label": "12"
+          },
+          {
+            "key": "y:14",
+            "axis": "y",
+            "value": "14",
+            "position": "189",
+            "label": "14"
+          },
+          {
+            "key": "y:16",
+            "axis": "y",
+            "value": "16",
+            "position": "161",
+            "label": "16"
+          },
+          {
+            "key": "y:18",
+            "axis": "y",
+            "value": "18",
+            "position": "133",
+            "label": "18"
+          },
+          {
+            "key": "y:20",
+            "axis": "y",
+            "value": "20",
+            "position": "105",
+            "label": "20"
+          },
+          {
+            "key": "x:Badminton",
+            "axis": "x",
+            "value": "Badminton",
+            "position": "237.5",
+            "label": "Badminton"
+          },
+          {
+            "key": "x:Tennis",
+            "axis": "x",
+            "value": "Tennis",
+            "position": "532.5",
+            "label": "Tennis"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 0.0,
+          "y_max": 20.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "bf8c8c4277ed18d867a32428a0744bd640682a97be3a714751ae033890826e82",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +257,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

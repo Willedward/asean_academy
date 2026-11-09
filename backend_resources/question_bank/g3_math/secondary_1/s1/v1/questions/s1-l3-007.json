@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-007",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-007-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Values rise from 80 to 100. A bar chart begins at 75. Divide the displayed percentage increase, measured from the drawn baseline, by the true percentage increase. Find the exaggeration factor. Enter the numerical value only."
+          "text": "The bar chart shows a value rising. Divide the displayed percentage increase, measured from the drawn baseline, by the true percentage increase. Find the exaggeration factor. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "True change uses 80 as the base; displayed change uses height 5."
+              "text": "True change uses the first value as its base; displayed change uses the first bar's height above the baseline."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The common increase cancels, leaving 80/5."
+              "text": "The common increase cancels, so compare the two base values."
             }
           ]
         }
@@ -72,7 +81,136 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-007-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-007-diagram-r2.svg",
+      "alt_text": "Bar chart with an axis break and a vertical axis from 75 to 100 in steps of 5. First: 80, Second: 100.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l3-007",
+        "outcome": "1.4",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "First",
+            "Second"
+          ],
+          "values": [
+            80,
+            100
+          ],
+          "y_max": 100,
+          "tick_step": 5,
+          "y_label": "Value",
+          "title": "Value rising",
+          "y_min": 75,
+          "alt_text": "Bar chart with an axis break and a vertical axis from 75 to 100 in steps of 5. First: 80, Second: 100."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "80",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "329",
+              "width": "177",
+              "height": "56"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "100",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "105",
+              "width": "177",
+              "height": "280"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:75",
+            "axis": "y",
+            "value": "75",
+            "position": "385",
+            "label": "75"
+          },
+          {
+            "key": "y:80",
+            "axis": "y",
+            "value": "80",
+            "position": "329",
+            "label": "80"
+          },
+          {
+            "key": "y:85",
+            "axis": "y",
+            "value": "85",
+            "position": "273",
+            "label": "85"
+          },
+          {
+            "key": "y:90",
+            "axis": "y",
+            "value": "90",
+            "position": "217",
+            "label": "90"
+          },
+          {
+            "key": "y:95",
+            "axis": "y",
+            "value": "95",
+            "position": "161",
+            "label": "95"
+          },
+          {
+            "key": "y:100",
+            "axis": "y",
+            "value": "100",
+            "position": "105",
+            "label": "100"
+          },
+          {
+            "key": "x:First",
+            "axis": "x",
+            "value": "First",
+            "position": "237.5",
+            "label": "First"
+          },
+          {
+            "key": "x:Second",
+            "axis": "x",
+            "value": "Second",
+            "position": "532.5",
+            "label": "Second"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 75.0,
+          "y_max": 100.0,
+          "tick_step": 5.0
+        }
+      },
+      "sha256": "ae6f4ce172d25e861e8c5cc301816a1ffc8de5ca782163565e17782e6d3a75a3",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +224,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

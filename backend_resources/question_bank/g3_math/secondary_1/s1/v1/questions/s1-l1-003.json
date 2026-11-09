@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l1-003",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l1-003-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar graph shows 6 books for Monday, 9 for Tuesday and 7 for Wednesday. How many books are shown for Tuesday? Enter the numerical value only."
+          "text": "The bar chart shows the number of books for three days. How many books are shown for Tuesday? Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Read its height from the stated scale."
+              "text": "Read across from the top of the bar to the vertical scale. It may lie between two labelled marks."
             }
           ]
         }
@@ -72,7 +81,161 @@
     }
   ],
   "total_marks": 1,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l1-003-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l1-003-diagram-r2.svg",
+      "alt_text": "Bar chart of the number of books on Monday, Tuesday and Wednesday, with a vertical axis from 0 to 10 marked in steps of 2.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "question_key": "s1-l1-003",
+        "outcome": "1.2",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "Monday",
+            "Tuesday",
+            "Wednesday"
+          ],
+          "values": [
+            6,
+            9,
+            7
+          ],
+          "y_max": 10,
+          "tick_step": 2,
+          "y_label": "Books",
+          "title": "Books each day",
+          "alt_text": "Bar chart of the number of books on Monday, Tuesday and Wednesday, with a vertical axis from 0 to 10 marked in steps of 2.",
+          "forbidden_visible_labels": [
+            "9"
+          ]
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "6",
+            "tag": "rect",
+            "geometry": {
+              "x": "129.333333",
+              "y": "217",
+              "width": "118",
+              "height": "168"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "9",
+            "tag": "rect",
+            "geometry": {
+              "x": "326",
+              "y": "133",
+              "width": "118",
+              "height": "252"
+            }
+          },
+          {
+            "key": "bar-2",
+            "kind": "bar",
+            "value": "7",
+            "tag": "rect",
+            "geometry": {
+              "x": "522.666667",
+              "y": "189",
+              "width": "118",
+              "height": "196"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "385",
+            "label": "0"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "329",
+            "label": "2"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "273",
+            "label": "4"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "217",
+            "label": "6"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "161",
+            "label": "8"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "105",
+            "label": "10"
+          },
+          {
+            "key": "x:Monday",
+            "axis": "x",
+            "value": "Monday",
+            "position": "188.333333",
+            "label": "Monday"
+          },
+          {
+            "key": "x:Tuesday",
+            "axis": "x",
+            "value": "Tuesday",
+            "position": "385",
+            "label": "Tuesday"
+          },
+          {
+            "key": "x:Wednesday",
+            "axis": "x",
+            "value": "Wednesday",
+            "position": "581.666667",
+            "label": "Wednesday"
+          }
+        ],
+        "forbidden_visible_labels": [
+          "9"
+        ],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 0.0,
+          "y_max": 10.0,
+          "tick_step": 2.0
+        }
+      },
+      "sha256": "24f114f6304f74220560931551a155847e42f38760e08f70e4a79f762e69e6fa",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -86,6 +249,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

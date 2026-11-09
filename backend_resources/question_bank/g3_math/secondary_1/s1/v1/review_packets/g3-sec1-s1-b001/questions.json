@@ -365,7 +365,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-001",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -377,7 +377,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-001-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -385,7 +394,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A survey table has row totals 28 and 32. Three cells contain 17, 11 and 14. Find the fourth cell. Enter the numerical value only."
+            "text": "The survey table shows some cell values and the row totals. Find the value in the cell marked ?. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -407,7 +416,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "First find the grand total from the row totals."
+                "text": "Look at the row that contains the missing cell."
               }
             ]
           },
@@ -416,7 +425,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract all three known cells from 60."
+                "text": "Subtract the known cell in that row from the row total."
               }
             ]
           }
@@ -426,8 +435,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The cell marked ? is in the row with total 32."
+              },
+              {
                 "type": "display_math",
-                "latex": "28+32=60"
+                "latex": "14+\\text{?}=32"
               }
             ],
             "mark_type": "M",
@@ -437,8 +450,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Subtract 14 from the row total."
+              },
+              {
                 "type": "display_math",
-                "latex": "60-(17+11+14)=18"
+                "latex": "32-14=18"
               }
             ],
             "mark_type": "A",
@@ -448,7 +465,119 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-001-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-001-diagram-r2.svg",
+        "alt_text": "Two-way table with two rows and columns Column 1, Column 2 and Total. Row 1: 17, 11, total 28. Row 2: 14, unknown, total 32.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "data_table",
+          "question_key": "s1-l3-001",
+          "outcome": "1.1",
+          "template": "data_table",
+          "inputs": {
+            "columns": [
+              "Column 1",
+              "Column 2",
+              "Total"
+            ],
+            "rows": [
+              "Row 1",
+              "Row 2"
+            ],
+            "cells": [
+              [
+                17,
+                11,
+                28
+              ],
+              [
+                14,
+                null,
+                32
+              ]
+            ],
+            "title": "Survey table",
+            "alt_text": "Two-way table with two rows and columns Column 1, Column 2 and Total. Row 1: 17, 11, total 28. Row 2: 14, unknown, total 32."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "cell-0-0",
+              "kind": "table-cell",
+              "value": "17",
+              "tag": "text",
+              "geometry": {
+                "x": "291.25",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-0-1",
+              "kind": "table-cell",
+              "value": "11",
+              "tag": "text",
+              "geometry": {
+                "x": "428.75",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-0-2",
+              "kind": "table-cell",
+              "value": "28",
+              "tag": "text",
+              "geometry": {
+                "x": "566.25",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-1-0",
+              "kind": "table-cell",
+              "value": "14",
+              "tag": "text",
+              "geometry": {
+                "x": "291.25",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-1-1",
+              "kind": "table-cell",
+              "value": "?",
+              "tag": "text",
+              "geometry": {
+                "x": "428.75",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-1-2",
+              "kind": "table-cell",
+              "value": "32",
+              "tag": "text",
+              "geometry": {
+                "x": "566.25",
+                "y": "277.24"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "b807ef7fceeebbc88fa29bb7df4bb33fe22993a9b8db0e88808d47249f6f51f2",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -462,7 +591,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -558,7 +687,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-001",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -570,7 +699,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-001-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -578,7 +716,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A two-way table contains 72 students. The chess column totals 31. In the robotics row, 16 choose chess and 23 choose coding. Find how many students in the other row choose coding. Enter the numerical value only."
+            "text": "The two-way table shows the choices of some students, and some cells are blank. Find the value in the cell marked ?. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -609,7 +747,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Coding totals 72 - 31 = 41; remove the 23 robotics students."
+                "text": "Subtract the robotics entry from that column total."
               }
             ]
           }
@@ -641,7 +779,155 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-001-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-001-diagram-r2.svg",
+        "alt_text": "Two-way table with columns Chess, Coding and Total and rows Robotics, Other and Total. Robotics: Chess 16, Coding 23. Total row: Chess 31, grand total 72. The Other row's Coding cell is unknown.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "data_table",
+          "question_key": "s1-l4-001",
+          "outcome": "1.1",
+          "template": "data_table",
+          "inputs": {
+            "columns": [
+              "Chess",
+              "Coding",
+              "Total"
+            ],
+            "rows": [
+              "Robotics",
+              "Other",
+              "Total"
+            ],
+            "cells": [
+              [
+                16,
+                23,
+                ""
+              ],
+              [
+                "",
+                null,
+                ""
+              ],
+              [
+                31,
+                "",
+                72
+              ]
+            ],
+            "title": "Student choices",
+            "alt_text": "Two-way table with columns Chess, Coding and Total and rows Robotics, Other and Total. Robotics: Chess 16, Coding 23. Total row: Chess 31, grand total 72. The Other row's Coding cell is unknown."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "cell-0-0",
+              "kind": "table-cell",
+              "value": "16",
+              "tag": "text",
+              "geometry": {
+                "x": "291.25",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-0-1",
+              "kind": "table-cell",
+              "value": "23",
+              "tag": "text",
+              "geometry": {
+                "x": "428.75",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-0-2",
+              "kind": "table-cell",
+              "value": "",
+              "tag": "text",
+              "geometry": {
+                "x": "566.25",
+                "y": "209.24"
+              }
+            },
+            {
+              "key": "cell-1-0",
+              "kind": "table-cell",
+              "value": "",
+              "tag": "text",
+              "geometry": {
+                "x": "291.25",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-1-1",
+              "kind": "table-cell",
+              "value": "?",
+              "tag": "text",
+              "geometry": {
+                "x": "428.75",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-1-2",
+              "kind": "table-cell",
+              "value": "",
+              "tag": "text",
+              "geometry": {
+                "x": "566.25",
+                "y": "277.24"
+              }
+            },
+            {
+              "key": "cell-2-0",
+              "kind": "table-cell",
+              "value": "31",
+              "tag": "text",
+              "geometry": {
+                "x": "291.25",
+                "y": "345.24"
+              }
+            },
+            {
+              "key": "cell-2-1",
+              "kind": "table-cell",
+              "value": "",
+              "tag": "text",
+              "geometry": {
+                "x": "428.75",
+                "y": "345.24"
+              }
+            },
+            {
+              "key": "cell-2-2",
+              "kind": "table-cell",
+              "value": "72",
+              "tag": "text",
+              "geometry": {
+                "x": "566.25",
+                "y": "345.24"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "0f3bc70939308d0a3a603cb5143ab9202830092a929477979b56f9e0fbb018c2",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -655,12 +941,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l1-003",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -672,7 +958,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l1-003-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -680,7 +975,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bar graph shows 6 books for Monday, 9 for Tuesday and 7 for Wednesday. How many books are shown for Tuesday? Enter the numerical value only."
+            "text": "The bar chart shows the number of books for three days. How many books are shown for Tuesday? Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -711,7 +1006,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Read its height from the stated scale."
+                "text": "Read across from the top of the bar to the vertical scale. It may lie between two labelled marks."
               }
             ]
           }
@@ -732,7 +1027,161 @@
       }
     ],
     "total_marks": 1,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l1-003-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l1-003-diagram-r2.svg",
+        "alt_text": "Bar chart of the number of books on Monday, Tuesday and Wednesday, with a vertical axis from 0 to 10 marked in steps of 2.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l1-003",
+          "outcome": "1.2",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "Monday",
+              "Tuesday",
+              "Wednesday"
+            ],
+            "values": [
+              6,
+              9,
+              7
+            ],
+            "y_max": 10,
+            "tick_step": 2,
+            "y_label": "Books",
+            "title": "Books each day",
+            "alt_text": "Bar chart of the number of books on Monday, Tuesday and Wednesday, with a vertical axis from 0 to 10 marked in steps of 2.",
+            "forbidden_visible_labels": [
+              "9"
+            ]
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "6",
+              "tag": "rect",
+              "geometry": {
+                "x": "129.333333",
+                "y": "217",
+                "width": "118",
+                "height": "168"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "9",
+              "tag": "rect",
+              "geometry": {
+                "x": "326",
+                "y": "133",
+                "width": "118",
+                "height": "252"
+              }
+            },
+            {
+              "key": "bar-2",
+              "kind": "bar",
+              "value": "7",
+              "tag": "rect",
+              "geometry": {
+                "x": "522.666667",
+                "y": "189",
+                "width": "118",
+                "height": "196"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:2",
+              "axis": "y",
+              "value": "2",
+              "position": "329",
+              "label": "2"
+            },
+            {
+              "key": "y:4",
+              "axis": "y",
+              "value": "4",
+              "position": "273",
+              "label": "4"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "217",
+              "label": "6"
+            },
+            {
+              "key": "y:8",
+              "axis": "y",
+              "value": "8",
+              "position": "161",
+              "label": "8"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "105",
+              "label": "10"
+            },
+            {
+              "key": "x:Monday",
+              "axis": "x",
+              "value": "Monday",
+              "position": "188.333333",
+              "label": "Monday"
+            },
+            {
+              "key": "x:Tuesday",
+              "axis": "x",
+              "value": "Tuesday",
+              "position": "385",
+              "label": "Tuesday"
+            },
+            {
+              "key": "x:Wednesday",
+              "axis": "x",
+              "value": "Wednesday",
+              "position": "581.666667",
+              "label": "Wednesday"
+            }
+          ],
+          "forbidden_visible_labels": [
+            "9"
+          ],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 10.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "24f114f6304f74220560931551a155847e42f38760e08f70e4a79f762e69e6fa",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -746,12 +1195,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-003",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -763,7 +1212,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-003-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -771,7 +1229,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bar chart shows 18 participants for badminton and 11 for tennis. How many more chose badminton? Enter the numerical value only."
+            "text": "The bar chart shows how many participants chose badminton and how many chose tennis. How many more chose badminton? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -802,7 +1260,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 18 - 11."
+                "text": "Read each bar against the scale, then subtract."
               }
             ]
           }
@@ -823,7 +1281,169 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-003-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-003-diagram-r2.svg",
+        "alt_text": "Bar chart with Badminton: 18, Tennis: 11.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l2-003",
+          "outcome": "1.2",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "Badminton",
+              "Tennis"
+            ],
+            "values": [
+              18,
+              11
+            ],
+            "y_max": 20,
+            "tick_step": 2,
+            "y_label": "Participants",
+            "title": "Sports chosen"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "18",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "133",
+                "width": "177",
+                "height": "252"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "11",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "231",
+                "width": "177",
+                "height": "154"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:0",
+              "axis": "y",
+              "value": "0",
+              "position": "385",
+              "label": "0"
+            },
+            {
+              "key": "y:2",
+              "axis": "y",
+              "value": "2",
+              "position": "357",
+              "label": "2"
+            },
+            {
+              "key": "y:4",
+              "axis": "y",
+              "value": "4",
+              "position": "329",
+              "label": "4"
+            },
+            {
+              "key": "y:6",
+              "axis": "y",
+              "value": "6",
+              "position": "301",
+              "label": "6"
+            },
+            {
+              "key": "y:8",
+              "axis": "y",
+              "value": "8",
+              "position": "273",
+              "label": "8"
+            },
+            {
+              "key": "y:10",
+              "axis": "y",
+              "value": "10",
+              "position": "245",
+              "label": "10"
+            },
+            {
+              "key": "y:12",
+              "axis": "y",
+              "value": "12",
+              "position": "217",
+              "label": "12"
+            },
+            {
+              "key": "y:14",
+              "axis": "y",
+              "value": "14",
+              "position": "189",
+              "label": "14"
+            },
+            {
+              "key": "y:16",
+              "axis": "y",
+              "value": "16",
+              "position": "161",
+              "label": "16"
+            },
+            {
+              "key": "y:18",
+              "axis": "y",
+              "value": "18",
+              "position": "133",
+              "label": "18"
+            },
+            {
+              "key": "y:20",
+              "axis": "y",
+              "value": "20",
+              "position": "105",
+              "label": "20"
+            },
+            {
+              "key": "x:Badminton",
+              "axis": "x",
+              "value": "Badminton",
+              "position": "237.5",
+              "label": "Badminton"
+            },
+            {
+              "key": "x:Tennis",
+              "axis": "x",
+              "value": "Tennis",
+              "position": "532.5",
+              "label": "Tennis"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 0.0,
+            "y_max": 20.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "bf8c8c4277ed18d867a32428a0744bd640682a97be3a714751ae033890826e82",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -837,12 +1457,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-004",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -854,7 +1474,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-004-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -862,7 +1491,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pictogram key is one circle = 6 students. A category shows 4 complete circles and one half-circle. Find the number of students. Enter the numerical value only."
+            "text": "The pictogram shows the number of students in one category. Find the number of students. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -884,7 +1513,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A half-circle represents half of six."
+                "text": "A half symbol represents half of the value in the key."
               }
             ]
           },
@@ -893,7 +1522,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Combine 4 × 6 with 3."
+                "text": "Multiply the whole symbols by the key, then add the half symbol's value."
               }
             ]
           }
@@ -914,7 +1543,95 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-004-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-004-diagram-r2.svg",
+        "alt_text": "Pictogram where each ● represents 6; Category has 4.5 symbols.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pictogram",
+          "question_key": "s1-l2-004",
+          "outcome": "1.2",
+          "template": "pictogram",
+          "inputs": {
+            "rows": [
+              {
+                "label": "Category",
+                "count": 4.5
+              }
+            ],
+            "key": 6,
+            "title": "Students in one category",
+            "symbol": "●"
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0-0",
+              "kind": "icon",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "200",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-1",
+              "kind": "icon",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "258",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-2",
+              "kind": "icon",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "316",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-3",
+              "kind": "icon",
+              "value": "6",
+              "tag": "text",
+              "geometry": {
+                "x": "374",
+                "y": "124"
+              }
+            },
+            {
+              "key": "icon-0-partial",
+              "kind": "partial-icon",
+              "value": "3",
+              "tag": "text",
+              "geometry": {
+                "x": "432",
+                "y": "124"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "2189f801e491aa484d13b8af44d772f633c148bd37331842035f335f5b22a358",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -928,7 +1645,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1043,7 +1760,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-004",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1055,7 +1772,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-004-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1063,7 +1789,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 72° sector in a pie chart represents 18 students. Find the total number of students. Enter the numerical value only."
+            "text": "The sector marked 72° in the pie chart represents 18 students. Find the total number of students. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1085,7 +1811,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The sector is 72/360 of the whole."
+                "text": "The sector's fraction of the circle is its angle over 360°."
               }
             ]
           },
@@ -1094,7 +1820,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set 72/360 of the total equal to 18."
+                "text": "Set that fraction of the total equal to the number of students in the sector."
               }
             ]
           }
@@ -1126,7 +1852,64 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-004-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-004-diagram-r2.svg",
+        "alt_text": "Pie chart with a sector marked 72 degrees and the rest of the circle labelled Rest.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pie_chart",
+          "question_key": "s1-l3-004",
+          "outcome": "1.2",
+          "template": "pie_chart",
+          "inputs": {
+            "labels": [
+              "72°",
+              "Rest"
+            ],
+            "values": [
+              72,
+              288
+            ],
+            "title": "Pie chart",
+            "alt_text": "Pie chart with a sector marked 72 degrees and the rest of the circle labelled Rest."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "sector-0",
+              "kind": "pie-sector",
+              "value": "72",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L360 90 A160 160 0 0 1 512.169043 200.557281 Z"
+              }
+            },
+            {
+              "key": "sector-1",
+              "kind": "pie-sector",
+              "value": "288",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L512.169043 200.557281 A160 160 0 1 1 360 90 Z"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "f33001b30d2c4522b59f941064edc60f68f5c887a692ca032001c556852b8e2b",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1140,12 +1923,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l4-002",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1157,7 +1940,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l4-002-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1165,7 +1957,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pie chart sector is 135°. The remaining 225° represents 75 observations. Find the number represented by the 135° sector. Enter the numerical value only."
+            "text": "In the pie chart, the sector marked 225° represents 75 observations. Find the number represented by the other sector. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1196,7 +1988,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up the ratio 135/225 against the known 75."
+                "text": "Set up a ratio of the two sector angles against the known observations."
               }
             ]
           }
@@ -1228,7 +2020,64 @@
       }
     ],
     "total_marks": 4,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l4-002-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l4-002-diagram-r2.svg",
+        "alt_text": "Pie chart with two sectors, marked 135 degrees and 225 degrees.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "pie_chart",
+          "question_key": "s1-l4-002",
+          "outcome": "1.2",
+          "template": "pie_chart",
+          "inputs": {
+            "labels": [
+              "135°",
+              "225°"
+            ],
+            "values": [
+              135,
+              225
+            ],
+            "title": "Pie chart",
+            "alt_text": "Pie chart with two sectors, marked 135 degrees and 225 degrees."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "sector-0",
+              "kind": "pie-sector",
+              "value": "135",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L360 90 A160 160 0 0 1 473.137085 363.137085 Z"
+              }
+            },
+            {
+              "key": "sector-1",
+              "kind": "pie-sector",
+              "value": "225",
+              "tag": "path",
+              "geometry": {
+                "d": "M360 250 L473.137085 363.137085 A160 160 0 1 1 360 90 Z"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "c09d957d902d5c136fc0d25bc7f9366c9bb3019b807ea3ee0db2ef9f5e8967bb",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -1242,7 +2091,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
@@ -1975,7 +2824,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-007",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1987,7 +2836,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-007-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -1995,7 +2853,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bar chart for scores 92 and 96 starts its vertical axis at 90. Using height above the baseline, how many times as tall is the 96 bar as the 92 bar? Enter the numerical value only."
+            "text": "The bar chart shows scores A and B. Using the height of each bar above the bottom of the axis, how many times as tall is bar B as bar A? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2017,7 +2875,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the baseline from each plotted value."
+                "text": "Subtract the value at the bottom of the axis from each plotted value."
               }
             ]
           },
@@ -2026,7 +2884,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare heights 6 and 2."
+                "text": "Divide bar B's height above the axis by bar A's height above the axis."
               }
             ]
           }
@@ -2047,7 +2905,129 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-007-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-007-diagram-r2.svg",
+        "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l2-007",
+          "outcome": "1.4",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "A",
+              "B"
+            ],
+            "values": [
+              92,
+              96
+            ],
+            "y_max": 98,
+            "tick_step": 2,
+            "y_label": "Score",
+            "title": "Two scores",
+            "y_min": 90,
+            "alt_text": "Bar chart with an axis break and a vertical axis from 90 to 98 in steps of 2. A: 92, B: 96."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "92",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "315",
+                "width": "177",
+                "height": "70"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "96",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "175",
+                "width": "177",
+                "height": "210"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:90",
+              "axis": "y",
+              "value": "90",
+              "position": "385",
+              "label": "90"
+            },
+            {
+              "key": "y:92",
+              "axis": "y",
+              "value": "92",
+              "position": "315",
+              "label": "92"
+            },
+            {
+              "key": "y:94",
+              "axis": "y",
+              "value": "94",
+              "position": "245",
+              "label": "94"
+            },
+            {
+              "key": "y:96",
+              "axis": "y",
+              "value": "96",
+              "position": "175",
+              "label": "96"
+            },
+            {
+              "key": "y:98",
+              "axis": "y",
+              "value": "98",
+              "position": "105",
+              "label": "98"
+            },
+            {
+              "key": "x:A",
+              "axis": "x",
+              "value": "A",
+              "position": "237.5",
+              "label": "A"
+            },
+            {
+              "key": "x:B",
+              "axis": "x",
+              "value": "B",
+              "position": "532.5",
+              "label": "B"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 90.0,
+            "y_max": 98.0,
+            "tick_step": 2.0
+          }
+        },
+        "sha256": "329c2bac5a6d2702f34d1d82b4396c7c23ab7b411891b4ef4866fb55901b2661",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2061,12 +3041,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l2-008",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2078,7 +3058,16 @@
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l2-008-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2086,7 +3075,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A square icon representing 20 items has side 2 cm. The icon for 40 items is drawn with side 4 cm. How many times as large is the second icon's area? Enter the numerical value only."
+            "text": "The two square icons in the figure represent the numbers of items shown. How many times as large as the first icon's area is the second icon's area? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2117,7 +3106,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare 4² with 2²."
+                "text": "Square each side length from the figure, then divide."
               }
             ]
           }
@@ -2138,7 +3127,77 @@
       }
     ],
     "total_marks": 2,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l2-008-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l2-008-diagram-r2.svg",
+        "alt_text": "Two square icons: one for 20 items with side 2 cm and one for 40 items with side 4 cm.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "scaled_icons",
+          "question_key": "s1-l2-008",
+          "outcome": "1.4",
+          "template": "scaled_icons",
+          "inputs": {
+            "shape": "square",
+            "items": [
+              {
+                "label": "20 items",
+                "caption": "side 2 cm",
+                "width": 2,
+                "height": 2
+              },
+              {
+                "label": "40 items",
+                "caption": "side 4 cm",
+                "width": 4,
+                "height": 4
+              }
+            ],
+            "title": "Two square icons",
+            "alt_text": "Two square icons: one for 20 items with side 2 cm and one for 40 items with side 4 cm."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0",
+              "kind": "square-icon",
+              "value": "2x2",
+              "tag": "rect",
+              "geometry": {
+                "x": "120",
+                "y": "220",
+                "width": "120",
+                "height": "120"
+              }
+            },
+            {
+              "key": "icon-1",
+              "kind": "square-icon",
+              "value": "4x4",
+              "tag": "rect",
+              "geometry": {
+                "x": "420",
+                "y": "100",
+                "width": "240",
+                "height": "240"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "d4c8050cf27cedc49bf56e0bedac18c41e2415f640c59890ce725d5fd9dc260f",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2152,12 +3211,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-007",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2169,7 +3228,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-007-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2177,7 +3245,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Values rise from 80 to 100. A bar chart begins at 75. Divide the displayed percentage increase, measured from the drawn baseline, by the true percentage increase. Find the exaggeration factor. Enter the numerical value only."
+            "text": "The bar chart shows a value rising. Divide the displayed percentage increase, measured from the drawn baseline, by the true percentage increase. Find the exaggeration factor. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2199,7 +3267,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "True change uses 80 as the base; displayed change uses height 5."
+                "text": "True change uses the first value as its base; displayed change uses the first bar's height above the baseline."
               }
             ]
           },
@@ -2208,7 +3276,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The common increase cancels, leaving 80/5."
+                "text": "The common increase cancels, so compare the two base values."
               }
             ]
           }
@@ -2229,7 +3297,136 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-007-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-007-diagram-r2.svg",
+        "alt_text": "Bar chart with an axis break and a vertical axis from 75 to 100 in steps of 5. First: 80, Second: 100.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "bar_chart",
+          "question_key": "s1-l3-007",
+          "outcome": "1.4",
+          "template": "bar_chart",
+          "inputs": {
+            "categories": [
+              "First",
+              "Second"
+            ],
+            "values": [
+              80,
+              100
+            ],
+            "y_max": 100,
+            "tick_step": 5,
+            "y_label": "Value",
+            "title": "Value rising",
+            "y_min": 75,
+            "alt_text": "Bar chart with an axis break and a vertical axis from 75 to 100 in steps of 5. First: 80, Second: 100."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "bar-0",
+              "kind": "bar",
+              "value": "80",
+              "tag": "rect",
+              "geometry": {
+                "x": "149",
+                "y": "329",
+                "width": "177",
+                "height": "56"
+              }
+            },
+            {
+              "key": "bar-1",
+              "kind": "bar",
+              "value": "100",
+              "tag": "rect",
+              "geometry": {
+                "x": "444",
+                "y": "105",
+                "width": "177",
+                "height": "280"
+              }
+            }
+          ],
+          "chart_ticks": [
+            {
+              "key": "y:75",
+              "axis": "y",
+              "value": "75",
+              "position": "385",
+              "label": "75"
+            },
+            {
+              "key": "y:80",
+              "axis": "y",
+              "value": "80",
+              "position": "329",
+              "label": "80"
+            },
+            {
+              "key": "y:85",
+              "axis": "y",
+              "value": "85",
+              "position": "273",
+              "label": "85"
+            },
+            {
+              "key": "y:90",
+              "axis": "y",
+              "value": "90",
+              "position": "217",
+              "label": "90"
+            },
+            {
+              "key": "y:95",
+              "axis": "y",
+              "value": "95",
+              "position": "161",
+              "label": "95"
+            },
+            {
+              "key": "y:100",
+              "axis": "y",
+              "value": "100",
+              "position": "105",
+              "label": "100"
+            },
+            {
+              "key": "x:First",
+              "axis": "x",
+              "value": "First",
+              "position": "237.5",
+              "label": "First"
+            },
+            {
+              "key": "x:Second",
+              "axis": "x",
+              "value": "Second",
+              "position": "532.5",
+              "label": "Second"
+            }
+          ],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43,
+          "axis": {
+            "y_min": 75.0,
+            "y_max": 100.0,
+            "tick_step": 5.0
+          }
+        },
+        "sha256": "ae6f4ce172d25e861e8c5cc301816a1ffc8de5ca782163565e17782e6d3a75a3",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2243,12 +3440,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s1-l3-008",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2260,7 +3457,16 @@
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [],
+    "stem": [
+      {
+        "type": "text",
+        "text": "Use the data display together with the information in the question."
+      },
+      {
+        "type": "asset_ref",
+        "asset_key": "s1-l3-008-diagram"
+      }
+    ],
     "parts": [
       {
         "position": 1,
@@ -2268,7 +3474,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two circular symbols represent values 25 and 100. Their diameters are drawn in the ratio 1:4. Divide the displayed area ratio by the true data ratio. Enter the numerical value only."
+            "text": "The two circular symbols in the figure represent the values shown below them. Divide the displayed area ratio by the true data ratio. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2299,7 +3505,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Displayed area ratio is 16 while the true ratio is 4."
+                "text": "Find the ratio of the areas from the diameters and the ratio of the values, then divide."
               }
             ]
           }
@@ -2320,7 +3526,75 @@
       }
     ],
     "total_marks": 3,
-    "assets": [],
+    "assets": [
+      {
+        "asset_key": "s1-l3-008-diagram",
+        "kind": "chart",
+        "format": "svg",
+        "path": "assets/s1-l3-008-diagram-r2.svg",
+        "alt_text": "Two circles: Value 25 with diameter 1 unit and Value 100 with diameter 4 units.",
+        "generation_spec": {
+          "renderer": "nextscholar-data-chart-svg-v1",
+          "diagram_kind": "scaled_icons",
+          "question_key": "s1-l3-008",
+          "outcome": "1.4",
+          "template": "scaled_icons",
+          "inputs": {
+            "shape": "circle",
+            "items": [
+              {
+                "label": "Value 25",
+                "caption": "diameter 1 unit",
+                "width": 1,
+                "height": 1
+              },
+              {
+                "label": "Value 100",
+                "caption": "diameter 4 units",
+                "width": 4,
+                "height": 4
+              }
+            ],
+            "title": "Two circular symbols",
+            "alt_text": "Two circles: Value 25 with diameter 1 unit and Value 100 with diameter 4 units."
+          },
+          "viewbox": [
+            720,
+            480
+          ],
+          "chart_marks": [
+            {
+              "key": "icon-0",
+              "kind": "circle-icon",
+              "value": "1x1",
+              "tag": "circle",
+              "geometry": {
+                "cx": "180",
+                "cy": "310",
+                "r": "30"
+              }
+            },
+            {
+              "key": "icon-1",
+              "kind": "circle-icon",
+              "value": "4x4",
+              "tag": "circle",
+              "geometry": {
+                "cx": "540",
+                "cy": "220",
+                "r": "120"
+              }
+            }
+          ],
+          "chart_ticks": [],
+          "forbidden_visible_labels": [],
+          "min_phone_font_px": 12.43
+        },
+        "sha256": "2b10495fb42b61b526cfaace21fb018ddd1a5d6b12122183185280c7499ebb6b",
+        "width": 720,
+        "height": 480
+      }
+    ],
     "provenance": {
       "authoring_method": "original_generated",
       "style_references": [
@@ -2334,7 +3608,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": null
+      "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
     }
   },
   {

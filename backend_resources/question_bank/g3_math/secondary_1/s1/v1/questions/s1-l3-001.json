@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l3-001",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -12,7 +12,16 @@
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [],
+  "stem": [
+    {
+      "type": "text",
+      "text": "Use the data display together with the information in the question."
+    },
+    {
+      "type": "asset_ref",
+      "asset_key": "s1-l3-001-diagram"
+    }
+  ],
   "parts": [
     {
       "position": 1,
@@ -20,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A survey table has row totals 28 and 32. Three cells contain 17, 11 and 14. Find the fourth cell. Enter the numerical value only."
+          "text": "The survey table shows some cell values and the row totals. Find the value in the cell marked ?. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -42,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "First find the grand total from the row totals."
+              "text": "Look at the row that contains the missing cell."
             }
           ]
         },
@@ -51,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract all three known cells from 60."
+              "text": "Subtract the known cell in that row from the row total."
             }
           ]
         }
@@ -61,8 +70,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The cell marked ? is in the row with total 32."
+            },
+            {
               "type": "display_math",
-              "latex": "28+32=60"
+              "latex": "14+\\text{?}=32"
             }
           ],
           "mark_type": "M",
@@ -72,8 +85,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Subtract 14 from the row total."
+            },
+            {
               "type": "display_math",
-              "latex": "60-(17+11+14)=18"
+              "latex": "32-14=18"
             }
           ],
           "mark_type": "A",
@@ -83,7 +100,119 @@
     }
   ],
   "total_marks": 3,
-  "assets": [],
+  "assets": [
+    {
+      "asset_key": "s1-l3-001-diagram",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/s1-l3-001-diagram-r2.svg",
+      "alt_text": "Two-way table with two rows and columns Column 1, Column 2 and Total. Row 1: 17, 11, total 28. Row 2: 14, unknown, total 32.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "question_key": "s1-l3-001",
+        "outcome": "1.1",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Column 1",
+            "Column 2",
+            "Total"
+          ],
+          "rows": [
+            "Row 1",
+            "Row 2"
+          ],
+          "cells": [
+            [
+              17,
+              11,
+              28
+            ],
+            [
+              14,
+              null,
+              32
+            ]
+          ],
+          "title": "Survey table",
+          "alt_text": "Two-way table with two rows and columns Column 1, Column 2 and Total. Row 1: 17, 11, total 28. Row 2: 14, unknown, total 32."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "17",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "11",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-2",
+            "kind": "table-cell",
+            "value": "28",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "14",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "?",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "277.24"
+            }
+          },
+          {
+            "key": "cell-1-2",
+            "kind": "table-cell",
+            "value": "32",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "277.24"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "b807ef7fceeebbc88fa29bb7df4bb33fe22993a9b8db0e88808d47249f6f51f2",
+      "width": 720,
+      "height": 480
+    }
+  ],
   "provenance": {
     "authoring_method": "original_generated",
     "style_references": [
@@ -97,6 +226,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": null
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
