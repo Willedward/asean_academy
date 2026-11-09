@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g4-l2-521",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G4",
   "primary_outcome": "4.3",
-  "title": "Calculate a side using tangent",
+  "title": "Find the vertical height",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Rescue planners noted restricted clearance for equipment while preparing a replacement frame. A sight line at the mangrove boardwalk makes an angle of 35° with level ground. The horizontal distance is 17 m. Find the vertical height x in metres, correct to 1 decimal place."
+          "text": "Rescue planners noted restricted clearance for equipment while preparing a replacement frame. A sight line at the mangrove boardwalk makes an angle of 35° with level ground. The horizontal distance is 17 m. Find the vertical height "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " in metres, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -60,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use tan 35° = x/17 and round only the final answer."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\tan 35^{\\circ}=\\frac{x}{17}"
+            },
+            {
+              "type": "text",
+              "text": " and round only the final answer."
             }
           ]
         }
@@ -101,7 +117,7 @@
       "asset_key": "g4-l2-521-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-521-diagram-r2.svg",
+      "path": "assets/g4-l2-521-diagram-r3.svg",
       "alt_text": "Right-angled triangle on level ground. The sight line makes 35° with the ground, the horizontal distance is 17 m and the vertical height is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
