@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-512",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The line continues beyond the part shown in the graph. The point (k, 3) lies on this line. Find k."
+          "text": "The line continues beyond the part shown in the graph. The point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(k,3)"
+        },
+        {
+          "type": "text",
+          "text": " lies on this line. Find k."
         }
       ],
       "marks": 3,
@@ -51,7 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Read two grid points on the line and see how much y falls as x rises."
+              "text": "Read two grid points on the line and see how much "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " falls as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " rises."
             }
           ]
         },
@@ -60,7 +84,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the fall in y when x rises by 5, then continue the pattern until y reaches 3."
+              "text": "Find the fall in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " when "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " rises by 5, then continue the pattern until "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " reaches 3."
             }
           ]
         }
@@ -71,7 +119,39 @@
           "content": [
             {
               "type": "text",
-              "text": "From (0, 7) to (5, 6), y falls by 1 when x rises by 5. To fall from 7 to 3 is a fall of 4."
+              "text": "From "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(0,7)"
+            },
+            {
+              "type": "text",
+              "text": " to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(5,6)"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " falls by 1 when "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " rises by 5. To fall from 7 to 3 is a fall of 4."
             },
             {
               "type": "display_math",
@@ -86,7 +166,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Check: the line through these points has equation x+5y=35."
+              "text": "Check: the line through these points has equation "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+5y=35"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +193,7 @@
       "asset_key": "n7-l3-512-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l3-512-diagram-r2.svg",
+      "path": "assets/n7-l3-512-diagram-r3.svg",
       "alt_text": "Straight line through the grid points (0, 7), (5, 6) and (10, 5).",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

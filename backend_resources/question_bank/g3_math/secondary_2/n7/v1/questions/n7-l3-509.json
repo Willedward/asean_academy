@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-509",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation 2(x-4)+5=11 has a single solution. Work out x."
+          "text": "The equation "
+        },
+        {
+          "type": "inline_math",
+          "latex": "2(x-4)+5=11"
+        },
+        {
+          "type": "text",
+          "text": " has a single solution. Work out "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Rewrite the equation as 2(x-4)=6."
+              "text": "Rewrite the equation as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2(x-4)=6"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

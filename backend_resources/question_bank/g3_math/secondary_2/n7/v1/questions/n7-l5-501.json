@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l5-501",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find k so that (k-3)x+5=4x+5 is true for every real value of x."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": " so that "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(k-3)x+5=4x+5"
+        },
+        {
+          "type": "text",
+          "text": " is true for every real value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 5,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Equate the x-coefficients: k-3=4."
+              "text": "Equate the x-coefficients: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k-3=4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }

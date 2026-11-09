@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-510",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,39 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The lines x+y=6 and x-y=2 intersect at (k,2). Find k."
+          "text": "The lines "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+y=6"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x-y=2"
+        },
+        {
+          "type": "text",
+          "text": " intersect at "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(k,2)"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "k"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -42,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the equations to eliminate y."
+              "text": "Add the equations to eliminate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },

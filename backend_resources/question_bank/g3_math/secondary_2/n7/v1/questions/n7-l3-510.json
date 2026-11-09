@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-510",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of p-4x>4, where p is a constant. Find p."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p-4x>4"
+        },
+        {
+          "type": "text",
+          "text": ", where p is a constant. Find p."
         }
       ],
       "marks": 3,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution reaches its boundary where p-4x equals 4."
+              "text": "The solution reaches its boundary where "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p-4x"
+            },
+            {
+              "type": "text",
+              "text": " equals 4."
             }
           ]
         },
@@ -60,7 +76,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the boundary from the number line, substitute it for x in p-4x=4, then solve for p."
+              "text": "Read the boundary from the number line, substitute it for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p-4x=4"
+            },
+            {
+              "type": "text",
+              "text": ", then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +111,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The boundary shown is x=4."
+              "text": "The boundary shown is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=4"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -86,7 +134,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Check the direction: with p=20 the solution matches the graph."
+              "text": "Check the direction: with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p=20"
+            },
+            {
+              "type": "text",
+              "text": " the solution matches the graph."
             },
             {
               "type": "display_math",
@@ -105,7 +161,7 @@
       "asset_key": "n7-l3-510-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l3-510-diagram-r2.svg",
+      "path": "assets/n7-l3-510-diagram-r3.svg",
       "alt_text": "Number line showing values less than 4.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

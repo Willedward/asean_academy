@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-508",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of -5<2x+c≤15. Find the constant c."
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-5<2x+c\\le 15"
+        },
+        {
+          "type": "text",
+          "text": ". Find the constant c."
         }
       ],
       "marks": 4,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The two ends of the graph are where 2x+c reaches -5 and 15."
+              "text": "The two ends of the graph are where "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+c"
+            },
+            {
+              "type": "text",
+              "text": " reaches -5 and 15."
             }
           ]
         },
@@ -60,7 +76,31 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the left end of the graph: substitute its value for x in 2x+c=-5, then solve for c."
+              "text": "Use the left end of the graph: substitute its value for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+c=-5"
+            },
+            {
+              "type": "text",
+              "text": ", then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "c"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,7 +111,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The graph shows -4<x≤6, so 2x+c=-5 when x=-4."
+              "text": "The graph shows "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-4<x\\le 6"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+c=-5"
+            },
+            {
+              "type": "text",
+              "text": " when "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=-4"
+            },
+            {
+              "type": "text",
+              "text": "."
             },
             {
               "type": "display_math",
@@ -105,7 +169,7 @@
       "asset_key": "n7-l4-508-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l4-508-diagram-r2.svg",
+      "path": "assets/n7-l4-508-diagram-r3.svg",
       "alt_text": "Number line showing values greater than -4 and less than or equal to 6.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

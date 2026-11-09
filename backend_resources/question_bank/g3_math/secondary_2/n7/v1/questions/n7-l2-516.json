@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-516",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "By factorising, find the smaller solution of x²-11x+24=0."
+          "text": "By factorising, find the smaller solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x^{2}-11x+24=0"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The required factorisation is (x-3)(x-8)=0."
+              "text": "One bracket is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(x-8)"
+            },
+            {
+              "type": "text",
+              "text": ". Work out the other bracket, then set each bracket equal to zero."
             }
           ]
         }

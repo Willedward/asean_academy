@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-507",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Nine parcels have a total mass of 48 kg. There are x small parcels of 4 kg and y large parcels of 7 kg. Set up two equations, solve them and state x."
+          "text": "Nine parcels have a total mass of 48 kg. There are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " small parcels of 4 kg and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " large parcels of 7 kg. Set up two equations, solve them and state "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 4,
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write x+y=9 and 4x+7y=48."
+              "text": "One equation is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=9"
+            },
+            {
+              "type": "text",
+              "text": ". Write a second equation for the total mass, then solve the pair."
             }
           ]
         }

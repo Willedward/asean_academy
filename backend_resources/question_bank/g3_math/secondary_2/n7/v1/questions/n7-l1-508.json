@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-508",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The number line shows the solution of x+4<11. What is the greatest integer that satisfies the inequality?"
+          "text": "The number line shows the solution of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+4<11"
+        },
+        {
+          "type": "text",
+          "text": ". What is the greatest integer that satisfies the inequality?"
         }
       ],
       "marks": 1,
@@ -71,7 +79,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The solution is x<7 and 7 itself is excluded, so the greatest integer is 6."
+              "text": "The solution is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x<7"
+            },
+            {
+              "type": "text",
+              "text": " and 7 itself is excluded, so the greatest integer is 6."
             },
             {
               "type": "display_math",
@@ -90,7 +106,7 @@
       "asset_key": "n7-l1-508-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-l1-508-diagram-r2.svg",
+      "path": "assets/n7-l1-508-diagram-r3.svg",
       "alt_text": "Number line showing values less than 7.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
