@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-501",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Class midpoints 10, 20 and 30 have frequencies 3, f and 9. The estimated mean is 24. Find f."
+          "text": "Class midpoints 10, 20 and 30 have frequencies 3, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f"
+        },
+        {
+          "type": "text",
+          "text": " and 9. The estimated mean is 24. Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "f"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -42,7 +58,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the grouped-mean numerator and denominator using f."
+              "text": "Write the grouped-mean numerator and denominator using "
+            },
+            {
+              "type": "inline_math",
+              "latex": "f"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -51,7 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve [10(3)+20f+30(9)]/[3+f+9]=24."
+              "text": "Solve "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{10(3)+20f+30(9)}{3+f+9}=24"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
