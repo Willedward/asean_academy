@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## s1-l1-511 — Lilac Maple Bay — Rainforest station: dot frequency
+## s1-l1-511 — Frequency represented above seven
 
 [Open this question in the HTML preview](index.html#s1-l1-511)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-518 — Silver Maple Bay — Angklung ensemble: grouped midpoint calculation
+## s1-l2-518 — Estimated mean of three symmetric classes
 
 [Open this question in the HTML preview](index.html#s1-l2-518)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-515 — Violet Maple Bay — Angklung ensemble: missing grouped frequency
+## s1-l3-515 — Solve the middle frequency in a grouped distribution
 
 [Open this question in the HTML preview](index.html#s1-l3-515)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-512 — Azure Orchid Bay — Library makerspace: representation purpose
+## s1-l1-512 — Select the display whose bars span continuous intervals
 
 [Open this question in the HTML preview](index.html#s1-l1-512)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-519 — Bronze Orchid Bay — Rainforest station: grouped midpoint calculation
+## s1-l2-519 — Use symmetry to estimate a grouped mean
 
 [Open this question in the HTML preview](index.html#s1-l2-519)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-520 — Coral Orchid Bay — River clean-up: stem-and-leaf range
+## s1-l2-520 — Spread of values encoded by a 70s stem
 
 [Open this question in the HTML preview](index.html#s1-l2-520)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-516 — Emerald Orchid Bay — River clean-up: histogram interval total
+## s1-l3-516 — Count observations above the lower boundary ten
 
 [Open this question in the HTML preview](index.html#s1-l3-516)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-511 — Golden Orchid Bay — Angklung ensemble: unequal-width histogram
+## s1-l4-511 — Total frequency from two density rectangles
 
 [Open this question in the HTML preview](index.html#s1-l4-511)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-513 — Indigo Orchid Bay — Robotics club: misleading feature code
+## s1-l1-513 — Identify raw-frequency heights on unequal classes
 
 [Open this question in the HTML preview](index.html#s1-l1-513)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-514 — Violet Orchid Bay — Coral monitoring team: identify the mode
+## s1-l1-514 — Repeated value among five observations
 
 [Open this question in the HTML preview](index.html#s1-l1-514)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-519 — Bronze Palm Bay — Community garden: missing value from a mean
+## s1-l3-519 — Find a fifth number from a mean of thirteen
 
 [Open this question in the HTML preview](index.html#s1-l3-519)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-515 — Coral Palm Bay — Rattan workshop: typical value with an outlier
+## s1-l1-515 — Choose a centre that uses every assessment score
 
 [Open this question in the HTML preview](index.html#s1-l1-515)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-520 — Golden Palm Bay — Cycling project: missing value from a mean
+## s1-l3-520 — Use the total to recover one missing number
 
 [Open this question in the HTML preview](index.html#s1-l3-520)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l5-503 — Jade Palm Bay — Komodo field camp: select centre after contamination
+## s1-l5-503 — Robust centre for contaminated sensor readings
 
 [Open this question in the HTML preview](index.html#s1-l5-503)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-524 — Lilac Palm Bay — Bamboo design lab: calculate the mean
+## s1-l2-524 — Mean of consecutive odd scores centred at thirteen
 
 [Open this question in the HTML preview](index.html#s1-l2-524)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-525 — Silver Palm Bay — School canteen: most common category
+## s1-l2-525 — Choose a centre for the most popular canteen meal
 
 [Open this question in the HTML preview](index.html#s1-l2-525)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-513 — Amber Reed Bay — Kite festival: diagnose unequal histogram widths
+## s1-l4-513 — Frequency gap between unequal histogram classes
 
 [Open this question in the HTML preview](index.html#s1-l4-513)
 
