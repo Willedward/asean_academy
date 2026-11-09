@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l4-008",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A designer uses square icons whose side lengths are proportional to data values. The values are 12 and 30. If the smaller square has area 16 cm\u00b2, find the area the larger square would have under this misleading rule. Enter the numerical value only."
+          "text": "A designer uses square icons whose side lengths are proportional to data values. The values are 12 and 30. If the smaller square has area 16 cm², find the area the larger square would have under this misleading rule. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -42,7 +42,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the side-length scale factor 30/12."
+              "text": "Find the side-length scale factor "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{30}{12}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-l2-015",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.4",
-  "title": "Missing-unit ambiguity count",
+  "title": "Weekly output chart",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A chart title says \u2018Weekly output\u2019 and its axis reads 10, 20, 30. Three units are plausible: items, kilograms and dollars. Without a unit label, how many different interpretations are listed? Enter the numerical value only."
+          "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A chart is titled ‘Weekly output’ and its vertical axis reads 10, 20, 30, but nothing on the chart says what those numbers count. Enter the issue code."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count the plausible units named."
+              "text": "Check what a reader must know before the numbers on the axis mean anything."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "All three remain possible without a label."
+              "text": "Ask whether the chart tells you what the values 10, 20 and 30 are measuring."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\text{possible interpretations}=3"
+              "latex": "\\text{missing labels or units}\\Rightarrow 4"
             }
           ],
           "mark_type": "B",
