@@ -1761,7 +1761,7 @@ def test_e5_two_passage_group_integrates_reading_skills_and_exact_marking(englis
 
 def test_e5_checkpoint_pairs_mark_reference_context_and_comparison_exactly(english_root):
     expected = {
-        "er-l5-008": ["A", "A", "B", "A", "A"],
+        "er-l5-008": ["A", "C", "B", "C", "A"],
         "er-l5-009": ["B", "A", "C", "A", "A"],
     }
 
