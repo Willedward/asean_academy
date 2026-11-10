@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -90,7 +90,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve (x + 2)/3 + (x - 1)/2 = 6."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{x+1}{3}+\\frac{x-1}{2}=4"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "steps": [
@@ -103,7 +111,7 @@
             },
             {
               "type": "display_math",
-              "latex": "2(x+2)+3(x-1)=36"
+              "latex": "2(x+1)+3(x-1)=24"
             }
           ]
         },
@@ -116,7 +124,7 @@
             },
             {
               "type": "display_math",
-              "latex": "2x+4+3x-3=36\\Rightarrow5x+1=36"
+              "latex": "2x+2+3x-3=24\\Rightarrow5x-1=24"
             }
           ]
         },
@@ -129,12 +137,12 @@
             },
             {
               "type": "display_math",
-              "latex": "5x=35\\Rightarrow x=7"
+              "latex": "5x=25\\Rightarrow x=5"
             }
           ]
         }
       ],
-      "verification_note": "Substituting x = 7 into the original equation gives 9/3 + 6/2 = 3 + 3 = 6."
+      "verification_note": "Substituting x = 5 into the original equation gives 6/3 + 4/2 = 2 + 2 = 4."
     },
     {
       "stable_key": "n7-73-subtraction-example",
@@ -144,7 +152,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve (2x - 1)/4 - (x + 2)/6 = 3/4."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{2x-1}{4}-\\frac{x+2}{6}=\\frac34"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "steps": [
@@ -198,7 +214,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Solve (x - 4)/5 = 3."
+          "text": "Solve "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{x-4}{5}=3"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "response": {
