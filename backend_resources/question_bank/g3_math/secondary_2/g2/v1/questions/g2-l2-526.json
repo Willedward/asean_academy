@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-526",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Reduced diagram",
+  "title": "Reduced length of a side",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -24,11 +24,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{1}{3}"
+          "latex": "\\frac{1}{4}"
         },
         {
           "type": "text",
-          "text": " of every original linear measurement. Find the reduced length of its 12 cm side. Enter the numerical value only."
+          "text": " of every original linear measurement. Find the reduced length of its 18 cm side, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -37,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "4.5",
+        "canonical_latex": "4.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding sides are multiplied by the same scale factor."
+              "text": "A reduction multiplies lengths by the scale factor."
             }
           ]
         },
@@ -59,11 +59,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Multiply "
             },
             {
               "type": "inline_math",
-              "latex": "12\\times \\frac{1}{3}"
+              "latex": "18"
+            },
+            {
+              "type": "text",
+              "text": " by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac14"
             },
             {
               "type": "text",
@@ -78,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "L=12\\times 1/3"
+              "latex": "L=18\\times\\frac14"
             }
           ],
           "mark_type": "M",
@@ -88,8 +96,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "L=4"
+              "latex": "L=4.5"
             }
           ],
           "mark_type": "A",
