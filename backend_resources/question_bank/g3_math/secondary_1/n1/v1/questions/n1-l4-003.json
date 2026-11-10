@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-003",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Divide a directed interval",
+  "title": "Equal divisions on a number line",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -15,7 +15,7 @@
   "stem": [
     {
       "type": "text",
-      "text": "On a number line, A has coordinate -2.4 and B has coordinate 1.8."
+      "text": "On a number line, A has coordinate -2.4 and B has coordinate 1.8. The segment AB is divided into 5 equal parts."
     }
   ],
   "parts": [
@@ -25,7 +25,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "R is two fifths of the distance from A to B, measured from A. Find the coordinate of R."
+          "text": "R is the second division point after A, moving towards B. Find the coordinate of R."
         }
       ],
       "marks": 2,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the directed distance from A to B before taking the fraction."
+              "text": "Find the length of AB, then the length of one equal part."
             }
           ]
         },
@@ -55,20 +55,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "B-A=4.2"
-            },
-            {
               "type": "text",
-              "text": ", so move "
-            },
-            {
-              "type": "inline_math",
-              "latex": "(\\frac{2}{5})(4.2)=1.68"
-            },
-            {
-              "type": "text",
-              "text": " units right from -2.4."
+              "text": "Move two equal parts to the right from A."
             }
           ]
         }
@@ -78,8 +66,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "B-A=1.8-(-2.4)=4.2"
+              "type": "inline_math",
+              "latex": "AB=1.8-(-2.4)=4.2"
+            },
+            {
+              "type": "text",
+              "text": ", so each part is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4.2\\div5=0.84"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -89,8 +89,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "R=-2.4+(\\frac{2}{5})(4.2)=-0.72"
+              "type": "inline_math",
+              "latex": "R=-2.4+2(0.84)=-0.72"
             }
           ],
           "mark_type": "A",

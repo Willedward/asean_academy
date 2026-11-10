@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 3,
   "stable_key": "n3-l1-012",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Team A scores 90 points and Team B scores 75 points. By what percentage is Team A's score greater than Team B's score?"
+          "text": "Team A scores 90 points and Team B scores 72 points. By what percentage is Team A's score greater than Team B's score?"
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "25",
+        "canonical_latex": "25\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the 15-point difference with 75 points."
+              "text": "Compare the difference between the scores with Team B's 72 points."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{90-75}{75}\\times100\\%=20\\%"
+              "type": "inline_math",
+              "latex": "\\frac{90-72}{72}\\times100\\%=25\\%"
             }
           ],
           "mark_type": "B",

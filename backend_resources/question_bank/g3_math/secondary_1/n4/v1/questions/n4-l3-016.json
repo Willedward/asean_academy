@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l3-016",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.1",
-  "title": "Average assembly rate",
+  "title": "Comparing value for money",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A workshop assembles 480 components during an 8-hour morning shift and 360 components during a 4-hour afternoon shift. Find its average assembly rate over both shifts in components per hour."
+          "text": "Brand A sells 750 g of rice for S$6 and Brand B sells 1.5 kg for S$10. How many more grams per dollar does Brand B give? Enter only the number."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "70",
-        "canonical_latex": "70\\text{ components/h}",
+        "canonical_answer": "25",
+        "canonical_latex": "25",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the combined output and combined working time."
+              "text": "Find the grams per dollar for each brand."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 480 and 360, then divide by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "8+4"
-            },
-            {
-              "type": "text",
-              "text": " hours."
+              "text": "Convert 1.5 kg to grams, then divide each mass by its price."
             }
           ]
         }
@@ -69,8 +61,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total output}=480+360=840"
+              "type": "text",
+              "text": "Brand A: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "750\\div6=125"
+            },
+            {
+              "type": "text",
+              "text": " g per dollar"
             }
           ],
           "mark_type": "M",
@@ -80,8 +80,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total time}=8+4=12\\text{ h}"
+              "type": "text",
+              "text": "Brand B: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1500\\div10=150"
+            },
+            {
+              "type": "text",
+              "text": " g per dollar"
             }
           ],
           "mark_type": "M",
@@ -91,8 +99,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{840}{12}=70\\text{ components/h}"
+              "type": "inline_math",
+              "latex": "150-125=25"
             }
           ],
           "mark_type": "A",

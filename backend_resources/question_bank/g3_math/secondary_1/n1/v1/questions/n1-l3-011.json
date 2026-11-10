@@ -1,23 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-011",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Complete a product to a square",
+  "title": "Sum of the prime factors",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [
-    {
-      "type": "text",
-      "text": "A positive integer is written in prime-factor form."
-    }
-  ],
+  "stem": [],
   "parts": [
     {
       "position": 1,
@@ -25,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the smallest positive integer "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": " such that "
-        },
-        {
-          "type": "inline_math",
-          "latex": "630k"
-        },
-        {
-          "type": "text",
-          "text": " is a perfect square."
+          "text": "Find the sum of the distinct prime factors of 630."
         }
       ],
       "marks": 2,
@@ -50,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "70",
-        "canonical_latex": "70",
+        "canonical_answer": "17",
+        "canonical_latex": "17",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -63,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "In a perfect square, every prime exponent is even."
+              "text": "Write 630 as a product of prime factors."
             }
           ]
         },
@@ -71,12 +50,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "630=2\\times 3^{2}\\times 5\\times 7"
-            },
-            {
               "type": "text",
-              "text": "; supply one more factor of each prime with an odd exponent."
+              "text": "List each different prime only once, then add them."
             }
           ]
         }
@@ -86,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "630=2\\times 3^{2}\\times 5\\times 7"
+              "type": "inline_math",
+              "latex": "630=2\\times3^{2}\\times5\\times7"
             }
           ],
           "mark_type": "M",
@@ -98,15 +73,7 @@
           "content": [
             {
               "type": "inline_math",
-              "latex": "k=2\\times 5\\times 7=70"
-            },
-            {
-              "type": "text",
-              "text": ", giving "
-            },
-            {
-              "type": "inline_math",
-              "latex": "630k=210^{2}"
+              "latex": "2+3+5+7=17"
             }
           ],
           "mark_type": "A",

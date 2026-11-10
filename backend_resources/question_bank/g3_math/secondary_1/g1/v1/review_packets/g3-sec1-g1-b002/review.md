@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-009 — Four angles around a point
+## g1-l3-009 — Angle type around a point
 
 [Open this question in the HTML preview](index.html#g1-l3-009)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-005 — Three related angles around a point
+## g1-l4-005 — Angle type around a point (three angles)
 
 [Open this question in the HTML preview](index.html#g1-l4-005)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-007 — Equal diagonal in a parallelogram
+## g1-l4-007 — Parallelogram with algebraic angles
 
 [Open this question in the HTML preview](index.html#g1-l4-007)
 

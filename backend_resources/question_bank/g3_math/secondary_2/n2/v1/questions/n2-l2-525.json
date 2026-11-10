@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l2-525",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N2",
   "primary_outcome": "2.4",
-  "title": "Route distance in kilometres",
+  "title": "Statement scale with a decimal answer",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a regional logistics study. On a map with scale 1 : 125,000, a heritage walk measures 10 cm. Find the real distance in kilometres. Enter the numerical value only."
+          "text": "On a map, 2 cm represents 750 m. A road is 6 cm long on the map. Find the real length of the road in kilometres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "12.5",
-        "canonical_latex": "12.5",
+        "canonical_answer": "2.25",
+        "canonical_latex": "2.25",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the scale to find the real distance in centimetres."
+              "text": "Find how many metres 1 cm represents, or compare 6 cm with 2 cm."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "After multiplying, divide by 100 000 to convert centimetres to kilometres."
+              "text": "6 cm is 3 times as long as 2 cm."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "10\\times 125{,}000=1{,}250{,}000\\text{ cm}=12.5\\text{ km}"
+              "latex": "6\\text{ cm}\\mapsto3\\times750=2250\\text{ m}"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{12.5}"
+              "latex": "2250\\text{ m}=2.25\\text{ km}"
             }
           ],
           "mark_type": "A",

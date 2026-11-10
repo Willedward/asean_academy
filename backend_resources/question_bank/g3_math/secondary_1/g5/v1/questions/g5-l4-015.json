@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-015",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.3",
-  "title": "Length from prism area and volume",
+  "title": "Volume from surface area",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -28,15 +28,7 @@
         },
         {
           "type": "text",
-          "text": " cm. Its volume plus its total surface area is 420 when numerical values are added. Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": " cm. Its total surface area is 220 cm². Find its volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -45,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10",
+        "canonical_answer": "200",
+        "canonical_latex": "200",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write volume and surface area in terms of "
+              "text": "Write the total surface area in terms of "
             },
             {
               "type": "inline_math",
@@ -75,23 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Volume is "
+              "text": "Solve for "
             },
             {
               "type": "inline_math",
-              "latex": "20x"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": " and surface area is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "40+18x"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": ", then find the volume."
             }
           ]
         }
@@ -101,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "20x+(40+18x)=420"
+              "type": "inline_math",
+              "latex": "40+18x=220"
             }
           ],
           "mark_type": "M",
@@ -112,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "38x=380"
+              "type": "inline_math",
+              "latex": "x=10"
             }
           ],
           "mark_type": "M",
@@ -123,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=10"
+              "type": "inline_math",
+              "latex": "V=20(10)=200"
             }
           ],
           "mark_type": "A",

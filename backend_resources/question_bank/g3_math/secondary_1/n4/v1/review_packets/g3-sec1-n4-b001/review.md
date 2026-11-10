@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l1-003 — Converting kilometres to metres
+## n4-l1-003 — Metres per second to metres per minute
 
 [Open this question in the HTML preview](index.html#n4-l1-003)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-003 — Jogging speed conversion
+## n4-l3-003 — Distance covered by a jogger
 
 [Open this question in the HTML preview](index.html#n4-l3-003)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-004 — High-speed rail conversion
+## n4-l3-004 — Comparing two train speeds
 
 [Open this question in the HTML preview](index.html#n4-l3-004)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l3-005 — Conveyor speed in metres per second
+## n4-l3-005 — Time on a conveyor belt
 
 [Open this question in the HTML preview](index.html#n4-l3-005)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l4-003 — Converting kilometres per minute
+## n4-l4-003 — Comparing a craft and a helicopter
 
 [Open this question in the HTML preview](index.html#n4-l4-003)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n4-l5-001 — Converting a cubic flow rate
+## n4-l5-001 — Time to fill a tank
 
 [Open this question in the HTML preview](index.html#n4-l5-001)
 

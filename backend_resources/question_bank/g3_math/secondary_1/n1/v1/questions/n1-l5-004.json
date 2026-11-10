@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l5-004",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Divide a rational interval exactly",
+  "title": "Division points that are positive",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -31,15 +31,7 @@
     },
     {
       "type": "text",
-      "text": ". Point P is "
-    },
-    {
-      "type": "inline_math",
-      "latex": "\\frac{4}{7}"
-    },
-    {
-      "type": "text",
-      "text": " of the way from A to B."
+      "text": ". The segment AB is divided into 7 equal parts."
     }
   ],
   "parts": [
@@ -49,7 +41,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the exact coordinate of P."
+          "text": "How many of the division points between A and B have a positive coordinate?"
         }
       ],
       "marks": 2,
@@ -58,8 +50,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5/84",
-        "canonical_latex": "\\frac5{84}",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -71,15 +63,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "P=A+(\\frac{4}{7})(B-A)"
-            },
-            {
-              "type": "text",
-              "text": ", keeping all values as fractions."
+              "text": "Find the length of AB, then the length of one part."
             }
           ]
         },
@@ -87,20 +71,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "B-A=\\frac{59}{12}"
-            },
-            {
               "type": "text",
-              "text": "; multiply this directed distance by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{4}{7}"
-            },
-            {
-              "type": "text",
-              "text": " before adding A."
+              "text": "Add one part at a time to A, keeping all values as fractions with a common denominator, and see when the coordinate becomes positive."
             }
           ]
         }
@@ -110,8 +82,36 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "B-A=\\frac{13}{6}-(-\\frac{11}{4})=\\frac{59}{12}"
+              "type": "inline_math",
+              "latex": "AB=\\frac{59}{12}"
+            },
+            {
+              "type": "text",
+              "text": ", so one part is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{59}{84}"
+            },
+            {
+              "type": "text",
+              "text": ", and the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k"
+            },
+            {
+              "type": "text",
+              "text": "th point is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{-231+59k}{84}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -121,8 +121,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "P=-\\frac{11}{4}+(\\frac{4}{7})(\\frac{59}{12})=-\\frac{231}{84}+\\frac{236}{84}=\\frac{5}{84}"
+              "type": "text",
+              "text": "This is positive for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k=4,5,6"
+            },
+            {
+              "type": "text",
+              "text": ", so there are 3 such points."
             }
           ],
           "mark_type": "A",

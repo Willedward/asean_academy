@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 4,
   "stable_key": "n3-l3-016",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Route A takes 1 hour 12 minutes and Route B takes 60 minutes. By what percentage is the time for Route A longer than the time for Route B?"
+          "text": "Route A takes 1 hour 21 minutes and Route B takes 54 minutes. By what percentage is the time for Route A longer than the time for Route B?"
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "50",
+        "canonical_latex": "50\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "1\\text{ h }12\\text{ min}=72\\text{ min}"
+              "type": "inline_math",
+              "latex": "1\\text{ h }21\\text{ min}=81\\text{ min}"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{72-60}{60}\\times100\\%=20\\%"
+              "type": "inline_math",
+              "latex": "\\frac{81-54}{54}\\times100\\%=50\\%"
             }
           ],
           "mark_type": "M",
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Route A takes }20\\%\\text{ longer}"
+              "type": "inline_math",
+              "latex": "\\text{Route A takes }50\\%\\text{ longer}"
             }
           ],
           "mark_type": "A",

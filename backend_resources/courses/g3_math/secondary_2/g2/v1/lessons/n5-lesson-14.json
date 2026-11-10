@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n5",
   "status": "draft",
@@ -46,7 +46,7 @@
         },
         {
           "type": "text",
-          "text": "List factor pairs of |c| systematically and test their sums. If c is positive, the pair has matching signs; use the sign of b to choose both positive or both negative. If c is negative, use opposite signs and match their difference to b."
+          "text": "List factor pairs of |c| systematically and test their sums. If c is positive, the pair has matching signs; use the sign of b to choose both positive or both negative. If c is negative, use opposite signs: their sum must still equal b, so the number with the larger absolute value takes the sign of b. For x² − 2x − 15, the pair is −5 and +3, because −5 × 3 = −15 and −5 + 3 = −2."
         }
       ]
     },
@@ -198,7 +198,9 @@
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
-        "checker_config": {}
+        "checker_config": {
+          "form": "factorised_completely"
+        }
       },
       "feedback": [
         {

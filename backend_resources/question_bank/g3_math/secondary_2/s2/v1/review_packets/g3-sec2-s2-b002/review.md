@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l2-509 — Not blue complement
+## s2-l2-509 — Spot an impossible probability
 
 [Open this question in the HTML preview](index.html#s2-l2-509)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l3-511 — Planned number of journeys
+## s2-l3-511 — Compare two bags
 
 [Open this question in the HTML preview](index.html#s2-l3-511)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l3-512 — How many seeds were planted
+## s2-l3-512 — Use an estimated probability to predict
 
 [Open this question in the HTML preview](index.html#s2-l3-512)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l4-505 — Expected dry afternoons
+## s2-l4-505 — Change in expected dry afternoons
 
 [Open this question in the HTML preview](index.html#s2-l4-505)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l2-516 — Non-primary colour
+## s2-l2-516 — Probability of choosing a white card
 
 [Open this question in the HTML preview](index.html#s2-l2-516)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l4-507 — Three draws with replacement
+## s2-l4-507 — Counter and coin
 
 [Open this question in the HTML preview](index.html#s2-l4-507)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "ex-l3-002",
   "bank_key": "english-ex-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -17,14 +17,26 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Which sentence order creates the clearest given-to-new progression for the rain paragraph?",
+      "prompt": "Which sentence order links each sentence most clearly to the one before it in the rain paragraph?",
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "The group moved the electrical equipment first. Rain forced the stalls indoors. This showed adaptation. Water was approaching an extension lead."},
-          {"key": "B", "text": "Rain forced the stalls indoors. During the move, water began approaching an extension lead. That safety risk made the electrical equipment the first priority. Handling one priority at a time showed how the method supported calm adaptation."},
-          {"key": "C", "text": "Firstly, it rained. Secondly, there was equipment. Thirdly, this happened. Finally, the method was useful."},
-          {"key": "D", "text": "The method supported adaptation. The extension lead existed. Charity sales need stalls. Rain is a kind of weather."}
+          {
+            "key": "A",
+            "text": "The group moved the electrical equipment first. Rain forced the stalls indoors. This showed how the method supported adaptation. During the move, water was approaching an extension lead, and the decorations were carried in later."
+          },
+          {
+            "key": "B",
+            "text": "Rain forced the stalls indoors. During the move, water began approaching an extension lead. That safety risk made the electrical equipment the first priority. Handling one priority at a time showed how the method supported calm adaptation."
+          },
+          {
+            "key": "C",
+            "text": "Firstly, it rained. Secondly, there was equipment. Thirdly, this happened. Finally, the method was useful."
+          },
+          {
+            "key": "D",
+            "text": "The method supported adaptation. The extension lead existed. Charity sales need stalls. Rain is a kind of weather."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
@@ -43,13 +55,32 @@
       "response": {
         "type": "multiple_response",
         "options": [
-          {"key": "A", "text": "the approaching water"},
-          {"key": "B", "text": "that safety risk"},
-          {"key": "C", "text": "the decision to move electrical equipment first"},
-          {"key": "D", "text": "it"},
-          {"key": "E", "text": "this thing"}
+          {
+            "key": "A",
+            "text": "the approaching water"
+          },
+          {
+            "key": "B",
+            "text": "that safety risk"
+          },
+          {
+            "key": "C",
+            "text": "the decision to move electrical equipment first"
+          },
+          {
+            "key": "D",
+            "text": "it"
+          },
+          {
+            "key": "E",
+            "text": "this thing"
+          }
         ],
-        "correct_keys": ["A", "B", "C"],
+        "correct_keys": [
+          "A",
+          "B",
+          "C"
+        ],
         "choice_rationales": {
           "A": "This repeats the relevant noun precisely while the risk is being established.",
           "B": "This summarises why the water matters and creates a bridge to the response.",
@@ -67,10 +98,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "However"},
-          {"key": "B", "text": "For example"},
-          {"key": "C", "text": "As a result"},
-          {"key": "D", "text": "Meanwhile"}
+          {
+            "key": "A",
+            "text": "However"
+          },
+          {
+            "key": "B",
+            "text": "For example"
+          },
+          {
+            "key": "C",
+            "text": "As a result"
+          },
+          {
+            "key": "D",
+            "text": "Meanwhile"
+          }
         ],
         "correct_key": "C",
         "choice_rationales": {
@@ -89,10 +132,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Firstly, the rain began. Moreover, water neared the cable. Furthermore, we moved things. Finally, it worked."},
-          {"key": "B", "text": "Rain forced the stalls indoors, where water began approaching an extension lead. Because that risk could not wait, the group moved electrical equipment before decorations."},
-          {"key": "C", "text": "The rain began. In addition, additionally, furthermore and moreover, we acted."},
-          {"key": "D", "text": "The rain began. Nevertheless, this thing led to stuff, and consequently it was cohesive."}
+          {
+            "key": "A",
+            "text": "Firstly, the rain began. Moreover, water neared the cable. Furthermore, we moved things. Finally, it worked, and in conclusion the method was useful."
+          },
+          {
+            "key": "B",
+            "text": "Rain forced the stalls indoors, where water began approaching an extension lead. Because that risk could not wait, the group moved electrical equipment before decorations."
+          },
+          {
+            "key": "C",
+            "text": "The rain began. In addition, additionally, furthermore and moreover, we acted."
+          },
+          {
+            "key": "D",
+            "text": "The rain began. Nevertheless, this thing led to stuff, and consequently it was cohesive."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
@@ -107,14 +162,26 @@
     },
     {
       "position": 5,
-      "prompt": "Which thread-word chain preserves one central idea without mechanical repetition or synonym drift?",
+      "prompt": "Which chain of key words keeps one central idea without repeating the same word mechanically or drifting to words with a different meaning?",
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "step-by-step method → one priority at a time → clear next action"},
-          {"key": "B", "text": "method → scheme → trick → magic"},
-          {"key": "C", "text": "organisation → orange poster → grey cloud → school wall"},
-          {"key": "D", "text": "plan → plan → plan → plan, with no further meaning added"}
+          {
+            "key": "A",
+            "text": "step-by-step method → one priority at a time → clear next action"
+          },
+          {
+            "key": "B",
+            "text": "method → scheme → trick → magic"
+          },
+          {
+            "key": "C",
+            "text": "organisation → orange poster → grey cloud → school wall"
+          },
+          {
+            "key": "D",
+            "text": "plan → plan → plan → plan, with no further meaning added"
+          }
         ],
         "correct_key": "A",
         "choice_rationales": {
@@ -133,10 +200,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "During the move, water began spreading towards an extension lead, creating an immediate safety risk."},
-          {"key": "B", "text": "The poster lettering was orange and one helper wore blue shoes."},
-          {"key": "C", "text": "Firstly, secondly and finally are common linking words."},
-          {"key": "D", "text": "Decorations can be found in many colours and shapes."}
+          {
+            "key": "A",
+            "text": "During the move, water began spreading towards an extension lead, creating an immediate safety risk."
+          },
+          {
+            "key": "B",
+            "text": "The poster lettering was orange, and one helper wore blue shoes with white laces."
+          },
+          {
+            "key": "C",
+            "text": "Firstly, secondly and finally are common linking words."
+          },
+          {
+            "key": "D",
+            "text": "Decorations can be found in many colours and shapes."
+          }
         ],
         "correct_key": "A",
         "choice_rationales": {

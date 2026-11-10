@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-015",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N5",
   "primary_outcome": "5.8",
-  "title": "Expand and simplify",
+  "title": "Factorise two terms",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Expand and simplify 3(2a - 5) - 2(a + 4)."
+          "text": "Factorise "
+        },
+        {
+          "type": "inline_math",
+          "latex": "18a-24ab"
+        },
+        {
+          "type": "text",
+          "text": " completely."
         }
       ],
       "marks": 3,
@@ -29,15 +37,16 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "4a-23",
-        "canonical_latex": "4a-23",
+        "canonical_expression": "6*a*(3-4*b)",
+        "canonical_latex": "6a(3-4b)",
         "variables": [
-          "a"
+          "a",
+          "b"
         ],
         "domain_constraints": [],
         "accepted_equivalents": [],
         "checker_config": {
-          "form": "expanded"
+          "form": "factorised_completely"
         }
       },
       "hints": [
@@ -46,7 +55,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Look for a factor shared by every term, or expand each bracket term by term."
+              "text": "Find the highest common factor of all the terms."
             }
           ]
         },
@@ -55,7 +64,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Check a factorisation by multiplying the bracket back out."
+              "text": "Start by writing: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\operatorname{HCF}(18a,24ab)=6a"
             }
           ]
         }
@@ -65,8 +78,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "6a-15-2a-8"
+              "type": "inline_math",
+              "latex": "\\operatorname{HCF}(18a,24ab)=6a"
             }
           ],
           "mark_type": "M",
@@ -76,8 +89,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(6a-2a)-23"
+              "type": "inline_math",
+              "latex": "18a\\div6a=3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "24ab\\div6a=4b"
             }
           ],
           "mark_type": "M",
@@ -87,8 +108,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "4a-23"
+              "type": "inline_math",
+              "latex": "6a(3-4b)"
             }
           ],
           "mark_type": "A",

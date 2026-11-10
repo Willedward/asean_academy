@@ -1,35 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-005",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.7",
-  "title": "Upper bound of a sum",
+  "title": "Greatest value before rounding",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [
-    {
-      "type": "inline_math",
-      "latex": "a=3.46"
-    },
-    {
-      "type": "text",
-      "text": " correct to 2 decimal places and "
-    },
-    {
-      "type": "inline_math",
-      "latex": "b=8.2"
-    },
-    {
-      "type": "text",
-      "text": " correct to 1 decimal place."
-    }
-  ],
+  "stem": [],
   "parts": [
     {
       "position": 1,
@@ -37,11 +20,27 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the upper bound of "
+          "text": "A number "
         },
         {
           "type": "inline_math",
-          "latex": "a+b"
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " has exactly 3 decimal places. When "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " is rounded to 2 decimal places, the result is 3.46. Find the greatest possible value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
         },
         {
           "type": "text",
@@ -54,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "11.715",
-        "canonical_latex": "11.715",
+        "canonical_answer": "3.464",
+        "canonical_latex": "3.464",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,7 +66,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the upper bound for each rounded measurement."
+              "text": "Decide which 3-decimal-place numbers round to 3.46."
             }
           ]
         },
@@ -75,20 +74,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "a<3.465"
-            },
-            {
               "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b<8.25"
-            },
-            {
-              "type": "text",
-              "text": ", so add the two upper endpoints."
+              "text": "Numbers from 3.455 up to, but not including, 3.465 round to 3.46."
             }
           ]
         }
@@ -98,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "Upper bounds: 3.465 and 8.25"
+              "type": "inline_math",
+              "latex": "3.455\\le x<3.465"
             }
           ],
           "mark_type": "M",
@@ -109,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3.465+8.25=11.715"
+              "type": "text",
+              "text": "The greatest value with 3 decimal places is 3.464."
             }
           ],
           "mark_type": "A",

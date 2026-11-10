@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l4-008",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -69,12 +69,39 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\left(\\frac{30}{12}\\right)^2(16)=100"
+              "type": "text",
+              "text": "The side-length scale factor is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{30}{12}=\\frac{5}{2}"
+            },
+            {
+              "type": "text",
+              "text": ", so the area scale factor is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\left(\\frac{5}{2}\\right)^2=\\frac{25}{4}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
-          "mark_type": "B",
-          "mark_value": 4
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "\\frac{25}{4}\\times16=100"
+            }
+          ],
+          "mark_type": "A",
+          "mark_value": 1
         }
       ]
     }

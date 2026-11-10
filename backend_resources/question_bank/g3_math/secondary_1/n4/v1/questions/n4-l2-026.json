@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l2-026",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.1",
-  "title": "Average labelling rate",
+  "title": "Two machines working together",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A machine labels 320 jars in the first 8 minutes and 280 jars in the next 7 minutes. Find its average labelling rate for the whole period in jars per minute."
+          "text": "Machine A labels 40 jars per minute and Machine B labels 25 jars per minute. Working together, how many jars do they label in 12 minutes?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "40",
-        "canonical_latex": "40\\text{ jars/min}",
+        "canonical_answer": "780",
+        "canonical_latex": "780",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the total number of jars and the total time."
+              "text": "Add the two rates to find the combined rate."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add both outputs and both durations before dividing."
+              "text": "Multiply the combined rate by the time."
             }
           ]
         }
@@ -61,8 +61,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Average rate}=\\frac{320+280}{8+7}"
+              "type": "text",
+              "text": "Combined rate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=40+25=65"
+            },
+            {
+              "type": "text",
+              "text": " jars per minute"
             }
           ],
           "mark_type": "M",
@@ -72,8 +80,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "=40\\text{ jars/min}"
+              "type": "inline_math",
+              "latex": "65\\times12=780"
+            },
+            {
+              "type": "text",
+              "text": " jars"
             }
           ],
           "mark_type": "A",

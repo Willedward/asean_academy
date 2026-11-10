@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l4-513",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Frequency gap between unequal histogram classes",
+  "title": "True frequency density from a histogram",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A misleading histogram uses frequency as bar height. A width-5 class has frequency 10 and a width-15 class has frequency 45. Calculate the difference between the two class frequencies before judging the bar heights."
+          "text": "A misleading histogram uses frequency as bar height. A class of width 5 has frequency 10, and a class of width 15 has frequency 45. The second bar is 4.5 times as tall as the first. How many times the frequency density of the first class is the frequency density of the second class?"
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "35",
-        "canonical_latex": "35",
+        "canonical_answer": "1.5",
+        "canonical_latex": "1.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The numerical comparison must use frequencies, even though a correct histogram would use frequency density for height."
+              "text": "Frequency density is frequency divided by class width."
             }
           ]
         },
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Ignore the widths here: you only need how much more one frequency is than the other. Which calculation gives that?"
+              "text": "Find the density of each class, then divide the second density by the first."
             }
           ]
         }
@@ -71,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Find each frequency density. "
             },
             {
               "type": "display_math",
-              "latex": "45-10=35"
+              "latex": "\\frac{10}{5}=2,\\quad\\frac{45}{15}=3"
             }
           ],
           "mark_type": "M",
@@ -86,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the true ratio of densities is "
             },
             {
               "type": "display_math",
-              "latex": "35"
+              "latex": "\\frac{3}{2}=1.5"
             }
           ],
           "mark_type": "A",
@@ -105,7 +105,7 @@
       "asset_key": "s1-l4-513-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l4-513-diagram-r4.svg",
+      "path": "assets/s1-l4-513-diagram-r5.svg",
       "alt_text": "Histogram with 2 classes; frequency values 10, 45.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

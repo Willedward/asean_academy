@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-021",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A charity has category totals 13, 27, 46 and 91; it needs precise comparison and does not want partial icons. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A charity has category totals 13, 27, 46 and 91; readers need to compare the sizes at a glance, and the charity does not want partial icons. For the reason code, use 1 if a pictogram cannot show four categories, 2 if these totals would need part-icons, or 3 if pictograms can show only data in time order. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "22",
+        "canonical_latex": "22",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Decide what readers must do with these four totals."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "These totals are not convenient multiples of an icon, so a pictorial display would need part-icons. The charity also wants precise comparison of separate totals. Ask which display compares separate totals against a common scale."
+              "text": "These totals are not convenient multiples of an icon. The charity also wants separate totals compared at a glance. Choose the display that compares sizes against a common scale, then think about what would go wrong with icons."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A bar graph compares the four totals against one scale at a glance. These totals are not convenient multiples of an icon, so a pictogram would need part-icons, and the reason code is 2."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=2"
+              "latex": "\\text{Code}=22"
             }
           ],
           "mark_type": "B",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 3,
   "stable_key": "n3-l1-011",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A worksheet contains 70 questions. Farid completes 21 of them. Express the number completed as a percentage of the total."
+          "text": "A worksheet contains 60 questions. Farid completes 21 of them. Express the number completed as a percentage of the total."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "30",
-        "canonical_latex": "30\\%",
+        "canonical_answer": "35",
+        "canonical_latex": "35\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 21 divided by 70, then multiply by 100%."
+              "text": "Calculate 21 divided by 60, then multiply by 100%."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{21}{70}\\times100\\%=30\\%"
+              "type": "inline_math",
+              "latex": "\\frac{21}{60}\\times100\\%=35\\%"
             }
           ],
           "mark_type": "B",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-006",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.3",
-  "title": "Composing two linear rules",
+  "title": "Line with related gradient and intercept",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,51 +20,35 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Functions "
+          "text": "A line "
         },
         {
           "type": "inline_math",
-          "latex": "f"
+          "latex": "y=ax+b"
         },
         {
           "type": "text",
-          "text": " and "
+          "text": " passes through "
         },
         {
           "type": "inline_math",
-          "latex": "g"
+          "latex": "(2,15)"
         },
         {
           "type": "text",
-          "text": " are "
+          "text": ". Its gradient is twice its "
         },
         {
           "type": "inline_math",
-          "latex": "f(x)=3x-2"
+          "latex": "y"
         },
         {
           "type": "text",
-          "text": " and "
+          "text": "-intercept. Find "
         },
         {
           "type": "inline_math",
-          "latex": "g(x)=5-2x"
-        },
-        {
-          "type": "text",
-          "text": ". Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " if "
-        },
-        {
-          "type": "inline_math",
-          "latex": "f(g(x))=19"
+          "latex": "a"
         },
         {
           "type": "text",
@@ -77,8 +61,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-1",
-        "canonical_latex": "-1",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -90,23 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute "
+              "text": "Write the gradient in terms of the "
             },
             {
               "type": "inline_math",
-              "latex": "g"
+              "latex": "y"
             },
             {
               "type": "text",
-              "text": "(x) in place of the input of "
-            },
-            {
-              "type": "inline_math",
-              "latex": "f"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "-intercept."
             }
           ]
         },
@@ -115,15 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Simplify "
+              "text": "Substitute the point into "
             },
             {
               "type": "inline_math",
-              "latex": "3(5-2x)-2"
+              "latex": "y=ax+b"
             },
             {
               "type": "text",
-              "text": " before solving."
+              "text": " and solve."
             }
           ]
         }
@@ -133,8 +109,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "13-6x=19"
+              "type": "inline_math",
+              "latex": "a=2b"
             }
           ],
           "mark_type": "M",
@@ -144,8 +120,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-6x=6"
+              "type": "inline_math",
+              "latex": "15=2a+b=2(2b)+b=5b"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b=3"
             }
           ],
           "mark_type": "M",
@@ -155,8 +139,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=-1"
+              "type": "inline_math",
+              "latex": "a=2(3)=6"
             }
           ],
           "mark_type": "A",

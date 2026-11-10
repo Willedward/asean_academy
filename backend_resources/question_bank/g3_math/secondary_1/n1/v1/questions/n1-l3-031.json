@@ -1,23 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-031",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.7",
-  "title": "Estimate using one significant figure",
+  "title": "Estimate a root and a power",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [
-    {
-      "type": "text",
-      "text": "Round every given number to 1 significant figure before calculating."
-    }
-  ],
+  "stem": [],
   "parts": [
     {
       "position": 1,
@@ -29,11 +24,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{398\\times 0.0204}{1.98}"
+          "latex": "\\sqrt{99.2}+4.97^{2}"
         },
         {
           "type": "text",
-          "text": "."
+          "text": " by rounding each number to 1 significant figure before calculating."
         }
       ],
       "marks": 2,
@@ -42,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "35",
+        "canonical_latex": "35",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -55,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Round 398, 0.0204 and 1.98 separately."
+              "text": "Round each number to 1 significant figure."
             }
           ]
         },
@@ -64,7 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 398≈400, 0.0204≈0.02 and 1.98≈2."
+              "text": "Use 99.2≈100 and 4.97≈5."
             }
           ]
         }
@@ -74,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "(400\\times 0.02)\\div 2"
+              "type": "inline_math",
+              "latex": "\\sqrt{100}+5^{2}"
             }
           ],
           "mark_type": "M",
@@ -85,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "8\\div 2=4"
+              "type": "inline_math",
+              "latex": "10+25=35"
             }
           ],
           "mark_type": "A",

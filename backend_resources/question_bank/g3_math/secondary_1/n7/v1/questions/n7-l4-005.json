@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-005",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -101,8 +101,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "16=11+k"
+              "type": "text",
+              "text": "Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=11"
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2(11-3)=11+k"
             }
           ],
           "mark_type": "M",
@@ -112,8 +124,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=5"
+              "type": "inline_math",
+              "latex": "16=11+k"
             }
           ],
           "mark_type": "M",
@@ -123,8 +135,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{check: }16=16"
+              "type": "inline_math",
+              "latex": "k=5"
             }
           ],
           "mark_type": "A",

@@ -1,31 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l5-002",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.4",
-  "title": "Two-stage calculator model",
+  "title": "Smallest power above a target",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
   "status": "draft",
-  "stem": [
-    {
-      "type": "text",
-      "text": "Define "
-    },
-    {
-      "type": "inline_math",
-      "latex": "A=\\frac{\\sqrt{73.5}+4.82^{3}}{1.75^{2}-0.64}"
-    },
-    {
-      "type": "text",
-      "text": ". Use the unrounded value of A in the second calculation."
-    }
-  ],
+  "stem": [],
   "parts": [
     {
       "position": 1,
@@ -33,15 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate "
+          "text": "Use your calculator to find the smallest positive integer "
         },
         {
           "type": "inline_math",
-          "latex": "100\\frac{A-20}{A+20}"
+          "latex": "n"
         },
         {
           "type": "text",
-          "text": ". Give your answer correct to 3 significant figures."
+          "text": " for which "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1.03^{n}>2"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -49,12 +44,12 @@
       "secondary_outcomes": [],
       "response": {
         "type": "numeric",
-        "comparison_mode": "rounded_sf",
-        "canonical_answer": "42.7",
-        "canonical_latex": "42.7",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "24",
+        "canonical_latex": "24",
         "accepted_answers": [],
         "absolute_tolerance": null,
-        "rounding_precision": 3,
+        "rounding_precision": null,
         "unit": null
       },
       "hints": [
@@ -63,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate A with brackets around the complete numerator and denominator."
+              "text": "Use trial and improvement on your calculator."
             }
           ]
         },
@@ -71,12 +66,16 @@
           "stage": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Test values of "
+            },
+            {
               "type": "inline_math",
-              "latex": "A=49.764038"
+              "latex": "n"
             },
             {
               "type": "text",
-              "text": "...; substitute this unrounded value into the percentage expression."
+              "text": " around 20, then adjust until you find the first power above 2."
             }
           ]
         }
@@ -86,8 +85,12 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=\\frac{\\sqrt{73.5}+4.82^{3}}{1.75^{2}-0.64}=49.764038"
+              "type": "inline_math",
+              "latex": "1.03^{23}=1.97\\ldots"
+            },
+            {
+              "type": "text",
+              "text": ", which is less than 2."
             }
           ],
           "mark_type": "M",
@@ -97,8 +100,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "100\\frac{A-20}{A+20}=42.663869"
+              "type": "inline_math",
+              "latex": "1.03^{24}=2.03\\ldots"
+            },
+            {
+              "type": "text",
+              "text": ", which is greater than 2."
             }
           ],
           "mark_type": "M",
@@ -108,8 +115,8 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "To 3 significant figures, the answer is 42.7."
+              "type": "inline_math",
+              "latex": "n=24"
             }
           ],
           "mark_type": "A",

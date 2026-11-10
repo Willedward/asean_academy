@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-013",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Seven sports have counts ranging from 3 to 240, and readers must compare their magnitudes accurately. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Seven sports have counts ranging from 3 to 240, and readers must compare their sizes accurately. For the reason code, use 1 if a pictogram cannot show seven sports, 2 if counts from 3 to 240 would need many icons or part-icons and would be slow to compare, or 3 if pictograms can show only whole numbers. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "22",
+        "canonical_latex": "22",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Decide whether readers need a picture for fun or a scale for accurate comparison."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The seven sports are separate categories, and readers must compare how big each count is. Ask which display lets them compare sizes against a common scale."
+              "text": "The seven sports are separate categories, and readers must compare how big each count is. Choose the display that compares sizes against a common scale, then think about what a pictogram would need for a count as small as 3 and as large as 240."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A bar graph compares the seven counts against one scale, even with such a wide range. A pictogram would need many icons or part-icons for counts from 3 to 240 and would be slow to compare, so the reason code is 2."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=2"
+              "latex": "\\text{Code}=22"
             }
           ],
           "mark_type": "B",

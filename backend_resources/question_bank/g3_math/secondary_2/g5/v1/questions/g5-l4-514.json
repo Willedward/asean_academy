@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l4-514",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered restricted transport access while preparing a capacity check for the school science exhibit. The exhibit will be moved between classrooms on a wheeled trolley. A scale model will be stored with the project documentation. A cone of height 21 cm is filled to one eighth of its full volume. The liquid forms a smaller similar cone at the tip. Find the liquid depth in cm."
+          "text": "A paper cup shaped as a cone is held with its vertex pointing down. The cone of height 21 cm is filled to eight twenty-sevenths of its full volume, and the liquid forms a cone similar to the cup. Find the depth of the liquid in cm."
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10.5",
-        "canonical_latex": "10.5",
+        "canonical_answer": "14",
+        "canonical_latex": "14",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "\\left(\\frac{h}{H}\\right)^{3}=\\frac{1}{8}"
+              "latex": "\\left(\\frac{h}{H}\\right)^{3}=\\frac{8}{27}"
             },
             {
               "type": "text",
@@ -87,22 +87,48 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The liquid forms a cone similar to the container, so the volume ratio is the cube of the height ratio."
             },
             {
               "type": "display_math",
-              "latex": "\\left(\\frac{h}{21}\\right)^3=\\frac18\\Rightarrow h=10.5"
+              "latex": "\\left(\\frac{h}{21}\\right)^3=\\frac{8}{27}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Take the cube root of both sides."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{10.5}"
+              "latex": "\\frac{h}{21}=\\frac{2}{3}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=21\\times\\frac{2}{3}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=14\\text{ cm}"
             }
           ],
           "mark_type": "A",
@@ -117,8 +143,8 @@
       "asset_key": "g5-l4-514-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-514-diagram-r3.svg",
-      "alt_text": "Conical container held with its vertex pointing down, height h = 21 cm. Liquid fills one eighth of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
+      "path": "assets/g5-l4-514-diagram-r4.svg",
+      "alt_text": "Conical container held with its vertex pointing down, height h = 21 cm. Liquid fills 0.296296 of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "inverted_cone_liquid",
@@ -130,7 +156,7 @@
             "value": 21,
             "unit": "cm"
           },
-          "volume_fraction": 0.125
+          "volume_fraction": 0.2962962962962963
         },
         "not_to_scale": true,
         "dimensions": {
@@ -138,11 +164,10 @@
             "value": 21,
             "unit": "cm"
           },
-          "volume_fraction": 0.125
+          "volume_fraction": 0.2962962962962963
         },
         "forbidden_visible_labels": [
-          "10.5",
-          "10.50",
+          "14",
           "1/2",
           "½",
           "0.5",
@@ -350,7 +375,7 @@
           "liquid_depth": false
         }
       },
-      "sha256": "ff6537902bf3c8e39a4432ae69dfc315f0843a47f5bc5ffa5e7c0fbcbd413184",
+      "sha256": "ad79ddebc3b4621919c1cb0f2d63a39d2e68e10200ec3c738fd8e810c60c2952",
       "width": 600,
       "height": 477
     }

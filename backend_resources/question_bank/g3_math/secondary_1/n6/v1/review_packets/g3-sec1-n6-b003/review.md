@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-019 — Temperature conversion table
+## n6-l2-019 — Temperature conversion
 
 [Open this question in the HTML preview](index.html#n6-l2-019)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l4-010 — A relationship with a fixed total
+## n6-l4-010 — Pair that fits two relationships
 
 [Open this question in the HTML preview](index.html#n6-l4-010)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-019 — Function from a word rule
+## n6-l3-019 — Battery level rule
 
 [Open this question in the HTML preview](index.html#n6-l3-019)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l5-003 — Linked linear functions
+## n6-l5-003 — Smallest whole input for a rule
 
 [Open this question in the HTML preview](index.html#n6-l5-003)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-022 — Parallel vertical change
+## n6-l2-022 — Vertical change on a line
 
 [Open this question in the HTML preview](index.html#n6-l2-022)
 

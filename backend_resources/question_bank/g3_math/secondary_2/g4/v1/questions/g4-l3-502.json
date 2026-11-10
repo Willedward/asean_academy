@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-502",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Rescue planners noted salt exposure near the coast while preparing a replacement frame. A rectangular section of the mountain rescue shelter measures 36 m by 48 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          "text": "A rectangular playing field measures 33 m by 56 m. A cable runs straight from one corner to the opposite corner to carry power to a scoreboard. Find the length d of the cable in metres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60",
+        "canonical_answer": "65",
+        "canonical_latex": "65",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "d^{2}=36^{2}+48^{2}"
+              "latex": "d^{2}=33^{2}+56^{2}"
             },
             {
               "type": "text",
@@ -79,22 +79,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "d=\\sqrt{36^2+48^2}=60"
+              "text": "Two adjacent sides of the rectangle meet at a right angle, so the diagonal is the hypotenuse of a right-angled triangle with shorter sides 33 m and 56 m."
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{60}"
+              "latex": "d^2=33^2+56^2=1089+3136=4225"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{4225}=65"
             }
           ],
           "mark_type": "A",
@@ -109,8 +120,8 @@
       "asset_key": "g4-l3-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-502-diagram-r3.svg",
-      "alt_text": "Rectangle 48 m by 36 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+      "path": "assets/g4-l3-502-diagram-r4.svg",
+      "alt_text": "Rectangle 56 m by 33 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,11 +131,11 @@
         "inputs": {
           "sides": [
             {
-              "value": 36,
+              "value": 33,
               "unit": "m"
             },
             {
-              "value": 48,
+              "value": 56,
               "unit": "m"
             }
           ]
@@ -133,17 +144,17 @@
         "dimensions": {
           "sides": [
             {
-              "value": 48,
+              "value": 56,
               "unit": "m"
             },
             {
-              "value": 36,
+              "value": 33,
               "unit": "m"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "60"
+          "65"
         ],
         "unknowns": [
           {
@@ -155,23 +166,23 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          446.0
+          400.0
         ],
         "points": {
           "A": [
-            120.0,
-            326.0
+            110.0,
+            279.93
           ],
           "B": [
-            120.0,
+            110.0,
             56.0
           ],
           "C": [
-            480.0,
-            326.0
+            490.0,
+            279.93
           ],
           "D": [
-            480.0,
+            490.0,
             56.0
           ]
         },
@@ -224,11 +235,11 @@
         ],
         "labels": [
           {
-            "text": "36 m",
+            "text": "33 m",
             "target": "segment:AB"
           },
           {
-            "text": "48 m",
+            "text": "56 m",
             "target": "segment:AC"
           },
           {
@@ -257,15 +268,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.5893,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "ae1edb7aa77d1f1218c463a234916380efe6d4899fee87ac99510bec1e28bbdb",
+      "sha256": "42fe80b065de5477afa4b84ac71a457a21563d20215fdb09d3794393d664c335",
       "width": 600,
-      "height": 446
+      "height": 400
     }
   ],
   "provenance": {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l3-514",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bag contains 3 red and 2 blue counters. Two counters are selected without replacement. Find the probability of selecting one counter of each colour. Give your answer as a fraction in simplest form."
+          "text": "A bag contains 3 red and 2 blue counters. Two counters are selected at random without replacement. Find the probability of selecting one counter of each colour. Give your answer as a fraction in simplest form."
         }
       ],
       "marks": 3,
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count both orders: red then blue, and blue then red."
+              "text": "Label the counters R1, R2, R3, B1 and B2 and list the ordered pairs."
             }
           ]
         },
@@ -53,39 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{3}{5}"
-            },
-            {
-              "type": "text",
-              "text": " times "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{2}{4}"
-            },
-            {
-              "type": "text",
-              "text": " plus "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{2}{5}"
-            },
-            {
-              "type": "text",
-              "text": " times "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{3}{4}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "There are 20 ordered pairs. Count the pairs with one red and one blue counter."
             }
           ]
         }
@@ -95,8 +63,20 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Listing ordered pairs gives 20 outcomes. Red then blue gives "
+            },
+            {
+              "type": "inline_math",
+              "latex": "3\\times2=6"
+            },
+            {
+              "type": "text",
+              "text": " pairs, and blue then red gives another 6. "
+            },
+            {
               "type": "display_math",
-              "latex": "P=\\frac{12}{20}=\\frac{3}{5}"
+              "latex": "P=\\frac{12}{20}"
             }
           ],
           "mark_type": "M",

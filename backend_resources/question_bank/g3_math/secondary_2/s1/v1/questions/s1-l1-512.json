@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l1-512",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.6",
-  "title": "Select the display whose bars span continuous intervals",
+  "title": "Plot individual whole-number heights",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. For 150 continuous measurements grouped into adjacent intervals, choose the display in which each bar spans an interval and bar area represents frequency. Enter the code."
+          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A gardener measures 12 seedlings to the nearest whole centimetre, from 3 cm to 9 cm, and wants to mark each measurement above a number line so that repeats stack up. Enter the most suitable code."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose a representation designed for grouped continuous measurements."
+              "text": "The gardener wants one mark for every single measurement."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Rule out any display that shows each of the 150 values separately. Which of the remaining displays shows the shape of the grouped data, not just a list of counts?"
+              "text": "Which display shows each value as its own mark on a number line?"
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\text{histogram}\\Rightarrow 2"
+              "latex": "\\text{dot diagram}\\Rightarrow1"
             }
           ],
           "mark_type": "A",

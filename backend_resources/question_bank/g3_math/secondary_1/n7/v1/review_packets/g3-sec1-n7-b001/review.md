@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-001 — Completing an inverse-operation statement
+## n7-l2-001 — Two linked steps
 
 [Open this question in the HTML preview](index.html#n7-l2-001)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-002 — Choosing a balancing divisor
+## n7-l2-002 — Testing a solution
 
 [Open this question in the HTML preview](index.html#n7-l2-002)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-001 — Completing an equivalent equation
+## n7-l3-001 — Equations with no solution
 
 [Open this question in the HTML preview](index.html#n7-l3-001)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-002 — Clearing a denominator consistently
+## n7-l3-002 — Choosing an equivalent equation
 
 [Open this question in the HTML preview](index.html#n7-l3-002)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-004 — Purchase followed by a refund
+## n7-l4-004 — Pen price from change received
 
 [Open this question in the HTML preview](index.html#n7-l4-004)
 

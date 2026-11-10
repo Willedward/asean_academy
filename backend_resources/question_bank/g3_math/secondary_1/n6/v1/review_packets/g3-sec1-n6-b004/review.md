@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l4-013 — Equidistant point on an axis
+## n6-l4-013 — Point dividing a segment
 
 [Open this question in the HTML preview](index.html#n6-l4-013)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-025 — Finding an input
+## n6-l2-025 — Continuing a table to find an input
 
 [Open this question in the HTML preview](index.html#n6-l2-025)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-027 — Constant rate from context
+## n6-l3-027 — Savings balance
 
 [Open this question in the HTML preview](index.html#n6-l3-027)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-029 — Table for plotting
+## n6-l2-029 — Range of a table of values
 
 [Open this question in the HTML preview](index.html#n6-l2-029)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-031 — Gradient after scaling axes
+## n6-l3-031 — Gradient from coordinate changes
 
 [Open this question in the HTML preview](index.html#n6-l3-031)
 

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-528",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G5",
   "primary_outcome": "5.6",
-  "title": "Cone and hemisphere capacity",
+  "title": "Volume of a cone joined to a hemisphere",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered a strict material budget while preparing a capacity check for the volcanology field model. Field samples are packed separately from the measuring model. The design must also be explained clearly in the safety briefing. A solid is formed by joining a cone of radius 8 cm and height 15 cm to a hemisphere of the same radius. Find the total volume in cm³, correct to 1 decimal place."
+          "text": "A model space capsule is formed by joining a cone of radius 9 cm and height 12 cm to a hemisphere of the same radius, with 12 cm the perpendicular height of the cone. Find its total volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "2077.6",
-        "canonical_latex": "2077.6",
+        "canonical_answer": "2544.7",
+        "canonical_latex": "2544.7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -71,22 +71,41 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of the cone:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac13\\pi(8)^2(15)+\\frac23\\pi(8)^3=2077.6"
+              "latex": "\\frac13\\pi(9)^2(12)=324\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the hemisphere, half of a sphere of the same radius:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{2077.6}"
+              "latex": "\\frac12\\times\\frac43\\pi(9)^3=486\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the two volumes."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=810\\pi=2544.690\\ldots=2544.7\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -101,8 +120,8 @@
       "asset_key": "g5-l3-528-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-528-diagram-r2.svg",
-      "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 8 cm. The cone's perpendicular height is h = 15 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
+      "path": "assets/g5-l3-528-diagram-r3.svg",
+      "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 9 cm. The cone's perpendicular height is h = 12 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "cone_hemisphere",
@@ -111,32 +130,32 @@
         "template": "cone_hemisphere_volume",
         "inputs": {
           "radius": {
-            "value": 8,
+            "value": 9,
             "unit": "cm"
           },
           "height": {
-            "value": 15,
+            "value": 12,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 8,
+            "value": 9,
             "unit": "cm"
           },
           "cone_height": {
-            "value": 15,
+            "value": 12,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "2077.6",
-          "2077.64",
-          "1005.3",
-          "1005.31",
-          "1072.3",
-          "1072.33"
+          "2544.7",
+          "2544.69",
+          "1017.9",
+          "1017.88",
+          "1526.8",
+          "1526.81"
         ],
         "unknowns": [],
         "solids": [
@@ -162,36 +181,36 @@
         ],
         "viewbox": [
           600.0,
-          529.0
+          496.0
         ],
         "points": {
           "hO": [
             330.0,
-            296.0
+            246.0
           ],
           "hL": [
-            196.67,
-            296.0
+            180.0,
+            246.0
           ],
           "hR": [
-            463.33,
-            296.0
+            480.0,
+            246.0
           ],
           "O": [
             330.0,
-            296.0
+            246.0
           ],
           "V": [
             330.0,
             46.0
           ],
           "L": [
-            196.67,
-            296.0
+            180.0,
+            246.0
           ],
           "R": [
-            463.33,
-            296.0
+            480.0,
+            246.0
           ]
         },
         "segments": [
@@ -227,13 +246,13 @@
         "ellipses": {
           "hrim": {
             "center": "hO",
-            "rx": 133.33,
-            "ry": 45.33
+            "rx": 150.0,
+            "ry": 51.0
           },
           "base": {
             "center": "O",
-            "rx": 133.33,
-            "ry": 45.33
+            "rx": 150.0,
+            "ry": 51.0
           }
         },
         "right_angles": [
@@ -250,33 +269,33 @@
           {
             "target": "segment:OR",
             "from": [
-              396.66,
-              296.0
+              405.0,
+              246.0
             ],
             "to": [
-              493.32,
-              344.33
+              507.31,
+              338.08
             ]
           },
           {
             "target": "segment:VO",
             "from": [
               330.0,
-              151.0
+              130.0
             ],
             "to": [
               251.09,
-              123.38
+              102.38
             ]
           }
         ],
         "labels": [
           {
-            "text": "r = 8 cm",
+            "text": "r = 9 cm",
             "target": "segment:OR"
           },
           {
-            "text": "h = 15 cm",
+            "text": "h = 12 cm",
             "target": "segment:VO"
           }
         ],
@@ -333,9 +352,9 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "b43bb2054b1a95f6a0800eb2e9a5c23a0b10326e970c8d6573611fb130e4f246",
+      "sha256": "70709f1f648de0050357b900211a8260955359859aae0a492c3a6ab73a4dc02d",
       "width": 600,
-      "height": 529
+      "height": 496
     }
   ],
   "provenance": {

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-001",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Completing an inverse-operation statement",
+  "title": "Two linked steps",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,27 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation is rewritten in the form "
+          "text": "The equation below is solved by subtracting "
         },
         {
           "type": "inline_math",
-          "latex": "x=17-k"
+          "latex": "p"
+        },
+        {
+          "type": "text",
+          "text": " from both sides and then dividing both sides by "
+        },
+        {
+          "type": "inline_math",
+          "latex": "q"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p+q"
         },
         {
           "type": "text",
@@ -32,19 +48,7 @@
         },
         {
           "type": "display_math",
-          "latex": "x+9=17"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "latex": "2x+9=17"
         }
       ],
       "marks": 2,
@@ -53,8 +57,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "9",
-        "canonical_latex": "9",
+        "canonical_answer": "11",
+        "canonical_latex": "11",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +70,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Undo the addition on the left."
+              "text": "Undo the addition first, then the multiplication."
             }
           ]
         },
@@ -75,23 +79,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the number that is added to "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " from both sides, then compare your new equation with "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x=17-k"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Decide which number to subtract and which number to divide by, then add those two numbers."
             }
           ]
         }
@@ -101,8 +89,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=17-9"
+              "type": "inline_math",
+              "latex": "p=9"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "q=2"
             }
           ],
           "mark_type": "M",
@@ -112,8 +108,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=9"
+              "type": "inline_math",
+              "latex": "p+q=9+2=11"
             }
           ],
           "mark_type": "A",

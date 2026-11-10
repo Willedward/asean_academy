@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-519",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A grouped distribution has midpoints 5, 15 and 25 with symmetric frequencies 6, 8 and 6. Use the symmetry to state its estimated mean."
+          "text": "A grouped distribution has midpoints 30, 40 and 50 with symmetric frequencies 6, 8 and 6. Use the symmetry to state its estimated mean."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "15.0",
-        "canonical_latex": "15.0",
+        "canonical_answer": "40",
+        "canonical_latex": "40",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Form the products midpoint × frequency for all classes."
+              "text": "Multiply each midpoint by its frequency."
             }
           ]
         },
@@ -51,7 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the sum of products by total frequency 20."
+              "text": "Add the products, then divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "20"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -62,11 +70,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Multiply midpoints by frequencies and add. "
             },
             {
               "type": "display_math",
-              "latex": "\\bar x\\approx\\frac{5(6)+15(8)+25(6)}{20}=15"
+              "latex": "30(6)+40(8)+50(6)=800"
             }
           ],
           "mark_type": "M",
@@ -77,11 +85,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Divide by the total frequency "
+            },
+            {
+              "type": "inline_math",
+              "latex": "20"
+            },
+            {
+              "type": "text",
+              "text": ": "
             },
             {
               "type": "display_math",
-              "latex": "15.0"
+              "latex": "\\bar x\\approx40"
             }
           ],
           "mark_type": "A",

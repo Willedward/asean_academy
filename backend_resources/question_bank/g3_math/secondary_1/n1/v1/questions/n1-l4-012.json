@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-012",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Use divisibility and divisor count",
+  "title": "Smallest value with a divisibility condition",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -19,7 +19,7 @@
     },
     {
       "type": "inline_math",
-      "latex": "N=2^{a}\\times 3^{b}\\times 7"
+      "latex": "N=2^{a}\\times3^{b}\\times7"
     },
     {
       "type": "text",
@@ -47,7 +47,15 @@
     },
     {
       "type": "text",
-      "text": ". N is divisible by 216 and has exactly 64 positive factors."
+      "text": ". "
+    },
+    {
+      "type": "inline_math",
+      "latex": "N"
+    },
+    {
+      "type": "text",
+      "text": " is divisible by 216."
     }
   ],
   "parts": [
@@ -57,7 +65,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find N."
+          "text": "Find the smallest possible value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "N"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -66,8 +82,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "24192",
-        "canonical_latex": "24192",
+        "canonical_answer": "3024",
+        "canonical_latex": "3024",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -79,11 +95,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Translate the divisor count into "
+              "text": "Use divisibility by 216 to find the smallest values of "
             },
             {
               "type": "inline_math",
-              "latex": "2(a+1)(b+1)=64"
+              "latex": "a"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
             },
             {
               "type": "text",
@@ -96,23 +120,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Divisibility by "
+              "text": "Choose the smallest "
             },
             {
               "type": "inline_math",
-              "latex": "216=2^{3}\\times 3^{3}"
+              "latex": "a"
             },
             {
               "type": "text",
-              "text": " gives "
+              "text": " and "
             },
             {
               "type": "inline_math",
-              "latex": "a, b\\ge 3"
+              "latex": "b"
             },
             {
               "type": "text",
-              "text": "; combine this with "
+              "text": " that also satisfy "
             },
             {
               "type": "inline_math",
@@ -131,15 +155,7 @@
           "content": [
             {
               "type": "inline_math",
-              "latex": "(a+1)(b+1)=32"
-            },
-            {
-              "type": "text",
-              "text": "; the only ordered pair meeting the conditions is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "8\\times 4"
+              "latex": "216=2^{3}\\times3^{3}"
             },
             {
               "type": "text",
@@ -147,11 +163,35 @@
             },
             {
               "type": "inline_math",
-              "latex": "a=7"
+              "latex": "a\\ge3"
             },
             {
               "type": "text",
               "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b\\ge3"
+            },
+            {
+              "type": "text",
+              "text": ". With "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a>b"
+            },
+            {
+              "type": "text",
+              "text": ", the smallest choice is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a=4"
+            },
+            {
+              "type": "text",
+              "text": ", "
             },
             {
               "type": "inline_math",
@@ -169,8 +209,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "N=2^{7}\\times 3^{3}\\times 7=24192"
+              "type": "inline_math",
+              "latex": "N=2^{4}\\times3^{3}\\times7=3024"
             }
           ],
           "mark_type": "A",

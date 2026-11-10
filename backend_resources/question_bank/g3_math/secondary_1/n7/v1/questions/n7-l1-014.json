@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-014",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.2",
-  "title": "Reversing division by eight",
+  "title": "Reversing a subtraction",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -28,23 +28,11 @@
         },
         {
           "type": "text",
-          "text": " from the equation."
+          "text": "."
         },
         {
           "type": "display_math",
-          "latex": "\\frac{q}{8}=5"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "q"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "latex": "9-q=4"
         }
       ],
       "marks": 1,
@@ -53,8 +41,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "40",
-        "canonical_latex": "40",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply both sides by 8."
+              "text": "Add "
+            },
+            {
+              "type": "inline_math",
+              "latex": "q"
+            },
+            {
+              "type": "text",
+              "text": " to both sides."
             }
           ]
         },
@@ -75,15 +71,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write "
-            },
-            {
-              "type": "inline_math",
-              "latex": "q=5\\times 8"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Subtract 4 from both sides."
             }
           ]
         }
@@ -93,8 +81,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "q=5\\times8=40"
+              "type": "inline_math",
+              "latex": "q=9-4=5"
             }
           ],
           "mark_type": "A",

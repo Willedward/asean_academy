@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-l3-526",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a regional logistics study. On an unlabelled map, 4 cm represents 1000 m. Another route measures 8 cm. Find its real length in metres. Enter the numerical value only."
+          "text": "On a hand-drawn map, a 1400 m stretch of river is 4 cm long. A road on the same drawing is 9 cm long. What is the real length of the road in metres? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2000",
-        "canonical_latex": "2000",
+        "canonical_answer": "3150",
+        "canonical_latex": "3150",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide 1000 by 4, then multiply by 8."
+              "text": "Find how many metres 1 cm represents first."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "1\\text{ cm}=1000\\div4=250\\text{ m},\\quad 8\\times250=2000\\text{ m}"
+              "latex": "1\\text{ cm}\\mapsto 1400\\div4=350\\text{ m},\\quad 9\\times350=3150\\text{ m}"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{2000}"
+              "latex": "\\boxed{3150}"
             }
           ],
           "mark_type": "A",

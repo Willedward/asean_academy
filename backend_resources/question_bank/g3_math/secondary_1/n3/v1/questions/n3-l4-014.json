@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 4,
   "stable_key": "n3-l4-014",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N3",
   "primary_outcome": "3.1",
-  "title": "A part compared with its new whole",
+  "title": "Percentage of a subgroup",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quantity A is 30% of Quantity B. Express A as a percentage of the sum of A and B. Give your answer to 1 decimal place."
+          "text": "In a class, 60% of the students are girls. 25% of the girls and 75% of the boys wear glasses. What percentage of the class wear glasses? Enter the percentage without the % sign."
         }
       ],
       "marks": 4,
@@ -28,13 +28,21 @@
       "secondary_outcomes": [],
       "response": {
         "type": "numeric",
-        "comparison_mode": "rounded_dp",
-        "canonical_answer": "23.1",
-        "canonical_latex": "23.1\\%",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "45",
+        "canonical_latex": "45\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
-        "rounding_precision": 1,
-        "unit": null
+        "rounding_precision": null,
+        "unit": {
+          "canonical": "%",
+          "accepted": [
+            "%",
+            "percent",
+            "per cent"
+          ],
+          "required": false
+        }
       },
       "hints": [
         {
@@ -42,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Represent A and the sum using the same quantity."
+              "text": "Find each group's share of the class, then the share that wears glasses."
             }
           ]
         },
@@ -51,15 +59,23 @@
           "content": [
             {
               "type": "text",
-              "text": "If B is x, then A is 0.3x and "
+              "text": "Work out "
             },
             {
               "type": "inline_math",
-              "latex": "A+B"
+              "latex": "0.6\\times0.25"
             },
             {
               "type": "text",
-              "text": " is 1.3x."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0.4\\times0.75"
+            },
+            {
+              "type": "text",
+              "text": ", then add them."
             }
           ]
         }
@@ -69,19 +85,35 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A=0.3B"
+              "type": "text",
+              "text": "Girls with glasses: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0.6\\times0.25=0.15"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
-          "mark_value": 1
+          "mark_value": 2
         },
         {
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "A+B=1.3B"
+              "type": "text",
+              "text": "Boys with glasses: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0.4\\times0.75=0.30"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -91,19 +123,12 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{0.3B}{1.3B}\\times100\\%=23.076\\ldots\\%"
-            }
-          ],
-          "mark_type": "M",
-          "mark_value": 1
-        },
-        {
-          "position": 4,
-          "content": [
+              "type": "inline_math",
+              "latex": "0.15+0.30=0.45"
+            },
             {
-              "type": "display_math",
-              "latex": "\\text{Required percentage}=23.1\\%\\text{ (to 1 d.p.)}"
+              "type": "text",
+              "text": ", so 45%."
             }
           ],
           "mark_type": "A",

@@ -1,35 +1,18 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-011",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.7",
-  "title": "Lower bound of a quotient",
+  "title": "Estimate a quotient",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
   "status": "draft",
-  "stem": [
-    {
-      "type": "inline_math",
-      "latex": "a=7.4"
-    },
-    {
-      "type": "text",
-      "text": " correct to 1 decimal place and "
-    },
-    {
-      "type": "inline_math",
-      "latex": "b=0.62"
-    },
-    {
-      "type": "text",
-      "text": " correct to 2 decimal places. Both values are positive."
-    }
-  ],
+  "stem": [],
   "parts": [
     {
       "position": 1,
@@ -37,15 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the lower bound of "
+          "text": "Estimate "
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{a}{b}"
+          "latex": "\\frac{7.4}{0.62}"
         },
         {
           "type": "text",
-          "text": "."
+          "text": " by rounding each number to 1 significant figure. Give your estimate to the nearest whole number."
         }
       ],
       "marks": 2,
@@ -54,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "11.76",
-        "canonical_latex": "11.76",
+        "canonical_answer": "12",
+        "canonical_latex": "12",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "For a positive quotient, use the lower bound of the numerator and upper bound of the denominator."
+              "text": "Round each number to 1 significant figure."
             }
           ]
         },
@@ -76,23 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The required bounds are "
-            },
-            {
-              "type": "inline_math",
-              "latex": "a\\ge 7.35"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b<0.625"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Divide the rounded values, then round the result to the nearest whole number."
             }
           ]
         }
@@ -102,12 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "Lower bound = "
-            },
-            {
               "type": "inline_math",
-              "latex": "\\frac{7.35}{0.625}"
+              "latex": "\\frac{7}{0.6}=11.67\\ldots"
             }
           ],
           "mark_type": "M",
@@ -117,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "7.35\\div 0.625=11.76"
+              "type": "text",
+              "text": "The estimate is 12."
             }
           ],
           "mark_type": "A",

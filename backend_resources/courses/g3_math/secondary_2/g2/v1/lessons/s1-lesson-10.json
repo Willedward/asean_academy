@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s1-lesson-10",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-s1",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Grouped data do not reveal individual observations, so use each class midpoint as a representative value. The midpoint is the average of the lower and upper class boundaries. Multiply it by the class frequency to estimate that class's contribution to the total."
+          "text": "Grouped data do not reveal individual observations, so use each class midpoint as a representative value. The midpoint is the average of the lower and upper class boundaries. Multiply it by the class frequency to estimate that class's contribution to the total. In the table, the class 10 to 20 means 10 ≤ t < 20: it includes 10 but not 20, so each value belongs to exactly one class. The columns are the midpoint x, the frequency f and their product fx."
         },
         {
           "type": "asset_ref",
@@ -66,11 +66,11 @@
       "stable_key": "s1-10-example-1",
       "position": 4,
       "type": "worked_example",
-      "title": "Calculate a grouped mean",
+      "title": "Worked example: calculate a grouped mean",
       "prompt": [
         {
           "type": "text",
-          "text": "Midpoints 15, 25 and 35 have frequencies 4, 7 and 3."
+          "text": "Use the table in the diagram to estimate the mean time."
         }
       ],
       "steps": [
@@ -79,7 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Compute Σfx=15(4)+25(7)+35(3)=340."
+              "text": "Multiply each midpoint by its frequency and add."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\Sigma fx=15(4)+25(7)+35(3)=60+175+105=340"
             }
           ]
         },
@@ -87,8 +91,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Compute Σf=4+7+3=14."
+              "type": "display_math",
+              "latex": "\\Sigma f=4+7+3=14"
             }
           ]
         },
@@ -96,23 +100,23 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Estimated mean=340/14≈24.29."
+              "type": "display_math",
+              "latex": "\\text{estimated mean}=\\frac{340}{14}\\approx24.3\\text{ minutes}"
             }
           ]
         }
       ],
-      "verification_note": "The answer lies between the smallest and largest midpoints."
+      "verification_note": "The estimate lies between the smallest and largest midpoints, 15 and 35, and closer to 25, where most of the data are."
     },
     {
       "stable_key": "s1-10-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Find a missing frequency",
+      "title": "Worked example: find a missing frequency",
       "prompt": [
         {
           "type": "text",
-          "text": "Midpoints 10, 20, 30 have frequencies 3, f, 5 and estimated mean 22."
+          "text": "Midpoints 10, 20 and 30 have frequencies 3, f and 5. The estimated mean is 22. Find f."
         }
       ],
       "steps": [
@@ -120,8 +124,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "Form [10(3)+20f+30(5)]/(8+f)=22."
+              "type": "display_math",
+              "latex": "\\frac{10(3)+20f+30(5)}{3+f+5}=22"
             }
           ]
         },
@@ -129,8 +133,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Solve 180+20f=176+22f."
+              "type": "display_math",
+              "latex": "180+20f=22(8+f)=176+22f"
             }
           ]
         },
@@ -138,13 +142,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Hence f=2."
+              "type": "display_math",
+              "latex": "4=2f\\quad\\Rightarrow\\quad f=2"
             }
           ]
         }
       ],
-      "verification_note": "Substitution gives total frequency 10 and weighted total 220."
+      "verification_note": "With f = 2, the total frequency is 10 and Σfx = 30 + 40 + 150 = 220, so the mean is 220 ÷ 10 = 22."
     },
     {
       "stable_key": "s1-10-recall",
@@ -154,14 +158,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Midpoints 5 and 15 each have frequency 4. Find the estimated mean."
+          "text": "Grouped data have midpoints 6 and 18 with frequencies 3 and 1. Find the estimated mean."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10",
-        "canonical_latex": "10",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -170,7 +174,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Equal frequencies balance the estimated mean halfway between 5 and 15."
+          "text": "Σfx = 6(3) + 18(1) = 36 and Σf = 4, so the estimated mean is 36 ÷ 4 = 9."
         }
       ]
     },
@@ -182,11 +186,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Read the scale, key, class boundaries and units before calculating or interpreting."
+          "text": "Estimated mean = Σfx ÷ Σf, using each class midpoint as x."
         },
         {
           "type": "text",
-          "text": "Show the statistical definition or formula, calculate carefully, then explain what the result means for the displayed data."
+          "text": "Find each midpoint, add an fx column, divide the two totals, and remember that the result is an estimate. For a missing frequency, put the unknown into both Σfx and Σf."
         }
       ]
     }
@@ -196,15 +200,182 @@
       "asset_key": "s1-lesson-10-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-10-grouped-mean.svg",
-      "alt_text": "A grouped frequency table showing class intervals, midpoints and frequencies for estimating a mean.",
+      "path": "assets/s1-lesson-10-grouped-mean-r2.svg",
+      "alt_text": "Grouped frequency table for times t in minutes, with columns midpoint x, frequency f and fx. Class 10 to 20 (10 ≤ t < 20) has x = 15, f = 4 and fx = 60. Class 20 to 30 has x = 25, f = 7 and fx = 175. Class 30 to 40 has x = 35, f = 3 and fx = 105. The totals are f = 14 and fx = 340.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "grouped_mean_table",
-        "lesson_key": "s1-lesson-10"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "lesson_key": "s1-lesson-10",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "x",
+            "f",
+            "fx"
+          ],
+          "rows": [
+            "10 to 20",
+            "20 to 30",
+            "30 to 40",
+            "Total"
+          ],
+          "cells": [
+            [
+              15,
+              4,
+              60
+            ],
+            [
+              25,
+              7,
+              175
+            ],
+            [
+              35,
+              3,
+              105
+            ],
+            [
+              "",
+              14,
+              340
+            ]
+          ],
+          "title": "Estimated mean from grouped times",
+          "alt_text": "Grouped frequency table for times t in minutes, with columns midpoint x, frequency f and fx. Class 10 to 20 (10 ≤ t < 20) has x = 15, f = 4 and fx = 60. Class 20 to 30 has x = 25, f = 7 and fx = 175. Class 30 to 40 has x = 35, f = 3 and fx = 105. The totals are f = 14 and fx = 340."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "15",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "4",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-0-2",
+            "kind": "table-cell",
+            "value": "60",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "25",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "7",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-1-2",
+            "kind": "table-cell",
+            "value": "175",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-2-0",
+            "kind": "table-cell",
+            "value": "35",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-2-1",
+            "kind": "table-cell",
+            "value": "3",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-2-2",
+            "kind": "table-cell",
+            "value": "105",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-3-0",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "291.25",
+              "y": "375.8"
+            }
+          },
+          {
+            "key": "cell-3-1",
+            "kind": "table-cell",
+            "value": "14",
+            "tag": "text",
+            "geometry": {
+              "x": "428.75",
+              "y": "375.8"
+            }
+          },
+          {
+            "key": "cell-3-2",
+            "kind": "table-cell",
+            "value": "340",
+            "tag": "text",
+            "geometry": {
+              "x": "566.25",
+              "y": "375.8"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "e12bc3d56e2de7cc0eaf26066b22a5a9129ac323b66794a3236db238828ca981",
-      "width": 960,
+      "sha256": "11b42efd3345b24645d3bb9370cf2d2f0fd9f3a772ec80312843cf85d4e45856",
+      "width": 720,
       "height": 480
     }
   ],
@@ -214,6 +385,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

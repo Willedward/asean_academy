@@ -214,7 +214,9 @@ def load_english_claims(path: Path) -> EnglishBatchClaimRegistry:
 
 
 def _check_quality(report, root: Path, foundation) -> None:
-    findings = english_quality_findings(foundation.questions, foundation.lessons, foundation.forms)
+    findings = english_quality_findings(
+        foundation.questions, foundation.lessons, foundation.forms, foundation.passages
+    )
     baseline = load_quality_baseline(root)
     baseline_path = root / BASELINE_PATH
     for finding in findings:

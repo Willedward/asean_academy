@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-024 — Recognising an equivalent rearrangement
+## n7-l2-024 — Equation or expression
 
 [Open this question in the HTML preview](index.html#n7-l2-024)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l2-025 — Naming the removed constant
+## n7-l2-025 — Value of an expression from a solution
 
 [Open this question in the HTML preview](index.html#n7-l2-025)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-024 — Scaling both sides of an equation
+## n7-l3-024 — Which equation is not equivalent
 
 [Open this question in the HTML preview](index.html#n7-l3-024)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-027 — Fractional coefficient in a linear equation
+## n7-l3-027 — Bracket with terms on both sides
 
 [Open this question in the HTML preview](index.html#n7-l3-027)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-031 — Two ribbon lengths
+## n7-l3-031 — Three ribbon lengths
 
 [Open this question in the HTML preview](index.html#n7-l3-031)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-005 — Multi-stage charity collection
+## n7-l5-005 — Multi-stage class fund
 
 [Open this question in the HTML preview](index.html#n7-l5-005)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-005",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,11 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Clear denominators 3 and 2 using their lowest common multiple."
+          "text": "Clear denominators 5 and 2 using their lowest common multiple."
         },
         {
           "type": "display_math",
-          "latex": "\\frac{x+2}{3}+\\frac{x-1}{2}=6"
+          "latex": "\\frac{x+2}{5}+\\frac{x-1}{2}=2"
         },
         {
           "type": "text",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply every term by 6."
+              "text": "Multiply every term by 10."
             }
           ]
         },
@@ -67,15 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "This gives "
+              "text": "Write the result as "
             },
             {
               "type": "inline_math",
-              "latex": "2(x+2)+3(x-1)=36"
+              "latex": "2(x+2)+5(x-1)=20"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ", then expand and collect."
             }
           ]
         }
@@ -85,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2(x+2)+3(x-1)=36"
+              "type": "inline_math",
+              "latex": "2(x+2)+5(x-1)=20"
             }
           ],
           "mark_type": "M",
@@ -96,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5x+1=36"
+              "type": "inline_math",
+              "latex": "7x-1=20"
             }
           ],
           "mark_type": "M",
@@ -107,8 +107,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=7"
+              "type": "inline_math",
+              "latex": "x=3"
             }
           ],
           "mark_type": "A",

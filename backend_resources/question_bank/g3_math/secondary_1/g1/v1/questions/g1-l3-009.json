@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-009",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.1",
-  "title": "Four angles around a point",
+  "title": "Angle type around a point",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Four angles around a point are 80°, 115°, "
+          "text": "Four angles around a point are 40°, 60°, "
         },
         {
           "type": "inline_math",
@@ -32,11 +32,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "(x+25)^\\circ"
+          "latex": "(x+60)^\\circ"
         },
         {
           "type": "text",
-          "text": ". Find the larger of the two unknown angles."
+          "text": ". Use acute = 1, right = 2, obtuse = 3 and reflex = 4. Enter the code of the larger unknown angle."
         }
       ],
       "marks": 3,
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "95",
-        "canonical_latex": "95",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,15 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Solve for "
             },
             {
               "type": "inline_math",
-              "latex": "80+115+x+x+25=360"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ", then find the larger unknown angle and compare it with 90° and 180°."
             }
           ]
         }
@@ -85,8 +85,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2x+220=360"
+              "type": "inline_math",
+              "latex": "2x+160=360"
             }
           ],
           "mark_type": "M",
@@ -96,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=70"
+              "type": "inline_math",
+              "latex": "x=100"
             }
           ],
           "mark_type": "M",
@@ -107,8 +107,12 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x+25=95"
+              "type": "inline_math",
+              "latex": "x+60=160^\\circ"
+            },
+            {
+              "type": "text",
+              "text": ", which is obtuse, so the code is 3."
             }
           ],
           "mark_type": "A",

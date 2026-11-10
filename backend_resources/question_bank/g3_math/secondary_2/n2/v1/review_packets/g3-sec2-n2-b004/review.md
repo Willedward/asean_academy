@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-525 — Route distance in kilometres
+## n2-l2-525 — Statement scale with a decimal answer
 
 [Open this question in the HTML preview](index.html#n2-l2-525)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l2-527 — Rectangular land area
+## n2-l2-527 — Area of a playing field in hectares
 
 [Open this question in the HTML preview](index.html#n2-l2-527)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l3-529 — Scale a direct proportion
+## n2-l3-529 — Mass of floor tiles
 
 [Open this question in the HTML preview](index.html#n2-l3-529)
 

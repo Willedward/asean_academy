@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-518",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered heavy seasonal rainfall while preparing a capacity check for the forest ranger outpost. Rangers assemble the shelter from parts carried on foot. The design must also be explained clearly in the safety briefing. An open hemisphere has radius 10 cm. Its curved surface area is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k\\pi"
-        },
-        {
-          "type": "text",
-          "text": " cm². Find k."
+          "text": "A lampshade is made in the shape of an open hemisphere. The open hemisphere has radius 7 cm. Its curved surface area is kπ cm². What is k?"
         }
       ],
       "marks": 1,
@@ -46,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "200",
-        "canonical_latex": "200",
+        "canonical_answer": "98",
+        "canonical_latex": "98",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -68,11 +60,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Halve the sphere’s surface-area formula to get "
             },
             {
               "type": "inline_math",
-              "latex": "2\\times 10^{2}"
+              "latex": "2\\pi r^{2}"
+            },
+            {
+              "type": "text",
+              "text": ", then compare with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k\\pi"
             },
             {
               "type": "text",
@@ -87,10 +87,14 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "A=2\\pi(10)^2=200\\pi"
+              "latex": "A=\\tfrac12\\times4\\pi(7)^2=2\\pi(7)^2=98\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 98."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -102,8 +106,8 @@
       "asset_key": "g5-l1-518-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-518-diagram-r3.svg",
-      "alt_text": "Open hemisphere (a bowl) with radius r = 10 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
+      "path": "assets/g5-l1-518-diagram-r4.svg",
+      "alt_text": "Open hemisphere (a bowl) with radius r = 7 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "hemisphere",
@@ -112,23 +116,23 @@
         "template": "hemisphere_curved_area",
         "inputs": {
           "radius": {
-            "value": 10,
+            "value": 7,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 10,
+            "value": 7,
             "unit": "cm"
           },
           "open": true
         },
         "forbidden_visible_labels": [
-          "200",
-          "200π",
-          "628.3",
-          "628.32"
+          "98",
+          "98π",
+          "307.9",
+          "307.88"
         ],
         "unknowns": [],
         "solids": [
@@ -177,22 +181,9 @@
           }
         },
         "right_angles": [],
-        "leaders": [
-          {
-            "target": "segment:OR",
-            "from": [
-              395.0,
-              124.6
-            ],
-            "to": [
-              439.02,
-              51.22
-            ]
-          }
-        ],
         "labels": [
           {
-            "text": "r = 10 cm",
+            "text": "r = 7 cm",
             "target": "segment:OR"
           }
         ],
@@ -212,7 +203,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "45c4d413d02d9aec626e91b24715cc9b1aeac0844670126d9fc975ea73d77ebe",
+      "sha256": "3a224f2636455791f53f66be8ad547f45755a137f24599dbd25b9990ad7263d1",
       "width": 600,
       "height": 425
     }

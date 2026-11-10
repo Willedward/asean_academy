@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-512",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Safety officers considered heavy seasonal rainfall while preparing a capacity check for the orchard irrigation reservoir. Irrigation pipes enter the reservoir through a low side wall. The design must also be explained clearly in the safety briefing. A hollow spherical shell has outer radius 4 cm and inner radius 2 cm. Find the volume of material in cm³, correct to 1 decimal place."
+          "text": "A plastic float is made hollow so that it stays light. The hollow spherical shell has outer radius 4 cm and inner radius 2 cm. Calculate the volume of plastic in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 4,
@@ -71,22 +71,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of the outer sphere:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac43\\pi(4^3-2^3)=234.6"
+              "latex": "\\frac43\\pi(4)^3=\\frac{256}{3}\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the inner space:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{234.6}"
+              "latex": "\\frac43\\pi(2)^3=\\frac{32}{3}\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Subtract."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac{256}{3}\\pi-\\frac{32}{3}\\pi=\\frac{224}{3}\\pi=234.572\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=234.6\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -101,7 +131,7 @@
       "asset_key": "g5-l4-512-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-512-diagram-r2.svg",
+      "path": "assets/g5-l4-512-diagram-r3.svg",
       "alt_text": "Hollow spherical shell: an outer sphere of radius R = 4 cm with a dashed concentric inner sphere of radius r = 2 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -291,6 +321,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "g2-l2-524",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Reflected triangular pennants",
+  "title": "Congruent triangles: find the perimeter",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pennant is reflected to produce a matching copy. Each badge or pennant is triangular. One is congruent to a triangle with side lengths 18 cm, 20 cm and 21 cm. Find its perimeter. Enter the numerical value only."
+          "text": "Triangles ABC and DEF are congruent, with AB corresponding to DE. AB = "
+        },
+        {
+          "type": "inline_math",
+          "latex": "3x"
+        },
+        {
+          "type": "text",
+          "text": " cm, DE = 15 cm, BC = 14 cm and CA = 16 cm. Find the perimeter of triangle ABC, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "59",
-        "canonical_latex": "59",
+        "canonical_answer": "45",
+        "canonical_latex": "45",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the matching side or angle before calculating."
+              "text": "Corresponding sides of congruent triangles are equal, so find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " first."
             }
           ]
         },
@@ -51,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the three corresponding side lengths."
+              "text": "Once you know AB, add the three sides of triangle ABC."
             }
           ]
         }
@@ -61,8 +77,32 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Use AB = DE to find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": ". "
+            },
+            {
               "type": "display_math",
-              "latex": "P=18+20+21"
+              "latex": "3x=15\\Rightarrow x=5"
+            },
+            {
+              "type": "text",
+              "text": " So AB "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=15"
+            },
+            {
+              "type": "text",
+              "text": " cm."
             }
           ],
           "mark_type": "M",
@@ -72,8 +112,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Add the three sides: "
+            },
+            {
               "type": "display_math",
-              "latex": "P=59"
+              "latex": "P=15+14+16=45"
             }
           ],
           "mark_type": "A",

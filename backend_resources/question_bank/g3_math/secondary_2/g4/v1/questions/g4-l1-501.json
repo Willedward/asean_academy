@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l1-501",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Survey crew noted salt exposure near the coast while preparing a replacement frame. For the harbour access ramp, a right triangular panel has perpendicular sides 5 cm and 12 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+          "text": "A small right-angled bracket supports a picture ledge. It has perpendicular sides 5 cm and 12 cm. Calculate the hypotenuse c in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -78,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The hypotenuse is opposite the right angle, so by Pythagoras’ theorem"
+            },
+            {
               "type": "display_math",
-              "latex": "c=\\sqrt{5^2+12^2}=13"
+              "latex": "c^2=5^2+12^2=169,\\quad c=\\sqrt{169}=13"
             }
           ],
           "mark_type": "A",
@@ -94,7 +98,7 @@
       "asset_key": "g4-l1-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-501-diagram-r3.svg",
+      "path": "assets/g4-l1-501-diagram-r4.svg",
       "alt_text": "Right-angled triangle with perpendicular sides 5 cm and 12 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -234,6 +238,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

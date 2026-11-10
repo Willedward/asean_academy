@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-515",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered a narrow installation area while preparing a replacement design for the community garden store. Garden tools are stored upright beside the compost area. A later inspection will compare the finished dimensions with this record. An open hemisphere has radius 10 cm. Its curved surface area is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k\\pi"
-        },
-        {
-          "type": "text",
-          "text": " cm². Find k."
+          "text": "A gardener lines a hanging basket with moss. The basket is an open hemisphere, and the open hemisphere has radius 10 cm. Its curved surface area is kπ cm². Find k."
         }
       ],
       "marks": 1,
@@ -68,11 +60,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Halve the sphere’s surface-area formula to get "
             },
             {
               "type": "inline_math",
-              "latex": "2\\times 10^{2}"
+              "latex": "2\\pi r^{2}"
+            },
+            {
+              "type": "text",
+              "text": ", then compare with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k\\pi"
             },
             {
               "type": "text",
@@ -87,10 +87,14 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "A=2\\pi(10)^2=200\\pi"
+              "latex": "A=\\tfrac12\\times4\\pi(10)^2=2\\pi(10)^2=200\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 200."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -102,7 +106,7 @@
       "asset_key": "g5-l1-515-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-515-diagram-r3.svg",
+      "path": "assets/g5-l1-515-diagram-r4.svg",
       "alt_text": "Open hemisphere (a bowl) with radius r = 10 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -230,6 +234,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

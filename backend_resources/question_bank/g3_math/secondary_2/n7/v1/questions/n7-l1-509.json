@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l1-509",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,11 +24,19 @@
         },
         {
           "type": "inline_math",
-          "latex": "4x+3y=15"
+          "latex": "4x-3y=15"
         },
         {
           "type": "text",
-          "text": " cuts the y-axis at "
+          "text": " cuts the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": "-axis at "
         },
         {
           "type": "inline_math",
@@ -53,8 +61,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "-5",
+        "canonical_latex": "-5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -91,11 +99,11 @@
             },
             {
               "type": "text",
-              "text": ", so "
+              "text": ", then solve for "
             },
             {
               "type": "inline_math",
-              "latex": "3y=15"
+              "latex": "y"
             },
             {
               "type": "text",
@@ -110,7 +118,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "3y=15\\Rightarrow y=5"
+              "latex": "-3y=15\\Rightarrow y=-5"
             }
           ],
           "mark_type": "A",

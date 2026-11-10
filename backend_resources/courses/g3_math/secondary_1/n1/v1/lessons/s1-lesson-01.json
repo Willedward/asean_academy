@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
@@ -52,7 +52,7 @@
         },
         {
           "type": "text",
-          "text": "Read the raw list once and add one tally for each observation. Convert tallies to frequencies only after the list is complete. Then add every frequency and compare the sum with the number of observations. The visual example shows the complete route from raw travel methods to a checked frequency table."
+          "text": "Read the raw list once and add one tally for each observation. Convert tallies to frequencies only after the list is complete. Then add every frequency and compare the sum with the number of observations. The table below shows the result for eight learners’ travel methods: one tally stroke per learner, a frequency for each category, and a total of 3 + 2 + 3 = 8 that matches the eight observations."
         },
         {
           "type": "asset_ref",
@@ -256,16 +256,138 @@
       "asset_key": "s1-lesson-01-frequency-table",
       "kind": "table",
       "format": "svg",
-      "path": "assets/s1-lesson-01-frequency-table.svg",
-      "alt_text": "Eight travel-to-school observations classified into walk, bicycle and bus, with frequencies 3, 2 and 3 and a checked total of 8.",
+      "path": "assets/s1-lesson-01-frequency-table-r3.svg",
+      "alt_text": "Frequency table for eight travel-to-school observations. Walk has tally three strokes and frequency 3, bicycle two strokes and frequency 2, bus three strokes and frequency 3, and the total frequency is 8.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "raw_data_to_frequency_table",
-        "lesson_key": "s1-lesson-01"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "lesson_key": "s1-lesson-01",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Tally",
+            "Frequency"
+          ],
+          "rows": [
+            "Walk",
+            "Bicycle",
+            "Bus",
+            "Total"
+          ],
+          "cells": [
+            [
+              "|||",
+              3
+            ],
+            [
+              "||",
+              2
+            ],
+            [
+              "|||",
+              3
+            ],
+            [
+              "",
+              8
+            ]
+          ],
+          "title": "Travel to school: tally and frequency",
+          "alt_text": "Frequency table for eight travel-to-school observations. Walk has tally three strokes and frequency 3, bicycle two strokes and frequency 2, bus three strokes and frequency 3, and the total frequency is 8."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "|||",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "3",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "195.8"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "||",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-1-1",
+            "kind": "table-cell",
+            "value": "2",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "255.8"
+            }
+          },
+          {
+            "key": "cell-2-0",
+            "kind": "table-cell",
+            "value": "|||",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-2-1",
+            "kind": "table-cell",
+            "value": "3",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "315.8"
+            }
+          },
+          {
+            "key": "cell-3-0",
+            "kind": "table-cell",
+            "value": "",
+            "tag": "text",
+            "geometry": {
+              "x": "360",
+              "y": "375.8"
+            }
+          },
+          {
+            "key": "cell-3-1",
+            "kind": "table-cell",
+            "value": "8",
+            "tag": "text",
+            "geometry": {
+              "x": "543.333333",
+              "y": "375.8"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "1222fde9e5bf56690165b5b44a36bc7477e6048287d906d34ce0593403f178cf",
-      "width": 940,
-      "height": 500
+      "sha256": "4a61697621c74f838c4019e1862da06d55010049789b2a64c2c5655ae45d04a6",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -274,6 +396,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

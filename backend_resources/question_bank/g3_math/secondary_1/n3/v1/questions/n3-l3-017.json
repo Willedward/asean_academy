@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 4,
   "stable_key": "n3-l3-017",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N3",
   "primary_outcome": "3.3",
-  "title": "Combining two percentage relationships",
+  "title": "Reversing a percentage relationship",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quantity P is 125% of Quantity Q. Quantity Q is 120% of Quantity R. Express Quantity P as a percentage of Quantity R."
+          "text": "Quantity P is 125% of Quantity Q. Express Quantity Q as a percentage of Quantity P."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "150",
-        "canonical_latex": "150\\%",
+        "canonical_answer": "80",
+        "canonical_latex": "80\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write both percentage relationships as multipliers and combine them."
+              "text": "Write P in terms of Q using a multiplier."
             }
           ]
         },
@@ -51,23 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "P=1.25Q"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "Q=1.2R"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Rearrange to write Q in terms of P."
             }
           ]
         }
@@ -77,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "P=1.25Q,\\quad Q=1.2R"
+              "type": "inline_math",
+              "latex": "P=1.25Q"
             }
           ],
           "mark_type": "M",
@@ -88,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "P=1.25(1.2R)=1.5R"
+              "type": "inline_math",
+              "latex": "Q=\\frac{P}{1.25}=0.8P"
             }
           ],
           "mark_type": "M",
@@ -99,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "P=150\\%\\text{ of }R"
+              "type": "inline_math",
+              "latex": "Q=80\\%\\text{ of }P"
             }
           ],
           "mark_type": "A",

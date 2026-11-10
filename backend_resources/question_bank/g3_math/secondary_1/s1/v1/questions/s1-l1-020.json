@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l1-020",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A primary-school poster needs a friendly approximate display of three recycling totals using repeated bottle symbols. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A primary-school poster needs a friendly display of three recycling totals that young children can count picture by picture. Enter the most suitable code only."
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Think about what young children could count and enjoy on a poster."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The poster uses repeated bottle symbols for approximate totals. Ask which display is built from repeated pictures."
+              "text": "The display is for young children, so counting matters more than exact values. Ask which display is built from repeated pictures."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A display of repeated small pictures is friendly and easy for young children to count. A table would give exact totals, but it is not picture-based."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=3"
+              "latex": "\\text{Code}=3"
             }
           ],
           "mark_type": "B",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-016",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.7",
-  "title": "Upper bound of a product",
+  "title": "Estimate and accurate value of a product",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -19,7 +19,7 @@
     },
     {
       "type": "text",
-      "text": " correct to 1 decimal place and "
+      "text": " and "
     },
     {
       "type": "inline_math",
@@ -27,7 +27,7 @@
     },
     {
       "type": "text",
-      "text": " correct to 2 decimal places. Both values are positive."
+      "text": "."
     }
   ],
   "parts": [
@@ -37,7 +37,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the upper bound of ab."
+          "text": "Find the difference between "
+        },
+        {
+          "type": "inline_math",
+          "latex": "ab"
+        },
+        {
+          "type": "text",
+          "text": " rounded to 1 significant figure and the estimate obtained by rounding "
+        },
+        {
+          "type": "inline_math",
+          "latex": "a"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "b"
+        },
+        {
+          "type": "text",
+          "text": " each to 1 significant figure before multiplying."
         }
       ],
       "marks": 2,
@@ -46,8 +70,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "40.77375",
-        "canonical_latex": "40.77375",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -59,7 +83,7 @@
           "content": [
             {
               "type": "text",
-              "text": "For a product of positive quantities, multiply their upper bounds."
+              "text": "Find the estimate and the accurate product separately."
             }
           ]
         },
@@ -68,7 +92,31 @@
           "content": [
             {
               "type": "text",
-              "text": "The upper bounds are 12.45 and 3.275."
+              "text": "Round "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "b"
+            },
+            {
+              "type": "text",
+              "text": " to 1 s.f. and multiply; then calculate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "ab"
+            },
+            {
+              "type": "text",
+              "text": " exactly and round it to 1 s.f."
             }
           ]
         }
@@ -79,11 +127,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Upper bound = "
+              "text": "Estimate "
             },
             {
               "type": "inline_math",
-              "latex": "12.45\\times 3.275"
+              "latex": "=10\\times3=30"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "ab=40.548"
+            },
+            {
+              "type": "text",
+              "text": ", which is 40 to 1 s.f."
             }
           ],
           "mark_type": "M",
@@ -93,8 +153,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "12.45\\times 3.275=40.77375"
+              "type": "inline_math",
+              "latex": "40-30=10"
             }
           ],
           "mark_type": "A",

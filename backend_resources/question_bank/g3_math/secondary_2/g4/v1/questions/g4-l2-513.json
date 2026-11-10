@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-513",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Rescue planners noted high winds during seasonal storms while preparing a replacement frame. A sight line at the community water tank makes an angle of 45° with level ground. The horizontal distance is 15 m. Find the vertical height x in metres, correct to 1 decimal place."
+          "text": "From a point on the ground, an engineer sights the top of a radio mast. The sight line makes an angle of 65° with level ground. The horizontal distance is 9 m. Find the vertical height x of the mast in metres, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,11 +38,9 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "15.0",
-        "canonical_latex": "15.0",
-        "accepted_answers": [
-          "15"
-        ],
+        "canonical_answer": "19.3",
+        "canonical_latex": "19.3",
+        "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
         "unit": null
@@ -66,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "\\tan 45^{\\circ}=\\frac{x}{15}"
+              "latex": "\\tan 65^{\\circ}=\\frac{x}{9}"
             },
             {
               "type": "text",
@@ -81,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Relative to the 65° angle, x is opposite and the 9 m distance is adjacent, so use the tangent ratio."
             },
             {
               "type": "display_math",
-              "latex": "x=15\\tan 45^\\circ=15.0"
+              "latex": "\\tan 65^\\circ=\\frac{x}{9}"
             }
           ],
           "mark_type": "M",
@@ -96,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{15.0}"
+              "latex": "x=9\\tan 65^\\circ=19.301\\ldots=19.3"
             }
           ],
           "mark_type": "A",
@@ -111,8 +109,8 @@
       "asset_key": "g4-l2-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-513-diagram-r3.svg",
-      "alt_text": "Right-angled triangle on level ground. The sight line makes 45° with the ground, the horizontal distance is 15 m and the vertical height is labelled x. Not drawn to scale.",
+      "path": "assets/g4-l2-513-diagram-r4.svg",
+      "alt_text": "Right-angled triangle on level ground. The sight line makes 65° with the ground, the horizontal distance is 9 m and the vertical height is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,30 +118,23 @@
         "outcome": "4.3",
         "template": "tangent_opposite",
         "inputs": {
-          "angle": 45,
+          "angle": 65,
           "adjacent": {
-            "value": 15,
+            "value": 9,
             "unit": "m"
           }
         },
         "not_to_scale": true,
         "dimensions": {
-          "angle_degrees": 45.0,
+          "angle_degrees": 65.0,
           "adjacent": {
-            "value": 15,
+            "value": 9,
             "unit": "m"
           }
         },
-        "forbidden_visible_labels": [],
-        "forbidden_label_exemptions": [
-          {
-            "value": "15.0",
-            "reason": "equals a stated value shown on the diagram"
-          },
-          {
-            "value": "15",
-            "reason": "equals a stated value shown on the diagram"
-          }
+        "forbidden_visible_labels": [
+          "19.3",
+          "19.30"
         ],
         "unknowns": [
           {
@@ -159,15 +150,15 @@
         ],
         "points": {
           "A": [
-            155.0,
+            232.39,
             346.0
           ],
           "B": [
-            155.0,
+            232.39,
             56.0
           ],
           "C": [
-            445.0,
+            367.61,
             346.0
           ]
         },
@@ -212,24 +203,24 @@
               "B"
             ],
             "marker_key": "angle-C",
-            "drawn_degrees": 45.0,
-            "degrees": 45.0
+            "drawn_degrees": 65.0,
+            "degrees": 65.0
           }
         ],
         "angle_markers": [
           {
             "marker_key": "angle-C",
             "center": [
-              445.0,
+              367.61,
               346.0
             ],
             "radius": 46.0,
             "start_ray_point": [
-              155.0,
+              232.39,
               346.0
             ],
             "end_ray_point": [
-              155.0,
+              232.39,
               56.0
             ],
             "large_arc": 0,
@@ -238,7 +229,7 @@
         ],
         "labels": [
           {
-            "text": "45°",
+            "text": "65°",
             "target": "angle:C"
           },
           {
@@ -246,7 +237,7 @@
             "target": "segment:AB"
           },
           {
-            "text": "15 m",
+            "text": "9 m",
             "target": "segment:AC"
           },
           {
@@ -261,13 +252,13 @@
               "AB",
               "AC"
             ],
-            "value": 1.0,
+            "value": 2.1445,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "573d03b6912089282412e031eec35de1ad25cc32f22d689a1799881e4d465806",
+      "sha256": "b23a7a666f62cfecfb8b0804b240a554d8884f5fde809006cd93c9a67a1aed30",
       "width": 600,
       "height": 466
     }

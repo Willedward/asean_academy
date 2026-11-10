@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 3,
     "stable_key": "n3-l1-016",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A runner plans 90 laps and completes 27 laps. Express the number completed as a percentage of the planned number."
+            "text": "A runner plans 90 laps and completes 36 laps. Express the number completed as a percentage of the planned number."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "30",
-          "canonical_latex": "30\\%",
+          "canonical_answer": "40",
+          "canonical_latex": "40\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 27 divided by 90, then multiply by 100%."
+                "text": "Calculate 36 divided by 90, then multiply by 100%."
               }
             ]
           }
@@ -62,8 +62,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{27}{90}\\times100\\%=30\\%"
+                "type": "inline_math",
+                "latex": "\\frac{36}{90}\\times100\\%=40\\%"
               }
             ],
             "mark_type": "B",
@@ -92,7 +92,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 3,
     "stable_key": "n3-l2-026",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -112,7 +112,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A roll contains 1.8 m of ribbon. Mei uses 45 cm. Express the length used as a percentage of the original length."
+            "text": "A roll contains 1.8 m of ribbon. Mei uses 54 cm. Express the length used as a percentage of the original length."
           }
         ],
         "marks": 2,
@@ -121,8 +121,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "25",
-          "canonical_latex": "25\\%",
+          "canonical_answer": "30",
+          "canonical_latex": "30\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -143,7 +143,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 1.8 m as 180 cm, then compare 45 cm with 180 cm."
+                "text": "Write 1.8 m as 180 cm, then compare 54 cm with 180 cm."
               }
             ]
           }
@@ -153,7 +153,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "1.8\\text{ m}=180\\text{ cm}"
               }
             ],
@@ -164,8 +164,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{45}{180}\\times100\\%=25\\%"
+                "type": "inline_math",
+                "latex": "\\frac{54}{180}\\times100\\%=30\\%"
               }
             ],
             "mark_type": "A",
@@ -307,14 +307,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 4,
     "stable_key": "n3-l4-014",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.1",
-    "title": "A part compared with its new whole",
+    "title": "Percentage of a subgroup",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -327,7 +327,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quantity A is 30% of Quantity B. Express A as a percentage of the sum of A and B. Give your answer to 1 decimal place."
+            "text": "In a class, 60% of the students are girls. 25% of the girls and 75% of the boys wear glasses. What percentage of the class wear glasses? Enter the percentage without the % sign."
           }
         ],
         "marks": 4,
@@ -335,13 +335,21 @@
         "secondary_outcomes": [],
         "response": {
           "type": "numeric",
-          "comparison_mode": "rounded_dp",
-          "canonical_answer": "23.1",
-          "canonical_latex": "23.1\\%",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "45",
+          "canonical_latex": "45\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
-          "rounding_precision": 1,
-          "unit": null
+          "rounding_precision": null,
+          "unit": {
+            "canonical": "%",
+            "accepted": [
+              "%",
+              "percent",
+              "per cent"
+            ],
+            "required": false
+          }
         },
         "hints": [
           {
@@ -349,7 +357,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Represent A and the sum using the same quantity."
+                "text": "Find each group's share of the class, then the share that wears glasses."
               }
             ]
           },
@@ -358,15 +366,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "If B is x, then A is 0.3x and "
+                "text": "Work out "
               },
               {
                 "type": "inline_math",
-                "latex": "A+B"
+                "latex": "0.6\\times0.25"
               },
               {
                 "type": "text",
-                "text": " is 1.3x."
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "0.4\\times0.75"
+              },
+              {
+                "type": "text",
+                "text": ", then add them."
               }
             ]
           }
@@ -376,19 +392,35 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=0.3B"
+                "type": "text",
+                "text": "Girls with glasses: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "0.6\\times0.25=0.15"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
-            "mark_value": 1
+            "mark_value": 2
           },
           {
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A+B=1.3B"
+                "type": "text",
+                "text": "Boys with glasses: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "0.4\\times0.75=0.30"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -398,19 +430,12 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{0.3B}{1.3B}\\times100\\%=23.076\\ldots\\%"
-              }
-            ],
-            "mark_type": "M",
-            "mark_value": 1
-          },
-          {
-            "position": 4,
-            "content": [
+                "type": "inline_math",
+                "latex": "0.15+0.30=0.45"
+              },
               {
-                "type": "display_math",
-                "latex": "\\text{Required percentage}=23.1\\%\\text{ (to 1 d.p.)}"
+                "type": "text",
+                "text": ", so 45%."
               }
             ],
             "mark_type": "A",
@@ -439,7 +464,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 4,
     "stable_key": "n3-l1-017",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -459,7 +484,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Collection P has 110 cards and Collection Q has 100 cards. By what percentage does Collection P have more cards than Collection Q?"
+            "text": "Collection P has 140 cards and Collection Q has 100 cards. By what percentage does Collection P have more cards than Collection Q?"
           }
         ],
         "marks": 1,
@@ -468,8 +493,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10\\%",
+          "canonical_answer": "40",
+          "canonical_latex": "40\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -500,8 +525,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{110-100}{100}\\times100\\%=10\\%"
+                "type": "inline_math",
+                "latex": "\\frac{140-100}{100}\\times100\\%=40\\%"
               }
             ],
             "mark_type": "B",
@@ -530,7 +555,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 3,
     "stable_key": "n3-l2-027",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -550,7 +575,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Container A holds 55 litres and Container B holds 50 litres. By what percentage is the capacity of Container A greater than that of Container B?"
+            "text": "Container A holds 65 litres and Container B holds 50 litres. By what percentage is the capacity of Container A greater than that of Container B?"
           }
         ],
         "marks": 2,
@@ -559,8 +584,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10\\%",
+          "canonical_answer": "30",
+          "canonical_latex": "30\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -581,7 +606,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the 5-litre difference and divide by 50 litres."
+                "text": "Find the difference in litres and divide by 50 litres."
               }
             ]
           }
@@ -591,8 +616,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "55-50=5"
+                "type": "inline_math",
+                "latex": "65-50=15"
               }
             ],
             "mark_type": "M",
@@ -602,8 +627,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{5}{50}\\times100\\%=10\\%"
+                "type": "inline_math",
+                "latex": "\\frac{15}{50}\\times100\\%=30\\%"
               }
             ],
             "mark_type": "A",
@@ -632,7 +657,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l3-024",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -652,7 +677,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A kiosk earns S$1.25 thousand on Saturday and S$1000 on Sunday. By what percentage is Saturday's revenue greater than Sunday's revenue?"
+            "text": "A kiosk earns S$1250 on Saturday and S$1000 on Sunday. By what percentage is Saturday's revenue greater than Sunday's revenue?"
           }
         ],
         "marks": 3,
@@ -674,7 +699,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Express both revenues in dollars before comparing them."
+                "text": "Find the difference in revenue."
               }
             ]
           },
@@ -683,7 +708,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write S$1.25 thousand as dollars and find the difference, then write it as a percentage of Sunday's revenue."
+                "text": "Write the difference as a percentage of Sunday's revenue."
               }
             ]
           }
@@ -693,8 +718,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1.25\\text{ thousand dollars}=1250\\text{ dollars}"
+                "type": "inline_math",
+                "latex": "1250-1000=250"
               }
             ],
             "mark_type": "M",
@@ -704,8 +729,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1250-1000=250"
+                "type": "inline_math",
+                "latex": "\\frac{250}{1000}"
               }
             ],
             "mark_type": "M",
@@ -715,7 +740,7 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "\\frac{250}{1000}\\times100\\%=25\\%"
               }
             ],
@@ -1315,14 +1340,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 4,
     "stable_key": "n3-l4-015",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.3",
-    "title": "Original quantity before a reduction",
+    "title": "Comparing with a reduced quantity",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1335,7 +1360,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "After Quantity X is reduced by 25%, it is equal to 135% of Quantity Y. Express the original Quantity X as a percentage of Quantity Y."
+            "text": "After Quantity X is increased by 20%, it is equal to 75% of Quantity Y. Express Quantity Y as a percentage of the original Quantity X."
           }
         ],
         "marks": 3,
@@ -1344,8 +1369,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "180",
-          "canonical_latex": "180\\%",
+          "canonical_answer": "160",
+          "canonical_latex": "160\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1357,7 +1382,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Relate the reduced value of X to both original X and Y."
+                "text": "Relate the increased value of X to Y."
               }
             ]
           },
@@ -1366,15 +1391,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write "
+                "text": "Write the equation connecting "
               },
               {
                 "type": "inline_math",
-                "latex": "0.75X=1.35Y"
+                "latex": "1.2X"
               },
               {
                 "type": "text",
-                "text": ", then solve for X in terms of Y."
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "0.75Y"
+              },
+              {
+                "type": "text",
+                "text": ", then solve for Y in terms of X."
               }
             ]
           }
@@ -1384,8 +1417,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.75X=1.35Y"
+                "type": "inline_math",
+                "latex": "1.2X=0.75Y"
               }
             ],
             "mark_type": "M",
@@ -1395,8 +1428,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "X=\\frac{1.35}{0.75}Y=1.8Y"
+                "type": "inline_math",
+                "latex": "Y=\\frac{1.2}{0.75}X=1.6X"
               }
             ],
             "mark_type": "M",
@@ -1406,8 +1439,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "X=180\\%\\text{ of }Y"
+                "type": "inline_math",
+                "latex": "Y=160\\%\\text{ of }X"
               }
             ],
             "mark_type": "A",
@@ -1977,7 +2010,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-030",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1997,7 +2030,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "After a 30% discount, a chair costs S$126. Find its original price in dollars."
+            "text": "After a 30% discount, a chair costs S$126. Find its original price in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2192,14 +2225,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-029",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.5",
-    "title": "Item price before GST and delivery",
+    "title": "Price before a decrease and an increase",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2212,7 +2245,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A customer pays S$236 for an item. This includes a S$18 delivery charge and 9% GST charged on the item price. Find the item price before GST, in dollars."
+            "text": "A price is decreased by 20%, and the new price is then increased by 15%. The final price is S$184. Find the original price, in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2234,7 +2267,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Remove the fixed delivery charge before reversing GST."
+                "text": "Reverse both percentage changes, or use their combined multiplier."
               }
             ]
           },
@@ -2243,7 +2276,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 18 from 236, then divide by 1.09."
+                "text": "Multiply the two multipliers together, then divide 184 by the result."
               }
             ]
           }
@@ -2253,8 +2286,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "236-18=218"
+                "type": "inline_math",
+                "latex": "0.80\\times1.15=0.92"
               }
             ],
             "mark_type": "M",
@@ -2264,8 +2297,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Pre-GST price}=218\\div1.09"
+                "type": "inline_math",
+                "latex": "\\text{Original price}=184\\div0.92"
               }
             ],
             "mark_type": "M",
@@ -2275,8 +2308,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Pre-GST price}=200"
+                "type": "inline_math",
+                "latex": "\\text{Original price}=200"
               }
             ],
             "mark_type": "A",
@@ -2305,14 +2338,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-021",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.6",
-    "title": "Percentage of a quantity",
+    "title": "Students walking to school",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2325,7 +2358,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find 12% of 250."
+            "text": "A school has 250 students. 12% of them walk to school. Find the number of students who walk to school."
           }
         ],
         "marks": 1,
@@ -2347,7 +2380,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 12% as a decimal multiplier."
+                "text": "Find 12% of the number of students."
               }
             ]
           },
@@ -2396,7 +2429,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-031",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2416,7 +2449,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A jacket costs S$150 and is sold at an 8% discount. Find its sale price in dollars."
+            "text": "A jacket costs S$150 and is sold at an 8% discount. Find its sale price in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2724,7 +2757,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l5-005",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2739,7 +2772,7 @@
     "stem": [
       {
         "type": "text",
-        "text": "A shop marks an item 40% above its cost price, then gives a 15% discount on the marked price. After 9% GST is added, the customer pays S$259.42."
+        "text": "A shop marks an item 40% above its cost price, then gives a 15% discount on the marked price. After 9% GST (goods and services tax, a tax added to the price) is added, the customer pays S$259.42."
       }
     ],
     "parts": [
@@ -2749,7 +2782,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the cost price of the item, in dollars."
+            "text": "Find the cost price of the item, in dollars. Enter only the number."
           }
         ],
         "marks": 3,

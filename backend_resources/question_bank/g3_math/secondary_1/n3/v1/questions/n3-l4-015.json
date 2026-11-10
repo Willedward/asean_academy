@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 4,
   "stable_key": "n3-l4-015",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N3",
   "primary_outcome": "3.3",
-  "title": "Original quantity before a reduction",
+  "title": "Comparing with a reduced quantity",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "After Quantity X is reduced by 25%, it is equal to 135% of Quantity Y. Express the original Quantity X as a percentage of Quantity Y."
+          "text": "After Quantity X is increased by 20%, it is equal to 75% of Quantity Y. Express Quantity Y as a percentage of the original Quantity X."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "180",
-        "canonical_latex": "180\\%",
+        "canonical_answer": "160",
+        "canonical_latex": "160\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Relate the reduced value of X to both original X and Y."
+              "text": "Relate the increased value of X to Y."
             }
           ]
         },
@@ -51,15 +51,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Write "
+              "text": "Write the equation connecting "
             },
             {
               "type": "inline_math",
-              "latex": "0.75X=1.35Y"
+              "latex": "1.2X"
             },
             {
               "type": "text",
-              "text": ", then solve for X in terms of Y."
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0.75Y"
+            },
+            {
+              "type": "text",
+              "text": ", then solve for Y in terms of X."
             }
           ]
         }
@@ -69,8 +77,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.75X=1.35Y"
+              "type": "inline_math",
+              "latex": "1.2X=0.75Y"
             }
           ],
           "mark_type": "M",
@@ -80,8 +88,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "X=\\frac{1.35}{0.75}Y=1.8Y"
+              "type": "inline_math",
+              "latex": "Y=\\frac{1.2}{0.75}X=1.6X"
             }
           ],
           "mark_type": "M",
@@ -91,8 +99,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "X=180\\%\\text{ of }Y"
+              "type": "inline_math",
+              "latex": "Y=160\\%\\text{ of }X"
             }
           ],
           "mark_type": "A",

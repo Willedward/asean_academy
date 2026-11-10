@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A prism has a constant cross-section, so volume=cross-sectional area×length. A cylinder is a circular prism with volume πr²h. Surface area unfolds every exposed face: two congruent ends plus the lateral surface."
+          "text": "The diagram shows a triangular prism. Its cross-section, the shaded right-angled triangle at the front, is the same all the way along its 9 cm length, so volume = cross-sectional area × length. A cylinder is a prism whose cross-section is a circle, so its volume is πr²h. Surface area unfolds every exposed face: for a closed solid, two equal ends plus the faces around the side."
         },
         {
           "type": "asset_ref",
@@ -70,11 +70,11 @@
       "stable_key": "g5-53-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: volume of a triangular prism",
       "prompt": [
         {
           "type": "text",
-          "text": "A prism has cross-sectional area 18 cm² and length 7 cm. Find its volume."
+          "text": "The triangular prism in the diagram has a right-angled triangular cross-section with perpendicular sides 8 cm and 5 cm, and length 9 cm. Find its volume."
         }
       ],
       "steps": [
@@ -82,8 +82,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The cross-section is a right-angled triangle, so its area is ½ × base × height."
+            },
+            {
               "type": "display_math",
-              "latex": "V=18(7)"
+              "latex": "A=\\frac12\\times8\\times5=20\\text{ cm}^2"
             }
           ]
         },
@@ -91,19 +95,23 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Multiply the cross-sectional area by the length of the prism."
+            },
+            {
               "type": "display_math",
-              "latex": "V=126\\text{ cm}^3"
+              "latex": "V=20\\times9=180\\text{ cm}^3"
             }
           ]
         }
       ],
-      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+      "verification_note": "The prism is half of an 8 cm by 5 cm by 9 cm cuboid, and 8 × 5 × 9 = 360, so half is 180 cm³."
     },
     {
       "stable_key": "g5-lesson-03-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: surface area of a closed cylinder",
       "prompt": [
         {
           "type": "text",
@@ -116,7 +124,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The two circular ends have area 2πr²=18π."
+              "text": "The two circular ends:"
+            },
+            {
+              "type": "display_math",
+              "latex": "2\\pi r^2=2\\pi(3)^2=18\\pi\\text{ cm}^2"
             }
           ]
         },
@@ -125,7 +137,65 @@
           "content": [
             {
               "type": "text",
-              "text": "The curved surface has area 2πrh=48π."
+              "text": "The curved surface unrolls into a rectangle 2πr long and h high:"
+            },
+            {
+              "type": "display_math",
+              "latex": "2\\pi rh=2\\pi(3)(8)=48\\pi\\text{ cm}^2"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{Total surface area}=18\\pi+48\\pi=66\\pi\\text{ cm}^2"
+            }
+          ]
+        }
+      ],
+      "verification_note": "A closed cylinder includes both ends, and every term is in square units."
+    },
+    {
+      "stable_key": "g5-lesson-03-example-3",
+      "position": 6,
+      "type": "worked_example",
+      "title": "Worked example: an open cylinder with π = 22/7",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "The open cylindrical tin in the diagram has radius 7 cm and height 12 cm. Using π = 22/7, find (a) its volume and (b) the area of metal needed to make it."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "g5-lesson-03-cylinder"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "With r = 7, the value π = 22/7 cancels neatly. The base area is"
+            },
+            {
+              "type": "display_math",
+              "latex": "\\pi r^2=\\frac{22}{7}\\times7\\times7=154\\text{ cm}^2"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "(a) Volume = base area × height."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=154\\times12=1848\\text{ cm}^3"
             }
           ]
         },
@@ -134,16 +204,24 @@
           "content": [
             {
               "type": "text",
-              "text": "Total surface area=66π cm²."
+              "text": "(b) The tin is open, so it has one circular end (the base) and a curved surface."
+            },
+            {
+              "type": "display_math",
+              "latex": "2\\pi rh=2\\times\\frac{22}{7}\\times7\\times12=528\\text{ cm}^2"
+            },
+            {
+              "type": "display_math",
+              "latex": "\\text{Metal}=154+528=682\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "A closed cylinder includes two ends; every term has square units."
+      "verification_note": "Only one end is included because the top is open. Using the calculator's π instead of 22/7 changes only the later digits: 1847.3 cm³ instead of 1848 cm³."
     },
     {
       "stable_key": "g5-lesson-03-pitfalls",
-      "position": 6,
+      "position": 7,
       "type": "explanation",
       "title": "Common errors and checks",
       "blocks": [
@@ -155,7 +233,7 @@
     },
     {
       "stable_key": "g5-53-recall",
-      "position": 7,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -183,17 +261,17 @@
     },
     {
       "stable_key": "g5-lesson-03-summary",
-      "position": 8,
+      "position": 9,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+          "text": "Prism: volume = cross-sectional area × length. Cylinder: volume = πr²h and curved surface area = 2πrh."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "For surface area, list every exposed face first: a closed cylinder has two circular ends, an open one has one. Halve a diameter before using r, and use π = 22/7 or the calculator value as the question says."
         }
       ]
     }
@@ -203,16 +281,452 @@
       "asset_key": "g5-lesson-03-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-03-solids.svg",
-      "alt_text": "A triangular prism and a cylinder with their cross-sections and lengths highlighted.",
+      "path": "assets/g5-lesson-03-solids-r3.svg",
+      "alt_text": "A triangular prism. Its front face is a right triangle with perpendicular sides 8 cm and 5 cm, and the right angle is marked. The prism is 9 cm long, and hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "solids",
-        "lesson_key": "g5-lesson-03"
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "prism",
+        "lesson_key": "g5-lesson-03",
+        "template": "prism_right_triangle_legs",
+        "inputs": {
+          "base": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "length": {
+            "value": 9,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "base": {
+            "value": 8,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "length": {
+            "value": 9,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "20",
+          "180"
+        ],
+        "unknowns": [],
+        "drawn_scale": 34.5673,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "prism",
+            "front": [
+              "A",
+              "B",
+              "C"
+            ],
+            "back": [
+              "Ab",
+              "Bb",
+              "Cb"
+            ],
+            "hidden_vertex": "Ab",
+            "cross_section": {
+              "type": "right_triangle",
+              "points": [
+                "A",
+                "B",
+                "C"
+              ],
+              "right_at": "A"
+            },
+            "segments": [
+              "AbBb",
+              "CbAb",
+              "AAb",
+              "BbCb",
+              "BBb",
+              "CCb",
+              "AB",
+              "BC",
+              "CA"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "AB",
+            "label": "8 cm",
+            "factor": 1.0,
+            "value": 8.0
+          },
+          {
+            "segment": "CA",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "BBb",
+            "label": "9 cm",
+            "factor": 0.5,
+            "value": 9.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "rear-face",
+          "side-BC",
+          "cross-section"
+        ],
+        "viewbox": [
+          600.0,
+          380.0
+        ],
+        "points": {
+          "A": [
+            98.02,
+            292.06
+          ],
+          "B": [
+            374.56,
+            292.06
+          ],
+          "C": [
+            98.02,
+            119.22
+          ],
+          "Ab": [
+            225.44,
+            202.84
+          ],
+          "Bb": [
+            501.98,
+            202.84
+          ],
+          "Cb": [
+            225.44,
+            30.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AbBb",
+            "from": "Ab",
+            "to": "Bb",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "CbAb",
+            "from": "Cb",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "AAb",
+            "from": "A",
+            "to": "Ab",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "BbCb",
+            "from": "Bb",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BBb",
+            "from": "B",
+            "to": "Bb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CCb",
+            "from": "C",
+            "to": "Cb",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 20
+          }
+        ],
+        "labels": [
+          {
+            "text": "8 cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:CA"
+          },
+          {
+            "text": "9 cm",
+            "target": "segment:BBb"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "6658fcfd750cd5641ef189949feffcd0afa09837cd6ccb23290aa9d48f8cc5b2",
-      "width": 940,
-      "height": 390
+      "sha256": "e4e2add53605e03ded0e3890943db31614e844014e1c8f7c03b44baa3ef0e5dc",
+      "width": 600,
+      "height": 380
+    },
+    {
+      "asset_key": "g5-lesson-03-cylinder",
+      "kind": "geometry",
+      "format": "svg",
+      "path": "assets/g5-lesson-03-cylinder-r3.svg",
+      "alt_text": "A cylinder that is open at the top, with radius 7 cm and height 12 cm. The inside of the rim is shaded, and the far half of the base is dashed. Not drawn to scale.",
+      "generation_spec": {
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "cylinder",
+        "lesson_key": "g5-lesson-03",
+        "template": "open_cylinder",
+        "inputs": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "radius": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 12,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "682",
+          "154",
+          "528"
+        ],
+        "unknowns": [],
+        "drawn_scale": 19.5833,
+        "depth_factor": 1.0,
+        "figures": [
+          {
+            "type": "cylinder",
+            "rim": "rim",
+            "base": "base",
+            "sides": [
+              "A1C1",
+              "A2C2"
+            ],
+            "radius": "OA2",
+            "open_top": true,
+            "interior": "#c5dcd8",
+            "segments": [
+              "A1C1",
+              "A2C2",
+              "OA2"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "A2C2",
+            "label": "12 cm",
+            "factor": 1.0,
+            "value": 12.0
+          },
+          {
+            "segment": "OA2",
+            "label": "7 cm",
+            "factor": 1.0,
+            "value": 7.0
+          }
+        ],
+        "captions": [
+          "Open top"
+        ],
+        "shades": [
+          "curved-surface"
+        ],
+        "viewbox": [
+          600.0,
+          443.0
+        ],
+        "points": {
+          "O": [
+            300.0,
+            93.12
+          ],
+          "B": [
+            300.0,
+            328.12
+          ],
+          "A1": [
+            162.92,
+            93.12
+          ],
+          "A2": [
+            437.08,
+            93.12
+          ],
+          "C1": [
+            162.92,
+            328.12
+          ],
+          "C2": [
+            437.08,
+            328.12
+          ]
+        },
+        "segments": [
+          {
+            "key": "A1C1",
+            "from": "A1",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2C2",
+            "from": "A2",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "OA2",
+            "from": "O",
+            "to": "A2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "ellipses": {
+          "base": {
+            "center": "B",
+            "rx": 137.08,
+            "ry": 41.12
+          },
+          "rim": {
+            "center": "O",
+            "rx": 137.08,
+            "ry": 41.12
+          }
+        },
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:OA2",
+            "from": [
+              368.54,
+              93.12
+            ],
+            "to": [
+              368.54,
+              159.25
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "12 cm",
+            "target": "segment:A2C2"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:OA2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "ellipse_centre",
+            "ellipse": "rim",
+            "point": "O"
+          },
+          {
+            "type": "ellipse_centre",
+            "ellipse": "base",
+            "point": "B"
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "rim",
+            "points": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "type": "on_ellipse",
+            "ellipse": "base",
+            "points": [
+              "C1",
+              "C2"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A1",
+              "C1"
+            ]
+          },
+          {
+            "type": "vertical",
+            "points": [
+              "A2",
+              "C2"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
+      },
+      "sha256": "7ea550b7caae3347a7890e06b2717254cef0548357423144adccd58e48f2648c",
+      "width": 600,
+      "height": 443
     }
   ],
   "provenance": {
@@ -221,6 +735,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

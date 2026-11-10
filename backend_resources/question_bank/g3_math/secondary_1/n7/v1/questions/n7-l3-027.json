@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-027",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.2",
-  "title": "Fractional coefficient in a linear equation",
+  "title": "Bracket with terms on both sides",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,14 +20,6 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use multiplication to remove the denominator."
-        },
-        {
-          "type": "display_math",
-          "latex": "\\frac{3x}{4}+5=17"
-        },
-        {
-          "type": "text",
           "text": "Find the value of "
         },
         {
@@ -37,6 +29,10 @@
         {
           "type": "text",
           "text": "."
+        },
+        {
+          "type": "display_math",
+          "latex": "3(x+2)+5=2x+17"
         }
       ],
       "marks": 3,
@@ -45,8 +41,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "16",
-        "canonical_latex": "16",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,15 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 5 to obtain "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{3x}{4}=12"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Expand the bracket, then collect the terms on the left."
             }
           ]
         },
@@ -75,7 +63,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply by 4, then divide by 3."
+              "text": "Bring the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-terms to one side and the numbers to the other."
             }
           ]
         }
@@ -85,8 +81,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{3x}{4}=12"
+              "type": "inline_math",
+              "latex": "3x+11=2x+17"
             }
           ],
           "mark_type": "M",
@@ -96,8 +92,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3x=48"
+              "type": "inline_math",
+              "latex": "x+11=17"
             }
           ],
           "mark_type": "M",
@@ -107,8 +103,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=16"
+              "type": "inline_math",
+              "latex": "x=6"
             }
           ],
           "mark_type": "A",

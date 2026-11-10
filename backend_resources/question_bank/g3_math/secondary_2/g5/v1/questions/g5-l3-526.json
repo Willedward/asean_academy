@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l3-526",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Safety officers considered a strict material budget while preparing a capacity check for the transport museum exhibit. The exhibit compares historic and modern transport shapes. The design must also be explained clearly in the safety briefing. A closed cone has radius 5 cm and perpendicular height 12 cm. Find its total surface area in cm², correct to 1 decimal place."
+          "text": "A museum transport display includes a solid cone. The closed cone has radius 8 cm and perpendicular height 15 cm. Find its total surface area in cm², correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "282.7",
-        "canonical_latex": "282.7",
+        "canonical_answer": "628.3",
+        "canonical_latex": "628.3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,11 +60,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
+              "text": "Use Pythagoras’ theorem for the slant height "
             },
             {
               "type": "inline_math",
-              "latex": "l=\\sqrt{5^{2}+12^{2}}"
+              "latex": "l"
             },
             {
               "type": "text",
@@ -95,22 +95,37 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The radius, perpendicular height and slant height form a right-angled triangle."
             },
             {
               "type": "display_math",
-              "latex": "l=\\sqrt{5^2+12^2}=13,\\quad S=\\pi(5)(13)+\\pi(5)^2=282.7"
+              "latex": "l=\\sqrt{8^2+15^2}=17\\text{ cm}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Total surface area = curved area + base area."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{282.7}"
+              "latex": "S=\\pi(8)(17)+\\pi(8)^2=136\\pi+64\\pi=200\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "S=628.319\\ldots=628.3\\text{ cm}^2"
             }
           ],
           "mark_type": "A",
@@ -125,8 +140,8 @@
       "asset_key": "g5-l3-526-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-526-diagram-r3.svg",
-      "alt_text": "Closed cone with base radius r = 5 cm and perpendicular height h = 12 cm from the vertex to the centre of the base, right angle marked. The slant edge is drawn but not labelled. Not drawn to scale.",
+      "path": "assets/g5-l3-526-diagram-r4.svg",
+      "alt_text": "Closed cone with base radius r = 8 cm and perpendicular height h = 15 cm from the vertex to the centre of the base, right angle marked. The slant edge is drawn but not labelled. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "cone",
@@ -135,35 +150,35 @@
         "template": "cone_total_area",
         "inputs": {
           "radius": {
-            "value": 5,
+            "value": 8,
             "unit": "cm"
           },
           "height": {
-            "value": 12,
+            "value": 15,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 5,
+            "value": 8,
             "unit": "cm"
           },
           "height": {
-            "value": 12,
+            "value": 15,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "282.7",
-          "282.74",
-          "204.2",
-          "204.20",
-          "78.5",
-          "78.54",
-          "13",
-          "90π",
-          "65π"
+          "628.3",
+          "628.32",
+          "427.3",
+          "427.26",
+          "201.1",
+          "201.06",
+          "17",
+          "200π",
+          "136π"
         ],
         "unknowns": [],
         "solids": [
@@ -180,7 +195,7 @@
         ],
         "viewbox": [
           600.0,
-          502.0
+          514.0
         ],
         "points": {
           "O": [
@@ -192,11 +207,11 @@
             50.0
           ],
           "L": [
-            215.0,
+            180.0,
             350.0
           ],
           "R": [
-            465.0,
+            500.0,
             350.0
           ]
         },
@@ -233,8 +248,8 @@
         "ellipses": {
           "base": {
             "center": "O",
-            "rx": 125.0,
-            "ry": 42.5
+            "rx": 160.0,
+            "ry": 54.4
           }
         },
         "right_angles": [
@@ -251,11 +266,11 @@
           {
             "target": "segment:OR",
             "from": [
-              402.5,
+              420.0,
               350.0
             ],
             "to": [
-              426.56,
+              444.06,
               418.75
             ]
           },
@@ -263,21 +278,21 @@
             "target": "segment:VO",
             "from": [
               340.0,
-              176.0
+              200.0
             ],
             "to": [
-              261.09,
-              148.38
+              237.49,
+              164.12
             ]
           }
         ],
         "labels": [
           {
-            "text": "r = 5 cm",
+            "text": "r = 8 cm",
             "target": "segment:OR"
           },
           {
-            "text": "h = 12 cm",
+            "text": "h = 15 cm",
             "target": "segment:VO"
           }
         ],
@@ -313,9 +328,9 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "ad81d0e80a632b3e94c33b2ab049a2380bb2e63b0f8ac8682be660a6bef8699d",
+      "sha256": "e74b9bac3d0eb596dcfa698cff0d59d0847f1710a81fd3cf7a8a2ec638ea9dae",
       "width": 600,
-      "height": 502
+      "height": 514
     }
   ],
   "provenance": {

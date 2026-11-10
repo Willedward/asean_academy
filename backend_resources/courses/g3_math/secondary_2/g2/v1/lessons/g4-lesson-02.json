@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g4",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   },
   "stable_key": "g4-lesson-02",
   "position": 2,
@@ -174,7 +174,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Do not compare a + b with c as a right-angle test; that is only the triangle inequality. Do not round square totals. Write the side ordering, both square calculations and a conclusion linked to equality or inequality."
+          "text": "Do not compare a + b with c as a right-angle test; that is only the triangle inequality. Do not round square totals. Write the side ordering, both square calculations and a conclusion linked to equality or inequality. Practice questions ask you to enter 1 for right-angled or 0 for not right-angled; work out both totals before you enter it, so that the answer comes from the comparison and not from a guess."
         }
       ]
     },
@@ -228,16 +228,181 @@
       "asset_key": "g4-lesson-02-converse",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-lesson-02-converse.svg",
-      "alt_text": "Comparison of a 7-24-25 right triangle with a 7-24-26 non-right triangle using squared side lengths.",
+      "path": "assets/g4-lesson-02-converse-r2.svg",
+      "alt_text": "Two triangles drawn from their side lengths. The 7, 24, 25 triangle has a right angle marked opposite the side 25 because 7² + 24² = 625 = 25². The 7, 24, 26 triangle has no right angle because 26² = 676.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "pythagoras_converse",
-        "lesson_key": "g4-lesson-02"
+        "renderer": "nextscholar-right-triangle-svg-v2",
+        "diagram_kind": "right_triangle",
+        "lesson_key": "g4-lesson-02",
+        "template": "lesson_converse",
+        "inputs": {
+          "triangles": [
+            [
+              7,
+              24,
+              25
+            ],
+            [
+              7,
+              24,
+              26
+            ]
+          ]
+        },
+        "not_to_scale": false,
+        "dimensions": {
+          "triangles": [
+            [
+              7,
+              24,
+              25
+            ],
+            [
+              7,
+              24,
+              26
+            ]
+          ]
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "task": "teaching",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          650.0
+        ],
+        "points": {
+          "A1": [
+            100.0,
+            176.67
+          ],
+          "B1": [
+            100.0,
+            60.0
+          ],
+          "C1": [
+            500.0,
+            176.67
+          ],
+          "A2": [
+            108.85,
+            480.31
+          ],
+          "B2": [
+            91.15,
+            365.0
+          ],
+          "C2": [
+            508.85,
+            480.31
+          ]
+        },
+        "segments": [
+          {
+            "key": "A1B1",
+            "from": "A1",
+            "to": "B1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A1C1",
+            "from": "A1",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B1C1",
+            "from": "B1",
+            "to": "C1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2B2",
+            "from": "A2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "A2C2",
+            "from": "A2",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2C2",
+            "from": "B2",
+            "to": "C2",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A1",
+            "arms": [
+              "B1",
+              "C1"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "7",
+            "target": "segment:A1B1"
+          },
+          {
+            "text": "24",
+            "target": "segment:A1C1"
+          },
+          {
+            "text": "25",
+            "target": "segment:B1C1"
+          },
+          {
+            "text": "7",
+            "target": "segment:A2B2"
+          },
+          {
+            "text": "24",
+            "target": "segment:A2C2"
+          },
+          {
+            "text": "26",
+            "target": "segment:B2C2"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "A1B1",
+              "A1C1"
+            ],
+            "value": 0.2917,
+            "tolerance": 0.02
+          },
+          {
+            "type": "length_ratio",
+            "segments": [
+              "A2B2",
+              "A2C2"
+            ],
+            "value": 0.2917,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "9b26ef3e840d3716050711d95dba932edf74d00a33c66f21b9b4f2780deea6cd",
-      "width": 940,
-      "height": 470
+      "sha256": "e6a7afd6c427ca5b3bfeb5d547cd852ff433d523fee7a2858b65fc70851d6959",
+      "width": 600,
+      "height": 650
     }
   ]
 }

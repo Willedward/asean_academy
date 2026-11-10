@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l5-003",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.3",
-  "title": "Linked linear functions",
+  "title": "Smallest whole input for a rule",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,19 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A linear function "
+          "text": "A linear rule gives "
         },
         {
           "type": "inline_math",
-          "latex": "f"
+          "latex": "y=9"
         },
         {
           "type": "text",
-          "text": " has "
+          "text": " when "
         },
         {
           "type": "inline_math",
-          "latex": "f(2)=9"
+          "latex": "x=2"
         },
         {
           "type": "text",
@@ -40,19 +40,19 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(7)=24"
+          "latex": "y=24"
         },
         {
           "type": "text",
-          "text": ". Another function is "
+          "text": " when "
         },
         {
           "type": "inline_math",
-          "latex": "g(x)=5x-6"
+          "latex": "x=7"
         },
         {
           "type": "text",
-          "text": ". Find "
+          "text": ". Find the smallest whole-number value of "
         },
         {
           "type": "inline_math",
@@ -60,11 +60,11 @@
         },
         {
           "type": "text",
-          "text": " if "
+          "text": " for which "
         },
         {
           "type": "inline_math",
-          "latex": "f(g(x))=60"
+          "latex": "y>60"
         },
         {
           "type": "text",
@@ -77,8 +77,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "20",
+        "canonical_latex": "20",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -90,15 +90,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the two values of "
+              "text": "Use the two pairs to find the rule "
             },
             {
               "type": "inline_math",
-              "latex": "f"
+              "latex": "y=ax+b"
             },
             {
               "type": "text",
-              "text": " to determine its rule."
+              "text": "."
             }
           ]
         },
@@ -107,23 +107,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Then substitute "
+              "text": "Set up an inequality for "
             },
             {
               "type": "inline_math",
-              "latex": "g"
+              "latex": "y>60"
             },
             {
               "type": "text",
-              "text": "(x) as the input of "
-            },
-            {
-              "type": "inline_math",
-              "latex": "f"
-            },
-            {
-              "type": "text",
-              "text": " and solve."
+              "text": " and find the smallest whole number that satisfies it."
             }
           ]
         }
@@ -133,8 +125,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "f(g(x))=3(5x-6)+3"
+              "type": "inline_math",
+              "latex": "a=\\frac{24-9}{7-2}=3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "9=3(2)+b\\Rightarrow b=3"
             }
           ],
           "mark_type": "M",
@@ -144,8 +144,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "15x-15=60"
+              "type": "inline_math",
+              "latex": "3x+3>60\\Rightarrow x>19"
             }
           ],
           "mark_type": "M",
@@ -155,8 +155,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=5"
+              "type": "text",
+              "text": "The smallest whole number is 20."
             }
           ],
           "mark_type": "A",

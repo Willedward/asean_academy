@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l4-010 — One group within a constrained total
+## n3-l4-010 — Members joining a club
 
 [Open this question in the HTML preview](index.html#n3-l4-010)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l3-017 — Combining two percentage relationships
+## n3-l3-017 — Reversing a percentage relationship
 
 [Open this question in the HTML preview](index.html#n3-l3-017)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n3-l3-020 — Meal price before service charge
+## n3-l3-020 — Food-delivery order before service charge
 
 [Open this question in the HTML preview](index.html#n3-l3-020)
 

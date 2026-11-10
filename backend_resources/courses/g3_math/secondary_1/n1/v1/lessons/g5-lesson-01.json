@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -44,7 +44,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A parallelogram has area base×perpendicular height. The height must meet the base at 90°, even when it falls outside the sloping side. A trapezium has area one half times the sum of its parallel sides times the perpendicular height."
+          "text": "The diagram shows the two shapes in the first worked example. In each shape the dashed line is the perpendicular height: it meets the base at 90°, and the small square marks the right angle. A parallelogram has area base × perpendicular height. A trapezium has area one half of the sum of its parallel sides, multiplied by the perpendicular height. Neither formula uses a sloping side."
         },
         {
           "type": "asset_ref",
@@ -60,7 +60,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Choose either parallel side as the parallelogram base, then pair it with the corresponding perpendicular height. For a trapezium, identify the parallel pair before substituting. Keep units consistent and square the final length unit because area measures two-dimensional coverage."
+          "text": "Any side of a parallelogram can be the base; pair it with the perpendicular height to that side. For a trapezium, first identify the pair of parallel sides, then the perpendicular distance between them. Keep units consistent and square the final length unit, because area measures two-dimensional coverage."
         }
       ]
     },
@@ -68,11 +68,11 @@
       "stable_key": "g5-51-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: area of a parallelogram and a trapezium",
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has parallel sides 8 cm and 14 cm and height 6 cm. Find its area."
+          "text": "The diagram shows a parallelogram with base 10 cm and perpendicular height 6 cm, and a trapezium with parallel sides 7 cm and 13 cm and perpendicular height 5 cm. Find the area of each shape."
         }
       ],
       "steps": [
@@ -80,8 +80,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Parallelogram: multiply the base by the perpendicular height. The sloping side is not needed."
+            },
+            {
               "type": "display_math",
-              "latex": "A=\\frac12(8+14)(6)"
+              "latex": "A=bh=10\\times6=60\\text{ cm}^2"
             }
           ]
         },
@@ -89,23 +93,27 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Trapezium: add the parallel sides first, then halve and multiply by the perpendicular height."
+            },
+            {
               "type": "display_math",
-              "latex": "A=66\\text{ cm}^2"
+              "latex": "A=\\frac12(7+13)(5)=\\frac12(20)(5)=50\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+      "verification_note": "The trapezium's area lies between 7 × 5 = 35 cm² and 13 × 5 = 65 cm², the areas of rectangles on its shorter and longer parallel sides. Both answers are in square centimetres."
     },
     {
       "stable_key": "g5-lesson-01-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: find a missing parallel side",
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has area 126 cm², height 9 cm and one parallel side 10 cm. Find the other parallel side."
+          "text": "A trapezium has area 126 cm², perpendicular height 9 cm and one parallel side 10 cm. Find the other parallel side."
         }
       ],
       "steps": [
@@ -114,7 +122,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 126=1/2(10+b)×9."
+              "text": "Substitute the known values into the trapezium formula, with b the unknown parallel side."
+            },
+            {
+              "type": "display_math",
+              "latex": "126=\\frac12(10+b)\\times9"
             }
           ]
         },
@@ -123,7 +135,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply by 2 and divide by 9: 28=10+b."
+              "text": "Multiply both sides by 2, then divide both sides by 9."
+            },
+            {
+              "type": "display_math",
+              "latex": "252=9(10+b)\\quad\\Rightarrow\\quad28=10+b"
             }
           ]
         },
@@ -131,13 +147,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Hence b=18 cm."
+              "type": "display_math",
+              "latex": "b=18\\text{ cm}"
             }
           ]
         }
       ],
-      "verification_note": "Substitution gives 1/2(10+18)×9=126 cm²."
+      "verification_note": "Substitution gives ½ × (10 + 18) × 9 = 14 × 9 = 126 cm²."
     },
     {
       "stable_key": "g5-lesson-01-pitfalls",
@@ -187,11 +203,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+          "text": "Area of a parallelogram = base × perpendicular height. Area of a trapezium = ½ × (sum of the parallel sides) × perpendicular height."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Use the height that meets the base at 90°, never a sloping side. To find a missing length, substitute what you know and undo the operations in reverse order. Give areas in square units."
         }
       ]
     }
@@ -201,16 +217,340 @@
       "asset_key": "g5-lesson-01-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-01-area.svg",
-      "alt_text": "A parallelogram and a trapezium with bases and perpendicular heights clearly marked.",
+      "path": "assets/g5-lesson-01-area-r3.svg",
+      "alt_text": "A parallelogram with base 10 cm and dashed perpendicular height 6 cm, beside a trapezium with parallel sides 7 cm and 13 cm and dashed perpendicular height 5 cm. A right angle is marked at the foot of each height. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "area",
-        "lesson_key": "g5-lesson-01"
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "two_quadrilaterals",
+        "lesson_key": "g5-lesson-01",
+        "template": "parallelogram_and_trapezium",
+        "inputs": {
+          "base": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "parallel_short": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "parallel_long": {
+            "value": 13,
+            "unit": "cm"
+          },
+          "trapezium_height": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "base": {
+            "value": 10,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 6,
+            "unit": "cm"
+          },
+          "parallel_short": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "parallel_long": {
+            "value": 13,
+            "unit": "cm"
+          },
+          "trapezium_height": {
+            "value": 5,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "60",
+          "50",
+          "110"
+        ],
+        "unknowns": [],
+        "drawn_scale": 19.2882,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "parallelogram",
+            "points": [
+              "PA",
+              "PB",
+              "PC",
+              "PD"
+            ],
+            "heights": [
+              {
+                "segment": "PDPF",
+                "foot": "PF",
+                "top": "PD",
+                "base": [
+                  "PA",
+                  "PB"
+                ]
+              }
+            ],
+            "segments": [
+              "PAPB",
+              "PBPC",
+              "PCPD",
+              "PDPA",
+              "PDPF"
+            ]
+          },
+          {
+            "type": "trapezium",
+            "points": [
+              "TA",
+              "TB",
+              "TC",
+              "TD"
+            ],
+            "heights": [
+              {
+                "segment": "TDTF",
+                "foot": "TF",
+                "top": "TD",
+                "base": [
+                  "TA",
+                  "TB"
+                ]
+              }
+            ],
+            "segments": [
+              "TATB",
+              "TBTC",
+              "TCTD",
+              "TDTA",
+              "TDTF"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "PAPB",
+            "label": "10 cm",
+            "factor": 1.0,
+            "value": 10.0
+          },
+          {
+            "segment": "PDPF",
+            "label": "6 cm",
+            "factor": 1.0,
+            "value": 6.0
+          },
+          {
+            "segment": "TATB",
+            "label": "13 cm",
+            "factor": 1.0,
+            "value": 13.0
+          },
+          {
+            "segment": "TCTD",
+            "label": "7 cm",
+            "factor": 1.0,
+            "value": 7.0
+          },
+          {
+            "segment": "TDTF",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "Pparallelogram",
+          "Ttrapezium"
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "PA": [
+            35.0,
+            171.73
+          ],
+          "PB": [
+            227.88,
+            171.73
+          ],
+          "PC": [
+            279.96,
+            56.0
+          ],
+          "PD": [
+            87.08,
+            56.0
+          ],
+          "PF": [
+            87.08,
+            171.73
+          ],
+          "TA": [
+            314.25,
+            171.73
+          ],
+          "TB": [
+            565.0,
+            171.73
+          ],
+          "TC": [
+            507.14,
+            75.29
+          ],
+          "TD": [
+            372.12,
+            75.29
+          ],
+          "TF": [
+            372.12,
+            171.73
+          ]
+        },
+        "segments": [
+          {
+            "key": "PAPB",
+            "from": "PA",
+            "to": "PB",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PBPC",
+            "from": "PB",
+            "to": "PC",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PCPD",
+            "from": "PC",
+            "to": "PD",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PDPA",
+            "from": "PD",
+            "to": "PA",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PDPF",
+            "from": "PD",
+            "to": "PF",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "TATB",
+            "from": "TA",
+            "to": "TB",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TBTC",
+            "from": "TB",
+            "to": "TC",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TCTD",
+            "from": "TC",
+            "to": "TD",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TDTA",
+            "from": "TD",
+            "to": "TA",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "TDTF",
+            "from": "TD",
+            "to": "TF",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "PF",
+            "arms": [
+              "PB",
+              "PD"
+            ],
+            "marker_size": 18
+          },
+          {
+            "vertex": "TF",
+            "arms": [
+              "TB",
+              "TD"
+            ],
+            "marker_size": 18
+          }
+        ],
+        "labels": [
+          {
+            "text": "10 cm",
+            "target": "segment:PAPB"
+          },
+          {
+            "text": "6 cm",
+            "target": "segment:PDPF"
+          },
+          {
+            "text": "13 cm",
+            "target": "segment:TATB"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:TCTD"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:TDTF"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "collinear",
+            "points": [
+              "PA",
+              "PF",
+              "PB"
+            ]
+          },
+          {
+            "type": "collinear",
+            "points": [
+              "TA",
+              "TF",
+              "TB"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "beb5d82c3b8aed40d7c1090e87b069fe1db85ebd140ed6f0018e7f7c2cd5e3b9",
-      "width": 940,
-      "height": 390
+      "sha256": "e77a92480ff50202bebf0e3f8a255db44d170701cfaab5e817e16567f16f146a",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -219,6 +559,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

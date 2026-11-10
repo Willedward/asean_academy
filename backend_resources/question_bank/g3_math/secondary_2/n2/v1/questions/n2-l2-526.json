@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l2-526",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a regional logistics study. Two landmarks are 0.7 km apart. A map has scale 1 : 10,000. Find their separation on the map in millimetres. Enter the numerical value only."
+          "text": "Two gates of a park are 0.7 km apart. On a park plan drawn at 1 : 5 000, how far apart are they in millimetres? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "70",
-        "canonical_latex": "70",
+        "canonical_answer": "140",
+        "canonical_latex": "140",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The quotient gives map centimetres; multiply it by 10 for millimetres."
+              "text": "Convert 0.7 km to centimetres, divide by the scale denominator, then convert to millimetres."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "0.7\\text{ km}=70{,}000\\text{ cm},\\quad \\frac{70{,}000}{10{,}000}\\times10=70\\text{ mm}"
+              "latex": "0.7\\text{ km}=70\\,000\\text{ cm},\\quad\\frac{70\\,000}{5\\,000}=14\\text{ cm}=140\\text{ mm}"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{70}"
+              "latex": "\\boxed{140}"
             }
           ],
           "mark_type": "A",

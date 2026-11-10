@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-002",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Choosing a balancing divisor",
+  "title": "Testing a solution",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,35 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Both sides are divided by the same positive number to obtain "
+          "text": "Which value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " is the solution of the equation? Enter 1 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=6"
+        },
+        {
+          "type": "text",
+          "text": ", 2 for "
         },
         {
           "type": "inline_math",
           "latex": "x=7"
+        },
+        {
+          "type": "text",
+          "text": " and 3 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=8"
         },
         {
           "type": "text",
@@ -33,10 +57,6 @@
         {
           "type": "display_math",
           "latex": "3x=21"
-        },
-        {
-          "type": "text",
-          "text": "State the divisor."
         }
       ],
       "marks": 2,
@@ -45,8 +65,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,15 +78,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The factor multiplying "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " must be removed."
+              "text": "A solution makes both sides equal when it is substituted."
             }
           ]
         },
@@ -75,15 +87,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Which number multiplies "
+              "text": "Work out "
             },
             {
               "type": "inline_math",
-              "latex": "x"
+              "latex": "3x"
             },
             {
               "type": "text",
-              "text": "? Divide both sides by that number."
+              "text": " for each of the three values and compare it with 21."
             }
           ]
         }
@@ -93,8 +105,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{3x}{3}=\\frac{21}{3}"
+              "type": "inline_math",
+              "latex": "3(7)=21"
             }
           ],
           "mark_type": "M",
@@ -104,8 +116,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{divisor}=3"
+              "type": "inline_math",
+              "latex": "x=7"
+            },
+            {
+              "type": "text",
+              "text": " is the solution, so the code is 2."
             }
           ],
           "mark_type": "A",

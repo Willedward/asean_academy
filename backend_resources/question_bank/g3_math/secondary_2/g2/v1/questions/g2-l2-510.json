@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-510",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Similar rectangles",
+  "title": "Find the original side",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle in a brochure is enlarged by factor 4. A side measuring 5 cm has a corresponding side on the enlargement. Find that new length. Enter the numerical value only."
+          "text": "A rectangle in a brochure is enlarged by scale factor 4. The enlarged side measures 20 cm. Find the original side length, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding sides are multiplied by the same scale factor."
+              "text": "An enlargement multiplies lengths by the scale factor."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "5\\times 4"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Divide the enlarged length by the scale factor."
             }
           ]
         }
@@ -69,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Reverse the enlargement. "
+            },
+            {
               "type": "display_math",
-              "latex": "L=5\\times 4"
+              "latex": "L=20\\div4"
             }
           ],
           "mark_type": "M",
@@ -80,8 +76,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "L=20"
+              "latex": "L=5"
             }
           ],
           "mark_type": "A",

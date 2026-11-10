@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-018 — Same-side interior expressions
+## g1-l3-018 — Co-interior expressions
 
 [Open this question in the HTML preview](index.html#g1-l3-018)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l1-014 — Lines of symmetry in a rectangle
+## g1-l1-014 — Lines of symmetry in an equilateral triangle
 
 [Open this question in the HTML preview](index.html#g1-l1-014)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l3-019 — Rhombus diagonal angle
+## g1-l3-019 — Angle in a rhombus from its diagonals
 
 [Open this question in the HTML preview](index.html#g1-l3-019)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l5-004 — Classification hierarchy synthesis
+## g1-l5-004 — Parallelogram from an angle equation
 
 [Open this question in the HTML preview](index.html#g1-l5-004)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g1-l4-012 — Locating a circumcentre
+## g1-l4-012 — Arcs needed for an SSS construction
 
 [Open this question in the HTML preview](index.html#g1-l4-012)
 

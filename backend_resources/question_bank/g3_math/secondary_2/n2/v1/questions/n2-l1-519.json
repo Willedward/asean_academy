@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l1-519",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from a regional logistics study. A map states that 1 cm represents 5 km. Write the missing denominator in the scale 1 : ____. Enter the numerical value only."
+          "text": "In a road atlas, every centimetre stands for 5 km. Write the scale in the form "
+        },
+        {
+          "type": "inline_math",
+          "latex": "1:n"
+        },
+        {
+          "type": "text",
+          "text": " and give "
+        },
+        {
+          "type": "inline_math",
+          "latex": "n"
+        },
+        {
+          "type": "text",
+          "text": ". Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -70,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "5\\text{ km}=5\\times100\\,000\\text{ cm}=500000\\text{ cm}"
+              "latex": "5\\text{ km}=5\\times100\\,000\\text{ cm}=500\\,000\\text{ cm}"
             }
           ],
           "mark_type": "A",

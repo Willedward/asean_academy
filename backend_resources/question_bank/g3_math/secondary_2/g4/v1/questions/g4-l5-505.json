@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l5-505",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Site coordinators noted a protected habitat boundary while preparing a replacement frame. Two observation points on level ground at the recycling-centre conveyor are 20 m apart and lie on the same line with a vertical mast. The angles of elevation to its top are 35° at the farther point and 50° at the nearer point. Find the mast height correct to 1 decimal place."
+          "text": "Two observation points on level ground are 20 m apart and lie on a straight line with the foot of a vertical mast. The angles of elevation to its top are 35° at the farther point and 50° at the nearer point. Find the height h of the mast in metres, correct to 1 decimal place."
         }
       ],
       "marks": 5,
@@ -111,22 +111,63 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "From the nearer point, h is opposite the 50° angle and x is adjacent."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{h}{\\tan35^\\circ}-\\frac{h}{\\tan50^\\circ}=20\\Rightarrow h=34.0"
+              "latex": "h=x\\tan50^\\circ"
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "From the farther point, the adjacent side is x + 20."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{34.0}"
+              "latex": "h=(x+20)\\tan35^\\circ"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Equate the two expressions and solve for x."
+            },
+            {
+              "type": "display_math",
+              "latex": "x\\tan50^\\circ=(x+20)\\tan35^\\circ\\Rightarrow x=\\frac{20\\tan35^\\circ}{\\tan50^\\circ-\\tan35^\\circ}=28.490\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=x\\tan50^\\circ=33.953\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=34.0\\text{ m}"
             }
           ],
           "mark_type": "A",
@@ -141,7 +182,7 @@
       "asset_key": "g4-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-505-diagram-r3.svg",
+      "path": "assets/g4-l5-505-diagram-r4.svg",
       "alt_text": "A vertical mast of height h stands on level ground. Two observation points on the same line as the mast are 20 m apart; the nearer point is x from the mast. The angle of elevation of the top is 35° from the farther point and 50° from the nearer point. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -375,6 +416,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

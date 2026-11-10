@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-027",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Track an elevator between levels",
+  "title": "Levels between start and finish",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -25,7 +25,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "At which level does the elevator finish?"
+          "text": "How many levels apart are the start and finish on a vertical number line?"
         }
       ],
       "marks": 2,
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-6",
-        "canonical_latex": "-6",
+        "canonical_answer": "3",
+        "canonical_latex": "3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Represent rising by addition and descending by subtraction."
+              "text": "Represent rising by moving up and descending by moving down."
             }
           ]
         },
@@ -56,15 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-3+8-11"
-            },
-            {
-              "type": "text",
-              "text": " in chronological order."
+              "text": "Find the finish level, then count the levels between it and the start."
             }
           ]
         }
@@ -74,8 +66,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-3+8=5"
+              "type": "inline_math",
+              "latex": "-3+8-11=-6"
             }
           ],
           "mark_type": "M",
@@ -85,8 +77,24 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5-11=-6"
+              "type": "text",
+              "text": "Levels "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-6"
+            },
+            {
+              "type": "text",
+              "text": " are 3 levels apart."
             }
           ],
           "mark_type": "A",

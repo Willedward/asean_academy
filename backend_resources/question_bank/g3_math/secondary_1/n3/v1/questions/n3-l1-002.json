@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l1-002",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Aisha read 48 pages and Ben read 40 pages. By what percentage did Aisha read more pages than Ben?"
+          "text": "Aisha read 56 pages and Ben read 40 pages. By what percentage did Aisha read more pages than Ben?"
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "40",
+        "canonical_latex": "40\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The difference is 8 pages; calculate 8 divided by 40, then multiply by 100%."
+              "text": "Find the difference in pages, then divide it by 40 and multiply by 100%."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{48-40}{40}\\times100\\%=20\\%"
+              "type": "inline_math",
+              "latex": "\\frac{56-40}{40}\\times100\\%=40\\%"
             }
           ],
           "mark_type": "B",

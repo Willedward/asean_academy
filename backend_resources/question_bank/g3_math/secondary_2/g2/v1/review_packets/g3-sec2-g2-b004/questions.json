@@ -103,14 +103,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g2-l2-524",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Reflected triangular pennants",
+    "title": "Congruent triangles: find the perimeter",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -123,7 +123,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pennant is reflected to produce a matching copy. Each badge or pennant is triangular. One is congruent to a triangle with side lengths 18 cm, 20 cm and 21 cm. Find its perimeter. Enter the numerical value only."
+            "text": "Triangles ABC and DEF are congruent, with AB corresponding to DE. AB = "
+          },
+          {
+            "type": "inline_math",
+            "latex": "3x"
+          },
+          {
+            "type": "text",
+            "text": " cm, DE = 15 cm, BC = 14 cm and CA = 16 cm. Find the perimeter of triangle ABC, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -132,8 +140,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "59",
-          "canonical_latex": "59",
+          "canonical_answer": "45",
+          "canonical_latex": "45",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -145,7 +153,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Locate the matching side or angle before calculating."
+                "text": "Corresponding sides of congruent triangles are equal, so find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " first."
               }
             ]
           },
@@ -154,7 +170,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the three corresponding side lengths."
+                "text": "Once you know AB, add the three sides of triangle ABC."
               }
             ]
           }
@@ -164,8 +180,32 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Use AB = DE to find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ". "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=18+20+21"
+                "latex": "3x=15\\Rightarrow x=5"
+              },
+              {
+                "type": "text",
+                "text": " So AB "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=15"
+              },
+              {
+                "type": "text",
+                "text": " cm."
               }
             ],
             "mark_type": "M",
@@ -175,8 +215,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Add the three sides: "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=59"
+                "latex": "P=15+14+16=45"
               }
             ],
             "mark_type": "A",
@@ -205,7 +249,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-525",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -264,7 +308,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which part of the translation changes the x-coordinate: the move right or the move up? Apply that to the x-coordinate of A."
+                "text": "Which part of the translation changes the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate?"
               }
             ]
           }
@@ -315,7 +367,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-526",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -351,7 +403,7 @@
           },
           {
             "type": "text",
-            "text": " cm. Find their common side length. Enter the numerical value only."
+            "text": " cm. Find their common side length. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -452,14 +504,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l4-513",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Congruent frame perimeter",
+    "title": "Congruent frames with an algebraic length",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -480,7 +532,15 @@
           },
           {
             "type": "text",
-            "text": " cm and 13 cm. Their common length is 18 cm. Find the perimeter of either frame. Enter the numerical value only."
+            "text": " cm and 13 cm. The length of each frame is "
+          },
+          {
+            "type": "inline_math",
+            "latex": "3x"
+          },
+          {
+            "type": "text",
+            "text": " cm. Find the perimeter of either frame, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -519,15 +579,15 @@
               },
               {
                 "type": "text",
-                "text": ", use "
+                "text": ", find the length, then use "
               },
               {
                 "type": "inline_math",
-                "latex": "P=2"
+                "latex": "P=2(\\text{length}+\\text{width})"
               },
               {
                 "type": "text",
-                "text": "(length + width)."
+                "text": "."
               }
             ]
           }
@@ -549,7 +609,19 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "x=6"
+                "latex": "x="
+              },
+              {
+                "type": "text",
+                "text": ", so the length is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3x=18"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -688,14 +760,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-525",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.2",
-    "title": "Similar picture frames",
+    "title": "Enlargement with a change of units",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -708,7 +780,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A picture frame design is magnified by factor 4. Calculate the copied length corresponding to a 9 cm rail. Enter the numerical value only."
+            "text": "A 9 cm rail on a picture frame design is enlarged by scale factor 40. Find the length of the enlarged rail in metres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -717,8 +789,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "36",
-          "canonical_latex": "36",
+          "canonical_answer": "3.6",
+          "canonical_latex": "3.6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -730,7 +802,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Corresponding sides are multiplied by the same scale factor."
+                "text": "Corresponding sides are multiplied by the scale factor."
               }
             ]
           },
@@ -739,15 +811,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "9\\times 4"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Multiply first, then convert from centimetres to metres."
               }
             ]
           }
@@ -757,8 +821,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Multiply by the scale factor. "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=9\\times 4"
+                "latex": "9\\times40=360\\text{ cm}"
               }
             ],
             "mark_type": "M",
@@ -768,8 +836,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Convert to metres: "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=36"
+                "latex": "3.6\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -798,14 +870,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-526",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.2",
-    "title": "Reduced diagram",
+    "title": "Reduced length of a side",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -822,11 +894,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "\\frac{1}{3}"
+            "latex": "\\frac{1}{4}"
           },
           {
             "type": "text",
-            "text": " of every original linear measurement. Find the reduced length of its 12 cm side. Enter the numerical value only."
+            "text": " of every original linear measurement. Find the reduced length of its 18 cm side, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -835,8 +907,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "4.5",
+          "canonical_latex": "4.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -848,7 +920,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Corresponding sides are multiplied by the same scale factor."
+                "text": "A reduction multiplies lengths by the scale factor."
               }
             ]
           },
@@ -857,11 +929,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Multiply "
               },
               {
                 "type": "inline_math",
-                "latex": "12\\times \\frac{1}{3}"
+                "latex": "18"
+              },
+              {
+                "type": "text",
+                "text": " by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "\\frac14"
               },
               {
                 "type": "text",
@@ -876,7 +956,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "L=12\\times 1/3"
+                "latex": "L=18\\times\\frac14"
               }
             ],
             "mark_type": "M",
@@ -886,8 +966,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=4"
+                "latex": "L=4.5"
               }
             ],
             "mark_type": "A",
@@ -916,7 +1000,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-527",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -936,7 +1020,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A similar image has a side length of 28 cm after an enlargement by scale factor 4. Find the corresponding original side length. Enter the numerical value only."
+            "text": "A similar image has a side length of 28 cm after an enlargement by scale factor 4. Find the corresponding original side length. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1171,14 +1255,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l1-519",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.3",
-    "title": "Obtuse corresponding angle",
+    "title": "Use the angle sum in a similar triangle",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1191,7 +1275,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An obtuse vertex of 105° on a polygon matches vertex "
+            "text": "Two similar triangles are labelled in corresponding order. In the first triangle, two angles are "
+          },
+          {
+            "type": "inline_math",
+            "latex": "40^{\\circ}"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "75^{\\circ}"
+          },
+          {
+            "type": "text",
+            "text": ". Find the third angle "
           },
           {
             "type": "inline_math",
@@ -1199,15 +1299,7 @@
           },
           {
             "type": "text",
-            "text": " on a similar polygon. Calculate "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": " of the second triangle. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -1216,8 +1308,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "105",
-          "canonical_latex": "105",
+          "canonical_answer": "65",
+          "canonical_latex": "65",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1229,7 +1321,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Corresponding angles in similar figures are equal."
+                "text": "Corresponding angles are equal, and the angles of a triangle add to "
+              },
+              {
+                "type": "inline_math",
+                "latex": "180^{\\circ}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -1238,15 +1338,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which angle in the first figure is in the same position as "
+                "text": "Subtract the two known angles from "
               },
               {
                 "type": "inline_math",
-                "latex": "x"
+                "latex": "180^{\\circ}"
               },
               {
                 "type": "text",
-                "text": "? Its size is not changed by similarity."
+                "text": "."
               }
             ]
           }
@@ -1257,7 +1357,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "x=105^\\circ"
+                "latex": "x=180-(40+75)=65"
               }
             ],
             "mark_type": "A",
@@ -1286,14 +1386,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-527",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.3",
-    "title": "Similar trapezium sides",
+    "title": "Vertex order in similar triangles",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1306,23 +1406,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Similar trapeziums have corresponding short bases 8 cm and 5 cm. The first long base is 24 cm and the second is "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": " cm. Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": "Triangle ABC is similar to triangle RPQ, with vertices in that order. AB = 8 cm, BC = 24 cm and RP = 5 cm. Find PQ, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1344,7 +1428,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use one constant ratio for all corresponding sides."
+                "text": "The order of the vertices tells you which sides correspond."
               }
             ]
           },
@@ -1353,15 +1437,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{y}{24}=\\frac{5}{8}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "A matches R, B matches P and C matches Q, so BC corresponds to PQ."
               }
             ]
           }
@@ -1371,8 +1447,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Sides correspond in vertex order. "
+              },
+              {
                 "type": "display_math",
-                "latex": "\\frac{y}{24}=\\frac{5}{8}"
+                "latex": "\\frac{PQ}{24}=\\frac{5}{8}"
               }
             ],
             "mark_type": "M",
@@ -1382,8 +1462,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "y=15"
+                "latex": "PQ=15"
               }
             ],
             "mark_type": "A",
@@ -1412,14 +1496,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-528",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.3",
-    "title": "Triangle proportionality",
+    "title": "Similar triangles: three-term ratio",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1432,23 +1516,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two similar triangular frames pair a 9 cm side with a 4 cm side. The side corresponding to 27 cm is labelled "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": ". Calculate "
-          },
-          {
-            "type": "inline_math",
-            "latex": "y"
-          },
-          {
-            "type": "text",
-            "text": ". Enter the numerical value only."
+            "text": "Triangle S has sides 9 cm, 12 cm and 18 cm. Triangle T is similar to triangle S, and its shortest side is 4 cm. Find the longest side of triangle T, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1457,8 +1525,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "12",
-          "canonical_latex": "12",
+          "canonical_answer": "8",
+          "canonical_latex": "8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1470,7 +1538,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use one constant ratio for all corresponding sides."
+                "text": "Use the ratio between the two shortest sides."
               }
             ]
           },
@@ -1479,15 +1547,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set "
+                "text": "The scale factor from S to T is "
               },
               {
                 "type": "inline_math",
-                "latex": "\\frac{y}{27}=\\frac{4}{9}"
+                "latex": "\\frac{4}{9}"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ". Apply it to the longest side of S."
               }
             ]
           }
@@ -1497,8 +1565,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Find the scale factor from the shortest sides. "
+              },
+              {
                 "type": "display_math",
-                "latex": "\\frac{y}{27}=\\frac{4}{9}"
+                "latex": "k=\\frac{4}{9}"
               }
             ],
             "mark_type": "M",
@@ -1508,8 +1580,20 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Multiply the longest side by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
                 "type": "display_math",
-                "latex": "y=12"
+                "latex": "y=18\\times\\frac49=8"
               }
             ],
             "mark_type": "A",
@@ -1538,7 +1622,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-528",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1566,7 +1650,7 @@
           },
           {
             "type": "text",
-            "text": " from the smaller to the larger. A diagonal of the smaller is 12 cm. Find the corresponding diagonal of the larger. Enter the numerical value only."
+            "text": " from the smaller to the larger. A diagonal of the smaller is 12 cm. Find the corresponding diagonal of the larger. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1648,7 +1732,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l4-515",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1668,7 +1752,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two similar polygons have areas 64 cm² and 144 cm². The smaller polygon has perimeter 40 cm. Find the larger perimeter. Enter the numerical value only."
+            "text": "Two similar polygons have areas 64 cm² and 144 cm². The smaller polygon has perimeter 40 cm. Find the larger perimeter. Give your answer in square centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1761,14 +1845,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l1-520",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.4",
-    "title": "Miniature coordinate label",
+    "title": "Find a scale factor from coordinates",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1781,23 +1865,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A coordinate label "
+            "text": "A point at "
           },
           {
             "type": "inline_math",
-            "latex": "A=(9,3)"
+            "latex": "(2,5)"
           },
           {
             "type": "text",
-            "text": " is copied as a miniature centred at the origin with factor "
+            "text": " is mapped from the origin to "
           },
           {
             "type": "inline_math",
-            "latex": "\\frac{1}{3}"
+            "latex": "(8,20)"
           },
           {
             "type": "text",
-            "text": ". Find the image y-coordinate. Enter the numerical value only."
+            "text": ". Find the scale factor of this enlargement. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -1806,8 +1890,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1819,7 +1903,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "An enlargement about the origin multiplies each coordinate by the scale factor."
+                "text": "Compare the image coordinate with the original coordinate."
               }
             ]
           },
@@ -1828,15 +1912,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the original y-coordinate by "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\frac{1}{3}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Divide an image coordinate by the matching original coordinate."
               }
             ]
           }
@@ -1847,7 +1923,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "y'=3\\times 1/3=1"
+                "latex": "k=\\frac{8}{2}=4"
               }
             ],
             "mark_type": "A",
@@ -1876,14 +1952,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-529",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.4",
-    "title": "Origin image ordinate",
+    "title": "y-coordinate of an image",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1986,7 +2062,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-530",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2006,7 +2082,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A square has side length 20 cm. It is reduced by scale factor 0.4. Find the image side length. Enter the numerical value only."
+            "text": "A square has side length 20 cm. It is reduced by scale factor 0.4. Find the image side length. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2206,7 +2282,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l4-516",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2234,7 +2310,7 @@
           },
           {
             "type": "text",
-            "text": ". Find the original area. Enter the numerical value only."
+            "text": ". Find the original area. Give your answer in square centimetres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -2343,7 +2419,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "g2-l5-504",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2363,7 +2439,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A triangle of area 32 cm² is enlarged by scale factor 3/2 and then reduced by scale factor 2/3. The resulting triangle is enlarged again by scale factor 5/2. Find its final area. Enter the numerical value only."
+            "text": "A triangle of area 32 cm² is enlarged by scale factor 3/2 and then reduced by scale factor 2/3. The resulting triangle is enlarged again by scale factor 5/2. Find its final area. Give your answer in square centimetres. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -2467,14 +2543,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l1-521",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.5",
-    "title": "Photo enlargement",
+    "title": "Scale factor from two matching features",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2487,7 +2563,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A photograph feature measuring 5 cm is magnified by factor 8. Find the feature's enlarged length in centimetres. Enter the numerical value only."
+            "text": "A photograph is enlarged so that a 5 cm feature becomes 40 cm. Another feature on the original is 3 cm. Find its enlarged length in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -2496,8 +2572,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "40",
-          "canonical_latex": "40",
+          "canonical_answer": "24",
+          "canonical_latex": "24",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2509,7 +2585,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the represented length by the stated scale factor."
+                "text": "Find the scale factor from the matching pair of lengths."
               }
             ]
           },
@@ -2518,15 +2594,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "The scale factor is "
               },
               {
                 "type": "inline_math",
-                "latex": "5\\times 8"
+                "latex": "40\\div5"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ". Apply it to the 3 cm feature."
               }
             ]
           }
@@ -2537,7 +2613,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "L=5\\times8=40"
+                "latex": "k=\\frac{40}{5}=8\\Rightarrow L=3\\times8=24"
               }
             ],
             "mark_type": "A",

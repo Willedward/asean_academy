@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l3-002",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Clearing a denominator consistently",
+  "title": "Choosing an equivalent equation",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,27 +20,43 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Multiply every term by 3 to obtain "
+          "text": "Which equation has the same solution as "
         },
         {
           "type": "inline_math",
-          "latex": "x+6=k"
-        },
-        {
-          "type": "text",
-          "text": "."
-        },
-        {
-          "type": "display_math",
           "latex": "\\frac{x}{3}+2=7"
         },
         {
           "type": "text",
-          "text": "Find "
+          "text": "? Enter 1 for "
         },
         {
           "type": "inline_math",
-          "latex": "k"
+          "latex": "x+2=21"
+        },
+        {
+          "type": "text",
+          "text": ", 2 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+6=21"
+        },
+        {
+          "type": "text",
+          "text": ", 3 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+6=7"
+        },
+        {
+          "type": "text",
+          "text": " and 4 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+2=7"
         },
         {
           "type": "text",
@@ -53,8 +69,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "21",
-        "canonical_latex": "21",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +82,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Every term, including 2 and 7, must be multiplied by 3."
+              "text": "To clear the denominator, every term must be multiplied by 3."
             }
           ]
         },
@@ -75,7 +91,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The right-hand side becomes 7 times 3."
+              "text": "Multiply each term of the equation, including 2 and 7, by 3, then compare the result with the choices."
             }
           ]
         }
@@ -85,8 +101,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x+6=7\\times3"
+              "type": "text",
+              "text": "Multiply every term by 3."
             }
           ],
           "mark_type": "M",
@@ -96,7 +112,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x+6=21"
             }
           ],
@@ -107,8 +123,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=21"
+              "type": "text",
+              "text": "The code is 2."
             }
           ],
           "mark_type": "A",

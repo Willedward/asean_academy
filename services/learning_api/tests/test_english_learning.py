@@ -1517,7 +1517,7 @@ def test_e5_checkpoint_delivers_a_safe_paired_passage_and_records_three_masterie
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "B", "4": "A", "5": "A"},
+        {"1": "A", "2": "C", "3": "B", "4": "C", "5": "A"},
         "e5-checkpoint-pass-attempt",
     )
     assert completed.status_code == 200, completed.text
@@ -1686,7 +1686,7 @@ def test_failed_e6_checkpoint_retake_uses_two_disjoint_form_b_groups():
         app,
         retry_id,
         retry_second,
-        {"1": "A", "2": "A"},
+        {"1": "C", "2": "B"},
         "e6-checkpoint-retry-second",
     )
     assert retry_completed.status_code == 200, retry_completed.text
@@ -1892,7 +1892,7 @@ def test_e9_checkpoint_is_readiness_only_and_records_simulation_mastery():
         app,
         session_id,
         question,
-        {"1": "B", "2": "B", "3": "B", "4": "B", "5": "C"},
+        {"1": "B", "2": "A", "3": "C", "4": "B", "5": "C"},
         "e9-checkpoint-pass-attempt",
     )
     assert completed.status_code == 200, completed.text
@@ -1967,14 +1967,14 @@ def test_e1_checkpoint_passes_without_answer_leak_and_atomically_records_mastery
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "B"},
         "e1-checkpoint-pass-attempt",
     )
     replayed = submit_checkpoint(
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "A", "4": "A", "5": "B"},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "B"},
         "e1-checkpoint-pass-attempt",
     )
     assert answered.status_code == 200, answered.text
@@ -2030,7 +2030,7 @@ def test_failed_e1_checkpoint_preserves_proficiency_and_retake_uses_form_b():
         app,
         retry_id,
         retry_question,
-        {str(position): "A" for position in range(1, 6)},
+        {"1": "B", "2": "A", "3": "C", "4": "C", "5": "A"},
         "e1-checkpoint-retake-attempt",
     )
     assert passed.status_code == 200, passed.text
@@ -2054,7 +2054,7 @@ def test_e1_checkpoint_does_not_partially_complete_if_proficiency_changes():
         app,
         session_id,
         question,
-        {str(position): "A" for position in range(1, 6)},
+        {"1": "A", "2": "C", "3": "B", "4": "A", "5": "C"},
         "e1-checkpoint-prerequisite-race-attempt",
     )
 

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-010",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.2",
-  "title": "A relationship with a fixed total",
+  "title": "Pair that fits two relationships",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Positive integers "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y"
-        },
-        {
-          "type": "text",
-          "text": " satisfy "
+          "text": "Two relationships are "
         },
         {
           "type": "inline_math",
@@ -44,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": ". If the ordered pair has "
+          "text": " and "
         },
         {
           "type": "inline_math",
@@ -52,11 +36,35 @@
         },
         {
           "type": "text",
-          "text": ", find "
+          "text": ". Which ordered pair satisfies both? Enter 1 for "
         },
         {
           "type": "inline_math",
-          "latex": "x"
+          "latex": "(5,8)"
+        },
+        {
+          "type": "text",
+          "text": ", 2 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(7,5)"
+        },
+        {
+          "type": "text",
+          "text": ", 3 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(9,2)"
+        },
+        {
+          "type": "text",
+          "text": " and 4 for "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(8,6)"
         },
         {
           "type": "text",
@@ -69,8 +77,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -82,23 +90,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the second condition to replace "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " or "
-            },
-            {
-              "type": "inline_math",
-              "latex": "y"
-            },
-            {
-              "type": "text",
-              "text": " in the first relationship."
+              "text": "Each pair must make both relationships true."
             }
           ]
         },
@@ -107,7 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute "
+              "text": "Test each pair in "
             },
             {
               "type": "inline_math",
@@ -115,7 +107,7 @@
             },
             {
               "type": "text",
-              "text": " into "
+              "text": " first, then check the surviving pair in "
             },
             {
               "type": "inline_math",
@@ -133,8 +125,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "5y+6=31"
+              "type": "text",
+              "text": "Only "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(7,5)"
+            },
+            {
+              "type": "text",
+              "text": " satisfies "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=y+2"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -144,8 +152,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "y=5"
+              "type": "inline_math",
+              "latex": "3(7)+2(5)=31"
             }
           ],
           "mark_type": "M",
@@ -155,8 +163,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=7"
+              "type": "text",
+              "text": "The code is 2."
             }
           ],
           "mark_type": "A",

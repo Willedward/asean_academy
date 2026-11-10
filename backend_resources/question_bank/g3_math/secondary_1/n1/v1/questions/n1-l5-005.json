@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l5-005",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.6",
-  "title": "Solve a compound rational inequality",
+  "title": "Sum of integers between bounds",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "List all possible values of "
+          "text": "Find the sum of all integers "
         },
         {
           "type": "inline_math",
@@ -37,11 +37,11 @@
         },
         {
           "type": "text",
-          "text": " if "
+          "text": " satisfying "
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{11}{6}<\\frac{2n-1}{5}\\le\\frac{7}{10}"
+          "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
         },
         {
           "type": "text",
@@ -52,19 +52,14 @@
       "primary_outcome": "1.6",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "ordered_numeric_list",
-        "canonical_expression": "[-4,-3,-2,-1,0,1,2]",
-        "canonical_latex": "-4,\\;-3,\\;-2,\\;-1,\\;0,\\;1,\\;2",
-        "variables": [
-          "n"
-        ],
-        "domain_constraints": [],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "order": "ascending",
-          "allow_equivalent_fractions": true
-        }
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "-7",
+        "canonical_latex": "-7",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -72,7 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply all parts by 5, then add 1 before dividing by 2."
+              "text": "Convert the bounds to decimals."
             }
           ]
         },
@@ -81,15 +76,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The resulting bounds are "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "List the integers between the bounds, then add them."
             }
           ]
         }
@@ -100,15 +87,23 @@
           "content": [
             {
               "type": "inline_math",
-              "latex": "-\\frac{55}{6}<2n-1\\le\\frac{7}{2}"
+              "latex": "-\\frac{49}{12}\\approx-4.08"
             },
             {
               "type": "text",
-              "text": ", hence "
+              "text": " and "
             },
             {
               "type": "inline_math",
-              "latex": "-\\frac{49}{6}<2n\\le\\frac{9}{2}"
+              "latex": "\\frac94=2.25"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "n=-4,-3,-2,-1,0,1,2"
             },
             {
               "type": "text",
@@ -122,16 +117,12 @@
           "position": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "-\\frac{49}{12}<n\\le\\frac{9}{4}"
-            },
-            {
               "type": "text",
-              "text": ", so "
+              "text": "The sum is "
             },
             {
               "type": "inline_math",
-              "latex": "n=-4,-3,-2,-1, 0, 1, 2"
+              "latex": "-7"
             },
             {
               "type": "text",

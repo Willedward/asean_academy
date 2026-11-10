@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-524 — Reflected triangular pennants
+## g2-l2-524 — Congruent triangles: find the perimeter
 
 [Open this question in the HTML preview](index.html#g2-l2-524)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l4-513 — Congruent frame perimeter
+## g2-l4-513 — Congruent frames with an algebraic length
 
 [Open this question in the HTML preview](index.html#g2-l4-513)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-525 — Similar picture frames
+## g2-l2-525 — Enlargement with a change of units
 
 [Open this question in the HTML preview](index.html#g2-l2-525)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-526 — Reduced diagram
+## g2-l2-526 — Reduced length of a side
 
 [Open this question in the HTML preview](index.html#g2-l2-526)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-519 — Obtuse corresponding angle
+## g2-l1-519 — Use the angle sum in a similar triangle
 
 [Open this question in the HTML preview](index.html#g2-l1-519)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-527 — Similar trapezium sides
+## g2-l2-527 — Vertex order in similar triangles
 
 [Open this question in the HTML preview](index.html#g2-l2-527)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-528 — Triangle proportionality
+## g2-l2-528 — Similar triangles: three-term ratio
 
 [Open this question in the HTML preview](index.html#g2-l2-528)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-520 — Miniature coordinate label
+## g2-l1-520 — Find a scale factor from coordinates
 
 [Open this question in the HTML preview](index.html#g2-l1-520)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-529 — Origin image ordinate
+## g2-l2-529 — y-coordinate of an image
 
 [Open this question in the HTML preview](index.html#g2-l2-529)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-521 — Photo enlargement
+## g2-l1-521 — Scale factor from two matching features
 
 [Open this question in the HTML preview](index.html#g2-l1-521)
 

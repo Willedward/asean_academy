@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student designers considered limited storage space while preparing a replacement design for the community grain store. A cone and a cylinder have the same circular base and perpendicular height. Enter the numerator of the fraction of the cylinder’s volume occupied by the cone."
+          "text": "In a sand-art kit, a cone and a cylinder have the same circular base and perpendicular height. Enter the numerator of the fraction of the cylinder’s volume occupied by the cone."
         }
       ],
       "marks": 1,
@@ -70,11 +70,15 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Three full cones fill a cylinder with the same base and perpendicular height, so the cone occupies one third of the cylinder."
+            },
+            {
               "type": "display_math",
               "latex": "V_{\\text{cone}}=\\frac13V_{\\text{cylinder}}"
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -86,7 +90,7 @@
       "asset_key": "g5-l1-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-502-diagram-r3.svg",
+      "path": "assets/g5-l1-502-diagram-r4.svg",
       "alt_text": "Cone drawn inside a cylinder. They share the same circular base of radius r and the same perpendicular height h; the cone's vertex is at the centre of the cylinder's top. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -331,6 +335,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

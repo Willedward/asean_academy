@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l3-025",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.1",
-  "title": "Coach speed including a break",
+  "title": "Length of a stop",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A coach travels 84 km in 1.2 hours, stops for 18 minutes, and then travels another 66 km in 1 hour. Find its average speed for the entire period, including the stop, in kilometres per hour."
+          "text": "A coach travels 84 km at 70 km/h, stops, and then travels 66 km at 60 km/h. The whole trip takes 3 hours, including the stop. Find the length of the stop in minutes."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60\\text{ km/h}",
+        "canonical_answer": "42",
+        "canonical_latex": "42",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Include the stop when finding the total elapsed time."
+              "text": "Find the travelling time for each part."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert 18 minutes to 0.3 hour, then divide the total distance by the total time."
+              "text": "Subtract the travelling times from 3 hours, then convert hours to minutes."
             }
           ]
         }
@@ -61,8 +61,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total distance}=84+66=150\\text{ km}"
+              "type": "text",
+              "text": "Travel times: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "84\\div70=1.2"
+            },
+            {
+              "type": "text",
+              "text": " h and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "66\\div60=1.1"
+            },
+            {
+              "type": "text",
+              "text": " h."
             }
           ],
           "mark_type": "M",
@@ -72,8 +88,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total time}=1.2+0.3+1=2.5\\text{ h}"
+              "type": "text",
+              "text": "Stop "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=3-1.2-1.1=0.7"
+            },
+            {
+              "type": "text",
+              "text": " h."
             }
           ],
           "mark_type": "M",
@@ -83,8 +107,12 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{150}{2.5}=60\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "0.7\\times60=42"
+            },
+            {
+              "type": "text",
+              "text": " minutes"
             }
           ],
           "mark_type": "A",

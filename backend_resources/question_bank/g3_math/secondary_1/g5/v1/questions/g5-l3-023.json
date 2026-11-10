@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-023",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged. Using "
+          "text": "A cuboid 10 cm by 5 cm by 4 cm and a cylinder of radius 3.5 cm and height 8 cm are fully submerged in water. Using "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": ", find their total displacement in cm³. Enter the numerical value only."
+          "text": ", find the total volume of water displaced in cm³. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -69,12 +69,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "V=10(5)(4)+\\frac{22}{7}(3.5^2)(8)=200+308=508"
+              "type": "inline_math",
+              "latex": "V=10(5)(4)+\\frac{22}{7}(3.5^2)(8)"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "=200+308=508"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g5",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "For a composite solid, volume is additive for joined non-overlapping pieces and subtractive for holes. Surface area requires a face audit: count exposed faces only. When two solids are joined, the contact region disappears from the outside surface on both pieces."
+          "text": "The diagram shows the solid used in both worked examples: a 5 cm by 4 cm by 3 cm block resting on top of a 9 cm by 7 cm by 4 cm cuboid. Volume is additive: the solid holds the space of both pieces. Surface area needs a face audit. Where the block sits, a 5 cm by 4 cm rectangle on top of the cuboid is covered, and the base of the block is hidden as well, so the contact area disappears from the outside surface twice."
         },
         {
           "type": "asset_ref",
@@ -70,11 +70,11 @@
       "stable_key": "g5-55-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: volume of joined cuboids",
       "prompt": [
         {
           "type": "text",
-          "text": "Two cuboids of volumes 180 cm³ and 75 cm³ are joined without overlap. Find the total volume."
+          "text": "The solid in the diagram is a 9 cm by 7 cm by 4 cm cuboid with a 5 cm by 4 cm by 3 cm block joined on top. Find its total volume."
         }
       ],
       "steps": [
@@ -82,8 +82,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Find the volume of each piece."
+            },
+            {
               "type": "display_math",
-              "latex": "V=180+75"
+              "latex": "9\\times7\\times4=252\\text{ cm}^3,\\qquad5\\times4\\times3=60\\text{ cm}^3"
             }
           ]
         },
@@ -91,23 +95,27 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "The pieces are joined without overlapping, so add the volumes."
+            },
+            {
               "type": "display_math",
-              "latex": "V=255\\text{ cm}^3"
+              "latex": "V=252+60=312\\text{ cm}^3"
             }
           ]
         }
       ],
-      "verification_note": "The result uses compatible units and agrees with the dimensions and component structure."
+      "verification_note": "The total is more than the large cuboid alone, 252 cm³, by exactly the block's 60 cm³."
     },
     {
       "stable_key": "g5-lesson-05-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: exposed surface area",
       "prompt": [
         {
           "type": "text",
-          "text": "Two cuboids are joined across a 4 cm by 3 cm rectangular face. Their separate surface areas are 94 cm² and 112 cm². Find the exposed surface area of the composite solid."
+          "text": "Find the exposed surface area of the same solid."
         }
       ],
       "steps": [
@@ -116,7 +124,15 @@
           "content": [
             {
               "type": "text",
-              "text": "The contact area is 4×3=12 cm²."
+              "text": "Find the surface area of each piece separately."
+            },
+            {
+              "type": "display_math",
+              "latex": "2(9\\times7+9\\times4+7\\times4)=2(63+36+28)=254\\text{ cm}^2"
+            },
+            {
+              "type": "display_math",
+              "latex": "2(5\\times4+5\\times3+4\\times3)=2(20+15+12)=94\\text{ cm}^2"
             }
           ]
         },
@@ -125,21 +141,16 @@
           "content": [
             {
               "type": "text",
-              "text": "That face was counted once on each separate cuboid, so subtract 2×12."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
+              "text": "The contact face is 5 cm by 4 cm, an area of 20 cm². It was counted once on each piece, so subtract it twice."
+            },
             {
-              "type": "text",
-              "text": "Exposed surface area=94+112−24=182 cm²."
+              "type": "display_math",
+              "latex": "254+94-2\\times20=308\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "The joined solid has less surface area than the sum 206 cm² of the separate solids."
+      "verification_note": "The joined solid has less surface than the two separate pieces, 348 cm², by exactly two contact faces, 40 cm²."
     },
     {
       "stable_key": "g5-lesson-05-pitfalls",
@@ -189,11 +200,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Sketch or decompose the figure, label compatible units, select the correct area or volume relationship, calculate in clear stages, and check that the final unit is squared or cubed as required."
+          "text": "Volume of a composite solid: add the volumes of joined pieces and subtract the volumes of holes or removed parts."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Surface area: count only exposed faces. Subtract each contact face twice, once from each piece, and add any new inside faces that a hole creates."
         }
       ]
     }
@@ -203,16 +214,491 @@
       "asset_key": "g5-lesson-05-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-lesson-05-composite_solid.svg",
-      "alt_text": "Two cuboids joined at a shaded contact face, plus a cube with a cylindrical hole.",
+      "path": "assets/g5-lesson-05-composite_solid-r3.svg",
+      "alt_text": "A cuboid with edges 9 cm, 7 cm and 4 cm, with a smaller cuboid with edges 5 cm, 4 cm and 3 cm attached on its top face. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "composite_solid",
-        "lesson_key": "g5-lesson-05"
+        "renderer": "nextscholar-sec1-mensuration-svg-v1",
+        "diagram_kind": "joined_solids",
+        "lesson_key": "g5-lesson-05",
+        "template": "block_on_cuboid",
+        "inputs": {
+          "length": {
+            "value": 9,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "block_length": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "block_depth": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "block_height": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "length": {
+            "value": 9,
+            "unit": "cm"
+          },
+          "depth": {
+            "value": 7,
+            "unit": "cm"
+          },
+          "height": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "block_length": {
+            "value": 5,
+            "unit": "cm"
+          },
+          "block_depth": {
+            "value": 4,
+            "unit": "cm"
+          },
+          "block_height": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
+        "forbidden_visible_labels": [
+          "308",
+          "254",
+          "94",
+          "20"
+        ],
+        "unknowns": [],
+        "drawn_scale": 33.81,
+        "depth_factor": 0.5,
+        "figures": [
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "F1",
+              "F2": "F2",
+              "F3": "F3",
+              "F4": "F4",
+              "B1": "B1",
+              "B2": "B2",
+              "B3": "B3",
+              "B4": "B4"
+            },
+            "hidden_vertex": "B1",
+            "occluded": [
+              [
+                "B4",
+                "Z1"
+              ]
+            ],
+            "segments": [
+              "B1B2",
+              "B1B4",
+              "F1B1",
+              "F1F2",
+              "F2F3",
+              "F3F4",
+              "F4F1",
+              "F2B2",
+              "B2B3",
+              "F3B3",
+              "F4B4",
+              "B4Z1",
+              "Z1B3"
+            ]
+          },
+          {
+            "type": "cuboid",
+            "vertices": {
+              "F1": "kF1",
+              "F2": "kF2",
+              "F3": "kF3",
+              "F4": "kF4",
+              "B1": "kB1",
+              "B2": "kB2",
+              "B3": "kB3",
+              "B4": "kB4"
+            },
+            "hidden_vertex": "kB1",
+            "on_top_of": [
+              "F4",
+              "F3",
+              "B3",
+              "B4"
+            ],
+            "cube": false,
+            "segments": [
+              "kB1kB2",
+              "kB1kB4",
+              "kF1kB1",
+              "kF1kF2",
+              "kF2kF3",
+              "kF3kF4",
+              "kF4kF1",
+              "kF2kB2",
+              "kB2kB3",
+              "kF3kB3",
+              "kB3kB4",
+              "kF4kB4"
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "segment": "F1F2",
+            "label": "9 cm",
+            "factor": 1.0,
+            "value": 9.0
+          },
+          {
+            "segment": "F4F1",
+            "label": "4 cm",
+            "factor": 1.0,
+            "value": 4.0
+          },
+          {
+            "segment": "F2B2",
+            "label": "7 cm",
+            "factor": 0.5,
+            "value": 7.0
+          },
+          {
+            "segment": "kB3kB4",
+            "label": "5 cm",
+            "factor": 1.0,
+            "value": 5.0
+          },
+          {
+            "segment": "kF3kB3",
+            "label": "4 cm",
+            "factor": 0.5,
+            "value": 4.0
+          },
+          {
+            "segment": "kF4kF1",
+            "label": "3 cm",
+            "factor": 1.0,
+            "value": 3.0
+          }
+        ],
+        "captions": [],
+        "shades": [
+          "right-face",
+          "top-face",
+          "front-face",
+          "kright-face",
+          "ktop-face",
+          "kfront-face"
+        ],
+        "viewbox": [
+          600.0,
+          440.0
+        ],
+        "points": {
+          "F1": [
+            99.39,
+            352.0
+          ],
+          "F2": [
+            403.68,
+            352.0
+          ],
+          "F3": [
+            403.68,
+            216.76
+          ],
+          "F4": [
+            99.39,
+            216.76
+          ],
+          "B2": [
+            500.61,
+            284.13
+          ],
+          "B3": [
+            500.61,
+            148.89
+          ],
+          "B4": [
+            196.32,
+            148.89
+          ],
+          "B1": [
+            196.32,
+            284.13
+          ],
+          "kF1": [
+            187.78,
+            202.22
+          ],
+          "kF2": [
+            356.83,
+            202.22
+          ],
+          "kF3": [
+            356.83,
+            100.79
+          ],
+          "kF4": [
+            187.78,
+            100.79
+          ],
+          "kB2": [
+            412.22,
+            163.43
+          ],
+          "kB3": [
+            412.22,
+            62.0
+          ],
+          "kB4": [
+            243.17,
+            62.0
+          ],
+          "kB1": [
+            243.17,
+            163.43
+          ],
+          "Z1": [
+            412.22,
+            148.89
+          ]
+        },
+        "segments": [
+          {
+            "key": "B1B2",
+            "from": "B1",
+            "to": "B2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "B1B4",
+            "from": "B1",
+            "to": "B4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1B1",
+            "from": "F1",
+            "to": "B1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "F1F2",
+            "from": "F1",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2F3",
+            "from": "F2",
+            "to": "F3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3F4",
+            "from": "F3",
+            "to": "F4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4F1",
+            "from": "F4",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2B2",
+            "from": "F2",
+            "to": "B2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B2B3",
+            "from": "B2",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F3B3",
+            "from": "F3",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F4B4",
+            "from": "F4",
+            "to": "B4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "B4Z1",
+            "from": "B4",
+            "to": "Z1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "Z1B3",
+            "from": "Z1",
+            "to": "B3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kB1kB2",
+            "from": "kB1",
+            "to": "kB2",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "kB1kB4",
+            "from": "kB1",
+            "to": "kB4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "kF1kB1",
+            "from": "kF1",
+            "to": "kB1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "kF1kF2",
+            "from": "kF1",
+            "to": "kF2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF2kF3",
+            "from": "kF2",
+            "to": "kF3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF3kF4",
+            "from": "kF3",
+            "to": "kF4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF4kF1",
+            "from": "kF4",
+            "to": "kF1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF2kB2",
+            "from": "kF2",
+            "to": "kB2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kB2kB3",
+            "from": "kB2",
+            "to": "kB3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF3kB3",
+            "from": "kF3",
+            "to": "kB3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kB3kB4",
+            "from": "kB3",
+            "to": "kB4",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "kF4kB4",
+            "from": "kF4",
+            "to": "kB4",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "leaders": [
+          {
+            "target": "segment:kF3kB3",
+            "from": [
+              384.52,
+              81.4
+            ],
+            "to": [
+              439.52,
+              81.4
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "9 cm",
+            "target": "segment:F1F2"
+          },
+          {
+            "text": "4 cm",
+            "target": "segment:F4F1"
+          },
+          {
+            "text": "7 cm",
+            "target": "segment:F2B2"
+          },
+          {
+            "text": "5 cm",
+            "target": "segment:kB3kB4"
+          },
+          {
+            "text": "4 cm",
+            "target": "segment:kF3kB3"
+          },
+          {
+            "text": "3 cm",
+            "target": "segment:kF4kF1"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "ac89b5553db7545d221e106dcccf474d364c20bbf9d6a4c02d36c1a244b8abd1",
-      "width": 940,
-      "height": 390
+      "sha256": "35b88613a53715368dd7369aa91967a186022401acbcc29153c316d3e78e5be8",
+      "width": 600,
+      "height": 440
     }
   ],
   "provenance": {
@@ -221,6 +707,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-sec1-mensuration-svg-v1; awaiting Mathematics and editorial review."
   }
 }

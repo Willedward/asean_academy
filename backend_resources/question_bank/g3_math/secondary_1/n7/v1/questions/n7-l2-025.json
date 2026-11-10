@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-025",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Naming the removed constant",
+  "title": "Value of an expression from a solution",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,39 +20,27 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The equation is changed to the equivalent equation "
+          "text": "Find the value of "
         },
         {
           "type": "inline_math",
-          "latex": "3x=15"
+          "latex": "2x+3"
         },
         {
           "type": "text",
-          "text": " by subtracting "
+          "text": " when "
         },
         {
           "type": "inline_math",
-          "latex": "k"
+          "latex": "x"
         },
         {
           "type": "text",
-          "text": " from both sides."
+          "text": " is the solution of the equation."
         },
         {
           "type": "display_math",
           "latex": "3x+4=19"
-        },
-        {
-          "type": "text",
-          "text": "Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
-        },
-        {
-          "type": "text",
-          "text": "."
         }
       ],
       "marks": 2,
@@ -61,8 +49,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "13",
+        "canonical_latex": "13",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -74,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Identify the constant added to "
+              "text": "First solve the equation for "
             },
             {
               "type": "inline_math",
-              "latex": "3x"
+              "latex": "x"
             },
             {
               "type": "text",
@@ -91,15 +79,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Which constant is added to "
+              "text": "Substitute your value of "
             },
             {
               "type": "inline_math",
-              "latex": "3x"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "? Subtract that number from both sides."
+              "text": " into "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2x+3"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -109,8 +105,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3x+4-4=19-4"
+              "type": "inline_math",
+              "latex": "3x=15"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x=5"
             }
           ],
           "mark_type": "M",
@@ -120,8 +124,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "k=4"
+              "type": "inline_math",
+              "latex": "2x+3=2(5)+3=13"
             }
           ],
           "mark_type": "A",

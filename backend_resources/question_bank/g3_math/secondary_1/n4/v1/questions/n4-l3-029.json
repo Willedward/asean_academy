@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l3-029",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A minibus is 18 km ahead of a car on the same road. The minibus travels at 54 km/h and the car travels in the same direction at 72 km/h. Find the time in hours taken by the car to catch the minibus."
+          "text": "A minibus is 27 km ahead of a car on the same road. The minibus travels at 54 km/h and the car travels in the same direction at 72 km/h. Find the time in hours taken by the car to catch the minibus."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1\\text{ h}",
+        "canonical_answer": "1.5",
+        "canonical_latex": "1.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -69,7 +69,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Closing speed}=72-54=18\\text{ km/h}"
             }
           ],
@@ -80,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Time}=\\frac{18}{18}"
+              "type": "inline_math",
+              "latex": "\\text{Time}=\\frac{27}{18}"
             }
           ],
           "mark_type": "M",
@@ -91,8 +91,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "=1\\text{ h}"
+              "type": "inline_math",
+              "latex": "=1.5\\text{ h}"
             }
           ],
           "mark_type": "A",

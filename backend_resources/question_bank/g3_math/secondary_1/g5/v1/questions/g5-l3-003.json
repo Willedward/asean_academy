@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l3-003",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 16 m by 12 m lobby has a 6 m by 5 m rectangular corner removed. Square tiles each cover 0.5 m². How many tiles cover the remaining floor with no wastage? Enter the numerical value only."
+          "text": "A 16 m by 12 m lobby has a 6 m by 5 m rectangular corner removed. Square tiles each cover 0.25 m². How many tiles cover the remaining floor with no wastage? Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "324",
-        "canonical_latex": "324",
+        "canonical_answer": "648",
+        "canonical_latex": "648",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The remaining area is 162 m²."
+              "text": "Find the area of the L-shape, then divide by the area of one tile."
             }
           ]
         }
@@ -70,7 +70,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "A=16(12)-6(5)=162"
             }
           ],
@@ -81,8 +81,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "N=\\frac{162}{0.5}=324"
+              "type": "inline_math",
+              "latex": "N=\\frac{162}{0.25}=648"
             }
           ],
           "mark_type": "A",
@@ -97,7 +97,7 @@
       "asset_key": "g5-l3-003-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-003-diagram-r3.svg",
+      "path": "assets/g5-l3-003-diagram-r4.svg",
       "alt_text": "An L-shape. The full bottom edge is 16 m and the full left edge is 12 m. The removed top-right corner has edges 6 m and 5 m. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",
@@ -122,7 +122,7 @@
             "value": 5,
             "unit": "m"
           },
-          "tile_area": 0.5
+          "tile_area": 0.25
         },
         "not_to_scale": true,
         "dimensions": {
@@ -144,7 +144,7 @@
           }
         },
         "forbidden_visible_labels": [
-          "324",
+          "648",
           "162",
           "192",
           "30",

@@ -1,14 +1,14 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 4,
+    "revision": 5,
     "stable_key": "n1-l2-016",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.1",
-    "title": "Prime factors of 756",
+    "title": "Prime factors of 1260",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Express 756 as a product of prime factors using index notation. Type powers with ^, for example 2^3."
+            "text": "Express 1260 as a product of prime factors using index notation. Type powers with ^, for example 2^3."
           }
         ],
         "marks": 2,
@@ -30,8 +30,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "prime_factorisation",
-          "canonical_expression": "756",
-          "canonical_latex": "2^2\\times3^3\\times7",
+          "canonical_expression": "1260",
+          "canonical_latex": "2^2\\times3^2\\times5\\times7",
           "variables": [],
           "domain_constraints": [],
           "accepted_equivalents": [],
@@ -56,7 +56,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "756 is divisible by 2 twice; then factor 189 using 3 and 7."
+                "text": "1260 is divisible by 2 twice; then factorise 315 using small primes."
               }
             ]
           }
@@ -66,8 +66,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "756=2\\times 378=2^{2}\\times 189"
+                "type": "inline_math",
+                "latex": "1260=2\\times630=2^{2}\\times315"
               }
             ],
             "mark_type": "M",
@@ -78,7 +78,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "189=3^{3}\\times 7"
+                "latex": "315=3^{2}\\times5\\times7"
               },
               {
                 "type": "text",
@@ -86,7 +86,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "756=2^{2}\\times 3^{3}\\times 7"
+                "latex": "1260=2^{2}\\times3^{2}\\times5\\times7"
               }
             ],
             "mark_type": "A",
@@ -115,24 +115,19 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-011",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.1",
-    "title": "Complete a product to a square",
+    "title": "Sum of the prime factors",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "A positive integer is written in prime-factor form."
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -140,23 +135,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the smallest positive integer "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": " such that "
-          },
-          {
-            "type": "inline_math",
-            "latex": "630k"
-          },
-          {
-            "type": "text",
-            "text": " is a perfect square."
+            "text": "Find the sum of the distinct prime factors of 630."
           }
         ],
         "marks": 2,
@@ -165,8 +144,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "70",
-          "canonical_latex": "70",
+          "canonical_answer": "17",
+          "canonical_latex": "17",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -178,7 +157,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "In a perfect square, every prime exponent is even."
+                "text": "Write 630 as a product of prime factors."
               }
             ]
           },
@@ -186,12 +165,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "630=2\\times 3^{2}\\times 5\\times 7"
-              },
-              {
                 "type": "text",
-                "text": "; supply one more factor of each prime with an odd exponent."
+                "text": "List each different prime only once, then add them."
               }
             ]
           }
@@ -201,8 +176,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "630=2\\times 3^{2}\\times 5\\times 7"
+                "type": "inline_math",
+                "latex": "630=2\\times3^{2}\\times5\\times7"
               }
             ],
             "mark_type": "M",
@@ -213,15 +188,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "k=2\\times 5\\times 7=70"
-              },
-              {
-                "type": "text",
-                "text": ", giving "
-              },
-              {
-                "type": "inline_math",
-                "latex": "630k=210^{2}"
+                "latex": "2+3+5+7=17"
               }
             ],
             "mark_type": "A",
@@ -250,14 +217,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-001",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.1",
-    "title": "Recover exponents from divisor information",
+    "title": "Identify a number from its factors",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -269,7 +236,7 @@
       },
       {
         "type": "inline_math",
-        "latex": "N=2^{a}\\times 3^{b}"
+        "latex": "N=2^{a}\\times3^{b}"
       },
       {
         "type": "text",
@@ -289,7 +256,23 @@
       },
       {
         "type": "text",
-        "text": " are positive integers. N is divisible by 72 and has exactly 18 positive factors."
+        "text": " are positive integers. "
+      },
+      {
+        "type": "inline_math",
+        "latex": "N"
+      },
+      {
+        "type": "text",
+        "text": " is divisible by 72 and "
+      },
+      {
+        "type": "inline_math",
+        "latex": "400<N<500"
+      },
+      {
+        "type": "text",
+        "text": "."
       }
     ],
     "parts": [
@@ -308,8 +291,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "288",
-          "canonical_latex": "288",
+          "canonical_answer": "432",
+          "canonical_latex": "432",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -321,23 +304,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use divisibility by 72 to bound "
+                "text": "Use divisibility by 72 to narrow down the possible values of "
               },
               {
                 "type": "inline_math",
-                "latex": "a"
+                "latex": "N"
               },
               {
                 "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "b"
-              },
-              {
-                "type": "text",
-                "text": ", then use the divisor-count formula."
+                "text": "."
               }
             ]
           },
@@ -345,36 +320,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "72=2^{3}\\times 3^{2}"
-              },
-              {
                 "type": "text",
-                "text": ", so "
-              },
-              {
-                "type": "inline_math",
-                "latex": "a\\ge 3"
-              },
-              {
-                "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "b\\ge 2"
-              },
-              {
-                "type": "text",
-                "text": "; also "
-              },
-              {
-                "type": "inline_math",
-                "latex": "(a+1)(b+1)=18"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "List the multiples of 72 between 400 and 500 and check that each has only 2 and 3 as prime factors."
               }
             ]
           }
@@ -385,43 +332,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "The only factor pair satisfying "
+                "text": "The only multiple of 72 between 400 and 500 is "
               },
               {
                 "type": "inline_math",
-                "latex": "a+1\\ge 4"
-              },
-              {
-                "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "b+1\\ge 3"
-              },
-              {
-                "type": "text",
-                "text": " is "
-              },
-              {
-                "type": "inline_math",
-                "latex": "6\\times 3"
-              },
-              {
-                "type": "text",
-                "text": ", so "
-              },
-              {
-                "type": "inline_math",
-                "latex": "a=5"
-              },
-              {
-                "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "b=2"
+                "latex": "72\\times6=432"
               },
               {
                 "type": "text",
@@ -435,8 +350,20 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "N=2^{5}\\times 3^{2}=288"
+                "type": "inline_math",
+                "latex": "432=2^{4}\\times3^{3}"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "N=432"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -465,7 +392,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l2-017",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -485,7 +412,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the highest common factor of 168 and 252."
+            "text": "Find the highest common factor of 126 and 198."
           }
         ],
         "marks": 2,
@@ -494,8 +421,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "84",
-          "canonical_latex": "84",
+          "canonical_answer": "18",
+          "canonical_latex": "18",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -515,8 +442,12 @@
             "stage": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Write "
+              },
+              {
                 "type": "inline_math",
-                "latex": "168=2^{3}\\times 3\\times 7"
+                "latex": "126"
               },
               {
                 "type": "text",
@@ -524,11 +455,11 @@
               },
               {
                 "type": "inline_math",
-                "latex": "252=2^{2}\\times 3^{2}\\times 7"
+                "latex": "198"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " in prime-factor form, then take the common prime powers."
               }
             ]
           }
@@ -538,8 +469,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{HCF}=2^{2}\\times 3\\times 7"
+                "type": "inline_math",
+                "latex": "126=2\\times3^{2}\\times7"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "198=2\\times3^{2}\\times11"
               }
             ],
             "mark_type": "M",
@@ -549,8 +488,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{HCF}=84"
+                "type": "inline_math",
+                "latex": "\\text{HCF}=2\\times3^{2}=18"
               }
             ],
             "mark_type": "A",
@@ -579,14 +518,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-012",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.2",
-    "title": "Least square multiple",
+    "title": "Lowest common multiple of 180 and 24",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -599,7 +538,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the smallest perfect square that is a multiple of 180."
+            "text": "Find the smallest positive integer that is a multiple of both 180 and 24."
           }
         ],
         "marks": 2,
@@ -608,8 +547,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "900",
-          "canonical_latex": "900",
+          "canonical_answer": "360",
+          "canonical_latex": "360",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -621,7 +560,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 180 in prime-factor form and make every exponent even."
+                "text": "Write 180 and 24 as products of prime factors."
               }
             ]
           },
@@ -629,12 +568,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "180=2^{2}\\times 3^{2}\\times 5"
-              },
-              {
                 "type": "text",
-                "text": ", so only the exponent of 5 needs another factor of 5."
+                "text": "Take the highest power of each prime that appears."
               }
             ]
           }
@@ -644,8 +579,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "180=2^{2}\\times 3^{2}\\times 5"
+                "type": "inline_math",
+                "latex": "180=2^{2}\\times3^{2}\\times5"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "24=2^{3}\\times3"
               }
             ],
             "mark_type": "M",
@@ -655,8 +598,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "180\\times 5=2^{2}\\times 3^{2}\\times 5^{2}=900=30^{2}"
+                "type": "inline_math",
+                "latex": "\\text{LCM}=2^{3}\\times3^{2}\\times5=360"
               }
             ],
             "mark_type": "A",
@@ -1495,32 +1438,19 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l5-002",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.4",
-    "title": "Two-stage calculator model",
+    "title": "Smallest power above a target",
     "difficulty": 5,
     "calculator_allowed": true,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "text",
-        "text": "Define "
-      },
-      {
-        "type": "inline_math",
-        "latex": "A=\\frac{\\sqrt{73.5}+4.82^{3}}{1.75^{2}-0.64}"
-      },
-      {
-        "type": "text",
-        "text": ". Use the unrounded value of A in the second calculation."
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -1528,15 +1458,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Calculate "
+            "text": "Use your calculator to find the smallest positive integer "
           },
           {
             "type": "inline_math",
-            "latex": "100\\frac{A-20}{A+20}"
+            "latex": "n"
           },
           {
             "type": "text",
-            "text": ". Give your answer correct to 3 significant figures."
+            "text": " for which "
+          },
+          {
+            "type": "inline_math",
+            "latex": "1.03^{n}>2"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 3,
@@ -1544,12 +1482,12 @@
         "secondary_outcomes": [],
         "response": {
           "type": "numeric",
-          "comparison_mode": "rounded_sf",
-          "canonical_answer": "42.7",
-          "canonical_latex": "42.7",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "24",
+          "canonical_latex": "24",
           "accepted_answers": [],
           "absolute_tolerance": null,
-          "rounding_precision": 3,
+          "rounding_precision": null,
           "unit": null
         },
         "hints": [
@@ -1558,7 +1496,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate A with brackets around the complete numerator and denominator."
+                "text": "Use trial and improvement on your calculator."
               }
             ]
           },
@@ -1566,12 +1504,16 @@
             "stage": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Test values of "
+              },
+              {
                 "type": "inline_math",
-                "latex": "A=49.764038"
+                "latex": "n"
               },
               {
                 "type": "text",
-                "text": "...; substitute this unrounded value into the percentage expression."
+                "text": " around 20, then adjust until you find the first power above 2."
               }
             ]
           }
@@ -1581,8 +1523,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "A=\\frac{\\sqrt{73.5}+4.82^{3}}{1.75^{2}-0.64}=49.764038"
+                "type": "inline_math",
+                "latex": "1.03^{23}=1.97\\ldots"
+              },
+              {
+                "type": "text",
+                "text": ", which is less than 2."
               }
             ],
             "mark_type": "M",
@@ -1592,8 +1538,12 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "100\\frac{A-20}{A+20}=42.663869"
+                "type": "inline_math",
+                "latex": "1.03^{24}=2.03\\ldots"
+              },
+              {
+                "type": "text",
+                "text": ", which is greater than 2."
               }
             ],
             "mark_type": "M",
@@ -1603,8 +1553,8 @@
             "position": 3,
             "content": [
               {
-                "type": "text",
-                "text": "To 3 significant figures, the answer is 42.7."
+                "type": "inline_math",
+                "latex": "n=24"
               }
             ],
             "mark_type": "A",
@@ -1633,14 +1583,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l2-018",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Order signed fractions and decimals",
+    "title": "Order mixed signs",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1657,15 +1607,15 @@
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{7}{4}"
+            "latex": "-\\frac{3}{4}"
           },
           {
             "type": "text",
-            "text": ", -1.6, -1.58 and "
+            "text": ", 0.7, -0.72 and "
           },
           {
             "type": "inline_math",
-            "latex": "-\\frac{3}{2}"
+            "latex": "\\frac{3}{5}"
           },
           {
             "type": "text",
@@ -1678,8 +1628,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "ordered_numeric_list",
-          "canonical_expression": "[-1.75,-1.6,-1.58,-1.5]",
-          "canonical_latex": "-\\frac74,\\;-1.6,\\;-1.58,\\;-\\frac32",
+          "canonical_expression": "[-0.75,-0.72,0.6,0.7]",
+          "canonical_latex": "-\\frac34,\\;-0.72,\\;\\frac35,\\;0.7",
           "variables": [],
           "domain_constraints": [],
           "accepted_equivalents": [],
@@ -1703,7 +1653,7 @@
             "content": [
               {
                 "type": "inline_math",
-                "latex": "-\\frac{7}{4}=-1.75"
+                "latex": "-\\frac{3}{4}=-0.75"
               },
               {
                 "type": "text",
@@ -1711,11 +1661,11 @@
               },
               {
                 "type": "inline_math",
-                "latex": "-\\frac{3}{2}=-1.5"
+                "latex": "\\frac{3}{5}=0.6"
               },
               {
                 "type": "text",
-                "text": "; more negative values come first."
+                "text": "; negative values come before positive ones."
               }
             ]
           }
@@ -1726,7 +1676,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The values are -1.75, -1.60, -1.58 and -1.50."
+                "text": "The values are -0.75, -0.72, 0.6 and 0.7."
               }
             ],
             "mark_type": "M",
@@ -1741,15 +1691,19 @@
               },
               {
                 "type": "inline_math",
-                "latex": "-\\frac{7}{4}"
+                "latex": "-\\frac34"
               },
               {
                 "type": "text",
-                "text": ", -1.6, -1.58, "
+                "text": ", -0.72, "
               },
               {
                 "type": "inline_math",
-                "latex": "-\\frac{3}{2}"
+                "latex": "\\frac35"
+              },
+              {
+                "type": "text",
+                "text": ", 0.7"
               }
             ],
             "mark_type": "A",
@@ -1778,14 +1732,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-016",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Midpoint of signed coordinates",
+    "title": "Midpoints on a number line",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1803,7 +1757,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the coordinate of the midpoint of PQ."
+            "text": "M is the midpoint of PQ and N is the midpoint of MQ. Find the coordinate of N."
           }
         ],
         "marks": 2,
@@ -1812,8 +1766,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "-0.7",
-          "canonical_latex": "-0.7",
+          "canonical_answer": "1.25",
+          "canonical_latex": "1.25",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1825,7 +1779,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The midpoint is the average of the two endpoint coordinates."
+                "text": "Find the coordinate of M first."
               }
             ]
           },
@@ -1834,7 +1788,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add -4.6 and 3.2, then divide the result by 2."
+                "text": "Then find the midpoint of M and Q in the same way."
               }
             ]
           }
@@ -1844,8 +1798,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{-4.6+3.2}{2}=-\\frac{1.4}{2}"
+                "type": "inline_math",
+                "latex": "M=\\frac{-4.6+3.2}{2}=-0.7"
               }
             ],
             "mark_type": "M",
@@ -1855,8 +1809,8 @@
             "position": 2,
             "content": [
               {
-                "type": "text",
-                "text": "The midpoint has coordinate -0.7."
+                "type": "inline_math",
+                "latex": "N=\\frac{-0.7+3.2}{2}=1.25"
               }
             ],
             "mark_type": "A",
@@ -1885,14 +1839,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-003",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.5",
-    "title": "Divide a directed interval",
+    "title": "Equal divisions on a number line",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1900,7 +1854,7 @@
     "stem": [
       {
         "type": "text",
-        "text": "On a number line, A has coordinate -2.4 and B has coordinate 1.8."
+        "text": "On a number line, A has coordinate -2.4 and B has coordinate 1.8. The segment AB is divided into 5 equal parts."
       }
     ],
     "parts": [
@@ -1910,7 +1864,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "R is two fifths of the distance from A to B, measured from A. Find the coordinate of R."
+            "text": "R is the second division point after A, moving towards B. Find the coordinate of R."
           }
         ],
         "marks": 2,
@@ -1932,7 +1886,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the directed distance from A to B before taking the fraction."
+                "text": "Find the length of AB, then the length of one equal part."
               }
             ]
           },
@@ -1940,20 +1894,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "B-A=4.2"
-              },
-              {
                 "type": "text",
-                "text": ", so move "
-              },
-              {
-                "type": "inline_math",
-                "latex": "(\\frac{2}{5})(4.2)=1.68"
-              },
-              {
-                "type": "text",
-                "text": " units right from -2.4."
+                "text": "Move two equal parts to the right from A."
               }
             ]
           }
@@ -1963,8 +1905,20 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "B-A=1.8-(-2.4)=4.2"
+                "type": "inline_math",
+                "latex": "AB=1.8-(-2.4)=4.2"
+              },
+              {
+                "type": "text",
+                "text": ", so each part is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4.2\\div5=0.84"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1974,8 +1928,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "R=-2.4+(\\frac{2}{5})(4.2)=-0.72"
+                "type": "inline_math",
+                "latex": "R=-2.4+2(0.84)=-0.72"
               }
             ],
             "mark_type": "A",
@@ -2243,14 +2197,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-017",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.6",
-    "title": "Scale a double inequality",
+    "title": "Integers in a compound inequality",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2284,7 +2238,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "-1.5\\le\\frac{n}{2}<2.25"
+            "latex": "-3\\le n<4.5"
           },
           {
             "type": "text",
@@ -2315,7 +2269,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply every part of the inequality by 2."
+                "text": "Decide which endpoints are included."
               }
             ]
           },
@@ -2324,15 +2278,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The equivalent bounds are "
-              },
-              {
-                "type": "inline_math",
-                "latex": "-3\\le n<4.5"
-              },
-              {
-                "type": "text",
-                "text": "; list only integers."
+                "text": "Start at the smallest allowed integer and stop before 4.5."
               }
             ]
           }
@@ -2342,8 +2288,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "-3\\le n<4.5"
+                "type": "inline_math",
+                "latex": "n"
+              },
+              {
+                "type": "text",
+                "text": " can equal -3, and it must be less than 4.5."
               }
             ],
             "mark_type": "M",
@@ -2353,8 +2303,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "n=-3,-2,-1, 0, 1, 2, 3, 4"
+                "type": "inline_math",
+                "latex": "n=-3,-2,-1,0,1,2,3,4"
               }
             ],
             "mark_type": "A",
@@ -2631,7 +2581,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l3-018",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2660,7 +2610,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "\\frac{19.8\\times 0.503}{0.0997}"
+            "latex": "\\frac{41.2\\times0.298}{0.0503}"
           },
           {
             "type": "text",
@@ -2673,8 +2623,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_answer": "240",
+          "canonical_latex": "240",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2695,7 +2645,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 19.8≈20, 0.503≈0.5 and 0.0997≈0.1."
+                "text": "Use 41.2≈40, 0.298≈0.3 and 0.0503≈0.05."
               }
             ]
           }
@@ -2705,8 +2655,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{20\\times 0.5}{0.1}"
+                "type": "inline_math",
+                "latex": "\\frac{40\\times0.3}{0.05}"
               }
             ],
             "mark_type": "M",
@@ -2716,8 +2666,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{10}{0.1}=100"
+                "type": "inline_math",
+                "latex": "\\frac{12}{0.05}=240"
               }
             ],
             "mark_type": "A",
@@ -2746,36 +2696,19 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n1-l4-005",
     "bank_key": "g3-sec1-n1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N1",
     "primary_outcome": "1.7",
-    "title": "Upper bound of a sum",
+    "title": "Greatest value before rounding",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
     "status": "draft",
-    "stem": [
-      {
-        "type": "inline_math",
-        "latex": "a=3.46"
-      },
-      {
-        "type": "text",
-        "text": " correct to 2 decimal places and "
-      },
-      {
-        "type": "inline_math",
-        "latex": "b=8.2"
-      },
-      {
-        "type": "text",
-        "text": " correct to 1 decimal place."
-      }
-    ],
+    "stem": [],
     "parts": [
       {
         "position": 1,
@@ -2783,11 +2716,27 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the upper bound of "
+            "text": "A number "
           },
           {
             "type": "inline_math",
-            "latex": "a+b"
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " has exactly 3 decimal places. When "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": " is rounded to 2 decimal places, the result is 3.46. Find the greatest possible value of "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
           },
           {
             "type": "text",
@@ -2800,8 +2749,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "11.715",
-          "canonical_latex": "11.715",
+          "canonical_answer": "3.464",
+          "canonical_latex": "3.464",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2813,7 +2762,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write the upper bound for each rounded measurement."
+                "text": "Decide which 3-decimal-place numbers round to 3.46."
               }
             ]
           },
@@ -2821,20 +2770,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "a<3.465"
-              },
-              {
                 "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "b<8.25"
-              },
-              {
-                "type": "text",
-                "text": ", so add the two upper endpoints."
+                "text": "Numbers from 3.455 up to, but not including, 3.465 round to 3.46."
               }
             ]
           }
@@ -2844,8 +2781,8 @@
             "position": 1,
             "content": [
               {
-                "type": "text",
-                "text": "Upper bounds: 3.465 and 8.25"
+                "type": "inline_math",
+                "latex": "3.455\\le x<3.465"
               }
             ],
             "mark_type": "M",
@@ -2855,8 +2792,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3.465+8.25=11.715"
+                "type": "text",
+                "text": "The greatest value with 3 decimal places is 3.464."
               }
             ],
             "mark_type": "A",

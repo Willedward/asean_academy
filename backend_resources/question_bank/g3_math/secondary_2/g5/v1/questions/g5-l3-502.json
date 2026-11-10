@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G5",
   "primary_outcome": "5.6",
-  "title": "Cone and hemisphere capacity",
+  "title": "Volume of a cone joined to a hemisphere",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered heavy seasonal rainfall while preparing a replacement design for the recycling centre container. A solid is formed by joining a cone of radius 3 cm and height 4 cm to a hemisphere of the same radius. Find the total volume in cm³, correct to 1 decimal place."
+          "text": "A toy spinning top is a solid made by joining a cone of radius 3 cm and height 4 cm to a hemisphere of the same radius. The height given is the perpendicular height of the cone. Find the total volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -71,22 +71,41 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of the cone:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac13\\pi(3)^2(4)+\\frac23\\pi(3)^3=94.2"
+              "latex": "\\frac13\\pi(3)^2(4)=12\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the hemisphere, half of a sphere of the same radius:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{94.2}"
+              "latex": "\\frac12\\times\\frac43\\pi(3)^3=18\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the two volumes."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=30\\pi=94.248\\ldots=94.2\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -101,7 +120,7 @@
       "asset_key": "g5-l3-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-502-diagram-r2.svg",
+      "path": "assets/g5-l3-502-diagram-r3.svg",
       "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 3 cm. The cone's perpendicular height is h = 4 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -351,6 +370,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

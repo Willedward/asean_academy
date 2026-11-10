@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l3-020",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -70,12 +70,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "96-(18+25+31)=22"
+              "type": "inline_math",
+              "latex": "18+25+31=74"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 2
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "96-74=22"
             }
           ],
           "mark_type": "A",
-          "mark_value": 3
+          "mark_value": 1
         }
       ]
     }
@@ -86,7 +97,7 @@
       "asset_key": "s1-l3-020-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-020-diagram-r2.svg",
+      "path": "assets/s1-l3-020-diagram-r3.svg",
       "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

@@ -591,7 +591,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l3-002",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -611,7 +611,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cyclist rides 24 km in 1.5 hours, rests for 0.5 hour, and then rides 16 km in 1 hour. Find the average speed for the complete journey, including the rest, in km/h. Give your answer as an exact fraction."
+            "text": "A cyclist rides 30 km in 1.5 hours, rests for 0.5 hour, and then rides 20 km in 1 hour. Find the average speed for the complete journey, including the rest, in km/h. Give your answer as an exact fraction."
           }
         ],
         "marks": 3,
@@ -620,8 +620,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "40/3",
-          "canonical_latex": "\\frac{40}{3}\\text{ km/h}",
+          "canonical_answer": "50/3",
+          "canonical_latex": "\\frac{50}{3}",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -652,8 +652,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Total distance}=24+16=40\\text{ km}"
+                "type": "inline_math",
+                "latex": "\\text{Total distance}=30+20=50\\text{ km}"
               }
             ],
             "mark_type": "M",
@@ -663,7 +663,7 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "\\text{Total time}=1.5+0.5+1=3\\text{ h}"
               }
             ],
@@ -674,8 +674,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Average speed}=\\frac{40}{3}\\text{ km/h}"
+                "type": "inline_math",
+                "latex": "\\text{Average speed}=\\frac{50}{3}\\text{ km/h}"
               }
             ],
             "mark_type": "A",
@@ -704,7 +704,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l4-001",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -746,7 +746,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Choose a convenient one-way distance that is a common multiple of both speeds."
+                "text": "Let the one-way distance be "
+              },
+              {
+                "type": "inline_math",
+                "latex": "d"
+              },
+              {
+                "type": "text",
+                "text": " km and write each travel time in terms of "
+              },
+              {
+                "type": "inline_math",
+                "latex": "d"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -755,7 +771,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Let each direction be 180 km, then find the total distance and the two travel times."
+                "text": "Add the two travel times, then divide the total distance "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2d"
+              },
+              {
+                "type": "text",
+                "text": " by the total time."
               }
             ]
           }
@@ -765,8 +789,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Let each one-way distance be }180\\text{ km}"
+                "type": "text",
+                "text": "Let the one-way distance be "
+              },
+              {
+                "type": "inline_math",
+                "latex": "d"
+              },
+              {
+                "type": "text",
+                "text": " km."
               }
             ],
             "mark_type": "B",
@@ -776,8 +808,20 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "t_1=\\frac{180}{60}=3\\text{ h},\\quad t_2=\\frac{180}{90}=2\\text{ h}"
+                "type": "inline_math",
+                "latex": "t_1=\\frac{d}{60}"
+              },
+              {
+                "type": "text",
+                "text": " h and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "t_2=\\frac{d}{90}"
+              },
+              {
+                "type": "text",
+                "text": " h"
               }
             ],
             "mark_type": "M",
@@ -787,8 +831,16 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Total distance}=360\\text{ km},\\quad \\text{total time}=5\\text{ h}"
+                "type": "text",
+                "text": "Total time "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=\\frac{d}{60}+\\frac{d}{90}=\\frac{d}{36}"
+              },
+              {
+                "type": "text",
+                "text": " h"
               }
             ],
             "mark_type": "M",
@@ -798,8 +850,16 @@
             "position": 4,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Average speed}=\\frac{360}{5}=72\\text{ km/h}"
+                "type": "text",
+                "text": "Average speed "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=\\frac{2d}{d/36}=72"
+              },
+              {
+                "type": "text",
+                "text": " km/h"
               }
             ],
             "mark_type": "A",
@@ -952,14 +1012,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l1-003",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "Converting kilometres to metres",
+    "title": "Metres per second to metres per minute",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -972,7 +1032,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Express 3.6 km in metres."
+            "text": "Express 3 m/s in metres per minute."
           }
         ],
         "marks": 1,
@@ -981,8 +1041,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3600",
-          "canonical_latex": "3600\\text{ m}",
+          "canonical_answer": "180",
+          "canonical_latex": "180",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -994,7 +1054,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Recall how many metres make one kilometre."
+                "text": "One minute is 60 seconds."
               }
             ]
           },
@@ -1003,7 +1063,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply 3.6 by 1000."
+                "text": "Multiply 3 by 60."
               }
             ]
           }
@@ -1013,8 +1073,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3.6\\times1000=3600\\text{ m}"
+                "type": "inline_math",
+                "latex": "3\\times60=180\\text{ m/min}"
               }
             ],
             "mark_type": "B",
@@ -1225,7 +1285,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l2-005",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1245,7 +1305,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Express 90 km/h in m/s."
+            "text": "Express 54 km/h in m/s."
           }
         ],
         "marks": 1,
@@ -1254,8 +1314,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "25",
-          "canonical_latex": "25\\text{ m/s}",
+          "canonical_answer": "15",
+          "canonical_latex": "15",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1276,7 +1336,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 90 by 3.6."
+                "text": "Divide 54 by 3.6."
               }
             ]
           }
@@ -1286,8 +1346,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "90\\div3.6=25\\text{ m/s}"
+                "type": "inline_math",
+                "latex": "54\\div3.6=15\\text{ m/s}"
               }
             ],
             "mark_type": "B",
@@ -1316,14 +1376,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l3-003",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "Jogging speed conversion",
+    "title": "Distance covered by a jogger",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1336,7 +1396,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A jogger moves at 7.5 m/s. Convert this speed to km/h."
+            "text": "A jogger moves at 7.5 m/s for 8 minutes. Find the distance covered, in kilometres."
           }
         ],
         "marks": 2,
@@ -1345,8 +1405,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "27",
-          "canonical_latex": "27\\text{ km/h}",
+          "canonical_answer": "3.6",
+          "canonical_latex": "3.6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1358,7 +1418,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Convert metres to kilometres and seconds to hours."
+                "text": "Convert the time to seconds."
               }
             ]
           },
@@ -1367,7 +1427,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiplying a speed in m/s by 3.6 gives the speed in km/h."
+                "text": "Multiply the speed by the time in seconds, then convert metres to kilometres."
               }
             ]
           }
@@ -1377,8 +1437,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "7.5\\times\\frac{3600}{1000}"
+                "type": "inline_math",
+                "latex": "7.5\\times(8\\times60)=3600\\text{ m}"
               }
             ],
             "mark_type": "M",
@@ -1388,8 +1448,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "=27\\text{ km/h}"
+                "type": "inline_math",
+                "latex": "3600\\text{ m}=3.6\\text{ km}"
               }
             ],
             "mark_type": "A",
@@ -1418,14 +1478,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l3-004",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "High-speed rail conversion",
+    "title": "Comparing two train speeds",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1438,7 +1498,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A train travels at 108 km/h. Convert this speed to m/s."
+            "text": "Train A travels at 108 km/h and Train B travels at 31 m/s. How many metres per second faster is Train B?"
           }
         ],
         "marks": 2,
@@ -1447,8 +1507,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "30",
-          "canonical_latex": "30\\text{ m/s}",
+          "canonical_answer": "1",
+          "canonical_latex": "1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1460,7 +1520,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Replace each kilometre with 1000 metres and each hour with 3600 seconds."
+                "text": "Put both speeds in the same unit first."
               }
             ]
           },
@@ -1469,7 +1529,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply 108 by 1000 divided by 3600."
+                "text": "Convert 108 km/h to m/s, then subtract."
               }
             ]
           }
@@ -1479,8 +1539,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "108\\times\\frac{1000}{3600}"
+                "type": "inline_math",
+                "latex": "108\\div3.6=30\\text{ m/s}"
               }
             ],
             "mark_type": "M",
@@ -1490,8 +1550,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "=30\\text{ m/s}"
+                "type": "inline_math",
+                "latex": "31-30=1\\text{ m/s}"
               }
             ],
             "mark_type": "A",
@@ -1520,14 +1580,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l3-005",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "Conveyor speed in metres per second",
+    "title": "Time on a conveyor belt",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1540,7 +1600,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A conveyor belt moves 450 metres each minute. Express its speed in m/s."
+            "text": "A conveyor belt moves 450 metres each minute. How many seconds does it take to move an item 3 km along the belt?"
           }
         ],
         "marks": 2,
@@ -1549,8 +1609,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7.5",
-          "canonical_latex": "7.5\\text{ m/s}",
+          "canonical_answer": "400",
+          "canonical_latex": "400",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1562,7 +1622,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Only the time unit needs conversion."
+                "text": "Convert the belt's speed to metres per second."
               }
             ]
           },
@@ -1571,7 +1631,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "One minute is 60 seconds, so divide 450 by 60."
+                "text": "Convert 3 km to metres, then divide by the speed in m/s."
               }
             ]
           }
@@ -1581,8 +1641,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1\\text{ min}=60\\text{ s}"
+                "type": "inline_math",
+                "latex": "450\\div60=7.5\\text{ m/s}"
               }
             ],
             "mark_type": "M",
@@ -1592,8 +1652,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "450\\div60=7.5\\text{ m/s}"
+                "type": "inline_math",
+                "latex": "3000\\div7.5=400\\text{ s}"
               }
             ],
             "mark_type": "A",
@@ -1622,14 +1682,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l4-003",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "Converting kilometres per minute",
+    "title": "Comparing a craft and a helicopter",
     "difficulty": 4,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1642,7 +1702,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A rescue craft travels at 2.4 km/min. Express its speed in m/s."
+            "text": "A rescue craft travels at 2.4 km/min. A helicopter flies at 126 km/h. How many metres per second faster is the rescue craft?"
           }
         ],
         "marks": 3,
@@ -1651,8 +1711,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "40",
-          "canonical_latex": "40\\text{ m/s}",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1664,7 +1724,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Convert kilometres to metres and minutes to seconds."
+                "text": "Convert both speeds to metres per second."
               }
             ]
           },
@@ -1673,7 +1733,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write 2.4 km as 2400 m, then divide by 60 seconds."
+                "text": "Convert 2.4 km/min using metres and seconds, and convert 126 km/h, then subtract."
               }
             ]
           }
@@ -1683,8 +1743,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2.4\\text{ km}=2400\\text{ m}"
+                "type": "inline_math",
+                "latex": "\\frac{2400\\text{ m}}{60\\text{ s}}=40\\text{ m/s}"
               }
             ],
             "mark_type": "M",
@@ -1694,19 +1754,19 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1\\text{ min}=60\\text{ s}"
+                "type": "inline_math",
+                "latex": "126\\div3.6=35\\text{ m/s}"
               }
             ],
-            "mark_type": "B",
+            "mark_type": "M",
             "mark_value": 1
           },
           {
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{2400}{60}=40\\text{ m/s}"
+                "type": "inline_math",
+                "latex": "40-35=5\\text{ m/s}"
               }
             ],
             "mark_type": "A",
@@ -1735,14 +1795,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n4-l5-001",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N4",
     "primary_outcome": "4.2",
-    "title": "Converting a cubic flow rate",
+    "title": "Time to fill a tank",
     "difficulty": 5,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -1755,7 +1815,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pump has a flow rate of 2.7 cubic metres per hour. Express this rate in cubic centimetres per second."
+            "text": "A pump has a flow rate of 2.7 cubic metres per hour. How many minutes does it take to fill a tank of capacity 4500 litres? (1 cubic metre is 1000 litres.)"
           }
         ],
         "marks": 5,
@@ -1764,8 +1824,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "750",
-          "canonical_latex": "750\\text{ cm}^3\\text{/s}",
+          "canonical_answer": "100",
+          "canonical_latex": "100",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1777,7 +1837,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Both the volume unit and the time unit must be converted; remember that a cubic conversion applies in three dimensions."
+                "text": "Convert the flow rate to litres per minute."
               }
             ]
           },
@@ -1786,7 +1846,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use 1 cubic metre equals 1,000,000 cubic centimetres and 1 hour equals 3600 seconds."
+                "text": "Convert cubic metres to litres and hours to minutes, then divide the capacity by the rate."
               }
             ]
           }
@@ -1796,8 +1856,12 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1\\text{ m}=100\\text{ cm}\\implies1\\text{ m}^3=100^3=1{,}000{,}000\\text{ cm}^3"
+                "type": "inline_math",
+                "latex": "1\\text{ m}^3=1000"
+              },
+              {
+                "type": "text",
+                "text": " litres"
               }
             ],
             "mark_type": "B",
@@ -1807,8 +1871,12 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2.7\\text{ m}^3=2{,}700{,}000\\text{ cm}^3"
+                "type": "inline_math",
+                "latex": "2.7\\text{ m}^3/\\text{h}=2700"
+              },
+              {
+                "type": "text",
+                "text": " litres per hour"
               }
             ],
             "mark_type": "M",
@@ -1818,19 +1886,23 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1\\text{ h}=3600\\text{ s}"
+                "type": "inline_math",
+                "latex": "2700\\div60=45"
+              },
+              {
+                "type": "text",
+                "text": " litres per minute"
               }
             ],
-            "mark_type": "B",
+            "mark_type": "M",
             "mark_value": 1
           },
           {
             "position": 4,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Rate}=\\frac{2{,}700{,}000}{3600}\\text{ cm}^3/\\text{s}"
+                "type": "inline_math",
+                "latex": "\\text{Time}=4500\\div45"
               }
             ],
             "mark_type": "M",
@@ -1840,8 +1912,12 @@
             "position": 5,
             "content": [
               {
-                "type": "display_math",
-                "latex": "=750\\text{ cm}^3/\\text{s}"
+                "type": "inline_math",
+                "latex": "=100"
+              },
+              {
+                "type": "text",
+                "text": " minutes"
               }
             ],
             "mark_type": "A",
@@ -2562,7 +2638,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n4-l4-004",
     "bank_key": "g3-sec1-n4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2582,7 +2658,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A test vehicle on a closed track is planned to average 80 km/h over a 240 km trial. The first 100 km takes 2 hours because of a technical delay. Find the constant speed needed for the remaining 140 km to achieve the planned average."
+            "text": "A test vehicle on a closed track is planned to average 80 km/h over a 240 km trial. The first 100 km is travelled at 50 km/h, and the vehicle then stops for 12 minutes. Find the constant speed, in kilometres per hour, needed for the remaining 140 km to achieve the planned average."
           }
         ],
         "marks": 4,
@@ -2591,8 +2667,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "140",
-          "canonical_latex": "140\\text{ km/h}",
+          "canonical_answer": "175",
+          "canonical_latex": "175",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2604,7 +2680,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "First find the maximum total journey time allowed by the planned average."
+                "text": "First find the total journey time allowed by the planned average."
               }
             ]
           },
@@ -2613,7 +2689,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the 2 hours already used, then divide the remaining distance by the remaining time."
+                "text": "Subtract the time for the first 100 km and the stop, then divide the remaining distance by the remaining time."
               }
             ]
           }
@@ -2623,7 +2699,7 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "inline_math",
                 "latex": "\\text{Planned total time}=\\frac{240}{80}=3\\text{ h}"
               }
             ],
@@ -2634,8 +2710,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Remaining time}=3-2=1\\text{ h}"
+                "type": "inline_math",
+                "latex": "\\text{Time used}=\\frac{100}{50}+\\frac{12}{60}=2.2\\text{ h}"
               }
             ],
             "mark_type": "M",
@@ -2645,8 +2721,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Remaining distance}=240-100=140\\text{ km}"
+                "type": "inline_math",
+                "latex": "\\text{Remaining time}=3-2.2=0.8\\text{ h}"
               }
             ],
             "mark_type": "M",
@@ -2656,8 +2732,8 @@
             "position": 4,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Required speed}=\\frac{140}{1}=140\\text{ km/h}"
+                "type": "inline_math",
+                "latex": "\\text{Required speed}=\\frac{140}{0.8}=175\\text{ km/h}"
               }
             ],
             "mark_type": "A",

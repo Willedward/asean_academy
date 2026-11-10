@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l2-023",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.4",
-  "title": "Cylinder picture scaling",
+  "title": "Checking a pie chart's angles",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cylinder icon's height and diameter are both doubled to suggest twice the amount. By what factor does the pictured cylinder's volume increase? Enter the numerical value only."
+          "text": "A pie chart has three sectors with angles 150°, 120° and 100°. How many degrees more than a full circle do the sectors add up to? Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8",
-        "canonical_latex": "8",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Volume depends on radius squared and height."
+              "text": "The sectors of a complete pie chart should add up to a full circle."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Doubling all linear dimensions multiplies volume by "
-            },
-            {
-              "type": "inline_math",
-              "latex": "2^{3}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Add the three sector angles, then subtract 360°."
             }
           ]
         }
@@ -69,12 +61,23 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2^3=8"
+              "type": "inline_math",
+              "latex": "150+120+100=370"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "inline_math",
+              "latex": "370-360=10"
             }
           ],
           "mark_type": "A",
-          "mark_value": 2
+          "mark_value": 1
         }
       ]
     }
