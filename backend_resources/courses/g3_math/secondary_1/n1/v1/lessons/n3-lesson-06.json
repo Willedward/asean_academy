@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-lesson-06",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n3",
@@ -30,7 +30,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Many errors come from using the correct percentage with the wrong base. Mark the quantity that represents 100% at each stage. Profit percentage commonly uses cost price as its base; discount uses marked price; tax is applied to the price specified after any earlier change."
+          "text": "Many errors come from using the correct percentage with the wrong base. Mark the quantity that represents 100% at each stage. Profit percentage commonly uses cost price as its base; discount uses marked price; tax is calculated on the price after any discount."
         }
       ]
     },
@@ -47,14 +47,38 @@
       ]
     },
     {
-      "stable_key": "percentage-budget-example",
+      "stable_key": "percentage-money-terms",
       "position": 3,
+      "type": "explanation",
+      "title": "Words used in money problems",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Cost price is what a seller pays for an item; selling price is what the customer pays. Profit = selling price \u2212 cost price, and profit percentage uses the cost price as the base. The marked price is the price shown before any discount; a discount is a percentage of the marked price. A mark-up is a percentage added to the cost price to set the marked price."
+        },
+        {
+          "type": "text",
+          "text": "Commission is a percentage of the value of sales paid to the person who made them. A sales tax, such as Singapore\u2019s Goods and Services Tax (GST, 9%), is a percentage added to the price after any discount. Simple interest on a sum P at R% per year for T years is"
+        },
+        {
+          "type": "display_math",
+          "latex": "I=\\frac{PRT}{100}"
+        },
+        {
+          "type": "text",
+          "text": "For example, S$2000 at 3% per year for 4 years earns 2000 \u00d7 3 \u00d7 4 \u00f7 100 = S$240 interest."
+        }
+      ]
+    },
+    {
+      "stable_key": "percentage-budget-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example: percentages of a budget",
       "prompt": [
         {
           "type": "text",
-          "text": "A club spends 35% of a $2400 budget on equipment and 25% of the remainder on transport. How much remains?"
+          "text": "A club spends 35% of a S$2400 budget on equipment and 25% of the remainder on transport. How much remains?"
         }
       ],
       "steps": [
@@ -83,13 +107,76 @@
               "latex": "1560\\times0.75=1170"
             }
           ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "S$1170 remains."
+            }
+          ]
         }
       ],
-      "verification_note": "$1170 is 48.75% of the original budget, matching the combined multiplier 0.65 \u00d7 0.75."
+      "verification_note": "S$1170 is 48.75% of the original budget, matching the combined multiplier 0.65 \u00d7 0.75 = 0.4875."
+    },
+    {
+      "stable_key": "percentage-markup-example",
+      "position": 5,
+      "type": "worked_example",
+      "title": "Worked example: mark-up, discount and profit",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A shop buys a bag for S$80 and marks it up by 40%. It then sells the bag at a 15% discount on the marked price. Find the selling price and the profit as a percentage of the cost price."
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Mark-up: the marked price is 140% of the cost price."
+            },
+            {
+              "type": "display_math",
+              "latex": "80\\times1.40=112"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Discount: the selling price is 85% of the marked price."
+            },
+            {
+              "type": "display_math",
+              "latex": "112\\times0.85=95.20"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The profit is S$95.20 \u2212 S$80 = S$15.20. Use the cost price as the base."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{15.20}{80}\\times100\\%=19\\%"
+            }
+          ]
+        }
+      ],
+      "verification_note": "The overall multiplier is 1.40 \u00d7 0.85 = 1.19, which is a 19% profit, matching the answer."
     },
     {
       "stable_key": "percentage-mixture-example",
-      "position": 4,
+      "position": 6,
       "type": "worked_example",
       "title": "Worked example: change a concentration",
       "prompt": [
@@ -143,13 +230,13 @@
     },
     {
       "stable_key": "percentage-profit-recall",
-      "position": 5,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "An item costs $200 and sells for $230. Find the profit as a percentage of the cost price."
+          "text": "An item costs S$200 and sells for S$230. Find the profit as a percentage of the cost price."
         }
       ],
       "response": {
@@ -172,13 +259,13 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The profit is $30. Cost price is the reference, so 30 \u00f7 200 \u00d7 100% = 15%."
+          "text": "The profit is S$30. Cost price is the reference, so 30 \u00f7 200 \u00d7 100% = 15%."
         }
       ]
     },
     {
       "stable_key": "percentage-problem-summary",
-      "position": 6,
+      "position": 8,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [

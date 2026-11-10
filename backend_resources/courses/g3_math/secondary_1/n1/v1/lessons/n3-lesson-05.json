@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n3",
@@ -62,7 +62,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A shirt costs $64 after a 20% discount. Find its marked price."
+          "text": "A shirt costs S$68 after a 15% discount. Find its marked price."
         }
       ],
       "steps": [
@@ -71,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The sale price is 80% of the marked price."
+              "text": "The sale price is 85% of the marked price."
             },
             {
               "type": "display_math",
-              "latex": "64=0.8\\times\\text{marked price}"
+              "latex": "68=0.85\\times\\text{marked price}"
             }
           ]
         },
@@ -84,16 +84,25 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by 0.8."
+              "text": "Divide by 0.85."
             },
             {
               "type": "display_math",
-              "latex": "\\text{marked price}=\\frac{64}{0.8}=80"
+              "latex": "\\text{marked price}=\\frac{68}{0.85}=80"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The marked price is S$80."
             }
           ]
         }
       ],
-      "verification_note": "Checking forwards, 20% of $80 is $16 and $80 \u2212 $16 = $64."
+      "verification_note": "Checking forwards, 15% of S$80 is S$12, and S$80 \u2212 S$12 = S$68."
     },
     {
       "stable_key": "reverse-tax-example",
@@ -103,7 +112,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "After a 10% discount and then 9% GST, an item costs $196.20. Find the original price."
+          "text": "An item is discounted by 15%, and then an 8% sales tax (a tax added to the price) is charged. It costs S$229.50. Find the original price."
         }
       ],
       "steps": [
@@ -112,11 +121,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Combine the discount and GST multipliers."
+              "text": "Combine the discount and tax multipliers."
             },
             {
               "type": "display_math",
-              "latex": "0.90\\times1.09=0.981"
+              "latex": "0.85\\times1.08=0.918"
             }
           ]
         },
@@ -129,12 +138,21 @@
             },
             {
               "type": "display_math",
-              "latex": "\\text{original}=\\frac{196.20}{0.981}=200"
+              "latex": "\\text{original}=\\frac{229.50}{0.918}=250"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The original price was S$250."
             }
           ]
         }
       ],
-      "verification_note": "Checking forwards, $200 \u00d7 0.90 \u00d7 1.09 = $196.20."
+      "verification_note": "Checking forwards, S$250 \u00d7 0.85 = S$212.50, and S$212.50 \u00d7 1.08 = S$229.50."
     },
     {
       "stable_key": "reverse-percentage-recall",
