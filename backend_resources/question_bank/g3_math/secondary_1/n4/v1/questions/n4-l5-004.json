@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l5-004",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.1",
-  "title": "Journey sections with a rest",
+  "title": "Who finishes first",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 300 km journey has three travelling sections and a 30-minute rest. The first and second sections have the same distance. The vehicle travels at 50 km/h, 75 km/h and 100 km/h in the first, second and third sections respectively. Its average speed for the entire journey, including the rest, is 60 km/h. Find the distance of the first section in kilometres."
+          "text": "Cyclist P and Cyclist Q start together on a 120 km route. P rides at 30 km/h but stops for 40 minutes on the way. Q rides at 20 km/h with no stops. How many minutes earlier does P finish?"
         }
       ],
       "marks": 5,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "112.5",
-        "canonical_latex": "112.5\\text{ km}",
+        "canonical_answer": "80",
+        "canonical_latex": "80",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,15 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the overall average speed to find total elapsed time, remove the rest, and let each of the first two section distances be "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " km."
+              "text": "Find each cyclist's total time, including any stop."
             }
           ]
         },
@@ -59,23 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{x}{50}+\\frac{x}{75}+\\frac{300-2x}{100}"
-            },
-            {
-              "type": "text",
-              "text": " equal to the travelling time after subtracting 0.5 hour from "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{300}{60}"
-            },
-            {
-              "type": "text",
-              "text": " hours."
+              "text": "Write both total times in minutes, then subtract."
             }
           ]
         }
@@ -85,19 +61,51 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Elapsed time}=\\frac{300}{60}=5\\text{ h},\\quad \\text{travelling time}=4.5\\text{ h}"
+              "type": "text",
+              "text": "P's riding time "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{120}{30}=4"
+            },
+            {
+              "type": "text",
+              "text": " h"
             }
           ],
-          "mark_type": "B",
+          "mark_type": "M",
           "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{x}{50}+\\frac{x}{75}+\\frac{300-2x}{100}=4.5"
+              "type": "text",
+              "text": "P's total time "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=4"
+            },
+            {
+              "type": "text",
+              "text": " h "
+            },
+            {
+              "type": "inline_math",
+              "latex": "40"
+            },
+            {
+              "type": "text",
+              "text": " min "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=280"
+            },
+            {
+              "type": "text",
+              "text": " min"
             }
           ],
           "mark_type": "M",
@@ -107,8 +115,24 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{6x+4x+900-6x}{300}=4.5"
+              "type": "text",
+              "text": "Q's time "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{120}{20}=6"
+            },
+            {
+              "type": "text",
+              "text": " h "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=360"
+            },
+            {
+              "type": "text",
+              "text": " min"
             }
           ],
           "mark_type": "M",
@@ -118,8 +142,8 @@
           "position": 4,
           "content": [
             {
-              "type": "display_math",
-              "latex": "4x+900=1350"
+              "type": "inline_math",
+              "latex": "360-280"
             }
           ],
           "mark_type": "M",
@@ -129,8 +153,12 @@
           "position": 5,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=112.5\\text{ km}"
+              "type": "inline_math",
+              "latex": "=80"
+            },
+            {
+              "type": "text",
+              "text": " minutes"
             }
           ],
           "mark_type": "A",
