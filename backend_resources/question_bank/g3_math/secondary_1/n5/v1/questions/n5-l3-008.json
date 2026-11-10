@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-008",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -46,7 +46,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Look for a factor shared by every term, or expand each bracket term by term."
+              "text": "Find the highest common factor of all the terms."
             }
           ]
         },
@@ -55,7 +55,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Check a factorisation by multiplying the bracket back out."
+              "text": "Start by writing: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\operatorname{HCF}(12,18,24)=6"
             }
           ]
         }
@@ -65,7 +69,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\operatorname{HCF}(12,18,24)=6"
             }
           ],
@@ -76,8 +80,24 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "6(2x^2-3x+4)"
+              "type": "inline_math",
+              "latex": "12x^2\\div6=2x^2"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "18x\\div6=3x"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "24\\div6=4"
             }
           ],
           "mark_type": "M",
@@ -87,7 +107,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "6(2x^2-3x+4)"
             }
           ],
