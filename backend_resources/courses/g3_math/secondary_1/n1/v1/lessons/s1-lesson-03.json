@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
@@ -34,7 +34,7 @@
         },
         {
           "type": "text",
-          "text": "The decision guide gives strong default choices. A table serves exact lookup, a bar graph makes category lengths easy to compare, a line graph follows ordered change, and a pie chart highlights a small number of parts within one meaningful whole. These are guidelines rather than automatic rules; the audience and amount of data also matter."
+          "text": "The table below gives strong default choices. A table serves exact lookup, a bar graph makes category lengths easy to compare, a pictogram presents a few categories to a general audience, a line graph follows ordered change, and a pie chart highlights a small number of parts within one meaningful whole. These are guidelines rather than automatic rules; the audience and amount of data also matter."
         },
         {
           "type": "asset_ref",
@@ -166,14 +166,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for table, 2 for bar graph, 3 for line graph and 4 for pie chart. Which code best shows a temperature trend measured each hour?"
+          "text": "Use code 1 for table, 2 for bar graph, 3 for pictogram, 4 for line graph and 5 for pie chart. Which code best shows a temperature trend measured each hour?"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -182,7 +182,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Hourly observations are ordered in time and the task is to follow change, so a line graph is the strongest default choice: code 3."
+          "text": "Hourly observations are ordered in time and the task is to follow change, so a line graph is the strongest default choice: code 4."
         }
       ]
     },
@@ -212,16 +212,107 @@
       "asset_key": "s1-lesson-03-display-choice",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-03-display-choice.svg",
-      "alt_text": "A decision guide linking exact lookup, category comparison, ordered change and parts of a whole to suitable statistical displays.",
+      "path": "assets/s1-lesson-03-display-choice-r3.svg",
+      "alt_text": "Table matching the reader’s task to a default display: exact lookup, table; compare groups, bar graph; few categories for a general audience, pictogram; ordered change, line graph; parts of a whole, pie chart.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "statistical_display_decision_guide",
-        "lesson_key": "s1-lesson-03"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "lesson_key": "s1-lesson-03",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "Display"
+          ],
+          "rows": [
+            "Exact lookup",
+            "Compare groups",
+            "Few categories",
+            "Ordered change",
+            "Parts of a whole"
+          ],
+          "cells": [
+            [
+              "Table"
+            ],
+            [
+              "Bar graph"
+            ],
+            [
+              "Pictogram"
+            ],
+            [
+              "Line graph"
+            ],
+            [
+              "Pie chart"
+            ]
+          ],
+          "title": "Reader’s task and a default display",
+          "alt_text": "Table matching the reader’s task to a default display: exact lookup, table; compare groups, bar graph; few categories for a general audience, pictogram; ordered change, line graph; parts of a whole, pie chart."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "Table",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "179"
+            }
+          },
+          {
+            "key": "cell-1-0",
+            "kind": "table-cell",
+            "value": "Bar graph",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "229"
+            }
+          },
+          {
+            "key": "cell-2-0",
+            "kind": "table-cell",
+            "value": "Pictogram",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "279"
+            }
+          },
+          {
+            "key": "cell-3-0",
+            "kind": "table-cell",
+            "value": "Line graph",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "329"
+            }
+          },
+          {
+            "key": "cell-4-0",
+            "kind": "table-cell",
+            "value": "Pie chart",
+            "tag": "text",
+            "geometry": {
+              "x": "497.5",
+              "y": "379"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
       },
-      "sha256": "bdafdd4d347e9dec9d2039e049c31047b49b66475d79a23824cb831975da6cbb",
-      "width": 940,
-      "height": 500
+      "sha256": "1f4219b939fd7a01837e6efa77d7b7142d373c6538c4966c6ae86e13d1b968f0",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -230,6 +321,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

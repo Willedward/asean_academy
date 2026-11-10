@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-513",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G5",
   "primary_outcome": "5.6",
-  "title": "Choose the cone volume factor",
+  "title": "Rectangular pyramid volume",
   "difficulty": 1,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Site engineers considered a narrow installation area while preparing a replacement design for the airport navigation model. The model is viewed from the terminal observation window. A later inspection will compare the finished dimensions with this record. A cone and a cylinder have the same circular base and perpendicular height. Enter the numerator of the fraction of the cylinder’s volume occupied by the cone."
+          "text": "For a birthday present, Siti folds card into a closed box with a pointed lid that meets at one apex. The pyramid has a rectangular base 6 cm by 4 cm and perpendicular height 7 cm. Find its volume in cm³."
         }
       ],
       "marks": 1,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "56",
+        "canonical_latex": "56",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare a cone with a cylinder that has the same base and height."
+              "text": "First calculate the rectangular base area."
             }
           ]
         },
@@ -60,7 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "How many identical cones would fill the cylinder? Use that to write the cone's volume as a fraction of the cylinder's volume, then enter the numerator."
+              "text": "Use "
+            },
+            {
+              "type": "inline_math",
+              "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -70,11 +78,23 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The base area is"
+            },
+            {
               "type": "display_math",
-              "latex": "V_{\\text{cone}}=\\frac13V_{\\text{cylinder}}"
+              "latex": "6\\times4=24\\text{ cm}^2"
+            },
+            {
+              "type": "text",
+              "text": "so"
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac13\\times24\\times7=56"
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -86,116 +106,156 @@
       "asset_key": "g5-l1-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-513-diagram-r3.svg",
-      "alt_text": "Cone drawn inside a cylinder. They share the same circular base of radius r and the same perpendicular height h; the cone's vertex is at the centre of the cylinder's top. Not drawn to scale.",
+      "path": "assets/g5-l1-513-diagram-r4.svg",
+      "alt_text": "Right pyramid on a rectangular base 6 cm by 4 cm. The perpendicular height h = 7 cm runs from the apex to the centre of the base, with the right angle marked. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
-        "diagram_kind": "cone_cylinder",
+        "diagram_kind": "pyramid",
         "question_key": "g5-l1-513",
         "outcome": "5.6",
-        "template": "cone_cylinder_factor",
-        "inputs": {},
+        "template": "rectangular_pyramid_volume",
+        "inputs": {
+          "base": [
+            {
+              "value": 6,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            }
+          ],
+          "height": {
+            "value": 7,
+            "unit": "cm"
+          }
+        },
         "not_to_scale": true,
         "dimensions": {
-          "radius": "r",
-          "height": "h"
+          "base": [
+            {
+              "value": 6,
+              "unit": "cm"
+            },
+            {
+              "value": 4,
+              "unit": "cm"
+            }
+          ],
+          "height": {
+            "value": 7,
+            "unit": "cm"
+          }
         },
         "forbidden_visible_labels": [
-          "1",
-          "1/3",
-          "⅓",
-          "one third",
-          "1:3",
-          "3"
+          "56",
+          "24"
         ],
         "unknowns": [],
         "solids": [
           {
-            "type": "cylinder",
+            "type": "pyramid",
+            "base": "rectangle",
             "points": {
-              "top": "T",
-              "base": "O"
-            }
-          },
-          {
-            "type": "cone",
-            "orientation": "vertex_up",
-            "points": {
+              "P1": "P1",
+              "P2": "P2",
+              "P3": "P3",
+              "P4": "P4",
               "O": "O",
               "V": "V",
-              "L": "L",
-              "R": "R"
+              "S": "S",
+              "X": "X"
             }
           }
         ],
         "viewbox": [
           600.0,
-          522.0
+          507.0
         ],
         "points": {
-          "T": [
-            300.0,
-            101.0
+          "P1": [
+            206.04,
+            387.23
           ],
-          "CL": [
-            150.0,
-            101.0
+          "P2": [
+            476.04,
+            387.23
           ],
-          "CR": [
-            450.0,
-            101.0
+          "P3": [
+            560.0,
+            334.77
           ],
-          "BL": [
-            150.0,
-            371.0
-          ],
-          "BR": [
-            450.0,
-            371.0
+          "P4": [
+            290.0,
+            334.77
           ],
           "O": [
-            300.0,
-            371.0
+            383.02,
+            361.0
           ],
           "V": [
-            300.0,
-            101.0
+            383.02,
+            46.0
           ],
-          "L": [
-            150.0,
-            371.0
-          ],
-          "R": [
-            450.0,
-            371.0
+          "X": [
+            413.02,
+            361.0
           ]
         },
         "segments": [
           {
-            "key": "CLBL",
-            "from": "CL",
-            "to": "BL",
-            "hidden": false,
-            "role": "cylinder"
+            "key": "P1P4",
+            "from": "P1",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
           },
           {
-            "key": "CRBR",
-            "from": "CR",
-            "to": "BR",
-            "hidden": false,
-            "role": "cylinder"
+            "key": "P4P3",
+            "from": "P4",
+            "to": "P3",
+            "hidden": true,
+            "role": "edge"
           },
           {
-            "key": "VL",
+            "key": "VP4",
             "from": "V",
-            "to": "L",
+            "to": "P4",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "P1P2",
+            "from": "P1",
+            "to": "P2",
             "hidden": false,
             "role": "edge"
           },
           {
-            "key": "VR",
+            "key": "P2P3",
+            "from": "P2",
+            "to": "P3",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP1",
             "from": "V",
-            "to": "R",
+            "to": "P1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP2",
+            "from": "V",
+            "to": "P2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VP3",
+            "from": "V",
+            "to": "P3",
             "hidden": false,
             "role": "edge"
           },
@@ -205,48 +265,75 @@
             "to": "O",
             "hidden": true,
             "role": "edge"
-          },
-          {
-            "key": "OR",
-            "from": "O",
-            "to": "R",
-            "hidden": true,
-            "role": "edge"
           }
         ],
-        "ellipses": {
-          "top": {
-            "center": "T",
-            "rx": 150.0,
-            "ry": 51.0
-          },
-          "base": {
-            "center": "O",
-            "rx": 150.0,
-            "ry": 51.0
-          }
-        },
         "right_angles": [
           {
             "vertex": "O",
             "arms": [
               "V",
-              "R"
+              "X"
             ],
             "marker_size": 16
           }
         ],
+        "leaders": [
+          {
+            "target": "segment:VO",
+            "from": [
+              383.02,
+              203.5
+            ],
+            "to": [
+              288.22,
+              170.32
+            ]
+          }
+        ],
         "labels": [
           {
-            "text": "r",
-            "target": "segment:OR"
+            "text": "6 cm",
+            "target": "segment:P1P2"
           },
           {
-            "text": "h",
+            "text": "4 cm",
+            "target": "segment:P2P3"
+          },
+          {
+            "text": "h = 7 cm",
             "target": "segment:VO"
           }
         ],
         "relationships": [
+          {
+            "type": "polygon_sides",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ],
+            "count": 4
+          },
+          {
+            "type": "parallelogram",
+            "points": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          {
+            "type": "centroid",
+            "point": "O",
+            "of": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
           {
             "type": "vertical",
             "points": [
@@ -255,67 +342,25 @@
             ]
           },
           {
-            "type": "ellipse_centre",
-            "ellipse": "base",
-            "point": "O"
-          },
-          {
-            "type": "on_ellipse",
-            "ellipse": "base",
-            "points": [
-              "L",
-              "R"
-            ]
-          },
-          {
-            "type": "midpoint",
+            "type": "inside_polygon",
             "point": "O",
-            "of": [
-              "L",
-              "R"
+            "polygon": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
             ]
           },
           {
-            "type": "same_point",
-            "points": [
-              "T",
-              "V"
-            ]
-          },
-          {
-            "type": "vertical",
-            "points": [
-              "CL",
-              "BL"
-            ]
-          },
-          {
-            "type": "vertical",
-            "points": [
-              "CR",
-              "BR"
-            ]
-          },
-          {
-            "type": "same_point",
-            "points": [
-              "BL",
-              "L"
-            ]
-          },
-          {
-            "type": "same_point",
-            "points": [
-              "BR",
-              "R"
-            ]
+            "type": "hidden_segment",
+            "segment": "VO"
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "dcf1fee7430aad8b0f63780f0b44523ead09388ec8765ae47e88557fe7ea8b75",
+      "sha256": "9916caa3cb19b409cd6156bbffbf0f3c92139d1a1d3ea5977eb258b78efddc8d",
       "width": 600,
-      "height": 522
+      "height": 507
     }
   ],
   "provenance": {

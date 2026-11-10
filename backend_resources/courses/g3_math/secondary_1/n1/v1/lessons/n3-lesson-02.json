@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n3",
@@ -70,7 +70,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A club has 54 members this year and had 45 members last year. By what percentage did membership increase?"
+          "text": "A club has 52 members this year and had 40 members last year. By what percentage did membership increase?"
         }
       ],
       "steps": [
@@ -83,7 +83,7 @@
             },
             {
               "type": "display_math",
-              "latex": "54-45=9"
+              "latex": "52-40=12"
             }
           ]
         },
@@ -92,16 +92,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the increase with last year\u2019s membership."
+              "text": "Compare the increase with last year\u2019s membership, the reference."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{9}{45}\\times100\\%=20\\%"
+              "latex": "\\frac{12}{40}\\times100\\%=30\\%"
             }
           ]
         }
       ],
-      "verification_note": "The increase is one fifth of the original membership, so 20% is reasonable."
+      "verification_note": "Check forwards: 30% of 40 is 12, and 40 + 12 = 52."
     },
     {
       "stable_key": "percentage-reverse-comparison",
@@ -111,7 +111,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A is 25% more than B. By what percentage is B less than A?"
+          "text": "A is 60% more than B. By what percentage is B less than A?"
         }
       ],
       "steps": [
@@ -120,11 +120,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Choose a convenient value, such as B = 100. Then A = 125."
+              "text": "Choose a convenient value, such as B = 100. Then A = 160."
             },
             {
               "type": "display_math",
-              "latex": "A=125,\\quad B=100"
+              "latex": "A=160,\\quad B=100"
             }
           ]
         },
@@ -133,16 +133,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare the difference with A because B is being described relative to A."
+              "text": "Compare the difference with A, because B is being described relative to A."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{125-100}{125}\\times100\\%=20\\%"
+              "latex": "\\frac{160-100}{160}\\times100\\%=37.5\\%"
             }
           ]
         }
       ],
-      "verification_note": "The two percentages differ because their reference quantities are 100 and 125."
+      "verification_note": "The two percentages differ because their reference quantities are 100 and 160: the same difference of 60 is 60% of 100 but 37.5% of 160."
     },
     {
       "stable_key": "percentage-comparison-recall",
@@ -152,14 +152,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A price rises from $60 to $72. Find the percentage increase."
+          "text": "A price rises from S$50 to S$62. Find the percentage increase. (S$ means Singapore dollars.)"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "24",
+        "canonical_latex": "24\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -175,7 +175,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The increase is $12. Divide 12 by the original price of 60 and multiply by 100%."
+          "text": "The increase is S$12. Divide 12 by the original price of 50 and multiply by 100%: 24%."
         }
       ]
     },

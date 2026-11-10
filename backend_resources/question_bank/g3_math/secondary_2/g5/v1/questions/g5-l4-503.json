@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-503",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered salt exposure near the coast while preparing a replacement design for the community garden store. The radius of a sphere is increased by 50%. Find the percentage increase in its volume, correct to 1 decimal place."
+          "text": "A balloon is inflated until it is larger but still round. The radius of a sphere is increased by 50%. Find the percentage increase in its volume, correct to 1 decimal place."
         }
       ],
       "marks": 4,
@@ -68,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Cube the radius scale factor 1.5, subtract 1, then convert to a percentage."
+              "text": "Write the new radius as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1.5r"
+            },
+            {
+              "type": "text",
+              "text": " and compare the two volume formulas."
             }
           ]
         }
@@ -79,22 +87,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "A 50% increase multiplies the radius by 1.5."
             },
             {
               "type": "display_math",
-              "latex": "\\left(1.5^3-1\\right)\\times100\\%=237.5\\%"
+              "latex": "R=1.5r"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume depends on the cube of the radius."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{237.5\\%}"
+              "latex": "\\frac{V_{\\text{new}}}{V_{\\text{old}}}=\\frac{\\frac43\\pi(1.5r)^3}{\\frac43\\pi r^3}=1.5^3=3.375"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the increase to a percentage."
+            },
+            {
+              "type": "display_math",
+              "latex": "(3.375-1)\\times100\\%"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "237.5\\%"
             }
           ],
           "mark_type": "A",
@@ -109,7 +147,7 @@
       "asset_key": "g5-l4-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-503-diagram-r2.svg",
+      "path": "assets/g5-l4-503-diagram-r3.svg",
       "alt_text": "Two spheres side by side: the original with radius r, and the enlarged sphere with radius R, which is r increased by 50%. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -281,6 +319,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

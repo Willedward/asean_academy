@@ -1271,6 +1271,258 @@ def quadratic_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diag
     )
 
 
+
+def _clip_line(a: float, b: float, c: float, box: tuple[float, float, float, float]):
+    """The two ends of the visible part of ax + by = c inside the window, or None."""
+    x_min, x_max, y_min, y_max = box
+    found: list[tuple[float, float]] = []
+    if not math.isclose(b, 0):
+        for x in (x_min, x_max):
+            y = (c - a * x) / b
+            if y_min - 1e-9 <= y <= y_max + 1e-9:
+                found.append((x, y))
+    if not math.isclose(a, 0):
+        for y in (y_min, y_max):
+            x = (c - b * y) / a
+            if x_min - 1e-9 <= x <= x_max + 1e-9:
+                found.append((x, y))
+    unique: list[tuple[float, float]] = []
+    for point in found:
+        if all(math.dist(point, other) > 1e-6 for other in unique):
+            unique.append(point)
+    if len(unique) < 2:
+        return None
+    best = max(
+        ((p, q) for p in unique for q in unique if p is not q), key=lambda pair: math.dist(*pair)
+    )
+    return tuple(sorted(best))
+
+
+def line_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """Straight lines ax + by = c on axes with equal unit scales, with optional labelled points."""
+    lines = list(inputs["lines"])
+    if not 1 <= len(lines) <= 2:
+        raise ValueError("line_graph draws one or two lines")
+    x_min, x_max = float(inputs["x_min"]), float(inputs["x_max"])
+    y_min, y_max = float(inputs["y_min"]), float(inputs["y_max"])
+    if x_max <= x_min or y_max <= y_min or not (x_min <= 0 <= x_max and y_min <= 0 <= y_max):
+        raise ValueError("line_graph axes must have positive ranges that include the origin")
+    title = str(inputs.get("title", "Straight-line graph"))
+    description = str(inputs["alt_text"])
+    builder = _Builder(title, description)
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    unit = min(560 / (x_max - x_min), 380 / (y_max - y_min))
+    left = (WIDTH - unit * (x_max - x_min)) / 2 + 10
+    right = left + unit * (x_max - x_min)
+    top = 95.0
+    step = 1 if unit >= 34 else 2
+    bottom = top + unit * (y_max - y_min)
+    builder.height = int(math.ceil(bottom + 60))
+
+    def sx(value: float) -> float:
+        return left + (value - x_min) * unit
+
+    def sy(value: float) -> float:
+        return bottom - (value - y_min) * unit
+
+    for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
+        x = sx(tick)
+        builder.line(x, top, x, bottom, stroke=GRID, width=1)
+        if tick > 0 and tick % step == 0:
+            builder.text(tick, x, sy(0) + 30, size=FONT)
+        builder.tick("x", tick, x)
+    for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
+        y = sy(tick)
+        builder.line(left, y, right, y, stroke=GRID, width=1)
+        if tick > 0 and tick % step == 0:
+            builder.text(tick, sx(0) - 12, y + 9, anchor="end", size=FONT)
+        builder.tick("y", tick, y)
+    builder.line(left, sy(0), right + 14, sy(0), width=3)
+    builder.line(sx(0), bottom, sx(0), top - 14, width=3)
+    builder.path(
+        f"M{_fmt(right + 4)} {_fmt(sy(0) - 7)} L{_fmt(right + 16)} {_fmt(sy(0))} "
+        f"L{_fmt(right + 4)} {_fmt(sy(0) + 7)}",
+        width=3,
+    )
+    builder.path(
+        f"M{_fmt(sx(0) - 7)} {_fmt(top - 4)} L{_fmt(sx(0))} {_fmt(top - 16)} "
+        f"L{_fmt(sx(0) + 7)} {_fmt(top - 4)}",
+        width=3,
+    )
+    builder.text("x", right + 30, sy(0) + 9, size=FONT, anchor="start")
+    builder.text("y", sx(0), top - 26, size=FONT)
+    builder.text("O", sx(0) - 12, sy(0) + 30, size=FONT, anchor="end")
+    colours = (ACCENT, SECONDARY)
+    for index, item in enumerate(lines):
+        a, b, c = float(item["a"]), float(item["b"]), float(item["c"])
+        ends = _clip_line(a, b, c, (x_min, x_max, y_min, y_max))
+        if ends is None:
+            raise ValueError("each line must cross the plotting window")
+        (x1, y1), (x2, y2) = ends
+        builder.mark(
+            f"line-{index}",
+            "line",
+            f"{_fmt(a)},{_fmt(b)},{_fmt(c)}",
+            "line",
+            {"x1": sx(x1), "y1": sy(y1), "x2": sx(x2), "y2": sy(y2)},
+            style={"stroke": colours[index], "stroke-width": 4},
+        )
+        label = item.get("label")
+        if label:
+            builder.text(
+                str(label),
+                sx(float(item["label_x"])),
+                sy(float(item["label_y"])),
+                size=FONT,
+                anchor=str(item.get("label_anchor", "start")),
+                fill=colours[index] if index == 0 else INK,
+            )
+    for index, point in enumerate(inputs.get("points", [])):
+        px, py = float(point["x"]), float(point["y"])
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 8},
+            style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
+        )
+        if point.get("label"):
+            builder.text(
+                str(point["label"]),
+                sx(px) + float(point.get("dx", 16)),
+                sy(py) + float(point.get("dy", -14)),
+                size=FONT,
+                anchor=str(point.get("anchor", "start")),
+            )
+    return _finish(
+        builder,
+        template="line_graph",
+        diagram_kind="line_graph",
+        inputs=inputs,
+        extras={
+            "axis": {"x_min": x_min, "x_max": x_max, "y_min": y_min, "y_max": y_max},
+            "unit_px": _fmt(unit),
+        },
+    )
+
+
+def proportion_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """y = kx (direct) or y = k/x (inverse) for positive x, with labelled points on the graph."""
+    kind = str(inputs["kind"])
+    if kind not in {"direct", "inverse"}:
+        raise ValueError("proportion_graph kind must be direct or inverse")
+    k = float(inputs["k"])
+    x_max, y_max = float(inputs["x_max"]), float(inputs["y_max"])
+    step = float(inputs.get("tick_step", 1))
+    if k <= 0 or x_max <= 0 or y_max <= 0:
+        raise ValueError("proportion_graph needs positive k and axis maxima")
+    title = str(inputs.get("title", "Direct proportion" if kind == "direct" else "Inverse proportion"))
+    builder = _Builder(title, str(inputs["alt_text"]))
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    left, right, top, bottom = 110.0, 650.0, 80.0, 400.0
+
+    def sx(value: float) -> float:
+        return left + value / x_max * (right - left)
+
+    def sy(value: float) -> float:
+        return bottom - value / y_max * (bottom - top)
+
+    for tick in _ticks(0, x_max, step):
+        x = sx(tick)
+        builder.line(x, top, x, bottom, stroke=GRID, width=1)
+        if tick > 0:
+            builder.text(_fmt(tick), x, bottom + 32, size=FONT)
+        builder.tick("x", _fmt(tick), x)
+    for tick in _ticks(0, y_max, step):
+        y = sy(tick)
+        builder.line(left, y, right, y, stroke=GRID, width=1)
+        if tick > 0:
+            builder.text(_fmt(tick), left - 12, y + 9, anchor="end", size=FONT)
+        builder.tick("y", _fmt(tick), y)
+    builder.line(left, bottom, right + 14, bottom, width=3)
+    builder.line(left, bottom, left, top - 14, width=3)
+    builder.text(str(inputs.get("x_label", "x")), right + 24, bottom + 9, size=FONT, anchor="start")
+    builder.text(str(inputs.get("y_label", "y")), left, top - 24, size=FONT)
+    builder.text("O", left - 12, bottom + 32, size=FONT, anchor="end")
+    if kind == "direct":
+        end_x = min(x_max, y_max / k)
+        sample = [(0.0, 0.0), (end_x, k * end_x)]
+    else:
+        start_x = k / y_max
+        sample = [
+            (start_x + (x_max - start_x) * index / 80, k / (start_x + (x_max - start_x) * index / 80))
+            for index in range(81)
+        ]
+    d = "M" + " L".join(f"{_fmt(sx(x))} {_fmt(sy(y))}" for x, y in sample)
+    builder.mark(
+        "curve",
+        "proportion-curve",
+        f"{kind};{_fmt(k)}",
+        "path",
+        {"d": d},
+        style={"fill": "none", "stroke": ACCENT, "stroke-width": 4},
+    )
+    for index, point in enumerate(inputs.get("points", [])):
+        px = float(point["x"])
+        py = k * px if kind == "direct" else k / px
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 8},
+            style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
+        )
+        builder.text(
+            f"({_fmt(px)}, {_fmt(py)})",
+            sx(px) + float(point.get("dx", 16)),
+            sy(py) + float(point.get("dy", -14)),
+            size=FONT,
+            anchor=str(point.get("anchor", "start")),
+        )
+    return _finish(
+        builder,
+        template="proportion_graph",
+        diagram_kind="proportion_graph",
+        inputs=inputs,
+        extras={"axis": {"x_min": 0, "x_max": x_max, "y_min": 0, "y_max": y_max}},
+    )
+
+
+def scale_squares(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """A map square and the real square it represents, with side lengths on the sides."""
+    title = str(inputs.get("title", "Length scale and area scale"))
+    builder = _Builder(title, str(inputs["alt_text"]))
+    builder.height = 470
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    small, large = 110.0, 220.0
+    base = 330.0
+    squares = (
+        (90.0, small, str(inputs["map_side"]), str(inputs["map_area"]), str(inputs["map_caption"])),
+        (380.0, large, str(inputs["real_side"]), str(inputs["real_area"]), str(inputs["real_caption"])),
+    )
+    for index, (x, size, side, area, caption) in enumerate(squares):
+        y = base - size
+        builder.mark(
+            f"square-{index}",
+            "square",
+            side,
+            "rect",
+            {"x": x, "y": y, "width": size, "height": size},
+            style={"fill": FILL, "stroke": INK, "stroke-width": 3},
+        )
+        builder.line(x, base + 18, x + size, base + 18, width=2)
+        builder.line(x, base + 10, x, base + 26, width=2)
+        builder.line(x + size, base + 10, x + size, base + 26, width=2)
+        builder.text(side, x + size / 2, base + 52, size=FONT)
+        builder.text(area, x + size / 2, y + size / 2 + 9, size=FONT)
+        builder.text(caption, x + size / 2, base + 92, size=FONT, fill=MUTED)
+    builder.text(str(inputs["scale_label"]), 275, 175, size=FONT)
+    builder.path("M 225 195 L 355 195 M 343 186 L 355 195 L 343 204", width=3)
+    builder.text("Not drawn to scale", WIDTH - 24, builder.height - 18, size=FONT, anchor="end", fill=MUTED)
+    return _finish(builder, template="scale_squares", diagram_kind="scale_squares", inputs=inputs)
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
@@ -1287,6 +1539,9 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "number_line": number_line,
     "coordinate_line": coordinate_line,
     "quadratic_graph": quadratic_graph,
+    "line_graph": line_graph,
+    "proportion_graph": proportion_graph,
+    "scale_squares": scale_squares,
 }
 
 

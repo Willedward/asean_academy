@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-s1",
@@ -34,7 +34,7 @@
         },
         {
           "type": "text",
-          "text": "The same values 92 and 98 look dramatically different above a baseline of 90. Their displayed heights are 2 and 8, a ratio of 4, although the actual values differ by only 6 and have a ratio close to 1.07. The paired diagrams expose this change in impression."
+          "text": "The scores 84 and 92 in the diagram look very different above a baseline of 80. Their displayed heights are 4 and 12, a ratio of 3, although the actual values differ by only 8 and have a ratio close to 1.1."
         },
         {
           "type": "asset_ref",
@@ -70,7 +70,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar graph shows scores 92 and 98 above a baseline of 90. Compare the displayed-height ratio with the actual-value ratio and explain the risk."
+          "text": "The bar chart in the diagram shows scores 84 and 92 above a baseline of 80. Compare the displayed-height ratio with the actual-value ratio and explain the risk."
         }
       ],
       "steps": [
@@ -83,7 +83,7 @@
             },
             {
               "type": "display_math",
-              "latex": "h_1=92-90=2,\\qquad h_2=98-90=8"
+              "latex": "h_1=84-80=4,\\qquad h_2=92-80=12"
             }
           ]
         },
@@ -96,7 +96,7 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{h_2}{h_1}=\\frac{8}{2}=4"
+              "latex": "\\frac{h_2}{h_1}=\\frac{12}{4}=3"
             }
           ]
         },
@@ -109,7 +109,7 @@
             },
             {
               "type": "display_math",
-              "latex": "\\frac{98}{92}\\approx1.065"
+              "latex": "\\frac{92}{84}\\approx1.095"
             }
           ]
         },
@@ -118,12 +118,12 @@
           "content": [
             {
               "type": "text",
-              "text": "The graph makes the second score appear four times the first in bar height, although the score is only about 6.5% greater. Redraw bars from zero or mark and explain the truncated scale prominently."
+              "text": "The graph makes the second score look three times the first in bar height, although it is only about 9.5% greater. Redraw the bars from zero, or keep the break mark and say clearly that the chart shows differences, not full sizes."
             }
           ]
         }
       ],
-      "verification_note": "The arithmetic separates the visual ratio 4 from the data ratio about 1.065; the proposed zero baseline restores bar length as a fair magnitude comparison."
+      "verification_note": "The arithmetic separates the visual ratio 3 from the data ratio of about 1.095. Drawn from zero, the bars would be 84 and 92 units tall, almost equal."
     },
     {
       "stable_key": "s1-14-area-example",
@@ -196,7 +196,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A strong critique names the feature, describes the false impression and supports the claim with numbers. ‘The graph is misleading’ is incomplete. A precise explanation might say that the non-zero baseline changes bar heights from 92 and 98 to 2 and 8, making a 6.5% increase look like a fourfold comparison."
+          "text": "A strong critique names the feature, describes the false impression and supports the claim with numbers. ‘The graph is misleading’ is incomplete. A precise explanation might say that the non-zero baseline changes bar heights from 84 and 92 to 4 and 12, making a 9.5% increase look like a threefold comparison."
         },
         {
           "type": "text",
@@ -212,14 +212,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Values 72 and 78 are drawn above a baseline of 70. By what factor is the second displayed bar height greater than the first?"
+          "text": "Values 63 and 66 are drawn above a baseline of 60. By what factor is the second displayed bar height greater than the first?"
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -228,7 +228,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "The displayed heights are 72 − 70 = 2 and 78 − 70 = 8. Their ratio is 8 ÷ 2 = 4, even though the actual values are close."
+          "text": "The displayed heights are 63 − 60 = 3 and 66 − 60 = 6. Their ratio is 6 ÷ 3 = 2, even though 66 is less than 5% more than 63."
         }
       ]
     },
@@ -258,16 +258,142 @@
       "asset_key": "s1-lesson-04-truncated-axis",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-lesson-04-truncated-axis.svg",
-      "alt_text": "Values 92 and 98 shown on a truncated axis and on a zero-based axis to compare the resulting visual impressions.",
+      "path": "assets/s1-lesson-04-truncated-axis-r3.svg",
+      "alt_text": "Bar chart of two scores, Team A 84 and Team B 92, with the vertical axis starting at 80, shown by a break mark, and ticks every 2 up to 94.",
       "generation_spec": {
-        "renderer": "nextscholar-statistics-svg-v1",
-        "diagram_kind": "truncated_axis_comparison",
-        "lesson_key": "s1-lesson-04"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "bar_chart",
+        "lesson_key": "s1-lesson-04",
+        "template": "bar_chart",
+        "inputs": {
+          "categories": [
+            "Team A",
+            "Team B"
+          ],
+          "values": [
+            84,
+            92
+          ],
+          "y_min": 80,
+          "y_max": 94,
+          "tick_step": 2,
+          "y_label": "Score",
+          "title": "Scores drawn from a baseline of 80",
+          "alt_text": "Bar chart of two scores, Team A 84 and Team B 92, with the vertical axis starting at 80, shown by a break mark, and ticks every 2 up to 94."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "bar-0",
+            "kind": "bar",
+            "value": "84",
+            "tag": "rect",
+            "geometry": {
+              "x": "149",
+              "y": "305",
+              "width": "177",
+              "height": "80"
+            }
+          },
+          {
+            "key": "bar-1",
+            "kind": "bar",
+            "value": "92",
+            "tag": "rect",
+            "geometry": {
+              "x": "444",
+              "y": "145",
+              "width": "177",
+              "height": "240"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "y:80",
+            "axis": "y",
+            "value": "80",
+            "position": "385",
+            "label": "80"
+          },
+          {
+            "key": "y:82",
+            "axis": "y",
+            "value": "82",
+            "position": "345",
+            "label": "82"
+          },
+          {
+            "key": "y:84",
+            "axis": "y",
+            "value": "84",
+            "position": "305",
+            "label": "84"
+          },
+          {
+            "key": "y:86",
+            "axis": "y",
+            "value": "86",
+            "position": "265",
+            "label": "86"
+          },
+          {
+            "key": "y:88",
+            "axis": "y",
+            "value": "88",
+            "position": "225",
+            "label": "88"
+          },
+          {
+            "key": "y:90",
+            "axis": "y",
+            "value": "90",
+            "position": "185",
+            "label": "90"
+          },
+          {
+            "key": "y:92",
+            "axis": "y",
+            "value": "92",
+            "position": "145",
+            "label": "92"
+          },
+          {
+            "key": "y:94",
+            "axis": "y",
+            "value": "94",
+            "position": "105",
+            "label": "94"
+          },
+          {
+            "key": "x:Team A",
+            "axis": "x",
+            "value": "Team A",
+            "position": "237.5",
+            "label": "Team A"
+          },
+          {
+            "key": "x:Team B",
+            "axis": "x",
+            "value": "Team B",
+            "position": "532.5",
+            "label": "Team B"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "y_min": 80.0,
+          "y_max": 94.0,
+          "tick_step": 2.0
+        }
       },
-      "sha256": "ddb8899e5cfe62fb7f45188f8c7e790acc548e6ebc6c9c50d4ede31a3029afec",
-      "width": 940,
-      "height": 500
+      "sha256": "ca4678f389592e93ac4ac135de0428e05b0d74e5a88f722402fdf7fa78f18922",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -276,6 +402,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Revision 2 expands the teaching sequence, visual model and worked examples; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l1-521",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Design technicians noted a protected habitat boundary while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the weather-sensor mast, the opposite side is 4 m. Find the adjacent side "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " in metres. Enter the numerical value only."
+          "text": "A ladder leans against a wall and makes an acute 45° angle with level ground. It just reaches a window ledge, so the opposite side is 4 m. Find the adjacent side x, the distance from the foot of the ladder to the wall, in metres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -86,6 +78,10 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Relative to the 45° angle, the given side is opposite and x is adjacent, so"
+            },
+            {
               "type": "display_math",
               "latex": "\\tan45^\\circ=\\frac{4}{x}=1\\Rightarrow x=4"
             }
@@ -102,7 +98,7 @@
       "asset_key": "g4-l1-521-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-521-diagram-r3.svg",
+      "path": "assets/g4-l1-521-diagram-r4.svg",
       "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 4 m and the adjacent side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -268,6 +264,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

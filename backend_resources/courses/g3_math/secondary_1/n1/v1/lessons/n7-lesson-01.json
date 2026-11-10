@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -81,6 +81,10 @@
         {
           "type": "text",
           "text": "A statement such as 2(x + 1) = 2x + 2 is true for every value because both sides simplify to the same expression. A statement such as x + 4 = x + 7 is never true because subtracting x would give 4 = 7. Recognising these cases prevents the false conclusion that every equation has exactly one solution."
+        },
+        {
+          "type": "text",
+          "text": "An identity is true for every value of x, so after any brackets are expanded, the coefficient of x and the constant term must match on the two sides. For example, 2(x + 4) = 2x + b is an identity only when b = 8, because 2(x + 4) = 2x + 8."
         }
       ]
     },
@@ -142,7 +146,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Which of x = -2, x = 1 and x = 4 satisfies 2x + 5 = 3x + 1?"
+          "text": "Which of x = −2, x = 1 and x = 4 satisfies 2x + 5 = 3x + 1?"
         }
       ],
       "steps": [
@@ -151,11 +155,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Rearrange the equation by subtracting 2x from both sides."
+              "text": "Substitute each candidate into both sides and compare."
             },
             {
               "type": "display_math",
-              "latex": "5=x+1"
+              "latex": "x=-2:\\quad 2(-2)+5=1,\\qquad 3(-2)+1=-5"
             }
           ]
         },
@@ -163,12 +167,12 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Subtract 1 from both sides."
+              "type": "display_math",
+              "latex": "x=1:\\quad 2(1)+5=7,\\qquad 3(1)+1=4"
             },
             {
               "type": "display_math",
-              "latex": "x=4"
+              "latex": "x=4:\\quad 2(4)+5=13,\\qquad 3(4)+1=13"
             }
           ]
         },
@@ -177,16 +181,12 @@
           "content": [
             {
               "type": "text",
-              "text": "Check the matching candidate in the original equation."
-            },
-            {
-              "type": "display_math",
-              "latex": "2(4)+5=13,\\qquad3(4)+1=13"
+              "text": "Only x = 4 makes the two sides equal, so x = 4 is the solution from the list."
             }
           ]
         }
       ],
-      "verification_note": "Both sides equal 13 for x = 4. The other candidates fail substitution, so 4 is the only listed solution."
+      "verification_note": "Solving confirms it: subtracting 2x from both sides gives 5 = x + 1, so x = 4."
     },
     {
       "stable_key": "n7-71-recall",
@@ -196,7 +196,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "For 4x + 1 = 21, what value does the left-hand side have when x = 5?"
+          "text": "For 4x + 1 = 23, what value does the left-hand side have when x = 5?"
         }
       ],
       "response": {
@@ -212,7 +212,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Substituting x = 5 gives 4(5) + 1 = 21, matching the right-hand side."
+          "text": "4(5) + 1 = 21. The right-hand side is 23, so x = 5 is not a solution of this equation."
         }
       ]
     },
@@ -238,7 +238,7 @@
       "asset_key": "n7-lesson-01-equation-balance",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-lesson-01-equation-balance.svg",
+      "path": "assets/n7-lesson-01-equation-balance-r3.svg",
       "alt_text": "A level balance scale with 2x plus 3 on the left pan and 11 on the right pan, representing the equation 2x + 3 = 11.",
       "generation_spec": {
         "renderer": "nextscholar-balance-svg-v1",

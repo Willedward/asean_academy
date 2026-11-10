@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l1-517",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Survey crew noted uneven terrain across the site while preparing a replacement frame. For the hilltop communications hut, a right triangular panel has perpendicular sides 60 cm and 80 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+          "text": "A right-angled triangular sail is made for a model boat. It has perpendicular sides 65 cm and 72 cm. Calculate the hypotenuse c in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "100",
-        "canonical_latex": "100",
+        "canonical_answer": "97",
+        "canonical_latex": "97",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "60^{2}+80^{2}"
+              "latex": "65^{2}+72^{2}"
             },
             {
               "type": "text",
@@ -78,8 +78,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The hypotenuse is opposite the right angle, so by Pythagoras’ theorem"
+            },
+            {
               "type": "display_math",
-              "latex": "c=\\sqrt{60^2+80^2}=100"
+              "latex": "c^2=65^2+72^2=9409,\\quad c=\\sqrt{9409}=97"
             }
           ],
           "mark_type": "A",
@@ -94,8 +98,8 @@
       "asset_key": "g4-l1-517-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-517-diagram-r3.svg",
-      "alt_text": "Right-angled triangle with perpendicular sides 60 cm and 80 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
+      "path": "assets/g4-l1-517-diagram-r4.svg",
+      "alt_text": "Right-angled triangle with perpendicular sides 65 cm and 72 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -105,11 +109,11 @@
         "inputs": {
           "legs": [
             {
-              "value": 60,
+              "value": 65,
               "unit": "cm"
             },
             {
-              "value": 80,
+              "value": 72,
               "unit": "cm"
             }
           ]
@@ -118,17 +122,17 @@
         "dimensions": {
           "perpendicular_sides": [
             {
-              "value": 60,
+              "value": 65,
               "unit": "cm"
             },
             {
-              "value": 80,
+              "value": 72,
               "unit": "cm"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "100"
+          "97"
         ],
         "unknowns": [
           {
@@ -140,20 +144,20 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          446.0
+          466.0
         ],
         "points": {
           "A": [
-            120.0,
-            326.0
+            139.38,
+            346.0
           ],
           "B": [
-            120.0,
+            139.38,
             56.0
           ],
           "C": [
-            480.0,
-            326.0
+            460.62,
+            346.0
           ]
         },
         "segments": [
@@ -191,11 +195,11 @@
         ],
         "labels": [
           {
-            "text": "60 cm",
+            "text": "65 cm",
             "target": "segment:AB"
           },
           {
-            "text": "80 cm",
+            "text": "72 cm",
             "target": "segment:AC"
           },
           {
@@ -210,15 +214,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.9028,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "b475d9bec069fcc39a1623afa9d38aad7993a54f112a2c4ae7ca961382286650",
+      "sha256": "74c7fa5c488ea965664cd829685cc33c6055fcadda69f110026e7a8702d42ea5",
       "width": 600,
-      "height": 446
+      "height": 466
     }
   ],
   "provenance": {

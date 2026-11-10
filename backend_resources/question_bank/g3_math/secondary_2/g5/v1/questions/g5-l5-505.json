@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l5-505",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered restricted transport access while preparing a capacity check for the mountain weather shelter. Snow-free tropical mountain conditions still bring strong crosswinds. A scale model will be stored with the project documentation. A spherical object of radius 6 cm has a concentric spherical core of radius 3 cm removed. Find the percentage of the original volume that remains, correct to 1 decimal place."
+          "text": "An ornament is made lighter by hollowing out its centre. The spherical object of radius 6 cm has a concentric spherical core of radius 3 cm removed. Find the percentage of the original volume that remains, correct to 1 decimal place."
         }
       ],
       "marks": 5,
@@ -103,22 +103,63 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Original volume:"
             },
             {
               "type": "display_math",
-              "latex": "\\frac{6^3-3^3}{6^3}\\times100\\%=87.5\\%"
+              "latex": "\\frac43\\pi(6)^3"
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the core:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{87.5\\%}"
+              "latex": "\\frac43\\pi(3)^3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Fraction remaining; the factor 4π/3 cancels."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\frac{6^3-3^3}{6^3}=\\frac{189}{216}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\frac{189}{216}\\times100\\%"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "87.5\\%"
             }
           ],
           "mark_type": "A",
@@ -133,7 +174,7 @@
       "asset_key": "g5-l5-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l5-505-diagram-r3.svg",
+      "path": "assets/g5-l5-505-diagram-r4.svg",
       "alt_text": "Sphere of radius R = 6 cm with a dashed concentric spherical core of radius r = 3 cm removed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -327,6 +368,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

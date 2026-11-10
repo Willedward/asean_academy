@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-506",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G5",
   "primary_outcome": "5.6",
-  "title": "Choose the cone volume factor",
+  "title": "Curved area of a hemisphere",
   "difficulty": 1,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Site engineers considered limited storage space while preparing a replacement design for the village festival display. A cone and a cylinder have the same circular base and perpendicular height. Enter the numerator of the fraction of the cylinder’s volume occupied by the cone."
+          "text": "A cup for a toy tea set is shaped as an open hemisphere. The open hemisphere has radius 3 cm. Its curved surface area is kπ cm². Find k."
         }
       ],
       "marks": 1,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "18",
+        "canonical_latex": "18",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare a cone with a cylinder that has the same base and height."
+              "text": "An open hemisphere uses only half the sphere’s curved surface."
             }
           ]
         },
@@ -60,7 +60,23 @@
           "content": [
             {
               "type": "text",
-              "text": "How many identical cones would fill the cylinder? Use that to write the cone's volume as a fraction of the cylinder's volume, then enter the numerator."
+              "text": "Halve the sphere’s surface-area formula to get "
+            },
+            {
+              "type": "inline_math",
+              "latex": "2\\pi r^{2}"
+            },
+            {
+              "type": "text",
+              "text": ", then compare with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k\\pi"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -71,10 +87,14 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "V_{\\text{cone}}=\\frac13V_{\\text{cylinder}}"
+              "latex": "A=\\tfrac12\\times4\\pi(3)^2=2\\pi(3)^2=18\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 18."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -86,43 +106,41 @@
       "asset_key": "g5-l1-506-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-506-diagram-r3.svg",
-      "alt_text": "Cone drawn inside a cylinder. They share the same circular base of radius r and the same perpendicular height h; the cone's vertex is at the centre of the cylinder's top. Not drawn to scale.",
+      "path": "assets/g5-l1-506-diagram-r4.svg",
+      "alt_text": "Open hemisphere (a bowl) with radius r = 3 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
-        "diagram_kind": "cone_cylinder",
+        "diagram_kind": "hemisphere",
         "question_key": "g5-l1-506",
         "outcome": "5.6",
-        "template": "cone_cylinder_factor",
-        "inputs": {},
+        "template": "hemisphere_curved_area",
+        "inputs": {
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          }
+        },
         "not_to_scale": true,
         "dimensions": {
-          "radius": "r",
-          "height": "h"
+          "radius": {
+            "value": 3,
+            "unit": "cm"
+          },
+          "open": true
         },
         "forbidden_visible_labels": [
-          "1",
-          "1/3",
-          "⅓",
-          "one third",
-          "1:3",
-          "3"
+          "18",
+          "18π",
+          "56.5",
+          "56.55"
         ],
         "unknowns": [],
         "solids": [
           {
-            "type": "cylinder",
-            "points": {
-              "top": "T",
-              "base": "O"
-            }
-          },
-          {
-            "type": "cone",
-            "orientation": "vertex_up",
+            "type": "hemisphere",
+            "open": true,
             "points": {
               "O": "O",
-              "V": "V",
               "L": "L",
               "R": "R"
             }
@@ -130,192 +148,64 @@
         ],
         "viewbox": [
           600.0,
-          522.0
+          425.0
         ],
         "points": {
-          "T": [
-            300.0,
-            101.0
-          ],
-          "CL": [
-            150.0,
-            101.0
-          ],
-          "CR": [
-            450.0,
-            101.0
-          ],
-          "BL": [
-            150.0,
-            371.0
-          ],
-          "BR": [
-            450.0,
-            371.0
-          ],
           "O": [
             300.0,
-            371.0
-          ],
-          "V": [
-            300.0,
-            101.0
+            124.6
           ],
           "L": [
-            150.0,
-            371.0
+            110.0,
+            124.6
           ],
           "R": [
-            450.0,
-            371.0
+            490.0,
+            124.6
           ]
         },
         "segments": [
           {
-            "key": "CLBL",
-            "from": "CL",
-            "to": "BL",
-            "hidden": false,
-            "role": "cylinder"
-          },
-          {
-            "key": "CRBR",
-            "from": "CR",
-            "to": "BR",
-            "hidden": false,
-            "role": "cylinder"
-          },
-          {
-            "key": "VL",
-            "from": "V",
-            "to": "L",
-            "hidden": false,
-            "role": "edge"
-          },
-          {
-            "key": "VR",
-            "from": "V",
-            "to": "R",
-            "hidden": false,
-            "role": "edge"
-          },
-          {
-            "key": "VO",
-            "from": "V",
-            "to": "O",
-            "hidden": true,
-            "role": "edge"
-          },
-          {
             "key": "OR",
             "from": "O",
             "to": "R",
-            "hidden": true,
+            "hidden": false,
             "role": "edge"
           }
         ],
         "ellipses": {
-          "top": {
-            "center": "T",
-            "rx": 150.0,
-            "ry": 51.0
-          },
-          "base": {
+          "rim": {
             "center": "O",
-            "rx": 150.0,
-            "ry": 51.0
+            "rx": 190.0,
+            "ry": 64.6
           }
         },
-        "right_angles": [
-          {
-            "vertex": "O",
-            "arms": [
-              "V",
-              "R"
-            ],
-            "marker_size": 16
-          }
-        ],
+        "right_angles": [],
         "labels": [
           {
-            "text": "r",
+            "text": "r = 3 cm",
             "target": "segment:OR"
-          },
-          {
-            "text": "h",
-            "target": "segment:VO"
           }
         ],
         "relationships": [
           {
-            "type": "vertical",
-            "points": [
-              "V",
-              "O"
-            ]
-          },
-          {
             "type": "ellipse_centre",
-            "ellipse": "base",
+            "ellipse": "rim",
             "point": "O"
           },
           {
             "type": "on_ellipse",
-            "ellipse": "base",
+            "ellipse": "rim",
             "points": [
-              "L",
-              "R"
-            ]
-          },
-          {
-            "type": "midpoint",
-            "point": "O",
-            "of": [
-              "L",
-              "R"
-            ]
-          },
-          {
-            "type": "same_point",
-            "points": [
-              "T",
-              "V"
-            ]
-          },
-          {
-            "type": "vertical",
-            "points": [
-              "CL",
-              "BL"
-            ]
-          },
-          {
-            "type": "vertical",
-            "points": [
-              "CR",
-              "BR"
-            ]
-          },
-          {
-            "type": "same_point",
-            "points": [
-              "BL",
-              "L"
-            ]
-          },
-          {
-            "type": "same_point",
-            "points": [
-              "BR",
               "R"
             ]
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "dcf1fee7430aad8b0f63780f0b44523ead09388ec8765ae47e88557fe7ea8b75",
+      "sha256": "ed526099832bbe9d8198d7359c5d8b04c459923644f439410e67eda67642c77b",
       "width": 600,
-      "height": 522
+      "height": 425
     }
   ],
   "provenance": {

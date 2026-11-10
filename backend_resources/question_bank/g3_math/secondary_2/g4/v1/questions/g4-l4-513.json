@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l4-513",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Construction monitors noted uneven terrain across the site while preparing a replacement frame. At the community water tank, a cable runs from the top of a 28 m vertical post to an anchor 45 m from its base. Another 2 m is required for fastening. Find the total cable length in metres. Enter the numerical value only."
+          "text": "For a radio mast, a support cable must reach from the top of a 28 m vertical post to an anchor 45 m from its base. Another 2 m is required for fastening. Find the total cable length in metres. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -95,22 +95,48 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "The post is vertical and the ground is level, so the sloping cable c is the hypotenuse of a right-angled triangle."
             },
             {
               "type": "display_math",
-              "latex": "\\sqrt{28^2+45^2}+2=53+2=55"
+              "latex": "c^2=28^2+45^2=784+2025=2809"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{55}"
+              "latex": "c=\\sqrt{2809}=53\\text{ m}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the fastening allowance."
+            },
+            {
+              "type": "display_math",
+              "latex": "53+2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{total length}=55\\text{ m}"
             }
           ],
           "mark_type": "A",
@@ -125,7 +151,7 @@
       "asset_key": "g4-l4-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-513-diagram-r3.svg",
+      "path": "assets/g4-l4-513-diagram-r4.svg",
       "alt_text": "Vertical post 28 m high with a cable c from its top to an anchor 45 m from its base, right angle marked at the base. A further 2 m of cable is shown beyond the anchor for fastening. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -293,6 +319,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

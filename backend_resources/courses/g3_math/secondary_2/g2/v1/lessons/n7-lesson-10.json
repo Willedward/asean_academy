@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -67,14 +67,26 @@
       ]
     },
     {
-      "stable_key": "n7-10-example-1",
+      "stable_key": "n7-10-errors",
       "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Write down what each variable means before forming equations. Use two different facts from the question, not the same fact written twice. In cost problems, multiply each number of items by its price. After solving, check that the answers make sense: counts must be whole numbers that are not negative, and digits must be from 0 to 9."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-10-example-1",
+      "position": 5,
       "type": "worked_example",
-      "title": "Model ticket sales",
+      "title": "Worked example: model ticket sales",
       "prompt": [
         {
           "type": "text",
-          "text": "Adult tickets cost S$8 and student tickets S$5. Twelve tickets earn S$75. Find each number."
+          "text": "Adult tickets cost S$7 and child tickets cost S$4. Fifteen tickets earn S$78. Find the number of each."
         }
       ],
       "steps": [
@@ -83,7 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Let x and y be adult and student ticket counts."
+              "text": "Let x be the number of adult tickets and y the number of child tickets."
+            },
+            {
+              "type": "display_math",
+              "latex": "x+y=15,\\qquad 7x+4y=78"
             }
           ]
         },
@@ -92,7 +108,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Form x+y=12 and 8x+5y=75."
+              "text": "Subtract 4 times the first equation from the second to eliminate y."
+            },
+            {
+              "type": "display_math",
+              "latex": "7x+4y-4(x+y)=78-60\\quad\\Rightarrow\\quad 3x=18\\quad\\Rightarrow\\quad x=6"
             }
           ]
         },
@@ -100,23 +120,23 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Elimination gives x=5 and y=7."
+              "type": "display_math",
+              "latex": "y=15-6=9"
             }
           ]
         }
       ],
-      "verification_note": "There are 12 tickets and 5(8)+7(5)=75."
+      "verification_note": "There are 6 + 9 = 15 tickets, and 6(7) + 9(4) = 42 + 36 = 78 dollars."
     },
     {
       "stable_key": "n7-10-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Model a two-digit number",
+      "title": "Worked example: model a two-digit number",
       "prompt": [
         {
           "type": "text",
-          "text": "A two-digit number has digit sum 11 and is 27 greater than its reversal. Find it."
+          "text": "A two-digit number has digit sum 13 and is 45 greater than the number formed by reversing its digits. Find it."
         }
       ],
       "steps": [
@@ -125,7 +145,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Let x be the tens digit and y the units digit."
+              "text": "Let x be the tens digit and y the units digit. The number is 10x + y and its reversal is 10y + x."
+            },
+            {
+              "type": "display_math",
+              "latex": "x+y=13,\\qquad (10x+y)-(10y+x)=45"
             }
           ]
         },
@@ -134,7 +158,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x+y=11 and 9x-9y=27."
+              "text": "Simplify the second equation."
+            },
+            {
+              "type": "display_math",
+              "latex": "9x-9y=45\\quad\\Rightarrow\\quad x-y=5"
             }
           ]
         },
@@ -143,16 +171,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Then x-y=3, so x=7 and y=4; the number is 74."
+              "text": "Add this to x + y = 13."
+            },
+            {
+              "type": "display_math",
+              "latex": "2x=18\\quad\\Rightarrow\\quad x=9,\\quad y=4"
             }
           ]
         }
       ],
-      "verification_note": "74-47=27 and 7+4=11."
+      "verification_note": "The number is 94: 9 + 4 = 13 and 94 − 49 = 45, and both digits are between 0 and 9."
     },
     {
       "stable_key": "n7-10-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -180,17 +212,17 @@
     },
     {
       "stable_key": "n7-10-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "Define two variables with units, then write one equation for each independent condition, such as a total count and a total cost."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "Solve by elimination or substitution, check the values in the words of the question, and reject values the context does not allow."
         }
       ]
     }

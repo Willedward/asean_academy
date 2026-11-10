@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-518",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G5",
   "primary_outcome": "5.6",
-  "title": "Cone and hemisphere capacity",
+  "title": "Volume of a cone joined to a hemisphere",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maintenance team considered limited storage space while preparing a capacity check for the island rescue marker. Reflective panels must stay visible from the island landing point. The design must also be explained clearly in the safety briefing. A solid is formed by joining a cone of radius 8 cm and height 15 cm to a hemisphere of the same radius. Find the total volume in cm³, correct to 1 decimal place."
+          "text": "A garden bollard is shaped by joining a cone of radius 8 cm and height 15 cm to a hemisphere of the same radius; 15 cm is the perpendicular height of the cone. Find the volume of the bollard in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -71,22 +71,41 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of the cone:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac13\\pi(8)^2(15)+\\frac23\\pi(8)^3=2077.6"
+              "latex": "\\frac13\\pi(8)^2(15)=320\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume of the hemisphere, half of a sphere of the same radius:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{2077.6}"
+              "latex": "\\frac12\\times\\frac43\\pi(8)^3=\\frac{1024}{3}\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the two volumes."
+            },
+            {
+              "type": "display_math",
+              "latex": "V=\\frac{1984}{3}\\pi=2077.640\\ldots=2077.6\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -101,7 +120,7 @@
       "asset_key": "g5-l3-518-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-518-diagram-r2.svg",
+      "path": "assets/g5-l3-518-diagram-r3.svg",
       "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 8 cm. The cone's perpendicular height is h = 15 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -351,6 +370,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

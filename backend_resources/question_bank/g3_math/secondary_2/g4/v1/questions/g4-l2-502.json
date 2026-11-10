@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-502",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Safety inspectors noted salt exposure near the coast while preparing a replacement frame. A safety brace in the coastal evacuation sign forms a right triangle. Its hypotenuse is 29 m and one shorter side is 20 m. Find the other shorter side in metres. Enter the numerical value only."
+          "text": "A wire stay is pegged to level ground and fixed to a vertical pole. For the triangle formed by the wire, the pole and the ground, the hypotenuse is 29 m and one shorter side is 20 m. Find the other shorter side b, the distance from the foot of the pole to the peg, in metres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "The 29 m side is the hypotenuse, so by Pythagoras’ theorem"
             },
             {
               "type": "display_math",
-              "latex": "b=\\sqrt{29^2-20^2}=21"
+              "latex": "b^2=29^2-20^2=841-400=441"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{21}"
+              "latex": "b=\\sqrt{441}=21"
             }
           ],
           "mark_type": "A",
@@ -109,7 +109,7 @@
       "asset_key": "g4-l2-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-502-diagram-r3.svg",
+      "path": "assets/g4-l2-502-diagram-r4.svg",
       "alt_text": "Right-angled triangle with hypotenuse 29 m and one perpendicular side 20 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -245,6 +245,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

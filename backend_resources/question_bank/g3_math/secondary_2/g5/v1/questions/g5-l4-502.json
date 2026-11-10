@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-502",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered salt exposure near the coast while preparing a replacement design for the wetland monitoring float. A closed square-based pyramid has base side 8 m and slant height 12 m on every face. Covering costs $5 per m². Find the total covering cost in dollars."
+          "text": "Every face of a park sculpture, including the base, is covered with weatherproof panels. The closed square-based pyramid has base side 8 m and slant height 12 m on every face. Covering costs S$5 per m². Find the total covering cost in dollars. Enter the number only."
         }
       ],
       "marks": 4,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the total area, then multiply by $5 per m²."
+              "text": "Find the total area, then multiply by S$5 per m²."
             }
           ]
         }
@@ -71,22 +71,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Area of the square base:"
             },
             {
               "type": "display_math",
-              "latex": "S=8^2+4(\\frac12)(8)(12)=256,\\quad C=256(5)=1280"
+              "latex": "8^2=64\\text{ m}^2"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Area of the four triangular faces:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{1280}"
+              "latex": "4\\times\\frac12\\times8\\times12=192\\text{ m}^2"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Total area times the rate:"
+            },
+            {
+              "type": "display_math",
+              "latex": "(64+192)\\times5=256\\times5"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{cost}=\\text{S\\$}1280"
             }
           ],
           "mark_type": "A",
@@ -101,7 +131,7 @@
       "asset_key": "g5-l4-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-502-diagram-r2.svg",
+      "path": "assets/g5-l4-502-diagram-r3.svg",
       "alt_text": "Closed square-based pyramid with base side 8 m. The slant height l = 12 m is marked on a triangular face from the apex to the midpoint of a base edge. Hidden edges are dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -356,6 +386,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

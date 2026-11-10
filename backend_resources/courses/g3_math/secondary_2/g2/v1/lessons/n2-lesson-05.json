@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n2-lesson-05",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n2",
@@ -39,10 +39,6 @@
         {
           "type": "text",
           "text": "Do not decide from one pair of values alone. Test several rows of a table or use the relationship described by the context. A quantity that increases when another increases is not automatically directly proportional: y = 3x + 5 increases with x but is not direct proportion because y/x changes and its graph does not pass through the origin."
-        },
-        {
-          "type": "asset_ref",
-          "asset_key": "n2-lesson-05-proportion-models"
         }
       ]
     },
@@ -63,6 +59,14 @@
         {
           "type": "text",
           "text": "A direct-proportion table has a constant y/x in every valid row, and its graph is a straight line through the origin. The point (0, 0) matters: if zero items still carry a fixed fee, the total cost is linear but is not directly proportional to the number of items."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n2-lesson-05-proportion-models"
+        },
+        {
+          "type": "text",
+          "text": "In the first diagram, y = 2x: from (2, 4) to (4, 8), x doubles and y doubles, and the straight line passes through the origin."
         }
       ]
     },
@@ -133,6 +137,14 @@
         {
           "type": "text",
           "text": "An inverse-proportion graph is a decreasing curve in the positive quadrant for positive quantities. It approaches the axes but never reaches them, because x = 0 would require division by zero. In a table, x doubling makes y halve; x multiplying by five makes y one fifth as large."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n2-lesson-05-inverse"
+        },
+        {
+          "type": "text",
+          "text": "In the second diagram, xy = 12: from (2, 6) to (4, 3), x doubles and y halves. Sometimes a quantity depends on two others at once. For a job, the worker-days needed are directly proportional to the size of the job, while for a fixed job the number of days is inversely proportional to the number of workers; this combination is called joint proportion."
         }
       ]
     },
@@ -144,7 +156,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Eight pumps with equal output can empty a reservoir in 15 hours. Assuming they work continuously at the same rate, how long would 12 pumps take?"
+          "text": "Nine pumps with equal output can empty a reservoir in 16 hours. Assuming they work continuously at the same rate, how long would 12 pumps take?"
         }
       ],
       "steps": [
@@ -153,7 +165,7 @@
           "content": [
             {
               "type": "text",
-              "text": "For a fixed job, number of pumps and time are inversely proportional."
+              "text": "For a fixed job, the number of pumps and the time are inversely proportional."
             },
             {
               "type": "display_math",
@@ -170,7 +182,7 @@
             },
             {
               "type": "display_math",
-              "latex": "k=8\\times15=120"
+              "latex": "k=9\\times16=144"
             }
           ]
         },
@@ -179,20 +191,74 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 12 pumps and solve for time."
+              "text": "Use 12 pumps and solve for the time."
             },
             {
               "type": "display_math",
-              "latex": "12t=120\\Rightarrow t=10\\text{ hours}"
+              "latex": "12t=144\\Rightarrow t=12\\text{ hours}"
             }
           ]
         }
       ],
-      "verification_note": "The number of pumps increased by a factor of 12/8 = 1.5, while time decreased by the reciprocal factor: 15/1.5 = 10 hours."
+      "verification_note": "The number of pumps increased by a factor of 12/9 = 4/3, and the time decreased by the reciprocal factor: 16 × 3/4 = 12 hours."
+    },
+    {
+      "stable_key": "n2-25-team-change-example",
+      "position": 6,
+      "type": "worked_example",
+      "title": "Worked example: a team changes part-way through",
+      "prompt": [
+        {
+          "type": "text",
+          "text": "A job needs 16 equally productive workers for 9 days. After 3 days, 4 workers leave. How many more days do the remaining workers need to finish the job?"
+        }
+      ],
+      "steps": [
+        {
+          "position": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Measure the whole job in worker-days."
+            },
+            {
+              "type": "display_math",
+              "latex": "16\\times9=144\\text{ worker-days}"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Work out how much is done in the first 3 days and how much is left."
+            },
+            {
+              "type": "display_math",
+              "latex": "16\\times3=48,\\qquad 144-48=96\\text{ worker-days}"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Twelve workers remain, so divide the remaining work by 12."
+            },
+            {
+              "type": "display_math",
+              "latex": "96\\div12=8\\text{ more days}"
+            }
+          ]
+        }
+      ],
+      "verification_note": "Check the total: 16 × 3 + 12 × 8 = 48 + 96 = 144 worker-days, the whole job. The job takes 3 + 8 = 11 days, longer than 9, as expected when workers leave."
     },
     {
       "stable_key": "n2-25-model-checks",
-      "position": 6,
+      "position": 7,
       "type": "explanation",
       "title": "Translate the context and reject false models",
       "blocks": [
@@ -208,7 +274,7 @@
     },
     {
       "stable_key": "n2-25-recall",
-      "position": 7,
+      "position": 8,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -243,7 +309,7 @@
     },
     {
       "stable_key": "n2-lesson-05-summary",
-      "position": 8,
+      "position": 9,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
@@ -263,16 +329,336 @@
       "asset_key": "n2-lesson-05-proportion-models",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n2-lesson-05-proportion-models.svg",
-      "alt_text": "Side-by-side graphs: direct proportion is a straight line through the origin with y divided by x constant, while inverse proportion is a decreasing curve with x times y constant.",
+      "path": "assets/n2-lesson-05-proportion-models-r2.svg",
+      "alt_text": "Graph of y = 2x for x from 0 to 6: a straight line through the origin O. The marked points (2, 4) and (4, 8) show that when x doubles, y doubles, and y ÷ x = 2 at both.",
       "generation_spec": {
-        "renderer": "nextscholar-proportion-svg-v1",
-        "diagram_kind": "direct_inverse_comparison",
-        "lesson_key": "n2-lesson-05"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "proportion_graph",
+        "lesson_key": "n2-lesson-05",
+        "template": "proportion_graph",
+        "inputs": {
+          "kind": "direct",
+          "k": 2,
+          "x_max": 6,
+          "y_max": 12,
+          "tick_step": 2,
+          "points": [
+            {
+              "x": 2
+            },
+            {
+              "x": 4
+            }
+          ],
+          "title": "Direct proportion: y = 2x",
+          "alt_text": "Graph of y = 2x for x from 0 to 6: a straight line through the origin O. The marked points (2, 4) and (4, 8) show that when x doubles, y doubles, and y ÷ x = 2 at both."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "curve",
+            "kind": "proportion-curve",
+            "value": "direct;2",
+            "tag": "path",
+            "geometry": {
+              "d": "M110 400 L650 80"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "2,4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "290",
+              "cy": "293.333333",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "4,8",
+            "tag": "circle",
+            "geometry": {
+              "cx": "470",
+              "cy": "186.666667",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "110",
+            "label": "0"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "290",
+            "label": "2"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "470",
+            "label": "4"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "650",
+            "label": "6"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "400",
+            "label": "0"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "346.666667",
+            "label": "2"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "293.333333",
+            "label": "4"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "240",
+            "label": "6"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "186.666667",
+            "label": "8"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "133.333333",
+            "label": "10"
+          },
+          {
+            "key": "y:12",
+            "axis": "y",
+            "value": "12",
+            "position": "80",
+            "label": "12"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": 0,
+          "x_max": 6.0,
+          "y_min": 0,
+          "y_max": 12.0
+        }
       },
-      "sha256": "73b025d4ac583da95604cd7bd96f9b98309dd5ba08085a2b40b6e0d3f37a7d16",
-      "width": 940,
-      "height": 470
+      "sha256": "b6199271d19c6c8fdbd02af4eb1c14cfe2ed276876f8d44e79e6c93a20780daa",
+      "width": 720,
+      "height": 480
+    },
+    {
+      "asset_key": "n2-lesson-05-inverse",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n2-lesson-05-inverse-r2.svg",
+      "alt_text": "Graph of y = 12 ÷ x for positive x: a decreasing curve that gets closer to both axes without meeting them. The marked points (2, 6) and (4, 3) show that when x doubles, y halves, and x × y = 12 at both.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "proportion_graph",
+        "lesson_key": "n2-lesson-05",
+        "template": "proportion_graph",
+        "inputs": {
+          "kind": "inverse",
+          "k": 12,
+          "x_max": 12,
+          "y_max": 12,
+          "tick_step": 2,
+          "points": [
+            {
+              "x": 2
+            },
+            {
+              "x": 4
+            }
+          ],
+          "title": "Inverse proportion: xy = 12",
+          "alt_text": "Graph of y = 12 ÷ x for positive x: a decreasing curve that gets closer to both axes without meeting them. The marked points (2, 6) and (4, 3) show that when x doubles, y halves, and x × y = 12 at both."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "curve",
+            "kind": "proportion-curve",
+            "value": "inverse;12",
+            "tag": "path",
+            "geometry": {
+              "d": "M155 80 L161.1875 118.681319 L167.375 149.019608 L173.5625 173.451327 L179.75 193.548387 L185.9375 210.37037 L192.125 224.657534 L198.3125 236.942675 L204.5 247.619048 L210.6875 256.98324 L216.875 265.263158 L223.0625 272.636816 L229.25 279.245283 L235.4375 285.201794 L241.625 290.598291 L247.8125 295.510204 L254 300 L260.1875 304.11985 L266.375 307.913669 L272.5625 311.418685 L278.75 314.666667 L284.9375 317.684887 L291.125 320.496894 L297.3125 323.123123 L303.5 325.581395 L309.6875 327.887324 L315.875 330.054645 L322.0625 332.095491 L328.25 334.020619 L334.4375 335.839599 L340.625 337.560976 L346.8125 339.192399 L353 340.740741 L359.1875 342.21219 L365.375 343.612335 L371.5625 344.946237 L377.75 346.218487 L383.9375 347.433265 L390.125 348.594378 L396.3125 349.705305 L402.5 350.769231 L408.6875 351.789077 L414.875 352.767528 L421.0625 353.707052 L427.25 354.609929 L433.4375 355.478261 L439.625 356.313993 L445.8125 357.118928 L452 357.894737 L458.1875 358.642973 L464.375 359.365079 L470.5625 360.062402 L476.75 360.736196 L482.9375 361.387632 L489.125 362.017804 L495.3125 362.627737 L501.5 363.218391 L507.6875 363.790665 L513.875 364.345404 L520.0625 364.883402 L526.25 365.405405 L532.4375 365.912117 L538.625 366.404199 L544.8125 366.882277 L551 367.346939 L557.1875 367.798742 L563.375 368.238213 L569.5625 368.665851 L575.75 369.082126 L581.9375 369.487485 L588.125 369.882353 L594.3125 370.267131 L600.5 370.642202 L606.6875 371.007928 L612.875 371.364653 L619.0625 371.712707 L625.25 372.052402 L631.4375 372.384035 L637.625 372.707889 L643.8125 373.024236 L650 373.333333"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "2,6",
+            "tag": "circle",
+            "geometry": {
+              "cx": "200",
+              "cy": "240",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "4,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "290",
+              "cy": "320",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "110",
+            "label": "0"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "200",
+            "label": "2"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "290",
+            "label": "4"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "380",
+            "label": "6"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "470",
+            "label": "8"
+          },
+          {
+            "key": "x:10",
+            "axis": "x",
+            "value": "10",
+            "position": "560",
+            "label": "10"
+          },
+          {
+            "key": "x:12",
+            "axis": "x",
+            "value": "12",
+            "position": "650",
+            "label": "12"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "400",
+            "label": "0"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "346.666667",
+            "label": "2"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "293.333333",
+            "label": "4"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "240",
+            "label": "6"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "186.666667",
+            "label": "8"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "133.333333",
+            "label": "10"
+          },
+          {
+            "key": "y:12",
+            "axis": "y",
+            "value": "12",
+            "position": "80",
+            "label": "12"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": 0,
+          "x_max": 12.0,
+          "y_min": 0,
+          "y_max": 12.0
+        }
+      },
+      "sha256": "6cd52d52fe51154d0d67133d69ef14ac4bcb48e2b7cf5101c0d9783f284fcacf",
+      "width": 720,
+      "height": 480
     }
   ],
   "provenance": {
@@ -281,6 +667,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n7",
@@ -90,7 +90,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The length of a rectangle is 3 cm more than twice its width. Its perimeter is 42 cm. Find its width."
+          "text": "The length of a rectangle is 4 cm less than three times its width. Its perimeter is 48 cm. Find its width."
         }
       ],
       "steps": [
@@ -99,7 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the width be x cm. Then the length is 2x + 3 cm."
+              "text": "Let the width be x cm. Then the length is (3x − 4) cm."
             }
           ]
         },
@@ -112,7 +112,7 @@
             },
             {
               "type": "display_math",
-              "latex": "2[x+(2x+3)]=42"
+              "latex": "2[x+(3x-4)]=48"
             }
           ]
         },
@@ -125,12 +125,12 @@
             },
             {
               "type": "display_math",
-              "latex": "6x+6=42\\Rightarrow6x=36\\Rightarrow x=6"
+              "latex": "8x-8=48\\Rightarrow8x=56\\Rightarrow x=7"
             }
           ]
         }
       ],
-      "verification_note": "The width is 6 cm and the length is 15 cm. Their perimeter is 2(6 + 15) = 42 cm, and 15 = 2(6) + 3."
+      "verification_note": "The width is 7 cm and the length is 3(7) − 4 = 17 cm. Their perimeter is 2(7 + 17) = 48 cm."
     },
     {
       "stable_key": "n7-74-ticket-example",
@@ -140,7 +140,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An adult ticket costs 4 dollars more than a student ticket. Three student tickets and two adult tickets cost 48 dollars. Find the price of one student ticket."
+          "text": "An adult ticket costs S$4 more than a student ticket. Three student tickets and two adult tickets cost S$48 (S$ means Singapore dollars). Find the price of one student ticket."
         }
       ],
       "steps": [
@@ -180,7 +180,7 @@
           ]
         }
       ],
-      "verification_note": "A student ticket costs 8 dollars and an adult ticket costs 12 dollars. The total is 3(8) + 2(12) = 48 dollars."
+      "verification_note": "A student ticket costs S$8 and an adult ticket costs S$12. The total is 3(8) + 2(12) = 48 dollars."
     },
     {
       "stable_key": "n7-74-recall",
@@ -190,7 +190,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Three identical folders and a pen costing 2 dollars cost 17 dollars altogether. What is the price of one folder in dollars?"
+          "text": "Three identical folders and a pen costing S$2 cost S$17 altogether. What is the price of one folder, in dollars?"
         }
       ],
       "response": {

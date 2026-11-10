@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-531",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,23 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community builders noted a protected habitat boundary while preparing a replacement frame. A right triangular component at the forest ranger cabin has an opposite side of 16 cm and an adjacent side of 63 cm relative to angle "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\theta"
-        },
-        {
-          "type": "text",
-          "text": ". Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\theta"
-        },
-        {
-          "type": "text",
-          "text": " correct to 1 decimal place."
+          "text": "A model staircase rises at angle θ to the floor. Its right-angled profile has an opposite side of 8 cm and an adjacent side of 15 cm relative to angle θ. Find θ correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -54,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "14.3",
-        "canonical_latex": "14.3^\\circ",
+        "canonical_answer": "28.1",
+        "canonical_latex": "28.1^\\circ",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -91,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Write "
             },
             {
               "type": "inline_math",
-              "latex": "\\tan^{-1} \\left(\\frac{16}{63}\\right)"
+              "latex": "\\tan\\theta"
             },
             {
               "type": "text",
-              "text": " in degree mode."
+              "text": " as a fraction using the two given sides, then use the inverse tangent in degree mode."
             }
           ]
         }
@@ -110,22 +94,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Relative to θ, the opposite and adjacent sides are given, so use the tangent ratio."
             },
             {
               "type": "display_math",
-              "latex": "\\theta=\\tan^{-1}\\left(\\frac{16}{63}\\right)=14.3^\\circ"
+              "latex": "\\tan\\theta=\\frac{8}{15}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{14.3^\\circ}"
+              "latex": "\\theta=\\tan^{-1}\\left(\\frac{8}{15}\\right)=28.072\\ldots^\\circ"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\theta=28.1^\\circ"
             }
           ],
           "mark_type": "A",
@@ -140,8 +135,8 @@
       "asset_key": "g4-l3-531-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-531-diagram-r3.svg",
-      "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 16 cm and the adjacent side is 63 cm. Not drawn to scale.",
+      "path": "assets/g4-l3-531-diagram-r4.svg",
+      "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 8 cm and the adjacent side is 15 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -150,28 +145,28 @@
         "template": "find_angle",
         "inputs": {
           "opposite": {
-            "value": 16,
+            "value": 8,
             "unit": "cm"
           },
           "adjacent": {
-            "value": 63,
+            "value": 15,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "opposite": {
-            "value": 16,
+            "value": 8,
             "unit": "cm"
           },
           "adjacent": {
-            "value": 63,
+            "value": 15,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "14.3",
-          "14.25"
+          "28.1",
+          "28.07"
         ],
         "unknowns": [
           {
@@ -183,12 +178,12 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          300.0
+          368.0
         ],
         "points": {
           "A": [
             120.0,
-            147.43
+            248.0
           ],
           "B": [
             120.0,
@@ -196,7 +191,7 @@
           ],
           "C": [
             480.0,
-            147.43
+            248.0
           ]
         },
         "segments": [
@@ -240,8 +235,8 @@
               "B"
             ],
             "marker_key": "angle-C",
-            "drawn_degrees": 14.25,
-            "degrees": 14.25
+            "drawn_degrees": 28.07,
+            "degrees": 28.07
           }
         ],
         "angle_markers": [
@@ -249,12 +244,12 @@
             "marker_key": "angle-C",
             "center": [
               480.0,
-              147.43
+              248.0
             ],
-            "radius": 96.8,
+            "radius": 49.2,
             "start_ray_point": [
               120.0,
-              147.43
+              248.0
             ],
             "end_ray_point": [
               120.0,
@@ -270,11 +265,11 @@
             "target": "angle:C"
           },
           {
-            "text": "16 cm",
+            "text": "8 cm",
             "target": "segment:AB"
           },
           {
-            "text": "63 cm",
+            "text": "15 cm",
             "target": "segment:AC"
           }
         ],
@@ -285,15 +280,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.254,
+            "value": 0.5333,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "da42eeeb936639906c1ac9cef6a41f487165830c472e878965307ea6a6e63062",
+      "sha256": "13432bbda14585d25cf46f2f9377a0af95d9d838e3907b90115bff2d4aabf248",
       "width": 600,
-      "height": 300
+      "height": 368
     }
   ],
   "provenance": {

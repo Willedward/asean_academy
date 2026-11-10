@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered a strict material budget while preparing a replacement design for the water treatment vessel. Service technicians inspect the vessel through a side hatch. The first sketch was checked against an equipment inventory. A spherical model has diameter 20 cm. Find its volume in cm³, correct to 1 decimal place."
+          "text": "A melon is modelled as a sphere for a science lesson. The spherical melon has diameter 14 cm. Find its volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "4188.8",
-        "canonical_latex": "4188.8",
+        "canonical_answer": "1436.8",
+        "canonical_latex": "1436.8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Halve 20, then use "
+              "text": "Halve the diameter, then use "
             },
             {
               "type": "inline_math",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The radius is half the diameter."
             },
             {
               "type": "display_math",
-              "latex": "r=20\\div2=10,\\quad V=\\frac43\\pi(10)^3=4188.8"
+              "latex": "r=14\\div2=7,\\quad V=\\frac43\\pi(7)^3=\\frac{1372}{3}\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{4188.8}"
+              "latex": "V=1436.755\\ldots=1436.8\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g5-l2-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-508-diagram-r3.svg",
-      "alt_text": "Sphere with a full diameter d = 20 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+      "path": "assets/g5-l2-508-diagram-r4.svg",
+      "alt_text": "Sphere with a full diameter d = 14 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -119,22 +119,22 @@
         "template": "sphere_volume_diameter",
         "inputs": {
           "diameter": {
-            "value": 20,
+            "value": 14,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "diameter": {
-            "value": 20,
+            "value": 14,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "4188.8",
-          "4188.79",
-          "10",
-          "r = 10"
+          "1436.8",
+          "1436.76",
+          "7",
+          "r = 7"
         ],
         "unknowns": [],
         "solids": [
@@ -193,7 +193,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "d = 20 cm",
+            "text": "d = 14 cm",
             "target": "segment:D1D2"
           }
         ],
@@ -222,7 +222,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "219dff6c2aae9c77f2ef0e133840744961a40fb2e09da7034c5a33fcaa25b2fa",
+      "sha256": "9f5b802a97e545292310e41763759b18d1c1c8b24fc4156f482b75bb8c8adc35",
       "width": 600,
       "height": 460
     }

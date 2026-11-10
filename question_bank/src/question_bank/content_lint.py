@@ -1070,13 +1070,21 @@ def _numeric_hint_leak(
             re.IGNORECASE,
         ) or re.search(r"(?:[-+*/^]|times|plus|minus|of)\s*$", before, re.IGNORECASE)
         if "/" in literal and answer.denominator != 1 and not operand:
-            numerator, denominator = (Fraction(item) for item in literal.split("/"))
-            if Fraction(numerator) / Fraction(denominator) == answer and (
+            # A LaTeX \frac{5}{8} reaches here as "5)/(8": drop the brackets before parsing.
+            fraction = re.sub(r"[\s()]", "", literal)
+            numerator, denominator = (Fraction(item) for item in fraction.split("/"))
+            if any(
+                prompt_value == answer and "/" in prompt_literal
+                for prompt_value, _, _, prompt_literal in _numbers(prompt_plain)
+            ):
+                # The prompt gives this fraction (for example "write 5/8 as a decimal").
+                continue
+            if numerator / denominator == answer and (
                 numerator,
                 denominator,
             ) != (answer.numerator, answer.denominator):
-                return f"states the answer as the unsimplified fraction {literal.strip()}"
-            return f"states the exact answer {literal.strip()}"
+                return f"states the answer as the unsimplified fraction {fraction}"
+            return f"states the exact answer {fraction}"
         if _RESULT_CONTEXT.search(before):
             assigned = _ASSIGNED_VARIABLE.search(before)
             if assigned and asked and assigned.group(1) not in asked:
