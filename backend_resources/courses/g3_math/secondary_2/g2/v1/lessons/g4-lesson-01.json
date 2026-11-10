@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g4",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
   },
   "stable_key": "g4-lesson-01",
   "position": 1,
@@ -216,16 +216,112 @@
       "asset_key": "g4-lesson-01-pythagoras",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-lesson-01-pythagoras.svg",
-      "alt_text": "A 6-8-10 right triangle demonstrating a squared plus b squared equals c squared.",
+      "path": "assets/g4-lesson-01-pythagoras-r2.svg",
+      "alt_text": "Right-angled triangle with perpendicular sides a = 6 and b = 8 and hypotenuse c = 10 opposite the marked right angle, with 6² + 8² = 10².",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "pythagoras",
-        "lesson_key": "g4-lesson-01"
+        "renderer": "nextscholar-right-triangle-svg-v2",
+        "diagram_kind": "right_triangle",
+        "lesson_key": "g4-lesson-01",
+        "template": "lesson_pythagoras",
+        "inputs": {
+          "legs": [
+            6,
+            8
+          ]
+        },
+        "not_to_scale": false,
+        "dimensions": {
+          "perpendicular_sides": [
+            6.0,
+            8.0
+          ],
+          "hypotenuse": 10.0
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "task": "teaching",
+        "drawn_to_scale": true,
+        "viewbox": [
+          600.0,
+          486.0
+        ],
+        "points": {
+          "A": [
+            120.0,
+            326.0
+          ],
+          "B": [
+            120.0,
+            56.0
+          ],
+          "C": [
+            480.0,
+            326.0
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "AC",
+            "from": "A",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "A",
+            "arms": [
+              "B",
+              "C"
+            ],
+            "marker_size": 22
+          }
+        ],
+        "labels": [
+          {
+            "text": "a = 6",
+            "target": "segment:AB"
+          },
+          {
+            "text": "b = 8",
+            "target": "segment:AC"
+          },
+          {
+            "text": "c = 10",
+            "target": "segment:BC"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "length_ratio",
+            "segments": [
+              "AB",
+              "AC"
+            ],
+            "value": 0.75,
+            "tolerance": 0.02
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "76f7d10b9fa89f7ce1ca4e17002cdfaa95827f0d50e783ada6d812fb72c74f49",
-      "width": 940,
-      "height": 470
+      "sha256": "537846bbadc73553e9e14989f502cf0616a85ca1080eb3000d0caf58ec252931",
+      "width": 600,
+      "height": 486
     }
   ]
 }
