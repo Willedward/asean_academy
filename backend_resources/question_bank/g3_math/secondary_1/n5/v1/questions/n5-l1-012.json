@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n5-l1-012",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write y + y + y + y as a product."
+          "text": "Write "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y+y+y+y"
+        },
+        {
+          "type": "text",
+          "text": " as a product."
         }
       ],
       "marks": 1,
