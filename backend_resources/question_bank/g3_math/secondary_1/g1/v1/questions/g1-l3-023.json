@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l3-023",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 45° constructed angle and a 30° constructed angle are placed adjacent without overlap. Find the combined angle in degrees."
+          "text": "A 45° constructed angle and a 30° constructed angle are placed adjacent without overlap. The combined angle is then bisected. Find each resulting angle in degrees."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "75",
-        "canonical_latex": "75",
+        "canonical_answer": "37.5",
+        "canonical_latex": "37.5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add 45° and 30°."
+              "text": "Add the two angles, then halve the total."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "45^\\circ+30^\\circ=75^\\circ"
+              "type": "inline_math",
+              "latex": "(45^\\circ+30^\\circ)\\div2=37.5^\\circ"
             }
           ],
           "mark_type": "A",
