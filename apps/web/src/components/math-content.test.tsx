@@ -31,6 +31,74 @@ describe("MathContent", () => {
     expect(diagram).toHaveAttribute("height", "390");
   });
 
+  it("keeps a space between consecutive authored text blocks", () => {
+    const { container } = render(
+      <p>
+        <MathContent
+          blocks={[
+            { type: "text", text: "Exterior angles total 360°." },
+            { type: "text", text: "To find n, divide 360° by one angle." },
+            { type: "text", text: " Already spaced." },
+          ]}
+        />
+      </p>,
+    );
+
+    expect(container.textContent).toBe(
+      "Exterior angles total 360°. To find n, divide 360° by one angle. Already spaced.",
+    );
+  });
+
+  it("adds no space between text and inline maths", () => {
+    const { container } = render(
+      <p>
+        <MathContent
+          blocks={[
+            { type: "text", text: "Value (" },
+            { type: "inline_math", latex: "x" },
+            { type: "text", text: ")." },
+          ]}
+        />
+      </p>,
+    );
+
+    const text = container.textContent ?? "";
+    expect(text.startsWith("Value (")).toBe(true);
+    expect(text.endsWith(").")).toBe(true);
+    expect(text).not.toMatch(/\( | \)/);
+  });
+
+  it("keeps touching punctuation on the same line as inline maths", () => {
+    const { container } = render(
+      <p>
+        <MathContent
+          blocks={[
+            { type: "text", text: "Calculate (" },
+            { type: "inline_math", latex: "12\\times 8" },
+            { type: "text", text: ")." },
+            { type: "text", text: "Then compare " },
+            { type: "inline_math", latex: "a" },
+            { type: "text", text: ", " },
+            { type: "inline_math", latex: "b" },
+          ]}
+        />
+      </p>,
+    );
+
+    const groups = container.querySelectorAll("span.whitespace-nowrap");
+    expect(groups).toHaveLength(2);
+    expect(groups[0]!.firstChild?.textContent).toBe("(");
+    expect(groups[0]!.lastChild?.textContent).toBe(").");
+    expect(groups[1]!.lastChild?.textContent).toBe(",");
+    const paragraph = container.querySelector("p")!;
+    const plainText = [...paragraph.childNodes]
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .map((node) => node.textContent)
+      .join("|");
+    // Each punctuation mark appears once: the text blocks lose what moved.
+    expect(plainText).toBe("Calculate | Then compare | ");
+  });
+
   it("leaves KaTeX's MathML to name the maths", () => {
     const { container } = render(
       <MathContent
