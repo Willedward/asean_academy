@@ -156,7 +156,7 @@ describe("LivePracticeView readability", () => {
       .querySelector("ol li .katex-display")
       ?.closest("li > div");
     expect(step).not.toBeNull();
-    expect(step?.className).toContain("[&_.katex-display]:my-0");
-    expect(step?.className).toContain("[&_.katex-display>.katex]:text-left");
+    expect(step?.className).toContain("[&_.katex-display]:my-0!");
+    expect(step?.className).toContain("[&_.katex-display>.katex]:text-left!");
   });
 });

@@ -452,8 +452,8 @@ export function LivePracticeView({
                         <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-ns-brand-soft text-sm font-bold">
                           {index + 1}
                         </span>
-                        {/* Display maths starts level with its step number. */}
-                        <div className="min-w-0 grow pt-0.5 leading-7 [&_.katex-display]:my-0 [&_.katex-display>.katex]:text-left [&>span.block:first-child]:mt-0">
+                        {/* Display maths starts level with its step number. KaTeX CSS is unlayered, so these overrides need "!". */}
+                        <div className="min-w-0 grow pt-0.5 leading-7 [&_.katex-display]:my-0! [&_.katex-display>.katex]:text-left! [&>span.block:first-child]:mt-0">
                           <MathContent
                             assets={question.assets}
                             assetScope={{
