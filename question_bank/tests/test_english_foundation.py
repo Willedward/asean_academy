@@ -50,7 +50,7 @@ def test_english_foundation_has_complete_curriculum_and_valid_pilot(english_root
     }
     assert len(report.forms) == 25
     assert len(report.essay_rubrics) == 1
-    assert len(report.essay_prompts) == 1
+    assert len(report.essay_prompts) == 13
     assert {form.status for form in report.forms} == {"draft"}
     assert report.catalogue.route_lesson_codes("core") == [
         "E0.1",
