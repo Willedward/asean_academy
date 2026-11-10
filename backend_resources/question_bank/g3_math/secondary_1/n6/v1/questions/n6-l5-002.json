@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l5-002",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A delivery service models cost by "
+          "text": "A delivery service charges S$y for a distance of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": " km, where "
         },
         {
           "type": "inline_math",
@@ -32,7 +40,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "(4, 18)"
+          "latex": "(4,18)"
         },
         {
           "type": "text",
@@ -40,11 +48,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "(10, 36)"
+          "latex": "(10,36)"
         },
         {
           "type": "text",
-          "text": " lie on its graph. A second service charges "
+          "text": " lie on its graph. A second service charges S$y where "
         },
         {
           "type": "inline_math",
@@ -52,15 +60,7 @@
         },
         {
           "type": "text",
-          "text": ". Find the distance "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " at which both services charge the same amount."
+          "text": ". Find the distance, in km, at which both services charge the same amount."
         }
       ],
       "marks": 3,
@@ -117,7 +117,15 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
+              "latex": "a=\\frac{36-18}{10-4}=3"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
               "latex": "18=3(4)+b\\Rightarrow b=6"
             }
           ],
@@ -128,7 +136,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "3x+6=2x+17"
             }
           ],
@@ -139,7 +147,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "x=11"
             }
           ],

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-008",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -32,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "A(2, 1)"
+          "latex": "A(2,1)"
         },
         {
           "type": "text",
@@ -40,7 +40,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "B(x, 10)"
+          "latex": "B(p,10)"
         },
         {
           "type": "text",
@@ -48,19 +48,35 @@
         },
         {
           "type": "inline_math",
-          "latex": "x>2"
+          "latex": "p>2"
         },
         {
           "type": "text",
-          "text": ". The horizontal segment from A to "
+          "text": ". The horizontal segment from "
         },
         {
           "type": "inline_math",
-          "latex": "(x, 1)"
+          "latex": "A"
         },
         {
           "type": "text",
-          "text": " and the vertical segment to B form a right triangle. Find its area."
+          "text": " to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(p,1)"
+        },
+        {
+          "type": "text",
+          "text": " and the vertical segment to "
+        },
+        {
+          "type": "inline_math",
+          "latex": "B"
+        },
+        {
+          "type": "text",
+          "text": " form a right triangle. Find its area."
         }
       ],
       "marks": 3,
@@ -101,8 +117,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "36=3(x-2)"
+              "type": "inline_math",
+              "latex": "\\frac{9}{p-2}=\\frac34\\Rightarrow p-2=12"
             }
           ],
           "mark_type": "M",
@@ -112,8 +128,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x-2=12"
+              "type": "text",
+              "text": "Horizontal length 12, vertical length 9"
             }
           ],
           "mark_type": "M",
@@ -123,7 +139,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Area}=\\frac12(12)(9)=54"
             }
           ],

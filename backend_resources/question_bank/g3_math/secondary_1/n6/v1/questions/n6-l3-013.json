@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l3-013",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.3",
-  "title": "Same output from two functions",
+  "title": "Equal outputs from two relationships",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Functions "
+          "text": "Relationships "
         },
         {
           "type": "inline_math",
-          "latex": "f"
+          "latex": "y=5x-4"
         },
         {
           "type": "text",
@@ -32,27 +32,19 @@
         },
         {
           "type": "inline_math",
-          "latex": "g"
+          "latex": "y=2x+11"
         },
         {
           "type": "text",
-          "text": " are given by "
+          "text": " give the same value of "
         },
         {
           "type": "inline_math",
-          "latex": "f(x)=5x-4"
+          "latex": "y"
         },
         {
           "type": "text",
-          "text": " and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "g(x)=2x+11"
-        },
-        {
-          "type": "text",
-          "text": ". Find "
+          "text": " for one value of "
         },
         {
           "type": "inline_math",
@@ -60,11 +52,11 @@
         },
         {
           "type": "text",
-          "text": " when "
+          "text": ". Find that value of "
         },
         {
           "type": "inline_math",
-          "latex": "f(x)=g(x)"
+          "latex": "y"
         },
         {
           "type": "text",
@@ -77,8 +69,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "21",
+        "canonical_latex": "21",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -90,7 +82,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Set the two function expressions equal."
+              "text": "Set the two expressions for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " equal."
             }
           ]
         },
@@ -99,15 +99,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
+              "text": "Solve for "
             },
             {
               "type": "inline_math",
-              "latex": "5x-4=2x+11"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ", then substitute into either expression."
             }
           ]
         }
@@ -117,7 +117,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "5x-4=2x+11"
             }
           ],
@@ -128,8 +128,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3x=15"
+              "type": "inline_math",
+              "latex": "x=5"
             }
           ],
           "mark_type": "M",
@@ -139,8 +139,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=5"
+              "type": "inline_math",
+              "latex": "y=5(5)-4=21"
             }
           ],
           "mark_type": "A",

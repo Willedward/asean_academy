@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l1-008 — Input from an ordered pair
+## n6-l1-008 — Reading a table of values (input)
 
 [Open this question in the HTML preview](index.html#n6-l1-008)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-010 — Completing a value table
+## n6-l2-010 — Sum of a table of values
 
 [Open this question in the HTML preview](index.html#n6-l2-010)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l3-013 — Same output from two functions
+## n6-l3-013 — Equal outputs from two relationships
 
 [Open this question in the HTML preview](index.html#n6-l3-013)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l4-006 — Composing two linear rules
+## n6-l4-006 — Line with related gradient and intercept
 
 [Open this question in the HTML preview](index.html#n6-l4-006)
 
