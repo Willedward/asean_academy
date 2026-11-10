@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l1-510",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.8",
-  "title": "Crossing point with one coordinate given",
+  "title": "Intersection of two lines",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -36,11 +36,11 @@
         },
         {
           "type": "text",
-          "text": " intersect at "
+          "text": " intersect at the point "
         },
         {
           "type": "inline_math",
-          "latex": "(k,2)"
+          "latex": "(p,q)"
         },
         {
           "type": "text",
@@ -48,7 +48,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "k"
+          "latex": "p"
         },
         {
           "type": "text",
@@ -91,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "After addition, divide the resulting value of 2x by 2."
+              "text": "Add the two equations to eliminate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -101,8 +109,24 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Add the equations. "
+            },
+            {
               "type": "display_math",
-              "latex": "2x=8\\Rightarrow x=4\\Rightarrow k=4"
+              "latex": "2x=8\\Rightarrow x=4"
+            },
+            {
+              "type": "text",
+              "text": " So "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p=4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

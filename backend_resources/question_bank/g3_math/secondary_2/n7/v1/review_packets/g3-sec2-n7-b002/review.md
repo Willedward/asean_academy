@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-507 — Museum entry for adults and students
+## n7-l3-507 — Rectangle perimeter from two conditions
 
 [Open this question in the HTML preview](index.html#n7-l3-507)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-507 — Nine parcels of two masses
+## n7-l4-507 — Triangle with two equal sides
 
 [Open this question in the HTML preview](index.html#n7-l4-507)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-502 — Two unknown counts at a field station
+## n7-l5-502 — Simultaneous equations with fractions
 
 [Open this question in the HTML preview](index.html#n7-l5-502)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-510 — Crossing point with one coordinate given
+## n7-l1-510 — Intersection of two lines
 
 [Open this question in the HTML preview](index.html#n7-l1-510)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-509 — Given roots, find the constant
+## n7-l4-509 — Solve a non-monic quadratic
 
 [Open this question in the HTML preview](index.html#n7-l4-509)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l2-513",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,11 +24,27 @@
         },
         {
           "type": "inline_math",
-          "latex": "2x+4y=10"
+          "latex": "2x+4y=-6"
         },
         {
           "type": "text",
-          "text": " cross the x-axis? Give the x-coordinate."
+          "text": " cross the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-axis? Give the "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-coordinate."
         }
       ],
       "marks": 2,
@@ -37,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "-3",
+        "canonical_latex": "-3",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,7 +83,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute "
+              "text": "Set "
             },
             {
               "type": "inline_math",
@@ -75,11 +91,11 @@
             },
             {
               "type": "text",
-              "text": " into "
+              "text": ", then solve for "
             },
             {
               "type": "inline_math",
-              "latex": "2x+4y=10"
+              "latex": "x"
             },
             {
               "type": "text",
@@ -94,11 +110,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "At the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-axis, "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=0"
+            },
+            {
+              "type": "text",
+              "text": ". "
             },
             {
               "type": "display_math",
-              "latex": "2x=10\\Rightarrow x=5\\Rightarrow k=5"
+              "latex": "2x=-6"
             }
           ],
           "mark_type": "M",
@@ -109,11 +141,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-coordinate is "
             },
             {
               "type": "display_math",
-              "latex": "5"
+              "latex": "-3"
             }
           ],
           "mark_type": "A",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l5-502",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.8",
-  "title": "Two unknown counts at a field station",
+  "title": "Simultaneous equations with fractions",
   "difficulty": 5,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "At the Mekong field station, two unknown counts satisfy "
+          "text": "Solve the simultaneous equations "
         },
         {
           "type": "inline_math",
-          "latex": "x+y=9"
+          "latex": "\\frac{x}{2}+\\frac{y}{3}=2"
         },
         {
           "type": "text",
@@ -32,11 +32,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "3x+2y=24"
+          "latex": "3x-2y=-4"
         },
         {
           "type": "text",
-          "text": ". Use elimination or substitution to find "
+          "text": ". Give "
         },
         {
           "type": "inline_math",
@@ -44,7 +44,7 @@
         },
         {
           "type": "text",
-          "text": "."
+          "text": " as an exact fraction, or as a decimal correct to 3 significant figures."
         }
       ],
       "marks": 5,
@@ -53,9 +53,11 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
-        "accepted_answers": [],
+        "canonical_answer": "4/3",
+        "canonical_latex": "4/3",
+        "accepted_answers": [
+          "1.33"
+        ],
         "absolute_tolerance": null,
         "rounding_precision": null,
         "unit": null
@@ -66,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare a multiple of the total-count equation with the weighted equation."
+              "text": "Clear the fractions in the first equation first."
             }
           ]
         },
@@ -75,23 +77,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Double "
+              "text": "Multiplying the first equation by "
             },
             {
               "type": "inline_math",
-              "latex": "x+y=9"
+              "latex": "6"
             },
             {
               "type": "text",
-              "text": " and subtract it from "
+              "text": " gives "
             },
             {
               "type": "inline_math",
-              "latex": "3x+2y=24"
+              "latex": "3x+2y=12"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Add this to the second equation."
             }
           ]
         }
@@ -102,11 +104,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Multiply the first equation by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "6"
+            },
+            {
+              "type": "text",
+              "text": " and add it to the second. "
             },
             {
               "type": "display_math",
-              "latex": "(3x+2y)-(2x+2y)=24-18\\Rightarrow x=6"
+              "latex": "3x+2y=12,\\quad3x-2y=-4\\Rightarrow6x=8"
             }
           ],
           "mark_type": "M",
@@ -117,11 +127,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "x=\\frac{4}{3}"
             }
           ],
           "mark_type": "A",
