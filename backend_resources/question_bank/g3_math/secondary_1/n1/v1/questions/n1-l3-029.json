@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-029",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.6",
-  "title": "List integers inside rational bounds",
+  "title": "Integers between given bounds",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -41,7 +41,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{5}{2}\\le\\frac{k}{3}<\\frac{4}{3}"
+          "latex": "-\\frac{15}{2}\\le k<4"
         },
         {
           "type": "text",
@@ -72,7 +72,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply every part by 3; the inequality directions remain unchanged."
+              "text": "Convert "
+            },
+            {
+              "type": "inline_math",
+              "latex": "-\\frac{15}{2}"
+            },
+            {
+              "type": "text",
+              "text": " to a decimal."
             }
           ]
         },
@@ -81,15 +89,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The new bounds are "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{15}{2}\\le k<4"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Note which endpoint is included, then list the integers."
             }
           ]
         }
@@ -99,8 +99,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-7.5\\le k<4"
+              "type": "inline_math",
+              "latex": "-\\frac{15}{2}=-7.5"
             }
           ],
           "mark_type": "M",
@@ -115,7 +115,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "k=-7,-6,-5,-4,-3,-2,-1, 0, 1, 2, 3"
+              "latex": "k=-7,-6,-5,-4,-3,-2,-1,0,1,2,3"
             },
             {
               "type": "text",

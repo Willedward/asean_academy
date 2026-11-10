@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-024",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Complete a product to a square",
+  "title": "Largest prime factor",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,23 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the least positive integer "
-        },
-        {
-          "type": "inline_math",
-          "latex": "p"
-        },
-        {
-          "type": "text",
-          "text": " for which "
-        },
-        {
-          "type": "inline_math",
-          "latex": "1176p"
-        },
-        {
-          "type": "text",
-          "text": " is a perfect square."
+          "text": "Find the largest prime factor of 1176."
         }
       ],
       "marks": 2,
@@ -45,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "7",
+        "canonical_latex": "7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Write 1176 as a product of prime powers and identify odd exponents."
+              "text": "Write 1176 as a product of prime factors."
             }
           ]
         },
@@ -66,12 +50,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "1176=2^{3}\\times 3\\times 7^{2}"
-            },
-            {
               "type": "text",
-              "text": "; one factor each of 2 and 3 completes the square."
+              "text": "Divide out powers of 2 and 3, then see what prime remains."
             }
           ]
         }
@@ -81,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "1176=2^{3}\\times 3\\times 7^{2}"
+              "type": "inline_math",
+              "latex": "1176=2^{3}\\times3\\times7^{2}"
             }
           ],
           "mark_type": "M",
@@ -92,20 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "p=2\\times 3=6"
-            },
-            {
               "type": "text",
-              "text": ", giving "
-            },
-            {
-              "type": "inline_math",
-              "latex": "1176p=84^{2}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "The largest prime factor is 7."
             }
           ],
           "mark_type": "A",

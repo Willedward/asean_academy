@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l2-031",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.6",
-  "title": "Arrange negative rational numbers",
+  "title": "Which inequality is true",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,40 +20,45 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write "
+          "text": "Enter 1 if "
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{9}{5}"
+          "latex": "-\\frac{9}{5}\\ge-1.72"
         },
         {
           "type": "text",
-          "text": ", -1.72, "
+          "text": " is true, 2 if "
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{13}{8}"
+          "latex": "-\\frac{13}{8}>-1.7"
         },
         {
           "type": "text",
-          "text": " and -1.7 in ascending order."
+          "text": " is true, or 3 if "
+        },
+        {
+          "type": "inline_math",
+          "latex": "-1.72>-1.7"
+        },
+        {
+          "type": "text",
+          "text": " is true. Exactly one statement is true."
         }
       ],
       "marks": 2,
       "primary_outcome": "1.6",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "ordered_numeric_list",
-        "canonical_expression": "[-1.8,-1.72,-1.7,-1.625]",
-        "canonical_latex": "-\\frac95,\\;-1.72,\\;-1.7,\\;-\\frac{13}{8}",
-        "variables": [],
-        "domain_constraints": [],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "order": "ascending",
-          "allow_equivalent_fractions": true
-        }
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -61,7 +66,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert the fractions to terminating decimals."
+              "text": "Convert the fractions to decimals."
             }
           ]
         },
@@ -69,8 +74,19 @@
           "stage": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Compare the two numbers in each statement using a number line."
+            }
+          ]
+        }
+      ],
+      "solution": [
+        {
+          "position": 1,
+          "content": [
+            {
               "type": "inline_math",
-              "latex": "-\\frac{9}{5}=-1.8"
+              "latex": "-\\frac95=-1.8"
             },
             {
               "type": "text",
@@ -82,18 +98,7 @@
             },
             {
               "type": "text",
-              "text": "; place the most negative number first."
-            }
-          ]
-        }
-      ],
-      "solution": [
-        {
-          "position": 1,
-          "content": [
-            {
-              "type": "text",
-              "text": "The decimal values are -1.8, -1.72, -1.625 and -1.7."
+              "text": "; compare each pair."
             }
           ],
           "mark_type": "M",
@@ -104,23 +109,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Ascending order: "
+              "text": "Only "
             },
             {
               "type": "inline_math",
-              "latex": "-\\frac{9}{5}"
+              "latex": "-1.625>-1.7"
             },
             {
               "type": "text",
-              "text": ", -1.72, -1.7, "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{13}{8}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": " is true, so the code is 2."
             }
           ],
           "mark_type": "A",

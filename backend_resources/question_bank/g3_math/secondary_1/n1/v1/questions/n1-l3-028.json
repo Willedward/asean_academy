@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-028",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Mean of signed measurements",
+  "title": "Spread of signed measurements",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -25,7 +25,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find their mean."
+          "text": "Find the difference between the largest and the smallest measurement."
         }
       ],
       "marks": 2,
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "0.5",
-        "canonical_latex": "0.5",
+        "canonical_answer": "5.6",
+        "canonical_latex": "5.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add all four signed values before dividing."
+              "text": "Locate the largest and smallest values on a number line."
             }
           ]
         },
@@ -56,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the four signed values, keeping track of the negatives, then divide the total by the number of measurements."
+              "text": "Subtract the smallest value from the largest value."
             }
           ]
         }
@@ -66,8 +66,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-2.4+1.8-0.6+3.2=2.0"
+              "type": "text",
+              "text": "Largest "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=3.2"
+            },
+            {
+              "type": "text",
+              "text": " and smallest "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=-2.4"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -77,16 +93,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Mean = "
-            },
-            {
               "type": "inline_math",
-              "latex": "2.0\\div 4=0.5"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "latex": "3.2-(-2.4)=5.6"
             }
           ],
           "mark_type": "A",
