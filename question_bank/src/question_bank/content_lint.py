@@ -32,9 +32,14 @@ from typing import Literal
 
 from pydantic import Field, ValidationError, model_validator
 
+from .geometry_validation import CHECKED_GEOMETRY_RENDERERS, LEGACY_GEOMETRY_RENDERERS
 from .models import AlgebraicResponse, Model, NumericResponse, Question
 
 Severity = Literal["warning", "error"]
+
+GEOMETRY_FIGURE_RENDERERS = (CHECKED_GEOMETRY_RENDERERS | LEGACY_GEOMETRY_RENDERERS) - {
+    "nextscholar-data-chart-svg-v1"
+}
 
 POLICY_ENVIRONMENT_VARIABLE = "QUESTION_BANK_CONTENT_LINT_POLICY"
 DEFAULT_POLICY_PATH = (
@@ -78,8 +83,9 @@ CHECKS: dict[str, CheckSpec] = {
             "content_plain_text_math",
             "Plain-text mathematics in text blocks",
             "Text blocks containing sqrt(...), ^ exponents, ASCII relations such as <= or !=, "
-            "'*' multiplication, bracketed slash fractions or raw LaTeX commands, which should "
-            "be inline_math or display_math blocks.",
+            "'*' multiplication, slash fractions such as 3/4, mixed numbers such as 2 1/3 or "
+            "raw LaTeX commands, which should be inline_math or display_math blocks. Ratios, "
+            "times, dates, answer-format instructions and geometry figure prompts are exempt.",
         ),
         CheckSpec(
             "content_prompt_without_question",
@@ -874,17 +880,65 @@ _PLAIN_MATH_PATTERNS: list[tuple[str, re.Pattern]] = [
         "bracketed slash fraction",
         re.compile(r"\)\s*/\s*[\w(]|(?<![\w/])[\w.]+\s*/\s*\((?![a-z]{2,}\b)"),
     ),
+    # Numeric fractions such as "3/4" and mixed numbers such as "2 1/3" (CFL-586). These are
+    # matched after ratios, times and dates are masked, see _mask_ratios_times_dates.
+    ("mixed number", re.compile(r"(?<![\w/.,])\d+\s+\d+\s*/\s*\d+(?![\w/.])")),
+    (
+        "slash fraction",
+        re.compile(r"(?<![\w/.:$])\d+(?:\.\d+)?\s*/\s*\d+(?:\.\d+)?(?![\w/:]|\.\d)"),
+    ),
 ]
+# Notation that a geometry figure prompt may keep as text, because the geometry checks read the
+# given numbers and labels from text blocks only.  Raw LaTeX and '*' are never acceptable.
+_NOTATION_LABELS = frozenset(
+    {
+        "function-call root",
+        "caret exponent",
+        "ASCII relation",
+        "bracketed slash fraction",
+        "mixed number",
+        "slash fraction",
+    }
+)
+_MASKED_LABELS = frozenset({"mixed number", "slash fraction"})
+# Prompts that teach the answer format, for example "Type powers with ^, for example 2^3."
+_CARET_TYPING_INSTRUCTION = re.compile(
+    r"\b(?:type|enter|input|key\s+in|use)\b[^.]*?\bwith\s+(?:a\s+)?\^", re.IGNORECASE
+)
+_RATIO_TERM = r"(?:\d+\s+)?\d+(?:\.\d+)?(?:\s*/\s*\d+)?"
+_RATIOS_TIMES_DATES = re.compile(
+    rf"(?<![\w.]){_RATIO_TERM}(?:\s*:\s*{_RATIO_TERM})+(?![\w.]*\d)"  # 1 1/2 : 2 1/4, 9:30
+    r"|(?<![\w/])\d{1,4}/\d{1,2}/\d{1,4}(?![\w/])"  # 12/05/2026
+)
+
+
+def _mask_ratios_times_dates(text: str) -> str:
+    return _RATIOS_TIMES_DATES.sub(lambda match: " " * len(match.group()), text)
 
 
 def plain_text_math_findings(
-    text_blocks: Iterable[tuple[str, str]], subject: str
+    text_blocks: Iterable[tuple[str, str]],
+    subject: str,
+    *,
+    notation_exempt: Iterable[str] = (),
 ) -> list[ContentFinding]:
+    """Flag mathematics typed as plain text.
+
+    ``notation_exempt`` lists block locations (geometry figure prompts) where only raw LaTeX
+    and '*' multiplication are flagged.
+    """
+
+    exempt = set(notation_exempt)
     messages: list[str] = []
     first_location = ""
     for location, text in text_blocks:
+        masked = _mask_ratios_times_dates(text)
         for label, pattern in _PLAIN_MATH_PATTERNS:
-            match = pattern.search(text)
+            if location in exempt and label in _NOTATION_LABELS:
+                continue
+            if label == "caret exponent" and _CARET_TYPING_INSTRUCTION.search(text):
+                continue
+            match = pattern.search(masked if label in _MASKED_LABELS else text)
             if match is None:
                 continue
             excerpt = text[max(0, match.start() - 20) : match.end() + 20].strip()
@@ -1795,6 +1849,29 @@ def _question_text_blocks(question: Question) -> Iterator[tuple[str, object]]:
                 yield f"parts[{part_index}].solution[{step_index}][{index}]", block
 
 
+def has_geometry_figure(question: Question) -> bool:
+    """Whether the question shows a figure drawn by a geometry generator (not a data chart).
+
+    The geometry checks read the given numbers and labels from the stem and prompt text
+    blocks, so those blocks keep them as text.
+    """
+
+    return any(
+        (asset.generation_spec or {}).get("renderer") in GEOMETRY_FIGURE_RENDERERS
+        for asset in question.assets
+    )
+
+
+def _figure_prompt_locations(question: Question, blocks) -> list[str]:
+    if not has_geometry_figure(question):
+        return []
+    return [
+        location
+        for location, _ in blocks
+        if location.startswith("stem[") or ".prompt[" in location
+    ]
+
+
 def lint_question(question: Question) -> list[ContentFinding]:
     """Run every single-item check on one question."""
 
@@ -1809,6 +1886,7 @@ def lint_question(question: Question) -> list[ContentFinding]:
     findings += plain_text_math_findings(
         [(location, block.text) for location, block in blocks if block.type == "text"],
         question.stable_key,
+        notation_exempt=_figure_prompt_locations(question, blocks),
     )
     findings += prompt_without_question_findings(
         [

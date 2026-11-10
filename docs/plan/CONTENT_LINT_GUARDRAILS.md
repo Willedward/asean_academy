@@ -106,9 +106,19 @@ location, for example `parts[0].solution[0].content[0].latex`.
   - caret exponents (`2^3`, `(5/6)^2`);
   - ASCII relations (`<=`, `>=`, `!=`, `=>`);
   - `*` used for multiplication;
-  - bracketed slash fractions (`(x+3)/(x-2)`, `2/(x-6)`).
+  - bracketed slash fractions (`(x+3)/(x-2)`, `2/(x-6)`);
+  - numeric slash fractions (`3/4 of 120`, `1.8/3`) and mixed numbers (`2 1/3`) (CFL-586).
+- **Not flagged on purpose:**
+  - a caret in a prompt that teaches the answer format ("Type powers with ^, for example 2^3");
+  - ratios, including ratios of fractions (`1 1/2:2 1/4`), times (`9:30`) and dates
+    (`12/05/2026`);
+  - units and words with a slash (`km/h`, `red/white`);
+  - on questions with a geometry figure (any geometry renderer, not data charts), the stem and
+    part prompts may keep roots, carets, relations and fractions as text, because the geometry
+    checks read the given numbers and labels from text blocks only. Their hints and solutions
+    are still checked, and raw LaTeX or `*` is flagged everywhere.
 - **Limits:**
-  - Simple prose such as `x = 5`, `3/4 of 120` or `5x + 4 = 34` is deliberately not flagged.
+  - Simple prose such as `x = 5`, `x/25` or `5x + 4 = 34` is deliberately not flagged.
     It is too common in hints and lessons to flag without a high false-positive rate.
   - Titles are not checked.
   - This check measures the clearest cases only. The audits' "all prompts are plain text"
