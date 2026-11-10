@@ -205,7 +205,7 @@ def test_integrated_secondary_2_n6_lessons_meet_the_depth_and_asset_gates(reposi
         assert lesson.position == position
         assert lesson.outcomes == [f"6.{position + 5}"]
         assert lesson_note_depth_shortfalls(lesson) == []
-        assert len(lesson.assets) == 1
+        assert lesson.assets  # lesson 06 adds a table and lesson 07 a second graph
         for asset in lesson.assets:
             asset_path = course_root / asset.path
             assert asset_path.is_file()
