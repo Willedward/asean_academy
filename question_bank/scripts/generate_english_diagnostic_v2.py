@@ -4,12 +4,19 @@ The generated JSON remains draft and must receive human English and editorial re
 Run from the repository root with:
 
     uv run --project question_bank python question_bank/scripts/generate_english_diagnostic_v2.py
+
+The committed records have been edited by hand since they were generated (#588 and #631
+reordered keys, lengthened distractors and changed target words), so the script refuses to
+run while any of its question, passage or batch files exist. Pass --overwrite-hand-edited only
+to deliberately replace those edits with this script's output.
 """
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
+from collections.abc import Sequence
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -624,7 +631,42 @@ def write_batch(batch_id: str, bank_key: str, module: str, question_keys: list[s
     )
 
 
-def main() -> None:
+OVERWRITE_FLAG = "--overwrite-hand-edited"
+BATCH_IDS = ("english-ev-b018", "english-eb-b015", "english-eo-b013", "english-er-b015")
+
+
+def target_paths(questions: dict[str, dict], passages: dict[str, dict]) -> list[Path]:
+    """Files this script creates from scratch (banks and forms are updated in place)."""
+
+    return [
+        *(ENGLISH / "passages" / f"{key}.json" for key in sorted(passages)),
+        *(ENGLISH / "questions" / f"{key}.json" for key in sorted(questions)),
+        *(ENGLISH / "authoring/batches" / f"{batch_id}.json" for batch_id in BATCH_IDS),
+    ]
+
+
+def refuse_to_overwrite(existing: list[Path]) -> None:
+    shown = ", ".join(path.relative_to(ENGLISH).as_posix() for path in existing[:5])
+    if len(existing) > 5:
+        shown += f" and {len(existing) - 5} more"
+    raise SystemExit(
+        "Refusing to overwrite the English diagnostic v2 content: "
+        f"{len(existing)} file(s) already exist ({shown}). These records were edited by hand "
+        "after generation (#588 and #631 reordered keys, lengthened distractors and changed "
+        "target words), and re-running this script would undo those fixes. Edit the JSON "
+        f"directly instead, or pass {OVERWRITE_FLAG} to replace the edits deliberately. "
+        "Nothing was written."
+    )
+
+
+def main(argv: Sequence[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        OVERWRITE_FLAG,
+        action="store_true",
+        help="Replace existing, hand-edited diagnostic v2 records with this script's output.",
+    )
+    args = parser.parse_args(argv)
     questions: dict[str, dict] = {}
     passages: dict[str, dict] = {}
     for form, keys in FORM_KEYS.items():
@@ -648,6 +690,10 @@ def main() -> None:
                 keys["narrative"]: narrative,
             }
         )
+
+    existing = [path for path in target_paths(questions, passages) if path.exists()]
+    if existing and not args.overwrite_hand_edited:
+        refuse_to_overwrite(existing)
 
     for key, payload in sorted(passages.items()):
         write_json(ENGLISH / "passages" / f"{key}.json", payload)
