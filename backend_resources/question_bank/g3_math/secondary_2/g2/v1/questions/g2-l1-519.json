@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-519",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.3",
-  "title": "Obtuse corresponding angle",
+  "title": "Use the angle sum in a similar triangle",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "An obtuse vertex of 105° on a polygon matches vertex "
+          "text": "Two similar triangles are labelled in corresponding order. In the first triangle, two angles are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "40^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "75^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the third angle "
         },
         {
           "type": "inline_math",
@@ -28,15 +44,7 @@
         },
         {
           "type": "text",
-          "text": " on a similar polygon. Calculate "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": " of the second triangle. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -45,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "105",
-        "canonical_latex": "105",
+        "canonical_answer": "65",
+        "canonical_latex": "65",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding angles in similar figures are equal."
+              "text": "Corresponding angles are equal, and the angles of a triangle add to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "180^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -67,15 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Which angle in the first figure is in the same position as "
+              "text": "Subtract the two known angles from "
             },
             {
               "type": "inline_math",
-              "latex": "x"
+              "latex": "180^{\\circ}"
             },
             {
               "type": "text",
-              "text": "? Its size is not changed by similarity."
+              "text": "."
             }
           ]
         }
@@ -86,7 +102,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=105^\\circ"
+              "latex": "x=180-(40+75)=65"
             }
           ],
           "mark_type": "A",
