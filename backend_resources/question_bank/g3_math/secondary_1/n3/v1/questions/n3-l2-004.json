@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l2-004",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cyclist planned to travel 60 km but travelled 84 km. Express the actual distance as a percentage of the planned distance."
+          "text": "A cyclist planned to travel 60 km but travelled 78 km. Express the actual distance as a percentage of the planned distance."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "140",
-        "canonical_latex": "140\\%",
+        "canonical_answer": "130",
+        "canonical_latex": "130",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 84 divided by 60, then multiply by 100%."
+              "text": "Calculate 78 divided by 60, then multiply by 100%."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{84}{60}\\times100\\%=140\\%"
+              "type": "inline_math",
+              "latex": "\\frac{78}{60}\\times100\\%=130\\%"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Actual distance}=140\\%\\text{ of planned distance}"
+              "type": "inline_math",
+              "latex": "\\text{Actual distance}=130\\%\\text{ of planned distance}"
             }
           ],
           "mark_type": "A",

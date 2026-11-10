@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-001",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A box contains 60 counters, of which 18 are red. Express the number of red counters as a percentage of the total number of counters."
+            "text": "A box contains 60 counters, of which 27 are red. Express the number of red counters as a percentage of the total number of counters."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "30",
-          "canonical_latex": "30\\%",
+          "canonical_answer": "45",
+          "canonical_latex": "45",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 18 divided by 60, then multiply by 100%."
+                "text": "Calculate 27 divided by 60, then multiply by 100%."
               }
             ]
           }
@@ -62,8 +62,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{18}{60}\\times100\\%=30\\%"
+                "type": "inline_math",
+                "latex": "\\frac{27}{60}\\times100\\%=45\\%"
               }
             ],
             "mark_type": "B",
@@ -522,7 +522,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-002",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -542,7 +542,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Aisha read 48 pages and Ben read 40 pages. By what percentage did Aisha read more pages than Ben?"
+            "text": "Aisha read 56 pages and Ben read 40 pages. By what percentage did Aisha read more pages than Ben?"
           }
         ],
         "marks": 1,
@@ -551,8 +551,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "40",
+          "canonical_latex": "40",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -573,7 +573,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The difference is 8 pages; calculate 8 divided by 40, then multiply by 100%."
+                "text": "Find the difference in pages, then divide it by 40 and multiply by 100%."
               }
             ]
           }
@@ -583,8 +583,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{48-40}{40}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{56-40}{40}\\times100\\%=40\\%"
               }
             ],
             "mark_type": "B",
@@ -613,7 +613,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-003",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -633,7 +633,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The robotics club has 54 members and the drama club has 45 members. By what percentage is the robotics club membership greater than the drama club membership?"
+            "text": "The robotics club has 63 members and the drama club has 45 members. By what percentage is the robotics club membership greater than the drama club membership?"
           }
         ],
         "marks": 2,
@@ -642,8 +642,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "40",
+          "canonical_latex": "40",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -664,7 +664,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find 54 minus 45, then divide the difference by 45."
+                "text": "Find 63 minus 45, then divide the difference by 45."
               }
             ]
           }
@@ -674,8 +674,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "54-45=9"
+                "type": "inline_math",
+                "latex": "63-45=18"
               }
             ],
             "mark_type": "M",
@@ -685,8 +685,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{9}{45}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{18}{45}\\times100\\%=40\\%"
               }
             ],
             "mark_type": "A",
@@ -715,7 +715,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-002",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -735,7 +735,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Parcel P has a total mass of 1.8 kg, including 150 g of packaging. Parcel Q contains 1.5 kg of goods with no packaging included in its stated mass. By what percentage is the mass of goods in Parcel P greater than the mass of goods in Parcel Q?"
+            "text": "Parcel P has a total mass of 1.8 kg, including 150 g of packaging. Parcel Q contains 1.5 kg of goods (no packaging). By what percentage is the mass of goods in Parcel P greater than the mass of goods in Parcel Q?"
           }
         ],
         "marks": 3,
@@ -828,7 +828,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l4-002",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -848,7 +848,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Hana's monthly allowance is 25% more than Mei's monthly allowance. By what percentage is Mei's allowance less than Hana's allowance?"
+            "text": "Hana's monthly allowance is 60% more than Mei's monthly allowance. By what percentage is Mei's allowance less than Hana's allowance?"
           }
         ],
         "marks": 3,
@@ -857,8 +857,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "37.5",
+          "canonical_latex": "37.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -889,8 +889,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Difference}=125-100=25"
+                "type": "inline_math",
+                "latex": "\\text{Difference}=160-100=60"
               }
             ],
             "mark_type": "M",
@@ -900,8 +900,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{25}{125}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{60}{160}\\times100\\%=37.5\\%"
               }
             ],
             "mark_type": "M",
@@ -911,8 +911,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Mei's allowance is }20\\%\\text{ less than Hana's.}"
+                "type": "inline_math",
+                "latex": "\\text{Mei's allowance is }37.5\\%\\text{ less than Hana's.}"
               }
             ],
             "mark_type": "A",
@@ -1032,7 +1032,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-004",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1052,7 +1052,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cyclist planned to travel 60 km but travelled 84 km. Express the actual distance as a percentage of the planned distance."
+            "text": "A cyclist planned to travel 60 km but travelled 78 km. Express the actual distance as a percentage of the planned distance."
           }
         ],
         "marks": 2,
@@ -1061,8 +1061,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "140",
-          "canonical_latex": "140\\%",
+          "canonical_answer": "130",
+          "canonical_latex": "130",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1083,7 +1083,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 84 divided by 60, then multiply by 100%."
+                "text": "Calculate 78 divided by 60, then multiply by 100%."
               }
             ]
           }
@@ -1093,8 +1093,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{84}{60}\\times100\\%=140\\%"
+                "type": "inline_math",
+                "latex": "\\frac{78}{60}\\times100\\%=130\\%"
               }
             ],
             "mark_type": "M",
@@ -1104,8 +1104,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Actual distance}=140\\%\\text{ of planned distance}"
+                "type": "inline_math",
+                "latex": "\\text{Actual distance}=130\\%\\text{ of planned distance}"
               }
             ],
             "mark_type": "A",
@@ -1676,7 +1676,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-004",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1696,7 +1696,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A bicycle costs S$240. Its price is increased by 12% and then reduced by 5%. Find the final price in dollars."
+            "text": "A bicycle costs S$250. Its price is increased by 8% and then reduced by 10%. Find the final price in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -1705,8 +1705,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "255.36",
-          "canonical_latex": "255.36",
+          "canonical_answer": "243",
+          "canonical_latex": "243",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1727,7 +1727,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the multipliers 1.12 and 0.95 in that order."
+                "text": "Use the multipliers 1.08 and 0.90 in that order."
               }
             ]
           }
@@ -1737,8 +1737,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "240\\times1.12=268.80"
+                "type": "inline_math",
+                "latex": "250\\times1.08=270"
               }
             ],
             "mark_type": "M",
@@ -1748,8 +1748,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "268.80\\times0.95=255.36"
+                "type": "inline_math",
+                "latex": "270\\times0.90=243"
               }
             ],
             "mark_type": "A",
@@ -1778,7 +1778,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l4-004",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1793,7 +1793,7 @@
     "stem": [
       {
         "type": "text",
-        "text": "In Year 1, 64% of 250 candidates passed a test. In Year 2, 76% of 225 candidates passed the test."
+        "text": "In Year 1, 56% of 250 candidates passed a test. In Year 2, 72% of 225 candidates passed the test."
       }
     ],
     "parts": [
@@ -1812,8 +1812,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "12",
-          "canonical_latex": "12\\text{ percentage points}",
+          "canonical_answer": "16",
+          "canonical_latex": "16",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1844,7 +1844,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 64 from 76."
+                "text": "Subtract 56 from 72."
               }
             ]
           }
@@ -1854,8 +1854,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "76-64=12\\text{ percentage points}"
+                "type": "inline_math",
+                "latex": "72-56=16\\text{ percentage points}"
               }
             ],
             "mark_type": "B",
@@ -1878,8 +1878,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "6.9",
-          "canonical_latex": "6.9\\%",
+          "canonical_answer": "15.7",
+          "canonical_latex": "15.7",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -1908,7 +1908,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Year 1 has 0.64 multiplied by 250 passes, and Year 2 has 0.76 multiplied by 225 passes."
+                "text": "Year 1 has 0.56 multiplied by 250 passes, and Year 2 has 0.72 multiplied by 225 passes."
               }
             ]
           }
@@ -1918,8 +1918,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.64\\times250=160,\\quad0.76\\times225=171"
+                "type": "inline_math",
+                "latex": "0.56\\times250=140,\\quad0.72\\times225=162"
               }
             ],
             "mark_type": "M",
@@ -1929,8 +1929,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{171-160}{160}\\times100\\%=6.875\\%"
+                "type": "inline_math",
+                "latex": "\\frac{162-140}{140}\\times100\\%=15.714\\ldots\\%"
               }
             ],
             "mark_type": "M",
@@ -1940,8 +1940,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Percentage increase}=6.9\\%\\text{ (to 1 d.p.)}"
+                "type": "inline_math",
+                "latex": "\\text{Percentage increase}=15.7\\%\\text{ (to 1 d.p.)}"
               }
             ],
             "mark_type": "A",
@@ -1970,7 +1970,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l1-004",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1990,7 +1990,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "After a 20% discount, a bag costs S$72. Find its original price in dollars."
+            "text": "After a 20% discount, a bag costs S$72. Find its original price in dollars. Enter only the number."
           }
         ],
         "marks": 1,
@@ -2061,7 +2061,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-008",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2081,7 +2081,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "After an 8% increase, a worker's monthly salary is S$2700. Find the monthly salary before the increase, in dollars."
+            "text": "After an 8% increase, a worker's monthly salary is S$2700. Find the monthly salary before the increase, in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2163,7 +2163,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-005",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2183,7 +2183,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A customer pays S$153.70 for a desk. This total consists of the desk's price including 9% GST and a delivery charge of S$12. Find the desk's price before GST, in dollars."
+            "text": "A customer pays S$153.70 for a desk. This total consists of the desk's price including 9% GST (goods and services tax, a tax added to the price) and a delivery charge of S$12. Find the desk's price before GST, in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2276,7 +2276,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l4-005",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2296,7 +2296,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A jacket is discounted by 10%. Then 9% GST is charged on the discounted price. The final amount paid is S$196.20. Find the jacket's list price in dollars."
+            "text": "A jacket is discounted by 20%. Then 9% GST (goods and services tax, a tax added to the price) is charged on the discounted price. The final amount paid is S$218. Find the jacket's list price in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2305,8 +2305,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "200",
-          "canonical_latex": "200",
+          "canonical_answer": "250",
+          "canonical_latex": "250",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2327,7 +2327,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The final amount is the list price multiplied by 0.90 and then by 1.09."
+                "text": "The final amount is the list price multiplied by 0.80 and then by 1.09."
               }
             ]
           }
@@ -2337,8 +2337,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.90\\times1.09=0.981"
+                "type": "inline_math",
+                "latex": "0.80\\times1.09=0.872"
               }
             ],
             "mark_type": "M",
@@ -2348,8 +2348,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{List price}=196.20\\div0.981"
+                "type": "inline_math",
+                "latex": "\\text{List price}=218\\div0.872"
               }
             ],
             "mark_type": "M",
@@ -2359,8 +2359,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{List price}=200"
+                "type": "inline_math",
+                "latex": "\\text{List price}=250"
               }
             ],
             "mark_type": "A",
@@ -2389,7 +2389,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-005",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2409,7 +2409,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A collection contains 90 stamps. 30% of them are from Singapore. Find the number of Singapore stamps."
+            "text": "A collection contains 90 stamps. 30% of them are from Malaysia. Find the number of Malaysian stamps."
           }
         ],
         "marks": 1,
@@ -2480,7 +2480,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-009",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2500,7 +2500,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A book has a marked price of S$80 and is sold at a 15% discount. Find its sale price in dollars."
+            "text": "A book has a marked price of S$80 and is sold at a 15% discount. Find its sale price in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2582,7 +2582,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-006",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2602,7 +2602,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Ravi spends 25% of his money on books. He then spends 40% of the remaining money on a meal and has S$270 left. Find the amount of money he had at first, in dollars."
+            "text": "Ravi spends 25% of his money on books. He then spends 40% of the remaining money on a meal and has S$270 left. Find the amount of money he had at first, in dollars. Enter only the number."
           }
         ],
         "marks": 3,

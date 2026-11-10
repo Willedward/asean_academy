@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n3-l4-004",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -15,7 +15,7 @@
   "stem": [
     {
       "type": "text",
-      "text": "In Year 1, 64% of 250 candidates passed a test. In Year 2, 76% of 225 candidates passed the test."
+      "text": "In Year 1, 56% of 250 candidates passed a test. In Year 2, 72% of 225 candidates passed the test."
     }
   ],
   "parts": [
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "12",
-        "canonical_latex": "12\\text{ percentage points}",
+        "canonical_answer": "16",
+        "canonical_latex": "16",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +66,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract 64 from 76."
+              "text": "Subtract 56 from 72."
             }
           ]
         }
@@ -76,8 +76,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "76-64=12\\text{ percentage points}"
+              "type": "inline_math",
+              "latex": "72-56=16\\text{ percentage points}"
             }
           ],
           "mark_type": "B",
@@ -100,8 +100,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "6.9",
-        "canonical_latex": "6.9\\%",
+        "canonical_answer": "15.7",
+        "canonical_latex": "15.7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -130,7 +130,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Year 1 has 0.64 multiplied by 250 passes, and Year 2 has 0.76 multiplied by 225 passes."
+              "text": "Year 1 has 0.56 multiplied by 250 passes, and Year 2 has 0.72 multiplied by 225 passes."
             }
           ]
         }
@@ -140,8 +140,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "0.64\\times250=160,\\quad0.76\\times225=171"
+              "type": "inline_math",
+              "latex": "0.56\\times250=140,\\quad0.72\\times225=162"
             }
           ],
           "mark_type": "M",
@@ -151,8 +151,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{171-160}{160}\\times100\\%=6.875\\%"
+              "type": "inline_math",
+              "latex": "\\frac{162-140}{140}\\times100\\%=15.714\\ldots\\%"
             }
           ],
           "mark_type": "M",
@@ -162,8 +162,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Percentage increase}=6.9\\%\\text{ (to 1 d.p.)}"
+              "type": "inline_math",
+              "latex": "\\text{Percentage increase}=15.7\\%\\text{ (to 1 d.p.)}"
             }
           ],
           "mark_type": "A",
