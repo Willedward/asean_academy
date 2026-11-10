@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-514",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community planners considered a narrow installation area while preparing a replacement design for the wetland monitoring float. Floating instruments must remain stable in shallow wetland water. A later inspection will compare the finished dimensions with this record. A sphere has radius 9 cm. Its surface area is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k\\pi"
-        },
-        {
-          "type": "text",
-          "text": " cm². Find k."
+          "text": "A ball is dipped in paint so that its whole surface is coated. The ball is a sphere, and the sphere has radius 6 cm. Its surface area is kπ cm². Find k."
         }
       ],
       "marks": 1,
@@ -46,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "324",
-        "canonical_latex": "324",
+        "canonical_answer": "144",
+        "canonical_latex": "144",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -76,15 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Substitute the radius into "
             },
             {
               "type": "inline_math",
-              "latex": "4\\times 9^{2}"
+              "latex": "4\\pi r^{2}"
             },
             {
               "type": "text",
-              "text": "; π is already shown in "
+              "text": " and compare the result with "
             },
             {
               "type": "inline_math",
@@ -103,10 +95,14 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "S=4\\pi(9)^2=324\\pi"
+              "latex": "S=4\\pi(6)^2=144\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 144."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -118,8 +114,8 @@
       "asset_key": "g5-l1-514-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-514-diagram-r3.svg",
-      "alt_text": "Sphere with radius r = 9 cm drawn from the centre to the surface. Not drawn to scale.",
+      "path": "assets/g5-l1-514-diagram-r4.svg",
+      "alt_text": "Sphere with radius r = 6 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -128,22 +124,22 @@
         "template": "sphere_surface_area",
         "inputs": {
           "radius": {
-            "value": 9,
+            "value": 6,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 9,
+            "value": 6,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "324",
-          "324π",
-          "1017.9",
-          "1017.88"
+          "144",
+          "144π",
+          "452.4",
+          "452.39"
         ],
         "unknowns": [],
         "solids": [
@@ -198,7 +194,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "r = 9 cm",
+            "text": "r = 6 cm",
             "target": "segment:OE"
           }
         ],
@@ -218,7 +214,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "7fecad3c35c45c309317fce65e6e47760281fe99f5c933cced348a875e8240bb",
+      "sha256": "81308757dd55c09bdd187407710fb8534ae970595bd3042345a44fc3dfe53c9d",
       "width": 600,
       "height": 460
     }
