@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l4-512",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.6",
-  "title": "Reject an unsuitable display",
+  "title": "Show the overall shape of container masses",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a dot diagram, 2 for a histogram and 3 for a grouped frequency table. A port weighs 5,000 containers to the nearest kilogram. Each exact mass can stay in the records; the report only needs the overall distribution. Which code is least suitable because it would become overcrowded?"
+          "text": "Use code 1 for a dot diagram, 2 for a histogram and 3 for a grouped frequency table. A port weighs 5,000 containers to the nearest kilogram. The report needs a graph that shows the overall shape of the distribution of masses. Which code is the most suitable?"
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Consider how many separate marks the representation would need."
+              "text": "There are too many values to draw individually, and the report needs a graph."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare what each display draws: one mark per observation, one bar per interval, or one row per interval. With this many values, which of these becomes unreadable?"
+              "text": "Which of the three displays is a graph that shows the shape of grouped data?"
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "A histogram shows the shape of a large set of grouped measurements. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{overcrowded dot diagram}\\Rightarrow 1"
+              "latex": "\\text{histogram}\\Rightarrow2"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "1"
+              "latex": "2"
             }
           ],
           "mark_type": "A",

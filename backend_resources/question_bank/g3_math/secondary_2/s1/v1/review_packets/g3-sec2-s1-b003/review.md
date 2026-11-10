@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-512 — Select the display whose bars span continuous intervals
+## s1-l1-512 — Plot individual whole-number heights
 
 [Open this question in the HTML preview](index.html#s1-l1-512)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-520 — Spread of values encoded by a 70s stem
+## s1-l2-520 — Spread of the 70s row
 
 [Open this question in the HTML preview](index.html#s1-l2-520)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-516 — Count observations above the lower boundary ten
+## s1-l3-516 — Observations at least 10 on a histogram
 
 [Open this question in the HTML preview](index.html#s1-l3-516)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-517 — Compare two small distributions
+## s1-l3-517 — Counts of book sizes sold
 
 [Open this question in the HTML preview](index.html#s1-l3-517)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-512 — Reject an unsuitable display
+## s1-l4-512 — Show the overall shape of container masses
 
 [Open this question in the HTML preview](index.html#s1-l4-512)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-522 — Retain archaeological measurements
+## s1-l2-522 — Count coins in age bands
 
 [Open this question in the HTML preview](index.html#s1-l2-522)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-523 — Displayed bar increase
+## s1-l2-523 — Apparent increase in rainfall
 
 [Open this question in the HTML preview](index.html#s1-l2-523)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-525 — Choose a centre for the most popular canteen meal
+## s1-l2-525 — Choose a measure for house prices
 
 [Open this question in the HTML preview](index.html#s1-l2-525)
 
@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-513 — Frequency gap between unequal histogram classes
+## s1-l4-513 — True frequency density from a histogram
 
 [Open this question in the HTML preview](index.html#s1-l4-513)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-518",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar chart starts its vertical scale at 120. The first bar reaches 160 and the second reaches 184. The visible rise is what percentage of the first bar's displayed height?"
+          "text": "A bar chart starts its vertical scale at 120. The first bar reaches 160 and the second reaches 190. The visible rise is what percentage of the first bar's displayed height?"
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60\\%",
+        "canonical_answer": "75",
+        "canonical_latex": "75",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -68,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The first displayed height is "
+              "text": "The visible heights are "
             },
             {
               "type": "inline_math",
@@ -76,15 +76,15 @@
             },
             {
               "type": "text",
-              "text": ", while the visible rise is "
+              "text": " and "
             },
             {
               "type": "inline_math",
-              "latex": "184-160"
+              "latex": "190-120"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{184-160}{160-120}\\times100=60"
+              "latex": "\\frac{(190-120)-(160-120)}{160-120}\\times100=\\frac{30}{40}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "60\\%"
+              "latex": "75\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l3-518-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-518-diagram-r3.svg",
-      "alt_text": "Bar chart with First: 160, Second: 184.",
+      "path": "assets/s1-l3-518-diagram-r4.svg",
+      "alt_text": "Bar chart with First: 160, Second: 190.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -145,14 +145,14 @@
           ],
           "values": [
             160,
-            184
+            190
           ],
           "y_min": 120,
           "y_max": 190,
           "tick_step": 10,
           "y_label": "Value",
           "forbidden_visible_labels": [
-            "60"
+            "75"
           ]
         },
         "viewbox": [
@@ -175,13 +175,13 @@
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "184",
+            "value": "190",
             "tag": "rect",
             "geometry": {
               "x": "444",
-              "y": "129",
+              "y": "105",
               "width": "177",
-              "height": "256"
+              "height": "280"
             }
           }
         ],
@@ -258,7 +258,7 @@
           }
         ],
         "forbidden_visible_labels": [
-          "60"
+          "75"
         ],
         "min_phone_font_px": 12.43,
         "axis": {
@@ -267,7 +267,7 @@
           "tick_step": 10.0
         }
       },
-      "sha256": "61b7a9a68b7b314872ada100fd4a4fdba6d2c6007e3e0f2c129f1cb56c54c9b8",
+      "sha256": "2767428ad98fc820ecfc6776321bd211e77caa1bc2f2526bcfb69f96bc928197",
       "width": 720,
       "height": 480
     }

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "s1-l2-523",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Displayed bar increase",
+  "title": "Apparent increase in rainfall",
   "difficulty": 2,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The vertical axis of a rainfall bar chart starts at 100. One month reads 110 and the next reads 120. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "The vertical axis of a rainfall bar chart starts at 100. One month reads 110 and the next reads 118. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "100",
-        "canonical_latex": "100\\%",
+        "canonical_answer": "80",
+        "canonical_latex": "80",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -80,11 +80,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "120-100"
+              "latex": "118-100"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(120-100)-(110-100)}{110-100}\\times100=100"
+              "latex": "\\frac{(118-100)-(110-100)}{110-100}\\times100=\\frac{8}{10}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "100\\%"
+              "latex": "80\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l2-523-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-523-diagram-r4.svg",
-      "alt_text": "Bar chart with First month: 110, Next month: 120.",
+      "path": "assets/s1-l2-523-diagram-r5.svg",
+      "alt_text": "Bar chart with First: 110, Second: 118.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -140,17 +140,20 @@
         "inputs": {
           "title": "Monthly rainfall",
           "categories": [
-            "First month",
-            "Next month"
+            "First",
+            "Second"
           ],
           "values": [
             110,
-            120
+            118
           ],
           "y_min": 100,
-          "y_max": 120,
-          "tick_step": 10,
-          "y_label": "Rainfall"
+          "y_max": 118,
+          "tick_step": 5,
+          "y_label": "Rainfall",
+          "forbidden_visible_labels": [
+            "80"
+          ]
         },
         "viewbox": [
           720,
@@ -164,15 +167,15 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "245",
+              "y": "229.444444",
               "width": "177",
-              "height": "140"
+              "height": "155.555556"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "120",
+            "value": "118",
             "tag": "rect",
             "geometry": {
               "x": "444",
@@ -191,43 +194,52 @@
             "label": "100"
           },
           {
+            "key": "y:105",
+            "axis": "y",
+            "value": "105",
+            "position": "307.222222",
+            "label": "105"
+          },
+          {
             "key": "y:110",
             "axis": "y",
             "value": "110",
-            "position": "245",
+            "position": "229.444444",
             "label": "110"
           },
           {
-            "key": "y:120",
+            "key": "y:115",
             "axis": "y",
-            "value": "120",
-            "position": "105",
-            "label": "120"
+            "value": "115",
+            "position": "151.666667",
+            "label": "115"
           },
           {
-            "key": "x:First month",
+            "key": "x:First",
             "axis": "x",
-            "value": "First month",
+            "value": "First",
             "position": "237.5",
-            "label": "First month"
+            "label": "First"
           },
           {
-            "key": "x:Next month",
+            "key": "x:Second",
             "axis": "x",
-            "value": "Next month",
+            "value": "Second",
             "position": "532.5",
-            "label": "Next month"
+            "label": "Second"
           }
         ],
-        "forbidden_visible_labels": [],
+        "forbidden_visible_labels": [
+          "80"
+        ],
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 100.0,
-          "y_max": 120.0,
-          "tick_step": 10.0
+          "y_max": 118.0,
+          "tick_step": 5.0
         }
       },
-      "sha256": "18edb5a7aab31ed9e895084776b89f3db06f246b1973d0e54c502d144b9be688",
+      "sha256": "342c8f61e43b130cb3be24de302cf6f7d8cb71397c106afbb34ab398df73e9be",
       "width": 720,
       "height": 480
     }
