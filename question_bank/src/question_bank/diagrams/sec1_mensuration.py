@@ -676,7 +676,7 @@ def _draw_l_shape(
         "B",
         away_from="E",
         value=width_value,
-        variable=variable,
+        variable=variable if width_value is None else None,
         constant=constants[0],
     )
     sketch.length(
@@ -685,7 +685,7 @@ def _draw_l_shape(
         "A",
         away_from="B",
         value=height_value,
-        variable=variable,
+        variable=variable if height_value is None else None,
         constant=constants[1],
     )
     sketch.length(
@@ -750,33 +750,59 @@ def corner_removed(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
 
 
 def corner_removed_algebra(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
-    extra_w, extra_h = inputs["width_extra"], inputs["height_extra"]
+    """An L-shape whose sides are written in x, with a known corner removed.
+
+    Either both sides are algebraic, ``(x + p)`` by ``(x + q)`` (a quadratic), or the width is a
+    stated length and only the height is ``(x + q)``, which keeps the equation linear.
+    """
     cut_width, cut_height, remaining = _given(inputs, "cut_width", "cut_height", "remaining_area")
-    # (x + p)(x + q) − ab = remaining
-    p, r = extra_w, extra_h
-    disc = (p + r) ** 2 - 4 * (p * r - cut_width.value * cut_height.value - remaining.value)
-    _require(disc >= 0, "The stated area gives no real length x.")
-    x = (-(p + r) + math.sqrt(disc)) / 2
-    _require(x > 0, "The stated area gives no positive length x.")
-    drawn = _neutral(x, 1.3)
-    unit_name = cut_width.unit or ""
     a, b = cut_width.value, cut_height.value
-    width_label, height_label = _algebra(p, unit_name), _algebra(r, unit_name)
-    sketch = _Sketch(_l_points(drawn + p, drawn + r, a, b), side_labels=(height_label,))
+    unit_name = cut_width.unit or ""
+    r = inputs["height_extra"]
+    if "width" in inputs:
+        (width,) = _given(inputs, "width")
+        _same_unit(width, cut_width, cut_height)
+        w = width.value
+        # w(x + q) − ab = remaining
+        x = (remaining.value + a * b) / w - r
+        _require(x > 0, "The stated area gives no positive length x.")
+        _require(a < w, "The removed corner must be narrower than the rectangle.")
+        drawn = _neutral(x, 1.3)
+        width_label, height_label = width.text, _algebra(r, unit_name)
+        points = _l_points(w, drawn + r, a, b)
+        values: tuple[float | None, float | None, float, float] = (w, None, a, b)
+        constants = (0.0, float(r))
+        expressions = [height_label]
+        derived = [x, x + r, w * (x + r)]
+    else:
+        p = inputs["width_extra"]
+        # (x + p)(x + q) − ab = remaining
+        disc = (p + r) ** 2 - 4 * (p * r - a * b - remaining.value)
+        _require(disc >= 0, "The stated area gives no real length x.")
+        x = (-(p + r) + math.sqrt(disc)) / 2
+        _require(x > 0, "The stated area gives no positive length x.")
+        drawn = _neutral(x, 1.3)
+        width_label, height_label = _algebra(p, unit_name), _algebra(r, unit_name)
+        points = _l_points(drawn + p, drawn + r, a, b)
+        values = (None, None, a, b)
+        constants = (float(p), float(r))
+        expressions = [width_label, height_label]
+        derived = [x, x + p, x + r, (x + p) * (x + r)]
+    sketch = _Sketch(points, side_labels=(height_label,))
     sketch.neutral.append({"variable": "x", "drawn": drawn, "avoid": x})
     _draw_l_shape(
         sketch,
         (width_label, height_label, cut_width.text, cut_height.text),
-        (None, None, a, b),
+        values,
         variable="x",
-        constants=(float(p), float(r)),
+        constants=constants,
         cut_label_inside=True,
     )
     return sketch.diagram(
         template="corner_removed_algebra",
         inputs=inputs,
         kind="rectilinear",
-        dimensions={"expressions": [width_label, height_label]},
+        dimensions={"expressions": expressions},
         title="An L-shape with algebraic side lengths",
         alt_text=(
             f"An L-shape. The full bottom edge is {width_label} and the full left edge is "
@@ -784,7 +810,7 @@ def corner_removed_algebra(inputs: dict[str, Any], answers: Sequence[str] = ()) 
             f"{cut_height.text}."
         ),
         answers=answers,
-        derived=[x, x + p, x + r, (x + p) * (x + r)],
+        derived=derived,
         findings=_key_findings(x, answers),
     )
 

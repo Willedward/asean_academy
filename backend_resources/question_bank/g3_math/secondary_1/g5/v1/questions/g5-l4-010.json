@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l4-010",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangle measures (x + 5) cm by (x + 3) cm. A 5 cm by 3 cm corner is removed, leaving area 84 cm². Find x. Enter the numerical value only."
+          "text": "A rectangle measures 12 cm by (x + 3) cm. A 5 cm by 3 cm corner is removed, leaving area 93 cm². Find x. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "(x+5)(x+3)-15=84"
+              "latex": "12(x+3)-15=93"
             },
             {
               "type": "text",
@@ -79,7 +79,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "(x+5)(x+3)-15=84"
+              "latex": "12(x+3)-15=93"
             }
           ],
           "mark_type": "M",
@@ -90,7 +90,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x^2+8x-84=0"
+              "latex": "12x+36-15=93"
             }
           ],
           "mark_type": "M",
@@ -101,7 +101,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "(x-6)(x+14)=0"
+              "latex": "12x=72"
             }
           ],
           "mark_type": "M",
@@ -127,8 +127,8 @@
       "asset_key": "g5-l4-010-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-010-diagram-r3.svg",
-      "alt_text": "An L-shape. The full bottom edge is (x + 5) cm and the full left edge is (x + 3) cm. The removed top-right corner has edges 5 cm and 3 cm. Not drawn to scale.",
+      "path": "assets/g5-l4-010-diagram-r4.svg",
+      "alt_text": "An L-shape. The full bottom edge is 12 cm and the full left edge is (x + 3) cm. The removed top-right corner has edges 5 cm and 3 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-sec1-mensuration-svg-v1",
         "diagram_kind": "rectilinear",
@@ -136,7 +136,10 @@
         "outcome": "5.2",
         "template": "corner_removed_algebra",
         "inputs": {
-          "width_extra": 5,
+          "width": {
+            "value": 12,
+            "unit": "cm"
+          },
           "height_extra": 3,
           "cut_width": {
             "value": 5,
@@ -147,25 +150,23 @@
             "unit": "cm"
           },
           "remaining_area": {
-            "value": 84,
+            "value": 93,
             "unit": "cm²"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "expressions": [
-            "(x + 5) cm",
             "(x + 3) cm"
           ]
         },
         "forbidden_visible_labels": [
           "6",
-          "11",
           "9",
-          "99"
+          "108"
         ],
         "unknowns": [],
-        "drawn_scale": 18.2738,
+        "drawn_scale": 19.7967,
         "depth_factor": 0.5,
         "figures": [
           {
@@ -191,10 +192,9 @@
         "measures": [
           {
             "segment": "AB",
-            "label": "(x + 5) cm",
+            "label": "12 cm",
             "factor": 1.0,
-            "variable": "x",
-            "constant": 5.0
+            "value": 12.0
           },
           {
             "segment": "FA",
@@ -229,27 +229,27 @@
         ],
         "viewbox": [
           600.0,
-          329.0
+          346.0
         ],
         "points": {
           "A": [
             181.22,
-            241.01
+            257.76
           ],
           "B": [
             418.78,
-            241.01
+            257.76
           ],
           "C": [
             418.78,
-            94.82
+            99.39
           ],
           "D": [
-            327.41,
-            94.82
+            319.8,
+            99.39
           ],
           "E": [
-            327.41,
+            319.8,
             40.0
           ],
           "F": [
@@ -304,7 +304,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "(x + 5) cm",
+            "text": "12 cm",
             "target": "segment:AB"
           },
           {
@@ -323,9 +323,9 @@
         "relationships": [],
         "min_phone_font_px": 13.13
       },
-      "sha256": "6bb24a15618618eb1b8a5f40dc8b918361e282d68591fd2d903088c27c7bb538",
+      "sha256": "0e8a735850362d80813e527ed5cdbb93d51f35134c516b686f622e3a7284b3fd",
       "width": 600,
-      "height": 329
+      "height": 346
     }
   ],
   "provenance": {
