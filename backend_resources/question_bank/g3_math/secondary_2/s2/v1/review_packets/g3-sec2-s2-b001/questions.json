@@ -388,7 +388,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-502",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -408,7 +408,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The probability that a light bulb is defective is 0.08. Find the probability that it is not defective."
+            "text": "The probability that a light bulb is defective is 0.08. Find the probability that it is not defective. Give your answer as a decimal."
           }
         ],
         "marks": 2,
@@ -417,8 +417,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "23/25",
-          "canonical_latex": "\\frac{23}{25}",
+          "canonical_answer": "0.92",
+          "canonical_latex": "0.92",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -458,7 +458,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "1-\\frac{8}{100}=\\frac{23}{25}"
+                "latex": "1-0.08=0.92"
               }
             ],
             "mark_type": "M",
@@ -469,7 +469,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{\\frac{23}{25}}"
+                "latex": "\\boxed{0.92}"
               }
             ],
             "mark_type": "A",
@@ -498,14 +498,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l2-503",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.1",
-    "title": "Missed target complement",
+    "title": "Compare two probabilities",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -518,31 +518,29 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An archer hits a practice target with probability "
+            "text": "Event A has probability 0.6 and event B has probability "
           },
           {
             "type": "inline_math",
-            "latex": "\\frac{7}{10}"
+            "latex": "\\frac{5}{8}"
           },
           {
             "type": "text",
-            "text": ". Find the probability that the archer misses. Give your answer as a fraction in simplest form."
+            "text": ". Which event is more likely? Enter the larger probability as a decimal."
           }
         ],
         "marks": 2,
         "primary_outcome": "2.1",
         "secondary_outcomes": [],
         "response": {
-          "type": "algebraic_expression",
-          "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "3/10",
-          "canonical_latex": "\\frac{3}{10}",
-          "variables": [],
-          "domain_constraints": [],
-          "accepted_equivalents": [],
-          "checker_config": {
-            "form": "simplest_fraction"
-          }
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "0.625",
+          "canonical_latex": "0.625",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
         },
         "hints": [
           {
@@ -550,7 +548,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Hit and miss are complementary outcomes."
+                "text": "Write both probabilities in the same form before comparing."
               }
             ]
           },
@@ -558,8 +556,8 @@
             "stage": 2,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "1-\\frac{7}{10}"
+                "type": "text",
+                "text": "Divide 5 by 8 to write the probability of event B as a decimal."
               }
             ]
           }
@@ -570,7 +568,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "1-\\frac{7}{10}=\\frac{3}{10}"
+                "latex": "\\frac{5}{8}=0.625>0.6"
               }
             ],
             "mark_type": "M",
@@ -580,8 +578,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So event B is more likely: "
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{\\frac{3}{10}}"
+                "latex": "\\boxed{0.625}"
               }
             ],
             "mark_type": "A",
@@ -948,14 +950,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "s2-l3-503",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.1",
-    "title": "Expected unsuccessful seeds",
+    "title": "Expected number from the missing probability",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -968,7 +970,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A seed germinates with probability 0.72. A gardener plants 250 seeds. Find the expected number that do not germinate."
+            "text": "A spinner has red, blue and green sectors. The probability of red is 0.25 and the probability of blue is 0.4. The spinner is spun 200 times. Find the expected number of green results."
           }
         ],
         "marks": 3,
@@ -990,7 +992,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the complementary probability first."
+                "text": "The three probabilities add up to 1."
               }
             ]
           },
@@ -999,7 +1001,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract the given probability from 1, then multiply by the number of trials."
+                "text": "Find the probability of green first, then multiply by the number of spins."
               }
             ]
           }
@@ -1010,7 +1012,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P(\\text{complement})=1-\\frac{72}{100}=\\frac{28}{100},\\quad 250\\times\\frac{28}{100}=70"
+                "latex": "P(\\text{green})=1-0.25-0.4=0.35,\\quad 200\\times0.35=70"
               }
             ],
             "mark_type": "M",
@@ -1420,7 +1422,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l1-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1464,7 +1466,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Count the favourable outcomes and the total equally likely outcomes."
+                "text": "Count how many outcomes are favourable and how many outcomes are possible."
               }
             ]
           },
@@ -1484,7 +1486,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{8}=\\frac{3}{8}"
+                "latex": "P=\\frac{3}{8}"
               }
             ],
             "mark_type": "A",
@@ -1606,7 +1608,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l1-506",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1670,7 +1672,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{2}{5}=\\frac{2}{5}"
+                "latex": "P=\\frac{2}{5}"
               }
             ],
             "mark_type": "A",
@@ -1803,7 +1805,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-506",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1867,7 +1869,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{10}=\\frac{3}{10}"
+                "latex": "P=\\frac{3}{10}"
               }
             ],
             "mark_type": "M",
@@ -1907,7 +1909,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-507",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1927,7 +1929,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "One card is chosen from cards numbered 3 to 11 inclusive. Find the probability that the number is strictly between 5 and 9. Give your answer as a fraction in simplest form."
+            "text": "One card is chosen at random from cards numbered 3 to 11 inclusive. Find the probability that the number is strictly between 5 and 9. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 2,
@@ -2011,7 +2013,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l2-508",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2075,7 +2077,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "P=\\frac{3}{8}=\\frac{3}{8}"
+                "latex": "P=\\frac{3}{8}"
               }
             ],
             "mark_type": "M",
@@ -2115,14 +2117,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l3-505",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "S2",
     "primary_outcome": "2.2",
-    "title": "Exactly one head",
+    "title": "Coin and three-section spinner",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2135,7 +2137,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two fair coins are tossed. Find the probability of obtaining exactly one head. Give your answer as a fraction in simplest form."
+            "text": "A fair coin is tossed and a fair spinner with three equal sections labelled 1, 2 and 3 is spun. Find the probability of obtaining a head and an odd number. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 3,
@@ -2144,8 +2146,8 @@
         "response": {
           "type": "algebraic_expression",
           "comparison_mode": "symbolic_equivalence",
-          "canonical_expression": "1/2",
-          "canonical_latex": "\\frac{1}{2}",
+          "canonical_expression": "1/3",
+          "canonical_latex": "\\frac{1}{3}",
           "variables": [],
           "domain_constraints": [],
           "accepted_equivalents": [],
@@ -2159,7 +2161,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "List HH, HT, TH and TT."
+                "text": "List every possible pair of results, such as (H, 1)."
               }
             ]
           },
@@ -2168,7 +2170,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "HT and TH are the two favourable ordered outcomes."
+                "text": "There are 6 pairs in the list. Count the pairs with a head and an odd number."
               }
             ]
           }
@@ -2178,8 +2180,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "List the outcomes: (H,1), (H,2), (H,3), (T,1), (T,2), (T,3). The favourable ones are (H,1) and (H,3). "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=\\frac{2}{4}=\\frac{1}{2}"
+                "latex": "P=\\frac{2}{6}"
               }
             ],
             "mark_type": "M",
@@ -2190,7 +2196,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{\\frac{1}{2}}"
+                "latex": "\\boxed{\\frac{1}{3}}"
               }
             ],
             "mark_type": "A",
@@ -2571,7 +2577,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s2-l4-503",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2591,7 +2597,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Cards numbered 1 to 6 are in a bag. Two cards are chosen without replacement. Find the probability that the sum of their numbers is even. Give your answer as a fraction in simplest form."
+            "text": "Cards numbered 1 to 6 are in a bag. Two cards are chosen at random without replacement. Find the probability that the sum of their numbers is even. Give your answer as a fraction in simplest form."
           }
         ],
         "marks": 4,
@@ -2675,7 +2681,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "s2-l4-504",
     "bank_key": "g3-sec2-s2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2719,7 +2725,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the complement that neither result is prime."
+                "text": "Draw a 6 by 6 possibility table, or count the outcomes where neither result is prime."
               }
             ]
           },
@@ -2728,15 +2734,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "There are three non-primes, so the complement probability is "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\left(\\frac{3}{6}\\right)^{2}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "The non-primes are 1, 4 and 6. Count the cells of the table where both results are non-prime."
               }
             ]
           }
@@ -2746,8 +2744,28 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "In the 36-cell possibility table, both results are non-prime in "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3\\times3=9"
+              },
+              {
+                "type": "text",
+                "text": " cells (each from 1, 4, 6). So "
+              },
+              {
+                "type": "inline_math",
+                "latex": "36-9=27"
+              },
+              {
+                "type": "text",
+                "text": " cells have at least one prime. "
+              },
+              {
                 "type": "display_math",
-                "latex": "P=1-\\left(\\frac36\\right)^2=1-\\frac14=\\frac34"
+                "latex": "P=\\frac{27}{36}"
               }
             ],
             "mark_type": "M",
