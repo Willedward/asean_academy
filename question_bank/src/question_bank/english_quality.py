@@ -36,6 +36,10 @@ OPEN_CLOZE_PROMPT = re.compile(
 TARGET_WORD = re.compile(r"What does [“\"]([^”\"]+)[”\"]")
 # Older items ask "What does tentative mean?" without quotation marks.
 UNQUOTED_TARGET_WORD = re.compile(r"What does ([A-Za-z’'-]+) mean")
+# The reported paper has no editing section and no "answer in your own words" questions
+# (exam profile excluded_task_types), so practice must not train either format.
+EXCLUDED_QUESTION_TYPES = {"editing"}
+OWN_WORDS = re.compile(r"\bin (?:your|their|his|her) own words\b", re.IGNORECASE)
 BANNED_TERMS = (
     "blueprint",
     "confound",
@@ -391,6 +395,28 @@ def _lesson_copy_findings(questions, lessons) -> list[QualityFinding]:
     return findings
 
 
+def _excluded_task_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
+    findings = []
+    if question.question_type in EXCLUDED_QUESTION_TYPES:
+        findings.append(
+            QualityFinding(
+                "excluded_task_type",
+                question.stable_key,
+                f"The paper has no {question.question_type} questions; use a task type it reports.",
+            )
+        )
+    texts = [question.instructions, *(part.prompt for part in question.parts)]
+    if any(OWN_WORDS.search(text) for text in texts):
+        findings.append(
+            QualityFinding(
+                "own_words_question",
+                question.stable_key,
+                "The paper has no answer-in-your-own-words questions.",
+            )
+        )
+    return findings
+
+
 def _banned_term_findings(questions, lessons) -> list[QualityFinding]:
     findings = []
     for item in [*questions, *lessons]:
@@ -419,6 +445,7 @@ def english_quality_findings(questions, lessons, forms, passages=None) -> list[Q
         findings.extend(_banked_cloze_order_findings(question))
         findings.extend(_target_word_findings(question, passages))
         findings.extend(_option_order_findings(question))
+        findings.extend(_excluded_task_findings(question))
     findings.extend(_repeated_sequence_findings(questions))
     findings.extend(_form_findings(forms, by_key))
     findings.extend(_diagnostic_longest_findings(forms, by_key))

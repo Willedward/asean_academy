@@ -2517,11 +2517,11 @@ def test_e2_1_grammar_journey_marks_boundaries_and_agreement_deterministically()
     answers: list[str | list[str]] = ["B", "A", "B", "C", ["B", "A"], "A"]
     expected_types = [
         "grammar_usage",
-        "editing",
-        "editing",
         "grammar_usage",
         "grammar_usage",
-        "editing",
+        "grammar_usage",
+        "grammar_usage",
+        "grammar_usage",
     ]
 
     for number, (answer, expected_type) in enumerate(zip(answers, expected_types, strict=True), 1):
@@ -4077,7 +4077,7 @@ def test_e8_1_precise_vocabulary_is_learner_safe_and_marks_exactly():
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     assert question["stable_key"] == "ex-l1-003"
-    assert question["question_type"] == "editing"
+    assert question["question_type"] == "composition_planning"
     assert question["passage"] is None
     assert question["word_bank"] is None
     assert [part["response_type"] for part in question["parts"]] == [
@@ -4138,7 +4138,7 @@ def test_e8_2_sentence_variety_is_learner_safe_and_marks_exactly():
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     assert question["stable_key"] == "ex-l2-003"
-    assert question["question_type"] == "editing"
+    assert question["question_type"] == "composition_planning"
     assert question["passage"] is None
     assert question["word_bank"] is None
     assert [part["response_type"] for part in question["parts"]] == [
@@ -4199,7 +4199,7 @@ def test_e8_3_show_relationships_is_learner_safe_and_marks_exactly():
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     assert question["stable_key"] == "ex-l3-003"
-    assert question["question_type"] == "editing"
+    assert question["question_type"] == "composition_planning"
     assert question["passage"] is None
     assert question["word_bank"] is None
     assert [part["response_type"] for part in question["parts"]] == [
@@ -4260,7 +4260,7 @@ def test_e8_4_edit_by_priority_is_learner_safe_and_marks_exactly():
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     assert question["stable_key"] == "ex-l4-003"
-    assert question["question_type"] == "editing"
+    assert question["question_type"] == "composition_planning"
     assert question["passage"] is None
     assert question["word_bank"] is None
     assert [part["response_type"] for part in question["parts"]] == [
@@ -4321,7 +4321,7 @@ def test_e8_5_personal_error_log_is_learner_safe_and_marks_exactly():
     assert current.status_code == 200, current.text
     question = current.json()["question"]
     assert question["stable_key"] == "ex-l5-003"
-    assert question["question_type"] == "editing"
+    assert question["question_type"] == "composition_planning"
     assert question["passage"] is None
     assert question["word_bank"] is None
     assert [part["response_type"] for part in question["parts"]] == [
