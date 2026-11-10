@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-005",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.4",
-  "title": "Testing a plotted point",
+  "title": "Reading a straight-line graph",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,47 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The point "
+          "text": "A straight-line graph crosses the "
         },
         {
           "type": "inline_math",
-          "latex": "(3, 7)"
+          "latex": "y"
         },
         {
           "type": "text",
-          "text": " is tested against the graph "
+          "text": "-axis at "
         },
         {
           "type": "inline_math",
-          "latex": "y=2x+c"
+          "latex": "(0,5)"
         },
         {
           "type": "text",
-          "text": ". Find "
+          "text": " and also passes through "
         },
         {
           "type": "inline_math",
-          "latex": "c"
+          "latex": "(2,11)"
         },
         {
           "type": "text",
-          "text": " so that the point lies on the graph."
+          "text": ". Find the value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": " on the line when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=3"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -53,8 +69,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "14",
+        "canonical_latex": "14",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -66,7 +82,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the point's coordinates into the equation."
+              "text": "The point where the graph crosses the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-axis gives the constant term."
             }
           ]
         },
@@ -75,15 +99,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "7=2(3)+c"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Find the gradient from the two given points, then write the equation of the line."
             }
           ]
         }
@@ -93,8 +109,24 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "7=6+c"
+              "type": "text",
+              "text": "Gradient "
+            },
+            {
+              "type": "inline_math",
+              "latex": "=\\frac{11-5}{2-0}=3"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=3x+5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -104,8 +136,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "c=1"
+              "type": "inline_math",
+              "latex": "y=3(3)+5=14"
             }
           ],
           "mark_type": "A",

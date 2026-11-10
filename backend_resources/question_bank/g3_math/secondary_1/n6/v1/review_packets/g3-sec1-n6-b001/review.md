@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l1-003 — Reading an ordered pair
+## n6-l1-003 — Reading a table of values
 
 [Open this question in the HTML preview](index.html#n6-l1-003)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l4-002 — Function satisfying two conditions
+## n6-l4-002 — Relationship from two conditions
 
 [Open this question in the HTML preview](index.html#n6-l4-002)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n6-l2-005 — Testing a plotted point
+## n6-l2-005 — Reading a straight-line graph
 
 [Open this question in the HTML preview](index.html#n6-l2-005)
 
