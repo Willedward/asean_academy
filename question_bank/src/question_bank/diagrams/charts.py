@@ -1523,6 +1523,102 @@ def scale_squares(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagra
     builder.text("Not drawn to scale", WIDTH - 24, builder.height - 18, size=FONT, anchor="end", fill=MUTED)
     return _finish(builder, template="scale_squares", diagram_kind="scale_squares", inputs=inputs)
 
+
+def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """y = ax² + bx + c sampled from the rule, with numbered axes, plotted points and an optional
+    labelled axis of symmetry."""
+    a, b, c = float(inputs["a"]), float(inputs.get("b", 0)), float(inputs.get("c", 0))
+    if math.isclose(a, 0):
+        raise ValueError("parabola_graph needs a non-zero a")
+    x_min, x_max = float(inputs["x_min"]), float(inputs["x_max"])
+    y_min, y_max = float(inputs["y_min"]), float(inputs["y_max"])
+    if x_max <= x_min or y_max <= y_min or not (x_min <= 0 <= x_max and y_min <= 0 <= y_max):
+        raise ValueError("parabola_graph axes must have positive ranges that include the origin")
+    step = int(inputs.get("tick_step", 1))
+    title = str(inputs.get("title", "Quadratic graph"))
+    builder = _Builder(title, str(inputs["alt_text"]))
+    builder.text(title, WIDTH / 2, 42, size=TITLE_FONT)
+    x_unit = 560 / (x_max - x_min)
+    y_unit = min(x_unit, 380 / (y_max - y_min))
+    left = (WIDTH - x_unit * (x_max - x_min)) / 2 + 10
+    right = left + x_unit * (x_max - x_min)
+    top = 95.0
+    bottom = top + y_unit * (y_max - y_min)
+    builder.height = int(math.ceil(bottom + 60))
+
+    def sx(value: float) -> float:
+        return left + (value - x_min) * x_unit
+
+    def sy(value: float) -> float:
+        return bottom - (value - y_min) * y_unit
+
+    for tick in range(math.ceil(x_min), math.floor(x_max) + 1):
+        x = sx(tick)
+        builder.line(x, top, x, bottom, stroke=GRID, width=1)
+        if tick != 0 and tick % step == 0:
+            builder.text(tick, x, sy(0) + 30, size=FONT)
+        builder.tick("x", tick, x)
+    for tick in range(math.ceil(y_min), math.floor(y_max) + 1):
+        y = sy(tick)
+        builder.line(left, y, right, y, stroke=GRID, width=1)
+        if tick != 0 and tick % step == 0:
+            builder.text(tick, sx(0) - 12, y + 9, anchor="end", size=FONT)
+        builder.tick("y", tick, y)
+    builder.line(left, sy(0), right + 14, sy(0), width=3)
+    builder.line(sx(0), bottom, sx(0), top - 14, width=3)
+    builder.text("x", right + 24, sy(0) + 9, size=FONT, anchor="start")
+    builder.text("y", sx(0), top - 24, size=FONT)
+    sample = []
+    for index in range(161):
+        x = x_min + (x_max - x_min) * index / 160
+        y = a * x * x + b * x + c
+        if y_min - 1e-9 <= y <= y_max + 1e-9:
+            sample.append((x, y))
+    if len(sample) < 2:
+        raise ValueError("the parabola must cross the plotting window")
+    d = "M" + " L".join(f"{_fmt(sx(x))} {_fmt(sy(y))}" for x, y in sample)
+    builder.mark(
+        "curve",
+        "quadratic-curve",
+        f"{_fmt(a)};{_fmt(b)};{_fmt(c)}",
+        "path",
+        {"d": d},
+        style={"fill": "none", "stroke": ACCENT, "stroke-width": 4},
+    )
+    if inputs.get("axis_label"):
+        h = -b / (2 * a)
+        builder.line(
+            sx(h), top, sx(h), bottom, stroke=SECONDARY, width=2, dash="8 7",
+            attrs={"data-role": "axis-of-symmetry", "data-value": _fmt(h)},
+        )
+        builder.text(str(inputs["axis_label"]), sx(h) + 10, bottom - 14, size=FONT, anchor="start")
+    for index, point in enumerate(inputs.get("points", [])):
+        px = float(point["x"])
+        py = a * px * px + b * px + c
+        builder.mark(
+            f"point-{index}",
+            "point",
+            f"{_fmt(px)},{_fmt(py)}",
+            "circle",
+            {"cx": sx(px), "cy": sy(py), "r": 7},
+            style={"fill": INK, "stroke": BACKGROUND, "stroke-width": 2},
+        )
+        if point.get("label"):
+            builder.text(
+                f"({_fmt(px)}, {_fmt(py)})",
+                sx(px) + float(point.get("dx", 14)),
+                sy(py) + float(point.get("dy", -12)),
+                size=FONT,
+                anchor=str(point.get("anchor", "start")),
+            )
+    return _finish(
+        builder,
+        template="parabola_graph",
+        diagram_kind="parabola_graph",
+        inputs=inputs,
+        extras={"axis": {"x_min": x_min, "x_max": x_max, "y_min": y_min, "y_max": y_max}},
+    )
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
@@ -1542,6 +1638,7 @@ TEMPLATES: dict[str, Callable[..., Diagram]] = {
     "line_graph": line_graph,
     "proportion_graph": proportion_graph,
     "scale_squares": scale_squares,
+    "parabola_graph": parabola_graph,
 }
 
 

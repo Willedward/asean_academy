@@ -102,6 +102,18 @@ SAMPLES = {
         "scale_label": "1 : 50 000",
         "alt_text": "A 2 cm map square, area 4 cm², represents a 1 km square, area 1 km².",
     },
+    "parabola_graph": {
+        "a": 1,
+        "b": -6,
+        "c": 5,
+        "x_min": -1,
+        "x_max": 7,
+        "y_min": -5,
+        "y_max": 6,
+        "axis_label": "x = 3",
+        "points": [{"x": 1, "label": 1, "dx": 12, "dy": -14}],
+        "alt_text": "Parabola y = x² − 6x + 5 with axis x = 3 through (1, 0).",
+    },
 }
 
 

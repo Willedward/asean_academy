@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n6",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   },
   "stable_key": "n6-lesson-06",
   "position": 1,
@@ -76,7 +76,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Each row in a value table gives one point on the graph. Plot x horizontally and y vertically, use a consistent scale, and draw a smooth curve through the calculated points. A quadratic graph is a parabola rather than a chain of straight line segments."
+          "text": "Each column in a value table gives one point on the graph. For y = x² − 4, the table below lists seven inputs from −3 to 3 and their outputs."
+        },
+        {
+          "type": "asset_ref",
+          "asset_key": "n6-lesson-06-table"
+        },
+        {
+          "type": "text",
+          "text": "Plot x horizontally and y vertically, use a consistent scale, and draw a smooth curve through the calculated points. A quadratic graph is a parabola rather than a chain of straight line segments."
         },
         {
           "type": "asset_ref",
@@ -84,7 +92,7 @@
         },
         {
           "type": "text",
-          "text": "For y=x²-4, the point (0,-4) is the y-intercept because x=0. The points (-2,0) and (2,0) are x-intercepts because y=0. Substituting each coordinate into the original rule verifies that it lies on the graph."
+          "text": "For y = x² − 4, the point (0, −4) is the y-intercept because x = 0. The points (−2, 0) and (2, 0) are x-intercepts because y = 0. Substituting each coordinate into the original rule verifies that it lies on the graph. The lowest point, (0, −4), is the turning point, also called the vertex."
         }
       ]
     },
@@ -238,16 +246,418 @@
       "asset_key": "n6-lesson-06-graph",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-06-quadratic-function.svg",
-      "alt_text": "A value table and coordinate graph for y equals x squared minus 4, showing roots at negative two and two and vertex at zero negative four.",
+      "path": "assets/n6-lesson-06-quadratic-function-r2.svg",
+      "alt_text": "Graph of y = x² − 4 for x from −3.5 to 3.5 with numbered axes. The seven points from the table, (−3, 5), (−2, 0), (−1, −3), (0, −4), (1, −3), (2, 0) and (3, 5), lie on a smooth U-shaped curve. The points (−2, 0), (2, 0) and (0, −4) are labelled.",
       "generation_spec": {
-        "renderer": "nextscholar-chart-svg-v1",
-        "diagram_kind": "quadratic_table_graph",
-        "lesson_key": "n6-lesson-06"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "parabola_graph",
+        "lesson_key": "n6-lesson-06",
+        "template": "parabola_graph",
+        "inputs": {
+          "a": 1,
+          "b": 0,
+          "c": -4,
+          "x_min": -3.5,
+          "x_max": 3.5,
+          "y_min": -5,
+          "y_max": 6,
+          "points": [
+            {
+              "x": -3
+            },
+            {
+              "x": -1
+            },
+            {
+              "x": 1
+            },
+            {
+              "x": 3
+            },
+            {
+              "x": -2,
+              "label": 1,
+              "dx": -12,
+              "dy": -14,
+              "anchor": "end"
+            },
+            {
+              "x": 2,
+              "label": 1,
+              "dx": 12,
+              "dy": -14
+            },
+            {
+              "x": 0,
+              "label": 1,
+              "dx": 14,
+              "dy": 26
+            }
+          ],
+          "title": "From a rule to a table and graph",
+          "alt_text": "Graph of y = x² − 4 for x from −3.5 to 3.5 with numbered axes. The seven points from the table, (−3, 5), (−2, 0), (−1, −3), (0, −4), (1, −3), (2, 0) and (3, 5), lie on a smooth U-shaped curve. The points (−2, 0), (2, 0) and (0, −4) are labelled."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "curve",
+            "kind": "quadratic-curve",
+            "value": "1;0;-4",
+            "tag": "path",
+            "geometry": {
+              "d": "M118 97.677273 L121.5 107.132741 L125 116.455966 L128.5 125.646946 L132 134.705682 L135.5 143.632173 L139 152.42642 L142.5 161.088423 L146 169.618182 L149.5 178.015696 L153 186.280966 L156.5 194.413991 L160 202.414773 L163.5 210.28331 L167 218.019602 L170.5 225.623651 L174 233.095455 L177.5 240.435014 L181 247.64233 L184.5 254.717401 L188 261.660227 L191.5 268.47081 L195 275.149148 L198.5 281.695241 L202 288.109091 L205.5 294.390696 L209 300.540057 L212.5 306.557173 L216 312.442045 L219.5 318.194673 L223 323.815057 L226.5 329.303196 L230 334.659091 L233.5 339.882741 L237 344.974148 L240.5 349.93331 L244 354.760227 L247.5 359.454901 L251 364.01733 L254.5 368.447514 L258 372.745455 L261.5 376.911151 L265 380.944602 L268.5 384.84581 L272 388.614773 L275.5 392.251491 L279 395.755966 L282.5 399.128196 L286 402.368182 L289.5 405.475923 L293 408.45142 L296.5 411.294673 L300 414.005682 L303.5 416.584446 L307 419.030966 L310.5 421.345241 L314 423.527273 L317.5 425.57706 L321 427.494602 L324.5 429.279901 L328 430.932955 L331.5 432.453764 L335 433.84233 L338.5 435.098651 L342 436.222727 L345.5 437.21456 L349 438.074148 L352.5 438.801491 L356 439.396591 L359.5 439.859446 L363 440.190057 L366.5 440.388423 L370 440.454545 L373.5 440.388423 L377 440.190057 L380.5 439.859446 L384 439.396591 L387.5 438.801491 L391 438.074148 L394.5 437.21456 L398 436.222727 L401.5 435.098651 L405 433.84233 L408.5 432.453764 L412 430.932955 L415.5 429.279901 L419 427.494602 L422.5 425.57706 L426 423.527273 L429.5 421.345241 L433 419.030966 L436.5 416.584446 L440 414.005682 L443.5 411.294673 L447 408.45142 L450.5 405.475923 L454 402.368182 L457.5 399.128196 L461 395.755966 L464.5 392.251491 L468 388.614773 L471.5 384.84581 L475 380.944602 L478.5 376.911151 L482 372.745455 L485.5 368.447514 L489 364.01733 L492.5 359.454901 L496 354.760227 L499.5 349.93331 L503 344.974148 L506.5 339.882741 L510 334.659091 L513.5 329.303196 L517 323.815057 L520.5 318.194673 L524 312.442045 L527.5 306.557173 L531 300.540057 L534.5 294.390696 L538 288.109091 L541.5 281.695241 L545 275.149148 L548.5 268.47081 L552 261.660227 L555.5 254.717401 L559 247.64233 L562.5 240.435014 L566 233.095455 L569.5 225.623651 L573 218.019602 L576.5 210.28331 L580 202.414773 L583.5 194.413991 L587 186.280966 L590.5 178.015696 L594 169.618182 L597.5 161.088423 L601 152.42642 L604.5 143.632173 L608 134.705682 L611.5 125.646946 L615 116.455966 L618.5 107.132741 L622 97.677273"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "-3,5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "130",
+              "cy": "129.545455",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "-1,-3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "290",
+              "cy": "405.909091",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "1,-3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "450",
+              "cy": "405.909091",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-3",
+            "kind": "point",
+            "value": "3,5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "610",
+              "cy": "129.545455",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-4",
+            "kind": "point",
+            "value": "-2,0",
+            "tag": "circle",
+            "geometry": {
+              "cx": "210",
+              "cy": "302.272727",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-5",
+            "kind": "point",
+            "value": "2,0",
+            "tag": "circle",
+            "geometry": {
+              "cx": "530",
+              "cy": "302.272727",
+              "r": "7"
+            }
+          },
+          {
+            "key": "point-6",
+            "kind": "point",
+            "value": "0,-4",
+            "tag": "circle",
+            "geometry": {
+              "cx": "370",
+              "cy": "440.454545",
+              "r": "7"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "130",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "210",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "290",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "370",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "450",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "530",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "610",
+            "label": "3"
+          },
+          {
+            "key": "y:-5",
+            "axis": "y",
+            "value": "-5",
+            "position": "475",
+            "label": "-5"
+          },
+          {
+            "key": "y:-4",
+            "axis": "y",
+            "value": "-4",
+            "position": "440.454545",
+            "label": "-4"
+          },
+          {
+            "key": "y:-3",
+            "axis": "y",
+            "value": "-3",
+            "position": "405.909091",
+            "label": "-3"
+          },
+          {
+            "key": "y:-2",
+            "axis": "y",
+            "value": "-2",
+            "position": "371.363636",
+            "label": "-2"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "336.818182",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "302.272727",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "267.727273",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "233.181818",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "198.636364",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "164.090909",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "129.545455",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "95",
+            "label": "6"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -3.5,
+          "x_max": 3.5,
+          "y_min": -5.0,
+          "y_max": 6.0
+        }
       },
-      "sha256": "34cfb50db63ed6797408f184716dffd1074956f869b7ebf95fd47e66dccc1939",
-      "width": 960,
-      "height": 460
+      "sha256": "7ca6d6bf836f6fb6ad791eb75f1828db86a957931c2da028de2b0036f77119a5",
+      "width": 720,
+      "height": 535
+    },
+    {
+      "asset_key": "n6-lesson-06-table",
+      "kind": "chart",
+      "format": "svg",
+      "path": "assets/n6-lesson-06-table-r2.svg",
+      "alt_text": "Table of values for y = x² − 4. For x = −3, −2, −1, 0, 1, 2 and 3, y = 5, 0, −3, −4, −3, 0 and 5.",
+      "generation_spec": {
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "data_table",
+        "lesson_key": "n6-lesson-06",
+        "template": "data_table",
+        "inputs": {
+          "columns": [
+            "-3",
+            "-2",
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "rows": [
+            "y"
+          ],
+          "cells": [
+            [
+              5,
+              0,
+              -3,
+              -4,
+              -3,
+              0,
+              5
+            ]
+          ],
+          "title": "Table of values for y = x² − 4",
+          "alt_text": "Table of values for y = x² − 4. For x = −3, −2, −1, 0, 1, 2 and 3, y = 5, 0, −3, −4, −3, 0 and 5."
+        },
+        "viewbox": [
+          720,
+          480
+        ],
+        "chart_marks": [
+          {
+            "key": "cell-0-0",
+            "kind": "table-cell",
+            "value": "5",
+            "tag": "text",
+            "geometry": {
+              "x": "188.125",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-1",
+            "kind": "table-cell",
+            "value": "0",
+            "tag": "text",
+            "geometry": {
+              "x": "256.875",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-2",
+            "kind": "table-cell",
+            "value": "-3",
+            "tag": "text",
+            "geometry": {
+              "x": "325.625",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-3",
+            "kind": "table-cell",
+            "value": "-4",
+            "tag": "text",
+            "geometry": {
+              "x": "394.375",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-4",
+            "kind": "table-cell",
+            "value": "-3",
+            "tag": "text",
+            "geometry": {
+              "x": "463.125",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-5",
+            "kind": "table-cell",
+            "value": "0",
+            "tag": "text",
+            "geometry": {
+              "x": "531.875",
+              "y": "209.24"
+            }
+          },
+          {
+            "key": "cell-0-6",
+            "kind": "table-cell",
+            "value": "5",
+            "tag": "text",
+            "geometry": {
+              "x": "600.625",
+              "y": "209.24"
+            }
+          }
+        ],
+        "chart_ticks": [],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43
+      },
+      "sha256": "dfdfc5163d31b08103d28740275b03fe77889f07b4cb34fdfba426fa0a80fee3",
+      "width": 720,
+      "height": 480
     }
   ]
 }
