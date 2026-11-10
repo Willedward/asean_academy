@@ -164,9 +164,11 @@ export function LiveOnboardingShell({ children }: { children: ReactNode }) {
                 label="NextScholar hornbill welcoming a beta student"
               />
             </div>
-            <h1 className="m-0 text-[40px] leading-[46px] font-bold tracking-[-0.015em]">
+            {/* The form's "Activate student access" is the page h1, so this
+                hidden-on-mobile welcome is styled text, not a second h1. */}
+            <p className="m-0 text-[40px] leading-[46px] font-bold tracking-[-0.015em]">
               Welcome to the beta.
-            </h1>
+            </p>
             <p className="m-0 text-lg leading-7 text-ns-on-brand/85">
               Connect the invitation sent to your Google account. It assigns the
               reviewed course revision and keeps your progress attached to one

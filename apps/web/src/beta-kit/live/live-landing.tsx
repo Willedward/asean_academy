@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BookOpen, CheckCircle2, RotateCcw, Sigma } from "lucide-react";
 
 import { Hornbill } from "../components/hornbill";
-import { Button, Card, H3, Muted, Tag } from "../components/ui";
+import { Button, Card, H2, Muted, Tag } from "../components/ui";
 import { BareShell, Logo } from "../shell/app-shell";
 
 const FEATURES = [
@@ -90,7 +90,7 @@ export function LiveLandingScreen({ signInHref }: { signInHref: string }) {
               <span className="inline-flex size-11 items-center justify-center rounded-full bg-ns-brand-soft text-ns-ink">
                 <Icon size={21} aria-hidden />
               </span>
-              <H3>{title}</H3>
+              <H2 className="text-[17px] leading-6">{title}</H2>
               <Muted className="text-[15px] leading-[22px]">{text}</Muted>
             </Card>
           ))}
