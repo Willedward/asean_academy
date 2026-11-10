@@ -10,61 +10,67 @@
   animation: hornbill-enter 520ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
 }
 
+/* Idle loops play a few cycles and then rest, so no motion lasts longer than
+   five seconds (WCAG 2.2.2 Pause, Stop, Hide). Every keyframe set starts and
+   ends at the resting pose, so the bird settles without a jump. */
+
 .animated .body {
   transform-origin: 50% 90%;
-  animation: hornbill-breathe 3.8s ease-in-out infinite;
+  animation: hornbill-breathe 3.8s ease-in-out 1;
 }
 
 .animated .head {
   transform-origin: 34% 78%;
-  animation: hornbill-head-idle 4.6s ease-in-out infinite;
+  animation: hornbill-head-idle 4.6s ease-in-out 1;
 }
 
 .animated .eyes {
   transform-origin: center;
-  animation: hornbill-blink 5.8s ease-in-out infinite;
+  animation: hornbill-blink 4.6s ease-in-out 1;
 }
 
 .animated .wing {
   transform-origin: 72% 24%;
-  animation: hornbill-wing-idle 3.8s ease-in-out infinite;
+  animation: hornbill-wing-idle 3.8s ease-in-out 1;
 }
 
 .animated .tail {
   transform-origin: 72% 10%;
-  animation: hornbill-tail-idle 3.8s ease-in-out infinite;
+  animation: hornbill-tail-idle 3.8s ease-in-out 1;
 }
 
 .animated .lowerBeak {
   transform-origin: 4% 8%;
-  animation: hornbill-beak-idle 7.2s ease-in-out infinite;
+  animation: hornbill-beak-idle 4.8s ease-in-out 1;
 }
 
 .animated.cheer .body {
   animation-duration: 1.8s;
+  animation-iteration-count: 2;
 }
 
 .animated.cheer .head {
-  animation: hornbill-head-cheer 1.8s ease-in-out infinite;
+  animation: hornbill-head-cheer 1.8s ease-in-out 2 forwards;
 }
 
 .animated.cheer .wing {
-  animation: hornbill-wing-cheer 900ms ease-in-out infinite;
+  animation: hornbill-wing-cheer 900ms ease-in-out 5 forwards;
 }
 
 .animated.cheer .tail {
   animation-duration: 1.8s;
+  animation-iteration-count: 2;
 }
 
 .animated.point .wing {
-  animation: hornbill-wing-point 2.8s ease-in-out infinite;
+  animation: hornbill-wing-point 2.8s ease-in-out 1;
 }
 
 .animated.sleepy .body,
 .animated.sleepy .head,
 .animated.sleepy .tail,
 .animated.sleepy .wing {
-  animation-duration: 5.4s;
+  animation-duration: 4.8s;
 }
 
 .animated.sleepy .eyes {

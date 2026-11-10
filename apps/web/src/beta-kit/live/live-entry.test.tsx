@@ -1,7 +1,11 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { LiveOnboardingShell, LiveSignInScreen } from "./live-entry";
+import {
+  LiveOnboardingFormView,
+  LiveOnboardingShell,
+  LiveSignInScreen,
+} from "./live-entry";
 
 afterEach(cleanup);
 
@@ -66,5 +70,28 @@ describe("live entry screens", () => {
       );
       expect(switchButton.closest("form")).toHaveAttribute("method", "post");
     });
+  });
+
+  it("gives onboarding a single h1 for the activation form", () => {
+    render(
+      <LiveOnboardingShell>
+        <LiveOnboardingFormView
+          codeFromLink={false}
+          displayName=""
+          email="student@example.com"
+          error={null}
+          invitationCode=""
+          onDisplayNameChange={vi.fn()}
+          onInvitationCodeChange={vi.fn()}
+          onSubmit={vi.fn()}
+          submitting={false}
+        />
+      </LiveOnboardingShell>,
+    );
+
+    const headings = screen.getAllByRole("heading", { level: 1 });
+    expect(headings).toHaveLength(1);
+    expect(headings[0]).toHaveTextContent("Activate student access");
+    expect(screen.getByText("Welcome to the beta.").tagName).toBe("P");
   });
 });

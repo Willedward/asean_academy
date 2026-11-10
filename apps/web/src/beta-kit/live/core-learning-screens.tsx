@@ -352,7 +352,7 @@ export function CoreCourseMapScreen({
 
       {units.length === 0 ? (
         <Card>
-          <H3>Course map is being prepared</H3>
+          <H2 className="text-[17px] leading-6">Course map is being prepared</H2>
           <Muted>No units are available in this course revision yet.</Muted>
         </Card>
       ) : null}

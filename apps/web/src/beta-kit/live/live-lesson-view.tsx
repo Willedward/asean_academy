@@ -20,7 +20,6 @@ import {
   Eyebrow,
   H1,
   H2,
-  H3,
   Muted,
   Tag,
 } from "../components/ui";
@@ -117,7 +116,7 @@ export function LiveLessonView({
       </header>
 
       <Card tone="sunken" className="gap-3">
-        <H3>By the end you can</H3>
+        <H2 className="text-[17px] leading-6">By the end you can</H2>
         <ul className="m-0 flex list-disc flex-col gap-2 pl-5 text-[15px] leading-6">
           {lesson.objectives.map((objective) => (
             <li key={objective}>{objective}</li>
