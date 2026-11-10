@@ -1686,7 +1686,7 @@ def test_failed_e6_checkpoint_retake_uses_two_disjoint_form_b_groups():
         app,
         retry_id,
         retry_second,
-        {"1": "A", "2": "A"},
+        {"1": "C", "2": "B"},
         "e6-checkpoint-retry-second",
     )
     assert retry_completed.status_code == 200, retry_completed.text
@@ -1892,7 +1892,7 @@ def test_e9_checkpoint_is_readiness_only_and_records_simulation_mastery():
         app,
         session_id,
         question,
-        {"1": "B", "2": "B", "3": "B", "4": "B", "5": "C"},
+        {"1": "B", "2": "A", "3": "C", "4": "B", "5": "C"},
         "e9-checkpoint-pass-attempt",
     )
     assert completed.status_code == 200, completed.text

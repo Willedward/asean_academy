@@ -1794,7 +1794,7 @@ def test_e6_checkpoint_groups_mark_task_decoding_and_planning_exactly(english_ro
         "ex-l1-010": ["B", ["A", "C", "D"], "C"],
         "ex-l5-007": ["A", "A"],
         "ex-l1-011": ["B", "A", "A"],
-        "ex-l5-008": ["A", "A"],
+        "ex-l5-008": ["C", "B"],
     }
 
     for question_key, answers in expected.items():
@@ -1867,7 +1867,7 @@ def test_e8_checkpoint_groups_mark_revision_priority_exactly(english_root):
 
 def test_e9_checkpoint_groups_mark_simulation_protocol_exactly(english_root):
     expected = {
-        "ex-l5-009": ["B", "B", "B", "B", "C"],
+        "ex-l5-009": ["B", "A", "C", "B", "C"],
         "ex-l5-010": ["A", "B", "B", "C", "B"],
     }
     for question_key, answers in expected.items():
