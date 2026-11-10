@@ -274,7 +274,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-017",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -294,7 +294,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Journey times in minutes are 8, 12, 17, 21, 24, 26, 31, 34, 37 and 42. Using intervals 0–14, 15–29, 30–44, find the frequency in 15–29. Enter the numerical value only."
+            "text": "Journey times, measured in whole minutes, are 8, 12, 17, 21, 24, 26, 31, 34, 37 and 42. Using intervals 0–14, 15–29 and 30–44, find the frequency in 15–29. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -335,12 +335,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
+                "type": "text",
+                "text": "The times from 15 to 29 inclusive are 17, 21, 24 and 26."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
                 "latex": "f(15\\text{–}29)=4"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1704,7 +1715,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-020",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1774,12 +1785,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "96-(18+25+31)=22"
+                "type": "inline_math",
+                "latex": "18+25+31=74"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 2
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "96-74=22"
               }
             ],
             "mark_type": "A",
-            "mark_value": 3
+            "mark_value": 1
           }
         ]
       }
@@ -1790,7 +1812,7 @@
         "asset_key": "s1-l3-020-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l3-020-diagram-r2.svg",
+        "path": "assets/s1-l3-020-diagram-r3.svg",
         "alt_text": "Bar chart with A: 18, B: 25, C: 31 and D unknown.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -1992,7 +2014,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-010",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2021,7 +2043,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The cumulative line graph shows the total units after day 2 and after day 5. The increases on days 3 and 4 were 11 and 16. Find the increase on day 5. Enter the numerical value only."
+            "text": "The line graph shows the running total of units (the total so far) after day 2 and after day 5. The increases on days 3 and 4 were 11 and 16. Find the increase on day 5. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -2089,7 +2111,7 @@
         "asset_key": "s1-l4-010-diagram",
         "kind": "chart",
         "format": "svg",
-        "path": "assets/s1-l4-010-diagram-r2.svg",
+        "path": "assets/s1-l4-010-diagram-r3.svg",
         "alt_text": "Line graph with Day 2: 24, Day 5: 63.",
         "generation_spec": {
           "renderer": "nextscholar-data-chart-svg-v1",
@@ -2110,7 +2132,7 @@
             "y_max": 70,
             "tick_step": 10,
             "y_label": "Units",
-            "title": "Cumulative units",
+            "title": "Total units so far",
             "show_values": true
           },
           "viewbox": [
@@ -2221,7 +2243,7 @@
             "tick_step": 10.0
           }
         },
-        "sha256": "c07d4d54983c5706b77b7ced2a9b1e8ab711f7c2edc8bc577738ade8db6e0c77",
+        "sha256": "72c8816676edb96fa2ea18af314f3a842ff0a9159a140bed8a73c313c8dab144",
         "width": 720,
         "height": 480
       }
@@ -2244,7 +2266,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-015",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2286,7 +2308,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide whether readers need one exact value at a time or an overall picture."
               }
             ]
           },
@@ -2305,8 +2327,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A table lists the exact attendance value for each of the 20 classes. A bar graph would make readers estimate the values from bar heights."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=1"
+                "latex": "\\text{Code}=1"
               }
             ],
             "mark_type": "B",
@@ -2335,14 +2361,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-020",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Visitor icon display",
+    "title": "Visitor counts on a pictogram",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2355,7 +2381,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A museum infographic for young visitors will show small whole-number counts for three exhibit zones using one person icon per ten visitors. Enter the most suitable code only."
+            "text": "A museum wants to show visitor counts of 40, 37 and 52 for three exhibit zones, with one person icon for every ten visitors. Use code 1 if a pictogram cannot show three zones, code 2 if the counts 37 and 52 would need part-icons that are hard to read, or code 3 if a pictogram needs at least ten icons in every row. Enter the code only."
           }
         ],
         "marks": 2,
@@ -2364,8 +2390,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "3",
-          "canonical_latex": "3",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2377,7 +2403,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Check how each count fits with one icon for every ten visitors."
               }
             ]
           },
@@ -2386,7 +2412,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Each icon stands for ten visitors and the counts are small. Ask which display shows a quantity by repeating a small picture."
+                "text": "Divide each count by 10 and look for any count that does not come to a whole number of icons."
               }
             ]
           }
@@ -2396,8 +2422,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "37 and 52 are not multiples of 10, so they would need part-icons that are hard to read exactly. Three zones can be shown, so the number of rows is not the problem."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=3"
+                "latex": "\\text{Code}=2"
               }
             ],
             "mark_type": "B",
@@ -2426,14 +2456,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-021",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Daily account balance",
+    "title": "Daily balance on a pie chart",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2446,7 +2476,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A treasurer needs to reveal rises and falls in an account balance across 30 consecutive days. Enter the most suitable code only."
+            "text": "A treasurer proposes a pie chart of an account's balance on each of 30 consecutive days. Use code 1 if a pie chart cannot show large numbers, code 2 if its sectors would show shares of a total and hide how the balance changes from day to day, or code 3 if a pie chart cannot show dates. Enter the code only."
           }
         ],
         "marks": 2,
@@ -2455,8 +2485,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "4",
-          "canonical_latex": "4",
+          "canonical_answer": "2",
+          "canonical_latex": "2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2468,7 +2498,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Ask what the 30 daily balances are for: shares of something, or one quantity changing over time."
               }
             ]
           },
@@ -2477,7 +2507,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The balance is one quantity recorded day after day, and the reader must see it rise and fall. Ask which display shows change across consecutive days."
+                "text": "Think about what a pie chart is built to show, and what the reader wants to see from one day to the next."
               }
             ]
           }
@@ -2487,8 +2517,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The 30 balances are not parts of one whole: the treasurer wants to see the balance move from day to day. A pie chart would show shares of a total and hide that change."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=4"
+                "latex": "\\text{Code}=2"
               }
             ],
             "mark_type": "B",
@@ -2517,7 +2551,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-021",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2537,7 +2571,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A charity has category totals 13, 27, 46 and 91; it needs precise comparison and does not want partial icons. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A charity has category totals 13, 27, 46 and 91; readers need to compare the sizes at a glance, and the charity does not want partial icons. For the reason code, use 1 if a pictogram cannot show four categories, 2 if these totals would need part-icons, or 3 if pictograms can show only data in time order. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2546,8 +2580,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "22",
+          "canonical_latex": "22",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2559,7 +2593,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide what readers must do with these four totals."
               }
             ]
           },
@@ -2568,7 +2602,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "These totals are not convenient multiples of an icon, so a pictorial display would need part-icons. The charity also wants precise comparison of separate totals. Ask which display compares separate totals against a common scale."
+                "text": "These totals are not convenient multiples of an icon. The charity also wants separate totals compared at a glance. Choose the display that compares sizes against a common scale, then think about what would go wrong with icons."
               }
             ]
           }
@@ -2578,8 +2612,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A bar graph compares the four totals against one scale at a glance. These totals are not convenient multiples of an icon, so a pictogram would need part-icons, and the reason code is 2."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=2"
+                "latex": "\\text{Code}=22"
               }
             ],
             "mark_type": "B",
@@ -2608,14 +2646,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l3-022",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.3",
-    "title": "Preserve paired exact values",
+    "title": "Exact lap and heart-rate records",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2628,7 +2666,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A coach needs players to find exact lap time and heart-rate entries for each training session. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. A coach has the lap time and heart rate of a player for each of 12 training sessions, and players must find the exact pair of numbers for any session. For the reason code, use 1 if a line graph cannot be used for time data, 2 if a line graph can show only one measure, or 3 if a line graph would make readers estimate each exact pair of numbers from the points. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 3,
@@ -2637,8 +2675,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "13",
+          "canonical_latex": "13",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2650,7 +2688,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide what players must do with the numbers."
               }
             ]
           },
@@ -2659,7 +2697,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Each session has two exact measurements that players must be able to find. Ask which display keeps both exact numbers for every session."
+                "text": "Each session has two exact measurements. Choose the display that keeps both exact numbers for every session, then think about what players would have to do if they used a line graph instead."
               }
             ]
           }
@@ -2669,8 +2707,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "A table keeps the exact pair of numbers for each of the 12 sessions. On a line graph players would have to estimate each exact pair from the points, so the reason code is 3."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=1"
+                "latex": "\\text{Code}=13"
               }
             ],
             "mark_type": "B",
@@ -2699,7 +2741,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-011",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2719,7 +2761,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Eight categories have close frequencies. The display must support accurate comparison and avoid judging sector angles or icon areas. Enter the most suitable code only."
+            "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Eight categories have close frequencies. The display must support accurate comparison and avoid judging sector angles or icon areas. For the reason code, use 1 if a line graph needs at least ten points, 2 if joining the separate categories with lines would suggest an order that does not exist, or 3 if a line graph cannot show close values. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
           }
         ],
         "marks": 4,
@@ -2728,8 +2770,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "22",
+          "canonical_latex": "22",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2741,7 +2783,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Match the information need to the main strength of each representation."
+                "text": "Decide whether these eight categories form a sequence or are separate groups."
               }
             ]
           },
@@ -2750,7 +2792,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The eight frequencies are close together, so readers must judge small differences accurately. Ask which display lets them compare sizes against one common scale."
+                "text": "The eight frequencies are close together, so readers must judge small differences accurately. Choose the display that compares sizes against one common scale, then think about what lines between categories would suggest."
               }
             ]
           }
@@ -2760,8 +2802,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Bars against one scale let readers judge small differences accurately without using sector angles or icon areas. Joining separate categories with lines would suggest an order that does not exist, so the reason code is 2."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{Best choice code}=2"
+                "latex": "\\text{Code}=22"
               }
             ],
             "mark_type": "B",
@@ -2790,7 +2836,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-016",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2851,6 +2897,18 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Doubling every length of a cube makes the icon "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2^3=8"
+              },
+              {
+                "type": "text",
+                "text": " times as large, not 2 times, so the volume of the symbol misrepresents the value. The axis and labels are not the problem here."
+              },
+              {
                 "type": "display_math",
                 "latex": "\\text{volume symbol distortion}\\Rightarrow 3"
               }
@@ -2881,14 +2939,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l1-017",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.4",
-    "title": "Unlabelled graph values",
+    "title": "Graph with numbered ticks",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2901,7 +2959,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph has numbered tick marks but does not state whether they represent dollars, people or kilograms. Enter the issue code."
+            "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph has numbered tick marks but does not state whether they represent litres, people or kilograms. Enter the issue code."
           }
         ],
         "marks": 1,
@@ -2941,6 +2999,10 @@
           {
             "position": 1,
             "content": [
+              {
+                "type": "text",
+                "text": "A reader cannot tell what the numbers measure because the unit is missing. The axis itself may be drawn correctly, so a truncated axis or unequal intervals is not the issue."
+              },
               {
                 "type": "display_math",
                 "latex": "\\text{missing labels or units}\\Rightarrow 4"
@@ -3063,14 +3125,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l2-023",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "S1",
     "primary_outcome": "1.4",
-    "title": "Cylinder picture scaling",
+    "title": "Checking a pie chart's angles",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3083,7 +3145,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A cylinder icon's height and diameter are both doubled to suggest twice the amount. By what factor does the pictured cylinder's volume increase? Enter the numerical value only."
+            "text": "A pie chart has three sectors with angles 150°, 120° and 100°. How many degrees more than a full circle do the sectors add up to? Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -3092,8 +3154,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "10",
+          "canonical_latex": "10",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3105,7 +3167,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Volume depends on radius squared and height."
+                "text": "The sectors of a complete pie chart should add up to a full circle."
               }
             ]
           },
@@ -3114,15 +3176,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Doubling all linear dimensions multiplies volume by "
-              },
-              {
-                "type": "inline_math",
-                "latex": "2^{3}"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Add the three sector angles, then subtract 360°."
               }
             ]
           }
@@ -3132,12 +3186,23 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2^3=8"
+                "type": "inline_math",
+                "latex": "150+120+100=370"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "370-360=10"
               }
             ],
             "mark_type": "A",
-            "mark_value": 2
+            "mark_value": 1
           }
         ]
       }
@@ -3280,7 +3345,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "s1-l4-012",
     "bank_key": "g3-sec1-s1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3300,7 +3365,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A five-year series is 140, 105, 112, 126 and 119. A report uses only years 2 to 4 and states a percentage rise. Find how many percentage points larger this reported rise is than the full-period percentage change, to the nearest whole percentage point. Enter the numerical value only."
+            "text": "A five-year series is 140, 105, 112, 126 and 119. A report uses only years 2 to 4 and states a percentage rise. Find how many percentage points larger this reported rise is than the full-period percentage change, to the nearest whole percentage point. (A difference between two percentages is measured in percentage points.) Enter the numerical value only."
           }
         ],
         "marks": 4,

@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-020 — Visitor icon display
+## s1-l2-020 — Visitor counts on a pictogram
 
 [Open this question in the HTML preview](index.html#s1-l2-020)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-021 — Daily account balance
+## s1-l2-021 — Daily balance on a pie chart
 
 [Open this question in the HTML preview](index.html#s1-l2-021)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-022 — Preserve paired exact values
+## s1-l3-022 — Exact lap and heart-rate records
 
 [Open this question in the HTML preview](index.html#s1-l3-022)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-017 — Unlabelled graph values
+## s1-l1-017 — Graph with numbered ticks
 
 [Open this question in the HTML preview](index.html#s1-l1-017)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-023 — Cylinder picture scaling
+## s1-l2-023 — Checking a pie chart's angles
 
 [Open this question in the HTML preview](index.html#s1-l2-023)
 

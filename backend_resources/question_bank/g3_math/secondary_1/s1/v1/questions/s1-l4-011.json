@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l4-011",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Eight categories have close frequencies. The display must support accurate comparison and avoid judging sector angles or icon areas. Enter the most suitable code only."
+          "text": "Use code 1 for a table, 2 for a bar graph, 3 for a pictogram, 4 for a line graph and 5 for a pie chart. Eight categories have close frequencies. The display must support accurate comparison and avoid judging sector angles or icon areas. For the reason code, use 1 if a line graph needs at least ten points, 2 if joining the separate categories with lines would suggest an order that does not exist, or 3 if a line graph cannot show close values. Enter a two-digit number: the first digit is the code of the most suitable display and the second digit is the reason code."
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2",
-        "canonical_latex": "2",
+        "canonical_answer": "22",
+        "canonical_latex": "22",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Match the information need to the main strength of each representation."
+              "text": "Decide whether these eight categories form a sequence or are separate groups."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The eight frequencies are close together, so readers must judge small differences accurately. Ask which display lets them compare sizes against one common scale."
+              "text": "The eight frequencies are close together, so readers must judge small differences accurately. Choose the display that compares sizes against one common scale, then think about what lines between categories would suggest."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Bars against one scale let readers judge small differences accurately without using sector angles or icon areas. Joining separate categories with lines would suggest an order that does not exist, so the reason code is 2."
+            },
+            {
               "type": "display_math",
-              "latex": "\\text{Best choice code}=2"
+              "latex": "\\text{Code}=22"
             }
           ],
           "mark_type": "B",
