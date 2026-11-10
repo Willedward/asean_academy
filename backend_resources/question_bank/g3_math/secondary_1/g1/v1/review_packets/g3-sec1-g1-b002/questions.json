@@ -183,14 +183,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l3-009",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.1",
-    "title": "Four angles around a point",
+    "title": "Angle type around a point",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -203,7 +203,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Four angles around a point are 80°, 115°, "
+            "text": "Four angles around a point are 40°, 60°, "
           },
           {
             "type": "inline_math",
@@ -215,11 +215,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "(x+25)^\\circ"
+            "latex": "(x+60)^\\circ"
           },
           {
             "type": "text",
-            "text": ". Find the larger of the two unknown angles."
+            "text": ". Use acute = 1, right = 2, obtuse = 3 and reflex = 4. Enter the code of the larger unknown angle."
           }
         ],
         "marks": 3,
@@ -228,8 +228,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "95",
-          "canonical_latex": "95",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -250,15 +250,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Solve for "
               },
               {
                 "type": "inline_math",
-                "latex": "80+115+x+x+25=360"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then find the larger unknown angle and compare it with 90° and 180°."
               }
             ]
           }
@@ -268,8 +268,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2x+220=360"
+                "type": "inline_math",
+                "latex": "2x+160=360"
               }
             ],
             "mark_type": "M",
@@ -279,8 +279,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=70"
+                "type": "inline_math",
+                "latex": "x=100"
               }
             ],
             "mark_type": "M",
@@ -290,8 +290,12 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x+25=95"
+                "type": "inline_math",
+                "latex": "x+60=160^\\circ"
+              },
+              {
+                "type": "text",
+                "text": ", which is obtuse, so the code is 3."
               }
             ],
             "mark_type": "A",
@@ -320,14 +324,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l4-005",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.1",
-    "title": "Three related angles around a point",
+    "title": "Angle type around a point (three angles)",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -352,7 +356,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(x+20)^\\circ"
+            "latex": "(x+50)^\\circ"
           },
           {
             "type": "text",
@@ -360,11 +364,11 @@
           },
           {
             "type": "inline_math",
-            "latex": "(x+40)^\\circ"
+            "latex": "(2x+90)^\\circ"
           },
           {
             "type": "text",
-            "text": ". Find the largest angle in degrees."
+            "text": ". Use acute = 1, right = 2, obtuse = 3 and reflex = 4. Enter the code of the largest angle."
           }
         ],
         "marks": 3,
@@ -373,8 +377,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "140",
-          "canonical_latex": "140",
+          "canonical_answer": "4",
+          "canonical_latex": "4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -395,15 +399,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "First solve "
+                "text": "Solve the equation for "
               },
               {
                 "type": "inline_math",
-                "latex": "3x+60=360"
+                "latex": "x"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": ", then find all three angles before classifying the largest."
               }
             ]
           }
@@ -413,8 +417,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "3x+60=360"
+                "type": "inline_math",
+                "latex": "4x+140=360"
               }
             ],
             "mark_type": "M",
@@ -424,8 +428,16 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=100"
+                "type": "inline_math",
+                "latex": "x=55"
+              },
+              {
+                "type": "text",
+                "text": ", so the angles are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "55^\\circ,105^\\circ,200^\\circ"
               }
             ],
             "mark_type": "M",
@@ -435,8 +447,12 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x+40=140"
+                "type": "inline_math",
+                "latex": "200^\\circ"
+              },
+              {
+                "type": "text",
+                "text": " is reflex, so the code is 4."
               }
             ],
             "mark_type": "A",
@@ -1414,7 +1430,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l3-011",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1438,7 +1454,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(4x+18)^\\circ"
+            "latex": "(4x+6)^\\circ"
           },
           {
             "type": "text",
@@ -1446,7 +1462,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "(7x-42)^\\circ"
+            "latex": "(7x-51)^\\circ"
           },
           {
             "type": "text",
@@ -1459,8 +1475,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "98",
-          "canonical_latex": "98",
+          "canonical_answer": "82",
+          "canonical_latex": "82",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1499,8 +1515,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "4x+18=7x-42"
+                "type": "inline_math",
+                "latex": "4x+6=7x-51"
               }
             ],
             "mark_type": "M",
@@ -1510,8 +1526,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=20"
+                "type": "inline_math",
+                "latex": "x=19"
               }
             ],
             "mark_type": "M",
@@ -1521,8 +1537,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "4x+18=98"
+                "type": "inline_math",
+                "latex": "4x+6=82"
               }
             ],
             "mark_type": "A",
@@ -2467,7 +2483,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l3-013",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2487,7 +2503,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Using codes 1–6, a quadrilateral has perpendicular diagonals that bisect each other, but it has no right angles. Enter its code."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A quadrilateral has perpendicular diagonals that bisect each other, but it has no right angles. Enter its code."
           }
         ],
         "marks": 1,
@@ -2558,14 +2574,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l4-007",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.5",
-    "title": "Equal diagonal in a parallelogram",
+    "title": "Parallelogram with algebraic angles",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2578,7 +2594,23 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Using codes 1–6, a non-square parallelogram has equal diagonals. Enter its most specific code."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). Parallelogram ABCD has angle A "
+          },
+          {
+            "type": "inline_math",
+            "latex": "=(5x+10)^\\circ"
+          },
+          {
+            "type": "text",
+            "text": ", angle B "
+          },
+          {
+            "type": "inline_math",
+            "latex": "=(3x+42)^\\circ"
+          },
+          {
+            "type": "text",
+            "text": " and AB ≠ BC. Enter its most specific code."
           }
         ],
         "marks": 2,
@@ -2600,7 +2632,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Equal diagonals give the parallelogram four right angles."
+                "text": "Adjacent angles of a parallelogram are supplementary."
               }
             ]
           },
@@ -2609,7 +2641,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "The non-square condition selects the rectangle code."
+                "text": "Solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": ", then use the size of the angles and AB ≠ BC."
               }
             ]
           }
@@ -2619,8 +2659,20 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{parallelogram}+\\text{equal diagonals}=\\text{rectangle}"
+                "type": "inline_math",
+                "latex": "8x+52=180\\Rightarrow x=16"
+              },
+              {
+                "type": "text",
+                "text": ", so angle A "
+              },
+              {
+                "type": "inline_math",
+                "latex": "=90^\\circ"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -2630,7 +2682,11 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
+                "type": "text",
+                "text": "Four right angles and unequal adjacent sides give "
+              },
+              {
+                "type": "inline_math",
                 "latex": "\\text{code}=2"
               }
             ],

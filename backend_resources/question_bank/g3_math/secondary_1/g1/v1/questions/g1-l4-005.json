@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g1-l4-005",
   "bank_key": "g3-sec1-g1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G1",
   "primary_outcome": "1.1",
-  "title": "Three related angles around a point",
+  "title": "Angle type around a point (three angles)",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -32,7 +32,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "(x+20)^\\circ"
+          "latex": "(x+50)^\\circ"
         },
         {
           "type": "text",
@@ -40,11 +40,11 @@
         },
         {
           "type": "inline_math",
-          "latex": "(x+40)^\\circ"
+          "latex": "(2x+90)^\\circ"
         },
         {
           "type": "text",
-          "text": ". Find the largest angle in degrees."
+          "text": ". Use acute = 1, right = 2, obtuse = 3 and reflex = 4. Enter the code of the largest angle."
         }
       ],
       "marks": 3,
@@ -53,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "140",
-        "canonical_latex": "140",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -75,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "First solve "
+              "text": "Solve the equation for "
             },
             {
               "type": "inline_math",
-              "latex": "3x+60=360"
+              "latex": "x"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ", then find all three angles before classifying the largest."
             }
           ]
         }
@@ -93,8 +93,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3x+60=360"
+              "type": "inline_math",
+              "latex": "4x+140=360"
             }
           ],
           "mark_type": "M",
@@ -104,8 +104,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=100"
+              "type": "inline_math",
+              "latex": "x=55"
+            },
+            {
+              "type": "text",
+              "text": ", so the angles are "
+            },
+            {
+              "type": "inline_math",
+              "latex": "55^\\circ,105^\\circ,200^\\circ"
             }
           ],
           "mark_type": "M",
@@ -115,8 +123,12 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x+40=140"
+              "type": "inline_math",
+              "latex": "200^\\circ"
+            },
+            {
+              "type": "text",
+              "text": " is reflex, so the code is 4."
             }
           ],
           "mark_type": "A",
