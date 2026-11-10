@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-512",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.6",
-  "title": "Preserve exact values",
+  "title": "Choose a display for litter counts",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A teacher has 24 whole-number test scores ranging from 38 to 96, with few repeats. Parents must be able to read off each exact score and still see the distribution. Enter the most suitable code."
+          "text": "Use code 1 for a dot diagram, 2 for a histogram, 3 for a stem-and-leaf diagram and 4 for a frequency table. A vet records the number of puppies in each of 60 litters, from 1 to 9. The report only needs how many litters had each number of puppies. Enter the most suitable code."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
+        "canonical_answer": "4",
+        "canonical_latex": "4",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Look for a display that keeps every original numerical value."
+              "text": "The vet does not need a graph, only how often each number occurred."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Rule out any display that groups the scores into intervals. Of the displays left, which one keeps each score in an ordered list?"
+              "text": "Which display is simply a table of how often each value occurs?"
             }
           ]
         }
@@ -62,11 +62,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Only the count for each number is needed, so a frequency table is suitable. "
             },
             {
               "type": "display_math",
-              "latex": "\\text{stem-and-leaf diagram}\\Rightarrow 3"
+              "latex": "\\text{frequency table}\\Rightarrow4"
             }
           ],
           "mark_type": "M",
@@ -77,11 +77,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Enter "
             },
             {
               "type": "display_math",
-              "latex": "3"
+              "latex": "4"
             }
           ],
           "mark_type": "A",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l5-501",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -73,11 +73,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "The classes 0–5, 5–10 and 10–15 hold "
+            },
+            {
+              "type": "inline_math",
+              "latex": "13+19+11=43"
+            },
+            {
+              "type": "text",
+              "text": " observations, so the final class holds "
             },
             {
               "type": "display_math",
-              "latex": "f=63-(13+19+11)=20,\\quad d=20/8=2.5"
+              "latex": "63-43=20"
             }
           ],
           "mark_type": "M",
@@ -88,11 +96,19 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Divide the frequency by the class width "
+            },
+            {
+              "type": "inline_math",
+              "latex": "8"
+            },
+            {
+              "type": "text",
+              "text": ": frequency density "
             },
             {
               "type": "display_math",
-              "latex": "2.5"
+              "latex": "=\\frac{20}{8}=2.5"
             }
           ],
           "mark_type": "A",
@@ -107,7 +123,7 @@
       "asset_key": "s1-l5-501-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l5-501-diagram-r2.svg",
+      "path": "assets/s1-l5-501-diagram-r3.svg",
       "alt_text": "Histogram with 4 classes; density values 2.6, 3.8, 2.2, unknown.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

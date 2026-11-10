@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-508",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.5",
-  "title": "Observations in the upper two equal-width bins",
+  "title": "Observations at or above 10 on a histogram",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A frequency histogram has equal-width intervals 0–10, 10–20 and 20–30 with heights 5, 7 and 6. Add the frequencies in the two intervals at or above 10."
+          "text": "Use the histogram. How many observations are in the classes "
+        },
+        {
+          "type": "inline_math",
+          "latex": "10\\leq x<20"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "20\\leq x<30"
+        },
+        {
+          "type": "text",
+          "text": " altogether?"
         }
       ],
       "marks": 3,
@@ -60,7 +76,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the frequencies for 10–20 and 20–30 only."
+              "text": "Read the two relevant bar heights from the histogram, then add them."
             }
           ]
         }
@@ -71,11 +87,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Read the bar heights for the two classes and add. "
             },
             {
               "type": "display_math",
-              "latex": "7+6=13"
+              "latex": "7+6"
             }
           ],
           "mark_type": "M",
@@ -86,11 +102,15 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "Altogether "
             },
             {
               "type": "display_math",
               "latex": "13"
+            },
+            {
+              "type": "text",
+              "text": " observations."
             }
           ],
           "mark_type": "A",
@@ -105,7 +125,7 @@
       "asset_key": "s1-l3-508-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-508-diagram-r3.svg",
+      "path": "assets/s1-l3-508-diagram-r4.svg",
       "alt_text": "Histogram with 3 classes; frequency values 5, 7, 6.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",

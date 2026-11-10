@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l3-511",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.7",
-  "title": "Apparent increase from a truncated baseline",
+  "title": "How much taller a bar looks on a cut-off axis",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A bar chart begins its vertical axis at 110. Two values are 140 and 158. Relative to the displayed height of the first bar, what percentage increase does the second bar appear to show?"
+          "text": "A chart of weekly hall attendance has a vertical axis that is cut off at 110. Its two bars reach 140 and 155. Judging only by the heights actually drawn, by what percentage does the second bar look taller than the first?"
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "60",
-        "canonical_latex": "60\\%",
+        "canonical_answer": "50",
+        "canonical_latex": "50",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -68,7 +68,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The displayed heights are "
+              "text": "The visible heights are "
             },
             {
               "type": "inline_math",
@@ -80,11 +80,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "158-110"
+              "latex": "155-110"
             },
             {
               "type": "text",
-              "text": ". Compare their increase with the first displayed height."
+              "text": ". Compare the increase with the first visible height."
             }
           ]
         }
@@ -95,11 +95,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Measure heights from the truncated baseline. "
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(158-110)-(140-110)}{140-110}\\times100=60"
+              "latex": "\\frac{(155-110)-(140-110)}{140-110}\\times100=\\frac{15}{30}\\times100"
             }
           ],
           "mark_type": "M",
@@ -110,11 +110,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "So the apparent increase is "
             },
             {
               "type": "display_math",
-              "latex": "60\\%"
+              "latex": "50\\%"
             }
           ],
           "mark_type": "A",
@@ -129,8 +129,8 @@
       "asset_key": "s1-l3-511-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l3-511-diagram-r3.svg",
-      "alt_text": "Bar chart with First: 140, Second: 158.",
+      "path": "assets/s1-l3-511-diagram-r4.svg",
+      "alt_text": "Bar chart with First: 140, Second: 155.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "bar_chart",
@@ -145,14 +145,14 @@
           ],
           "values": [
             140,
-            158
+            155
           ],
           "y_min": 110,
-          "y_max": 160,
+          "y_max": 155,
           "tick_step": 10,
           "y_label": "Value",
           "forbidden_visible_labels": [
-            "60"
+            "50"
           ]
         },
         "viewbox": [
@@ -167,21 +167,21 @@
             "tag": "rect",
             "geometry": {
               "x": "149",
-              "y": "217",
+              "y": "198.333333",
               "width": "177",
-              "height": "168"
+              "height": "186.666667"
             }
           },
           {
             "key": "bar-1",
             "kind": "bar",
-            "value": "158",
+            "value": "155",
             "tag": "rect",
             "geometry": {
               "x": "444",
-              "y": "116.2",
+              "y": "105",
               "width": "177",
-              "height": "268.8"
+              "height": "280"
             }
           }
         ],
@@ -197,36 +197,29 @@
             "key": "y:120",
             "axis": "y",
             "value": "120",
-            "position": "329",
+            "position": "322.777778",
             "label": "120"
           },
           {
             "key": "y:130",
             "axis": "y",
             "value": "130",
-            "position": "273",
+            "position": "260.555556",
             "label": "130"
           },
           {
             "key": "y:140",
             "axis": "y",
             "value": "140",
-            "position": "217",
+            "position": "198.333333",
             "label": "140"
           },
           {
             "key": "y:150",
             "axis": "y",
             "value": "150",
-            "position": "161",
+            "position": "136.111111",
             "label": "150"
-          },
-          {
-            "key": "y:160",
-            "axis": "y",
-            "value": "160",
-            "position": "105",
-            "label": "160"
           },
           {
             "key": "x:First",
@@ -244,16 +237,16 @@
           }
         ],
         "forbidden_visible_labels": [
-          "60"
+          "50"
         ],
         "min_phone_font_px": 12.43,
         "axis": {
           "y_min": 110.0,
-          "y_max": 160.0,
+          "y_max": 155.0,
           "tick_step": 10.0
         }
       },
-      "sha256": "5b29ef4c11ec0b233b50c034602b393eb9c4e28428a6125921d2bb482a852729",
+      "sha256": "8593951be9a570bdd70ae8759dc591e15b90053d225a7f166e94ab10065d30a1",
       "width": 720,
       "height": 480
     }

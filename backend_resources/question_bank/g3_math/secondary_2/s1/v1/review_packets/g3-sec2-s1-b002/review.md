@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-508 — Observations in the upper two equal-width bins
+## s1-l3-508 — Observations at or above 10 on a histogram
 
 [Open this question in the HTML preview](index.html#s1-l3-508)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-511 — Difference between extreme leaves on a 60s row
+## s1-l2-511 — Range of the 60s row
 
 [Open this question in the HTML preview](index.html#s1-l2-511)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-509 — Combined count in the final two histogram classes
+## s1-l3-509 — Observations in the last two classes of a histogram
 
 [Open this question in the HTML preview](index.html#s1-l3-509)
 
@@ -106,7 +106,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l1-508 — Select a graph for 150 grouped reaction times
+## s1-l1-508 — Choose a table for tallied counts
 
 [Open this question in the HTML preview](index.html#s1-l1-508)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-512 — Preserve exact values
+## s1-l2-512 — Choose a display for litter counts
 
 [Open this question in the HTML preview](index.html#s1-l2-512)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-510 — Compare two small distributions
+## s1-l3-510 — Compare the shapes of two large groups
 
 [Open this question in the HTML preview](index.html#s1-l3-510)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l3-511 — Apparent increase from a truncated baseline
+## s1-l3-511 — How much taller a bar looks on a cut-off axis
 
 [Open this question in the HTML preview](index.html#s1-l3-511)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-513 — Displayed bar increase
+## s1-l2-513 — Apparent increase in museum visitors
 
 [Open this question in the HTML preview](index.html#s1-l2-513)
 
@@ -216,7 +216,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l2-516 — Identify the most popular requested shoe size
+## s1-l2-516 — Choose a measure for electricity bills
 
 [Open this question in the HTML preview](index.html#s1-l2-516)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s1-l4-508 — Reject an unsuitable display
+## s1-l4-508 — Look up counts for each interval
 
 [Open this question in the HTML preview](index.html#s1-l4-508)
 

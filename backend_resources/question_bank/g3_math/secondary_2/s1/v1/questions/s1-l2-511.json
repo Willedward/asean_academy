@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s1-l2-511",
   "bank_key": "g3-sec2-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S1",
   "primary_outcome": "1.5",
-  "title": "Difference between extreme leaves on a 60s row",
+  "title": "Range of the 60s row",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The stem-and-leaf row 6 | 1 3 4 7 8 uses 6|1 to represent 61. Subtract the least observation from the greatest observation."
+          "text": "Use the stem-and-leaf diagram. Find the range of the values shown."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "8",
+        "canonical_latex": "8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the value represented by the first leaf from the value represented by the last leaf."
+              "text": "Read the smallest and largest values from the diagram, using the key, then subtract."
             }
           ]
         }
@@ -71,11 +71,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Extract the relevant values and apply the stated statistical method."
+              "text": "Read the smallest and largest values. "
             },
             {
               "type": "display_math",
-              "latex": "(68)-(61)=7"
+              "latex": "69-61"
             }
           ],
           "mark_type": "M",
@@ -86,11 +86,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value and check that it matches the data and representation."
+              "text": "The answer is "
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "8"
             }
           ],
           "mark_type": "A",
@@ -105,8 +105,8 @@
       "asset_key": "s1-l2-511-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/s1-l2-511-diagram-r3.svg",
-      "alt_text": "Stem-and-leaf diagram. stem 6, leaves 1 3 4 7 8. Key: 6 | 1 means 61.",
+      "path": "assets/s1-l2-511-diagram-r4.svg",
+      "alt_text": "Stem-and-leaf diagram. stem 6, leaves 1 4 6 6 9. Key: 6|1 means 61.",
       "generation_spec": {
         "renderer": "nextscholar-data-chart-svg-v1",
         "diagram_kind": "stem_leaf",
@@ -120,14 +120,14 @@
               "stem": 6,
               "leaves": [
                 1,
-                3,
                 4,
-                7,
-                8
+                6,
+                6,
+                9
               ]
             }
           ],
-          "key": "6 | 1 means 61"
+          "key": "6|1 means 61"
         },
         "viewbox": [
           720,
@@ -137,7 +137,7 @@
           {
             "key": "row-0",
             "kind": "stem-leaf-row",
-            "value": "6|1 3 4 7 8",
+            "value": "6|1 4 6 6 9",
             "tag": "text",
             "geometry": {
               "x": "335",
@@ -149,7 +149,7 @@
         "forbidden_visible_labels": [],
         "min_phone_font_px": 12.43
       },
-      "sha256": "ca52795beb46afad07a070912a55a3c65d5d4739908df9b9da7fff3c7e77c067",
+      "sha256": "0e1abd78cb3caff58a60400fbb8fa77a67d4bfeddcd08e426efe44c69aca9d9f",
       "width": 720,
       "height": 480
     }
