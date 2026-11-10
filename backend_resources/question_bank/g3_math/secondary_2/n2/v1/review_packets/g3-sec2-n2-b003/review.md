@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l3-521 — Scale a direct proportion
+## n2-l3-521 — Mass of a box of wall tiles
 
 [Open this question in the HTML preview](index.html#n2-l3-521)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l3-522 — Machine-hours for a fixed order
+## n2-l3-522 — Printing presses working together
 
 [Open this question in the HTML preview](index.html#n2-l3-522)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n2-l4-512 — Team expansion during a project
+## n2-l4-512 — Road repair team grows
 
 [Open this question in the HTML preview](index.html#n2-l4-512)
 
