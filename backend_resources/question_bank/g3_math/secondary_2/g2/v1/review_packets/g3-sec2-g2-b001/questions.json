@@ -936,14 +936,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-502",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Recognising SAS",
+    "title": "Corresponding angles of congruent triangles",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -956,7 +956,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two triangles have two corresponding sides equal and the included angles equal. Use code 1 for SSS, 2 for SAS, 3 for ASA and 4 for RHS. Enter the numerical value only."
+            "text": "Triangles ABC and PQR are congruent, with A, B and C corresponding to P, Q and R. Angle P = 52° and angle B = 73°. Find angle C in degrees. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -965,8 +965,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "55",
+          "canonical_latex": "55",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -978,7 +978,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Focus on the angle between the two known sides."
+                "text": "Corresponding angles of congruent triangles are equal. Which angle of triangle ABC matches angle P?"
               }
             ]
           },
@@ -987,7 +987,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Where is the equal angle relative to the two equal sides?"
+                "text": "Angle A equals angle P. Now use the angle sum of triangle ABC."
               }
             ]
           }
@@ -997,8 +997,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Angle A corresponds to angle P."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\text{criterion}=\\text{SAS}"
+                "latex": "\\angle A=\\angle P=52^\\circ"
               }
             ],
             "mark_type": "M",
@@ -1009,7 +1013,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\text{code}=2"
+                "latex": "\\angle C=180^\\circ-52^\\circ-73^\\circ=55^\\circ"
               }
             ],
             "mark_type": "A",
