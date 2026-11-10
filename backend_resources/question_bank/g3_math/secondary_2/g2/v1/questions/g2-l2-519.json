@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-519",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Similar floor plans",
+  "title": "Scale factor between two plans",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A floor plan is redrawn using scale factor 2 from the first plan. Find the new measurement corresponding to 8 cm. Enter the numerical value only."
+          "text": "A length of 8 cm on a first floor plan corresponds to 16 cm on a new plan. Find the scale factor from the first plan to the new plan. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "16",
-        "canonical_latex": "16",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding sides are multiplied by the same scale factor."
+              "text": "Scale factor compares the image length with the original length."
             }
           ]
         },
@@ -51,15 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "8\\times 2"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Divide the new length by the original length."
             }
           ]
         }
@@ -70,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "L=8\\times 2"
+              "latex": "k=\\frac{16}{8}"
             }
           ],
           "mark_type": "M",
@@ -80,8 +72,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "L=16"
+              "latex": "k=2"
             }
           ],
           "mark_type": "A",

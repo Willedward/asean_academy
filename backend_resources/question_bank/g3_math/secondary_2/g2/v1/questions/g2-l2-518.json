@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-518",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Similar logos",
+  "title": "Logo reduced to one third",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A company logo is scaled uniformly by 3. Determine the new length of a segment that was 7 cm on the original logo. Enter the numerical value only."
+          "text": "A company logo is reduced by scale factor "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{1}{3}"
+        },
+        {
+          "type": "text",
+          "text": ". A segment on the original logo is 21 cm. Find the length of the matching segment on the reduced logo, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -29,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "21",
-        "canonical_latex": "21",
+        "canonical_answer": "7",
+        "canonical_latex": "7",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding sides are multiplied by the same scale factor."
+              "text": "A reduction multiplies lengths by the scale factor."
             }
           ]
         },
@@ -51,11 +59,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Multiply "
             },
             {
               "type": "inline_math",
-              "latex": "7\\times 3"
+              "latex": "21"
+            },
+            {
+              "type": "text",
+              "text": " by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac13"
             },
             {
               "type": "text",
@@ -70,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "L=7\\times 3"
+              "latex": "L=21\\times\\frac13"
             }
           ],
           "mark_type": "M",
@@ -80,8 +96,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "L=21"
+              "latex": "L=7"
             }
           ],
           "mark_type": "A",

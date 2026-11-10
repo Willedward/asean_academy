@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-517",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Overlaid polygons",
+  "title": "Overlaid polygons with an unknown angle",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,11 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A tracing of one polygon fits exactly over its partner. The congruent polygons have corresponding angles of 74° and "
+          "text": "A tracing of one polygon fits exactly over its partner. Corresponding angles are "
         },
         {
           "type": "inline_math",
-          "latex": "y^{\\circ}"
+          "latex": "(y+24)^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "74^{\\circ}"
         },
         {
           "type": "text",
@@ -45,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "74",
-        "canonical_latex": "74",
+        "canonical_answer": "50",
+        "canonical_latex": "50",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +66,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the matching side or angle before calculating."
+              "text": "Corresponding angles of congruent shapes are equal."
             }
           ]
         },
@@ -67,15 +75,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Which angle corresponds to "
-            },
-            {
-              "type": "inline_math",
-              "latex": "y^{\\circ}"
-            },
-            {
-              "type": "text",
-              "text": "? Think about what congruence tells you about matching angles."
+              "text": "Write an equation connecting the two corresponding angles."
             }
           ]
         }
@@ -86,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "y=74^\\circ"
+              "latex": "y+24=74\\Rightarrow y=50"
             }
           ],
           "mark_type": "A",

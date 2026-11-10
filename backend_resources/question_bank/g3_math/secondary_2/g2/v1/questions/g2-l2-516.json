@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-516",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.1",
-  "title": "Congruent quadrilaterals",
+  "title": "Congruent quadrilaterals with an unknown side",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A quality inspector overlays two four-sided tiles. The congruent figures have corresponding sides of length 13 cm and "
+          "text": "Two congruent quadrilaterals have corresponding sides of length "
         },
         {
           "type": "inline_math",
-          "latex": "x"
+          "latex": "(3x-2)"
         },
         {
           "type": "text",
-          "text": " cm. Find "
+          "text": " cm and 13 cm. Find "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "13",
-        "canonical_latex": "13",
+        "canonical_answer": "5",
+        "canonical_latex": "5",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Locate the matching side or angle before calculating."
+              "text": "Corresponding sides of congruent shapes are equal."
             }
           ]
         },
@@ -67,15 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Which given side matches the side of length "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": " cm? Think about what congruence tells you about matching sides."
+              "text": "Write an equation connecting the two corresponding sides."
             }
           ]
         }
@@ -86,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=13"
+              "latex": "3x-2=13\\Rightarrow x=5"
             }
           ],
           "mark_type": "A",

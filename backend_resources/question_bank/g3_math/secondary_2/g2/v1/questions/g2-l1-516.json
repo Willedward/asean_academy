@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-516",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.5",
-  "title": "Model bridge span",
+  "title": "Length of a bridge from a scale model",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A model bridge span starts from a 4 cm template and uses enlargement factor 6. Calculate the model span in centimetres. Enter the numerical value only."
+          "text": "A model of a bridge is built at scale 1 : 50. The model is 24 cm long. Find the real length of the bridge in metres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "24",
-        "canonical_latex": "24",
+        "canonical_answer": "12",
+        "canonical_latex": "12",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the represented length by the stated scale factor."
+              "text": "Multiply the model length by the scale to get the real length in centimetres."
             }
           ]
         },
@@ -51,11 +51,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Convert the result from centimetres to metres by dividing by "
             },
             {
               "type": "inline_math",
-              "latex": "4\\times 6"
+              "latex": "100"
             },
             {
               "type": "text",
@@ -70,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "L=4\\times6=24"
+              "latex": "24\\times50=1200\\text{ cm}=12\\text{ m}"
             }
           ],
           "mark_type": "A",
