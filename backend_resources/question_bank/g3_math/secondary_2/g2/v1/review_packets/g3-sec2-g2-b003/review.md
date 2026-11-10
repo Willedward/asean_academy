@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-516 — Congruent quadrilaterals
+## g2-l2-516 — Congruent quadrilaterals with an unknown side
 
 [Open this question in the HTML preview](index.html#g2-l2-516)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-517 — Overlaid polygons
+## g2-l2-517 — Overlaid polygons with an unknown angle
 
 [Open this question in the HTML preview](index.html#g2-l2-517)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-518 — Similar logos
+## g2-l2-518 — Logo reduced to one third
 
 [Open this question in the HTML preview](index.html#g2-l2-518)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-519 — Similar floor plans
+## g2-l2-519 — Scale factor between two plans
 
 [Open this question in the HTML preview](index.html#g2-l2-519)
 
@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l3-518 — Similar hexagon perimeter
+## g2-l3-518 — Perimeter of a larger similar hexagon
 
 [Open this question in the HTML preview](index.html#g2-l3-518)
 
@@ -117,7 +117,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-514 — Similar quadrilateral angle
+## g2-l1-514 — Find an angle using the angle sum
 
 [Open this question in the HTML preview](index.html#g2-l1-514)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l2-521 — Matching edges
+## g2-l2-521 — Unknown original edge
 
 [Open this question in the HTML preview](index.html#g2-l2-521)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l1-516 — Model bridge span
+## g2-l1-516 — Length of a bridge from a scale model
 
 [Open this question in the HTML preview](index.html#g2-l1-516)
 
@@ -260,7 +260,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g2-l3-523 — Model area scale
+## g2-l3-523 — Model area and real area
 
 [Open this question in the HTML preview](index.html#g2-l3-523)
 

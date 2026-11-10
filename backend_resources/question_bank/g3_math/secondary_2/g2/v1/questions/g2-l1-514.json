@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l1-514",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.3",
-  "title": "Similar quadrilateral angle",
+  "title": "Find an angle using the angle sum",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,31 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar quadrilaterals are labelled in corresponding order. One interior angle is 72° and its partner is "
+          "text": "Two similar quadrilaterals are labelled in corresponding order. Three interior angles of the first are "
+        },
+        {
+          "type": "inline_math",
+          "latex": "90^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": ", "
+        },
+        {
+          "type": "inline_math",
+          "latex": "70^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "inline_math",
+          "latex": "120^{\\circ}"
+        },
+        {
+          "type": "text",
+          "text": ". Find the corresponding fourth angle "
         },
         {
           "type": "inline_math",
@@ -28,15 +52,7 @@
         },
         {
           "type": "text",
-          "text": ". Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": " of the second quadrilateral. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -45,8 +61,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "72",
-        "canonical_latex": "72",
+        "canonical_answer": "80",
+        "canonical_latex": "80",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +74,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Corresponding angles in similar figures are equal."
+              "text": "Corresponding angles are equal, and the angles of a quadrilateral add to "
+            },
+            {
+              "type": "inline_math",
+              "latex": "360^{\\circ}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -67,15 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Which angle in the first figure is in the same position as "
+              "text": "Subtract the three known angles from "
             },
             {
               "type": "inline_math",
-              "latex": "x"
+              "latex": "360^{\\circ}"
             },
             {
               "type": "text",
-              "text": "? Its size is not changed by similarity."
+              "text": "."
             }
           ]
         }
@@ -86,7 +110,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=72^\\circ"
+              "latex": "x=360-(90+70+120)=80"
             }
           ],
           "mark_type": "A",

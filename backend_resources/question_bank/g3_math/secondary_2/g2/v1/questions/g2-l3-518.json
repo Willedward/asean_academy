@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-518",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.2",
-  "title": "Similar hexagon perimeter",
+  "title": "Perimeter of a larger similar hexagon",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A regular hexagon of side 4 cm is similar to a regular hexagon of side 10 cm. Find the perimeter of the larger hexagon. Enter the numerical value only."
+          "text": "A regular hexagon has perimeter 24 cm. A similar regular hexagon has sides that are 2.5 times as long. Find the perimeter of the larger hexagon, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "A regular hexagon has six equal sides."
+              "text": "Perimeter is a length, so it is scaled by the same factor as the sides."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Which hexagon is the question about? Use six sides of that hexagon."
+              "text": "Multiply the smaller perimeter by the scale factor."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "P=6(10)"
+              "latex": "P=2.5\\times24"
             }
           ],
           "mark_type": "M",
@@ -71,6 +71,10 @@
         {
           "position": 2,
           "content": [
+            {
+              "type": "text",
+              "text": "So "
+            },
             {
               "type": "display_math",
               "latex": "P=60"

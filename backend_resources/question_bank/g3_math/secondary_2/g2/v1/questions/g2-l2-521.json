@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l2-521",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.3",
-  "title": "Matching edges",
+  "title": "Unknown original edge",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Two similar arrowheads have one pair of matching edges 6 cm and 3 cm. Another original edge is 30 cm. Find its copied length "
+          "text": "Two similar arrowheads have one pair of matching edges: 6 cm on the original and 3 cm on the copy. Another edge on the copy is 15 cm. Find the matching edge "
         },
         {
           "type": "inline_math",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": ". Enter the numerical value only."
+          "text": " on the original, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -37,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "15",
-        "canonical_latex": "15",
+        "canonical_answer": "30",
+        "canonical_latex": "30",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -59,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Set "
+              "text": "Set up a ratio comparing original to copy and solve for "
             },
             {
               "type": "inline_math",
-              "latex": "\\frac{y}{30}=\\frac{3}{6}"
+              "latex": "y"
             },
             {
               "type": "text",
@@ -78,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{y}{30}=\\frac{3}{6}"
+              "latex": "\\frac{y}{15}=\\frac{6}{3}"
             }
           ],
           "mark_type": "M",
@@ -88,8 +88,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "y=15"
+              "latex": "y=30"
             }
           ],
           "mark_type": "A",

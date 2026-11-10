@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-l3-523",
   "bank_key": "g3-sec2-g2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "G2",
   "primary_outcome": "2.5",
-  "title": "Model area scale",
+  "title": "Model area and real area",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A square model has area 16 cm² and represents a square floor using linear scale 1:25. Find the actual floor area in square centimetres. Enter the numerical value only."
+          "text": "A square model has area 16 cm² and represents a square floor using linear scale 1:100. Find the actual floor area in square metres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "10000",
-        "canonical_latex": "10000",
+        "canonical_answer": "16",
+        "canonical_latex": "16",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Square the linear scale, then apply it to the model area."
+              "text": "Find the area in square centimetres first, then convert to square metres."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Square the linear scale and apply it to the model area. "
+            },
+            {
               "type": "display_math",
-              "latex": "A=16(25^2)"
+              "latex": "A=16(100^2)"
             }
           ],
           "mark_type": "M",
@@ -72,8 +76,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Evaluate. "
+            },
+            {
               "type": "display_math",
-              "latex": "A=16(625)"
+              "latex": "A=160000\\text{ cm}^2"
             }
           ],
           "mark_type": "M",
@@ -83,8 +91,20 @@
           "position": 3,
           "content": [
             {
+              "type": "text",
+              "text": "Divide by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "10000"
+            },
+            {
+              "type": "text",
+              "text": " to convert to square metres. "
+            },
+            {
               "type": "display_math",
-              "latex": "A=10000"
+              "latex": "A=16\\text{ m}^2"
             }
           ],
           "mark_type": "A",
