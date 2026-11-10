@@ -333,7 +333,7 @@ def test_validated_geometry_assets_are_served_for_lessons_and_questions():
     )
     assert n2_lesson_response.status_code == 200
     assert n2_lesson_response.headers["content-type"].startswith("image/svg+xml")
-    assert b"map scale" in n2_lesson_response.content
+    assert b"A map square and the real square" in n2_lesson_response.content
 
     g4_lesson_response = get(
         "/api/v1/content-assets/lesson/g4-lesson-01/g4-lesson-01-pythagoras"
