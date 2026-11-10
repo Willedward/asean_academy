@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## s2-l1-518 — Recorded successes
+## s2-l1-518 — Probability of not landing on S
 
 [Open this question in the HTML preview](index.html#s2-l1-518)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l2-527 — Expected sunny mornings
+## s2-l2-527 — Compare probabilities written in different forms
 
 [Open this question in the HTML preview](index.html#s2-l2-527)
 
@@ -172,7 +172,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## s2-l2-528 — Two-colour sample space
+## s2-l2-528 — Spinner with a repeated label
 
 [Open this question in the HTML preview](index.html#s2-l2-528)
 

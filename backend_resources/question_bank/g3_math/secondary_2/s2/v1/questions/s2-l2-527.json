@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l2-527",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "Expected sunny mornings",
+  "title": "Compare probabilities written in different forms",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,23 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The probability of a sunny morning is 0.45. Over 20 mornings, find the expected number of sunny mornings."
+          "text": "Event A has probability 0.45 and event B has probability "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{9}{20}"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "P(A)-P(B)"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -29,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "9",
-        "canonical_latex": "9",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply the number of mornings by the probability."
+              "text": "Write both probabilities as decimals."
             }
           ]
         },
@@ -51,7 +67,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate 20 times 0.45."
+              "text": "Convert "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{9}{20}"
+            },
+            {
+              "type": "text",
+              "text": " by dividing 9 by 20."
             }
           ]
         }
@@ -62,7 +86,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "20\\times\\frac{45}{100}=9"
+              "latex": "\\frac{9}{20}=0.45"
             }
           ],
           "mark_type": "M",
@@ -72,8 +96,16 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So "
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{9}"
+              "latex": "P(A)-P(B)=\\boxed{0}"
+            },
+            {
+              "type": "text",
+              "text": ": the events are equally likely."
             }
           ],
           "mark_type": "A",

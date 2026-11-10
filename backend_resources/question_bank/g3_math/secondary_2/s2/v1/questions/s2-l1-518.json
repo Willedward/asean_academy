@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l1-518",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "Recorded successes",
+  "title": "Probability of not landing on S",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Seven of ten equally likely positions on a wheel are labelled S. Write the probability of landing on S as a fraction in simplest form."
+          "text": "Seven of ten equally likely positions on a wheel are labelled S. Write the probability of not landing on S as a fraction in simplest form."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "algebraic_expression",
         "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "7/10",
-        "canonical_latex": "\\frac{7}{10}",
+        "canonical_expression": "3/10",
+        "canonical_latex": "\\frac{3}{10}",
         "variables": [],
         "domain_constraints": [],
         "accepted_equivalents": [],
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use favourable positions over all positions."
+              "text": "Not landing on S is the complement of landing on S."
             }
           ]
         },
@@ -53,7 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Count the positions labelled S, then count all the positions on the wheel."
+              "text": "Subtract the probability of S from 1."
             }
           ]
         }
@@ -64,7 +64,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "P(S)=\\frac{7}{10}"
+              "latex": "P(\\text{not }S)=1-\\frac{7}{10}=\\frac{3}{10}"
             }
           ],
           "mark_type": "A",
