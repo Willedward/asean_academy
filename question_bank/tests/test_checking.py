@@ -295,9 +295,9 @@ def test_mixed_number_parsing_handles_signs_and_rejects_improper_parts(authored_
 
 def test_percentage_questions_accept_the_percent_sign(authored_responses):
     spec = authored_responses[("n3-l1-001", 1)]
-    for answer in ["30", "30%", "30 %", "30.0%"]:
+    for answer in ["64", "64%", "64 %", "64.0%"]:
         assert passes(spec, answer), answer
-    for answer in ["0.3", "0.3%", "3/10", "300%"]:
+    for answer in ["0.64", "0.64%", "16/25", "640%", "30%"]:
         assert not passes(spec, answer), answer
 
 
