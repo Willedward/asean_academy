@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "s2-l2-509",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "Not blue complement",
+  "title": "Spot an impossible probability",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,31 +20,29 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A spinner lands on blue with probability "
+          "text": "Four values are suggested for the probability of an event: 0.3, 1.2, "
         },
         {
           "type": "inline_math",
-          "latex": "\\frac{5}{12}"
+          "latex": "\\frac{4}{5}"
         },
         {
           "type": "text",
-          "text": ". Find the probability that it does not land on blue. Give your answer as a fraction in simplest form."
+          "text": " and 0. Which value cannot be a probability? Enter that value."
         }
       ],
       "marks": 2,
       "primary_outcome": "2.1",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "7/12",
-        "canonical_latex": "\\frac{7}{12}",
-        "variables": [],
-        "domain_constraints": [],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "form": "simplest_fraction"
-        }
+        "type": "numeric",
+        "canonical_latex": "1.2",
+        "comparison_mode": "exact_numeric",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null,
+        "canonical_answer": "1.2"
       },
       "hints": [
         {
@@ -52,7 +50,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 1 minus the probability of blue."
+              "text": "Every probability lies between 0 and 1 inclusive."
             }
           ]
         },
@@ -60,8 +58,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "1-\\frac{5}{12}"
+              "type": "text",
+              "text": "Check each value against the probability scale from 0 to 1."
             }
           ]
         }
@@ -71,8 +69,20 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "A probability must satisfy "
+            },
+            {
+              "type": "inline_math",
+              "latex": "0\\le P\\le1"
+            },
+            {
+              "type": "text",
+              "text": ". "
+            },
+            {
               "type": "display_math",
-              "latex": "1-\\frac{5}{12}=\\frac{7}{12}"
+              "latex": "1.2>1"
             }
           ],
           "mark_type": "M",
@@ -82,8 +92,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "So the impossible value is "
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{7}{12}}"
+              "latex": "\\boxed{1.2}"
             }
           ],
           "mark_type": "A",

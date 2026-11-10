@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l3-511",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "S2",
   "primary_outcome": "2.1",
-  "title": "Planned number of journeys",
+  "title": "Compare two bags",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,15 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A journey is late with probability "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\frac{3}{20}"
-        },
-        {
-          "type": "text",
-          "text": ". The expected number of late journeys is 27. Find the total number of journeys."
+          "text": "Bag A has 3 red counters out of 8. Bag B has 5 red counters out of 12. One counter is taken at random from a bag. Enter 1 if bag A gives the greater probability of red, or 2 if bag B does."
         }
       ],
       "marks": 3,
@@ -37,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "180",
-        "canonical_latex": "180",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,15 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Let the number of trials be "
-            },
-            {
-              "type": "inline_math",
-              "latex": "n"
-            },
-            {
-              "type": "text",
-              "text": " and use expected frequency = np."
+              "text": "Work out the probability of red for each bag."
             }
           ]
         },
@@ -67,7 +51,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide the expected frequency by the event probability."
+              "text": "Compare "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{3}{8}"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{5}{12}"
+            },
+            {
+              "type": "text",
+              "text": " by writing them over a common denominator."
             }
           ]
         }
@@ -78,7 +78,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "n=\\frac{27}{3/20}=180"
+              "latex": "\\frac{3}{8}=\\frac{9}{24},\\quad\\frac{5}{12}=\\frac{10}{24}"
             }
           ],
           "mark_type": "M",
@@ -88,8 +88,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Bag B gives the greater probability: "
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{180}"
+              "latex": "\\boxed{2}"
             }
           ],
           "mark_type": "A",
