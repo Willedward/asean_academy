@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-002",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.3",
-  "title": "Function satisfying two conditions",
+  "title": "Relationship from two conditions",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,19 +20,27 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A linear function "
+          "text": "A linear relationship "
         },
         {
           "type": "inline_math",
-          "latex": "f(x)=ax+b"
+          "latex": "y=ax+b"
         },
         {
           "type": "text",
-          "text": " satisfies "
+          "text": " has "
         },
         {
           "type": "inline_math",
-          "latex": "f(-2)=11"
+          "latex": "y=11"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=-2"
         },
         {
           "type": "text",
@@ -40,7 +48,15 @@
         },
         {
           "type": "inline_math",
-          "latex": "f(5)=-3"
+          "latex": "y=-3"
+        },
+        {
+          "type": "text",
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=5"
         },
         {
           "type": "text",
@@ -48,11 +64,19 @@
         },
         {
           "type": "inline_math",
-          "latex": "f"
+          "latex": "y"
         },
         {
           "type": "text",
-          "text": "(8)."
+          "text": " when "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x=8"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 3,
@@ -74,7 +98,23 @@
           "content": [
             {
               "type": "text",
-              "text": "Form two equations or find a from the change in outputs."
+              "text": "Form two equations or find "
+            },
+            {
+              "type": "inline_math",
+              "latex": "a"
+            },
+            {
+              "type": "text",
+              "text": " from the change in "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -91,7 +131,7 @@
             },
             {
               "type": "text",
-              "text": ", then evaluate the completed function at "
+              "text": ", then evaluate the relationship at "
             },
             {
               "type": "inline_math",
@@ -109,8 +149,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "11=-2(-2)+b\\Rightarrow b=7"
+              "type": "inline_math",
+              "latex": "a=\\frac{-3-11}{5-(-2)}=-2"
             }
           ],
           "mark_type": "M",
@@ -120,8 +160,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "f(x)=-2x+7"
+              "type": "inline_math",
+              "latex": "11=-2(-2)+b\\Rightarrow b=7"
             }
           ],
           "mark_type": "M",
@@ -131,8 +171,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "f(8)=-16+7=-9"
+              "type": "inline_math",
+              "latex": "y=-2(8)+7=-9"
             }
           ],
           "mark_type": "A",
