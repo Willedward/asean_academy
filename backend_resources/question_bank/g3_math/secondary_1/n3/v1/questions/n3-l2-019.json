@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l2-019",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Bottle P contains 2.4 litres and Bottle Q contains 2 litres. By what percentage does Bottle P contain more than Bottle Q?"
+          "text": "Bottle P contains 2.7 litres and Bottle Q contains 2 litres. By what percentage does Bottle P contain more than Bottle Q?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "20",
-        "canonical_latex": "20\\%",
+        "canonical_answer": "35",
+        "canonical_latex": "35",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the 0.4-litre difference and divide it by 2 litres."
+              "text": "Find the difference in litres and divide it by 2 litres."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2.4-2=0.4"
+              "type": "inline_math",
+              "latex": "2.7-2=0.7"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{0.4}{2}\\times100\\%=20\\%"
+              "type": "inline_math",
+              "latex": "\\frac{0.7}{2}\\times100\\%=35\\%"
             }
           ],
           "mark_type": "A",

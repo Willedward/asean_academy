@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n3-l4-010",
   "bank_key": "g3-sec1-n3-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N3",
   "primary_outcome": "3.1",
-  "title": "One group within a constrained total",
+  "title": "Members joining a club",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "In a club, the number of junior members is 60% of the number of senior members. Express the number of senior members as a percentage of the total membership."
+          "text": "In a club, 40% of the members are juniors. After 20 more juniors join, juniors make up 50% of the members. Find the original number of members."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "62.5",
-        "canonical_latex": "62.5\\%",
+        "canonical_answer": "100",
+        "canonical_latex": "100",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Represent the two groups using the same unknown."
+              "text": "Let the original number of members be "
+            },
+            {
+              "type": "inline_math",
+              "latex": "T"
+            },
+            {
+              "type": "text",
+              "text": " and write the number of juniors before and after."
             }
           ]
         },
@@ -51,7 +59,15 @@
           "content": [
             {
               "type": "text",
-              "text": "If there are x senior members, there are 0.6x junior members and 1.6x members in total."
+              "text": "Write an equation for 50% of the new total, then solve for "
+            },
+            {
+              "type": "inline_math",
+              "latex": "T"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -61,8 +77,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "J=0.6S"
+              "type": "inline_math",
+              "latex": "0.4T+20=0.5(T+20)"
             }
           ],
           "mark_type": "M",
@@ -72,8 +88,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "T=S+J=1.6S"
+              "type": "inline_math",
+              "latex": "0.1T=10"
             }
           ],
           "mark_type": "M",
@@ -83,8 +99,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{S}{1.6S}\\times100\\%=62.5\\%"
+              "type": "inline_math",
+              "latex": "T=100"
             }
           ],
           "mark_type": "A",

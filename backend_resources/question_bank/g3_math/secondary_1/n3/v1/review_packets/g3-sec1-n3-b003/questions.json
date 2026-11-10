@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-011",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A worksheet contains 70 questions. Farid completes 21 of them. Express the number completed as a percentage of the total."
+            "text": "A worksheet contains 60 questions. Farid completes 21 of them. Express the number completed as a percentage of the total."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "30",
-          "canonical_latex": "30\\%",
+          "canonical_answer": "35",
+          "canonical_latex": "35",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 21 divided by 70, then multiply by 100%."
+                "text": "Calculate 21 divided by 60, then multiply by 100%."
               }
             ]
           }
@@ -62,8 +62,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{21}{70}\\times100\\%=30\\%"
+                "type": "inline_math",
+                "latex": "\\frac{21}{60}\\times100\\%=35\\%"
               }
             ],
             "mark_type": "B",
@@ -307,14 +307,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l4-010",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.1",
-    "title": "One group within a constrained total",
+    "title": "Members joining a club",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -327,7 +327,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "In a club, the number of junior members is 60% of the number of senior members. Express the number of senior members as a percentage of the total membership."
+            "text": "In a club, 40% of the members are juniors. After 20 more juniors join, juniors make up 50% of the members. Find the original number of members."
           }
         ],
         "marks": 3,
@@ -336,8 +336,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "62.5",
-          "canonical_latex": "62.5\\%",
+          "canonical_answer": "100",
+          "canonical_latex": "100",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -349,7 +349,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Represent the two groups using the same unknown."
+                "text": "Let the original number of members be "
+              },
+              {
+                "type": "inline_math",
+                "latex": "T"
+              },
+              {
+                "type": "text",
+                "text": " and write the number of juniors before and after."
               }
             ]
           },
@@ -358,7 +366,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "If there are x senior members, there are 0.6x junior members and 1.6x members in total."
+                "text": "Write an equation for 50% of the new total, then solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "T"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -368,8 +384,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "J=0.6S"
+                "type": "inline_math",
+                "latex": "0.4T+20=0.5(T+20)"
               }
             ],
             "mark_type": "M",
@@ -379,8 +395,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "T=S+J=1.6S"
+                "type": "inline_math",
+                "latex": "0.1T=10"
               }
             ],
             "mark_type": "M",
@@ -390,8 +406,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{S}{1.6S}\\times100\\%=62.5\\%"
+                "type": "inline_math",
+                "latex": "T=100"
               }
             ],
             "mark_type": "A",
@@ -420,7 +436,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-012",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -440,7 +456,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Team A scores 90 points and Team B scores 75 points. By what percentage is Team A's score greater than Team B's score?"
+            "text": "Team A scores 90 points and Team B scores 72 points. By what percentage is Team A's score greater than Team B's score?"
           }
         ],
         "marks": 1,
@@ -449,8 +465,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "25",
+          "canonical_latex": "25",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -471,7 +487,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare the 15-point difference with 75 points."
+                "text": "Compare the difference between the scores with Team B's 72 points."
               }
             ]
           }
@@ -481,8 +497,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{90-75}{75}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{90-72}{72}\\times100\\%=25\\%"
               }
             ],
             "mark_type": "B",
@@ -511,7 +527,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-019",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -531,7 +547,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Bottle P contains 2.4 litres and Bottle Q contains 2 litres. By what percentage does Bottle P contain more than Bottle Q?"
+            "text": "Bottle P contains 2.7 litres and Bottle Q contains 2 litres. By what percentage does Bottle P contain more than Bottle Q?"
           }
         ],
         "marks": 2,
@@ -540,8 +556,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "35",
+          "canonical_latex": "35",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -562,7 +578,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the 0.4-litre difference and divide it by 2 litres."
+                "text": "Find the difference in litres and divide it by 2 litres."
               }
             ]
           }
@@ -572,8 +588,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "2.4-2=0.4"
+                "type": "inline_math",
+                "latex": "2.7-2=0.7"
               }
             ],
             "mark_type": "M",
@@ -583,110 +599,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{0.4}{2}\\times100\\%=20\\%"
-              }
-            ],
-            "mark_type": "A",
-            "mark_value": 1
-          }
-        ]
-      }
-    ],
-    "total_marks": 2,
-    "assets": [],
-    "provenance": {
-      "authoring_method": "original_generated",
-      "style_references": [
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
-        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
-        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
-        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
-      ],
-      "created_at": "2026-10-12T01:00:00Z",
-      "authored_by": "OpenAI Codex",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "review_notes": null
-    }
-  },
-  {
-    "schema_version": "1.0.0",
-    "revision": 1,
-    "stable_key": "n3-l2-020",
-    "bank_key": "g3-sec1-n3-v1",
-    "curriculum_version": "g3_math_v1_draft",
-    "school_level": "secondary_1",
-    "topic_code": "N3",
-    "primary_outcome": "3.2",
-    "title": "Comparing electricity use",
-    "difficulty": 2,
-    "calculator_allowed": false,
-    "question_type": "structured",
-    "status": "draft",
-    "stem": [],
-    "parts": [
-      {
-        "position": 1,
-        "label": null,
-        "prompt": [
-          {
-            "type": "text",
-            "text": "A household uses 450 kWh of electricity in June and 405 kWh in July. By what percentage is the July usage lower than the June usage?"
-          }
-        ],
-        "marks": 2,
-        "primary_outcome": "3.2",
-        "secondary_outcomes": [],
-        "response": {
-          "type": "numeric",
-          "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10\\%",
-          "accepted_answers": [],
-          "absolute_tolerance": null,
-          "rounding_precision": null,
-          "unit": null
-        },
-        "hints": [
-          {
-            "stage": 1,
-            "content": [
-              {
-                "type": "text",
-                "text": "Compare the reduction with the June usage."
-              }
-            ]
-          },
-          {
-            "stage": 2,
-            "content": [
-              {
-                "type": "text",
-                "text": "Subtract 405 from 450, then divide by 450."
-              }
-            ]
-          }
-        ],
-        "solution": [
-          {
-            "position": 1,
-            "content": [
-              {
-                "type": "display_math",
-                "latex": "450-405=45"
-              }
-            ],
-            "mark_type": "M",
-            "mark_value": 1
-          },
-          {
-            "position": 2,
-            "content": [
-              {
-                "type": "display_math",
-                "latex": "\\frac{45}{450}\\times100\\%=10\\%"
+                "type": "inline_math",
+                "latex": "\\frac{0.7}{2}\\times100\\%=35\\%"
               }
             ],
             "mark_type": "A",
@@ -716,6 +630,108 @@
   {
     "schema_version": "1.0.0",
     "revision": 2,
+    "stable_key": "n3-l2-020",
+    "bank_key": "g3-sec1-n3-v1",
+    "curriculum_version": "g3_math_v1_draft",
+    "school_level": "secondary_1",
+    "topic_code": "N3",
+    "primary_outcome": "3.2",
+    "title": "Comparing electricity use",
+    "difficulty": 2,
+    "calculator_allowed": false,
+    "question_type": "structured",
+    "status": "draft",
+    "stem": [],
+    "parts": [
+      {
+        "position": 1,
+        "label": null,
+        "prompt": [
+          {
+            "type": "text",
+            "text": "A household uses 450 kWh of electricity in June and 369 kWh in July. By what percentage is the July usage lower than the June usage?"
+          }
+        ],
+        "marks": 2,
+        "primary_outcome": "3.2",
+        "secondary_outcomes": [],
+        "response": {
+          "type": "numeric",
+          "comparison_mode": "exact_numeric",
+          "canonical_answer": "18",
+          "canonical_latex": "18",
+          "accepted_answers": [],
+          "absolute_tolerance": null,
+          "rounding_precision": null,
+          "unit": null
+        },
+        "hints": [
+          {
+            "stage": 1,
+            "content": [
+              {
+                "type": "text",
+                "text": "Compare the reduction with the June usage."
+              }
+            ]
+          },
+          {
+            "stage": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Subtract 369 from 450, then divide by 450."
+              }
+            ]
+          }
+        ],
+        "solution": [
+          {
+            "position": 1,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "450-369=81"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "inline_math",
+                "latex": "\\frac{81}{450}\\times100\\%=18\\%"
+              }
+            ],
+            "mark_type": "A",
+            "mark_value": 1
+          }
+        ]
+      }
+    ],
+    "total_marks": 2,
+    "assets": [],
+    "provenance": {
+      "authoring_method": "original_generated",
+      "style_references": [
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (QP).pdf",
+        "backend_resources/sample_papers/TMS 2023 1E Math P2 (ANS).pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Anglo Chinese School with Answers.pdf",
+        "backend_resources/sample_papers/2022 Sec 2 Express Math EOY Canberra Secondary with Answers.pdf",
+        "backend_resources/sample_papers/Math - Sec2 - SA2 - 2023 - Zhonghua Sec.pdf"
+      ],
+      "created_at": "2026-10-12T01:00:00Z",
+      "authored_by": "OpenAI Codex",
+      "reviewed_at": null,
+      "reviewed_by": null,
+      "review_notes": null
+    }
+  },
+  {
+    "schema_version": "1.0.0",
+    "revision": 3,
     "stable_key": "n3-l3-016",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -735,7 +751,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Route A takes 1 hour 12 minutes and Route B takes 60 minutes. By what percentage is the time for Route A longer than the time for Route B?"
+            "text": "Route A takes 1 hour 21 minutes and Route B takes 54 minutes. By what percentage is the time for Route A longer than the time for Route B?"
           }
         ],
         "marks": 3,
@@ -744,8 +760,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "50",
+          "canonical_latex": "50",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -776,8 +792,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "1\\text{ h }12\\text{ min}=72\\text{ min}"
+                "type": "inline_math",
+                "latex": "1\\text{ h }21\\text{ min}=81\\text{ min}"
               }
             ],
             "mark_type": "M",
@@ -787,8 +803,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{72-60}{60}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{81-54}{54}\\times100\\%=50\\%"
               }
             ],
             "mark_type": "M",
@@ -798,8 +814,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Route A takes }20\\%\\text{ longer}"
+                "type": "inline_math",
+                "latex": "\\text{Route A takes }50\\%\\text{ longer}"
               }
             ],
             "mark_type": "A",
@@ -1142,14 +1158,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l3-017",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.3",
-    "title": "Combining two percentage relationships",
+    "title": "Reversing a percentage relationship",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1162,7 +1178,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quantity P is 125% of Quantity Q. Quantity Q is 120% of Quantity R. Express Quantity P as a percentage of Quantity R."
+            "text": "Quantity P is 125% of Quantity Q. Express Quantity Q as a percentage of Quantity P."
           }
         ],
         "marks": 3,
@@ -1171,8 +1187,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "150",
-          "canonical_latex": "150\\%",
+          "canonical_answer": "80",
+          "canonical_latex": "80",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1184,7 +1200,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Write both percentage relationships as multipliers and combine them."
+                "text": "Write P in terms of Q using a multiplier."
               }
             ]
           },
@@ -1193,23 +1209,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
-              },
-              {
-                "type": "inline_math",
-                "latex": "P=1.25Q"
-              },
-              {
-                "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "Q=1.2R"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Rearrange to write Q in terms of P."
               }
             ]
           }
@@ -1219,8 +1219,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "P=1.25Q,\\quad Q=1.2R"
+                "type": "inline_math",
+                "latex": "P=1.25Q"
               }
             ],
             "mark_type": "M",
@@ -1230,8 +1230,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "P=1.25(1.2R)=1.5R"
+                "type": "inline_math",
+                "latex": "Q=\\frac{P}{1.25}=0.8P"
               }
             ],
             "mark_type": "M",
@@ -1241,8 +1241,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "P=150\\%\\text{ of }R"
+                "type": "inline_math",
+                "latex": "Q=80\\%\\text{ of }P"
               }
             ],
             "mark_type": "A",
@@ -1483,7 +1483,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l2-022",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1503,7 +1503,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A pass rate rises from 68% to 74%. Find the increase in percentage points."
+            "text": "A pass rate rises from 68% to 73%. Find the increase in percentage points."
           }
         ],
         "marks": 2,
@@ -1512,8 +1512,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "6",
-          "canonical_latex": "6\\text{ percentage points}",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1544,7 +1544,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 68 from 74."
+                "text": "Subtract 68 from 73."
               }
             ]
           }
@@ -1554,8 +1554,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "74-68=6"
+                "type": "inline_math",
+                "latex": "73-68=5"
               }
             ],
             "mark_type": "M",
@@ -1565,8 +1565,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{Increase}=6\\text{ percentage points}"
+                "type": "inline_math",
+                "latex": "\\text{Increase}=5\\text{ percentage points}"
               }
             ],
             "mark_type": "A",
@@ -1928,7 +1928,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-023",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1948,7 +1948,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "After an 18% discount, a lamp costs S$82. Find its marked price in dollars."
+            "text": "After an 18% discount, a lamp costs S$82. Find its marked price in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2030,14 +2030,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-020",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "N3",
     "primary_outcome": "3.5",
-    "title": "Meal price before service charge",
+    "title": "Food-delivery order before service charge",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -2050,7 +2050,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A restaurant bill is S$169.50. This includes a S$12 delivery fee and a 5% service charge on the meal price. Find the meal price before the service charge, in dollars."
+            "text": "A food-delivery order costs S$169.50. This includes a S$12 delivery fee and a 5% service charge on the meal price. Find the meal price before the service charge, in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2460,7 +2460,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-024",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2480,7 +2480,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "S$2400 is invested at a simple interest rate of 3% per year. Find the interest earned after one year, in dollars."
+            "text": "S$2400 is invested at a simple interest rate of 3% per year. Find the interest earned after one year, in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2562,7 +2562,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-025",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2582,7 +2582,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An item costs S$250 before 9% GST. Find its price including GST, in dollars."
+            "text": "An item costs S$250 before 9% GST (goods and services tax, a tax added to the price). Find its price including GST, in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2664,7 +2664,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n3-l3-022",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2684,7 +2684,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A library display has 240 books. Fiction books make up 30% of the display. Of the remaining books, 25% are borrowed. Find the total number of books borrowed if all fiction books and the stated non-fiction books are borrowed."
+            "text": "A library display has 240 books. Fiction books make up 30% of the display. All the fiction books are borrowed, and 25% of the other books are borrowed. How many books are borrowed altogether?"
           }
         ],
         "marks": 3,
