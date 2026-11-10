@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-lesson-04",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "An enlargement with centre C and scale factor k maps each point P along line CP so that vector CP′=k vector CP. On a coordinate grid, P′=C+k(P−C). Positive fractional factors create reductions while preserving direction from the centre."
+          "text": "An enlargement with centre C and scale factor k maps each point A along the line CA, so that the distance from C to the image A′ is k times the distance from C to A. The diagram shows the centre C(2, −2), the point A(6, 4) and the line joining them, used in the second worked example; the image lies on this line. On a coordinate grid, A′ = C + k(A − C). Factors greater than 1 enlarge, and factors between 0 and 1 reduce."
         },
         {
           "type": "asset_ref",
@@ -62,7 +62,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "About the origin, multiply both coordinates by k. About another centre, subtract the centre coordinates, scale the displacement, then add the centre back. Linear dimensions use |k| and areas use k². The centre, object point and image point must be collinear."
+          "text": "About the origin, multiply both coordinates by k. About another centre, subtract the centre coordinates, scale the displacement, then add the centre back. Lengths are multiplied by k and areas by k². The centre, the object point and the image point must lie on one straight line."
         }
       ]
     },
@@ -70,7 +70,7 @@
       "stable_key": "g2-24-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: enlarge about the origin",
       "prompt": [
         {
           "type": "text",
@@ -82,8 +82,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "About the origin, multiply each coordinate by the scale factor."
+            },
+            {
               "type": "display_math",
-              "latex": "P'=(4(2),4(3))"
+              "latex": "P'=(4\\times2,\\ 4\\times3)"
             }
           ]
         },
@@ -97,17 +101,17 @@
           ]
         }
       ],
-      "verification_note": "Check that every side and angle was matched in the stated corresponding order."
+      "verification_note": "P′ is on the ray from O through P: (8, 12) = 4 × (2, 3), and it is 4 times as far from O."
     },
     {
       "stable_key": "g2-lesson-04-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: enlarge about another centre",
       "prompt": [
         {
           "type": "text",
-          "text": "Point P=(6,4) is enlarged by scale factor 1/2 about C=(2,−2). Find P′."
+          "text": "In the diagram, point A = (6, 4) is enlarged by scale factor 1/2 about C = (2, −2). Find the image A′."
         }
       ],
       "steps": [
@@ -116,7 +120,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The displacement from C to P is (6−2,4−(−2))=(4,6)."
+              "text": "Find the displacement from C to A."
+            },
+            {
+              "type": "display_math",
+              "latex": "A-C=(6-2,\\ 4-(-2))=(4,6)"
             }
           ]
         },
@@ -125,7 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Scale the displacement: 1/2(4,6)=(2,3)."
+              "text": "Scale the displacement."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\tfrac12(4,6)=(2,3)"
             }
           ]
         },
@@ -134,12 +146,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Add C back: P′=(2,−2)+(2,3)=(4,1)."
+              "text": "Add C back."
+            },
+            {
+              "type": "display_math",
+              "latex": "A'=(2,-2)+(2,3)=(4,1)"
             }
           ]
         }
       ],
-      "verification_note": "P′ lies halfway from C to P, so C, P′ and P are collinear."
+      "verification_note": "A′ is halfway from C to A, so C, A′ and A lie on the line in the diagram."
     },
     {
       "stable_key": "g2-lesson-04-pitfalls",
@@ -161,14 +177,14 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A 12 cm side is reduced by scale factor 1/3. Find the image length."
+          "text": "A 15 cm side is reduced by scale factor 2/5. Find the length of the image side, in cm."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "4",
-        "canonical_latex": "4",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -177,7 +193,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Multiply the original length by 1/3: 12 × 1/3 = 4."
+          "text": "Multiply the original length by the scale factor: 15 × 2/5 = 6 cm."
         }
       ]
     },
@@ -189,11 +205,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+          "text": "Enlargement with centre C and scale factor k: A′ = C + k(A − C), and C, A and A′ lie on one line. About the origin, multiply both coordinates by k."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Lengths are multiplied by k and areas by k². Factors between 0 and 1 give reductions."
         }
       ]
     }
@@ -203,16 +219,208 @@
       "asset_key": "g2-lesson-04-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-lesson-04-enlargement.svg",
-      "alt_text": "A coordinate grid showing a triangle and its enlargement from a marked centre, with construction rays through corresponding vertices.",
+      "path": "assets/g2-lesson-04-enlargement-r3.svg",
+      "alt_text": "Coordinate axes x and y with a unit grid and origin O. The centre C(2, −2) and the point A(6, 4) are plotted and joined by a straight line. The image point is not plotted. A caption reads scale factor 1/2. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "enlargement",
-        "lesson_key": "g2-lesson-04"
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "coordinate_grid",
+        "lesson_key": "g2-lesson-04",
+        "template": "centre_given_ray",
+        "inputs": {
+          "centre": [
+            2,
+            -2
+          ],
+          "factor": [
+            1,
+            2
+          ],
+          "point": [
+            6,
+            4
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "C": [
+            2,
+            -2
+          ],
+          "A": [
+            6,
+            4
+          ],
+          "factor": [
+            1,
+            2
+          ]
+        },
+        "forbidden_visible_labels": [
+          "5",
+          "(4, 1)"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "4",
+            "reason": "equals a stated value shown on the diagram"
+          },
+          {
+            "value": "1",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "grid": {
+          "origin": "O",
+          "unit": 51.02,
+          "x": [
+            -2,
+            4
+          ],
+          "y": [
+            -4,
+            5
+          ],
+          "points": {
+            "C": [
+              2.0,
+              -2.0
+            ],
+            "A": [
+              6.0,
+              4.0
+            ]
+          },
+          "ticks": {
+            "x": [
+              6,
+              2
+            ],
+            "y": [
+              4,
+              -2
+            ]
+          }
+        },
+        "viewbox": [
+          600.0,
+          628.0
+        ],
+        "points": {
+          "GridA": [
+            103.57,
+            556.69
+          ],
+          "GridB": [
+            409.69,
+            97.51
+          ],
+          "O": [
+            205.61,
+            352.61
+          ],
+          "UnitX": [
+            256.63,
+            352.61
+          ],
+          "XEnd": [
+            435.2,
+            352.61
+          ],
+          "XStart": [
+            88.27,
+            352.61
+          ],
+          "YEnd": [
+            205.61,
+            72.0
+          ],
+          "YStart": [
+            205.61,
+            572.0
+          ],
+          "C": [
+            307.65,
+            454.65
+          ],
+          "A": [
+            511.73,
+            148.53
+          ]
+        },
+        "segments": [
+          {
+            "key": "XStartXEnd",
+            "from": "XStart",
+            "to": "XEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "YStartYEnd",
+            "from": "YStart",
+            "to": "YEnd",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "6",
+            "target": "tick:x:6"
+          },
+          {
+            "text": "2",
+            "target": "tick:x:2"
+          },
+          {
+            "text": "4",
+            "target": "tick:y:4"
+          },
+          {
+            "text": "−2",
+            "target": "tick:y:-2"
+          },
+          {
+            "text": "x",
+            "target": "axis:x"
+          },
+          {
+            "text": "y",
+            "target": "axis:y"
+          },
+          {
+            "text": "O",
+            "target": "point:O"
+          },
+          {
+            "text": "C(2, −2)",
+            "target": "point:C"
+          },
+          {
+            "text": "A(6, 4)",
+            "target": "point:A"
+          },
+          {
+            "text": "scale factor 1/2",
+            "target": "caption:factor"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "aed00e69013bba642cabec31799333d6498a8534c4f4ce27d95339c4009187af",
-      "width": 940,
-      "height": 390
+      "sha256": "1b3007626df6d9e101870fe35775effa21f173009aaa624b65db2f4cdc85f33f",
+      "width": 600,
+      "height": 628
     }
   ],
   "provenance": {
@@ -221,6 +429,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

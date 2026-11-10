@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-lesson-01",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -44,7 +44,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Congruent figures have identical shape and size even after translation, rotation or reflection. Write corresponding vertices in matching order. Equal tick marks identify corresponding sides and equal arc marks identify corresponding angles."
+          "text": "Congruent figures have identical shape and size even after a translation, rotation or reflection. In the diagram, triangle PQR is triangle ABC turned upside down. Matching tick marks show the corresponding sides: one tick on AB and PQ, two on BC and QR, three on CA and RP. Write corresponding vertices in matching order, A↔P, B↔Q and C↔R, before transferring any length or angle."
         },
         {
           "type": "asset_ref",
@@ -68,17 +68,21 @@
       "stable_key": "g2-21-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: equal corresponding sides",
       "prompt": [
         {
           "type": "text",
-          "text": "Congruent triangles have corresponding sides 3x + 1 cm and 16 cm. Find x."
+          "text": "In the diagram, triangles ABC and PQR are congruent, with AB = (3x + 1) cm and PQ = 16 cm. Find x."
         }
       ],
       "steps": [
         {
           "position": 1,
           "content": [
+            {
+              "type": "text",
+              "text": "AB and PQ both carry one tick, so they are corresponding sides, and corresponding sides of congruent figures are equal."
+            },
             {
               "type": "display_math",
               "latex": "3x+1=16"
@@ -90,22 +94,22 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "x=5"
+              "latex": "3x=15\\quad\\Rightarrow\\quad x=5"
             }
           ]
         }
       ],
-      "verification_note": "Check that every side and angle was matched in the stated corresponding order."
+      "verification_note": "Substituting x = 5 gives AB = 3(5) + 1 = 16 cm, which equals PQ."
     },
     {
       "stable_key": "g2-lesson-01-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: transfer sides and angles",
       "prompt": [
         {
           "type": "text",
-          "text": "Right triangles ABC and PQR have right angles at B and Q, AC=PR=13 cm and AB=PQ=5 cm. Prove the triangles congruent and find the remaining side."
+          "text": "Triangles ABC and PQR are congruent, with A↔P, B↔Q and C↔R. AB = 7 cm, angle B = 64° and angle C = 48°. Find PQ and angle P."
         }
       ],
       "steps": [
@@ -114,7 +118,11 @@
           "content": [
             {
               "type": "text",
-              "text": "AC and PR are equal hypotenuses, AB and PQ are equal corresponding sides, and both triangles are right-angled."
+              "text": "PQ corresponds to AB, so the two sides are equal."
+            },
+            {
+              "type": "display_math",
+              "latex": "PQ=AB=7\\text{ cm}"
             }
           ]
         },
@@ -123,7 +131,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Therefore the triangles are congruent by RHS."
+              "text": "Angle P corresponds to angle A. Find angle A from the angle sum of triangle ABC."
+            },
+            {
+              "type": "display_math",
+              "latex": "\\angle A=180^\\circ-64^\\circ-48^\\circ=68^\\circ"
             }
           ]
         },
@@ -131,13 +143,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Using Pythagoras, the remaining side is √(13²−5²)=12 cm in each triangle."
+              "type": "display_math",
+              "latex": "\\angle P=\\angle A=68^\\circ"
             }
           ]
         }
       ],
-      "verification_note": "The correspondence A↔P, B↔Q, C↔R preserves the right angle, hypotenuse and matching side."
+      "verification_note": "The angles of triangle PQR are 68°, 64° and 48°, which total 180°, and every value was taken from the vertex it corresponds to."
     },
     {
       "stable_key": "g2-lesson-01-pitfalls",
@@ -187,11 +199,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+          "text": "Congruent figures have equal corresponding sides and equal corresponding angles; only their position or orientation changes."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Write the vertex correspondence first, then copy each length or angle from the vertex or side that matches it, and check that the angle sum still works."
         }
       ]
     }
@@ -201,16 +213,194 @@
       "asset_key": "g2-lesson-01-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-lesson-01-congruent.svg",
-      "alt_text": "Two congruent triangles in different orientations with matching side ticks and angle arcs.",
+      "path": "assets/g2-lesson-01-congruent-r3.svg",
+      "alt_text": "Two triangles ABC and PQR, with PQR turned upside down. AB is marked (3x + 1) cm and PQ is marked 16 cm. AB and PQ have one tick, BC and QR have two ticks, and CA and RP have three ticks. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "congruent",
-        "lesson_key": "g2-lesson-01"
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "congruent_triangles",
+        "lesson_key": "g2-lesson-01",
+        "template": "congruent_algebra",
+        "inputs": {
+          "ab": {
+            "coefficient": 3,
+            "constant": 1
+          },
+          "pq": {
+            "value": 16,
+            "unit": "cm"
+          }
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "PQ": {
+            "value": 16,
+            "unit": "cm"
+          },
+          "AB": "(3x + 1) cm"
+        },
+        "forbidden_visible_labels": [
+          "5"
+        ],
+        "unknowns": [],
+        "forbid_right_angle_marker": true,
+        "figures": {
+          "ABC": [
+            "A",
+            "B",
+            "C"
+          ],
+          "PQR": [
+            "P",
+            "Q",
+            "R"
+          ]
+        },
+        "equal_marks": [
+          {
+            "segments": [
+              "AB",
+              "PQ"
+            ],
+            "ticks": 1
+          },
+          {
+            "segments": [
+              "BC",
+              "QR"
+            ],
+            "ticks": 2
+          },
+          {
+            "segments": [
+              "CA",
+              "RP"
+            ],
+            "ticks": 3
+          }
+        ],
+        "viewbox": [
+          600.0,
+          300.0
+        ],
+        "points": {
+          "A": [
+            50.0,
+            181.33
+          ],
+          "B": [
+            246.08,
+            181.33
+          ],
+          "C": [
+            116.67,
+            48.0
+          ],
+          "P": [
+            550.0,
+            48.0
+          ],
+          "Q": [
+            353.92,
+            48.0
+          ],
+          "R": [
+            483.33,
+            181.33
+          ]
+        },
+        "segments": [
+          {
+            "key": "AB",
+            "from": "A",
+            "to": "B",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "BC",
+            "from": "B",
+            "to": "C",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "CA",
+            "from": "C",
+            "to": "A",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "PQ",
+            "from": "P",
+            "to": "Q",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "QR",
+            "from": "Q",
+            "to": "R",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "RP",
+            "from": "R",
+            "to": "P",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [],
+        "labels": [
+          {
+            "text": "A",
+            "target": "point:A"
+          },
+          {
+            "text": "B",
+            "target": "point:B"
+          },
+          {
+            "text": "C",
+            "target": "point:C"
+          },
+          {
+            "text": "P",
+            "target": "point:P"
+          },
+          {
+            "text": "Q",
+            "target": "point:Q"
+          },
+          {
+            "text": "R",
+            "target": "point:R"
+          },
+          {
+            "text": "(3x + 1) cm",
+            "target": "segment:AB"
+          },
+          {
+            "text": "16 cm",
+            "target": "segment:PQ"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "congruent",
+            "figures": [
+              "ABC",
+              "PQR"
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "25da1a1ed602914a49d4b063231b92588bffa623fcaa152570c94d9ce3fcbd7b",
-      "width": 940,
-      "height": 390
+      "sha256": "146a1c687f4c4c15a891e804149f1aa75bc1e415469e63c0b0205c24596e4d0a",
+      "width": 600,
+      "height": 300
     }
   ],
   "provenance": {
@@ -219,6 +409,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g2-lesson-05",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Scale drawings, maps and models are applications of similarity. A scale 1:n means one unit on the representation corresponds to n of the same units in reality. Convert units before multiplying or dividing by the scale factor."
+          "text": "Scale drawings, maps, models and shadows are applications of similarity. The diagram shows a pole and a tree on level ground at the same time of day. The sun's rays make equal angles with the ground, and both uprights are at right angles to it, so the two triangles are similar: height ÷ shadow is the same for both. A scale 1 : n means that one unit on a plan or model corresponds to n of the same units in reality."
         },
         {
           "type": "asset_ref",
@@ -70,11 +70,11 @@
       "stable_key": "g2-25-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example",
+      "title": "Worked example: shadows",
       "prompt": [
         {
           "type": "text",
-          "text": "A 2 m pole casts a 3 m shadow while a tree casts a 12 m shadow. Find the tree height."
+          "text": "In the diagram, a 1.8 m pole casts a 2.4 m shadow, and at the same time a tree casts a 14 m shadow. Find the height h of the tree."
         }
       ],
       "steps": [
@@ -82,8 +82,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The triangles are similar, so height ÷ shadow is equal."
+            },
+            {
               "type": "display_math",
-              "latex": "\\frac{2}{3}=\\frac{h}{12}"
+              "latex": "\\frac{1.8}{2.4}=\\frac{h}{14}"
             }
           ]
         },
@@ -92,22 +96,22 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "h=8"
+              "latex": "h=14\\times\\frac{1.8}{2.4}=14\\times0.75=10.5\\text{ m}"
             }
           ]
         }
       ],
-      "verification_note": "Check that every side and angle was matched in the stated corresponding order."
+      "verification_note": "The tree's shadow is 14 ÷ 2.4 ≈ 5.8 times the pole's, and 10.5 ÷ 1.8 ≈ 5.8 too."
     },
     {
       "stable_key": "g2-lesson-05-example-2",
       "position": 5,
       "type": "worked_example",
-      "title": "Worked example: apply the method",
+      "title": "Worked example: a plan at scale 1 : 600",
       "prompt": [
         {
           "type": "text",
-          "text": "A rectangular garden measures 36 m by 24 m. It is drawn at scale 1:600. Find the plan dimensions in centimetres and its plan area."
+          "text": "A rectangular garden measures 36 m by 24 m. It is drawn at scale 1 : 600. Find the plan dimensions in centimetres and the plan area."
         }
       ],
       "steps": [
@@ -116,7 +120,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert actual lengths: 36 m=3600 cm and 24 m=2400 cm."
+              "text": "Convert the real lengths to centimetres first."
+            },
+            {
+              "type": "display_math",
+              "latex": "36\\text{ m}=3600\\text{ cm},\\qquad24\\text{ m}=2400\\text{ cm}"
             }
           ]
         },
@@ -125,7 +133,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide by 600 to obtain plan dimensions 6 cm by 4 cm."
+              "text": "Divide by 600 for the plan."
+            },
+            {
+              "type": "display_math",
+              "latex": "3600\\div600=6\\text{ cm},\\qquad2400\\div600=4\\text{ cm}"
             }
           ]
         },
@@ -133,13 +145,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "The plan area is 6×4=24 cm²."
+              "type": "display_math",
+              "latex": "\\text{plan area}=6\\times4=24\\text{ cm}^2"
             }
           ]
         }
       ],
-      "verification_note": "Using the area factor 600² gives 864 m²=8,640,000 cm² and 8,640,000÷360,000=24 cm²."
+      "verification_note": "Check with the area factor 600²: the real area is 36 × 24 = 864 m² = 8 640 000 cm², and 8 640 000 ÷ 360 000 = 24 cm²."
     },
     {
       "stable_key": "g2-lesson-05-pitfalls",
@@ -189,11 +201,11 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Write the correspondence first, use one consistent scale factor, preserve equal angles, and check whether a length, perimeter or area needs a linear or squared factor."
+          "text": "Shadows at the same time, plans, maps and models are similar figures. Write a proportion between corresponding measurements, or use the scale 1 : n."
         },
         {
           "type": "text",
-          "text": " Before moving on, explain the relevant property in words, show the equation or formula with units, and use the diagram markings to check that every correspondence is consistent."
+          "text": "Convert to the same unit before using a scale, multiply by n for real lengths and divide by n for plan lengths, and use n² only for areas."
         }
       ]
     }
@@ -203,16 +215,235 @@
       "asset_key": "g2-lesson-05-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-lesson-05-scale.svg",
-      "alt_text": "A plan rectangle and a larger real courtyard connected by a scale arrow, with linear and area scale factors shown.",
+      "path": "assets/g2-lesson-05-scale-r3.svg",
+      "alt_text": "Two triangles, each with an upright, its shadow along level ground and a dashed sun ray. The pole is marked 1.8 m and its shadow 2.4 m. The tree is marked h. The second shadow is marked 14 m. A right angle is shown with a corner mark at the foot of the tree. Not drawn to scale.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
-        "diagram_kind": "scale",
-        "lesson_key": "g2-lesson-05"
+        "renderer": "nextscholar-similarity-svg-v1",
+        "diagram_kind": "shadow",
+        "lesson_key": "g2-lesson-05",
+        "template": "shadow_pair",
+        "inputs": {
+          "height": {
+            "value": 1.8,
+            "unit": "m"
+          },
+          "shadow": {
+            "value": 2.4,
+            "unit": "m"
+          },
+          "other_shadow": {
+            "value": 14,
+            "unit": "m"
+          },
+          "names": [
+            "pole",
+            "tree"
+          ]
+        },
+        "not_to_scale": true,
+        "dimensions": {
+          "height": {
+            "value": 1.8,
+            "unit": "m"
+          },
+          "shadow": {
+            "value": 2.4,
+            "unit": "m"
+          },
+          "other_shadow": 14.0
+        },
+        "forbidden_visible_labels": [
+          "10.5",
+          "10.50",
+          "5.8",
+          "5.83"
+        ],
+        "forbidden_label_exemptions": [
+          {
+            "value": "14",
+            "reason": "equals a stated value shown on the diagram"
+          }
+        ],
+        "unknowns": [
+          {
+            "target": "segment:F2T2",
+            "label": "h"
+          }
+        ],
+        "figures": {
+          "first": [
+            "S1",
+            "F1",
+            "T1"
+          ],
+          "second": [
+            "S2",
+            "F2",
+            "T2"
+          ]
+        },
+        "viewbox": [
+          600.0,
+          394.0
+        ],
+        "points": {
+          "S1": [
+            50.0,
+            270.3
+          ],
+          "F1": [
+            98.98,
+            270.3
+          ],
+          "T1": [
+            98.98,
+            233.56
+          ],
+          "S2": [
+            206.74,
+            270.3
+          ],
+          "F2": [
+            492.48,
+            270.3
+          ],
+          "T2": [
+            492.48,
+            56.0
+          ],
+          "PadR": [
+            550.0,
+            270.3
+          ]
+        },
+        "segments": [
+          {
+            "key": "S1F1",
+            "from": "S1",
+            "to": "F1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F1T1",
+            "from": "F1",
+            "to": "T1",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S1T1",
+            "from": "S1",
+            "to": "T1",
+            "hidden": true,
+            "role": "edge"
+          },
+          {
+            "key": "S2F2",
+            "from": "S2",
+            "to": "F2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "F2T2",
+            "from": "F2",
+            "to": "T2",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "S2T2",
+            "from": "S2",
+            "to": "T2",
+            "hidden": true,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "F2",
+            "arms": [
+              "S2",
+              "T2"
+            ],
+            "marker_size": 16
+          }
+        ],
+        "labels": [
+          {
+            "text": "1.8 m",
+            "target": "segment:F1T1"
+          },
+          {
+            "text": "h",
+            "target": "segment:F2T2"
+          },
+          {
+            "text": "2.4 m",
+            "target": "segment:S1F1"
+          },
+          {
+            "text": "14 m",
+            "target": "segment:S2F2"
+          },
+          {
+            "text": "pole",
+            "target": "caption:first-name"
+          },
+          {
+            "text": "tree",
+            "target": "caption:second-name"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "similar",
+            "figures": [
+              "first",
+              "second"
+            ],
+            "value": 5.8333
+          },
+          {
+            "type": "to_scale",
+            "lengths": [
+              [
+                [
+                  "F1",
+                  "T1"
+                ],
+                1.8
+              ],
+              [
+                [
+                  "S1",
+                  "F1"
+                ],
+                2.4
+              ],
+              [
+                [
+                  "S2",
+                  "F2"
+                ],
+                14.0
+              ],
+              [
+                [
+                  "F2",
+                  "T2"
+                ],
+                10.500000000000002
+              ]
+            ]
+          }
+        ],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "3c6e4fec5156d8c6e2b00fa665bdc58667b22130dcca5dfe1c661c991d0d49c5",
-      "width": 940,
-      "height": 390
+      "sha256": "33d5f6ac75e79b093a088cae65b8689672864b43a96d831d7c942152c074ff92",
+      "width": 600,
+      "height": 394
     }
   ],
   "provenance": {
@@ -221,6 +452,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded and diagram-recalibrated; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-similarity-svg-v1; awaiting Mathematics and editorial review."
   }
 }
