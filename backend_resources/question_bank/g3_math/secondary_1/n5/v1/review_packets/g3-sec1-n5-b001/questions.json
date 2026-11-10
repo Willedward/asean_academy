@@ -681,7 +681,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "n5-l4-002",
     "bank_key": "g3-sec1-n5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -701,7 +701,15 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Write the square of the quotient (a + b)/(3c) as one algebraic expression."
+            "text": "Write the square of the quotient "
+          },
+          {
+            "type": "inline_math",
+            "latex": "\\frac{a+b}{3c}"
+          },
+          {
+            "type": "text",
+            "text": " as one algebraic expression."
           }
         ],
         "marks": 3,
