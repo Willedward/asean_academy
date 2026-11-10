@@ -95,7 +95,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-010 — Area of a rectangular cut-out
+## g5-l3-010 — Side of a rectangular cut-out
 
 [Open this question in the HTML preview](index.html#g5-l3-010)
 
@@ -249,7 +249,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l2-014 — Tank with raised section
+## g5-l2-014 — Capacity of a tank in litres
 
 [Open this question in the HTML preview](index.html#g5-l2-014)
 
