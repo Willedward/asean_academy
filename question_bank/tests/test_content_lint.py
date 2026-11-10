@@ -190,6 +190,53 @@ def test_failing_lesson_fixture_is_reported(fixture, codes):
     assert _codes(lint_lesson(_lesson(fixture))) == codes
 
 
+def _decimal_answer_question(prompt: list[dict], hint: list[dict]) -> Question:
+    document = json.loads(
+        (FIXTURES / "questions" / "hint-reveals-answer-fraction-fail.json").read_text()
+    )
+    part = document["parts"][0]
+    part["prompt"] = prompt
+    part["response"]["canonical_answer"] = "0.625"
+    part["response"]["canonical_latex"] = "0.625"
+    part["hints"][1]["content"] = hint
+    part["solution"][1]["content"] = [{"type": "display_math", "latex": "\\boxed{0.625}"}]
+    part["solution"][0]["content"] = [{"type": "display_math", "latex": "5\\div 8=0.625"}]
+    return Question.model_validate(document)
+
+
+def test_latex_fraction_hint_with_a_decimal_answer_does_not_crash():
+    # Regression: "\frac{5}{8}" becomes "((5)/(8))" in plain notation, and the hint check
+    # used to split the literal "5)/(8" and crash with a ValueError.
+    hint = [
+        {"type": "text", "text": "Write the probability as "},
+        {"type": "inline_math", "latex": "\\frac{5}{8}"},
+        {"type": "text", "text": " and then divide."},
+    ]
+    leaking = _decimal_answer_question(
+        [
+            {
+                "type": "text",
+                "text": "A bag holds 5 red and 3 blue counters. Find the probability of red "
+                "as a decimal.",
+            }
+        ],
+        hint,
+    )
+    (finding,) = lint_question(leaking)
+    assert finding.code == "content_hint_reveals_answer"
+    assert "states the exact answer 5/8" in finding.message
+
+    given = _decimal_answer_question(
+        [
+            {"type": "text", "text": "The probability of event B is "},
+            {"type": "inline_math", "latex": "\\frac{5}{8}"},
+            {"type": "text", "text": ". Write it as a decimal."},
+        ],
+        hint,
+    )
+    assert lint_question(given) == []
+
+
 def test_latex_and_plain_text_normalise_to_the_same_value():
     assert parse_value("\\frac{7}{12}") == parse_value("7/12")
     assert parse_value("48\\,400") == 48400
