@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l1-008",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Reading the right-hand constant",
+  "title": "Checking a solution by substitution",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,19 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Read the equation carefully."
+          "text": "Is "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y=6"
+        },
+        {
+          "type": "text",
+          "text": " a solution of the equation? Enter 1 for yes and 0 for no."
         },
         {
           "type": "display_math",
           "latex": "4y-9=19"
-        },
-        {
-          "type": "text",
-          "text": "State the constant on the right-hand side."
         }
       ],
       "marks": 1,
@@ -37,8 +41,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "19",
-        "canonical_latex": "19",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +54,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Look only at the side to the right of the equals sign."
+              "text": "Replace "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": " by 6 on the left-hand side."
             }
           ]
         },
@@ -59,7 +71,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the equals sign and read the number to the right of it."
+              "text": "Work out "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4(6)-9"
+            },
+            {
+              "type": "text",
+              "text": " and compare it with 19."
             }
           ]
         }
@@ -69,8 +89,12 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{right-hand constant}=19"
+              "type": "inline_math",
+              "latex": "4(6)-9=15"
+            },
+            {
+              "type": "text",
+              "text": ", which is not 19, so the answer is 0."
             }
           ],
           "mark_type": "A",

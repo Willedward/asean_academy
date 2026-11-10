@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## n7-l1-007 — Identifying a coefficient
+## n7-l1-007 — Equation or expression
 
 [Open this question in the HTML preview](index.html#n7-l1-007)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-008 — Reading the right-hand constant
+## n7-l1-008 — Checking a solution by substitution
 
 [Open this question in the HTML preview](index.html#n7-l1-008)
 
@@ -40,7 +40,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-009 — Matching an expanded equation
+## n7-l3-009 — Testing candidate solutions
 
 [Open this question in the HTML preview](index.html#n7-l3-009)
 
@@ -73,7 +73,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l5-001 — Parameter producing infinitely many solutions
+## n7-l5-001 — Parameter giving no solution
 
 [Open this question in the HTML preview](index.html#n7-l5-001)
 
@@ -271,7 +271,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l3-016 — Comparing two savings accounts
+## n7-l3-016 — Two amounts with a known difference
 
 [Open this question in the HTML preview](index.html#n7-l3-016)
 

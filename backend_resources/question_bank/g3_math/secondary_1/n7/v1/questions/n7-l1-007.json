@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n7-l1-007",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N7",
   "primary_outcome": "7.1",
-  "title": "Identifying a coefficient",
+  "title": "Equation or expression",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Consider the equation shown."
+          "text": "Use code 1 for an equation and code 2 for an expression. Enter the code for the following."
         },
         {
           "type": "display_math",
-          "latex": "5p=35"
-        },
-        {
-          "type": "text",
-          "text": "State the coefficient of p."
+          "latex": "5p-3"
         }
       ],
       "marks": 1,
@@ -37,8 +33,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "5",
-        "canonical_latex": "5",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +46,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The coefficient is the numerical factor multiplying p."
+              "text": "An equation has an equals sign."
             }
           ]
         },
@@ -59,7 +55,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Read the number immediately before p."
+              "text": "Look for an equals sign in what is shown."
             }
           ]
         }
@@ -69,8 +65,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{coefficient of }p=5"
+              "type": "text",
+              "text": "There is no equals sign, so it is an expression."
             }
           ],
           "mark_type": "A",

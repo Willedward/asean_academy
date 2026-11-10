@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-015",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A liquid begins at 18°C and warms by 4°C each minute. It reaches 46°C after "
+          "text": "A liquid begins at 18°C and warms by 3°C each minute. It reaches 45°C after "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "9",
+        "canonical_latex": "9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,11 +58,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Its temperature is "
+              "text": "Its temperature after "
             },
             {
               "type": "inline_math",
-              "latex": "18+4x"
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": " minutes is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "18+3x"
             },
             {
               "type": "text",
@@ -79,7 +87,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "18+4x=46"
+              "latex": "18+3x=45"
             },
             {
               "type": "text",
@@ -93,8 +101,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "18+4x=46"
+              "type": "inline_math",
+              "latex": "18+3x=45"
             }
           ],
           "mark_type": "M",
@@ -104,8 +112,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=7"
+              "type": "inline_math",
+              "latex": "x=9"
             }
           ],
           "mark_type": "A",
