@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-512",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered restricted transport access while preparing a replacement design for the school science exhibit. The exhibit will be moved between classrooms on a wheeled trolley. A later inspection will compare the finished dimensions with this record. A spherical model has diameter 12 cm. Find its volume in cm³, correct to 1 decimal place."
+          "text": "An ice-cream shop serves round scoops. The spherical scoop has diameter 10 cm. Find its volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "904.8",
-        "canonical_latex": "904.8",
+        "canonical_answer": "523.6",
+        "canonical_latex": "523.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Halve 12, then use "
+              "text": "Halve the diameter, then use "
             },
             {
               "type": "inline_math",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The radius is half the diameter."
             },
             {
               "type": "display_math",
-              "latex": "r=12\\div2=6,\\quad V=\\frac43\\pi(6)^3=904.8"
+              "latex": "r=10\\div2=5,\\quad V=\\frac43\\pi(5)^3=\\frac{500}{3}\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{904.8}"
+              "latex": "V=523.599\\ldots=523.6\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g5-l2-512-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-512-diagram-r3.svg",
-      "alt_text": "Sphere with a full diameter d = 12 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+      "path": "assets/g5-l2-512-diagram-r4.svg",
+      "alt_text": "Sphere with a full diameter d = 10 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -119,23 +119,22 @@
         "template": "sphere_volume_diameter",
         "inputs": {
           "diameter": {
-            "value": 12,
+            "value": 10,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "diameter": {
-            "value": 12,
+            "value": 10,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "904.8",
-          "904.78",
-          "288π",
-          "6",
-          "r = 6"
+          "523.6",
+          "523.60",
+          "5",
+          "r = 5"
         ],
         "unknowns": [],
         "solids": [
@@ -194,7 +193,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "d = 12 cm",
+            "text": "d = 10 cm",
             "target": "segment:D1D2"
           }
         ],
@@ -223,7 +222,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "5af1cf48abea0c29e86122f4df8d508943158b6a0282f4b7cddb3774cdb2177d",
+      "sha256": "6d68df817aaeb0e4055b4079ea40902331dfe989c2b1ff5a301066b696b6e1e0",
       "width": 600,
       "height": 460
     }

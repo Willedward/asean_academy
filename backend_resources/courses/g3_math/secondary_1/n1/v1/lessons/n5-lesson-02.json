@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
@@ -38,7 +38,15 @@
         },
         {
           "type": "text",
-          "text": "Brackets make a group act as one quantity. Thus 3(x + y) means three copies of the entire sum, while 3x + y multiplies only x by 3. Read from the outermost operation inward: 3(x + y) says “three times the sum”, whereas (3x + y)/5 says “one fifth of the whole numerator”."
+          "text": "Brackets make a group act as one quantity. Thus 3(x + y) means three copies of the entire sum, while 3x + y multiplies only x by 3. Read from the outermost operation inward: 3(x + y) says “three times the sum”, whereas "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{3x+y}{5}"
+        },
+        {
+          "type": "text",
+          "text": " says “one fifth of the whole numerator”."
         }
       ]
     },
@@ -50,7 +58,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write the square of the quotient of a + b and 3c, then simplify the squared denominator."
+          "text": "Write the square of the quotient of x − y and 2z, then simplify the squared denominator."
         }
       ],
       "steps": [
@@ -59,11 +67,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Keep the sum a + b together and form the quotient."
+              "text": "Keep the difference x − y together and form the quotient."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{a+b}{3c}"
+              "latex": "\\frac{x-y}{2z}"
             }
           ]
         },
@@ -72,11 +80,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Square the complete quotient with outer brackets."
+              "text": "Square the complete quotient, using outer brackets."
             },
             {
               "type": "display_math",
-              "latex": "\\left(\\frac{a+b}{3c}\\right)^2"
+              "latex": "\\left(\\frac{x-y}{2z}\\right)^2"
             }
           ]
         },
@@ -85,16 +93,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Apply the square to numerator and denominator."
+              "text": "A square applies to the whole numerator and the whole denominator, and (2z)² = 4z²."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{(a+b)^2}{9c^2}"
+              "latex": "\\frac{(x-y)^2}{4z^2}"
             }
           ]
         }
       ],
-      "verification_note": "For any non-zero c, substituting values into the bracketed quotient before squaring gives the same result as the final fraction."
+      "verification_note": "For x = 5, y = 1 and z = 1, the quotient is 4/2 = 2 and its square is 4; the final fraction gives 16/4 = 4 as well."
     },
     {
       "stable_key": "fractions-and-brackets",
@@ -104,7 +112,23 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A fraction bar groups everything in its numerator and everything in its denominator. The expression (x + 7)/5 means add first and divide the result by 5. By contrast, x + 7/5 divides only 7 by 5. When typing, use brackets to reproduce the grouping shown by a printed fraction bar."
+          "text": "A fraction bar groups everything in its numerator and everything in its denominator. The expression "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{x+7}{5}"
+        },
+        {
+          "type": "text",
+          "text": " means add first and divide the result by 5. By contrast, "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x+\\frac75"
+        },
+        {
+          "type": "text",
+          "text": " divides only 7 by 5. When typing, put brackets around a whole numerator or denominator to reproduce the grouping shown by a printed fraction bar."
         },
         {
           "type": "display_math",
@@ -178,7 +202,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A coefficient and an exponent perform different operations: 3x is three copies of x, while x³ is three factors of x. The expression ab means a multiplied by b, but a + b remains a sum. Never cancel terms across addition: the a in (a + b)/a cannot be cancelled because the numerator is not a single product."
+          "text": "A coefficient and an exponent perform different operations: 3x is three copies of x, while x³ is three factors of x. The expression ab means a multiplied by b, but a + b remains a sum. Never cancel terms across addition: the a in "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{a+b}{a}"
+        },
+        {
+          "type": "text",
+          "text": " cannot be cancelled because the numerator is not a single product."
         },
         {
           "type": "display_math",
@@ -216,7 +248,15 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Keep x + 7 together in the numerator: (x + 7)/5."
+          "text": "Keep x + 7 together in the numerator: "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{x+7}{5}"
+        },
+        {
+          "type": "text",
+          "text": ". When typing, put brackets around the numerator."
         }
       ]
     },

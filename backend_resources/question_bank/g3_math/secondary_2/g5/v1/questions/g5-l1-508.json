@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l1-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered a strict material budget while preparing a replacement design for the hilltop radio enclosure. Radio components require an air gap around the enclosure. The first sketch was checked against an equipment inventory. An open hemisphere has radius 6 cm. Its curved surface area is "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k\\pi"
-        },
-        {
-          "type": "text",
-          "text": " cm². Find k."
+          "text": "The outside of a soap dish is to be painted; the dish is an open hemisphere. The open hemisphere has radius 4 cm. Its curved surface area is kπ cm². Find k."
         }
       ],
       "marks": 1,
@@ -46,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "72",
-        "canonical_latex": "72",
+        "canonical_answer": "32",
+        "canonical_latex": "32",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -68,11 +60,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Halve the sphere’s surface-area formula to get "
             },
             {
               "type": "inline_math",
-              "latex": "2\\times 6^{2}"
+              "latex": "2\\pi r^{2}"
+            },
+            {
+              "type": "text",
+              "text": ", then compare with "
+            },
+            {
+              "type": "inline_math",
+              "latex": "k\\pi"
             },
             {
               "type": "text",
@@ -87,10 +87,14 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "A=2\\pi(6)^2=72\\pi"
+              "latex": "A=\\tfrac12\\times4\\pi(4)^2=2\\pi(4)^2=32\\pi"
+            },
+            {
+              "type": "text",
+              "text": "so k = 32."
             }
           ],
-          "mark_type": "B",
+          "mark_type": "A",
           "mark_value": 1
         }
       ]
@@ -102,8 +106,8 @@
       "asset_key": "g5-l1-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l1-508-diagram-r3.svg",
-      "alt_text": "Open hemisphere (a bowl) with radius r = 6 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
+      "path": "assets/g5-l1-508-diagram-r4.svg",
+      "alt_text": "Open hemisphere (a bowl) with radius r = 4 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "hemisphere",
@@ -112,23 +116,23 @@
         "template": "hemisphere_curved_area",
         "inputs": {
           "radius": {
-            "value": 6,
+            "value": 4,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 6,
+            "value": 4,
             "unit": "cm"
           },
           "open": true
         },
         "forbidden_visible_labels": [
-          "72",
-          "72π",
-          "226.2",
-          "226.19"
+          "32",
+          "32π",
+          "100.5",
+          "100.53"
         ],
         "unknowns": [],
         "solids": [
@@ -179,7 +183,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "r = 6 cm",
+            "text": "r = 4 cm",
             "target": "segment:OR"
           }
         ],
@@ -199,7 +203,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "e0e7b61908b6a0039fccf27967e6f97c413df79d9407b12adbdda6bb62c6d92d",
+      "sha256": "61856b576408b16051b601cecd5164fd1f2449cd20a7b72063a065b1c9ad1b5d",
       "width": 600,
       "height": 425
     }

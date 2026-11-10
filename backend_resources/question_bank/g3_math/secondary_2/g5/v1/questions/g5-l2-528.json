@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-528",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered salt exposure near the coast while preparing a capacity check for the community garden store. Garden tools are stored upright beside the compost area. The design must also be explained clearly in the safety briefing. A spherical model has diameter 20 cm. Find its volume in cm³, correct to 1 decimal place."
+          "text": "A clay pot for storing rice is round. The spherical pot has diameter 18 cm. Find its volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "4188.8",
-        "canonical_latex": "4188.8",
+        "canonical_answer": "3053.6",
+        "canonical_latex": "3053.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Halve 20, then use "
+              "text": "Halve the diameter, then use "
             },
             {
               "type": "inline_math",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The radius is half the diameter."
             },
             {
               "type": "display_math",
-              "latex": "r=20\\div2=10,\\quad V=\\frac43\\pi(10)^3=4188.8"
+              "latex": "r=18\\div2=9,\\quad V=\\frac43\\pi(9)^3=972\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{4188.8}"
+              "latex": "V=3053.628\\ldots=3053.6\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g5-l2-528-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-528-diagram-r3.svg",
-      "alt_text": "Sphere with a full diameter d = 20 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+      "path": "assets/g5-l2-528-diagram-r4.svg",
+      "alt_text": "Sphere with a full diameter d = 18 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -119,22 +119,23 @@
         "template": "sphere_volume_diameter",
         "inputs": {
           "diameter": {
-            "value": 20,
+            "value": 18,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "diameter": {
-            "value": 20,
+            "value": 18,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "4188.8",
-          "4188.79",
-          "10",
-          "r = 10"
+          "3053.6",
+          "3053.63",
+          "972π",
+          "9",
+          "r = 9"
         ],
         "unknowns": [],
         "solids": [
@@ -193,7 +194,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "d = 20 cm",
+            "text": "d = 18 cm",
             "target": "segment:D1D2"
           }
         ],
@@ -222,7 +223,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "219dff6c2aae9c77f2ef0e133840744961a40fb2e09da7034c5a33fcaa25b2fa",
+      "sha256": "fd26de14b368093515da6b6a9dfdeec5df760d2e031e2768fa66082c817cefd6",
       "width": 600,
       "height": 460
     }

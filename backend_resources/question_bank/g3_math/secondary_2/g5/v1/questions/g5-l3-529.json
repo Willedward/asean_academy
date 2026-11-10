@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-529",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality inspectors considered a strict material budget while preparing a capacity check for the water treatment vessel. Service technicians inspect the vessel through a side hatch. The design must also be explained clearly in the safety briefing. A sphere has radius 300 cm. Find its volume in m³, correct to 1 decimal place."
+          "text": "A storage tank at a water-treatment plant is a sphere, measured on the inside. The sphere has radius 350 cm. Find its volume in m³, correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "113.1",
-        "canonical_latex": "113.1",
+        "canonical_answer": "179.6",
+        "canonical_latex": "179.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -71,22 +71,37 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume in cubic centimetres:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac43\\pi(300)^3=113097335.5\\text{ cm}^3=113.1\\text{ m}^3"
+              "latex": "V=\\frac43\\pi(350)^3=179594380.0\\ldots\\text{ cm}^3"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "There are 1,000,000 cm³ in 1 m³."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{113.1}"
+              "latex": "V=179594380.0\\ldots\\div1\\,000\\,000=179.5944\\ldots\\text{ m}^3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=179.6\\text{ m}^3"
             }
           ],
           "mark_type": "A",
@@ -101,8 +116,8 @@
       "asset_key": "g5-l3-529-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-529-diagram-r2.svg",
-      "alt_text": "Sphere with radius r = 300 cm drawn from the centre to the surface. Not drawn to scale.",
+      "path": "assets/g5-l3-529-diagram-r3.svg",
+      "alt_text": "Sphere with radius r = 350 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -111,7 +126,7 @@
         "template": "sphere_volume_radius",
         "inputs": {
           "radius": {
-            "value": 300,
+            "value": 350,
             "unit": "cm"
           },
           "answer_unit": "m³"
@@ -119,18 +134,17 @@
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 300,
+            "value": 350,
             "unit": "cm"
           },
           "answer_unit": "m³"
         },
         "forbidden_visible_labels": [
-          "113.1",
-          "113.10",
-          "3 m",
-          "113097335.5",
-          "113097335.53",
-          "36000000π"
+          "179.6",
+          "179.59",
+          "3.5 m",
+          "179594380",
+          "57166666.666667π"
         ],
         "unknowns": [],
         "solids": [
@@ -185,7 +199,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "r = 300 cm",
+            "text": "r = 350 cm",
             "target": "segment:OE"
           }
         ],
@@ -205,7 +219,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "2566c3bbcf4cf7a3c3c15be059de466ef6d80e93781fc7432b4da57ec737655d",
+      "sha256": "a5476e1183b2ed8c4fb4292fe66522d81fc78e9aa28a9ca853acdf987a8f284f",
       "width": 600,
       "height": 460
     }

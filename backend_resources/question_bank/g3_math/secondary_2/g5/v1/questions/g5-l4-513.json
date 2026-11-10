@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-513",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maintenance team considered restricted transport access while preparing a capacity check for the island rescue marker. Reflective panels must stay visible from the island landing point. A scale model will be stored with the project documentation. The radius of a sphere is increased by 20%. Find the percentage increase in its volume, correct to 1 decimal place."
+          "text": "A water droplet grows as it gathers moisture. The radius of a sphere is increased by 10%. Find the percentage increase in its volume, correct to 1 decimal place."
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "72.8",
-        "canonical_latex": "72.8\\%",
+        "canonical_answer": "33.1",
+        "canonical_latex": "33.1\\%",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -68,7 +68,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Cube the radius scale factor 1.2, subtract 1, then convert to a percentage."
+              "text": "Write the new radius as "
+            },
+            {
+              "type": "inline_math",
+              "latex": "1.1r"
+            },
+            {
+              "type": "text",
+              "text": " and compare the two volume formulas."
             }
           ]
         }
@@ -79,22 +87,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "A 10% increase multiplies the radius by 1.1."
             },
             {
               "type": "display_math",
-              "latex": "\\left(1.2^3-1\\right)\\times100\\%=72.8\\%"
+              "latex": "R=1.1r"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Volume depends on the cube of the radius."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{72.8\\%}"
+              "latex": "\\frac{V_{\\text{new}}}{V_{\\text{old}}}=\\frac{\\frac43\\pi(1.1r)^3}{\\frac43\\pi r^3}=1.1^3=1.331"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Convert the increase to a percentage."
+            },
+            {
+              "type": "display_math",
+              "latex": "(1.331-1)\\times100\\%"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "33.1\\%"
             }
           ],
           "mark_type": "A",
@@ -109,8 +147,8 @@
       "asset_key": "g5-l4-513-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-513-diagram-r2.svg",
-      "alt_text": "Two spheres side by side: the original with radius r, and the enlarged sphere with radius R, which is r increased by 20%. Not drawn to scale.",
+      "path": "assets/g5-l4-513-diagram-r3.svg",
+      "alt_text": "Two spheres side by side: the original with radius r, and the enlarged sphere with radius R, which is r increased by 10%. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -118,19 +156,19 @@
         "outcome": "5.6",
         "template": "sphere_percentage_change",
         "inputs": {
-          "percent": 20
+          "percent": 10
         },
         "not_to_scale": true,
         "dimensions": {
-          "radius_increase_percent": 20.0
+          "radius_increase_percent": 10.0
         },
         "forbidden_visible_labels": [
-          "72.8",
-          "72.80",
-          "1.7",
-          "1.73",
-          "1.2³",
-          "1.2r"
+          "33.1",
+          "33.10",
+          "1.3",
+          "1.33",
+          "1.1³",
+          "1.1r"
         ],
         "unknowns": [],
         "solids": [
@@ -155,24 +193,24 @@
         ],
         "viewbox": [
           600.0,
-          475.0
+          463.0
         ],
         "points": {
           "aO": [
-            144.39,
-            187.27
+            149.48,
+            181.43
           ],
           "aE": [
-            232.02,
-            113.74
+            241.01,
+            104.63
           ],
           "bO": [
-            432.73,
-            187.27
+            438.57,
+            181.43
           ],
           "bE": [
-            537.89,
-            99.03
+            539.25,
+            96.95
           ]
         },
         "segments": [
@@ -194,25 +232,25 @@
         "circles": {
           "asphere": {
             "center": "aO",
-            "radius": 114.39,
+            "radius": 119.48,
             "hidden": false
           },
           "bsphere": {
             "center": "bO",
-            "radius": 137.27,
+            "radius": 131.43,
             "hidden": false
           }
         },
         "ellipses": {
           "aequator": {
             "center": "aO",
-            "rx": 114.39,
-            "ry": 34.32
+            "rx": 119.48,
+            "ry": 35.84
           },
           "bequator": {
             "center": "bO",
-            "rx": 137.27,
-            "ry": 41.18
+            "rx": 131.43,
+            "ry": 39.43
           }
         },
         "right_angles": [],
@@ -257,15 +295,15 @@
               "bsphere",
               "asphere"
             ],
-            "value": 1.2,
+            "value": 1.1,
             "tolerance": 0.01
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "4898e0fa9bd2af51b4f5c932919d1ffacd2737c2d85ec113269f77321cab4dc7",
+      "sha256": "df0d459eeb3a8a0c82666a90992859610fd46298932f6551ac863ab5486546d9",
       "width": 600,
-      "height": 475
+      "height": 463
     }
   ],
   "provenance": {

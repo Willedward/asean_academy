@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "ex-l4-007",
   "bank_key": "english-ex-v1",
   "curriculum_version": "asean_scholarship_english_v1_draft",
@@ -17,25 +17,37 @@
   "parts": [
     {
       "position": 1,
-      "prompt": "Which rehearsal sequence best represents safe process compression?",
+      "prompt": "Which rehearsal sequence best shortens the writing process safely?",
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Repeat one memorised response at 30 minutes until its copying speed improves, then infer readiness for every prompt."},
-          {"key": "B", "text": "Use a supported 45-minute fresh response to locate bottlenecks, fade support on a fresh 35-minute response, then attempt a fresh 30-minute response independently when the shorter process remains complete."},
-          {"key": "C", "text": "Move directly to 30 minutes and remove planning, development and checking at the same time."},
-          {"key": "D", "text": "Keep every rehearsal at 45 minutes because timing evidence can never inform practice."}
+          {
+            "key": "A",
+            "text": "Repeat one memorised response at 30 minutes every day until its copying speed improves, then infer readiness for every possible prompt without trying a fresh one."
+          },
+          {
+            "key": "B",
+            "text": "Use a supported 45-minute fresh response to locate bottlenecks, reduce support on a fresh 35-minute response, then attempt a fresh 30-minute response independently when the shorter process remains complete."
+          },
+          {
+            "key": "C",
+            "text": "Move directly to 30 minutes and remove planning, development and checking at the same time."
+          },
+          {
+            "key": "D",
+            "text": "Keep every rehearsal at 45 minutes because timing evidence can never inform practice."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
-          "A": "A repeated response confounds memory with transfer and does not test the process on an unseen task.",
+          "A": "A repeated response tests memory rather than transfer and does not test the process on an unseen task.",
           "B": "The sequence reduces time and support in bounded stages while requiring the complete process to transfer to fresh prompts.",
           "C": "Changing every condition at once removes the safeguards and makes the cause of failure unclear.",
           "D": "Supported practice is useful, but the lesson outcome requires a controlled move toward the reported independent limit."
         }
       },
       "hint": "Choose the sequence that changes time and support gradually while testing each stage on fresh material.",
-      "correct_explanation": "Bounded compression uses one stage to diagnose, the next to fade support and a fresh independent run to test transfer."
+      "correct_explanation": "Safe shortening uses one stage to diagnose, the next to reduce support and a fresh independent run to test transfer."
     },
     {
       "position": 2,
@@ -43,13 +55,32 @@
       "response": {
         "type": "multiple_response",
         "options": [
-          {"key": "A", "text": "Both rehearsals reached a complete ending within their clocks."},
-          {"key": "B", "text": "The 35-minute run preserved a four-minute checking period with reduced support."},
-          {"key": "C", "text": "The 35-minute response repeated its opening and underdeveloped the second reason."},
-          {"key": "D", "text": "Nara wrote exactly the same number of words in both responses."},
-          {"key": "E", "text": "One sentence in the 45-minute response used an uncommon adjective."}
+          {
+            "key": "A",
+            "text": "Both rehearsals reached a complete ending within their clocks."
+          },
+          {
+            "key": "B",
+            "text": "The 35-minute run preserved a four-minute checking period with reduced support."
+          },
+          {
+            "key": "C",
+            "text": "The 35-minute response repeated its opening and underdeveloped the second reason."
+          },
+          {
+            "key": "D",
+            "text": "Nara wrote exactly the same number of words in both responses."
+          },
+          {
+            "key": "E",
+            "text": "One sentence in the 45-minute response used an uncommon adjective."
+          }
         ],
-        "correct_keys": ["A", "B", "C"],
+        "correct_keys": [
+          "A",
+          "B",
+          "C"
+        ],
         "choice_rationales": {
           "A": "Completion shows that compression has not yet removed the response's ending.",
           "B": "A protected checking buffer and reduced support are direct evidence about the shorter process.",
@@ -67,10 +98,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Remove the compact plan and use its time to copy the prompt into a longer introduction."},
-          {"key": "B", "text": "Use the entire checking buffer to add a third reason, whether or not it supports the focus."},
-          {"key": "C", "text": "Limit the opening to the task and controlling focus, keep the compact route, and use the saved drafting time to complete the claim–detail–explanation chain for the second reason."},
-          {"key": "D", "text": "Ask an adult to draft the second reason before the timer starts."}
+          {
+            "key": "A",
+            "text": "Remove the compact plan and use its time to copy the prompt into a longer introduction."
+          },
+          {
+            "key": "B",
+            "text": "Use the entire checking buffer to add a third reason, whether or not it supports the focus, and leave the second reason only partly developed."
+          },
+          {
+            "key": "C",
+            "text": "Limit the opening to the task and controlling focus, keep the compact route, and use the saved drafting time to complete the claim–detail–explanation chain for the second reason."
+          },
+          {
+            "key": "D",
+            "text": "Ask an adult to draft the second reason before the timer starts."
+          }
         ],
         "correct_key": "C",
         "choice_rationales": {
@@ -89,10 +132,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Reuse the 35-minute prompt with its response visible and ask a parent to improve sentences during the run."},
-          {"key": "B", "text": "Use a fresh comparable prompt, a separately controlled 30-minute clock and no hints, model answer, external editing or feedback until submission."},
-          {"key": "C", "text": "Begin with 30 minutes but borrow extra time from Section 1 whenever the conclusion is unfinished."},
-          {"key": "D", "text": "Pause the clock whenever Nara wants to search for a stronger example online."}
+          {
+            "key": "A",
+            "text": "Reuse the 35-minute prompt with its response visible and ask a parent to improve sentences during the run before submitting."
+          },
+          {
+            "key": "B",
+            "text": "Use a fresh comparable prompt, a separately controlled 30-minute clock and no hints, model answer, external editing or feedback until submission."
+          },
+          {
+            "key": "C",
+            "text": "Begin with 30 minutes but borrow extra time from Section 1 whenever the conclusion is unfinished."
+          },
+          {
+            "key": "D",
+            "text": "Pause the clock whenever Nara wants to search for a stronger example online."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {
@@ -111,10 +166,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "Start an unrelated third reason so the response becomes longer."},
-          {"key": "B", "text": "Rewrite the opening repeatedly until it sounds more dramatic, even if the response ends mid-sentence."},
-          {"key": "C", "text": "Finish the planned route with a bounded conclusion, then check task fulfilment and paragraph order before using remaining time on sentence boundaries and high-risk conventions."},
-          {"key": "D", "text": "Stop immediately and leave the final eight minutes unused because the original schedule changed."}
+          {
+            "key": "A",
+            "text": "Start an unrelated third reason so the response becomes longer."
+          },
+          {
+            "key": "B",
+            "text": "Rewrite the opening repeatedly until it sounds more dramatic, even if the response ends mid-sentence without a conclusion or any checking."
+          },
+          {
+            "key": "C",
+            "text": "Finish the planned route with a bounded conclusion, then check task fulfilment and paragraph order before using remaining time on sentence boundaries and high-risk conventions."
+          },
+          {
+            "key": "D",
+            "text": "Stop immediately and leave the final eight minutes unused because the original schedule changed."
+          }
         ],
         "correct_key": "C",
         "choice_rationales": {
@@ -133,10 +200,22 @@
       "response": {
         "type": "single_choice",
         "options": [
-          {"key": "A", "text": "The run proves Nara cannot succeed in the scholarship selection process."},
-          {"key": "B", "text": "The run does not yet show independent 30-minute completion; return to 35 minutes, target the recorded bottleneck and use another fresh comparable prompt before retrying independently."},
-          {"key": "C", "text": "Count the hinted response as independent because it used a 30-minute clock."},
-          {"key": "D", "text": "Repeat the identical prompt until it is memorised, then treat the faster result as proof of transfer."}
+          {
+            "key": "A",
+            "text": "The run proves Nara cannot succeed in the scholarship selection process."
+          },
+          {
+            "key": "B",
+            "text": "The run does not yet show independent 30-minute completion; return to 35 minutes, target the recorded bottleneck and use another fresh comparable prompt before retrying independently."
+          },
+          {
+            "key": "C",
+            "text": "Count the hinted response as independent because it used a 30-minute clock."
+          },
+          {
+            "key": "D",
+            "text": "Repeat the identical prompt until it is memorised, then treat the faster result as proof of transfer to every new composition prompt in the real test."
+          }
         ],
         "correct_key": "B",
         "choice_rationales": {

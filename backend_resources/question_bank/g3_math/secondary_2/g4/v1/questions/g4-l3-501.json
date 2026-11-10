@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-501",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Design technicians noted salt exposure near the coast while preparing a replacement frame. A rectangular section of the community water tank measures 11 m by 60 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+          "text": "A rectangular car park measures 11 m by 60 m. A cable runs straight from one corner to the opposite corner, under the surface, to power the lights. Find the length d of the cable in metres. Enter the numerical value only."
         }
       ],
       "marks": 3,
@@ -79,22 +79,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "d=\\sqrt{11^2+60^2}=61"
+              "text": "Two adjacent sides of the rectangle meet at a right angle, so the diagonal is the hypotenuse of a right-angled triangle with shorter sides 11 m and 60 m."
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{61}"
+              "latex": "d^2=11^2+60^2=121+3600=3721"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{3721}=61"
             }
           ],
           "mark_type": "A",
@@ -109,7 +120,7 @@
       "asset_key": "g4-l3-501-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-501-diagram-r3.svg",
+      "path": "assets/g4-l3-501-diagram-r4.svg",
       "alt_text": "Rectangle 60 m by 11 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -272,6 +283,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

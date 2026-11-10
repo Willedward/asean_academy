@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l1-513 — Choose the cone volume factor
+## g5-l1-513 — Rectangular pyramid volume
 
 [Open this question in the HTML preview](index.html#g5-l1-513)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-518 — Cone and hemisphere capacity
+## g5-l3-518 — Volume of a cone joined to a hemisphere
 
 [Open this question in the HTML preview](index.html#g5-l3-518)
 
@@ -205,7 +205,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l3-522 — Cone and hemisphere capacity
+## g5-l3-522 — Volume of a cone joined to a hemisphere
 
 [Open this question in the HTML preview](index.html#g5-l3-522)
 

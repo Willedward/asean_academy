@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-508",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maintenance team considered a narrow installation area while preparing a replacement design for the river survey buoy. The buoy houses sensors above a sealed battery compartment. A later inspection will compare the finished dimensions with this record. A cone of radius 5 cm and slant height 13 cm is joined base-to-base to a hemisphere of radius 5 cm. Find the external surface area in cm², correct to 1 decimal place."
+          "text": "A buoy is painted all over the outside. The buoy's cone of radius 5 cm and slant height 13 cm is joined base-to-base to a hemisphere of radius 5 cm. Find the external surface area in cm², correct to 1 decimal place."
         }
       ],
       "marks": 4,
@@ -71,22 +71,52 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Curved area of the cone:"
             },
             {
               "type": "display_math",
-              "latex": "S=\\pi(5)(13)+2\\pi(5)^2=361.3"
+              "latex": "\\pi(5)(13)=65\\pi"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Curved area of the hemisphere:"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{361.3}"
+              "latex": "2\\pi(5)^2=50\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "The joined circular faces are inside the solid, so add only the two curved areas."
+            },
+            {
+              "type": "display_math",
+              "latex": "S=65\\pi+50\\pi=115\\pi"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "S=361.283\\ldots=361.3\\text{ cm}^2"
             }
           ],
           "mark_type": "A",
@@ -101,7 +131,7 @@
       "asset_key": "g5-l4-508-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l4-508-diagram-r2.svg",
+      "path": "assets/g5-l4-508-diagram-r3.svg",
       "alt_text": "Solid made of a cone joined base to base with a hemisphere of radius r = 5 cm. The cone's slant height is l = 13 cm. The joined circular faces are hidden inside the solid. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -325,6 +355,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

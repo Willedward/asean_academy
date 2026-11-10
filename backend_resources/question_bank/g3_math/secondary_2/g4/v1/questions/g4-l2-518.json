@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-518",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community builders noted soft ground around the supports while preparing a replacement frame. A triangular support at the emergency radio tower has side lengths 45 cm, 60 cm and 75 cm. Enter 1 if it is right-angled and 0 if it is not."
+          "text": "A triangular stand for a radio antenna is welded from three rods. It has side lengths 30 cm, 72 cm and 79 cm. Enter 1 if it is right-angled and 0 if it is not."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1",
-        "canonical_latex": "1",
+        "canonical_answer": "0",
+        "canonical_latex": "0",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -55,7 +55,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "45^{2}+60^{2}"
+              "latex": "30^{2}+72^{2}"
             },
             {
               "type": "text",
@@ -63,7 +63,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "75^{2}"
+              "latex": "79^{2}"
             },
             {
               "type": "text",
@@ -78,11 +78,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Square the two shorter sides and the longest side."
             },
             {
               "type": "display_math",
-              "latex": "45^2+60^2=5625,\\quad 75^2=5625"
+              "latex": "30^2+72^2=6084,\\quad 79^2=6241"
             }
           ],
           "mark_type": "M",
@@ -92,8 +92,12 @@
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "6084 is not equal to 6241, so by the converse of Pythagoras’ theorem the triangle is not right-angled."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{1}"
+              "latex": "\\boxed{0}"
             }
           ],
           "mark_type": "A",
@@ -117,6 +121,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

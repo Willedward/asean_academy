@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l1-507",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -30,15 +30,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team considered a strict material budget while preparing a replacement design for the marine laboratory vessel. The vessel is secured to a bench during wave simulations. The first sketch was checked against an equipment inventory. A sphere has radius 5 cm. Its surface area is "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k\\pi"
-          },
-          {
-            "type": "text",
-            "text": " cm². Find k."
+            "text": "A paper lantern is a sphere covered completely in paper. The sphere has radius 7 cm. Its surface area is kπ cm², the area of paper used. Find k."
           }
         ],
         "marks": 1,
@@ -47,8 +39,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "100",
-          "canonical_latex": "100",
+          "canonical_answer": "196",
+          "canonical_latex": "196",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -77,15 +69,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Substitute the radius into "
               },
               {
                 "type": "inline_math",
-                "latex": "4\\times 5^{2}"
+                "latex": "4\\pi r^{2}"
               },
               {
                 "type": "text",
-                "text": "; π is already shown in "
+                "text": " and compare the result with "
               },
               {
                 "type": "inline_math",
@@ -104,10 +96,14 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "S=4\\pi(5)^2=100\\pi"
+                "latex": "S=4\\pi(7)^2=196\\pi"
+              },
+              {
+                "type": "text",
+                "text": "so k = 196."
               }
             ],
-            "mark_type": "B",
+            "mark_type": "A",
             "mark_value": 1
           }
         ]
@@ -119,8 +115,8 @@
         "asset_key": "g5-l1-507-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-507-diagram-r3.svg",
-        "alt_text": "Sphere with radius r = 5 cm drawn from the centre to the surface. Not drawn to scale.",
+        "path": "assets/g5-l1-507-diagram-r4.svg",
+        "alt_text": "Sphere with radius r = 7 cm drawn from the centre to the surface. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "sphere",
@@ -129,22 +125,22 @@
           "template": "sphere_surface_area",
           "inputs": {
             "radius": {
-              "value": 5,
+              "value": 7,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 5,
+              "value": 7,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "100",
-            "100π",
-            "314.2",
-            "314.16"
+            "196",
+            "196π",
+            "615.8",
+            "615.75"
           ],
           "unknowns": [],
           "solids": [
@@ -199,7 +195,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "r = 5 cm",
+              "text": "r = 7 cm",
               "target": "segment:OE"
             }
           ],
@@ -219,7 +215,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "d03821208560335fb7951c8ecd3c8d3439be8636140b4b4ff66b5d8831400360",
+        "sha256": "af8b2632acb4f908b826760fb50df9832e43c282b8ef18e9aca1de60544e862e",
         "width": 600,
         "height": 460
       }
@@ -242,7 +238,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l1-508",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -271,15 +267,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers considered a strict material budget while preparing a replacement design for the hilltop radio enclosure. Radio components require an air gap around the enclosure. The first sketch was checked against an equipment inventory. An open hemisphere has radius 6 cm. Its curved surface area is "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k\\pi"
-          },
-          {
-            "type": "text",
-            "text": " cm². Find k."
+            "text": "The outside of a soap dish is to be painted; the dish is an open hemisphere. The open hemisphere has radius 4 cm. Its curved surface area is kπ cm². Find k."
           }
         ],
         "marks": 1,
@@ -288,8 +276,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "72",
-          "canonical_latex": "72",
+          "canonical_answer": "32",
+          "canonical_latex": "32",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -310,11 +298,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Halve the sphere’s surface-area formula to get "
               },
               {
                 "type": "inline_math",
-                "latex": "2\\times 6^{2}"
+                "latex": "2\\pi r^{2}"
+              },
+              {
+                "type": "text",
+                "text": ", then compare with "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k\\pi"
               },
               {
                 "type": "text",
@@ -329,10 +325,14 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "A=2\\pi(6)^2=72\\pi"
+                "latex": "A=\\tfrac12\\times4\\pi(4)^2=2\\pi(4)^2=32\\pi"
+              },
+              {
+                "type": "text",
+                "text": "so k = 32."
               }
             ],
-            "mark_type": "B",
+            "mark_type": "A",
             "mark_value": 1
           }
         ]
@@ -344,8 +344,8 @@
         "asset_key": "g5-l1-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-508-diagram-r3.svg",
-        "alt_text": "Open hemisphere (a bowl) with radius r = 6 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
+        "path": "assets/g5-l1-508-diagram-r4.svg",
+        "alt_text": "Open hemisphere (a bowl) with radius r = 4 cm drawn from the centre of the rim to its edge. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "hemisphere",
@@ -354,23 +354,23 @@
           "template": "hemisphere_curved_area",
           "inputs": {
             "radius": {
-              "value": 6,
+              "value": 4,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 6,
+              "value": 4,
               "unit": "cm"
             },
             "open": true
           },
           "forbidden_visible_labels": [
-            "72",
-            "72π",
-            "226.2",
-            "226.19"
+            "32",
+            "32π",
+            "100.5",
+            "100.53"
           ],
           "unknowns": [],
           "solids": [
@@ -421,7 +421,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "r = 6 cm",
+              "text": "r = 4 cm",
               "target": "segment:OR"
             }
           ],
@@ -441,7 +441,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "e0e7b61908b6a0039fccf27967e6f97c413df79d9407b12adbdda6bb62c6d92d",
+        "sha256": "61856b576408b16051b601cecd5164fd1f2449cd20a7b72063a065b1c9ad1b5d",
         "width": 600,
         "height": 425
       }
@@ -464,7 +464,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l1-509",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -493,7 +493,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Safety officers considered a strict material budget while preparing a replacement design for the transport museum exhibit. The exhibit compares historic and modern transport shapes. The first sketch was checked against an equipment inventory. A pyramid has base area 24 cm² and perpendicular height 15 cm. Find its volume in cm³. Enter the numerical value only."
+            "text": "The tip of a monument model is a solid pyramid. This pyramid has base area 24 cm² and perpendicular height 15 cm. Calculate its volume in cm³."
           }
         ],
         "marks": 1,
@@ -524,11 +524,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "(24\\times 15)\\div 3"
+                "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
               },
               {
                 "type": "text",
@@ -542,11 +542,15 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Use the pyramid volume formula."
+              },
+              {
                 "type": "display_math",
-                "latex": "V=\\frac13(24)(15)=120"
+                "latex": "V=\\frac13\\times24\\times15=120"
               }
             ],
-            "mark_type": "B",
+            "mark_type": "A",
             "mark_value": 1
           }
         ]
@@ -558,7 +562,7 @@
         "asset_key": "g5-l1-509-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-509-diagram-r3.svg",
+        "path": "assets/g5-l1-509-diagram-r4.svg",
         "alt_text": "Pyramid with base area 24 cm² and perpendicular height h = 15 cm from the apex to the centre of the base, right angle marked. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -811,19 +815,19 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l1-510",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G5",
     "primary_outcome": "5.6",
-    "title": "Choose the cone volume factor",
+    "title": "Volume of a pyramid",
     "difficulty": 1,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -845,7 +849,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Site engineers considered a strict material budget while preparing a replacement design for the food distribution hopper. Dry goods leave the hopper through a centred opening. The first sketch was checked against an equipment inventory. A cone and a cylinder have the same circular base and perpendicular height. Enter the numerator of the fraction of the cylinder’s volume occupied by the cone."
+            "text": "A chocolate is moulded in the shape of a pyramid. The pyramid has base area 30 cm² and perpendicular height 7 cm. Find the volume of chocolate in cm³."
           }
         ],
         "marks": 1,
@@ -854,8 +858,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "1",
-          "canonical_latex": "1",
+          "canonical_answer": "70",
+          "canonical_latex": "70",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -867,7 +871,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare a cone with a cylinder that has the same base and height."
+                "text": "A pyramid occupies one third of the matching prism."
               }
             ]
           },
@@ -876,7 +880,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "How many identical cones would fill the cylinder? Use that to write the cone's volume as a fraction of the cylinder's volume, then enter the numerator."
+                "text": "Use "
+              },
+              {
+                "type": "inline_math",
+                "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -886,11 +898,15 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Use the pyramid volume formula."
+              },
+              {
                 "type": "display_math",
-                "latex": "V_{\\text{cone}}=\\frac13V_{\\text{cylinder}}"
+                "latex": "V=\\frac13\\times30\\times7=70"
               }
             ],
-            "mark_type": "B",
+            "mark_type": "A",
             "mark_value": 1
           }
         ]
@@ -902,116 +918,143 @@
         "asset_key": "g5-l1-510-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-510-diagram-r3.svg",
-        "alt_text": "Cone drawn inside a cylinder. They share the same circular base of radius r and the same perpendicular height h; the cone's vertex is at the centre of the cylinder's top. Not drawn to scale.",
+        "path": "assets/g5-l1-510-diagram-r4.svg",
+        "alt_text": "Pyramid with base area 30 cm² and perpendicular height h = 7 cm from the apex to the centre of the base, right angle marked. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
-          "diagram_kind": "cone_cylinder",
+          "diagram_kind": "pyramid",
           "question_key": "g5-l1-510",
           "outcome": "5.6",
-          "template": "cone_cylinder_factor",
-          "inputs": {},
+          "template": "pyramid_base_area_volume",
+          "inputs": {
+            "base_area": {
+              "value": 30,
+              "unit": "cm²"
+            },
+            "height": {
+              "value": 7,
+              "unit": "cm"
+            }
+          },
           "not_to_scale": true,
           "dimensions": {
-            "radius": "r",
-            "height": "h"
+            "base_area": {
+              "value": 30,
+              "unit": "cm²"
+            },
+            "height": {
+              "value": 7,
+              "unit": "cm"
+            }
           },
           "forbidden_visible_labels": [
-            "1",
-            "1/3",
-            "⅓",
-            "one third",
-            "1:3",
-            "3"
+            "70"
           ],
           "unknowns": [],
           "solids": [
             {
-              "type": "cylinder",
+              "type": "pyramid",
+              "base": "unspecified",
               "points": {
-                "top": "T",
-                "base": "O"
-              }
-            },
-            {
-              "type": "cone",
-              "orientation": "vertex_up",
-              "points": {
+                "P1": "P1",
+                "P2": "P2",
+                "P3": "P3",
+                "P4": "P4",
                 "O": "O",
                 "V": "V",
-                "L": "L",
-                "R": "R"
+                "S": "S",
+                "X": "X"
               }
             }
           ],
           "viewbox": [
             600.0,
-            522.0
+            467.0
           ],
           "points": {
-            "T": [
-              300.0,
-              101.0
+            "P1": [
+              209.4,
+              347.23
             ],
-            "CL": [
-              150.0,
-              101.0
+            "P2": [
+              479.4,
+              347.23
             ],
-            "CR": [
-              450.0,
-              101.0
+            "P3": [
+              560.0,
+              296.87
             ],
-            "BL": [
-              150.0,
-              371.0
-            ],
-            "BR": [
-              450.0,
-              371.0
+            "P4": [
+              290.0,
+              296.87
             ],
             "O": [
-              300.0,
-              371.0
+              384.7,
+              322.05
             ],
             "V": [
-              300.0,
-              101.0
+              384.7,
+              46.0
             ],
-            "L": [
-              150.0,
-              371.0
-            ],
-            "R": [
-              450.0,
-              371.0
+            "X": [
+              414.7,
+              322.05
             ]
           },
           "segments": [
             {
-              "key": "CLBL",
-              "from": "CL",
-              "to": "BL",
-              "hidden": false,
-              "role": "cylinder"
+              "key": "P1P4",
+              "from": "P1",
+              "to": "P4",
+              "hidden": true,
+              "role": "edge"
             },
             {
-              "key": "CRBR",
-              "from": "CR",
-              "to": "BR",
-              "hidden": false,
-              "role": "cylinder"
+              "key": "P4P3",
+              "from": "P4",
+              "to": "P3",
+              "hidden": true,
+              "role": "edge"
             },
             {
-              "key": "VL",
+              "key": "VP4",
               "from": "V",
-              "to": "L",
+              "to": "P4",
+              "hidden": true,
+              "role": "edge"
+            },
+            {
+              "key": "P1P2",
+              "from": "P1",
+              "to": "P2",
               "hidden": false,
               "role": "edge"
             },
             {
-              "key": "VR",
+              "key": "P2P3",
+              "from": "P2",
+              "to": "P3",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "VP1",
               "from": "V",
-              "to": "R",
+              "to": "P1",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "VP2",
+              "from": "V",
+              "to": "P2",
+              "hidden": false,
+              "role": "edge"
+            },
+            {
+              "key": "VP3",
+              "from": "V",
+              "to": "P3",
               "hidden": false,
               "role": "edge"
             },
@@ -1021,48 +1064,71 @@
               "to": "O",
               "hidden": true,
               "role": "edge"
-            },
-            {
-              "key": "OR",
-              "from": "O",
-              "to": "R",
-              "hidden": true,
-              "role": "edge"
             }
           ],
-          "ellipses": {
-            "top": {
-              "center": "T",
-              "rx": 150.0,
-              "ry": 51.0
-            },
-            "base": {
-              "center": "O",
-              "rx": 150.0,
-              "ry": 51.0
-            }
-          },
           "right_angles": [
             {
               "vertex": "O",
               "arms": [
                 "V",
-                "R"
+                "X"
               ],
               "marker_size": 16
             }
           ],
+          "leaders": [
+            {
+              "target": "segment:VO",
+              "from": [
+                384.7,
+                184.03
+              ],
+              "to": [
+                289.89,
+                150.84
+              ]
+            }
+          ],
           "labels": [
             {
-              "text": "r",
-              "target": "segment:OR"
+              "text": "base area 30 cm²",
+              "target": "face:base"
             },
             {
-              "text": "h",
+              "text": "h = 7 cm",
               "target": "segment:VO"
             }
           ],
           "relationships": [
+            {
+              "type": "polygon_sides",
+              "points": [
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+              ],
+              "count": 4
+            },
+            {
+              "type": "parallelogram",
+              "points": [
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+              ]
+            },
+            {
+              "type": "centroid",
+              "point": "O",
+              "of": [
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+              ]
+            },
             {
               "type": "vertical",
               "points": [
@@ -1071,67 +1137,25 @@
               ]
             },
             {
-              "type": "ellipse_centre",
-              "ellipse": "base",
-              "point": "O"
-            },
-            {
-              "type": "on_ellipse",
-              "ellipse": "base",
-              "points": [
-                "L",
-                "R"
-              ]
-            },
-            {
-              "type": "midpoint",
+              "type": "inside_polygon",
               "point": "O",
-              "of": [
-                "L",
-                "R"
+              "polygon": [
+                "P1",
+                "P2",
+                "P3",
+                "P4"
               ]
             },
             {
-              "type": "same_point",
-              "points": [
-                "T",
-                "V"
-              ]
-            },
-            {
-              "type": "vertical",
-              "points": [
-                "CL",
-                "BL"
-              ]
-            },
-            {
-              "type": "vertical",
-              "points": [
-                "CR",
-                "BR"
-              ]
-            },
-            {
-              "type": "same_point",
-              "points": [
-                "BL",
-                "L"
-              ]
-            },
-            {
-              "type": "same_point",
-              "points": [
-                "BR",
-                "R"
-              ]
+              "type": "hidden_segment",
+              "segment": "VO"
             }
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "dcf1fee7430aad8b0f63780f0b44523ead09388ec8765ae47e88557fe7ea8b75",
+        "sha256": "66e891f0eb918f44797a98365d1c3dba1b83a3eb1c9434cff1e5e853ff76551b",
         "width": 600,
-        "height": 522
+        "height": 467
       }
     ],
     "provenance": {
@@ -1152,7 +1176,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l1-511",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1181,15 +1205,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Community planners considered a strict material budget while preparing a replacement design for the volcanology field model. Field samples are packed separately from the measuring model. The first sketch was checked against an equipment inventory. A sphere has radius 9 cm. Its surface area is "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k\\pi"
-          },
-          {
-            "type": "text",
-            "text": " cm². Find k."
+            "text": "A festival display uses a large round ornament in the shape of a sphere. The sphere has radius 9 cm. Its surface area is kπ cm². Find k."
           }
         ],
         "marks": 1,
@@ -1228,15 +1244,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Substitute the radius into "
               },
               {
                 "type": "inline_math",
-                "latex": "4\\times 9^{2}"
+                "latex": "4\\pi r^{2}"
               },
               {
                 "type": "text",
-                "text": "; π is already shown in "
+                "text": " and compare the result with "
               },
               {
                 "type": "inline_math",
@@ -1256,9 +1272,13 @@
               {
                 "type": "display_math",
                 "latex": "S=4\\pi(9)^2=324\\pi"
+              },
+              {
+                "type": "text",
+                "text": "so k = 324."
               }
             ],
-            "mark_type": "B",
+            "mark_type": "A",
             "mark_value": 1
           }
         ]
@@ -1270,7 +1290,7 @@
         "asset_key": "g5-l1-511-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l1-511-diagram-r3.svg",
+        "path": "assets/g5-l1-511-diagram-r4.svg",
         "alt_text": "Sphere with radius r = 9 cm drawn from the centre to the surface. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -1388,12 +1408,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-508",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1422,7 +1442,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quality inspectors considered a strict material budget while preparing a replacement design for the water treatment vessel. Service technicians inspect the vessel through a side hatch. The first sketch was checked against an equipment inventory. A spherical model has diameter 20 cm. Find its volume in cm³, correct to 1 decimal place."
+            "text": "A melon is modelled as a sphere for a science lesson. The spherical melon has diameter 14 cm. Find its volume in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -1431,8 +1451,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "4188.8",
-          "canonical_latex": "4188.8",
+          "canonical_answer": "1436.8",
+          "canonical_latex": "1436.8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -1453,7 +1473,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Halve 20, then use "
+                "text": "Halve the diameter, then use "
               },
               {
                 "type": "inline_math",
@@ -1472,11 +1492,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "The radius is half the diameter."
               },
               {
                 "type": "display_math",
-                "latex": "r=20\\div2=10,\\quad V=\\frac43\\pi(10)^3=4188.8"
+                "latex": "r=14\\div2=7,\\quad V=\\frac43\\pi(7)^3=\\frac{1372}{3}\\pi"
               }
             ],
             "mark_type": "M",
@@ -1487,7 +1507,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{4188.8}"
+                "latex": "V=1436.755\\ldots=1436.8\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -1502,8 +1522,8 @@
         "asset_key": "g5-l2-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-508-diagram-r3.svg",
-        "alt_text": "Sphere with a full diameter d = 20 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+        "path": "assets/g5-l2-508-diagram-r4.svg",
+        "alt_text": "Sphere with a full diameter d = 14 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "sphere",
@@ -1512,22 +1532,22 @@
           "template": "sphere_volume_diameter",
           "inputs": {
             "diameter": {
-              "value": 20,
+              "value": 14,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "diameter": {
-              "value": 20,
+              "value": 14,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "4188.8",
-            "4188.79",
-            "10",
-            "r = 10"
+            "1436.8",
+            "1436.76",
+            "7",
+            "r = 7"
           ],
           "unknowns": [],
           "solids": [
@@ -1586,7 +1606,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "d = 20 cm",
+              "text": "d = 14 cm",
               "target": "segment:D1D2"
             }
           ],
@@ -1615,7 +1635,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "219dff6c2aae9c77f2ef0e133840744961a40fb2e09da7034c5a33fcaa25b2fa",
+        "sha256": "9f5b802a97e545292310e41763759b18d1c1c8b24fc4156f482b75bb8c8adc35",
         "width": 600,
         "height": 460
       }
@@ -1638,7 +1658,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-509",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1667,7 +1687,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Survey crew considered restricted transport access while preparing a replacement design for the harbour rain gauge. Tide markers and mooring ropes define the available harbour footprint. A later inspection will compare the finished dimensions with this record. A right pyramid has a rectangular base 8 cm by 9 cm and perpendicular height 12 cm. Find its volume in cm³."
+            "text": "A block of cheese is cut into a right pyramid. The pyramid has a rectangular base 8 cm by 9 cm and perpendicular height 12 cm. Calculate the volume of cheese in cm³."
           }
         ],
         "marks": 2,
@@ -1702,7 +1722,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "V=\\frac{1}{3}\\times (8\\times 9)\\times 12"
+                "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
               },
               {
                 "type": "text",
@@ -1717,11 +1737,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Find the base area, then use the pyramid volume formula."
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13(8)(9)(12)=288"
+                "latex": "V=\\frac13\\times(8\\times9)\\times12=\\frac13\\times72\\times12"
               }
             ],
             "mark_type": "M",
@@ -1732,7 +1752,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{288}"
+                "latex": "V=288\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -1747,7 +1767,7 @@
         "asset_key": "g5-l2-509-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-509-diagram-r3.svg",
+        "path": "assets/g5-l2-509-diagram-r4.svg",
         "alt_text": "Right pyramid on a rectangular base 8 cm by 9 cm. The perpendicular height h = 12 cm runs from the apex to the centre of the base, with the right angle marked. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -2017,12 +2037,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-510",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2051,7 +2071,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Student designers considered restricted transport access while preparing a replacement design for the community grain store. Ventilation gaps must remain clear around stacked grain sacks. A later inspection will compare the finished dimensions with this record. A cone has radius 4 cm and perpendicular height 15 cm. Find its volume in cm³, correct to 1 decimal place."
+            "text": "Salt poured onto a table forms a pile shaped like a cone. The cone has radius 4 cm and perpendicular height 15 cm. Find its volume in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -2082,15 +2102,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "\\pi\\times 4^{2}\\times 15\\div 3"
+                "latex": "V=\\frac{1}{3}\\pi r^{2}h"
               },
               {
                 "type": "text",
-                "text": ", then round."
+                "text": ", then round only the final answer."
               }
             ]
           }
@@ -2101,11 +2121,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume of a cone:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13\\pi(4)^2(15)=251.3\\text{ cm}^3"
+                "latex": "V=\\frac13\\pi(4)^2(15)=80\\pi"
               }
             ],
             "mark_type": "M",
@@ -2116,7 +2136,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{251.3}"
+                "latex": "V=251.327\\ldots=251.3\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -2131,7 +2151,7 @@
         "asset_key": "g5-l2-510-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-510-diagram-r3.svg",
+        "path": "assets/g5-l2-510-diagram-r4.svg",
         "alt_text": "Cone with base radius r = 4 cm and perpendicular height h = 15 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -2331,12 +2351,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-511",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2365,7 +2385,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team considered restricted transport access while preparing a replacement design for the island rescue marker. Reflective panels must stay visible from the island landing point. A later inspection will compare the finished dimensions with this record. A cone has radius 12 cm and slant height 20 cm. Find its curved surface area in cm², correct to 1 decimal place."
+            "text": "An ice-cream wafer is shaped as a cone. The cone has radius 5 cm and slant height 13 cm. Find its curved surface area in cm², correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -2374,8 +2394,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "754.0",
-          "canonical_latex": "754.0",
+          "canonical_answer": "204.2",
+          "canonical_latex": "204.2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -2396,15 +2416,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "\\pi\\times 12\\times 20"
+                "latex": "\\pi r l"
               },
               {
                 "type": "text",
-                "text": "; do not add the base."
+                "text": " with the slant height; do not add the base."
               }
             ]
           }
@@ -2415,11 +2435,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Curved surface area of a cone:"
               },
               {
                 "type": "display_math",
-                "latex": "A=\\pi(12)(20)=754.0\\text{ cm}^2"
+                "latex": "A=\\pi rl=\\pi\\times5\\times13=65\\pi"
               }
             ],
             "mark_type": "M",
@@ -2430,7 +2450,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{754.0}"
+                "latex": "A=204.204\\ldots=204.2\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
@@ -2445,8 +2465,8 @@
         "asset_key": "g5-l2-511-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-511-diagram-r3.svg",
-        "alt_text": "Cone with base radius r = 12 cm and slant height l = 20 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
+        "path": "assets/g5-l2-511-diagram-r4.svg",
+        "alt_text": "Cone with base radius r = 5 cm and slant height l = 13 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "cone",
@@ -2455,30 +2475,29 @@
           "template": "cone_curved_area",
           "inputs": {
             "radius": {
-              "value": 12,
+              "value": 5,
               "unit": "cm"
             },
             "slant_height": {
-              "value": 20,
+              "value": 13,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 12,
+              "value": 5,
               "unit": "cm"
             },
             "slant_height": {
-              "value": 20,
+              "value": 13,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "754.0",
-            "754",
-            "753.98",
-            "240π"
+            "204.2",
+            "204.20",
+            "65π"
           ],
           "unknowns": [],
           "solids": [
@@ -2495,24 +2514,24 @@
           ],
           "viewbox": [
             600.0,
-            444.0
+            502.0
           ],
           "points": {
             "O": [
               340.0,
-              276.67
+              350.0
             ],
             "V": [
               340.0,
               50.0
             ],
             "L": [
-              170.0,
-              276.67
+              215.0,
+              350.0
             ],
             "R": [
-              510.0,
-              276.67
+              465.0,
+              350.0
             ]
           },
           "segments": [
@@ -2541,8 +2560,8 @@
           "ellipses": {
             "base": {
               "center": "O",
-              "rx": 170.0,
-              "ry": 57.8
+              "rx": 125.0,
+              "ry": 42.5
             }
           },
           "right_angles": [],
@@ -2550,22 +2569,22 @@
             {
               "target": "segment:OR",
               "from": [
-                425.0,
-                276.67
+                402.5,
+                350.0
               ],
               "to": [
-                450.0,
-                348.12
+                426.56,
+                418.75
               ]
             }
           ],
           "labels": [
             {
-              "text": "r = 12 cm",
+              "text": "r = 5 cm",
               "target": "segment:OR"
             },
             {
-              "text": "l = 20 cm",
+              "text": "l = 13 cm",
               "target": "segment:VR"
             }
           ],
@@ -2601,9 +2620,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "9f9ceb0f71579b7c1120d92f2aa3cbd5bbc6e16c76393c5f386e645e40dec3db",
+        "sha256": "b4f1e70dff7b075b93b1a9bbde76523f7c1920ed66ce37322edc606901d94df7",
         "width": 600,
-        "height": 444
+        "height": 502
       }
     ],
     "provenance": {
@@ -2624,7 +2643,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-512",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2653,7 +2672,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers considered restricted transport access while preparing a replacement design for the school science exhibit. The exhibit will be moved between classrooms on a wheeled trolley. A later inspection will compare the finished dimensions with this record. A spherical model has diameter 12 cm. Find its volume in cm³, correct to 1 decimal place."
+            "text": "An ice-cream shop serves round scoops. The spherical scoop has diameter 10 cm. Find its volume in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -2662,8 +2681,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "904.8",
-          "canonical_latex": "904.8",
+          "canonical_answer": "523.6",
+          "canonical_latex": "523.6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -2684,7 +2703,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Halve 12, then use "
+                "text": "Halve the diameter, then use "
               },
               {
                 "type": "inline_math",
@@ -2703,11 +2722,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "The radius is half the diameter."
               },
               {
                 "type": "display_math",
-                "latex": "r=12\\div2=6,\\quad V=\\frac43\\pi(6)^3=904.8"
+                "latex": "r=10\\div2=5,\\quad V=\\frac43\\pi(5)^3=\\frac{500}{3}\\pi"
               }
             ],
             "mark_type": "M",
@@ -2718,7 +2737,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{904.8}"
+                "latex": "V=523.599\\ldots=523.6\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -2733,8 +2752,8 @@
         "asset_key": "g5-l2-512-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-512-diagram-r3.svg",
-        "alt_text": "Sphere with a full diameter d = 12 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+        "path": "assets/g5-l2-512-diagram-r4.svg",
+        "alt_text": "Sphere with a full diameter d = 10 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "sphere",
@@ -2743,23 +2762,22 @@
           "template": "sphere_volume_diameter",
           "inputs": {
             "diameter": {
-              "value": 12,
+              "value": 10,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "diameter": {
-              "value": 12,
+              "value": 10,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "904.8",
-            "904.78",
-            "288π",
-            "6",
-            "r = 6"
+            "523.6",
+            "523.60",
+            "5",
+            "r = 5"
           ],
           "unknowns": [],
           "solids": [
@@ -2818,7 +2836,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "d = 12 cm",
+              "text": "d = 10 cm",
               "target": "segment:D1D2"
             }
           ],
@@ -2847,7 +2865,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "5af1cf48abea0c29e86122f4df8d508943158b6a0282f4b7cddb3774cdb2177d",
+        "sha256": "6d68df817aaeb0e4055b4079ea40902331dfe989c2b1ff5a301066b696b6e1e0",
         "width": 600,
         "height": 460
       }
@@ -2870,7 +2888,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-513",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2899,7 +2917,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Safety officers considered restricted transport access while preparing a replacement design for the coastal water tank. Pipe connections occupy part of the coastal tank platform. A later inspection will compare the finished dimensions with this record. A right pyramid has a rectangular base 5 cm by 5 cm and perpendicular height 9 cm. Find its volume in cm³."
+            "text": "The top of a trophy is a solid right pyramid. The pyramid has a rectangular base 5 cm by 5 cm and perpendicular height 9 cm. Find its volume in cm³."
           }
         ],
         "marks": 2,
@@ -2934,7 +2952,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "V=\\frac{1}{3}\\times (5\\times 5)\\times 9"
+                "latex": "V=\\frac{1}{3}\\times\\text{base area}\\times\\text{height}"
               },
               {
                 "type": "text",
@@ -2949,11 +2967,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Find the base area, then use the pyramid volume formula."
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13(5)(5)(9)=75"
+                "latex": "V=\\frac13\\times(5\\times5)\\times9=\\frac13\\times25\\times9"
               }
             ],
             "mark_type": "M",
@@ -2964,7 +2982,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{75}"
+                "latex": "V=75\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -2979,7 +2997,7 @@
         "asset_key": "g5-l2-513-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-513-diagram-r3.svg",
+        "path": "assets/g5-l2-513-diagram-r4.svg",
         "alt_text": "Right pyramid on a rectangular base 5 cm by 5 cm. The perpendicular height h = 9 cm runs from the apex to the centre of the base, with the right angle marked. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -3256,12 +3274,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-514",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3290,7 +3308,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Site engineers considered restricted transport access while preparing a replacement design for the village festival display. Paper lanterns will surround the display without touching its surface. A later inspection will compare the finished dimensions with this record. A cone has radius 8 cm and perpendicular height 12 cm. Find its volume in cm³, correct to 1 decimal place."
+            "text": "Grain in a model granary forms a heap shaped like a cone. The cone has radius 8 cm and perpendicular height 12 cm. Find its volume in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -3321,15 +3339,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "\\pi\\times 8^{2}\\times 12\\div 3"
+                "latex": "V=\\frac{1}{3}\\pi r^{2}h"
               },
               {
                 "type": "text",
-                "text": ", then round."
+                "text": ", then round only the final answer."
               }
             ]
           }
@@ -3340,11 +3358,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume of a cone:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13\\pi(8)^2(12)=804.2\\text{ cm}^3"
+                "latex": "V=\\frac13\\pi(8)^2(12)=256\\pi"
               }
             ],
             "mark_type": "M",
@@ -3355,7 +3373,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{804.2}"
+                "latex": "V=804.248\\ldots=804.2\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -3370,7 +3388,7 @@
         "asset_key": "g5-l2-514-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-514-diagram-r3.svg",
+        "path": "assets/g5-l2-514-diagram-r4.svg",
         "alt_text": "Cone with base radius r = 8 cm and perpendicular height h = 12 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -3570,12 +3588,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l2-515",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3604,7 +3622,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Community planners considered restricted transport access while preparing a replacement design for the mangrove research station. Researchers carry the equipment along a narrow mangrove boardwalk. A later inspection will compare the finished dimensions with this record. A cone has radius 8 cm and slant height 17 cm. Find its curved surface area in cm², correct to 1 decimal place."
+            "text": "The curved surface of a traffic cone is painted orange. The cone has radius 7 cm and slant height 24 cm. Find its curved surface area in cm², correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -3613,8 +3631,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "427.3",
-          "canonical_latex": "427.3",
+          "canonical_answer": "527.8",
+          "canonical_latex": "527.8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -3635,15 +3653,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Evaluate "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "\\pi\\times 8\\times 17"
+                "latex": "\\pi r l"
               },
               {
                 "type": "text",
-                "text": "; do not add the base."
+                "text": " with the slant height; do not add the base."
               }
             ]
           }
@@ -3654,11 +3672,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Curved surface area of a cone:"
               },
               {
                 "type": "display_math",
-                "latex": "A=\\pi(8)(17)=427.3\\text{ cm}^2"
+                "latex": "A=\\pi rl=\\pi\\times7\\times24=168\\pi"
               }
             ],
             "mark_type": "M",
@@ -3669,7 +3687,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{427.3}"
+                "latex": "A=527.788\\ldots=527.8\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
@@ -3684,8 +3702,8 @@
         "asset_key": "g5-l2-515-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l2-515-diagram-r3.svg",
-        "alt_text": "Cone with base radius r = 8 cm and slant height l = 17 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
+        "path": "assets/g5-l2-515-diagram-r4.svg",
+        "alt_text": "Cone with base radius r = 7 cm and slant height l = 24 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "cone",
@@ -3694,29 +3712,29 @@
           "template": "cone_curved_area",
           "inputs": {
             "radius": {
-              "value": 8,
+              "value": 7,
               "unit": "cm"
             },
             "slant_height": {
-              "value": 17,
+              "value": 24,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 8,
+              "value": 7,
               "unit": "cm"
             },
             "slant_height": {
-              "value": 17,
+              "value": 24,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "427.3",
-            "427.26",
-            "136π"
+            "527.8",
+            "527.79",
+            "168π"
           ],
           "unknowns": [],
           "solids": [
@@ -3733,7 +3751,7 @@
           ],
           "viewbox": [
             600.0,
-            514.0
+            491.0
           ],
           "points": {
             "O": [
@@ -3745,11 +3763,11 @@
               50.0
             ],
             "L": [
-              180.0,
+              248.52,
               350.0
             ],
             "R": [
-              500.0,
+              431.48,
               350.0
             ]
           },
@@ -3779,8 +3797,8 @@
           "ellipses": {
             "base": {
               "center": "O",
-              "rx": 160.0,
-              "ry": 54.4
+              "rx": 91.48,
+              "ry": 31.1
             }
           },
           "right_angles": [],
@@ -3788,22 +3806,22 @@
             {
               "target": "segment:OR",
               "from": [
-                420.0,
+                385.74,
                 350.0
               ],
               "to": [
-                444.06,
-                418.75
+                438.88,
+                416.43
               ]
             }
           ],
           "labels": [
             {
-              "text": "r = 8 cm",
+              "text": "r = 7 cm",
               "target": "segment:OR"
             },
             {
-              "text": "l = 17 cm",
+              "text": "l = 24 cm",
               "target": "segment:VR"
             }
           ],
@@ -3839,9 +3857,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "c24bbb760fb37ba9b7cb1f149f18bd0bb41ff6c62c0275f727560c31fa46c07e",
+        "sha256": "90e3efce424f8e9a0d949d431f10878f2cdf4f0f1b532e0f161bbc6fbe4d630e",
         "width": 600,
-        "height": 514
+        "height": 491
       }
     ],
     "provenance": {
@@ -3862,7 +3880,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-509",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3891,7 +3909,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quality inspectors considered restricted transport access while preparing a replacement design for the mountain weather shelter. Snow-free tropical mountain conditions still bring strong crosswinds. A later inspection will compare the finished dimensions with this record. A sphere has radius 100 cm. Find its volume in m³, correct to 1 decimal place."
+            "text": "A climbing frame in a park encloses a space shaped like a sphere. The sphere has radius 150 cm. Find its volume in m³, correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -3900,8 +3918,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "4.2",
-          "canonical_latex": "4.2",
+          "canonical_answer": "14.1",
+          "canonical_latex": "14.1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -3933,22 +3951,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume in cubic centimetres:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac43\\pi(100)^3=4188790.2\\text{ cm}^3=4.2\\text{ m}^3"
+                "latex": "V=\\frac43\\pi(150)^3=14137166.9\\ldots\\text{ cm}^3"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "There are 1,000,000 cm³ in 1 m³."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{4.2}"
+                "latex": "V=14137166.9\\ldots\\div1\\,000\\,000=14.1372\\ldots\\text{ m}^3"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=14.1\\text{ m}^3"
               }
             ],
             "mark_type": "A",
@@ -3963,8 +3996,8 @@
         "asset_key": "g5-l3-509-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-509-diagram-r2.svg",
-        "alt_text": "Sphere with radius r = 100 cm drawn from the centre to the surface. Not drawn to scale.",
+        "path": "assets/g5-l3-509-diagram-r3.svg",
+        "alt_text": "Sphere with radius r = 150 cm drawn from the centre to the surface. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "sphere",
@@ -3973,7 +4006,7 @@
           "template": "sphere_volume_radius",
           "inputs": {
             "radius": {
-              "value": 100,
+              "value": 150,
               "unit": "cm"
             },
             "answer_unit": "m³"
@@ -3981,18 +4014,18 @@
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 100,
+              "value": 150,
               "unit": "cm"
             },
             "answer_unit": "m³"
           },
           "forbidden_visible_labels": [
-            "4.2",
-            "4.19",
-            "1 m",
-            "4188790.2",
-            "4188790.20",
-            "1333333.333333π"
+            "14.1",
+            "14.14",
+            "1.5 m",
+            "14137166.9",
+            "14137166.94",
+            "4500000π"
           ],
           "unknowns": [],
           "solids": [
@@ -4047,7 +4080,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "r = 100 cm",
+              "text": "r = 150 cm",
               "target": "segment:OE"
             }
           ],
@@ -4067,7 +4100,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "fbc60e0e1dd3ac84d998c20841335f8c1ce39315f5339f9a9b195e2d49493896",
+        "sha256": "e045ac4e988e5445b261491a083492a1a8c0246d10adbe40a34a83e6a796e441",
         "width": 600,
         "height": 460
       }
@@ -4090,7 +4123,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-510",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4119,7 +4152,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Survey crew considered high daytime temperatures while preparing a replacement design for the sports hall roof model. Roof trusses leave a fixed clearance above the indoor court. A later inspection will compare the finished dimensions with this record. A closed cone has radius 9 cm and perpendicular height 12 cm. Find its total surface area in cm², correct to 1 decimal place."
+            "text": "A roof model is built as a cone with a floor. The closed cone has radius 9 cm and perpendicular height 12 cm. Find its total surface area in cm², correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -4150,11 +4183,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
+                "text": "Use Pythagoras’ theorem for the slant height "
               },
               {
                 "type": "inline_math",
-                "latex": "l=\\sqrt{9^{2}+12^{2}}"
+                "latex": "l"
               },
               {
                 "type": "text",
@@ -4185,22 +4218,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "The radius, perpendicular height and slant height form a right-angled triangle."
               },
               {
                 "type": "display_math",
-                "latex": "l=\\sqrt{9^2+12^2}=15,\\quad S=\\pi(9)(15)+\\pi(9)^2=678.6"
+                "latex": "l=\\sqrt{9^2+12^2}=15\\text{ cm}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Total surface area = curved area + base area."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{678.6}"
+                "latex": "S=\\pi(9)(15)+\\pi(9)^2=135\\pi+81\\pi=216\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=678.584\\ldots=678.6\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
@@ -4215,7 +4263,7 @@
         "asset_key": "g5-l3-510-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-510-diagram-r3.svg",
+        "path": "assets/g5-l3-510-diagram-r4.svg",
         "alt_text": "Closed cone with base radius r = 9 cm and perpendicular height h = 12 cm from the vertex to the centre of the base, right angle marked. The slant edge is drawn but not labelled. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -4421,12 +4469,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-511",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4455,7 +4503,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Student designers considered high daytime temperatures while preparing a replacement design for the public library sculpture. Visitors can walk around the sculpture but cannot touch it. A later inspection will compare the finished dimensions with this record. A rectangular pyramid has volume 270 cm³ and base dimensions 10 cm by 9 cm. Find its perpendicular height in cm."
+            "text": "A sculptor casts a solid in resin. The rectangular pyramid has volume 270 cm³ and base dimensions 10 cm by 9 cm. Find its perpendicular height in cm."
           }
         ],
         "marks": 3,
@@ -4486,11 +4534,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Write "
               },
               {
                 "type": "inline_math",
-                "latex": "270=(10\\times 9\\times h)\\div 3"
+                "latex": "270=\\frac{1}{3}\\times\\text{base area}\\times h"
+              },
+              {
+                "type": "text",
+                "text": " and solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "h"
               },
               {
                 "type": "text",
@@ -4505,22 +4561,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Find the base area."
               },
               {
                 "type": "display_math",
-                "latex": "270=\\frac13(10)(9)h\\Rightarrow h=9"
+                "latex": "10\\times9=90\\text{ cm}^2"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Substitute into the volume formula."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{9}"
+                "latex": "270=\\frac13\\times90\\times h"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=\\frac{3\\times270}{90}=9\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -4535,7 +4606,7 @@
         "asset_key": "g5-l3-511-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-511-diagram-r3.svg",
+        "path": "assets/g5-l3-511-diagram-r4.svg",
         "alt_text": "Rectangular-based pyramid with base 10 cm by 9 cm and volume 270 cm³. The perpendicular height h runs from the apex to the centre of the base, with the right angle marked. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -4802,19 +4873,19 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-512",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G5",
     "primary_outcome": "5.6",
-    "title": "Cone and hemisphere capacity",
+    "title": "Volume of a cone joined to a hemisphere",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -4836,7 +4907,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team considered high daytime temperatures while preparing a replacement design for the aquaculture feed hopper. Feed must flow smoothly without remaining in the hopper corners. A later inspection will compare the finished dimensions with this record. A solid is formed by joining a cone of radius 3 cm and height 4 cm to a hemisphere of the same radius. Find the total volume in cm³, correct to 1 decimal place."
+            "text": "An ice-cream cone is filled and then topped with a scoop, modelled by joining a cone of radius 4 cm and height 9 cm to a hemisphere of the same radius. The height is the perpendicular height of the cone. Find the total volume of ice cream in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -4845,8 +4916,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "94.2",
-          "canonical_latex": "94.2",
+          "canonical_answer": "284.8",
+          "canonical_latex": "284.8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -4878,22 +4949,41 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume of the cone:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13\\pi(3)^2(4)+\\frac23\\pi(3)^3=94.2"
+                "latex": "\\frac13\\pi(4)^2(9)=48\\pi"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Volume of the hemisphere, half of a sphere of the same radius:"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{94.2}"
+                "latex": "\\frac12\\times\\frac43\\pi(4)^3=\\frac{128}{3}\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the two volumes."
+              },
+              {
+                "type": "display_math",
+                "latex": "V=\\frac{272}{3}\\pi=284.838\\ldots=284.8\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -4908,8 +4998,8 @@
         "asset_key": "g5-l3-512-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-512-diagram-r2.svg",
-        "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 3 cm. The cone's perpendicular height is h = 4 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
+        "path": "assets/g5-l3-512-diagram-r3.svg",
+        "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 4 cm. The cone's perpendicular height is h = 9 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "cone_hemisphere",
@@ -4918,32 +5008,33 @@
           "template": "cone_hemisphere_volume",
           "inputs": {
             "radius": {
-              "value": 3,
+              "value": 4,
               "unit": "cm"
             },
             "height": {
-              "value": 4,
+              "value": 9,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 3,
+              "value": 4,
               "unit": "cm"
             },
             "cone_height": {
-              "value": 4,
+              "value": 9,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "94.2",
-            "94.25",
-            "37.7",
-            "37.70",
-            "56.5",
-            "56.55"
+            "284.8",
+            "284.84",
+            "150.8",
+            "150.80",
+            "134.0",
+            "134",
+            "134.04"
           ],
           "unknowns": [],
           "solids": [
@@ -4969,36 +5060,36 @@
           ],
           "viewbox": [
             600.0,
-            496.0
+            507.0
           ],
           "points": {
             "hO": [
               330.0,
-              246.0
+              296.0
             ],
             "hL": [
-              180.0,
-              246.0
+              218.89,
+              296.0
             ],
             "hR": [
-              480.0,
-              246.0
+              441.11,
+              296.0
             ],
             "O": [
               330.0,
-              246.0
+              296.0
             ],
             "V": [
               330.0,
               46.0
             ],
             "L": [
-              180.0,
-              246.0
+              218.89,
+              296.0
             ],
             "R": [
-              480.0,
-              246.0
+              441.11,
+              296.0
             ]
           },
           "segments": [
@@ -5034,13 +5125,13 @@
           "ellipses": {
             "hrim": {
               "center": "hO",
-              "rx": 150.0,
-              "ry": 51.0
+              "rx": 111.11,
+              "ry": 37.78
             },
             "base": {
               "center": "O",
-              "rx": 150.0,
-              "ry": 51.0
+              "rx": 111.11,
+              "ry": 37.78
             }
           },
           "right_angles": [
@@ -5057,33 +5148,33 @@
             {
               "target": "segment:OR",
               "from": [
-                405.0,
-                246.0
+                394.44,
+                296.0
               ],
               "to": [
-                507.31,
-                338.08
+                448.97,
+                304.18
               ]
             },
             {
               "target": "segment:VO",
               "from": [
                 330.0,
-                130.0
+                171.0
               ],
               "to": [
                 258.79,
-                105.08
+                146.08
               ]
             }
           ],
           "labels": [
             {
-              "text": "r = 3 cm",
+              "text": "r = 4 cm",
               "target": "segment:OR"
             },
             {
-              "text": "h = 4 cm",
+              "text": "h = 9 cm",
               "target": "segment:VO"
             }
           ],
@@ -5140,9 +5231,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "c894d2a76d79c36b390a5982a1e3752a25b065f4b226c9d6eda08762aa62c846",
+        "sha256": "6739e0d27dac218aaed9025066ae3601c689ddbde114016b455395d08a327ff2",
         "width": 600,
-        "height": 496
+        "height": 507
       }
     ],
     "provenance": {
@@ -5163,7 +5254,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-513",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5192,7 +5283,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers considered high daytime temperatures while preparing a replacement design for the clinic shade structure. The clinic needs a washable cover above the waiting area. A later inspection will compare the finished dimensions with this record. A sphere has radius 200 cm. Find its volume in m³, correct to 1 decimal place."
+            "text": "A planetarium model of the Earth is a sphere. The sphere has radius 260 cm. Find its volume in m³, correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -5201,8 +5292,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "33.5",
-          "canonical_latex": "33.5",
+          "canonical_answer": "73.6",
+          "canonical_latex": "73.6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -5234,22 +5325,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume in cubic centimetres:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac43\\pi(200)^3=33510321.6\\text{ cm}^3=33.5\\text{ m}^3"
+                "latex": "V=\\frac43\\pi(260)^3=73622176.6\\ldots\\text{ cm}^3"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "There are 1,000,000 cm³ in 1 m³."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{33.5}"
+                "latex": "V=73622176.6\\ldots\\div1\\,000\\,000=73.6222\\ldots\\text{ m}^3"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "V=73.6\\text{ m}^3"
               }
             ],
             "mark_type": "A",
@@ -5264,8 +5370,8 @@
         "asset_key": "g5-l3-513-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-513-diagram-r2.svg",
-        "alt_text": "Sphere with radius r = 200 cm drawn from the centre to the surface. Not drawn to scale.",
+        "path": "assets/g5-l3-513-diagram-r3.svg",
+        "alt_text": "Sphere with radius r = 260 cm drawn from the centre to the surface. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "sphere",
@@ -5274,7 +5380,7 @@
           "template": "sphere_volume_radius",
           "inputs": {
             "radius": {
-              "value": 200,
+              "value": 260,
               "unit": "cm"
             },
             "answer_unit": "m³"
@@ -5282,18 +5388,18 @@
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 200,
+              "value": 260,
               "unit": "cm"
             },
             "answer_unit": "m³"
           },
           "forbidden_visible_labels": [
-            "33.5",
-            "33.51",
-            "2 m",
-            "33510321.6",
-            "33510321.64",
-            "10666666.666667π"
+            "73.6",
+            "73.62",
+            "2.6 m",
+            "73622176.6",
+            "73622176.64",
+            "23434666.666667π"
           ],
           "unknowns": [],
           "solids": [
@@ -5348,7 +5454,7 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "r = 200 cm",
+              "text": "r = 260 cm",
               "target": "segment:OE"
             }
           ],
@@ -5368,7 +5474,7 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "71a74ceb330e540c2b32c1418ac79eed83a182f9ce576b3558daa4303cdf8a1e",
+        "sha256": "fc53da8d108e8e867fbcc2949719d136a04afc0e0916e0c59d7a911a5db42a99",
         "width": 600,
         "height": 460
       }
@@ -5391,7 +5497,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-514",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5420,7 +5526,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Safety officers considered high daytime temperatures while preparing a replacement design for the orchard irrigation reservoir. Irrigation pipes enter the reservoir through a low side wall. A later inspection will compare the finished dimensions with this record. A closed cone has radius 6 cm and perpendicular height 8 cm. Find its total surface area in cm², correct to 1 decimal place."
+            "text": "A tall road marker is a solid cone. The closed cone has radius 7 cm and perpendicular height 24 cm. Find its total surface area in cm², correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -5429,8 +5535,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "301.6",
-          "canonical_latex": "301.6",
+          "canonical_answer": "703.7",
+          "canonical_latex": "703.7",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -5451,11 +5557,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use "
+                "text": "Use Pythagoras’ theorem for the slant height "
               },
               {
                 "type": "inline_math",
-                "latex": "l=\\sqrt{6^{2}+8^{2}}"
+                "latex": "l"
               },
               {
                 "type": "text",
@@ -5486,22 +5592,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "The radius, perpendicular height and slant height form a right-angled triangle."
               },
               {
                 "type": "display_math",
-                "latex": "l=\\sqrt{6^2+8^2}=10,\\quad S=\\pi(6)(10)+\\pi(6)^2=301.6"
+                "latex": "l=\\sqrt{7^2+24^2}=25\\text{ cm}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Total surface area = curved area + base area."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{301.6}"
+                "latex": "S=\\pi(7)(25)+\\pi(7)^2=175\\pi+49\\pi=224\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=703.717\\ldots=703.7\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
@@ -5516,8 +5637,8 @@
         "asset_key": "g5-l3-514-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-514-diagram-r3.svg",
-        "alt_text": "Closed cone with base radius r = 6 cm and perpendicular height h = 8 cm from the vertex to the centre of the base, right angle marked. The slant edge is drawn but not labelled. Not drawn to scale.",
+        "path": "assets/g5-l3-514-diagram-r4.svg",
+        "alt_text": "Closed cone with base radius r = 7 cm and perpendicular height h = 24 cm from the vertex to the centre of the base, right angle marked. The slant edge is drawn but not labelled. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "cone",
@@ -5526,35 +5647,35 @@
           "template": "cone_total_area",
           "inputs": {
             "radius": {
-              "value": 6,
+              "value": 7,
               "unit": "cm"
             },
             "height": {
-              "value": 8,
+              "value": 24,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 6,
+              "value": 7,
               "unit": "cm"
             },
             "height": {
-              "value": 8,
+              "value": 24,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "301.6",
-            "301.59",
-            "188.5",
-            "188.50",
-            "113.1",
-            "113.10",
-            "10",
-            "96π",
-            "60π"
+            "703.7",
+            "703.72",
+            "549.8",
+            "549.78",
+            "153.9",
+            "153.94",
+            "25",
+            "224π",
+            "175π"
           ],
           "unknowns": [],
           "solids": [
@@ -5571,24 +5692,24 @@
           ],
           "viewbox": [
             600.0,
-            444.0
+            490.0
           ],
           "points": {
             "O": [
               340.0,
-              276.67
+              350.0
             ],
             "V": [
               340.0,
               50.0
             ],
             "L": [
-              170.0,
-              276.67
+              252.5,
+              350.0
             ],
             "R": [
-              510.0,
-              276.67
+              427.5,
+              350.0
             ]
           },
           "segments": [
@@ -5624,8 +5745,8 @@
           "ellipses": {
             "base": {
               "center": "O",
-              "rx": 170.0,
-              "ry": 57.8
+              "rx": 87.5,
+              "ry": 29.75
             }
           },
           "right_angles": [
@@ -5642,33 +5763,33 @@
             {
               "target": "segment:OR",
               "from": [
-                425.0,
-                276.67
+                383.75,
+                350.0
               ],
               "to": [
-                449.06,
-                345.42
+                377.71,
+                410.39
               ]
             },
             {
               "target": "segment:VO",
               "from": [
                 340.0,
-                163.34
+                200.0
               ],
               "to": [
-                245.19,
-                130.15
+                284.99,
+                205.5
               ]
             }
           ],
           "labels": [
             {
-              "text": "r = 6 cm",
+              "text": "r = 7 cm",
               "target": "segment:OR"
             },
             {
-              "text": "h = 8 cm",
+              "text": "h = 24 cm",
               "target": "segment:VO"
             }
           ],
@@ -5704,9 +5825,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "1bdbd09dd4303fdc38901108089cabe5e27f5e384afa8e6b79a4f0b80616aa57",
+        "sha256": "b95b62e7e503abbd137401fda967e29da37fdf1d469b9d3ec919801aa9a05af8",
         "width": 600,
-        "height": 444
+        "height": 490
       }
     ],
     "provenance": {
@@ -5727,7 +5848,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l3-515",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5756,7 +5877,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Site engineers considered high daytime temperatures while preparing a replacement design for the ferry terminal sign. Passenger sight lines determine the sign installation height. A later inspection will compare the finished dimensions with this record. A rectangular pyramid has volume 70 cm³ and base dimensions 7 cm by 5 cm. Find its perpendicular height in cm."
+            "text": "A small block of wax is carved for a candle-making class. The rectangular pyramid has volume 70 cm³ and base dimensions 7 cm by 5 cm. Find its perpendicular height in cm."
           }
         ],
         "marks": 3,
@@ -5787,11 +5908,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
+                "text": "Write "
               },
               {
                 "type": "inline_math",
-                "latex": "70=(7\\times 5\\times h)\\div 3"
+                "latex": "70=\\frac{1}{3}\\times\\text{base area}\\times h"
+              },
+              {
+                "type": "text",
+                "text": " and solve for "
+              },
+              {
+                "type": "inline_math",
+                "latex": "h"
               },
               {
                 "type": "text",
@@ -5806,22 +5935,37 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Find the base area."
               },
               {
                 "type": "display_math",
-                "latex": "70=\\frac13(7)(5)h\\Rightarrow h=6"
+                "latex": "7\\times5=35\\text{ cm}^2"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Substitute into the volume formula."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{6}"
+                "latex": "70=\\frac13\\times35\\times h"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=\\frac{3\\times70}{35}=6\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -5836,7 +5980,7 @@
         "asset_key": "g5-l3-515-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-515-diagram-r3.svg",
+        "path": "assets/g5-l3-515-diagram-r4.svg",
         "alt_text": "Rectangular-based pyramid with base 7 cm by 5 cm and volume 70 cm³. The perpendicular height h runs from the apex to the centre of the base, with the right angle marked. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -6098,19 +6242,19 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l3-516",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G5",
     "primary_outcome": "5.6",
-    "title": "Cone and hemisphere capacity",
+    "title": "Volume of a cone joined to a hemisphere",
     "difficulty": 3,
     "calculator_allowed": true,
     "question_type": "structured",
@@ -6132,7 +6276,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Community planners considered high daytime temperatures while preparing a replacement design for the recycling centre container. Sorted materials arrive in reusable bins of fixed capacity. A later inspection will compare the finished dimensions with this record. A solid is formed by joining a cone of radius 7 cm and height 24 cm to a hemisphere of the same radius. Find the total volume in cm³, correct to 1 decimal place."
+            "text": "A marker buoy is a solid formed by joining a cone of radius 6 cm and height 10 cm to a hemisphere of the same radius. The cone's perpendicular height is 10 cm. Find the volume of the buoy in cm³, correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -6141,8 +6285,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "1949.9",
-          "canonical_latex": "1949.9",
+          "canonical_answer": "829.4",
+          "canonical_latex": "829.4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
@@ -6174,22 +6318,41 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume of the cone:"
               },
               {
                 "type": "display_math",
-                "latex": "V=\\frac13\\pi(7)^2(24)+\\frac23\\pi(7)^3=1949.9"
+                "latex": "\\frac13\\pi(6)^2(10)=120\\pi"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Volume of the hemisphere, half of a sphere of the same radius:"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{1949.9}"
+                "latex": "\\frac12\\times\\frac43\\pi(6)^3=144\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the two volumes."
+              },
+              {
+                "type": "display_math",
+                "latex": "V=264\\pi=829.380\\ldots=829.4\\text{ cm}^3"
               }
             ],
             "mark_type": "A",
@@ -6204,8 +6367,8 @@
         "asset_key": "g5-l3-516-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l3-516-diagram-r2.svg",
-        "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 7 cm. The cone's perpendicular height is h = 24 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
+        "path": "assets/g5-l3-516-diagram-r3.svg",
+        "alt_text": "Solid made of a cone joined to a hemisphere of the same radius r = 6 cm. The cone's perpendicular height is h = 10 cm. The joining circle's hidden half is dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
           "diagram_kind": "cone_hemisphere",
@@ -6214,32 +6377,33 @@
           "template": "cone_hemisphere_volume",
           "inputs": {
             "radius": {
-              "value": 7,
+              "value": 6,
               "unit": "cm"
             },
             "height": {
-              "value": 24,
+              "value": 10,
               "unit": "cm"
             }
           },
           "not_to_scale": true,
           "dimensions": {
             "radius": {
-              "value": 7,
+              "value": 6,
               "unit": "cm"
             },
             "cone_height": {
-              "value": 24,
+              "value": 10,
               "unit": "cm"
             }
           },
           "forbidden_visible_labels": [
-            "1949.9",
-            "1949.88",
-            "1231.5",
-            "1231.50",
-            "718.4",
-            "718.38"
+            "829.4",
+            "829.38",
+            "377.0",
+            "377",
+            "376.99",
+            "452.4",
+            "452.39"
           ],
           "unknowns": [],
           "solids": [
@@ -6265,7 +6429,7 @@
           ],
           "viewbox": [
             600.0,
-            469.0
+            546.0
           ],
           "points": {
             "hO": [
@@ -6273,11 +6437,11 @@
               296.0
             ],
             "hL": [
-              257.08,
+              180.0,
               296.0
             ],
             "hR": [
-              402.92,
+              480.0,
               296.0
             ],
             "O": [
@@ -6289,11 +6453,11 @@
               46.0
             ],
             "L": [
-              257.08,
+              180.0,
               296.0
             ],
             "R": [
-              402.92,
+              480.0,
               296.0
             ]
           },
@@ -6330,13 +6494,13 @@
           "ellipses": {
             "hrim": {
               "center": "hO",
-              "rx": 72.92,
-              "ry": 24.79
+              "rx": 150.0,
+              "ry": 51.0
             },
             "base": {
               "center": "O",
-              "rx": 72.92,
-              "ry": 24.79
+              "rx": 150.0,
+              "ry": 51.0
             }
           },
           "right_angles": [
@@ -6353,12 +6517,12 @@
             {
               "target": "segment:OR",
               "from": [
-                366.46,
+                405.0,
                 296.0
               ],
               "to": [
-                440.75,
-                333.14
+                507.31,
+                388.08
               ]
             },
             {
@@ -6368,18 +6532,18 @@
                 171.0
               ],
               "to": [
-                274.99,
-                176.5
+                227.49,
+                135.12
               ]
             }
           ],
           "labels": [
             {
-              "text": "r = 7 cm",
+              "text": "r = 6 cm",
               "target": "segment:OR"
             },
             {
-              "text": "h = 24 cm",
+              "text": "h = 10 cm",
               "target": "segment:VO"
             }
           ],
@@ -6436,9 +6600,9 @@
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "e8529f14f9fdc7927cf48d63add42840f88838c2097b0b0104ca5f5c3f92a2dc",
+        "sha256": "792e1a7572764a5470bdce335b39dac1e983653b96038c16d1c37d3537bd953e",
         "width": 600,
-        "height": 469
+        "height": 546
       }
     ],
     "provenance": {
@@ -6459,7 +6623,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-505",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -6488,7 +6652,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quality inspectors considered high daytime temperatures while preparing a replacement design for the forest ranger outpost. Rangers assemble the shelter from parts carried on foot. A later inspection will compare the finished dimensions with this record. A closed square-based pyramid has base side 8 m and slant height 13 m on every face. Covering costs $6 per m². Find the total covering cost in dollars."
+            "text": "All the faces of a storage hut, including the floor, are to be lined. The closed square-based pyramid has base side 8 m and slant height 13 m on every face. Covering costs S$6 per m². Find the total covering cost in dollars. Enter the number only."
           }
         ],
         "marks": 4,
@@ -6519,7 +6683,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find the total area, then multiply by $6 per m²."
+                "text": "Find the total area, then multiply by S$6 per m²."
               }
             ]
           }
@@ -6530,22 +6694,52 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Area of the square base:"
               },
               {
                 "type": "display_math",
-                "latex": "S=8^2+4(\\frac12)(8)(13)=272,\\quad C=272(6)=1632"
+                "latex": "8^2=64\\text{ m}^2"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Area of the four triangular faces:"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{1632}"
+                "latex": "4\\times\\frac12\\times8\\times13=208\\text{ m}^2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Total area times the rate:"
+              },
+              {
+                "type": "display_math",
+                "latex": "(64+208)\\times6=272\\times6"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{cost}=\\text{S\\$}1632"
               }
             ],
             "mark_type": "A",
@@ -6560,7 +6754,7 @@
         "asset_key": "g5-l4-505-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l4-505-diagram-r2.svg",
+        "path": "assets/g5-l4-505-diagram-r3.svg",
         "alt_text": "Closed square-based pyramid with base side 8 m. The slant height l = 13 m is marked on a triangular face from the apex to the midpoint of a base edge. Hidden edges are dashed. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -6815,12 +7009,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-506",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -6849,7 +7043,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Survey crew considered a narrow installation area while preparing a replacement design for the museum planet model. Planet labels must remain readable under the gallery lights. A later inspection will compare the finished dimensions with this record. The radius of a sphere is increased by 20%. Find the percentage increase in its volume, correct to 1 decimal place."
+            "text": "A soap bubble grows as more air is blown into it. The radius of a sphere is increased by 20%. Find the percentage increase in its volume, correct to 1 decimal place."
           }
         ],
         "marks": 4,
@@ -6888,7 +7082,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Cube the radius scale factor 1.2, subtract 1, then convert to a percentage."
+                "text": "Write the new radius as "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1.2r"
+              },
+              {
+                "type": "text",
+                "text": " and compare the two volume formulas."
               }
             ]
           }
@@ -6899,22 +7101,52 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "A 20% increase multiplies the radius by 1.2."
               },
               {
                 "type": "display_math",
-                "latex": "\\left(1.2^3-1\\right)\\times100\\%=72.8\\%"
+                "latex": "R=1.2r"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Volume depends on the cube of the radius."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{72.8\\%}"
+                "latex": "\\frac{V_{\\text{new}}}{V_{\\text{old}}}=\\frac{\\frac43\\pi(1.2r)^3}{\\frac43\\pi r^3}=1.2^3=1.728"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Convert the increase to a percentage."
+              },
+              {
+                "type": "display_math",
+                "latex": "(1.728-1)\\times100\\%"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "72.8\\%"
               }
             ],
             "mark_type": "A",
@@ -6929,7 +7161,7 @@
         "asset_key": "g5-l4-506-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l4-506-diagram-r2.svg",
+        "path": "assets/g5-l4-506-diagram-r3.svg",
         "alt_text": "Two spheres side by side: the original with radius r, and the enlarged sphere with radius R, which is r increased by 20%. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -7101,12 +7333,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g5-l4-507",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -7135,7 +7367,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Student designers considered a narrow installation area while preparing a replacement design for the market pavilion ornament. Market stalls need space below the hanging ornament. A later inspection will compare the finished dimensions with this record. A cone of height 15 cm is filled to one eighth of its full volume. The liquid forms a smaller similar cone at the tip. Find the liquid depth in cm."
+            "text": "A drinking glass shaped as a cone is held with its vertex pointing down. The cone of height 15 cm is filled to one eighth of its full volume, and the liquid forms a cone similar to the glass. Find the depth of the liquid in cm."
           }
         ],
         "marks": 4,
@@ -7193,22 +7425,48 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "The liquid forms a cone similar to the container, so the volume ratio is the cube of the height ratio."
               },
               {
                 "type": "display_math",
-                "latex": "\\left(\\frac{h}{15}\\right)^3=\\frac18\\Rightarrow h=7.5"
+                "latex": "\\left(\\frac{h}{15}\\right)^3=\\frac{1}{8}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Take the cube root of both sides."
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{7.5}"
+                "latex": "\\frac{h}{15}=\\frac{1}{2}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=15\\times\\frac{1}{2}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=7.5\\text{ cm}"
               }
             ],
             "mark_type": "A",
@@ -7223,7 +7481,7 @@
         "asset_key": "g5-l4-507-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l4-507-diagram-r3.svg",
+        "path": "assets/g5-l4-507-diagram-r4.svg",
         "alt_text": "Conical container held with its vertex pointing down, height h = 15 cm. Liquid fills one eighth of the volume and forms a smaller cone at the tip; its depth is marked but not given. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -7474,12 +7732,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l4-508",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -7508,7 +7766,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team considered a narrow installation area while preparing a replacement design for the river survey buoy. The buoy houses sensors above a sealed battery compartment. A later inspection will compare the finished dimensions with this record. A cone of radius 5 cm and slant height 13 cm is joined base-to-base to a hemisphere of radius 5 cm. Find the external surface area in cm², correct to 1 decimal place."
+            "text": "A buoy is painted all over the outside. The buoy's cone of radius 5 cm and slant height 13 cm is joined base-to-base to a hemisphere of radius 5 cm. Find the external surface area in cm², correct to 1 decimal place."
           }
         ],
         "marks": 4,
@@ -7550,22 +7808,52 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Curved area of the cone:"
               },
               {
                 "type": "display_math",
-                "latex": "S=\\pi(5)(13)+2\\pi(5)^2=361.3"
+                "latex": "\\pi(5)(13)=65\\pi"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Curved area of the hemisphere:"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{361.3}"
+                "latex": "2\\pi(5)^2=50\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "The joined circular faces are inside the solid, so add only the two curved areas."
+              },
+              {
+                "type": "display_math",
+                "latex": "S=65\\pi+50\\pi=115\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "S=361.283\\ldots=361.3\\text{ cm}^2"
               }
             ],
             "mark_type": "A",
@@ -7580,7 +7868,7 @@
         "asset_key": "g5-l4-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l4-508-diagram-r2.svg",
+        "path": "assets/g5-l4-508-diagram-r3.svg",
         "alt_text": "Solid made of a cone joined base to base with a hemisphere of radius r = 5 cm. The cone's slant height is l = 13 cm. The joined circular faces are hidden inside the solid. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -7804,12 +8092,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g5-l5-502",
     "bank_key": "g3-sec2-g5-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -7838,7 +8126,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers considered a narrow installation area while preparing a replacement design for the solar farm equipment cover. Cable trays run beneath the protective equipment cover. A later inspection will compare the finished dimensions with this record. Four solid spheres of radius 3 cm are melted and recast into identical cones of radius 2 cm and height 9 cm, with no material lost. How many complete cones are made?"
+            "text": "A foundry recycles metal with no material lost. Four solid spheres of radius 3 cm are melted and recast into identical cones of radius 2 cm and height 9 cm, where 9 cm is the perpendicular height. How many complete cones are made?"
           }
         ],
         "marks": 5,
@@ -7880,22 +8168,67 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select the relevant dimensions and apply the mensuration relationship."
+                "text": "Volume of one sphere:"
               },
               {
                 "type": "display_math",
-                "latex": "n=\\frac{4(\\frac43\\pi(3)^3)}{\\frac13\\pi(2)^2(9)}=12"
+                "latex": "\\frac43\\pi(3)^3=36\\pi"
               }
             ],
             "mark_type": "M",
-            "mark_value": 4
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "Volume of the four spheres:"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{12}"
+                "latex": "4\\times36\\pi=144\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Volume of one cone:"
+              },
+              {
+                "type": "display_math",
+                "latex": "\\frac13\\pi(2)^2(9)=12\\pi"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "text",
+                "text": "Divide the total volume by the volume of one cone."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\frac{144\\pi}{12\\pi}=12"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 5,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "12\\text{ cones}"
               }
             ],
             "mark_type": "A",
@@ -7910,7 +8243,7 @@
         "asset_key": "g5-l5-502-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g5-l5-502-diagram-r2.svg",
+        "path": "assets/g5-l5-502-diagram-r3.svg",
         "alt_text": "Four separate solid spheres, each of radius 3 cm, are melted and recast into identical separate cones of radius 2 cm and perpendicular height 9 cm. One sphere and one cone are drawn. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-mensuration-svg-v2",
@@ -8190,7 +8523,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
     }
   }
 ]

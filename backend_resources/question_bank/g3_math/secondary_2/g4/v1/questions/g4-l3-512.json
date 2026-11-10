@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-512",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maintenance team noted high winds during seasonal storms while preparing a replacement frame. A triangular support at the harbour access ramp has side lengths 7 cm, 24 cm and 25 cm. Enter 1 if it is right-angled and 0 if it is not."
+          "text": "A triangular step plate is cut for a harbour access ramp. It has side lengths 7 cm, 0.24 m and 25 cm. Enter 1 if it is right-angled and 0 if it is not."
         }
       ],
       "marks": 3,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Treat the longest side as the possible hypotenuse."
+              "text": "Write all three sides in the same unit, then treat the longest side as the possible hypotenuse."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compare "
+              "text": "In centimetres, compare "
             },
             {
               "type": "inline_math",
@@ -78,7 +78,22 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Write every side in centimetres."
+            },
+            {
+              "type": "display_math",
+              "latex": "0.24\\text{ m}=24\\text{ cm}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Square the two shorter sides and the longest side."
             },
             {
               "type": "display_math",
@@ -86,11 +101,15 @@
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
-          "position": 2,
+          "position": 3,
           "content": [
+            {
+              "type": "text",
+              "text": "The two results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 25 cm side."
+            },
             {
               "type": "display_math",
               "latex": "\\boxed{1}"
@@ -117,6 +136,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-530",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student designers considered a strict material budget while preparing a capacity check for the evacuation centre supply bin. Supply packages are counted before every emergency exercise. The design must also be explained clearly in the safety briefing. A cone has radius 4 cm and perpendicular height 18 cm. Find its volume in cm³, correct to 1 decimal place."
+          "text": "A toy set includes a solid wooden cone. The cone has radius 5 cm and perpendicular height 12 cm. Find its volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "301.6",
-        "canonical_latex": "301.6",
+        "canonical_answer": "314.2",
+        "canonical_latex": "314.2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,15 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Use "
             },
             {
               "type": "inline_math",
-              "latex": "\\pi\\times 4^{2}\\times 18\\div 3"
+              "latex": "V=\\frac{1}{3}\\pi r^{2}h"
             },
             {
               "type": "text",
-              "text": ", then round."
+              "text": ", then round only the final answer."
             }
           ]
         }
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume of a cone:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac13\\pi(4)^2(18)=301.6\\text{ cm}^3"
+              "latex": "V=\\frac13\\pi(5)^2(12)=100\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{301.6}"
+              "latex": "V=314.159\\ldots=314.2\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g5-l2-530-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-530-diagram-r3.svg",
-      "alt_text": "Cone with base radius r = 4 cm and perpendicular height h = 18 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
+      "path": "assets/g5-l2-530-diagram-r4.svg",
+      "alt_text": "Cone with base radius r = 5 cm and perpendicular height h = 12 cm from the vertex to the centre of the base, right angle marked. The hidden half of the base is dashed. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "cone",
@@ -119,29 +119,29 @@
         "template": "cone_volume",
         "inputs": {
           "radius": {
-            "value": 4,
+            "value": 5,
             "unit": "cm"
           },
           "height": {
-            "value": 18,
+            "value": 12,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "radius": {
-            "value": 4,
+            "value": 5,
             "unit": "cm"
           },
           "height": {
-            "value": 18,
+            "value": 12,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "301.6",
-          "301.59",
-          "96π"
+          "314.2",
+          "314.16",
+          "100π"
         ],
         "unknowns": [],
         "solids": [
@@ -158,7 +158,7 @@
         ],
         "viewbox": [
           600.0,
-          489.0
+          502.0
         ],
         "points": {
           "O": [
@@ -170,11 +170,11 @@
             50.0
           ],
           "L": [
-            254.29,
+            215.0,
             350.0
           ],
           "R": [
-            425.71,
+            465.0,
             350.0
           ]
         },
@@ -211,8 +211,8 @@
         "ellipses": {
           "base": {
             "center": "O",
-            "rx": 85.71,
-            "ry": 29.14
+            "rx": 125.0,
+            "ry": 42.5
           }
         },
         "right_angles": [
@@ -229,33 +229,33 @@
           {
             "target": "segment:OR",
             "from": [
-              382.86,
+              402.5,
               350.0
             ],
             "to": [
-              376.82,
-              410.39
+              426.56,
+              418.75
             ]
           },
           {
             "target": "segment:VO",
             "from": [
               340.0,
-              200.0
+              176.0
             ],
             "to": [
-              284.99,
-              205.5
+              261.09,
+              148.38
             ]
           }
         ],
         "labels": [
           {
-            "text": "r = 4 cm",
+            "text": "r = 5 cm",
             "target": "segment:OR"
           },
           {
-            "text": "h = 18 cm",
+            "text": "h = 12 cm",
             "target": "segment:VO"
           }
         ],
@@ -291,9 +291,9 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "6e239d1b8bdccdf8ada0bcec8cfc28ec3af3ea38077dfccacbf8b2fe74fd5942",
+      "sha256": "e901744630a199781bf1a97284d6bb6971b16149f70d4f3d6b368190b47962c3",
       "width": 600,
-      "height": 489
+      "height": 502
     }
   ],
   "provenance": {

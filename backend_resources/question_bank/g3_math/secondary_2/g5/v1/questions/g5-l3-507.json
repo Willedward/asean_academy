@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l3-507",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered salt exposure near the coast while preparing a replacement design for the solar farm equipment cover. A sphere has radius 200 cm. Find its volume in m³, correct to 1 decimal place."
+          "text": "A large gas holder is shaped as a sphere. The sphere has radius 200 cm. Find its volume in m³, correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -71,22 +71,37 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Volume in cubic centimetres:"
             },
             {
               "type": "display_math",
-              "latex": "V=\\frac43\\pi(200)^3=33510321.6\\text{ cm}^3=33.5\\text{ m}^3"
+              "latex": "V=\\frac43\\pi(200)^3=33510321.6\\ldots\\text{ cm}^3"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "There are 1,000,000 cm³ in 1 m³."
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{33.5}"
+              "latex": "V=33510321.6\\ldots\\div1\\,000\\,000=33.5103\\ldots\\text{ m}^3"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "V=33.5\\text{ m}^3"
             }
           ],
           "mark_type": "A",
@@ -101,7 +116,7 @@
       "asset_key": "g5-l3-507-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l3-507-diagram-r2.svg",
+      "path": "assets/g5-l3-507-diagram-r3.svg",
       "alt_text": "Sphere with radius r = 200 cm drawn from the centre to the surface. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -223,6 +238,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

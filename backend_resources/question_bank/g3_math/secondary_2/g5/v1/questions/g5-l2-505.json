@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-505",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Maintenance team considered heavy seasonal rainfall while preparing a replacement design for the aquaculture feed hopper. A cone has radius 8 cm and slant height 17 cm. Find its curved surface area in cm², correct to 1 decimal place."
+          "text": "The roof of a model hut is a cone, and only its sloping surface is tiled. The cone has radius 8 cm and slant height 17 cm. Find its curved surface area in cm², correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -60,15 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Evaluate "
+              "text": "Use "
             },
             {
               "type": "inline_math",
-              "latex": "\\pi\\times 8\\times 17"
+              "latex": "\\pi r l"
             },
             {
               "type": "text",
-              "text": "; do not add the base."
+              "text": " with the slant height; do not add the base."
             }
           ]
         }
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "Curved surface area of a cone:"
             },
             {
               "type": "display_math",
-              "latex": "A=\\pi(8)(17)=427.3\\text{ cm}^2"
+              "latex": "A=\\pi rl=\\pi\\times8\\times17=136\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{427.3}"
+              "latex": "A=427.257\\ldots=427.3\\text{ cm}^2"
             }
           ],
           "mark_type": "A",
@@ -109,7 +109,7 @@
       "asset_key": "g5-l2-505-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-505-diagram-r3.svg",
+      "path": "assets/g5-l2-505-diagram-r4.svg",
       "alt_text": "Cone with base radius r = 8 cm and slant height l = 17 cm marked along the sloping surface from the vertex to the edge of the base. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
@@ -282,6 +282,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-mensuration-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate dimensions varied where listed; awaiting Mathematics and editorial review."
   }
 }

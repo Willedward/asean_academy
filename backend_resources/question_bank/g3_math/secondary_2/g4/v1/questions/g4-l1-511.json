@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l1-511",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Design technicians noted high winds during seasonal storms while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the school robotics platform, the opposite side is 8 m. Find the adjacent side x in metres. Enter the numerical value only."
+          "text": "A diagonal scaffold brace rests on the ground at an acute 45° angle and meets a vertical post. Measured up the post, the opposite side is 8 m. Find the adjacent side x, the horizontal distance from the post to the foot of the brace, in metres. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -78,6 +78,10 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Relative to the 45° angle, the given side is opposite and x is adjacent, so"
+            },
+            {
               "type": "display_math",
               "latex": "\\tan45^\\circ=\\frac{8}{x}=1\\Rightarrow x=8"
             }
@@ -94,7 +98,7 @@
       "asset_key": "g4-l1-511-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l1-511-diagram-r3.svg",
+      "path": "assets/g4-l1-511-diagram-r4.svg",
       "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 8 m and the adjacent side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -260,6 +264,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

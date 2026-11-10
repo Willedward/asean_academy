@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l4-514",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,15 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Student engineers noted a protected habitat boundary while preparing a replacement frame. Two shorter sides of a triangular frame for the market canopy support are 7 cm and 24 cm. The angle between them must be 90°. Find the required longest side "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " in centimetres. Enter the numerical value only."
+          "text": "On the plan of a market canopy, a corner brace is drawn to scale. The two shorter sides of a triangular frame on the plan are 7 cm and 24 cm. The angle between them must be 90°. Find the length x of the longest side on the plan, in centimetres. Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -87,22 +79,44 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "x^2=7^2+24^2\\Rightarrow x=25"
+              "text": "The 90° angle lies between the two shorter sides, so the longest side x is the hypotenuse."
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{25}"
+              "latex": "x^2=7^2+24^2=49+576=625"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=\\sqrt{625}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=25"
             }
           ],
           "mark_type": "A",
@@ -117,7 +131,7 @@
       "asset_key": "g4-l4-514-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-514-diagram-r3.svg",
+      "path": "assets/g4-l4-514-diagram-r4.svg",
       "alt_text": "Triangle with shorter sides 7 cm and 24 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -257,6 +271,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

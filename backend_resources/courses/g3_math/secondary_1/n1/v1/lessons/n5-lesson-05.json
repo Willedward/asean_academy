@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n5",
@@ -38,7 +38,7 @@
         },
         {
           "type": "text",
-          "text": "For 4, 7, 10, 13, … the common difference is 3. The trial rule 3n starts 3, 6, 9, 12, which is always 1 too small, so Tₙ = 3n + 1. The position n begins at 1 unless the problem explicitly defines a stage 0."
+          "text": "For 5, 8, 11, 14, … the common difference is 3. The trial rule 3n starts 3, 6, 9, 12, which is always 2 too small, so Tₙ = 3n + 2. The position n begins at 1 unless the problem explicitly defines a stage 0."
         }
       ]
     },
@@ -50,7 +50,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A linear sequence has fourth term 19 and ninth term 39. Find its nth term."
+          "text": "A linear sequence has third term 14 and eighth term 39. Find its nth term."
         }
       ],
       "steps": [
@@ -59,11 +59,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Five term intervals separate positions 4 and 9, so find the change per interval."
+              "text": "Five term intervals separate positions 3 and 8, so find the change per interval."
             },
             {
               "type": "display_math",
-              "latex": "d=\\frac{39-19}{9-4}=4"
+              "latex": "d=\\frac{39-14}{8-3}=5"
             }
           ]
         },
@@ -72,11 +72,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use Tₙ = 4n + c and substitute the fourth term."
+              "text": "Use Tₙ = 5n + c and substitute the third term."
             },
             {
               "type": "display_math",
-              "latex": "19=4(4)+c"
+              "latex": "14=5(3)+c"
             }
           ]
         },
@@ -84,17 +84,13 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Solve for c and state the rule."
-            },
-            {
               "type": "display_math",
-              "latex": "c=3,\\qquad T_n=4n+3"
+              "latex": "c=-1,\\qquad T_n=5n-1"
             }
           ]
         }
       ],
-      "verification_note": "The rule gives T₄ = 19 and T₉ = 39, confirming both pieces of supplied information."
+      "verification_note": "The rule gives T₃ = 15 − 1 = 14 and T₈ = 40 − 1 = 39, matching both pieces of information."
     },
     {
       "stable_key": "visual-linear-patterns",
@@ -104,15 +100,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A visual pattern can also be linear. Separate a fixed starting part from a group added at every new stage. If stage 1 has 4 sticks and each later stage shares one side while adding 3 sticks, the total is 4 + 3(n − 1). Simplifying gives the same dn + c form used for a number sequence."
+          "text": "A visual pattern can also be linear. Separate a fixed starting part from a group added at every new stage. If stage 1 has 6 sticks and each later stage shares one side while adding 5 sticks, the total is 6 + 5(n − 1). Simplifying gives the same dn + c form used for a number sequence."
         },
         {
           "type": "display_math",
-          "latex": "4+3(n-1)=4+3n-3=3n+1"
+          "latex": "6+5(n-1)=6+5n-5=5n+1"
         },
         {
           "type": "text",
-          "text": "The coefficient 3 describes the growth per stage. The constant 1 is an adjustment determined by the starting arrangement; it does not necessarily count a visible group by itself. Draw or tabulate the first few stages before deciding which part repeats."
+          "text": "The coefficient 5 describes the growth per stage. The constant 1 is an adjustment determined by the starting arrangement; it does not necessarily count a visible group by itself. Draw or tabulate the first few stages before deciding which part repeats."
         }
       ]
     },
@@ -120,11 +116,11 @@
       "stable_key": "matchstick-pattern-example",
       "position": 4,
       "type": "worked_example",
-      "title": "Worked example: model joined squares",
+      "title": "Worked example: model joined pentagons",
       "prompt": [
         {
           "type": "text",
-          "text": "Stage 1 is one square made from 4 sticks. Each new square shares one side with the previous square. Find the rule and the number of sticks at stage 12."
+          "text": "Stage 1 is one pentagon made from 5 sticks. Each new pentagon shares one side with the previous pentagon. Find the rule and the number of sticks at stage 12."
         }
       ],
       "steps": [
@@ -133,11 +129,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The first square contributes 4 sticks; each of the remaining n − 1 squares adds 3."
+              "text": "The first pentagon contributes 5 sticks; each of the remaining n − 1 pentagons adds 4."
             },
             {
               "type": "display_math",
-              "latex": "T_n=4+3(n-1)"
+              "latex": "T_n=5+4(n-1)"
             }
           ]
         },
@@ -150,7 +146,7 @@
             },
             {
               "type": "display_math",
-              "latex": "T_n=3n+1"
+              "latex": "T_n=4n+1"
             }
           ]
         },
@@ -163,12 +159,12 @@
             },
             {
               "type": "display_math",
-              "latex": "T_{12}=3(12)+1=37"
+              "latex": "T_{12}=4(12)+1=49"
             }
           ]
         }
       ],
-      "verification_note": "The first three values from the rule are 4, 7 and 10, matching the construction’s increase of 3 sticks per stage."
+      "verification_note": "The first three values from the rule are 5, 9 and 13, matching the construction’s increase of 4 sticks per stage."
     },
     {
       "stable_key": "rule-verification",

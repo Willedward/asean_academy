@@ -71,6 +71,18 @@ SAMPLES = {
         "y_max": 8,
     },
     "quadratic_graph": {"roots": [-5, 3], "a": 1, "x_min": -7, "x_max": 5},
+    "line_graph": {
+        "lines": [
+            {"a": 1, "b": 1, "c": 8, "label": "x + y = 8", "label_x": 6.3, "label_y": 2.6},
+            {"a": 4, "b": 3, "c": 29, "label": "4x + 3y = 29", "label_x": 1.6, "label_y": 9.4},
+        ],
+        "x_min": -1,
+        "x_max": 9,
+        "y_min": -1,
+        "y_max": 10,
+        "points": [{"x": 5, "y": 3, "label": "(5, 3)", "dx": -16, "dy": -12, "anchor": "end"}],
+        "alt_text": "Lines x + y = 8 and 4x + 3y = 29 crossing at (5, 3).",
+    },
 }
 
 

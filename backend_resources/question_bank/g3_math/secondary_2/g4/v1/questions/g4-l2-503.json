@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-503",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers noted salt exposure near the coast while preparing a replacement frame. A safety brace in the school robotics platform forms a right triangle. Its hypotenuse is 35 m and one shorter side is 21 m. Find the other shorter side in metres. Enter the numerical value only."
+          "text": "A kite flies on a straight, taut string. Taking the string as the longest side of a right-angled triangle, the hypotenuse is 53 m and one shorter side is 28 m. Find the other shorter side b, the horizontal distance to the point below the kite, in metres. Enter the numerical value only."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "28",
-        "canonical_latex": "28",
+        "canonical_answer": "45",
+        "canonical_latex": "45",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "\\sqrt{35^{2}-21^{2}}"
+              "latex": "\\sqrt{53^{2}-28^{2}}"
             },
             {
               "type": "text",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "The 53 m side is the hypotenuse, so by Pythagoras’ theorem"
             },
             {
               "type": "display_math",
-              "latex": "b=\\sqrt{35^2-21^2}=28"
+              "latex": "b^2=53^2-28^2=2809-784=2025"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{28}"
+              "latex": "b=\\sqrt{2025}=45"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g4-l2-503-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-503-diagram-r3.svg",
-      "alt_text": "Right-angled triangle with hypotenuse 35 m and one perpendicular side 21 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
+      "path": "assets/g4-l2-503-diagram-r4.svg",
+      "alt_text": "Right-angled triangle with hypotenuse 53 m and one perpendicular side 28 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -119,27 +119,27 @@
         "template": "missing_leg",
         "inputs": {
           "hypotenuse": {
-            "value": 35,
+            "value": 53,
             "unit": "m"
           },
           "leg": {
-            "value": 21,
+            "value": 28,
             "unit": "m"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "hypotenuse": {
-            "value": 35,
+            "value": 53,
             "unit": "m"
           },
           "perpendicular_side": {
-            "value": 21,
+            "value": 28,
             "unit": "m"
           }
         },
         "forbidden_visible_labels": [
-          "28"
+          "45"
         ],
         "unknowns": [
           {
@@ -151,12 +151,12 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          446.0
+          400.0
         ],
         "points": {
           "A": [
             120.0,
-            326.0
+            280.0
           ],
           "B": [
             120.0,
@@ -164,7 +164,7 @@
           ],
           "C": [
             480.0,
-            326.0
+            280.0
           ]
         },
         "segments": [
@@ -202,7 +202,7 @@
         ],
         "labels": [
           {
-            "text": "21 m",
+            "text": "28 m",
             "target": "segment:AB"
           },
           {
@@ -210,7 +210,7 @@
             "target": "segment:AC"
           },
           {
-            "text": "35 m",
+            "text": "53 m",
             "target": "segment:BC"
           }
         ],
@@ -221,15 +221,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.6222,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "56decd6c4f6494731fbfab231dccbeb071dfac80eb87906a9394e112a348d49f",
+      "sha256": "1ee31cac6c9ef0f34594ac1f78b6d1a1929adcac1e733736e87f72269c7e9f1f",
       "width": 600,
-      "height": 446
+      "height": 400
     }
   ],
   "provenance": {

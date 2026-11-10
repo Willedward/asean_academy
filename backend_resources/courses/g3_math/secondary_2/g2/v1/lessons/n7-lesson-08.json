@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n7",
   "status": "draft",
@@ -11,7 +11,7 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   },
   "stable_key": "n7-lesson-08",
   "position": 4,
@@ -38,7 +38,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A solution of simultaneous equations must satisfy both equations at the same time. Algebraically, substitution or elimination reduces the pair to one variable. Graphically, the solution is the coordinate where the two straight lines intersect."
+          "text": "A solution of simultaneous equations must satisfy both equations at the same time. Algebraically, substitution or elimination reduces the pair to one variable. Graphically, the solution is the point where the two straight lines intersect. The diagram shows the lines of the second worked example, x + y = 8 and 4x + 3y = 29, crossing at (5, 3)."
         },
         {
           "type": "asset_ref",
@@ -71,14 +71,26 @@
       ]
     },
     {
-      "stable_key": "n7-08-example-1",
+      "stable_key": "n7-08-errors",
       "position": 4,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "When multiplying an equation to match coefficients, multiply every term, including the constant. Subtract whole equations carefully, sign by sign. Find both unknowns, not just one, and check the pair in both original equations, because a pair that satisfies only one equation is not a solution."
+        }
+      ]
+    },
+    {
+      "stable_key": "n7-08-example-1",
+      "position": 5,
       "type": "worked_example",
-      "title": "Eliminate directly",
+      "title": "Worked example: eliminate directly",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve 2x+y=11 and x-y=1."
+          "text": "Solve 2x + y = 11 and x − y = 1."
         }
       ],
       "steps": [
@@ -87,7 +99,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the equations to eliminate y."
+              "text": "The y-terms are opposites, so add the equations to eliminate y."
+            },
+            {
+              "type": "display_math",
+              "latex": "3x=12\\quad\\Rightarrow\\quad x=4"
             }
           ]
         },
@@ -96,31 +112,26 @@
           "content": [
             {
               "type": "text",
-              "text": "3x=12, so x=4."
-            }
-          ]
-        },
-        {
-          "position": 3,
-          "content": [
+              "text": "Substitute into x − y = 1."
+            },
             {
-              "type": "text",
-              "text": "Substitute into x-y=1 to get y=3."
+              "type": "display_math",
+              "latex": "4-y=1\\quad\\Rightarrow\\quad y=3"
             }
           ]
         }
       ],
-      "verification_note": "(4,3) satisfies both 8+3=11 and 4-3=1."
+      "verification_note": "(4, 3) satisfies both: 8 + 3 = 11 and 4 − 3 = 1."
     },
     {
       "stable_key": "n7-08-example-2",
-      "position": 5,
+      "position": 6,
       "type": "worked_example",
-      "title": "Use substitution",
+      "title": "Worked example: use substitution",
       "prompt": [
         {
           "type": "text",
-          "text": "Solve x+y=9 and 3x+2y=23."
+          "text": "Solve x + y = 8 and 4x + 3y = 29."
         }
       ],
       "steps": [
@@ -129,7 +140,11 @@
           "content": [
             {
               "type": "text",
-              "text": "From x+y=9, write y=9-x."
+              "text": "From x + y = 8, write y in terms of x."
+            },
+            {
+              "type": "display_math",
+              "latex": "y=8-x"
             }
           ]
         },
@@ -138,7 +153,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute: 3x+2(9-x)=23."
+              "text": "Substitute into the second equation and simplify."
+            },
+            {
+              "type": "display_math",
+              "latex": "4x+3(8-x)=29\\quad\\Rightarrow\\quad 4x+24-3x=29\\quad\\Rightarrow\\quad x=5"
             }
           ]
         },
@@ -146,23 +165,23 @@
           "position": 3,
           "content": [
             {
-              "type": "text",
-              "text": "Then x=5 and y=4."
+              "type": "display_math",
+              "latex": "y=8-5=3"
             }
           ]
         }
       ],
-      "verification_note": "(5,4) gives 9 in the first equation and 23 in the second."
+      "verification_note": "(5, 3) gives 5 + 3 = 8 and 20 + 9 = 29, and it is the crossing point in the diagram."
     },
     {
       "stable_key": "n7-08-recall",
-      "position": 6,
+      "position": 7,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
         {
           "type": "text",
-          "text": "For x+y=7 and x-y=1, find x."
+          "text": "For 2x + y = 11 and x + y = 7, find x."
         }
       ],
       "response": {
@@ -178,23 +197,23 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Adding gives 2x=8, so x=4."
+          "text": "Subtracting the second equation from the first gives x = 4 (and then y = 3)."
         }
       ]
     },
     {
       "stable_key": "n7-08-summary",
-      "position": 7,
+      "position": 8,
       "type": "summary",
       "title": "Lesson checklist",
       "blocks": [
         {
           "type": "text",
-          "text": "Name the mathematical relationship, choose a method that preserves it, and show each transformation clearly."
+          "text": "The solution of a pair of simultaneous equations satisfies both equations; on a graph it is the point where the two lines cross."
         },
         {
           "type": "text",
-          "text": "Check the result in every original condition and interpret endpoints, coordinates, roots or quantities in the form requested."
+          "text": "Use substitution when a variable is easy to isolate, and elimination when coefficients match or can be matched. Find both values and check them in both original equations."
         }
       ]
     }
@@ -204,16 +223,266 @@
       "asset_key": "n7-lesson-08-diagram",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n7-lesson-08-intersection.svg",
-      "alt_text": "Two straight lines crossing at their common simultaneous-equation solution.",
+      "path": "assets/n7-lesson-08-intersection-r2.svg",
+      "alt_text": "Graphs of the straight lines x + y = 8 and 4x + 3y = 29 on axes from −1 to 9 for x and −1 to 10 for y, with equal unit scales. The lines cross at the marked point (5, 3).",
       "generation_spec": {
-        "renderer": "nextscholar-chart-svg-v1",
-        "diagram_kind": "simultaneous_intersection",
-        "lesson_key": "n7-lesson-08"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n7-lesson-08",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": 1,
+              "b": 1,
+              "c": 8,
+              "label": "x + y = 8",
+              "label_x": 6.3,
+              "label_y": 2.6
+            },
+            {
+              "a": 4,
+              "b": 3,
+              "c": 29,
+              "label": "4x + 3y = 29",
+              "label_x": 1.6,
+              "label_y": 9.4
+            }
+          ],
+          "x_min": -1,
+          "x_max": 9,
+          "y_min": -1,
+          "y_max": 10,
+          "points": [
+            {
+              "x": 5,
+              "y": 3,
+              "label": "(5, 3)",
+              "dx": -16,
+              "dy": -12,
+              "anchor": "end"
+            }
+          ],
+          "title": "Two lines meeting at one point",
+          "alt_text": "Graphs of the straight lines x + y = 8 and 4x + 3y = 29 on axes from −1 to 9 for x and −1 to 10 for y, with equal unit scales. The lines cross at the marked point (5, 3)."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "1,1,8",
+            "tag": "line",
+            "geometry": {
+              "x1": "197.272727",
+              "y1": "129.545455",
+              "x2": "542.727273",
+              "y2": "475"
+            }
+          },
+          {
+            "key": "line-1",
+            "kind": "line",
+            "value": "4,3,29",
+            "tag": "line",
+            "geometry": {
+              "x1": "223.181818",
+              "y1": "95",
+              "x2": "508.181818",
+              "y2": "475"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "5,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "404.545455",
+              "cy": "336.818182",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "197.272727",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "231.818182",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "266.363636",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "300.909091",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "335.454545",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "370",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "404.545455",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "439.090909",
+            "label": "6"
+          },
+          {
+            "key": "x:7",
+            "axis": "x",
+            "value": "7",
+            "position": "473.636364",
+            "label": "7"
+          },
+          {
+            "key": "x:8",
+            "axis": "x",
+            "value": "8",
+            "position": "508.181818",
+            "label": "8"
+          },
+          {
+            "key": "x:9",
+            "axis": "x",
+            "value": "9",
+            "position": "542.727273",
+            "label": "9"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "475",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "440.454545",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "405.909091",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "371.363636",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "336.818182",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "302.272727",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "267.727273",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "233.181818",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "198.636364",
+            "label": "7"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "164.090909",
+            "label": "8"
+          },
+          {
+            "key": "y:9",
+            "axis": "y",
+            "value": "9",
+            "position": "129.545455",
+            "label": "9"
+          },
+          {
+            "key": "y:10",
+            "axis": "y",
+            "value": "10",
+            "position": "95",
+            "label": "10"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -1.0,
+          "x_max": 9.0,
+          "y_min": -1.0,
+          "y_max": 10.0
+        },
+        "unit_px": "34.545455"
       },
-      "sha256": "f6b92a442a62c4d779f629973ba1f28ff8617d0b3da0df84806a76ff79bb5481",
-      "width": 960,
-      "height": 460
+      "sha256": "a77781143f472d6369936786a91855fae501fad5e1c26b3c3fd8e305d4afc282",
+      "width": 720,
+      "height": 535
     }
   ]
 }

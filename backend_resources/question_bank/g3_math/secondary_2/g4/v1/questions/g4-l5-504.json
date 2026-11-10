@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l5-504",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Environmental officers noted soft ground around the supports while preparing a replacement frame. An inspection route at the drainage inspection route crosses a rectangular floor 42 m by 56 m diagonally, then continues 42 m along a straight corridor. Find the complete route length in metres. Enter the numerical value only."
+          "text": "A delivery robot in a warehouse crosses a rectangular floor 24 m by 70 m diagonally, then continues 30 m along a straight corridor to the loading bay. Find the length of the complete route in metres. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "112",
-        "canonical_latex": "112",
+        "canonical_answer": "104",
+        "canonical_latex": "104",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -60,15 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The diagonal is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\sqrt{42^{2}+56^{2}}"
-            },
-            {
-              "type": "text",
-              "text": "; add 42 m."
+              "text": "Find the diagonal of the floor first, using the two sides of the rectangle, then add the straight part of the route."
             }
           ]
         }
@@ -79,22 +71,55 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "\\sqrt{42^2+56^2}+42=112"
+              "text": "The diagonal d is the hypotenuse of a right-angled triangle with shorter sides 24 m and 70 m."
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{112}"
+              "latex": "d^2=24^2+70^2=576+4900=5476"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{5476}=74\\text{ m}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the straight part of the route."
+            },
+            {
+              "type": "display_math",
+              "latex": "74+30"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{route length}=104\\text{ m}"
             }
           ],
           "mark_type": "A",
@@ -109,8 +134,8 @@
       "asset_key": "g4-l5-504-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-504-diagram-r3.svg",
-      "alt_text": "Rectangular floor 56 m by 42 m. The route crosses the floor along the diagonal d, then continues 42 m along a straight corridor. Not drawn to scale.",
+      "path": "assets/g4-l5-504-diagram-r4.svg",
+      "alt_text": "Rectangular floor 70 m by 24 m. The route crosses the floor along the diagonal d, then continues 30 m along a straight corridor. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,16 +145,16 @@
         "inputs": {
           "floor": [
             {
-              "value": 42,
+              "value": 24,
               "unit": "m"
             },
             {
-              "value": 56,
+              "value": 70,
               "unit": "m"
             }
           ],
           "corridor": {
-            "value": 42,
+            "value": 30,
             "unit": "m"
           }
         },
@@ -137,22 +162,22 @@
         "dimensions": {
           "floor": [
             {
-              "value": 56,
+              "value": 70,
               "unit": "m"
             },
             {
-              "value": 42,
+              "value": 24,
               "unit": "m"
             }
           ],
           "corridor": {
-            "value": 42,
+            "value": 30,
             "unit": "m"
           }
         },
         "forbidden_visible_labels": [
-          "112",
-          "70"
+          "104",
+          "74"
         ],
         "unknowns": [
           {
@@ -164,23 +189,23 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          381.0
+          300.0
         ],
         "points": {
           "A": [
             65.0,
-            261.43
+            172.8
           ],
           "B": [
             65.0,
             60.0
           ],
           "C": [
-            333.57,
-            261.43
+            394.0,
+            172.8
           ],
           "D": [
-            333.57,
+            394.0,
             60.0
           ],
           "E": [
@@ -244,11 +269,11 @@
         ],
         "labels": [
           {
-            "text": "56 m",
+            "text": "70 m",
             "target": "segment:AC"
           },
           {
-            "text": "42 m",
+            "text": "24 m",
             "target": "segment:CD"
           },
           {
@@ -256,7 +281,7 @@
             "target": "segment:AD"
           },
           {
-            "text": "42 m",
+            "text": "30 m",
             "target": "segment:DE"
           }
         ],
@@ -282,7 +307,7 @@
               "CD",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.3429,
             "tolerance": 0.02
           },
           {
@@ -291,15 +316,15 @@
               "DE",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.4286,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "eb0733b05f2f84e8a5e7deb1f68ed1b4115539914b35b422a9c7f8f4b678833a",
+      "sha256": "420f3992dc99cc9ed913933eeef0ad42e9b3fca32517967c172006dd01229701",
       "width": 600,
-      "height": 381
+      "height": 300
     }
   ],
   "provenance": {

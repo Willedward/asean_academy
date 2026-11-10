@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-523",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Community builders noted restricted clearance for equipment while preparing a replacement frame. A right triangular component at the public-transit map board has an opposite side of 42 cm and an adjacent side of 56 cm relative to angle θ. Find θ correct to 1 decimal place."
+          "text": "A sloping drainage channel model drops steadily towards an outlet. Its right-angled profile has an opposite side of 33 cm and an adjacent side of 56 cm relative to angle θ. Find θ correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "36.9",
-        "canonical_latex": "36.9^\\circ",
+        "canonical_answer": "30.5",
+        "canonical_latex": "30.5^\\circ",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -75,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Write "
             },
             {
               "type": "inline_math",
-              "latex": "\\tan^{-1} \\left(\\frac{42}{56}\\right)"
+              "latex": "\\tan\\theta"
             },
             {
               "type": "text",
-              "text": " in degree mode."
+              "text": " as a fraction using the two given sides, then use the inverse tangent in degree mode."
             }
           ]
         }
@@ -94,22 +94,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Relative to θ, the opposite and adjacent sides are given, so use the tangent ratio."
             },
             {
               "type": "display_math",
-              "latex": "\\theta=\\tan^{-1}\\left(\\frac{42}{56}\\right)=36.9^\\circ"
+              "latex": "\\tan\\theta=\\frac{33}{56}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{36.9^\\circ}"
+              "latex": "\\theta=\\tan^{-1}\\left(\\frac{33}{56}\\right)=30.510\\ldots^\\circ"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\theta=30.5^\\circ"
             }
           ],
           "mark_type": "A",
@@ -124,8 +135,8 @@
       "asset_key": "g4-l3-523-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-523-diagram-r3.svg",
-      "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 42 cm and the adjacent side is 56 cm. Not drawn to scale.",
+      "path": "assets/g4-l3-523-diagram-r4.svg",
+      "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 33 cm and the adjacent side is 56 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -134,7 +145,7 @@
         "template": "find_angle",
         "inputs": {
           "opposite": {
-            "value": 42,
+            "value": 33,
             "unit": "cm"
           },
           "adjacent": {
@@ -145,7 +156,7 @@
         "not_to_scale": true,
         "dimensions": {
           "opposite": {
-            "value": 42,
+            "value": 33,
             "unit": "cm"
           },
           "adjacent": {
@@ -154,8 +165,8 @@
           }
         },
         "forbidden_visible_labels": [
-          "36.9",
-          "36.87"
+          "30.5",
+          "30.51"
         ],
         "unknowns": [
           {
@@ -167,12 +178,12 @@
         "drawn_to_scale": true,
         "viewbox": [
           600.0,
-          446.0
+          388.0
         ],
         "points": {
           "A": [
             120.0,
-            326.0
+            268.14
           ],
           "B": [
             120.0,
@@ -180,7 +191,7 @@
           ],
           "C": [
             480.0,
-            326.0
+            268.14
           ]
         },
         "segments": [
@@ -224,8 +235,8 @@
               "B"
             ],
             "marker_key": "angle-C",
-            "drawn_degrees": 36.87,
-            "degrees": 36.87
+            "drawn_degrees": 30.51,
+            "degrees": 30.51
           }
         ],
         "angle_markers": [
@@ -233,12 +244,12 @@
             "marker_key": "angle-C",
             "center": [
               480.0,
-              326.0
+              268.14
             ],
             "radius": 46.0,
             "start_ray_point": [
               120.0,
-              326.0
+              268.14
             ],
             "end_ray_point": [
               120.0,
@@ -254,7 +265,7 @@
             "target": "angle:C"
           },
           {
-            "text": "42 cm",
+            "text": "33 cm",
             "target": "segment:AB"
           },
           {
@@ -269,15 +280,15 @@
               "AB",
               "AC"
             ],
-            "value": 0.75,
+            "value": 0.5893,
             "tolerance": 0.02
           }
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "a7fabeea0ac3254e6b13f76e6f6c31eba33f496e12a3b8cb50f10fcdb9545acf",
+      "sha256": "8d8bbd955f21d4a104018855dcdb1abb524418447d76391553caa54dbdb258c7",
       "width": 600,
-      "height": 446
+      "height": 388
     }
   ],
   "provenance": {
