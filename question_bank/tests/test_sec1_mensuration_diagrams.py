@@ -831,6 +831,23 @@ def test_the_contradictory_wording_is_refused():
     assert sm.text_only_reason(prompt) is not None
 
 
+def test_a_drilled_solid_can_be_asked_for_its_surface_area(tmp_path):
+    inputs = {"side": cm(14), "radius": cm(3.5), "asks": "surface_area"}
+    stated = (
+        "A cube of side 14 cm has a cylindrical hole of radius 3.5 cm drilled straight through it."
+    )
+    diagram = sm.cube_cylindrical_hole(inputs, ["1407"])
+    forbidden = set(diagram.generation_spec["forbidden_visible_labels"])
+
+    assert diagram.content_findings == []
+    assert findings(tmp_path, diagram, ["1407"], stated) == []
+    # 6 × 14² = 1176, two circles 77, curved lining 308.
+    assert {"1407", "1176", "77", "308"} <= forbidden
+    assert sm.cube_cylindrical_hole(inputs, ["2205"]).content_findings
+    with pytest.raises(UnsupportedDiagram):
+        sm.cube_cylindrical_hole({**inputs, "asks": "mass"})
+
+
 def test_corner_removed_algebra_can_state_the_width_and_keep_the_equation_linear(tmp_path):
     inputs = {
         "width": cm(12),
