@@ -46,6 +46,7 @@ from .english_authoring import (
     release_english_batch,
     validate_english_authoring,
 )
+from .english_form_equivalence import form_equivalence_report, render_markdown
 from .english_quality import english_quality_findings, write_quality_baseline
 from .english_repository import EnglishObjectiveImporter
 from .english_validation import validate_english_foundation, write_english_schemas
@@ -500,6 +501,17 @@ def parser():
     english_release.add_argument("batch_id")
     english_release.add_argument("--owner", required=True)
     english_release.add_argument("--claims", type=Path, default=DEFAULT_ENGLISH_CLAIMS)
+    english_equivalence = commands.add_parser(
+        "english-form-equivalence",
+        help="Report how closely the English baseline, endline and reserve forms match",
+    )
+    english_equivalence.add_argument(
+        "root", type=Path, nargs="?", default=DEFAULT_ENGLISH_FOUNDATION
+    )
+    english_equivalence.add_argument(
+        "--format", choices=("markdown", "json"), default="markdown"
+    )
+    english_equivalence.add_argument("--output", type=Path)
     english_importer = commands.add_parser(
         "english-import-db",
         help="Import a validation-clean English snapshot into PostgreSQL",
@@ -538,6 +550,18 @@ def main(argv=None):
             ),
         )
         print(json.dumps({"accepted_findings": count}, indent=2))
+        return 0
+    if args.command == "english-form-equivalence":
+        report = form_equivalence_report(args.root)
+        text = (
+            render_markdown(report)
+            if args.format == "markdown"
+            else json.dumps(report, indent=2, ensure_ascii=False) + "\n"
+        )
+        if args.output:
+            args.output.write_text(text)
+        else:
+            print(text, end="")
         return 0
     if args.command == "english-authoring-export":
         result = export_english_reviewer_batch(args.root, args.batch, args.output)
