@@ -394,3 +394,25 @@ def test_quadratic_graph_can_hide_the_axis_of_symmetry():
     assert 'data-role="axis-of-symmetry"' not in hidden.svg
     assert not [mark for mark in hidden.generation_spec["chart_marks"] if mark["key"] == "vertex"]
     assert findings(hidden) == []
+
+
+def test_sec1_s1_diagram_audit_records_one_decision_per_question(repository_root):
+    bank = repository_root / "backend_resources/question_bank/g3_math/secondary_1/s1/v1"
+    audit = json.loads((bank / "diagram_audit.json").read_text())
+    questions = {
+        path.stem: json.loads(path.read_text()) for path in (bank / "questions").glob("*.json")
+    }
+    decisions = {item["question_key"]: item for item in audit["decisions"]}
+
+    assert audit["bank_key"] == "g3-sec1-s1-v1"
+    assert set(decisions) == set(questions)
+    assert audit["audited_question_count"] == len(questions)
+    drawn = {key for key, question in questions.items() if question["assets"]}
+    assert audit["diagram_question_count"] == len(drawn)
+    for key, item in decisions.items():
+        if key in drawn:
+            assert item["decision"] == "diagram_added"
+            assert item["asset_key"] == questions[key]["assets"][0]["asset_key"]
+        else:
+            assert item["decision"] == "text_sufficient"
+        assert item["reason"]
