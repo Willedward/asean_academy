@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n5-l3-026",
   "bank_key": "g3-sec1-n5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find (2m² - n)/(m + n) when m = 3 and n = 1."
+          "text": "Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{2m^2-n}{m+n}"
+        },
+        {
+          "type": "text",
+          "text": " when m = 3 and n = 1."
         }
       ],
       "marks": 3,
