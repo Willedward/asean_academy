@@ -54,9 +54,16 @@ _ARC_PATH = re.compile(
 )
 
 
-def revisioned_asset_path_issues(storage_path: str, revision: int) -> list[tuple[str, str]]:
-    """Keep asset bytes addressable for every immutable content revision."""
-    if revision < 3 or f"-r{revision}." in Path(storage_path).name:
+def revisioned_asset_path_issues(
+    storage_path: str, revision: int, *, minimum_revision: int = 3
+) -> list[tuple[str, str]]:
+    """Keep asset bytes addressable for every immutable content revision.
+
+    Question assets start at revision 2: ``math_question_assets.storage_path`` is unique across
+    every imported revision, so a revision 2 that reuses revision 1's filename stops the hosted
+    import on a database that already holds revision 1.
+    """
+    if revision < minimum_revision or f"-r{revision}." in Path(storage_path).name:
         return []
     return [
         (

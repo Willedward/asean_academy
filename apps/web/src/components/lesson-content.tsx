@@ -225,7 +225,7 @@ function RecallCheck({
           {!result.correct ? (
             <p className="mb-0 mt-1 text-sm">
               {result.error ??
-                "That answer is not correct yet. Check your prime factors and try again."}
+                "That answer is not correct yet. Check your working and try again."}
             </p>
           ) : null}
           {result.correct && result.feedback.length ? (

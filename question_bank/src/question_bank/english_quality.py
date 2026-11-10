@@ -24,6 +24,12 @@ MAX_DIAGNOSTIC_LONGEST_KEY_SHARE = 0.5
 DIAGNOSTIC_POOLS = {"baseline_diagnostic", "endline_diagnostic", "protected_reserve"}
 DIAGNOSTIC_FORM_TYPES = {"baseline", "endline", "endline_reserve"}
 LESSON_COPY_WORDS = 8
+# Level review rule 5: diagnostic passages per task type, in words (whitespace-separated).
+DIAGNOSTIC_PASSAGE_WORDS = {
+    "reading_comprehension": (300, 450),
+    "banked_cloze": (150, 250),
+    "open_cloze": (150, 250),
+}
 PROTECTED_POOLS = {
     "baseline_diagnostic",
     "endline_diagnostic",
@@ -36,6 +42,10 @@ OPEN_CLOZE_PROMPT = re.compile(
 TARGET_WORD = re.compile(r"What does [“\"]([^”\"]+)[”\"]")
 # Older items ask "What does tentative mean?" without quotation marks.
 UNQUOTED_TARGET_WORD = re.compile(r"What does ([A-Za-z’'-]+) mean")
+# The reported paper has no editing section and no "answer in your own words" questions
+# (exam profile excluded_task_types), so practice must not train either format.
+EXCLUDED_QUESTION_TYPES = {"editing"}
+OWN_WORDS = re.compile(r"\bin (?:your|their|his|her) own words\b", re.IGNORECASE)
 BANNED_TERMS = (
     "blueprint",
     "confound",
@@ -301,6 +311,44 @@ def _diagnostic_longest_findings(forms, by_key) -> list[QualityFinding]:
     return findings
 
 
+def passage_word_count(passage) -> int:
+    return sum(len(paragraph.split()) for paragraph in passage.paragraphs)
+
+
+def _diagnostic_passage_length_findings(forms, by_key, passages) -> list[QualityFinding]:
+    """Flag baseline, endline and reserve passages outside the level-review length range."""
+
+    if passages is None:
+        return []
+    by_revision = {(passage.stable_key, passage.revision): passage for passage in passages}
+    findings = []
+    seen = set()
+    for form in forms:
+        if form.form_type not in DIAGNOSTIC_FORM_TYPES:
+            continue
+        for key in form.question_keys:
+            question = by_key.get(key)
+            if question is None or question.passage_ref is None:
+                continue
+            limits = DIAGNOSTIC_PASSAGE_WORDS.get(question.question_type)
+            ref = question.passage_ref
+            passage = by_revision.get((ref.stable_key, ref.revision))
+            if limits is None or passage is None or ref.stable_key in seen:
+                continue
+            seen.add(ref.stable_key)
+            words = passage_word_count(passage)
+            low, high = limits
+            if not low <= words <= high:
+                findings.append(
+                    QualityFinding(
+                        "diagnostic_passage_length",
+                        ref.stable_key,
+                        f"{words} words; {question.question_type} passages need {low}-{high}.",
+                    )
+                )
+    return findings
+
+
 def _form_findings(forms, by_key) -> list[QualityFinding]:
     findings = []
     for form in forms:
@@ -391,6 +439,28 @@ def _lesson_copy_findings(questions, lessons) -> list[QualityFinding]:
     return findings
 
 
+def _excluded_task_findings(question: EnglishObjectiveQuestion) -> list[QualityFinding]:
+    findings = []
+    if question.question_type in EXCLUDED_QUESTION_TYPES:
+        findings.append(
+            QualityFinding(
+                "excluded_task_type",
+                question.stable_key,
+                f"The paper has no {question.question_type} questions; use a task type it reports.",
+            )
+        )
+    texts = [question.instructions, *(part.prompt for part in question.parts)]
+    if any(OWN_WORDS.search(text) for text in texts):
+        findings.append(
+            QualityFinding(
+                "own_words_question",
+                question.stable_key,
+                "The paper has no answer-in-your-own-words questions.",
+            )
+        )
+    return findings
+
+
 def _banned_term_findings(questions, lessons) -> list[QualityFinding]:
     findings = []
     for item in [*questions, *lessons]:
@@ -419,9 +489,11 @@ def english_quality_findings(questions, lessons, forms, passages=None) -> list[Q
         findings.extend(_banked_cloze_order_findings(question))
         findings.extend(_target_word_findings(question, passages))
         findings.extend(_option_order_findings(question))
+        findings.extend(_excluded_task_findings(question))
     findings.extend(_repeated_sequence_findings(questions))
     findings.extend(_form_findings(forms, by_key))
     findings.extend(_diagnostic_longest_findings(forms, by_key))
+    findings.extend(_diagnostic_passage_length_findings(forms, by_key, passages))
     findings.extend(_protected_reuse_findings(questions, lessons))
     findings.extend(_lesson_copy_findings(questions, lessons))
     findings.extend(_banned_term_findings(questions, lessons))

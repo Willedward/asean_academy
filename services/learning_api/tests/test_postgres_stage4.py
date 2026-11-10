@@ -142,6 +142,7 @@ def test_postgres_english_essay_contracts_pin_exact_immutable_revisions():
               on rubric_versions.id = prompt_versions.rubric_version_id
             join english_essay_rubrics rubrics on rubrics.id = rubric_versions.rubric_id
             where prompt_versions.is_current and rubric_versions.is_current
+              and prompts.stable_key = 'english-essay-prompt-school-learning-transfer-v1'
             """
         ).fetchone()
 

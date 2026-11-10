@@ -1,5 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { lessonFixture } from "@/lib/api/course";
 import type {
@@ -7,10 +13,7 @@ import type {
   LessonSectionProgressResponse,
 } from "@/lib/api/progress";
 
-import {
-  LessonContent,
-  type LessonContentApi,
-} from "./lesson-content";
+import { LessonContent, type LessonContentApi } from "./lesson-content";
 
 const initialProgress: LessonSectionProgressResponse = {
   lesson_key: "n1-lesson-01",
@@ -21,6 +24,8 @@ const initialProgress: LessonSectionProgressResponse = {
 };
 
 describe("LessonContent", () => {
+  afterEach(cleanup);
+
   it("records explicit reading completion and checks active recall through the API", async () => {
     const firstCompleted: LessonSectionProgressResponse = {
       ...initialProgress,
@@ -56,9 +61,13 @@ describe("LessonContent", () => {
     );
 
     expect(
-      screen.getByRole("heading", { name: "Learn the ideas, then practise them" }),
+      screen.getByRole("heading", {
+        name: "Learn the ideas, then practise them",
+      }),
     ).toBeInTheDocument();
-    await waitFor(() => expect(api.getProgress).toHaveBeenCalledWith("n1-lesson-01"));
+    await waitFor(() =>
+      expect(api.getProgress).toHaveBeenCalledWith("n1-lesson-01"),
+    );
 
     const firstCompletionButton = screen
       .getAllByRole("button", { name: "Mark section complete" })
@@ -85,7 +94,42 @@ describe("LessonContent", () => {
         "2^2 * 3 * 7",
       ),
     );
-    expect(await screen.findByText("Correct", { selector: "p" })).toBeInTheDocument();
+    expect(
+      await screen.findByText("Correct", { selector: "p" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("2 of 7 sections complete")).toBeInTheDocument();
+  });
+
+  it("gives a wrong recall answer a message that fits any topic", async () => {
+    const api = {
+      getProgress: vi.fn().mockResolvedValue(initialProgress),
+      setCompletion: vi.fn(),
+      checkRecall: vi.fn().mockResolvedValue({
+        correct: false,
+        error: null,
+        feedback: [],
+        progress: initialProgress,
+      } satisfies ActiveRecallAttemptResponse),
+    } satisfies LessonContentApi;
+
+    render(
+      <LessonContent
+        api={api}
+        lessonKey="n1-lesson-01"
+        sections={lessonFixture.sections}
+      />,
+    );
+
+    fireEvent.change(screen.getByLabelText("Your answer"), {
+      target: { value: "56" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+    expect(
+      await screen.findByText(
+        "That answer is not correct yet. Check your working and try again.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("status")).not.toHaveTextContent(/prime factors/);
   });
 });

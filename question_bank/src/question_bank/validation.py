@@ -243,7 +243,9 @@ def _validate_assets(
                 path,
                 f"Expected {asset.sha256}, found {digest}",
             )
-        for code, message in revisioned_asset_path_issues(asset.path, question.revision):
+        for code, message in revisioned_asset_path_issues(
+            asset.path, question.revision, minimum_revision=2
+        ):
             _issue(report, "error", code, path, message)
         for finding in geometry_diagram_findings(
             path, asset.generation_spec, asset.alt_text, context, strict=strict_geometry

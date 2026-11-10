@@ -779,6 +779,7 @@ def test_applying_all_batches_clears_strict_geometry(repository_root, tmp_path):
 def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_path):
     bank = copy_bank(repository_root, tmp_path)
     before = json.loads((bank / "questions" / "g5-l5-002.json").read_text())
+    added_before = json.loads((bank / "questions" / "g5-l2-011.json").read_text())
     count = json.loads((bank / "diagram_audit.json").read_text())["diagram_question_count"]
     report = regenerate_batch(bank, "B002", apply=True, add=NEW_FIGURES["B002"])
     assert report.ok
@@ -795,7 +796,9 @@ def test_apply_revisions_files_and_records_the_decisions(repository_root, tmp_pa
 
     added = json.loads((bank / "questions" / "g5-l2-011.json").read_text())
     assert added["stem"][1] == {"type": "asset_ref", "asset_key": "g5-l2-011-diagram"}
-    assert added["revision"] == 2
+    # g5-l2-011 already has its figure, so regenerating keeps its revision and file.
+    assert added["revision"] == added_before["revision"]
+    assert added["assets"][0]["path"].endswith(f"-r{added['revision']}.svg")
     audit = json.loads((bank / "diagram_audit.json").read_text())
     decision = next(item for item in audit["decisions"] if item["question_key"] == "g5-l2-011")
     assert decision["decision"] == "diagram_added"
