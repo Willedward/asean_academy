@@ -395,6 +395,61 @@ class Canvas:
             record["degrees"] = degrees
         self.angles.append(record)
 
+    def reflex_arc(
+        self,
+        key: str,
+        vertex: str,
+        first: str,
+        second: str,
+        radius: float,
+        degrees: float | None = None,
+    ) -> None:
+        """Mark the reflex angle between two rays: the long way round from ``first`` to ``second``."""
+        v = self.points[vertex]
+        start = rounded(add(v, scale(unit(sub(self.points[first], v)), radius)))
+        end = rounded(add(v, scale(unit(sub(self.points[second], v)), radius)))
+        a, b = sub(start, v), sub(end, v)
+        minor_sweep = 1 if a[0] * b[1] - a[1] * b[0] > 0 else 0
+        sweep = 1 - minor_sweep
+        d = (
+            f"M{fmt(start[0])} {fmt(start[1])} A{fmt(radius)} {fmt(radius)} 0 1 {sweep} "
+            f"{fmt(end[0])} {fmt(end[1])}"
+        )
+        drawn = 360 - angle_between(v, self.points[first], self.points[second])
+        start_angle = math.atan2(a[1], a[0])
+        delta = math.radians(drawn) * (1 if sweep else -1)
+        samples = [
+            (
+                v[0] + radius * math.cos(start_angle + delta * index / 48),
+                v[1] + radius * math.sin(start_angle + delta * index / 48),
+            )
+            for index in range(49)
+        ]
+        self.raw_path(
+            d, [samples], stroke=ACCENT, width=THIN + 0.5, attrs={"data-angle-marker": key}
+        )
+        self.angle_markers.append(
+            {
+                "marker_key": key,
+                "center": list(v),
+                "radius": float(fmt(radius)),
+                "start_ray_point": list(self.points[first]),
+                "end_ray_point": list(self.points[second]),
+                "large_arc": 1,
+                "sweep": sweep,
+            }
+        )
+        record = {
+            "vertex": vertex,
+            "arms": [first, second],
+            "marker_key": key,
+            "drawn_degrees": round(drawn, 2),
+            "reflex": True,
+        }
+        if degrees is not None:
+            record["degrees"] = degrees
+        self.angles.append(record)
+
     # ------------------------------------------------------------------- labels
     def _nearest_is(self, box: Box, key: str) -> bool:
         """True when ``box`` is closer to segment ``key`` than to any other segment."""
@@ -515,11 +570,16 @@ class Canvas:
         *,
         target: str | None = None,
         size: float = LABEL_SIZE,
+        reflex: bool = False,
     ) -> Point:
         v = self.points[vertex]
         u = unit(sub(self.points[first], v))
         w = unit(sub(self.points[second], v))
         bisector = unit(add(u, w))
+        if reflex:
+            # The reflex angle lies on the other side of both rays.
+            bisector = (-bisector[0], -bisector[1])
+            u, w = w, u
         width, height = self.label_size(text, size)
         candidates = []
         for spread in (0.0, -0.18, 0.18, -0.32, 0.32):

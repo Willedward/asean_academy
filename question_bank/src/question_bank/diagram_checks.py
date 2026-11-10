@@ -46,6 +46,7 @@ PLANE_GEOMETRY_RENDERER = "nextscholar-plane-geometry-svg-v1"
 SIMILARITY_RENDERER = "nextscholar-similarity-svg-v1"
 # What the alternative text of each plane-geometry figure must name.
 PLANE_FIGURE_WORDS = {
+    "angle_types": "angle",
     "angles_on_line": "straight line",
     "right_angle_split": "right angle",
     "intersecting_lines": "lines",
@@ -486,6 +487,8 @@ class _Checked:
             if first is None or second is None:
                 continue
             measured = _angle(vertex, first, second)
+            if item.get("reflex"):
+                measured = 360 - measured
             if "degrees" in item and not math.isclose(
                 measured, float(item["degrees"]), abs_tol=ANGLE_TOLERANCE
             ):
@@ -609,6 +612,8 @@ class _Checked:
         inside = (u[0] * w[1] - u[1] * w[0]) * cross_uv >= 0 and (
             w[0] * v[1] - w[1] * v[0]
         ) * cross_uv >= 0
+        if item.get("reflex"):
+            inside = not inside
         if not inside:
             self.add(
                 "geometry_label_detached",
@@ -1028,7 +1033,9 @@ class _Checked:
                         "geometry_angle_ray_undrawn",
                         f"Arc {key} uses a ray from {item.get('vertex')} to {name} that is not drawn.",
                     )
-            measured = _angle(vertex, arms[0], arms[1])
+            minor = _angle(vertex, arms[0], arms[1])
+            reflex = bool(item.get("reflex"))
+            measured = 360 - minor if reflex else minor
             if not math.isclose(
                 float(item.get("drawn_degrees", -1)), measured, abs_tol=ANGLE_TOLERANCE
             ):
@@ -1060,7 +1067,17 @@ class _Checked:
                 continue
             samples = path_polylines(node.attrib["d"])[0]
             middle = samples[len(samples) // 2]
-            if (
+            inside_minor = (
+                _angle(vertex, middle, arms[0]) + _angle(vertex, middle, arms[1])
+                <= minor + ANGLE_TOLERANCE
+            )
+            if reflex:
+                if inside_minor:
+                    self.add(
+                        "geometry_angle_marker_sweep",
+                        f"Reflex arc {key} sweeps inside the smaller angle between its rays.",
+                    )
+            elif (
                 _angle(vertex, middle, arms[0]) > measured + ANGLE_TOLERANCE
                 or _angle(vertex, middle, arms[1]) > measured + ANGLE_TOLERANCE
             ):

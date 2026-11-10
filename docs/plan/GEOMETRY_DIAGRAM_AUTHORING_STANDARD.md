@@ -214,6 +214,7 @@ hand-made assets and is unaffected.
 | `diagonals` | `diagonals_equal_bisect`, `diagonals_perpendicular_one_bisected` |
 | `kite` | `kite_symmetry`, `kite_angles` |
 | `construction` | `perpendicular_bisector_midpoint`, `safe_radius`, `equilateral_on_ray`, `sss_arc_radius`, `sss_mirror_image` |
+| `angle_types` | lesson `lesson_angle_types` (acute, right, obtuse and reflex angles drawn to size; the reflex arc takes the long way round) |
 
 **Text-only test.** If every accurate figure of a question shows its answer, and any other figure
 would draw a false relationship, the question has no figure. `plane_geometry.TEXT_ONLY` lists these
