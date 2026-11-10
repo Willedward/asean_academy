@@ -1866,7 +1866,8 @@ def test_e8_checkpoint_groups_mark_revision_priority_exactly(english_root):
             check_english_answer(part.response, answer)["correct"]
             for part, answer in zip(question.parts, answers, strict=True)
         ] == [True] * 5
-        assert "composition self-editing" in question.instructions
+        assert question.instructions.startswith("Composition checkpoint.")
+        assert "draft" not in question.instructions
 
 
 def test_e9_checkpoint_groups_mark_simulation_protocol_exactly(english_root):
@@ -2830,6 +2831,11 @@ def test_quality_rules_flag_task_types_the_paper_does_not_use(english_root):
     }
 
     question.question_type = "grammar_usage"
+    question.parts[0].prompt = "Original: “Rina finished, she left.” Which revision is correct?"
+    assert {finding.code for finding in english_quality_findings([question], [], [])} == {
+        "correction_task"
+    }
+
     question.parts[0].prompt = "Explain in your own words why Rina handed it over."
     assert {finding.code for finding in english_quality_findings([question], [], [])} == {
         "own_words_question"

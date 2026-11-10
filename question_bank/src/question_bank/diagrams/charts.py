@@ -1619,7 +1619,116 @@ def parabola_graph(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagr
         extras={"axis": {"x_min": x_min, "x_max": x_max, "y_min": y_min, "y_max": y_max}},
     )
 
+BALANCE_WIDTH = 600
+BALANCE_LABEL_FONT = 32
+
+
+def balance_scale(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Diagram:
+    """A level balance with one expression on each pan, as a model of an equation.
+
+    Only a balanced (level) beam is drawn, because a tilted beam would need the two sides'
+    values, which the learner is meant to find. Each pan hangs from its beam end by two strings
+    to the ends of its rim, and its label sits on the rim between those strings. There is no
+    title or caption in the figure: the lesson text explains it.
+    """
+    from ..svg_metrics import text_width
+
+    left_label, right_label = str(inputs["left"]).strip(), str(inputs["right"]).strip()
+    if not left_label or not right_label:
+        raise ValueError("balance_scale needs an expression on each pan")
+    if inputs.get("balanced", True) is not True:
+        raise ValueError("balance_scale draws a level (balanced) beam only")
+    description = str(
+        inputs.get(
+            "alt_text",
+            f"A level balance with {left_label} on the left pan and {right_label} on the right "
+            "pan.",
+        )
+    )
+    title = str(inputs.get("title", "A balanced equation"))
+    builder = _Builder(title, description, width=BALANCE_WIDTH, height=300)
+    beam_y, rim_y, half_rim = 70.0, 210.0, 108.0
+    centres = (120.0, 480.0)
+    pivot = (300.0, beam_y)
+    base_top, base_bottom = 262.0, 284.0
+    label_baseline = rim_y - 10
+    label_top = label_baseline - BALANCE_LABEL_FONT * 0.75
+    # The strings run from the beam end to the rim ends; at the top of a label they are this far
+    # either side of the pan centre, so a label must be narrower than that gap.
+    inset = 8.0
+    gap = (half_rim - inset) * (label_top - beam_y) / (rim_y - beam_y)
+    for label in (left_label, right_label):
+        if text_width(label, BALANCE_LABEL_FONT) / 2 + 10 > gap:
+            raise ValueError(f"The pan label {label!r} is too wide for the pan")
+    builder.path(
+        f"M{_fmt(pivot[0] - 50)} {_fmt(base_bottom)} H{_fmt(pivot[0] + 50)} "
+        f"L{_fmt(pivot[0] + 30)} {_fmt(base_top)} H{_fmt(pivot[0] - 30)} Z",
+        fill=FILL,
+        width=4,
+        attrs={"data-role": "base"},
+    )
+    builder.line(pivot[0], pivot[1], pivot[0], base_top, width=10, attrs={"data-role": "post"})
+    builder.mark(
+        "beam",
+        "beam",
+        "level",
+        "line",
+        {"x1": centres[0], "y1": beam_y, "x2": centres[1], "y2": beam_y},
+        style={"stroke": INK, "stroke-width": 9},
+    )
+    for side, centre, label in (
+        ("left", centres[0], left_label),
+        ("right", centres[1], right_label),
+    ):
+        rim_left, rim_right = centre - half_rim, centre + half_rim
+        for end in (rim_left + inset, rim_right - inset):
+            builder.line(centre, beam_y, end, rim_y, width=3, attrs={"data-role": "string"})
+        builder.mark(
+            f"pan-{side}",
+            "pan",
+            label,
+            "path",
+            {
+                "d": f"M{_fmt(rim_left)} {_fmt(rim_y)} Q{_fmt(centre)} {_fmt(rim_y + 70)} "
+                f"{_fmt(rim_right)} {_fmt(rim_y)} Z"
+            },
+            style={"fill": FILL, "stroke": INK, "stroke-width": 4},
+        )
+        builder.text(
+            label,
+            centre,
+            label_baseline,
+            size=BALANCE_LABEL_FONT,
+            weight=700,
+            fill=ACCENT,
+            attrs={"data-label-for": f"pan-{side}"},
+        )
+    builder.figure.append(
+        "<circle"
+        + _attrs(
+            {
+                "data-role": "pivot",
+                "cx": _fmt(pivot[0]),
+                "cy": _fmt(pivot[1]),
+                "r": 13,
+                "fill": ACCENT,
+                "stroke": INK,
+                "stroke-width": 4,
+            }
+        )
+        + "/>"
+    )
+    return _finish(
+        builder,
+        template="balance_scale",
+        diagram_kind="equation_balance",
+        inputs=inputs,
+        extras={"balanced": True},
+    )
+
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
+    "balance_scale": balance_scale,
     "scaled_icons": scaled_icons,
     "bar_chart": bar_chart,
     "line_chart": line_chart,

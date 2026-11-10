@@ -45,6 +45,10 @@ UNQUOTED_TARGET_WORD = re.compile(r"What does ([A-Za-z’'-]+) mean")
 # The reported paper has no editing section and no "answer in your own words" questions
 # (exam profile excluded_task_types), so practice must not train either format.
 EXCLUDED_QUESTION_TYPES = {"editing"}
+CORRECTION_TASK = re.compile(
+    r"\bOriginal:|\bWhich revision\b(?! set)|['’]s draft:|\bcorrect the (?:error|mistake)s?\b",
+    re.IGNORECASE,
+)
 OWN_WORDS = re.compile(r"\bin (?:your|their|his|her) own words\b", re.IGNORECASE)
 BANNED_TERMS = (
     "blueprint",
@@ -450,6 +454,14 @@ def _excluded_task_findings(question: EnglishObjectiveQuestion) -> list[QualityF
             )
         )
     texts = [question.instructions, *(part.prompt for part in question.parts)]
+    if any(CORRECTION_TASK.search(text) for text in texts):
+        findings.append(
+            QualityFinding(
+                "correction_task",
+                question.stable_key,
+                "The paper has no editing questions; ask what to write, not how to fix a given text.",
+            )
+        )
     if any(OWN_WORDS.search(text) for text in texts):
         findings.append(
             QualityFinding(

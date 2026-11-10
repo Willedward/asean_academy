@@ -1,10 +1,12 @@
 import json
 import shutil
 import tempfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pytest
 
+from question_bank.diagram_checks import text_layout_issues
 from question_bank.diagrams import DATA_CHART_RENDERER, charts
 from question_bank.diagrams.questions import render_question_asset
 from question_bank.diagrams.regenerate import DATA_DISPLAY_STEM, regenerate_batch
@@ -12,6 +14,7 @@ from question_bank.geometry_validation import geometry_diagram_findings
 from question_bank.validation import validate_bank
 
 SAMPLES = {
+    "balance_scale": {"left": "2x + 3", "right": "11", "balanced": True},
     "bar_chart": {
         "categories": ["Mon", "Tue", "Wed"],
         "values": [6, 9, 7],
@@ -356,6 +359,7 @@ def test_explicit_chart_request_applies_revisioned_asset(repository_root, tmp_pa
         }
     }
 
+    before = json.loads((bank / "questions/s1-l3-001.json").read_text())
     report = regenerate_batch(
         bank,
         "B001",
@@ -368,13 +372,14 @@ def test_explicit_chart_request_applies_revisioned_asset(repository_root, tmp_pa
     assert report.ok, report.as_dict()
     question = json.loads((bank / "questions/s1-l3-001.json").read_text())
     [asset] = question["assets"]
-    assert question["revision"] == 2
+    # The question already has its table, so the stored figure is kept unchanged.
+    assert question["revision"] == before["revision"]
     assert question["stem"][:2] == [
         {"type": "text", "text": DATA_DISPLAY_STEM},
         {"type": "asset_ref", "asset_key": "s1-l3-001-diagram"},
     ]
     assert asset["kind"] == "chart"
-    assert asset["path"] == "assets/s1-l3-001-diagram-r2.svg"
+    assert asset["path"] == f"assets/s1-l3-001-diagram-r{before['revision']}.svg"
     assert asset["generation_spec"]["template"] == "data_table"
     validation = validate_bank(
         bank,
@@ -394,6 +399,30 @@ def test_quadratic_graph_can_hide_the_axis_of_symmetry():
     assert 'data-role="axis-of-symmetry"' not in hidden.svg
     assert not [mark for mark in hidden.generation_spec["chart_marks"] if mark["key"] == "vertex"]
     assert findings(hidden) == []
+
+
+def test_balance_scale_keeps_labels_clear_of_every_string_and_has_no_caption():
+    diagram = charts.balance_scale(SAMPLES["balance_scale"])
+    root = ET.fromstring(diagram.svg)
+
+    assert text_layout_issues(root, check_strokes=True) == []
+    texts = [node.text for node in root.iter() if node.tag.endswith("text")]
+    assert texts == ["2x + 3", "11"]
+    assert diagram.generation_spec["balanced"] is True
+    assert [mark["value"] for mark in diagram.generation_spec["chart_marks"]] == [
+        "level",
+        "2x + 3",
+        "11",
+    ]
+    # Two strings per pan, each ending on its pan's rim.
+    assert diagram.svg.count('data-role="string"') == 4
+
+
+def test_balance_scale_refuses_an_unbalanced_beam_or_a_label_too_wide_for_its_pan():
+    with pytest.raises(ValueError, match="level"):
+        charts.balance_scale({"left": "x", "right": "5", "balanced": False})
+    with pytest.raises(ValueError, match="too wide"):
+        charts.balance_scale({"left": "3x + 14 + 2x", "right": "11"})
 
 
 def test_sec1_s1_diagram_audit_records_one_decision_per_question(repository_root):
