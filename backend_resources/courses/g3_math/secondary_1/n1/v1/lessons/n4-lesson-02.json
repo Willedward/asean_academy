@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n4",
@@ -63,14 +63,26 @@
       ]
     },
     {
-      "stable_key": "kilometres-hour-example",
+      "stable_key": "rate-conversion-errors",
       "position": 3,
+      "type": "explanation",
+      "title": "Common errors",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "A frequent error is converting only one unit: changing kilometres to metres but leaving hours unchanged gives 54 000 m/h, not a speed in metres per second. Another is using 3.6 the wrong way round. A quick check helps: a speed in metres per second is a smaller number than the same speed in kilometres per hour, so divide by 3.6 when going from km/h to m/s. For a volume rate, remember that 1 cubic metre = 1000 litres and 1 minute = 60 seconds, and convert each unit separately."
+        }
+      ]
+    },
+    {
+      "stable_key": "kilometres-hour-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example: kilometres per hour to metres per second",
       "prompt": [
         {
           "type": "text",
-          "text": "Express 90 km/h in metres per second."
+          "text": "Express 54 km/h in metres per second."
         }
       ],
       "steps": [
@@ -79,11 +91,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace kilometres and hours by metres and seconds."
+              "text": "Replace kilometres by metres and hours by seconds."
             },
             {
               "type": "display_math",
-              "latex": "90\\times\\frac{1000}{3600}\\text{ m/s}"
+              "latex": "54\\times\\frac{1000}{3600}\\text{ m/s}"
             }
           ]
         },
@@ -92,20 +104,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Simplify, or divide 90 by 3.6."
+              "text": "Simplify, or divide 54 by 3.6."
             },
             {
               "type": "display_math",
-              "latex": "90\\div3.6=25\\text{ m/s}"
+              "latex": "54\\div3.6=15\\text{ m/s}"
             }
           ]
         }
       ],
-      "verification_note": "Multiplying 25 m/s by 3.6 returns 90 km/h."
+      "verification_note": "Multiplying 15 m/s by 3.6 returns 54 km/h. In one hour, 15 m/s covers 15 \u00d7 3600 = 54 000 m = 54 km."
     },
     {
       "stable_key": "flow-rate-example",
-      "position": 4,
+      "position": 5,
       "type": "worked_example",
       "title": "Worked example: convert a volume rate",
       "prompt": [
@@ -146,7 +158,7 @@
     },
     {
       "stable_key": "speed-conversion-recall",
-      "position": 5,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -181,7 +193,7 @@
     },
     {
       "stable_key": "rate-conversion-summary",
-      "position": 6,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [

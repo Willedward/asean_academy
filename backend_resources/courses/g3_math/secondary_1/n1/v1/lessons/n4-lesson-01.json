@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n4",
@@ -61,8 +61,24 @@
       ]
     },
     {
-      "stable_key": "production-rate-example",
+      "stable_key": "constant-and-average-speed",
       "position": 3,
+      "type": "explanation",
+      "title": "Constant speed and average speed",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "An object moves at constant speed when it covers equal distances in equal times, so its speed never changes. Average speed describes a whole journey with one number, even when the speed changes. A car that travels 120 km in 2 hours has an average speed of 60 km/h, but it need not have travelled at a constant 60 km/h: it may have gone faster on an open road and stopped at traffic lights."
+        },
+        {
+          "type": "text",
+          "text": "Common errors: averaging the stage speeds instead of dividing total distance by total time; leaving out a stop that the question says to include; and adding times written in different units, such as hours and minutes, without converting them first."
+        }
+      ]
+    },
+    {
+      "stable_key": "production-rate-example",
+      "position": 4,
       "type": "worked_example",
       "title": "Worked example: average production rate",
       "prompt": [
@@ -103,13 +119,13 @@
     },
     {
       "stable_key": "journey-average-example",
-      "position": 4,
+      "position": 5,
       "type": "worked_example",
       "title": "Worked example: average speed including a stop",
       "prompt": [
         {
           "type": "text",
-          "text": "A cyclist travels 24 km in 1.5 hours, rests for 30 minutes, and travels another 16 km in 1 hour. Find the average speed for the entire period."
+          "text": "A cyclist travels 30 km in 2 hours, rests for 20 minutes, and then travels another 18 km in 40 minutes. Find the average speed for the entire period."
         }
       ],
       "steps": [
@@ -122,7 +138,7 @@
             },
             {
               "type": "display_math",
-              "latex": "24+16=40\\text{ km}"
+              "latex": "30+18=48\\text{ km}"
             }
           ]
         },
@@ -131,11 +147,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert the rest to hours and add all elapsed times."
+              "text": "Convert the minutes to hours and add all the elapsed times, including the rest."
             },
             {
               "type": "display_math",
-              "latex": "1.5+0.5+1=3\\text{ h}"
+              "latex": "2+\\frac{20}{60}+\\frac{40}{60}=2+\\frac13+\\frac23=3\\text{ h}"
             }
           ]
         },
@@ -144,20 +160,20 @@
           "content": [
             {
               "type": "text",
-              "text": "Divide total distance by total elapsed time."
+              "text": "Divide the total distance by the total elapsed time."
             },
             {
               "type": "display_math",
-              "latex": "\\frac{40}{3}=13\\frac13\\text{ km/h}"
+              "latex": "\\frac{48}{3}=16\\text{ km/h}"
             }
           ]
         }
       ],
-      "verification_note": "The answer is below both travelling-stage speeds because the elapsed time includes a rest."
+      "verification_note": "16 km/h \u00d7 3 h = 48 km. Without the rest, the time would be 2\u2154 h and the average 18 km/h, so including the stop lowers the average, as it should."
     },
     {
       "stable_key": "average-speed-recall",
-      "position": 5,
+      "position": 6,
       "type": "active_recall",
       "title": "Check your understanding",
       "prompt": [
@@ -192,7 +208,7 @@
     },
     {
       "stable_key": "rate-concepts-summary",
-      "position": 6,
+      "position": 7,
       "type": "summary",
       "title": "Method checklist",
       "blocks": [
