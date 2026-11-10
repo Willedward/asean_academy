@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l3-529",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,23 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Environmental officers noted a protected habitat boundary while preparing a replacement frame. A right triangular component at the volleyball court marking has an opposite side of 14 cm and an adjacent side of 48 cm relative to angle "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\theta"
-        },
-        {
-          "type": "text",
-          "text": ". Find "
-        },
-        {
-          "type": "inline_math",
-          "latex": "\\theta"
-        },
-        {
-          "type": "text",
-          "text": " correct to 1 decimal place."
+          "text": "A wheelchair-ramp model meets the ground at angle θ. Its right-angled side profile has an opposite side of 14 cm and an adjacent side of 48 cm relative to angle θ. Find θ correct to 1 decimal place."
         }
       ],
       "marks": 3,
@@ -91,15 +75,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Write "
             },
             {
               "type": "inline_math",
-              "latex": "\\tan^{-1} \\left(\\frac{14}{48}\\right)"
+              "latex": "\\tan\\theta"
             },
             {
               "type": "text",
-              "text": " in degree mode."
+              "text": " as a fraction using the two given sides, then use the inverse tangent in degree mode."
             }
           ]
         }
@@ -110,22 +94,33 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Relative to θ, the opposite and adjacent sides are given, so use the tangent ratio."
             },
             {
               "type": "display_math",
-              "latex": "\\theta=\\tan^{-1}\\left(\\frac{14}{48}\\right)=16.3^\\circ"
+              "latex": "\\tan\\theta=\\frac{14}{48}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 2
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{16.3^\\circ}"
+              "latex": "\\theta=\\tan^{-1}\\left(\\frac{14}{48}\\right)=16.260\\ldots^\\circ"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\theta=16.3^\\circ"
             }
           ],
           "mark_type": "A",
@@ -140,7 +135,7 @@
       "asset_key": "g4-l3-529-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l3-529-diagram-r3.svg",
+      "path": "assets/g4-l3-529-diagram-r4.svg",
       "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 14 cm and the adjacent side is 48 cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -309,6 +304,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }

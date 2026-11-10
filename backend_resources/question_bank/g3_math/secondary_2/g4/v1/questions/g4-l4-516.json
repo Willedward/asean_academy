@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l4-516",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Quality auditors noted a protected habitat boundary while preparing a replacement frame. An observer stands 16 m from a vertical tower at the emergency radio tower. The angle of elevation from eye level to the top is 50°, and the observer’s eye is 1.6 m above the ground. Find the tower height correct to 1 decimal place."
+          "text": "A technician stands 16 m from a vertical tower carrying radio aerials. The angle of elevation from eye level to the top is 50°, and his eye is 1.6 m above the ground. Find the height h of the radio tower in metres, correct to 1 decimal place."
         }
       ],
       "marks": 4,
@@ -60,15 +60,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Find "
+              "text": "Use "
             },
             {
               "type": "inline_math",
-              "latex": "16 \\tan 50^{\\circ}"
+              "latex": "\\tan 50^{\\circ}=\\frac{h-1.6}{16}"
             },
             {
               "type": "text",
-              "text": ", then add 1.6 m."
+              "text": " to find the height above eye level, then account for the eye height."
             }
           ]
         }
@@ -79,22 +79,48 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "From the eye, the height above eye level, h − 1.6, is opposite the 50° angle and the 16 m distance is adjacent."
             },
             {
               "type": "display_math",
-              "latex": "h=16\\tan 50^\\circ+1.6=20.7"
+              "latex": "\\tan 50^\\circ=\\frac{h-1.6}{16}"
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{20.7}"
+              "latex": "h-1.6=16\\tan 50^\\circ=19.068\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the eye height."
+            },
+            {
+              "type": "display_math",
+              "latex": "h=19.068\\ldots+1.6=20.668\\ldots"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "h=20.7\\text{ m}"
             }
           ],
           "mark_type": "A",
@@ -109,7 +135,7 @@
       "asset_key": "g4-l4-516-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-516-diagram-r3.svg",
+      "path": "assets/g4-l4-516-diagram-r4.svg",
       "alt_text": "An observer stands 16 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 50°. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -323,6 +349,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }
