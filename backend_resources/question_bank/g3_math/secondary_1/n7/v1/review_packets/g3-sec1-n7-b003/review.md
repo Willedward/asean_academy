@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l4-009 — Coefficient constrained by a solution
+## n7-l4-009 — Possible values of a coefficient
 
 [Open this question in the HTML preview](index.html#n7-l4-009)
 
@@ -84,7 +84,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n7-l1-014 — Reversing division by eight
+## n7-l1-014 — Reversing a subtraction
 
 [Open this question in the HTML preview](index.html#n7-l1-014)
 

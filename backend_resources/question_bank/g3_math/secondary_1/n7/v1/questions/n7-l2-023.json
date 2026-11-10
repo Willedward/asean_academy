@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l2-023",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A mobile plan costs S$9 monthly plus S$3 for each extra gigabyte. One bill is S$30. Let "
+          "text": "A mobile plan costs S$9 monthly plus S$3 for each extra gigabyte. One bill is S$27. Let "
         },
         {
           "type": "inline_math",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "6",
+        "canonical_latex": "6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -79,7 +79,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "9+3x=30"
+              "latex": "9+3x=27"
             },
             {
               "type": "text",
@@ -93,8 +93,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "9+3x=30"
+              "type": "inline_math",
+              "latex": "9+3x=27"
             }
           ],
           "mark_type": "M",
@@ -104,8 +104,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "x=7"
+              "type": "inline_math",
+              "latex": "x=6"
             }
           ],
           "mark_type": "A",

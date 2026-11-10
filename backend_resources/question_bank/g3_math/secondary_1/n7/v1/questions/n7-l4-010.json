@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n7-l4-010",
   "bank_key": "g3-sec1-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,14 +20,6 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Remove both brackets and solve the resulting equation."
-        },
-        {
-          "type": "display_math",
-          "latex": "4(2x-3)-3(x+5)=2x"
-        },
-        {
-          "type": "text",
           "text": "Find the value of "
         },
         {
@@ -37,6 +29,10 @@
         {
           "type": "text",
           "text": "."
+        },
+        {
+          "type": "display_math",
+          "latex": "4(2x-3)-3(x+5)=2x"
         }
       ],
       "marks": 3,
@@ -58,15 +54,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Expand to "
-            },
-            {
-              "type": "inline_math",
-              "latex": "8x-12-3x-15=2x"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Expand both brackets, taking care with the signs."
             }
           ]
         },
@@ -75,7 +63,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Collect the x-terms and constants separately."
+              "text": "Collect the "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-terms on one side and the constants on the other."
             }
           ]
         }
