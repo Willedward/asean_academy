@@ -282,7 +282,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n5-l5-005 — Factorise a four-term expression
+## n5-l5-005 — Factorise with higher powers
 
 [Open this question in the HTML preview](index.html#n5-l5-005)
 

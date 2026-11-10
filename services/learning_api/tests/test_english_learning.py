@@ -1517,7 +1517,7 @@ def test_e5_checkpoint_delivers_a_safe_paired_passage_and_records_three_masterie
         app,
         session_id,
         question,
-        {"1": "A", "2": "A", "3": "B", "4": "A", "5": "A"},
+        {"1": "A", "2": "C", "3": "B", "4": "C", "5": "A"},
         "e5-checkpoint-pass-attempt",
     )
     assert completed.status_code == 200, completed.text

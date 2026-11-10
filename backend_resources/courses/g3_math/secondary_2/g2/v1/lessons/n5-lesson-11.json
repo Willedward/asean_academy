@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-n5",
   "status": "draft",
@@ -90,7 +90,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A trapezium has area 84 cm² and parallel sides 9 cm and 15 cm. Using A=½h(a+b), find h."
+          "text": "A trapezium (a four-sided shape with exactly one pair of parallel sides) has area 84 cm² and parallel sides 9 cm and 15 cm. Using "
+        },
+        {
+          "type": "inline_math",
+          "latex": "A=\\frac12h(a+b)"
+        },
+        {
+          "type": "text",
+          "text": ", find h."
         }
       ],
       "steps": [
@@ -176,16 +184,14 @@
         }
       ],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "symbolic_equivalence",
-        "canonical_expression": "9",
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "9",
         "canonical_latex": "9",
-        "variables": [
-          "r"
-        ],
-        "domain_constraints": [],
-        "accepted_equivalents": [],
-        "checker_config": {}
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "feedback": [
         {
