@@ -829,3 +829,25 @@ def test_the_contradictory_wording_is_refused():
     )
 
     assert sm.text_only_reason(prompt) is not None
+
+
+def test_corner_removed_algebra_can_state_the_width_and_keep_the_equation_linear(tmp_path):
+    inputs = {
+        "width": cm(12),
+        "height_extra": 3,
+        "cut_width": cm(5),
+        "cut_height": cm(3),
+        "remaining_area": {"value": 93, "unit": "cm²"},
+    }
+    stated = "A rectangle measures 12 cm by (x + 3) cm. A 5 cm by 3 cm corner is removed."
+    diagram = sm.corner_removed_algebra(inputs, ["6"])
+    spec = diagram.generation_spec
+
+    assert diagram.content_findings == []
+    assert findings(tmp_path, diagram, ["6"], stated) == []
+    assert spec["dimensions"] == {"expressions": ["(x + 3) cm"]}
+    assert "12 cm" in diagram.alt_text
+    assert {"6", "9"} <= set(spec["forbidden_visible_labels"])
+    # x = 6 is drawn at a neutral size, and the stated width is drawn to scale.
+    assert abs(spec["neutral_lengths"][0]["drawn"] - 6) >= 1.2
+    assert sm.corner_removed_algebra(inputs, ["5"]).content_findings
