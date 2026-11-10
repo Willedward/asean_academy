@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-019",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.2",
-  "title": "Temperature conversion table",
+  "title": "Temperature conversion",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -28,11 +28,11 @@
         },
         {
           "type": "text",
-          "text": ". Find F when "
+          "text": ". Find C when "
         },
         {
           "type": "inline_math",
-          "latex": "C=10"
+          "latex": "F=50"
         },
         {
           "type": "text",
@@ -45,8 +45,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "50",
-        "canonical_latex": "50",
+        "canonical_answer": "10",
+        "canonical_latex": "10",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute 10 for C."
+              "text": "Replace F by 50 to form a linear equation in C."
             }
           ]
         },
@@ -67,15 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
-            },
-            {
-              "type": "inline_math",
-              "latex": "1.8(10)+32"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Subtract 32 from both sides, then divide by 1.8."
             }
           ]
         }
@@ -85,8 +77,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "F=18+32"
+              "type": "inline_math",
+              "latex": "50=1.8C+32\\Rightarrow18=1.8C"
             }
           ],
           "mark_type": "M",
@@ -96,8 +88,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "F=50"
+              "type": "inline_math",
+              "latex": "C=10"
             }
           ],
           "mark_type": "A",

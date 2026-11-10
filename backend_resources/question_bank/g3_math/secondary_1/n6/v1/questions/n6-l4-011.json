@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l4-011",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -77,8 +77,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{y-intercepts are }2\\text{ and }8"
+              "type": "inline_math",
+              "latex": "x+2=-x+8\\Rightarrow x=3"
+            },
+            {
+              "type": "text",
+              "text": ", so the lines meet at "
+            },
+            {
+              "type": "inline_math",
+              "latex": "(3,5)"
             }
           ],
           "mark_type": "M",
@@ -88,8 +96,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{base}=6,\\ \\text{height}=3"
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "-intercepts are 2 and 8, so the base is 6 and the height is 3"
             }
           ],
           "mark_type": "M",
@@ -99,7 +111,7 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Area}=\\frac12(6)(3)=9"
             }
           ],
