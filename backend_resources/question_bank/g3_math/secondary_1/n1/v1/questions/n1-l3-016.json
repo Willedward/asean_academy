@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l3-016",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Midpoint of signed coordinates",
+  "title": "Midpoints on a number line",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -25,7 +25,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the coordinate of the midpoint of PQ."
+          "text": "M is the midpoint of PQ and N is the midpoint of MQ. Find the coordinate of N."
         }
       ],
       "marks": 2,
@@ -34,8 +34,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "-0.7",
-        "canonical_latex": "-0.7",
+        "canonical_answer": "1.25",
+        "canonical_latex": "1.25",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -47,7 +47,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The midpoint is the average of the two endpoint coordinates."
+              "text": "Find the coordinate of M first."
             }
           ]
         },
@@ -56,7 +56,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add -4.6 and 3.2, then divide the result by 2."
+              "text": "Then find the midpoint of M and Q in the same way."
             }
           ]
         }
@@ -66,8 +66,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\frac{-4.6+3.2}{2}=-\\frac{1.4}{2}"
+              "type": "inline_math",
+              "latex": "M=\\frac{-4.6+3.2}{2}=-0.7"
             }
           ],
           "mark_type": "M",
@@ -77,8 +77,8 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "The midpoint has coordinate -0.7."
+              "type": "inline_math",
+              "latex": "N=\\frac{-0.7+3.2}{2}=1.25"
             }
           ],
           "mark_type": "A",

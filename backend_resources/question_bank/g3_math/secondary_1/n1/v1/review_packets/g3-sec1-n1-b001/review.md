@@ -7,7 +7,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial reviewer:
 - Review date:
 
-## n1-l2-016 — Prime factors of 756
+## n1-l2-016 — Prime factors of 1260
 
 [Open this question in the HTML preview](index.html#n1-l2-016)
 
@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-011 — Complete a product to a square
+## n1-l3-011 — Sum of the prime factors
 
 [Open this question in the HTML preview](index.html#n1-l3-011)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-001 — Recover exponents from divisor information
+## n1-l4-001 — Identify a number from its factors
 
 [Open this question in the HTML preview](index.html#n1-l4-001)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-012 — Least square multiple
+## n1-l3-012 — Lowest common multiple of 180 and 24
 
 [Open this question in the HTML preview](index.html#n1-l3-012)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l5-002 — Two-stage calculator model
+## n1-l5-002 — Smallest power above a target
 
 [Open this question in the HTML preview](index.html#n1-l5-002)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l2-018 — Order signed fractions and decimals
+## n1-l2-018 — Order mixed signs
 
 [Open this question in the HTML preview](index.html#n1-l2-018)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-016 — Midpoint of signed coordinates
+## n1-l3-016 — Midpoints on a number line
 
 [Open this question in the HTML preview](index.html#n1-l3-016)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-003 — Divide a directed interval
+## n1-l4-003 — Equal divisions on a number line
 
 [Open this question in the HTML preview](index.html#n1-l4-003)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-017 — Scale a double inequality
+## n1-l3-017 — Integers in a compound inequality
 
 [Open this question in the HTML preview](index.html#n1-l3-017)
 
@@ -238,7 +238,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-005 — Upper bound of a sum
+## n1-l4-005 — Greatest value before rounding
 
 [Open this question in the HTML preview](index.html#n1-l4-005)
 

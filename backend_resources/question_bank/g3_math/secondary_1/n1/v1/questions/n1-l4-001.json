@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-001",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Recover exponents from divisor information",
+  "title": "Identify a number from its factors",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -19,7 +19,7 @@
     },
     {
       "type": "inline_math",
-      "latex": "N=2^{a}\\times 3^{b}"
+      "latex": "N=2^{a}\\times3^{b}"
     },
     {
       "type": "text",
@@ -39,7 +39,23 @@
     },
     {
       "type": "text",
-      "text": " are positive integers. N is divisible by 72 and has exactly 18 positive factors."
+      "text": " are positive integers. "
+    },
+    {
+      "type": "inline_math",
+      "latex": "N"
+    },
+    {
+      "type": "text",
+      "text": " is divisible by 72 and "
+    },
+    {
+      "type": "inline_math",
+      "latex": "400<N<500"
+    },
+    {
+      "type": "text",
+      "text": "."
     }
   ],
   "parts": [
@@ -58,8 +74,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "288",
-        "canonical_latex": "288",
+        "canonical_answer": "432",
+        "canonical_latex": "432",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -71,23 +87,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Use divisibility by 72 to bound "
+              "text": "Use divisibility by 72 to narrow down the possible values of "
             },
             {
               "type": "inline_math",
-              "latex": "a"
+              "latex": "N"
             },
             {
               "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b"
-            },
-            {
-              "type": "text",
-              "text": ", then use the divisor-count formula."
+              "text": "."
             }
           ]
         },
@@ -95,36 +103,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "72=2^{3}\\times 3^{2}"
-            },
-            {
               "type": "text",
-              "text": ", so "
-            },
-            {
-              "type": "inline_math",
-              "latex": "a\\ge 3"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b\\ge 2"
-            },
-            {
-              "type": "text",
-              "text": "; also "
-            },
-            {
-              "type": "inline_math",
-              "latex": "(a+1)(b+1)=18"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "List the multiples of 72 between 400 and 500 and check that each has only 2 and 3 as prime factors."
             }
           ]
         }
@@ -135,43 +115,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The only factor pair satisfying "
+              "text": "The only multiple of 72 between 400 and 500 is "
             },
             {
               "type": "inline_math",
-              "latex": "a+1\\ge 4"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b+1\\ge 3"
-            },
-            {
-              "type": "text",
-              "text": " is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "6\\times 3"
-            },
-            {
-              "type": "text",
-              "text": ", so "
-            },
-            {
-              "type": "inline_math",
-              "latex": "a=5"
-            },
-            {
-              "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "b=2"
+              "latex": "72\\times6=432"
             },
             {
               "type": "text",
@@ -185,8 +133,20 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "N=2^{5}\\times 3^{2}=288"
+              "type": "inline_math",
+              "latex": "432=2^{4}\\times3^{3}"
+            },
+            {
+              "type": "text",
+              "text": ", so "
+            },
+            {
+              "type": "inline_math",
+              "latex": "N=432"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",
