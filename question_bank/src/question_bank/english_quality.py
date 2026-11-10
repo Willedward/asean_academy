@@ -24,7 +24,8 @@ MAX_DIAGNOSTIC_LONGEST_KEY_SHARE = 0.5
 DIAGNOSTIC_POOLS = {"baseline_diagnostic", "endline_diagnostic", "protected_reserve"}
 DIAGNOSTIC_FORM_TYPES = {"baseline", "endline", "endline_reserve"}
 LESSON_COPY_WORDS = 8
-# Level review rule 5: diagnostic passages per task type, in words (whitespace-separated).
+# Level review rule 5: diagnostic and mock passages per task type, in words (whitespace-separated).
+PASSAGE_LENGTH_FORM_TYPES = DIAGNOSTIC_FORM_TYPES | {"mock"}
 DIAGNOSTIC_PASSAGE_WORDS = {
     "reading_comprehension": (300, 450),
     "banked_cloze": (150, 250),
@@ -316,7 +317,7 @@ def passage_word_count(passage) -> int:
 
 
 def _diagnostic_passage_length_findings(forms, by_key, passages) -> list[QualityFinding]:
-    """Flag baseline, endline and reserve passages outside the level-review length range."""
+    """Flag diagnostic and mock passages outside the level-review length range."""
 
     if passages is None:
         return []
@@ -324,7 +325,7 @@ def _diagnostic_passage_length_findings(forms, by_key, passages) -> list[Quality
     findings = []
     seen = set()
     for form in forms:
-        if form.form_type not in DIAGNOSTIC_FORM_TYPES:
+        if form.form_type not in PASSAGE_LENGTH_FORM_TYPES:
             continue
         for key in form.question_keys:
             question = by_key.get(key)
