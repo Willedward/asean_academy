@@ -1,11 +1,11 @@
 # Current project handoff
 
-Updated: 9 November 2026 (Asia/Singapore)
+Updated: 10 November 2026 (Asia/Singapore)
 
 This is the short restart file for a new session or collaborator. Read it before loading
 the larger plans; do not use the full chat transcript as project state.
 
-## Start here: state on 9 November 2026
+## Start here: state on 10 November 2026
 
 This section replaces the older status notes further down, which are kept as history. Where they
 disagree, trust this section and the repo.
@@ -30,8 +30,8 @@ Don't ask about these again.
   full launch (see "Switching tutor models").
 - **Content fix decisions** in `docs/plan/CONTENT_FIX_LEDGER.md`: D1 A, D2 A, D3 A, D4 B, D5 B, D6 B,
   D7 A, D8 C, D9 A. For D3, area and volume scale factors and standard form stay, with teaching;
-  other flagged topics are rewritten in scope. D8 C means fix categories 1-3 now and do duplicates
-  and the rest later.
+  other flagged topics are rewritten in scope. D8 C means fix categories 1-3 first, then the rest;
+  both are now done for every batch except the held Sec 1 N2 batches.
 
 ### Rules that CI or the release process depend on
 
@@ -49,97 +49,116 @@ Don't ask about these again.
 - Never edit an existing migration, force-push a shared branch, commit secrets or learner data, or
   use paid LLM APIs for content.
 - Check every changed item through `question_bank.checking.check_answer` with right and plausible
-  wrong answers. Grep `services/learning_api/tests` for changed keys, because tests can assert on
+  wrong answers, and with every form the old version accepted. A trailing `\%` in `canonical_latex`
+  is what lets "40%" pass; removing it rejected correct answers on 18 Sec 1 N3 items until #568 and
+  #603-#605. Grep `services/learning_api/tests` for changed keys, because tests can assert on
   content.
-- Known CI noise: a browser-journey "socket hang up" and a web job that fails after all its tests pass
-  have both cleared on rerun. Read the log before assuming that.
+- Merge only when all 5 named checks pass on the PR's current head, using `gh pr merge --merge
+  --match-head-commit`. A missing check counts as not passed. Don't use `--delete-branch` while a
+  worktree depends on the branch, and never run agent git commands in the main checkout.
+- Known CI noise: a browser-journey "socket hang up", the slow two-course-track spec, and "window is
+  not defined" in the web job. Read the log, then rerun once.
 
 ### Done
 
-- **Mathematics fixes:** categories 1-3 are merged for every batch on the fix list. All 19
-  Mathematics banks report 0 errors under `validate --strict-geometry`, and `catalogue-validate` and
-  `authoring-validate` are clean (0 errors, 0 duplicate findings).
-- **Diagrams:** checked figures for all geometry topics, and data charts for Sec 2 S1, S2, N6, N7 and
-  Sec 1 S1, from the generator in `question_bank/src/question_bank/diagrams/charts.py`.
-- **Answer forms under D9 A:** `simplest_fraction` and `require_index_notation` (#397) are applied to
-  Sec 2 S2 and Sec 1 N1.
-- **Answer leaks and plain-text maths:** ledger categories 4 and 7 are merged for 67 batches
-  (#437-#508), 1,269 questions changed, under D5 B. Every maths block parses in KaTeX. Most of the
-  conversion was only checked by script and has not been viewed in the app. Sec 1 N2 stays closed
-  under D4 B. On questions with figures, expressions that match a label and lone letters stay as text,
-  because the geometry checks read only text blocks.
-- **Readiness:** `question-bank review-readiness` lists what can go to a reviewer. A ledger record's
-  `resolution` shows which batches were fixed and by which PRs, because statuses are never updated.
-  All 75 reviewer packets are current.
-- **Diagnostic:** connected to the Mathematics course, with the audit's fixable findings merged
-  (#418-#431). Students wait on human approval of its 76 questions. The English diagnostic is 43 parts
-  in 60 minutes (#370).
-- **English:** all 51 lessons and both Section 1 mocks exist as drafts, retargeted to Sec 3 entry, with
-  a learner mock runtime.
-- **App:** `/progress` no longer opens a connection per unit (#416), one `main` per page (#417), the
-  learner accessibility findings in `docs/plan/ACCESSIBILITY_AUDIT_2026_11.md` (#432), the admin ones
-  (#436), and the admin content status route (#442).
-- **Release:** two-course gate (#313), single invitation (#280), Gemini-only tutor deploy settings.
+- **Mathematics questions, all fix categories:** categories 1-3 first, then answer leaks and
+  plain-text maths (#437-#508), then duplicates, teaching gaps and polish (76 batch PRs, #515-#633,
+  including G4/G5 #610-#617). Every batch except the 4 held Sec 1 N2 batches was cleaned. Over
+  400 answer keys changed, mostly where duplicates got new numbers; each PR body lists them old and
+  new. Reviewers should treat these as new items.
+- **Lessons:** 238 of 327 lesson findings fixed in 19 PRs (#558-#642), including the Sec 1 G5 figures
+  D-22 to D-31, new worked examples under D7 A, and the D1 S$ gloss. New chart and polygon templates
+  were added to the generators.
+- **Checks on the final state (10 November):** `catalogue-validate` and `authoring-validate` 0 errors,
+  0 duplicates, 2,052 questions; `review-readiness` 71 ready, 4 approved, 0 blocked, 0 in progress;
+  all 8,995 maths blocks in questions, lessons and English parse in KaTeX (two `\pih` typos fixed in
+  `g5-l5-501`); no answer form accepted before this pass is now rejected across 1,636 changed
+  questions.
+- **Ledger:** records carry a `resolution`: `fixed_in_content` or `left_open`, with batches and PRs.
+  Statuses are never updated.
+- **English:** quality findings 270 to 27 (#588-#631). Banked cloze keys no longer follow bank order,
+  vocabulary targets appear in their sentences, the longest option is no longer the key, and the
+  three diagnostic forms no longer share one key sequence. Six validator rules stop these recurring.
+  The v2 diagnostic generator now refuses to overwrite the hand-fixed content (#636).
+- **App:** hint maths renders inline (#525); diagnostic answers save on Next and resume at the first
+  unanswered question (#526); tutor provider and model are deploy variables (#532); admin and learner
+  accessibility (#432, #436, #637, #640), including animations that stop within 5 seconds and fixed
+  heading order; the admin content status route (#442).
+- **Tooling:** plain-text maths lint warns (#627, 23 questions flagged, 16 in Sec 1 N2); hint-leak lint
+  no longer crashes on fractions (#624).
+- **Diagnostic:** connected to the Mathematics course (#418-#431). Students wait on human approval of
+  its 76 questions. The English diagnostic is 43 parts in 60 minutes (#370).
+- **Release:** two-course gate (#313), single invitation (#280).
 
 ### Still to do, in suggested order
 
-1. **Staging test on the review site.** William signs in with Google, since this needs a person. Check
-   the site loads first: its API timed out or returned errors on 5 and 9 November. Click through the
-   review flow and a small review batch, a mock, and the tutor, including calibration. Also run the
-   accessibility check still open in B5, including a phone screen reader; #432 was only tested in
-   Chromium.
-2. **Start Mathematics review** using `docs/plan/MATH_REVIEWER_GUIDE.md`, from the batches
-   `review-readiness` lists as ready.
-3. **Diagnostic decisions for William,** listed under "Questions for William".
-4. **Later content passes:** ledger categories 5, 6 and 8 (duplicates, teaching gaps and polish), 87
-   lesson fix groups, and the Sec 1 G5 lesson figures (D-22 to D-31). Doing these after review cancels
-   approvals on the questions changed. Sec 1 S1 still needs a `diagram_audit.json` (CFL-426).
-   Leftovers from categories 4 and 7:
-   - Real leaks the pass missed or left: `n7-l1-513`, `n6-l1-012`, `n6-l1-021`, `n6-l1-015`,
-     `n6-l2-008`, `n1-l1-019`, `g1-l1-012`, and the title of `s1-l1-017`.
-   - Outside the batches: CFL-230, CFL-248, CFL-249, CFL-250 and `n1-l2-11` (older calibration
-     questions), and lesson items CFL-234, CFL-595 and CFL-601.
-   - A check that flags plain-text maths (CFL-586).
-   - Sec 2 G4 b004 keeps `x` and `θ` as inline maths on 19 figure prompts while b001-b003 use text.
-   - Stage-2 hints such as "Calculate tan⁻¹(48/55)" on difficulty 3+ items weren't on the worklist.
-5. **English, after the staging test:** 270 quality findings
-   (`backend_resources/english/v1/authoring/quality_baseline.json`), form equivalence, practice depth,
-   and 8-12 essay prompts. The educator's review blocks the pilot, so their start date matters. The new
-   diagnostic's vocabulary is mostly B2-C1, which the level review flagged as hard; the educator should
-   judge it.
-6. **Remaining accessibility:** P2-11, P2-12 and P3 in the audit.
-7. **Production:** Railway staging and production aren't set up and no GitHub secrets exist. Needs
-   `STAGING_GEMINI_API_KEY` and `PRODUCTION_GEMINI_API_KEY` among others. See
+1. **Staging test on the review site.** William signs in with Google. Check the site loads first: its
+   API timed out on 5 and 9 November. Click through review, a mock, the tutor and calibration, and do
+   the B5 accessibility check with a phone screen reader. None of the rewritten content or the new
+   lesson figures has been viewed in the app yet, so look at some.
+2. **Start Mathematics review** with `docs/plan/MATH_REVIEWER_GUIDE.md`, from the 71 ready batches.
+3. **Questions for William,** below.
+4. **English educator:** the 27 baseline findings left (11 replacement vocabulary words, 16 lesson
+   examples that copy assessment), vocabulary that looks too hard for Sec 1-2 (for example tenable,
+   equivocal, circumspect, cogent), six editing-type practice items the real paper doesn't have, four
+   diagnostic passages under 300 words, and form equivalence (plan: the educator rates each target
+   word, swap outliers between forms, lengthen passages to 300-450 words, add a per-form equivalence
+   report, and alternate baseline and endline forms in the pilot). `eb-l5-203` gap 5 may take "rapid" as well as "steady".
+5. **Production:** Railway staging and production aren't set up and no GitHub secrets exist. See
    `docs/plan/RELEASE_OPERATIONS.md` and `docs/plan/HOSTED_STAGING.md`.
+
+### Left open after the cleanup pass
+
+Ledger records with `resolution.status` `left_open` (112). By kind:
+
+- **Policy or tooling:** total_marks equal to difficulty, calculator flags, manifests citing house
+  rules v1, generation_spec shape, diagram audits (Sec 1 S1 `diagram_audit.json`, CFL-426), the lesson
+  length metric (CFL-547), and terminology policy records.
+- **Difficulty relabels:** need blueprint rebalancing (for example CFL-386, 458, 461, 462, 472, 501).
+- **Generators that don't exist:** the balance figure in `n7-lesson-01`, the angle-types figure in
+  `g1-lesson-01`, the points-only figure in `n6-lesson-01`, sine and cosine templates (CFL-384), and
+  optional figures for text-only items (CFL-465, 466, 474, 479, 481, 489, 504).
+- **Pinned by tests:** `s1-l3-001`, `g5-l2-011`, `g5-l4-010`, `g5-l5-005`, `n3-l1-001`.
+- **Held:** Sec 1 N2 (D4) and the five older calibration questions outside any batch (below).
+- **Scope:** formal congruence and similarity tests (CFL-580) stay taught, because bank items
+  `g2-l3-502`, `g2-l3-509`, `g2-l4-505` and `g2-l4-509` still use them; f(x) notation (CFL-406).
 
 ### Questions for William
 
-Judgement calls made in PRs, each easy to reverse:
+New:
 
-- Text-only "is it right-angled?" items in Sec 2 G4 under D6 B (28 items).
-- Whole-number answers: `15` passes for 15 tan 45°, but `34` fails on 33.95 because the prompt asks for
-  1 decimal place.
+- **Locked lessons:** Learn and Progress link to locked lessons, where "Start draft practice" leads to
+  an error page. Recommended: show the lock state up front.
+- **Tutor plan sheet:** unreachable (the API never sends `tutor_plan_required`), links to `/plans`
+  (404), and "Send this to my parent" does nothing. Recommended: hide it for the pilot.
+- **Older calibration questions** `n1-l3-01`, `n1-l1-04`, `n1-l1-14`, `n1-l1-15`, `n1-l2-11`: live in
+  Sec 1 N1 pools (practice, unit checkpoint, reserve), outside any batch, so pr-check blocks edits.
+  `n1-l3-01`'s alt text reads its answers aloud. Recommended: a sanctioned seed-question path in
+  pr-check, then fix them; or remove them from the pools.
+- **Sec 1 N2:** D4 B says reopen after the ranked batches, which is now. Reopening cancels its human
+  approvals, so it needs an explicit yes.
+- `n5-l1-515` prints 5a/5b and the key agrees. 5a/6b (CFL-598) would change the answer: which was
+  intended?
+
+Earlier judgement calls, each easy to reverse:
+
+- Sec 1 S1 coded items at difficulty 3+ now take a display code plus a reason code (D6 B).
+- D3 A rewrites: Sec 1 N1 divisor counts, completing squares and cubes, bounds, scaled inequalities and
+  the section formula; Sec 1 N6 composite functions; Sec 1 N5 factorising by grouping; Sec 2 N6 uses
+  symmetry instead of x = -b/(2a); Sec 2 S2 uses listing and trees instead of the multiplication rule.
+- GST glossed; n3-lesson-05's 9% GST example became a generic 8% sales tax.
+- Text-only "is it right-angled?" items in Sec 2 G4 under D6 B.
 - `simplified_fraction` on Sec 1 N5 "simplest form" items, and `expanded` rejecting `6(x+2)` on
   "Simplify" items.
-- Distinct titles to remove codenames in Sec 2 N5 and N6, which leaves the clones in place for now.
-- `n5-l2-002` changed from "write as repeated addition" to "write as a single term".
-- `s1-l2-015` replaced with an issue-code item (key 4), because the old one counted words in its own
-  prompt. `n3-l1-004` has new numbers (S$72, key 90).
-- Prompts rewritten so the value must be derived, keys unchanged: `g1-l3-008`, `g1-l2-023`, `g1-l3-031`,
-  `n7-l1-001`, and the four Sec 2 N7 "x+6=k has the solution x=3" items (CFL-214).
-- `n5-l1-515` prints 5a/5b and the key agrees. Changing it to 5a/6b (CFL-598) would change the answer, so
-  it was left: which was intended?
-- `g5-l3-011` changed from "find x" to "find the perimeter", key 44, because its old givens contradicted
-  each other.
-- `g1-l4-011` stays text-only, because a drawn polygon shows its number of sides, which is the answer.
-  `s2-l1-507` only converts 0.2 to a percentage, so it was taken off the figure list.
-- Diagnostic outcome tags (B13, E13, B28, E27, E28) are wrong in `plan.json`, and those tags are what
-  gets imported. Recommended: per-item overrides in the generator.
+- `s1-l2-015` replaced with an issue-code item; `g5-l3-011` asks for the perimeter (key 44).
+- `g1-l4-011` stays text-only, because a drawn polygon shows its number of sides.
+- Diagnostic outcome tags (B13, E13, B28, E27, E28) are wrong in `plan.json`. Recommended: per-item
+  overrides in the generator.
 - Diagnostic form design: 13 of 19 topic groups use different outcomes across the two forms.
-  Recommended: report at topic level for the pilot and re-pair once item statistics exist.
-- Diagnostic balance: recommended replacing B28 with a trigonometry item, setting B29 to 2 marks and E30
-  to 3, and relabelling B34, B35, E11 and E36 as difficulty 2.
-- E35 (frequency density): needs confirming against the syllabus.
+  Recommended: report at topic level for the pilot.
+- Diagnostic balance: recommended replacing B28 with a trigonometry item, B29 to 2 marks, E30 to 3, and
+  relabelling B34, B35, E11 and E36 as difficulty 2. E35 (frequency density) needs confirming against
+  the syllabus.
 
 ### Switching tutor models
 
