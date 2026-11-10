@@ -646,7 +646,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-011",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -666,7 +666,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A ticket costs S$90 before a promotion and S$72 during the promotion. By what percentage is the promotional price lower than the original price?"
+            "text": "A ticket costs S$90 before a promotion and S$63 during the promotion. By what percentage is the promotional price lower than the original price?"
           }
         ],
         "marks": 2,
@@ -675,8 +675,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20\\%",
+          "canonical_answer": "30",
+          "canonical_latex": "30",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -697,7 +697,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Subtract 72 from 90, then divide the difference by 90."
+                "text": "Subtract 63 from 90, then divide the difference by 90."
               }
             ]
           }
@@ -707,8 +707,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "90-72=18"
+                "type": "inline_math",
+                "latex": "90-63=27"
               }
             ],
             "mark_type": "M",
@@ -718,8 +718,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\frac{18}{90}\\times100\\%=20\\%"
+                "type": "inline_math",
+                "latex": "\\frac{27}{90}\\times100\\%=30\\%"
               }
             ],
             "mark_type": "A",
@@ -1393,7 +1393,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l1-009",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1413,7 +1413,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Decrease 150 by 20%."
+            "text": "Decrease 240 by 15%."
           }
         ],
         "marks": 1,
@@ -1422,8 +1422,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "120",
-          "canonical_latex": "120",
+          "canonical_answer": "204",
+          "canonical_latex": "204",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1435,7 +1435,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "A 20% decrease leaves 80% of the original quantity."
+                "text": "A 15% decrease leaves 85% of the original quantity."
               }
             ]
           },
@@ -1444,7 +1444,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply 150 by 0.8."
+                "text": "Multiply 240 by 0.85."
               }
             ]
           }
@@ -1454,8 +1454,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "150\\times0.8=120"
+                "type": "inline_math",
+                "latex": "240\\times0.85=204"
               }
             ],
             "mark_type": "B",
@@ -2403,7 +2403,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l4-008",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2423,7 +2423,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An investment grows by 10% in its first year and by 20% in its second year. It is worth S$528 after the two increases. Find its original value in dollars."
+            "text": "An investment grows by 10% in its first year and by 20% in its second year. It is worth S$528 after the two increases. Find its original value in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2607,7 +2607,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l2-017",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2627,7 +2627,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A salesperson earns a commission of 4% on sales of S$3250. Find the commission in dollars."
+            "text": "A salesperson earns a commission of 4% on sales of S$3250. Find the commission in dollars. Enter only the number."
           }
         ],
         "marks": 2,
@@ -2709,7 +2709,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "n3-l3-014",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2729,7 +2729,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Lina spends 35% of her money on rent and 20% of her original amount on food. She then has S$270 left. Find the amount she had at first, in dollars."
+            "text": "Lina spends 30% of her money on rent and 25% of her original amount on food. She then has S$225 left. Find the amount she had at first, in dollars. Enter only the number."
           }
         ],
         "marks": 3,
@@ -2738,8 +2738,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "600",
-          "canonical_latex": "600",
+          "canonical_answer": "500",
+          "canonical_latex": "500",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2760,7 +2760,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "After spending 35% and 20%, she has 45% of the original amount left."
+                "text": "Work out the percentage of the original amount that is left after both expenses."
               }
             ]
           }
@@ -2770,8 +2770,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "100\\%-35\\%-20\\%=45\\%"
+                "type": "inline_math",
+                "latex": "100\\%-30\\%-25\\%=45\\%"
               }
             ],
             "mark_type": "M",
@@ -2781,8 +2781,8 @@
             "position": 2,
             "content": [
               {
-                "type": "display_math",
-                "latex": "0.45x=270"
+                "type": "inline_math",
+                "latex": "0.45x=225"
               }
             ],
             "mark_type": "M",
@@ -2792,8 +2792,8 @@
             "position": 3,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=270\\div0.45=600"
+                "type": "inline_math",
+                "latex": "x=225\\div0.45=500"
               }
             ],
             "mark_type": "A",
