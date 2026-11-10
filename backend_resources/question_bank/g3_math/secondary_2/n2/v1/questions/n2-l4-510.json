@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l4-510",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from an environmental field study. A path measures 7 cm on Map A with scale 1 : 50,000. Map B shows the same path at scale 1 : 40,000. Find its length on Map B in centimetres. Enter the numerical value only."
+          "text": "A hiking route is 12 cm long on a detailed 1 : 20 000 map. How long will it be on a 1 : 50 000 overview map, in centimetres? Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "8.75",
-        "canonical_latex": "8.75",
+        "canonical_answer": "4.8",
+        "canonical_latex": "4.8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Find the actual distance using Map A, then divide by Map B's denominator."
+              "text": "Find the real length in centimetres from Map A, then divide by the Map B denominator."
             }
           ]
         }
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "d=7(50{,}000)=350{,}000\\text{ cm},\\quad \\text{Map B}=\\frac{350{,}000}{40{,}000}=8.75\\text{ cm}"
+              "latex": "d=12(20\\,000)=240\\,000\\text{ cm},\\quad\\text{Map B}=\\frac{240\\,000}{50\\,000}=4.8\\text{ cm}"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{8.75}"
+              "latex": "\\boxed{4.8}"
             }
           ],
           "mark_type": "A",

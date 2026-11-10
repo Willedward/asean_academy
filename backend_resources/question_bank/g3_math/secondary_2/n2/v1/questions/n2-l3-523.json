@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l3-523",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N2",
   "primary_outcome": "2.5",
-  "title": "Test and extend a proportional table",
+  "title": "Cost from a price list",
   "difficulty": 3,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,31 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from an environmental field study. A table contains the pair "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x=5"
-        },
-        {
-          "type": "text",
-          "text": ", "
-        },
-        {
-          "type": "inline_math",
-          "latex": "y=8"
-        },
-        {
-          "type": "text",
-          "text": ". The relationship is direct proportion. Find the y-value paired with "
-        },
-        {
-          "type": "inline_math",
-          "latex": "x=10"
-        },
-        {
-          "type": "text",
-          "text": ". Enter the exact numerical value only."
+          "text": "A price list shows that 5 notebooks cost S$8, 10 notebooks cost S$16 and 15 notebooks cost S$24. The cost is directly proportional to the number of notebooks. Find the cost of 12 notebooks, in dollars. Type the number only."
         }
       ],
       "marks": 3,
@@ -53,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "16",
-        "canonical_latex": "16",
+        "canonical_answer": "19.2",
+        "canonical_latex": "19.2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -83,15 +59,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Set "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\frac{y}{10}=\\frac{8}{5}"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Find the cost of one notebook from any row, then multiply by 12."
             }
           ]
         }
@@ -102,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\frac{y}{10}=\\frac{8}{5}\\Rightarrow y=\\frac{8(10)}{5}=16"
+              "latex": "\\frac{y}{12}=\\frac{8}{5}\\Rightarrow y=\\frac{8(12)}{5}=19.2"
             }
           ],
           "mark_type": "M",
@@ -113,7 +81,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{16}"
+              "latex": "\\boxed{19.2}"
             }
           ],
           "mark_type": "A",

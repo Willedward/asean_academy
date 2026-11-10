@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n2-l1-514",
   "bank_key": "g3-sec2-n2-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N2",
   "primary_outcome": "2.4",
-  "title": "Statement scale as a ratio",
+  "title": "Kilometres represented by 1 cm",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use the data from an environmental field study. A map states that 1 cm represents 6 km. Write the missing denominator in the scale 1 : ____. Enter the numerical value only."
+          "text": "A map has scale 1 : 200 000. How many kilometres does 1 cm on the map represent? Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "600000",
-        "canonical_latex": "600000",
+        "canonical_answer": "2",
+        "canonical_latex": "2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Both sides of a ratio scale must use the same unit."
+              "text": "1 cm on the map represents 200 000 cm on the ground."
             }
           ]
         },
@@ -51,15 +51,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert 6 km to centimetres using "
+              "text": "There are "
             },
             {
               "type": "inline_math",
-              "latex": "1\\text{ km}=100\\,000"
+              "latex": "100\\,000"
             },
             {
               "type": "text",
-              "text": " cm."
+              "text": " cm in 1 km."
             }
           ]
         }
@@ -70,7 +70,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "6\\text{ km}=6\\times100\\,000\\text{ cm}=600000\\text{ cm}"
+              "latex": "200\\,000\\text{ cm}=2\\text{ km}"
             }
           ],
           "mark_type": "A",
