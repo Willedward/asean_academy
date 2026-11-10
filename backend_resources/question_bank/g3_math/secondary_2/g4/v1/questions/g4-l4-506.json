@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l4-506",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Safety inspectors noted high winds during seasonal storms while preparing a replacement frame. Two shorter sides of a triangular frame for the village solar-panel frame are 15 cm and 20 cm. The angle between them must be 90°. Find the required longest side x in centimetres. Enter the numerical value only."
+          "text": "A solar-panel stand needs a rigid side support. The two shorter sides of a triangular frame for the stand are 20 cm and 99 cm. The angle between them must be 90°. How long must the longest side x be, in centimetres? Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "25",
-        "canonical_latex": "25",
+        "canonical_answer": "101",
+        "canonical_latex": "101",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -64,7 +64,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "x^{2}=15^{2}+20^{2}"
+              "latex": "x^{2}=20^{2}+99^{2}"
             },
             {
               "type": "text",
@@ -79,22 +79,44 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "x^2=15^2+20^2\\Rightarrow x=25"
+              "text": "The 90° angle lies between the two shorter sides, so the longest side x is the hypotenuse."
             }
           ],
           "mark_type": "M",
-          "mark_value": 3
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
+              "type": "text",
+              "text": "By Pythagoras’ theorem,"
+            },
+            {
               "type": "display_math",
-              "latex": "\\boxed{25}"
+              "latex": "x^2=20^2+99^2=400+9801=10201"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=\\sqrt{10201}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "x=101"
             }
           ],
           "mark_type": "A",
@@ -109,8 +131,8 @@
       "asset_key": "g4-l4-506-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l4-506-diagram-r3.svg",
-      "alt_text": "Triangle with shorter sides 15 cm and 20 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
+      "path": "assets/g4-l4-506-diagram-r4.svg",
+      "alt_text": "Triangle with shorter sides 20 cm and 99 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
         "diagram_kind": "right_triangle",
@@ -120,11 +142,11 @@
         "inputs": {
           "legs": [
             {
-              "value": 15,
+              "value": 20,
               "unit": "cm"
             },
             {
-              "value": 20,
+              "value": 99,
               "unit": "cm"
             }
           ]
@@ -133,17 +155,17 @@
         "dimensions": {
           "perpendicular_sides": [
             {
-              "value": 15,
+              "value": 20,
               "unit": "cm"
             },
             {
-              "value": 20,
+              "value": 99,
               "unit": "cm"
             }
           ]
         },
         "forbidden_visible_labels": [
-          "25"
+          "101"
         ],
         "unknowns": [
           {
@@ -152,15 +174,15 @@
           }
         ],
         "task": "find_hypotenuse",
-        "drawn_to_scale": true,
+        "drawn_to_scale": false,
         "viewbox": [
           600.0,
-          446.0
+          300.0
         ],
         "points": {
           "A": [
             120.0,
-            326.0
+            136.0
           ],
           "B": [
             120.0,
@@ -168,7 +190,7 @@
           ],
           "C": [
             480.0,
-            326.0
+            136.0
           ]
         },
         "segments": [
@@ -206,11 +228,11 @@
         ],
         "labels": [
           {
-            "text": "15 cm",
+            "text": "20 cm",
             "target": "segment:AB"
           },
           {
-            "text": "20 cm",
+            "text": "99 cm",
             "target": "segment:AC"
           },
           {
@@ -218,22 +240,12 @@
             "target": "segment:BC"
           }
         ],
-        "relationships": [
-          {
-            "type": "length_ratio",
-            "segments": [
-              "AB",
-              "AC"
-            ],
-            "value": 0.75,
-            "tolerance": 0.02
-          }
-        ],
+        "relationships": [],
         "min_phone_font_px": 13.13
       },
-      "sha256": "2bb6ee06c159c00bbd6a13e1a878892d393ce2ce3c49a52dd7b37c38aa756ea9",
+      "sha256": "899496af3604747b5e0ca6eea81a06ddba1d89f8f520ee68a0da13e64ff3777a",
       "width": 600,
-      "height": 446
+      "height": 300
     }
   ],
   "provenance": {

@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l1-507",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -30,7 +30,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Survey crew noted a narrow foundation beside drainage while preparing a replacement frame. For the reservoir service road, a right triangular panel has perpendicular sides 24 cm and 143 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+            "text": "A long, thin triangular gusset plate strengthens a bridge model. It has perpendicular sides 24 cm and 143 cm. Calculate the hypotenuse c in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -79,8 +79,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The hypotenuse is opposite the right angle, so by Pythagoras’ theorem"
+              },
+              {
                 "type": "display_math",
-                "latex": "c=\\sqrt{24^2+143^2}=145"
+                "latex": "c^2=24^2+143^2=21025,\\quad c=\\sqrt{21025}=145"
               }
             ],
             "mark_type": "A",
@@ -95,7 +99,7 @@
         "asset_key": "g4-l1-507-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l1-507-diagram-r3.svg",
+        "path": "assets/g4-l1-507-diagram-r4.svg",
         "alt_text": "Right-angled triangle with perpendicular sides 24 cm and 143 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -225,12 +229,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l1-508",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -259,7 +263,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team noted a narrow foundation beside drainage while preparing a replacement frame. For the wildlife crossing sign, a right triangular panel has perpendicular sides 6 cm and 8 cm. Calculate the hypotenuse in centimetres. Enter the numerical value only."
+            "text": "A triangular corner shelf fits into the right angle between two walls. It has perpendicular sides 21 cm and 72 cm. Calculate the hypotenuse c in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -268,8 +272,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "10",
-          "canonical_latex": "10",
+          "canonical_answer": "75",
+          "canonical_latex": "75",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -294,7 +298,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "6^{2}+8^{2}"
+                "latex": "21^{2}+72^{2}"
               },
               {
                 "type": "text",
@@ -308,8 +312,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "The hypotenuse is opposite the right angle, so by Pythagoras’ theorem"
+              },
+              {
                 "type": "display_math",
-                "latex": "c=\\sqrt{6^2+8^2}=10"
+                "latex": "c^2=21^2+72^2=5625,\\quad c=\\sqrt{5625}=75"
               }
             ],
             "mark_type": "A",
@@ -324,8 +332,8 @@
         "asset_key": "g4-l1-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l1-508-diagram-r3.svg",
-        "alt_text": "Right-angled triangle with perpendicular sides 6 cm and 8 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
+        "path": "assets/g4-l1-508-diagram-r4.svg",
+        "alt_text": "Right-angled triangle with perpendicular sides 21 cm and 72 cm, right angle marked; the hypotenuse is labelled c. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
           "diagram_kind": "right_triangle",
@@ -335,11 +343,11 @@
           "inputs": {
             "legs": [
               {
-                "value": 6,
+                "value": 21,
                 "unit": "cm"
               },
               {
-                "value": 8,
+                "value": 72,
                 "unit": "cm"
               }
             ]
@@ -348,17 +356,17 @@
           "dimensions": {
             "perpendicular_sides": [
               {
-                "value": 6,
+                "value": 21,
                 "unit": "cm"
               },
               {
-                "value": 8,
+                "value": 72,
                 "unit": "cm"
               }
             ]
           },
           "forbidden_visible_labels": [
-            "10"
+            "75"
           ],
           "unknowns": [
             {
@@ -370,12 +378,12 @@
           "drawn_to_scale": true,
           "viewbox": [
             600.0,
-            446.0
+            300.0
           ],
           "points": {
             "A": [
               120.0,
-              326.0
+              161.0
             ],
             "B": [
               120.0,
@@ -383,7 +391,7 @@
             ],
             "C": [
               480.0,
-              326.0
+              161.0
             ]
           },
           "segments": [
@@ -421,11 +429,11 @@
           ],
           "labels": [
             {
-              "text": "6 cm",
+              "text": "21 cm",
               "target": "segment:AB"
             },
             {
-              "text": "8 cm",
+              "text": "72 cm",
               "target": "segment:AC"
             },
             {
@@ -440,15 +448,15 @@
                 "AB",
                 "AC"
               ],
-              "value": 0.75,
+              "value": 0.2917,
               "tolerance": 0.02
             }
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "6551c16b9f6c38f1bff4c4fb33455cc13a9877475c402997d81c0f8478e766dd",
+        "sha256": "b358f79ca3044362d7dc753fc0597bcd5dd63146b44ec61d192be457ea924d66",
         "width": 600,
-        "height": 446
+        "height": 300
       }
     ],
     "provenance": {
@@ -469,7 +477,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-508",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -498,7 +506,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Student engineers noted a narrow foundation beside drainage while preparing a replacement frame. A safety brace in the laboratory equipment stand forms a right triangle. Its hypotenuse is 41 m and one shorter side is 9 m. Find the other shorter side in metres. Enter the numerical value only."
+            "text": "A straight cable runs from the top of a vertical pole down to an anchor on level ground. Here the hypotenuse is 41 m and one shorter side is 9 m. Find the other shorter side b, the distance from the foot of the pole to the anchor, in metres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -548,11 +556,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "The 41 m side is the hypotenuse, so by Pythagoras’ theorem"
               },
               {
                 "type": "display_math",
-                "latex": "b=\\sqrt{41^2-9^2}=40"
+                "latex": "b^2=41^2-9^2=1681-81=1600"
               }
             ],
             "mark_type": "M",
@@ -563,7 +571,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{40}"
+                "latex": "b=\\sqrt{1600}=40"
               }
             ],
             "mark_type": "A",
@@ -578,7 +586,7 @@
         "asset_key": "g4-l2-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-508-diagram-r3.svg",
+        "path": "assets/g4-l2-508-diagram-r4.svg",
         "alt_text": "Right-angled triangle with hypotenuse 41 m and one perpendicular side 9 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -714,12 +722,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-509",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -748,7 +756,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Safety inspectors noted a narrow foundation beside drainage while preparing a replacement frame. A safety brace in the community garden plot forms a right triangle. Its hypotenuse is 37 m and one shorter side is 12 m. Find the other shorter side in metres. Enter the numerical value only."
+            "text": "A rescue rope is pulled tight from a cliff ledge down to a stake on a flat beach. In the right-angled triangle made with the cliff face, the hypotenuse is 37 m and one shorter side is 12 m. Find the other shorter side b, the distance along the beach, in metres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -798,11 +806,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "The 37 m side is the hypotenuse, so by Pythagoras’ theorem"
               },
               {
                 "type": "display_math",
-                "latex": "b=\\sqrt{37^2-12^2}=35"
+                "latex": "b^2=37^2-12^2=1369-144=1225"
               }
             ],
             "mark_type": "M",
@@ -813,7 +821,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{35}"
+                "latex": "b=\\sqrt{1225}=35"
               }
             ],
             "mark_type": "A",
@@ -828,7 +836,7 @@
         "asset_key": "g4-l2-509-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-509-diagram-r3.svg",
+        "path": "assets/g4-l2-509-diagram-r4.svg",
         "alt_text": "Right-angled triangle with hypotenuse 37 m and one perpendicular side 12 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -964,12 +972,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-510",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -998,7 +1006,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers noted a narrow foundation beside drainage while preparing a replacement frame. A safety brace in the airport luggage frame forms a right triangle. Its hypotenuse is 34 m and one shorter side is 16 m. Find the other shorter side in metres. Enter the numerical value only."
+            "text": "An escalator forms a right-angled triangle with the station floor and the vertical drop between two levels: the hypotenuse is 34 m and one shorter side is 16 m. Find the other shorter side b, the horizontal distance covered, in metres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1048,11 +1056,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "The 34 m side is the hypotenuse, so by Pythagoras’ theorem"
               },
               {
                 "type": "display_math",
-                "latex": "b=\\sqrt{34^2-16^2}=30"
+                "latex": "b^2=34^2-16^2=1156-256=900"
               }
             ],
             "mark_type": "M",
@@ -1063,7 +1071,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{30}"
+                "latex": "b=\\sqrt{900}=30"
               }
             ],
             "mark_type": "A",
@@ -1078,7 +1086,7 @@
         "asset_key": "g4-l2-510-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-510-diagram-r3.svg",
+        "path": "assets/g4-l2-510-diagram-r4.svg",
         "alt_text": "Right-angled triangle with hypotenuse 34 m and one perpendicular side 16 m, right angle marked; the other perpendicular side is labelled b. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -1214,12 +1222,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-509",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1248,7 +1256,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Design technicians noted a narrow foundation beside drainage while preparing a replacement frame. A rectangular section of the mangrove boardwalk measures 27 m by 36 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+            "text": "A rectangular exhibition hall floor measures 48 m by 55 m. A cable runs straight from one corner to the opposite corner, carrying a string of lights. Find the length d of the cable in metres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1257,8 +1265,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "45",
-          "canonical_latex": "45",
+          "canonical_answer": "73",
+          "canonical_latex": "73",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1283,7 +1291,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "d^{2}=27^{2}+36^{2}"
+                "latex": "d^{2}=48^{2}+55^{2}"
               },
               {
                 "type": "text",
@@ -1298,22 +1306,33 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
-              },
-              {
-                "type": "display_math",
-                "latex": "d=\\sqrt{27^2+36^2}=45"
+                "text": "Two adjacent sides of the rectangle meet at a right angle, so the diagonal is the hypotenuse of a right-angled triangle with shorter sides 48 m and 55 m."
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "By Pythagoras’ theorem,"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{45}"
+                "latex": "d^2=48^2+55^2=2304+3025=5329"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{5329}=73"
               }
             ],
             "mark_type": "A",
@@ -1328,8 +1347,8 @@
         "asset_key": "g4-l3-509-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l3-509-diagram-r3.svg",
-        "alt_text": "Rectangle 36 m by 27 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
+        "path": "assets/g4-l3-509-diagram-r4.svg",
+        "alt_text": "Rectangle 55 m by 48 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
           "diagram_kind": "right_triangle",
@@ -1339,11 +1358,11 @@
           "inputs": {
             "sides": [
               {
-                "value": 27,
+                "value": 48,
                 "unit": "m"
               },
               {
-                "value": 36,
+                "value": 55,
                 "unit": "m"
               }
             ]
@@ -1352,17 +1371,17 @@
           "dimensions": {
             "sides": [
               {
-                "value": 36,
+                "value": 55,
                 "unit": "m"
               },
               {
-                "value": 27,
+                "value": 48,
                 "unit": "m"
               }
             ]
           },
           "forbidden_visible_labels": [
-            "45"
+            "73"
           ],
           "unknowns": [
             {
@@ -1378,19 +1397,19 @@
           ],
           "points": {
             "A": [
-              120.0,
+              145.31,
               326.0
             ],
             "B": [
-              120.0,
+              145.31,
               56.0
             ],
             "C": [
-              480.0,
+              454.69,
               326.0
             ],
             "D": [
-              480.0,
+              454.69,
               56.0
             ]
           },
@@ -1443,11 +1462,11 @@
           ],
           "labels": [
             {
-              "text": "27 m",
+              "text": "48 m",
               "target": "segment:AB"
             },
             {
-              "text": "36 m",
+              "text": "55 m",
               "target": "segment:AC"
             },
             {
@@ -1476,13 +1495,13 @@
                 "AB",
                 "AC"
               ],
-              "value": 0.75,
+              "value": 0.8727,
               "tolerance": 0.02
             }
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "b35afe0ee3f70deb512a54225544c984690ef8ea41a49fae5c2e6f8f1bc8c2a6",
+        "sha256": "e2f87a6e7ecd803f246c96849490858e9b87d624801e5fa9f2700674bcec378a",
         "width": 600,
         "height": 446
       }
@@ -1505,7 +1524,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-510",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1534,7 +1553,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Rescue planners noted a narrow foundation beside drainage while preparing a replacement frame. A rectangular section of the food-distribution awning measures 28 m by 45 m. A cable runs straight from one corner to the opposite corner. Find the cable length in metres. Enter the numerical value only."
+            "text": "A rectangular fish pond measures 28 m by 45 m. A cable runs straight from one corner to the opposite corner to hold a floating pump in place. Find the length d of the cable in metres. Enter the numerical value only."
           }
         ],
         "marks": 3,
@@ -1584,22 +1603,33 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
-              },
-              {
-                "type": "display_math",
-                "latex": "d=\\sqrt{28^2+45^2}=53"
+                "text": "Two adjacent sides of the rectangle meet at a right angle, so the diagonal is the hypotenuse of a right-angled triangle with shorter sides 28 m and 45 m."
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "By Pythagoras’ theorem,"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{53}"
+                "latex": "d^2=28^2+45^2=784+2025=2809"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{2809}=53"
               }
             ],
             "mark_type": "A",
@@ -1614,7 +1644,7 @@
         "asset_key": "g4-l3-510-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l3-510-diagram-r3.svg",
+        "path": "assets/g4-l3-510-diagram-r4.svg",
         "alt_text": "Rectangle 45 m by 28 m with a cable along the diagonal from one corner to the opposite corner, labelled d. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -1786,12 +1816,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l4-505",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1820,7 +1850,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Construction monitors noted a narrow foundation beside drainage while preparing a replacement frame. At the hydrology survey marker, a cable runs from the top of a 16 m vertical post to an anchor 63 m from its base. Another 2 m is required for fastening. Find the total cable length in metres. Enter the numerical value only."
+            "text": "A flagpole at a school gate is held by a tight rope running from the top of a 16 m vertical post to an anchor 63 m from its base. Another 2 m is required for fastening. Find the total length of rope used, in metres. Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -1886,22 +1916,48 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "The post is vertical and the ground is level, so the sloping cable c is the hypotenuse of a right-angled triangle."
               },
               {
                 "type": "display_math",
-                "latex": "\\sqrt{16^2+63^2}+2=65+2=67"
+                "latex": "c^2=16^2+63^2=256+3969=4225"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{67}"
+                "latex": "c=\\sqrt{4225}=65\\text{ m}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the fastening allowance."
+              },
+              {
+                "type": "display_math",
+                "latex": "65+2"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{total length}=67\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -1916,7 +1972,7 @@
         "asset_key": "g4-l4-505-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l4-505-diagram-r3.svg",
+        "path": "assets/g4-l4-505-diagram-r4.svg",
         "alt_text": "Vertical post 16 m high with a cable c from its top to an anchor 63 m from its base, right angle marked at the base. A further 2 m of cable is shown beyond the anchor for fastening. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -2084,12 +2140,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l5-502",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2118,7 +2174,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Environmental officers noted a narrow foundation beside drainage while preparing a replacement frame. An inspection route at the training-camp flagpole crosses a rectangular floor 40 m by 42 m diagonally, then continues 40 m along a straight corridor. Find the complete route length in metres. Enter the numerical value only."
+            "text": "A cleaner crosses a rectangular floor 40 m by 42 m diagonally, then continues 40 m along a straight corridor to a storeroom. Find the length of the complete route in metres. Enter the numerical value only."
           }
         ],
         "marks": 5,
@@ -2149,15 +2205,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The diagonal is "
-              },
-              {
-                "type": "inline_math",
-                "latex": "\\sqrt{40^{2}+42^{2}}"
-              },
-              {
-                "type": "text",
-                "text": "; add 40 m."
+                "text": "Find the diagonal of the floor first, using the two sides of the rectangle, then add the straight part of the route."
               }
             ]
           }
@@ -2168,22 +2216,55 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
-              },
-              {
-                "type": "display_math",
-                "latex": "\\sqrt{40^2+42^2}+40=98"
+                "text": "The diagonal d is the hypotenuse of a right-angled triangle with shorter sides 40 m and 42 m."
               }
             ],
             "mark_type": "M",
-            "mark_value": 4
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{98}"
+                "latex": "d^2=40^2+42^2=1600+1764=3364"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "d=\\sqrt{3364}=58\\text{ m}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the straight part of the route."
+              },
+              {
+                "type": "display_math",
+                "latex": "58+40"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 5,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\text{route length}=98\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -2198,7 +2279,7 @@
         "asset_key": "g4-l5-502-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l5-502-diagram-r3.svg",
+        "path": "assets/g4-l5-502-diagram-r4.svg",
         "alt_text": "Rectangular floor 42 m by 40 m. The route crosses the floor along the diagonal d, then continues 40 m along a straight corridor. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -2404,12 +2485,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l1-509",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2429,7 +2510,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Transport analysts noted a narrow foundation beside drainage while preparing a replacement frame. A triangular support at the public-transit map board has side lengths 48 cm, 55 cm and 74 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular road-sign blank is cut from a metal sheet. It has side lengths 48 cm, 55 cm and 74 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 1,
@@ -2486,8 +2567,20 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Square the two shorter sides and the longest side."
+              },
+              {
                 "type": "display_math",
                 "latex": "48^2+55^2=5329,\\quad 74^2=5476"
+              },
+              {
+                "type": "text",
+                "text": "5329 is not equal to 5476, so by the converse of Pythagoras’ theorem the triangle is not right-angled."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\boxed{0}"
               }
             ],
             "mark_type": "A",
@@ -2511,12 +2604,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l1-510",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2536,7 +2629,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Community builders noted a narrow foundation beside drainage while preparing a replacement frame. A triangular support at the seismic sensor enclosure has side lengths 51 cm, 68 cm and 85 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular shelf bracket is welded from three steel bars. It has side lengths 51 cm, 68 cm and 85 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 1,
@@ -2593,8 +2686,20 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Square the two shorter sides and the longest side."
+              },
+              {
                 "type": "display_math",
                 "latex": "51^2+68^2=7225,\\quad 85^2=7225"
+              },
+              {
+                "type": "text",
+                "text": "The two results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 85 cm side."
+              },
+              {
+                "type": "display_math",
+                "latex": "\\boxed{1}"
               }
             ],
             "mark_type": "A",
@@ -2618,12 +2723,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-511",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2643,7 +2748,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quality auditors noted a narrow foundation beside drainage while preparing a replacement frame. A triangular support at the floating farm platform has side lengths 65 cm, 72 cm and 98 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular platform for a floating farm is marked out with rope. It has side lengths 65 cm, 72 cm and 98 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 2,
@@ -2701,7 +2806,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Square the two shorter sides and the longest side."
               },
               {
                 "type": "display_math",
@@ -2714,6 +2819,10 @@
           {
             "position": 2,
             "content": [
+              {
+                "type": "text",
+                "text": "9409 is not equal to 9604, so by the converse of Pythagoras’ theorem the triangle is not right-angled."
+              },
               {
                 "type": "display_math",
                 "latex": "\\boxed{0}"
@@ -2740,12 +2849,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-512",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2765,7 +2874,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Site coordinators noted a narrow foundation beside drainage while preparing a replacement frame. A triangular support at the hilltop communications hut has side lengths 75 cm, 100 cm and 125 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular support for a hilltop weather station is cut from plywood. It has side lengths 28 cm, 96 cm and 100 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 2,
@@ -2800,7 +2909,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "75^{2}+100^{2}"
+                "latex": "28^{2}+96^{2}"
               },
               {
                 "type": "text",
@@ -2808,7 +2917,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "125^{2}"
+                "latex": "100^{2}"
               },
               {
                 "type": "text",
@@ -2823,11 +2932,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Square the two shorter sides and the longest side."
               },
               {
                 "type": "display_math",
-                "latex": "75^2+100^2=15625,\\quad 125^2=15625"
+                "latex": "28^2+96^2=10000,\\quad 100^2=10000"
               }
             ],
             "mark_type": "M",
@@ -2836,6 +2945,10 @@
           {
             "position": 2,
             "content": [
+              {
+                "type": "text",
+                "text": "The two results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 100 cm side."
+              },
               {
                 "type": "display_math",
                 "latex": "\\boxed{1}"
@@ -2862,12 +2975,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-511",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2887,7 +3000,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Survey crew noted high winds during seasonal storms while preparing a replacement frame. A triangular support at the marine laboratory pier has side lengths 3 cm, 4 cm and 6 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular frame for a pier lamp is bent from wire. It has side lengths 0.3 m, 40 cm and 0.6 m. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 3,
@@ -2909,7 +3022,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Treat the longest side as the possible hypotenuse."
+                "text": "Write all three sides in the same unit, then treat the longest side as the possible hypotenuse."
               }
             ]
           },
@@ -2918,11 +3031,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare "
+                "text": "In centimetres, compare "
               },
               {
                 "type": "inline_math",
-                "latex": "3^{2}+4^{2}"
+                "latex": "30^{2}+40^{2}"
               },
               {
                 "type": "text",
@@ -2930,7 +3043,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "6^{2}"
+                "latex": "60^{2}"
               },
               {
                 "type": "text",
@@ -2945,19 +3058,38 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Write every side in centimetres."
               },
               {
                 "type": "display_math",
-                "latex": "3^2+4^2=25,\\quad 6^2=36"
+                "latex": "0.3\\text{ m}=30\\text{ cm}, 0.6\\text{ m}=60\\text{ cm}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
+              {
+                "type": "text",
+                "text": "Square the two shorter sides and the longest side."
+              },
+              {
+                "type": "display_math",
+                "latex": "30^2+40^2=2500,\\quad 60^2=3600"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "2500 is not equal to 3600, so by the converse of Pythagoras’ theorem the triangle is not right-angled."
+              },
               {
                 "type": "display_math",
                 "latex": "\\boxed{0}"
@@ -2984,12 +3116,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-512",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3009,7 +3141,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Maintenance team noted high winds during seasonal storms while preparing a replacement frame. A triangular support at the harbour access ramp has side lengths 7 cm, 24 cm and 25 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A triangular step plate is cut for a harbour access ramp. It has side lengths 7 cm, 0.24 m and 25 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 3,
@@ -3031,7 +3163,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Treat the longest side as the possible hypotenuse."
+                "text": "Write all three sides in the same unit, then treat the longest side as the possible hypotenuse."
               }
             ]
           },
@@ -3040,7 +3172,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare "
+                "text": "In centimetres, compare "
               },
               {
                 "type": "inline_math",
@@ -3067,7 +3199,22 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Write every side in centimetres."
+              },
+              {
+                "type": "display_math",
+                "latex": "0.24\\text{ m}=24\\text{ cm}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Square the two shorter sides and the longest side."
               },
               {
                 "type": "display_math",
@@ -3075,11 +3222,15 @@
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
-            "position": 2,
+            "position": 3,
             "content": [
+              {
+                "type": "text",
+                "text": "The two results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 25 cm side."
+              },
               {
                 "type": "display_math",
                 "latex": "\\boxed{1}"
@@ -3106,12 +3257,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-513",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3131,7 +3282,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Student engineers noted high winds during seasonal storms while preparing a replacement frame. A triangular support at the rainforest observation deck has side lengths 9 cm, 40 cm and 41 cm. Enter 1 if it is right-angled and 0 if it is not."
+            "text": "A narrow triangular fin is cut for an observation-deck railing. It has side lengths 0.09 m, 40 cm and 41 cm. Enter 1 if it is right-angled and 0 if it is not."
           }
         ],
         "marks": 3,
@@ -3153,7 +3304,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Treat the longest side as the possible hypotenuse."
+                "text": "Write all three sides in the same unit, then treat the longest side as the possible hypotenuse."
               }
             ]
           },
@@ -3162,7 +3313,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Compare "
+                "text": "In centimetres, compare "
               },
               {
                 "type": "inline_math",
@@ -3189,7 +3340,22 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Write every side in centimetres."
+              },
+              {
+                "type": "display_math",
+                "latex": "0.09\\text{ m}=9\\text{ cm}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 2,
+            "content": [
+              {
+                "type": "text",
+                "text": "Square the two shorter sides and the longest side."
               },
               {
                 "type": "display_math",
@@ -3197,11 +3363,15 @@
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
-            "position": 2,
+            "position": 3,
             "content": [
+              {
+                "type": "text",
+                "text": "The two results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 41 cm side."
+              },
               {
                 "type": "display_math",
                 "latex": "\\boxed{1}"
@@ -3228,12 +3398,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram removed; text-only. Awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l4-506",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3262,7 +3432,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Safety inspectors noted high winds during seasonal storms while preparing a replacement frame. Two shorter sides of a triangular frame for the village solar-panel frame are 15 cm and 20 cm. The angle between them must be 90°. Find the required longest side x in centimetres. Enter the numerical value only."
+            "text": "A solar-panel stand needs a rigid side support. The two shorter sides of a triangular frame for the stand are 20 cm and 99 cm. The angle between them must be 90°. How long must the longest side x be, in centimetres? Enter the numerical value only."
           }
         ],
         "marks": 4,
@@ -3271,8 +3441,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "25",
-          "canonical_latex": "25",
+          "canonical_answer": "101",
+          "canonical_latex": "101",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3297,7 +3467,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "x^{2}=15^{2}+20^{2}"
+                "latex": "x^{2}=20^{2}+99^{2}"
               },
               {
                 "type": "text",
@@ -3312,22 +3482,44 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
-              },
-              {
-                "type": "display_math",
-                "latex": "x^2=15^2+20^2\\Rightarrow x=25"
+                "text": "The 90° angle lies between the two shorter sides, so the longest side x is the hypotenuse."
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "By Pythagoras’ theorem,"
+              },
+              {
                 "type": "display_math",
-                "latex": "\\boxed{25}"
+                "latex": "x^2=20^2+99^2=400+9801=10201"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "x=\\sqrt{10201}"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "x=101"
               }
             ],
             "mark_type": "A",
@@ -3342,8 +3534,8 @@
         "asset_key": "g4-l4-506-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l4-506-diagram-r3.svg",
-        "alt_text": "Triangle with shorter sides 15 cm and 20 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
+        "path": "assets/g4-l4-506-diagram-r4.svg",
+        "alt_text": "Triangle with shorter sides 20 cm and 99 cm meeting at a marked right angle; the longest side is labelled x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
           "diagram_kind": "right_triangle",
@@ -3353,11 +3545,11 @@
           "inputs": {
             "legs": [
               {
-                "value": 15,
+                "value": 20,
                 "unit": "cm"
               },
               {
-                "value": 20,
+                "value": 99,
                 "unit": "cm"
               }
             ]
@@ -3366,17 +3558,17 @@
           "dimensions": {
             "perpendicular_sides": [
               {
-                "value": 15,
+                "value": 20,
                 "unit": "cm"
               },
               {
-                "value": 20,
+                "value": 99,
                 "unit": "cm"
               }
             ]
           },
           "forbidden_visible_labels": [
-            "25"
+            "101"
           ],
           "unknowns": [
             {
@@ -3385,15 +3577,15 @@
             }
           ],
           "task": "find_hypotenuse",
-          "drawn_to_scale": true,
+          "drawn_to_scale": false,
           "viewbox": [
             600.0,
-            446.0
+            300.0
           ],
           "points": {
             "A": [
               120.0,
-              326.0
+              136.0
             ],
             "B": [
               120.0,
@@ -3401,7 +3593,7 @@
             ],
             "C": [
               480.0,
-              326.0
+              136.0
             ]
           },
           "segments": [
@@ -3439,11 +3631,11 @@
           ],
           "labels": [
             {
-              "text": "15 cm",
+              "text": "20 cm",
               "target": "segment:AB"
             },
             {
-              "text": "20 cm",
+              "text": "99 cm",
               "target": "segment:AC"
             },
             {
@@ -3451,22 +3643,12 @@
               "target": "segment:BC"
             }
           ],
-          "relationships": [
-            {
-              "type": "length_ratio",
-              "segments": [
-                "AB",
-                "AC"
-              ],
-              "value": 0.75,
-              "tolerance": 0.02
-            }
-          ],
+          "relationships": [],
           "min_phone_font_px": 13.13
         },
-        "sha256": "2bb6ee06c159c00bbd6a13e1a878892d393ce2ce3c49a52dd7b37c38aa756ea9",
+        "sha256": "899496af3604747b5e0ca6eea81a06ddba1d89f8f520ee68a0da13e64ff3777a",
         "width": 600,
-        "height": 446
+        "height": 300
       }
     ],
     "provenance": {
@@ -3487,7 +3669,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l5-503",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3516,7 +3698,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Field researchers noted high winds during seasonal storms while preparing a replacement frame. A triangular boundary around the coastal evacuation sign has perimeter 84 m. Two sides measure 21 m and 28 m. Find the third side x, then verify that the triangle is right-angled. Enter x only."
+            "text": "A triangular lawn in front of a coastal visitor centre has perimeter 126 m. Two sides measure 28 m and 45 m. Find the third side x, then verify that the triangle is right-angled. Enter x only."
           }
         ],
         "marks": 5,
@@ -3525,8 +3707,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "35",
-          "canonical_latex": "35",
+          "canonical_answer": "53",
+          "canonical_latex": "53",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3566,22 +3748,59 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "The three sides add up to the perimeter."
               },
               {
                 "type": "display_math",
-                "latex": "x=84-21-28=35,\\quad 21^2+28^2=35^2"
+                "latex": "x+28+45=126"
               }
             ],
             "mark_type": "M",
-            "mark_value": 4
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{35}"
+                "latex": "x=126-28-45=53"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "The longest side is x, so compare the squares."
+              },
+              {
+                "type": "display_math",
+                "latex": "28^2+45^2=784+2025=2809,\\quad 53^2=2809"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "text",
+                "text": "The results are equal, so by the converse of Pythagoras’ theorem the triangle is right-angled, with the right angle opposite the 53 m side."
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 5,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "x=53"
               }
             ],
             "mark_type": "A",
@@ -3596,8 +3815,8 @@
         "asset_key": "g4-l5-503-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l5-503-diagram-r3.svg",
-        "alt_text": "Triangle with perimeter 84 m. Two sides are 21 m and 28 m; the third side is labelled x. No angle is marked. Not drawn to scale.",
+        "path": "assets/g4-l5-503-diagram-r4.svg",
+        "alt_text": "Triangle with perimeter 126 m. Two sides are 28 m and 45 m; the third side is labelled x. No angle is marked. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
           "diagram_kind": "right_triangle",
@@ -3606,16 +3825,16 @@
           "template": "perimeter_verify",
           "inputs": {
             "perimeter": {
-              "value": 84,
+              "value": 126,
               "unit": "m"
             },
             "sides": [
               {
-                "value": 21,
+                "value": 28,
                 "unit": "m"
               },
               {
-                "value": 28,
+                "value": 45,
                 "unit": "m"
               }
             ]
@@ -3623,22 +3842,22 @@
           "not_to_scale": true,
           "dimensions": {
             "perimeter": {
-              "value": 84,
+              "value": 126,
               "unit": "m"
             },
             "sides": [
               {
-                "value": 21,
+                "value": 28,
                 "unit": "m"
               },
               {
-                "value": 28,
+                "value": 45,
                 "unit": "m"
               }
             ]
           },
           "forbidden_visible_labels": [
-            "35",
+            "53",
             "right-angled",
             "right angled",
             "right angle",
@@ -3659,20 +3878,20 @@
           "forbid_right_angle_marker": true,
           "viewbox": [
             600.0,
-            382.0
+            370.0
           ],
           "points": {
             "A": [
               110.0,
-              242.4
+              230.45
             ],
             "B": [
-              246.8,
+              216.06,
               60.0
             ],
             "C": [
               490.0,
-              242.4
+              230.45
             ]
           },
           "segments": [
@@ -3701,11 +3920,11 @@
           "right_angles": [],
           "labels": [
             {
-              "text": "21 m",
+              "text": "28 m",
               "target": "segment:AB"
             },
             {
-              "text": "28 m",
+              "text": "45 m",
               "target": "segment:BC"
             },
             {
@@ -3720,7 +3939,7 @@
                 "AB",
                 "AC"
               ],
-              "value": 0.6,
+              "value": 0.5283,
               "tolerance": 0.02
             },
             {
@@ -3729,15 +3948,15 @@
                 "BC",
                 "AC"
               ],
-              "value": 0.8,
+              "value": 0.8491,
               "tolerance": 0.02
             }
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "5f26e6324ee96ad9aaec54bd2331db135e0dcec922c510e3ba532b00818bc05d",
+        "sha256": "f58be64b4068a6cca9e6fef39813a0939eb5a6bca4b971afbdb33f22a4a3bcd2",
         "width": 600,
-        "height": 382
+        "height": 370
       }
     ],
     "provenance": {
@@ -3758,7 +3977,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l1-511",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3787,7 +4006,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Design technicians noted high winds during seasonal storms while preparing a replacement frame. From an acute 45° angle in a right-triangle model of the school robotics platform, the opposite side is 8 m. Find the adjacent side x in metres. Enter the numerical value only."
+            "text": "A diagonal scaffold brace rests on the ground at an acute 45° angle and meets a vertical post. Measured up the post, the opposite side is 8 m. Find the adjacent side x, the horizontal distance from the post to the foot of the brace, in metres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -3836,6 +4055,10 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Relative to the 45° angle, the given side is opposite and x is adjacent, so"
+              },
+              {
                 "type": "display_math",
                 "latex": "\\tan45^\\circ=\\frac{8}{x}=1\\Rightarrow x=8"
               }
@@ -3852,7 +4075,7 @@
         "asset_key": "g4-l1-511-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l1-511-diagram-r3.svg",
+        "path": "assets/g4-l1-511-diagram-r4.svg",
         "alt_text": "Right-angled triangle with a marked acute angle of 45°. The side opposite that angle is 8 m and the adjacent side is labelled x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -4018,12 +4241,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-513",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4052,7 +4275,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Rescue planners noted high winds during seasonal storms while preparing a replacement frame. A sight line at the community water tank makes an angle of 45° with level ground. The horizontal distance is 15 m. Find the vertical height x in metres, correct to 1 decimal place."
+            "text": "From a point on the ground, an engineer sights the top of a radio mast. The sight line makes an angle of 65° with level ground. The horizontal distance is 9 m. Find the vertical height x of the mast in metres, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -4061,11 +4284,9 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "rounded_dp",
-          "canonical_answer": "15.0",
-          "canonical_latex": "15.0",
-          "accepted_answers": [
-            "15"
-          ],
+          "canonical_answer": "19.3",
+          "canonical_latex": "19.3",
+          "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": 1,
           "unit": null
@@ -4089,7 +4310,7 @@
               },
               {
                 "type": "inline_math",
-                "latex": "\\tan 45^{\\circ}=\\frac{x}{15}"
+                "latex": "\\tan 65^{\\circ}=\\frac{x}{9}"
               },
               {
                 "type": "text",
@@ -4104,11 +4325,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Relative to the 65° angle, x is opposite and the 9 m distance is adjacent, so use the tangent ratio."
               },
               {
                 "type": "display_math",
-                "latex": "x=15\\tan 45^\\circ=15.0"
+                "latex": "\\tan 65^\\circ=\\frac{x}{9}"
               }
             ],
             "mark_type": "M",
@@ -4119,7 +4340,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{15.0}"
+                "latex": "x=9\\tan 65^\\circ=19.301\\ldots=19.3"
               }
             ],
             "mark_type": "A",
@@ -4134,8 +4355,8 @@
         "asset_key": "g4-l2-513-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-513-diagram-r3.svg",
-        "alt_text": "Right-angled triangle on level ground. The sight line makes 45° with the ground, the horizontal distance is 15 m and the vertical height is labelled x. Not drawn to scale.",
+        "path": "assets/g4-l2-513-diagram-r4.svg",
+        "alt_text": "Right-angled triangle on level ground. The sight line makes 65° with the ground, the horizontal distance is 9 m and the vertical height is labelled x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
           "diagram_kind": "right_triangle",
@@ -4143,30 +4364,23 @@
           "outcome": "4.3",
           "template": "tangent_opposite",
           "inputs": {
-            "angle": 45,
+            "angle": 65,
             "adjacent": {
-              "value": 15,
+              "value": 9,
               "unit": "m"
             }
           },
           "not_to_scale": true,
           "dimensions": {
-            "angle_degrees": 45.0,
+            "angle_degrees": 65.0,
             "adjacent": {
-              "value": 15,
+              "value": 9,
               "unit": "m"
             }
           },
-          "forbidden_visible_labels": [],
-          "forbidden_label_exemptions": [
-            {
-              "value": "15.0",
-              "reason": "equals a stated value shown on the diagram"
-            },
-            {
-              "value": "15",
-              "reason": "equals a stated value shown on the diagram"
-            }
+          "forbidden_visible_labels": [
+            "19.3",
+            "19.30"
           ],
           "unknowns": [
             {
@@ -4182,15 +4396,15 @@
           ],
           "points": {
             "A": [
-              155.0,
+              232.39,
               346.0
             ],
             "B": [
-              155.0,
+              232.39,
               56.0
             ],
             "C": [
-              445.0,
+              367.61,
               346.0
             ]
           },
@@ -4235,24 +4449,24 @@
                 "B"
               ],
               "marker_key": "angle-C",
-              "drawn_degrees": 45.0,
-              "degrees": 45.0
+              "drawn_degrees": 65.0,
+              "degrees": 65.0
             }
           ],
           "angle_markers": [
             {
               "marker_key": "angle-C",
               "center": [
-                445.0,
+                367.61,
                 346.0
               ],
               "radius": 46.0,
               "start_ray_point": [
-                155.0,
+                232.39,
                 346.0
               ],
               "end_ray_point": [
-                155.0,
+                232.39,
                 56.0
               ],
               "large_arc": 0,
@@ -4261,7 +4475,7 @@
           ],
           "labels": [
             {
-              "text": "45°",
+              "text": "65°",
               "target": "angle:C"
             },
             {
@@ -4269,7 +4483,7 @@
               "target": "segment:AB"
             },
             {
-              "text": "15 m",
+              "text": "9 m",
               "target": "segment:AC"
             },
             {
@@ -4284,13 +4498,13 @@
                 "AB",
                 "AC"
               ],
-              "value": 1.0,
+              "value": 2.1445,
               "tolerance": 0.02
             }
           ],
           "min_phone_font_px": 13.13
         },
-        "sha256": "573d03b6912089282412e031eec35de1ad25cc32f22d689a1799881e4d465806",
+        "sha256": "b23a7a666f62cfecfb8b0804b240a554d8884f5fde809006cd93c9a67a1aed30",
         "width": 600,
         "height": 466
       }
@@ -4313,7 +4527,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-514",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4342,7 +4556,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Construction monitors noted high winds during seasonal storms while preparing a replacement frame. A sight line at the mountain rescue shelter makes an angle of 50° with level ground. The horizontal distance is 16 m. Find the vertical height x in metres, correct to 1 decimal place."
+            "text": "A drone camera resting on the ground is aimed at the top of a water tower. Its sight line makes an angle of 50° with level ground. The horizontal distance is 16 m. Find the vertical height x of the water tower in metres, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -4392,11 +4606,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Relative to the 50° angle, x is opposite and the 16 m distance is adjacent, so use the tangent ratio."
               },
               {
                 "type": "display_math",
-                "latex": "x=16\\tan 50^\\circ=19.1"
+                "latex": "\\tan 50^\\circ=\\frac{x}{16}"
               }
             ],
             "mark_type": "M",
@@ -4407,7 +4621,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{19.1}"
+                "latex": "x=16\\tan 50^\\circ=19.068\\ldots=19.1"
               }
             ],
             "mark_type": "A",
@@ -4422,7 +4636,7 @@
         "asset_key": "g4-l2-514-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-514-diagram-r3.svg",
+        "path": "assets/g4-l2-514-diagram-r4.svg",
         "alt_text": "Right-angled triangle on level ground. The sight line makes 50° with the ground, the horizontal distance is 16 m and the vertical height is labelled x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -4589,12 +4803,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l2-515",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4623,7 +4837,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Environmental officers noted high winds during seasonal storms while preparing a replacement frame. A sight line at the island ferry terminal makes an angle of 55° with level ground. The horizontal distance is 17 m. Find the vertical height x in metres, correct to 1 decimal place."
+            "text": "A marker on the ground is used to check the height of a clock tower. The sight line to the top of the tower makes an angle of 55° with level ground. The horizontal distance is 17 m. Find the vertical height x of the clock tower in metres, correct to 1 decimal place."
           }
         ],
         "marks": 2,
@@ -4673,11 +4887,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Relative to the 55° angle, x is opposite and the 17 m distance is adjacent, so use the tangent ratio."
               },
               {
                 "type": "display_math",
-                "latex": "x=17\\tan 55^\\circ=24.3"
+                "latex": "\\tan 55^\\circ=\\frac{x}{17}"
               }
             ],
             "mark_type": "M",
@@ -4688,7 +4902,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{24.3}"
+                "latex": "x=17\\tan 55^\\circ=24.279\\ldots=24.3"
               }
             ],
             "mark_type": "A",
@@ -4703,7 +4917,7 @@
         "asset_key": "g4-l2-515-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l2-515-diagram-r3.svg",
+        "path": "assets/g4-l2-515-diagram-r4.svg",
         "alt_text": "Right-angled triangle on level ground. The sight line makes 55° with the ground, the horizontal distance is 17 m and the vertical height is labelled x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -4870,12 +5084,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-514",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4904,7 +5118,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Transport analysts noted high winds during seasonal storms while preparing a replacement frame. A right triangular component at the wetland monitoring tower has an opposite side of 25 cm and an adjacent side of 60 cm relative to angle θ. Find θ correct to 1 decimal place."
+            "text": "A skateboard ramp model has an opposite side of 25 cm and an adjacent side of 60 cm relative to angle θ, the angle between the ramp and the floor. Find θ correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -4950,15 +5164,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Write "
               },
               {
                 "type": "inline_math",
-                "latex": "\\tan^{-1} \\left(\\frac{25}{60}\\right)"
+                "latex": "\\tan\\theta"
               },
               {
                 "type": "text",
-                "text": " in degree mode."
+                "text": " as a fraction using the two given sides, then use the inverse tangent in degree mode."
               }
             ]
           }
@@ -4969,22 +5183,33 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Relative to θ, the opposite and adjacent sides are given, so use the tangent ratio."
               },
               {
                 "type": "display_math",
-                "latex": "\\theta=\\tan^{-1}\\left(\\frac{25}{60}\\right)=22.6^\\circ"
+                "latex": "\\tan\\theta=\\frac{25}{60}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{22.6^\\circ}"
+                "latex": "\\theta=\\tan^{-1}\\left(\\frac{25}{60}\\right)=22.620\\ldots^\\circ"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\theta=22.6^\\circ"
               }
             ],
             "mark_type": "A",
@@ -4999,7 +5224,7 @@
         "asset_key": "g4-l3-514-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l3-514-diagram-r3.svg",
+        "path": "assets/g4-l3-514-diagram-r4.svg",
         "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 25 cm and the adjacent side is 60 cm. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -5168,12 +5393,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l3-515",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5202,7 +5427,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Community builders noted high winds during seasonal storms while preparing a replacement frame. A right triangular component at the sports-hall roof truss has an opposite side of 40 cm and an adjacent side of 42 cm relative to angle θ. Find θ correct to 1 decimal place."
+            "text": "In a garden-shed roof truss, the rafter makes angle θ with the horizontal tie beam. The right-angled truss has an opposite side of 40 cm and an adjacent side of 42 cm relative to angle θ. Find θ correct to 1 decimal place."
           }
         ],
         "marks": 3,
@@ -5248,15 +5473,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Write "
               },
               {
                 "type": "inline_math",
-                "latex": "\\tan^{-1} \\left(\\frac{40}{42}\\right)"
+                "latex": "\\tan\\theta"
               },
               {
                 "type": "text",
-                "text": " in degree mode."
+                "text": " as a fraction using the two given sides, then use the inverse tangent in degree mode."
               }
             ]
           }
@@ -5267,22 +5492,33 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "Relative to θ, the opposite and adjacent sides are given, so use the tangent ratio."
               },
               {
                 "type": "display_math",
-                "latex": "\\theta=\\tan^{-1}\\left(\\frac{40}{42}\\right)=43.6^\\circ"
+                "latex": "\\tan\\theta=\\frac{40}{42}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 2
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{43.6^\\circ}"
+                "latex": "\\theta=\\tan^{-1}\\left(\\frac{40}{42}\\right)=43.603\\ldots^\\circ"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "\\theta=43.6^\\circ"
               }
             ],
             "mark_type": "A",
@@ -5297,7 +5533,7 @@
         "asset_key": "g4-l3-515-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l3-515-diagram-r3.svg",
+        "path": "assets/g4-l3-515-diagram-r4.svg",
         "alt_text": "Right-angled triangle with the acute angle θ marked. Relative to θ, the opposite side is 40 cm and the adjacent side is 42 cm. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -5466,12 +5702,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l4-507",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5500,7 +5736,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Quality auditors noted high winds during seasonal storms while preparing a replacement frame. An observer stands 20 m from a vertical tower at the orchard irrigation gate. The angle of elevation from eye level to the top is 35°, and the observer’s eye is 1.6 m above the ground. Find the tower height correct to 1 decimal place."
+            "text": "A boy checks the height of his town's water tower. He stands 20 m from a vertical tower on flat ground; the angle of elevation from eye level to the top is 35°, and his eye is 1.6 m above the ground. Calculate the height h of the tower in metres, correct to 1 decimal place."
           }
         ],
         "marks": 4,
@@ -5531,15 +5767,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "20 \\tan 35^{\\circ}"
+                "latex": "\\tan 35^{\\circ}=\\frac{h-1.6}{20}"
               },
               {
                 "type": "text",
-                "text": ", then add 1.6 m."
+                "text": " to find the height above eye level, then account for the eye height."
               }
             ]
           }
@@ -5550,22 +5786,48 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "From the eye, the height above eye level, h − 1.6, is opposite the 35° angle and the 20 m distance is adjacent."
               },
               {
                 "type": "display_math",
-                "latex": "h=20\\tan 35^\\circ+1.6=15.6"
+                "latex": "\\tan 35^\\circ=\\frac{h-1.6}{20}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{15.6}"
+                "latex": "h-1.6=20\\tan 35^\\circ=14.004\\ldots"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the eye height."
+              },
+              {
+                "type": "display_math",
+                "latex": "h=14.004\\ldots+1.6=15.604\\ldots"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=15.6\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -5580,7 +5842,7 @@
         "asset_key": "g4-l4-507-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l4-507-diagram-r3.svg",
+        "path": "assets/g4-l4-507-diagram-r4.svg",
         "alt_text": "An observer stands 20 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 35°. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -5795,12 +6057,12 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "g4-l4-508",
     "bank_key": "g3-sec2-g4-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -5829,7 +6091,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Site coordinators noted high winds during seasonal storms while preparing a replacement frame. An observer stands 21 m from a vertical tower at the museum display frame. The angle of elevation from eye level to the top is 40°, and the observer’s eye is 1.6 m above the ground. Find the tower height correct to 1 decimal place."
+            "text": "A surveyor measuring a clock tower stands 21 m from a vertical tower on level ground. The angle of elevation from eye level to the top is 40°, and her eye is 1.6 m above the ground. Find the height h of the clock tower in metres, correct to 1 decimal place."
           }
         ],
         "marks": 4,
@@ -5860,15 +6122,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Find "
+                "text": "Use "
               },
               {
                 "type": "inline_math",
-                "latex": "21 \\tan 40^{\\circ}"
+                "latex": "\\tan 40^{\\circ}=\\frac{h-1.6}{21}"
               },
               {
                 "type": "text",
-                "text": ", then add 1.6 m."
+                "text": " to find the height above eye level, then account for the eye height."
               }
             ]
           }
@@ -5879,22 +6141,48 @@
             "content": [
               {
                 "type": "text",
-                "text": "Select and apply the right-triangle relationship."
+                "text": "From the eye, the height above eye level, h − 1.6, is opposite the 40° angle and the 21 m distance is adjacent."
               },
               {
                 "type": "display_math",
-                "latex": "h=21\\tan 40^\\circ+1.6=19.2"
+                "latex": "\\tan 40^\\circ=\\frac{h-1.6}{21}"
               }
             ],
             "mark_type": "M",
-            "mark_value": 3
+            "mark_value": 1
           },
           {
             "position": 2,
             "content": [
               {
                 "type": "display_math",
-                "latex": "\\boxed{19.2}"
+                "latex": "h-1.6=21\\tan 40^\\circ=17.621\\ldots"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 3,
+            "content": [
+              {
+                "type": "text",
+                "text": "Add the eye height."
+              },
+              {
+                "type": "display_math",
+                "latex": "h=17.621\\ldots+1.6=19.221\\ldots"
+              }
+            ],
+            "mark_type": "M",
+            "mark_value": 1
+          },
+          {
+            "position": 4,
+            "content": [
+              {
+                "type": "display_math",
+                "latex": "h=19.2\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -5909,7 +6197,7 @@
         "asset_key": "g4-l4-508-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g4-l4-508-diagram-r3.svg",
+        "path": "assets/g4-l4-508-diagram-r4.svg",
         "alt_text": "An observer stands 21 m from a vertical tower of height h on level ground. The observer's eye is 1.6 m above the ground. A dashed eye-level line meets the tower at a right angle, and the angle of elevation from eye level to the top is 40°. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-right-triangle-svg-v2",
@@ -6123,7 +6411,7 @@
       "authored_by": "OpenAI Codex",
       "reviewed_at": null,
       "reviewed_by": null,
-      "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+      "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
     }
   }
 ]

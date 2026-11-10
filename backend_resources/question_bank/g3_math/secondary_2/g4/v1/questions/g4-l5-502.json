@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l5-502",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Environmental officers noted a narrow foundation beside drainage while preparing a replacement frame. An inspection route at the training-camp flagpole crosses a rectangular floor 40 m by 42 m diagonally, then continues 40 m along a straight corridor. Find the complete route length in metres. Enter the numerical value only."
+          "text": "A cleaner crosses a rectangular floor 40 m by 42 m diagonally, then continues 40 m along a straight corridor to a storeroom. Find the length of the complete route in metres. Enter the numerical value only."
         }
       ],
       "marks": 5,
@@ -60,15 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "The diagonal is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "\\sqrt{40^{2}+42^{2}}"
-            },
-            {
-              "type": "text",
-              "text": "; add 40 m."
+              "text": "Find the diagonal of the floor first, using the two sides of the rectangle, then add the straight part of the route."
             }
           ]
         }
@@ -79,22 +71,55 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
-            },
-            {
-              "type": "display_math",
-              "latex": "\\sqrt{40^2+42^2}+40=98"
+              "text": "The diagonal d is the hypotenuse of a right-angled triangle with shorter sides 40 m and 42 m."
             }
           ],
           "mark_type": "M",
-          "mark_value": 4
+          "mark_value": 1
         },
         {
           "position": 2,
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{98}"
+              "latex": "d^2=40^2+42^2=1600+1764=3364"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 3,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "d=\\sqrt{3364}=58\\text{ m}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "Add the straight part of the route."
+            },
+            {
+              "type": "display_math",
+              "latex": "58+40"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 1
+        },
+        {
+          "position": 5,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "\\text{route length}=98\\text{ m}"
             }
           ],
           "mark_type": "A",
@@ -109,7 +134,7 @@
       "asset_key": "g4-l5-502-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l5-502-diagram-r3.svg",
+      "path": "assets/g4-l5-502-diagram-r4.svg",
       "alt_text": "Rectangular floor 42 m by 40 m. The route crosses the floor along the diagonal d, then continues 40 m along a straight corridor. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -315,6 +340,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }
