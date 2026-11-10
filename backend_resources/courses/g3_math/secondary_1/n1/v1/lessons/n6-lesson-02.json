@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-lesson-02",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -50,7 +50,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "When x increases by equal amounts, a linear relationship produces equal changes in y. For the points in the diagram, each increase of 1 in x increases y by 4, and y = 2 when x = 0. This gives y = 4x + 2."
+          "text": "When x increases by equal amounts, a linear relationship produces equal changes in y. For the points in the diagram, each increase of 1 in x increases y by 2, and y = 1 when x = 0. This gives y = 2x + 1."
         },
         {
           "type": "asset_ref",
@@ -58,7 +58,7 @@
         },
         {
           "type": "text",
-          "text": "If the x-values do not increase by 1, compare change in y with the matching change in x. For example, a rise of 12 while x increases by 3 is still a change of 4 in y per one unit of x."
+          "text": "If the x-values do not increase by 1, compare change in y with the matching change in x. For example, a rise of 6 while x increases by 3 is still a change of 2 in y per one unit of x."
         }
       ]
     },
@@ -90,7 +90,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The pairs (0, 2), (1, 6), (2, 10) and (3, 14) follow a linear relationship. Write y as an expression in x and find y when x = 8."
+          "text": "The pairs (0, 1), (1, 3), (2, 5) and (3, 7) in the diagram follow a linear relationship. Write y as an expression in x and find y when x = 8."
         }
       ],
       "steps": [
@@ -103,7 +103,7 @@
             },
             {
               "type": "display_math",
-              "latex": "6-2=10-6=14-10=4"
+              "latex": "3-1=5-3=7-5=2"
             }
           ]
         },
@@ -112,11 +112,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use x = 0 to identify the starting output."
+              "text": "Use x = 0 to identify the starting output, 1."
             },
             {
               "type": "display_math",
-              "latex": "y=4x+2"
+              "latex": "y=2x+1"
             }
           ]
         },
@@ -129,12 +129,12 @@
             },
             {
               "type": "display_math",
-              "latex": "y=4(8)+2=34"
+              "latex": "y=2(8)+1=17"
             }
           ]
         }
       ],
-      "verification_note": "The rule gives 2, 6, 10 and 14 for the four original inputs, so both its rate and starting value agree with the data."
+      "verification_note": "The rule gives 1, 3, 5 and 7 for the four original inputs, so both its rate and its starting value agree with the data."
     },
     {
       "stable_key": "n6-relationship-context-example",
@@ -240,16 +240,239 @@
       "asset_key": "n6-lesson-02-ordered-pairs",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-02-ordered-pairs.svg",
-      "alt_text": "Coordinate graph of the ordered pairs (0, 2), (1, 6), (2, 10) and (3, 14) on the line y = 4x + 2.",
+      "path": "assets/n6-lesson-02-ordered-pairs-r3.svg",
+      "alt_text": "Graph with equal unit scales showing the ordered pairs (0, 1), (1, 3), (2, 5) and (3, 7) on the straight line y = 2x + 1.",
       "generation_spec": {
-        "renderer": "nextscholar-coordinate-svg-v1",
-        "diagram_kind": "coordinate_graph",
-        "lesson_key": "n6-lesson-02"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n6-lesson-02",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": 2,
+              "b": -1,
+              "c": -1
+            }
+          ],
+          "x_min": -1,
+          "x_max": 4,
+          "y_min": -1,
+          "y_max": 8,
+          "points": [
+            {
+              "x": 0,
+              "y": 1,
+              "label": "(0, 1)"
+            },
+            {
+              "x": 1,
+              "y": 3,
+              "label": "(1, 3)"
+            },
+            {
+              "x": 2,
+              "y": 5,
+              "label": "(2, 5)"
+            },
+            {
+              "x": 3,
+              "y": 7,
+              "label": "(3, 7)"
+            }
+          ],
+          "title": "Ordered pairs on y = 2x + 1",
+          "alt_text": "Graph with equal unit scales showing the ordered pairs (0, 1), (1, 3), (2, 5) and (3, 7) on the straight line y = 2x + 1."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "2,-1,-1",
+            "tag": "line",
+            "geometry": {
+              "x1": "264.444444",
+              "y1": "475",
+              "x2": "454.444444",
+              "y2": "95"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "0,1",
+            "tag": "circle",
+            "geometry": {
+              "cx": "306.666667",
+              "cy": "390.555556",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "1,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "348.888889",
+              "cy": "306.111111",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-2",
+            "kind": "point",
+            "value": "2,5",
+            "tag": "circle",
+            "geometry": {
+              "cx": "391.111111",
+              "cy": "221.666667",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-3",
+            "kind": "point",
+            "value": "3,7",
+            "tag": "circle",
+            "geometry": {
+              "cx": "433.333333",
+              "cy": "137.222222",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "264.444444",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "306.666667",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "348.888889",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "391.111111",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "433.333333",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "475.555556",
+            "label": "4"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "475",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "432.777778",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "390.555556",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "348.333333",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "306.111111",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "263.888889",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "221.666667",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "179.444444",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "137.222222",
+            "label": "7"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "95",
+            "label": "8"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -1.0,
+          "x_max": 4.0,
+          "y_min": -1.0,
+          "y_max": 8.0
+        },
+        "unit_px": "42.222222"
       },
-      "sha256": "2da8e6ea603602e23497698d1bf24dc5c0afccdb49b1e5dfbcb5b7beb6c2d461",
-      "width": 940,
-      "height": 500
+      "sha256": "f68f768cc5b7188abc930f505c9259d7d648a198cafe2f526984ec616e6d64ca",
+      "width": 720,
+      "height": 535
     }
   ],
   "provenance": {
@@ -258,6 +481,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

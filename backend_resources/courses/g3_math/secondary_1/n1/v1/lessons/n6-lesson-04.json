@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-lesson-04",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -240,16 +240,227 @@
       "asset_key": "n6-lesson-04-linear-graph",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-04-linear-graph.svg",
-      "alt_text": "Graph of y = -2x + 8 with y-intercept (0, 8) and x-intercept (4, 0) marked.",
+      "path": "assets/n6-lesson-04-linear-graph-r3.svg",
+      "alt_text": "Graph of y = −2x + 8 with equal unit scales, crossing the y-axis at (0, 8) and the x-axis at (4, 0).",
       "generation_spec": {
-        "renderer": "nextscholar-coordinate-svg-v1",
-        "diagram_kind": "coordinate_graph",
-        "lesson_key": "n6-lesson-04"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n6-lesson-04",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": 2,
+              "b": 1,
+              "c": 8,
+              "label": "y = −2x + 8",
+              "label_x": 2.4,
+              "label_y": 5.2
+            }
+          ],
+          "x_min": -1,
+          "x_max": 5,
+          "y_min": -1,
+          "y_max": 9,
+          "points": [
+            {
+              "x": 0,
+              "y": 8,
+              "label": "(0, 8)"
+            },
+            {
+              "x": 4,
+              "y": 0,
+              "label": "(4, 0)",
+              "dx": -12,
+              "dy": -14,
+              "anchor": "end"
+            }
+          ],
+          "title": "Intercepts of y = −2x + 8",
+          "alt_text": "Graph of y = −2x + 8 with equal unit scales, crossing the y-axis at (0, 8) and the x-axis at (4, 0)."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "2,1,8",
+            "tag": "line",
+            "geometry": {
+              "x1": "275",
+              "y1": "95",
+              "x2": "465",
+              "y2": "475"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "0,8",
+            "tag": "circle",
+            "geometry": {
+              "cx": "294",
+              "cy": "133",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "4,0",
+            "tag": "circle",
+            "geometry": {
+              "cx": "446",
+              "cy": "437",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "256",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "294",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "332",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "370",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "408",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "446",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "484",
+            "label": "5"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "475",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "437",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "399",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "361",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "323",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "285",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "247",
+            "label": "5"
+          },
+          {
+            "key": "y:6",
+            "axis": "y",
+            "value": "6",
+            "position": "209",
+            "label": "6"
+          },
+          {
+            "key": "y:7",
+            "axis": "y",
+            "value": "7",
+            "position": "171",
+            "label": "7"
+          },
+          {
+            "key": "y:8",
+            "axis": "y",
+            "value": "8",
+            "position": "133",
+            "label": "8"
+          },
+          {
+            "key": "y:9",
+            "axis": "y",
+            "value": "9",
+            "position": "95",
+            "label": "9"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -1.0,
+          "x_max": 5.0,
+          "y_min": -1.0,
+          "y_max": 9.0
+        },
+        "unit_px": "38"
       },
-      "sha256": "b83f2d72ba0bed4638a7ab22837c3fcf0c9d594cf359d0c20fb9f6462f3ea37e",
-      "width": 940,
-      "height": 500
+      "sha256": "f6975cba097d6f0ddc0eefdec0faab6d0b8c601154976101c7066240cae716ee",
+      "width": 720,
+      "height": 535
     }
   ],
   "provenance": {
@@ -258,6 +469,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
