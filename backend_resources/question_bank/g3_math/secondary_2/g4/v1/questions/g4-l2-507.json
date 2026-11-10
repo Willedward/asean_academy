@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g4-l2-507",
   "bank_key": "g3-sec2-g4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Environmental officers noted limited access during heavy rain while preparing a replacement frame. A sight line at the forest ranger cabin makes an angle of 30° with level ground. The horizontal distance is 15 m. Find the vertical height x in metres, correct to 1 decimal place."
+          "text": "A forestry student sights the top of a tree from a marker on the ground. The sight line makes an angle of 30° with level ground. The horizontal distance is 15 m. Find the vertical height x of the tree in metres, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select and apply the right-triangle relationship."
+              "text": "Relative to the 30° angle, x is opposite and the 15 m distance is adjacent, so use the tangent ratio."
             },
             {
               "type": "display_math",
-              "latex": "x=15\\tan 30^\\circ=8.7"
+              "latex": "\\tan 30^\\circ=\\frac{x}{15}"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{8.7}"
+              "latex": "x=15\\tan 30^\\circ=8.660\\ldots=8.7"
             }
           ],
           "mark_type": "A",
@@ -109,7 +109,7 @@
       "asset_key": "g4-l2-507-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g4-l2-507-diagram-r3.svg",
+      "path": "assets/g4-l2-507-diagram-r4.svg",
       "alt_text": "Right-angled triangle on level ground. The sight line makes 30° with the ground, the horizontal distance is 15 m and the vertical height is labelled x. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-right-triangle-svg-v2",
@@ -276,6 +276,6 @@
     "authored_by": "OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Diagram regenerated from the content data with nextscholar-right-triangle-svg-v2; awaiting Mathematics and editorial review."
+    "review_notes": "Pre-review cleanup: context rewritten, worked steps split by mark, duplicate numbers varied where listed; awaiting Mathematics and editorial review."
   }
 }
