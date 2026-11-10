@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l2-526",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -94,11 +94,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Write the two equations. "
             },
             {
               "type": "display_math",
-              "latex": "x+y=10,\\ 4x+3y=38\\Rightarrow x=8"
+              "latex": "x+y=10,\\quad 4x+3y=38"
+            },
+            {
+              "type": "text",
+              "text": " Substitute "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=10-x"
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
+              "type": "display_math",
+              "latex": "4x+3(10-x)=38\\Rightarrow 1x=8"
             }
           ],
           "mark_type": "M",
@@ -109,11 +125,23 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "8"
+              "latex": "x=8"
+            },
+            {
+              "type": "text",
+              "text": " Check: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4(8)+3(2)=38"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

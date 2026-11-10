@@ -124,7 +124,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l2-526",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -218,11 +218,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Write the two equations. "
               },
               {
                 "type": "display_math",
-                "latex": "x+y=10,\\ 4x+3y=38\\Rightarrow x=8"
+                "latex": "x+y=10,\\quad 4x+3y=38"
+              },
+              {
+                "type": "text",
+                "text": " Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=10-x"
+              },
+              {
+                "type": "text",
+                "text": ": "
+              },
+              {
+                "type": "display_math",
+                "latex": "4x+3(10-x)=38\\Rightarrow 1x=8"
               }
             ],
             "mark_type": "M",
@@ -233,11 +249,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=8"
+              },
+              {
+                "type": "text",
+                "text": " Check: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(8)+3(2)=38"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -266,7 +294,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-523",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -336,11 +364,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Let "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " be adult tickets and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " be student tickets. "
               },
               {
                 "type": "display_math",
-                "latex": "x+y=13,\\ 7x+4y=73\\Rightarrow x=7"
+                "latex": "x+y=13,\\quad7x+4y=73\\Rightarrow7x+4(13-x)=73\\Rightarrow3x=21"
               }
             ],
             "mark_type": "M",
@@ -351,11 +395,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "x=7"
+              },
+              {
+                "type": "text",
+                "text": " Check: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "7(7)+4(6)=73"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -384,14 +440,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l4-514",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N7",
     "primary_outcome": "7.5",
-    "title": "One value satisfying two equations",
+    "title": "Clear fractions in a linear equation",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -404,35 +460,11 @@
         "prompt": [
           {
             "type": "text",
-            "text": "One value of "
+            "text": "Solve "
           },
           {
             "type": "inline_math",
-            "latex": "x"
-          },
-          {
-            "type": "text",
-            "text": " satisfies both "
-          },
-          {
-            "type": "inline_math",
-            "latex": "5x+5=35"
-          },
-          {
-            "type": "text",
-            "text": " and "
-          },
-          {
-            "type": "inline_math",
-            "latex": "kx=36"
-          },
-          {
-            "type": "text",
-            "text": ". Work out "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
+            "latex": "\\frac{2x+1}{3}-\\frac{x-2}{4}=2"
           },
           {
             "type": "text",
@@ -445,8 +477,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "6",
-          "canonical_latex": "6",
+          "canonical_answer": "2.8",
+          "canonical_latex": "2.8",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -458,7 +490,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve the fully known equation first, then use its solution in the second equation."
+                "text": "Multiply every term by the common denominator "
+              },
+              {
+                "type": "inline_math",
+                "latex": "12"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -467,39 +507,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Solve "
-              },
-              {
-                "type": "inline_math",
-                "latex": "5x+5=35"
-              },
-              {
-                "type": "text",
-                "text": " for "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x"
-              },
-              {
-                "type": "text",
-                "text": ", then substitute your value into "
-              },
-              {
-                "type": "inline_math",
-                "latex": "kx=36"
-              },
-              {
-                "type": "text",
-                "text": " and solve for "
-              },
-              {
-                "type": "inline_math",
-                "latex": "k"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "After multiplying, take care with the minus sign in front of the second fraction."
               }
             ]
           }
@@ -510,11 +518,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Multiply by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "12"
+              },
+              {
+                "type": "text",
+                "text": " and collect terms. "
               },
               {
                 "type": "display_math",
-                "latex": "5x=30\\Rightarrow x=6;\\quad 6k=36\\Rightarrow k=6"
+                "latex": "4(2x+1)-3(x-2)=24\\Rightarrow8x+4-3x+6=24\\Rightarrow5x=14"
               }
             ],
             "mark_type": "M",
@@ -525,11 +541,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "6"
+                "latex": "x=2.8"
               }
             ],
             "mark_type": "A",
@@ -689,7 +705,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l2-527",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -721,7 +737,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "3x+1=25"
+            "latex": "3x+1=1"
           },
           {
             "type": "text",
@@ -734,8 +750,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "0",
+          "canonical_latex": "0",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -756,7 +772,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "First subtract 1, then divide by 3."
+                "text": "Subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1"
+              },
+              {
+                "type": "text",
+                "text": " from both sides, then divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -767,11 +799,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Subtract "
+              },
+              {
+                "type": "inline_math",
+                "latex": "1"
+              },
+              {
+                "type": "text",
+                "text": " from both sides, then divide by "
+              },
+              {
+                "type": "inline_math",
+                "latex": "3"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "3x=25-1=24\\Rightarrow x=8"
+                "latex": "3x=0"
               }
             ],
             "mark_type": "M",
@@ -782,11 +830,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=0"
               }
             ],
             "mark_type": "A",
@@ -815,7 +863,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-524",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -835,7 +883,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The angklung club charged S$8 per adult and S$5 per student for a concert. Ten tickets brought in S$74. How many adult tickets were sold? Use a pair of simultaneous equations."
+            "text": "The angklung club charged S$9 per adult and S$6 per student for a concert. Eleven tickets brought in S$81. How many adult tickets were sold? Use a pair of simultaneous equations."
           }
         ],
         "marks": 3,
@@ -844,8 +892,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -866,15 +914,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "One equation is "
+                "text": "Substitute "
               },
               {
                 "type": "inline_math",
-                "latex": "x+y=10"
+                "latex": "y=11-x"
               },
               {
                 "type": "text",
-                "text": ". Write a second equation for the total cost, then solve the pair."
+                "text": " into the money equation."
               }
             ]
           }
@@ -885,11 +933,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Let "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " be adult tickets and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": " be student tickets. "
               },
               {
                 "type": "display_math",
-                "latex": "x+y=10,\\ 8x+5y=74\\Rightarrow x=8"
+                "latex": "x+y=11,\\quad9x+6y=81\\Rightarrow9x+6(11-x)=81\\Rightarrow3x=15"
               }
             ],
             "mark_type": "M",
@@ -900,11 +964,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=5"
+              },
+              {
+                "type": "text",
+                "text": " Check: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "9(5)+6(6)=81"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -933,7 +1009,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-525",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -957,7 +1033,15 @@
           },
           {
             "type": "inline_math",
-            "latex": "x:4(x-2)+2=30"
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": ": "
+          },
+          {
+            "type": "inline_math",
+            "latex": "4(x-2)+2=-22"
           },
           {
             "type": "text",
@@ -970,8 +1054,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "9",
-          "canonical_latex": "9",
+          "canonical_answer": "-4",
+          "canonical_latex": "-4",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -992,15 +1076,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Rewrite the equation as "
-              },
-              {
-                "type": "inline_math",
-                "latex": "4(x-2)=28"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Expand the bracket and collect the constants before dividing."
               }
             ]
           }
@@ -1011,11 +1087,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Expand the bracket and collect the constants. "
               },
               {
                 "type": "display_math",
-                "latex": "4(x-2)=28\\Rightarrow x-2=7\\Rightarrow x=9"
+                "latex": "4x-8+2=-22\\Rightarrow4x=-16"
               }
             ],
             "mark_type": "M",
@@ -1026,11 +1102,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "9"
+                "latex": "x=-4"
+              },
+              {
+                "type": "text",
+                "text": " Check: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(-6)+2=-22"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -1059,7 +1147,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l5-504",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1161,11 +1249,55 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Let the digits be "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "x+y=7,\\ 9x-9y=27\\Rightarrow x=5,\\ y=2;\\quad 10x+y=52"
+                "latex": "x+y=7,\\quad(10x+y)-(10y+x)=27\\Rightarrow9(x-y)=27\\Rightarrow x-y=3"
+              },
+              {
+                "type": "text",
+                "text": " Add the equations: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "2x=10"
+              },
+              {
+                "type": "text",
+                "text": ", so "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=5"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=2"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -1176,7 +1308,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So the code is "
               },
               {
                 "type": "display_math",
@@ -1966,14 +2098,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l4-515",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N7",
     "primary_outcome": "7.7",
-    "title": "Line through a point crossing the x-axis",
+    "title": "Area enclosed by a line and the axes",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2002,23 +2134,7 @@
           },
           {
             "type": "text",
-            "text": ", which crosses the x-axis at "
-          },
-          {
-            "type": "inline_math",
-            "latex": "x=\\frac{25}{k}"
-          },
-          {
-            "type": "text",
-            "text": ". Find "
-          },
-          {
-            "type": "inline_math",
-            "latex": "k"
-          },
-          {
-            "type": "text",
-            "text": "."
+            "text": ". Find the area, in square units, of the triangle enclosed by this line and the two coordinate axes."
           }
         ],
         "marks": 4,
@@ -2027,8 +2143,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "5",
-          "canonical_latex": "5",
+          "canonical_answer": "62.5",
+          "canonical_latex": "62.5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2040,7 +2156,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "A stated point must make the linear equation true."
+                "text": "Substitute the point to find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": ", then find where the line meets each axis."
               }
             ]
           },
@@ -2049,31 +2173,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute "
-              },
-              {
-                "type": "inline_math",
-                "latex": "x=4"
-              },
-              {
-                "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "y=5"
-              },
-              {
-                "type": "text",
-                "text": ", then isolate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "k"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "The triangle has base and height equal to the two intercepts."
               }
             ]
           }
@@ -2084,11 +2184,47 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "(4,5)"
+              },
+              {
+                "type": "text",
+                "text": " to find "
+              },
+              {
+                "type": "inline_math",
+                "latex": "k"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "4k+5=25\\Rightarrow 4k=20\\Rightarrow k=5"
+                "latex": "4k+5=25\\Rightarrow k=5"
+              },
+              {
+                "type": "text",
+                "text": " The intercepts are "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x=5"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=25"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "M",
@@ -2099,11 +2235,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "Area "
               },
               {
                 "type": "display_math",
-                "latex": "5"
+                "latex": "=\\frac12(5)(25)=62.5"
               }
             ],
             "mark_type": "A",
@@ -2255,7 +2391,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l2-529",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2275,15 +2411,31 @@
         "prompt": [
           {
             "type": "text",
-            "text": "State the x-coordinate of the point where "
+            "text": "State the "
           },
           {
             "type": "inline_math",
-            "latex": "4x+2y=28"
+            "latex": "x"
           },
           {
             "type": "text",
-            "text": " meets the x-axis."
+            "text": "-coordinate of the point where "
+          },
+          {
+            "type": "inline_math",
+            "latex": "4x+2y=3"
+          },
+          {
+            "type": "text",
+            "text": " meets the "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "-axis."
           }
         ],
         "marks": 2,
@@ -2292,8 +2444,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "0.75",
+          "canonical_latex": "0.75",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2322,7 +2474,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Substitute "
+                "text": "Set "
               },
               {
                 "type": "inline_math",
@@ -2330,11 +2482,11 @@
               },
               {
                 "type": "text",
-                "text": " into "
+                "text": ", then solve for "
               },
               {
                 "type": "inline_math",
-                "latex": "4x+2y=28"
+                "latex": "x"
               },
               {
                 "type": "text",
@@ -2349,11 +2501,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "At the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-axis, "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=0"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "4x=28\\Rightarrow x=7\\Rightarrow k=7"
+                "latex": "4x=3"
               }
             ],
             "mark_type": "M",
@@ -2364,11 +2532,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So the "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate is "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "0.75"
               }
             ],
             "mark_type": "A",
@@ -2631,14 +2807,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l4-516",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N7",
     "primary_outcome": "7.8",
-    "title": "Point on two lines with a parameter",
+    "title": "Find k when three lines meet",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2651,15 +2827,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The point "
-          },
-          {
-            "type": "inline_math",
-            "latex": "(4,5)"
-          },
-          {
-            "type": "text",
-            "text": " lies on both "
+            "text": "The lines "
           },
           {
             "type": "inline_math",
@@ -2668,6 +2836,14 @@
           {
             "type": "text",
             "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x-y=-1"
+          },
+          {
+            "type": "text",
+            "text": " meet at a point that also lies on "
           },
           {
             "type": "inline_math",
@@ -2683,15 +2859,7 @@
           },
           {
             "type": "text",
-            "text": " and check that "
-          },
-          {
-            "type": "inline_math",
-            "latex": "(4,5)"
-          },
-          {
-            "type": "text",
-            "text": " satisfies both equations."
+            "text": "."
           }
         ],
         "marks": 4,
@@ -2713,7 +2881,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Use the supplied intersection in the equation containing the unknown parameter."
+                "text": "Find the point where the first two lines meet."
               }
             ]
           },
@@ -2726,27 +2894,11 @@
               },
               {
                 "type": "inline_math",
-                "latex": "x=4"
+                "latex": "y=x+1"
               },
               {
                 "type": "text",
-                "text": " and "
-              },
-              {
-                "type": "inline_math",
-                "latex": "y=5"
-              },
-              {
-                "type": "text",
-                "text": " into "
-              },
-              {
-                "type": "inline_math",
-                "latex": "2x-y=k"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": " into the first equation, then use the point in the third line."
               }
             ]
           }
@@ -2757,11 +2909,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Substitute "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=x+1"
+              },
+              {
+                "type": "text",
+                "text": " into the first line. "
               },
               {
                 "type": "display_math",
-                "latex": "k=2(4)-5=3;\\quad 4(4)+3(5)=31"
+                "latex": "4x+3(x+1)=31\\Rightarrow7x=28\\Rightarrow x=4,\\ y=5"
               }
             ],
             "mark_type": "M",
@@ -2772,11 +2932,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "3"
+                "latex": "k=2(4)-5=3"
               }
             ],
             "mark_type": "A",
@@ -2805,14 +2965,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l1-520",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "N7",
     "primary_outcome": "7.8",
-    "title": "Where two lines cross when y is known",
+    "title": "Intersection of two lines",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2823,6 +2983,10 @@
         "position": 1,
         "label": null,
         "prompt": [
+          {
+            "type": "text",
+            "text": "The lines "
+          },
           {
             "type": "inline_math",
             "latex": "x+y=10"
@@ -2837,7 +3001,23 @@
           },
           {
             "type": "text",
-            "text": " meet at a point with y-coordinate 4. What is the x-coordinate?"
+            "text": " meet at the point "
+          },
+          {
+            "type": "inline_math",
+            "latex": "(p,q)"
+          },
+          {
+            "type": "text",
+            "text": ". Find "
+          },
+          {
+            "type": "inline_math",
+            "latex": "p"
+          },
+          {
+            "type": "text",
+            "text": "."
           }
         ],
         "marks": 1,
@@ -2876,7 +3056,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "After addition, divide the resulting value of 2x by 2."
+                "text": "Add the two equations to eliminate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           }
@@ -2886,8 +3074,24 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Add the equations. "
+              },
+              {
                 "type": "display_math",
-                "latex": "2x=12\\Rightarrow x=6\\Rightarrow k=6"
+                "latex": "2x=12\\Rightarrow x=6"
+              },
+              {
+                "type": "text",
+                "text": " So "
+              },
+              {
+                "type": "inline_math",
+                "latex": "p=6"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -2916,7 +3120,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l2-530",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2952,7 +3156,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "2x+y=18"
+            "latex": "2x+y=-6"
           },
           {
             "type": "text",
@@ -2960,7 +3164,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "x-y=6"
+            "latex": "x-y=0"
           },
           {
             "type": "text",
@@ -2981,8 +3185,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "8",
-          "canonical_latex": "8",
+          "canonical_answer": "-2",
+          "canonical_latex": "-2",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3003,11 +3207,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the equations to obtain "
+                "text": "Add the two equations to eliminate "
               },
               {
                 "type": "inline_math",
-                "latex": "3x=24"
+                "latex": "y"
               },
               {
                 "type": "text",
@@ -3022,11 +3226,19 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Add the two equations to eliminate "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": ". "
               },
               {
                 "type": "display_math",
-                "latex": "(2+1)x=24\\Rightarrow x=8"
+                "latex": "3x=-6"
               }
             ],
             "mark_type": "M",
@@ -3037,11 +3249,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=-2"
               }
             ],
             "mark_type": "A",
@@ -3437,7 +3649,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-529",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3461,7 +3673,7 @@
           },
           {
             "type": "inline_math",
-            "latex": "4x+2y=34"
+            "latex": "4x+2y=12"
           },
           {
             "type": "text",
@@ -3469,11 +3681,19 @@
           },
           {
             "type": "inline_math",
-            "latex": "x+y=10"
+            "latex": "x+y=7"
           },
           {
             "type": "text",
-            "text": " cross at a single point. Calculate its x-coordinate."
+            "text": " cross at a single point. Calculate its "
+          },
+          {
+            "type": "inline_math",
+            "latex": "x"
+          },
+          {
+            "type": "text",
+            "text": "-coordinate."
           }
         ],
         "marks": 3,
@@ -3482,8 +3702,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "7",
-          "canonical_latex": "7",
+          "canonical_answer": "-1",
+          "canonical_latex": "-1",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3504,23 +3724,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "From "
+                "text": "Rewrite "
               },
               {
                 "type": "inline_math",
-                "latex": "x+y=10"
+                "latex": "x+y=7"
               },
               {
                 "type": "text",
-                "text": ", use "
+                "text": " as "
               },
               {
                 "type": "inline_math",
-                "latex": "y=10-x"
+                "latex": "y=7-x"
               },
               {
                 "type": "text",
-                "text": " in the other equation."
+                "text": " and substitute into the first equation."
               }
             ]
           }
@@ -3531,11 +3751,27 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "From "
+              },
+              {
+                "type": "inline_math",
+                "latex": "x+y=7"
+              },
+              {
+                "type": "text",
+                "text": ", "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y=7-x"
+              },
+              {
+                "type": "text",
+                "text": ". Substitute. "
               },
               {
                 "type": "display_math",
-                "latex": "4x+2(10-x)=34\\Rightarrow x=7"
+                "latex": "4x+2(7-x)=12\\Rightarrow2x+14=12"
               }
             ],
             "mark_type": "M",
@@ -3546,11 +3782,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "So "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "x=-1"
+              },
+              {
+                "type": "text",
+                "text": " Check: "
+              },
+              {
+                "type": "inline_math",
+                "latex": "4(-1)+2(8)=12"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -3678,7 +3926,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l2-531",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3736,7 +3984,23 @@
             "content": [
               {
                 "type": "text",
-                "text": "Look for two numbers whose product is 84 and sum is -20."
+                "text": "Find two numbers with product "
+              },
+              {
+                "type": "inline_math",
+                "latex": "84"
+              },
+              {
+                "type": "text",
+                "text": " and sum "
+              },
+              {
+                "type": "inline_math",
+                "latex": "-20"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ]
           },
@@ -3764,11 +4028,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Factorise. "
               },
               {
                 "type": "display_math",
-                "latex": "x^2-20x+84=(x-6)(x-14)=0\\Rightarrow x=6\\text{ or }14"
+                "latex": "x^2-20x+84=0\\Rightarrow(x-6)(x-14)=0\\Rightarrow x=6\\text{ or }x=14"
               }
             ],
             "mark_type": "M",
@@ -3779,11 +4043,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "The smaller value is "
               },
               {
                 "type": "display_math",
-                "latex": "6"
+                "latex": "x=6"
               }
             ],
             "mark_type": "A",
@@ -3812,7 +4076,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-530",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3882,11 +4146,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Rearrange to zero and factorise. "
               },
               {
                 "type": "display_math",
-                "latex": "x^2-11x+28=0\\Rightarrow (x-7)(x-4)=0\\Rightarrow x=7\\text{ or }4"
+                "latex": "x^2-11x+28=0\\Rightarrow(x-4)(x-7)=0\\Rightarrow x=4\\text{ or }x=7"
               }
             ],
             "mark_type": "M",
@@ -3897,11 +4161,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "The larger solution is "
               },
               {
                 "type": "display_math",
-                "latex": "7"
+                "latex": "x=7"
               }
             ],
             "mark_type": "A",
@@ -3930,7 +4194,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 3,
+    "revision": 4,
     "stable_key": "n7-l3-531",
     "bank_key": "g3-sec2-n7-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -4000,11 +4264,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set up and carry out the required algebraic method."
+                "text": "Rearrange to zero and factorise. "
               },
               {
                 "type": "display_math",
-                "latex": "x^2-13x+40=0\\Rightarrow (x-8)(x-5)=0\\Rightarrow x=8\\text{ or }5"
+                "latex": "x^2-13x+40=0\\Rightarrow(x-5)(x-8)=0\\Rightarrow x=5\\text{ or }x=8"
               }
             ],
             "mark_type": "M",
@@ -4015,11 +4279,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "State the requested value after checking it in the original condition."
+                "text": "The greater root is "
               },
               {
                 "type": "display_math",
-                "latex": "8"
+                "latex": "x=8"
               }
             ],
             "mark_type": "A",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l1-520",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.8",
-  "title": "Where two lines cross when y is known",
+  "title": "Intersection of two lines",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -18,6 +18,10 @@
       "position": 1,
       "label": null,
       "prompt": [
+        {
+          "type": "text",
+          "text": "The lines "
+        },
         {
           "type": "inline_math",
           "latex": "x+y=10"
@@ -32,7 +36,23 @@
         },
         {
           "type": "text",
-          "text": " meet at a point with y-coordinate 4. What is the x-coordinate?"
+          "text": " meet at the point "
+        },
+        {
+          "type": "inline_math",
+          "latex": "(p,q)"
+        },
+        {
+          "type": "text",
+          "text": ". Find "
+        },
+        {
+          "type": "inline_math",
+          "latex": "p"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 1,
@@ -71,7 +91,15 @@
           "content": [
             {
               "type": "text",
-              "text": "After addition, divide the resulting value of 2x by 2."
+              "text": "Add the two equations to eliminate "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         }
@@ -81,8 +109,24 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "Add the equations. "
+            },
+            {
               "type": "display_math",
-              "latex": "2x=12\\Rightarrow x=6\\Rightarrow k=6"
+              "latex": "2x=12\\Rightarrow x=6"
+            },
+            {
+              "type": "text",
+              "text": " So "
+            },
+            {
+              "type": "inline_math",
+              "latex": "p=6"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

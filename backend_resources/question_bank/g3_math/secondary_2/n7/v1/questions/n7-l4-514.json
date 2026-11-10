@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l4-514",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_2",
   "topic_code": "N7",
   "primary_outcome": "7.5",
-  "title": "One value satisfying two equations",
+  "title": "Clear fractions in a linear equation",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,35 +20,11 @@
       "prompt": [
         {
           "type": "text",
-          "text": "One value of "
+          "text": "Solve "
         },
         {
           "type": "inline_math",
-          "latex": "x"
-        },
-        {
-          "type": "text",
-          "text": " satisfies both "
-        },
-        {
-          "type": "inline_math",
-          "latex": "5x+5=35"
-        },
-        {
-          "type": "text",
-          "text": " and "
-        },
-        {
-          "type": "inline_math",
-          "latex": "kx=36"
-        },
-        {
-          "type": "text",
-          "text": ". Work out "
-        },
-        {
-          "type": "inline_math",
-          "latex": "k"
+          "latex": "\\frac{2x+1}{3}-\\frac{x-2}{4}=2"
         },
         {
           "type": "text",
@@ -61,8 +37,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "6",
-        "canonical_latex": "6",
+        "canonical_answer": "2.8",
+        "canonical_latex": "2.8",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -74,7 +50,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve the fully known equation first, then use its solution in the second equation."
+              "text": "Multiply every term by the common denominator "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ]
         },
@@ -83,39 +67,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Solve "
-            },
-            {
-              "type": "inline_math",
-              "latex": "5x+5=35"
-            },
-            {
-              "type": "text",
-              "text": " for "
-            },
-            {
-              "type": "inline_math",
-              "latex": "x"
-            },
-            {
-              "type": "text",
-              "text": ", then substitute your value into "
-            },
-            {
-              "type": "inline_math",
-              "latex": "kx=36"
-            },
-            {
-              "type": "text",
-              "text": " and solve for "
-            },
-            {
-              "type": "inline_math",
-              "latex": "k"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "After multiplying, take care with the minus sign in front of the second fraction."
             }
           ]
         }
@@ -126,11 +78,19 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "Multiply by "
+            },
+            {
+              "type": "inline_math",
+              "latex": "12"
+            },
+            {
+              "type": "text",
+              "text": " and collect terms. "
             },
             {
               "type": "display_math",
-              "latex": "5x=30\\Rightarrow x=6;\\quad 6k=36\\Rightarrow k=6"
+              "latex": "4(2x+1)-3(x-2)=24\\Rightarrow8x+4-3x+6=24\\Rightarrow5x=14"
             }
           ],
           "mark_type": "M",
@@ -141,11 +101,11 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "6"
+              "latex": "x=2.8"
             }
           ],
           "mark_type": "A",

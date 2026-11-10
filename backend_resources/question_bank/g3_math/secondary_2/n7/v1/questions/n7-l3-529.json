@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "n7-l3-529",
   "bank_key": "g3-sec2-n7-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -24,7 +24,7 @@
         },
         {
           "type": "inline_math",
-          "latex": "4x+2y=34"
+          "latex": "4x+2y=12"
         },
         {
           "type": "text",
@@ -32,11 +32,19 @@
         },
         {
           "type": "inline_math",
-          "latex": "x+y=10"
+          "latex": "x+y=7"
         },
         {
           "type": "text",
-          "text": " cross at a single point. Calculate its x-coordinate."
+          "text": " cross at a single point. Calculate its "
+        },
+        {
+          "type": "inline_math",
+          "latex": "x"
+        },
+        {
+          "type": "text",
+          "text": "-coordinate."
         }
       ],
       "marks": 3,
@@ -45,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "7",
-        "canonical_latex": "7",
+        "canonical_answer": "-1",
+        "canonical_latex": "-1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -67,23 +75,23 @@
           "content": [
             {
               "type": "text",
-              "text": "From "
+              "text": "Rewrite "
             },
             {
               "type": "inline_math",
-              "latex": "x+y=10"
+              "latex": "x+y=7"
             },
             {
               "type": "text",
-              "text": ", use "
+              "text": " as "
             },
             {
               "type": "inline_math",
-              "latex": "y=10-x"
+              "latex": "y=7-x"
             },
             {
               "type": "text",
-              "text": " in the other equation."
+              "text": " and substitute into the first equation."
             }
           ]
         }
@@ -94,11 +102,27 @@
           "content": [
             {
               "type": "text",
-              "text": "Set up and carry out the required algebraic method."
+              "text": "From "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x+y=7"
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "inline_math",
+              "latex": "y=7-x"
+            },
+            {
+              "type": "text",
+              "text": ". Substitute. "
             },
             {
               "type": "display_math",
-              "latex": "4x+2(10-x)=34\\Rightarrow x=7"
+              "latex": "4x+2(7-x)=12\\Rightarrow2x+14=12"
             }
           ],
           "mark_type": "M",
@@ -109,11 +133,23 @@
           "content": [
             {
               "type": "text",
-              "text": "State the requested value after checking it in the original condition."
+              "text": "So "
             },
             {
               "type": "display_math",
-              "latex": "7"
+              "latex": "x=-1"
+            },
+            {
+              "type": "text",
+              "text": " Check: "
+            },
+            {
+              "type": "inline_math",
+              "latex": "4(-1)+2(8)=12"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",
