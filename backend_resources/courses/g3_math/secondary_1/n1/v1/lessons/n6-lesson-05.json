@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-lesson-05",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -94,7 +94,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the gradient of the line through (-2, 7) and (4, -5), and interpret its sign."
+          "text": "Find the gradient of the line through (−3, 8) and (2, −7), and interpret its sign."
         }
       ],
       "steps": [
@@ -107,7 +107,7 @@
             },
             {
               "type": "display_math",
-              "latex": "-5-7=-12"
+              "latex": "-7-8=-15"
             }
           ]
         },
@@ -116,11 +116,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate the matching horizontal change."
+              "text": "Calculate the matching horizontal change, in the same order."
             },
             {
               "type": "display_math",
-              "latex": "4-(-2)=6"
+              "latex": "2-(-3)=5"
             }
           ]
         },
@@ -133,12 +133,12 @@
             },
             {
               "type": "display_math",
-              "latex": "m=\\frac{-12}{6}=-2"
+              "latex": "m=\\frac{-15}{5}=-3"
             }
           ]
         }
       ],
-      "verification_note": "The negative result agrees with the line falling as x increases. Moving 1 unit right corresponds to moving 2 units down."
+      "verification_note": "The negative result agrees with the line falling as x increases: moving 1 unit right corresponds to moving 3 units down. Taking the points in the other order gives 15 ÷ (−5) = −3 as well."
     },
     {
       "stable_key": "n6-gradient-missing-coordinate-example",
@@ -202,15 +202,17 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A line rises 15 units while moving 5 units to the right. Find its gradient."
+          "text": "A line rises 12 units while moving 8 units to the right. Find its gradient."
         }
       ],
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3",
-        "canonical_latex": "3",
-        "accepted_answers": [],
+        "canonical_answer": "1.5",
+        "canonical_latex": "1.5",
+        "accepted_answers": [
+          "3/2"
+        ],
         "absolute_tolerance": null,
         "rounding_precision": null,
         "unit": null
@@ -218,7 +220,7 @@
       "feedback": [
         {
           "type": "text",
-          "text": "Gradient = vertical change / horizontal change = 15/5 = 3."
+          "text": "Gradient = vertical change ÷ horizontal change = 12 ÷ 8 = 1.5, which is 3/2."
         }
       ]
     },
@@ -244,16 +246,198 @@
       "asset_key": "n6-lesson-05-gradient",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-05-gradient.svg",
-      "alt_text": "Line through (1, 1) and (5, 3), with a right triangle showing horizontal change 4 and vertical change 2.",
+      "path": "assets/n6-lesson-05-gradient-r3.svg",
+      "alt_text": "Line through (1, 1) and (5, 3) with equal unit scales. From (1, 1) to (5, 3) the horizontal change is 4 and the vertical change is 2.",
       "generation_spec": {
-        "renderer": "nextscholar-coordinate-svg-v1",
-        "diagram_kind": "coordinate_graph",
-        "lesson_key": "n6-lesson-05"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n6-lesson-05",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": 1,
+              "b": -2,
+              "c": -1
+            }
+          ],
+          "x_min": -1,
+          "x_max": 6,
+          "y_min": -1,
+          "y_max": 4,
+          "points": [
+            {
+              "x": 1,
+              "y": 1,
+              "label": "(1, 1)",
+              "dx": 12,
+              "dy": 24
+            },
+            {
+              "x": 5,
+              "y": 3,
+              "label": "(5, 3)",
+              "dx": -12,
+              "dy": -14,
+              "anchor": "end"
+            }
+          ],
+          "title": "Gradient from two points",
+          "alt_text": "Line through (1, 1) and (5, 3) with equal unit scales. From (1, 1) to (5, 3) the horizontal change is 4 and the vertical change is 2."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "1,-2,-1",
+            "tag": "line",
+            "geometry": {
+              "x1": "104",
+              "y1": "399",
+              "x2": "636",
+              "y2": "133"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "1,1",
+            "tag": "circle",
+            "geometry": {
+              "cx": "256",
+              "cy": "323",
+              "r": "8"
+            }
+          },
+          {
+            "key": "point-1",
+            "kind": "point",
+            "value": "5,3",
+            "tag": "circle",
+            "geometry": {
+              "cx": "560",
+              "cy": "171",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "104",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "180",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "256",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "332",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "408",
+            "label": "3"
+          },
+          {
+            "key": "x:4",
+            "axis": "x",
+            "value": "4",
+            "position": "484",
+            "label": "4"
+          },
+          {
+            "key": "x:5",
+            "axis": "x",
+            "value": "5",
+            "position": "560",
+            "label": "5"
+          },
+          {
+            "key": "x:6",
+            "axis": "x",
+            "value": "6",
+            "position": "636",
+            "label": "6"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "475",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "399",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "323",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "247",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "171",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "95",
+            "label": "4"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -1.0,
+          "x_max": 6.0,
+          "y_min": -1.0,
+          "y_max": 4.0
+        },
+        "unit_px": "76"
       },
-      "sha256": "4ab775822e7bfc3d3d18227a82970fcda25a93bd1303f2f458b764c109166794",
-      "width": 940,
-      "height": 500
+      "sha256": "1d8cb2883b64b650cb46d74bbb03500bc48d3557ce5b4c4ef89f009ecfc3e0de",
+      "width": 720,
+      "height": 535
     }
   ],
   "provenance": {
@@ -262,6 +446,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-lesson-03",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-n6",
@@ -94,7 +94,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A linear function has y = 6 when x = 1 and y = 15 when x = 4. Find its rule and then find the output when x = -2."
+          "text": "A linear function has y = 7 when x = 2 and y = 19 when x = 5. Find its rule and then find the output when x = −2."
         }
       ],
       "steps": [
@@ -107,7 +107,7 @@
             },
             {
               "type": "display_math",
-              "latex": "a=\\frac{15-6}{4-1}=\\frac93=3"
+              "latex": "a=\\frac{19-7}{5-2}=\\frac{12}{3}=4"
             }
           ]
         },
@@ -116,11 +116,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Use (1, 6) to find b."
+              "text": "Use (2, 7) to find b."
             },
             {
               "type": "display_math",
-              "latex": "6=3(1)+b\\Rightarrow b=3"
+              "latex": "7=4(2)+b\\Rightarrow b=-1"
             }
           ]
         },
@@ -129,16 +129,16 @@
           "content": [
             {
               "type": "text",
-              "text": "Write the rule and substitute x = -2."
+              "text": "Write the rule and substitute x = −2."
             },
             {
               "type": "display_math",
-              "latex": "y=3x+3,\\qquad y=3(-2)+3=-3"
+              "latex": "y=4x-1,\\qquad y=4(-2)-1=-9"
             }
           ]
         }
       ],
-      "verification_note": "The second original pair checks the rule because 3(4) + 3 = 15; the new output follows from the same constant rate."
+      "verification_note": "The second original pair checks the rule because 4(5) − 1 = 19; the new output follows from the same constant rate."
     },
     {
       "stable_key": "n6-function-context-example",
@@ -148,7 +148,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A container starts with 18 litres and drains at 2.5 litres per minute. Let V be the remaining volume after t minutes. Write V as a function of t, find V after 4 minutes, and find when 3 litres remain."
+          "text": "A phone battery is 90% charged and loses 4 percentage points of charge per hour while a video plays. Let B be the charge, in %, after t hours. Write B as a function of t, find B after 6 hours, find when 30% remains, and state the domain."
         }
       ],
       "steps": [
@@ -157,11 +157,11 @@
           "content": [
             {
               "type": "text",
-              "text": "The initial value is 18 and the rate is negative because the volume decreases."
+              "text": "The starting value is 90 and the rate is negative because the charge decreases."
             },
             {
               "type": "display_math",
-              "latex": "V=-2.5t+18"
+              "latex": "B=-4t+90"
             }
           ]
         },
@@ -170,11 +170,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute t = 4."
+              "text": "Substitute t = 6."
             },
             {
               "type": "display_math",
-              "latex": "V=-2.5(4)+18=8\\text{ litres}"
+              "latex": "B=-4(6)+90=66"
             }
           ]
         },
@@ -183,16 +183,29 @@
           "content": [
             {
               "type": "text",
-              "text": "Set V = 3 and solve."
+              "text": "Set B = 30 and solve."
             },
             {
               "type": "display_math",
-              "latex": "3=-2.5t+18\\Rightarrow2.5t=15\\Rightarrow t=6\\text{ minutes}"
+              "latex": "30=-4t+90\\Rightarrow4t=60\\Rightarrow t=15\\text{ hours}"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "content": [
+            {
+              "type": "text",
+              "text": "The battery is empty when B = 0, that is when t = 90 ÷ 4 = 22.5. The rule only makes sense for this time, so the domain is"
+            },
+            {
+              "type": "display_math",
+              "latex": "0\\le t\\le22.5"
             }
           ]
         }
       ],
-      "verification_note": "After 6 minutes the amount drained is 2.5 × 6 = 15 litres, leaving 18 − 15 = 3 litres. The physical domain ends when the container becomes empty."
+      "verification_note": "After 15 hours the charge used is 4 × 15 = 60 percentage points, leaving 90 − 60 = 30%. Outside 0 ≤ t ≤ 22.5 the rule would give a negative charge or describe a time before the video started."
     },
     {
       "stable_key": "n6-functions-recall",
@@ -244,16 +257,216 @@
       "asset_key": "n6-lesson-03-function-parts",
       "kind": "chart",
       "format": "svg",
-      "path": "assets/n6-lesson-03-function-parts.svg",
-      "alt_text": "Two linear graphs sharing y-intercept 1: one rises for positive a and one falls for negative a.",
+      "path": "assets/n6-lesson-03-function-parts-r3.svg",
+      "alt_text": "Two straight lines with equal unit scales, both crossing the y-axis at (0, 1): y = 2x + 1 rises from left to right and y = −x + 1 falls.",
       "generation_spec": {
-        "renderer": "nextscholar-coordinate-svg-v1",
-        "diagram_kind": "coordinate_graph",
-        "lesson_key": "n6-lesson-03"
+        "renderer": "nextscholar-data-chart-svg-v1",
+        "diagram_kind": "line_graph",
+        "lesson_key": "n6-lesson-03",
+        "template": "line_graph",
+        "inputs": {
+          "lines": [
+            {
+              "a": -2,
+              "b": 1,
+              "c": 1,
+              "label": "y = 2x + 1",
+              "label_x": 1.0,
+              "label_y": 4.2
+            },
+            {
+              "a": 1,
+              "b": 1,
+              "c": 1,
+              "label": "y = −x + 1",
+              "label_x": -2.9,
+              "label_y": -1.6
+            }
+          ],
+          "x_min": -3,
+          "x_max": 3,
+          "y_min": -3,
+          "y_max": 5,
+          "points": [
+            {
+              "x": 0,
+              "y": 1,
+              "label": "(0, 1)",
+              "dx": 14,
+              "dy": 24
+            }
+          ],
+          "title": "Same b, different a",
+          "alt_text": "Two straight lines with equal unit scales, both crossing the y-axis at (0, 1): y = 2x + 1 rises from left to right and y = −x + 1 falls."
+        },
+        "viewbox": [
+          720,
+          535
+        ],
+        "chart_marks": [
+          {
+            "key": "line-0",
+            "kind": "line",
+            "value": "-2,1,1",
+            "tag": "line",
+            "geometry": {
+              "x1": "275",
+              "y1": "475",
+              "x2": "465",
+              "y2": "95"
+            }
+          },
+          {
+            "key": "line-1",
+            "kind": "line",
+            "value": "1,1,1",
+            "tag": "line",
+            "geometry": {
+              "x1": "227.5",
+              "y1": "142.5",
+              "x2": "512.5",
+              "y2": "427.5"
+            }
+          },
+          {
+            "key": "point-0",
+            "kind": "point",
+            "value": "0,1",
+            "tag": "circle",
+            "geometry": {
+              "cx": "370",
+              "cy": "285",
+              "r": "8"
+            }
+          }
+        ],
+        "chart_ticks": [
+          {
+            "key": "x:-3",
+            "axis": "x",
+            "value": "-3",
+            "position": "227.5",
+            "label": "-3"
+          },
+          {
+            "key": "x:-2",
+            "axis": "x",
+            "value": "-2",
+            "position": "275",
+            "label": "-2"
+          },
+          {
+            "key": "x:-1",
+            "axis": "x",
+            "value": "-1",
+            "position": "322.5",
+            "label": "-1"
+          },
+          {
+            "key": "x:0",
+            "axis": "x",
+            "value": "0",
+            "position": "370",
+            "label": "0"
+          },
+          {
+            "key": "x:1",
+            "axis": "x",
+            "value": "1",
+            "position": "417.5",
+            "label": "1"
+          },
+          {
+            "key": "x:2",
+            "axis": "x",
+            "value": "2",
+            "position": "465",
+            "label": "2"
+          },
+          {
+            "key": "x:3",
+            "axis": "x",
+            "value": "3",
+            "position": "512.5",
+            "label": "3"
+          },
+          {
+            "key": "y:-3",
+            "axis": "y",
+            "value": "-3",
+            "position": "475",
+            "label": "-3"
+          },
+          {
+            "key": "y:-2",
+            "axis": "y",
+            "value": "-2",
+            "position": "427.5",
+            "label": "-2"
+          },
+          {
+            "key": "y:-1",
+            "axis": "y",
+            "value": "-1",
+            "position": "380",
+            "label": "-1"
+          },
+          {
+            "key": "y:0",
+            "axis": "y",
+            "value": "0",
+            "position": "332.5",
+            "label": "0"
+          },
+          {
+            "key": "y:1",
+            "axis": "y",
+            "value": "1",
+            "position": "285",
+            "label": "1"
+          },
+          {
+            "key": "y:2",
+            "axis": "y",
+            "value": "2",
+            "position": "237.5",
+            "label": "2"
+          },
+          {
+            "key": "y:3",
+            "axis": "y",
+            "value": "3",
+            "position": "190",
+            "label": "3"
+          },
+          {
+            "key": "y:4",
+            "axis": "y",
+            "value": "4",
+            "position": "142.5",
+            "label": "4"
+          },
+          {
+            "key": "y:5",
+            "axis": "y",
+            "value": "5",
+            "position": "95",
+            "label": "5"
+          }
+        ],
+        "forbidden_visible_labels": [],
+        "min_phone_font_px": 12.43,
+        "axis": {
+          "x_min": -3.0,
+          "x_max": 3.0,
+          "y_min": -3.0,
+          "y_max": 5.0
+        },
+        "unit_px": "47.5"
       },
-      "sha256": "01cf3f293887f0f264792e08f460b239ea1b9fbcb89cad0915b8cb7a27e14318",
-      "width": 940,
-      "height": 500
+      "sha256": "48567508a2730fcfbbb0f9cfe2e51401de1a66f45e4d63f608f75783712752aa",
+      "width": 720,
+      "height": 535
     }
   ],
   "provenance": {
@@ -262,6 +475,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Expanded with visual explanations and a second worked example; awaiting Mathematics and editorial review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-data-chart-svg-v1; awaiting Mathematics and editorial review."
   }
 }
