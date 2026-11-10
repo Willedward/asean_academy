@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g2-lesson-03",
   "course_key": "g3-sec2-math",
   "unit_key": "g3-sec2-g2",
@@ -46,7 +46,7 @@
       "blocks": [
         {
           "type": "text",
-          "text": "A similarity statement such as triangle ABC similar to triangle PQR fixes A↔P, B↔Q and C↔R, so the corresponding sides are AB↔PQ, BC↔QR and AC↔PR. The diagram shows a common case: D is on AB, E is on AC and DE is parallel to BC. Triangles ADE and ABC share angle A, and the parallel lines make their other corresponding angles equal, so the small triangle ADE is similar to the whole triangle ABC with A↔A, D↔B and E↔C."
+          "text": "A similarity statement such as triangle ABC similar to triangle PQR fixes A↔P, B↔Q and C↔R, so the corresponding sides are AB↔PQ, BC↔QR and AC↔PR. The diagram shows a common case: D is on AB, E is on AC and DE is parallel to BC. Because DE is parallel to BC, triangle ABC is an enlargement of triangle ADE with centre A, so the two triangles are similar, with A↔A, D↔B and E↔C."
         },
         {
           "type": "asset_ref",
@@ -62,7 +62,15 @@
       "blocks": [
         {
           "type": "text",
-          "text": "Use ratios with matching orientation, such as AB/PQ=BC/QR. Cross-multiplication then solves an unknown side. Equal corresponding angles can establish AA similarity; once similarity is known, every corresponding length follows the same scale factor."
+          "text": "Write each ratio as a side of one figure over the corresponding side of the other, in the same order every time, for example "
+        },
+        {
+          "type": "inline_math",
+          "latex": "\\frac{AB}{PQ}=\\frac{BC}{QR}"
+        },
+        {
+          "type": "text",
+          "text": ". Cross-multiplication then solves an unknown side. Once you know, or are told, that two figures are similar, their corresponding angles are equal and every corresponding length follows the same scale factor."
         }
       ]
     },
@@ -215,7 +223,7 @@
       "asset_key": "g2-lesson-03-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g2-lesson-03-proportion-r3.svg",
+      "path": "assets/g2-lesson-03-proportion-r4.svg",
       "alt_text": "Triangle ABC with D on AB and E on AC. DE and BC are parallel, shown with arrow marks. AD is marked 5 cm, the whole of AB is marked 15 cm, DE is marked 6 cm and BC is marked y cm. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-similarity-svg-v1",
