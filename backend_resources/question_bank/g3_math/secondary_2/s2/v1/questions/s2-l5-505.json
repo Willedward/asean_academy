@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s2-l5-505",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -44,7 +44,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use the complement where all three results are different."
+              "text": "Use a tree diagram with 3 branches at each spin."
             }
           ]
         },
@@ -53,7 +53,7 @@
           "content": [
             {
               "type": "text",
-              "text": "All-different outcomes are the six permutations of 1, 2 and 3 among 27 outcomes."
+              "text": "The tree has 27 end points. List the outcomes where all three results are different."
             }
           ]
         }
@@ -63,8 +63,12 @@
           "position": 1,
           "content": [
             {
+              "type": "text",
+              "text": "The tree gives 27 outcomes. All different: 123, 132, 213, 231, 312, 321, which is 6 outcomes. "
+            },
+            {
               "type": "display_math",
-              "latex": "P=1-\\frac{3!}{3^3}=1-\\frac{6}{27}=\\frac79"
+              "latex": "P=1-\\frac{6}{27}=\\frac{21}{27}"
             }
           ],
           "mark_type": "M",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "s2-l3-526",
   "bank_key": "g3-sec2-s2-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "The probabilities that a sensor reports green and amber are 0.46 and 0.31 respectively. The only other report is red. Find the probability of red."
+          "text": "The probabilities that a sensor reports green and amber are 0.46 and 0.31 respectively. The only other report is red. Find the probability of red as a decimal."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "23/100",
-        "canonical_latex": "\\frac{23}{100}",
+        "canonical_answer": "0.23",
+        "canonical_latex": "0.23",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -62,7 +62,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "P(\\text{remaining})=1-23/50-31/100=\\frac{23}{100}"
+              "latex": "P(\\text{red})=1-0.46-0.31"
             }
           ],
           "mark_type": "M",
@@ -73,7 +73,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{\\frac{23}{100}}"
+              "latex": "\\boxed{0.23}"
             }
           ],
           "mark_type": "A",
