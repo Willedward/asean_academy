@@ -103,14 +103,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-508",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Matching trapeziums",
+    "title": "Congruent shapes with an unknown angle",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -123,11 +123,19 @@
         "prompt": [
           {
             "type": "text",
-            "text": "An architect compares a pair of matching trapezium panels. The congruent polygons have corresponding angles of 50° and "
+            "text": "Two congruent trapeziums have corresponding angles of "
           },
           {
             "type": "inline_math",
-            "latex": "y^{\\circ}"
+            "latex": "(2y+10)^{\\circ}"
+          },
+          {
+            "type": "text",
+            "text": " and "
+          },
+          {
+            "type": "inline_math",
+            "latex": "60^{\\circ}"
           },
           {
             "type": "text",
@@ -148,8 +156,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "50",
-          "canonical_latex": "50",
+          "canonical_answer": "25",
+          "canonical_latex": "25",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -161,7 +169,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Locate the matching side or angle before calculating."
+                "text": "Corresponding angles of congruent shapes are equal."
               }
             ]
           },
@@ -170,15 +178,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Which angle corresponds to "
-              },
-              {
-                "type": "inline_math",
-                "latex": "y^{\\circ}"
-              },
-              {
-                "type": "text",
-                "text": "? Think about what congruence tells you about matching angles."
+                "text": "Write an equation connecting the two corresponding angles."
               }
             ]
           }
@@ -189,7 +189,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "y=50^\\circ"
+                "latex": "2y+10=60\\Rightarrow y=25"
               }
             ],
             "mark_type": "A",
@@ -218,14 +218,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g2-l2-509",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.1",
-    "title": "Congruent triangular badges",
+    "title": "Perimeter of a congruent triangle",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -238,7 +238,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two kite-shaped badges are placed vertex for vertex. Each badge or pennant is triangular. One is congruent to a triangle with side lengths 11 cm, 13 cm and 14 cm. Find its perimeter. Enter the numerical value only."
+            "text": "Two triangular badges are congruent. One badge has sides 11 cm, 13 cm and 14 cm. Find the perimeter of the other badge, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -811,14 +811,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-510",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.2",
-    "title": "Similar rectangles",
+    "title": "Find the original side",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -831,7 +831,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A rectangle in a brochure is enlarged by factor 4. A side measuring 5 cm has a corresponding side on the enlargement. Find that new length. Enter the numerical value only."
+            "text": "A rectangle in a brochure is enlarged by scale factor 4. The enlarged side measures 20 cm. Find the original side length, in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -840,8 +840,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "20",
-          "canonical_latex": "20",
+          "canonical_answer": "5",
+          "canonical_latex": "5",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -853,7 +853,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Corresponding sides are multiplied by the same scale factor."
+                "text": "An enlargement multiplies lengths by the scale factor."
               }
             ]
           },
@@ -862,15 +862,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
-              },
-              {
-                "type": "inline_math",
-                "latex": "5\\times 4"
-              },
-              {
-                "type": "text",
-                "text": "."
+                "text": "Divide the enlarged length by the scale factor."
               }
             ]
           }
@@ -880,8 +872,12 @@
             "position": 1,
             "content": [
               {
+                "type": "text",
+                "text": "Reverse the enlargement. "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=5\\times 4"
+                "latex": "L=20\\div4"
               }
             ],
             "mark_type": "M",
@@ -891,8 +887,12 @@
             "position": 2,
             "content": [
               {
+                "type": "text",
+                "text": "So "
+              },
+              {
                 "type": "display_math",
-                "latex": "L=20"
+                "latex": "L=5"
               }
             ],
             "mark_type": "A",
@@ -921,7 +921,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-511",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -941,7 +941,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A triangular road sign is reproduced with linear factor 2. Find the image length corresponding to its 6 cm edge. Enter the numerical value only."
+            "text": "A triangular road sign is reproduced with linear factor 2. Find the image length corresponding to its 6 cm edge. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1031,7 +1031,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-510",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1051,7 +1051,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Two similar pentagons have perimeters 35 cm and 70 cm. A side of the smaller pentagon is 6 cm. Find the corresponding side of the larger pentagon. Enter the numerical value only."
+            "text": "Two similar pentagons have perimeters 35 cm and 70 cm. A side of the smaller pentagon is 6 cm. Find the corresponding side of the larger pentagon. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -1804,7 +1804,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-512",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1871,15 +1871,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Set "
+                "text": "Set up "
               },
               {
                 "type": "inline_math",
-                "latex": "\\frac{y}{12}=\\frac{7}{4}"
+                "latex": "\\frac{y}{12}"
               },
               {
                 "type": "text",
-                "text": "."
+                "text": " using the matching edges."
               }
             ]
           }
@@ -2032,7 +2032,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l3-513",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2052,7 +2052,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "The corresponding sides of two similar triangles are in the ratio 4:7. The smaller triangle has perimeter 36 cm. Find the perimeter of the larger triangle. Enter the numerical value only."
+            "text": "The corresponding sides of two similar triangles are in the ratio 4:7. The smaller triangle has perimeter 36 cm. Find the perimeter of the larger triangle. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2282,7 +2282,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l1-510",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2341,7 +2341,15 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the original y-coordinate by 3."
+                "text": "Multiply the original "
+              },
+              {
+                "type": "inline_math",
+                "latex": "y"
+              },
+              {
+                "type": "text",
+                "text": "-coordinate by the scale factor."
               }
             ]
           }
@@ -2381,7 +2389,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g2-l2-513",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2401,7 +2409,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A triangle has perimeter 22 cm. It is enlarged by scale factor 3. Find the image perimeter. Enter the numerical value only."
+            "text": "A triangle has perimeter 22 cm. It is enlarged by scale factor 3. Find the image perimeter. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
@@ -2864,14 +2872,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l1-511",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_2",
     "topic_code": "G2",
     "primary_outcome": "2.5",
-    "title": "Scale drawing wall",
+    "title": "Scale drawing of a wall",
     "difficulty": 1,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2884,7 +2892,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A wall shown as 3 cm on a scale drawing represents a length 7 times as large. Find the represented length in centimetres. Enter the numerical value only."
+            "text": "On a scale drawing with scale 1 : 200, a wall is 3 cm long. Find the real length of the wall in metres. Enter the numerical value only."
           }
         ],
         "marks": 1,
@@ -2893,8 +2901,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "21",
-          "canonical_latex": "21",
+          "canonical_answer": "6",
+          "canonical_latex": "6",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2906,7 +2914,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Multiply the represented length by the stated scale factor."
+                "text": "Multiply the drawn length by the scale to get the real length in centimetres."
               }
             ]
           },
@@ -2915,11 +2923,11 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate "
+                "text": "Convert the result from centimetres to metres by dividing by "
               },
               {
                 "type": "inline_math",
-                "latex": "3\\times 7"
+                "latex": "100"
               },
               {
                 "type": "text",
@@ -2934,7 +2942,7 @@
             "content": [
               {
                 "type": "display_math",
-                "latex": "L=3\\times7=21"
+                "latex": "3\\times200=600\\text{ cm}=6\\text{ m}"
               }
             ],
             "mark_type": "A",
@@ -3073,7 +3081,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g2-l2-515",
     "bank_key": "g3-sec2-g2-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -3093,7 +3101,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A photograph 12 cm wide is enlarged so that a 5 cm feature becomes 15 cm. Find the new photograph width. Enter the numerical value only."
+            "text": "A photograph 12 cm wide is enlarged so that a 5 cm feature becomes 15 cm. Find the new photograph width. Give your answer in centimetres. Enter the numerical value only."
           }
         ],
         "marks": 2,
