@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l1-003",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.2",
-  "title": "Converting kilometres to metres",
+  "title": "Metres per second to metres per minute",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Express 3.6 km in metres."
+          "text": "Express 3 m/s in metres per minute."
         }
       ],
       "marks": 1,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "3600",
-        "canonical_latex": "3600\\text{ m}",
+        "canonical_answer": "180",
+        "canonical_latex": "180",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Recall how many metres make one kilometre."
+              "text": "One minute is 60 seconds."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply 3.6 by 1000."
+              "text": "Multiply 3 by 60."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "3.6\\times1000=3600\\text{ m}"
+              "type": "inline_math",
+              "latex": "3\\times60=180\\text{ m/min}"
             }
           ],
           "mark_type": "B",

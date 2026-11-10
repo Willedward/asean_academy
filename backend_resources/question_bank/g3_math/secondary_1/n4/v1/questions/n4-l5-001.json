@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n4-l5-001",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.2",
-  "title": "Converting a cubic flow rate",
+  "title": "Time to fill a tank",
   "difficulty": 5,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A pump has a flow rate of 2.7 cubic metres per hour. Express this rate in cubic centimetres per second."
+          "text": "A pump has a flow rate of 2.7 cubic metres per hour. How many minutes does it take to fill a tank of capacity 4500 litres? (1 cubic metre is 1000 litres.)"
         }
       ],
       "marks": 5,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "750",
-        "canonical_latex": "750\\text{ cm}^3\\text{/s}",
+        "canonical_answer": "100",
+        "canonical_latex": "100",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Both the volume unit and the time unit must be converted; remember that a cubic conversion applies in three dimensions."
+              "text": "Convert the flow rate to litres per minute."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use 1 cubic metre equals 1,000,000 cubic centimetres and 1 hour equals 3600 seconds."
+              "text": "Convert cubic metres to litres and hours to minutes, then divide the capacity by the rate."
             }
           ]
         }
@@ -61,8 +61,12 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "1\\text{ m}=100\\text{ cm}\\implies1\\text{ m}^3=100^3=1{,}000{,}000\\text{ cm}^3"
+              "type": "inline_math",
+              "latex": "1\\text{ m}^3=1000"
+            },
+            {
+              "type": "text",
+              "text": " litres"
             }
           ],
           "mark_type": "B",
@@ -72,8 +76,12 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "2.7\\text{ m}^3=2{,}700{,}000\\text{ cm}^3"
+              "type": "inline_math",
+              "latex": "2.7\\text{ m}^3/\\text{h}=2700"
+            },
+            {
+              "type": "text",
+              "text": " litres per hour"
             }
           ],
           "mark_type": "M",
@@ -83,19 +91,23 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "1\\text{ h}=3600\\text{ s}"
+              "type": "inline_math",
+              "latex": "2700\\div60=45"
+            },
+            {
+              "type": "text",
+              "text": " litres per minute"
             }
           ],
-          "mark_type": "B",
+          "mark_type": "M",
           "mark_value": 1
         },
         {
           "position": 4,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Rate}=\\frac{2{,}700{,}000}{3600}\\text{ cm}^3/\\text{s}"
+              "type": "inline_math",
+              "latex": "\\text{Time}=4500\\div45"
             }
           ],
           "mark_type": "M",
@@ -105,8 +117,12 @@
           "position": 5,
           "content": [
             {
-              "type": "display_math",
-              "latex": "=750\\text{ cm}^3/\\text{s}"
+              "type": "inline_math",
+              "latex": "=100"
+            },
+            {
+              "type": "text",
+              "text": " minutes"
             }
           ],
           "mark_type": "A",

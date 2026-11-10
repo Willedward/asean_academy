@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l3-002",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A cyclist rides 24 km in 1.5 hours, rests for 0.5 hour, and then rides 16 km in 1 hour. Find the average speed for the complete journey, including the rest, in km/h. Give your answer as an exact fraction."
+          "text": "A cyclist rides 30 km in 1.5 hours, rests for 0.5 hour, and then rides 20 km in 1 hour. Find the average speed for the complete journey, including the rest, in km/h. Give your answer as an exact fraction."
         }
       ],
       "marks": 3,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "40/3",
-        "canonical_latex": "\\frac{40}{3}\\text{ km/h}",
+        "canonical_answer": "50/3",
+        "canonical_latex": "\\frac{50}{3}",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Total distance}=24+16=40\\text{ km}"
+              "type": "inline_math",
+              "latex": "\\text{Total distance}=30+20=50\\text{ km}"
             }
           ],
           "mark_type": "M",
@@ -72,7 +72,7 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Total time}=1.5+0.5+1=3\\text{ h}"
             }
           ],
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Average speed}=\\frac{40}{3}\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "\\text{Average speed}=\\frac{50}{3}\\text{ km/h}"
             }
           ],
           "mark_type": "A",

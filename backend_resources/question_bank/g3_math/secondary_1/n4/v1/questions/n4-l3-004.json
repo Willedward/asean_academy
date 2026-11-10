@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l3-004",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.2",
-  "title": "High-speed rail conversion",
+  "title": "Comparing two train speeds",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A train travels at 108 km/h. Convert this speed to m/s."
+          "text": "Train A travels at 108 km/h and Train B travels at 31 m/s. How many metres per second faster is Train B?"
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "30",
-        "canonical_latex": "30\\text{ m/s}",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Replace each kilometre with 1000 metres and each hour with 3600 seconds."
+              "text": "Put both speeds in the same unit first."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiply 108 by 1000 divided by 3600."
+              "text": "Convert 108 km/h to m/s, then subtract."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "108\\times\\frac{1000}{3600}"
+              "type": "inline_math",
+              "latex": "108\\div3.6=30\\text{ m/s}"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "=30\\text{ m/s}"
+              "type": "inline_math",
+              "latex": "31-30=1\\text{ m/s}"
             }
           ],
           "mark_type": "A",
