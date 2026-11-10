@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l4-004",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A test vehicle on a closed track is planned to average 80 km/h over a 240 km trial. The first 100 km takes 2 hours because of a technical delay. Find the constant speed needed for the remaining 140 km to achieve the planned average."
+          "text": "A test vehicle on a closed track is planned to average 80 km/h over a 240 km trial. The first 100 km is travelled at 50 km/h, and the vehicle then stops for 12 minutes. Find the constant speed, in kilometres per hour, needed for the remaining 140 km to achieve the planned average."
         }
       ],
       "marks": 4,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "140",
-        "canonical_latex": "140\\text{ km/h}",
+        "canonical_answer": "175",
+        "canonical_latex": "175",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "First find the maximum total journey time allowed by the planned average."
+              "text": "First find the total journey time allowed by the planned average."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtract the 2 hours already used, then divide the remaining distance by the remaining time."
+              "text": "Subtract the time for the first 100 km and the stop, then divide the remaining distance by the remaining time."
             }
           ]
         }
@@ -61,7 +61,7 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
+              "type": "inline_math",
               "latex": "\\text{Planned total time}=\\frac{240}{80}=3\\text{ h}"
             }
           ],
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Remaining time}=3-2=1\\text{ h}"
+              "type": "inline_math",
+              "latex": "\\text{Time used}=\\frac{100}{50}+\\frac{12}{60}=2.2\\text{ h}"
             }
           ],
           "mark_type": "M",
@@ -83,8 +83,8 @@
           "position": 3,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Remaining distance}=240-100=140\\text{ km}"
+              "type": "inline_math",
+              "latex": "\\text{Remaining time}=3-2.2=0.8\\text{ h}"
             }
           ],
           "mark_type": "M",
@@ -94,8 +94,8 @@
           "position": 4,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{Required speed}=\\frac{140}{1}=140\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "\\text{Required speed}=\\frac{140}{0.8}=175\\text{ km/h}"
             }
           ],
           "mark_type": "A",

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 1,
+  "revision": 2,
   "stable_key": "n4-l3-003",
   "bank_key": "g3-sec1-n4-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N4",
   "primary_outcome": "4.2",
-  "title": "Jogging speed conversion",
+  "title": "Distance covered by a jogger",
   "difficulty": 3,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A jogger moves at 7.5 m/s. Convert this speed to km/h."
+          "text": "A jogger moves at 7.5 m/s for 8 minutes. Find the distance covered, in kilometres."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "27",
-        "canonical_latex": "27\\text{ km/h}",
+        "canonical_answer": "3.6",
+        "canonical_latex": "3.6",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert metres to kilometres and seconds to hours."
+              "text": "Convert the time to seconds."
             }
           ]
         },
@@ -51,7 +51,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Multiplying a speed in m/s by 3.6 gives the speed in km/h."
+              "text": "Multiply the speed by the time in seconds, then convert metres to kilometres."
             }
           ]
         }
@@ -61,8 +61,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "7.5\\times\\frac{3600}{1000}"
+              "type": "inline_math",
+              "latex": "7.5\\times(8\\times60)=3600\\text{ m}"
             }
           ],
           "mark_type": "M",
@@ -72,8 +72,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "=27\\text{ km/h}"
+              "type": "inline_math",
+              "latex": "3600\\text{ m}=3.6\\text{ km}"
             }
           ],
           "mark_type": "A",
