@@ -1,7 +1,7 @@
 [
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 1,
     "stable_key": "n3-l1-001",
     "bank_key": "g3-sec1-n3-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -21,7 +21,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A box contains 60 counters, of which 27 are red. Express the number of red counters as a percentage of the total number of counters."
+            "text": "A box contains 60 counters, of which 18 are red. Express the number of red counters as a percentage of the total number of counters."
           }
         ],
         "marks": 1,
@@ -30,8 +30,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "45",
-          "canonical_latex": "45",
+          "canonical_answer": "30",
+          "canonical_latex": "30\\%",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -52,7 +52,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Calculate 27 divided by 60, then multiply by 100%."
+                "text": "Calculate 18 divided by 60, then multiply by 100%."
               }
             ]
           }
@@ -62,8 +62,8 @@
             "position": 1,
             "content": [
               {
-                "type": "inline_math",
-                "latex": "\\frac{27}{60}\\times100\\%=45\\%"
+                "type": "display_math",
+                "latex": "\\frac{18}{60}\\times100\\%=30\\%"
               }
             ],
             "mark_type": "B",
