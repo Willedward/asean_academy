@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l1-016",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A solid consists of two prisms with volumes 150 cm³ and 90 cm³ joined without overlap. Find its volume in cm³. Enter the numerical value only."
+          "text": "A solid consists of a 5 cm by 5 cm by 6 cm cuboid and a prism of volume 90 cm³, joined without overlap. Find its volume in cm³. Enter the numerical value only."
         }
       ],
       "marks": 1,
@@ -42,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Add the component volumes."
+              "text": "Find the volume of the cuboid, then add the volume of the prism."
             }
           ]
         },
@@ -55,11 +55,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "150+90"
+              "latex": "5\\times5\\times6"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ", then add 90."
             }
           ]
         }
@@ -69,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "V=150+90=240"
+              "type": "inline_math",
+              "latex": "V=5(5)(6)+90=240"
             }
           ],
           "mark_type": "A",

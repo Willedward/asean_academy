@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l2-016 — Trapezium window area
+## g5-l2-016 — Finding a parallel side
 
 [Open this question in the HTML preview](index.html#g5-l2-016)
 
@@ -62,7 +62,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l1-013 — Perimeter of a noticeboard
+## g5-l1-013 — Perimeter of a notched noticeboard
 
 [Open this question in the HTML preview](index.html#g5-l1-013)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## g5-l4-011 — Number of slabs from mixed units
+## g5-l4-011 — Blocks with the same volume as a slab
 
 [Open this question in the HTML preview](index.html#g5-l4-011)
 

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "g5-l4-011",
   "bank_key": "g3-sec1-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "G5",
   "primary_outcome": "5.4",
-  "title": "Number of slabs from mixed units",
+  "title": "Blocks with the same volume as a slab",
   "difficulty": 4,
   "calculator_allowed": true,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "A concrete slab has volume 0.18 m³. Each small block measures 30 cm by 20 cm by 10 cm. How many blocks have the same total volume? Enter the numerical value only."
+          "text": "A concrete slab has volume 0.18 m³. Each small block measures 30 cm by 20 cm by 10 cm. How many such blocks have a total volume equal to the slab's volume? Enter the numerical value only."
         }
       ],
       "marks": 4,
@@ -62,11 +62,22 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "N=\\frac{180000}{30(20)(10)}=30"
+              "latex": "N=\\frac{180000}{30(20)(10)}"
+            }
+          ],
+          "mark_type": "M",
+          "mark_value": 3
+        },
+        {
+          "position": 2,
+          "content": [
+            {
+              "type": "display_math",
+              "latex": "N=30"
             }
           ],
           "mark_type": "A",
-          "mark_value": 4
+          "mark_value": 1
         }
       ]
     }
