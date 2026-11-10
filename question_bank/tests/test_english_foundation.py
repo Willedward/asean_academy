@@ -2751,7 +2751,7 @@ def test_compression_reviewer_export_contains_bounded_transfer_route(
     assert "Nara has not yet attempted the 30-minute independent run" in page
     assert page.count("<strong>Answer:</strong>") == 6
     assert "<strong>Answer:</strong> A, B, C" in page
-    assert "Bounded compression uses one stage to diagnose" in page
+    assert "Safe shortening uses one stage to diagnose" in page
     assert "does not justify a high-stakes judgement" in page
 
 
