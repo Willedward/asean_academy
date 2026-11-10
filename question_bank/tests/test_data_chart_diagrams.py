@@ -470,3 +470,136 @@ def test_coordinate_points_numbers_both_axes_and_keeps_points_off_the_edge():
     assert [mark["value"] for mark in diagram.generation_spec["chart_marks"]] == ["-4,3", "4,3"]
     with pytest.raises(ValueError, match="edge"):
         charts.coordinate_points({**inputs, "points": [{"x": 6, "y": 3}]})
+
+
+def _labels_crossing_plotted_marks(svg):
+    """Text boxes that a plotted line, curve or point runs through, ignoring plated labels."""
+    from question_bank.svg_metrics import iter_texts, path_polylines, segment_box_distance
+
+    root = ET.fromstring(svg)
+    segments = []
+    for element in root.iter():
+        if not element.attrib.get("data-chart-mark"):
+            continue
+        if element.tag.endswith("line"):
+            x1, y1, x2, y2 = (float(element.attrib[k]) for k in ("x1", "y1", "x2", "y2"))
+            segments.append(((x1, y1), (x2, y2)))
+        elif element.tag.endswith("path"):
+            for polyline in path_polylines(element.attrib["d"]):
+                segments += list(zip(polyline, polyline[1:], strict=False))
+        elif element.tag.endswith("circle"):
+            x, y, r = (float(element.attrib[k]) for k in ("cx", "cy", "r"))
+            segments += [((x - r, y), (x + r, y)), ((x, y - r), (x, y + r))]
+    plates = [
+        tuple(float(element.attrib[k]) for k in ("x", "y", "width", "height"))
+        for element in root.iter()
+        if element.attrib.get("data-role") == "label-plate"
+    ]
+
+    def plated(box):
+        return any(
+            x <= box.x0 and y <= box.y0 and box.x1 <= x + w and box.y1 <= y + h
+            for x, y, w, h in plates
+        )
+
+    return [
+        text.text
+        for text in iter_texts(root)
+        if not plated(text.box)
+        and any(segment_box_distance(a, b, text.box) < 2 for a, b in segments)
+    ]
+
+
+GRAPH_CASES = {
+    "two_lines_through_axis_numbers": (
+        "line_graph",
+        {
+            "lines": [
+                {"a": 1, "b": 1, "c": 8, "label": "x + y = 8", "label_x": 6.3, "label_y": 2.6},
+                {"a": 4, "b": 3, "c": 29, "label": "4x + 3y = 29", "label_x": 1.6, "label_y": 9.4},
+            ],
+            "x_min": -1,
+            "x_max": 9,
+            "y_min": -1,
+            "y_max": 10,
+            "points": [{"x": 5, "y": 3, "label": "(5, 3)", "dx": -16, "dy": -12, "anchor": "end"}],
+            "alt_text": "Two lines crossing at (5, 3).",
+        },
+    ),
+    "labels_on_crossing_lines": (
+        "line_graph",
+        {
+            "lines": [
+                {"a": -2, "b": 1, "c": 1, "label": "y = 2x + 1", "label_x": 1.0, "label_y": 4.2},
+                {"a": 1, "b": 1, "c": 1, "label": "y = −x + 1", "label_x": -2.9, "label_y": -1.6},
+            ],
+            "x_min": -3,
+            "x_max": 3,
+            "y_min": -3,
+            "y_max": 5,
+            "points": [{"x": 0, "y": 1, "label": "(0, 1)", "dx": 14, "dy": 24}],
+            "alt_text": "Two lines through (0, 1).",
+        },
+    ),
+    "vertex_on_the_y_axis": (
+        "parabola_graph",
+        {
+            "a": 1,
+            "b": 0,
+            "c": -4,
+            "x_min": -3.5,
+            "x_max": 3.5,
+            "y_min": -5,
+            "y_max": 6,
+            "points": [{"x": -2, "label": 1}, {"x": 2, "label": 1}, {"x": 0, "label": 1}],
+            "alt_text": "Parabola y = x² − 4.",
+        },
+    ),
+}
+
+
+@pytest.mark.parametrize("case", sorted(GRAPH_CASES))
+def test_graph_labels_and_axis_numbers_keep_clear_of_plotted_lines(case):
+    template, inputs = GRAPH_CASES[case]
+    diagram = charts.TEMPLATES[template](inputs)
+
+    assert _labels_crossing_plotted_marks(diagram.svg) == []
+    assert findings(diagram) == []
+
+
+def test_lesson_graphs_keep_labels_clear_of_plotted_lines(repository_root):
+    courses = repository_root / "backend_resources/courses/g3_math"
+    checked = 0
+    for path in sorted(courses.glob("*/*/v1/lessons/*.json")):
+        for asset in json.loads(path.read_text())["assets"]:
+            spec = asset["generation_spec"]
+            if spec.get("template") in {"line_graph", "parabola_graph"}:
+                svg = (path.parent.parent / asset["path"]).read_text()
+                assert _labels_crossing_plotted_marks(svg) == [], asset["asset_key"]
+                checked += 1
+    assert checked >= 9
+
+
+def test_quadratic_graph_can_move_the_zero_off_the_y_axis():
+    inputs = {"roots": [-5, 3], "a": 1, "x_min": -7, "x_max": 5}
+    moved = charts.quadratic_graph({**inputs, "clear_labels": True})
+    zero = [
+        text
+        for text in ET.fromstring(moved.svg).iter()
+        if text.tag.endswith("text") and text.text == "0"
+    ][0]
+    axis_x = 90 + 7 / 12 * 590
+    assert zero.attrib["text-anchor"] in {"start", "end"}
+    assert abs(float(zero.attrib["x"]) - axis_x) >= 9
+    assert findings(moved) == []
+
+
+def test_data_table_can_name_its_header_row_and_end_below_the_table():
+    inputs = {"columns": ["-1", "0", "1"], "rows": ["y"], "cells": [[1, 0, 1]]}
+    plain = charts.data_table(inputs)
+    named = charts.data_table({**inputs, "corner": "x", "compact": True})
+    texts = [node.text for node in ET.fromstring(named.svg).iter() if node.tag.endswith("text")]
+
+    assert "x" in texts
+    assert named.height < plain.height
+    assert findings(named) == []
