@@ -387,11 +387,14 @@ def test_angle_type_diagram_rays_must_match_the_declared_classification(
     asset = lesson["assets"][0]
     svg_path = course_root / asset["path"]
     svg = svg_path.read_text()
-    svg = svg.replace(
-        '<line x1="520" y1="230" x2="628.25" y2="292.5"/>',
-        '<line x1="520" y1="230" x2="628.25" y2="167.5"/>',
+    # Swing the obtuse angle's second ray from 120° to 60° without changing its labels.
+    tampered = svg.replace(
+        '<line data-segment="VobtuseRobtuse" x1="205" y1="455" x2="130" y2="325.1"',
+        '<line data-segment="VobtuseRobtuse" x1="205" y1="455" x2="280" y2="325.1"',
         1,
     )
+    assert tampered != svg
+    svg = tampered
     svg_path.write_text(svg)
     asset["sha256"] = hashlib.sha256(svg_path.read_bytes()).hexdigest()
     lesson_path.write_text(json.dumps(lesson))

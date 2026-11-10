@@ -27,6 +27,10 @@ def cm(value):
 
 
 CASES = {
+    "lesson_angle_types": (
+        {"angle_measures": {"acute": 60, "right": 90, "obtuse": 120, "reflex": 240}},
+        [],
+    ),
     "straight_line_given": ({"given": 68}, ["112"]),
     "straight_line_ratio": ({"ratio": [2, 3]}, ["108"]),
     "complement_split": ({"given": 38}, ["52"]),
@@ -432,3 +436,41 @@ def test_apply_makes_an_answer_revealing_item_text_only(repository_root, tmp_pat
     assert decision["decision"] == "text_sufficient"
     assert "side counts" in decision["reason"]
     assert (bank / "assets" / "g1-l5-003-diagram.svg").is_file()
+
+
+def test_angle_types_lesson_figure_keeps_labels_off_arcs_and_captions_level(tmp_path):
+    diagram, _ = render("lesson_angle_types")
+    spec = diagram.generation_spec
+
+    assert findings(tmp_path, diagram) == []
+    captions = dict(
+        (name, float(y))
+        for y, name in re.findall(r'y="([\d.]+)"[^>]*>(acute|right|obtuse|reflex)<', diagram.svg)
+    )
+    assert captions["acute"] == captions["right"]
+    assert captions["obtuse"] == captions["reflex"]
+    reflex = next(item for item in spec["angles"] if item.get("reflex"))
+    assert reflex["drawn_degrees"] == pytest.approx(240, abs=0.5)
+    marker = next(item for item in spec["angle_markers"] if item["marker_key"] == "angle-reflex")
+    assert marker["large_arc"] == 1
+    assert spec["not_to_scale"] is False
+    assert "Not drawn to scale" not in diagram.svg
+
+
+def test_angle_types_checks_catch_a_reflex_arc_drawn_the_short_way(tmp_path):
+    diagram, _ = render("lesson_angle_types")
+    path = re.search(r'<path data-angle-marker="angle-reflex" d="([^"]+)"', diagram.svg)[1]
+    flags = re.search(r"A(\S+) (\S+) 0 1 (\d)", path)
+    short = path.replace(flags[0], f"A{flags[1]} {flags[2]} 0 0 {1 - int(flags[3])}")
+    spec = json.loads(json.dumps(diagram.generation_spec))
+    spec["angle_markers"][-1]["large_arc"] = 0
+    spec["angle_markers"][-1]["sweep"] = 1 - int(flags[3])
+    found = codes(tmp_path, diagram, svg=diagram.svg.replace(path, short), spec=spec)
+    assert "geometry_angle_marker_sweep" in found
+
+
+def test_angle_types_refuses_measures_of_the_wrong_type():
+    with pytest.raises(UnsupportedDiagram):
+        pg.lesson_angle_types(
+            {"angle_measures": {"acute": 60, "right": 90, "obtuse": 200, "reflex": 240}}
+        )

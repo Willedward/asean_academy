@@ -14,7 +14,22 @@ import re
 from collections.abc import Callable, Sequence
 from typing import Any
 
-from .canvas import INK, LIGHT, STROKE, THIN, Canvas, add, fmt, length, scale, sub, unit
+from ..svg_metrics import baseline_for_center
+from .canvas import (
+    ANGLE_TEXT,
+    CAPTION_SIZE,
+    INK,
+    LIGHT,
+    STROKE,
+    THIN,
+    Canvas,
+    add,
+    fmt,
+    length,
+    scale,
+    sub,
+    unit,
+)
 from .common import (
     PLANE_GEOMETRY_RENDERER,
     Diagram,
@@ -1233,9 +1248,120 @@ def sss_mirror_image(inputs: dict[str, Any], answers: Sequence[str] = ()) -> Dia
     )
 
 
+# ------------------------------------------------------------------------ lesson: angle types
+ANGLE_CLASSES = (
+    ("acute", lambda d: 0 < d < 90),
+    ("right", lambda d: d == 90),
+    ("obtuse", lambda d: 90 < d < 180),
+    ("reflex", lambda d: 180 < d < 360),
+)
+
+
+def lesson_angle_types(inputs: dict[str, Any] | None = None, answers: Sequence[str] = ()) -> Diagram:
+    """Four angles drawn to size, one of each type, in a two-by-two grid.
+
+    Each angle has one horizontal ray and one ray at its stated size measured anticlockwise. The
+    acute, obtuse and reflex angles carry an arc and a degree label outside the arc stroke; the
+    right angle carries a corner mark. The four type names share one baseline per row. Each angle's
+    two rays sit in a ``data-angle-kind`` group, so the angle-type check can measure them.
+    """
+    inputs = inputs or {"angle_measures": {"acute": 60, "right": 90, "obtuse": 120, "reflex": 240}}
+    measures = {name: float(value) for name, value in inputs["angle_measures"].items()}
+    _require(
+        set(measures) == {name for name, _ in ANGLE_CLASSES}
+        and all(test(measures[name]) for name, test in ANGLE_CLASSES),
+        "Angle types need one acute, one right (90°), one obtuse and one reflex angle.",
+    )
+    canvas = Canvas(height=560)
+    ray = 150.0
+    # Vertex, ray length and caption position (centre x, baseline y) for each panel. The reflex angle's second ray points
+    # down, so its vertex sits higher in its panel.
+    panels = {
+        "acute": ((75.0, 205.0), ray, (150.0, 258.0)),
+        "right": ((375.0, 205.0), ray, (450.0, 258.0)),
+        "obtuse": ((205.0, 455.0), ray, (205.0, 536.0)),
+        "reflex": ((440.0, 400.0), 120.0, (510.0, 536.0)),
+    }
+    for name, (vertex, arm, _) in panels.items():
+        degrees = measures[name]
+        v = canvas.point(f"V{name}", vertex)
+        canvas.point(f"H{name}", (v[0] + arm, v[1]))
+        canvas.point(f"R{name}", _svg_polar(v, degrees, arm))
+        canvas.figure.append(
+            f'<g data-angle-kind="{name}" data-angle-degrees="{number(degrees)}">'
+        )
+        canvas.segment(f"V{name}H{name}", f"V{name}", f"H{name}")
+        canvas.segment(f"V{name}R{name}", f"V{name}", f"R{name}")
+        if name == "right":
+            canvas.right_angle(f"V{name}", f"H{name}", f"R{name}", size=24)
+        elif name == "reflex":
+            canvas.reflex_arc(f"angle-{name}", f"V{name}", f"H{name}", f"R{name}", 34, degrees)
+        else:
+            canvas.angle_arc(f"angle-{name}", f"V{name}", f"H{name}", f"R{name}", 44, degrees)
+        canvas.figure.append("</g>")
+    for name in panels:
+        label = _degree(measures[name])
+        if name == "right":
+            v = canvas.points[f"V{name}"]
+            canvas.text(
+                label,
+                [(v[0] + 24 + dx, v[1] - 24 - dy) for dx, dy in ((34, 30), (44, 40), (54, 50))],
+                fill=ANGLE_TEXT,
+            )
+        else:
+            canvas.angle_label(
+                label,
+                f"V{name}",
+                f"H{name}",
+                f"R{name}",
+                34 if name == "reflex" else 44,
+                target=f"angle:angle-{name}",
+                reflex=name == "reflex",
+            )
+    for name, (_, _, (cx, baseline)) in panels.items():
+        # Put the two names in a row on one baseline, whatever their letters' heights.
+        offset = baseline_for_center(0.0, name, CAPTION_SIZE)
+        canvas.caption(name, (cx, baseline - offset))
+    spec = base_spec(
+        renderer=PLANE_GEOMETRY_RENDERER,
+        diagram_kind="angle_types",
+        template="lesson_angle_types",
+        inputs=inputs,
+        dimensions={"angle_measures": inputs["angle_measures"]},
+        canvas=canvas,
+        forbidden=[],
+        exemptions=[],
+        unknowns=[],
+        extra={
+            "task": "teaching",
+            "drawn_to_scale": True,
+            "angle_measures": inputs["angle_measures"],
+        },
+    )
+    a, r, o, x = (_degree(measures[name]) for name in ("acute", "right", "obtuse", "reflex"))
+    return finish(
+        canvas,
+        renderer=PLANE_GEOMETRY_RENDERER,
+        title="Acute, right, obtuse and reflex angles",
+        alt_text=(
+            f"Four angles drawn to size, each between two rays from one point: an acute angle of "
+            f"{a}, a right angle of {r} with a corner mark, an obtuse angle of {o} and a reflex "
+            f"angle of {x}, measured the long way round."
+        ),
+        spec=spec,
+    )
+
+
+def _svg_polar(origin: Point, degrees: float, radius: float) -> Point:
+    """A point at ``degrees`` anticlockwise from the positive x-direction, in SVG coordinates."""
+    angle = math.radians(degrees)
+    return (origin[0] + radius * math.cos(angle), origin[1] - radius * math.sin(angle))
+
+
 TEMPLATES: dict[str, Callable[..., Diagram]] = {
     function.__name__: function
     for function in (
+        lesson_angle_types,
         straight_line_given,
         straight_line_ratio,
         complement_split,

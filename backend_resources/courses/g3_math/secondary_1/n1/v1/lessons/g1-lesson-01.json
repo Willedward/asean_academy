@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 4,
+  "revision": 5,
   "stable_key": "g1-lesson-01",
   "course_key": "g3-sec1-math",
   "unit_key": "g3-sec1-g1",
@@ -213,22 +213,271 @@
       "asset_key": "g1-lesson-01-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g1-lesson-01-angle_types-r4.svg",
-      "alt_text": "Four labelled examples showing an acute angle, a right angle, an obtuse angle and a reflex angle.",
+      "path": "assets/g1-lesson-01-angle_types-r5.svg",
+      "alt_text": "Four angles drawn to size, each between two rays from one point: an acute angle of 60°, a right angle of 90° with a corner mark, an obtuse angle of 120° and a reflex angle of 240°, measured the long way round.",
       "generation_spec": {
-        "renderer": "nextscholar-geometry-svg-v1",
+        "renderer": "nextscholar-plane-geometry-svg-v1",
         "diagram_kind": "angle_types",
         "lesson_key": "g1-lesson-01",
+        "template": "lesson_angle_types",
+        "inputs": {
+          "angle_measures": {
+            "acute": 60,
+            "right": 90,
+            "obtuse": 120,
+            "reflex": 240
+          }
+        },
+        "not_to_scale": false,
+        "dimensions": {
+          "angle_measures": {
+            "acute": 60,
+            "right": 90,
+            "obtuse": 120,
+            "reflex": 240
+          }
+        },
+        "forbidden_visible_labels": [],
+        "unknowns": [],
+        "task": "teaching",
+        "drawn_to_scale": true,
         "angle_measures": {
           "acute": 60,
           "right": 90,
           "obtuse": 120,
           "reflex": 240
-        }
+        },
+        "viewbox": [
+          600.0,
+          560.0
+        ],
+        "points": {
+          "Vacute": [
+            75.0,
+            205.0
+          ],
+          "Hacute": [
+            225.0,
+            205.0
+          ],
+          "Racute": [
+            150.0,
+            75.1
+          ],
+          "Vright": [
+            375.0,
+            205.0
+          ],
+          "Hright": [
+            525.0,
+            205.0
+          ],
+          "Rright": [
+            375.0,
+            55.0
+          ],
+          "Vobtuse": [
+            205.0,
+            455.0
+          ],
+          "Hobtuse": [
+            355.0,
+            455.0
+          ],
+          "Robtuse": [
+            130.0,
+            325.1
+          ],
+          "Vreflex": [
+            440.0,
+            400.0
+          ],
+          "Hreflex": [
+            560.0,
+            400.0
+          ],
+          "Rreflex": [
+            380.0,
+            503.92
+          ]
+        },
+        "segments": [
+          {
+            "key": "VacuteHacute",
+            "from": "Vacute",
+            "to": "Hacute",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VacuteRacute",
+            "from": "Vacute",
+            "to": "Racute",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VrightHright",
+            "from": "Vright",
+            "to": "Hright",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VrightRright",
+            "from": "Vright",
+            "to": "Rright",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VobtuseHobtuse",
+            "from": "Vobtuse",
+            "to": "Hobtuse",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VobtuseRobtuse",
+            "from": "Vobtuse",
+            "to": "Robtuse",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VreflexHreflex",
+            "from": "Vreflex",
+            "to": "Hreflex",
+            "hidden": false,
+            "role": "edge"
+          },
+          {
+            "key": "VreflexRreflex",
+            "from": "Vreflex",
+            "to": "Rreflex",
+            "hidden": false,
+            "role": "edge"
+          }
+        ],
+        "right_angles": [
+          {
+            "vertex": "Vright",
+            "arms": [
+              "Hright",
+              "Rright"
+            ],
+            "marker_size": 24
+          }
+        ],
+        "angles": [
+          {
+            "vertex": "Vacute",
+            "arms": [
+              "Hacute",
+              "Racute"
+            ],
+            "marker_key": "angle-acute",
+            "drawn_degrees": 60.0,
+            "degrees": 60.0
+          },
+          {
+            "vertex": "Vobtuse",
+            "arms": [
+              "Hobtuse",
+              "Robtuse"
+            ],
+            "marker_key": "angle-obtuse",
+            "drawn_degrees": 120.0,
+            "degrees": 120.0
+          },
+          {
+            "vertex": "Vreflex",
+            "arms": [
+              "Hreflex",
+              "Rreflex"
+            ],
+            "marker_key": "angle-reflex",
+            "drawn_degrees": 240.0,
+            "reflex": true,
+            "degrees": 240.0
+          }
+        ],
+        "angle_markers": [
+          {
+            "marker_key": "angle-acute",
+            "center": [
+              75.0,
+              205.0
+            ],
+            "radius": 44.0,
+            "start_ray_point": [
+              225.0,
+              205.0
+            ],
+            "end_ray_point": [
+              150.0,
+              75.1
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-obtuse",
+            "center": [
+              205.0,
+              455.0
+            ],
+            "radius": 44.0,
+            "start_ray_point": [
+              355.0,
+              455.0
+            ],
+            "end_ray_point": [
+              130.0,
+              325.1
+            ],
+            "large_arc": 0,
+            "sweep": 0
+          },
+          {
+            "marker_key": "angle-reflex",
+            "center": [
+              440.0,
+              400.0
+            ],
+            "radius": 34.0,
+            "start_ray_point": [
+              560.0,
+              400.0
+            ],
+            "end_ray_point": [
+              380.0,
+              503.92
+            ],
+            "large_arc": 1,
+            "sweep": 0
+          }
+        ],
+        "labels": [
+          {
+            "text": "60°",
+            "target": "angle:angle-acute"
+          },
+          {
+            "text": "120°",
+            "target": "angle:angle-obtuse"
+          },
+          {
+            "text": "240°",
+            "target": "angle:angle-reflex"
+          }
+        ],
+        "relationships": [],
+        "min_phone_font_px": 13.13
       },
-      "sha256": "5e29f0d9f4dfc51ff520c367f9f686f983dbf46e35241a418f2dc916d39a4d05",
-      "width": 940,
-      "height": 390
+      "sha256": "efdeabd9cca6b4c31df5798ed67b27ad5b293b4c54a67b484b19e943bbd4cde1",
+      "width": 600,
+      "height": 560
     }
   ],
   "provenance": {
@@ -237,6 +486,6 @@
     "authored_by": "ASEAN Academy content team with OpenAI Codex",
     "reviewed_at": null,
     "reviewed_by": null,
-    "review_notes": "Corrected angle classification and reflex-arc layout after founder review; awaiting Mathematics and editorial re-review."
+    "review_notes": "Diagram regenerated from the content data with nextscholar-plane-geometry-svg-v1; awaiting Mathematics and editorial review."
   }
 }
