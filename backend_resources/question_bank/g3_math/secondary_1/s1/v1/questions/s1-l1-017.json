@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "s1-l1-017",
   "bank_key": "g3-sec1-s1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "S1",
   "primary_outcome": "1.4",
-  "title": "Unlabelled graph values",
+  "title": "Graph with numbered ticks",
   "difficulty": 1,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph has numbered tick marks but does not state whether they represent dollars, people or kilograms. Enter the issue code."
+          "text": "Use code 1 for a truncated axis, 2 for unequal scale intervals, 3 for area or volume symbols, 4 for missing labels or units, and 5 for a selectively chosen time period. A line graph has numbered tick marks but does not state whether they represent litres, people or kilograms. Enter the issue code."
         }
       ],
       "marks": 1,
@@ -60,6 +60,10 @@
         {
           "position": 1,
           "content": [
+            {
+              "type": "text",
+              "text": "A reader cannot tell what the numbers measure because the unit is missing. The axis itself may be drawn correctly, so a truncated axis or unequal intervals is not the issue."
+            },
             {
               "type": "display_math",
               "latex": "\\text{missing labels or units}\\Rightarrow 4"
