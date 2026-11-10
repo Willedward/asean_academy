@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 3,
+  "revision": 4,
   "stable_key": "g5-l2-524",
   "bank_key": "g3-sec2-g5-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -29,7 +29,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Field researchers considered salt exposure near the coast while preparing a capacity check for the solar farm equipment cover. Cable trays run beneath the protective equipment cover. The design must also be explained clearly in the safety briefing. A spherical model has diameter 12 cm. Find its volume in cm³, correct to 1 decimal place."
+          "text": "A beach ball is blown up until it is firm. The spherical ball has diameter 24 cm. Find its volume in cm³, correct to 1 decimal place."
         }
       ],
       "marks": 2,
@@ -38,8 +38,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "rounded_dp",
-        "canonical_answer": "904.8",
-        "canonical_latex": "904.8",
+        "canonical_answer": "7238.2",
+        "canonical_latex": "7238.2",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": 1,
@@ -60,7 +60,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Halve 12, then use "
+              "text": "Halve the diameter, then use "
             },
             {
               "type": "inline_math",
@@ -79,11 +79,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Select the relevant dimensions and apply the mensuration relationship."
+              "text": "The radius is half the diameter."
             },
             {
               "type": "display_math",
-              "latex": "r=12\\div2=6,\\quad V=\\frac43\\pi(6)^3=904.8"
+              "latex": "r=24\\div2=12,\\quad V=\\frac43\\pi(12)^3=2304\\pi"
             }
           ],
           "mark_type": "M",
@@ -94,7 +94,7 @@
           "content": [
             {
               "type": "display_math",
-              "latex": "\\boxed{904.8}"
+              "latex": "V=7238.229\\ldots=7238.2\\text{ cm}^3"
             }
           ],
           "mark_type": "A",
@@ -109,8 +109,8 @@
       "asset_key": "g5-l2-524-diagram",
       "kind": "geometry",
       "format": "svg",
-      "path": "assets/g5-l2-524-diagram-r3.svg",
-      "alt_text": "Sphere with a full diameter d = 12 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
+      "path": "assets/g5-l2-524-diagram-r4.svg",
+      "alt_text": "Sphere with a full diameter d = 24 cm drawn through the centre from one side of the surface to the other. Not drawn to scale.",
       "generation_spec": {
         "renderer": "nextscholar-mensuration-svg-v2",
         "diagram_kind": "sphere",
@@ -119,23 +119,23 @@
         "template": "sphere_volume_diameter",
         "inputs": {
           "diameter": {
-            "value": 12,
+            "value": 24,
             "unit": "cm"
           }
         },
         "not_to_scale": true,
         "dimensions": {
           "diameter": {
-            "value": 12,
+            "value": 24,
             "unit": "cm"
           }
         },
         "forbidden_visible_labels": [
-          "904.8",
-          "904.78",
-          "288π",
-          "6",
-          "r = 6"
+          "7238.2",
+          "7238.23",
+          "2304π",
+          "12",
+          "r = 12"
         ],
         "unknowns": [],
         "solids": [
@@ -194,7 +194,7 @@
         "right_angles": [],
         "labels": [
           {
-            "text": "d = 12 cm",
+            "text": "d = 24 cm",
             "target": "segment:D1D2"
           }
         ],
@@ -223,7 +223,7 @@
         ],
         "min_phone_font_px": 13.13
       },
-      "sha256": "5af1cf48abea0c29e86122f4df8d508943158b6a0282f4b7cddb3774cdb2177d",
+      "sha256": "754703e4e1eadd351a404e173816e2e5a8996cc85a547c19394169bc81415d65",
       "width": 600,
       "height": 460
     }
