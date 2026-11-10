@@ -1132,14 +1132,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l2-027",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.3",
-    "title": "Obtuse alternate angle",
+    "title": "Acute interior angle at the other line",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -1152,7 +1152,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A transversal crosses two parallel lines. An obtuse angle is 118°. Find its alternate interior angle in degrees."
+            "text": "A transversal crosses two parallel lines. An interior angle at one line is 118°. Find the acute interior angle at the other line, in degrees."
           }
         ],
         "marks": 1,
@@ -1161,8 +1161,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "118",
-          "canonical_latex": "118",
+          "canonical_answer": "62",
+          "canonical_latex": "62",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -1174,7 +1174,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Alternate interior angles are equal."
+                "text": "Alternate interior angles are equal, and angles on a straight line add up to 180°."
               }
             ]
           },
@@ -1183,7 +1183,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The alternate angle keeps the same size."
+                "text": "Find the interior angle at the other line that equals 118°, then use the straight-line fact."
               }
             ]
           }
@@ -1193,8 +1193,16 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "x=118^\\circ"
+                "type": "text",
+                "text": "The alternate interior angle is 118°, so the acute interior angle at the other line is "
+              },
+              {
+                "type": "inline_math",
+                "latex": "180^\\circ-118^\\circ=62^\\circ"
+              },
+              {
+                "type": "text",
+                "text": "."
               }
             ],
             "mark_type": "A",
@@ -1223,7 +1231,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l3-026",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -1252,7 +1260,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A transversal makes an acute angle of 37° with one of two parallel lines. A second transversal is perpendicular to the first. Find the acute angle that the second transversal makes with either parallel line."
+            "text": "A transversal makes an acute angle of 37° with one of two parallel lines. A second transversal is perpendicular to the first. Find, in degrees, the acute angle that the second transversal makes with either parallel line."
           }
         ],
         "marks": 1,
@@ -1309,7 +1317,7 @@
         "asset_key": "g1-l3-026-diagram",
         "kind": "geometry",
         "format": "svg",
-        "path": "assets/g1-l3-026-diagram-r2.svg",
+        "path": "assets/g1-l3-026-diagram-r3.svg",
         "alt_text": "Two parallel horizontal lines, shown with arrow marks, and two transversals that cross between them at a right angle, shown with a corner mark. At the lower line, one transversal makes an angle marked 37° and the other makes an angle marked x. Not drawn to scale.",
         "generation_spec": {
           "renderer": "nextscholar-plane-geometry-svg-v1",
@@ -2363,14 +2371,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l2-029",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.5",
-    "title": "Rotational order of a non-square rectangle",
+    "title": "Parallelogram with four equal sides",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2383,7 +2391,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Find the order of rotational symmetry of a non-square rectangle."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A parallelogram has four equal sides but no right angles. Enter its code."
           }
         ],
         "marks": 1,
@@ -2392,8 +2400,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "2",
-          "canonical_latex": "2",
+          "canonical_answer": "3",
+          "canonical_latex": "3",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2405,7 +2413,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Turn the rectangle about its centre."
+                "text": "Decide what having four equal sides makes a parallelogram."
               }
             ]
           },
@@ -2414,7 +2422,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "It matches after 180° and again after 360°."
+                "text": "Then use the fact that it has no right angles to rule out one listed shape."
               }
             ]
           }
@@ -2424,8 +2432,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "\\text{order}=2"
+                "type": "text",
+                "text": "Four equal sides with no right angles give a non-square rhombus, so the code is 3."
               }
             ],
             "mark_type": "A",
@@ -2454,7 +2462,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l3-028",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2474,7 +2482,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Using codes 1–6, a parallelogram has one right angle and unequal adjacent sides. Enter its most specific code."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A parallelogram has one right angle and unequal adjacent sides. Enter its most specific code."
           }
         ],
         "marks": 2,
@@ -2556,7 +2564,7 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l3-029",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
@@ -2576,7 +2584,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Using codes 1–6, a quadrilateral is both a rectangle and a rhombus. Enter its most specific code."
+            "text": "Use this code: square = 1, non-square rectangle = 2, non-square rhombus = 3, other parallelogram = 4, kite = 5, trapezium = 6 (exactly one pair of parallel sides). A quadrilateral is both a rectangle and a rhombus. Enter its most specific code."
           }
         ],
         "marks": 2,
@@ -2851,14 +2859,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l3-030",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.6",
-    "title": "Regular polygon with a 24-degree exterior angle",
+    "title": "Regular polygon with a 40-degree exterior angle",
     "difficulty": 3,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -2871,7 +2879,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "Each exterior angle of a regular polygon is 24°. Find its number of sides."
+            "text": "Each exterior angle of a regular polygon is 40°. Find its number of sides."
           }
         ],
         "marks": 1,
@@ -2880,8 +2888,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "15",
-          "canonical_latex": "15",
+          "canonical_answer": "9",
+          "canonical_latex": "9",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -2902,7 +2910,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 360 by 24."
+                "text": "Divide 360 by 40."
               }
             ]
           }
@@ -2912,8 +2920,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "n=360^\\circ\\div24^\\circ=15"
+                "type": "inline_math",
+                "latex": "n=360^\\circ\\div40^\\circ=9"
               }
             ],
             "mark_type": "A",
@@ -3154,14 +3162,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 1,
+    "revision": 2,
     "stable_key": "g1-l2-031",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.7",
-    "title": "Bisecting a 126-degree angle",
+    "title": "Original angle from its bisected half",
     "difficulty": 2,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3174,7 +3182,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 126° angle is constructed and then bisected with compasses. Find either half in degrees."
+            "text": "An angle is bisected with compasses, and each half measures 38°. Find the size of the original angle in degrees."
           }
         ],
         "marks": 1,
@@ -3183,8 +3191,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "63",
-          "canonical_latex": "63",
+          "canonical_answer": "76",
+          "canonical_latex": "76",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3196,7 +3204,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "The two constructed angles are equal."
+                "text": "Bisecting makes two equal halves."
               }
             ]
           },
@@ -3205,7 +3213,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Divide 126° by 2."
+                "text": "Add the two equal halves."
               }
             ]
           }
@@ -3215,8 +3223,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "126^\\circ\\div2=63^\\circ"
+                "type": "inline_math",
+                "latex": "2(38^\\circ)=76^\\circ"
               }
             ],
             "mark_type": "A",
@@ -3368,14 +3376,14 @@
   },
   {
     "schema_version": "1.0.0",
-    "revision": 2,
+    "revision": 3,
     "stable_key": "g1-l4-016",
     "bank_key": "g3-sec1-g1-v1",
     "curriculum_version": "g3_math_v1_draft",
     "school_level": "secondary_1",
     "topic_code": "G1",
     "primary_outcome": "1.7",
-    "title": "Combining two constructed angles",
+    "title": "Repeated bisection of a constructed angle",
     "difficulty": 4,
     "calculator_allowed": false,
     "question_type": "structured",
@@ -3388,7 +3396,7 @@
         "prompt": [
           {
             "type": "text",
-            "text": "A 60° angle and a 45° angle are constructed adjacent to form one larger angle. Find the larger angle in degrees."
+            "text": "A 120° angle is constructed. It is bisected, and then one half is bisected again. Find the size of the smallest angle formed, in degrees."
           }
         ],
         "marks": 1,
@@ -3397,8 +3405,8 @@
         "response": {
           "type": "numeric",
           "comparison_mode": "exact_numeric",
-          "canonical_answer": "105",
-          "canonical_latex": "105",
+          "canonical_answer": "30",
+          "canonical_latex": "30",
           "accepted_answers": [],
           "absolute_tolerance": null,
           "rounding_precision": null,
@@ -3410,7 +3418,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Keep the two angles adjacent and non-overlapping."
+                "text": "Each bisection halves the angle being bisected."
               }
             ]
           },
@@ -3419,7 +3427,7 @@
             "content": [
               {
                 "type": "text",
-                "text": "Add the two constructed measures."
+                "text": "Halve 120°, then halve the result."
               }
             ]
           }
@@ -3429,8 +3437,8 @@
             "position": 1,
             "content": [
               {
-                "type": "display_math",
-                "latex": "60^\\circ+45^\\circ=105^\\circ"
+                "type": "inline_math",
+                "latex": "120^\\circ\\div2\\div2=30^\\circ"
               }
             ],
             "mark_type": "A",
