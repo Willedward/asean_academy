@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-009",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Locate a fractional point on an interval",
+  "title": "Finding an endpoint from equal divisions",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -23,23 +23,15 @@
     },
     {
       "type": "text",
-      "text": " and B has coordinate "
+      "text": " and P has coordinate "
     },
     {
       "type": "inline_math",
-      "latex": "\\frac{11}{6}"
+      "latex": "\\frac{1}{6}"
     },
     {
       "type": "text",
-      "text": ". Point P is "
-    },
-    {
-      "type": "inline_math",
-      "latex": "\\frac{3}{5}"
-    },
-    {
-      "type": "text",
-      "text": " of the way from A to B."
+      "text": ". The segment AB is divided into 5 equal parts, and P is the third division point after A."
     }
   ],
   "parts": [
@@ -49,7 +41,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the coordinate of P."
+          "text": "Find the coordinate of B."
         }
       ],
       "marks": 2,
@@ -58,8 +50,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "1/6",
-        "canonical_latex": "\\frac16",
+        "canonical_answer": "11/6",
+        "canonical_latex": "\\frac{11}{6}",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -71,15 +63,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Use "
-            },
-            {
-              "type": "inline_math",
-              "latex": "P=A+(\\frac{3}{5})(B-A)"
-            },
-            {
-              "type": "text",
-              "text": "."
+              "text": "Find the distance AP, then the length of one equal part."
             }
           ]
         },
@@ -88,15 +72,7 @@
           "content": [
             {
               "type": "text",
-              "text": "First find "
-            },
-            {
-              "type": "inline_math",
-              "latex": "B-A"
-            },
-            {
-              "type": "text",
-              "text": " using a common denominator of 6."
+              "text": "Move five equal parts to the right from A."
             }
           ]
         }
@@ -106,8 +82,20 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "B-A=\\frac{11}{6}-(-\\frac{7}{3})=\\frac{25}{6}"
+              "type": "inline_math",
+              "latex": "AP=\\frac16-\\left(-\\frac73\\right)=\\frac{5}{2}"
+            },
+            {
+              "type": "text",
+              "text": ", so one part is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "\\frac{5}{2}\\div3=\\frac{5}{6}"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "M",
@@ -117,8 +105,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "P=-\\frac{7}{3}+(\\frac{3}{5})(\\frac{25}{6})=-\\frac{14}{6}+\\frac{15}{6}=\\frac{1}{6}"
+              "type": "inline_math",
+              "latex": "B=-\\frac{14}{6}+5\\left(\\frac{5}{6}\\right)=\\frac{11}{6}"
             }
           ],
           "mark_type": "A",

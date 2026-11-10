@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l2-024",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.5",
-  "title": "Calculate with signed decimals",
+  "title": "Distance between points on a number line",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,15 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Calculate "
-        },
-        {
-          "type": "inline_math",
-          "latex": "-2.7-(-4.35)+1.2"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "Points P and Q are at -2.7 and 1.2 on a number line. Find the distance PQ."
         }
       ],
       "marks": 2,
@@ -37,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "2.85",
-        "canonical_latex": "2.85",
+        "canonical_answer": "3.9",
+        "canonical_latex": "3.9",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,7 +42,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Subtracting a negative number is equivalent to adding it."
+              "text": "The distance is the larger coordinate minus the smaller one."
             }
           ]
         },
@@ -59,11 +51,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Rewrite the expression as "
+              "text": "Calculate "
             },
             {
               "type": "inline_math",
-              "latex": "-2.7+4.35+1.2"
+              "latex": "1.2-(-2.7)"
             },
             {
               "type": "text",
@@ -77,8 +69,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "-2.7+4.35=1.65"
+              "type": "inline_math",
+              "latex": "PQ=1.2-(-2.7)"
             }
           ],
           "mark_type": "M",
@@ -88,8 +80,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "1.65+1.2=2.85"
+              "type": "inline_math",
+              "latex": "PQ=3.9"
             }
           ],
           "mark_type": "A",

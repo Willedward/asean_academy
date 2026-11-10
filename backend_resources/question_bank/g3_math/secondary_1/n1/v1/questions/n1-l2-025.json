@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l2-025",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.6",
-  "title": "Order negative fractions and decimals",
+  "title": "Comparing with an inequality sign",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -20,40 +20,37 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Write "
+          "text": "Which statement is true: "
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{7}{4}"
+          "latex": "-\\frac{7}{4}<-1.68"
         },
         {
           "type": "text",
-          "text": ", -1.68, "
+          "text": " or "
         },
         {
           "type": "inline_math",
-          "latex": "-\\frac{13}{8}"
+          "latex": "-\\frac{7}{4}>-1.68"
         },
         {
           "type": "text",
-          "text": " and -1.6 in ascending order."
+          "text": "? Enter 1 for < and 2 for >."
         }
       ],
       "marks": 2,
       "primary_outcome": "1.6",
       "secondary_outcomes": [],
       "response": {
-        "type": "algebraic_expression",
-        "comparison_mode": "ordered_numeric_list",
-        "canonical_expression": "[-1.75,-1.68,-1.625,-1.6]",
-        "canonical_latex": "-\\frac74,\\;-1.68,\\;-\\frac{13}{8},\\;-1.6",
-        "variables": [],
-        "domain_constraints": [],
-        "accepted_equivalents": [],
-        "checker_config": {
-          "order": "ascending",
-          "allow_equivalent_fractions": true
-        }
+        "type": "numeric",
+        "comparison_mode": "exact_numeric",
+        "canonical_answer": "1",
+        "canonical_latex": "1",
+        "accepted_answers": [],
+        "absolute_tolerance": null,
+        "rounding_precision": null,
+        "unit": null
       },
       "hints": [
         {
@@ -61,7 +58,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Convert both fractions to decimals."
+              "text": "Convert the fraction to a decimal first."
             }
           ]
         },
@@ -69,20 +66,8 @@
           "stage": 2,
           "content": [
             {
-              "type": "inline_math",
-              "latex": "-\\frac{7}{4}=-1.75"
-            },
-            {
               "type": "text",
-              "text": " and "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{13}{8}=-1.625"
-            },
-            {
-              "type": "text",
-              "text": "; the most negative value comes first."
+              "text": "Compare the two decimals; the number further to the left on a number line is the smaller one."
             }
           ]
         }
@@ -92,8 +77,8 @@
           "position": 1,
           "content": [
             {
-              "type": "text",
-              "text": "The values are -1.75, -1.68, -1.625 and -1.60."
+              "type": "inline_math",
+              "latex": "-\\frac74=-1.75"
             }
           ],
           "mark_type": "M",
@@ -103,24 +88,12 @@
           "position": 2,
           "content": [
             {
-              "type": "text",
-              "text": "Ascending order: "
-            },
-            {
               "type": "inline_math",
-              "latex": "-\\frac{7}{4}"
+              "latex": "-1.75<-1.68"
             },
             {
               "type": "text",
-              "text": ", -1.68, "
-            },
-            {
-              "type": "inline_math",
-              "latex": "-\\frac{13}{8}"
-            },
-            {
-              "type": "text",
-              "text": ", -1.6."
+              "text": ", so the code is 1."
             }
           ],
           "mark_type": "A",

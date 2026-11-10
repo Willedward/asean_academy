@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l4-006",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N1",
   "primary_outcome": "1.1",
-  "title": "Determine a number from its factors",
+  "title": "Largest multiple of a given form",
   "difficulty": 4,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -19,7 +19,7 @@
     },
     {
       "type": "inline_math",
-      "latex": "N=2^{a}\\times 3^{b}\\times 5"
+      "latex": "N=2^{a}\\times3^{b}\\times5"
     },
     {
       "type": "text",
@@ -39,7 +39,23 @@
     },
     {
       "type": "text",
-      "text": " are positive integers. N is divisible by 48 and has exactly 30 positive factors."
+      "text": " are positive integers. "
+    },
+    {
+      "type": "inline_math",
+      "latex": "N"
+    },
+    {
+      "type": "text",
+      "text": " is divisible by 48 and "
+    },
+    {
+      "type": "inline_math",
+      "latex": "N<1000"
+    },
+    {
+      "type": "text",
+      "text": "."
     }
   ],
   "parts": [
@@ -49,7 +65,15 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find N."
+          "text": "Find the largest possible value of "
+        },
+        {
+          "type": "inline_math",
+          "latex": "N"
+        },
+        {
+          "type": "text",
+          "text": "."
         }
       ],
       "marks": 2,
@@ -58,8 +82,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "720",
-        "canonical_latex": "720",
+        "canonical_answer": "960",
+        "canonical_latex": "960",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -87,7 +111,7 @@
             },
             {
               "type": "text",
-              "text": ", then apply the divisor-count formula."
+              "text": "."
             }
           ]
         },
@@ -96,19 +120,11 @@
           "content": [
             {
               "type": "text",
-              "text": "Since "
+              "text": "Find the smallest values "
             },
             {
               "type": "inline_math",
-              "latex": "48=2^{4}\\times 3"
-            },
-            {
-              "type": "text",
-              "text": ", "
-            },
-            {
-              "type": "inline_math",
-              "latex": "a\\ge 4"
+              "latex": "a"
             },
             {
               "type": "text",
@@ -116,19 +132,19 @@
             },
             {
               "type": "inline_math",
-              "latex": "b\\ge 1"
+              "latex": "b"
             },
             {
               "type": "text",
-              "text": "; also "
+              "text": " can take, then try increasing each while keeping "
             },
             {
               "type": "inline_math",
-              "latex": "2(a+1)(b+1)=30"
+              "latex": "N"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " below 1000."
             }
           ]
         }
@@ -139,15 +155,7 @@
           "content": [
             {
               "type": "inline_math",
-              "latex": "(a+1)(b+1)=15"
-            },
-            {
-              "type": "text",
-              "text": "; the required factor pair is "
-            },
-            {
-              "type": "inline_math",
-              "latex": "5\\times 3"
+              "latex": "48=2^{4}\\times3"
             },
             {
               "type": "text",
@@ -155,7 +163,7 @@
             },
             {
               "type": "inline_math",
-              "latex": "a=4"
+              "latex": "a\\ge4"
             },
             {
               "type": "text",
@@ -163,11 +171,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "b=2"
+              "latex": "b\\ge1"
             },
             {
               "type": "text",
-              "text": "."
+              "text": ". The possible values are 240, 480, 720 and 960."
             }
           ],
           "mark_type": "M",
@@ -177,8 +185,16 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "N=2^{4}\\times 3^{2}\\times 5=720"
+              "type": "text",
+              "text": "The largest is "
+            },
+            {
+              "type": "inline_math",
+              "latex": "960=2^{6}\\times3\\times5"
+            },
+            {
+              "type": "text",
+              "text": "."
             }
           ],
           "mark_type": "A",

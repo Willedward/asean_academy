@@ -18,7 +18,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-019 — Complete a product to a cube
+## n1-l3-019 — Exponents in a prime factorisation
 
 [Open this question in the HTML preview](index.html#n1-l3-019)
 
@@ -29,7 +29,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-006 — Determine a number from its factors
+## n1-l4-006 — Largest multiple of a given form
 
 [Open this question in the HTML preview](index.html#n1-l4-006)
 
@@ -51,7 +51,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-007 — Synchronise three repeating signals
+## n1-l4-007 — Third signal from a common time
 
 [Open this question in the HTML preview](index.html#n1-l4-007)
 
@@ -128,7 +128,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l1-019 — Add directed integers
+## n1-l1-019 — Moving along a number line
 
 [Open this question in the HTML preview](index.html#n1-l1-019)
 
@@ -139,7 +139,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l2-024 — Calculate with signed decimals
+## n1-l2-024 — Distance between points on a number line
 
 [Open this question in the HTML preview](index.html#n1-l2-024)
 
@@ -150,7 +150,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-022 — Track a temperature through changes
+## n1-l3-022 — A diver on a number line
 
 [Open this question in the HTML preview](index.html#n1-l3-022)
 
@@ -161,7 +161,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-009 — Locate a fractional point on an interval
+## n1-l4-009 — Finding an endpoint from equal divisions
 
 [Open this question in the HTML preview](index.html#n1-l4-009)
 
@@ -183,7 +183,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l2-025 — Order negative fractions and decimals
+## n1-l2-025 — Comparing with an inequality sign
 
 [Open this question in the HTML preview](index.html#n1-l2-025)
 
@@ -194,7 +194,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l3-023 — Integers in a scaled inequality
+## n1-l3-023 — Integers between rational bounds
 
 [Open this question in the HTML preview](index.html#n1-l3-023)
 
@@ -227,7 +227,7 @@ Add a note whenever a change is requested. Keep question keys unchanged.
 - Editorial decision: `pending`
 - Reviewer notes: _Replace this text with notes, or write `None`._
 
-## n1-l4-011 — Lower bound of a quotient
+## n1-l4-011 — Estimate a quotient
 
 [Open this question in the HTML preview](index.html#n1-l4-011)
 
