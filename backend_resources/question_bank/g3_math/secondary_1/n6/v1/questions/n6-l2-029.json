@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n6-l2-029",
   "bank_key": "g3-sec1-n6-v1",
   "curriculum_version": "g3_math_v1_draft",
   "school_level": "secondary_1",
   "topic_code": "N6",
   "primary_outcome": "6.4",
-  "title": "Table for plotting",
+  "title": "Range of a table of values",
   "difficulty": 2,
   "calculator_allowed": false,
   "question_type": "structured",
@@ -28,7 +28,7 @@
         },
         {
           "type": "text",
-          "text": ", find the y-value to pair with "
+          "text": ", a table uses "
         },
         {
           "type": "inline_math",
@@ -36,7 +36,15 @@
         },
         {
           "type": "text",
-          "text": "."
+          "text": ", 0 and 3. Find the difference between the largest and smallest "
+        },
+        {
+          "type": "inline_math",
+          "latex": "y"
+        },
+        {
+          "type": "text",
+          "text": "-values in the table."
         }
       ],
       "marks": 2,
@@ -45,8 +53,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "11",
-        "canonical_latex": "11",
+        "canonical_answer": "12",
+        "canonical_latex": "12",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -58,7 +66,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Substitute the chosen x-value into the line equation."
+              "text": "Substitute each of the three "
+            },
+            {
+              "type": "inline_math",
+              "latex": "x"
+            },
+            {
+              "type": "text",
+              "text": "-values."
             }
           ]
         },
@@ -67,15 +83,15 @@
           "content": [
             {
               "type": "text",
-              "text": "Calculate "
+              "text": "Find the largest and the smallest of the three "
             },
             {
               "type": "inline_math",
-              "latex": "-2(-3)+5"
+              "latex": "y"
             },
             {
               "type": "text",
-              "text": "."
+              "text": "-values, then subtract."
             }
           ]
         }
@@ -85,8 +101,8 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "y=-2(-3)+5"
+              "type": "inline_math",
+              "latex": "y=11,5,-1"
             }
           ],
           "mark_type": "M",
@@ -96,8 +112,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "y=6+5=11"
+              "type": "inline_math",
+              "latex": "11-(-1)=12"
             }
           ],
           "mark_type": "A",
