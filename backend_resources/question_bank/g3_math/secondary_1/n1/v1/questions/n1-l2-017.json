@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "revision": 2,
+  "revision": 3,
   "stable_key": "n1-l2-017",
   "bank_key": "g3-sec1-n1-v1",
   "curriculum_version": "g3_math_v1_draft",
@@ -20,7 +20,7 @@
       "prompt": [
         {
           "type": "text",
-          "text": "Find the highest common factor of 168 and 252."
+          "text": "Find the highest common factor of 126 and 198."
         }
       ],
       "marks": 2,
@@ -29,8 +29,8 @@
       "response": {
         "type": "numeric",
         "comparison_mode": "exact_numeric",
-        "canonical_answer": "84",
-        "canonical_latex": "84",
+        "canonical_answer": "18",
+        "canonical_latex": "18",
         "accepted_answers": [],
         "absolute_tolerance": null,
         "rounding_precision": null,
@@ -50,8 +50,12 @@
           "stage": 2,
           "content": [
             {
+              "type": "text",
+              "text": "Write "
+            },
+            {
               "type": "inline_math",
-              "latex": "168=2^{3}\\times 3\\times 7"
+              "latex": "126"
             },
             {
               "type": "text",
@@ -59,11 +63,11 @@
             },
             {
               "type": "inline_math",
-              "latex": "252=2^{2}\\times 3^{2}\\times 7"
+              "latex": "198"
             },
             {
               "type": "text",
-              "text": "."
+              "text": " in prime-factor form, then take the common prime powers."
             }
           ]
         }
@@ -73,8 +77,16 @@
           "position": 1,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{HCF}=2^{2}\\times 3\\times 7"
+              "type": "inline_math",
+              "latex": "126=2\\times3^{2}\\times7"
+            },
+            {
+              "type": "text",
+              "text": " and "
+            },
+            {
+              "type": "inline_math",
+              "latex": "198=2\\times3^{2}\\times11"
             }
           ],
           "mark_type": "M",
@@ -84,8 +96,8 @@
           "position": 2,
           "content": [
             {
-              "type": "display_math",
-              "latex": "\\text{HCF}=84"
+              "type": "inline_math",
+              "latex": "\\text{HCF}=2\\times3^{2}=18"
             }
           ],
           "mark_type": "A",
